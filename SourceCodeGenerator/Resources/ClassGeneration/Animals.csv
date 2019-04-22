@@ -1,0 +1,25 @@
+﻿Name;Hungarian name;Price
+Calf;Borjú;5e
+Chicken;Csirke;5r
+Pig;Disznó;3e
+Sheep;Juh;4e
+Goats;Kecske;3e
+Dog, fighting;Kutya, harci;8e
+Dog, housekeeper;Kutya, házőrző;80r
+Dog, sledge;Kutya, szánhúzó;120r
+Dog, hunter;Kutya, vadász;2e
+Goose;Liba;7r
+Horse, yoke;Ló, igás;8e
+Horse, light combat;Ló, könnyű harci;3a
+Horse, heavy combat;Ló, nehéz harci;10a
+Horse, pony;Ló, póni;8e
+Horse, traveler;Ló, utazó;1a
+Cat;Macska;5r
+Ox;Ökör;15e
+Mule;Öszvér;8e
+Turkey;Pulyka;8r
+Hawk, hunter;Sólyom, vadász;8a
+Donkey;Szamár;7e
+Cow;Tehén;8e
+Camel;Teve;1a
+Hen;Tyúk;7r

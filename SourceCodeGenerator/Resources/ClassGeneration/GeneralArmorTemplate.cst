@@ -1,0 +1,20 @@
+﻿using MagusCharacterGenerator.GameSystem.Valuables;
+using Mtf.Languages;
+
+namespace MagusCharacterGenerator.Things.{Namespace}
+{
+	class {ClassName}
+	{
+		public string Name => "{Name}";
+
+		public Money Price => {Price};
+
+		public int MovementInhibitingFactor => {Movement inhibiting factor};
+
+		public int DamageSusceptiveValue => {Damage susceptive value};
+
+		public int Weight => {Weight};
+
+		public override string ToString() => Lng.Elem("{Name}");
+	}
+}

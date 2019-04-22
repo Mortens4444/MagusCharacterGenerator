@@ -1,0 +1,83 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{B4CB8338-B2B5-4C2B-9271-84193FC9831D}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>SourceCodeGenerator</RootNamespace>
+    <AssemblyName>SourceCodeGenerator</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Xml.Linq" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="EmbeddedResourceReader.cs" />
+    <Compile Include="OdtTranslator.cs" />
+    <Compile Include="PriceConverter.cs" />
+    <Compile Include="Program.cs" />
+    <EmbeddedResource Include="Resources\ClassGeneration\Accomodation.csv" />
+    <EmbeddedResource Include="Resources\ClassGeneration\Clothes.csv" />
+    <EmbeddedResource Include="Resources\ClassGeneration\Debauchery.csv" />
+    <EmbeddedResource Include="Resources\ClassGeneration\Food.csv" />
+    <EmbeddedResource Include="Resources\ClassGeneration\GeneralObjectTemplate.cst" />
+    <EmbeddedResource Include="Resources\ClassGeneration\Other.csv" />
+    <EmbeddedResource Include="Resources\ClassGeneration\Trappings.csv" />
+    <Compile Include="CsvListToCSharpSorceFile.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\ClassGeneration\Travelling.csv" />
+    <EmbeddedResource Include="Resources\ClassGeneration\Armors.csv" />
+    <EmbeddedResource Include="Resources\ClassGeneration\GeneralArmorTemplate.cst" />
+    <None Include="Resources\Ogg\oggextract.ps1" />
+    <None Include="Resources\Ogg\ogg_to_mp3.bat" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\ClassGeneration\Animals.csv" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Mtf.Helper\Mtf.Helper.csproj">
+      <Project>{6c5a9051-ef6b-4bd1-8bf4-ad968129b4f3}</Project>
+      <Name>Mtf.Helper</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Mtf.Languages\Mtf.Languages.csproj">
+      <Project>{6e21f7e4-f3aa-433b-9e27-666286234025}</Project>
+      <Name>Mtf.Languages</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

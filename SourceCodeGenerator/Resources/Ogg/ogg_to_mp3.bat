@@ -1,0 +1,1 @@
+for %%a in (*.ogg) do cmd /c C:\Juntions\VLC\vlc.exe -I dummy "%%a" --sout=#transcode{acodec=mp3,channels=2}:standard{access=file,mux=raw,dst="%%~na.mp3"} vlc://quit
