@@ -39,7 +39,7 @@ namespace MagusCharacterGenerator.GameSystem
 		private ushort psiPoints;
 		private ushort manaPoints;
 		private ushort qualificationPoints;
-		private bool triggerEnabled = true;
+		private readonly bool triggerEnabled = true;
 		// TODO: Pass the correct method to count
 		private readonly MultiCasteMode multiCasteMode = MultiCasteMode.Normal_Or_SwitchedCaste;
 

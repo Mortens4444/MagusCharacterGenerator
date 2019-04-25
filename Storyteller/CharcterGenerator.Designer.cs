@@ -881,7 +881,7 @@
 			// 
 			this.nudGold.Location = new System.Drawing.Point(3, 401);
 			this.nudGold.Maximum = new decimal(new int[] {
-            25,
+            1000,
             0,
             0,
             0});
