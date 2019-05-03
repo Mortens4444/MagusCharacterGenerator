@@ -87,70 +87,77 @@ namespace Storyteller
 				return;
 			}
 
-			var characterName = !String.IsNullOrEmpty(tbName.Text) ? tbName.Text : NameGenerator.Get().ToName();
-			tbName.Text = characterName;
-
-			var race = (IRace)Activator.CreateInstance(selectedRace);
-			var caste = (ICaste)Activator.CreateInstance(selectedCaste, (byte)nudLevel.Value);
-			if (selectedSecondaryCaste != null && chkBoxSecondaryCaste.Checked)
+			try
 			{
-				var secondCaste = (ICaste)Activator.CreateInstance(selectedSecondaryCaste, (byte)nudSecondaryCasteLevel.Value);
-				character = (Character)Activator.CreateInstance(typeof(Character), characterName, race, caste, secondCaste);
-			}
-			else
-			{
-				character = (Character)Activator.CreateInstance(typeof(Character), characterName, race, caste);
-			}
-			character.PropertyChanged += Character_PropertyChanged;
+				var characterName = !String.IsNullOrEmpty(tbName.Text) ? tbName.Text : NameGenerator.Get().ToName();
+				tbName.Text = characterName;
 
-			nudStrength.Value = character.Strength;
-			nudSpeed.Value = character.Speed;
-			nudDexterity.Value = character.Dexterity;
-			nudStamina.Value = character.Stamina;
-			nudHealth.Value = character.Health;
-			nudBeauty.Value = character.Beauty;
-			nudWillPower.Value = character.WillPower;
-			nudIntelligence.Value = character.Intelligence;
-			nudAstral.Value = character.Astral;
-			nudGold.Value = character.Gold;
-			nudBravery.Value = character.Bravery;
-			nudErudition.Value = character.Erudition;
-
-			SetInitiatingValue();
-			SetAttackingValue();
-			SetDefendingValue();
-			SetAimingValue();
-			SetLifePoints();
-			SetPaintTolerancePoints();
-
-			SetPsiPoints();
-			SetManaPoints();
-			SetAstralMagicResistance();
-			SetMentalMagicResistance();
-
-			SetQualificationPoints();
-			nudPercent.Value = character.PercentQualificationPoints;
-
-			lvQualifications.Items.Clear();
-			//character.Psi
-			int i = 0;
-			foreach (var qualification in character.Qualifications.OrderBy(qualification => qualification.ToString()))
-			{
-				//var item = new ListViewItem(qualification.ToString());
-				//item.SubItems.Add();
-				var text = qualification.ToFullString();
-				var endIndex = text.LastIndexOf(' ');
-				var name = text.Substring(0, endIndex);
-				var item = new ListViewItem(name);
-				if (i++ % 2 == 0)
+				var race = (IRace)Activator.CreateInstance(selectedRace);
+				var caste = (ICaste)Activator.CreateInstance(selectedCaste, (byte)nudLevel.Value);
+				if (selectedSecondaryCaste != null && chkBoxSecondaryCaste.Checked)
 				{
-					item.BackColor = Color.LightBlue;
+					var secondCaste = (ICaste)Activator.CreateInstance(selectedSecondaryCaste, (byte)nudSecondaryCasteLevel.Value);
+					character = (Character)Activator.CreateInstance(typeof(Character), characterName, race, caste, secondCaste);
 				}
-				item.SubItems.Add(text.Substring(endIndex + 1));
-				lvQualifications.Items.Add(item);
-			}
+				else
+				{
+					character = (Character)Activator.CreateInstance(typeof(Character), characterName, race, caste);
+				}
+				character.PropertyChanged += Character_PropertyChanged;
 
-			//character.PercentQualifications
+				nudStrength.Value = character.Strength;
+				nudSpeed.Value = character.Speed;
+				nudDexterity.Value = character.Dexterity;
+				nudStamina.Value = character.Stamina;
+				nudHealth.Value = character.Health;
+				nudBeauty.Value = character.Beauty;
+				nudWillPower.Value = character.WillPower;
+				nudIntelligence.Value = character.Intelligence;
+				nudAstral.Value = character.Astral;
+				nudGold.Value = character.Gold;
+				nudBravery.Value = character.Bravery;
+				nudErudition.Value = character.Erudition;
+
+				SetInitiatingValue();
+				SetAttackingValue();
+				SetDefendingValue();
+				SetAimingValue();
+				SetLifePoints();
+				SetPaintTolerancePoints();
+
+				SetPsiPoints();
+				SetManaPoints();
+				SetAstralMagicResistance();
+				SetMentalMagicResistance();
+
+				SetQualificationPoints();
+				nudPercent.Value = character.PercentQualificationPoints;
+
+				lvQualifications.Items.Clear();
+				//character.Psi
+				int i = 0;
+				foreach (var qualification in character.Qualifications.OrderBy(qualification => qualification.ToString()))
+				{
+					//var item = new ListViewItem(qualification.ToString());
+					//item.SubItems.Add();
+					var text = qualification.ToFullString();
+					var endIndex = text.LastIndexOf(' ');
+					var name = text.Substring(0, endIndex);
+					var item = new ListViewItem(name);
+					if (i++ % 2 == 0)
+					{
+						item.BackColor = Color.LightBlue;
+					}
+					item.SubItems.Add(text.Substring(endIndex + 1));
+					lvQualifications.Items.Add(item);
+				}
+
+				//character.PercentQualifications
+			}
+			catch
+			{
+				Generate();
+			}
 		}
 
 		private void Character_PropertyChanged(object sender, PropertyChangedEventArgs e)
@@ -255,32 +262,44 @@ namespace Storyteller
 		private void cbRace_SelectedIndexChanged(object sender, EventArgs e)
 		{
 			selectedRace = races[cbRace.SelectedItem.ToString()];
+			SetDiceThrowLabel();
 		}
 
 		private void cbCaste_SelectedIndexChanged(object sender, EventArgs e)
 		{
 			selectedCaste = castes[cbCaste.SelectedItem.ToString()];
-			var caste = (ICaste)Activator.CreateInstance(selectedCaste, (byte)nudLevel.Value);
-			SetDiceThrowLabel(caste, nameof(caste.Strength), lblStrengthDiceThrow);
-			SetDiceThrowLabel(caste, nameof(caste.Speed), lblSpeedDiceThrow);
-			SetDiceThrowLabel(caste, nameof(caste.Dexterity), lblDexterityDiceThrow);
-			SetDiceThrowLabel(caste, nameof(caste.Stamina), lblStaminaDiceThrow);
-			SetDiceThrowLabel(caste, nameof(caste.Health), lblHealthDiceThrow);
-			SetDiceThrowLabel(caste, nameof(caste.Beauty), lblBeautyDiceThrow);
-			SetDiceThrowLabel(caste, nameof(caste.WillPower), lblWillPowerDiceThrow);
-			SetDiceThrowLabel(caste, nameof(caste.Intelligence), lblIntelligenceDiceThrow);
-			SetDiceThrowLabel(caste, nameof(caste.Astral), lblAstralDiceThrow);
-			SetDiceThrowLabel(caste, nameof(caste.Gold), lblGoldDiceThrow);
-			SetDiceThrowLabel(caste, nameof(caste.Bravery), lblBraveryDiceThrow);
-			SetDiceThrowLabel(caste, nameof(caste.Erudition), lblEruditionDiceThrow);
+			SetDiceThrowLabel();
 		}
 
-		private void SetDiceThrowLabel(ICaste caste, string propertyName, Label label)
+		private void SetDiceThrowLabel()
 		{
-			var attributes = AttributeUtils.GetAttributes(caste, propertyName);
-			var diceThrow = AttributeUtils.GetAttribute<DiceThrowAttribute>(attributes);
-			var diceThrowModifier = AttributeUtils.GetAttribute<DiceThrowModifierAttribute>(attributes);
-			var specialTrainingAttribute = AttributeUtils.GetAttribute<SpecialTrainingAttribute>(attributes);
+			if ((selectedCaste == null) || (selectedCaste == null))
+			{
+				return;
+			}
+
+			var caste = (ICaste)Activator.CreateInstance(selectedCaste, (byte)nudLevel.Value);
+			var race = (IRace)Activator.CreateInstance(selectedRace);
+			SetDiceThrowLabel(caste, race, nameof(caste.Strength), lblStrengthDiceThrow);
+			SetDiceThrowLabel(caste, race, nameof(caste.Speed), lblSpeedDiceThrow);
+			SetDiceThrowLabel(caste, race, nameof(caste.Dexterity), lblDexterityDiceThrow);
+			SetDiceThrowLabel(caste, race, nameof(caste.Stamina), lblStaminaDiceThrow);
+			SetDiceThrowLabel(caste, race, nameof(caste.Health), lblHealthDiceThrow);
+			SetDiceThrowLabel(caste, race, nameof(caste.Beauty), lblBeautyDiceThrow);
+			SetDiceThrowLabel(caste, race, nameof(caste.WillPower), lblWillPowerDiceThrow);
+			SetDiceThrowLabel(caste, race, nameof(caste.Intelligence), lblIntelligenceDiceThrow);
+			SetDiceThrowLabel(caste, race, nameof(caste.Astral), lblAstralDiceThrow);
+			SetDiceThrowLabel(caste, race, nameof(caste.Gold), lblGoldDiceThrow);
+			SetDiceThrowLabel(caste, race, nameof(caste.Bravery), lblBraveryDiceThrow);
+			SetDiceThrowLabel(caste, race, nameof(caste.Erudition), lblEruditionDiceThrow);
+		}
+
+		private void SetDiceThrowLabel(ICaste caste, IRace race, string propertyName, Label label)
+		{
+			var casteAttributes = caste.GetCustomAttributes(propertyName);
+			var diceThrow = AttributeUtils.GetAttribute<DiceThrowAttribute>(casteAttributes);
+			var diceThrowModifier = AttributeUtils.GetAttribute<DiceThrowModifierAttribute>(casteAttributes);
+			var specialTrainingAttribute = AttributeUtils.GetAttribute<SpecialTrainingAttribute>(casteAttributes);
 			label.Text = Lng.Elem(EnumUtils.GetDescription(diceThrow.DiceThrowType));
 			if (diceThrowModifier != null)
 			{
@@ -293,6 +312,11 @@ namespace Storyteller
 			if (diceThrow.DiceThrowType.ToString().EndsWith("2_Times"))
 			{
 				label.Text += " (2x)";
+			}
+			var raceModifier = race.GetPropertyShortValue(propertyName);
+			if (raceModifier != 0)
+			{
+				label.Text += raceModifier < 0 ? $" - {Math.Abs(raceModifier)}" : $" + {raceModifier}";
 			}
 		}
 
