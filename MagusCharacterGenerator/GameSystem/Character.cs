@@ -60,7 +60,7 @@ namespace MagusCharacterGenerator.GameSystem
 
 		#region Properties
 
-		public CharacterImage[] Images { get; private set; }
+		public IEnumerable<CharacterImage> Images { get; private set; }
 
 		public string Name { get; private set; }
 
@@ -377,17 +377,22 @@ namespace MagusCharacterGenerator.GameSystem
 			return ObjectSerializer.Load<Character>(fullPath);
 		}
 
-		public void Save(string fullPath, params CharacterImage[] characterImages)
+		public void Save(string fullPath, IEnumerable<CharacterImage> characterImages)
 		{
 			var destinationFolder = Path.GetDirectoryName(fullPath);
-			foreach (var characterImage in characterImages.Where(i => i.ImageFile != null))
+			var images = new List<CharacterImage>();
+			foreach (var characterImage in characterImages)
 			{
 				var destinationFile = Path.Combine(destinationFolder, Path.GetFileName(characterImage.ImageFile));
 				File.Copy(characterImage.ImageFile, destinationFile, true);
-				characterImage.ImageFile = destinationFile;
+				images.Add(new CharacterImage
+				{
+					ImageFile = destinationFile,
+					SizeMode = characterImage.SizeMode
+				});
 			}
 
-			Images = characterImages;
+			Images = images;
 			ObjectSerializer.Save(fullPath, this);
 		}
 

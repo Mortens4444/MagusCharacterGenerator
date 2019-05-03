@@ -1,3 +1,4 @@
+- Array, List mentés javítása
 - Mentett karakter betöltése
 - Harcrendszer
 - Karakterlap nyomtatása

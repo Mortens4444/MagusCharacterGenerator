@@ -25,6 +25,8 @@ namespace Storyteller
 		private Type selectedCaste;
 		private Type selectedSecondaryCaste;
 		private Character character;
+		private List<CharacterImage> images = new List<CharacterImage>();
+		private int shownImageIndex = 0;
 
 		public CharcterGenerator(bool canGenerate =  false)
 		{
@@ -332,16 +334,15 @@ namespace Storyteller
 			if (createCharacter)
 			{
 				DirectoryExtension.CreateIfNotExists(charactersDirectory);
-				CharacterImage characterImage = GetCharacterImage();
-				character.Save(Path.Combine(charactersDirectory, String.Concat("character", ExtensionProvider.CharacterSheetExtension)), characterImage);
+				character.Save(Path.Combine(charactersDirectory, String.Concat("character", ExtensionProvider.CharacterSheetExtension)), images);
 			}
 		}
 
-		private CharacterImage GetCharacterImage()
+		private CharacterImage CreateCharacterImage()
 		{
 			return new CharacterImage
 			{
-				ImageFile = (string)pbCharacter.Tag,
+				ImageFile = (string)pbCharacter.Image.Tag,
 				SizeMode = GetSizeModeFromComboBoxSelection()
 			};
 		}
@@ -396,7 +397,7 @@ namespace Storyteller
 			if (ofdCharacterImage.ShowDialog() == DialogResult.OK)
 			{
 				pbCharacter.Image = Image.FromFile(ofdCharacterImage.FileName);
-				pbCharacter.Tag = ofdCharacterImage.FileName;
+				pbCharacter.Image.Tag = ofdCharacterImage.FileName;
 			}
 		}
 
@@ -409,6 +410,64 @@ namespace Storyteller
 		{
 			cbSecondaryCaste.Enabled = chkBoxSecondaryCaste.Checked;
 			nudSecondaryCasteLevel.Enabled = chkBoxSecondaryCaste.Checked;
+		}
+
+		private void btnAdd_Click(object sender, EventArgs e)
+		{
+			if (pbCharacter.Image == null)
+			{
+				return;
+			}
+
+			var currentImage = CreateCharacterImage();
+			if (!images.Contains(currentImage))
+			{
+				images.Add(currentImage);
+			}
+			shownImageIndex = images.Count - 1;
+			SetAddRemoveButtonState();
+		}
+
+		private void btnRemove_Click(object sender, EventArgs e)
+		{
+			if (pbCharacter.Image == null)
+			{
+				return;
+			}
+
+			var currentImage = CreateCharacterImage();
+			if (images.Contains(currentImage))
+			{
+				images.Remove(currentImage);
+			}
+			shownImageIndex = 0;
+			SetAddRemoveButtonState();
+		}
+
+		private void SetAddRemoveButtonState()
+		{
+			btnPrevious.Enabled = images.Count > 1 && shownImageIndex > 0;
+			btnNext.Enabled = images.Count > 1 && shownImageIndex < images.Count - 1;
+		}
+
+		private void btnPrevious_Click(object sender, EventArgs e)
+		{
+			if (shownImageIndex > 0)
+			{
+				shownImageIndex--;
+				images[shownImageIndex].Load(pbCharacter);
+			}
+			SetAddRemoveButtonState();
+		}
+
+		private void btnNext_Click(object sender, EventArgs e)
+		{
+			if (shownImageIndex < images.Count - 1)
+			{
+				shownImageIndex++;
+				images[shownImageIndex].Load(pbCharacter);
+			}
+			SetAddRemoveButtonState();
 		}
 	}
 }

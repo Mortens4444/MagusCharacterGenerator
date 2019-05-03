@@ -117,6 +117,10 @@
 			this.lblStamina = new System.Windows.Forms.Label();
 			this.btnGenerate = new System.Windows.Forms.Button();
 			this.ofdCharacterImage = new System.Windows.Forms.OpenFileDialog();
+			this.btnAdd = new System.Windows.Forms.Button();
+			this.btnPrevious = new System.Windows.Forms.Button();
+			this.btnNext = new System.Windows.Forms.Button();
+			this.btnRemove = new System.Windows.Forms.Button();
 			this.panelMain.SuspendLayout();
 			this.gbCharacter.SuspendLayout();
 			this.gbGeneral.SuspendLayout();
@@ -165,6 +169,10 @@
 			// 
 			// gbCharacter
 			// 
+			this.gbCharacter.Controls.Add(this.btnRemove);
+			this.gbCharacter.Controls.Add(this.btnNext);
+			this.gbCharacter.Controls.Add(this.btnPrevious);
+			this.gbCharacter.Controls.Add(this.btnAdd);
 			this.gbCharacter.Controls.Add(this.gbGeneral);
 			this.gbCharacter.Controls.Add(this.cbImageSizeMode);
 			this.gbCharacter.Controls.Add(this.btnBrowse);
@@ -346,7 +354,6 @@
 			// 
 			// cbImageSizeMode
 			// 
-			this.cbImageSizeMode.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			this.cbImageSizeMode.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
 			this.cbImageSizeMode.FormattingEnabled = true;
 			this.cbImageSizeMode.Items.AddRange(new object[] {
@@ -355,7 +362,7 @@
             "Auto",
             "Center",
             "Zoom"});
-			this.cbImageSizeMode.Location = new System.Drawing.Point(799, 17);
+			this.cbImageSizeMode.Location = new System.Drawing.Point(642, 18);
 			this.cbImageSizeMode.Name = "cbImageSizeMode";
 			this.cbImageSizeMode.Size = new System.Drawing.Size(131, 21);
 			this.cbImageSizeMode.TabIndex = 43;
@@ -363,8 +370,7 @@
 			// 
 			// btnBrowse
 			// 
-			this.btnBrowse.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.btnBrowse.Location = new System.Drawing.Point(936, 16);
+			this.btnBrowse.Location = new System.Drawing.Point(779, 17);
 			this.btnBrowse.Name = "btnBrowse";
 			this.btnBrowse.Size = new System.Drawing.Size(75, 23);
 			this.btnBrowse.TabIndex = 42;
@@ -671,6 +677,7 @@
             this.chQualifications,
             this.chLevel});
 			this.lvQualifications.FullRowSelect = true;
+			this.lvQualifications.HideSelection = false;
 			this.lvQualifications.Location = new System.Drawing.Point(421, 19);
 			this.lvQualifications.Name = "lvQualifications";
 			this.lvQualifications.Size = new System.Drawing.Size(215, 515);
@@ -1162,6 +1169,48 @@
 			this.btnGenerate.UseVisualStyleBackColor = true;
 			this.btnGenerate.Click += new System.EventHandler(this.btnGenerate_Click);
 			// 
+			// btnAdd
+			// 
+			this.btnAdd.Location = new System.Drawing.Point(860, 17);
+			this.btnAdd.Name = "btnAdd";
+			this.btnAdd.Size = new System.Drawing.Size(23, 23);
+			this.btnAdd.TabIndex = 50;
+			this.btnAdd.Text = "+";
+			this.btnAdd.UseVisualStyleBackColor = true;
+			this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
+			// 
+			// btnPrevious
+			// 
+			this.btnPrevious.Enabled = false;
+			this.btnPrevious.Location = new System.Drawing.Point(916, 17);
+			this.btnPrevious.Name = "btnPrevious";
+			this.btnPrevious.Size = new System.Drawing.Size(44, 23);
+			this.btnPrevious.TabIndex = 51;
+			this.btnPrevious.Text = "<--";
+			this.btnPrevious.UseVisualStyleBackColor = true;
+			this.btnPrevious.Click += new System.EventHandler(this.btnPrevious_Click);
+			// 
+			// btnNext
+			// 
+			this.btnNext.Enabled = false;
+			this.btnNext.Location = new System.Drawing.Point(966, 16);
+			this.btnNext.Name = "btnNext";
+			this.btnNext.Size = new System.Drawing.Size(44, 23);
+			this.btnNext.TabIndex = 52;
+			this.btnNext.Text = "-->";
+			this.btnNext.UseVisualStyleBackColor = true;
+			this.btnNext.Click += new System.EventHandler(this.btnNext_Click);
+			// 
+			// btnRemove
+			// 
+			this.btnRemove.Location = new System.Drawing.Point(887, 17);
+			this.btnRemove.Name = "btnRemove";
+			this.btnRemove.Size = new System.Drawing.Size(23, 23);
+			this.btnRemove.TabIndex = 53;
+			this.btnRemove.Text = "-";
+			this.btnRemove.UseVisualStyleBackColor = true;
+			this.btnRemove.Click += new System.EventHandler(this.btnRemove_Click);
+			// 
 			// CharcterGenerator
 			// 
 			this.AcceptButton = this.btnGenerate;
@@ -1309,5 +1358,9 @@
 		private System.Windows.Forms.Label lblEruditionDiceThrow;
 		private System.Windows.Forms.Label lblBraveryDiceThrow;
 		private System.Windows.Forms.Label lblGoldDiceThrow;
+		private System.Windows.Forms.Button btnRemove;
+		private System.Windows.Forms.Button btnNext;
+		private System.Windows.Forms.Button btnPrevious;
+		private System.Windows.Forms.Button btnAdd;
 	}
 }
