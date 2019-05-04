@@ -1,6 +1,6 @@
 ﻿namespace MagusCharacterGenerator.GameSystem
 {
-    interface IAbilities
+	public interface IAbilities
     {
         short Strength { get; }
 

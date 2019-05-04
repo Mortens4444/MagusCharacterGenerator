@@ -1,6 +1,6 @@
 ﻿namespace MagusCharacterGenerator.GameSystem.Qualifications
 {
-    interface ISpecialQualification
+	public interface ISpecialQualification
     {
     }
 }

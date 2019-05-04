@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace MagusCharacterGenerator.Qualifications
 {
-	class SpecialQualificationList : List<ISpecialQualification>
+	public class SpecialQualificationList : List<ISpecialQualification>
 	{
 		public TSpecialQualification GetSpeciality<TSpecialQualification>()
 			where TSpecialQualification : class

@@ -18,7 +18,7 @@ using System.Runtime.CompilerServices;
 
 namespace MagusCharacterGenerator.GameSystem
 {
-	class Character : IFightModifier, ILiving, IAbilities, INotifyPropertyChanged
+	public class Character : IFightModifier, ILiving, IAbilities, INotifyPropertyChanged
 	{
 		private short health;
 		private short lifePoints;

@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace MagusCharacterGenerator.Castes
 {
-	interface ICaste : IAbilities
+	public interface ICaste : IAbilities
     {
 		short Gold { get; }
 

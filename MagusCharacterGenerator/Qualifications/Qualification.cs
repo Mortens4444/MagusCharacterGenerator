@@ -4,7 +4,7 @@ using System;
 
 namespace MagusCharacterGenerator.Qualifications
 {
-	class Qualification
+	public class Qualification
     {
         public Qualification(QualificationLevel qualificationLevel, byte level)
         {

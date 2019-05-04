@@ -1,3 +1,5 @@
+- Fix ObjectSerialization tests
+- ObjectSerializer work in memory (ObjectSerializerTest should not create & delete files)
 - Array, List mentés javítása
 - Mentett karakter betöltése
 - Harcrendszer
@@ -13,6 +15,7 @@
 - Képzettségek
 - FIXME: Multi-caste
 - Videóklippek lejátszása
+- Fix Psi test
 
 https://www.yumpu.com/hu/document/view/5842996/magus-puska-071-verzio-http-wwwszerepjatektk/5
 https://nemaakos.wordpress.com/magus/jatek-elmelet/harc-es-szimulacio/

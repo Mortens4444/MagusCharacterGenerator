@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace MagusCharacterGenerator.Qualifications
 {
-	class QualificationList : List<Qualification>
+	public class QualificationList : List<Qualification>
     {
         public void UpgradeOrAddQualification(Qualification newMasterQualification)
         {

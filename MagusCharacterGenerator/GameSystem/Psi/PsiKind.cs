@@ -1,6 +1,6 @@
 ﻿namespace MagusCharacterGenerator.GameSystem.Psi
 {
-    enum PsiKind
+	public enum PsiKind
     {
         Pyarron,
         Slan,

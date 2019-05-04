@@ -1,6 +1,6 @@
 ﻿namespace MagusCharacterGenerator.Qualifications
 {
-	class PercentQualification
+	public class PercentQualification
     {
         protected readonly byte Percent;
 

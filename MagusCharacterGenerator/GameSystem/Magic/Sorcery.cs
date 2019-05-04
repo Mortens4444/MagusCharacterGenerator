@@ -2,7 +2,7 @@
 
 namespace MagusCharacterGenerator.GameSystem.Magic
 {
-	abstract class Sorcery : ISpecialQualification
+	public abstract class Sorcery : ISpecialQualification
     {
         public ushort ManaPoints { get; set; }
 

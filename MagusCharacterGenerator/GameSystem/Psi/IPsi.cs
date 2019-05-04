@@ -2,7 +2,7 @@
 
 namespace MagusCharacterGenerator.GameSystem.Psi
 {
-    interface IPsi
+	public interface IPsi
     {
         PsiKind PsiKind { get; }
 

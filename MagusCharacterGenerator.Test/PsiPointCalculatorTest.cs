@@ -3,31 +3,27 @@ using MagusCharacterGenerator.Castes.Slan;
 using MagusCharacterGenerator.Castes.Sorcerer;
 using MagusCharacterGenerator.GameSystem;
 using MagusCharacterGenerator.Race;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Mtf.Helper;
+using NUnit.Framework;
 
 namespace MagusCharacterGenerator.Test
 {
-	[TestClass]
+	[TestFixture]
     public class PsiPointCalculatorTest
     {
-        [TestMethod]
-        public void TestPsiPoints()
+		public static object[] TestData =
+		{
+			new object[] { new Character("Mirena", new Human(), new Witch(5)), (ushort)21 },
+			new object[] { new Character("Toll", new Elf(), new BareHandMaster(5)), (ushort)26 },
+			new object[] { new Character("Maron", new Elf(), new Wizard(5)), (ushort)31 },
+			new object[] { new Character("Vesryn (Level: 5)", new Elf(), new Headhunter(5)), (ushort)16 },
+			new object[] { new Character("Vesryn (Level: 6)", new Elf(), new Headhunter(6)), (ushort)20 },
+		};
+
+		[Test, TestCaseSource("TestData")]
+		public void TestPsiPoints(Character character, ushort expectedPsiPoints)
         {
-            var witch = new Character("Mirena", new Human(), new Witch(5));
-            Assert.AreEqual(witch.PsiPoints - (ushort)MathHelper.GetAboveAvarageValue(witch.Intelligence), 21);
-
-            var slan = new Character("Toll", new Elf(), new BareHandMaster(5));
-            Assert.AreEqual(slan.PsiPoints - (ushort)MathHelper.GetAboveAvarageValue(slan.Intelligence), 26);
-
-            var wizard = new Character("Maron", new Elf(), new Wizard(5));
-            Assert.AreEqual(wizard.PsiPoints - (ushort)MathHelper.GetAboveAvarageValue(wizard.Intelligence), 31);
-
-            var headHunter1 = new Character("Vesryn (Level: 5)", new Elf(), new Headhunter(5));
-            Assert.AreEqual(headHunter1.PsiPoints - (ushort)MathHelper.GetAboveAvarageValue(headHunter1.Intelligence), 16);
-
-            var headHunter2 = new Character("Vesryn (Level: 6)", new Elf(), new Headhunter(6));
-            Assert.AreEqual(headHunter2.PsiPoints - (ushort)MathHelper.GetAboveAvarageValue(headHunter2.Intelligence), 20);
+            Assert.AreEqual(expectedPsiPoints, character.PsiPoints - (ushort)MathHelper.GetAboveAvarageValue(character.Intelligence));
         }
     }
 }

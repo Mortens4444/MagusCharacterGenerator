@@ -1,6 +1,6 @@
 ﻿namespace MagusCharacterGenerator.GameSystem.Qualifications
 {
-    enum QualificationLevel
+	public enum QualificationLevel
     {
         Base,
         Master

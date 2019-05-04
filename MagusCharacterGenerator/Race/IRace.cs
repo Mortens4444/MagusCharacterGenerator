@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace MagusCharacterGenerator.Race
 {
-    interface IRace : IAbilities
+	public interface IRace : IAbilities
     {
         QualificationList Qualifications { get; }
 
