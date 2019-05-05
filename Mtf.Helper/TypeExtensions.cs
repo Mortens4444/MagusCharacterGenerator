@@ -22,9 +22,19 @@ namespace Mtf.Helper
 			return type != null && (type.IsPrimitive || type == typeof(string));
 		}
 
-		public static bool IsGenericList(this Type type)
+		public static bool IsGenericList(this Type type, out Type elementsType)
 		{
-			return type != null && type.FullName.StartsWith("System.Collections.Generic.List`");
+			while (type != null)
+			{
+				if (type.FullName.StartsWith("System.Collections.Generic.List`"))
+				{
+					elementsType = type.GenericTypeArguments.First();
+					return true;
+				}
+				type = type.BaseType;
+			}
+			elementsType = null;
+			return false;
 		}
 	}
 }

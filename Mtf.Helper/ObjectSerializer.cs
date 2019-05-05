@@ -79,6 +79,11 @@ namespace Mtf.Helper
 			var objectsTypeInArray = objectType.FullName.Substring(0, objectType.FullName.Length - 2);
 			var elementType = TypeExtensions.GetTypeByName(objectsTypeInArray);
 			var elements = obj as Array;
+			SaveElements(streamWriter, indent, elementType, elements);
+		}
+
+		private static void SaveElements(StreamWriter streamWriter, int indent, Type elementType, IEnumerable elements)
+		{
 			var elementsStr = new StringBuilder();
 			foreach (var element in elements)
 			{
@@ -122,23 +127,9 @@ namespace Mtf.Helper
 		private static void HandleListProperties(StreamWriter streamWriter, object obj, int indent)
 		{
 			var objectType = obj.GetType();
-			
-			while (!objectType.IsGenericList())
-			{
-				objectType = objectType.BaseType;
-			}
-
-			var elementType = objectType.GenericTypeArguments.First();
-			var properties = elementType.GetProperties();
-			foreach (var element in obj as IList)
-			{
-				WriteWithIndent(streamWriter, indent, "{");
-				foreach (var property in properties)
-				{
-					SaveProperty(streamWriter, element, property, indent + 1);
-				}
-				WriteWithIndent(streamWriter, indent, "}");
-			}
+			objectType.IsGenericList(out var elementType);
+			var elements = obj as IList;
+			SaveElements(streamWriter, indent, elementType, elements);
 		}
 
 		private static void WriteWithIndent(StreamWriter streamWriter, int indent, string text)
@@ -156,7 +147,7 @@ namespace Mtf.Helper
 				Save(streamWriter, property.GetValue(obj), indent + 1);
 				WriteWithIndent(streamWriter, indent, "}");
 			}
-			else if (property.PropertyType.BaseType.IsGenericList())
+			else if (property.PropertyType.IsGenericList(out var _))
 			{
 				WriteWithIndent(streamWriter, indent, $"{property.Name}: List");
 				WriteWithIndent(streamWriter, indent, "{");
