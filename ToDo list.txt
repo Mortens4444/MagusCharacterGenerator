@@ -1,6 +1,5 @@
-- Fix ObjectSerialization tests
+- Check objectSerialization for Qualifications
 - ObjectSerializer work in memory (ObjectSerializerTest should not create & delete files)
-- Array, List mentés javítása
 - Mentett karakter betöltése
 - Harcrendszer
 - Karakterlap nyomtatása

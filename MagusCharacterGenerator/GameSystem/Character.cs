@@ -556,7 +556,7 @@ namespace MagusCharacterGenerator.GameSystem
 			//PsiPoints = 0;
 			//foreach (var caste in Castes)
 			{
-				(IPsi psi, ushort psiPoints, byte psiPointsModifier) = PsiPointCalculator.Calculate(caste.Qualifications, Intelligence, caste.Level);
+				(IPsi psi, ushort psiPoints, byte psiPointsModifier) = PsiPointCalculator.Calculate(Qualifications, Intelligence, caste.Level);
 
 				//if (PsiPoints < psiPoints)
 				{
