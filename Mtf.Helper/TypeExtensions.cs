@@ -17,6 +17,11 @@ namespace Mtf.Helper
 			return type != null && type.FullName == "System.Array";
 		}
 
+		public static bool IsPrimitiveOrString(this Type type)
+		{
+			return type != null && (type.IsPrimitive || type == typeof(string));
+		}
+
 		public static bool IsGenericList(this Type type)
 		{
 			return type != null && type.FullName.StartsWith("System.Collections.Generic.List`");

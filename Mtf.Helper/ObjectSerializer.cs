@@ -3,6 +3,7 @@ using System.Collections;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Text;
 
 namespace Mtf.Helper
 {
@@ -38,7 +39,9 @@ namespace Mtf.Helper
 			{
 				using (var streamWriter = new StreamWriter(fileStream))
 				{
-					Save(streamWriter, obj, 0);
+					WriteWithIndent(streamWriter, 0, "{");
+					Save(streamWriter, obj, 1);
+					WriteWithIndent(streamWriter, 0, "}");
 				}
 			}
 		}
@@ -46,14 +49,19 @@ namespace Mtf.Helper
 		private static void Save(StreamWriter streamWriter, object obj, int indent)
 		{
 			var objectType = obj.GetType();
+			var idx = objectType.FullName.IndexOf('[');
 
 			if (objectType.FullName.EndsWith("[]"))
 			{
-				HandleArrayProperties(streamWriter, obj, indent + 1);
+				HandleArrayProperties(streamWriter, obj, indent);
 			}
-			else if (objectType.FullName.Contains("List"))
+			else if (idx != -1 && objectType.FullName.Substring(0, idx).Contains("List"))
 			{
-				HandleListProperties(streamWriter, obj, indent + 1);
+				HandleListProperties(streamWriter, obj, indent);
+			}
+			else if (objectType.IsPrimitiveOrString())
+			{
+				WriteWithIndent(streamWriter, indent, obj.ToString());
 			}
 			else
 			{
@@ -70,14 +78,45 @@ namespace Mtf.Helper
 			var objectType = obj.GetType();
 			var objectsTypeInArray = objectType.FullName.Substring(0, objectType.FullName.Length - 2);
 			var elementType = TypeExtensions.GetTypeByName(objectsTypeInArray);
-			var properties = elementType.GetProperties();
-			foreach (var o in obj as Array)
+			var elements = obj as Array;
+			var elementsStr = new StringBuilder();
+			foreach (var element in elements)
 			{
-				foreach (var property in properties)
+				if (elementType.IsPrimitiveOrString())
 				{
-					SaveProperty(streamWriter, o, property, indent);
+					if (elementsStr.Length > 0)
+					{
+						elementsStr.Append(", ");
+					}
+					var value = GetValue(elementType, element);
+					elementsStr.Append(value);
+				}
+				else
+				{
+					Save(streamWriter, element, indent);
 				}
 			}
+			if (elementsStr.Length > 0)
+			{
+				Save(streamWriter, elementsStr.ToString(), indent);
+			}
+		}
+
+		private static object GetValue(Type elementType, object element)
+		{
+			if (element == null)
+			{
+				return "null";
+			}
+			if (elementType == typeof(string))
+			{
+				return $"\"{element}\"";
+			}
+			if (elementType == typeof(char))
+			{
+				return $"'{element}'";
+			}
+			return element;
 		}
 
 		private static void HandleListProperties(StreamWriter streamWriter, object obj, int indent)
@@ -112,21 +151,23 @@ namespace Mtf.Helper
 		{
 			if (property.PropertyType.BaseType.IsArray())
 			{
-				streamWriter.WriteLine($"{property.Name}: Array {{");
-				Save(streamWriter, property.GetValue(obj), indent);
-				streamWriter.WriteLine("}");
+				WriteWithIndent(streamWriter, indent, $"{property.Name}: Array");
+				WriteWithIndent(streamWriter, indent, "{");
+				Save(streamWriter, property.GetValue(obj), indent + 1);
+				WriteWithIndent(streamWriter, indent, "}");
 			}
 			else if (property.PropertyType.BaseType.IsGenericList())
 			{
-				streamWriter.WriteLine($"{property.Name}: List {{");
-				Save(streamWriter, property.GetValue(obj), indent);
-				streamWriter.WriteLine("}");
+				WriteWithIndent(streamWriter, indent, $"{property.Name}: List");
+				WriteWithIndent(streamWriter, indent, "{");
+				Save(streamWriter, property.GetValue(obj), indent + 1);
+				WriteWithIndent(streamWriter, indent, "}");
 			}
 			else
 			{
-				var propertyValue = property.GetValue(obj) ?? "null";
-				AddIndent(streamWriter, indent);
-				streamWriter.WriteLine($"{property.Name}: {propertyValue}");
+				var propertyValue = property.GetValue(obj);
+				propertyValue = GetValue(property.PropertyType, propertyValue);
+				WriteWithIndent(streamWriter, indent, $"{property.Name}: {propertyValue}");
 			}
 		}
 

@@ -24,9 +24,9 @@ namespace MagusCharacterGenerator.Test
 				Single = (float)3.14,
 				Double = (double)2.71,
 				String = "str",
-				Character = 'c'
+				Char = 'c'
 			};
-			var expectedSerializationContent = $"Byte: 255{Environment.NewLine}Short: -2{Environment.NewLine}UShort: 1{Environment.NewLine}Int32: -1{Environment.NewLine}UInt32: 2{Environment.NewLine}Int64: -100000000000{Environment.NewLine}UInt64: 100000000000{Environment.NewLine}Single: 3,14{Environment.NewLine}Double: 2,71{Environment.NewLine}String: str{Environment.NewLine}Character: c{Environment.NewLine}";
+			var expectedSerializationContent = $"{{{Environment.NewLine}\tByte: 255{Environment.NewLine}\tShort: -2{Environment.NewLine}\tUShort: 1{Environment.NewLine}\tInt32: -1{Environment.NewLine}\tUInt32: 2{Environment.NewLine}\tInt64: -100000000000{Environment.NewLine}\tUInt64: 100000000000{Environment.NewLine}\tSingle: 3,14{Environment.NewLine}\tDouble: 2,71{Environment.NewLine}\tString: \"str\"{Environment.NewLine}\tChar: 'c'{Environment.NewLine}}}{Environment.NewLine}";
 			TestSerialization(primitiveContainer, expectedSerializationContent);
 		}
 
@@ -38,7 +38,7 @@ namespace MagusCharacterGenerator.Test
 				Bytes = new byte[] { 1, 2, 3 },
 				Strings = new[] { "a", "b", "c" }
 			};
-			var expectedSerializationContent = $"{{{Environment.NewLine}\t{{ 1, 2, 3}}{Environment.NewLine}\t{{ a, b, c }}{Environment.NewLine}}}{Environment.NewLine}";
+			var expectedSerializationContent = $"{{{Environment.NewLine}\tBytes: Array{Environment.NewLine}\t{{{Environment.NewLine}\t\t1, 2, 3{Environment.NewLine}\t}}{Environment.NewLine}\tStrings: Array{Environment.NewLine}\t{{{Environment.NewLine}\t\t\"a\", \"b\", \"c\"{Environment.NewLine}\t}}{Environment.NewLine}}}{Environment.NewLine}";
 			TestSerialization(arrayContainer, expectedSerializationContent);
 		}
 
@@ -50,16 +50,23 @@ namespace MagusCharacterGenerator.Test
 				Bytes = new List<byte> { 1, 2, 3 },
 				Strings = new List<string> { "a", "b", "c" }
 			};
-			var expectedSerializationContent = $"{{{Environment.NewLine}\t{{ 1, 2, 3}}{Environment.NewLine}\t{{ a, b, c }}{Environment.NewLine}}}{Environment.NewLine}";
+			var expectedSerializationContent = $"{{{Environment.NewLine}\tBytes: List{Environment.NewLine}\t{{{Environment.NewLine}\t\t1, 2, 3{Environment.NewLine}\t}}{Environment.NewLine}\tStrings: List{Environment.NewLine}\t{{{Environment.NewLine}\t\t\"a\", \"b\", \"c\"{Environment.NewLine}\t}}{Environment.NewLine}}}{Environment.NewLine}";
 			TestSerialization(listContainer, expectedSerializationContent);
 		}
 
 		private void TestSerialization(object obj, string expectedResult)
 		{
+			string actualSerializationContent;
 			var filePath = Path.Combine(Path.GetTempPath(), Path.GetTempFileName());
-			ObjectSerializer.Save(filePath, obj);
-			var actualSerializationContent = File.ReadAllText(filePath);
-			File.Delete(filePath);
+			try
+			{
+				ObjectSerializer.Save(filePath, obj);
+				actualSerializationContent = File.ReadAllText(filePath);
+			}
+			finally
+			{
+				File.Delete(filePath);
+			}
 			Assert.AreEqual(expectedResult, actualSerializationContent);
 		}
 	}
