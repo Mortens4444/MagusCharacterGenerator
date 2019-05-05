@@ -49,13 +49,11 @@ namespace Mtf.Helper
 		private static void Save(StreamWriter streamWriter, object obj, int indent)
 		{
 			var objectType = obj.GetType();
-			var idx = objectType.FullName.IndexOf('[');
-
 			if (objectType.FullName.EndsWith("[]"))
 			{
 				HandleArrayProperties(streamWriter, obj, indent);
 			}
-			else if (idx != -1 && objectType.FullName.Substring(0, idx).Contains("List"))
+			else if (objectType.IsGenericList(out var _))
 			{
 				HandleListProperties(streamWriter, obj, indent);
 			}
