@@ -1,5 +1,4 @@
 ﻿using MagusCharacterGenerator.GameSystem;
-using MagusCharacterGenerator.GameSystem.Qualifications;
 using MagusCharacterGenerator.Qualifications;
 using System.Collections.Generic;
 

@@ -106,6 +106,7 @@ namespace Storyteller
 					character = (Character)Activator.CreateInstance(typeof(Character), characterName, race, caste);
 				}
 				character.PropertyChanged += Character_PropertyChanged;
+				character.CalculateChanges();
 
 				nudStrength.Value = character.Strength;
 				nudSpeed.Value = character.Speed;

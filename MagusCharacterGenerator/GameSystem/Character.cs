@@ -39,7 +39,8 @@ namespace MagusCharacterGenerator.GameSystem
 		private ushort psiPoints;
 		private ushort manaPoints;
 		private ushort qualificationPoints;
-		private readonly bool triggerEnabled = true;
+		private bool calculateChanges;
+
 		// TODO: Pass the correct method to count
 		private readonly MultiCasteMode multiCasteMode = MultiCasteMode.Normal_Or_SwitchedCaste;
 
@@ -49,16 +50,19 @@ namespace MagusCharacterGenerator.GameSystem
 
 		public Character(string name, IRace race, params ICaste[] castes)
 		{
-			triggerEnabled = false;
 			Name = name;
 			BaseCaste = castes.First();
 			Castes = castes;
 			Race = race;
 			CreateFirstLevel();
-			triggerEnabled = true;
 		}
 
 		#region Properties
+
+		public void CalculateChanges()
+		{
+			calculateChanges = true;
+		}
 
 		public IEnumerable<CharacterImage> Images { get; private set; }
 
@@ -197,7 +201,7 @@ namespace MagusCharacterGenerator.GameSystem
 				if (value != strength)
 				{
 					strength = value;
-					if (triggerEnabled)
+					if (calculateChanges)
 					{
 						CalculateFightValues();
 					}
@@ -213,7 +217,7 @@ namespace MagusCharacterGenerator.GameSystem
 				if (value != speed)
 				{
 					speed = value;
-					if (triggerEnabled)
+					if (calculateChanges)
 					{
 						CalculateFightValues();
 					}
@@ -229,7 +233,7 @@ namespace MagusCharacterGenerator.GameSystem
 				if (value != dexterity)
 				{
 					dexterity = value;
-					if (triggerEnabled)
+					if (calculateChanges)
 					{
 						CalculateFightValues();
 						CalculateQualificationPoints();
@@ -246,7 +250,7 @@ namespace MagusCharacterGenerator.GameSystem
 				if (value != stamina)
 				{
 					stamina = value;
-					if (triggerEnabled)
+					if (calculateChanges)
 					{
 						CalculatePainTolerancePoints();
 					}
@@ -262,7 +266,7 @@ namespace MagusCharacterGenerator.GameSystem
 				if (value != health)
 				{
 					health = value;
-					if (triggerEnabled)
+					if (calculateChanges)
 					{
 						CalculateLifePoints();
 					}
@@ -280,7 +284,7 @@ namespace MagusCharacterGenerator.GameSystem
 				if (value != intelligence)
 				{
 					intelligence = value;
-					if (triggerEnabled)
+					if (calculateChanges)
 					{
 						CalculatePsiPoints();
 						CalculateManaPoints();
@@ -298,7 +302,7 @@ namespace MagusCharacterGenerator.GameSystem
 				if (value != willPower)
 				{
 					willPower = value;
-					if (triggerEnabled)
+					if (calculateChanges)
 					{
 						CalculatePainTolerancePoints();
 						CalculateUnconsciousMentalMagicResistance();
@@ -315,7 +319,7 @@ namespace MagusCharacterGenerator.GameSystem
 				if (value != astral)
 				{
 					astral = value;
-					if (triggerEnabled)
+					if (calculateChanges)
 					{
 						CalculateUnconsciousAstralMagicResistance();
 					}
@@ -374,7 +378,9 @@ namespace MagusCharacterGenerator.GameSystem
 
 		public static Character Load(string fullPath)
 		{
-			return ObjectSerializer.Load<Character>(fullPath);
+			var result = ObjectSerializer.LoadFile<Character>(fullPath);
+			result.CalculateChanges();
+			return result;
 		}
 
 		public void Save(string fullPath, IEnumerable<CharacterImage> characterImages)
@@ -393,7 +399,7 @@ namespace MagusCharacterGenerator.GameSystem
 			}
 
 			Images = images;
-			ObjectSerializer.Save(fullPath, this);
+			ObjectSerializer.SaveFile(fullPath, this);
 		}
 
 		private void CreateFirstLevel()

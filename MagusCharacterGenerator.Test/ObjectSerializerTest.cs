@@ -1,6 +1,5 @@
 ﻿using Mtf.Helper;
 using NUnit.Framework;
-using System;
 using System.Collections.Generic;
 using System.IO;
 
@@ -26,7 +25,7 @@ namespace MagusCharacterGenerator.Test
 				String = "str",
 				Char = 'c'
 			};
-			var expectedSerializationContent = $"{{{Environment.NewLine}\tByte: 255{Environment.NewLine}\tShort: -2{Environment.NewLine}\tUShort: 1{Environment.NewLine}\tInt32: -1{Environment.NewLine}\tUInt32: 2{Environment.NewLine}\tInt64: -100000000000{Environment.NewLine}\tUInt64: 100000000000{Environment.NewLine}\tSingle: 3,14{Environment.NewLine}\tDouble: 2,71{Environment.NewLine}\tString: \"str\"{Environment.NewLine}\tChar: 'c'{Environment.NewLine}}}{Environment.NewLine}";
+			var expectedSerializationContent = EmbeddedResourceReader.Get("MagusCharacterGenerator.Test.ObjectSerializationResults.Primitives.json");
 			TestSerialization(primitiveContainer, expectedSerializationContent);
 		}
 
@@ -38,7 +37,7 @@ namespace MagusCharacterGenerator.Test
 				Bytes = new byte[] { 1, 2, 3 },
 				Strings = new[] { "a", "b", "c" }
 			};
-			var expectedSerializationContent = $"{{{Environment.NewLine}\tBytes: Array{Environment.NewLine}\t{{{Environment.NewLine}\t\t1, 2, 3{Environment.NewLine}\t}}{Environment.NewLine}\tStrings: Array{Environment.NewLine}\t{{{Environment.NewLine}\t\t\"a\", \"b\", \"c\"{Environment.NewLine}\t}}{Environment.NewLine}}}{Environment.NewLine}";
+			var expectedSerializationContent = EmbeddedResourceReader.Get("MagusCharacterGenerator.Test.ObjectSerializationResults.Arrays.json");
 			TestSerialization(arrayContainer, expectedSerializationContent);
 		}
 
@@ -50,7 +49,7 @@ namespace MagusCharacterGenerator.Test
 				Bytes = new List<byte> { 1, 2, 3 },
 				Strings = new List<string> { "a", "b", "c" }
 			};
-			var expectedSerializationContent = $"{{{Environment.NewLine}\tBytes: List{Environment.NewLine}\t{{{Environment.NewLine}\t\t1, 2, 3{Environment.NewLine}\t}}{Environment.NewLine}\tStrings: List{Environment.NewLine}\t{{{Environment.NewLine}\t\t\"a\", \"b\", \"c\"{Environment.NewLine}\t}}{Environment.NewLine}}}{Environment.NewLine}";
+			var expectedSerializationContent = EmbeddedResourceReader.Get("MagusCharacterGenerator.Test.ObjectSerializationResults.Lists.json");
 			TestSerialization(listContainer, expectedSerializationContent);
 		}
 
@@ -60,7 +59,7 @@ namespace MagusCharacterGenerator.Test
 			var filePath = Path.Combine(Path.GetTempPath(), Path.GetTempFileName());
 			try
 			{
-				ObjectSerializer.Save(filePath, obj);
+				ObjectSerializer.SaveFile(filePath, obj);
 				actualSerializationContent = File.ReadAllText(filePath);
 			}
 			finally

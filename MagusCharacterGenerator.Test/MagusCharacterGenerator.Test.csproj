@@ -40,6 +40,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.CSharp" />
     <Reference Include="nunit.framework, Version=3.11.0.0, Culture=neutral, PublicKeyToken=2638cd05610744eb, processorArchitecture=MSIL">
       <HintPath>..\packages\NUnit.3.11.0\lib\net45\nunit.framework.dll</HintPath>
     </Reference>
@@ -48,6 +49,8 @@
     <Reference Include="System.Drawing" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="EmbeddedResourceReader.cs" />
+    <Compile Include="ObjectDeserializerTest.cs" />
     <Compile Include="ObjectSerializerTest.cs" />
     <Compile Include="PsiPointCalculatorTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -68,6 +71,16 @@
       <Project>{B4CB8338-B2B5-4C2B-9271-84193FC9831D}</Project>
       <Name>SourceCodeGenerator</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="ObjectSerializationResults\Primitives.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="ObjectSerializationResults\Lists.json" />
+    <EmbeddedResource Include="ObjectSerializationResults\Arrays.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="ObjectDeserializationResults\Character.json" />
   </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

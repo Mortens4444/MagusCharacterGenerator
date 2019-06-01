@@ -1,0 +1,16 @@
+﻿{
+  "$id": "1",
+  "$type": "<>f__AnonymousType2`2[[System.Byte[], mscorlib],[System.String[], mscorlib]], MagusCharacterGenerator.Test",
+  "Bytes": {
+    "$type": "System.Byte[], mscorlib",
+    "$value": "AQID"
+  },
+  "Strings": {
+    "$type": "System.String[], mscorlib",
+    "$values": [
+      "a",
+      "b",
+      "c"
+    ]
+  }
+}

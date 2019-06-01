@@ -1,0 +1,15 @@
+﻿{
+  "$id": "1",
+  "$type": "<>f__AnonymousType1`11[[System.Byte, mscorlib],[System.Int16, mscorlib],[System.UInt16, mscorlib],[System.Int32, mscorlib],[System.UInt32, mscorlib],[System.Int64, mscorlib],[System.UInt64, mscorlib],[System.Single, mscorlib],[System.Double, mscorlib],[System.String, mscorlib],[System.Char, mscorlib]], MagusCharacterGenerator.Test",
+  "Byte": 255,
+  "Short": -2,
+  "UShort": 1,
+  "Int32": -1,
+  "UInt32": 2,
+  "Int64": -100000000000,
+  "UInt64": 100000000000,
+  "Single": 3.14,
+  "Double": 2.71,
+  "String": "str",
+  "Char": "c"
+}

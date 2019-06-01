@@ -8,7 +8,7 @@ using System.Collections.Generic;
 namespace MagusCharacterGenerator.Race
 {
 	/// <summary>
-	/// https://kalandozok.hu/cikkgyujtemeny/kieg%C3%A9sz%C3%ADt%C5%91k/fajok/j%C3%A1tszhat%C3%B3-fajok/f%C3%A9lork-goblin-r67/
+	/// https://kalandozok.hu/cikkgyujtemeny/kieg%C3%A9sz%C3%ADt%C5%91k/fajok/j%C3%A1tszhat%C3%B3-fajok/fajok-k%C3%B6nyve-r62/
 	/// </summary>
 	class MountainGiant : HalfGiant
 	{

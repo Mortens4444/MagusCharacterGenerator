@@ -2,6 +2,7 @@
 using MagusCharacterGenerator.GameSystem.Qualifications;
 using Mtf.Helper;
 using Mtf.Languages;
+using Newtonsoft.Json;
 
 namespace MagusCharacterGenerator.Qualifications.Scientific
 {
@@ -9,7 +10,10 @@ namespace MagusCharacterGenerator.Qualifications.Scientific
 	{
         public Language Language { get; set; }
 
-        public LanguageKnowledge(byte languageLevel, byte level = 1)
+		[JsonConstructor]
+		public LanguageKnowledge() { }
+
+		public LanguageKnowledge(byte languageLevel, byte level = 1)
             : base(languageLevel > 5 ? QualificationLevel.Master : QualificationLevel.Base, level)
         {
         }

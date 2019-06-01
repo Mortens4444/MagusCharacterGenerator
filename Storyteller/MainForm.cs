@@ -469,7 +469,7 @@ namespace StoryTeller
 
 		private void TvCharacters_AfterSelect(object sender, TreeViewEventArgs e)
 		{
-
+			var character = Character.Load(Path.Combine((string)e.Node.Tag, String.Concat("character", ExtensionProvider.CharacterSheetExtension)));
 		}
 
 		private void RacesToolStripMenuItem_Click(object sender, EventArgs e)

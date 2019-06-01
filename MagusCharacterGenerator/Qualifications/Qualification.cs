@@ -6,7 +6,7 @@ namespace MagusCharacterGenerator.Qualifications
 {
 	public class Qualification
     {
-        public Qualification(QualificationLevel qualificationLevel, byte level)
+        public Qualification(QualificationLevel qualificationLevel = QualificationLevel.Base, byte level = 1)
         {
             QualificationLevel = qualificationLevel;
             if (qualificationLevel == QualificationLevel.Base)
