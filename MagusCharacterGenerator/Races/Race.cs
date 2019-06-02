@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace MagusCharacterGenerator.Races
 {
-	public abstract class Race : IRace
+	abstract class Race : IRace
 	{
 		protected readonly DiceThrow DiceThrow = new DiceThrow();
 

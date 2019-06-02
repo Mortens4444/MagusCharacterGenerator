@@ -1,5 +1,4 @@
-﻿using MagusCharacterGenerator.Castes;
-using MagusCharacterGenerator.Castes.Believer.GodsOfPyarron;
+﻿using MagusCharacterGenerator.Castes.Believer.GodsOfPyarron;
 using MagusCharacterGenerator.Castes.Sorcerer;
 using MagusCharacterGenerator.GameSystem;
 using MagusCharacterGenerator.GameSystem.Languages;

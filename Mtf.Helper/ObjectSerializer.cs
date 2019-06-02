@@ -16,14 +16,10 @@ namespace Mtf.Helper
 				}
 			}
 		}
-
+		
 		public static T LoadContent<T>(string fileContent)
 		{
-			return JsonConvert.DeserializeObject<T>(fileContent, new JsonSerializerSettings
-			{
-				TypeNameHandling = TypeNameHandling.All,
-				PreserveReferencesHandling = PreserveReferencesHandling.Objects
-			});
+			return JsonConvert.DeserializeObject<T>(fileContent, GetJsonSerializerSettings());
 		}
 
 		public static void SaveFile(string fullPath, object obj)
@@ -40,11 +36,16 @@ namespace Mtf.Helper
 
 		public static string GetSerializedString(object obj)
 		{
-			return JsonConvert.SerializeObject(obj, Formatting.Indented, new JsonSerializerSettings
+			return JsonConvert.SerializeObject(obj, Formatting.Indented, GetJsonSerializerSettings());
+		}
+
+		private static JsonSerializerSettings GetJsonSerializerSettings()
+		{
+			return new JsonSerializerSettings
 			{
 				TypeNameHandling = TypeNameHandling.All,
 				PreserveReferencesHandling = PreserveReferencesHandling.Objects
-			});
+			};
 		}
 	}
 }
