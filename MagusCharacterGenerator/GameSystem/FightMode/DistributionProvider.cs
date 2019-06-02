@@ -1,5 +1,5 @@
 ﻿using MagusCharacterGenerator.Castes;
-using MagusCharacterGenerator.Race;
+using MagusCharacterGenerator.Races;
 
 namespace MagusCharacterGenerator.GameSystem.FightMode
 {

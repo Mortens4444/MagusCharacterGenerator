@@ -7,7 +7,7 @@ using MagusCharacterGenerator.GameSystem.Psi;
 using MagusCharacterGenerator.GameSystem.Qualifications;
 using MagusCharacterGenerator.Qualifications;
 using MagusCharacterGenerator.Qualifications.Specialities;
-using MagusCharacterGenerator.Race;
+using MagusCharacterGenerator.Races;
 using Mtf.Helper;
 using System;
 using System.Collections.Generic;

@@ -2,7 +2,7 @@
 using MagusCharacterGenerator.Castes.Slan;
 using MagusCharacterGenerator.Castes.Sorcerer;
 using MagusCharacterGenerator.GameSystem;
-using MagusCharacterGenerator.Race;
+using MagusCharacterGenerator.Races;
 using System;
 
 namespace MagusCharacterGenerator

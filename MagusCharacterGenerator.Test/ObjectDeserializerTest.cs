@@ -4,7 +4,7 @@ using MagusCharacterGenerator.Castes.Sorcerer;
 using MagusCharacterGenerator.GameSystem;
 using MagusCharacterGenerator.GameSystem.Languages;
 using MagusCharacterGenerator.Qualifications.Scientific;
-using MagusCharacterGenerator.Race;
+using MagusCharacterGenerator.Races;
 using Mtf.Helper;
 using NUnit.Framework;
 using System;
