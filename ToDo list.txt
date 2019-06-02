@@ -1,19 +1,17 @@
-- Check objectSerialization for Qualifications
-- ObjectSerializer work in memory (ObjectSerializerTest should not create & delete files)
-- Mentett karakter betöltése
+- Mentett karakter betÃ¶ltÃ©se (Fix unit tests)
 - Harcrendszer
-- Karakterlap nyomtatása
-- Új kasztok (harcosok, stb...)
-- Drágakövek
-- Mérgek
-- Ynev fõbb helyei
-- Karakter származás
-- Bestiárium (SourceCodeGenerator)
-- Pszi diszciplínák (SourceCodeGenerator)
-- Mágiarendszer (SourceCodeGenerator)
-- Képzettségek
+- Karakterlap nyomtatÃ¡sa
+- Ãšj kasztok (harcosok, stb...)
+- DrÃ¡gakÃ¶vek
+- MÃ©rgek
+- Ynev fÃµbb helyei
+- Karakter szÃ¡rmazÃ¡s
+- BestiÃ¡rium (SourceCodeGenerator)
+- Pszi diszciplÃ­nÃ¡k (SourceCodeGenerator)
+- MÃ¡giarendszer (SourceCodeGenerator)
+- KÃ©pzettsÃ©gek
 - FIXME: Multi-caste
-- Videóklippek lejátszása
+- VideÃ³klippek lejÃ¡tszÃ¡sa
 - Fix Psi test
 
 https://www.yumpu.com/hu/document/view/5842996/magus-puska-071-verzio-http-wwwszerepjatektk/5
