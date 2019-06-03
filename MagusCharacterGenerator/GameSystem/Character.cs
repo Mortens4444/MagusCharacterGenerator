@@ -66,13 +66,13 @@ namespace MagusCharacterGenerator.GameSystem
 
 		public IEnumerable<CharacterImage> Images { get; private set; }
 
-		public string Name { get; private set; }
+		public string Name { get; set; }
 
-		public ICaste BaseCaste { get; private set; }
+		public ICaste BaseCaste { get; set; }
 
-		public ICaste[] Castes { get; private set; }
+		public ICaste[] Castes { get; set; }
 
-		public IRace Race { get; private set; }
+		public IRace Race { get; set; }
 
 		public ushort PercentQualificationPoints { get; private set; }
 

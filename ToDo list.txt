@@ -1,4 +1,4 @@
-- Mentett karakter betöltése (Fix unit tests)
+- Mentett karakter betöltése
 - Harcrendszer
 - Karakterlap nyomtatása
 - Új kasztok (harcosok, stb...)

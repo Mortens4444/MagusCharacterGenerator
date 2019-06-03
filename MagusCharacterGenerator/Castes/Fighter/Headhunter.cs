@@ -20,78 +20,78 @@ namespace MagusCharacterGenerator.Castes.Fighter
 
 		[DiceThrow(ThrowType._2K6)]
 		[DiceThrowModifier(6)]
-		public short Strength => DiceThrow._2K6_Plus_6();
+		public override short Strength => DiceThrow._2K6_Plus_6();
 
 		[DiceThrow(ThrowType._1K6)]
 		[DiceThrowModifier(12)]
 		[SpecialTraining]
-		public short Speed => DiceThrow._1K6_Plus_12_Plus_SpecialTraining();
+		public override short Speed => DiceThrow._1K6_Plus_12_Plus_SpecialTraining();
 
 		[DiceThrow(ThrowType._1K10)]
 		[DiceThrowModifier(8)]
-		public short Dexterity => DiceThrow._1K10_Plus_8();
+		public override short Dexterity => DiceThrow._1K10_Plus_8();
 
 		[DiceThrow(ThrowType._1K6)]
 		[DiceThrowModifier(12)]
 		[SpecialTraining]
-		public short Stamina => DiceThrow._1K6_Plus_12_Plus_SpecialTraining();
+		public override short Stamina => DiceThrow._1K6_Plus_12_Plus_SpecialTraining();
 
 		[DiceThrow(ThrowType._1K10)]
 		[DiceThrowModifier(10)]
-		public short Health => DiceThrow._1K10_Plus_10();
+		public override short Health => DiceThrow._1K10_Plus_10();
 
 		[DiceThrow(ThrowType._3K6)]
-		public short Beauty => DiceThrow._3K6();
+		public override short Beauty => DiceThrow._3K6();
 
 		[DiceThrow(ThrowType._3K6_2_Times)]
-		public short Intelligence => DiceThrow._3K6_2_Times();
+		public override short Intelligence => DiceThrow._3K6_2_Times();
 
 		[DiceThrow(ThrowType._1K10)]
 		[DiceThrowModifier(8)]
-		public short WillPower => DiceThrow._1K10_Plus_8();
+		public override short WillPower => DiceThrow._1K10_Plus_8();
 
 		[DiceThrow(ThrowType._2K6)]
 		[DiceThrowModifier(6)]
-		public short Astral => DiceThrow._2K6_Plus_6();
+		public override short Astral => DiceThrow._2K6_Plus_6();
 
 		[DiceThrow(ThrowType._1K6)]
-		public short Gold => DiceThrow._1K6();
+		public override short Gold => DiceThrow._1K6();
 
 		[DiceThrow(ThrowType._2K6)]
 		[DiceThrowModifier(8)]
-		public byte Bravery => (byte)(DiceThrow._2K6() + 8);
+		public override byte Bravery => (byte)(DiceThrow._2K6() + 8);
 
 		[DiceThrow(ThrowType._2K6)]
 		[DiceThrowModifier(8)]
-		public byte Erudition => (byte)(DiceThrow._2K6() + 8);
+		public override byte Erudition => (byte)(DiceThrow._2K6() + 8);
 
-		public byte InitiatingBaseValue => 10;
+		public override byte InitiatingBaseValue => 10;
 
-        public byte AttackingBaseValue => 20;
+        public override byte AttackingBaseValue => 20;
 
-        public byte DefendingBaseValue => 75;
+        public override byte DefendingBaseValue => 75;
 
-        public byte AimingBaseValue => 0;
+        public override byte AimingBaseValue => 0;
 
-        public byte FightValueModifier => 11;
+        public override byte FightValueModifier => 11;
 
-        public byte BaseQualificationPoints => 3;
+        public override byte BaseQualificationPoints => 3;
 
-        public byte QualificationPointsModifier => 5;
+        public override byte QualificationPointsModifier => 5;
 
-        public byte PercentQualificationModifier => 20;
+        public override byte PercentQualificationModifier => 20;
 
-        public byte BaseLifePoints => 6;
+        public override byte BaseLifePoints => 6;
 
-        public byte BasePainTolerancePoints => 7;
+        public override byte BasePainTolerancePoints => 7;
 
-        public bool AddFightValueOnFirstLevel => false;
+        public override bool AddFightValueOnFirstLevel => false;
 
-        public bool AddPainToleranceOnFirstLevel => false;
+        public override bool AddPainToleranceOnFirstLevel => false;
 
-        public bool AddQualificationPointsOnFirstLevel => true;
+        public override bool AddQualificationPointsOnFirstLevel => true;
 
-        public QualificationList Qualifications => new QualificationList
+        public override QualificationList Qualifications => new QualificationList
         {
             new WeaponUsage(),
             new WeaponUsage(),
@@ -113,7 +113,7 @@ namespace MagusCharacterGenerator.Castes.Fighter
             new Backstab()
         };
 
-        public QualificationList FutureQualifications => new QualificationList
+        public override QualificationList FutureQualifications => new QualificationList
         {
             new FreeFromBondage(level: 2),
             new FreeFromBondage(QualificationLevel.Master, 2),
@@ -126,7 +126,7 @@ namespace MagusCharacterGenerator.Castes.Fighter
             new TrackReadingAndHiding(QualificationLevel.Master, 9)
         };
 
-        public List<PercentQualification> PercentQualifications => new List<PercentQualification>
+        public override List<PercentQualification> PercentQualifications => new List<PercentQualification>
         {
             new Climbing(30),
             new Falling(15),
@@ -136,7 +136,7 @@ namespace MagusCharacterGenerator.Castes.Fighter
             new TrapDetect(10)
         };
 
-        public SpecialQualificationList SpecialQualifications => new SpecialQualificationList
+        public override SpecialQualificationList SpecialQualifications => new SpecialQualificationList
         {
             new HeadHunterDamageIncreasing(),
             new SlanDisciplinesUsage(),
@@ -146,7 +146,7 @@ namespace MagusCharacterGenerator.Castes.Fighter
 
 		[DiceThrow(ThrowType._1K6)]
 		[DiceThrowModifier(5)]
-		public byte GetPainToleranceModifier() => (byte)(DiceThrow._1K6() + 5);
+		public override byte GetPainToleranceModifier() => (byte)(DiceThrow._1K6() + 5);
 
         public override string ToString() => Lng.Elem("Headhunter");
     }

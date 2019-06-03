@@ -46,7 +46,7 @@ namespace MagusCharacterGenerator.Test
 			var character = new Character("Mirena", new Human(), new Witch(5));
 			var characterJson = ObjectSerializer.GetSerializedString(character);
 			var deserializedCharacter = ObjectSerializer.LoadContent<Character>(characterJson);
-			Assert.AreEqual(character.Race, deserializedCharacter.Race);
+			Assert.AreEqual(character.Race.ToString(), deserializedCharacter.Race.ToString());
 		}
 
 		[Test]

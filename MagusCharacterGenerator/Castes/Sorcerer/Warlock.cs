@@ -19,77 +19,77 @@ namespace MagusCharacterGenerator.Castes.Sorcerer
 		public Warlord(byte level = 1) : base(level) { }
 
 		[DiceThrow(ThrowType._3K6_2_Times)]
-		public short Strength => DiceThrow._3K6_2_Times();
+		public override short Strength => DiceThrow._3K6_2_Times();
 
 		[DiceThrow(ThrowType._1K10)]
 		[DiceThrowModifier(8)]
-		public short Speed => DiceThrow._1K10_Plus_8();
+		public override short Speed => DiceThrow._1K10_Plus_8();
 
 		[DiceThrow(ThrowType._1K6)]
 		[DiceThrowModifier(12)]
 		[SpecialTraining]
-		public short Dexterity => DiceThrow._1K6_Plus_12_Plus_SpecialTraining();
+		public override short Dexterity => DiceThrow._1K6_Plus_12_Plus_SpecialTraining();
 
 		[DiceThrow(ThrowType._3K6_2_Times)]
-		public short Stamina => DiceThrow._3K6_2_Times();
+		public override short Stamina => DiceThrow._3K6_2_Times();
 
 		[DiceThrow(ThrowType._2K6)]
 		[DiceThrowModifier(6)]
-		public short Health => DiceThrow._2K6_Plus_6();
+		public override short Health => DiceThrow._2K6_Plus_6();
 
 		[DiceThrow(ThrowType._3K6)]
-		public short Beauty => DiceThrow._3K6();
+		public override short Beauty => DiceThrow._3K6();
 
 		[DiceThrow(ThrowType._2K6)]
 		[DiceThrowModifier(6)]
-		public short Intelligence => DiceThrow._2K6_Plus_6();
+		public override short Intelligence => DiceThrow._2K6_Plus_6();
 
 		[DiceThrow(ThrowType._2K6)]
 		[DiceThrowModifier(6)]
-		public short WillPower => DiceThrow._2K6_Plus_6();
+		public override short WillPower => DiceThrow._2K6_Plus_6();
 
 		[DiceThrow(ThrowType._1K6)]
 		[DiceThrowModifier(12)]
-		public short Astral => DiceThrow._1K6_Plus_12();
+		public override short Astral => DiceThrow._1K6_Plus_12();
 
 		[DiceThrow(ThrowType._2K6)]
-		public short Gold => DiceThrow._2K6();
-
-		[DiceThrow(ThrowType._2K6)]
-		[DiceThrowModifier(8)]
-		public byte Bravery => (byte)(DiceThrow._2K6() + 8);
+		public override short Gold => DiceThrow._2K6();
 
 		[DiceThrow(ThrowType._2K6)]
 		[DiceThrowModifier(8)]
-		public byte Erudition => (byte)(DiceThrow._2K6() + 8);
+		public override byte Bravery => (byte)(DiceThrow._2K6() + 8);
 
-		public byte InitiatingBaseValue => 7;
+		[DiceThrow(ThrowType._2K6)]
+		[DiceThrowModifier(8)]
+		public override byte Erudition => (byte)(DiceThrow._2K6() + 8);
 
-        public byte AttackingBaseValue => 17;
+		public override byte InitiatingBaseValue => 7;
 
-        public byte DefendingBaseValue => 72;
+        public override byte AttackingBaseValue => 17;
 
-        public byte AimingBaseValue => 5;
+        public override byte DefendingBaseValue => 72;
 
-        public byte FightValueModifier => 7;
+        public override byte AimingBaseValue => 5;
 
-        public byte BaseQualificationPoints => 7;
+        public override byte FightValueModifier => 7;
 
-        public byte QualificationPointsModifier => 8;
+        public override byte BaseQualificationPoints => 7;
 
-        public byte PercentQualificationModifier => 15;
+        public override byte QualificationPointsModifier => 8;
 
-        public byte BaseLifePoints => 3;
+        public override byte PercentQualificationModifier => 15;
 
-        public byte BasePainTolerancePoints => 4;
+        public override byte BaseLifePoints => 3;
 
-        public bool AddFightValueOnFirstLevel => false;
+        public override byte BasePainTolerancePoints => 4;
 
-        public bool AddPainToleranceOnFirstLevel => false;
+        public override bool AddFightValueOnFirstLevel => false;
 
-        public bool AddQualificationPointsOnFirstLevel => true;
+        public override bool AddPainToleranceOnFirstLevel => false;
 
-        public QualificationList Qualifications => new QualificationList
+        public override bool AddQualificationPointsOnFirstLevel => true;
+
+        public override QualificationList Qualifications => new QualificationList
         {
             new WeaponUsage(),
             new WeaponUsage(),
@@ -105,7 +105,7 @@ namespace MagusCharacterGenerator.Castes.Sorcerer
             new Herbalism(),
        };
 
-        public QualificationList FutureQualifications => new QualificationList
+        public override QualificationList FutureQualifications => new QualificationList
         {
             new Backstab(level: 2),
             new PoisoningAndNeutralization(QualificationLevel.Master, 4),
@@ -113,20 +113,20 @@ namespace MagusCharacterGenerator.Castes.Sorcerer
             new Herbalism(QualificationLevel.Master, 6)
         };
 
-        public List<PercentQualification> PercentQualifications => new List<PercentQualification>
+        public override List<PercentQualification> PercentQualifications => new List<PercentQualification>
         {
             new Sneaking(15),
             new Stealth(15)
         };
 
-        public SpecialQualificationList SpecialQualifications => new SpecialQualificationList
+        public override SpecialQualificationList SpecialQualifications => new SpecialQualificationList
         {
             new WarlockMagic()
         };
 
 		[DiceThrow(ThrowType._1K6)]
 		[DiceThrowModifier(1)]
-		public byte GetPainToleranceModifier() => (byte)(DiceThrow._1K6() + 1);
+		public override byte GetPainToleranceModifier() => (byte)(DiceThrow._1K6() + 1);
 
         public override string ToString()
         {

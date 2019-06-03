@@ -601,7 +601,7 @@
     ]
   },
   "Race": {
-    "$type": "MagusCharacterGenerator.Race.Amund, MagusCharacterGenerator",
+    "$type": "MagusCharacterGenerator.Races.Amund, MagusCharacterGenerator",
     "Strength": 1,
     "Stamina": 1,
     "Beauty": 3,
