@@ -31,7 +31,7 @@ namespace Storyteller
             }
         }
 
-        private static TreeNode CreateNode(string nodeName, object tag, int iconIndex)
+		public static TreeNode CreateNode(string nodeName, object tag, int iconIndex)
         {
             return new TreeNode(nodeName, iconIndex, iconIndex)
             {

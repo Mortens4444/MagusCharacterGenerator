@@ -12,6 +12,8 @@ using System;
 using System.Drawing;
 using System.IO;
 using System.Runtime.InteropServices;
+using System.Threading;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace StoryTeller
@@ -180,6 +182,7 @@ namespace StoryTeller
 			fileSystemWatcher.Changed += FileSystemWatcher_Changed;
 			fileSystemWatcher.Created += FileSystemWatcher_Created;
 			fileSystemWatcher.Deleted += FileSystemWatcher_Deleted;
+			fileSystemWatcher.EnableRaisingEvents = true;
 		}
 
 		private void FileSystemWatcher_Changed(object sender, FileSystemEventArgs e)
@@ -189,14 +192,18 @@ namespace StoryTeller
 
 		private void FileSystemWatcher_Created(object sender, FileSystemEventArgs e)
 		{
-			if (e.ChangeType == WatcherChangeTypes.Created && e.FullPath.EndsWith(ExtensionProvider.CharacterSheetExtension))
+			if (e.ChangeType == WatcherChangeTypes.Created && Path.GetDirectoryName(e.FullPath).Equals(PathProvider.Characters))
 			{
-				var character = Character.Load(e.FullPath);
-				var treeNode = new TreeNode(character.Name, 3, 3)
+				Task.Factory.StartNew(() =>
 				{
-					Tag = character
-				};
-				tvCharacters.Nodes.Add(treeNode);
+					Thread.Sleep(1000);
+					var character = Character.Load(Path.Combine(e.FullPath, String.Concat("character", ExtensionProvider.CharacterSheetExtension)));
+					var treeNode = TreeNodeCollectionExtensions.CreateNode(character.Name, e.FullPath, 3);
+					tvCharacters.Invoke((MethodInvoker)(() =>
+					{
+						tvCharacters.Nodes.Add(treeNode);
+					}));					
+				});
 			}
 		}
 
