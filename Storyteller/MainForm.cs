@@ -173,7 +173,10 @@ namespace StoryTeller
 		private void TsmiCharacter_Click(object sender, EventArgs e)
 		{
 			var charcterGenerator = new CharcterGenerator(true);
-			charcterGenerator.Show();
+			if (charcterGenerator.ShowDialog() == DialogResult.OK)
+			{
+				tvCharacters.Nodes.GetFilesAndFoldersWithClear(PathProvider.Characters, 1, ExtensionProvider.ImagesFilter);
+			}
 		}
 
 		private void MainForm_Shown(object sender, EventArgs e)
@@ -187,24 +190,24 @@ namespace StoryTeller
 
 		private void FileSystemWatcher_Changed(object sender, FileSystemEventArgs e)
 		{
-			throw new NotImplementedException();
+			//throw new NotImplementedException();
 		}
 
 		private void FileSystemWatcher_Created(object sender, FileSystemEventArgs e)
 		{
-			if (e.ChangeType == WatcherChangeTypes.Created && Path.GetDirectoryName(e.FullPath).Equals(PathProvider.Characters))
-			{
-				Task.Factory.StartNew(() =>
-				{
-					Thread.Sleep(1000);
-					var character = Character.Load(Path.Combine(e.FullPath, String.Concat("character", ExtensionProvider.CharacterSheetExtension)));
-					var treeNode = TreeNodeCollectionExtensions.CreateNode(character.Name, e.FullPath, 3);
-					tvCharacters.Invoke((MethodInvoker)(() =>
-					{
-						tvCharacters.Nodes.Add(treeNode);
-					}));					
-				});
-			}
+			//if (e.ChangeType == WatcherChangeTypes.Created && Path.GetDirectoryName(e.FullPath).Equals(PathProvider.Characters))
+			//{
+			//	Task.Factory.StartNew(() =>
+			//	{
+			//		Thread.Sleep(1000);
+			//		var character = Character.Load(Path.Combine(e.FullPath, String.Concat("character", ExtensionProvider.CharacterSheetExtension)));
+			//		var treeNode = TreeNodeCollectionExtensions.CreateNode(character.Name, e.FullPath, 3);
+			//		tvCharacters.Invoke((MethodInvoker)(() =>
+			//		{
+			//			tvCharacters.Nodes.Add(treeNode);
+			//		}));					
+			//	});
+			//}
 		}
 
 		private void FileSystemWatcher_Deleted(object sender, FileSystemEventArgs e)
@@ -477,6 +480,7 @@ namespace StoryTeller
 		private void TvCharacters_AfterSelect(object sender, TreeViewEventArgs e)
 		{
 			var character = Character.Load(Path.Combine((string)e.Node.Tag, String.Concat("character", ExtensionProvider.CharacterSheetExtension)));
+			charcterGenerator.LoadCharacter(character);
 		}
 
 		private void RacesToolStripMenuItem_Click(object sender, EventArgs e)

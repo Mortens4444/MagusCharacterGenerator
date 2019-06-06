@@ -37,9 +37,20 @@ namespace Storyteller
 			btnDone.Enabled = canGenerate;
 			btnGenerate.Enabled = canGenerate;
 
+			if (!canGenerate)
+			{
+				nudAimV.ReadOnly = true;
+			}
+
 			Icon = IconCreator.Get(IconChar.UserCircle, Color.Maroon);
 			Lng.Translate(this);
 			cbImageSizeMode.SelectedIndex = 1;
+		}
+
+		public void LoadCharacter(Character character)
+		{
+			this.character = character;
+			FillFromCharacter();
 		}
 
 		private void CharcterGenerator_Load(object sender, EventArgs e)
@@ -107,60 +118,69 @@ namespace Storyteller
 				}
 				character.PropertyChanged += Character_PropertyChanged;
 				character.CalculateChanges();
-
-				nudStrength.Value = character.Strength;
-				nudSpeed.Value = character.Speed;
-				nudDexterity.Value = character.Dexterity;
-				nudStamina.Value = character.Stamina;
-				nudHealth.Value = character.Health;
-				nudBeauty.Value = character.Beauty;
-				nudWillPower.Value = character.WillPower;
-				nudIntelligence.Value = character.Intelligence;
-				nudAstral.Value = character.Astral;
-				nudGold.Value = character.Gold;
-				nudBravery.Value = character.Bravery;
-				nudErudition.Value = character.Erudition;
-
-				SetInitiatingValue();
-				SetAttackingValue();
-				SetDefendingValue();
-				SetAimingValue();
-				SetLifePoints();
-				SetPaintTolerancePoints();
-
-				SetPsiPoints();
-				SetManaPoints();
-				SetAstralMagicResistance();
-				SetMentalMagicResistance();
-
-				SetQualificationPoints();
-				nudPercent.Value = character.PercentQualificationPoints;
-
-				lvQualifications.Items.Clear();
-				//character.Psi
-				int i = 0;
-				foreach (var qualification in character.Qualifications.OrderBy(qualification => qualification.ToString()))
-				{
-					//var item = new ListViewItem(qualification.ToString());
-					//item.SubItems.Add();
-					var text = qualification.ToFullString();
-					var endIndex = text.LastIndexOf(' ');
-					var name = text.Substring(0, endIndex);
-					var item = new ListViewItem(name);
-					if (i++ % 2 == 0)
-					{
-						item.BackColor = Color.LightBlue;
-					}
-					item.SubItems.Add(text.Substring(endIndex + 1));
-					lvQualifications.Items.Add(item);
-				}
-
-				//character.PercentQualifications
+				FillFromCharacter();
 			}
 			catch
 			{
 				Generate();
 			}
+		}
+
+		private void FillFromCharacter()
+		{
+			LoadCharacterProperties();
+
+			SetInitiatingValue();
+			SetAttackingValue();
+			SetDefendingValue();
+			SetAimingValue();
+			SetLifePoints();
+			SetPaintTolerancePoints();
+
+			SetPsiPoints();
+			SetManaPoints();
+			SetAstralMagicResistance();
+			SetMentalMagicResistance();
+
+			SetQualificationPoints();
+			nudPercent.Value = character.PercentQualificationPoints;
+
+			lvQualifications.Items.Clear();
+			//character.Psi
+			int i = 0;
+			foreach (var qualification in character.Qualifications.OrderBy(qualification => qualification.ToString()))
+			{
+				//var item = new ListViewItem(qualification.ToString());
+				//item.SubItems.Add();
+				var text = qualification.ToFullString();
+				var endIndex = text.LastIndexOf(' ');
+				var name = text.Substring(0, endIndex);
+				var item = new ListViewItem(name);
+				if (i++ % 2 == 0)
+				{
+					item.BackColor = Color.LightBlue;
+				}
+				item.SubItems.Add(text.Substring(endIndex + 1));
+				lvQualifications.Items.Add(item);
+			}
+
+			//character.PercentQualifications
+		}
+
+		private void LoadCharacterProperties()
+		{
+			nudStrength.Value = character.Strength;
+			nudSpeed.Value = character.Speed;
+			nudDexterity.Value = character.Dexterity;
+			nudStamina.Value = character.Stamina;
+			nudHealth.Value = character.Health;
+			nudBeauty.Value = character.Beauty;
+			nudWillPower.Value = character.WillPower;
+			nudIntelligence.Value = character.Intelligence;
+			nudAstral.Value = character.Astral;
+			nudGold.Value = character.Gold;
+			nudBravery.Value = character.Bravery;
+			nudErudition.Value = character.Erudition;
 		}
 
 		private void Character_PropertyChanged(object sender, PropertyChangedEventArgs e)

@@ -64,7 +64,7 @@ namespace MagusCharacterGenerator.GameSystem
 			calculateChanges = true;
 		}
 
-		public IEnumerable<CharacterImage> Images { get; private set; }
+		public IEnumerable<CharacterImage> Images { get; set; }
 
 		public string Name { get; set; }
 
@@ -74,12 +74,12 @@ namespace MagusCharacterGenerator.GameSystem
 
 		public IRace Race { get; set; }
 
-		public ushort PercentQualificationPoints { get; private set; }
+		public ushort PercentQualificationPoints { get; set; }
 
 		public ushort QualificationPoints
 		{
 			get => qualificationPoints;
-			private set
+			set
 			{
 				if (value != qualificationPoints)
 				{
@@ -92,7 +92,7 @@ namespace MagusCharacterGenerator.GameSystem
 		public short UnconsciousAstralMagicResistance
 		{
 			get => unconsciousAstralMagicResistance;
-			private set
+			set
 			{
 				if (value != unconsciousAstralMagicResistance)
 				{
@@ -105,7 +105,7 @@ namespace MagusCharacterGenerator.GameSystem
 		public short UnconsciousMentalMagicResistance
 		{
 			get => unconsciousMentalMagicResistance;
-			private set
+			set
 			{
 				if (value != unconsciousMentalMagicResistance)
 				{
@@ -118,7 +118,7 @@ namespace MagusCharacterGenerator.GameSystem
 		public short InitiatingValue
 		{
 			get => initiatingValue;
-			private set
+			set
 			{
 				if (value != initiatingValue)
 				{
@@ -131,7 +131,7 @@ namespace MagusCharacterGenerator.GameSystem
 		public short AttackingValue
 		{
 			get => attackingValue;
-			private set
+			set
 			{
 				if (value != attackingValue)
 				{
@@ -144,7 +144,7 @@ namespace MagusCharacterGenerator.GameSystem
 		public short DefendingValue
 		{
 			get => defendingValue;
-			private set
+			set
 			{
 				if (value != defendingValue)
 				{
@@ -157,7 +157,7 @@ namespace MagusCharacterGenerator.GameSystem
 		public short AimingValue
 		{
 			get => aimingValue;
-			private set
+			set
 			{
 				if (value != aimingValue)
 				{
@@ -170,7 +170,7 @@ namespace MagusCharacterGenerator.GameSystem
 		public short LifePoints
 		{
 			get => lifePoints;
-			private set
+			set
 			{
 				if (value != lifePoints)
 				{
@@ -183,7 +183,7 @@ namespace MagusCharacterGenerator.GameSystem
 		public short PainTolerancePoints
 		{
 			get => painTolerancePoints;
-			private set
+			set
 			{
 				if (value != painTolerancePoints)
 				{
@@ -274,7 +274,7 @@ namespace MagusCharacterGenerator.GameSystem
 			}
 		}
 
-		public short Beauty { get; private set; }
+		public short Beauty { get; set; }
 
 		public short Intelligence
 		{
@@ -327,20 +327,20 @@ namespace MagusCharacterGenerator.GameSystem
 			}
 		}
 
-		public short Gold { get; private set; }
+		public short Gold { get; set; }
 
-		public short Bravery { get; private set; }
+		public short Bravery { get; set; }
 
-		public short Erudition { get; private set; }
+		public short Erudition { get; set; }
 
-		public Sorcery Sorcery { get; private set; }
+		public Sorcery Sorcery { get; set; }
 
-		public IPsi Psi { get; private set; }
+		public IPsi Psi { get; set; }
 
 		public ushort ManaPoints
 		{
 			get => manaPoints;
-			private set
+			set
 			{
 				if (value != manaPoints)
 				{
@@ -353,7 +353,7 @@ namespace MagusCharacterGenerator.GameSystem
 		public ushort PsiPoints
 		{
 			get => psiPoints;
-			private set
+			set
 			{
 				if (value != psiPoints)
 				{
@@ -363,7 +363,7 @@ namespace MagusCharacterGenerator.GameSystem
 			}
 		}
 
-		public byte PsiPointsModifier { get; private set; }
+		public byte PsiPointsModifier { get; set; }
 
 		public QualificationList Qualifications { get; private set; } = new QualificationList();
 

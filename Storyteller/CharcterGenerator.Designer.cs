@@ -30,6 +30,10 @@
 		{
 			this.panelMain = new System.Windows.Forms.Panel();
 			this.gbCharacter = new System.Windows.Forms.GroupBox();
+			this.btnRemove = new System.Windows.Forms.Button();
+			this.btnNext = new System.Windows.Forms.Button();
+			this.btnPrevious = new System.Windows.Forms.Button();
+			this.btnAdd = new System.Windows.Forms.Button();
 			this.gbGeneral = new System.Windows.Forms.GroupBox();
 			this.lblName = new System.Windows.Forms.Label();
 			this.nudSecondaryCasteLevel = new System.Windows.Forms.NumericUpDown();
@@ -117,10 +121,6 @@
 			this.lblStamina = new System.Windows.Forms.Label();
 			this.btnGenerate = new System.Windows.Forms.Button();
 			this.ofdCharacterImage = new System.Windows.Forms.OpenFileDialog();
-			this.btnAdd = new System.Windows.Forms.Button();
-			this.btnPrevious = new System.Windows.Forms.Button();
-			this.btnNext = new System.Windows.Forms.Button();
-			this.btnRemove = new System.Windows.Forms.Button();
 			this.panelMain.SuspendLayout();
 			this.gbCharacter.SuspendLayout();
 			this.gbGeneral.SuspendLayout();
@@ -191,6 +191,48 @@
 			this.gbCharacter.Size = new System.Drawing.Size(1018, 573);
 			this.gbCharacter.TabIndex = 4;
 			this.gbCharacter.TabStop = false;
+			// 
+			// btnRemove
+			// 
+			this.btnRemove.Location = new System.Drawing.Point(887, 17);
+			this.btnRemove.Name = "btnRemove";
+			this.btnRemove.Size = new System.Drawing.Size(23, 23);
+			this.btnRemove.TabIndex = 53;
+			this.btnRemove.Text = "-";
+			this.btnRemove.UseVisualStyleBackColor = true;
+			this.btnRemove.Click += new System.EventHandler(this.btnRemove_Click);
+			// 
+			// btnNext
+			// 
+			this.btnNext.Enabled = false;
+			this.btnNext.Location = new System.Drawing.Point(966, 16);
+			this.btnNext.Name = "btnNext";
+			this.btnNext.Size = new System.Drawing.Size(44, 23);
+			this.btnNext.TabIndex = 52;
+			this.btnNext.Text = "-->";
+			this.btnNext.UseVisualStyleBackColor = true;
+			this.btnNext.Click += new System.EventHandler(this.btnNext_Click);
+			// 
+			// btnPrevious
+			// 
+			this.btnPrevious.Enabled = false;
+			this.btnPrevious.Location = new System.Drawing.Point(916, 17);
+			this.btnPrevious.Name = "btnPrevious";
+			this.btnPrevious.Size = new System.Drawing.Size(44, 23);
+			this.btnPrevious.TabIndex = 51;
+			this.btnPrevious.Text = "<--";
+			this.btnPrevious.UseVisualStyleBackColor = true;
+			this.btnPrevious.Click += new System.EventHandler(this.btnPrevious_Click);
+			// 
+			// btnAdd
+			// 
+			this.btnAdd.Location = new System.Drawing.Point(860, 17);
+			this.btnAdd.Name = "btnAdd";
+			this.btnAdd.Size = new System.Drawing.Size(23, 23);
+			this.btnAdd.TabIndex = 50;
+			this.btnAdd.Text = "+";
+			this.btnAdd.UseVisualStyleBackColor = true;
+			this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
 			// 
 			// gbGeneral
 			// 
@@ -556,6 +598,7 @@
 			// btnDone
 			// 
 			this.btnDone.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+			this.btnDone.DialogResult = System.Windows.Forms.DialogResult.OK;
 			this.btnDone.Location = new System.Drawing.Point(930, 544);
 			this.btnDone.Name = "btnDone";
 			this.btnDone.Size = new System.Drawing.Size(80, 23);
@@ -1168,48 +1211,6 @@
 			this.btnGenerate.Text = "Generate";
 			this.btnGenerate.UseVisualStyleBackColor = true;
 			this.btnGenerate.Click += new System.EventHandler(this.btnGenerate_Click);
-			// 
-			// btnAdd
-			// 
-			this.btnAdd.Location = new System.Drawing.Point(860, 17);
-			this.btnAdd.Name = "btnAdd";
-			this.btnAdd.Size = new System.Drawing.Size(23, 23);
-			this.btnAdd.TabIndex = 50;
-			this.btnAdd.Text = "+";
-			this.btnAdd.UseVisualStyleBackColor = true;
-			this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
-			// 
-			// btnPrevious
-			// 
-			this.btnPrevious.Enabled = false;
-			this.btnPrevious.Location = new System.Drawing.Point(916, 17);
-			this.btnPrevious.Name = "btnPrevious";
-			this.btnPrevious.Size = new System.Drawing.Size(44, 23);
-			this.btnPrevious.TabIndex = 51;
-			this.btnPrevious.Text = "<--";
-			this.btnPrevious.UseVisualStyleBackColor = true;
-			this.btnPrevious.Click += new System.EventHandler(this.btnPrevious_Click);
-			// 
-			// btnNext
-			// 
-			this.btnNext.Enabled = false;
-			this.btnNext.Location = new System.Drawing.Point(966, 16);
-			this.btnNext.Name = "btnNext";
-			this.btnNext.Size = new System.Drawing.Size(44, 23);
-			this.btnNext.TabIndex = 52;
-			this.btnNext.Text = "-->";
-			this.btnNext.UseVisualStyleBackColor = true;
-			this.btnNext.Click += new System.EventHandler(this.btnNext_Click);
-			// 
-			// btnRemove
-			// 
-			this.btnRemove.Location = new System.Drawing.Point(887, 17);
-			this.btnRemove.Name = "btnRemove";
-			this.btnRemove.Size = new System.Drawing.Size(23, 23);
-			this.btnRemove.TabIndex = 53;
-			this.btnRemove.Text = "-";
-			this.btnRemove.UseVisualStyleBackColor = true;
-			this.btnRemove.Click += new System.EventHandler(this.btnRemove_Click);
 			// 
 			// CharcterGenerator
 			// 

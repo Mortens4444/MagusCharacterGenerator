@@ -7,6 +7,12 @@ namespace Storyteller
 {
 	public static class TreeNodeCollectionExtensions
     {
+		public static void GetFilesAndFoldersWithClear(this TreeNodeCollection siblings, string path, int iconIndex, params string[] extensionFilters)
+		{
+			siblings.Clear();
+			siblings.GetFilesAndFolders(null, path, iconIndex, extensionFilters);
+		}
+
 		public static void GetFilesAndFolders(this TreeNodeCollection siblings, string path, int iconIndex, params string[] extensionFilters)
 		{
 			siblings.GetFilesAndFolders(null, path, iconIndex, extensionFilters);
