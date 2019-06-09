@@ -439,7 +439,7 @@ namespace MagusCharacterGenerator.GameSystem
 			WillPower = (short)(BaseCaste.WillPower + Race.WillPower);
 			Astral = (short)(BaseCaste.Astral + Race.Astral);
 			Bravery = BaseCaste.Bravery;
-			Bravery = BaseCaste.Erudition;
+			Erudition = BaseCaste.Erudition;
 		}
 
 		private void CalculateQualificationPoints()

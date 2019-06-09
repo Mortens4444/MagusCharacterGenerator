@@ -1,4 +1,3 @@
-- Mentett karakter betöltése
 - Harcrendszer
 - Karakterlap nyomtatása
 - Új kasztok (harcosok, stb...)

@@ -479,8 +479,13 @@ namespace StoryTeller
 
 		private void TvCharacters_AfterSelect(object sender, TreeViewEventArgs e)
 		{
-			var character = Character.Load(Path.Combine((string)e.Node.Tag, String.Concat("character", ExtensionProvider.CharacterSheetExtension)));
-			charcterGenerator.LoadCharacter(character);
+			var path = (string)e.Node.Tag;
+			if (!Directory.Exists(path))
+			{
+				path = Directory.GetParent(path).FullName;
+			}
+			var character = Character.Load(Path.Combine(path, String.Concat("character", ExtensionProvider.CharacterSheetExtension)));
+			charcterGenerator.LoadCharacter(character, (string)e.Node.Tag);
 		}
 
 		private void RacesToolStripMenuItem_Click(object sender, EventArgs e)
@@ -548,6 +553,23 @@ namespace StoryTeller
 		private void TsmiPinterest_Click(object sender, EventArgs e)
 		{
 			ProcessUtils.Start("https://hu.pinterest.com/topics/fantasy-characters/");
+		}
+
+		private void rtbStory_LinkClicked(object sender, LinkClickedEventArgs e)
+		{
+			var linkText = e.LinkText.Substring(1);
+			if (e.LinkText.StartsWith("@"))
+			{
+				tabControl.SelectedTab = tabControl.TabPages["tpCharacters"];
+				foreach (TreeNode characterNode in tvCharacters.Nodes)
+				{
+					if (characterNode.Text == linkText)
+					{
+						tvCharacters.SelectedNode = characterNode;
+						break;
+					}
+				}
+			}
 		}
 	}
 }

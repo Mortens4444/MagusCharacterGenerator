@@ -1,6 +1,7 @@
 ﻿using MagusCharacterGenerator.GameSystem.Qualifications;
 using Mtf.Helper;
 using Mtf.Languages;
+using Newtonsoft.Json;
 
 namespace MagusCharacterGenerator.Qualifications.Laical
 {
@@ -8,7 +9,10 @@ namespace MagusCharacterGenerator.Qualifications.Laical
     {
         public Profession Profession { get; set; }
 
-        public ProfessionKnowledge(QualificationLevel qualificationLevel = QualificationLevel.Base, byte level = 1)
+		[JsonConstructor]
+		public ProfessionKnowledge() { }
+
+		public ProfessionKnowledge(QualificationLevel qualificationLevel = QualificationLevel.Base, byte level = 1)
             : base(qualificationLevel, level)
         {
         }

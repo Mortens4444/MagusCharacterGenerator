@@ -2,7 +2,7 @@
 using MagusCharacterGenerator.GameSystem.Qualifications;
 using Mtf.Helper;
 using Mtf.Languages;
-using System;
+using Newtonsoft.Json;
 
 namespace MagusCharacterGenerator.Qualifications.Scientific
 {
@@ -10,7 +10,10 @@ namespace MagusCharacterGenerator.Qualifications.Scientific
 	{
         public AntientLanguage Language { get; set; }
 
-        public AntientLanguageKnowledge(QualificationLevel qualificationLevel = QualificationLevel.Base, byte level = 1)
+		[JsonConstructor]
+		public AntientLanguageKnowledge() { }
+
+		public AntientLanguageKnowledge(QualificationLevel qualificationLevel = QualificationLevel.Base, byte level = 1)
             : base(qualificationLevel, level)
         {
         }

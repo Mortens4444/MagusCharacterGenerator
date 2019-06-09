@@ -41,59 +41,65 @@ namespace MagusCharacterGenerator.Qualifications
             }
         }
 
-        //public void BuyQualificationUpgrade(Qualification qualification)
-        //{
-        //    Add(qualification);
-        //}
+        public new void Insert(int index, Qualification qualification)
+        {
+			if (Check(qualification, out var existingQualification))
+			{
+				base.Insert(index, qualification);
+				if (existingQualification != null)
+				{
+					Remove(existingQualification);
+				}
+			}
+        }
 
-        //public void BuyNewQualification(Qualification qualification)
-        //{
-        //    base.Add(qualification);
-        //}
+		public new void Add(Qualification qualification)
+		{
+			if (Check(qualification, out var existingQualification))
+			{
+				base.Add(qualification);
+				if (existingQualification != null)
+				{
+					Remove(existingQualification);
+				}
+			}
+		}
 
-        //public new void Add(Qualification qualification)
-        //{
-        //    SetQualificationLevel(qualification);
-        //    base.Add(qualification);
-        //}
+		public new void InsertRange(int index, IEnumerable<Qualification> qualifications)
+		{
+			foreach (var qualification in qualifications)
+			{
+				Insert(index, qualification);
+			}
+		}
 
-        //public new void AddRange(IEnumerable<Qualification> qualifications)
-        //{
-        //    SetQualificationLevel(qualifications.ToArray());
-        //    base.AddRange(qualifications);
-        //}
+		public new void AddRange(IEnumerable<Qualification> qualifications)
+		{
+			foreach (var qualification in qualifications)
+			{
+				Add(qualification);
+			}
+		}
 
-        //public new void Insert(int index, Qualification qualification)
-        //{
-        //    SetQualificationLevel(qualification);
-        //    base.Insert(index, qualification);
-        //}
+		private bool Check(Qualification qualification, out Qualification existingQualification)
+		{
+			if (qualification is ICanHaveMany)
+			{
+				existingQualification = null;
+				return true;
+			}
 
-        //public new void InsertRange(int index, IEnumerable<Qualification> qualifications)
-        //{
-        //    SetQualificationLevel(qualifications.ToArray());
-        //    base.InsertRange(index, qualifications);
-        //}
+			existingQualification = this.FirstOrDefault(q => q.QualificationType == qualification.QualificationType);
+			if (existingQualification == null)
+			{
+				return true;
+			}
 
-        //private static void SetQualificationLevel(params Qualification[] qualifications)
-        //{
-        //    foreach (var qualification in qualifications)
-        //    {
-        //        switch (qualification.QualificationLevel)
-        //        {
-        //            case QualificationLevel.Master:
-        //                var q = this.FirstOrDefault(qualification => qualification);
-        //                if (q != null)
-        //                {
-        //                }
-
-        //                qualification.MasterQualificationLevel =
-        //                break;
-        //            case QualificationLevel.Base:
-        //                break;
-        //        }
-
-        //    }
-        //}
-    }
+			if (existingQualification.QualificationLevel < qualification.QualificationLevel)
+			{
+				return true;
+			}
+			return false;
+		}
+	}
 }

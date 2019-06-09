@@ -47,10 +47,17 @@ namespace Storyteller
 			cbImageSizeMode.SelectedIndex = 1;
 		}
 
-		public void LoadCharacter(Character character)
+		public void LoadCharacter(Character character, string imageToLoad)
 		{
 			this.character = character;
 			FillFromCharacter();
+
+			var image = character.Images.FirstOrDefault(img => img.ImageFile == imageToLoad);
+			if (image.ImageFile == null)
+			{
+				image = character.Images.First();
+			}
+			image.Load(pbCharacter);
 		}
 
 		private void CharcterGenerator_Load(object sender, EventArgs e)
@@ -128,6 +135,19 @@ namespace Storyteller
 
 		private void FillFromCharacter()
 		{
+			cbRace.Text = character.Race.ToString();
+			tbName.Text = character.Name;
+
+			nudLevel.Value = character.Castes[0].Level;
+			cbCaste.Text = character.Castes[0].ToString();
+
+			chkBoxSecondaryCaste.Checked = character.Castes.Length > 1;
+			if (chkBoxSecondaryCaste.Checked)
+			{
+				nudSecondaryCasteLevel.Value = character.Castes[1].Level;
+				cbSecondaryCaste.Text = character.Castes[1].ToString();
+			}
+
 			LoadCharacterProperties();
 
 			SetInitiatingValue();

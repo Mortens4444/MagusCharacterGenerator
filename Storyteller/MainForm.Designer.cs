@@ -29,14 +29,14 @@
         private void InitializeComponent()
         {
 			this.components = new System.ComponentModel.Container();
-			System.Windows.Forms.ListViewGroup listViewGroup17 = new System.Windows.Forms.ListViewGroup("Accomodation", System.Windows.Forms.HorizontalAlignment.Left);
-			System.Windows.Forms.ListViewGroup listViewGroup18 = new System.Windows.Forms.ListViewGroup("Animals", System.Windows.Forms.HorizontalAlignment.Left);
-			System.Windows.Forms.ListViewGroup listViewGroup19 = new System.Windows.Forms.ListViewGroup("Clothes", System.Windows.Forms.HorizontalAlignment.Left);
-			System.Windows.Forms.ListViewGroup listViewGroup20 = new System.Windows.Forms.ListViewGroup("Debauchery", System.Windows.Forms.HorizontalAlignment.Left);
-			System.Windows.Forms.ListViewGroup listViewGroup21 = new System.Windows.Forms.ListViewGroup("Food", System.Windows.Forms.HorizontalAlignment.Left);
-			System.Windows.Forms.ListViewGroup listViewGroup22 = new System.Windows.Forms.ListViewGroup("Other", System.Windows.Forms.HorizontalAlignment.Left);
-			System.Windows.Forms.ListViewGroup listViewGroup23 = new System.Windows.Forms.ListViewGroup("Trappings", System.Windows.Forms.HorizontalAlignment.Left);
-			System.Windows.Forms.ListViewGroup listViewGroup24 = new System.Windows.Forms.ListViewGroup("Travelling", System.Windows.Forms.HorizontalAlignment.Left);
+			System.Windows.Forms.ListViewGroup listViewGroup1 = new System.Windows.Forms.ListViewGroup("Accomodation", System.Windows.Forms.HorizontalAlignment.Left);
+			System.Windows.Forms.ListViewGroup listViewGroup2 = new System.Windows.Forms.ListViewGroup("Animals", System.Windows.Forms.HorizontalAlignment.Left);
+			System.Windows.Forms.ListViewGroup listViewGroup3 = new System.Windows.Forms.ListViewGroup("Clothes", System.Windows.Forms.HorizontalAlignment.Left);
+			System.Windows.Forms.ListViewGroup listViewGroup4 = new System.Windows.Forms.ListViewGroup("Debauchery", System.Windows.Forms.HorizontalAlignment.Left);
+			System.Windows.Forms.ListViewGroup listViewGroup5 = new System.Windows.Forms.ListViewGroup("Food", System.Windows.Forms.HorizontalAlignment.Left);
+			System.Windows.Forms.ListViewGroup listViewGroup6 = new System.Windows.Forms.ListViewGroup("Other", System.Windows.Forms.HorizontalAlignment.Left);
+			System.Windows.Forms.ListViewGroup listViewGroup7 = new System.Windows.Forms.ListViewGroup("Trappings", System.Windows.Forms.HorizontalAlignment.Left);
+			System.Windows.Forms.ListViewGroup listViewGroup8 = new System.Windows.Forms.ListViewGroup("Travelling", System.Windows.Forms.HorizontalAlignment.Left);
 			this.menuStrip = new System.Windows.Forms.MenuStrip();
 			this.tsmiNew = new System.Windows.Forms.ToolStripMenuItem();
 			this.tsmiCharacter = new System.Windows.Forms.ToolStripMenuItem();
@@ -49,6 +49,8 @@
 			this.tsmiArkenForge = new System.Windows.Forms.ToolStripMenuItem();
 			this.tsmiGetSounds = new System.Windows.Forms.ToolStripMenuItem();
 			this.tsmiGetImages = new System.Windows.Forms.ToolStripMenuItem();
+			this.tsmiGoogle = new System.Windows.Forms.ToolStripMenuItem();
+			this.tsmiPinterest = new System.Windows.Forms.ToolStripMenuItem();
 			this.tsmiCastes = new System.Windows.Forms.ToolStripMenuItem();
 			this.tsmiKranichWarlock = new System.Windows.Forms.ToolStripMenuItem();
 			this.tsmiNastarPriest = new System.Windows.Forms.ToolStripMenuItem();
@@ -130,8 +132,6 @@
 			this.lvMarket = new System.Windows.Forms.ListView();
 			this.chName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
 			this.chPrice = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-			this.tsmiGoogle = new System.Windows.Forms.ToolStripMenuItem();
-			this.tsmiPinterest = new System.Windows.Forms.ToolStripMenuItem();
 			this.menuStrip.SuspendLayout();
 			this.MainPanel.SuspendLayout();
 			this.tabControl.SuspendLayout();
@@ -248,14 +248,14 @@
 			// tsmiArkenForge
 			// 
 			this.tsmiArkenForge.Name = "tsmiArkenForge";
-			this.tsmiArkenForge.Size = new System.Drawing.Size(180, 22);
+			this.tsmiArkenForge.Size = new System.Drawing.Size(133, 22);
 			this.tsmiArkenForge.Text = "Arkenforge";
 			this.tsmiArkenForge.Click += new System.EventHandler(this.TsmiArkenForge_Click);
 			// 
 			// tsmiGetSounds
 			// 
 			this.tsmiGetSounds.Name = "tsmiGetSounds";
-			this.tsmiGetSounds.Size = new System.Drawing.Size(180, 22);
+			this.tsmiGetSounds.Size = new System.Drawing.Size(133, 22);
 			this.tsmiGetSounds.Text = "Get sounds";
 			this.tsmiGetSounds.Click += new System.EventHandler(this.TsmiGetSounds_Click);
 			// 
@@ -265,8 +265,22 @@
             this.tsmiGoogle,
             this.tsmiPinterest});
 			this.tsmiGetImages.Name = "tsmiGetImages";
-			this.tsmiGetImages.Size = new System.Drawing.Size(180, 22);
+			this.tsmiGetImages.Size = new System.Drawing.Size(133, 22);
 			this.tsmiGetImages.Text = "Get images";
+			// 
+			// tsmiGoogle
+			// 
+			this.tsmiGoogle.Name = "tsmiGoogle";
+			this.tsmiGoogle.Size = new System.Drawing.Size(120, 22);
+			this.tsmiGoogle.Text = "Google";
+			this.tsmiGoogle.Click += new System.EventHandler(this.TsmiGoogle_Click);
+			// 
+			// tsmiPinterest
+			// 
+			this.tsmiPinterest.Name = "tsmiPinterest";
+			this.tsmiPinterest.Size = new System.Drawing.Size(120, 22);
+			this.tsmiPinterest.Text = "Pinterest";
+			this.tsmiPinterest.Click += new System.EventHandler(this.TsmiPinterest_Click);
 			// 
 			// tsmiCastes
 			// 
@@ -275,27 +289,27 @@
             this.tsmiNastarPriest,
             this.tsmiVelarPriest});
 			this.tsmiCastes.Name = "tsmiCastes";
-			this.tsmiCastes.Size = new System.Drawing.Size(180, 22);
+			this.tsmiCastes.Size = new System.Drawing.Size(133, 22);
 			this.tsmiCastes.Text = "Castes";
 			// 
 			// tsmiKranichWarlock
 			// 
 			this.tsmiKranichWarlock.Name = "tsmiKranichWarlock";
-			this.tsmiKranichWarlock.Size = new System.Drawing.Size(180, 22);
+			this.tsmiKranichWarlock.Size = new System.Drawing.Size(158, 22);
 			this.tsmiKranichWarlock.Text = "Kranich warlock";
 			this.tsmiKranichWarlock.Click += new System.EventHandler(this.TsmiKranichWarlock_Click);
 			// 
 			// tsmiNastarPriest
 			// 
 			this.tsmiNastarPriest.Name = "tsmiNastarPriest";
-			this.tsmiNastarPriest.Size = new System.Drawing.Size(180, 22);
+			this.tsmiNastarPriest.Size = new System.Drawing.Size(158, 22);
 			this.tsmiNastarPriest.Text = "Nastar priest";
 			this.tsmiNastarPriest.Click += new System.EventHandler(this.TsmiNastarPriest_Click);
 			// 
 			// tsmiVelarPriest
 			// 
 			this.tsmiVelarPriest.Name = "tsmiVelarPriest";
-			this.tsmiVelarPriest.Size = new System.Drawing.Size(180, 22);
+			this.tsmiVelarPriest.Size = new System.Drawing.Size(158, 22);
 			this.tsmiVelarPriest.Text = "Velar priest";
 			this.tsmiVelarPriest.Click += new System.EventHandler(this.TsmiVelarPriest_Click);
 			// 
@@ -306,7 +320,7 @@
             this.tsmiWeaponsAndArmors,
             this.racesToolStripMenuItem});
 			this.tsmiOther.Name = "tsmiOther";
-			this.tsmiOther.Size = new System.Drawing.Size(180, 22);
+			this.tsmiOther.Size = new System.Drawing.Size(133, 22);
 			this.tsmiOther.Text = "Other";
 			// 
 			// tsmiHttpsKalandozokHu
@@ -341,7 +355,7 @@
 			// tsmiAbout
 			// 
 			this.tsmiAbout.Name = "tsmiAbout";
-			this.tsmiAbout.Size = new System.Drawing.Size(180, 22);
+			this.tsmiAbout.Size = new System.Drawing.Size(107, 22);
 			this.tsmiAbout.Text = "About";
 			this.tsmiAbout.Click += new System.EventHandler(this.TsmiAbout_Click);
 			// 
@@ -356,7 +370,7 @@
 			// tsmiLanguages
 			// 
 			this.tsmiLanguages.Name = "tsmiLanguages";
-			this.tsmiLanguages.Size = new System.Drawing.Size(180, 22);
+			this.tsmiLanguages.Size = new System.Drawing.Size(131, 22);
 			this.tsmiLanguages.Text = "Languages";
 			// 
 			// statusStrip
@@ -423,6 +437,7 @@
 			this.rtbStory.Size = new System.Drawing.Size(786, 505);
 			this.rtbStory.TabIndex = 0;
 			this.rtbStory.Text = "";
+			this.rtbStory.LinkClicked += new System.Windows.Forms.LinkClickedEventHandler(this.rtbStory_LinkClicked);
 			// 
 			// tpCharacters
 			// 
@@ -684,6 +699,7 @@
             this.chLoopMusic});
 			this.lvNowPlayingMusic.ContextMenuStrip = this.cmdMusicPlayControls;
 			this.lvNowPlayingMusic.FullRowSelect = true;
+			this.lvNowPlayingMusic.HideSelection = false;
 			this.lvNowPlayingMusic.Location = new System.Drawing.Point(3, 49);
 			this.lvNowPlayingMusic.Name = "lvNowPlayingMusic";
 			this.lvNowPlayingMusic.Size = new System.Drawing.Size(239, 453);
@@ -850,6 +866,7 @@
             this.chLoop});
 			this.lvNowPlayingSounds.ContextMenuStrip = this.cmdSoundsPlayControls;
 			this.lvNowPlayingSounds.FullRowSelect = true;
+			this.lvNowPlayingSounds.HideSelection = false;
 			this.lvNowPlayingSounds.Location = new System.Drawing.Point(3, 49);
 			this.lvNowPlayingSounds.Name = "lvNowPlayingSounds";
 			this.lvNowPlayingSounds.Size = new System.Drawing.Size(239, 453);
@@ -1018,31 +1035,32 @@
             this.chPrice});
 			this.lvMarket.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.lvMarket.FullRowSelect = true;
-			listViewGroup17.Header = "Accomodation";
-			listViewGroup17.Name = "Accomodation";
-			listViewGroup18.Header = "Animals";
-			listViewGroup18.Name = "Animals";
-			listViewGroup19.Header = "Clothes";
-			listViewGroup19.Name = "Clothes";
-			listViewGroup20.Header = "Debauchery";
-			listViewGroup20.Name = "Debauchery";
-			listViewGroup21.Header = "Food";
-			listViewGroup21.Name = "Food";
-			listViewGroup22.Header = "Other";
-			listViewGroup22.Name = "Other";
-			listViewGroup23.Header = "Trappings";
-			listViewGroup23.Name = "Trappings";
-			listViewGroup24.Header = "Travelling";
-			listViewGroup24.Name = "Travelling";
+			listViewGroup1.Header = "Accomodation";
+			listViewGroup1.Name = "Accomodation";
+			listViewGroup2.Header = "Animals";
+			listViewGroup2.Name = "Animals";
+			listViewGroup3.Header = "Clothes";
+			listViewGroup3.Name = "Clothes";
+			listViewGroup4.Header = "Debauchery";
+			listViewGroup4.Name = "Debauchery";
+			listViewGroup5.Header = "Food";
+			listViewGroup5.Name = "Food";
+			listViewGroup6.Header = "Other";
+			listViewGroup6.Name = "Other";
+			listViewGroup7.Header = "Trappings";
+			listViewGroup7.Name = "Trappings";
+			listViewGroup8.Header = "Travelling";
+			listViewGroup8.Name = "Travelling";
 			this.lvMarket.Groups.AddRange(new System.Windows.Forms.ListViewGroup[] {
-            listViewGroup17,
-            listViewGroup18,
-            listViewGroup19,
-            listViewGroup20,
-            listViewGroup21,
-            listViewGroup22,
-            listViewGroup23,
-            listViewGroup24});
+            listViewGroup1,
+            listViewGroup2,
+            listViewGroup3,
+            listViewGroup4,
+            listViewGroup5,
+            listViewGroup6,
+            listViewGroup7,
+            listViewGroup8});
+			this.lvMarket.HideSelection = false;
 			this.lvMarket.Location = new System.Drawing.Point(3, 3);
 			this.lvMarket.Name = "lvMarket";
 			this.lvMarket.Size = new System.Drawing.Size(786, 505);
@@ -1059,20 +1077,6 @@
 			// 
 			this.chPrice.Text = "Price";
 			this.chPrice.Width = 126;
-			// 
-			// tsmiGoogle
-			// 
-			this.tsmiGoogle.Name = "tsmiGoogle";
-			this.tsmiGoogle.Size = new System.Drawing.Size(180, 22);
-			this.tsmiGoogle.Text = "Google";
-			this.tsmiGoogle.Click += new System.EventHandler(this.TsmiGoogle_Click);
-			// 
-			// tsmiPinterest
-			// 
-			this.tsmiPinterest.Name = "tsmiPinterest";
-			this.tsmiPinterest.Size = new System.Drawing.Size(180, 22);
-			this.tsmiPinterest.Text = "Pinterest";
-			this.tsmiPinterest.Click += new System.EventHandler(this.TsmiPinterest_Click);
 			// 
 			// MainForm
 			// 
