@@ -16,15 +16,22 @@ namespace MagusCharacterGenerator.GameSystem
 
 		public void Load(PictureBox pictureBox)
 		{
-			if (ImageFile == null)
+			try
+			{
+				if (ImageFile == null)
+				{
+					pictureBox.Image = null;
+				}
+				else
+				{
+					pictureBox.Image = Image.FromFile(ImageFile);
+					pictureBox.Image.Tag = ImageFile;
+					pictureBox.SizeMode = SizeMode;
+				}
+			}
+			catch
 			{
 				pictureBox.Image = null;
-			}
-			else
-			{
-				pictureBox.Image = Image.FromFile(ImageFile);
-				pictureBox.Image.Tag = ImageFile;
-				pictureBox.SizeMode = SizeMode;
 			}
 		}
 	}

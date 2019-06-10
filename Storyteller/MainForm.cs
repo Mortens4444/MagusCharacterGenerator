@@ -12,8 +12,6 @@ using System;
 using System.Drawing;
 using System.IO;
 using System.Runtime.InteropServices;
-using System.Threading;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace StoryTeller
@@ -484,8 +482,12 @@ namespace StoryTeller
 			{
 				path = Directory.GetParent(path).FullName;
 			}
-			var character = Character.Load(Path.Combine(path, String.Concat("character", ExtensionProvider.CharacterSheetExtension)));
-			charcterGenerator.LoadCharacter(character, (string)e.Node.Tag);
+			var characterFile = Path.Combine(path, String.Concat("character", ExtensionProvider.CharacterSheetExtension));
+			if (File.Exists(characterFile))
+			{
+				var character = Character.Load(characterFile);
+				charcterGenerator.LoadCharacter(character, (string)e.Node.Tag);
+			}
 		}
 
 		private void RacesToolStripMenuItem_Click(object sender, EventArgs e)

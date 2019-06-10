@@ -53,7 +53,7 @@ namespace Storyteller
 			FillFromCharacter();
 
 			var image = character.Images.FirstOrDefault(img => img.ImageFile == imageToLoad);
-			if (image.ImageFile == null)
+			if (image.ImageFile == null && character.Images.Any())
 			{
 				image = character.Images.First();
 			}
