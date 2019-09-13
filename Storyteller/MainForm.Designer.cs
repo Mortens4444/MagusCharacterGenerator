@@ -59,10 +59,10 @@
 			this.tsmiHttpsKalandozokHu = new System.Windows.Forms.ToolStripMenuItem();
 			this.tsmiWeaponsAndArmors = new System.Windows.Forms.ToolStripMenuItem();
 			this.racesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.tsmiHelp = new System.Windows.Forms.ToolStripMenuItem();
-			this.tsmiAbout = new System.Windows.Forms.ToolStripMenuItem();
 			this.tsmiSettings = new System.Windows.Forms.ToolStripMenuItem();
 			this.tsmiLanguages = new System.Windows.Forms.ToolStripMenuItem();
+			this.tsmiHelp = new System.Windows.Forms.ToolStripMenuItem();
+			this.tsmiAbout = new System.Windows.Forms.ToolStripMenuItem();
 			this.statusStrip = new System.Windows.Forms.StatusStrip();
 			this.MainPanel = new System.Windows.Forms.Panel();
 			this.tabControl = new System.Windows.Forms.TabControl();
@@ -174,8 +174,8 @@
 			this.menuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tsmiNew,
             this.tsmiAccessories,
-            this.tsmiHelp,
-            this.tsmiSettings});
+            this.tsmiSettings,
+            this.tsmiHelp});
 			this.menuStrip.Location = new System.Drawing.Point(0, 0);
 			this.menuStrip.Name = "menuStrip";
 			this.menuStrip.Size = new System.Drawing.Size(800, 24);
@@ -344,6 +344,20 @@
 			this.racesToolStripMenuItem.Text = "Races";
 			this.racesToolStripMenuItem.Click += new System.EventHandler(this.RacesToolStripMenuItem_Click);
 			// 
+			// tsmiSettings
+			// 
+			this.tsmiSettings.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsmiLanguages});
+			this.tsmiSettings.Name = "tsmiSettings";
+			this.tsmiSettings.Size = new System.Drawing.Size(61, 20);
+			this.tsmiSettings.Text = "Settings";
+			// 
+			// tsmiLanguages
+			// 
+			this.tsmiLanguages.Name = "tsmiLanguages";
+			this.tsmiLanguages.Size = new System.Drawing.Size(131, 22);
+			this.tsmiLanguages.Text = "Languages";
+			// 
 			// tsmiHelp
 			// 
 			this.tsmiHelp.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -358,20 +372,6 @@
 			this.tsmiAbout.Size = new System.Drawing.Size(107, 22);
 			this.tsmiAbout.Text = "About";
 			this.tsmiAbout.Click += new System.EventHandler(this.TsmiAbout_Click);
-			// 
-			// tsmiSettings
-			// 
-			this.tsmiSettings.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.tsmiLanguages});
-			this.tsmiSettings.Name = "tsmiSettings";
-			this.tsmiSettings.Size = new System.Drawing.Size(61, 20);
-			this.tsmiSettings.Text = "Settings";
-			// 
-			// tsmiLanguages
-			// 
-			this.tsmiLanguages.Name = "tsmiLanguages";
-			this.tsmiLanguages.Size = new System.Drawing.Size(131, 22);
-			this.tsmiLanguages.Text = "Languages";
 			// 
 			// statusStrip
 			// 
@@ -392,9 +392,9 @@
 			// 
 			// tabControl
 			// 
+			this.tabControl.Controls.Add(this.tpMap);
 			this.tabControl.Controls.Add(this.tpStory);
 			this.tabControl.Controls.Add(this.tpCharacters);
-			this.tabControl.Controls.Add(this.tpMap);
 			this.tabControl.Controls.Add(this.tpImages);
 			this.tabControl.Controls.Add(this.tpVideoClips);
 			this.tabControl.Controls.Add(this.tpMusic);
@@ -437,7 +437,7 @@
 			this.rtbStory.Size = new System.Drawing.Size(786, 505);
 			this.rtbStory.TabIndex = 0;
 			this.rtbStory.Text = "";
-			this.rtbStory.LinkClicked += new System.Windows.Forms.LinkClickedEventHandler(this.rtbStory_LinkClicked);
+			this.rtbStory.LinkClicked += new System.Windows.Forms.LinkClickedEventHandler(this.RtbStory_LinkClicked);
 			// 
 			// tpCharacters
 			// 

@@ -95,7 +95,7 @@ namespace Storyteller
 			Generate();
 		}
 
-		private void btnGenerate_Click(object sender, EventArgs e)
+		private void BtnGenerate_Click(object sender, EventArgs e)
 		{
 			Generate();
 		}
@@ -302,13 +302,13 @@ namespace Storyteller
 
 		#endregion
 
-		private void cbRace_SelectedIndexChanged(object sender, EventArgs e)
+		private void CbRace_SelectedIndexChanged(object sender, EventArgs e)
 		{
 			selectedRace = races[cbRace.SelectedItem.ToString()];
 			SetDiceThrowLabel();
 		}
 
-		private void cbCaste_SelectedIndexChanged(object sender, EventArgs e)
+		private void CbCaste_SelectedIndexChanged(object sender, EventArgs e)
 		{
 			selectedCaste = castes[cbCaste.SelectedItem.ToString()];
 			SetDiceThrowLabel();
@@ -363,12 +363,12 @@ namespace Storyteller
 			}
 		}
 
-		private void cbSecondaryCaste_SelectedIndexChanged(object sender, EventArgs e)
+		private void CbSecondaryCaste_SelectedIndexChanged(object sender, EventArgs e)
 		{
 			selectedSecondaryCaste = castes[cbSecondaryCaste.SelectedItem.ToString()];
 		}
 
-		private void btnDone_Click(object sender, EventArgs e)
+		private void BtnDone_Click(object sender, EventArgs e)
 		{
 			var charactersDirectory = Path.Combine(PathProvider.Characters, tbName.Text);
 			bool createCharacter = !Directory.Exists(charactersDirectory) || ConfirmBox.Show(Lng.Elem("Character already exists, do you want to owerwrite it?"));
@@ -447,13 +447,13 @@ namespace Storyteller
 			pbCharacter.SizeMode = GetSizeModeFromComboBoxSelection();
 		}
 
-		private void chkBoxSecondaryCaste_CheckedChanged(object sender, EventArgs e)
+		private void ChkBoxSecondaryCaste_CheckedChanged(object sender, EventArgs e)
 		{
 			cbSecondaryCaste.Enabled = chkBoxSecondaryCaste.Checked;
 			nudSecondaryCasteLevel.Enabled = chkBoxSecondaryCaste.Checked;
 		}
 
-		private void btnAdd_Click(object sender, EventArgs e)
+		private void BtnAdd_Click(object sender, EventArgs e)
 		{
 			if (pbCharacter.Image == null)
 			{
@@ -469,7 +469,7 @@ namespace Storyteller
 			SetAddRemoveButtonState();
 		}
 
-		private void btnRemove_Click(object sender, EventArgs e)
+		private void BtnRemove_Click(object sender, EventArgs e)
 		{
 			if (pbCharacter.Image == null)
 			{
@@ -491,7 +491,7 @@ namespace Storyteller
 			btnNext.Enabled = images.Count > 1 && shownImageIndex < images.Count - 1;
 		}
 
-		private void btnPrevious_Click(object sender, EventArgs e)
+		private void BtnPrevious_Click(object sender, EventArgs e)
 		{
 			if (shownImageIndex > 0)
 			{
@@ -501,7 +501,7 @@ namespace Storyteller
 			SetAddRemoveButtonState();
 		}
 
-		private void btnNext_Click(object sender, EventArgs e)
+		private void BtnNext_Click(object sender, EventArgs e)
 		{
 			if (shownImageIndex < images.Count - 1)
 			{

@@ -9,6 +9,12 @@ Languages;Nyelvek
 Dracker;Dracker
 Bravery;Bátorság
 Erudition;Műveltség
+Jellem;Personality
+Vallás;Religion
+Szülőföld;Homeland
+Életkor;Age
+Magasság;Height
+Testsúly;Weight
 You need to start the application with administrator right for the first time if you want to use the map functionality or create HKEY_LOCAL_MACHINE\[WOW6432Node]\SOFTWARE\Microsoft\Internet Explorer\MAIN\FeatureControl\FEATURE_BROWSER_EMULATION\Storyteller.exe REG_DWORD 0x8000 registry entries.;Először adminisztrátorként kell indítania a programot, ha a térkép funkciót használni szeretné vagy hozza létre a HKEY_LOCAL_MACHINE\[WOW6432Node]\SOFTWARE\Microsoft\Internet Explorer\MAIN\FeatureControl\FEATURE_BROWSER_EMULATION\Storyteller.exe REG_DWORD 0x8000 regisztrációs bejegyzéseket.
 Registry write error;Regisztrációs bejegyzés írási hiba
 1D6;1K6

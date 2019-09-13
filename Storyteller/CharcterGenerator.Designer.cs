@@ -200,7 +200,7 @@
 			this.btnRemove.TabIndex = 53;
 			this.btnRemove.Text = "-";
 			this.btnRemove.UseVisualStyleBackColor = true;
-			this.btnRemove.Click += new System.EventHandler(this.btnRemove_Click);
+			this.btnRemove.Click += new System.EventHandler(this.BtnRemove_Click);
 			// 
 			// btnNext
 			// 
@@ -211,7 +211,7 @@
 			this.btnNext.TabIndex = 52;
 			this.btnNext.Text = "-->";
 			this.btnNext.UseVisualStyleBackColor = true;
-			this.btnNext.Click += new System.EventHandler(this.btnNext_Click);
+			this.btnNext.Click += new System.EventHandler(this.BtnNext_Click);
 			// 
 			// btnPrevious
 			// 
@@ -222,7 +222,7 @@
 			this.btnPrevious.TabIndex = 51;
 			this.btnPrevious.Text = "<--";
 			this.btnPrevious.UseVisualStyleBackColor = true;
-			this.btnPrevious.Click += new System.EventHandler(this.btnPrevious_Click);
+			this.btnPrevious.Click += new System.EventHandler(this.BtnPrevious_Click);
 			// 
 			// btnAdd
 			// 
@@ -232,7 +232,7 @@
 			this.btnAdd.TabIndex = 50;
 			this.btnAdd.Text = "+";
 			this.btnAdd.UseVisualStyleBackColor = true;
-			this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
+			this.btnAdd.Click += new System.EventHandler(this.BtnAdd_Click);
 			// 
 			// gbGeneral
 			// 
@@ -250,7 +250,7 @@
 			this.gbGeneral.Controls.Add(this.nudLevel);
 			this.gbGeneral.Location = new System.Drawing.Point(3, 12);
 			this.gbGeneral.Name = "gbGeneral";
-			this.gbGeneral.Size = new System.Drawing.Size(274, 154);
+			this.gbGeneral.Size = new System.Drawing.Size(206, 198);
 			this.gbGeneral.TabIndex = 49;
 			this.gbGeneral.TabStop = false;
 			this.gbGeneral.Text = "General";
@@ -267,7 +267,7 @@
 			// nudSecondaryCasteLevel
 			// 
 			this.nudSecondaryCasteLevel.Enabled = false;
-			this.nudSecondaryCasteLevel.Location = new System.Drawing.Point(222, 125);
+			this.nudSecondaryCasteLevel.Location = new System.Drawing.Point(153, 169);
 			this.nudSecondaryCasteLevel.Maximum = new decimal(new int[] {
             255,
             0,
@@ -290,7 +290,7 @@
 			// lblRace
 			// 
 			this.lblRace.AutoSize = true;
-			this.lblRace.Location = new System.Drawing.Point(124, 16);
+			this.lblRace.Location = new System.Drawing.Point(3, 60);
 			this.lblRace.Name = "lblRace";
 			this.lblRace.Size = new System.Drawing.Size(33, 13);
 			this.lblRace.TabIndex = 2;
@@ -299,7 +299,7 @@
 			// lblSecondaryCasteLevel
 			// 
 			this.lblSecondaryCasteLevel.AutoSize = true;
-			this.lblSecondaryCasteLevel.Location = new System.Drawing.Point(219, 108);
+			this.lblSecondaryCasteLevel.Location = new System.Drawing.Point(150, 152);
 			this.lblSecondaryCasteLevel.Name = "lblSecondaryCasteLevel";
 			this.lblSecondaryCasteLevel.Size = new System.Drawing.Size(33, 13);
 			this.lblSecondaryCasteLevel.TabIndex = 47;
@@ -309,48 +309,48 @@
 			// 
 			this.cbCaste.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
 			this.cbCaste.FormattingEnabled = true;
-			this.cbCaste.Location = new System.Drawing.Point(5, 77);
+			this.cbCaste.Location = new System.Drawing.Point(6, 121);
 			this.cbCaste.Name = "cbCaste";
-			this.cbCaste.Size = new System.Drawing.Size(211, 21);
+			this.cbCaste.Size = new System.Drawing.Size(141, 21);
 			this.cbCaste.TabIndex = 1;
-			this.cbCaste.SelectedIndexChanged += new System.EventHandler(this.cbCaste_SelectedIndexChanged);
+			this.cbCaste.SelectedIndexChanged += new System.EventHandler(this.CbCaste_SelectedIndexChanged);
 			// 
 			// cbSecondaryCaste
 			// 
 			this.cbSecondaryCaste.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
 			this.cbSecondaryCaste.Enabled = false;
 			this.cbSecondaryCaste.FormattingEnabled = true;
-			this.cbSecondaryCaste.Location = new System.Drawing.Point(5, 124);
+			this.cbSecondaryCaste.Location = new System.Drawing.Point(6, 168);
 			this.cbSecondaryCaste.Name = "cbSecondaryCaste";
-			this.cbSecondaryCaste.Size = new System.Drawing.Size(211, 21);
+			this.cbSecondaryCaste.Size = new System.Drawing.Size(141, 21);
 			this.cbSecondaryCaste.TabIndex = 46;
-			this.cbSecondaryCaste.SelectedIndexChanged += new System.EventHandler(this.cbSecondaryCaste_SelectedIndexChanged);
+			this.cbSecondaryCaste.SelectedIndexChanged += new System.EventHandler(this.CbSecondaryCaste_SelectedIndexChanged);
 			// 
 			// cbRace
 			// 
 			this.cbRace.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
 			this.cbRace.FormattingEnabled = true;
-			this.cbRace.Location = new System.Drawing.Point(125, 32);
+			this.cbRace.Location = new System.Drawing.Point(4, 76);
 			this.cbRace.Name = "cbRace";
 			this.cbRace.Size = new System.Drawing.Size(141, 21);
 			this.cbRace.TabIndex = 3;
-			this.cbRace.SelectedIndexChanged += new System.EventHandler(this.cbRace_SelectedIndexChanged);
+			this.cbRace.SelectedIndexChanged += new System.EventHandler(this.CbRace_SelectedIndexChanged);
 			// 
 			// chkBoxSecondaryCaste
 			// 
 			this.chkBoxSecondaryCaste.AutoSize = true;
-			this.chkBoxSecondaryCaste.Location = new System.Drawing.Point(5, 104);
+			this.chkBoxSecondaryCaste.Location = new System.Drawing.Point(6, 148);
 			this.chkBoxSecondaryCaste.Name = "chkBoxSecondaryCaste";
 			this.chkBoxSecondaryCaste.Size = new System.Drawing.Size(106, 17);
 			this.chkBoxSecondaryCaste.TabIndex = 44;
 			this.chkBoxSecondaryCaste.Text = "Secondary caste";
 			this.chkBoxSecondaryCaste.UseVisualStyleBackColor = true;
-			this.chkBoxSecondaryCaste.CheckedChanged += new System.EventHandler(this.chkBoxSecondaryCaste_CheckedChanged);
+			this.chkBoxSecondaryCaste.CheckedChanged += new System.EventHandler(this.ChkBoxSecondaryCaste_CheckedChanged);
 			// 
 			// lblCaste
 			// 
 			this.lblCaste.AutoSize = true;
-			this.lblCaste.Location = new System.Drawing.Point(2, 59);
+			this.lblCaste.Location = new System.Drawing.Point(3, 103);
 			this.lblCaste.Name = "lblCaste";
 			this.lblCaste.Size = new System.Drawing.Size(34, 13);
 			this.lblCaste.TabIndex = 0;
@@ -360,13 +360,13 @@
 			// 
 			this.tbName.Location = new System.Drawing.Point(4, 32);
 			this.tbName.Name = "tbName";
-			this.tbName.Size = new System.Drawing.Size(115, 20);
+			this.tbName.Size = new System.Drawing.Size(141, 20);
 			this.tbName.TabIndex = 36;
 			// 
 			// lblLevel
 			// 
 			this.lblLevel.AutoSize = true;
-			this.lblLevel.Location = new System.Drawing.Point(219, 61);
+			this.lblLevel.Location = new System.Drawing.Point(150, 105);
 			this.lblLevel.Name = "lblLevel";
 			this.lblLevel.Size = new System.Drawing.Size(33, 13);
 			this.lblLevel.TabIndex = 37;
@@ -374,7 +374,7 @@
 			// 
 			// nudLevel
 			// 
-			this.nudLevel.Location = new System.Drawing.Point(222, 78);
+			this.nudLevel.Location = new System.Drawing.Point(153, 122);
 			this.nudLevel.Maximum = new decimal(new int[] {
             255,
             0,
@@ -439,7 +439,7 @@
 			this.gbModifiers.Controls.Add(this.nudQP);
 			this.gbModifiers.Controls.Add(this.nudPercent);
 			this.gbModifiers.Controls.Add(this.lblPercent);
-			this.gbModifiers.Location = new System.Drawing.Point(3, 371);
+			this.gbModifiers.Location = new System.Drawing.Point(3, 351);
 			this.gbModifiers.Name = "gbModifiers";
 			this.gbModifiers.Size = new System.Drawing.Size(112, 66);
 			this.gbModifiers.TabIndex = 34;
@@ -500,16 +500,16 @@
 			this.gbFightValues.Controls.Add(this.lblDV);
 			this.gbFightValues.Controls.Add(this.nudAV);
 			this.gbFightValues.Controls.Add(this.lblAV);
-			this.gbFightValues.Location = new System.Drawing.Point(3, 172);
+			this.gbFightValues.Location = new System.Drawing.Point(121, 216);
 			this.gbFightValues.Name = "gbFightValues";
-			this.gbFightValues.Size = new System.Drawing.Size(274, 61);
+			this.gbFightValues.Size = new System.Drawing.Size(98, 201);
 			this.gbFightValues.TabIndex = 33;
 			this.gbFightValues.TabStop = false;
 			this.gbFightValues.Text = "Fight values";
 			// 
 			// nudAimV
 			// 
-			this.nudAimV.Location = new System.Drawing.Point(159, 32);
+			this.nudAimV.Location = new System.Drawing.Point(9, 160);
 			this.nudAimV.Maximum = new decimal(new int[] {
             65535,
             0,
@@ -523,7 +523,7 @@
 			// lblAimV
 			// 
 			this.lblAimV.AutoSize = true;
-			this.lblAimV.Location = new System.Drawing.Point(155, 16);
+			this.lblAimV.Location = new System.Drawing.Point(6, 143);
 			this.lblAimV.Name = "lblAimV";
 			this.lblAimV.Size = new System.Drawing.Size(31, 13);
 			this.lblAimV.TabIndex = 24;
@@ -532,7 +532,7 @@
 			// lblIV
 			// 
 			this.lblIV.AutoSize = true;
-			this.lblIV.Location = new System.Drawing.Point(5, 16);
+			this.lblIV.Location = new System.Drawing.Point(10, 16);
 			this.lblIV.Name = "lblIV";
 			this.lblIV.Size = new System.Drawing.Size(17, 13);
 			this.lblIV.TabIndex = 16;
@@ -553,7 +553,7 @@
 			// 
 			// nudDV
 			// 
-			this.nudDV.Location = new System.Drawing.Point(109, 32);
+			this.nudDV.Location = new System.Drawing.Point(9, 117);
 			this.nudDV.Maximum = new decimal(new int[] {
             65535,
             0,
@@ -567,7 +567,7 @@
 			// lblDV
 			// 
 			this.lblDV.AutoSize = true;
-			this.lblDV.Location = new System.Drawing.Point(105, 16);
+			this.lblDV.Location = new System.Drawing.Point(10, 101);
 			this.lblDV.Name = "lblDV";
 			this.lblDV.Size = new System.Drawing.Size(22, 13);
 			this.lblDV.TabIndex = 20;
@@ -575,7 +575,7 @@
 			// 
 			// nudAV
 			// 
-			this.nudAV.Location = new System.Drawing.Point(59, 32);
+			this.nudAV.Location = new System.Drawing.Point(9, 74);
 			this.nudAV.Maximum = new decimal(new int[] {
             65535,
             0,
@@ -589,7 +589,7 @@
 			// lblAV
 			// 
 			this.lblAV.AutoSize = true;
-			this.lblAV.Location = new System.Drawing.Point(55, 16);
+			this.lblAV.Location = new System.Drawing.Point(10, 57);
 			this.lblAV.Name = "lblAV";
 			this.lblAV.Size = new System.Drawing.Size(21, 13);
 			this.lblAV.TabIndex = 22;
@@ -605,7 +605,7 @@
 			this.btnDone.TabIndex = 33;
 			this.btnDone.Text = "Done";
 			this.btnDone.UseVisualStyleBackColor = true;
-			this.btnDone.Click += new System.EventHandler(this.btnDone_Click);
+			this.btnDone.Click += new System.EventHandler(this.BtnDone_Click);
 			// 
 			// gbPsiManaAndMagicResistance
 			// 
@@ -617,7 +617,7 @@
 			this.gbPsiManaAndMagicResistance.Controls.Add(this.lblAstralMR);
 			this.gbPsiManaAndMagicResistance.Controls.Add(this.nudManaPoints);
 			this.gbPsiManaAndMagicResistance.Controls.Add(this.lblManaPoints);
-			this.gbPsiManaAndMagicResistance.Location = new System.Drawing.Point(121, 244);
+			this.gbPsiManaAndMagicResistance.Location = new System.Drawing.Point(3, 419);
 			this.gbPsiManaAndMagicResistance.Name = "gbPsiManaAndMagicResistance";
 			this.gbPsiManaAndMagicResistance.Size = new System.Drawing.Size(156, 125);
 			this.gbPsiManaAndMagicResistance.TabIndex = 32;
@@ -721,9 +721,9 @@
             this.chLevel});
 			this.lvQualifications.FullRowSelect = true;
 			this.lvQualifications.HideSelection = false;
-			this.lvQualifications.Location = new System.Drawing.Point(421, 19);
+			this.lvQualifications.Location = new System.Drawing.Point(378, 19);
 			this.lvQualifications.Name = "lvQualifications";
-			this.lvQualifications.Size = new System.Drawing.Size(215, 515);
+			this.lvQualifications.Size = new System.Drawing.Size(258, 515);
 			this.lvQualifications.TabIndex = 31;
 			this.lvQualifications.UseCompatibleStateImageBehavior = false;
 			this.lvQualifications.View = System.Windows.Forms.View.Details;
@@ -744,7 +744,7 @@
 			this.gbLifePoints.Controls.Add(this.nudLifePoints);
 			this.gbLifePoints.Controls.Add(this.nudPainTolerancePoints);
 			this.gbLifePoints.Controls.Add(this.lblPainTolerancePoints);
-			this.gbLifePoints.Location = new System.Drawing.Point(3, 239);
+			this.gbLifePoints.Location = new System.Drawing.Point(3, 212);
 			this.gbLifePoints.Name = "gbLifePoints";
 			this.gbLifePoints.Size = new System.Drawing.Size(112, 129);
 			this.gbLifePoints.TabIndex = 30;
@@ -835,9 +835,9 @@
 			this.gbAbilities.Controls.Add(this.nudBeauty);
 			this.gbAbilities.Controls.Add(this.nudStamina);
 			this.gbAbilities.Controls.Add(this.lblStamina);
-			this.gbAbilities.Location = new System.Drawing.Point(283, 16);
+			this.gbAbilities.Location = new System.Drawing.Point(225, 16);
 			this.gbAbilities.Name = "gbAbilities";
-			this.gbAbilities.Size = new System.Drawing.Size(135, 518);
+			this.gbAbilities.Size = new System.Drawing.Size(147, 518);
 			this.gbAbilities.TabIndex = 29;
 			this.gbAbilities.TabStop = false;
 			this.gbAbilities.Text = "Abilities";
@@ -1210,7 +1210,7 @@
 			this.btnGenerate.TabIndex = 4;
 			this.btnGenerate.Text = "Generate";
 			this.btnGenerate.UseVisualStyleBackColor = true;
-			this.btnGenerate.Click += new System.EventHandler(this.btnGenerate_Click);
+			this.btnGenerate.Click += new System.EventHandler(this.BtnGenerate_Click);
 			// 
 			// CharcterGenerator
 			// 

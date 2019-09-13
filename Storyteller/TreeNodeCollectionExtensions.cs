@@ -15,6 +15,10 @@ namespace Storyteller
 
 		public static void GetFilesAndFolders(this TreeNodeCollection siblings, string path, int iconIndex, params string[] extensionFilters)
 		{
+			if (!Directory.Exists(path))
+			{
+				Directory.CreateDirectory(path);
+			}
 			siblings.GetFilesAndFolders(null, path, iconIndex, extensionFilters);
 		}
 

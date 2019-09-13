@@ -1,5 +1,4 @@
-﻿//using DirectShowLib;
-using FontAwesome.Sharp;
+﻿using FontAwesome.Sharp;
 using MagusCharacterGenerator.GameSystem;
 using Microsoft.Win32;
 using Mtf.Helper;
@@ -28,7 +27,7 @@ namespace StoryTeller
 		{
 			try
 			{
-				string keyName = @"HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Internet Explorer\MAIN\FeatureControl\FEATURE_BROWSER_EMULATION";
+				string keyName = @"HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Internet Explorer\Main\FeatureControl\FEATURE_BROWSER_EMULATION";
 				string valueName = Path.GetFileName(Application.ExecutablePath);
 				if (Registry.GetValue(keyName, valueName, null) == null)
 				{
@@ -37,7 +36,7 @@ namespace StoryTeller
 			}
 			catch
 			{
-				ErrorBox.Show(Lng.Elem("Registry write error"), Lng.Elem(@"You need to start the application with administrator right for the first time if you want to use the map functionality or create HKEY_LOCAL_MACHINE\[WOW6432Node]\SOFTWARE\Microsoft\Internet Explorer\MAIN\FeatureControl\FEATURE_BROWSER_EMULATION\Storyteller.exe REG_DWORD 0x8000 registry entries."));
+				ErrorBox.Show(Lng.Elem("Registry write error"), Lng.Elem(@"You need to start the application with administrator right for the first time if you want to use the map functionality or create HKEY_LOCAL_MACHINE\SOFTWARE\[WOW6432Node\]Microsoft\Internet Explorer\Main\FeatureControl\FEATURE_BROWSER_EMULATION\Storyteller.exe REG_DWORD 0x8000 registry entries."));
 			}
 
 			InitializeComponent();
@@ -557,7 +556,7 @@ namespace StoryTeller
 			ProcessUtils.Start("https://hu.pinterest.com/topics/fantasy-characters/");
 		}
 
-		private void rtbStory_LinkClicked(object sender, LinkClickedEventArgs e)
+		private void RtbStory_LinkClicked(object sender, LinkClickedEventArgs e)
 		{
 			var linkText = e.LinkText.Substring(1);
 			if (e.LinkText.StartsWith("@"))
