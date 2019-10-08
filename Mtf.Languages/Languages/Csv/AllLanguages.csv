@@ -1,592 +1,600 @@
 English;Magyar
-Storyteller;Mesemondó
-New;Új
-Browse;Tallózás
-Yes;Igen
-No;Nem
-Settings;Beállítások
-Languages;Nyelvek
-Dracker;Dracker
-Bravery;Bátorság
-Erudition;Műveltség
-Jellem;Personality
-Vallás;Religion
-Szülőföld;Homeland
-Életkor;Age
-Magasság;Height
-Testsúly;Weight
-You need to start the application with administrator right for the first time if you want to use the map functionality or create HKEY_LOCAL_MACHINE\[WOW6432Node]\SOFTWARE\Microsoft\Internet Explorer\MAIN\FeatureControl\FEATURE_BROWSER_EMULATION\Storyteller.exe REG_DWORD 0x8000 registry entries.;Először adminisztrátorként kell indítania a programot, ha a térkép funkciót használni szeretné vagy hozza létre a HKEY_LOCAL_MACHINE\[WOW6432Node]\SOFTWARE\Microsoft\Internet Explorer\MAIN\FeatureControl\FEATURE_BROWSER_EMULATION\Storyteller.exe REG_DWORD 0x8000 regisztrációs bejegyzéseket.
-Registry write error;Regisztrációs bejegyzés írási hiba
+1D100;1K100
+1D10;1K10
+1D1;1K1
+1D2;1K2
+1D3;1K3
+1D5;1K5
 1D6;1K6
 2D6;2K6
-1D10;1K10
-3D6;3K6
-1D1;1K1
-1D5;1K5
-1D2;1K2
-1D100;1K100
-1D3;1K3
 3D100;3K100
-Images;Képek
-Map;Térkép
-St;Kf
-General error;Általános hiba
-Maps;Térképek
-All music;Összes zene
-Not choosen;Nincs kiválasztva
-All sound effects;Összes hangeffektus
-Now playing;Lejátszás alatt
-Feenhar;Feenhar
-Peasant;Paraszt
+3D6;3K6
+Abbit steel breast plate;Abbitacél mellvért
+Abbit steel chain mail;Abbitacél sodronying
+Abbit steel full plate;Abbitacél teljes vértezet
+Abbit steel half plate;Abbitacél félvértezet
+Abbit steel laminar armour;Abbitacél lemezvértezet
+Abbit steel scale armour;Abbitacél pikkelyvért
+Abilities;Képességek
+About;Névjegy
+Accessories;Kiegészítők
+Accomodation;Szállás
 Agriculture;Földművelés
-Growing plants;Növénytermesztés
+Aiming value;Célzó érték
+AimV;CÉ
+Alchemy;Alkímia
+Alidari woman;Alidari nő
+All music;Összes zene
+All sound effects;Összes hangeffektus
+Amund;Amund
 Animal breeding;Állattenyésztés
-Craftsman;Kézműves
-Merchant;Kereskedő
-News distributor;Hírterjesztő
-Soldier;Katona
-Guard;Őr
-Guard officer;Őrtiszt
-Forging;Kovácsolás
-Coinage;Pénzverés
-Boot making;Cipő készítés
-Wiseman;Bölcs
-Teaching;Tanítás
-Noble;Nemes
-Healer;Gyógyító
-Pottery;Fazekasság
-Rope beating;Kötélverés
-Tailoring;Szabászat
+Animals;Állatok
+Antient language knowledge;Ősi nyelv ismerete
+Aquir;Aquir
+Aquirian crossbow;Aquirian nyílpuska
 Architecture;Építészet
-Characters;Karakterek
+Arel priest;Arel pap
+Ark;Bárka
+Armors;Páncélok
+Astral;Asztrál
+Attacking value;Támadó érték
+Auto;Automatikus
+AV;TÉ
+Backpack, big;Hátizsák, nagy
+Backpack, small;Hátizsák, kicsi
+Backstab;Hátbaszúrás
+Bard;Bárd
+Bard magic;Bárd mágia
+Bare-hand master;Harcművész
+Barrel, big;Hordó, nagy
+Barrel, small;Hordó, kicsi
+Basic level;Alapfok
+Basket;Kosár
+Bastard sword;Máskélkezes kard
+Bath;Fürdő
+Battle ax;Csatacsákány
+Beauty;Szépség
+Beer, mug;Sör, korsó
+Bell;Csengő
+Belt holster;Övtáska
+Belt;Öv
+Better hearing;Jobb hallás
+Better seeing;Jobb látás
+Better sniffing;Jobb szaglás
+Bl;Af
+Blanket;Takaró
+Blind fighting;Vakharc
+Blow pipe;Fúvócső
+Boat;Csónak
+Boat paddles;Csónak evező
+Bola;Bola
+Boot making;Cipő készítés
+Boots;Bakancs
+Boots, riding;Csizma, lovagló
+Boots, walking;Csizma, gyalogos
+Brandy, glass;Pálinka, üveg
+Bravery;Bátorság
+Brigandine armor;Brigantin
+Broadsword;Pallos
+Bronze breast plate;Bronz mellvért
+Bronze full plate;Bronz teljes vértezet
+Bronze half plate;Bronz félvértezet
+Bronze laminar armour;Bronz lemezvértezet
+Bronze scale armour;Bronz pikkelyvért
+Browse;Tallózás
+Bucket;Vödör
+Butter, kilo;Vaj, kiló
+Caftan;Kaftán
+Calf;Borjú
+Camel;Teve
+Camouflage or disguise;Álcázás/álruha
+Candle;Gyertya
+Canoe;Kenu
+Cape, fabric;Köpeny, szövet
+Cape, fur;Köpeny, prém
+Cape, silk;Köpeny, selyem
+Cap;Sapka
+Caravel;Karavella
+Card sharper;Hamiskártya
+Carpenter;Ács
+Carriage;Kocsi
+Cart;Kordé
+Cartography;Térképészet
+Cart wheel;Szekér kerék
+Carved club;Furkósbot
+Caste;Kaszt
+Castes;Kasztok
+Cast iron footed bowl;Vaslábas
+Cat;Macska
+Center;Középre
+Chain mace;Láncos buzogány
+Chain, meter;Lánc, métere
+Chalk;Kréta
+Character already exists, do you want to owerwrite it?;A karakter már létezik, szeretné felülírni?
 Character;Karakter
 Character sheet;Karakterlap
 Character sheet (odt);Karakterlap (odt)
 Character sheet (pdf);Karakterlap (pdf)
-Video clips;Videóklippek
-Normal;Normál
-Stretch;Nyújtás
-Auto;Automatikus
-Center;Középre
-Zoom;Nagyítás
-Music;Zene
-Remove music;Zene eltávoltása
-Remove sound(s);Hang(ok) eltávoltása
-Sounds;Hangok
-Sound effect;Hang effektus
-Loop;Ismétlés
-Accessories;Kiegészítők
-Get sounds;Hangok beszerzése
-Get images;Képek beszerzése
-Sound effects;Hangeffektusok
-Combat;Harc
-Story;Történet
-Market;Piac
-Price;Ár
-Armors;Páncélok
-Weapons;Fegyverek
-Weapons and armors;Fegyverek és vértek
-Mithrill;Mithrill
-Gold;Arany
-Silver;Ezüst
-Copper;Réz
-Accomodation;Szállás
-Animals;Állatok
+Characters;Karakterek
+Chariot tools;Szekér szerszám
+Cheese;Sajt
+Chest, big;Láda, nagy
+Chest, small;Láda, kicsi
+Chicken;Csirke
+Chiffon;Köntös
+Climbing-irons;Mászóvas
+Climbing;Mászás
 Clothes;Ruhák
-Debauchery;Kicsapongás
-Food;Étel
-Other;Egyéb
-Trappings;Lószerszámok
-Travelling;Utazás
-Race;Faj
-Races;Fajok
-Gold;Arany
-Name;Név
-Filter;Szűrés
-General;Általános
-Caste;Kaszt
-Secondary caste;Második kaszt
-Castes;Kasztok
-Life points and pain tolerance;Életerő és fájdalomtűrés
-Abilities;Képességek
-Fight values;Harcértékek
-Modifiers;Módosítók
-Generate;Generálás
-There is no 'story.rtf' or 'story.txt' file in the folder: ;Nincs 'story.rtf' vagy 'story.txt' fájl ebben a könyvtárban: 
-Character already exists, do you want to owerwrite it?;A karakter már létezik, szeretné felülírni?
+Coat;Kabát
+Coinage;Pénzverés
+Combat;Harc
+Combat saddle;Nyereg, harci
+Common spice;Közönséges fűszer
 Confirmation;Megerősítés
-Done;Kész
+Copper;Réz
+Cow;Tehén
+Craftsman;Kézműves
 Created by;Készítette
-Level / %;Fok / %
-Psi, Mana, Magic resistance;Pszi, Mana, mágiaellenállás
-About;Névjegy
-Exit;Kilépés
-File;Fájl
-Help;Súgó
-Menu;Menü
-Strength;Erő
-Speed;Gyorsaság
-Dexterity;Ügyesség
-Stamina;Állóképesség
-Health;Egészség
-Beauty;Szépség
-Intelligence;Intelligencia
-WillPower;Akaraterő
-Astral;Asztrál
-Level;Szint
-Magic resistance;Mágiaellenállás
-MR;ME
-QP;KP
-Qualification points;Képzettség pontok
-Mana points;Mana pontok
-Psi points;Pszi pontok
-Psi points/level;Pszi pont/szint
-IV;KÉ
-Initiating value;Kezdeményező érték
-AV;TÉ
-Attacking value;Támadó érték
-DV;VÉ
-Defending value;Védő érték
-AimV;CÉ
-Aiming value;Célzó érték
-LP;ÉP
-Life points;Életerő pontok
-PTP;FP
-Pain tolerance points;Fájdalomtűrési pontok
-PTP/level;FP/szint
-Pain tolerance points/level;Fájdalomtűrési pontok/szint
-Amund;Amund
-Dwarf;Törpe
+Dagger Sleeve;Tőrhüvely
+Dagger;Tőr
 Dahr;Dahr
-Elf;Elf
-Night-elf;Éji elf
-Fire-elf;Tűzelf
-Half-elf;Félelf
-Half-orc;Félork
-Human;Ember
-Jann;Dzsenn
-Khal;Khál
-Orc;Ork
-Gentle orc;Udvari ork
-Wier;Wier
-Goblin;Goblin
-Gentle goblin;Udvari goblin
-Feenhar;Feenhar
-Faun;Faun
-Reptile;Hüllő
-Gnome;Gnóm
-Forest moth;Erdőpille
-Half-giant;Félóriás
-Half-giant (Ice giant);Félóriás (Jégóriás)
-Half-giant (Mountain giant);Félóriás (Hegyi óriás)
-Half-giant (Forest giant);Félóriás (Erdei óriás)
-Half-giant (Swamp giant);Félóriás (Mocsári óriás)
-Aquir;Aquir
-Kyr;Kyr
-LinguaDomini;LinguaDomini
-Voul;Voul
-White orc;Fehér ork
+Dancing;Tánc
+Darton paladin;Darton paplovag
+Deadbolt/padlock;Zár/lakat
+Debauchery;Kicsapongás
+Defending dagger;Hárítótőr
+Defending value;Védő érték
+Demonology;Demonológia
+Dexterity;Ügyesség
+Disarmament;Lefegyverzés
+Dog, fighting;Kutya, harci
+Dog, housekeeper;Kutya, házőrző
+Dog, hunter;Kutya, vadász
+Dog sledge;Kutyaszán
+Dog, sledge;Kutya, szánhúzó
 Domvik paladin;Domvik paplovag
 Domvik priest;Domvik pap
-Nastar paladin;Nastar paplovag
-Nastar priest;Nastar pap
-Nastar monk;Nastar szerzetes
-Velar priest;Velar pap
-Velar paladin;Velar paplovag
-Velar monk;Velar szerzetes
-Tharr priest;Tharr pap
-Arel priest;Arel pap
-Darton paladin;Darton paplovag
+Done;Kész
+Donkey;Szamár
+Dracker;Dracker
+Drakkar;Drakkar
 Dreina paladin;Dreina paplovag
-Krad paladin;Krad paplovag
-Kiel priest;Kiel pap
-Uwel paladin;Uwel paplovag
-Ranagol priest (Gorvik);Ranagol pap (gorviki)
-Ranagol priest (Kran);Ranagol pap (kráni)
-Ranagol paladin;Ranagol paplovag
-Gladiator;Gladiátor
-Headhunter;Fejvadász
-Knight;Lovag
-Warrior;Harcos
-Bard;Bárd
-Thief;Tolvaj
-Bare-hand master;Harcművész
-Sword master;Kardművész
-Fire wizard;Tűzvarázsló
-Warlock;Boszorkánymester
-Kranich;Kráni
-Kranich warlock;Kráni boszorkánymester
-Witch;Boszorkány
-Wizard;Varázsló
-Blind fighting;Vakharc
-Disarmament;Lefegyverzés
-Fist fighting;Ökölharc
-Heavy armor wearing;Nehézvértviselet
-Leadership;Hadvezetés
-Profession;Szakma
-Carpenter;Ács
-Jeweler;Ékszerész
-Smith;Kovács
-Goldsmith;Ötvös
-Tattoo maker;Tetováló
-Pub fighting;Kocsmai verekedés
-Shield using;Pajzshasználat
-Two-handed combat;Kétkezes harc
-Weapon breaking;Fegyvertörés
-Weapon knowledge;Fegyver ismeret
-Weapon throwing;Fegyverdobás
-Weapon usage;Fegyverhasználat
-Wrestling;Birkózás
-Cartography;Térképészet
-Dancing;Tánc
 Dressage training;Idomítás
+DV;VÉ
+Dwarf;Törpe
+Earthenware;Agyagedény
+Easy crossbow;Könnyű nyílpuska
+Eggs, dozens;Tojás, tucat
+Életkor;Age
+Elf;Elf
+Elvish bow;Elf íj
+Elvish dagger;Elf tőr
+English;Angol
+Erudition;Műveltség
 Etiquette;Etikett
-Fishing & Hunting;Vadászat/Halászat
-Forestry;Erdőjárás
-Juggling;Zsonglőrködés
-Knotting;Csomózás
-Riding;Lovaglás
-Running;Futás
-Sailing;Hajózás
-Kyr knowledge;Kyr tudás
-Sexual culture;Szexuális kultúra
-Singing & making music;Ének-zene
-Sound imitation;Hangutánzás
-Swimming;Úszás
-Track reading & hiding;Nyomolvasás/eltüntetés
-Trap setup;Csapdaállítás
-Value estimation;Értékbecslés
-Weather forecast;Időjóslás
-Bard magic;Bárd mágia
-Fire wizard magic;Tűzvarázsló mágia
-Magic knowledge;Mágiaismeret
-Magic usage;Mágiahasználat
-Priest magic;Papi mágia
-Warlock magic;Boszorkánymesteri mágia
-Witch magic;Boszorkány mágia
-Wizard magic;Varázsló mágia
-Climbing;Mászás
+Exit;Kilépés
+Fabric, ell;Szövet, rőf
 Falling;Esés
-Jumping;Ugrás
-Lock picking;Zárnyitás
-Pick pocketing;Zsebmetszés
-Secret door searching;Titkosajtó keresés
-Sneaking;Lopózás
-Stealth;Rejtőzködés
-Tightrope;Kötéltánc
-Trap detect;Csapdakeresés
-Psi Kyr method;Pszi Kyr metódus
-Psi Pyarron;Pszi Pyarroni
-Psi Slan-way;Pszi Slan-út
-Psi Kranich;Pszi Kráni metódus
-Alchemy;Alkímia
-Antient language knowledge;Ősi nyelv ismerete
-Demonology;Demonológia
+Faun;Faun
+Feathered mace;Tollas buzogány
+Feenhar;Feenhar
+Ferry;Komp
+Ferryman;Révész
+Fight values;Harcértékek
+File;Fájl
+Filter;Szűrés
+Fire-elf;Tűzelf
+Fire steel;Tűzszerszám
+Fire wizard magic;Tűzvarázsló mágia
+Fire wizard;Tűzvarázsló
+Fishing hook;Horgász horog
+Fishing & Hunting;Vadászat/Halászat
+Fishing net;Halászháló
+Fish, one dose;Hal, egy adag
+Fist fighting;Ökölharc
+Fist;Ököl
+Flail;Cséphadaró
+Flask;Kulacs
+Flint and steel;Kova és acél
+Fodder, one day;Abrak, egynapi
+Food;Étel
+Forest moth;Erdőpille
+Forestry;Erdőjárás
+Forging;Kovácsolás
+Four wheeled combat chariot;Négykerekű harci szekér
+Free from bondage;Kötelékből szabadulás
+Fur;Prém
+Galeas;Galeassz
+Galeon;Galeon
+Galleon paddles;Gálya evező
+Galley;Gálya
+Garotte;Garott
+General;Általános
+General error;Általános hiba
+Generate;Generálás
+Gentle goblin;Udvari goblin
+Gentle orc;Udvari ork
+Get images;Képek beszerzése
+Get sounds;Hangok beszerzése
+Girls of Lotus;Lótusz Leányai
+Gladiator;Gladiátor
+Gloves, fencing;Kesztyű, vívó
+Gloves, noble;Kesztyű, nemesi
+Gnome;Gnóm
+Goats;Kecske
+Goblin;Goblin
+Gold;Arany
+Goldsmith;Ötvös
+Goose;Liba
+Growing plants;Növénytermesztés
+Guard officer;Őrtiszt
+Guard;Őr
+Halberd;Alabárd
+Half-elf;Félelf
+Half-giant;Félóriás
+Half-giant (Forest giant);Félóriás (Erdei óriás)
+Half-giant (Ice giant);Félóriás (Jégóriás)
+Half-giant (Mountain giant);Félóriás (Hegyi óriás)
+Half-giant (Swamp giant);Félóriás (Mocsári óriás)
+Half-orc;Félork
+Halter;Kötőfék
+Hammer;Kalapács
+Hand crossbow;Kézi nyílpuska
+Hardened leather armor;Keményített bőr
+Harpoon;Szigony
+Hatchet;Szekerce
+Hat;Kalap
+Haversack;Tarisznya
+Hawk, hunter;Sólyom, vadász
+Headhunter;Fejvadász
+Headhunter sword;Fejvadász kard
+Healer;Gyógyító
+Health;Egészség
+Heavy armored riding lance;Kopja, nehézlovas
+Heavy armor wearing;Nehézvértviselet
+Heavy crossbow;Nehéz nyílpuska
+Help;Súgó
+Hen;Tyúk
 Heraldry;Címertan
 Herbalism;Herbalizmus
 History knowledge;Történelemismeret
-Language knowledge;Nyelvismeret
-Legend knowledge;Legendaismeret
-Physiology;Élettan
-Poisoning & neutralization;Méregkeverés/semlegesítés
-Reading & writing;Írás/olvasás
-Ultravision;Ultralátás
-Religion knowledge;Vallásismeret
-Rune magic;Rúnamágia
-Wound healing;Sebgyógyítás
-Better hearing;Jobb hallás
-Better seeing;Jobb látás
-Better sniffing;Jobb szaglás
-Infravision;Infralátás
-Backstab;Hátbaszúrás
-Camouflage or disguise;Álcázás/álruha
-Card sharper;Hamiskártya
-Free from bondage;Kötelékből szabadulás
-Percent qualification;Százalékos képzettség
-Qualification;Képzettség
-Qualifications;Képzettségek
-Bl;Af
-Basic level;Alapfok
-Ml;Mf
-Master level;Mesterfok
-Short sword;Rövid kard
-Halberd;Alabárd
-Javelin;Dárda/hajító dárda
-Lance;Kopja, könnyű
-Riding lance;Kopja, lovas
-Heavy armored riding lance;Kopja, nehézlovas
-Spear;Lándzsa
-Harpoon;Szigony
-Blow pipe;Fúvócső
-Short bow;Rövid íj
-Long bow;Hosszú íj
-Nomad bow;Visszacsapó íj
-Elvish bow;Elf íj
-Aquirian crossbow;Aquirian nyílpuska
-Hand crossbow;Kézi nyílpuska
-Kahreian crossbow;Kahreian nyílpuska
-Easy crossbow;Könnyű nyílpuska
-Heavy crossbow;Nehéz nyílpuska
-Shadonish armor breaking crossbow;Shadoni páncéltörő nyílpuska
-Sling;Sling
-Bola;Bola
-Throwing nets;Dobóháló
-Garotte;Garott
-Defending dagger;Hárítótőr
-Scourge;Korbács
-Lasso;Lasszó
-Whip;Ostor
-Fist;Ököl
-IronFist;Vasököl
-Little shield;Kicsi pajzs
-Medium shield;Közepes pajzs
-Large shield;Nagy pajzs
-Shadlekian mace;Shadleki buzogány
-One-handed hatchet;Egykezes csatabárd
-Two-handed hatchet;Kétkezes csatbárd
-Battle ax;Csatacsákány
-Throwing ax;Hajítóbárd
-Longsword;Hosszú kard
-Bastard sword;Máskélkezes kard
-Knight sword;Lovagi kard
-Broadsword;Pallos
-Saber;Szabja
-Jann saber;Dzsenn szabja
-Jad Janbiya;Dzsad dzsambia
-Yatagan;Jatagán
-Scimitar;Handzsár
-Headhunter sword;Fejvadász kard
-Slan sword;Slan kard
-Snake sword;Kígyó kard
-Knife;Kés
-Mara-sequor;Mara-sequor
-Sequor;Sequor
-Ramiera;Ramiera
-Slan star;Slan csillag
-Dagger;Tőr
-Elvish dagger;Elf tőr
-Slan dagger;Slan tőr
-Throwing dagger;Dobótőr
-Rapier;Tőrkard/rapír
-Long staff;Hosszú bot
-Short staff;Rövid bot
-Carved club;Furkósbot
-One-handed mace;Egykezes buzogány
-Two-handed mace;Kétkezes buzogány
-Spiked mace;Tüskés buzogány
-Feathered mace;Tollas buzogány
-Chain mace;Láncos buzogány
-Flail;Cséphadaró
-Warhammer;Harci kalapács
-Ark;Bárka
-Boat;Csónak
-Drakkar;Drakkar
-Galeas;Galeassz
-Galeon;Galeon
-Galley;Gálya
-Caravel;Karavella
-Canoe;Kenu
-Kogge;Kogge
-Boat paddles;Csónak evező
-Galleon paddles;Gálya evező
-Sail;Vitorla
-Ferryman;Révész
-Ferry;Komp
-Two wheeled combat chariot;Kétkerekű harci szekér
-Four wheeled combat chariot;Négykerekű harci szekér
-Landau;Hintó
-Sedan chair;Hordszék
-Carriage;Kocsi
-Cart;Kordé
-Dog sledge;Kutyaszán
-Sleigh;Lovasszán
-Stagecoach;Társzekér
-Wheelbarrow;Taliga
-Traveling cart with two wheels;Utazó szekér, kétkerekű
-Cart wheel;Szekér kerék
-Post chaise for a day;Postakocsi, naponta
-Reins, bridle, snaffle;Gyeplő, kantár, zabla
-Yoke, horse harness;Iga, járom
-Halter;Kötőfék
-Horse clothes;Lópokróc
-Combat saddle;Nyereg, harci
-Pack saddle;Nyereg, málhás
-Travelling saddle;Nyereg utazó
-Saddle bag;Nyeregtáska
-Horse shoe and shoeing;Patkó és patkolás
-Chariot tools;Szekér szerszám
-Stables;Istálló
-Room, shared bedroom;Szoba, közös háló
-Room with separate bed;Szoba, külön ágy
-Single room;Szoba, egyszemélyes
-Room, ornate;Szoba, díszes
-Room, suite;Szoba, lakosztály
-Bath;Fürdő
-Calf;Borjú
-Chicken;Csirke
-Pig;Disznó
-Sheep;Juh
-Goats;Kecske
-Dog, fighting;Kutya, harci
-Dog, housekeeper;Kutya, házőrző
-Dog, sledge;Kutya, szánhúzó
-Dog, hunter;Kutya, vadász
-Goose;Liba
-Horse, yoke;Ló, igás
-Horse, light combat;Ló, könnyű harci
-Horse, heavy combat;Ló, nehéz harci
-Horse, pony;Ló, póni
-Horse, traveler;Ló, utazó
-Cat;Macska
-Ox;Ökör
-Mule;Öszvér
-Turkey;Pulyka
-Hawk, hunter;Sólyom, vadász
-Donkey;Szamár
-Cow;Tehén
-Camel;Teve
-Hen;Tyúk
-Boots;Bakancs
-Shoes;Cipő
-Boots, riding;Csizma, lovagló
-Boots, walking;Csizma, gyalogos
-Hood;Csuklya
-Waist belt;Derékszíj
-Pants;Gatya
-Stockings;Harisnya
-Noble shirt;Nemesi ing
-Peasant shirts;Paraszti ing
-Coat;Kabát
-Caftan;Kaftán
-Hat;Kalap
-Chiffon;Köntös
-Cape, silk;Köpeny, selyem
-Cape, fabric;Köpeny, szövet
-Cape, fur;Köpeny, prém
-Gloves, noble;Kesztyű, nemesi
-Gloves, fencing;Kesztyű, vívó
-Vest;Mellény
-Shorts;Nadrág
-Belt;Öv
-Pantaloons;Pantalló
-Slippers;Papucs
-Cap;Sapka
-Saru;Saru
-Sandals;Szandál
-Toga;Tóga
-Tunic;Tunika
-Ordinary prostitute;Közönséges örömlány
-Girls of Lotus;Lótusz Leányai
-Alidari woman;Alidari nő
-Fodder, one day;Abrak, egynapi
-Wine, cup;Bor, kupa
-Sugar, glass;Cukor, süveg
-Lunch, dinner;Ebéd, vacsora
-Common spice;Közönséges fűszer
-Rare spice;Ritka fűszer
-Special spice;Különleges fűszer
-Fish, one dose;Hal, egy adag
-Meat, one dose;Hús, egy adag
-Liqueurs;Likőr
-Loree;Lőre
+Hone stone;Fenőkő
 Honey, bark;Méz, csupor
-Brandy, glass;Pálinka, üveg
+Hood;Csuklya
+Horse clothes;Lópokróc
+Horse, heavy combat;Ló, nehéz harci
+Horse, light combat;Ló, könnyű harci
+Horse, pony;Ló, póni
+Horse shoe and shoeing;Patkó és patkolás
+Horse, traveler;Ló, utazó
+Horse, yoke;Ló, igás
+Hose;Tömlő
+Human;Ember
+Hungarian;Magyar
+Images;Képek
+Infravision;Infralátás
+Initiating value;Kezdeményező érték
+Ink;Tinta
+Intelligence;Intelligencia
+IronFist;Vasököl
+IV;KÉ
+Jad Janbiya;Dzsad dzsambia
+Jann;Dzsenn
+Jann saber;Dzsenn szabja
+Javelin;Dárda/hajító dárda
+Jellem;Personality
+Jeweler;Ékszerész
+Juggling;Zsonglőrködés
+Jumping;Ugrás
+Kahreian crossbow;Kahreian nyílpuska
+Khal;Khál
+Kiel priest;Kiel pap
+Knife;Kés
+Knight;Lovag
+Knight sword;Lovagi kard
+Knotting;Csomózás
+Kogge;Kogge
+Krad paladin;Krad paplovag
+Kranich;Kráni
+Kranich warlock;Kráni boszorkánymester
+Kyr knowledge;Kyr tudás
+Kyr;Kyr
+Ladders;Létra
+Lampion;Mécses
+Lance;Kopja, könnyű
+Landau;Hintó
+Language knowledge;Nyelvismeret
+Languages;Nyelvek
+Lantern;Lámpás
+Large shield;Nagy pajzs
+Lasso;Lasszó
+Leadership;Hadvezetés
+Leather armor;Kivert bőr
+Legend knowledge;Legendaismeret
+Level / %;Fok / %
+Level;Szint
+Life points and pain tolerance;Életerő és fájdalomtűrés
+Life points;Életerő pontok
+Light chain mail;Láncing
+LinguaDomini;LinguaDomini
+Liqueurs;Likőr
+Little shield;Kicsi pajzs
+Lock picking;Zárnyitás
+Long bow;Hosszú íj
+Long staff;Hosszú bot
+Longsword;Hosszú kard
+Loop;Ismétlés
+Loree;Lőre
+LP;ÉP
+Lunch, dinner;Ebéd, vacsora
+Magasság;Height
+Magic knowledge;Mágiaismeret
+Magic;Mágia
+Magic resistance;Mágiaellenállás
+Magic usage;Mágiahasználat
+Mana points;Mana pontok
+Maps;Térképek
+Map;Térkép
+Mara-sequor;Mara-sequor
+Market;Piac
+Master level;Mesterfok
+Meat, one dose;Hús, egy adag
+Medium shield;Közepes pajzs
+Menu;Menü
+Merchant;Kereskedő
+Milk, jug;Tej, kancsó
+Mirror, metal;Tükör, fém
+Mithrill;Mithrill
+Mitrill breast plate;Mitrill mellvért
+Mitrill chain mail;Mitrill sodronying
+Mitrill full plate;Mitrill teljes vértezet
+Mitrill half plate;Mitrill félvértezet
+Mitrill laminar armour;Mitrill lemezvértezet
+Mitrill scale armour;Mitrill pikkelyvért
+Ml;Mf
+Modifiers;Módosítók
+MR;ME
+Mule;Öszvér
+Music;Zene
+Nail, dozens;Szeg, tucat
+Name;Név
+Nastar monk;Nastar szerzetes
+Nastar paladin;Nastar paplovag
+Nastar priest;Nastar pap
+News distributor;Hírterjesztő
+New;Új
+Night-elf;Éji elf
+Noble;Nemes
+Noble shirt;Nemesi ing
+Nomad bow;Visszacsapó íj
+No;Nem
+Normal;Normál
+Not choosen;Nincs kiválasztva
+Now playing;Lejátszás alatt
+Oilcloth;Viaszosvászon, rőf
+Oil for lamps;Olaj, lámpásba
 Old wine from Predoc 1 cluster;Predoci óbor 1 fürtös
 Old wine from Predoc 2 clusters;Predoci óbor 2 fürtös
 Old wine from Predoc 3 clusters;Predoci óbor 3 fürtös
 Old wine from Predoc 4 clusters;Predoci óbor 4 fürtös
 Old wine from Predoc 5 clusters;Predoci óbor 5 fürtös
-Cheese;Sajt
-Salt, blocks;Só, tömb
-Beer, mug;Sör, korsó
-Milk, jug;Tej, kancsó
-Eggs, dozens;Tojás, tucat
-Wild meat, one dose;Vadhús, egy adag
-Butter, kilo;Vaj, kiló
-Vegetables;Zöldség
-Earthenware;Agyagedény
-Shovel;Ásó
-Bell;Csengő
-Torch;Fáklya
-Hone stone;Fenőkő
-Candle;Gyertya
-Fishing net;Halászháló
-Backpack, small;Hátizsák, kicsi
-Backpack, big;Hátizsák, nagy
-Barrel, small;Hordó, kicsi
-Barrel, big;Hordó, nagy
-Fishing hook;Horgász horog
-Quill;Írótoll
-Swordhole, ornate;Kardhüvely, díszes
-Swordhole, ordinary;Kardhüvely, közönséges
-Hammer;Kalapács
-Basket;Kosár
-Flint and steel;Kova és acél
-Rope (20 meters);Kötél (20 méter)
-Chalk;Kréta
-Flask;Kulacs
-Chest, small;Láda, kicsi
-Chest, big;Láda, nagy
-Chain, meter;Lánc, métere
-Lantern;Lámpás
-Ladders;Létra
-Climbing-irons;Mászóvas
-Lampion;Mécses
-Scales;Mérleg
-Oil for lamps;Olaj, lámpásba
-Belt holster;Övtáska
+One-handed hatchet;Egykezes csatabárd
+One-handed mace;Egykezes buzogány
+Orc;Ork
+Ordinary prostitute;Közönséges örömlány
+Other;Egyéb
+Ox;Ökör
+Pack saddle;Nyereg, málhás
+Pain tolerance points;Fájdalomtűrési pontok
+Pain tolerance points/level;Fájdalomtűrési pontok/szint
+Pantaloons;Pantalló
+Pants;Gatya
 Paper, sheet;Papír, ív
-Sealing wax;Pecsétviasz
 Parchment sheets;Pergamen, ív
-Fur;Prém
-Tent, small;Sátor, kicsi
-Tent, great;Sátor, nagy
-Tent, crew;Sátor, legénységi
-Silk, ell;Selyem rőf
-Whistle;Síp
-Nail, dozens;Szeg, tucat
-Hatchet;Szekerce
-Fabric, ell;Szövet, rőf
-Blanket;Takaró
-Haversack;Tarisznya
+Peasant;Paraszt
+Peasant shirts;Paraszti ing
+Percent qualifications;Százalékos képzettségek
+Percent qualification;Százalékos képzettség
+Physiology;Élettan
+Pick pocketing;Zsebmetszés
+Pig;Disznó
+Poisoning & neutralization;Méregkeverés/semlegesítés
+Post chaise for a day;Postakocsi, naponta
+Pottery;Fazekasság
+Price;Ár
+Priest magic;Papi mágia
+Profession;Szakma
+Psi Kranich;Pszi Kráni metódus
+Psi Kyr method;Pszi Kyr metódus
+Psi, Mana, Magic resistance;Pszi, Mana, mágiaellenállás
+Psi points/level;Pszi pont/szint
+Psi points;Pszi pontok
+Psi;Pszi
+Psi Pyarron;Pszi Pyarroni
+Psi Slan-way;Pszi Slan-út
+PTP;FP
+PTP/level;FP/szint
+Pub fighting;Kocsmai verekedés
+QP;KP
+Qualification;Képzettség
+Qualification points;Képzettség pontok
+Qualifications;Képzettségek
+Quill;Írótoll
 Quiver;Tegez
-Ink;Tinta
-Hose;Tömlő
-Dagger Sleeve;Tőrhüvely
-Mirror, metal;Tükör, fém
-Fire steel;Tűzszerszám
-Sewing needle;Varrótű
-Cast iron footed bowl;Vaslábas
-Oilcloth;Viaszosvászon, rőf
-Bucket;Vödör
-Deadbolt/padlock;Zár/lakat
-Sack;Zsák
-Steel full plate;Acél teljes vértezet
-Bronze full plate;Bronz teljes vértezet
-Abbit steel full plate;Abbitacél teljes vértezet
-Mitrill full plate;Mitrill teljes vértezet
-Steel half plate;Acél félvértezet
-Bronze half plate;Bronz félvértezet
-Abbit steel half plate;Abbitacél félvértezet
-Mitrill half plate;Mitrill félvértezet
-Steel breast plate;Acél mellvért
-Bronze breast plate;Bronz mellvért
-Abbit steel breast plate;Abbitacél mellvért
-Mitrill breast plate;Mitrill mellvért
-Steel laminar armour;Acél lemezvértezet
-Bronze laminar armour;Bronz lemezvértezet
-Abbit steel laminar armour;Abbitacél lemezvértezet
-Mitrill laminar armour;Mitrill lemezvértezet
-Steel scale armour;Acél pikkelyvért
-Bronze scale armour;Bronz pikkelyvért
-Abbit steel scale armour;Abbitacél pikkelyvért
-Mitrill scale armour;Mitrill pikkelyvért
-Steel chain mail;Acél sodronying
-Abbit steel chain mail;Abbitacél sodronying
-Mitrill chain mail;Mitrill sodronying
-Light chain mail;Láncing
-Brigandine armor;Brigantin
-Ring armour;Gyűrűs vért
-Hardened leather armor;Keményített bőr
-Leather armor;Kivert bőr
+Race;Faj
+Race qualifications;Faji képzettségek
+Races;Fajok
 Rag;Posztó
+Ramiera;Ramiera
+Ranagol paladin;Ranagol paplovag
+Ranagol priest (Gorvik);Ranagol pap (gorviki)
+Ranagol priest (Kran);Ranagol pap (kráni)
+Rapier;Tőrkard/rapír
+Rare spice;Ritka fűszer
+Reading & writing;Írás/olvasás
+Registry write error;Regisztrációs bejegyzés írási hiba
+Reins, bridle, snaffle;Gyeplő, kantár, zabla
+Religion knowledge;Vallásismeret
+Remove music;Zene eltávoltása
+Remove sound(s);Hang(ok) eltávoltása
+Reptile;Hüllő
+Riding lance;Kopja, lovas
+Riding;Lovaglás
+Ring armour;Gyűrűs vért
+Room, ornate;Szoba, díszes
+Room, shared bedroom;Szoba, közös háló
+Room, suite;Szoba, lakosztály
+Room with separate bed;Szoba, külön ágy
+Rope (20 meters);Kötél (20 méter)
+Rope beating;Kötélverés
+Rune magic;Rúnamágia
+Running;Futás
+Saber;Szabja
+Sack;Zsák
+Saddle bag;Nyeregtáska
+Sailing;Hajózás
+Sail;Vitorla
+Salt, blocks;Só, tömb
+Sandals;Szandál
+Saru;Saru
+Scales;Mérleg
+Scimitar;Handzsár
+Scourge;Korbács
+Sealing wax;Pecsétviasz
+Secondary caste;Második kaszt
+Secret door searching;Titkosajtó keresés
+Sedan chair;Hordszék
+Sequor;Sequor
+Settings;Beállítások
+Sewing needle;Varrótű
+Sexual culture;Szexuális kultúra
+Shadlekian mace;Shadleki buzogány
+Shadonish armor breaking crossbow;Shadoni páncéltörő nyílpuska
+Sheep;Juh
+Shield using;Pajzshasználat
+Shoes;Cipő
+Short bow;Rövid íj
+Shorts;Nadrág
+Short staff;Rövid bot
+Short sword;Rövid kard
+Shovel;Ásó
+Silk, ell;Selyem rőf
+Silver;Ezüst
+Singing & making music;Ének-zene
+Single room;Szoba, egyszemélyes
+Skills;Képességek
+Slan dagger;Slan tőr
+Slan star;Slan csillag
+Slan sword;Slan kard
+Sleigh;Lovasszán
+Sling;Sling
+Slippers;Papucs
+Smith;Kovács
+Snake sword;Kígyó kard
+Sneaking;Lopózás
+Soldier;Katona
+Sound effect;Hang effektus
+Sound effects;Hangeffektusok
+Sound imitation;Hangutánzás
+Sounds;Hangok
+Spear;Lándzsa
+Special spice;Különleges fűszer
+Speed;Gyorsaság
+Spiked mace;Tüskés buzogány
+Stables;Istálló
+Stagecoach;Társzekér
+Stamina;Állóképesség
+Stealth;Rejtőzködés
+Steel breast plate;Acél mellvért
+Steel chain mail;Acél sodronying
+Steel full plate;Acél teljes vértezet
+Steel half plate;Acél félvértezet
+Steel laminar armour;Acél lemezvértezet
+Steel scale armour;Acél pikkelyvért
+St;Kf
+Stockings;Harisnya
+Storyteller;Mesemondó
+Story;Történet
+Strength;Erő
+Stretch;Nyújtás
+Sugar, glass;Cukor, süveg
+Swimming;Úszás
+Swordhole, ordinary;Kardhüvely, közönséges
+Swordhole, ornate;Kardhüvely, díszes
+Sword master;Kardművész
+Szülőföld;Homeland
+Tailoring;Szabászat
+Tattoo maker;Tetováló
+Teaching;Tanítás
+Tent, crew;Sátor, legénységi
+Tent, great;Sátor, nagy
+Tent, small;Sátor, kicsi
+Testsúly;Weight
+Tharr priest;Tharr pap
+There is no 'story.rtf' or 'story.txt' file in the folder: ;Nincs 'story.rtf' vagy 'story.txt' fájl ebben a könyvtárban: 
+Thief;Tolvaj
+Throwing ax;Hajítóbárd
+Throwing dagger;Dobótőr
+Throwing nets;Dobóháló
+Tightrope;Kötéltánc
+Toga;Tóga
+Torch;Fáklya
+Track reading & hiding;Nyomolvasás/eltüntetés
+Trap detect;Csapdakeresés
+Trappings;Lószerszámok
+Trap setup;Csapdaállítás
+Traveling cart with two wheels;Utazó szekér, kétkerekű
+Travelling saddle;Nyereg utazó
+Travelling;Utazás
+Tunic;Tunika
+Turkey;Pulyka
+Two-handed combat;Kétkezes harc
+Two-handed hatchet;Kétkezes csatbárd
+Two-handed mace;Kétkezes buzogány
+Two wheeled combat chariot;Kétkerekű harci szekér
+Ultravision;Ultralátás
+Unconscious astral magic resistance;Tudatalatti asztrális mágia-ellenállás
+Unconscious mental magic resistance;Tudatalatti mentális mágia-ellenállás
+Uwel paladin;Uwel paplovag
+Vallás;Religion
+Value estimation;Értékbecslés
+Vegetables;Zöldség
+Velar monk;Velar szerzetes
+Velar paladin;Velar paplovag
+Velar priest;Velar pap
+Vest;Mellény
+Video clips;Videóklippek
+Vitality;Életerő
+Voul;Voul
+Waist belt;Derékszíj
+Warhammer;Harci kalapács
+Warlock;Boszorkánymester
+Warlock magic;Boszorkánymesteri mágia
+Warrior;Harcos
+Weapon breaking;Fegyvertörés
+Weapon knowledge;Fegyver ismeret
+Weapons and armors;Fegyverek és vértek
+Weapons;Fegyverek
+Weapon throwing;Fegyverdobás
+Weapon usage;Fegyverhasználat
+Weather forecast;Időjóslás
+Wheelbarrow;Taliga
+Whip;Ostor
+Whistle;Síp
+White orc;Fehér ork
+Wier;Wier
+Wild meat, one dose;Vadhús, egy adag
+WillPower;Akaraterő
+Wine, cup;Bor, kupa
+Wiseman;Bölcs
+Witch;Boszorkány
+Witch magic;Boszorkány mágia
+Wizard magic;Varázsló mágia
+Wizard;Varázsló
+Wound healing;Sebgyógyítás
+Wrestling;Birkózás
+Yatagan;Jatagán
+Yes;Igen
+Yoke, horse harness;Iga, járom
+You need to start the application with administrator right for the first time if you want to use the map functionality or create HKEY_LOCAL_MACHINE\[WOW6432Node]\SOFTWARE\Microsoft\Internet Explorer\MAIN\FeatureControl\FEATURE_BROWSER_EMULATION\Storyteller.exe REG_DWORD 0x8000 registry entries.;Először adminisztrátorként kell indítania a programot, ha a térkép funkciót használni szeretné vagy hozza létre a HKEY_LOCAL_MACHINE\[WOW6432Node]\SOFTWARE\Microsoft\Internet Explorer\MAIN\FeatureControl\FEATURE_BROWSER_EMULATION\Storyteller.exe REG_DWORD 0x8000 regisztrációs bejegyzéseket.
+Zoom;Nagyítás

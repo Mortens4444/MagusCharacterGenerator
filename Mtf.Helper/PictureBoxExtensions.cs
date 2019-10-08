@@ -2,9 +2,9 @@
 using System.IO;
 using System.Windows.Forms;
 
-namespace Storyteller
+namespace Mtf.Helper
 {
-	static class PictureBoxExtensions
+	public static class PictureBoxExtensions
     {
         public static void LoadImage(this PictureBox pictureBox, string path)
         {

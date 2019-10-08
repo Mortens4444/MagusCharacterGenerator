@@ -137,6 +137,8 @@
     <Compile Include="Castes\ICaste.cs" />
     <Compile Include="Castes\Fighter\Warrior.cs" />
     <Compile Include="GameSystem\IAbilities.cs" />
+    <Compile Include="Utils\CharacterConverter.cs" />
+    <Compile Include="Utils\NameGenerator.cs" />
     <Compile Include="Qualifications\Battle\Disarmament.cs" />
     <Compile Include="Qualifications\ICanHaveMany.cs" />
     <Compile Include="Qualifications\Laical\ProfessionKnowledge.cs" />

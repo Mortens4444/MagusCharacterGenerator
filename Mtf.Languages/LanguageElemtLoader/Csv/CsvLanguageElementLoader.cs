@@ -7,7 +7,7 @@ namespace Mtf.Languages.LanguageElemtLoader.Csv
 	class CsvLanguageElementLoader : ILanguageElementLoader
 	{
 		/// <summary>
-		/// Memory usage can be reduced if only the current languge elements are loaded, not all languages.
+		/// Memory usage can be reduced if only the current language elements are loaded, not all languages.
 		/// </summary>
 		public Dictionary<(Language Language, string ElementIdentifier), List<string>> LoadElements()
 		{

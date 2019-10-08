@@ -16,7 +16,7 @@ namespace Mtf.Languages.LanguageElemtLoader.Csv
 
 		public static string[] SplitContent(string languageFileContent)
 		{
-			return languageFileContent.Split(new string[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries);
+			return languageFileContent.Split(new char[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries);
 		}
 	}
 }

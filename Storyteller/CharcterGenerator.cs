@@ -3,6 +3,7 @@ using MagusCharacterGenerator.Castes;
 using MagusCharacterGenerator.GameSystem;
 using MagusCharacterGenerator.GameSystem.Attributes;
 using MagusCharacterGenerator.Races;
+using MagusCharacterGenerator.Utils;
 using Mtf.Helper;
 using Mtf.Languages;
 using System;
