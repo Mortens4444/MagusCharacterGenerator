@@ -1,4 +1,6 @@
-﻿namespace MagusCharacterGenerator.Qualifications
+﻿using System;
+
+namespace MagusCharacterGenerator.Qualifications
 {
 	public class PercentQualification
     {
@@ -8,5 +10,10 @@
         {
             Percent = percent;
         }
-    }
+
+		public string ToFullString()
+		{
+			return String.Concat(ToString(), $" {Percent}%");
+		}
+	}
 }

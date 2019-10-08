@@ -30,7 +30,7 @@ namespace MagusCharacterGenerator.Qualifications
 
 		public string ToFullString()
         {
-            return ToString() + (QualificationLevel == QualificationLevel.Base ? $" {Lng.Elem("Bl")}" : $" {Lng.Elem("Ml")}");
+            return String.Concat(ToString(), QualificationLevel == QualificationLevel.Base ? $" {Lng.Elem("Bl")}" : $" {Lng.Elem("Ml")}");
         }
     }
 }

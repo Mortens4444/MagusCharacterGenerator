@@ -36,8 +36,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="FontAwesome.Sharp, Version=5.2.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\FontAwesome.Sharp.5.2.0\lib\net40\FontAwesome.Sharp.dll</HintPath>
+    <Reference Include="FontAwesome.Sharp, Version=5.8.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\FontAwesome.Sharp.5.8.3\lib\net40\FontAwesome.Sharp.dll</HintPath>
     </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
@@ -69,8 +69,6 @@
       <DependentUpon>CharcterGenerator.cs</DependentUpon>
     </Compile>
     <Compile Include="Converter\MusicPlayerToListViewItem.cs" />
-    <Compile Include="Grammar.cs" />
-    <Compile Include="IconCreator.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -81,9 +79,6 @@
     <Compile Include="Media\MusicPlayer.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="NameGenerator.cs" />
-    <Compile Include="PictureBoxExtensions.cs" />
-    <Compile Include="ProcessUtils.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SplashScreen.cs">
@@ -93,7 +88,6 @@
       <DependentUpon>SplashScreen.cs</DependentUpon>
     </Compile>
     <Compile Include="TreeNodeCollectionExtensions.cs" />
-    <Compile Include="TypeUtils.cs" />
     <None Include="Logo.png" />
     <EmbeddedResource Include="AboutForm.resx">
       <DependentUpon>AboutForm.cs</DependentUpon>

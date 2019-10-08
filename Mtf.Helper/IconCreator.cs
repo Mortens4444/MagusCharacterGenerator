@@ -4,9 +4,9 @@ using System.Drawing;
 
 using Icon = System.Drawing.Icon;
 
-namespace Storyteller
+namespace Mtf.Helper
 {
-	class IconCreator
+	public class IconCreator
 	{
 		public static Bitmap GetImage(IconChar iconChar, int size = 16)
 		{

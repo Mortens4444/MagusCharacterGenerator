@@ -1,7 +1,7 @@
 ﻿using System.Diagnostics;
 using System.IO;
 
-namespace Storyteller
+namespace Mtf.Helper
 {
 	public static class ProcessUtils
 	{

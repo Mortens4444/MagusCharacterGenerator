@@ -1,10 +1,17 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace Mtf.Helper
 {
 	public static class TypeExtensions
 	{
+		public static IEnumerable<Type> GetTypesInNamespace(this Type searchedtype, string nameSpace)
+		{
+			var assembly = searchedtype.Assembly;
+			return assembly.GetTypes().Where(type => String.Equals(type.Namespace, nameSpace, StringComparison.Ordinal));
+		}
+
 		public static Type GetTypeByName(string typeFullname)
 		{
 			var asseblies = AppDomain.CurrentDomain.GetAssemblies();

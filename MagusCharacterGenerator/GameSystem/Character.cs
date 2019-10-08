@@ -8,7 +8,9 @@ using MagusCharacterGenerator.GameSystem.Qualifications;
 using MagusCharacterGenerator.Qualifications;
 using MagusCharacterGenerator.Qualifications.Specialities;
 using MagusCharacterGenerator.Races;
+using MagusCharacterGenerator.Utils;
 using Mtf.Helper;
+using Mtf.Languages;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -638,6 +640,11 @@ namespace MagusCharacterGenerator.GameSystem
 				DefendingValue += defensePoints;
 				AimingValue += aimingPoints;
 			}
+		}
+
+		public override string ToString()
+		{
+			return CharacterConverter.ToString(this);
 		}
 	}
 }

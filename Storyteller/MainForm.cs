@@ -1,4 +1,5 @@
 ﻿using FontAwesome.Sharp;
+using MagusCharacterGenerator.Castes;
 using MagusCharacterGenerator.GameSystem;
 using Microsoft.Win32;
 using Mtf.Helper;
@@ -139,7 +140,7 @@ namespace StoryTeller
 
 		private void FillListViewGroup(ListView listView, string listViewGroupName)
 		{
-			var types = TypeUtils.GetTypesInNamespace($"MagusCharacterGenerator.Things.{listViewGroupName}");
+			var types = typeof(Caste).GetTypesInNamespace($"MagusCharacterGenerator.Things.{listViewGroupName}");
 			int index = 0;
 			foreach (var type in types)
 			{

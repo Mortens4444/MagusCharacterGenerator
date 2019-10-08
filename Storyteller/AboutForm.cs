@@ -1,7 +1,8 @@
-﻿using FontAwesome.Sharp;
-using Mtf.Languages;
-using System.Drawing;
+﻿using System.Drawing;
 using System.Windows.Forms;
+using FontAwesome.Sharp;
+using Mtf.Helper;
+using Mtf.Languages;
 
 namespace Storyteller
 {

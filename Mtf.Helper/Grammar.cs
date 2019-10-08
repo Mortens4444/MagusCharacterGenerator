@@ -1,6 +1,6 @@
 ﻿using System.Linq;
 
-namespace Storyteller
+namespace Mtf.Helper
 {
 	public static class Grammar
 	{
