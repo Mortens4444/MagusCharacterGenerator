@@ -39,10 +39,6 @@ namespace Mtf.Languages
 		/// <param name="controls">The ControlCollection to be translated.</param>
 		public static void Translate(ControlCollection controls)
 		{
-			if (TranslationCore.Language == Language.English)
-			{
-				return;
-			}
 			foreach (var control in controls)
 			{
 				if (control is WebBrowser)
@@ -138,6 +134,11 @@ namespace Mtf.Languages
             }
         }
 
+		public static string Elem(Language toLanguage, string element)
+		{
+			return Elem(TranslationCore.Language, toLanguage, element);
+		}
+
 		public static string Elem(Language fromLanguage, Language toLanguage, string element)
 		{
 			var fromElements = AllLanguageElements
@@ -155,7 +156,7 @@ namespace Mtf.Languages
 		}
 
 		/// <summary>
-		/// Get a translation of an english expression.
+		/// Get a translation of an English expression.
 		/// </summary>
 		/// <param name="elementIdentifier">The requested element, which wanted to be translated.</param>
 		/// <param name="index">Index of the specified translations. If not set, it will return the first translation.</param>
