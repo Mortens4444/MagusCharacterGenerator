@@ -31,7 +31,7 @@ namespace Mtf.Languages.LanguageElemtLoader.Csv
 				}
 				for (int j = 0; j < elements.Length; j++)
 				{
-					var key = ((Language)languages[j], elements[0]);
+					var key = (languages[j], elements[0]);
 					if (allLanguageElements.ContainsKey(key))
 					{
 						allLanguageElements[key].Add(elements[j]);
