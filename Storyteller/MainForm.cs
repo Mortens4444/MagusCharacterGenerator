@@ -21,7 +21,7 @@ namespace StoryTeller
 		[DllImport("user32.dll", SetLastError = true)]
 		static extern IntPtr SetParent(IntPtr hWndChild, IntPtr hWndNewParent);
 
-		private CharcterGenerator charcterGenerator;
+		private readonly CharcterGenerator characterGenerator;
 		public bool ChangeLanguage { get; private set; }
 
 		public MainForm()
@@ -74,14 +74,14 @@ namespace StoryTeller
 
 			LoadStory(rtbStory);
 
-			charcterGenerator = new CharcterGenerator
+			characterGenerator = new CharcterGenerator
 			{
 				TopLevel = false,
 				FormBorderStyle = FormBorderStyle.None,
 				Dock = DockStyle.Fill
 			};
-			pCharacterContent.Controls.Add(charcterGenerator);
-			charcterGenerator.Show();
+			pCharacterContent.Controls.Add(characterGenerator);
+			characterGenerator.Show();
 		}
 
 		private void GetLanguages()
@@ -486,7 +486,7 @@ namespace StoryTeller
 			if (File.Exists(characterFile))
 			{
 				var character = Character.Load(characterFile);
-				charcterGenerator.LoadCharacter(character, (string)e.Node.Tag);
+				characterGenerator.LoadCharacter(character, (string)e.Node.Tag);
 			}
 		}
 
