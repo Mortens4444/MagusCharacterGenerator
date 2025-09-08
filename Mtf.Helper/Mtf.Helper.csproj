@@ -69,6 +69,7 @@
     <Compile Include="EnumUtils.cs" />
     <Compile Include="ErrorBox.cs" />
     <Compile Include="Grammar.cs" />
+    <Compile Include="IconCharExtensions.cs" />
     <Compile Include="IconCreator.cs" />
     <Compile Include="MathHelper.cs" />
     <Compile Include="ObjectExtensions.cs" />

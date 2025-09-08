@@ -54,7 +54,7 @@ namespace MagusCharacterGenerator.Test
 		{
 			var expectedSerializationContent = EmbeddedResourceReader.Get(serializationResultFileName);
 			var actualSerializationContent = ObjectSerializer.GetSerializedString(obj);
-			Assert.AreEqual(expectedSerializationContent, actualSerializationContent);
+			Assert.That(expectedSerializationContent, Is.EqualTo(actualSerializationContent));
 		}
 	}
 }

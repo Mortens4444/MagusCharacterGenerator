@@ -44,10 +44,10 @@ namespace StoryTeller
 
 			LoadIcons();
 
-			imageList.Images.Add("0", IconChar.Folder.ToBitmap(16, Color.DarkGoldenrod));
-			imageList.Images.Add("1", IconChar.Image.ToBitmap(16, Color.ForestGreen));
-			imageList.Images.Add("2", IconChar.FileAudio.ToBitmap(16, Color.LightSeaGreen));
-			imageList.Images.Add("3", IconChar.User.ToBitmap(16, Color.BlanchedAlmond));
+			imageList.Images.Add("0", IconChar.Folder.IconCharToBitmap(16, Color.DarkGoldenrod));
+			imageList.Images.Add("1", IconChar.Image.IconCharToBitmap(16, Color.ForestGreen));
+			imageList.Images.Add("2", IconChar.FileAudio.IconCharToBitmap(16, Color.LightSeaGreen));
+			imageList.Images.Add("3", IconChar.User.IconCharToBitmap(16, Color.BlanchedAlmond));
 
 			DirectoryExtension.CreateApplicationDirectories();
 
