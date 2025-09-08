@@ -30,23 +30,23 @@ namespace MagusCharacterGenerator.Test
 			};
 			var anonymousClassJson = ObjectSerializer.GetSerializedString(anonymousClass);
 			var deserializedAnonymousClassJson = ObjectSerializer.LoadContent<dynamic>(anonymousClassJson);
-			Assert.AreEqual(anonymousClass.Value, deserializedAnonymousClassJson.Value);
-			Assert.AreEqual(anonymousClass.Date, deserializedAnonymousClassJson.Date);
-			Assert.AreEqual(anonymousClass.Name, deserializedAnonymousClassJson.Name);
-			Assert.AreEqual(anonymousClass.Lst, deserializedAnonymousClassJson.Lst);
-			Assert.AreEqual(anonymousClass.Lng.ToString(), deserializedAnonymousClassJson.Lng.ToString());
-			Assert.AreEqual(anonymousClass.Caste.ToString(), deserializedAnonymousClassJson.Caste.ToString());
-			Assert.AreEqual(anonymousClass.Race.ToString(), deserializedAnonymousClassJson.Race.ToString());
-			Assert.AreEqual(anonymousClass.Character.ToString(), deserializedAnonymousClassJson.Character.ToString());
+			Assert.That(anonymousClass.Value, Is.EqualTo(deserializedAnonymousClassJson.Value));
+			Assert.That(anonymousClass.Date, Is.EqualTo(deserializedAnonymousClassJson.Date));
+			Assert.That(anonymousClass.Name, Is.EqualTo(deserializedAnonymousClassJson.Name));
+			Assert.That(anonymousClass.Lst, Is.EqualTo(deserializedAnonymousClassJson.Lst));
+			Assert.That(anonymousClass.Lng.ToString(), Is.EqualTo(deserializedAnonymousClassJson.Lng.ToString()));
+			Assert.That(anonymousClass.Caste.ToString(), Is.EqualTo(deserializedAnonymousClassJson.Caste.ToString()));
+			Assert.That(anonymousClass.Race.ToString(), Is.EqualTo(deserializedAnonymousClassJson.Race.ToString()));
+			Assert.That(anonymousClass.Character.ToString(), Is.EqualTo(deserializedAnonymousClassJson.Character.ToString()));
 		}
 
 		[Test]
-		public void SeralizeAndDeserializeCharacter()
+		public void SerializeAndDeserializeCharacter()
 		{
 			var character = new Character("Mirena", new Human(), new Witch(5));
 			var characterJson = ObjectSerializer.GetSerializedString(character);
 			var deserializedCharacter = ObjectSerializer.LoadContent<Character>(characterJson);
-			Assert.AreEqual(character.Race.ToString(), deserializedCharacter.Race.ToString());
+			Assert.That(character.Race.ToString(), Is.EqualTo(deserializedCharacter.Race.ToString()));
 		}
 
 		[Test]
@@ -54,7 +54,7 @@ namespace MagusCharacterGenerator.Test
 		{
 			var savedCharacterJson = EmbeddedResourceReader.Get("MagusCharacterGenerator.Test.ObjectDeserializationResults.Character.json");
 			var character = ObjectSerializer.LoadContent<Character>(savedCharacterJson);
-			Assert.NotNull(character.Castes);
+			Assert.That(character.Castes, Is.Not.Null);
 		}
 	}
 }

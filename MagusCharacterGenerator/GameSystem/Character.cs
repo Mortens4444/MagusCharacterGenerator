@@ -449,8 +449,8 @@ namespace MagusCharacterGenerator.GameSystem
 			if (multiCasteMode == MultiCasteMode.Normal_Or_SwitchedCaste)
 			{
 				QualificationPoints = BaseCaste.BaseQualificationPoints;
-				QualificationPoints += (ushort)MathHelper.GetAboveAvarageValue(Intelligence);
-				QualificationPoints += (ushort)MathHelper.GetAboveAvarageValue(Dexterity);
+				QualificationPoints += (ushort)MathHelper.GetAboveAverageValue(Intelligence);
+				QualificationPoints += (ushort)MathHelper.GetAboveAverageValue(Dexterity);
 				if (BaseCaste.AddQualificationPointsOnFirstLevel)
 				{
 					QualificationPoints += BaseCaste.QualificationPointsModifier;
@@ -483,17 +483,17 @@ namespace MagusCharacterGenerator.GameSystem
 			var initiatorRace = Race.SpecialQualifications.GetSpeciality<GoodInitiator>();
 			
 			InitiatingValue = initiatorRace != null ? initiatorRace.InitiatingBase : BaseCaste.InitiatingBaseValue;
-			InitiatingValue += MathHelper.GetAboveAvarageValue(Speed);
-			InitiatingValue += MathHelper.GetAboveAvarageValue(Dexterity);
+			InitiatingValue += MathHelper.GetAboveAverageValue(Speed);
+			InitiatingValue += MathHelper.GetAboveAverageValue(Dexterity);
 
 			AttackingValue = BaseCaste.AttackingBaseValue;
-			AttackingValue += MathHelper.GetAboveAvarageValue(Strength);
-			AttackingValue += MathHelper.GetAboveAvarageValue(Speed);
-			AttackingValue += MathHelper.GetAboveAvarageValue(Dexterity);
+			AttackingValue += MathHelper.GetAboveAverageValue(Strength);
+			AttackingValue += MathHelper.GetAboveAverageValue(Speed);
+			AttackingValue += MathHelper.GetAboveAverageValue(Dexterity);
 
 			DefendingValue = BaseCaste.DefendingBaseValue;
-			DefendingValue += MathHelper.GetAboveAvarageValue(Speed);
-			DefendingValue += MathHelper.GetAboveAvarageValue(Dexterity);
+			DefendingValue += MathHelper.GetAboveAverageValue(Speed);
+			DefendingValue += MathHelper.GetAboveAverageValue(Dexterity);
 
 			var archerCaste = BaseCaste.SpecialQualifications.FirstOrDefault(specialQualification => specialQualification is GoodArcher) as GoodArcher;
 			var archerRace = Race.SpecialQualifications.GetSpeciality<GoodArcher>();
@@ -502,7 +502,7 @@ namespace MagusCharacterGenerator.GameSystem
 			{
 				AimingValue = archerCaste != null ? archerCaste.AimingBase :
 					archerRace != null ? archerRace.AimingBase : BaseCaste.AimingBaseValue;
-				AimingValue += MathHelper.GetAboveAvarageValue(Dexterity);
+				AimingValue += MathHelper.GetAboveAverageValue(Dexterity);
 			}
 			catch (InvalidOperationException)
 			{
@@ -521,7 +521,7 @@ namespace MagusCharacterGenerator.GameSystem
 			{
 				LifePoints = additionalLifePoints.ExtraLifePoints;
 			}
-			LifePoints += MathHelper.GetAboveAvarageValue(Health);
+			LifePoints += MathHelper.GetAboveAverageValue(Health);
 		}
 
 		private void CalculatePainTolerancePoints()
@@ -530,8 +530,8 @@ namespace MagusCharacterGenerator.GameSystem
 			if (multiCasteMode == MultiCasteMode.Normal_Or_SwitchedCaste)
 			{
 				PainTolerancePoints = doubledPainToleranceBase != null ? (byte)(2 * BaseCaste.BasePainTolerancePoints) : BaseCaste.BasePainTolerancePoints;
-				PainTolerancePoints += MathHelper.GetAboveAvarageValue(Stamina);
-				PainTolerancePoints += MathHelper.GetAboveAvarageValue(WillPower);
+				PainTolerancePoints += MathHelper.GetAboveAverageValue(Stamina);
+				PainTolerancePoints += MathHelper.GetAboveAverageValue(WillPower);
 				if (BaseCaste.AddPainToleranceOnFirstLevel)
 				{
 					PainTolerancePoints += BaseCaste.GetPainToleranceModifier();
@@ -550,12 +550,12 @@ namespace MagusCharacterGenerator.GameSystem
 
 		private void CalculateUnconsciousAstralMagicResistance()
 		{
-			UnconsciousAstralMagicResistance = MathHelper.GetAboveAvarageValue(Astral);
+			UnconsciousAstralMagicResistance = MathHelper.GetAboveAverageValue(Astral);
 		}
 
 		private void CalculateUnconsciousMentalMagicResistance()
 		{
-			UnconsciousMentalMagicResistance = MathHelper.GetAboveAvarageValue(WillPower);
+			UnconsciousMentalMagicResistance = MathHelper.GetAboveAverageValue(WillPower);
 		}
 
 		private void CalculatePsiPoints()
@@ -583,7 +583,7 @@ namespace MagusCharacterGenerator.GameSystem
 				var sorcery = caste.SpecialQualifications.FirstOrDefault(specialQualification => specialQualification is Sorcery) as Sorcery;
 				if (BaseCaste is Bard)
 				{
-					sorcery.ManaPoints = (ushort)MathHelper.GetAboveAvarageValue(Intelligence);
+					sorcery.ManaPoints = (ushort)MathHelper.GetAboveAverageValue(Intelligence);
 				}
 				var manaPoints = sorcery != null ? sorcery.ManaPoints : (ushort)0;
 

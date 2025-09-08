@@ -63,6 +63,7 @@
     <EmbeddedResource Include="Resources\ClassGeneration\Travelling.csv" />
     <EmbeddedResource Include="Resources\ClassGeneration\Armors.csv" />
     <EmbeddedResource Include="Resources\ClassGeneration\GeneralArmorTemplate.cst" />
+    <None Include="app.config" />
     <None Include="Resources\Ogg\oggextract.ps1" />
     <None Include="Resources\Ogg\ogg_to_mp3.bat" />
   </ItemGroup>

@@ -6,16 +6,16 @@ namespace Mtf.Helper
 {
 	public static class TypeExtensions
 	{
-		public static IEnumerable<Type> GetTypesInNamespace(this Type searchedtype, string nameSpace)
+		public static IEnumerable<Type> GetTypesInNamespace(this Type searchedType, string @namespace)
 		{
-			var assembly = searchedtype.Assembly;
-			return assembly.GetTypes().Where(type => String.Equals(type.Namespace, nameSpace, StringComparison.Ordinal));
+			var assembly = searchedType.Assembly;
+			return assembly.GetTypes().Where(type => String.Equals(type.Namespace, @namespace, StringComparison.Ordinal));
 		}
 
 		public static Type GetTypeByName(string typeFullname)
 		{
-			var asseblies = AppDomain.CurrentDomain.GetAssemblies();
-			return asseblies.SelectMany(assembly => assembly.GetTypes())
+			var assemblies = AppDomain.CurrentDomain.GetAssemblies();
+			return assemblies.SelectMany(assembly => assembly.GetTypes())
 				.First(type => type.FullName == typeFullname);
 		}
 

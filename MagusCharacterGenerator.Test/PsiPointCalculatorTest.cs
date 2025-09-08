@@ -29,7 +29,7 @@ namespace MagusCharacterGenerator.Test
 			{
 				var character = data.Item1;
 				var expectedPsiPoints = data.Item2;
-				Assert.AreEqual(expectedPsiPoints, character.PsiPoints - (ushort)MathHelper.GetAboveAvarageValue(character.Intelligence));
+				Assert.AreEqual(expectedPsiPoints, character.PsiPoints - (ushort)MathHelper.GetAboveAverageValue(character.Intelligence));
 			}
 
         }

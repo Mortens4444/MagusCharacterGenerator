@@ -9,7 +9,7 @@ namespace Mtf.Helper
             return (short)Math.Floor(fightValues * (percent / 100.0));
         }
 
-        public static short GetAboveAvarageValue(short value)
+        public static short GetAboveAverageValue(short value)
         {
             return (short)Math.Max(value - 10, 0);
         }

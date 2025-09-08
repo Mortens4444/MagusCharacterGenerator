@@ -14,7 +14,7 @@ namespace MagusCharacterGenerator.GameSystem.Psi
             var psi = qualifications.FirstOrDefault(qualification => qualification is IPsi) as IPsi;
             if (psi != null)
             {
-                psiPoints += (ushort)MathHelper.GetAboveAvarageValue(intelligence);
+                psiPoints += (ushort)MathHelper.GetAboveAverageValue(intelligence);
                 if (psi.PsiKind == PsiKind.Kyr)
                 {
                     psiPointsModifier = PsiUtils.KyrModifier;
