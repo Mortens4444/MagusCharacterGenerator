@@ -1,8 +1,8 @@
-﻿using MagusCharacterGenerator.Castes.Fighter;
-using MagusCharacterGenerator.Castes.Slan;
-using MagusCharacterGenerator.Castes.Sorcerer;
-using MagusCharacterGenerator.GameSystem;
-using MagusCharacterGenerator.Races;
+﻿using M.A.G.U.S.Classes.Fighter;
+using M.A.G.U.S.Classes.Slan;
+using M.A.G.U.S.Classes.Sorcerer;
+using M.A.G.U.S.GameSystem;
+using M.A.G.U.S.Races;
 using System;
 
 namespace MagusCharacterGenerator
@@ -24,7 +24,7 @@ namespace MagusCharacterGenerator
             var headHunter = new Character("Vesryn", new Elf(), new Headhunter(level));
             Console.WriteLine(headHunter);
 
-            var slan = new Character("Toll", new Elf(), new BareHandMaster(level));
+            var slan = new Character("Toll", new Elf(), new MartialArtist(level));
             Console.WriteLine(slan);
 
             var wizard = new Character("Maron", new Elf(), new Wizard(level));

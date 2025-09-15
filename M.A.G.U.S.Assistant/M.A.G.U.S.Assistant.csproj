@@ -19,7 +19,8 @@
 		<SingleProject>true</SingleProject>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<Nullable>enable</Nullable>
-
+    <AndroidSupportedAbis>arm64-v8a;armeabi-v7a;x86;x86_64</AndroidSupportedAbis>
+    
 		<!-- Display name -->
 		<ApplicationTitle>M.A.G.U.S.Assistant</ApplicationTitle>
 
@@ -46,7 +47,7 @@
 		<MauiIcon Include="Resources\AppIcon\appicon.svg" ForegroundFile="Resources\AppIcon\appiconfg.svg" Color="#512BD4" />
 
 		<!-- Splash Screen -->
-		<MauiSplashScreen Include="Resources\Splash\splash.svg" Color="#512BD4" BaseSize="128,128" />
+		<MauiSplashScreen Include="Resources\Splash\splash.png" Color="#512BD4" BaseSize="128,128" />
 
 		<!-- Images -->
 		<MauiImage Include="Resources\Images\*" />
@@ -60,8 +61,26 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Microsoft.Maui.Controls" Version="$(MauiVersion)" />
-		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="9.0.0" />
+		<PackageReference Include="Microsoft.Maui.Controls" Version="9.0.110" />
+		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="9.0.9" />
+		<PackageReference Include="Mtf.Maui.Controls" Version="1.0.27" />
+		<PackageReference Include="Mtf.MAUI.LanguageService" Version="1.0.14" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <ProjectReference Include="..\M.A.G.U.S\M.A.G.U.S..csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Compile Update="Views\CharacterGeneratorPage.xaml.cs">
+	    <DependentUpon>CharacterGeneratorPage.xaml</DependentUpon>
+	  </Compile>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <MauiXaml Update="Views\CharacterGeneratorPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	</ItemGroup>
 
 </Project>

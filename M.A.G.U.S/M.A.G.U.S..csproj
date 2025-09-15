@@ -1,0 +1,22 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <RootNamespace>M.A.G.U.S</RootNamespace>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="GameSystem\MagicalObjects\" />
+    <Folder Include="GameSystem\PoisonsAndIllnesses\" />
+    <Folder Include="GameSystem\Weapons\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Mtf.Extensions" Version="1.0.23" />
+    <PackageReference Include="Mtf.Windows.Forms.LanguageService" Version="3.1.17" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+  </ItemGroup>
+
+</Project>

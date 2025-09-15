@@ -1,29 +1,25 @@
-﻿using System.Drawing;
-using System.Windows.Forms;
-using FontAwesome.Sharp;
-using Mtf.Helper;
-using Mtf.Languages;
+﻿using FontAwesome.Sharp;
+using Mtf.LanguageService.Windows.Forms;
 
-namespace Storyteller
+namespace Storyteller;
+
+public partial class AboutForm : Form
 {
-	public partial class AboutForm : Form
+	public AboutForm()
 	{
-		public AboutForm()
-		{
-			InitializeComponent();
+		InitializeComponent();
 
-			Icon = IconCreator.Get(IconChar.Info, Color.Gray);
-			Lng.Translate(this);
-		}
+		Icon = IconCreator.Get(IconChar.Info, Color.Gray);
+		Translator.Translate(this);
+	}
 
-		private void LlLink_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-		{
-			ProcessUtils.Start(llLink.Text);
-		}
+	private void LlLink_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+	{
+		ProcessUtils.Start(llLink.Text);
+	}
 
-		private void LlDonate_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-		{
-			ProcessUtils.Start("https://www.paypal.me/Mortens4444");
-		}
+	private void LlDonate_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+	{
+		ProcessUtils.Start("https://www.paypal.me/Mortens4444");
 	}
 }

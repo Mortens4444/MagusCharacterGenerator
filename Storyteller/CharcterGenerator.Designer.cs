@@ -20,1257 +20,1223 @@
 			base.Dispose(disposing);
 		}
 
-		#region Windows Form Designer generated code
+        #region Windows Form Designer generated code
 
-		/// <summary>
-		/// Required method for Designer support - do not modify
-		/// the contents of this method with the code editor.
-		/// </summary>
-		private void InitializeComponent()
-		{
-			this.panelMain = new System.Windows.Forms.Panel();
-			this.gbCharacter = new System.Windows.Forms.GroupBox();
-			this.btnRemove = new System.Windows.Forms.Button();
-			this.btnNext = new System.Windows.Forms.Button();
-			this.btnPrevious = new System.Windows.Forms.Button();
-			this.btnAdd = new System.Windows.Forms.Button();
-			this.gbGeneral = new System.Windows.Forms.GroupBox();
-			this.lblName = new System.Windows.Forms.Label();
-			this.nudSecondaryCasteLevel = new System.Windows.Forms.NumericUpDown();
-			this.lblRace = new System.Windows.Forms.Label();
-			this.lblSecondaryCasteLevel = new System.Windows.Forms.Label();
-			this.cbCaste = new System.Windows.Forms.ComboBox();
-			this.cbSecondaryCaste = new System.Windows.Forms.ComboBox();
-			this.cbRace = new System.Windows.Forms.ComboBox();
-			this.chkBoxSecondaryCaste = new System.Windows.Forms.CheckBox();
-			this.lblCaste = new System.Windows.Forms.Label();
-			this.tbName = new System.Windows.Forms.TextBox();
-			this.lblLevel = new System.Windows.Forms.Label();
-			this.nudLevel = new System.Windows.Forms.NumericUpDown();
-			this.cbImageSizeMode = new System.Windows.Forms.ComboBox();
-			this.btnBrowse = new System.Windows.Forms.Button();
-			this.pbCharacter = new System.Windows.Forms.PictureBox();
-			this.gbModifiers = new System.Windows.Forms.GroupBox();
-			this.lbQualificationPoints = new System.Windows.Forms.Label();
-			this.nudQP = new System.Windows.Forms.NumericUpDown();
-			this.nudPercent = new System.Windows.Forms.NumericUpDown();
-			this.lblPercent = new System.Windows.Forms.Label();
-			this.gbFightValues = new System.Windows.Forms.GroupBox();
-			this.nudAimV = new System.Windows.Forms.NumericUpDown();
-			this.lblAimV = new System.Windows.Forms.Label();
-			this.lblIV = new System.Windows.Forms.Label();
-			this.nudIV = new System.Windows.Forms.NumericUpDown();
-			this.nudDV = new System.Windows.Forms.NumericUpDown();
-			this.lblDV = new System.Windows.Forms.Label();
-			this.nudAV = new System.Windows.Forms.NumericUpDown();
-			this.lblAV = new System.Windows.Forms.Label();
-			this.btnDone = new System.Windows.Forms.Button();
-			this.gbPsiManaAndMagicResistance = new System.Windows.Forms.GroupBox();
-			this.nudMentalMR = new System.Windows.Forms.NumericUpDown();
-			this.lblMentalMR = new System.Windows.Forms.Label();
-			this.lblPsiPoints = new System.Windows.Forms.Label();
-			this.nudPsiPoints = new System.Windows.Forms.NumericUpDown();
-			this.nudAstralMR = new System.Windows.Forms.NumericUpDown();
-			this.lblAstralMR = new System.Windows.Forms.Label();
-			this.nudManaPoints = new System.Windows.Forms.NumericUpDown();
-			this.lblManaPoints = new System.Windows.Forms.Label();
-			this.lvQualifications = new System.Windows.Forms.ListView();
-			this.chQualifications = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-			this.chLevel = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-			this.gbLifePoints = new System.Windows.Forms.GroupBox();
-			this.lbLifePoints = new System.Windows.Forms.Label();
-			this.nudLifePoints = new System.Windows.Forms.NumericUpDown();
-			this.nudPainTolerancePoints = new System.Windows.Forms.NumericUpDown();
-			this.lblPainTolerancePoints = new System.Windows.Forms.Label();
-			this.gbAbilities = new System.Windows.Forms.GroupBox();
-			this.lblEruditionDiceThrow = new System.Windows.Forms.Label();
-			this.lblBraveryDiceThrow = new System.Windows.Forms.Label();
-			this.lblGoldDiceThrow = new System.Windows.Forms.Label();
-			this.lblErudition = new System.Windows.Forms.Label();
-			this.nudErudition = new System.Windows.Forms.NumericUpDown();
-			this.lblBravery = new System.Windows.Forms.Label();
-			this.nudBravery = new System.Windows.Forms.NumericUpDown();
-			this.lblGold = new System.Windows.Forms.Label();
-			this.lblAstralDiceThrow = new System.Windows.Forms.Label();
-			this.nudGold = new System.Windows.Forms.NumericUpDown();
-			this.lblWillPowerDiceThrow = new System.Windows.Forms.Label();
-			this.lblIntelligenceDiceThrow = new System.Windows.Forms.Label();
-			this.lblBeautyDiceThrow = new System.Windows.Forms.Label();
-			this.lblHealthDiceThrow = new System.Windows.Forms.Label();
-			this.lblStaminaDiceThrow = new System.Windows.Forms.Label();
-			this.lblDexterityDiceThrow = new System.Windows.Forms.Label();
-			this.lblSpeedDiceThrow = new System.Windows.Forms.Label();
-			this.lblStrengthDiceThrow = new System.Windows.Forms.Label();
-			this.lblStrength = new System.Windows.Forms.Label();
-			this.lblAstral = new System.Windows.Forms.Label();
-			this.nudStrength = new System.Windows.Forms.NumericUpDown();
-			this.nudAstral = new System.Windows.Forms.NumericUpDown();
-			this.nudSpeed = new System.Windows.Forms.NumericUpDown();
-			this.lblWillPower = new System.Windows.Forms.Label();
-			this.lblSpeed = new System.Windows.Forms.Label();
-			this.nudWillPower = new System.Windows.Forms.NumericUpDown();
-			this.nudDexterity = new System.Windows.Forms.NumericUpDown();
-			this.lblIntelligence = new System.Windows.Forms.Label();
-			this.lblDexterity = new System.Windows.Forms.Label();
-			this.nudIntelligence = new System.Windows.Forms.NumericUpDown();
-			this.nudHealth = new System.Windows.Forms.NumericUpDown();
-			this.lblBeauty = new System.Windows.Forms.Label();
-			this.lblHealth = new System.Windows.Forms.Label();
-			this.nudBeauty = new System.Windows.Forms.NumericUpDown();
-			this.nudStamina = new System.Windows.Forms.NumericUpDown();
-			this.lblStamina = new System.Windows.Forms.Label();
-			this.btnGenerate = new System.Windows.Forms.Button();
-			this.ofdCharacterImage = new System.Windows.Forms.OpenFileDialog();
-			this.panelMain.SuspendLayout();
-			this.gbCharacter.SuspendLayout();
-			this.gbGeneral.SuspendLayout();
-			((System.ComponentModel.ISupportInitialize)(this.nudSecondaryCasteLevel)).BeginInit();
-			((System.ComponentModel.ISupportInitialize)(this.nudLevel)).BeginInit();
-			((System.ComponentModel.ISupportInitialize)(this.pbCharacter)).BeginInit();
-			this.gbModifiers.SuspendLayout();
-			((System.ComponentModel.ISupportInitialize)(this.nudQP)).BeginInit();
-			((System.ComponentModel.ISupportInitialize)(this.nudPercent)).BeginInit();
-			this.gbFightValues.SuspendLayout();
-			((System.ComponentModel.ISupportInitialize)(this.nudAimV)).BeginInit();
-			((System.ComponentModel.ISupportInitialize)(this.nudIV)).BeginInit();
-			((System.ComponentModel.ISupportInitialize)(this.nudDV)).BeginInit();
-			((System.ComponentModel.ISupportInitialize)(this.nudAV)).BeginInit();
-			this.gbPsiManaAndMagicResistance.SuspendLayout();
-			((System.ComponentModel.ISupportInitialize)(this.nudMentalMR)).BeginInit();
-			((System.ComponentModel.ISupportInitialize)(this.nudPsiPoints)).BeginInit();
-			((System.ComponentModel.ISupportInitialize)(this.nudAstralMR)).BeginInit();
-			((System.ComponentModel.ISupportInitialize)(this.nudManaPoints)).BeginInit();
-			this.gbLifePoints.SuspendLayout();
-			((System.ComponentModel.ISupportInitialize)(this.nudLifePoints)).BeginInit();
-			((System.ComponentModel.ISupportInitialize)(this.nudPainTolerancePoints)).BeginInit();
-			this.gbAbilities.SuspendLayout();
-			((System.ComponentModel.ISupportInitialize)(this.nudErudition)).BeginInit();
-			((System.ComponentModel.ISupportInitialize)(this.nudBravery)).BeginInit();
-			((System.ComponentModel.ISupportInitialize)(this.nudGold)).BeginInit();
-			((System.ComponentModel.ISupportInitialize)(this.nudStrength)).BeginInit();
-			((System.ComponentModel.ISupportInitialize)(this.nudAstral)).BeginInit();
-			((System.ComponentModel.ISupportInitialize)(this.nudSpeed)).BeginInit();
-			((System.ComponentModel.ISupportInitialize)(this.nudWillPower)).BeginInit();
-			((System.ComponentModel.ISupportInitialize)(this.nudDexterity)).BeginInit();
-			((System.ComponentModel.ISupportInitialize)(this.nudIntelligence)).BeginInit();
-			((System.ComponentModel.ISupportInitialize)(this.nudHealth)).BeginInit();
-			((System.ComponentModel.ISupportInitialize)(this.nudBeauty)).BeginInit();
-			((System.ComponentModel.ISupportInitialize)(this.nudStamina)).BeginInit();
-			this.SuspendLayout();
-			// 
-			// panelMain
-			// 
-			this.panelMain.Controls.Add(this.gbCharacter);
-			this.panelMain.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.panelMain.Location = new System.Drawing.Point(0, 0);
-			this.panelMain.Name = "panelMain";
-			this.panelMain.Size = new System.Drawing.Size(1018, 573);
-			this.panelMain.TabIndex = 0;
-			// 
-			// gbCharacter
-			// 
-			this.gbCharacter.Controls.Add(this.btnRemove);
-			this.gbCharacter.Controls.Add(this.btnNext);
-			this.gbCharacter.Controls.Add(this.btnPrevious);
-			this.gbCharacter.Controls.Add(this.btnAdd);
-			this.gbCharacter.Controls.Add(this.gbGeneral);
-			this.gbCharacter.Controls.Add(this.cbImageSizeMode);
-			this.gbCharacter.Controls.Add(this.btnBrowse);
-			this.gbCharacter.Controls.Add(this.pbCharacter);
-			this.gbCharacter.Controls.Add(this.gbModifiers);
-			this.gbCharacter.Controls.Add(this.gbFightValues);
-			this.gbCharacter.Controls.Add(this.btnDone);
-			this.gbCharacter.Controls.Add(this.gbPsiManaAndMagicResistance);
-			this.gbCharacter.Controls.Add(this.lvQualifications);
-			this.gbCharacter.Controls.Add(this.gbLifePoints);
-			this.gbCharacter.Controls.Add(this.gbAbilities);
-			this.gbCharacter.Controls.Add(this.btnGenerate);
-			this.gbCharacter.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.gbCharacter.Location = new System.Drawing.Point(0, 0);
-			this.gbCharacter.Name = "gbCharacter";
-			this.gbCharacter.Size = new System.Drawing.Size(1018, 573);
-			this.gbCharacter.TabIndex = 4;
-			this.gbCharacter.TabStop = false;
-			// 
-			// btnRemove
-			// 
-			this.btnRemove.Location = new System.Drawing.Point(887, 17);
-			this.btnRemove.Name = "btnRemove";
-			this.btnRemove.Size = new System.Drawing.Size(23, 23);
-			this.btnRemove.TabIndex = 53;
-			this.btnRemove.Text = "-";
-			this.btnRemove.UseVisualStyleBackColor = true;
-			this.btnRemove.Click += new System.EventHandler(this.BtnRemove_Click);
-			// 
-			// btnNext
-			// 
-			this.btnNext.Enabled = false;
-			this.btnNext.Location = new System.Drawing.Point(966, 16);
-			this.btnNext.Name = "btnNext";
-			this.btnNext.Size = new System.Drawing.Size(44, 23);
-			this.btnNext.TabIndex = 52;
-			this.btnNext.Text = "-->";
-			this.btnNext.UseVisualStyleBackColor = true;
-			this.btnNext.Click += new System.EventHandler(this.BtnNext_Click);
-			// 
-			// btnPrevious
-			// 
-			this.btnPrevious.Enabled = false;
-			this.btnPrevious.Location = new System.Drawing.Point(916, 17);
-			this.btnPrevious.Name = "btnPrevious";
-			this.btnPrevious.Size = new System.Drawing.Size(44, 23);
-			this.btnPrevious.TabIndex = 51;
-			this.btnPrevious.Text = "<--";
-			this.btnPrevious.UseVisualStyleBackColor = true;
-			this.btnPrevious.Click += new System.EventHandler(this.BtnPrevious_Click);
-			// 
-			// btnAdd
-			// 
-			this.btnAdd.Location = new System.Drawing.Point(860, 17);
-			this.btnAdd.Name = "btnAdd";
-			this.btnAdd.Size = new System.Drawing.Size(23, 23);
-			this.btnAdd.TabIndex = 50;
-			this.btnAdd.Text = "+";
-			this.btnAdd.UseVisualStyleBackColor = true;
-			this.btnAdd.Click += new System.EventHandler(this.BtnAdd_Click);
-			// 
-			// gbGeneral
-			// 
-			this.gbGeneral.Controls.Add(this.lblName);
-			this.gbGeneral.Controls.Add(this.nudSecondaryCasteLevel);
-			this.gbGeneral.Controls.Add(this.lblRace);
-			this.gbGeneral.Controls.Add(this.lblSecondaryCasteLevel);
-			this.gbGeneral.Controls.Add(this.cbCaste);
-			this.gbGeneral.Controls.Add(this.cbSecondaryCaste);
-			this.gbGeneral.Controls.Add(this.cbRace);
-			this.gbGeneral.Controls.Add(this.chkBoxSecondaryCaste);
-			this.gbGeneral.Controls.Add(this.lblCaste);
-			this.gbGeneral.Controls.Add(this.tbName);
-			this.gbGeneral.Controls.Add(this.lblLevel);
-			this.gbGeneral.Controls.Add(this.nudLevel);
-			this.gbGeneral.Location = new System.Drawing.Point(3, 12);
-			this.gbGeneral.Name = "gbGeneral";
-			this.gbGeneral.Size = new System.Drawing.Size(206, 198);
-			this.gbGeneral.TabIndex = 49;
-			this.gbGeneral.TabStop = false;
-			this.gbGeneral.Text = "General";
-			// 
-			// lblName
-			// 
-			this.lblName.AutoSize = true;
-			this.lblName.Location = new System.Drawing.Point(1, 16);
-			this.lblName.Name = "lblName";
-			this.lblName.Size = new System.Drawing.Size(35, 13);
-			this.lblName.TabIndex = 35;
-			this.lblName.Text = "Name";
-			// 
-			// nudSecondaryCasteLevel
-			// 
-			this.nudSecondaryCasteLevel.Enabled = false;
-			this.nudSecondaryCasteLevel.Location = new System.Drawing.Point(153, 169);
-			this.nudSecondaryCasteLevel.Maximum = new decimal(new int[] {
-            255,
-            0,
-            0,
-            0});
-			this.nudSecondaryCasteLevel.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-			this.nudSecondaryCasteLevel.Name = "nudSecondaryCasteLevel";
-			this.nudSecondaryCasteLevel.Size = new System.Drawing.Size(44, 20);
-			this.nudSecondaryCasteLevel.TabIndex = 48;
-			this.nudSecondaryCasteLevel.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-			// 
-			// lblRace
-			// 
-			this.lblRace.AutoSize = true;
-			this.lblRace.Location = new System.Drawing.Point(3, 60);
-			this.lblRace.Name = "lblRace";
-			this.lblRace.Size = new System.Drawing.Size(33, 13);
-			this.lblRace.TabIndex = 2;
-			this.lblRace.Text = "Race";
-			// 
-			// lblSecondaryCasteLevel
-			// 
-			this.lblSecondaryCasteLevel.AutoSize = true;
-			this.lblSecondaryCasteLevel.Location = new System.Drawing.Point(150, 152);
-			this.lblSecondaryCasteLevel.Name = "lblSecondaryCasteLevel";
-			this.lblSecondaryCasteLevel.Size = new System.Drawing.Size(33, 13);
-			this.lblSecondaryCasteLevel.TabIndex = 47;
-			this.lblSecondaryCasteLevel.Text = "Level";
-			// 
-			// cbCaste
-			// 
-			this.cbCaste.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-			this.cbCaste.FormattingEnabled = true;
-			this.cbCaste.Location = new System.Drawing.Point(6, 121);
-			this.cbCaste.Name = "cbCaste";
-			this.cbCaste.Size = new System.Drawing.Size(141, 21);
-			this.cbCaste.TabIndex = 1;
-			this.cbCaste.SelectedIndexChanged += new System.EventHandler(this.CbCaste_SelectedIndexChanged);
-			// 
-			// cbSecondaryCaste
-			// 
-			this.cbSecondaryCaste.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-			this.cbSecondaryCaste.Enabled = false;
-			this.cbSecondaryCaste.FormattingEnabled = true;
-			this.cbSecondaryCaste.Location = new System.Drawing.Point(6, 168);
-			this.cbSecondaryCaste.Name = "cbSecondaryCaste";
-			this.cbSecondaryCaste.Size = new System.Drawing.Size(141, 21);
-			this.cbSecondaryCaste.TabIndex = 46;
-			this.cbSecondaryCaste.SelectedIndexChanged += new System.EventHandler(this.CbSecondaryCaste_SelectedIndexChanged);
-			// 
-			// cbRace
-			// 
-			this.cbRace.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-			this.cbRace.FormattingEnabled = true;
-			this.cbRace.Location = new System.Drawing.Point(4, 76);
-			this.cbRace.Name = "cbRace";
-			this.cbRace.Size = new System.Drawing.Size(141, 21);
-			this.cbRace.TabIndex = 3;
-			this.cbRace.SelectedIndexChanged += new System.EventHandler(this.CbRace_SelectedIndexChanged);
-			// 
-			// chkBoxSecondaryCaste
-			// 
-			this.chkBoxSecondaryCaste.AutoSize = true;
-			this.chkBoxSecondaryCaste.Location = new System.Drawing.Point(6, 148);
-			this.chkBoxSecondaryCaste.Name = "chkBoxSecondaryCaste";
-			this.chkBoxSecondaryCaste.Size = new System.Drawing.Size(106, 17);
-			this.chkBoxSecondaryCaste.TabIndex = 44;
-			this.chkBoxSecondaryCaste.Text = "Secondary caste";
-			this.chkBoxSecondaryCaste.UseVisualStyleBackColor = true;
-			this.chkBoxSecondaryCaste.CheckedChanged += new System.EventHandler(this.ChkBoxSecondaryCaste_CheckedChanged);
-			// 
-			// lblCaste
-			// 
-			this.lblCaste.AutoSize = true;
-			this.lblCaste.Location = new System.Drawing.Point(3, 103);
-			this.lblCaste.Name = "lblCaste";
-			this.lblCaste.Size = new System.Drawing.Size(34, 13);
-			this.lblCaste.TabIndex = 0;
-			this.lblCaste.Text = "Caste";
-			// 
-			// tbName
-			// 
-			this.tbName.Location = new System.Drawing.Point(4, 32);
-			this.tbName.Name = "tbName";
-			this.tbName.Size = new System.Drawing.Size(141, 20);
-			this.tbName.TabIndex = 36;
-			// 
-			// lblLevel
-			// 
-			this.lblLevel.AutoSize = true;
-			this.lblLevel.Location = new System.Drawing.Point(150, 105);
-			this.lblLevel.Name = "lblLevel";
-			this.lblLevel.Size = new System.Drawing.Size(33, 13);
-			this.lblLevel.TabIndex = 37;
-			this.lblLevel.Text = "Level";
-			// 
-			// nudLevel
-			// 
-			this.nudLevel.Location = new System.Drawing.Point(153, 122);
-			this.nudLevel.Maximum = new decimal(new int[] {
-            255,
-            0,
-            0,
-            0});
-			this.nudLevel.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-			this.nudLevel.Name = "nudLevel";
-			this.nudLevel.Size = new System.Drawing.Size(44, 20);
-			this.nudLevel.TabIndex = 38;
-			this.nudLevel.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-			// 
-			// cbImageSizeMode
-			// 
-			this.cbImageSizeMode.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-			this.cbImageSizeMode.FormattingEnabled = true;
-			this.cbImageSizeMode.Items.AddRange(new object[] {
-            "Normal",
-            "Stretch",
-            "Auto",
-            "Center",
-            "Zoom"});
-			this.cbImageSizeMode.Location = new System.Drawing.Point(642, 18);
-			this.cbImageSizeMode.Name = "cbImageSizeMode";
-			this.cbImageSizeMode.Size = new System.Drawing.Size(131, 21);
-			this.cbImageSizeMode.TabIndex = 43;
-			this.cbImageSizeMode.SelectedIndexChanged += new System.EventHandler(this.CbImageSizeMode_SelectedIndexChanged);
-			// 
-			// btnBrowse
-			// 
-			this.btnBrowse.Location = new System.Drawing.Point(779, 17);
-			this.btnBrowse.Name = "btnBrowse";
-			this.btnBrowse.Size = new System.Drawing.Size(75, 23);
-			this.btnBrowse.TabIndex = 42;
-			this.btnBrowse.Text = "Browse";
-			this.btnBrowse.UseVisualStyleBackColor = true;
-			this.btnBrowse.Click += new System.EventHandler(this.BtnBrowse_Click);
-			// 
-			// pbCharacter
-			// 
-			this.pbCharacter.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-			this.pbCharacter.BackColor = System.Drawing.SystemColors.ButtonShadow;
-			this.pbCharacter.Location = new System.Drawing.Point(642, 45);
-			this.pbCharacter.Name = "pbCharacter";
-			this.pbCharacter.Size = new System.Drawing.Size(370, 489);
-			this.pbCharacter.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-			this.pbCharacter.TabIndex = 41;
-			this.pbCharacter.TabStop = false;
-			// 
-			// gbModifiers
-			// 
-			this.gbModifiers.Controls.Add(this.lbQualificationPoints);
-			this.gbModifiers.Controls.Add(this.nudQP);
-			this.gbModifiers.Controls.Add(this.nudPercent);
-			this.gbModifiers.Controls.Add(this.lblPercent);
-			this.gbModifiers.Location = new System.Drawing.Point(3, 351);
-			this.gbModifiers.Name = "gbModifiers";
-			this.gbModifiers.Size = new System.Drawing.Size(112, 66);
-			this.gbModifiers.TabIndex = 34;
-			this.gbModifiers.TabStop = false;
-			this.gbModifiers.Text = "Modifiers";
-			// 
-			// lbQualificationPoints
-			// 
-			this.lbQualificationPoints.AutoSize = true;
-			this.lbQualificationPoints.Location = new System.Drawing.Point(6, 20);
-			this.lbQualificationPoints.Name = "lbQualificationPoints";
-			this.lbQualificationPoints.Size = new System.Drawing.Size(22, 13);
-			this.lbQualificationPoints.TabIndex = 16;
-			this.lbQualificationPoints.Text = "QP";
-			// 
-			// nudQP
-			// 
-			this.nudQP.Location = new System.Drawing.Point(9, 36);
-			this.nudQP.Maximum = new decimal(new int[] {
-            65535,
-            0,
-            0,
-            0});
-			this.nudQP.Name = "nudQP";
-			this.nudQP.ReadOnly = true;
-			this.nudQP.Size = new System.Drawing.Size(44, 20);
-			this.nudQP.TabIndex = 15;
-			// 
-			// nudPercent
-			// 
-			this.nudPercent.Location = new System.Drawing.Point(59, 36);
-			this.nudPercent.Maximum = new decimal(new int[] {
-            65535,
-            0,
-            0,
-            0});
-			this.nudPercent.Name = "nudPercent";
-			this.nudPercent.ReadOnly = true;
-			this.nudPercent.Size = new System.Drawing.Size(44, 20);
-			this.nudPercent.TabIndex = 21;
-			// 
-			// lblPercent
-			// 
-			this.lblPercent.AutoSize = true;
-			this.lblPercent.Location = new System.Drawing.Point(56, 20);
-			this.lblPercent.Name = "lblPercent";
-			this.lblPercent.Size = new System.Drawing.Size(15, 13);
-			this.lblPercent.TabIndex = 22;
-			this.lblPercent.Text = "%";
-			// 
-			// gbFightValues
-			// 
-			this.gbFightValues.Controls.Add(this.nudAimV);
-			this.gbFightValues.Controls.Add(this.lblAimV);
-			this.gbFightValues.Controls.Add(this.lblIV);
-			this.gbFightValues.Controls.Add(this.nudIV);
-			this.gbFightValues.Controls.Add(this.nudDV);
-			this.gbFightValues.Controls.Add(this.lblDV);
-			this.gbFightValues.Controls.Add(this.nudAV);
-			this.gbFightValues.Controls.Add(this.lblAV);
-			this.gbFightValues.Location = new System.Drawing.Point(121, 216);
-			this.gbFightValues.Name = "gbFightValues";
-			this.gbFightValues.Size = new System.Drawing.Size(98, 201);
-			this.gbFightValues.TabIndex = 33;
-			this.gbFightValues.TabStop = false;
-			this.gbFightValues.Text = "Fight values";
-			// 
-			// nudAimV
-			// 
-			this.nudAimV.Location = new System.Drawing.Point(9, 160);
-			this.nudAimV.Maximum = new decimal(new int[] {
-            65535,
-            0,
-            0,
-            0});
-			this.nudAimV.Name = "nudAimV";
-			this.nudAimV.ReadOnly = true;
-			this.nudAimV.Size = new System.Drawing.Size(44, 20);
-			this.nudAimV.TabIndex = 23;
-			// 
-			// lblAimV
-			// 
-			this.lblAimV.AutoSize = true;
-			this.lblAimV.Location = new System.Drawing.Point(6, 143);
-			this.lblAimV.Name = "lblAimV";
-			this.lblAimV.Size = new System.Drawing.Size(31, 13);
-			this.lblAimV.TabIndex = 24;
-			this.lblAimV.Text = "AimV";
-			// 
-			// lblIV
-			// 
-			this.lblIV.AutoSize = true;
-			this.lblIV.Location = new System.Drawing.Point(10, 16);
-			this.lblIV.Name = "lblIV";
-			this.lblIV.Size = new System.Drawing.Size(17, 13);
-			this.lblIV.TabIndex = 16;
-			this.lblIV.Text = "IV";
-			// 
-			// nudIV
-			// 
-			this.nudIV.Location = new System.Drawing.Point(9, 32);
-			this.nudIV.Maximum = new decimal(new int[] {
-            65535,
-            0,
-            0,
-            0});
-			this.nudIV.Name = "nudIV";
-			this.nudIV.ReadOnly = true;
-			this.nudIV.Size = new System.Drawing.Size(44, 20);
-			this.nudIV.TabIndex = 15;
-			// 
-			// nudDV
-			// 
-			this.nudDV.Location = new System.Drawing.Point(9, 117);
-			this.nudDV.Maximum = new decimal(new int[] {
-            65535,
-            0,
-            0,
-            0});
-			this.nudDV.Name = "nudDV";
-			this.nudDV.ReadOnly = true;
-			this.nudDV.Size = new System.Drawing.Size(44, 20);
-			this.nudDV.TabIndex = 19;
-			// 
-			// lblDV
-			// 
-			this.lblDV.AutoSize = true;
-			this.lblDV.Location = new System.Drawing.Point(10, 101);
-			this.lblDV.Name = "lblDV";
-			this.lblDV.Size = new System.Drawing.Size(22, 13);
-			this.lblDV.TabIndex = 20;
-			this.lblDV.Text = "DV";
-			// 
-			// nudAV
-			// 
-			this.nudAV.Location = new System.Drawing.Point(9, 74);
-			this.nudAV.Maximum = new decimal(new int[] {
-            65535,
-            0,
-            0,
-            0});
-			this.nudAV.Name = "nudAV";
-			this.nudAV.ReadOnly = true;
-			this.nudAV.Size = new System.Drawing.Size(44, 20);
-			this.nudAV.TabIndex = 21;
-			// 
-			// lblAV
-			// 
-			this.lblAV.AutoSize = true;
-			this.lblAV.Location = new System.Drawing.Point(10, 57);
-			this.lblAV.Name = "lblAV";
-			this.lblAV.Size = new System.Drawing.Size(21, 13);
-			this.lblAV.TabIndex = 22;
-			this.lblAV.Text = "AV";
-			// 
-			// btnDone
-			// 
-			this.btnDone.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-			this.btnDone.DialogResult = System.Windows.Forms.DialogResult.OK;
-			this.btnDone.Location = new System.Drawing.Point(930, 544);
-			this.btnDone.Name = "btnDone";
-			this.btnDone.Size = new System.Drawing.Size(80, 23);
-			this.btnDone.TabIndex = 33;
-			this.btnDone.Text = "Done";
-			this.btnDone.UseVisualStyleBackColor = true;
-			this.btnDone.Click += new System.EventHandler(this.BtnDone_Click);
-			// 
-			// gbPsiManaAndMagicResistance
-			// 
-			this.gbPsiManaAndMagicResistance.Controls.Add(this.nudMentalMR);
-			this.gbPsiManaAndMagicResistance.Controls.Add(this.lblMentalMR);
-			this.gbPsiManaAndMagicResistance.Controls.Add(this.lblPsiPoints);
-			this.gbPsiManaAndMagicResistance.Controls.Add(this.nudPsiPoints);
-			this.gbPsiManaAndMagicResistance.Controls.Add(this.nudAstralMR);
-			this.gbPsiManaAndMagicResistance.Controls.Add(this.lblAstralMR);
-			this.gbPsiManaAndMagicResistance.Controls.Add(this.nudManaPoints);
-			this.gbPsiManaAndMagicResistance.Controls.Add(this.lblManaPoints);
-			this.gbPsiManaAndMagicResistance.Location = new System.Drawing.Point(3, 419);
-			this.gbPsiManaAndMagicResistance.Name = "gbPsiManaAndMagicResistance";
-			this.gbPsiManaAndMagicResistance.Size = new System.Drawing.Size(156, 125);
-			this.gbPsiManaAndMagicResistance.TabIndex = 32;
-			this.gbPsiManaAndMagicResistance.TabStop = false;
-			this.gbPsiManaAndMagicResistance.Text = "Psi, Mana, Magic resistance";
-			// 
-			// nudMentalMR
-			// 
-			this.nudMentalMR.Location = new System.Drawing.Point(84, 85);
-			this.nudMentalMR.Maximum = new decimal(new int[] {
-            65535,
-            0,
-            0,
-            0});
-			this.nudMentalMR.Name = "nudMentalMR";
-			this.nudMentalMR.ReadOnly = true;
-			this.nudMentalMR.Size = new System.Drawing.Size(44, 20);
-			this.nudMentalMR.TabIndex = 23;
-			// 
-			// lblMentalMR
-			// 
-			this.lblMentalMR.AutoSize = true;
-			this.lblMentalMR.Location = new System.Drawing.Point(81, 69);
-			this.lblMentalMR.Name = "lblMentalMR";
-			this.lblMentalMR.Size = new System.Drawing.Size(59, 13);
-			this.lblMentalMR.TabIndex = 24;
-			this.lblMentalMR.Text = "Mental MR";
-			// 
-			// lblPsiPoints
-			// 
-			this.lblPsiPoints.AutoSize = true;
-			this.lblPsiPoints.Location = new System.Drawing.Point(6, 30);
-			this.lblPsiPoints.Name = "lblPsiPoints";
-			this.lblPsiPoints.Size = new System.Drawing.Size(52, 13);
-			this.lblPsiPoints.TabIndex = 16;
-			this.lblPsiPoints.Text = "Psi points";
-			// 
-			// nudPsiPoints
-			// 
-			this.nudPsiPoints.Location = new System.Drawing.Point(9, 46);
-			this.nudPsiPoints.Maximum = new decimal(new int[] {
-            65535,
-            0,
-            0,
-            0});
-			this.nudPsiPoints.Name = "nudPsiPoints";
-			this.nudPsiPoints.ReadOnly = true;
-			this.nudPsiPoints.Size = new System.Drawing.Size(44, 20);
-			this.nudPsiPoints.TabIndex = 15;
-			// 
-			// nudAstralMR
-			// 
-			this.nudAstralMR.Location = new System.Drawing.Point(84, 46);
-			this.nudAstralMR.Maximum = new decimal(new int[] {
-            65535,
-            0,
-            0,
-            0});
-			this.nudAstralMR.Name = "nudAstralMR";
-			this.nudAstralMR.ReadOnly = true;
-			this.nudAstralMR.Size = new System.Drawing.Size(44, 20);
-			this.nudAstralMR.TabIndex = 19;
-			// 
-			// lblAstralMR
-			// 
-			this.lblAstralMR.AutoSize = true;
-			this.lblAstralMR.Location = new System.Drawing.Point(81, 30);
-			this.lblAstralMR.Name = "lblAstralMR";
-			this.lblAstralMR.Size = new System.Drawing.Size(53, 13);
-			this.lblAstralMR.TabIndex = 20;
-			this.lblAstralMR.Text = "Astral MR";
-			// 
-			// nudManaPoints
-			// 
-			this.nudManaPoints.Location = new System.Drawing.Point(11, 85);
-			this.nudManaPoints.Maximum = new decimal(new int[] {
-            65535,
-            0,
-            0,
-            0});
-			this.nudManaPoints.Name = "nudManaPoints";
-			this.nudManaPoints.ReadOnly = true;
-			this.nudManaPoints.Size = new System.Drawing.Size(44, 20);
-			this.nudManaPoints.TabIndex = 21;
-			// 
-			// lblManaPoints
-			// 
-			this.lblManaPoints.AutoSize = true;
-			this.lblManaPoints.Location = new System.Drawing.Point(8, 69);
-			this.lblManaPoints.Name = "lblManaPoints";
-			this.lblManaPoints.Size = new System.Drawing.Size(65, 13);
-			this.lblManaPoints.TabIndex = 22;
-			this.lblManaPoints.Text = "Mana points";
-			// 
-			// lvQualifications
-			// 
-			this.lvQualifications.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
-			this.lvQualifications.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.chQualifications,
-            this.chLevel});
-			this.lvQualifications.FullRowSelect = true;
-			this.lvQualifications.HideSelection = false;
-			this.lvQualifications.Location = new System.Drawing.Point(378, 19);
-			this.lvQualifications.Name = "lvQualifications";
-			this.lvQualifications.Size = new System.Drawing.Size(258, 515);
-			this.lvQualifications.TabIndex = 31;
-			this.lvQualifications.UseCompatibleStateImageBehavior = false;
-			this.lvQualifications.View = System.Windows.Forms.View.Details;
-			// 
-			// chQualifications
-			// 
-			this.chQualifications.Text = "Qualifications";
-			this.chQualifications.Width = 154;
-			// 
-			// chLevel
-			// 
-			this.chLevel.Text = "Level / %";
-			this.chLevel.Width = 57;
-			// 
-			// gbLifePoints
-			// 
-			this.gbLifePoints.Controls.Add(this.lbLifePoints);
-			this.gbLifePoints.Controls.Add(this.nudLifePoints);
-			this.gbLifePoints.Controls.Add(this.nudPainTolerancePoints);
-			this.gbLifePoints.Controls.Add(this.lblPainTolerancePoints);
-			this.gbLifePoints.Location = new System.Drawing.Point(3, 212);
-			this.gbLifePoints.Name = "gbLifePoints";
-			this.gbLifePoints.Size = new System.Drawing.Size(112, 129);
-			this.gbLifePoints.TabIndex = 30;
-			this.gbLifePoints.TabStop = false;
-			this.gbLifePoints.Text = "Life points and pain tolerance";
-			// 
-			// lbLifePoints
-			// 
-			this.lbLifePoints.AutoSize = true;
-			this.lbLifePoints.Location = new System.Drawing.Point(6, 37);
-			this.lbLifePoints.Name = "lbLifePoints";
-			this.lbLifePoints.Size = new System.Drawing.Size(55, 13);
-			this.lbLifePoints.TabIndex = 16;
-			this.lbLifePoints.Text = "Life points";
-			// 
-			// nudLifePoints
-			// 
-			this.nudLifePoints.Location = new System.Drawing.Point(9, 53);
-			this.nudLifePoints.Maximum = new decimal(new int[] {
-            65535,
-            0,
-            0,
-            0});
-			this.nudLifePoints.Name = "nudLifePoints";
-			this.nudLifePoints.ReadOnly = true;
-			this.nudLifePoints.Size = new System.Drawing.Size(44, 20);
-			this.nudLifePoints.TabIndex = 15;
-			// 
-			// nudPainTolerancePoints
-			// 
-			this.nudPainTolerancePoints.Location = new System.Drawing.Point(9, 99);
-			this.nudPainTolerancePoints.Maximum = new decimal(new int[] {
-            65535,
-            0,
-            0,
-            0});
-			this.nudPainTolerancePoints.Name = "nudPainTolerancePoints";
-			this.nudPainTolerancePoints.ReadOnly = true;
-			this.nudPainTolerancePoints.Size = new System.Drawing.Size(44, 20);
-			this.nudPainTolerancePoints.TabIndex = 17;
-			// 
-			// lblPainTolerancePoints
-			// 
-			this.lblPainTolerancePoints.AutoSize = true;
-			this.lblPainTolerancePoints.Location = new System.Drawing.Point(6, 83);
-			this.lblPainTolerancePoints.Name = "lblPainTolerancePoints";
-			this.lblPainTolerancePoints.Size = new System.Drawing.Size(106, 13);
-			this.lblPainTolerancePoints.TabIndex = 18;
-			this.lblPainTolerancePoints.Text = "Pain tolerance points";
-			// 
-			// gbAbilities
-			// 
-			this.gbAbilities.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
-			this.gbAbilities.Controls.Add(this.lblEruditionDiceThrow);
-			this.gbAbilities.Controls.Add(this.lblBraveryDiceThrow);
-			this.gbAbilities.Controls.Add(this.lblGoldDiceThrow);
-			this.gbAbilities.Controls.Add(this.lblErudition);
-			this.gbAbilities.Controls.Add(this.nudErudition);
-			this.gbAbilities.Controls.Add(this.lblBravery);
-			this.gbAbilities.Controls.Add(this.nudBravery);
-			this.gbAbilities.Controls.Add(this.lblGold);
-			this.gbAbilities.Controls.Add(this.lblAstralDiceThrow);
-			this.gbAbilities.Controls.Add(this.nudGold);
-			this.gbAbilities.Controls.Add(this.lblWillPowerDiceThrow);
-			this.gbAbilities.Controls.Add(this.lblIntelligenceDiceThrow);
-			this.gbAbilities.Controls.Add(this.lblBeautyDiceThrow);
-			this.gbAbilities.Controls.Add(this.lblHealthDiceThrow);
-			this.gbAbilities.Controls.Add(this.lblStaminaDiceThrow);
-			this.gbAbilities.Controls.Add(this.lblDexterityDiceThrow);
-			this.gbAbilities.Controls.Add(this.lblSpeedDiceThrow);
-			this.gbAbilities.Controls.Add(this.lblStrengthDiceThrow);
-			this.gbAbilities.Controls.Add(this.lblStrength);
-			this.gbAbilities.Controls.Add(this.lblAstral);
-			this.gbAbilities.Controls.Add(this.nudStrength);
-			this.gbAbilities.Controls.Add(this.nudAstral);
-			this.gbAbilities.Controls.Add(this.nudSpeed);
-			this.gbAbilities.Controls.Add(this.lblWillPower);
-			this.gbAbilities.Controls.Add(this.lblSpeed);
-			this.gbAbilities.Controls.Add(this.nudWillPower);
-			this.gbAbilities.Controls.Add(this.nudDexterity);
-			this.gbAbilities.Controls.Add(this.lblIntelligence);
-			this.gbAbilities.Controls.Add(this.lblDexterity);
-			this.gbAbilities.Controls.Add(this.nudIntelligence);
-			this.gbAbilities.Controls.Add(this.nudHealth);
-			this.gbAbilities.Controls.Add(this.lblBeauty);
-			this.gbAbilities.Controls.Add(this.lblHealth);
-			this.gbAbilities.Controls.Add(this.nudBeauty);
-			this.gbAbilities.Controls.Add(this.nudStamina);
-			this.gbAbilities.Controls.Add(this.lblStamina);
-			this.gbAbilities.Location = new System.Drawing.Point(225, 16);
-			this.gbAbilities.Name = "gbAbilities";
-			this.gbAbilities.Size = new System.Drawing.Size(147, 518);
-			this.gbAbilities.TabIndex = 29;
-			this.gbAbilities.TabStop = false;
-			this.gbAbilities.Text = "Abilities";
-			// 
-			// lblEruditionDiceThrow
-			// 
-			this.lblEruditionDiceThrow.AutoSize = true;
-			this.lblEruditionDiceThrow.Location = new System.Drawing.Point(51, 487);
-			this.lblEruditionDiceThrow.Name = "lblEruditionDiceThrow";
-			this.lblEruditionDiceThrow.Size = new System.Drawing.Size(0, 13);
-			this.lblEruditionDiceThrow.TabIndex = 44;
-			// 
-			// lblBraveryDiceThrow
-			// 
-			this.lblBraveryDiceThrow.AutoSize = true;
-			this.lblBraveryDiceThrow.Location = new System.Drawing.Point(51, 445);
-			this.lblBraveryDiceThrow.Name = "lblBraveryDiceThrow";
-			this.lblBraveryDiceThrow.Size = new System.Drawing.Size(0, 13);
-			this.lblBraveryDiceThrow.TabIndex = 43;
-			// 
-			// lblGoldDiceThrow
-			// 
-			this.lblGoldDiceThrow.AutoSize = true;
-			this.lblGoldDiceThrow.Location = new System.Drawing.Point(51, 403);
-			this.lblGoldDiceThrow.Name = "lblGoldDiceThrow";
-			this.lblGoldDiceThrow.Size = new System.Drawing.Size(0, 13);
-			this.lblGoldDiceThrow.TabIndex = 42;
-			// 
-			// lblErudition
-			// 
-			this.lblErudition.AutoSize = true;
-			this.lblErudition.Location = new System.Drawing.Point(4, 469);
-			this.lblErudition.Name = "lblErudition";
-			this.lblErudition.Size = new System.Drawing.Size(48, 13);
-			this.lblErudition.TabIndex = 40;
-			this.lblErudition.Text = "Erudition";
-			// 
-			// nudErudition
-			// 
-			this.nudErudition.Location = new System.Drawing.Point(6, 485);
-			this.nudErudition.Maximum = new decimal(new int[] {
-            25,
-            0,
-            0,
-            0});
-			this.nudErudition.Name = "nudErudition";
-			this.nudErudition.ReadOnly = true;
-			this.nudErudition.Size = new System.Drawing.Size(44, 20);
-			this.nudErudition.TabIndex = 41;
-			// 
-			// lblBravery
-			// 
-			this.lblBravery.AutoSize = true;
-			this.lblBravery.Location = new System.Drawing.Point(4, 427);
-			this.lblBravery.Name = "lblBravery";
-			this.lblBravery.Size = new System.Drawing.Size(43, 13);
-			this.lblBravery.TabIndex = 38;
-			this.lblBravery.Text = "Bravery";
-			// 
-			// nudBravery
-			// 
-			this.nudBravery.Location = new System.Drawing.Point(6, 443);
-			this.nudBravery.Maximum = new decimal(new int[] {
-            25,
-            0,
-            0,
-            0});
-			this.nudBravery.Name = "nudBravery";
-			this.nudBravery.ReadOnly = true;
-			this.nudBravery.Size = new System.Drawing.Size(44, 20);
-			this.nudBravery.TabIndex = 39;
-			// 
-			// lblGold
-			// 
-			this.lblGold.AutoSize = true;
-			this.lblGold.Location = new System.Drawing.Point(1, 385);
-			this.lblGold.Name = "lblGold";
-			this.lblGold.Size = new System.Drawing.Size(29, 13);
-			this.lblGold.TabIndex = 23;
-			this.lblGold.Text = "Gold";
-			// 
-			// lblAstralDiceThrow
-			// 
-			this.lblAstralDiceThrow.AutoSize = true;
-			this.lblAstralDiceThrow.Location = new System.Drawing.Point(51, 363);
-			this.lblAstralDiceThrow.Name = "lblAstralDiceThrow";
-			this.lblAstralDiceThrow.Size = new System.Drawing.Size(0, 13);
-			this.lblAstralDiceThrow.TabIndex = 37;
-			// 
-			// nudGold
-			// 
-			this.nudGold.Location = new System.Drawing.Point(3, 401);
-			this.nudGold.Maximum = new decimal(new int[] {
-            1000,
-            0,
-            0,
-            0});
-			this.nudGold.Name = "nudGold";
-			this.nudGold.ReadOnly = true;
-			this.nudGold.Size = new System.Drawing.Size(44, 20);
-			this.nudGold.TabIndex = 29;
-			// 
-			// lblWillPowerDiceThrow
-			// 
-			this.lblWillPowerDiceThrow.AutoSize = true;
-			this.lblWillPowerDiceThrow.Location = new System.Drawing.Point(51, 321);
-			this.lblWillPowerDiceThrow.Name = "lblWillPowerDiceThrow";
-			this.lblWillPowerDiceThrow.Size = new System.Drawing.Size(0, 13);
-			this.lblWillPowerDiceThrow.TabIndex = 36;
-			// 
-			// lblIntelligenceDiceThrow
-			// 
-			this.lblIntelligenceDiceThrow.AutoSize = true;
-			this.lblIntelligenceDiceThrow.Location = new System.Drawing.Point(51, 282);
-			this.lblIntelligenceDiceThrow.Name = "lblIntelligenceDiceThrow";
-			this.lblIntelligenceDiceThrow.Size = new System.Drawing.Size(0, 13);
-			this.lblIntelligenceDiceThrow.TabIndex = 35;
-			// 
-			// lblBeautyDiceThrow
-			// 
-			this.lblBeautyDiceThrow.AutoSize = true;
-			this.lblBeautyDiceThrow.Location = new System.Drawing.Point(51, 239);
-			this.lblBeautyDiceThrow.Name = "lblBeautyDiceThrow";
-			this.lblBeautyDiceThrow.Size = new System.Drawing.Size(0, 13);
-			this.lblBeautyDiceThrow.TabIndex = 34;
-			// 
-			// lblHealthDiceThrow
-			// 
-			this.lblHealthDiceThrow.AutoSize = true;
-			this.lblHealthDiceThrow.Location = new System.Drawing.Point(51, 198);
-			this.lblHealthDiceThrow.Name = "lblHealthDiceThrow";
-			this.lblHealthDiceThrow.Size = new System.Drawing.Size(0, 13);
-			this.lblHealthDiceThrow.TabIndex = 33;
-			// 
-			// lblStaminaDiceThrow
-			// 
-			this.lblStaminaDiceThrow.AutoSize = true;
-			this.lblStaminaDiceThrow.Location = new System.Drawing.Point(51, 157);
-			this.lblStaminaDiceThrow.Name = "lblStaminaDiceThrow";
-			this.lblStaminaDiceThrow.Size = new System.Drawing.Size(0, 13);
-			this.lblStaminaDiceThrow.TabIndex = 32;
-			// 
-			// lblDexterityDiceThrow
-			// 
-			this.lblDexterityDiceThrow.AutoSize = true;
-			this.lblDexterityDiceThrow.Location = new System.Drawing.Point(51, 116);
-			this.lblDexterityDiceThrow.Name = "lblDexterityDiceThrow";
-			this.lblDexterityDiceThrow.Size = new System.Drawing.Size(0, 13);
-			this.lblDexterityDiceThrow.TabIndex = 31;
-			// 
-			// lblSpeedDiceThrow
-			// 
-			this.lblSpeedDiceThrow.AutoSize = true;
-			this.lblSpeedDiceThrow.Location = new System.Drawing.Point(51, 75);
-			this.lblSpeedDiceThrow.Name = "lblSpeedDiceThrow";
-			this.lblSpeedDiceThrow.Size = new System.Drawing.Size(0, 13);
-			this.lblSpeedDiceThrow.TabIndex = 30;
-			// 
-			// lblStrengthDiceThrow
-			// 
-			this.lblStrengthDiceThrow.AutoSize = true;
-			this.lblStrengthDiceThrow.Location = new System.Drawing.Point(51, 35);
-			this.lblStrengthDiceThrow.Name = "lblStrengthDiceThrow";
-			this.lblStrengthDiceThrow.Size = new System.Drawing.Size(0, 13);
-			this.lblStrengthDiceThrow.TabIndex = 29;
-			// 
-			// lblStrength
-			// 
-			this.lblStrength.AutoSize = true;
-			this.lblStrength.Location = new System.Drawing.Point(0, 17);
-			this.lblStrength.Name = "lblStrength";
-			this.lblStrength.Size = new System.Drawing.Size(47, 13);
-			this.lblStrength.TabIndex = 6;
-			this.lblStrength.Text = "Strength";
-			// 
-			// lblAstral
-			// 
-			this.lblAstral.AutoSize = true;
-			this.lblAstral.Location = new System.Drawing.Point(0, 344);
-			this.lblAstral.Name = "lblAstral";
-			this.lblAstral.Size = new System.Drawing.Size(33, 13);
-			this.lblAstral.TabIndex = 28;
-			this.lblAstral.Text = "Astral";
-			// 
-			// nudStrength
-			// 
-			this.nudStrength.Location = new System.Drawing.Point(3, 33);
-			this.nudStrength.Maximum = new decimal(new int[] {
-            25,
-            0,
-            0,
-            0});
-			this.nudStrength.Name = "nudStrength";
-			this.nudStrength.Size = new System.Drawing.Size(44, 20);
-			this.nudStrength.TabIndex = 5;
-			this.nudStrength.ValueChanged += new System.EventHandler(this.NudStrength_ValueChanged);
-			// 
-			// nudAstral
-			// 
-			this.nudAstral.Location = new System.Drawing.Point(3, 359);
-			this.nudAstral.Maximum = new decimal(new int[] {
-            25,
-            0,
-            0,
-            0});
-			this.nudAstral.Name = "nudAstral";
-			this.nudAstral.Size = new System.Drawing.Size(44, 20);
-			this.nudAstral.TabIndex = 27;
-			this.nudAstral.ValueChanged += new System.EventHandler(this.NudAstral_ValueChanged);
-			// 
-			// nudSpeed
-			// 
-			this.nudSpeed.Location = new System.Drawing.Point(3, 73);
-			this.nudSpeed.Maximum = new decimal(new int[] {
-            25,
-            0,
-            0,
-            0});
-			this.nudSpeed.Name = "nudSpeed";
-			this.nudSpeed.Size = new System.Drawing.Size(44, 20);
-			this.nudSpeed.TabIndex = 7;
-			this.nudSpeed.ValueChanged += new System.EventHandler(this.NudSpeed_ValueChanged);
-			// 
-			// lblWillPower
-			// 
-			this.lblWillPower.AutoSize = true;
-			this.lblWillPower.Location = new System.Drawing.Point(0, 304);
-			this.lblWillPower.Name = "lblWillPower";
-			this.lblWillPower.Size = new System.Drawing.Size(54, 13);
-			this.lblWillPower.TabIndex = 26;
-			this.lblWillPower.Text = "WillPower";
-			// 
-			// lblSpeed
-			// 
-			this.lblSpeed.AutoSize = true;
-			this.lblSpeed.Location = new System.Drawing.Point(0, 58);
-			this.lblSpeed.Name = "lblSpeed";
-			this.lblSpeed.Size = new System.Drawing.Size(38, 13);
-			this.lblSpeed.TabIndex = 8;
-			this.lblSpeed.Text = "Speed";
-			// 
-			// nudWillPower
-			// 
-			this.nudWillPower.Location = new System.Drawing.Point(3, 319);
-			this.nudWillPower.Maximum = new decimal(new int[] {
-            25,
-            0,
-            0,
-            0});
-			this.nudWillPower.Name = "nudWillPower";
-			this.nudWillPower.Size = new System.Drawing.Size(44, 20);
-			this.nudWillPower.TabIndex = 25;
-			this.nudWillPower.ValueChanged += new System.EventHandler(this.NudWillPower_ValueChanged);
-			// 
-			// nudDexterity
-			// 
-			this.nudDexterity.Location = new System.Drawing.Point(3, 114);
-			this.nudDexterity.Maximum = new decimal(new int[] {
-            25,
-            0,
-            0,
-            0});
-			this.nudDexterity.Name = "nudDexterity";
-			this.nudDexterity.Size = new System.Drawing.Size(44, 20);
-			this.nudDexterity.TabIndex = 9;
-			this.nudDexterity.ValueChanged += new System.EventHandler(this.NudDexterity_ValueChanged);
-			// 
-			// lblIntelligence
-			// 
-			this.lblIntelligence.AutoSize = true;
-			this.lblIntelligence.Location = new System.Drawing.Point(0, 263);
-			this.lblIntelligence.Name = "lblIntelligence";
-			this.lblIntelligence.Size = new System.Drawing.Size(61, 13);
-			this.lblIntelligence.TabIndex = 24;
-			this.lblIntelligence.Text = "Intelligence";
-			// 
-			// lblDexterity
-			// 
-			this.lblDexterity.AutoSize = true;
-			this.lblDexterity.Location = new System.Drawing.Point(0, 99);
-			this.lblDexterity.Name = "lblDexterity";
-			this.lblDexterity.Size = new System.Drawing.Size(48, 13);
-			this.lblDexterity.TabIndex = 10;
-			this.lblDexterity.Text = "Dexterity";
-			// 
-			// nudIntelligence
-			// 
-			this.nudIntelligence.Location = new System.Drawing.Point(3, 278);
-			this.nudIntelligence.Maximum = new decimal(new int[] {
-            25,
-            0,
-            0,
-            0});
-			this.nudIntelligence.Name = "nudIntelligence";
-			this.nudIntelligence.Size = new System.Drawing.Size(44, 20);
-			this.nudIntelligence.TabIndex = 23;
-			this.nudIntelligence.ValueChanged += new System.EventHandler(this.NudIntelligence_ValueChanged);
-			// 
-			// nudHealth
-			// 
-			this.nudHealth.Location = new System.Drawing.Point(3, 196);
-			this.nudHealth.Maximum = new decimal(new int[] {
-            25,
-            0,
-            0,
-            0});
-			this.nudHealth.Name = "nudHealth";
-			this.nudHealth.Size = new System.Drawing.Size(44, 20);
-			this.nudHealth.TabIndex = 11;
-			this.nudHealth.ValueChanged += new System.EventHandler(this.NudHealth_ValueChanged);
-			// 
-			// lblBeauty
-			// 
-			this.lblBeauty.AutoSize = true;
-			this.lblBeauty.Location = new System.Drawing.Point(0, 222);
-			this.lblBeauty.Name = "lblBeauty";
-			this.lblBeauty.Size = new System.Drawing.Size(40, 13);
-			this.lblBeauty.TabIndex = 22;
-			this.lblBeauty.Text = "Beauty";
-			// 
-			// lblHealth
-			// 
-			this.lblHealth.AutoSize = true;
-			this.lblHealth.Location = new System.Drawing.Point(0, 181);
-			this.lblHealth.Name = "lblHealth";
-			this.lblHealth.Size = new System.Drawing.Size(38, 13);
-			this.lblHealth.TabIndex = 12;
-			this.lblHealth.Text = "Health";
-			// 
-			// nudBeauty
-			// 
-			this.nudBeauty.Location = new System.Drawing.Point(3, 237);
-			this.nudBeauty.Maximum = new decimal(new int[] {
-            25,
-            0,
-            0,
-            0});
-			this.nudBeauty.Name = "nudBeauty";
-			this.nudBeauty.Size = new System.Drawing.Size(44, 20);
-			this.nudBeauty.TabIndex = 21;
-			// 
-			// nudStamina
-			// 
-			this.nudStamina.Location = new System.Drawing.Point(3, 155);
-			this.nudStamina.Maximum = new decimal(new int[] {
-            25,
-            0,
-            0,
-            0});
-			this.nudStamina.Name = "nudStamina";
-			this.nudStamina.Size = new System.Drawing.Size(44, 20);
-			this.nudStamina.TabIndex = 13;
-			this.nudStamina.ValueChanged += new System.EventHandler(this.NudStamina_ValueChanged);
-			// 
-			// lblStamina
-			// 
-			this.lblStamina.AutoSize = true;
-			this.lblStamina.Location = new System.Drawing.Point(0, 140);
-			this.lblStamina.Name = "lblStamina";
-			this.lblStamina.Size = new System.Drawing.Size(45, 13);
-			this.lblStamina.TabIndex = 14;
-			this.lblStamina.Text = "Stamina";
-			// 
-			// btnGenerate
-			// 
-			this.btnGenerate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-			this.btnGenerate.Location = new System.Drawing.Point(844, 544);
-			this.btnGenerate.Name = "btnGenerate";
-			this.btnGenerate.Size = new System.Drawing.Size(80, 23);
-			this.btnGenerate.TabIndex = 4;
-			this.btnGenerate.Text = "Generate";
-			this.btnGenerate.UseVisualStyleBackColor = true;
-			this.btnGenerate.Click += new System.EventHandler(this.BtnGenerate_Click);
-			// 
-			// CharcterGenerator
-			// 
-			this.AcceptButton = this.btnGenerate;
-			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(1018, 573);
-			this.Controls.Add(this.panelMain);
-			this.Name = "CharcterGenerator";
-			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-			this.Text = "Charcter Generator";
-			this.Load += new System.EventHandler(this.CharcterGenerator_Load);
-			this.panelMain.ResumeLayout(false);
-			this.gbCharacter.ResumeLayout(false);
-			this.gbGeneral.ResumeLayout(false);
-			this.gbGeneral.PerformLayout();
-			((System.ComponentModel.ISupportInitialize)(this.nudSecondaryCasteLevel)).EndInit();
-			((System.ComponentModel.ISupportInitialize)(this.nudLevel)).EndInit();
-			((System.ComponentModel.ISupportInitialize)(this.pbCharacter)).EndInit();
-			this.gbModifiers.ResumeLayout(false);
-			this.gbModifiers.PerformLayout();
-			((System.ComponentModel.ISupportInitialize)(this.nudQP)).EndInit();
-			((System.ComponentModel.ISupportInitialize)(this.nudPercent)).EndInit();
-			this.gbFightValues.ResumeLayout(false);
-			this.gbFightValues.PerformLayout();
-			((System.ComponentModel.ISupportInitialize)(this.nudAimV)).EndInit();
-			((System.ComponentModel.ISupportInitialize)(this.nudIV)).EndInit();
-			((System.ComponentModel.ISupportInitialize)(this.nudDV)).EndInit();
-			((System.ComponentModel.ISupportInitialize)(this.nudAV)).EndInit();
-			this.gbPsiManaAndMagicResistance.ResumeLayout(false);
-			this.gbPsiManaAndMagicResistance.PerformLayout();
-			((System.ComponentModel.ISupportInitialize)(this.nudMentalMR)).EndInit();
-			((System.ComponentModel.ISupportInitialize)(this.nudPsiPoints)).EndInit();
-			((System.ComponentModel.ISupportInitialize)(this.nudAstralMR)).EndInit();
-			((System.ComponentModel.ISupportInitialize)(this.nudManaPoints)).EndInit();
-			this.gbLifePoints.ResumeLayout(false);
-			this.gbLifePoints.PerformLayout();
-			((System.ComponentModel.ISupportInitialize)(this.nudLifePoints)).EndInit();
-			((System.ComponentModel.ISupportInitialize)(this.nudPainTolerancePoints)).EndInit();
-			this.gbAbilities.ResumeLayout(false);
-			this.gbAbilities.PerformLayout();
-			((System.ComponentModel.ISupportInitialize)(this.nudErudition)).EndInit();
-			((System.ComponentModel.ISupportInitialize)(this.nudBravery)).EndInit();
-			((System.ComponentModel.ISupportInitialize)(this.nudGold)).EndInit();
-			((System.ComponentModel.ISupportInitialize)(this.nudStrength)).EndInit();
-			((System.ComponentModel.ISupportInitialize)(this.nudAstral)).EndInit();
-			((System.ComponentModel.ISupportInitialize)(this.nudSpeed)).EndInit();
-			((System.ComponentModel.ISupportInitialize)(this.nudWillPower)).EndInit();
-			((System.ComponentModel.ISupportInitialize)(this.nudDexterity)).EndInit();
-			((System.ComponentModel.ISupportInitialize)(this.nudIntelligence)).EndInit();
-			((System.ComponentModel.ISupportInitialize)(this.nudHealth)).EndInit();
-			((System.ComponentModel.ISupportInitialize)(this.nudBeauty)).EndInit();
-			((System.ComponentModel.ISupportInitialize)(this.nudStamina)).EndInit();
-			this.ResumeLayout(false);
+        /// <summary>
+        /// Required method for Designer support - do not modify
+        /// the contents of this method with the code editor.
+        /// </summary>
+        private void InitializeComponent()
+        {
+            panelMain = new Panel();
+            gbCharacter = new GroupBox();
+            btnRemove = new Button();
+            btnNext = new Button();
+            btnPrevious = new Button();
+            btnAdd = new Button();
+            gbGeneral = new GroupBox();
+            lblName = new Label();
+            nudSecondaryCasteLevel = new NumericUpDown();
+            lblRace = new Label();
+            lblSecondaryCasteLevel = new Label();
+            cbCaste = new ComboBox();
+            cbSecondaryCaste = new ComboBox();
+            cbRace = new ComboBox();
+            chkBoxSecondaryCaste = new CheckBox();
+            lblCaste = new Label();
+            tbName = new TextBox();
+            lblLevel = new Label();
+            nudLevel = new NumericUpDown();
+            cbImageSizeMode = new ComboBox();
+            btnBrowse = new Button();
+            pbCharacter = new PictureBox();
+            gbModifiers = new GroupBox();
+            lbQualificationPoints = new Label();
+            nudQP = new NumericUpDown();
+            nudPercent = new NumericUpDown();
+            lblPercent = new Label();
+            gbFightValues = new GroupBox();
+            nudAimV = new NumericUpDown();
+            lblAimV = new Label();
+            lblIV = new Label();
+            nudIV = new NumericUpDown();
+            nudDV = new NumericUpDown();
+            lblDV = new Label();
+            nudAV = new NumericUpDown();
+            lblAV = new Label();
+            btnDone = new Button();
+            gbPsiManaAndMagicResistance = new GroupBox();
+            nudMentalMR = new NumericUpDown();
+            lblMentalMR = new Label();
+            lblPsiPoints = new Label();
+            nudPsiPoints = new NumericUpDown();
+            nudAstralMR = new NumericUpDown();
+            lblAstralMR = new Label();
+            nudManaPoints = new NumericUpDown();
+            lblManaPoints = new Label();
+            lvQualifications = new ListView();
+            chQualifications = new ColumnHeader();
+            chLevel = new ColumnHeader();
+            gbLifePoints = new GroupBox();
+            lbLifePoints = new Label();
+            nudLifePoints = new NumericUpDown();
+            nudPainTolerancePoints = new NumericUpDown();
+            lblPainTolerancePoints = new Label();
+            gbAbilities = new GroupBox();
+            lblEruditionDiceThrow = new Label();
+            lblBraveryDiceThrow = new Label();
+            lblGoldDiceThrow = new Label();
+            lblErudition = new Label();
+            nudErudition = new NumericUpDown();
+            lblBravery = new Label();
+            nudBravery = new NumericUpDown();
+            lblGold = new Label();
+            lblAstralDiceThrow = new Label();
+            nudGold = new NumericUpDown();
+            lblWillPowerDiceThrow = new Label();
+            lblIntelligenceDiceThrow = new Label();
+            lblBeautyDiceThrow = new Label();
+            lblHealthDiceThrow = new Label();
+            lblStaminaDiceThrow = new Label();
+            lblDexterityDiceThrow = new Label();
+            lblSpeedDiceThrow = new Label();
+            lblStrengthDiceThrow = new Label();
+            lblStrength = new Label();
+            lblAstral = new Label();
+            nudStrength = new NumericUpDown();
+            nudAstral = new NumericUpDown();
+            nudSpeed = new NumericUpDown();
+            lblWillPower = new Label();
+            lblSpeed = new Label();
+            nudWillPower = new NumericUpDown();
+            nudDexterity = new NumericUpDown();
+            lblIntelligence = new Label();
+            lblDexterity = new Label();
+            nudIntelligence = new NumericUpDown();
+            nudHealth = new NumericUpDown();
+            lblBeauty = new Label();
+            lblHealth = new Label();
+            nudBeauty = new NumericUpDown();
+            nudStamina = new NumericUpDown();
+            lblStamina = new Label();
+            btnGenerate = new Button();
+            ofdCharacterImage = new OpenFileDialog();
+            panelMain.SuspendLayout();
+            gbCharacter.SuspendLayout();
+            gbGeneral.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)nudSecondaryCasteLevel).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)nudLevel).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pbCharacter).BeginInit();
+            gbModifiers.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)nudQP).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)nudPercent).BeginInit();
+            gbFightValues.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)nudAimV).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)nudIV).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)nudDV).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)nudAV).BeginInit();
+            gbPsiManaAndMagicResistance.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)nudMentalMR).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)nudPsiPoints).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)nudAstralMR).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)nudManaPoints).BeginInit();
+            gbLifePoints.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)nudLifePoints).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)nudPainTolerancePoints).BeginInit();
+            gbAbilities.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)nudErudition).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)nudBravery).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)nudGold).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)nudStrength).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)nudAstral).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)nudSpeed).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)nudWillPower).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)nudDexterity).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)nudIntelligence).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)nudHealth).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)nudBeauty).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)nudStamina).BeginInit();
+            SuspendLayout();
+            // 
+            // panelMain
+            // 
+            panelMain.Controls.Add(gbCharacter);
+            panelMain.Dock = DockStyle.Fill;
+            panelMain.Location = new Point(0, 0);
+            panelMain.Margin = new Padding(4, 3, 4, 3);
+            panelMain.Name = "panelMain";
+            panelMain.Size = new Size(1188, 661);
+            panelMain.TabIndex = 0;
+            // 
+            // gbCharacter
+            // 
+            gbCharacter.Controls.Add(btnRemove);
+            gbCharacter.Controls.Add(btnNext);
+            gbCharacter.Controls.Add(btnPrevious);
+            gbCharacter.Controls.Add(btnAdd);
+            gbCharacter.Controls.Add(gbGeneral);
+            gbCharacter.Controls.Add(cbImageSizeMode);
+            gbCharacter.Controls.Add(btnBrowse);
+            gbCharacter.Controls.Add(pbCharacter);
+            gbCharacter.Controls.Add(gbModifiers);
+            gbCharacter.Controls.Add(gbFightValues);
+            gbCharacter.Controls.Add(btnDone);
+            gbCharacter.Controls.Add(gbPsiManaAndMagicResistance);
+            gbCharacter.Controls.Add(lvQualifications);
+            gbCharacter.Controls.Add(gbLifePoints);
+            gbCharacter.Controls.Add(gbAbilities);
+            gbCharacter.Controls.Add(btnGenerate);
+            gbCharacter.Dock = DockStyle.Fill;
+            gbCharacter.Location = new Point(0, 0);
+            gbCharacter.Margin = new Padding(4, 3, 4, 3);
+            gbCharacter.Name = "gbCharacter";
+            gbCharacter.Padding = new Padding(4, 3, 4, 3);
+            gbCharacter.Size = new Size(1188, 661);
+            gbCharacter.TabIndex = 4;
+            gbCharacter.TabStop = false;
+            // 
+            // btnRemove
+            // 
+            btnRemove.Location = new Point(1035, 20);
+            btnRemove.Margin = new Padding(4, 3, 4, 3);
+            btnRemove.Name = "btnRemove";
+            btnRemove.Size = new Size(27, 27);
+            btnRemove.TabIndex = 53;
+            btnRemove.Text = "-";
+            btnRemove.UseVisualStyleBackColor = true;
+            btnRemove.Click += BtnRemove_Click;
+            // 
+            // btnNext
+            // 
+            btnNext.Enabled = false;
+            btnNext.Location = new Point(1127, 18);
+            btnNext.Margin = new Padding(4, 3, 4, 3);
+            btnNext.Name = "btnNext";
+            btnNext.Size = new Size(51, 27);
+            btnNext.TabIndex = 52;
+            btnNext.Text = "-->";
+            btnNext.UseVisualStyleBackColor = true;
+            btnNext.Click += BtnNext_Click;
+            // 
+            // btnPrevious
+            // 
+            btnPrevious.Enabled = false;
+            btnPrevious.Location = new Point(1069, 20);
+            btnPrevious.Margin = new Padding(4, 3, 4, 3);
+            btnPrevious.Name = "btnPrevious";
+            btnPrevious.Size = new Size(51, 27);
+            btnPrevious.TabIndex = 51;
+            btnPrevious.Text = "<--";
+            btnPrevious.UseVisualStyleBackColor = true;
+            btnPrevious.Click += BtnPrevious_Click;
+            // 
+            // btnAdd
+            // 
+            btnAdd.Location = new Point(1003, 20);
+            btnAdd.Margin = new Padding(4, 3, 4, 3);
+            btnAdd.Name = "btnAdd";
+            btnAdd.Size = new Size(27, 27);
+            btnAdd.TabIndex = 50;
+            btnAdd.Text = "+";
+            btnAdd.UseVisualStyleBackColor = true;
+            btnAdd.Click += BtnAdd_Click;
+            // 
+            // gbGeneral
+            // 
+            gbGeneral.Controls.Add(lblName);
+            gbGeneral.Controls.Add(nudSecondaryCasteLevel);
+            gbGeneral.Controls.Add(lblRace);
+            gbGeneral.Controls.Add(lblSecondaryCasteLevel);
+            gbGeneral.Controls.Add(cbCaste);
+            gbGeneral.Controls.Add(cbSecondaryCaste);
+            gbGeneral.Controls.Add(cbRace);
+            gbGeneral.Controls.Add(chkBoxSecondaryCaste);
+            gbGeneral.Controls.Add(lblCaste);
+            gbGeneral.Controls.Add(tbName);
+            gbGeneral.Controls.Add(lblLevel);
+            gbGeneral.Controls.Add(nudLevel);
+            gbGeneral.Location = new Point(4, 14);
+            gbGeneral.Margin = new Padding(4, 3, 4, 3);
+            gbGeneral.Name = "gbGeneral";
+            gbGeneral.Padding = new Padding(4, 3, 4, 3);
+            gbGeneral.Size = new Size(344, 228);
+            gbGeneral.TabIndex = 49;
+            gbGeneral.TabStop = false;
+            gbGeneral.Text = "General";
+            // 
+            // lblName
+            // 
+            lblName.AutoSize = true;
+            lblName.Location = new Point(1, 18);
+            lblName.Margin = new Padding(4, 0, 4, 0);
+            lblName.Name = "lblName";
+            lblName.Size = new Size(39, 15);
+            lblName.TabIndex = 35;
+            lblName.Text = "Name";
+            // 
+            // nudSecondaryCasteLevel
+            // 
+            nudSecondaryCasteLevel.Enabled = false;
+            nudSecondaryCasteLevel.Location = new Point(285, 195);
+            nudSecondaryCasteLevel.Margin = new Padding(4, 3, 4, 3);
+            nudSecondaryCasteLevel.Maximum = new decimal(new int[] { 255, 0, 0, 0 });
+            nudSecondaryCasteLevel.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
+            nudSecondaryCasteLevel.Name = "nudSecondaryCasteLevel";
+            nudSecondaryCasteLevel.Size = new Size(51, 23);
+            nudSecondaryCasteLevel.TabIndex = 48;
+            nudSecondaryCasteLevel.Value = new decimal(new int[] { 1, 0, 0, 0 });
+            // 
+            // lblRace
+            // 
+            lblRace.AutoSize = true;
+            lblRace.Location = new Point(4, 69);
+            lblRace.Margin = new Padding(4, 0, 4, 0);
+            lblRace.Name = "lblRace";
+            lblRace.Size = new Size(32, 15);
+            lblRace.TabIndex = 2;
+            lblRace.Text = "Race";
+            // 
+            // lblSecondaryCasteLevel
+            // 
+            lblSecondaryCasteLevel.AutoSize = true;
+            lblSecondaryCasteLevel.Location = new Point(282, 175);
+            lblSecondaryCasteLevel.Margin = new Padding(4, 0, 4, 0);
+            lblSecondaryCasteLevel.Name = "lblSecondaryCasteLevel";
+            lblSecondaryCasteLevel.Size = new Size(34, 15);
+            lblSecondaryCasteLevel.TabIndex = 47;
+            lblSecondaryCasteLevel.Text = "Level";
+            // 
+            // cbCaste
+            // 
+            cbCaste.DropDownStyle = ComboBoxStyle.DropDownList;
+            cbCaste.FormattingEnabled = true;
+            cbCaste.Location = new Point(7, 140);
+            cbCaste.Margin = new Padding(4, 3, 4, 3);
+            cbCaste.Name = "cbCaste";
+            cbCaste.Size = new Size(270, 23);
+            cbCaste.TabIndex = 1;
+            cbCaste.SelectedIndexChanged += CbCaste_SelectedIndexChanged;
+            // 
+            // cbSecondaryCaste
+            // 
+            cbSecondaryCaste.DropDownStyle = ComboBoxStyle.DropDownList;
+            cbSecondaryCaste.Enabled = false;
+            cbSecondaryCaste.FormattingEnabled = true;
+            cbSecondaryCaste.Location = new Point(7, 194);
+            cbSecondaryCaste.Margin = new Padding(4, 3, 4, 3);
+            cbSecondaryCaste.Name = "cbSecondaryCaste";
+            cbSecondaryCaste.Size = new Size(270, 23);
+            cbSecondaryCaste.TabIndex = 46;
+            cbSecondaryCaste.SelectedIndexChanged += CbSecondaryCaste_SelectedIndexChanged;
+            // 
+            // cbRace
+            // 
+            cbRace.DropDownStyle = ComboBoxStyle.DropDownList;
+            cbRace.FormattingEnabled = true;
+            cbRace.Location = new Point(5, 88);
+            cbRace.Margin = new Padding(4, 3, 4, 3);
+            cbRace.Name = "cbRace";
+            cbRace.Size = new Size(272, 23);
+            cbRace.TabIndex = 3;
+            cbRace.SelectedIndexChanged += CbRace_SelectedIndexChanged;
+            // 
+            // chkBoxSecondaryCaste
+            // 
+            chkBoxSecondaryCaste.AutoSize = true;
+            chkBoxSecondaryCaste.Location = new Point(7, 171);
+            chkBoxSecondaryCaste.Margin = new Padding(4, 3, 4, 3);
+            chkBoxSecondaryCaste.Name = "chkBoxSecondaryCaste";
+            chkBoxSecondaryCaste.Size = new Size(111, 19);
+            chkBoxSecondaryCaste.TabIndex = 44;
+            chkBoxSecondaryCaste.Text = "Secondary caste";
+            chkBoxSecondaryCaste.UseVisualStyleBackColor = true;
+            chkBoxSecondaryCaste.CheckedChanged += ChkBoxSecondaryCaste_CheckedChanged;
+            // 
+            // lblCaste
+            // 
+            lblCaste.AutoSize = true;
+            lblCaste.Location = new Point(4, 119);
+            lblCaste.Margin = new Padding(4, 0, 4, 0);
+            lblCaste.Name = "lblCaste";
+            lblCaste.Size = new Size(36, 15);
+            lblCaste.TabIndex = 0;
+            lblCaste.Text = "Caste";
+            // 
+            // tbName
+            // 
+            tbName.Location = new Point(5, 37);
+            tbName.Margin = new Padding(4, 3, 4, 3);
+            tbName.Name = "tbName";
+            tbName.Size = new Size(272, 23);
+            tbName.TabIndex = 36;
+            // 
+            // lblLevel
+            // 
+            lblLevel.AutoSize = true;
+            lblLevel.Location = new Point(282, 121);
+            lblLevel.Margin = new Padding(4, 0, 4, 0);
+            lblLevel.Name = "lblLevel";
+            lblLevel.Size = new Size(34, 15);
+            lblLevel.TabIndex = 37;
+            lblLevel.Text = "Level";
+            // 
+            // nudLevel
+            // 
+            nudLevel.Location = new Point(285, 141);
+            nudLevel.Margin = new Padding(4, 3, 4, 3);
+            nudLevel.Maximum = new decimal(new int[] { 255, 0, 0, 0 });
+            nudLevel.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
+            nudLevel.Name = "nudLevel";
+            nudLevel.Size = new Size(51, 23);
+            nudLevel.TabIndex = 38;
+            nudLevel.Value = new decimal(new int[] { 1, 0, 0, 0 });
+            // 
+            // cbImageSizeMode
+            // 
+            cbImageSizeMode.DropDownStyle = ComboBoxStyle.DropDownList;
+            cbImageSizeMode.FormattingEnabled = true;
+            cbImageSizeMode.Items.AddRange(new object[] { "Normal", "Stretch", "Auto", "Center", "Zoom" });
+            cbImageSizeMode.Location = new Point(749, 21);
+            cbImageSizeMode.Margin = new Padding(4, 3, 4, 3);
+            cbImageSizeMode.Name = "cbImageSizeMode";
+            cbImageSizeMode.Size = new Size(152, 23);
+            cbImageSizeMode.TabIndex = 43;
+            cbImageSizeMode.SelectedIndexChanged += CbImageSizeMode_SelectedIndexChanged;
+            // 
+            // btnBrowse
+            // 
+            btnBrowse.Location = new Point(909, 20);
+            btnBrowse.Margin = new Padding(4, 3, 4, 3);
+            btnBrowse.Name = "btnBrowse";
+            btnBrowse.Size = new Size(88, 27);
+            btnBrowse.TabIndex = 42;
+            btnBrowse.Text = "Browse";
+            btnBrowse.UseVisualStyleBackColor = true;
+            btnBrowse.Click += BtnBrowse_Click;
+            // 
+            // pbCharacter
+            // 
+            pbCharacter.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            pbCharacter.BackColor = SystemColors.ButtonShadow;
+            pbCharacter.Location = new Point(749, 52);
+            pbCharacter.Margin = new Padding(4, 3, 4, 3);
+            pbCharacter.Name = "pbCharacter";
+            pbCharacter.Size = new Size(432, 564);
+            pbCharacter.SizeMode = PictureBoxSizeMode.StretchImage;
+            pbCharacter.TabIndex = 41;
+            pbCharacter.TabStop = false;
+            // 
+            // gbModifiers
+            // 
+            gbModifiers.Controls.Add(lbQualificationPoints);
+            gbModifiers.Controls.Add(nudQP);
+            gbModifiers.Controls.Add(nudPercent);
+            gbModifiers.Controls.Add(lblPercent);
+            gbModifiers.Location = new Point(4, 405);
+            gbModifiers.Margin = new Padding(4, 3, 4, 3);
+            gbModifiers.Name = "gbModifiers";
+            gbModifiers.Padding = new Padding(4, 3, 4, 3);
+            gbModifiers.Size = new Size(131, 76);
+            gbModifiers.TabIndex = 34;
+            gbModifiers.TabStop = false;
+            gbModifiers.Text = "Modifiers";
+            // 
+            // lbQualificationPoints
+            // 
+            lbQualificationPoints.AutoSize = true;
+            lbQualificationPoints.Location = new Point(7, 23);
+            lbQualificationPoints.Margin = new Padding(4, 0, 4, 0);
+            lbQualificationPoints.Name = "lbQualificationPoints";
+            lbQualificationPoints.Size = new Size(23, 15);
+            lbQualificationPoints.TabIndex = 16;
+            lbQualificationPoints.Text = "QP";
+            // 
+            // nudQP
+            // 
+            nudQP.Location = new Point(10, 42);
+            nudQP.Margin = new Padding(4, 3, 4, 3);
+            nudQP.Maximum = new decimal(new int[] { 65535, 0, 0, 0 });
+            nudQP.Name = "nudQP";
+            nudQP.ReadOnly = true;
+            nudQP.Size = new Size(51, 23);
+            nudQP.TabIndex = 15;
+            // 
+            // nudPercent
+            // 
+            nudPercent.Location = new Point(69, 42);
+            nudPercent.Margin = new Padding(4, 3, 4, 3);
+            nudPercent.Maximum = new decimal(new int[] { 65535, 0, 0, 0 });
+            nudPercent.Name = "nudPercent";
+            nudPercent.ReadOnly = true;
+            nudPercent.Size = new Size(51, 23);
+            nudPercent.TabIndex = 21;
+            // 
+            // lblPercent
+            // 
+            lblPercent.AutoSize = true;
+            lblPercent.Location = new Point(65, 23);
+            lblPercent.Margin = new Padding(4, 0, 4, 0);
+            lblPercent.Name = "lblPercent";
+            lblPercent.Size = new Size(17, 15);
+            lblPercent.TabIndex = 22;
+            lblPercent.Text = "%";
+            // 
+            // gbFightValues
+            // 
+            gbFightValues.Controls.Add(nudAimV);
+            gbFightValues.Controls.Add(lblAimV);
+            gbFightValues.Controls.Add(lblIV);
+            gbFightValues.Controls.Add(nudIV);
+            gbFightValues.Controls.Add(nudDV);
+            gbFightValues.Controls.Add(lblDV);
+            gbFightValues.Controls.Add(nudAV);
+            gbFightValues.Controls.Add(lblAV);
+            gbFightValues.Location = new Point(141, 249);
+            gbFightValues.Margin = new Padding(4, 3, 4, 3);
+            gbFightValues.Name = "gbFightValues";
+            gbFightValues.Padding = new Padding(4, 3, 4, 3);
+            gbFightValues.Size = new Size(71, 232);
+            gbFightValues.TabIndex = 33;
+            gbFightValues.TabStop = false;
+            gbFightValues.Text = "Fight values";
+            // 
+            // nudAimV
+            // 
+            nudAimV.Location = new Point(10, 185);
+            nudAimV.Margin = new Padding(4, 3, 4, 3);
+            nudAimV.Maximum = new decimal(new int[] { 65535, 0, 0, 0 });
+            nudAimV.Name = "nudAimV";
+            nudAimV.ReadOnly = true;
+            nudAimV.Size = new Size(51, 23);
+            nudAimV.TabIndex = 23;
+            // 
+            // lblAimV
+            // 
+            lblAimV.AutoSize = true;
+            lblAimV.Location = new Point(7, 165);
+            lblAimV.Margin = new Padding(4, 0, 4, 0);
+            lblAimV.Name = "lblAimV";
+            lblAimV.Size = new Size(36, 15);
+            lblAimV.TabIndex = 24;
+            lblAimV.Text = "AimV";
+            // 
+            // lblIV
+            // 
+            lblIV.AutoSize = true;
+            lblIV.Location = new Point(12, 18);
+            lblIV.Margin = new Padding(4, 0, 4, 0);
+            lblIV.Name = "lblIV";
+            lblIV.Size = new Size(17, 15);
+            lblIV.TabIndex = 16;
+            lblIV.Text = "IV";
+            // 
+            // nudIV
+            // 
+            nudIV.Location = new Point(10, 37);
+            nudIV.Margin = new Padding(4, 3, 4, 3);
+            nudIV.Maximum = new decimal(new int[] { 65535, 0, 0, 0 });
+            nudIV.Name = "nudIV";
+            nudIV.ReadOnly = true;
+            nudIV.Size = new Size(51, 23);
+            nudIV.TabIndex = 15;
+            // 
+            // nudDV
+            // 
+            nudDV.Location = new Point(10, 135);
+            nudDV.Margin = new Padding(4, 3, 4, 3);
+            nudDV.Maximum = new decimal(new int[] { 65535, 0, 0, 0 });
+            nudDV.Name = "nudDV";
+            nudDV.ReadOnly = true;
+            nudDV.Size = new Size(51, 23);
+            nudDV.TabIndex = 19;
+            // 
+            // lblDV
+            // 
+            lblDV.AutoSize = true;
+            lblDV.Location = new Point(12, 117);
+            lblDV.Margin = new Padding(4, 0, 4, 0);
+            lblDV.Name = "lblDV";
+            lblDV.Size = new Size(22, 15);
+            lblDV.TabIndex = 20;
+            lblDV.Text = "DV";
+            // 
+            // nudAV
+            // 
+            nudAV.Location = new Point(10, 85);
+            nudAV.Margin = new Padding(4, 3, 4, 3);
+            nudAV.Maximum = new decimal(new int[] { 65535, 0, 0, 0 });
+            nudAV.Name = "nudAV";
+            nudAV.ReadOnly = true;
+            nudAV.Size = new Size(51, 23);
+            nudAV.TabIndex = 21;
+            // 
+            // lblAV
+            // 
+            lblAV.AutoSize = true;
+            lblAV.Location = new Point(12, 66);
+            lblAV.Margin = new Padding(4, 0, 4, 0);
+            lblAV.Name = "lblAV";
+            lblAV.Size = new Size(21, 15);
+            lblAV.TabIndex = 22;
+            lblAV.Text = "AV";
+            // 
+            // btnDone
+            // 
+            btnDone.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+            btnDone.DialogResult = DialogResult.OK;
+            btnDone.Location = new Point(1085, 628);
+            btnDone.Margin = new Padding(4, 3, 4, 3);
+            btnDone.Name = "btnDone";
+            btnDone.Size = new Size(93, 27);
+            btnDone.TabIndex = 33;
+            btnDone.Text = "Done";
+            btnDone.UseVisualStyleBackColor = true;
+            btnDone.Click += BtnDone_Click;
+            // 
+            // gbPsiManaAndMagicResistance
+            // 
+            gbPsiManaAndMagicResistance.Controls.Add(nudMentalMR);
+            gbPsiManaAndMagicResistance.Controls.Add(lblMentalMR);
+            gbPsiManaAndMagicResistance.Controls.Add(lblPsiPoints);
+            gbPsiManaAndMagicResistance.Controls.Add(nudPsiPoints);
+            gbPsiManaAndMagicResistance.Controls.Add(nudAstralMR);
+            gbPsiManaAndMagicResistance.Controls.Add(lblAstralMR);
+            gbPsiManaAndMagicResistance.Controls.Add(nudManaPoints);
+            gbPsiManaAndMagicResistance.Controls.Add(lblManaPoints);
+            gbPsiManaAndMagicResistance.Location = new Point(14, 487);
+            gbPsiManaAndMagicResistance.Margin = new Padding(4, 3, 4, 3);
+            gbPsiManaAndMagicResistance.Name = "gbPsiManaAndMagicResistance";
+            gbPsiManaAndMagicResistance.Padding = new Padding(4, 3, 4, 3);
+            gbPsiManaAndMagicResistance.Size = new Size(166, 144);
+            gbPsiManaAndMagicResistance.TabIndex = 32;
+            gbPsiManaAndMagicResistance.TabStop = false;
+            gbPsiManaAndMagicResistance.Text = "Psi, Mana, Magic resistance";
+            // 
+            // nudMentalMR
+            // 
+            nudMentalMR.Location = new Point(98, 98);
+            nudMentalMR.Margin = new Padding(4, 3, 4, 3);
+            nudMentalMR.Maximum = new decimal(new int[] { 65535, 0, 0, 0 });
+            nudMentalMR.Name = "nudMentalMR";
+            nudMentalMR.ReadOnly = true;
+            nudMentalMR.Size = new Size(51, 23);
+            nudMentalMR.TabIndex = 23;
+            // 
+            // lblMentalMR
+            // 
+            lblMentalMR.AutoSize = true;
+            lblMentalMR.Location = new Point(94, 80);
+            lblMentalMR.Margin = new Padding(4, 0, 4, 0);
+            lblMentalMR.Name = "lblMentalMR";
+            lblMentalMR.Size = new Size(65, 15);
+            lblMentalMR.TabIndex = 24;
+            lblMentalMR.Text = "Mental MR";
+            // 
+            // lblPsiPoints
+            // 
+            lblPsiPoints.AutoSize = true;
+            lblPsiPoints.Location = new Point(7, 35);
+            lblPsiPoints.Margin = new Padding(4, 0, 4, 0);
+            lblPsiPoints.Name = "lblPsiPoints";
+            lblPsiPoints.Size = new Size(58, 15);
+            lblPsiPoints.TabIndex = 16;
+            lblPsiPoints.Text = "Psi points";
+            // 
+            // nudPsiPoints
+            // 
+            nudPsiPoints.Location = new Point(10, 53);
+            nudPsiPoints.Margin = new Padding(4, 3, 4, 3);
+            nudPsiPoints.Maximum = new decimal(new int[] { 65535, 0, 0, 0 });
+            nudPsiPoints.Name = "nudPsiPoints";
+            nudPsiPoints.ReadOnly = true;
+            nudPsiPoints.Size = new Size(51, 23);
+            nudPsiPoints.TabIndex = 15;
+            // 
+            // nudAstralMR
+            // 
+            nudAstralMR.Location = new Point(98, 53);
+            nudAstralMR.Margin = new Padding(4, 3, 4, 3);
+            nudAstralMR.Maximum = new decimal(new int[] { 65535, 0, 0, 0 });
+            nudAstralMR.Name = "nudAstralMR";
+            nudAstralMR.ReadOnly = true;
+            nudAstralMR.Size = new Size(51, 23);
+            nudAstralMR.TabIndex = 19;
+            // 
+            // lblAstralMR
+            // 
+            lblAstralMR.AutoSize = true;
+            lblAstralMR.Location = new Point(94, 35);
+            lblAstralMR.Margin = new Padding(4, 0, 4, 0);
+            lblAstralMR.Name = "lblAstralMR";
+            lblAstralMR.Size = new Size(58, 15);
+            lblAstralMR.TabIndex = 20;
+            lblAstralMR.Text = "Astral MR";
+            // 
+            // nudManaPoints
+            // 
+            nudManaPoints.Location = new Point(13, 98);
+            nudManaPoints.Margin = new Padding(4, 3, 4, 3);
+            nudManaPoints.Maximum = new decimal(new int[] { 65535, 0, 0, 0 });
+            nudManaPoints.Name = "nudManaPoints";
+            nudManaPoints.ReadOnly = true;
+            nudManaPoints.Size = new Size(51, 23);
+            nudManaPoints.TabIndex = 21;
+            // 
+            // lblManaPoints
+            // 
+            lblManaPoints.AutoSize = true;
+            lblManaPoints.Location = new Point(9, 80);
+            lblManaPoints.Margin = new Padding(4, 0, 4, 0);
+            lblManaPoints.Name = "lblManaPoints";
+            lblManaPoints.Size = new Size(73, 15);
+            lblManaPoints.TabIndex = 22;
+            lblManaPoints.Text = "Mana points";
+            // 
+            // lvQualifications
+            // 
+            lvQualifications.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left;
+            lvQualifications.Columns.AddRange(new ColumnHeader[] { chQualifications, chLevel });
+            lvQualifications.FullRowSelect = true;
+            lvQualifications.Location = new Point(441, 22);
+            lvQualifications.Margin = new Padding(4, 3, 4, 3);
+            lvQualifications.Name = "lvQualifications";
+            lvQualifications.Size = new Size(300, 594);
+            lvQualifications.TabIndex = 31;
+            lvQualifications.UseCompatibleStateImageBehavior = false;
+            lvQualifications.View = View.Details;
+            // 
+            // chQualifications
+            // 
+            chQualifications.Text = "Qualifications";
+            chQualifications.Width = 154;
+            // 
+            // chLevel
+            // 
+            chLevel.Text = "Level / %";
+            chLevel.Width = 57;
+            // 
+            // gbLifePoints
+            // 
+            gbLifePoints.Controls.Add(lbLifePoints);
+            gbLifePoints.Controls.Add(nudLifePoints);
+            gbLifePoints.Controls.Add(nudPainTolerancePoints);
+            gbLifePoints.Controls.Add(lblPainTolerancePoints);
+            gbLifePoints.Location = new Point(4, 245);
+            gbLifePoints.Margin = new Padding(4, 3, 4, 3);
+            gbLifePoints.Name = "gbLifePoints";
+            gbLifePoints.Padding = new Padding(4, 3, 4, 3);
+            gbLifePoints.Size = new Size(131, 149);
+            gbLifePoints.TabIndex = 30;
+            gbLifePoints.TabStop = false;
+            gbLifePoints.Text = "Life points and pain tolerance";
+            // 
+            // lbLifePoints
+            // 
+            lbLifePoints.AutoSize = true;
+            lbLifePoints.Location = new Point(7, 43);
+            lbLifePoints.Margin = new Padding(4, 0, 4, 0);
+            lbLifePoints.Name = "lbLifePoints";
+            lbLifePoints.Size = new Size(62, 15);
+            lbLifePoints.TabIndex = 16;
+            lbLifePoints.Text = "Life points";
+            // 
+            // nudLifePoints
+            // 
+            nudLifePoints.Location = new Point(10, 61);
+            nudLifePoints.Margin = new Padding(4, 3, 4, 3);
+            nudLifePoints.Maximum = new decimal(new int[] { 65535, 0, 0, 0 });
+            nudLifePoints.Name = "nudLifePoints";
+            nudLifePoints.ReadOnly = true;
+            nudLifePoints.Size = new Size(51, 23);
+            nudLifePoints.TabIndex = 15;
+            // 
+            // nudPainTolerancePoints
+            // 
+            nudPainTolerancePoints.Location = new Point(10, 114);
+            nudPainTolerancePoints.Margin = new Padding(4, 3, 4, 3);
+            nudPainTolerancePoints.Maximum = new decimal(new int[] { 65535, 0, 0, 0 });
+            nudPainTolerancePoints.Name = "nudPainTolerancePoints";
+            nudPainTolerancePoints.ReadOnly = true;
+            nudPainTolerancePoints.Size = new Size(51, 23);
+            nudPainTolerancePoints.TabIndex = 17;
+            // 
+            // lblPainTolerancePoints
+            // 
+            lblPainTolerancePoints.AutoSize = true;
+            lblPainTolerancePoints.Location = new Point(7, 96);
+            lblPainTolerancePoints.Margin = new Padding(4, 0, 4, 0);
+            lblPainTolerancePoints.Name = "lblPainTolerancePoints";
+            lblPainTolerancePoints.Size = new Size(118, 15);
+            lblPainTolerancePoints.TabIndex = 18;
+            lblPainTolerancePoints.Text = "Pain tolerance points";
+            // 
+            // gbAbilities
+            // 
+            gbAbilities.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left;
+            gbAbilities.Controls.Add(lblEruditionDiceThrow);
+            gbAbilities.Controls.Add(lblBraveryDiceThrow);
+            gbAbilities.Controls.Add(lblGoldDiceThrow);
+            gbAbilities.Controls.Add(lblErudition);
+            gbAbilities.Controls.Add(nudErudition);
+            gbAbilities.Controls.Add(lblBravery);
+            gbAbilities.Controls.Add(nudBravery);
+            gbAbilities.Controls.Add(lblGold);
+            gbAbilities.Controls.Add(lblAstralDiceThrow);
+            gbAbilities.Controls.Add(nudGold);
+            gbAbilities.Controls.Add(lblWillPowerDiceThrow);
+            gbAbilities.Controls.Add(lblIntelligenceDiceThrow);
+            gbAbilities.Controls.Add(lblBeautyDiceThrow);
+            gbAbilities.Controls.Add(lblHealthDiceThrow);
+            gbAbilities.Controls.Add(lblStaminaDiceThrow);
+            gbAbilities.Controls.Add(lblDexterityDiceThrow);
+            gbAbilities.Controls.Add(lblSpeedDiceThrow);
+            gbAbilities.Controls.Add(lblStrengthDiceThrow);
+            gbAbilities.Controls.Add(lblStrength);
+            gbAbilities.Controls.Add(lblAstral);
+            gbAbilities.Controls.Add(nudStrength);
+            gbAbilities.Controls.Add(nudAstral);
+            gbAbilities.Controls.Add(nudSpeed);
+            gbAbilities.Controls.Add(lblWillPower);
+            gbAbilities.Controls.Add(lblSpeed);
+            gbAbilities.Controls.Add(nudWillPower);
+            gbAbilities.Controls.Add(nudDexterity);
+            gbAbilities.Controls.Add(lblIntelligence);
+            gbAbilities.Controls.Add(lblDexterity);
+            gbAbilities.Controls.Add(nudIntelligence);
+            gbAbilities.Controls.Add(nudHealth);
+            gbAbilities.Controls.Add(lblBeauty);
+            gbAbilities.Controls.Add(lblHealth);
+            gbAbilities.Controls.Add(nudBeauty);
+            gbAbilities.Controls.Add(nudStamina);
+            gbAbilities.Controls.Add(lblStamina);
+            gbAbilities.Location = new Point(356, 18);
+            gbAbilities.Margin = new Padding(4, 3, 4, 3);
+            gbAbilities.Name = "gbAbilities";
+            gbAbilities.Padding = new Padding(4, 3, 4, 3);
+            gbAbilities.Size = new Size(78, 598);
+            gbAbilities.TabIndex = 29;
+            gbAbilities.TabStop = false;
+            gbAbilities.Text = "Abilities";
+            // 
+            // lblEruditionDiceThrow
+            // 
+            lblEruditionDiceThrow.AutoSize = true;
+            lblEruditionDiceThrow.Location = new Point(59, 562);
+            lblEruditionDiceThrow.Margin = new Padding(4, 0, 4, 0);
+            lblEruditionDiceThrow.Name = "lblEruditionDiceThrow";
+            lblEruditionDiceThrow.Size = new Size(0, 15);
+            lblEruditionDiceThrow.TabIndex = 44;
+            // 
+            // lblBraveryDiceThrow
+            // 
+            lblBraveryDiceThrow.AutoSize = true;
+            lblBraveryDiceThrow.Location = new Point(59, 513);
+            lblBraveryDiceThrow.Margin = new Padding(4, 0, 4, 0);
+            lblBraveryDiceThrow.Name = "lblBraveryDiceThrow";
+            lblBraveryDiceThrow.Size = new Size(0, 15);
+            lblBraveryDiceThrow.TabIndex = 43;
+            // 
+            // lblGoldDiceThrow
+            // 
+            lblGoldDiceThrow.AutoSize = true;
+            lblGoldDiceThrow.Location = new Point(59, 465);
+            lblGoldDiceThrow.Margin = new Padding(4, 0, 4, 0);
+            lblGoldDiceThrow.Name = "lblGoldDiceThrow";
+            lblGoldDiceThrow.Size = new Size(0, 15);
+            lblGoldDiceThrow.TabIndex = 42;
+            // 
+            // lblErudition
+            // 
+            lblErudition.AutoSize = true;
+            lblErudition.Location = new Point(5, 541);
+            lblErudition.Margin = new Padding(4, 0, 4, 0);
+            lblErudition.Name = "lblErudition";
+            lblErudition.Size = new Size(55, 15);
+            lblErudition.TabIndex = 40;
+            lblErudition.Text = "Erudition";
+            // 
+            // nudErudition
+            // 
+            nudErudition.Location = new Point(7, 560);
+            nudErudition.Margin = new Padding(4, 3, 4, 3);
+            nudErudition.Maximum = new decimal(new int[] { 25, 0, 0, 0 });
+            nudErudition.Name = "nudErudition";
+            nudErudition.ReadOnly = true;
+            nudErudition.Size = new Size(51, 23);
+            nudErudition.TabIndex = 41;
+            // 
+            // lblBravery
+            // 
+            lblBravery.AutoSize = true;
+            lblBravery.Location = new Point(5, 493);
+            lblBravery.Margin = new Padding(4, 0, 4, 0);
+            lblBravery.Name = "lblBravery";
+            lblBravery.Size = new Size(46, 15);
+            lblBravery.TabIndex = 38;
+            lblBravery.Text = "Bravery";
+            // 
+            // nudBravery
+            // 
+            nudBravery.Location = new Point(7, 511);
+            nudBravery.Margin = new Padding(4, 3, 4, 3);
+            nudBravery.Maximum = new decimal(new int[] { 25, 0, 0, 0 });
+            nudBravery.Name = "nudBravery";
+            nudBravery.ReadOnly = true;
+            nudBravery.Size = new Size(51, 23);
+            nudBravery.TabIndex = 39;
+            // 
+            // lblGold
+            // 
+            lblGold.AutoSize = true;
+            lblGold.Location = new Point(1, 444);
+            lblGold.Margin = new Padding(4, 0, 4, 0);
+            lblGold.Name = "lblGold";
+            lblGold.Size = new Size(32, 15);
+            lblGold.TabIndex = 23;
+            lblGold.Text = "Gold";
+            // 
+            // lblAstralDiceThrow
+            // 
+            lblAstralDiceThrow.AutoSize = true;
+            lblAstralDiceThrow.Location = new Point(59, 419);
+            lblAstralDiceThrow.Margin = new Padding(4, 0, 4, 0);
+            lblAstralDiceThrow.Name = "lblAstralDiceThrow";
+            lblAstralDiceThrow.Size = new Size(0, 15);
+            lblAstralDiceThrow.TabIndex = 37;
+            // 
+            // nudGold
+            // 
+            nudGold.Location = new Point(4, 463);
+            nudGold.Margin = new Padding(4, 3, 4, 3);
+            nudGold.Maximum = new decimal(new int[] { 1000, 0, 0, 0 });
+            nudGold.Name = "nudGold";
+            nudGold.ReadOnly = true;
+            nudGold.Size = new Size(51, 23);
+            nudGold.TabIndex = 29;
+            // 
+            // lblWillPowerDiceThrow
+            // 
+            lblWillPowerDiceThrow.AutoSize = true;
+            lblWillPowerDiceThrow.Location = new Point(59, 370);
+            lblWillPowerDiceThrow.Margin = new Padding(4, 0, 4, 0);
+            lblWillPowerDiceThrow.Name = "lblWillPowerDiceThrow";
+            lblWillPowerDiceThrow.Size = new Size(0, 15);
+            lblWillPowerDiceThrow.TabIndex = 36;
+            // 
+            // lblIntelligenceDiceThrow
+            // 
+            lblIntelligenceDiceThrow.AutoSize = true;
+            lblIntelligenceDiceThrow.Location = new Point(59, 325);
+            lblIntelligenceDiceThrow.Margin = new Padding(4, 0, 4, 0);
+            lblIntelligenceDiceThrow.Name = "lblIntelligenceDiceThrow";
+            lblIntelligenceDiceThrow.Size = new Size(0, 15);
+            lblIntelligenceDiceThrow.TabIndex = 35;
+            // 
+            // lblBeautyDiceThrow
+            // 
+            lblBeautyDiceThrow.AutoSize = true;
+            lblBeautyDiceThrow.Location = new Point(59, 276);
+            lblBeautyDiceThrow.Margin = new Padding(4, 0, 4, 0);
+            lblBeautyDiceThrow.Name = "lblBeautyDiceThrow";
+            lblBeautyDiceThrow.Size = new Size(0, 15);
+            lblBeautyDiceThrow.TabIndex = 34;
+            // 
+            // lblHealthDiceThrow
+            // 
+            lblHealthDiceThrow.AutoSize = true;
+            lblHealthDiceThrow.Location = new Point(59, 228);
+            lblHealthDiceThrow.Margin = new Padding(4, 0, 4, 0);
+            lblHealthDiceThrow.Name = "lblHealthDiceThrow";
+            lblHealthDiceThrow.Size = new Size(0, 15);
+            lblHealthDiceThrow.TabIndex = 33;
+            // 
+            // lblStaminaDiceThrow
+            // 
+            lblStaminaDiceThrow.AutoSize = true;
+            lblStaminaDiceThrow.Location = new Point(59, 181);
+            lblStaminaDiceThrow.Margin = new Padding(4, 0, 4, 0);
+            lblStaminaDiceThrow.Name = "lblStaminaDiceThrow";
+            lblStaminaDiceThrow.Size = new Size(0, 15);
+            lblStaminaDiceThrow.TabIndex = 32;
+            // 
+            // lblDexterityDiceThrow
+            // 
+            lblDexterityDiceThrow.AutoSize = true;
+            lblDexterityDiceThrow.Location = new Point(59, 134);
+            lblDexterityDiceThrow.Margin = new Padding(4, 0, 4, 0);
+            lblDexterityDiceThrow.Name = "lblDexterityDiceThrow";
+            lblDexterityDiceThrow.Size = new Size(0, 15);
+            lblDexterityDiceThrow.TabIndex = 31;
+            // 
+            // lblSpeedDiceThrow
+            // 
+            lblSpeedDiceThrow.AutoSize = true;
+            lblSpeedDiceThrow.Location = new Point(59, 87);
+            lblSpeedDiceThrow.Margin = new Padding(4, 0, 4, 0);
+            lblSpeedDiceThrow.Name = "lblSpeedDiceThrow";
+            lblSpeedDiceThrow.Size = new Size(0, 15);
+            lblSpeedDiceThrow.TabIndex = 30;
+            // 
+            // lblStrengthDiceThrow
+            // 
+            lblStrengthDiceThrow.AutoSize = true;
+            lblStrengthDiceThrow.Location = new Point(59, 40);
+            lblStrengthDiceThrow.Margin = new Padding(4, 0, 4, 0);
+            lblStrengthDiceThrow.Name = "lblStrengthDiceThrow";
+            lblStrengthDiceThrow.Size = new Size(0, 15);
+            lblStrengthDiceThrow.TabIndex = 29;
+            // 
+            // lblStrength
+            // 
+            lblStrength.AutoSize = true;
+            lblStrength.Location = new Point(0, 20);
+            lblStrength.Margin = new Padding(4, 0, 4, 0);
+            lblStrength.Name = "lblStrength";
+            lblStrength.Size = new Size(52, 15);
+            lblStrength.TabIndex = 6;
+            lblStrength.Text = "Strength";
+            // 
+            // lblAstral
+            // 
+            lblAstral.AutoSize = true;
+            lblAstral.Location = new Point(0, 397);
+            lblAstral.Margin = new Padding(4, 0, 4, 0);
+            lblAstral.Name = "lblAstral";
+            lblAstral.Size = new Size(37, 15);
+            lblAstral.TabIndex = 28;
+            lblAstral.Text = "Astral";
+            // 
+            // nudStrength
+            // 
+            nudStrength.Location = new Point(4, 38);
+            nudStrength.Margin = new Padding(4, 3, 4, 3);
+            nudStrength.Maximum = new decimal(new int[] { 25, 0, 0, 0 });
+            nudStrength.Name = "nudStrength";
+            nudStrength.Size = new Size(51, 23);
+            nudStrength.TabIndex = 5;
+            nudStrength.ValueChanged += NudStrength_ValueChanged;
+            // 
+            // nudAstral
+            // 
+            nudAstral.Location = new Point(4, 414);
+            nudAstral.Margin = new Padding(4, 3, 4, 3);
+            nudAstral.Maximum = new decimal(new int[] { 25, 0, 0, 0 });
+            nudAstral.Name = "nudAstral";
+            nudAstral.Size = new Size(51, 23);
+            nudAstral.TabIndex = 27;
+            nudAstral.ValueChanged += NudAstral_ValueChanged;
+            // 
+            // nudSpeed
+            // 
+            nudSpeed.Location = new Point(4, 84);
+            nudSpeed.Margin = new Padding(4, 3, 4, 3);
+            nudSpeed.Maximum = new decimal(new int[] { 25, 0, 0, 0 });
+            nudSpeed.Name = "nudSpeed";
+            nudSpeed.Size = new Size(51, 23);
+            nudSpeed.TabIndex = 7;
+            nudSpeed.ValueChanged += NudSpeed_ValueChanged;
+            // 
+            // lblWillPower
+            // 
+            lblWillPower.AutoSize = true;
+            lblWillPower.Location = new Point(0, 351);
+            lblWillPower.Margin = new Padding(4, 0, 4, 0);
+            lblWillPower.Name = "lblWillPower";
+            lblWillPower.Size = new Size(60, 15);
+            lblWillPower.TabIndex = 26;
+            lblWillPower.Text = "WillPower";
+            // 
+            // lblSpeed
+            // 
+            lblSpeed.AutoSize = true;
+            lblSpeed.Location = new Point(0, 67);
+            lblSpeed.Margin = new Padding(4, 0, 4, 0);
+            lblSpeed.Name = "lblSpeed";
+            lblSpeed.Size = new Size(39, 15);
+            lblSpeed.TabIndex = 8;
+            lblSpeed.Text = "Speed";
+            // 
+            // nudWillPower
+            // 
+            nudWillPower.Location = new Point(4, 368);
+            nudWillPower.Margin = new Padding(4, 3, 4, 3);
+            nudWillPower.Maximum = new decimal(new int[] { 25, 0, 0, 0 });
+            nudWillPower.Name = "nudWillPower";
+            nudWillPower.Size = new Size(51, 23);
+            nudWillPower.TabIndex = 25;
+            nudWillPower.ValueChanged += NudWillPower_ValueChanged;
+            // 
+            // nudDexterity
+            // 
+            nudDexterity.Location = new Point(4, 132);
+            nudDexterity.Margin = new Padding(4, 3, 4, 3);
+            nudDexterity.Maximum = new decimal(new int[] { 25, 0, 0, 0 });
+            nudDexterity.Name = "nudDexterity";
+            nudDexterity.Size = new Size(51, 23);
+            nudDexterity.TabIndex = 9;
+            nudDexterity.ValueChanged += NudDexterity_ValueChanged;
+            // 
+            // lblIntelligence
+            // 
+            lblIntelligence.AutoSize = true;
+            lblIntelligence.Location = new Point(0, 303);
+            lblIntelligence.Margin = new Padding(4, 0, 4, 0);
+            lblIntelligence.Name = "lblIntelligence";
+            lblIntelligence.Size = new Size(68, 15);
+            lblIntelligence.TabIndex = 24;
+            lblIntelligence.Text = "Intelligence";
+            // 
+            // lblDexterity
+            // 
+            lblDexterity.AutoSize = true;
+            lblDexterity.Location = new Point(0, 114);
+            lblDexterity.Margin = new Padding(4, 0, 4, 0);
+            lblDexterity.Name = "lblDexterity";
+            lblDexterity.Size = new Size(53, 15);
+            lblDexterity.TabIndex = 10;
+            lblDexterity.Text = "Dexterity";
+            // 
+            // nudIntelligence
+            // 
+            nudIntelligence.Location = new Point(4, 321);
+            nudIntelligence.Margin = new Padding(4, 3, 4, 3);
+            nudIntelligence.Maximum = new decimal(new int[] { 25, 0, 0, 0 });
+            nudIntelligence.Name = "nudIntelligence";
+            nudIntelligence.Size = new Size(51, 23);
+            nudIntelligence.TabIndex = 23;
+            nudIntelligence.ValueChanged += NudIntelligence_ValueChanged;
+            // 
+            // nudHealth
+            // 
+            nudHealth.Location = new Point(4, 226);
+            nudHealth.Margin = new Padding(4, 3, 4, 3);
+            nudHealth.Maximum = new decimal(new int[] { 25, 0, 0, 0 });
+            nudHealth.Name = "nudHealth";
+            nudHealth.Size = new Size(51, 23);
+            nudHealth.TabIndex = 11;
+            nudHealth.ValueChanged += NudHealth_ValueChanged;
+            // 
+            // lblBeauty
+            // 
+            lblBeauty.AutoSize = true;
+            lblBeauty.Location = new Point(0, 256);
+            lblBeauty.Margin = new Padding(4, 0, 4, 0);
+            lblBeauty.Name = "lblBeauty";
+            lblBeauty.Size = new Size(43, 15);
+            lblBeauty.TabIndex = 22;
+            lblBeauty.Text = "Beauty";
+            // 
+            // lblHealth
+            // 
+            lblHealth.AutoSize = true;
+            lblHealth.Location = new Point(0, 209);
+            lblHealth.Margin = new Padding(4, 0, 4, 0);
+            lblHealth.Name = "lblHealth";
+            lblHealth.Size = new Size(42, 15);
+            lblHealth.TabIndex = 12;
+            lblHealth.Text = "Health";
+            // 
+            // nudBeauty
+            // 
+            nudBeauty.Location = new Point(4, 273);
+            nudBeauty.Margin = new Padding(4, 3, 4, 3);
+            nudBeauty.Maximum = new decimal(new int[] { 25, 0, 0, 0 });
+            nudBeauty.Name = "nudBeauty";
+            nudBeauty.Size = new Size(51, 23);
+            nudBeauty.TabIndex = 21;
+            // 
+            // nudStamina
+            // 
+            nudStamina.Location = new Point(4, 179);
+            nudStamina.Margin = new Padding(4, 3, 4, 3);
+            nudStamina.Maximum = new decimal(new int[] { 25, 0, 0, 0 });
+            nudStamina.Name = "nudStamina";
+            nudStamina.Size = new Size(51, 23);
+            nudStamina.TabIndex = 13;
+            nudStamina.ValueChanged += NudStamina_ValueChanged;
+            // 
+            // lblStamina
+            // 
+            lblStamina.AutoSize = true;
+            lblStamina.Location = new Point(0, 162);
+            lblStamina.Margin = new Padding(4, 0, 4, 0);
+            lblStamina.Name = "lblStamina";
+            lblStamina.Size = new Size(50, 15);
+            lblStamina.TabIndex = 14;
+            lblStamina.Text = "Stamina";
+            // 
+            // btnGenerate
+            // 
+            btnGenerate.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+            btnGenerate.Location = new Point(985, 628);
+            btnGenerate.Margin = new Padding(4, 3, 4, 3);
+            btnGenerate.Name = "btnGenerate";
+            btnGenerate.Size = new Size(93, 27);
+            btnGenerate.TabIndex = 4;
+            btnGenerate.Text = "Generate";
+            btnGenerate.UseVisualStyleBackColor = true;
+            btnGenerate.Click += BtnGenerate_Click;
+            // 
+            // CharcterGenerator
+            // 
+            AcceptButton = btnGenerate;
+            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleMode = AutoScaleMode.Font;
+            ClientSize = new Size(1188, 661);
+            Controls.Add(panelMain);
+            Margin = new Padding(4, 3, 4, 3);
+            Name = "CharcterGenerator";
+            StartPosition = FormStartPosition.CenterScreen;
+            Text = "Charcter Generator";
+            Load += CharcterGenerator_Load;
+            panelMain.ResumeLayout(false);
+            gbCharacter.ResumeLayout(false);
+            gbGeneral.ResumeLayout(false);
+            gbGeneral.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)nudSecondaryCasteLevel).EndInit();
+            ((System.ComponentModel.ISupportInitialize)nudLevel).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pbCharacter).EndInit();
+            gbModifiers.ResumeLayout(false);
+            gbModifiers.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)nudQP).EndInit();
+            ((System.ComponentModel.ISupportInitialize)nudPercent).EndInit();
+            gbFightValues.ResumeLayout(false);
+            gbFightValues.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)nudAimV).EndInit();
+            ((System.ComponentModel.ISupportInitialize)nudIV).EndInit();
+            ((System.ComponentModel.ISupportInitialize)nudDV).EndInit();
+            ((System.ComponentModel.ISupportInitialize)nudAV).EndInit();
+            gbPsiManaAndMagicResistance.ResumeLayout(false);
+            gbPsiManaAndMagicResistance.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)nudMentalMR).EndInit();
+            ((System.ComponentModel.ISupportInitialize)nudPsiPoints).EndInit();
+            ((System.ComponentModel.ISupportInitialize)nudAstralMR).EndInit();
+            ((System.ComponentModel.ISupportInitialize)nudManaPoints).EndInit();
+            gbLifePoints.ResumeLayout(false);
+            gbLifePoints.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)nudLifePoints).EndInit();
+            ((System.ComponentModel.ISupportInitialize)nudPainTolerancePoints).EndInit();
+            gbAbilities.ResumeLayout(false);
+            gbAbilities.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)nudErudition).EndInit();
+            ((System.ComponentModel.ISupportInitialize)nudBravery).EndInit();
+            ((System.ComponentModel.ISupportInitialize)nudGold).EndInit();
+            ((System.ComponentModel.ISupportInitialize)nudStrength).EndInit();
+            ((System.ComponentModel.ISupportInitialize)nudAstral).EndInit();
+            ((System.ComponentModel.ISupportInitialize)nudSpeed).EndInit();
+            ((System.ComponentModel.ISupportInitialize)nudWillPower).EndInit();
+            ((System.ComponentModel.ISupportInitialize)nudDexterity).EndInit();
+            ((System.ComponentModel.ISupportInitialize)nudIntelligence).EndInit();
+            ((System.ComponentModel.ISupportInitialize)nudHealth).EndInit();
+            ((System.ComponentModel.ISupportInitialize)nudBeauty).EndInit();
+            ((System.ComponentModel.ISupportInitialize)nudStamina).EndInit();
+            ResumeLayout(false);
 
-		}
+        }
 
-		#endregion
+        #endregion
 
-		private System.Windows.Forms.Panel panelMain;
+        private System.Windows.Forms.Panel panelMain;
 		private System.Windows.Forms.ComboBox cbRace;
 		private System.Windows.Forms.Label lblRace;
 		private System.Windows.Forms.ComboBox cbCaste;

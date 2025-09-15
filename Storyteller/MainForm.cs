@@ -1,18 +1,17 @@
 ﻿using FontAwesome.Sharp;
-using MagusCharacterGenerator.Castes;
-using MagusCharacterGenerator.GameSystem;
+using M.A.G.U.S.Classes;
+using M.A.G.U.S.GameSystem;
 using Microsoft.Win32;
-using Mtf.Helper;
-using Mtf.Languages;
-using Mtf.Languages.Utils;
+using Mtf.Extensions;
+using Mtf.LanguageService;
+using Mtf.LanguageService.Enums;
+using Mtf.LanguageService.Windows.Forms;
+using Mtf.MessageBoxes;
+using Mtf.Windows.Forms.Extensions.Services;
 using Storyteller;
 using Storyteller.Converter;
 using Storyteller.Media;
-using System;
-using System.Drawing;
-using System.IO;
 using System.Runtime.InteropServices;
-using System.Windows.Forms;
 
 namespace StoryTeller
 {
@@ -49,7 +48,7 @@ namespace StoryTeller
 			imageList.Images.Add("2", IconChar.FileAudio.IconCharToBitmap(16, Color.LightSeaGreen));
 			imageList.Images.Add("3", IconChar.User.IconCharToBitmap(16, Color.BlanchedAlmond));
 
-			DirectoryExtension.CreateApplicationDirectories();
+            DirectoryUtils.CreateApplicationDirectories();
 
 			tvImages.Nodes.GetFilesAndFolders(PathProvider.Maps, 1, ExtensionProvider.ImagesFilter);
 			tvMusic.Nodes.GetFilesAndFolders(PathProvider.Music, 2, ExtensionProvider.AudioFilter);
@@ -70,7 +69,7 @@ namespace StoryTeller
 
 			GetLanguages();
 
-			Lng.Translate(this);
+            Translator.Translate(this);
 
 			LoadStory(rtbStory);
 
@@ -93,7 +92,7 @@ namespace StoryTeller
 				menuItem.Click += (object sender, EventArgs e) =>
 				{
 					var lng = (Language)Enum.Parse(typeof(Language), language);
-					TranslationCore.ChangeToLanguage(lng);
+					Lng.DefaultLanguage = lng;
 					ChangeLanguage = true;
 					Close();
 				};
@@ -140,7 +139,7 @@ namespace StoryTeller
 
 		private void FillListViewGroup(ListView listView, string listViewGroupName)
 		{
-			var types = typeof(Caste).GetTypesInNamespace($"MagusCharacterGenerator.Things.{listViewGroupName}");
+			var types = typeof(Class).GetTypesInNamespace($"M.A.G.U.S.Things.{listViewGroupName}");
 			int index = 0;
 			foreach (var type in types)
 			{

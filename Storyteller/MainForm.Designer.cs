@@ -28,1109 +28,1121 @@
         /// </summary>
         private void InitializeComponent()
         {
-			this.components = new System.ComponentModel.Container();
-			System.Windows.Forms.ListViewGroup listViewGroup1 = new System.Windows.Forms.ListViewGroup("Accomodation", System.Windows.Forms.HorizontalAlignment.Left);
-			System.Windows.Forms.ListViewGroup listViewGroup2 = new System.Windows.Forms.ListViewGroup("Animals", System.Windows.Forms.HorizontalAlignment.Left);
-			System.Windows.Forms.ListViewGroup listViewGroup3 = new System.Windows.Forms.ListViewGroup("Clothes", System.Windows.Forms.HorizontalAlignment.Left);
-			System.Windows.Forms.ListViewGroup listViewGroup4 = new System.Windows.Forms.ListViewGroup("Debauchery", System.Windows.Forms.HorizontalAlignment.Left);
-			System.Windows.Forms.ListViewGroup listViewGroup5 = new System.Windows.Forms.ListViewGroup("Food", System.Windows.Forms.HorizontalAlignment.Left);
-			System.Windows.Forms.ListViewGroup listViewGroup6 = new System.Windows.Forms.ListViewGroup("Other", System.Windows.Forms.HorizontalAlignment.Left);
-			System.Windows.Forms.ListViewGroup listViewGroup7 = new System.Windows.Forms.ListViewGroup("Trappings", System.Windows.Forms.HorizontalAlignment.Left);
-			System.Windows.Forms.ListViewGroup listViewGroup8 = new System.Windows.Forms.ListViewGroup("Travelling", System.Windows.Forms.HorizontalAlignment.Left);
-			this.menuStrip = new System.Windows.Forms.MenuStrip();
-			this.tsmiNew = new System.Windows.Forms.ToolStripMenuItem();
-			this.tsmiCharacter = new System.Windows.Forms.ToolStripMenuItem();
-			this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-			this.tsmiCharacterSheetOdt = new System.Windows.Forms.ToolStripMenuItem();
-			this.tsmiCharacterSheetPdf = new System.Windows.Forms.ToolStripMenuItem();
-			this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
-			this.tsmiExit = new System.Windows.Forms.ToolStripMenuItem();
-			this.tsmiAccessories = new System.Windows.Forms.ToolStripMenuItem();
-			this.tsmiArkenForge = new System.Windows.Forms.ToolStripMenuItem();
-			this.tsmiGetSounds = new System.Windows.Forms.ToolStripMenuItem();
-			this.tsmiGetImages = new System.Windows.Forms.ToolStripMenuItem();
-			this.tsmiGoogle = new System.Windows.Forms.ToolStripMenuItem();
-			this.tsmiPinterest = new System.Windows.Forms.ToolStripMenuItem();
-			this.tsmiCastes = new System.Windows.Forms.ToolStripMenuItem();
-			this.tsmiKranichWarlock = new System.Windows.Forms.ToolStripMenuItem();
-			this.tsmiNastarPriest = new System.Windows.Forms.ToolStripMenuItem();
-			this.tsmiVelarPriest = new System.Windows.Forms.ToolStripMenuItem();
-			this.tsmiOther = new System.Windows.Forms.ToolStripMenuItem();
-			this.tsmiHttpsKalandozokHu = new System.Windows.Forms.ToolStripMenuItem();
-			this.tsmiWeaponsAndArmors = new System.Windows.Forms.ToolStripMenuItem();
-			this.racesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.tsmiSettings = new System.Windows.Forms.ToolStripMenuItem();
-			this.tsmiLanguages = new System.Windows.Forms.ToolStripMenuItem();
-			this.tsmiHelp = new System.Windows.Forms.ToolStripMenuItem();
-			this.tsmiAbout = new System.Windows.Forms.ToolStripMenuItem();
-			this.statusStrip = new System.Windows.Forms.StatusStrip();
-			this.MainPanel = new System.Windows.Forms.Panel();
-			this.tabControl = new System.Windows.Forms.TabControl();
-			this.tpStory = new System.Windows.Forms.TabPage();
-			this.pStory = new System.Windows.Forms.Panel();
-			this.rtbStory = new System.Windows.Forms.RichTextBox();
-			this.tpCharacters = new System.Windows.Forms.TabPage();
-			this.pCharacters = new System.Windows.Forms.Panel();
-			this.pCharacterContent = new System.Windows.Forms.Panel();
-			this.splitter2 = new System.Windows.Forms.Splitter();
-			this.pCharacterList = new System.Windows.Forms.Panel();
-			this.tvCharacters = new System.Windows.Forms.TreeView();
-			this.imageList = new System.Windows.Forms.ImageList(this.components);
-			this.tpMap = new System.Windows.Forms.TabPage();
-			this.wbMap = new System.Windows.Forms.WebBrowser();
-			this.tpImages = new System.Windows.Forms.TabPage();
-			this.pImages = new System.Windows.Forms.Panel();
-			this.pImageContent = new System.Windows.Forms.Panel();
-			this.pbImages = new System.Windows.Forms.PictureBox();
-			this.splitter1 = new System.Windows.Forms.Splitter();
-			this.pImagesLeft = new System.Windows.Forms.Panel();
-			this.tvImages = new System.Windows.Forms.TreeView();
-			this.tpVideoClips = new System.Windows.Forms.TabPage();
-			this.pVideoClip = new System.Windows.Forms.Panel();
-			this.pAllVideo = new System.Windows.Forms.Panel();
-			this.tvVideoClips = new System.Windows.Forms.TreeView();
-			this.tpMusic = new System.Windows.Forms.TabPage();
-			this.panelMusic = new System.Windows.Forms.Panel();
-			this.panelMusicContent = new System.Windows.Forms.Panel();
-			this.pNowPlayingMusic = new System.Windows.Forms.Panel();
-			this.gbNowPlayingMusic = new System.Windows.Forms.GroupBox();
-			this.lvNowPlayingMusic = new System.Windows.Forms.ListView();
-			this.chMusic = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-			this.chLoopMusic = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-			this.cmdMusicPlayControls = new System.Windows.Forms.ContextMenuStrip(this.components);
-			this.tsmiRemoveMusic = new System.Windows.Forms.ToolStripMenuItem();
-			this.splitter5 = new System.Windows.Forms.Splitter();
-			this.pAllMusic = new System.Windows.Forms.Panel();
-			this.gbAllMusic = new System.Windows.Forms.GroupBox();
-			this.chkMusicFilter = new System.Windows.Forms.CheckBox();
-			this.tbMusicFilter = new System.Windows.Forms.TextBox();
-			this.chkMusicLoop = new System.Windows.Forms.CheckBox();
-			this.tvMusic = new System.Windows.Forms.TreeView();
-			this.tpSoundEffects = new System.Windows.Forms.TabPage();
-			this.pSoundEffects = new System.Windows.Forms.Panel();
-			this.panelSoundEffectsContent = new System.Windows.Forms.Panel();
-			this.pNowPlayingSounds = new System.Windows.Forms.Panel();
-			this.gbNowPlayingSounds = new System.Windows.Forms.GroupBox();
-			this.lvNowPlayingSounds = new System.Windows.Forms.ListView();
-			this.chSounds = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-			this.chLoop = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-			this.cmdSoundsPlayControls = new System.Windows.Forms.ContextMenuStrip(this.components);
-			this.tsmiRemoveSounds = new System.Windows.Forms.ToolStripMenuItem();
-			this.splitter4 = new System.Windows.Forms.Splitter();
-			this.pAllSounds = new System.Windows.Forms.Panel();
-			this.gbAllSounds = new System.Windows.Forms.GroupBox();
-			this.chkSoundFilter = new System.Windows.Forms.CheckBox();
-			this.tbSoundFilter = new System.Windows.Forms.TextBox();
-			this.chkSoundsLoop = new System.Windows.Forms.CheckBox();
-			this.tvSoundEffects = new System.Windows.Forms.TreeView();
-			this.tpCombat = new System.Windows.Forms.TabPage();
-			this.panelCombat = new System.Windows.Forms.Panel();
-			this.panelCombatContent = new System.Windows.Forms.Panel();
-			this.splitter3 = new System.Windows.Forms.Splitter();
-			this.pAllCharacters = new System.Windows.Forms.Panel();
-			this.tpMarket = new System.Windows.Forms.TabPage();
-			this.lvMarket = new System.Windows.Forms.ListView();
-			this.chName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-			this.chPrice = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-			this.menuStrip.SuspendLayout();
-			this.MainPanel.SuspendLayout();
-			this.tabControl.SuspendLayout();
-			this.tpStory.SuspendLayout();
-			this.pStory.SuspendLayout();
-			this.tpCharacters.SuspendLayout();
-			this.pCharacters.SuspendLayout();
-			this.pCharacterList.SuspendLayout();
-			this.tpMap.SuspendLayout();
-			this.tpImages.SuspendLayout();
-			this.pImages.SuspendLayout();
-			this.pImageContent.SuspendLayout();
-			((System.ComponentModel.ISupportInitialize)(this.pbImages)).BeginInit();
-			this.pImagesLeft.SuspendLayout();
-			this.tpVideoClips.SuspendLayout();
-			this.pAllVideo.SuspendLayout();
-			this.tpMusic.SuspendLayout();
-			this.panelMusic.SuspendLayout();
-			this.panelMusicContent.SuspendLayout();
-			this.pNowPlayingMusic.SuspendLayout();
-			this.gbNowPlayingMusic.SuspendLayout();
-			this.cmdMusicPlayControls.SuspendLayout();
-			this.pAllMusic.SuspendLayout();
-			this.gbAllMusic.SuspendLayout();
-			this.tpSoundEffects.SuspendLayout();
-			this.pSoundEffects.SuspendLayout();
-			this.panelSoundEffectsContent.SuspendLayout();
-			this.pNowPlayingSounds.SuspendLayout();
-			this.gbNowPlayingSounds.SuspendLayout();
-			this.cmdSoundsPlayControls.SuspendLayout();
-			this.pAllSounds.SuspendLayout();
-			this.gbAllSounds.SuspendLayout();
-			this.tpCombat.SuspendLayout();
-			this.panelCombat.SuspendLayout();
-			this.tpMarket.SuspendLayout();
-			this.SuspendLayout();
-			// 
-			// menuStrip
-			// 
-			this.menuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.tsmiNew,
-            this.tsmiAccessories,
-            this.tsmiSettings,
-            this.tsmiHelp});
-			this.menuStrip.Location = new System.Drawing.Point(0, 0);
-			this.menuStrip.Name = "menuStrip";
-			this.menuStrip.Size = new System.Drawing.Size(800, 24);
-			this.menuStrip.TabIndex = 0;
-			this.menuStrip.Text = "menuStrip1";
-			// 
-			// tsmiNew
-			// 
-			this.tsmiNew.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.tsmiCharacter,
-            this.toolStripSeparator1,
-            this.tsmiCharacterSheetOdt,
-            this.tsmiCharacterSheetPdf,
-            this.toolStripSeparator2,
-            this.tsmiExit});
-			this.tsmiNew.Name = "tsmiNew";
-			this.tsmiNew.Size = new System.Drawing.Size(43, 20);
-			this.tsmiNew.Text = "New";
-			// 
-			// tsmiCharacter
-			// 
-			this.tsmiCharacter.Name = "tsmiCharacter";
-			this.tsmiCharacter.Size = new System.Drawing.Size(185, 22);
-			this.tsmiCharacter.Text = "Character";
-			this.tsmiCharacter.Click += new System.EventHandler(this.TsmiCharacter_Click);
-			// 
-			// toolStripSeparator1
-			// 
-			this.toolStripSeparator1.Name = "toolStripSeparator1";
-			this.toolStripSeparator1.Size = new System.Drawing.Size(182, 6);
-			// 
-			// tsmiCharacterSheetOdt
-			// 
-			this.tsmiCharacterSheetOdt.Name = "tsmiCharacterSheetOdt";
-			this.tsmiCharacterSheetOdt.Size = new System.Drawing.Size(185, 22);
-			this.tsmiCharacterSheetOdt.Text = "Character sheet (odt)";
-			this.tsmiCharacterSheetOdt.Click += new System.EventHandler(this.TsmiCharacterSheetOdt_Click);
-			// 
-			// tsmiCharacterSheetPdf
-			// 
-			this.tsmiCharacterSheetPdf.Name = "tsmiCharacterSheetPdf";
-			this.tsmiCharacterSheetPdf.Size = new System.Drawing.Size(185, 22);
-			this.tsmiCharacterSheetPdf.Text = "Character sheet (pdf)";
-			this.tsmiCharacterSheetPdf.Click += new System.EventHandler(this.TsmiCharacterSheetPdf_Click);
-			// 
-			// toolStripSeparator2
-			// 
-			this.toolStripSeparator2.Name = "toolStripSeparator2";
-			this.toolStripSeparator2.Size = new System.Drawing.Size(182, 6);
-			// 
-			// tsmiExit
-			// 
-			this.tsmiExit.Name = "tsmiExit";
-			this.tsmiExit.Size = new System.Drawing.Size(185, 22);
-			this.tsmiExit.Text = "Exit";
-			this.tsmiExit.Click += new System.EventHandler(this.TsmiExit_Click);
-			// 
-			// tsmiAccessories
-			// 
-			this.tsmiAccessories.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.tsmiArkenForge,
-            this.tsmiGetSounds,
-            this.tsmiGetImages,
-            this.tsmiCastes,
-            this.tsmiOther});
-			this.tsmiAccessories.Name = "tsmiAccessories";
-			this.tsmiAccessories.Size = new System.Drawing.Size(80, 20);
-			this.tsmiAccessories.Text = "Accessories";
-			// 
-			// tsmiArkenForge
-			// 
-			this.tsmiArkenForge.Name = "tsmiArkenForge";
-			this.tsmiArkenForge.Size = new System.Drawing.Size(133, 22);
-			this.tsmiArkenForge.Text = "Arkenforge";
-			this.tsmiArkenForge.Click += new System.EventHandler(this.TsmiArkenForge_Click);
-			// 
-			// tsmiGetSounds
-			// 
-			this.tsmiGetSounds.Name = "tsmiGetSounds";
-			this.tsmiGetSounds.Size = new System.Drawing.Size(133, 22);
-			this.tsmiGetSounds.Text = "Get sounds";
-			this.tsmiGetSounds.Click += new System.EventHandler(this.TsmiGetSounds_Click);
-			// 
-			// tsmiGetImages
-			// 
-			this.tsmiGetImages.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.tsmiGoogle,
-            this.tsmiPinterest});
-			this.tsmiGetImages.Name = "tsmiGetImages";
-			this.tsmiGetImages.Size = new System.Drawing.Size(133, 22);
-			this.tsmiGetImages.Text = "Get images";
-			// 
-			// tsmiGoogle
-			// 
-			this.tsmiGoogle.Name = "tsmiGoogle";
-			this.tsmiGoogle.Size = new System.Drawing.Size(120, 22);
-			this.tsmiGoogle.Text = "Google";
-			this.tsmiGoogle.Click += new System.EventHandler(this.TsmiGoogle_Click);
-			// 
-			// tsmiPinterest
-			// 
-			this.tsmiPinterest.Name = "tsmiPinterest";
-			this.tsmiPinterest.Size = new System.Drawing.Size(120, 22);
-			this.tsmiPinterest.Text = "Pinterest";
-			this.tsmiPinterest.Click += new System.EventHandler(this.TsmiPinterest_Click);
-			// 
-			// tsmiCastes
-			// 
-			this.tsmiCastes.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.tsmiKranichWarlock,
-            this.tsmiNastarPriest,
-            this.tsmiVelarPriest});
-			this.tsmiCastes.Name = "tsmiCastes";
-			this.tsmiCastes.Size = new System.Drawing.Size(133, 22);
-			this.tsmiCastes.Text = "Castes";
-			// 
-			// tsmiKranichWarlock
-			// 
-			this.tsmiKranichWarlock.Name = "tsmiKranichWarlock";
-			this.tsmiKranichWarlock.Size = new System.Drawing.Size(158, 22);
-			this.tsmiKranichWarlock.Text = "Kranich warlock";
-			this.tsmiKranichWarlock.Click += new System.EventHandler(this.TsmiKranichWarlock_Click);
-			// 
-			// tsmiNastarPriest
-			// 
-			this.tsmiNastarPriest.Name = "tsmiNastarPriest";
-			this.tsmiNastarPriest.Size = new System.Drawing.Size(158, 22);
-			this.tsmiNastarPriest.Text = "Nastar priest";
-			this.tsmiNastarPriest.Click += new System.EventHandler(this.TsmiNastarPriest_Click);
-			// 
-			// tsmiVelarPriest
-			// 
-			this.tsmiVelarPriest.Name = "tsmiVelarPriest";
-			this.tsmiVelarPriest.Size = new System.Drawing.Size(158, 22);
-			this.tsmiVelarPriest.Text = "Velar priest";
-			this.tsmiVelarPriest.Click += new System.EventHandler(this.TsmiVelarPriest_Click);
-			// 
-			// tsmiOther
-			// 
-			this.tsmiOther.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.tsmiHttpsKalandozokHu,
-            this.tsmiWeaponsAndArmors,
-            this.racesToolStripMenuItem});
-			this.tsmiOther.Name = "tsmiOther";
-			this.tsmiOther.Size = new System.Drawing.Size(133, 22);
-			this.tsmiOther.Text = "Other";
-			// 
-			// tsmiHttpsKalandozokHu
-			// 
-			this.tsmiHttpsKalandozokHu.Name = "tsmiHttpsKalandozokHu";
-			this.tsmiHttpsKalandozokHu.Size = new System.Drawing.Size(196, 22);
-			this.tsmiHttpsKalandozokHu.Text = "https://kalandozok.hu/";
-			this.tsmiHttpsKalandozokHu.Click += new System.EventHandler(this.TsmiHttpsKalandozokHu_Click);
-			// 
-			// tsmiWeaponsAndArmors
-			// 
-			this.tsmiWeaponsAndArmors.Name = "tsmiWeaponsAndArmors";
-			this.tsmiWeaponsAndArmors.Size = new System.Drawing.Size(196, 22);
-			this.tsmiWeaponsAndArmors.Text = "Weapons and armors";
-			this.tsmiWeaponsAndArmors.Click += new System.EventHandler(this.TsmiWeapons_Click);
-			// 
-			// racesToolStripMenuItem
-			// 
-			this.racesToolStripMenuItem.Name = "racesToolStripMenuItem";
-			this.racesToolStripMenuItem.Size = new System.Drawing.Size(196, 22);
-			this.racesToolStripMenuItem.Text = "Races";
-			this.racesToolStripMenuItem.Click += new System.EventHandler(this.RacesToolStripMenuItem_Click);
-			// 
-			// tsmiSettings
-			// 
-			this.tsmiSettings.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.tsmiLanguages});
-			this.tsmiSettings.Name = "tsmiSettings";
-			this.tsmiSettings.Size = new System.Drawing.Size(61, 20);
-			this.tsmiSettings.Text = "Settings";
-			// 
-			// tsmiLanguages
-			// 
-			this.tsmiLanguages.Name = "tsmiLanguages";
-			this.tsmiLanguages.Size = new System.Drawing.Size(131, 22);
-			this.tsmiLanguages.Text = "Languages";
-			// 
-			// tsmiHelp
-			// 
-			this.tsmiHelp.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.tsmiAbout});
-			this.tsmiHelp.Name = "tsmiHelp";
-			this.tsmiHelp.Size = new System.Drawing.Size(44, 20);
-			this.tsmiHelp.Text = "Help";
-			// 
-			// tsmiAbout
-			// 
-			this.tsmiAbout.Name = "tsmiAbout";
-			this.tsmiAbout.Size = new System.Drawing.Size(107, 22);
-			this.tsmiAbout.Text = "About";
-			this.tsmiAbout.Click += new System.EventHandler(this.TsmiAbout_Click);
-			// 
-			// statusStrip
-			// 
-			this.statusStrip.Location = new System.Drawing.Point(0, 562);
-			this.statusStrip.Name = "statusStrip";
-			this.statusStrip.Size = new System.Drawing.Size(800, 22);
-			this.statusStrip.TabIndex = 1;
-			this.statusStrip.Text = "statusStrip1";
-			// 
-			// MainPanel
-			// 
-			this.MainPanel.Controls.Add(this.tabControl);
-			this.MainPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.MainPanel.Location = new System.Drawing.Point(0, 24);
-			this.MainPanel.Name = "MainPanel";
-			this.MainPanel.Size = new System.Drawing.Size(800, 538);
-			this.MainPanel.TabIndex = 2;
-			// 
-			// tabControl
-			// 
-			this.tabControl.Controls.Add(this.tpMap);
-			this.tabControl.Controls.Add(this.tpStory);
-			this.tabControl.Controls.Add(this.tpCharacters);
-			this.tabControl.Controls.Add(this.tpImages);
-			this.tabControl.Controls.Add(this.tpVideoClips);
-			this.tabControl.Controls.Add(this.tpMusic);
-			this.tabControl.Controls.Add(this.tpSoundEffects);
-			this.tabControl.Controls.Add(this.tpCombat);
-			this.tabControl.Controls.Add(this.tpMarket);
-			this.tabControl.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.tabControl.ImageList = this.imageList;
-			this.tabControl.Location = new System.Drawing.Point(0, 0);
-			this.tabControl.Name = "tabControl";
-			this.tabControl.SelectedIndex = 0;
-			this.tabControl.Size = new System.Drawing.Size(800, 538);
-			this.tabControl.TabIndex = 0;
-			// 
-			// tpStory
-			// 
-			this.tpStory.Controls.Add(this.pStory);
-			this.tpStory.Location = new System.Drawing.Point(4, 23);
-			this.tpStory.Name = "tpStory";
-			this.tpStory.Padding = new System.Windows.Forms.Padding(3);
-			this.tpStory.Size = new System.Drawing.Size(792, 511);
-			this.tpStory.TabIndex = 6;
-			this.tpStory.Text = "Story";
-			this.tpStory.UseVisualStyleBackColor = true;
-			// 
-			// pStory
-			// 
-			this.pStory.Controls.Add(this.rtbStory);
-			this.pStory.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.pStory.Location = new System.Drawing.Point(3, 3);
-			this.pStory.Name = "pStory";
-			this.pStory.Size = new System.Drawing.Size(786, 505);
-			this.pStory.TabIndex = 0;
-			// 
-			// rtbStory
-			// 
-			this.rtbStory.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.rtbStory.Location = new System.Drawing.Point(0, 0);
-			this.rtbStory.Name = "rtbStory";
-			this.rtbStory.Size = new System.Drawing.Size(786, 505);
-			this.rtbStory.TabIndex = 0;
-			this.rtbStory.Text = "";
-			this.rtbStory.LinkClicked += new System.Windows.Forms.LinkClickedEventHandler(this.RtbStory_LinkClicked);
-			// 
-			// tpCharacters
-			// 
-			this.tpCharacters.Controls.Add(this.pCharacters);
-			this.tpCharacters.Location = new System.Drawing.Point(4, 23);
-			this.tpCharacters.Name = "tpCharacters";
-			this.tpCharacters.Padding = new System.Windows.Forms.Padding(3);
-			this.tpCharacters.Size = new System.Drawing.Size(792, 511);
-			this.tpCharacters.TabIndex = 3;
-			this.tpCharacters.Text = "Characters";
-			this.tpCharacters.UseVisualStyleBackColor = true;
-			// 
-			// pCharacters
-			// 
-			this.pCharacters.Controls.Add(this.pCharacterContent);
-			this.pCharacters.Controls.Add(this.splitter2);
-			this.pCharacters.Controls.Add(this.pCharacterList);
-			this.pCharacters.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.pCharacters.Location = new System.Drawing.Point(3, 3);
-			this.pCharacters.Name = "pCharacters";
-			this.pCharacters.Size = new System.Drawing.Size(786, 505);
-			this.pCharacters.TabIndex = 0;
-			// 
-			// pCharacterContent
-			// 
-			this.pCharacterContent.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.pCharacterContent.Location = new System.Drawing.Point(245, 0);
-			this.pCharacterContent.Name = "pCharacterContent";
-			this.pCharacterContent.Size = new System.Drawing.Size(541, 505);
-			this.pCharacterContent.TabIndex = 2;
-			// 
-			// splitter2
-			// 
-			this.splitter2.Location = new System.Drawing.Point(242, 0);
-			this.splitter2.Name = "splitter2";
-			this.splitter2.Size = new System.Drawing.Size(3, 505);
-			this.splitter2.TabIndex = 1;
-			this.splitter2.TabStop = false;
-			// 
-			// pCharacterList
-			// 
-			this.pCharacterList.Controls.Add(this.tvCharacters);
-			this.pCharacterList.Dock = System.Windows.Forms.DockStyle.Left;
-			this.pCharacterList.Location = new System.Drawing.Point(0, 0);
-			this.pCharacterList.Name = "pCharacterList";
-			this.pCharacterList.Size = new System.Drawing.Size(242, 505);
-			this.pCharacterList.TabIndex = 0;
-			// 
-			// tvCharacters
-			// 
-			this.tvCharacters.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.tvCharacters.ImageIndex = 0;
-			this.tvCharacters.ImageList = this.imageList;
-			this.tvCharacters.Location = new System.Drawing.Point(0, 0);
-			this.tvCharacters.Name = "tvCharacters";
-			this.tvCharacters.SelectedImageIndex = 0;
-			this.tvCharacters.Size = new System.Drawing.Size(242, 505);
-			this.tvCharacters.TabIndex = 0;
-			this.tvCharacters.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.TvCharacters_AfterSelect);
-			// 
-			// imageList
-			// 
-			this.imageList.ColorDepth = System.Windows.Forms.ColorDepth.Depth8Bit;
-			this.imageList.ImageSize = new System.Drawing.Size(16, 16);
-			this.imageList.TransparentColor = System.Drawing.Color.Transparent;
-			// 
-			// tpMap
-			// 
-			this.tpMap.Controls.Add(this.wbMap);
-			this.tpMap.Location = new System.Drawing.Point(4, 23);
-			this.tpMap.Name = "tpMap";
-			this.tpMap.Padding = new System.Windows.Forms.Padding(3);
-			this.tpMap.Size = new System.Drawing.Size(792, 511);
-			this.tpMap.TabIndex = 8;
-			this.tpMap.Text = "Map";
-			this.tpMap.UseVisualStyleBackColor = true;
-			// 
-			// wbMap
-			// 
-			this.wbMap.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.wbMap.Location = new System.Drawing.Point(3, 3);
-			this.wbMap.MinimumSize = new System.Drawing.Size(20, 20);
-			this.wbMap.Name = "wbMap";
-			this.wbMap.ScriptErrorsSuppressed = true;
-			this.wbMap.Size = new System.Drawing.Size(786, 505);
-			this.wbMap.TabIndex = 0;
-			this.wbMap.Url = new System.Uri("https://kalandozok.hu/ynev/", System.UriKind.Absolute);
-			// 
-			// tpImages
-			// 
-			this.tpImages.Controls.Add(this.pImages);
-			this.tpImages.Location = new System.Drawing.Point(4, 23);
-			this.tpImages.Name = "tpImages";
-			this.tpImages.Padding = new System.Windows.Forms.Padding(3);
-			this.tpImages.Size = new System.Drawing.Size(792, 511);
-			this.tpImages.TabIndex = 0;
-			this.tpImages.Text = "Images";
-			this.tpImages.UseVisualStyleBackColor = true;
-			// 
-			// pImages
-			// 
-			this.pImages.Controls.Add(this.pImageContent);
-			this.pImages.Controls.Add(this.splitter1);
-			this.pImages.Controls.Add(this.pImagesLeft);
-			this.pImages.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.pImages.Location = new System.Drawing.Point(3, 3);
-			this.pImages.Name = "pImages";
-			this.pImages.Size = new System.Drawing.Size(786, 505);
-			this.pImages.TabIndex = 0;
-			// 
-			// pImageContent
-			// 
-			this.pImageContent.Controls.Add(this.pbImages);
-			this.pImageContent.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.pImageContent.Location = new System.Drawing.Point(245, 0);
-			this.pImageContent.Name = "pImageContent";
-			this.pImageContent.Size = new System.Drawing.Size(541, 505);
-			this.pImageContent.TabIndex = 2;
-			// 
-			// pbImages
-			// 
-			this.pbImages.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.pbImages.Location = new System.Drawing.Point(0, 0);
-			this.pbImages.Name = "pbImages";
-			this.pbImages.Size = new System.Drawing.Size(541, 505);
-			this.pbImages.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-			this.pbImages.TabIndex = 0;
-			this.pbImages.TabStop = false;
-			// 
-			// splitter1
-			// 
-			this.splitter1.Location = new System.Drawing.Point(242, 0);
-			this.splitter1.Name = "splitter1";
-			this.splitter1.Size = new System.Drawing.Size(3, 505);
-			this.splitter1.TabIndex = 1;
-			this.splitter1.TabStop = false;
-			// 
-			// pImagesLeft
-			// 
-			this.pImagesLeft.Controls.Add(this.tvImages);
-			this.pImagesLeft.Dock = System.Windows.Forms.DockStyle.Left;
-			this.pImagesLeft.Location = new System.Drawing.Point(0, 0);
-			this.pImagesLeft.Name = "pImagesLeft";
-			this.pImagesLeft.Size = new System.Drawing.Size(242, 505);
-			this.pImagesLeft.TabIndex = 0;
-			// 
-			// tvImages
-			// 
-			this.tvImages.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.tvImages.ImageIndex = 0;
-			this.tvImages.ImageList = this.imageList;
-			this.tvImages.Location = new System.Drawing.Point(0, 0);
-			this.tvImages.Name = "tvImages";
-			this.tvImages.SelectedImageIndex = 0;
-			this.tvImages.Size = new System.Drawing.Size(242, 505);
-			this.tvImages.TabIndex = 0;
-			this.tvImages.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.TvMaps_AfterSelect);
-			this.tvImages.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.TvMaps_NodeMouseClick);
-			// 
-			// tpVideoClips
-			// 
-			this.tpVideoClips.Controls.Add(this.pVideoClip);
-			this.tpVideoClips.Controls.Add(this.pAllVideo);
-			this.tpVideoClips.Location = new System.Drawing.Point(4, 23);
-			this.tpVideoClips.Name = "tpVideoClips";
-			this.tpVideoClips.Padding = new System.Windows.Forms.Padding(3);
-			this.tpVideoClips.Size = new System.Drawing.Size(792, 511);
-			this.tpVideoClips.TabIndex = 5;
-			this.tpVideoClips.Text = "Video clips";
-			this.tpVideoClips.UseVisualStyleBackColor = true;
-			// 
-			// pVideoClip
-			// 
-			this.pVideoClip.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.pVideoClip.Location = new System.Drawing.Point(245, 3);
-			this.pVideoClip.Name = "pVideoClip";
-			this.pVideoClip.Size = new System.Drawing.Size(544, 505);
-			this.pVideoClip.TabIndex = 3;
-			// 
-			// pAllVideo
-			// 
-			this.pAllVideo.Controls.Add(this.tvVideoClips);
-			this.pAllVideo.Dock = System.Windows.Forms.DockStyle.Left;
-			this.pAllVideo.Location = new System.Drawing.Point(3, 3);
-			this.pAllVideo.Name = "pAllVideo";
-			this.pAllVideo.Size = new System.Drawing.Size(242, 505);
-			this.pAllVideo.TabIndex = 2;
-			// 
-			// tvVideoClips
-			// 
-			this.tvVideoClips.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.tvVideoClips.ImageIndex = 0;
-			this.tvVideoClips.ImageList = this.imageList;
-			this.tvVideoClips.Location = new System.Drawing.Point(0, 0);
-			this.tvVideoClips.Name = "tvVideoClips";
-			this.tvVideoClips.SelectedImageIndex = 0;
-			this.tvVideoClips.Size = new System.Drawing.Size(242, 505);
-			this.tvVideoClips.TabIndex = 0;
-			this.tvVideoClips.NodeMouseDoubleClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.TvVideoClips_NodeMouseDoubleClick);
-			// 
-			// tpMusic
-			// 
-			this.tpMusic.Controls.Add(this.panelMusic);
-			this.tpMusic.Location = new System.Drawing.Point(4, 23);
-			this.tpMusic.Name = "tpMusic";
-			this.tpMusic.Padding = new System.Windows.Forms.Padding(3);
-			this.tpMusic.Size = new System.Drawing.Size(792, 511);
-			this.tpMusic.TabIndex = 1;
-			this.tpMusic.Text = "Music";
-			this.tpMusic.UseVisualStyleBackColor = true;
-			// 
-			// panelMusic
-			// 
-			this.panelMusic.Controls.Add(this.panelMusicContent);
-			this.panelMusic.Controls.Add(this.splitter5);
-			this.panelMusic.Controls.Add(this.pAllMusic);
-			this.panelMusic.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.panelMusic.Location = new System.Drawing.Point(3, 3);
-			this.panelMusic.Name = "panelMusic";
-			this.panelMusic.Size = new System.Drawing.Size(786, 505);
-			this.panelMusic.TabIndex = 1;
-			// 
-			// panelMusicContent
-			// 
-			this.panelMusicContent.Controls.Add(this.pNowPlayingMusic);
-			this.panelMusicContent.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.panelMusicContent.Location = new System.Drawing.Point(245, 0);
-			this.panelMusicContent.Name = "panelMusicContent";
-			this.panelMusicContent.Size = new System.Drawing.Size(541, 505);
-			this.panelMusicContent.TabIndex = 3;
-			// 
-			// pNowPlayingMusic
-			// 
-			this.pNowPlayingMusic.Controls.Add(this.gbNowPlayingMusic);
-			this.pNowPlayingMusic.Dock = System.Windows.Forms.DockStyle.Left;
-			this.pNowPlayingMusic.Location = new System.Drawing.Point(0, 0);
-			this.pNowPlayingMusic.Name = "pNowPlayingMusic";
-			this.pNowPlayingMusic.Size = new System.Drawing.Size(245, 505);
-			this.pNowPlayingMusic.TabIndex = 0;
-			// 
-			// gbNowPlayingMusic
-			// 
-			this.gbNowPlayingMusic.Controls.Add(this.lvNowPlayingMusic);
-			this.gbNowPlayingMusic.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.gbNowPlayingMusic.Location = new System.Drawing.Point(0, 0);
-			this.gbNowPlayingMusic.Name = "gbNowPlayingMusic";
-			this.gbNowPlayingMusic.Size = new System.Drawing.Size(245, 505);
-			this.gbNowPlayingMusic.TabIndex = 0;
-			this.gbNowPlayingMusic.TabStop = false;
-			this.gbNowPlayingMusic.Text = "Now playing";
-			// 
-			// lvNowPlayingMusic
-			// 
-			this.lvNowPlayingMusic.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-			this.lvNowPlayingMusic.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.chMusic,
-            this.chLoopMusic});
-			this.lvNowPlayingMusic.ContextMenuStrip = this.cmdMusicPlayControls;
-			this.lvNowPlayingMusic.FullRowSelect = true;
-			this.lvNowPlayingMusic.HideSelection = false;
-			this.lvNowPlayingMusic.Location = new System.Drawing.Point(3, 49);
-			this.lvNowPlayingMusic.Name = "lvNowPlayingMusic";
-			this.lvNowPlayingMusic.Size = new System.Drawing.Size(239, 453);
-			this.lvNowPlayingMusic.TabIndex = 0;
-			this.lvNowPlayingMusic.UseCompatibleStateImageBehavior = false;
-			this.lvNowPlayingMusic.View = System.Windows.Forms.View.Details;
-			// 
-			// chMusic
-			// 
-			this.chMusic.Text = "Music";
-			this.chMusic.Width = 177;
-			// 
-			// chLoopMusic
-			// 
-			this.chLoopMusic.Text = "Loop";
-			// 
-			// cmdMusicPlayControls
-			// 
-			this.cmdMusicPlayControls.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.tsmiRemoveMusic});
-			this.cmdMusicPlayControls.Name = "cmdMusicPlayControls";
-			this.cmdMusicPlayControls.Size = new System.Drawing.Size(153, 26);
-			// 
-			// tsmiRemoveMusic
-			// 
-			this.tsmiRemoveMusic.Name = "tsmiRemoveMusic";
-			this.tsmiRemoveMusic.Size = new System.Drawing.Size(152, 22);
-			this.tsmiRemoveMusic.Text = "Remove music";
-			this.tsmiRemoveMusic.Click += new System.EventHandler(this.TsmiRemoveMusic_Click);
-			// 
-			// splitter5
-			// 
-			this.splitter5.Location = new System.Drawing.Point(242, 0);
-			this.splitter5.Name = "splitter5";
-			this.splitter5.Size = new System.Drawing.Size(3, 505);
-			this.splitter5.TabIndex = 2;
-			this.splitter5.TabStop = false;
-			// 
-			// pAllMusic
-			// 
-			this.pAllMusic.Controls.Add(this.gbAllMusic);
-			this.pAllMusic.Dock = System.Windows.Forms.DockStyle.Left;
-			this.pAllMusic.Location = new System.Drawing.Point(0, 0);
-			this.pAllMusic.Name = "pAllMusic";
-			this.pAllMusic.Size = new System.Drawing.Size(242, 505);
-			this.pAllMusic.TabIndex = 1;
-			// 
-			// gbAllMusic
-			// 
-			this.gbAllMusic.Controls.Add(this.chkMusicFilter);
-			this.gbAllMusic.Controls.Add(this.tbMusicFilter);
-			this.gbAllMusic.Controls.Add(this.chkMusicLoop);
-			this.gbAllMusic.Controls.Add(this.tvMusic);
-			this.gbAllMusic.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.gbAllMusic.Location = new System.Drawing.Point(0, 0);
-			this.gbAllMusic.Name = "gbAllMusic";
-			this.gbAllMusic.Size = new System.Drawing.Size(242, 505);
-			this.gbAllMusic.TabIndex = 0;
-			this.gbAllMusic.TabStop = false;
-			this.gbAllMusic.Text = "All music";
-			// 
-			// chkMusicFilter
-			// 
-			this.chkMusicFilter.AutoSize = true;
-			this.chkMusicFilter.Location = new System.Drawing.Point(128, 7);
-			this.chkMusicFilter.Name = "chkMusicFilter";
-			this.chkMusicFilter.Size = new System.Drawing.Size(48, 17);
-			this.chkMusicFilter.TabIndex = 7;
-			this.chkMusicFilter.Text = "Filter";
-			this.chkMusicFilter.UseVisualStyleBackColor = true;
-			this.chkMusicFilter.CheckedChanged += new System.EventHandler(this.ChkMusicFilter_CheckedChanged);
-			// 
-			// tbMusicFilter
-			// 
-			this.tbMusicFilter.Location = new System.Drawing.Point(128, 26);
-			this.tbMusicFilter.Name = "tbMusicFilter";
-			this.tbMusicFilter.Size = new System.Drawing.Size(111, 20);
-			this.tbMusicFilter.TabIndex = 2;
-			this.tbMusicFilter.TextChanged += new System.EventHandler(this.TbMusicFilter_TextChanged);
-			// 
-			// chkMusicLoop
-			// 
-			this.chkMusicLoop.AutoSize = true;
-			this.chkMusicLoop.Location = new System.Drawing.Point(6, 26);
-			this.chkMusicLoop.Name = "chkMusicLoop";
-			this.chkMusicLoop.Size = new System.Drawing.Size(50, 17);
-			this.chkMusicLoop.TabIndex = 1;
-			this.chkMusicLoop.Text = "Loop";
-			this.chkMusicLoop.UseVisualStyleBackColor = true;
-			// 
-			// tvMusic
-			// 
-			this.tvMusic.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-			this.tvMusic.FullRowSelect = true;
-			this.tvMusic.ImageIndex = 0;
-			this.tvMusic.ImageList = this.imageList;
-			this.tvMusic.Location = new System.Drawing.Point(3, 49);
-			this.tvMusic.Name = "tvMusic";
-			this.tvMusic.SelectedImageIndex = 0;
-			this.tvMusic.Size = new System.Drawing.Size(236, 453);
-			this.tvMusic.TabIndex = 0;
-			this.tvMusic.NodeMouseDoubleClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.TvMusic_NodeMouseDoubleClick);
-			// 
-			// tpSoundEffects
-			// 
-			this.tpSoundEffects.Controls.Add(this.pSoundEffects);
-			this.tpSoundEffects.Location = new System.Drawing.Point(4, 23);
-			this.tpSoundEffects.Name = "tpSoundEffects";
-			this.tpSoundEffects.Padding = new System.Windows.Forms.Padding(3);
-			this.tpSoundEffects.Size = new System.Drawing.Size(792, 511);
-			this.tpSoundEffects.TabIndex = 4;
-			this.tpSoundEffects.Text = "Sound effects";
-			this.tpSoundEffects.UseVisualStyleBackColor = true;
-			// 
-			// pSoundEffects
-			// 
-			this.pSoundEffects.Controls.Add(this.panelSoundEffectsContent);
-			this.pSoundEffects.Controls.Add(this.splitter4);
-			this.pSoundEffects.Controls.Add(this.pAllSounds);
-			this.pSoundEffects.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.pSoundEffects.Location = new System.Drawing.Point(3, 3);
-			this.pSoundEffects.Name = "pSoundEffects";
-			this.pSoundEffects.Size = new System.Drawing.Size(786, 505);
-			this.pSoundEffects.TabIndex = 1;
-			// 
-			// panelSoundEffectsContent
-			// 
-			this.panelSoundEffectsContent.Controls.Add(this.pNowPlayingSounds);
-			this.panelSoundEffectsContent.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.panelSoundEffectsContent.Location = new System.Drawing.Point(245, 0);
-			this.panelSoundEffectsContent.Name = "panelSoundEffectsContent";
-			this.panelSoundEffectsContent.Size = new System.Drawing.Size(541, 505);
-			this.panelSoundEffectsContent.TabIndex = 3;
-			// 
-			// pNowPlayingSounds
-			// 
-			this.pNowPlayingSounds.Controls.Add(this.gbNowPlayingSounds);
-			this.pNowPlayingSounds.Dock = System.Windows.Forms.DockStyle.Left;
-			this.pNowPlayingSounds.Location = new System.Drawing.Point(0, 0);
-			this.pNowPlayingSounds.Name = "pNowPlayingSounds";
-			this.pNowPlayingSounds.Size = new System.Drawing.Size(245, 505);
-			this.pNowPlayingSounds.TabIndex = 1;
-			// 
-			// gbNowPlayingSounds
-			// 
-			this.gbNowPlayingSounds.Controls.Add(this.lvNowPlayingSounds);
-			this.gbNowPlayingSounds.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.gbNowPlayingSounds.Location = new System.Drawing.Point(0, 0);
-			this.gbNowPlayingSounds.Name = "gbNowPlayingSounds";
-			this.gbNowPlayingSounds.Size = new System.Drawing.Size(245, 505);
-			this.gbNowPlayingSounds.TabIndex = 0;
-			this.gbNowPlayingSounds.TabStop = false;
-			this.gbNowPlayingSounds.Text = "Now playing";
-			// 
-			// lvNowPlayingSounds
-			// 
-			this.lvNowPlayingSounds.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-			this.lvNowPlayingSounds.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.chSounds,
-            this.chLoop});
-			this.lvNowPlayingSounds.ContextMenuStrip = this.cmdSoundsPlayControls;
-			this.lvNowPlayingSounds.FullRowSelect = true;
-			this.lvNowPlayingSounds.HideSelection = false;
-			this.lvNowPlayingSounds.Location = new System.Drawing.Point(3, 49);
-			this.lvNowPlayingSounds.Name = "lvNowPlayingSounds";
-			this.lvNowPlayingSounds.Size = new System.Drawing.Size(239, 453);
-			this.lvNowPlayingSounds.TabIndex = 0;
-			this.lvNowPlayingSounds.UseCompatibleStateImageBehavior = false;
-			this.lvNowPlayingSounds.View = System.Windows.Forms.View.Details;
-			// 
-			// chSounds
-			// 
-			this.chSounds.Text = "Sounds";
-			this.chSounds.Width = 177;
-			// 
-			// chLoop
-			// 
-			this.chLoop.Text = "Loop";
-			// 
-			// cmdSoundsPlayControls
-			// 
-			this.cmdSoundsPlayControls.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.tsmiRemoveSounds});
-			this.cmdSoundsPlayControls.Name = "cmdMusicPlayControls";
-			this.cmdSoundsPlayControls.Size = new System.Drawing.Size(167, 26);
-			// 
-			// tsmiRemoveSounds
-			// 
-			this.tsmiRemoveSounds.Name = "tsmiRemoveSounds";
-			this.tsmiRemoveSounds.Size = new System.Drawing.Size(166, 22);
-			this.tsmiRemoveSounds.Text = "Remove sound(s)";
-			this.tsmiRemoveSounds.Click += new System.EventHandler(this.TsmiRemoveSounds_Click);
-			// 
-			// splitter4
-			// 
-			this.splitter4.Location = new System.Drawing.Point(242, 0);
-			this.splitter4.Name = "splitter4";
-			this.splitter4.Size = new System.Drawing.Size(3, 505);
-			this.splitter4.TabIndex = 2;
-			this.splitter4.TabStop = false;
-			// 
-			// pAllSounds
-			// 
-			this.pAllSounds.Controls.Add(this.gbAllSounds);
-			this.pAllSounds.Dock = System.Windows.Forms.DockStyle.Left;
-			this.pAllSounds.Location = new System.Drawing.Point(0, 0);
-			this.pAllSounds.Name = "pAllSounds";
-			this.pAllSounds.Size = new System.Drawing.Size(242, 505);
-			this.pAllSounds.TabIndex = 1;
-			// 
-			// gbAllSounds
-			// 
-			this.gbAllSounds.Controls.Add(this.chkSoundFilter);
-			this.gbAllSounds.Controls.Add(this.tbSoundFilter);
-			this.gbAllSounds.Controls.Add(this.chkSoundsLoop);
-			this.gbAllSounds.Controls.Add(this.tvSoundEffects);
-			this.gbAllSounds.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.gbAllSounds.Location = new System.Drawing.Point(0, 0);
-			this.gbAllSounds.Name = "gbAllSounds";
-			this.gbAllSounds.Size = new System.Drawing.Size(242, 505);
-			this.gbAllSounds.TabIndex = 0;
-			this.gbAllSounds.TabStop = false;
-			this.gbAllSounds.Text = "All sound effects";
-			// 
-			// chkSoundFilter
-			// 
-			this.chkSoundFilter.AutoSize = true;
-			this.chkSoundFilter.Location = new System.Drawing.Point(128, 7);
-			this.chkSoundFilter.Name = "chkSoundFilter";
-			this.chkSoundFilter.Size = new System.Drawing.Size(48, 17);
-			this.chkSoundFilter.TabIndex = 6;
-			this.chkSoundFilter.Text = "Filter";
-			this.chkSoundFilter.UseVisualStyleBackColor = true;
-			this.chkSoundFilter.CheckedChanged += new System.EventHandler(this.ChkSoundFilter_CheckedChanged);
-			// 
-			// tbSoundFilter
-			// 
-			this.tbSoundFilter.Location = new System.Drawing.Point(128, 26);
-			this.tbSoundFilter.Name = "tbSoundFilter";
-			this.tbSoundFilter.Size = new System.Drawing.Size(111, 20);
-			this.tbSoundFilter.TabIndex = 4;
-			this.tbSoundFilter.TextChanged += new System.EventHandler(this.TbSoundFilter_TextChanged);
-			// 
-			// chkSoundsLoop
-			// 
-			this.chkSoundsLoop.AutoSize = true;
-			this.chkSoundsLoop.Location = new System.Drawing.Point(6, 26);
-			this.chkSoundsLoop.Name = "chkSoundsLoop";
-			this.chkSoundsLoop.Size = new System.Drawing.Size(50, 17);
-			this.chkSoundsLoop.TabIndex = 2;
-			this.chkSoundsLoop.Text = "Loop";
-			this.chkSoundsLoop.UseVisualStyleBackColor = true;
-			// 
-			// tvSoundEffects
-			// 
-			this.tvSoundEffects.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-			this.tvSoundEffects.ImageIndex = 0;
-			this.tvSoundEffects.ImageList = this.imageList;
-			this.tvSoundEffects.Location = new System.Drawing.Point(-3, 49);
-			this.tvSoundEffects.Name = "tvSoundEffects";
-			this.tvSoundEffects.SelectedImageIndex = 0;
-			this.tvSoundEffects.Size = new System.Drawing.Size(242, 450);
-			this.tvSoundEffects.TabIndex = 0;
-			this.tvSoundEffects.NodeMouseDoubleClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.TvSoundEffects_NodeMouseDoubleClick);
-			// 
-			// tpCombat
-			// 
-			this.tpCombat.Controls.Add(this.panelCombat);
-			this.tpCombat.Location = new System.Drawing.Point(4, 23);
-			this.tpCombat.Name = "tpCombat";
-			this.tpCombat.Padding = new System.Windows.Forms.Padding(3);
-			this.tpCombat.Size = new System.Drawing.Size(792, 511);
-			this.tpCombat.TabIndex = 2;
-			this.tpCombat.Text = "Combat";
-			this.tpCombat.UseVisualStyleBackColor = true;
-			// 
-			// panelCombat
-			// 
-			this.panelCombat.Controls.Add(this.panelCombatContent);
-			this.panelCombat.Controls.Add(this.splitter3);
-			this.panelCombat.Controls.Add(this.pAllCharacters);
-			this.panelCombat.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.panelCombat.Location = new System.Drawing.Point(3, 3);
-			this.panelCombat.Name = "panelCombat";
-			this.panelCombat.Size = new System.Drawing.Size(786, 505);
-			this.panelCombat.TabIndex = 1;
-			// 
-			// panelCombatContent
-			// 
-			this.panelCombatContent.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.panelCombatContent.Location = new System.Drawing.Point(245, 0);
-			this.panelCombatContent.Name = "panelCombatContent";
-			this.panelCombatContent.Size = new System.Drawing.Size(541, 505);
-			this.panelCombatContent.TabIndex = 3;
-			// 
-			// splitter3
-			// 
-			this.splitter3.Location = new System.Drawing.Point(242, 0);
-			this.splitter3.Name = "splitter3";
-			this.splitter3.Size = new System.Drawing.Size(3, 505);
-			this.splitter3.TabIndex = 2;
-			this.splitter3.TabStop = false;
-			// 
-			// pAllCharacters
-			// 
-			this.pAllCharacters.Dock = System.Windows.Forms.DockStyle.Left;
-			this.pAllCharacters.Location = new System.Drawing.Point(0, 0);
-			this.pAllCharacters.Name = "pAllCharacters";
-			this.pAllCharacters.Size = new System.Drawing.Size(242, 505);
-			this.pAllCharacters.TabIndex = 1;
-			// 
-			// tpMarket
-			// 
-			this.tpMarket.Controls.Add(this.lvMarket);
-			this.tpMarket.Location = new System.Drawing.Point(4, 23);
-			this.tpMarket.Name = "tpMarket";
-			this.tpMarket.Padding = new System.Windows.Forms.Padding(3);
-			this.tpMarket.Size = new System.Drawing.Size(792, 511);
-			this.tpMarket.TabIndex = 7;
-			this.tpMarket.Text = "Market";
-			this.tpMarket.UseVisualStyleBackColor = true;
-			// 
-			// lvMarket
-			// 
-			this.lvMarket.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.chName,
-            this.chPrice});
-			this.lvMarket.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.lvMarket.FullRowSelect = true;
-			listViewGroup1.Header = "Accomodation";
-			listViewGroup1.Name = "Accomodation";
-			listViewGroup2.Header = "Animals";
-			listViewGroup2.Name = "Animals";
-			listViewGroup3.Header = "Clothes";
-			listViewGroup3.Name = "Clothes";
-			listViewGroup4.Header = "Debauchery";
-			listViewGroup4.Name = "Debauchery";
-			listViewGroup5.Header = "Food";
-			listViewGroup5.Name = "Food";
-			listViewGroup6.Header = "Other";
-			listViewGroup6.Name = "Other";
-			listViewGroup7.Header = "Trappings";
-			listViewGroup7.Name = "Trappings";
-			listViewGroup8.Header = "Travelling";
-			listViewGroup8.Name = "Travelling";
-			this.lvMarket.Groups.AddRange(new System.Windows.Forms.ListViewGroup[] {
-            listViewGroup1,
-            listViewGroup2,
-            listViewGroup3,
-            listViewGroup4,
-            listViewGroup5,
-            listViewGroup6,
-            listViewGroup7,
-            listViewGroup8});
-			this.lvMarket.HideSelection = false;
-			this.lvMarket.Location = new System.Drawing.Point(3, 3);
-			this.lvMarket.Name = "lvMarket";
-			this.lvMarket.Size = new System.Drawing.Size(786, 505);
-			this.lvMarket.TabIndex = 0;
-			this.lvMarket.UseCompatibleStateImageBehavior = false;
-			this.lvMarket.View = System.Windows.Forms.View.Details;
-			// 
-			// chName
-			// 
-			this.chName.Text = "Name";
-			this.chName.Width = 151;
-			// 
-			// chPrice
-			// 
-			this.chPrice.Text = "Price";
-			this.chPrice.Width = 126;
-			// 
-			// MainForm
-			// 
-			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(800, 584);
-			this.Controls.Add(this.MainPanel);
-			this.Controls.Add(this.statusStrip);
-			this.Controls.Add(this.menuStrip);
-			this.MainMenuStrip = this.menuStrip;
-			this.Name = "MainForm";
-			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-			this.Text = "Storyteller";
-			this.Shown += new System.EventHandler(this.MainForm_Shown);
-			this.menuStrip.ResumeLayout(false);
-			this.menuStrip.PerformLayout();
-			this.MainPanel.ResumeLayout(false);
-			this.tabControl.ResumeLayout(false);
-			this.tpStory.ResumeLayout(false);
-			this.pStory.ResumeLayout(false);
-			this.tpCharacters.ResumeLayout(false);
-			this.pCharacters.ResumeLayout(false);
-			this.pCharacterList.ResumeLayout(false);
-			this.tpMap.ResumeLayout(false);
-			this.tpImages.ResumeLayout(false);
-			this.pImages.ResumeLayout(false);
-			this.pImageContent.ResumeLayout(false);
-			((System.ComponentModel.ISupportInitialize)(this.pbImages)).EndInit();
-			this.pImagesLeft.ResumeLayout(false);
-			this.tpVideoClips.ResumeLayout(false);
-			this.pAllVideo.ResumeLayout(false);
-			this.tpMusic.ResumeLayout(false);
-			this.panelMusic.ResumeLayout(false);
-			this.panelMusicContent.ResumeLayout(false);
-			this.pNowPlayingMusic.ResumeLayout(false);
-			this.gbNowPlayingMusic.ResumeLayout(false);
-			this.cmdMusicPlayControls.ResumeLayout(false);
-			this.pAllMusic.ResumeLayout(false);
-			this.gbAllMusic.ResumeLayout(false);
-			this.gbAllMusic.PerformLayout();
-			this.tpSoundEffects.ResumeLayout(false);
-			this.pSoundEffects.ResumeLayout(false);
-			this.panelSoundEffectsContent.ResumeLayout(false);
-			this.pNowPlayingSounds.ResumeLayout(false);
-			this.gbNowPlayingSounds.ResumeLayout(false);
-			this.cmdSoundsPlayControls.ResumeLayout(false);
-			this.pAllSounds.ResumeLayout(false);
-			this.gbAllSounds.ResumeLayout(false);
-			this.gbAllSounds.PerformLayout();
-			this.tpCombat.ResumeLayout(false);
-			this.panelCombat.ResumeLayout(false);
-			this.tpMarket.ResumeLayout(false);
-			this.ResumeLayout(false);
-			this.PerformLayout();
+            components = new System.ComponentModel.Container();
+            ListViewGroup listViewGroup1 = new ListViewGroup("Accomodation", HorizontalAlignment.Left);
+            ListViewGroup listViewGroup2 = new ListViewGroup("Animals", HorizontalAlignment.Left);
+            ListViewGroup listViewGroup3 = new ListViewGroup("Clothes", HorizontalAlignment.Left);
+            ListViewGroup listViewGroup4 = new ListViewGroup("Debauchery", HorizontalAlignment.Left);
+            ListViewGroup listViewGroup5 = new ListViewGroup("Food", HorizontalAlignment.Left);
+            ListViewGroup listViewGroup6 = new ListViewGroup("Other", HorizontalAlignment.Left);
+            ListViewGroup listViewGroup7 = new ListViewGroup("Trappings", HorizontalAlignment.Left);
+            ListViewGroup listViewGroup8 = new ListViewGroup("Travelling", HorizontalAlignment.Left);
+            menuStrip = new MenuStrip();
+            tsmiNew = new ToolStripMenuItem();
+            tsmiCharacter = new ToolStripMenuItem();
+            toolStripSeparator1 = new ToolStripSeparator();
+            tsmiCharacterSheetOdt = new ToolStripMenuItem();
+            tsmiCharacterSheetPdf = new ToolStripMenuItem();
+            toolStripSeparator2 = new ToolStripSeparator();
+            tsmiExit = new ToolStripMenuItem();
+            tsmiAccessories = new ToolStripMenuItem();
+            tsmiArkenForge = new ToolStripMenuItem();
+            tsmiGetSounds = new ToolStripMenuItem();
+            tsmiGetImages = new ToolStripMenuItem();
+            tsmiGoogle = new ToolStripMenuItem();
+            tsmiPinterest = new ToolStripMenuItem();
+            tsmiCastes = new ToolStripMenuItem();
+            tsmiKranichWarlock = new ToolStripMenuItem();
+            tsmiNastarPriest = new ToolStripMenuItem();
+            tsmiVelarPriest = new ToolStripMenuItem();
+            tsmiOther = new ToolStripMenuItem();
+            tsmiHttpsKalandozokHu = new ToolStripMenuItem();
+            tsmiWeaponsAndArmors = new ToolStripMenuItem();
+            racesToolStripMenuItem = new ToolStripMenuItem();
+            tsmiSettings = new ToolStripMenuItem();
+            tsmiLanguages = new ToolStripMenuItem();
+            tsmiHelp = new ToolStripMenuItem();
+            tsmiAbout = new ToolStripMenuItem();
+            statusStrip = new StatusStrip();
+            MainPanel = new Panel();
+            tabControl = new TabControl();
+            tpMap = new TabPage();
+            wbMap = new WebBrowser();
+            tpStory = new TabPage();
+            pStory = new Panel();
+            rtbStory = new RichTextBox();
+            tpCharacters = new TabPage();
+            pCharacters = new Panel();
+            pCharacterContent = new Panel();
+            splitter2 = new Splitter();
+            pCharacterList = new Panel();
+            tvCharacters = new TreeView();
+            imageList = new ImageList(components);
+            tpImages = new TabPage();
+            pImages = new Panel();
+            pImageContent = new Panel();
+            pbImages = new PictureBox();
+            splitter1 = new Splitter();
+            pImagesLeft = new Panel();
+            tvImages = new TreeView();
+            tpVideoClips = new TabPage();
+            pVideoClip = new Panel();
+            pAllVideo = new Panel();
+            tvVideoClips = new TreeView();
+            tpMusic = new TabPage();
+            panelMusic = new Panel();
+            panelMusicContent = new Panel();
+            pNowPlayingMusic = new Panel();
+            gbNowPlayingMusic = new GroupBox();
+            lvNowPlayingMusic = new ListView();
+            chMusic = new ColumnHeader();
+            chLoopMusic = new ColumnHeader();
+            cmdMusicPlayControls = new ContextMenuStrip(components);
+            tsmiRemoveMusic = new ToolStripMenuItem();
+            splitter5 = new Splitter();
+            pAllMusic = new Panel();
+            gbAllMusic = new GroupBox();
+            chkMusicFilter = new CheckBox();
+            tbMusicFilter = new TextBox();
+            chkMusicLoop = new CheckBox();
+            tvMusic = new TreeView();
+            tpSoundEffects = new TabPage();
+            pSoundEffects = new Panel();
+            panelSoundEffectsContent = new Panel();
+            pNowPlayingSounds = new Panel();
+            gbNowPlayingSounds = new GroupBox();
+            lvNowPlayingSounds = new ListView();
+            chSounds = new ColumnHeader();
+            chLoop = new ColumnHeader();
+            cmdSoundsPlayControls = new ContextMenuStrip(components);
+            tsmiRemoveSounds = new ToolStripMenuItem();
+            splitter4 = new Splitter();
+            pAllSounds = new Panel();
+            gbAllSounds = new GroupBox();
+            chkSoundFilter = new CheckBox();
+            tbSoundFilter = new TextBox();
+            chkSoundsLoop = new CheckBox();
+            tvSoundEffects = new TreeView();
+            tpCombat = new TabPage();
+            panelCombat = new Panel();
+            panelCombatContent = new Panel();
+            splitter3 = new Splitter();
+            pAllCharacters = new Panel();
+            tpMarket = new TabPage();
+            lvMarket = new ListView();
+            chName = new ColumnHeader();
+            chPrice = new ColumnHeader();
+            menuStrip.SuspendLayout();
+            MainPanel.SuspendLayout();
+            tabControl.SuspendLayout();
+            tpMap.SuspendLayout();
+            tpStory.SuspendLayout();
+            pStory.SuspendLayout();
+            tpCharacters.SuspendLayout();
+            pCharacters.SuspendLayout();
+            pCharacterList.SuspendLayout();
+            tpImages.SuspendLayout();
+            pImages.SuspendLayout();
+            pImageContent.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pbImages).BeginInit();
+            pImagesLeft.SuspendLayout();
+            tpVideoClips.SuspendLayout();
+            pAllVideo.SuspendLayout();
+            tpMusic.SuspendLayout();
+            panelMusic.SuspendLayout();
+            panelMusicContent.SuspendLayout();
+            pNowPlayingMusic.SuspendLayout();
+            gbNowPlayingMusic.SuspendLayout();
+            cmdMusicPlayControls.SuspendLayout();
+            pAllMusic.SuspendLayout();
+            gbAllMusic.SuspendLayout();
+            tpSoundEffects.SuspendLayout();
+            pSoundEffects.SuspendLayout();
+            panelSoundEffectsContent.SuspendLayout();
+            pNowPlayingSounds.SuspendLayout();
+            gbNowPlayingSounds.SuspendLayout();
+            cmdSoundsPlayControls.SuspendLayout();
+            pAllSounds.SuspendLayout();
+            gbAllSounds.SuspendLayout();
+            tpCombat.SuspendLayout();
+            panelCombat.SuspendLayout();
+            tpMarket.SuspendLayout();
+            SuspendLayout();
+            // 
+            // menuStrip
+            // 
+            menuStrip.Items.AddRange(new ToolStripItem[] { tsmiNew, tsmiAccessories, tsmiSettings, tsmiHelp });
+            menuStrip.Location = new Point(0, 0);
+            menuStrip.Name = "menuStrip";
+            menuStrip.Padding = new Padding(7, 2, 0, 2);
+            menuStrip.Size = new Size(933, 24);
+            menuStrip.TabIndex = 0;
+            menuStrip.Text = "menuStrip1";
+            // 
+            // tsmiNew
+            // 
+            tsmiNew.DropDownItems.AddRange(new ToolStripItem[] { tsmiCharacter, toolStripSeparator1, tsmiCharacterSheetOdt, tsmiCharacterSheetPdf, toolStripSeparator2, tsmiExit });
+            tsmiNew.Name = "tsmiNew";
+            tsmiNew.Size = new Size(43, 20);
+            tsmiNew.Text = "New";
+            // 
+            // tsmiCharacter
+            // 
+            tsmiCharacter.Name = "tsmiCharacter";
+            tsmiCharacter.Size = new Size(185, 22);
+            tsmiCharacter.Text = "Character";
+            tsmiCharacter.Click += TsmiCharacter_Click;
+            // 
+            // toolStripSeparator1
+            // 
+            toolStripSeparator1.Name = "toolStripSeparator1";
+            toolStripSeparator1.Size = new Size(182, 6);
+            // 
+            // tsmiCharacterSheetOdt
+            // 
+            tsmiCharacterSheetOdt.Name = "tsmiCharacterSheetOdt";
+            tsmiCharacterSheetOdt.Size = new Size(185, 22);
+            tsmiCharacterSheetOdt.Text = "Character sheet (odt)";
+            tsmiCharacterSheetOdt.Click += TsmiCharacterSheetOdt_Click;
+            // 
+            // tsmiCharacterSheetPdf
+            // 
+            tsmiCharacterSheetPdf.Name = "tsmiCharacterSheetPdf";
+            tsmiCharacterSheetPdf.Size = new Size(185, 22);
+            tsmiCharacterSheetPdf.Text = "Character sheet (pdf)";
+            tsmiCharacterSheetPdf.Click += TsmiCharacterSheetPdf_Click;
+            // 
+            // toolStripSeparator2
+            // 
+            toolStripSeparator2.Name = "toolStripSeparator2";
+            toolStripSeparator2.Size = new Size(182, 6);
+            // 
+            // tsmiExit
+            // 
+            tsmiExit.Name = "tsmiExit";
+            tsmiExit.Size = new Size(185, 22);
+            tsmiExit.Text = "Exit";
+            tsmiExit.Click += TsmiExit_Click;
+            // 
+            // tsmiAccessories
+            // 
+            tsmiAccessories.DropDownItems.AddRange(new ToolStripItem[] { tsmiArkenForge, tsmiGetSounds, tsmiGetImages, tsmiCastes, tsmiOther });
+            tsmiAccessories.Name = "tsmiAccessories";
+            tsmiAccessories.Size = new Size(80, 20);
+            tsmiAccessories.Text = "Accessories";
+            // 
+            // tsmiArkenForge
+            // 
+            tsmiArkenForge.Name = "tsmiArkenForge";
+            tsmiArkenForge.Size = new Size(133, 22);
+            tsmiArkenForge.Text = "Arkenforge";
+            tsmiArkenForge.Click += TsmiArkenForge_Click;
+            // 
+            // tsmiGetSounds
+            // 
+            tsmiGetSounds.Name = "tsmiGetSounds";
+            tsmiGetSounds.Size = new Size(133, 22);
+            tsmiGetSounds.Text = "Get sounds";
+            tsmiGetSounds.Click += TsmiGetSounds_Click;
+            // 
+            // tsmiGetImages
+            // 
+            tsmiGetImages.DropDownItems.AddRange(new ToolStripItem[] { tsmiGoogle, tsmiPinterest });
+            tsmiGetImages.Name = "tsmiGetImages";
+            tsmiGetImages.Size = new Size(133, 22);
+            tsmiGetImages.Text = "Get images";
+            // 
+            // tsmiGoogle
+            // 
+            tsmiGoogle.Name = "tsmiGoogle";
+            tsmiGoogle.Size = new Size(120, 22);
+            tsmiGoogle.Text = "Google";
+            tsmiGoogle.Click += TsmiGoogle_Click;
+            // 
+            // tsmiPinterest
+            // 
+            tsmiPinterest.Name = "tsmiPinterest";
+            tsmiPinterest.Size = new Size(120, 22);
+            tsmiPinterest.Text = "Pinterest";
+            tsmiPinterest.Click += TsmiPinterest_Click;
+            // 
+            // tsmiCastes
+            // 
+            tsmiCastes.DropDownItems.AddRange(new ToolStripItem[] { tsmiKranichWarlock, tsmiNastarPriest, tsmiVelarPriest });
+            tsmiCastes.Name = "tsmiCastes";
+            tsmiCastes.Size = new Size(133, 22);
+            tsmiCastes.Text = "Castes";
+            // 
+            // tsmiKranichWarlock
+            // 
+            tsmiKranichWarlock.Name = "tsmiKranichWarlock";
+            tsmiKranichWarlock.Size = new Size(158, 22);
+            tsmiKranichWarlock.Text = "Kranich warlock";
+            tsmiKranichWarlock.Click += TsmiKranichWarlock_Click;
+            // 
+            // tsmiNastarPriest
+            // 
+            tsmiNastarPriest.Name = "tsmiNastarPriest";
+            tsmiNastarPriest.Size = new Size(158, 22);
+            tsmiNastarPriest.Text = "Nastar priest";
+            tsmiNastarPriest.Click += TsmiNastarPriest_Click;
+            // 
+            // tsmiVelarPriest
+            // 
+            tsmiVelarPriest.Name = "tsmiVelarPriest";
+            tsmiVelarPriest.Size = new Size(158, 22);
+            tsmiVelarPriest.Text = "Velar priest";
+            tsmiVelarPriest.Click += TsmiVelarPriest_Click;
+            // 
+            // tsmiOther
+            // 
+            tsmiOther.DropDownItems.AddRange(new ToolStripItem[] { tsmiHttpsKalandozokHu, tsmiWeaponsAndArmors, racesToolStripMenuItem });
+            tsmiOther.Name = "tsmiOther";
+            tsmiOther.Size = new Size(133, 22);
+            tsmiOther.Text = "Other";
+            // 
+            // tsmiHttpsKalandozokHu
+            // 
+            tsmiHttpsKalandozokHu.Name = "tsmiHttpsKalandozokHu";
+            tsmiHttpsKalandozokHu.Size = new Size(196, 22);
+            tsmiHttpsKalandozokHu.Text = "https://kalandozok.hu/";
+            tsmiHttpsKalandozokHu.Click += TsmiHttpsKalandozokHu_Click;
+            // 
+            // tsmiWeaponsAndArmors
+            // 
+            tsmiWeaponsAndArmors.Name = "tsmiWeaponsAndArmors";
+            tsmiWeaponsAndArmors.Size = new Size(196, 22);
+            tsmiWeaponsAndArmors.Text = "Weapons and armors";
+            tsmiWeaponsAndArmors.Click += TsmiWeapons_Click;
+            // 
+            // racesToolStripMenuItem
+            // 
+            racesToolStripMenuItem.Name = "racesToolStripMenuItem";
+            racesToolStripMenuItem.Size = new Size(196, 22);
+            racesToolStripMenuItem.Text = "Races";
+            racesToolStripMenuItem.Click += RacesToolStripMenuItem_Click;
+            // 
+            // tsmiSettings
+            // 
+            tsmiSettings.DropDownItems.AddRange(new ToolStripItem[] { tsmiLanguages });
+            tsmiSettings.Name = "tsmiSettings";
+            tsmiSettings.Size = new Size(61, 20);
+            tsmiSettings.Text = "Settings";
+            // 
+            // tsmiLanguages
+            // 
+            tsmiLanguages.Name = "tsmiLanguages";
+            tsmiLanguages.Size = new Size(131, 22);
+            tsmiLanguages.Text = "Languages";
+            // 
+            // tsmiHelp
+            // 
+            tsmiHelp.DropDownItems.AddRange(new ToolStripItem[] { tsmiAbout });
+            tsmiHelp.Name = "tsmiHelp";
+            tsmiHelp.Size = new Size(44, 20);
+            tsmiHelp.Text = "Help";
+            // 
+            // tsmiAbout
+            // 
+            tsmiAbout.Name = "tsmiAbout";
+            tsmiAbout.Size = new Size(107, 22);
+            tsmiAbout.Text = "About";
+            tsmiAbout.Click += TsmiAbout_Click;
+            // 
+            // statusStrip
+            // 
+            statusStrip.Location = new Point(0, 652);
+            statusStrip.Name = "statusStrip";
+            statusStrip.Padding = new Padding(1, 0, 16, 0);
+            statusStrip.Size = new Size(933, 22);
+            statusStrip.TabIndex = 1;
+            statusStrip.Text = "statusStrip1";
+            // 
+            // MainPanel
+            // 
+            MainPanel.Controls.Add(tabControl);
+            MainPanel.Dock = DockStyle.Fill;
+            MainPanel.Location = new Point(0, 24);
+            MainPanel.Margin = new Padding(4, 3, 4, 3);
+            MainPanel.Name = "MainPanel";
+            MainPanel.Size = new Size(933, 628);
+            MainPanel.TabIndex = 2;
+            // 
+            // tabControl
+            // 
+            tabControl.Controls.Add(tpMap);
+            tabControl.Controls.Add(tpStory);
+            tabControl.Controls.Add(tpCharacters);
+            tabControl.Controls.Add(tpImages);
+            tabControl.Controls.Add(tpVideoClips);
+            tabControl.Controls.Add(tpMusic);
+            tabControl.Controls.Add(tpSoundEffects);
+            tabControl.Controls.Add(tpCombat);
+            tabControl.Controls.Add(tpMarket);
+            tabControl.Dock = DockStyle.Fill;
+            tabControl.ImageList = imageList;
+            tabControl.Location = new Point(0, 0);
+            tabControl.Margin = new Padding(4, 3, 4, 3);
+            tabControl.Name = "tabControl";
+            tabControl.SelectedIndex = 0;
+            tabControl.Size = new Size(933, 628);
+            tabControl.TabIndex = 0;
+            // 
+            // tpMap
+            // 
+            tpMap.Controls.Add(wbMap);
+            tpMap.Location = new Point(4, 24);
+            tpMap.Margin = new Padding(4, 3, 4, 3);
+            tpMap.Name = "tpMap";
+            tpMap.Padding = new Padding(4, 3, 4, 3);
+            tpMap.Size = new Size(925, 600);
+            tpMap.TabIndex = 8;
+            tpMap.Text = "Map";
+            tpMap.UseVisualStyleBackColor = true;
+            // 
+            // wbMap
+            // 
+            wbMap.Dock = DockStyle.Fill;
+            wbMap.Location = new Point(4, 3);
+            wbMap.Margin = new Padding(4, 3, 4, 3);
+            wbMap.MinimumSize = new Size(23, 23);
+            wbMap.Name = "wbMap";
+            wbMap.ScriptErrorsSuppressed = true;
+            wbMap.Size = new Size(917, 594);
+            wbMap.TabIndex = 0;
+            wbMap.Url = new Uri("https://kalandozok.hu/ynev/", UriKind.Absolute);
+            // 
+            // tpStory
+            // 
+            tpStory.Controls.Add(pStory);
+            tpStory.Location = new Point(4, 24);
+            tpStory.Margin = new Padding(4, 3, 4, 3);
+            tpStory.Name = "tpStory";
+            tpStory.Padding = new Padding(4, 3, 4, 3);
+            tpStory.Size = new Size(925, 600);
+            tpStory.TabIndex = 6;
+            tpStory.Text = "Story";
+            tpStory.UseVisualStyleBackColor = true;
+            // 
+            // pStory
+            // 
+            pStory.Controls.Add(rtbStory);
+            pStory.Dock = DockStyle.Fill;
+            pStory.Location = new Point(4, 3);
+            pStory.Margin = new Padding(4, 3, 4, 3);
+            pStory.Name = "pStory";
+            pStory.Size = new Size(917, 594);
+            pStory.TabIndex = 0;
+            // 
+            // rtbStory
+            // 
+            rtbStory.Dock = DockStyle.Fill;
+            rtbStory.Location = new Point(0, 0);
+            rtbStory.Margin = new Padding(4, 3, 4, 3);
+            rtbStory.Name = "rtbStory";
+            rtbStory.Size = new Size(917, 594);
+            rtbStory.TabIndex = 0;
+            rtbStory.Text = "";
+            rtbStory.LinkClicked += RtbStory_LinkClicked;
+            // 
+            // tpCharacters
+            // 
+            tpCharacters.Controls.Add(pCharacters);
+            tpCharacters.Location = new Point(4, 24);
+            tpCharacters.Margin = new Padding(4, 3, 4, 3);
+            tpCharacters.Name = "tpCharacters";
+            tpCharacters.Padding = new Padding(4, 3, 4, 3);
+            tpCharacters.Size = new Size(925, 600);
+            tpCharacters.TabIndex = 3;
+            tpCharacters.Text = "Characters";
+            tpCharacters.UseVisualStyleBackColor = true;
+            // 
+            // pCharacters
+            // 
+            pCharacters.Controls.Add(pCharacterContent);
+            pCharacters.Controls.Add(splitter2);
+            pCharacters.Controls.Add(pCharacterList);
+            pCharacters.Dock = DockStyle.Fill;
+            pCharacters.Location = new Point(4, 3);
+            pCharacters.Margin = new Padding(4, 3, 4, 3);
+            pCharacters.Name = "pCharacters";
+            pCharacters.Size = new Size(917, 594);
+            pCharacters.TabIndex = 0;
+            // 
+            // pCharacterContent
+            // 
+            pCharacterContent.Dock = DockStyle.Fill;
+            pCharacterContent.Location = new Point(286, 0);
+            pCharacterContent.Margin = new Padding(4, 3, 4, 3);
+            pCharacterContent.Name = "pCharacterContent";
+            pCharacterContent.Size = new Size(631, 594);
+            pCharacterContent.TabIndex = 2;
+            // 
+            // splitter2
+            // 
+            splitter2.Location = new Point(282, 0);
+            splitter2.Margin = new Padding(4, 3, 4, 3);
+            splitter2.Name = "splitter2";
+            splitter2.Size = new Size(4, 594);
+            splitter2.TabIndex = 1;
+            splitter2.TabStop = false;
+            // 
+            // pCharacterList
+            // 
+            pCharacterList.Controls.Add(tvCharacters);
+            pCharacterList.Dock = DockStyle.Left;
+            pCharacterList.Location = new Point(0, 0);
+            pCharacterList.Margin = new Padding(4, 3, 4, 3);
+            pCharacterList.Name = "pCharacterList";
+            pCharacterList.Size = new Size(282, 594);
+            pCharacterList.TabIndex = 0;
+            // 
+            // tvCharacters
+            // 
+            tvCharacters.Dock = DockStyle.Fill;
+            tvCharacters.ImageIndex = 0;
+            tvCharacters.ImageList = imageList;
+            tvCharacters.Location = new Point(0, 0);
+            tvCharacters.Margin = new Padding(4, 3, 4, 3);
+            tvCharacters.Name = "tvCharacters";
+            tvCharacters.SelectedImageIndex = 0;
+            tvCharacters.Size = new Size(282, 594);
+            tvCharacters.TabIndex = 0;
+            tvCharacters.AfterSelect += TvCharacters_AfterSelect;
+            // 
+            // imageList
+            // 
+            imageList.ColorDepth = ColorDepth.Depth8Bit;
+            imageList.ImageSize = new Size(16, 16);
+            imageList.TransparentColor = Color.Transparent;
+            // 
+            // tpImages
+            // 
+            tpImages.Controls.Add(pImages);
+            tpImages.Location = new Point(4, 24);
+            tpImages.Margin = new Padding(4, 3, 4, 3);
+            tpImages.Name = "tpImages";
+            tpImages.Padding = new Padding(4, 3, 4, 3);
+            tpImages.Size = new Size(925, 600);
+            tpImages.TabIndex = 0;
+            tpImages.Text = "Images";
+            tpImages.UseVisualStyleBackColor = true;
+            // 
+            // pImages
+            // 
+            pImages.Controls.Add(pImageContent);
+            pImages.Controls.Add(splitter1);
+            pImages.Controls.Add(pImagesLeft);
+            pImages.Dock = DockStyle.Fill;
+            pImages.Location = new Point(4, 3);
+            pImages.Margin = new Padding(4, 3, 4, 3);
+            pImages.Name = "pImages";
+            pImages.Size = new Size(917, 594);
+            pImages.TabIndex = 0;
+            // 
+            // pImageContent
+            // 
+            pImageContent.Controls.Add(pbImages);
+            pImageContent.Dock = DockStyle.Fill;
+            pImageContent.Location = new Point(286, 0);
+            pImageContent.Margin = new Padding(4, 3, 4, 3);
+            pImageContent.Name = "pImageContent";
+            pImageContent.Size = new Size(631, 594);
+            pImageContent.TabIndex = 2;
+            // 
+            // pbImages
+            // 
+            pbImages.Dock = DockStyle.Fill;
+            pbImages.Location = new Point(0, 0);
+            pbImages.Margin = new Padding(4, 3, 4, 3);
+            pbImages.Name = "pbImages";
+            pbImages.Size = new Size(631, 594);
+            pbImages.SizeMode = PictureBoxSizeMode.StretchImage;
+            pbImages.TabIndex = 0;
+            pbImages.TabStop = false;
+            // 
+            // splitter1
+            // 
+            splitter1.Location = new Point(282, 0);
+            splitter1.Margin = new Padding(4, 3, 4, 3);
+            splitter1.Name = "splitter1";
+            splitter1.Size = new Size(4, 594);
+            splitter1.TabIndex = 1;
+            splitter1.TabStop = false;
+            // 
+            // pImagesLeft
+            // 
+            pImagesLeft.Controls.Add(tvImages);
+            pImagesLeft.Dock = DockStyle.Left;
+            pImagesLeft.Location = new Point(0, 0);
+            pImagesLeft.Margin = new Padding(4, 3, 4, 3);
+            pImagesLeft.Name = "pImagesLeft";
+            pImagesLeft.Size = new Size(282, 594);
+            pImagesLeft.TabIndex = 0;
+            // 
+            // tvImages
+            // 
+            tvImages.Dock = DockStyle.Fill;
+            tvImages.ImageIndex = 0;
+            tvImages.ImageList = imageList;
+            tvImages.Location = new Point(0, 0);
+            tvImages.Margin = new Padding(4, 3, 4, 3);
+            tvImages.Name = "tvImages";
+            tvImages.SelectedImageIndex = 0;
+            tvImages.Size = new Size(282, 594);
+            tvImages.TabIndex = 0;
+            tvImages.AfterSelect += TvMaps_AfterSelect;
+            tvImages.NodeMouseClick += TvMaps_NodeMouseClick;
+            // 
+            // tpVideoClips
+            // 
+            tpVideoClips.Controls.Add(pVideoClip);
+            tpVideoClips.Controls.Add(pAllVideo);
+            tpVideoClips.Location = new Point(4, 24);
+            tpVideoClips.Margin = new Padding(4, 3, 4, 3);
+            tpVideoClips.Name = "tpVideoClips";
+            tpVideoClips.Padding = new Padding(4, 3, 4, 3);
+            tpVideoClips.Size = new Size(925, 600);
+            tpVideoClips.TabIndex = 5;
+            tpVideoClips.Text = "Video clips";
+            tpVideoClips.UseVisualStyleBackColor = true;
+            // 
+            // pVideoClip
+            // 
+            pVideoClip.Dock = DockStyle.Fill;
+            pVideoClip.Location = new Point(286, 3);
+            pVideoClip.Margin = new Padding(4, 3, 4, 3);
+            pVideoClip.Name = "pVideoClip";
+            pVideoClip.Size = new Size(635, 594);
+            pVideoClip.TabIndex = 3;
+            // 
+            // pAllVideo
+            // 
+            pAllVideo.Controls.Add(tvVideoClips);
+            pAllVideo.Dock = DockStyle.Left;
+            pAllVideo.Location = new Point(4, 3);
+            pAllVideo.Margin = new Padding(4, 3, 4, 3);
+            pAllVideo.Name = "pAllVideo";
+            pAllVideo.Size = new Size(282, 594);
+            pAllVideo.TabIndex = 2;
+            // 
+            // tvVideoClips
+            // 
+            tvVideoClips.Dock = DockStyle.Fill;
+            tvVideoClips.ImageIndex = 0;
+            tvVideoClips.ImageList = imageList;
+            tvVideoClips.Location = new Point(0, 0);
+            tvVideoClips.Margin = new Padding(4, 3, 4, 3);
+            tvVideoClips.Name = "tvVideoClips";
+            tvVideoClips.SelectedImageIndex = 0;
+            tvVideoClips.Size = new Size(282, 594);
+            tvVideoClips.TabIndex = 0;
+            tvVideoClips.NodeMouseDoubleClick += TvVideoClips_NodeMouseDoubleClick;
+            // 
+            // tpMusic
+            // 
+            tpMusic.Controls.Add(panelMusic);
+            tpMusic.Location = new Point(4, 24);
+            tpMusic.Margin = new Padding(4, 3, 4, 3);
+            tpMusic.Name = "tpMusic";
+            tpMusic.Padding = new Padding(4, 3, 4, 3);
+            tpMusic.Size = new Size(925, 600);
+            tpMusic.TabIndex = 1;
+            tpMusic.Text = "Music";
+            tpMusic.UseVisualStyleBackColor = true;
+            // 
+            // panelMusic
+            // 
+            panelMusic.Controls.Add(panelMusicContent);
+            panelMusic.Controls.Add(splitter5);
+            panelMusic.Controls.Add(pAllMusic);
+            panelMusic.Dock = DockStyle.Fill;
+            panelMusic.Location = new Point(4, 3);
+            panelMusic.Margin = new Padding(4, 3, 4, 3);
+            panelMusic.Name = "panelMusic";
+            panelMusic.Size = new Size(917, 594);
+            panelMusic.TabIndex = 1;
+            // 
+            // panelMusicContent
+            // 
+            panelMusicContent.Controls.Add(pNowPlayingMusic);
+            panelMusicContent.Dock = DockStyle.Fill;
+            panelMusicContent.Location = new Point(286, 0);
+            panelMusicContent.Margin = new Padding(4, 3, 4, 3);
+            panelMusicContent.Name = "panelMusicContent";
+            panelMusicContent.Size = new Size(631, 594);
+            panelMusicContent.TabIndex = 3;
+            // 
+            // pNowPlayingMusic
+            // 
+            pNowPlayingMusic.Controls.Add(gbNowPlayingMusic);
+            pNowPlayingMusic.Dock = DockStyle.Left;
+            pNowPlayingMusic.Location = new Point(0, 0);
+            pNowPlayingMusic.Margin = new Padding(4, 3, 4, 3);
+            pNowPlayingMusic.Name = "pNowPlayingMusic";
+            pNowPlayingMusic.Size = new Size(286, 594);
+            pNowPlayingMusic.TabIndex = 0;
+            // 
+            // gbNowPlayingMusic
+            // 
+            gbNowPlayingMusic.Controls.Add(lvNowPlayingMusic);
+            gbNowPlayingMusic.Dock = DockStyle.Fill;
+            gbNowPlayingMusic.Location = new Point(0, 0);
+            gbNowPlayingMusic.Margin = new Padding(4, 3, 4, 3);
+            gbNowPlayingMusic.Name = "gbNowPlayingMusic";
+            gbNowPlayingMusic.Padding = new Padding(4, 3, 4, 3);
+            gbNowPlayingMusic.Size = new Size(286, 594);
+            gbNowPlayingMusic.TabIndex = 0;
+            gbNowPlayingMusic.TabStop = false;
+            gbNowPlayingMusic.Text = "Now playing";
+            // 
+            // lvNowPlayingMusic
+            // 
+            lvNowPlayingMusic.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            lvNowPlayingMusic.Columns.AddRange(new ColumnHeader[] { chMusic, chLoopMusic });
+            lvNowPlayingMusic.ContextMenuStrip = cmdMusicPlayControls;
+            lvNowPlayingMusic.FullRowSelect = true;
+            lvNowPlayingMusic.Location = new Point(4, 57);
+            lvNowPlayingMusic.Margin = new Padding(4, 3, 4, 3);
+            lvNowPlayingMusic.Name = "lvNowPlayingMusic";
+            lvNowPlayingMusic.Size = new Size(278, 533);
+            lvNowPlayingMusic.TabIndex = 0;
+            lvNowPlayingMusic.UseCompatibleStateImageBehavior = false;
+            lvNowPlayingMusic.View = View.Details;
+            // 
+            // chMusic
+            // 
+            chMusic.Text = "Music";
+            chMusic.Width = 177;
+            // 
+            // chLoopMusic
+            // 
+            chLoopMusic.Text = "Loop";
+            // 
+            // cmdMusicPlayControls
+            // 
+            cmdMusicPlayControls.Items.AddRange(new ToolStripItem[] { tsmiRemoveMusic });
+            cmdMusicPlayControls.Name = "cmdMusicPlayControls";
+            cmdMusicPlayControls.Size = new Size(153, 26);
+            // 
+            // tsmiRemoveMusic
+            // 
+            tsmiRemoveMusic.Name = "tsmiRemoveMusic";
+            tsmiRemoveMusic.Size = new Size(152, 22);
+            tsmiRemoveMusic.Text = "Remove music";
+            tsmiRemoveMusic.Click += TsmiRemoveMusic_Click;
+            // 
+            // splitter5
+            // 
+            splitter5.Location = new Point(282, 0);
+            splitter5.Margin = new Padding(4, 3, 4, 3);
+            splitter5.Name = "splitter5";
+            splitter5.Size = new Size(4, 594);
+            splitter5.TabIndex = 2;
+            splitter5.TabStop = false;
+            // 
+            // pAllMusic
+            // 
+            pAllMusic.Controls.Add(gbAllMusic);
+            pAllMusic.Dock = DockStyle.Left;
+            pAllMusic.Location = new Point(0, 0);
+            pAllMusic.Margin = new Padding(4, 3, 4, 3);
+            pAllMusic.Name = "pAllMusic";
+            pAllMusic.Size = new Size(282, 594);
+            pAllMusic.TabIndex = 1;
+            // 
+            // gbAllMusic
+            // 
+            gbAllMusic.Controls.Add(chkMusicFilter);
+            gbAllMusic.Controls.Add(tbMusicFilter);
+            gbAllMusic.Controls.Add(chkMusicLoop);
+            gbAllMusic.Controls.Add(tvMusic);
+            gbAllMusic.Dock = DockStyle.Fill;
+            gbAllMusic.Location = new Point(0, 0);
+            gbAllMusic.Margin = new Padding(4, 3, 4, 3);
+            gbAllMusic.Name = "gbAllMusic";
+            gbAllMusic.Padding = new Padding(4, 3, 4, 3);
+            gbAllMusic.Size = new Size(282, 594);
+            gbAllMusic.TabIndex = 0;
+            gbAllMusic.TabStop = false;
+            gbAllMusic.Text = "All music";
+            // 
+            // chkMusicFilter
+            // 
+            chkMusicFilter.AutoSize = true;
+            chkMusicFilter.Location = new Point(149, 8);
+            chkMusicFilter.Margin = new Padding(4, 3, 4, 3);
+            chkMusicFilter.Name = "chkMusicFilter";
+            chkMusicFilter.Size = new Size(52, 19);
+            chkMusicFilter.TabIndex = 7;
+            chkMusicFilter.Text = "Filter";
+            chkMusicFilter.UseVisualStyleBackColor = true;
+            chkMusicFilter.CheckedChanged += ChkMusicFilter_CheckedChanged;
+            // 
+            // tbMusicFilter
+            // 
+            tbMusicFilter.Location = new Point(149, 30);
+            tbMusicFilter.Margin = new Padding(4, 3, 4, 3);
+            tbMusicFilter.Name = "tbMusicFilter";
+            tbMusicFilter.Size = new Size(129, 23);
+            tbMusicFilter.TabIndex = 2;
+            tbMusicFilter.TextChanged += TbMusicFilter_TextChanged;
+            // 
+            // chkMusicLoop
+            // 
+            chkMusicLoop.AutoSize = true;
+            chkMusicLoop.Location = new Point(7, 30);
+            chkMusicLoop.Margin = new Padding(4, 3, 4, 3);
+            chkMusicLoop.Name = "chkMusicLoop";
+            chkMusicLoop.Size = new Size(53, 19);
+            chkMusicLoop.TabIndex = 1;
+            chkMusicLoop.Text = "Loop";
+            chkMusicLoop.UseVisualStyleBackColor = true;
+            // 
+            // tvMusic
+            // 
+            tvMusic.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            tvMusic.FullRowSelect = true;
+            tvMusic.ImageIndex = 0;
+            tvMusic.ImageList = imageList;
+            tvMusic.Location = new Point(4, 57);
+            tvMusic.Margin = new Padding(4, 3, 4, 3);
+            tvMusic.Name = "tvMusic";
+            tvMusic.SelectedImageIndex = 0;
+            tvMusic.Size = new Size(275, 533);
+            tvMusic.TabIndex = 0;
+            tvMusic.NodeMouseDoubleClick += TvMusic_NodeMouseDoubleClick;
+            // 
+            // tpSoundEffects
+            // 
+            tpSoundEffects.Controls.Add(pSoundEffects);
+            tpSoundEffects.Location = new Point(4, 24);
+            tpSoundEffects.Margin = new Padding(4, 3, 4, 3);
+            tpSoundEffects.Name = "tpSoundEffects";
+            tpSoundEffects.Padding = new Padding(4, 3, 4, 3);
+            tpSoundEffects.Size = new Size(925, 600);
+            tpSoundEffects.TabIndex = 4;
+            tpSoundEffects.Text = "Sound effects";
+            tpSoundEffects.UseVisualStyleBackColor = true;
+            // 
+            // pSoundEffects
+            // 
+            pSoundEffects.Controls.Add(panelSoundEffectsContent);
+            pSoundEffects.Controls.Add(splitter4);
+            pSoundEffects.Controls.Add(pAllSounds);
+            pSoundEffects.Dock = DockStyle.Fill;
+            pSoundEffects.Location = new Point(4, 3);
+            pSoundEffects.Margin = new Padding(4, 3, 4, 3);
+            pSoundEffects.Name = "pSoundEffects";
+            pSoundEffects.Size = new Size(917, 594);
+            pSoundEffects.TabIndex = 1;
+            // 
+            // panelSoundEffectsContent
+            // 
+            panelSoundEffectsContent.Controls.Add(pNowPlayingSounds);
+            panelSoundEffectsContent.Dock = DockStyle.Fill;
+            panelSoundEffectsContent.Location = new Point(286, 0);
+            panelSoundEffectsContent.Margin = new Padding(4, 3, 4, 3);
+            panelSoundEffectsContent.Name = "panelSoundEffectsContent";
+            panelSoundEffectsContent.Size = new Size(631, 594);
+            panelSoundEffectsContent.TabIndex = 3;
+            // 
+            // pNowPlayingSounds
+            // 
+            pNowPlayingSounds.Controls.Add(gbNowPlayingSounds);
+            pNowPlayingSounds.Dock = DockStyle.Left;
+            pNowPlayingSounds.Location = new Point(0, 0);
+            pNowPlayingSounds.Margin = new Padding(4, 3, 4, 3);
+            pNowPlayingSounds.Name = "pNowPlayingSounds";
+            pNowPlayingSounds.Size = new Size(286, 594);
+            pNowPlayingSounds.TabIndex = 1;
+            // 
+            // gbNowPlayingSounds
+            // 
+            gbNowPlayingSounds.Controls.Add(lvNowPlayingSounds);
+            gbNowPlayingSounds.Dock = DockStyle.Fill;
+            gbNowPlayingSounds.Location = new Point(0, 0);
+            gbNowPlayingSounds.Margin = new Padding(4, 3, 4, 3);
+            gbNowPlayingSounds.Name = "gbNowPlayingSounds";
+            gbNowPlayingSounds.Padding = new Padding(4, 3, 4, 3);
+            gbNowPlayingSounds.Size = new Size(286, 594);
+            gbNowPlayingSounds.TabIndex = 0;
+            gbNowPlayingSounds.TabStop = false;
+            gbNowPlayingSounds.Text = "Now playing";
+            // 
+            // lvNowPlayingSounds
+            // 
+            lvNowPlayingSounds.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            lvNowPlayingSounds.Columns.AddRange(new ColumnHeader[] { chSounds, chLoop });
+            lvNowPlayingSounds.ContextMenuStrip = cmdSoundsPlayControls;
+            lvNowPlayingSounds.FullRowSelect = true;
+            lvNowPlayingSounds.Location = new Point(4, 57);
+            lvNowPlayingSounds.Margin = new Padding(4, 3, 4, 3);
+            lvNowPlayingSounds.Name = "lvNowPlayingSounds";
+            lvNowPlayingSounds.Size = new Size(278, 533);
+            lvNowPlayingSounds.TabIndex = 0;
+            lvNowPlayingSounds.UseCompatibleStateImageBehavior = false;
+            lvNowPlayingSounds.View = View.Details;
+            // 
+            // chSounds
+            // 
+            chSounds.Text = "Sounds";
+            chSounds.Width = 177;
+            // 
+            // chLoop
+            // 
+            chLoop.Text = "Loop";
+            // 
+            // cmdSoundsPlayControls
+            // 
+            cmdSoundsPlayControls.Items.AddRange(new ToolStripItem[] { tsmiRemoveSounds });
+            cmdSoundsPlayControls.Name = "cmdMusicPlayControls";
+            cmdSoundsPlayControls.Size = new Size(167, 26);
+            // 
+            // tsmiRemoveSounds
+            // 
+            tsmiRemoveSounds.Name = "tsmiRemoveSounds";
+            tsmiRemoveSounds.Size = new Size(166, 22);
+            tsmiRemoveSounds.Text = "Remove sound(s)";
+            tsmiRemoveSounds.Click += TsmiRemoveSounds_Click;
+            // 
+            // splitter4
+            // 
+            splitter4.Location = new Point(282, 0);
+            splitter4.Margin = new Padding(4, 3, 4, 3);
+            splitter4.Name = "splitter4";
+            splitter4.Size = new Size(4, 594);
+            splitter4.TabIndex = 2;
+            splitter4.TabStop = false;
+            // 
+            // pAllSounds
+            // 
+            pAllSounds.Controls.Add(gbAllSounds);
+            pAllSounds.Dock = DockStyle.Left;
+            pAllSounds.Location = new Point(0, 0);
+            pAllSounds.Margin = new Padding(4, 3, 4, 3);
+            pAllSounds.Name = "pAllSounds";
+            pAllSounds.Size = new Size(282, 594);
+            pAllSounds.TabIndex = 1;
+            // 
+            // gbAllSounds
+            // 
+            gbAllSounds.Controls.Add(chkSoundFilter);
+            gbAllSounds.Controls.Add(tbSoundFilter);
+            gbAllSounds.Controls.Add(chkSoundsLoop);
+            gbAllSounds.Controls.Add(tvSoundEffects);
+            gbAllSounds.Dock = DockStyle.Fill;
+            gbAllSounds.Location = new Point(0, 0);
+            gbAllSounds.Margin = new Padding(4, 3, 4, 3);
+            gbAllSounds.Name = "gbAllSounds";
+            gbAllSounds.Padding = new Padding(4, 3, 4, 3);
+            gbAllSounds.Size = new Size(282, 594);
+            gbAllSounds.TabIndex = 0;
+            gbAllSounds.TabStop = false;
+            gbAllSounds.Text = "All sound effects";
+            // 
+            // chkSoundFilter
+            // 
+            chkSoundFilter.AutoSize = true;
+            chkSoundFilter.Location = new Point(149, 8);
+            chkSoundFilter.Margin = new Padding(4, 3, 4, 3);
+            chkSoundFilter.Name = "chkSoundFilter";
+            chkSoundFilter.Size = new Size(52, 19);
+            chkSoundFilter.TabIndex = 6;
+            chkSoundFilter.Text = "Filter";
+            chkSoundFilter.UseVisualStyleBackColor = true;
+            chkSoundFilter.CheckedChanged += ChkSoundFilter_CheckedChanged;
+            // 
+            // tbSoundFilter
+            // 
+            tbSoundFilter.Location = new Point(149, 30);
+            tbSoundFilter.Margin = new Padding(4, 3, 4, 3);
+            tbSoundFilter.Name = "tbSoundFilter";
+            tbSoundFilter.Size = new Size(129, 23);
+            tbSoundFilter.TabIndex = 4;
+            tbSoundFilter.TextChanged += TbSoundFilter_TextChanged;
+            // 
+            // chkSoundsLoop
+            // 
+            chkSoundsLoop.AutoSize = true;
+            chkSoundsLoop.Location = new Point(7, 30);
+            chkSoundsLoop.Margin = new Padding(4, 3, 4, 3);
+            chkSoundsLoop.Name = "chkSoundsLoop";
+            chkSoundsLoop.Size = new Size(53, 19);
+            chkSoundsLoop.TabIndex = 2;
+            chkSoundsLoop.Text = "Loop";
+            chkSoundsLoop.UseVisualStyleBackColor = true;
+            // 
+            // tvSoundEffects
+            // 
+            tvSoundEffects.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            tvSoundEffects.ImageIndex = 0;
+            tvSoundEffects.ImageList = imageList;
+            tvSoundEffects.Location = new Point(-4, 57);
+            tvSoundEffects.Margin = new Padding(4, 3, 4, 3);
+            tvSoundEffects.Name = "tvSoundEffects";
+            tvSoundEffects.SelectedImageIndex = 0;
+            tvSoundEffects.Size = new Size(282, 530);
+            tvSoundEffects.TabIndex = 0;
+            tvSoundEffects.NodeMouseDoubleClick += TvSoundEffects_NodeMouseDoubleClick;
+            // 
+            // tpCombat
+            // 
+            tpCombat.Controls.Add(panelCombat);
+            tpCombat.Location = new Point(4, 24);
+            tpCombat.Margin = new Padding(4, 3, 4, 3);
+            tpCombat.Name = "tpCombat";
+            tpCombat.Padding = new Padding(4, 3, 4, 3);
+            tpCombat.Size = new Size(925, 600);
+            tpCombat.TabIndex = 2;
+            tpCombat.Text = "Combat";
+            tpCombat.UseVisualStyleBackColor = true;
+            // 
+            // panelCombat
+            // 
+            panelCombat.Controls.Add(panelCombatContent);
+            panelCombat.Controls.Add(splitter3);
+            panelCombat.Controls.Add(pAllCharacters);
+            panelCombat.Dock = DockStyle.Fill;
+            panelCombat.Location = new Point(4, 3);
+            panelCombat.Margin = new Padding(4, 3, 4, 3);
+            panelCombat.Name = "panelCombat";
+            panelCombat.Size = new Size(917, 594);
+            panelCombat.TabIndex = 1;
+            // 
+            // panelCombatContent
+            // 
+            panelCombatContent.Dock = DockStyle.Fill;
+            panelCombatContent.Location = new Point(286, 0);
+            panelCombatContent.Margin = new Padding(4, 3, 4, 3);
+            panelCombatContent.Name = "panelCombatContent";
+            panelCombatContent.Size = new Size(631, 594);
+            panelCombatContent.TabIndex = 3;
+            // 
+            // splitter3
+            // 
+            splitter3.Location = new Point(282, 0);
+            splitter3.Margin = new Padding(4, 3, 4, 3);
+            splitter3.Name = "splitter3";
+            splitter3.Size = new Size(4, 594);
+            splitter3.TabIndex = 2;
+            splitter3.TabStop = false;
+            // 
+            // pAllCharacters
+            // 
+            pAllCharacters.Dock = DockStyle.Left;
+            pAllCharacters.Location = new Point(0, 0);
+            pAllCharacters.Margin = new Padding(4, 3, 4, 3);
+            pAllCharacters.Name = "pAllCharacters";
+            pAllCharacters.Size = new Size(282, 594);
+            pAllCharacters.TabIndex = 1;
+            // 
+            // tpMarket
+            // 
+            tpMarket.Controls.Add(lvMarket);
+            tpMarket.Location = new Point(4, 24);
+            tpMarket.Margin = new Padding(4, 3, 4, 3);
+            tpMarket.Name = "tpMarket";
+            tpMarket.Padding = new Padding(4, 3, 4, 3);
+            tpMarket.Size = new Size(925, 600);
+            tpMarket.TabIndex = 7;
+            tpMarket.Text = "Market";
+            tpMarket.UseVisualStyleBackColor = true;
+            // 
+            // lvMarket
+            // 
+            lvMarket.Columns.AddRange(new ColumnHeader[] { chName, chPrice });
+            lvMarket.Dock = DockStyle.Fill;
+            lvMarket.FullRowSelect = true;
+            listViewGroup1.Header = "Accomodation";
+            listViewGroup1.Name = "Accomodation";
+            listViewGroup2.Header = "Animals";
+            listViewGroup2.Name = "Animals";
+            listViewGroup3.Header = "Clothes";
+            listViewGroup3.Name = "Clothes";
+            listViewGroup4.Header = "Debauchery";
+            listViewGroup4.Name = "Debauchery";
+            listViewGroup5.Header = "Food";
+            listViewGroup5.Name = "Food";
+            listViewGroup6.Header = "Other";
+            listViewGroup6.Name = "Other";
+            listViewGroup7.Header = "Trappings";
+            listViewGroup7.Name = "Trappings";
+            listViewGroup8.Header = "Travelling";
+            listViewGroup8.Name = "Travelling";
+            lvMarket.Groups.AddRange(new ListViewGroup[] { listViewGroup1, listViewGroup2, listViewGroup3, listViewGroup4, listViewGroup5, listViewGroup6, listViewGroup7, listViewGroup8 });
+            lvMarket.Location = new Point(4, 3);
+            lvMarket.Margin = new Padding(4, 3, 4, 3);
+            lvMarket.Name = "lvMarket";
+            lvMarket.Size = new Size(917, 594);
+            lvMarket.TabIndex = 0;
+            lvMarket.UseCompatibleStateImageBehavior = false;
+            lvMarket.View = View.Details;
+            // 
+            // chName
+            // 
+            chName.Text = "Name";
+            chName.Width = 151;
+            // 
+            // chPrice
+            // 
+            chPrice.Text = "Price";
+            chPrice.Width = 126;
+            // 
+            // MainForm
+            // 
+            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleMode = AutoScaleMode.Font;
+            ClientSize = new Size(933, 674);
+            Controls.Add(MainPanel);
+            Controls.Add(statusStrip);
+            Controls.Add(menuStrip);
+            MainMenuStrip = menuStrip;
+            Margin = new Padding(4, 3, 4, 3);
+            Name = "MainForm";
+            StartPosition = FormStartPosition.CenterScreen;
+            Text = "Storyteller";
+            Shown += MainForm_Shown;
+            menuStrip.ResumeLayout(false);
+            menuStrip.PerformLayout();
+            MainPanel.ResumeLayout(false);
+            tabControl.ResumeLayout(false);
+            tpMap.ResumeLayout(false);
+            tpStory.ResumeLayout(false);
+            pStory.ResumeLayout(false);
+            tpCharacters.ResumeLayout(false);
+            pCharacters.ResumeLayout(false);
+            pCharacterList.ResumeLayout(false);
+            tpImages.ResumeLayout(false);
+            pImages.ResumeLayout(false);
+            pImageContent.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)pbImages).EndInit();
+            pImagesLeft.ResumeLayout(false);
+            tpVideoClips.ResumeLayout(false);
+            pAllVideo.ResumeLayout(false);
+            tpMusic.ResumeLayout(false);
+            panelMusic.ResumeLayout(false);
+            panelMusicContent.ResumeLayout(false);
+            pNowPlayingMusic.ResumeLayout(false);
+            gbNowPlayingMusic.ResumeLayout(false);
+            cmdMusicPlayControls.ResumeLayout(false);
+            pAllMusic.ResumeLayout(false);
+            gbAllMusic.ResumeLayout(false);
+            gbAllMusic.PerformLayout();
+            tpSoundEffects.ResumeLayout(false);
+            pSoundEffects.ResumeLayout(false);
+            panelSoundEffectsContent.ResumeLayout(false);
+            pNowPlayingSounds.ResumeLayout(false);
+            gbNowPlayingSounds.ResumeLayout(false);
+            cmdSoundsPlayControls.ResumeLayout(false);
+            pAllSounds.ResumeLayout(false);
+            gbAllSounds.ResumeLayout(false);
+            gbAllSounds.PerformLayout();
+            tpCombat.ResumeLayout(false);
+            panelCombat.ResumeLayout(false);
+            tpMarket.ResumeLayout(false);
+            ResumeLayout(false);
+            PerformLayout();
 
         }
 

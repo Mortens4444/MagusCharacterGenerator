@@ -1,15 +1,13 @@
-﻿using MagusCharacterGenerator.Castes.Believer.GodsOfPyarron;
-using MagusCharacterGenerator.Castes.Sorcerer;
-using MagusCharacterGenerator.GameSystem;
-using MagusCharacterGenerator.GameSystem.Languages;
-using MagusCharacterGenerator.Qualifications.Scientific;
-using MagusCharacterGenerator.Races;
-using Mtf.Helper;
+﻿using M.A.G.U.S.Classes.Believer.GodsOfPyarron;
+using M.A.G.U.S.Classes.Sorcerer;
+using M.A.G.U.S.GameSystem;
+using M.A.G.U.S.GameSystem.Languages;
+using M.A.G.U.S.Qualifications.Scientific;
+using M.A.G.U.S.Races;
+using M.A.G.U.S.Utils;
 using NUnit.Framework;
-using System;
-using System.Collections.Generic;
 
-namespace MagusCharacterGenerator.Test
+namespace M.A.G.U.S.Test
 {
 	[TestFixture]
 	public class ObjectDeserializerTest
@@ -52,7 +50,7 @@ namespace MagusCharacterGenerator.Test
 		[Test]
 		public void DeserializeCharacter()
 		{
-			var savedCharacterJson = EmbeddedResourceReader.Get("MagusCharacterGenerator.Test.ObjectDeserializationResults.Character.json");
+			var savedCharacterJson = EmbeddedResourceReader.Get("M.A.G.U.S.Test.ObjectDeserializationResults.Character.json");
 			var character = ObjectSerializer.LoadContent<Character>(savedCharacterJson);
 			Assert.That(character.Castes, Is.Not.Null);
 		}

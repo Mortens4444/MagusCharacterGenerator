@@ -1,60 +1,57 @@
-﻿using System;
+﻿namespace CharacterGeneratorCli;
 
-namespace CharacterGeneratorCli
+class CommandLineArgumentsParser
 {
-	class CommandLineArgumentsParser
+	public CharacterGenerationDto? Parse(string[] args)
 	{
-		public CharacterGenerationDto Parse(string[] args)
+		try
 		{
-			try
-			{
-				var result = new CharacterGenerationDto();
+			var result = new CharacterGenerationDto();
 
-				int i = 0;
-				while (i < args.Length)
+			int i = 0;
+			while (i < args.Length)
+			{
+				switch (args[i].ToLower())
 				{
-					switch (args[i].ToLower())
-					{
-						case "-n":
-						case "--name":
-							result.Name = args[++i].ToLower();
-							break;
+					case "-n":
+					case "--name":
+						result.Name = args[++i].ToLower();
+						break;
 
-						case "-c":
-						case "--caste":
-							result.Caste = args[++i].ToLower();
-							break;
+					case "-c":
+					case "--caste":
+						result.Caste = args[++i].ToLower();
+						break;
 
-						case "-l":
-						case "--level":
-							result.Level = args[++i].ToLower();
-							break;
+					case "-l":
+					case "--level":
+						result.Level = args[++i].ToLower();
+						break;
 
-						case "-sc":
-						case "--secondary-caste":
-							result.SecondaryCaste = args[++i].ToLower();
-							break;
+					case "-sc":
+					case "--secondary-caste":
+						result.SecondaryCaste = args[++i].ToLower();
+						break;
 
-						case "-sl":
-						case "--secondary-level":
-							result.SecondaryLevel = args[++i].ToLower();
-							break;
+					case "-sl":
+					case "--secondary-level":
+						result.SecondaryLevel = args[++i].ToLower();
+						break;
 
-						case "-r":
-						case "--race":
-							result.Race = args[++i].ToLower();
-							break;
-					}
-
-					i++;
+					case "-r":
+					case "--race":
+						result.Race = args[++i].ToLower();
+						break;
 				}
-				return result;
+
+				i++;
 			}
-			catch (Exception)
-			{
-				CliHelp.Show();
-				return null;
-			}
+			return result;
+		}
+		catch (Exception)
+		{
+			CliHelp.Show();
+			return null;
 		}
 	}
 }

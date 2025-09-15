@@ -1,20 +1,17 @@
-﻿using MagusCharacterGenerator.GameSystem.Valuables;
-using Mtf.Languages;
+﻿using M.A.G.U.S.GameSystem.Valuables;
+using Mtf.LanguageService;
 
-namespace MagusCharacterGenerator.Things.{Namespace}
+namespace M.A.G.U.S.Things.{Namespace};
+
+public class {ClassName} : Thing
 {
-	class {ClassName}
-	{
-		public string Name => "{Name}";
+	public override string Name => "{Name}";
 
-		public Money Price => {Price};
+	public Money Price => {Price};
 
-		public int MovementInhibitingFactor => {Movement inhibiting factor};
+	public int MovementInhibitingFactor => {Movement inhibiting factor};
 
-		public int DamageSusceptiveValue => {Damage susceptive value};
+	public int DamageSusceptiveValue => {Damage susceptive value};
 
-		public int Weight => {Weight};
-
-		public override string ToString() => Lng.Elem("{Name}");
-	}
+	public int Weight => {Weight};
 }

@@ -1,9 +1,7 @@
-﻿using Mtf.Helper;
+﻿using M.A.G.U.S.Utils;
 using NUnit.Framework;
-using System.Collections.Generic;
-using System.IO;
 
-namespace MagusCharacterGenerator.Test
+namespace M.A.G.U.S.Test
 {
 	[TestFixture]
 	public class ObjectSerializerTest
@@ -25,7 +23,7 @@ namespace MagusCharacterGenerator.Test
 					String = "str",
 					Char = 'c'
 				},
-				"MagusCharacterGenerator.Test.ObjectSerializationResults.Primitives.json");
+				"M.A.G.U.S.Test.ObjectSerializationResults.Primitives.json");
 		}
 
 		[Test]
@@ -36,7 +34,7 @@ namespace MagusCharacterGenerator.Test
 					Bytes = new byte[] { 1, 2, 3 },
 					Strings = new[] { "a", "b", "c" }
 				},
-				"MagusCharacterGenerator.Test.ObjectSerializationResults.Arrays.json");
+				"M.A.G.U.S.Test.ObjectSerializationResults.Arrays.json");
 		}
 
 		[Test]
@@ -47,7 +45,7 @@ namespace MagusCharacterGenerator.Test
 					Bytes = new List<byte> { 1, 2, 3 },
 					Strings = new List<string> { "a", "b", "c" }
 				},
-				"MagusCharacterGenerator.Test.ObjectSerializationResults.Lists.json");
+				"M.A.G.U.S.Test.ObjectSerializationResults.Lists.json");
 		}
 
 		private void TestSerialization(object obj, string serializationResultFileName)

@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<v:NotifierPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:mc="clr-namespace:Mtf.Maui.Controls;assembly=Mtf.Maui.Controls"
+             xmlns:v="clr-namespace:M.A.G.U.S.Assistant.Views"
+             x:Class="M.A.G.U.S.Assistant.Views.MainPage">
+
+    <ScrollView>
+        <VerticalStackLayout>
+            <HorizontalStackLayout HorizontalOptions="Center">
+                <mc:MenuItemView ImageName="character_generation" LabelText="Character generator" PageType="{x:Type v:CharacterGeneratorPage}" />
+            </HorizontalStackLayout>
+        </VerticalStackLayout>
+    </ScrollView>
+
+</v:NotifierPage>

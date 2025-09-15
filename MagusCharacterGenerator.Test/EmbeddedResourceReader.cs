@@ -2,7 +2,7 @@
 using System.IO;
 using System.Reflection;
 
-namespace MagusCharacterGenerator.Test
+namespace M.A.G.U.S.Test
 {
 	public static class EmbeddedResourceReader
 	{

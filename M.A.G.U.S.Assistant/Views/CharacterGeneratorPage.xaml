@@ -1,0 +1,460 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<v:NotifierPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                xmlns:v="clr-namespace:M.A.G.U.S.Assistant.Views"
+                xmlns:vm="clr-namespace:M.A.G.U.S.Assistant.ViewModels"
+                xmlns:local="clr-namespace:M.A.G.U.S.Qualifications;assembly=M.A.G.U.S."
+                xmlns:mc="clr-namespace:Mtf.Maui.Controls;assembly=Mtf.Maui.Controls"
+                x:Class="M.A.G.U.S.Assistant.Views.CharacterGeneratorPage"
+                x:DataType="vm:CharacterGeneratorViewModel"
+                Title="M.A.G.U.S. Karakterlap">
+
+    <v:NotifierPage.BindingContext>
+        <vm:CharacterGeneratorViewModel />
+    </v:NotifierPage.BindingContext>
+
+    <v:NotifierPage.Resources>
+        <ResourceDictionary>
+            <Style x:Key="BoxBorder" TargetType="Border">
+                <Setter Property="StrokeShape" Value="{RoundRectangle CornerRadius=8}"/>
+                <Setter Property="Stroke" Value="{AppThemeBinding Light={StaticResource Gray300}, Dark={StaticResource Gray500}}"/>
+                <Setter Property="StrokeThickness" Value="1"/>
+                <Setter Property="Padding" Value="10"/>
+                <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource Gray900}}"/>
+            </Style>
+            <Style x:Key="HeaderLabel" TargetType="Label">
+                <Setter Property="FontAttributes" Value="Bold"/>
+                <Setter Property="FontSize" Value="16"/>
+                <Setter Property="Margin" Value="0,0,0,8"/>
+                <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}"/>
+            </Style>
+            <!--<Style x:Key="SubHeaderLabel" TargetType="Label">
+                <Setter Property="FontAttributes" Value="Bold"/>
+                <Setter Property="FontSize" Value="12"/>
+                <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource Gray600}, Dark={StaticResource Gray400}}"/>
+            </Style>-->
+            <Style x:Key="ValueLabel" TargetType="Label">
+                <Setter Property="HorizontalOptions" Value="End"/>
+                <Setter Property="VerticalOptions" Value="Center"/>
+                <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}"/>
+            </Style>
+            <Style x:Key="PropertyNameLabel" TargetType="Label">
+                <Setter Property="VerticalOptions" Value="Center"/>
+                <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}"/>
+            </Style>
+        </ResourceDictionary>
+    </v:NotifierPage.Resources>
+
+    <ScrollView>
+        <VerticalStackLayout Spacing="15" Padding="15">
+
+            <Label Text="M. A. G. U. S. Karakterlap"
+                   FontSize="Large"
+                   FontAttributes="Bold"
+                   HorizontalOptions="Center"/>
+
+            <HorizontalStackLayout Spacing="8" VerticalOptions="Center" HorizontalOptions="Center">
+                <Label Text="Faj:" VerticalOptions="Center"/>
+                <Picker ItemsSource="{Binding AvailableRaces}"
+                        ItemDisplayBinding="{Binding Name}"
+                        SelectedItem="{Binding SelectedRace}"
+                        WidthRequest="220"/>
+            </HorizontalStackLayout>
+
+            <HorizontalStackLayout Spacing="8" VerticalOptions="Center" HorizontalOptions="Center">
+                <Label Text="Kaszt:" VerticalOptions="Center"/>
+                <Picker ItemsSource="{Binding AvailableClasses}"
+                        ItemDisplayBinding="{Binding ClassName}"
+                        SelectedItem="{Binding SelectedClass}"
+                        WidthRequest="220"/>
+            </HorizontalStackLayout>
+            
+            <Button Text="Karakter Generálása"
+                    Command="{Binding GenerateCharacterCommand}"
+                    HorizontalOptions="Center"
+                    Margin="0,20,0,0"/>
+
+            <Grid ColumnDefinitions="*,*,*" ColumnSpacing="10" RowDefinitions="Auto" MinimumHeightRequest="1000">
+
+                <VerticalStackLayout Grid.Column="0" Spacing="10">
+                    <Border Style="{StaticResource BoxBorder}">
+                        <VerticalStackLayout>
+                            <Label Text="Képességek" Style="{StaticResource HeaderLabel}"/>
+                            <Grid ColumnDefinitions="Auto, Auto"
+                                  RowDefinitions="Auto, Auto, Auto, Auto, Auto, Auto, Auto, Auto, Auto, Auto, Auto"
+                                  RowSpacing="5"
+                                  MinimumWidthRequest="100"
+                                  MaximumWidthRequest="100"
+                                  MinimumHeightRequest="200"
+                                  >
+
+                                <mc:EntryWithLabel Label="Erő"
+                                                   Text="{Binding Character.Strength}"
+                                                   IsEnabled="False"
+                                                   Grid.Row="0"
+                                                   Grid.Column="0" />
+
+                                <mc:EntryWithLabel Label="Állóképesség"
+                                                   Text="{Binding Character.Stamina}"
+                                                   IsEnabled="False"
+                                                   Grid.Row="1"
+                                                   Grid.Column="0" />
+
+                                <mc:EntryWithLabel Label="Gyorsaság"
+                                                   Text="{Binding Character.Speed}"
+                                                   IsEnabled="False"
+                                                   Grid.Row="0"
+                                                   Grid.Column="1" />
+
+                                <mc:EntryWithLabel Label="Ügyesség"
+                                                   Text="{Binding Character.Dexterity}"
+                                                   IsEnabled="False"
+                                                   Grid.Row="1"
+                                                   Grid.Column="1" />
+
+                                <mc:EntryWithLabel Label="Egészség"
+                                                   Text="{Binding Character.Health}"
+                                                   IsEnabled="False"
+                                                   Grid.Row="2"
+                                                   Grid.Column="0" />
+
+                                <mc:EntryWithLabel Label="Szépség"
+                                                   Text="{Binding Character.Beauty}"
+                                                   IsEnabled="False"
+                                                   Grid.Row="2"
+                                                   Grid.Column="1" />
+
+                                <mc:EntryWithLabel Label="Akaraterő"
+                                                   Text="{Binding Character.WillPower}"
+                                                   IsEnabled="False"
+                                                   Grid.Row="3"
+                                                   Grid.Column="0" />
+
+                                <mc:EntryWithLabel Label="Intelligencia"
+                                                   Text="{Binding Character.Intelligence}"
+                                                   IsEnabled="False"
+                                                   Grid.Row="3"
+                                                   Grid.Column="1" />
+
+                                <mc:EntryWithLabel Label="Asztrál"
+                                                   Text="{Binding Character.Astral}"
+                                                   IsEnabled="False"
+                                                   Grid.Row="4"
+                                                   Grid.Column="0" />
+
+                                <mc:EntryWithLabel Label="Műveltség"
+                                                   Text="{Binding Character.Literacy}"
+                                                   IsEnabled="False"
+                                                   Grid.Row="4"
+                                                   Grid.Column="1" />
+                                <!--<Label Grid.Row="0" Grid.Column="0" Text="Erő:" Style="{StaticResource PropertyNameLabel}"/>
+                                <Label Grid.Row="0" Grid.Column="1" Text="{Binding Character.Strength}" Style="{StaticResource ValueLabel}"/>-->
+                            </Grid>
+                        </VerticalStackLayout>
+                    </Border>
+
+                    <Border Style="{StaticResource BoxBorder}">
+                        <VerticalStackLayout>
+                            <Label Text="Mana-pontok" Style="{StaticResource HeaderLabel}"/>
+                            <Grid ColumnDefinitions="Auto, Auto"
+                                  RowSpacing="5"
+                                  RowDefinitions="Auto, Auto">
+                                <mc:EntryWithLabel Label="Max. Mp"
+                                                    Text="{Binding Character.MaxManaPointsPerLevel}"
+                                                    IsEnabled="False"
+                                                    Grid.Row="0"
+                                                    Grid.Column="0" />
+
+                                <mc:EntryWithLabel Label="Akt. Mp"
+                                                    Text="{Binding Character.ManaPoints}"
+                                                    IsEnabled="False"
+                                                    Grid.Row="0"
+                                                    Grid.Column="1" />
+
+                                <mc:EntryWithLabel Label="Max. Mp/szint"
+                                                   Text="{Binding Character.MaxManaPointsPerLevel}"
+                                                   IsEnabled="False"
+                                                   Grid.Row="1"
+                                                   Grid.Column="0" />
+                            </Grid>
+                        </VerticalStackLayout>
+                    </Border>
+
+                    <Border Style="{StaticResource BoxBorder}">
+                        <VerticalStackLayout>
+                            <Label Text="ᛉ-pontok" Style="{StaticResource HeaderLabel}"/>
+                            <Grid ColumnDefinitions="Auto, Auto"
+                                  RowSpacing="5"
+                                  RowDefinitions="Auto, Auto">
+                                <mc:EntryWithLabel Label="Max. ᛉp"
+                                                    Text="{Binding Character.MaxPsiPoints}"
+                                                    IsEnabled="False"
+                                                    Grid.Row="0"
+                                                    Grid.Column="0" />
+
+                                <mc:EntryWithLabel Label="Akt. ᛉp"
+                                                    Text="{Binding Character.PsiPoints}"
+                                                    IsEnabled="False"
+                                                    Grid.Row="0"
+                                                    Grid.Column="1" />
+
+                                <mc:EntryWithLabel Label="Max. ᛉp/szint"
+                                                   Text="{Binding Character.PsiPointsModifier}"
+                                                   IsEnabled="False"
+                                                   Grid.Row="1"
+                                                   Grid.Column="0" />
+                            </Grid>
+                        </VerticalStackLayout>
+                    </Border>
+                </VerticalStackLayout>
+
+                <VerticalStackLayout Grid.Column="1" Spacing="10">
+                    <Border Style="{StaticResource BoxBorder}">
+                        <VerticalStackLayout>
+                            <Label Text="A Karakter Neve" Style="{StaticResource HeaderLabel}"/>
+                            <Label Text="{Binding Character.Name}" FontSize="18"/>
+                            <BoxView HeightRequest="1" Color="{AppThemeBinding Light={StaticResource Gray200}, Dark={StaticResource Gray600}}" Margin="0,5"/>
+                            <Grid ColumnDefinitions="Auto"
+                                  RowDefinitions="Auto, Auto, Auto"
+                                  MinimumWidthRequest="100"                                  
+                                  RowSpacing="5">
+
+                                <mc:EntryWithLabel Label="Faj"
+                                                   Text="{Binding Character.Race.Name}"
+                                                   HorizontalOptions="Center"
+                                                   IsEnabled="False"
+                                                   Grid.Row="0"
+                                                   Grid.Column="0" />
+
+                                <mc:EntryWithLabel Label="Kaszt"
+                                                   Text="{Binding Character.BaseCaste.ClassName}"
+                                                   HorizontalOptions="Center"
+                                                   IsEnabled="False"
+                                                   Grid.Row="1"
+                                                   Grid.Column="0" />
+
+                                <mc:EntryWithLabel Label="Jellem"
+                                                   Text="{Binding Character.Alignment}"
+                                                   HorizontalOptions="Center"
+                                                   IsEnabled="False"
+                                                   Grid.Row="2"
+                                                   Grid.Column="0" />
+                            </Grid>
+                        </VerticalStackLayout>
+                    </Border>
+
+                    <Border Style="{StaticResource BoxBorder}">
+                        <VerticalStackLayout HorizontalOptions="Center" Spacing="5">
+                            <mc:EntryWithLabel Label="Tapasztalati szint"
+                                                   Text="{Binding Character.BaseCaste.Level}"
+                                                   IsEnabled="False"
+                                                   Grid.Row="2"
+                                                   Grid.Column="0"
+                                                   Margin="0,0,0,5" />
+                            <!--<Label Text="Tapasztalati Szint" Style="{StaticResource HeaderLabel}"/>
+                            <Label Text="{Binding Character.ExperienceLevel}" FontSize="24" FontAttributes="Bold" HorizontalOptions="Center"/>-->
+                        </VerticalStackLayout>
+                    </Border>
+                </VerticalStackLayout>
+
+                <VerticalStackLayout Grid.Column="2" Spacing="10">
+                    <Border Style="{StaticResource BoxBorder}">
+                        <VerticalStackLayout>
+                            <Label Text="Életerő" Style="{StaticResource HeaderLabel}"/>
+                            <Grid ColumnDefinitions="Auto, Auto"
+                                  RowDefinitions="Auto, Auto"
+                                  RowSpacing="5">
+                                <mc:EntryWithLabel Label="Max. Ép"
+                                                   Text="{Binding Character.MaxHealthPoints}"
+                                                   IsEnabled="False"
+                                                   WidthRequest="100"
+                                                   Grid.Row="0"
+                                                   Grid.Column="0" />
+                                <mc:EntryWithLabel Label="Max. Fp"
+                                                   Text="{Binding Character.MaxPainTolerancePoints}"
+                                                   IsEnabled="False"
+                                                   WidthRequest="100"
+                                                   Grid.Row="0"
+                                                   Grid.Column="1" />
+                                <mc:EntryWithLabel Label="Akt. Ép"
+                                                   Text="{Binding Character.HealthPoints}"
+                                                   IsEnabled="False"
+                                                   WidthRequest="100"
+                                                   Grid.Row="1"
+                                                   Grid.Column="0" />
+
+                                <mc:EntryWithLabel Label="Akt. Fp"
+                                                   Text="{Binding Character.PainTolerancePoints}"
+                                                   IsEnabled="False"
+                                                   WidthRequest="100"
+                                                   Grid.Row="1"
+                                                   Grid.Column="1" />
+                            </Grid>
+                        </VerticalStackLayout>
+                    </Border>
+
+                    <Border Style="{StaticResource BoxBorder}">
+                        <VerticalStackLayout>
+                            <Label Text="Harcértékek" Style="{StaticResource HeaderLabel}"/>
+                            <Grid ColumnDefinitions="Auto, Auto, Auto, Auto"
+                                  RowDefinitions="Auto, Auto"
+                                  RowSpacing="5">
+
+                                <mc:EntryWithLabel Label="KÉ"
+                                                   Text="{Binding Character.InitiatingValue}"
+                                                   IsEnabled="False"
+                                                   WidthRequest="100"
+                                                   Grid.Row="0"
+                                                   Grid.Column="0"
+                                                   Margin="0,0,0,5" />
+
+                                <mc:EntryWithLabel Label="TÉ"
+                                                   Text="{Binding Character.AttackingValue}"
+                                                   IsEnabled="False"
+                                                   WidthRequest="100"
+                                                   Grid.Row="0"
+                                                   Grid.Column="1"
+                                                   Margin="0,0,0,5" />
+
+                                <mc:EntryWithLabel Label="VÉ"
+                                                   Text="{Binding Character.DefendingValue}"
+                                                   IsEnabled="False"
+                                                   WidthRequest="100"
+                                                   Grid.Row="0"
+                                                   Grid.Column="2"
+                                                   Margin="0,0,0,5" />
+
+                                <mc:EntryWithLabel Label="CÉ"
+                                                   Text="{Binding Character.AimingValue}"
+                                                   IsEnabled="False"
+                                                   WidthRequest="100"
+                                                   Grid.Row="0"
+                                                   Grid.Column="3"
+                                                   Margin="0,0,0,5" />
+                                
+                                <mc:EntryWithLabel Label="KÉ"
+                                                   Text="{Binding Character.InitiatingValue}"
+                                                   IsEnabled="False"
+                                                   WidthRequest="100"
+                                                   Grid.Row="1"
+                                                   Grid.Column="0"
+                                                   Margin="0,0,0,5" />
+
+                                <mc:EntryWithLabel Label="TÉ"
+                                                   Text="{Binding Character.AttackingValue}"
+                                                   IsEnabled="False"
+                                                   WidthRequest="100"
+                                                   Grid.Row="1"
+                                                   Grid.Column="1"
+                                                   Margin="0,0,0,5" />
+
+                                <mc:EntryWithLabel Label="VÉ"
+                                                   Text="{Binding Character.DefendingValue}"
+                                                   IsEnabled="False"
+                                                   WidthRequest="100"
+                                                   Grid.Row="1"
+                                                   Grid.Column="2"
+                                                   Margin="0,0,0,5" />
+
+                                <mc:EntryWithLabel Label="CÉ"
+                                                   Text="{Binding Character.AimingValue}"
+                                                   IsEnabled="False"
+                                                   WidthRequest="100"
+                                                   Grid.Row="1"
+                                                   Grid.Column="3"
+                                                   Margin="0,0,0,5" />
+                            </Grid>
+                        </VerticalStackLayout>
+                    </Border>
+
+                    <Border Style="{StaticResource BoxBorder}" Margin="0,10">
+                        <VerticalStackLayout>
+                            <Label Text="Képzettségek" Style="{StaticResource HeaderLabel}" />
+                            <Grid Padding="6"
+                                  ColumnDefinitions="*, Auto"
+                                  ColumnSpacing="10">
+
+                                <Label Text="Név"
+                                       VerticalOptions="Center"
+                                       TextColor="LightGray"
+                                       FontAttributes="Bold"/>
+                                <Label Text="Szint"
+                                       VerticalOptions="Center"
+                                       Grid.Column="1"
+                                       HorizontalOptions="End"
+                                       TextColor="LightGray"
+                                       FontAttributes="Bold"/>
+                            </Grid>
+
+                            <CollectionView ItemsSource="{Binding Character.Qualifications}"
+                                            SelectionMode="None"
+                                            HeightRequest="280">
+                                <CollectionView.ItemTemplate>
+                                    <DataTemplate x:DataType="local:Qualification">
+                                        <Grid Padding="6"
+                                              ColumnDefinitions="*,Auto"
+                                              ColumnSpacing="10">
+                                            <Label Text="{Binding Name}"
+                                                   VerticalOptions="Center"
+                                                   HorizontalOptions="Start"
+                                                   TextColor="White" />
+                                            <Label Text="{Binding QualificationLevel}"
+                                                   VerticalOptions="Center"
+                                                   Grid.Column="1"
+                                                   HorizontalTextAlignment="End"
+                                                   TextColor="White" />
+                                        </Grid>
+                                    </DataTemplate>
+                                </CollectionView.ItemTemplate>
+                            </CollectionView>
+                        </VerticalStackLayout>
+                    </Border>
+
+                    <Border Style="{StaticResource BoxBorder}" Margin="0,10">
+                        <VerticalStackLayout>
+                            <Label Text="Százalékos képzettségek" Style="{StaticResource HeaderLabel}" />
+                            <Grid Padding="6"
+                                  ColumnDefinitions="*, Auto"
+                                  ColumnSpacing="10">
+
+                                <Label Text="Név"
+                                       VerticalOptions="Center"
+                                       TextColor="LightGray"
+                                       FontAttributes="Bold"/>
+                                <Label Text="%"
+                                       VerticalOptions="Center"
+                                       Grid.Column="1"
+                                       HorizontalOptions="End"
+                                       TextColor="LightGray"
+                                       FontAttributes="Bold"/>
+                            </Grid>
+
+                            <CollectionView ItemsSource="{Binding Character.PercentQualifications}"
+                                            SelectionMode="None"
+                                            HeightRequest="280">
+                                <CollectionView.ItemTemplate>
+                                    <DataTemplate x:DataType="local:PercentQualification">
+                                        <Grid Padding="6"
+                                              ColumnDefinitions="*,Auto"
+                                              ColumnSpacing="10">
+                                            <Label Text="{Binding Name}"
+                                                   VerticalOptions="Center"
+                                                   HorizontalOptions="Start"
+                                                   TextColor="White" />
+                                            <Label Text="{Binding Percent}"
+                                                   VerticalOptions="Center"
+                                                   Grid.Column="1"
+                                                   HorizontalTextAlignment="End"
+                                                   TextColor="White" />
+                                        </Grid>
+                                    </DataTemplate>
+                                </CollectionView.ItemTemplate>
+                            </CollectionView>
+                        </VerticalStackLayout>
+                    </Border>
+                </VerticalStackLayout>
+            </Grid>
+
+        </VerticalStackLayout>
+    </ScrollView>
+</v:NotifierPage>

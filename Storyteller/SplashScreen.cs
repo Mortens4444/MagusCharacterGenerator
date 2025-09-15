@@ -1,27 +1,22 @@
-﻿using System.Threading;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+﻿namespace Storyteller;
 
-namespace Storyteller
+public partial class SplashScreen : Form
 {
-	public partial class SplashScreen : Form
+	public delegate void VoidResultVoidParams();
+
+	public SplashScreen()
 	{
-		public delegate void VoidResultVoidParams();
+		InitializeComponent();
+	}
 
-		public SplashScreen()
+	public static void ShowSplashScreen()
+	{
+		var splashScreen = new SplashScreen();
+		splashScreen.Show();
+		Task.Factory.StartNew(() =>
 		{
-			InitializeComponent();
-		}
-
-		public static void ShowSplashScreen()
-		{
-			var splashScreen = new SplashScreen();
-			splashScreen.Show();
-			Task.Factory.StartNew(() =>
-			{
-				Thread.Sleep(3000);
-				splashScreen.Invoke(new VoidResultVoidParams(splashScreen.Close));
-			});
-		}
+			Thread.Sleep(3000);
+			splashScreen.Invoke(new VoidResultVoidParams(splashScreen.Close));
+		});
 	}
 }

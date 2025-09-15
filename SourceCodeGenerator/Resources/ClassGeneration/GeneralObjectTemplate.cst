@@ -1,14 +1,12 @@
-﻿using MagusCharacterGenerator.GameSystem.Valuables;
-using Mtf.Languages;
+﻿using M.A.G.U.S.GameSystem.Valuables;
+using Mtf.LanguageService;
 
-namespace MagusCharacterGenerator.Things.{Namespace}
+namespace M.A.G.U.S.Things.{Namespace};
+
+public class {ClassName} : Thing
 {
-	class {ClassName}
-	{
-		public string Name => "{Name}";
+	public override string Name => "{Name}";
 
-		public Money Price => {Price};
-
-		public override string ToString() => Lng.Elem("{Name}");
-	}
+	public Money Price => {Price};
 }
+
