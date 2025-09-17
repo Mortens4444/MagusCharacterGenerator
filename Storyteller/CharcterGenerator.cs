@@ -1,5 +1,6 @@
 ﻿using FontAwesome.Sharp;
 using M.A.G.U.S.Classes;
+using M.A.G.U.S.Classes.Believer.GodsOfPyarron;
 using M.A.G.U.S.GameSystem;
 using M.A.G.U.S.GameSystem.Attributes;
 using M.A.G.U.S.Races;
@@ -18,13 +19,13 @@ namespace Storyteller;
 public partial class CharcterGenerator : Form
 {
 	private readonly Dictionary<string, Type> races = [];
-	private readonly Dictionary<string, Type> castes = [];
+	private readonly Dictionary<string, Type> classes = [];
 
-	private Type selectedRace;
-	private Type selectedCaste;
+	private Type selectedRace = typeof(Amund);
+	private Type selectedClass = typeof(ArelPriest);
 	private Type selectedSecondaryCaste;
 	private Character character;
-	private List<CharacterImage> images = [];
+	private readonly List<CharacterImage> images = [];
 	private int shownImageIndex = 0;
 
 	public CharcterGenerator(bool canGenerate =  false)
@@ -99,15 +100,15 @@ public partial class CharcterGenerator : Form
 		}
 		cbRace.SelectedIndex = 0;
 
-		var castesWithTypes = magusCharacterGeneratorTypes
+		var classesWithTypes = magusCharacterGeneratorTypes
 			.Where(type => !type.IsAbstract && typeof(IClass).IsAssignableFrom(type))
-			.Select(casteType => (Caste: Activator.CreateInstance(casteType, (byte)1), Type: casteType))
-			.OrderBy(casteWithType => casteWithType.Caste.ToString());
+            .Select(casteType => (Class: Activator.CreateInstance(casteType, (byte)1), Type: casteType))
+			.OrderBy(casteWithType => casteWithType.Class.ToString());
 
-		foreach (var casteWithType in castesWithTypes)
+		foreach (var classWithTypes in classesWithTypes)
 		{
-			var casteName = Lng.Elem(casteWithType.Caste.ToString());
-			castes.Add(casteName, casteWithType.Type);
+			var casteName = Lng.Elem(classWithTypes.Class.ToString());
+			classes.Add(casteName, classWithTypes.Type);
 			cbCaste.Items.Add(casteName);
 			cbSecondaryCaste.Items.Add(casteName);
 		}
@@ -135,7 +136,7 @@ public partial class CharcterGenerator : Form
 			tbName.Text = characterName;
 
 			var race = (IRace)Activator.CreateInstance(selectedRace);
-			var caste = (IClass)Activator.CreateInstance(selectedCaste, (byte)nudLevel.Value);
+			var caste = (IClass)Activator.CreateInstance(selectedClass, (byte)nudLevel.Value);
 			if (selectedSecondaryCaste != null && chkBoxSecondaryCaste.Checked)
 			{
 				var secondCaste = (IClass)Activator.CreateInstance(selectedSecondaryCaste, (byte)nudSecondaryCasteLevel.Value);
@@ -332,18 +333,18 @@ public partial class CharcterGenerator : Form
 
 	private void CbCaste_SelectedIndexChanged(object sender, EventArgs e)
 	{
-		selectedCaste = castes[cbCaste.SelectedItem.ToString()];
+		selectedClass = classes[cbCaste.SelectedItem.ToString()];
 		SetDiceThrowLabel();
 	}
 
 	private void SetDiceThrowLabel()
 	{
-		if ((selectedCaste == null) || (selectedCaste == null))
+		if ((selectedClass == null) || (selectedClass == null))
 		{
 			return;
 		}
 
-		var caste = (IClass)Activator.CreateInstance(selectedCaste, (byte)nudLevel.Value);
+		var caste = (IClass)Activator.CreateInstance(selectedClass, (byte)nudLevel.Value);
 		var race = (IRace)Activator.CreateInstance(selectedRace);
 		SetDiceThrowLabel(caste, race, nameof(caste.Strength), lblStrengthDiceThrow);
 		SetDiceThrowLabel(caste, race, nameof(caste.Speed), lblSpeedDiceThrow);
@@ -387,7 +388,7 @@ public partial class CharcterGenerator : Form
 
 	private void CbSecondaryCaste_SelectedIndexChanged(object sender, EventArgs e)
 	{
-		selectedSecondaryCaste = castes[cbSecondaryCaste.SelectedItem.ToString()];
+		selectedSecondaryCaste = classes[cbSecondaryCaste.SelectedItem.ToString()];
 	}
 
 	private void BtnDone_Click(object sender, EventArgs e)
@@ -416,7 +417,7 @@ public partial class CharcterGenerator : Form
 			});
 		}
 		
-        character.Images = images.Select(i => Image.FromFile(i.ImageFile)).ToList();
+        //character.Images = images.Select(i => Image.FromFile(i.ImageFile)).ToList();
 
         ObjectSerializer.SaveFile(fullPath, this);
 	}

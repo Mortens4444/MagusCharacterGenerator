@@ -19,28 +19,68 @@
 		<SingleProject>true</SingleProject>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<Nullable>enable</Nullable>
-    <AndroidSupportedAbis>arm64-v8a;armeabi-v7a;x86;x86_64</AndroidSupportedAbis>
-    
-		<!-- Display name -->
-		<ApplicationTitle>M.A.G.U.S.Assistant</ApplicationTitle>
+    <!--<AndroidSupportedAbis>arm64-v8a;armeabi-v7a;x86;x86_64</AndroidSupportedAbis>-->
+    <!-- Display name -->
+    <ApplicationTitle>M.A.G.U.S. Assistant</ApplicationTitle>
+    <!-- App Identifier -->
+    <ApplicationId>com.mortens.MAGUS.Assistant</ApplicationId>
+    <!-- Versions -->
+    <MajorVersion>1</MajorVersion>
+    <MinorVersion>0</MinorVersion>
+    <BuildNumber>0</BuildNumber>
+    <PatchNumber>0</PatchNumber>
+    <FileVersion>$(MajorVersion).$(MinorVersion).$(BuildNumber).$(PatchNumber)</FileVersion>
+    <AssemblyVersion>$(FileVersion)</AssemblyVersion>
+    <ApplicationDisplayVersion>$(MajorVersion).$(MinorVersion).$(BuildNumber)</ApplicationDisplayVersion>
+    <PackageVersion>$(ApplicationDisplayVersion)</PackageVersion>
+    <ApplicationVersion>$(MajorVersion)</ApplicationVersion>
+    <WarningLevel>9999</WarningLevel>
+    <EnforceCodeStyleInBuild>True</EnforceCodeStyleInBuild>
+    <AnalysisLevel>latest-all</AnalysisLevel>
+    <WindowsPackageType>MSIX</WindowsPackageType>
+    <Company>Mortens</Company>
+    <Authors>Mortens</Authors>
+    <IncludeSymbols>True</IncludeSymbols>
+    <UseWindowsForms>false</UseWindowsForms>
+    <UseWPF>false</UseWPF>
+	  <RunAOTCompilation>false</RunAOTCompilation>
+    <JavaMaxHeapSize>1G</JavaMaxHeapSize>
+    <AndroidEnableMultiDex>true</AndroidEnableMultiDex>
 
-		<!-- App Identifier -->
-		<ApplicationId>com.companyname.m.a.g.u.s.assistant</ApplicationId>
-
-		<!-- Versions -->
-		<ApplicationDisplayVersion>1.0</ApplicationDisplayVersion>
-		<ApplicationVersion>1</ApplicationVersion>
-
-		<!-- To develop, package, and publish an app to the Microsoft Store, see: https://aka.ms/MauiTemplateUnpackaged -->
-		<WindowsPackageType>None</WindowsPackageType>
-
-		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios'">15.0</SupportedOSPlatformVersion>
+    <SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios'">15.0</SupportedOSPlatformVersion>
 		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'maccatalyst'">15.0</SupportedOSPlatformVersion>
 		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android'">21.0</SupportedOSPlatformVersion>
 		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">10.0.17763.0</SupportedOSPlatformVersion>
 		<TargetPlatformMinVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">10.0.17763.0</TargetPlatformMinVersion>
 		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'tizen'">6.5</SupportedOSPlatformVersion>
 	</PropertyGroup>
+  
+  <PropertyGroup Condition="'$(Configuration)'=='Release' AND '$(TargetFramework)'=='net9.0-android'">
+		<PublishTrimmed>false</PublishTrimmed>
+	</PropertyGroup>
+  
+  <PropertyGroup Condition="'$(Configuration)' == 'Release'">
+    <AndroidKeyStore>True</AndroidKeyStore>
+    <AndroidSigningKeyAlias>h4ckw1thm3</AndroidSigningKeyAlias>
+    <AndroidSigningKeyStore>C:\Work\KeyStore\H4ckW1thM3\keystore.jks</AndroidSigningKeyStore>
+    <AndroidSigningKeyPass>file:C:\Work\KeyStore\H4ckW1thM3\AndroidSigningKeyPass.txt</AndroidSigningKeyPass>
+    <AndroidSigningStorePass>file:C:\Work\KeyStore\H4ckW1thM3\AndroidSigningStorePass.txt</AndroidSigningStorePass>
+    <!--<AndroidSigningKeyAlias>magus_assistant</AndroidSigningKeyAlias>
+    <AndroidSigningKeyStore>C:\Work\KeyStore\MAGUS_Assistant\keystore.jks</AndroidSigningKeyStore>
+    <AndroidSigningKeyPass>file:C:\Work\KeyStore\MAGUS_Assistant\AndroidSigningKeyPass.txt</AndroidSigningKeyPass>
+    <AndroidSigningStorePass>file:C:\Work\KeyStore\MAGUS_Assistant\AndroidSigningStorePass.txt</AndroidSigningStorePass>-->
+    <AndroidPackageFormats>aab;apk</AndroidPackageFormats>
+  </PropertyGroup>
+  
+  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net9.0-android|AnyCPU'">
+    <JavaMaximumHeapSize>2G</JavaMaximumHeapSize>
+    <AndroidEnableMultiDex>True</AndroidEnableMultiDex>
+  </PropertyGroup>
+  
+  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net9.0-android|AnyCPU'">
+    <JavaMaximumHeapSize>2G</JavaMaximumHeapSize>
+    <AndroidEnableMultiDex>True</AndroidEnableMultiDex>
+  </PropertyGroup>
 
 	<ItemGroup>
 		<!-- App Icon -->
@@ -64,7 +104,7 @@
 		<PackageReference Include="Microsoft.Maui.Controls" Version="9.0.110" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="9.0.9" />
 		<PackageReference Include="Mtf.Maui.Controls" Version="1.0.27" />
-		<PackageReference Include="Mtf.MAUI.LanguageService" Version="1.0.14" />
+		<PackageReference Include="Mtf.MAUI.LanguageService" Version="1.0.15" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -79,6 +119,12 @@
 
 	<ItemGroup>
 	  <MauiXaml Update="Views\CharacterGeneratorPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\MarketPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\WebBrowserPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	</ItemGroup>

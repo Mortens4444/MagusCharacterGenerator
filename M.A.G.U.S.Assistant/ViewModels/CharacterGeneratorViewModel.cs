@@ -29,6 +29,16 @@ namespace M.A.G.U.S.Assistant.ViewModels
         public ObservableCollection<IRace> AvailableRaces { get; } = [];
         public ObservableCollection<IClass> AvailableClasses { get; } = [];
 
+        byte selectedLevel;
+        public byte SelectedLevel
+        {
+            get => selectedLevel;
+            set
+            {
+                SetProperty(ref selectedLevel, value);
+            }
+        }
+
         IRace selectedRace;
         public IRace SelectedRace
         {
@@ -63,7 +73,15 @@ namespace M.A.G.U.S.Assistant.ViewModels
                 WeakReferenceMessenger.Default.Send(new ShowErrorMessage("Nincs kiválasztva kaszt!"));
                 return;
             }
-            Character = new Character("Mortens", selectedRace, selectedClass);
+            
+            var instanceClass = InstanceClass(selectedClass.GetType(), 1);
+            if (instanceClass == null)
+            {
+                WeakReferenceMessenger.Default.Send(new ShowErrorMessage("Kaszt konvertálási hiba!"));
+                return;
+            }
+
+            Character = new Character("Mortens", selectedRace, instanceClass);
         }
 
         private void LoadAvailableTypes()
@@ -109,9 +127,10 @@ namespace M.A.G.U.S.Assistant.ViewModels
                         {
                             try
                             {
-                                if (Activator.CreateInstance(t, (byte)1) is IClass instClass)
+                                var instanceClass = InstanceClass(t, 1);
+                                if (instanceClass != null)
                                 {
-                                    AvailableClasses.Add(instClass);
+                                    AvailableClasses.Add(instanceClass);
                                 }
                             }
                             catch (Exception ex)
@@ -130,6 +149,16 @@ namespace M.A.G.U.S.Assistant.ViewModels
             var sortedClasses = AvailableClasses.OrderBy(c => c.ClassName).ToArray();
             AvailableClasses.Clear();
             foreach (var c in sortedClasses) AvailableClasses.Add(c);
+        }
+
+        private static IClass? InstanceClass(Type classType, byte level)
+        {
+            if (Activator.CreateInstance(classType, level) is IClass instanceClass)
+            {
+                return instanceClass;
+            }
+
+            return null;
         }
 
         private static Type[] GetLoadableTypes(Assembly assembly)

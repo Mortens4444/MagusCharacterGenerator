@@ -11,7 +11,6 @@ using M.A.G.U.S.Qualifications.Specialities;
 using M.A.G.U.S.Races;
 using M.A.G.U.S.Utils;
 using System.ComponentModel;
-using System.Drawing;
 using System.Runtime.CompilerServices;
 
 namespace M.A.G.U.S.GameSystem;
@@ -66,7 +65,7 @@ public class Character : IFightModifier, ILiving, IAbilities, INotifyPropertyCha
 		calculateChanges = true;
 	}
 
-	public IEnumerable<Image> Images { get; set; }
+	//public IEnumerable<Image> Images { get; set; }
 
     private string name;
     public string Name
