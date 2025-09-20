@@ -16,10 +16,10 @@ public class OneHandedHatchet : Weapon, IMeleeWeapon
 
     public double Weight => 2;
 
-    public Money Price => new(0, 6);
+    public override Money Price => new(0, 6);
 
     [DiceThrow(ThrowType._1K10)]
     public byte GetDamage() => (byte)DiceThrow._1K10();
 
-    public override string Name => "One-handed hatchet";
+    public override string Name => "One-handed axe";
 }

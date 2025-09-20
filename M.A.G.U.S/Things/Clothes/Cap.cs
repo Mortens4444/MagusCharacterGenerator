@@ -6,5 +6,5 @@ public class Cap : Thing
 {
 	public override string Name => "Cap";
 
-	public Money Price => new(0, 0, 5);
+	public override Money Price => new(0, 0, 5);
 }

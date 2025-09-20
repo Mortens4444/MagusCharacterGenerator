@@ -6,7 +6,7 @@ public class MitrillScaleArmor : Thing
 {
 	public override string Name => "Mitrill scale armor";
 
-	public Money Price => new(2000, 0, 0);
+	public override Money Price => new(2000, 0, 0);
 
 	public int MovementInhibitingFactor => 0;
 

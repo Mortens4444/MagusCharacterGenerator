@@ -25,8 +25,8 @@ public class Khal : Race
     public override QualificationList Qualifications =>
     [
         new Forestry(),
-        new FishingAndHunting(),
-        new WeatherForecast(),
+        new HuntingAndFishing(),
+        new WeatherDivination(),
         new Swimming(),
         new Running(QualificationLevel.Master),
         new Demonology()
@@ -34,8 +34,8 @@ public class Khal : Race
 
     public override SpecialQualificationList SpecialQualifications =>
     [
-        new BetterSeeing(2),
+        new KeenSight(2),
         new BetterHearing(2),
-        new BetterSniffing(5)
+        new KeenSmell(5)
     ];
 }

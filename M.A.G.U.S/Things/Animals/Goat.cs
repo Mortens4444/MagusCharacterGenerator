@@ -4,5 +4,5 @@ namespace M.A.G.U.S.Things.Animals;
 
 public class Goat : Thing
 {
-	public Money Price => new(0, 3, 0);
+	public override Money Price => new(0, 3, 0);
 }

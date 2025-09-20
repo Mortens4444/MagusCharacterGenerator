@@ -14,8 +14,8 @@ public class DomvikPaladin(byte level = 1) : Paladin(level)
             var result = base.Qualifications;
             result.AddRange(
             [
-                new AntientLanguageKnowledge(AntientLanguage.LinguaDomini),
-                new WoundHealing(),
+                new AncientTongueLore(AntientLanguage.LinguaDomini),
+                new Healing(),
             ]);
             return result;
         }
@@ -28,7 +28,7 @@ public class DomvikPaladin(byte level = 1) : Paladin(level)
             var result = base.FutureQualifications;
             result.AddRange(
             [
-                new AntientLanguageKnowledge(AntientLanguage.LinguaDomini, QualificationLevel.Master, 4),
+                new AncientTongueLore(AntientLanguage.LinguaDomini, QualificationLevel.Master, 4),
             ]);
             return result;
         }

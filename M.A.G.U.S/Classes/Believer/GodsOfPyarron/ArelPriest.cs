@@ -15,20 +15,20 @@ public class ArelPriest(byte level = 1) : Priest(level)
 			var result = base.Qualifications;
 			result.AddRange(
 			[
-				new WeaponUsage(),
-				new WeaponUsage(),
-				new WeaponUsage(),
+				new WeaponUse(),
+				new WeaponUse(),
+				new WeaponUse(),
 				new WeaponThrowing(),
-				new WeaponKnowledge(),
-				new LanguageKnowledge(4),
-				new LanguageKnowledge(3),
-				new LanguageKnowledge(2),
-				new WeatherForecast(),
+				new WeaponLore(),
+				new LanguageLore(4),
+				new LanguageLore(3),
+				new LanguageLore(2),
+				new WeatherDivination(),
 				new Herbalism(),
-				new WoundHealing(),
-				new DressageTraining(),
+				new Healing(),
+				new AnimalTraining(),
 				new Forestry(QualificationLevel.Master),
-				new FishingAndHunting(QualificationLevel.Master),
+				new HuntingAndFishing(QualificationLevel.Master),
 				new Riding()
 			]);
 			return result;
@@ -42,11 +42,11 @@ public class ArelPriest(byte level = 1) : Priest(level)
 			var result = base.FutureQualifications;
 			result.AddRange(
 			[
-				new PubFighting(level: 2),
-				new LegendKnowledge(level: 3),
-				new TrapSetup(level: 4),
-				new TrackReadingAndHiding(level: 5),
-				new WeaponUsage(QualificationLevel.Master, 9),
+				new TavernBrawling(level: 2),
+				new LegendLore(level: 3),
+				new TrapSetting(level: 4),
+				new TrackingConcealment(level: 5),
+				new WeaponUse(QualificationLevel.Master, 9),
 			]);
 			return result;
 		}

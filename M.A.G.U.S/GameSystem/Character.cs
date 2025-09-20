@@ -335,7 +335,6 @@ public class Character : IFightModifier, ILiving, IAbilities, INotifyPropertyCha
     public string InArmorInitiative { get; set; }
     public string School { get; set; }
     public string Alignment { get; set; }
-    public string Literacy { get; set; }
 
     public short Intelligence
 	{

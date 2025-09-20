@@ -6,5 +6,5 @@ public class OldWineFromPredoc5Clusters : Thing
 {
 	public override string Name => "Old wine from Predoc 5 clusters";
 
-	public Money Price => new(5, 0, 0);
+	public override Money Price => new(5, 0, 0);
 }

@@ -92,16 +92,16 @@ public class KranichWarlock(byte level = 1) : Class(level), IClass, ILikeMagic
 
     public override QualificationList Qualifications =>
     [
-        new WeaponUsage(),
-            new WeaponUsage(),
+        new WeaponUse(),
+            new WeaponUse(),
             new WeaponThrowing(),
-            new PsiKranich(QualificationLevel.Master),
+            new PsiKranic(QualificationLevel.Master),
             new ReadingAndWriting(),
             new PoisoningAndNeutralization(),
             new CamouflageOrDisguise(),
-            new LanguageKnowledge(Language.Kranich, 3),
+            new LanguageLore(Language.Kranich, 3),
             new Alchemy(),
-        new AntientLanguageKnowledge(AntientLanguage.Aquir),
+        new AncientTongueLore(AntientLanguage.Aquir),
         new Etiquette(), //Kranich
 
 		//new Cluture(QualificationLevel.Master) // Order
@@ -110,16 +110,16 @@ public class KranichWarlock(byte level = 1) : Class(level), IClass, ILikeMagic
 
     public override QualificationList FutureQualifications =>
     [
-        new ProfessionKnowledge(Profession.TattoMaker, level: 2),
-        new ReligionKnowledge(level: 2),
+        new Craft(Profession.TattoMaker, level: 2),
+        new ReligionLore(level: 2),
             new Herbalism(level: 3),
         new Alchemy(QualificationLevel.Master, 3),
         new Etiquette(QualificationLevel.Master, 4), //Kranich
             new PoisoningAndNeutralization(QualificationLevel.Master, 4),
-        new ProfessionKnowledge(Profession.TattoMaker, QualificationLevel.Master, 5),
+        new Craft(Profession.TattoMaker, QualificationLevel.Master, 5),
         new Backstab(level: 5),
         new Herbalism(QualificationLevel.Master, 6),
-        new AntientLanguageKnowledge(AntientLanguage.Aquir, QualificationLevel.Master, 6),
+        new AncientTongueLore(AntientLanguage.Aquir, QualificationLevel.Master, 6),
         new RuneMagic(level: 7),
         new Demonology(level: 8)
 ];
@@ -132,7 +132,7 @@ public class KranichWarlock(byte level = 1) : Class(level), IClass, ILikeMagic
 
     public override SpecialQualificationList SpecialQualifications =>
     [
-        new WarlockMagic()
+        new Warlockry()
     ];
 
     [DiceThrow(ThrowType._1K6)]

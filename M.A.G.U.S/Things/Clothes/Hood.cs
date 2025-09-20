@@ -4,5 +4,5 @@ namespace M.A.G.U.S.Things.Clothes;
 
 public class Hood : Thing
 {
-	public Money Price => new(0, 0, 8);
+	public override Money Price => new(0, 0, 8);
 }

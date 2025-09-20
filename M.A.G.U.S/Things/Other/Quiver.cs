@@ -4,5 +4,5 @@ namespace M.A.G.U.S.Things.Other;
 
 public class Quiver : Thing
 {
-	public Money Price => new(0, 0, 150);
+	public override Money Price => new(0, 0, 150);
 }

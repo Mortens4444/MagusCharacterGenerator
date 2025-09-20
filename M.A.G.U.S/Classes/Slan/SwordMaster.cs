@@ -89,11 +89,11 @@ public class SwordMaster(byte level = 1) : Class(level), IClass, IJustFight
     public override QualificationList Qualifications =>
     [
         new PsiSlanWay(),
-        new WeaponUsage(),
-        new WeaponUsage(),
-        new WeaponUsage(),
+        new WeaponUse(),
+        new WeaponUse(),
+        new WeaponUse(),
         new WeaponBreaking(),
-        new FistFighting(),
+        new Fistfight(),
         new Wrestling(),
         new BlindFighting(),
         new Leadership(),
@@ -108,7 +108,7 @@ public class SwordMaster(byte level = 1) : Class(level), IClass, IJustFight
         new Riding(QualificationLevel.Master, 3),
         new WeaponBreaking(QualificationLevel.Master, 4),
         new BlindFighting(QualificationLevel.Master, 5),
-        new WeaponUsage(QualificationLevel.Master, 5)
+        new WeaponUse(QualificationLevel.Master, 5)
     ];
 
     public override List<PercentQualification> PercentQualifications =>

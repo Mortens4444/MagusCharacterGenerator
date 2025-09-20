@@ -15,10 +15,10 @@ public class KranRanagolPriest(byte level = 1) : Priest(level)
             var result = base.FutureQualifications;
             result.AddRange(
             [
-                new MagicUsage(level: 3),
-                new AntientLanguageKnowledge(AntientLanguage.Aquir, level: 5),
-                new MagicUsage(QualificationLevel.Master, 6),
-                new AntientLanguageKnowledge(AntientLanguage.Aquir, QualificationLevel.Master, 11)
+                new Spellcasting(level: 3),
+                new AncientTongueLore(AntientLanguage.Aquir, level: 5),
+                new Spellcasting(QualificationLevel.Master, 6),
+                new AncientTongueLore(AntientLanguage.Aquir, QualificationLevel.Master, 11)
             ]);
             return result;
         }

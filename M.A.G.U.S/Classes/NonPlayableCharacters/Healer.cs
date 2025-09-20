@@ -75,7 +75,7 @@ public class Healer(byte level = 1) : Class(level), IClass
 
     public override QualificationList Qualifications =>
     [
-        new WoundHealing(),
+        new Healing(),
         new Herbalism(),
         new Alchemy()
     ];

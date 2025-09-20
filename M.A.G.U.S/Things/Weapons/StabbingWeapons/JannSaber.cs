@@ -16,11 +16,11 @@ public class JannSaber : Weapon, IMeleeWeapon
 
     public double Weight => 120;
 
-    public Money Price => new(0, 5);
+    public override Money Price => new(0, 5);
 
     [DiceThrow(ThrowType._1K6)]
     [DiceThrowModifier(3)]
     public byte GetDamage() => (byte)(DiceThrow._1K6() + 3);
 
-    public override string Name => "Jann saber";
+    public override string Name => "Sword, jann sabre";
 }

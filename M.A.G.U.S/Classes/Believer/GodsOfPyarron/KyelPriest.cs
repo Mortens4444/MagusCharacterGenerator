@@ -15,18 +15,18 @@ public class KyelPriest(byte level = 1) : Priest(level)
             var result = base.Qualifications;
             result.AddRange(
             [
-                new WeaponUsage(),
-                new WeaponUsage(),
-                new WeaponUsage(),
-                new ShieldUsing(),
+                new WeaponUse(),
+                new WeaponUse(),
+                new WeaponUse(),
+                new ShieldUse(),
                 new HeavyArmorWearing(),
-                new WeaponKnowledge(),
+                new WeaponLore(),
                 new Leadership(),
-                new LanguageKnowledge(3),
-                new LanguageKnowledge(3),
-                new LanguageKnowledge(2),
+                new LanguageLore(3),
+                new LanguageLore(3),
+                new LanguageLore(2),
                 new Etiquette(QualificationLevel.Master),
-                new WoundHealing(),
+                new Healing(),
                 new Herbalism(),
                 new Disarmament()
             ]);
@@ -42,7 +42,7 @@ public class KyelPriest(byte level = 1) : Priest(level)
             result.AddRange(
             [
                 new Cartography(level: 3),
-                new WoundHealing(QualificationLevel.Master, 4),
+                new Healing(QualificationLevel.Master, 4),
                 new Herbalism(QualificationLevel.Master, 5),
                 new Physiology(level: 6),
                 new Disarmament(QualificationLevel.Master, 7),

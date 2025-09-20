@@ -16,7 +16,7 @@ public class Ramiera : Weapon, IMeleeWeapon
 
     public double Weight => 0.8;
 
-    public Money Price => new(2);
+    public override Money Price => new(2);
 
     [DiceThrow(ThrowType._1K6)]
     [DiceThrowModifier(1)]

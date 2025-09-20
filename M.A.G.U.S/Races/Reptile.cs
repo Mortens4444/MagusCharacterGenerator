@@ -43,7 +43,7 @@ public class Reptile : Race
     public override SpecialQualificationList SpecialQualifications =>
     [
         new Infravision(50),
-        new BetterSniffing(2)
+        new KeenSmell(2)
 		//Savas nyál naponta 2x (Té: +20, Sebzés: k6)
 		// InvisibleFrom3rdLevelIfSorcerer
 		// AlakváltásFrom7thLevelIfSorcerer

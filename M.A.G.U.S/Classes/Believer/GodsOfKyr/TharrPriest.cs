@@ -15,11 +15,11 @@ public class TharrPriest(byte level = 1) : Priest(level)
 			var result = base.Qualifications;
 			result.AddRange(
 			[
-				new WeaponUsage(),
-				new WeaponUsage(),
-				new WeaponUsage(),
+				new WeaponUse(),
+				new WeaponUse(),
+				new WeaponUse(),
 				new WeaponThrowing(),
-				new AntientLanguageKnowledge(QualificationLevel.Master),
+				new AncientTongueLore(QualificationLevel.Master),
 				new PoisoningAndNeutralization(),
 				new Backstab(),
 				new Alchemy(),

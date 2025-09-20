@@ -71,10 +71,10 @@ public class GuardOfficer(byte level = 1) : Class(level), IClass
 
     public override QualificationList Qualifications =>
     [
-        new WeaponUsage(),
-        new WeaponUsage(),
+        new WeaponUse(),
+        new WeaponUse(),
         new HeavyArmorWearing(),
-        new ShieldUsing(),
+        new ShieldUse(),
         new Leadership()
    ];
 

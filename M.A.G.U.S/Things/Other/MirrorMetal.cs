@@ -4,7 +4,7 @@ namespace M.A.G.U.S.Things.Other;
 
 public class MirrorMetal : Thing
 {
-	public override string Name => "Mirror, metal";
+	public override string Name => "Metal mirror";
 
-	public Money Price => new(0, 0, 10);
+	public override Money Price => new(0, 0, 10);
 }

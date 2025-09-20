@@ -15,7 +15,7 @@ public class Spear : Weapon, IMeleeWeapon
 
     public double Weight => 2;
 
-    public Money Price => new(0, 8);
+    public override Money Price => new(0, 8);
 
     [DiceThrow(ThrowType._1K10)]
     public byte GetDamage() => (byte)(DiceThrow._1K10());

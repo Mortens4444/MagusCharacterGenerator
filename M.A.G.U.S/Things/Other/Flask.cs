@@ -4,5 +4,5 @@ namespace M.A.G.U.S.Things.Other;
 
 public class Flask : Thing
 {
-	public Money Price => new(0, 0, 4);
+	public override Money Price => new(0, 0, 4);
 }

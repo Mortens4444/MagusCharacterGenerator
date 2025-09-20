@@ -6,7 +6,7 @@ public class BronzeFullPlate : Thing
 {
 	public override string Name => "Bronze full plate";
 
-	public Money Price => new(160, 0, 0);
+	public override Money Price => new(160, 0, 0);
 
 	public int MovementInhibitingFactor => -8;
 

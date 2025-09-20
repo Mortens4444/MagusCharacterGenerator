@@ -4,7 +4,7 @@ namespace M.A.G.U.S.Things.Trappings;
 
 public class ReinsBridleSnaffle : Thing
 {
-	public override string Name => "Reins, bridle, snaffle";
+	public override string Name => "Reins, bridle, bit";
 
-	public Money Price => new(0, 0, 15);
+	public override Money Price => new(0, 0, 15);
 }

@@ -25,8 +25,8 @@ public class ForestGiant : HalfGiant
             result.AddRange(
             [
                 new Forestry(QualificationLevel.Master),
-                new TrackReadingAndHiding(),
-                new ProfessionKnowledge(Profession.Carpenter, QualificationLevel.Master)
+                new TrackingConcealment(),
+                new Craft(Profession.Carpenter, QualificationLevel.Master)
             ]);
             return result;
         }

@@ -16,7 +16,7 @@ public class UwelPaladin(byte level = 1) : Paladin(level)
             result.AddRange(
             [
                 new HeavyArmorWearing(),
-                new ShieldUsing(),
+                new ShieldUse(),
                 new WeaponBreaking(),
                 new Disarmament()
             ]);
@@ -31,9 +31,9 @@ public class UwelPaladin(byte level = 1) : Paladin(level)
             var result = base.FutureQualifications;
             result.AddRange(
             [
-                new TrackReadingAndHiding(QualificationLevel.Master, 3),
+                new TrackingConcealment(QualificationLevel.Master, 3),
                 new Herbalism(level: 5),
-                new WoundHealing(QualificationLevel.Master, 5),
+                new Healing(QualificationLevel.Master, 5),
                 new HeavyArmorWearing(QualificationLevel.Master, 6)
             ]);
             return result;

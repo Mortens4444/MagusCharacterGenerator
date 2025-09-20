@@ -4,5 +4,5 @@ namespace M.A.G.U.S.Things.Travelling;
 
 public class Canoe : Thing
 {
-	public Money Price => new(7, 0, 0);
+	public override Money Price => new(7, 0, 0);
 }

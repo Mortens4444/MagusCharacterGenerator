@@ -16,11 +16,11 @@ public class ShadlekianMace : Weapon, IMeleeWeapon
 
     public double Weight => 1.8;
 
-    public Money Price => new(1, 3);
+    public override Money Price => new(1, 3);
 
     [DiceThrow(ThrowType._1K6)]
     [DiceThrowModifier(1)]
     public byte GetDamage() => (byte)(DiceThrow._1K6() + 1);
 
-    public override string Name => "Shadlekian mace";
+    public override string Name => "Shadleki mace";
 }

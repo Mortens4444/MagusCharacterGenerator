@@ -16,10 +16,10 @@ public class DomvikPriest(byte level = 1) : Priest(level)
 			var result = base.Qualifications;
 			result.AddRange(
 			[
-				new WeaponUsage(),
-				new ShieldUsing(),
-				new AntientLanguageKnowledge(AntientLanguage.LinguaDomini),
-				new WoundHealing(),
+				new WeaponUse(),
+				new ShieldUse(),
+				new AncientTongueLore(AntientLanguage.LinguaDomini),
+				new Healing(),
 				new PoisoningAndNeutralization(),
 				new Heraldry(),
 				new Riding()
@@ -36,7 +36,7 @@ public class DomvikPriest(byte level = 1) : Priest(level)
 			result.AddRange(
 			[
 				new ReadingAndWriting(QualificationLevel.Master),
-				new AntientLanguageKnowledge(AntientLanguage.LinguaDomini, QualificationLevel.Master, 3),
+				new AncientTongueLore(AntientLanguage.LinguaDomini, QualificationLevel.Master, 3),
 				new PoisoningAndNeutralization(QualificationLevel.Master, 3),
 			]);
 			return result;

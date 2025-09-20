@@ -15,7 +15,7 @@ public class Shortstaff : Weapon, IMeleeWeapon
 
     public double Weight => 0.7;
 
-    public Money Price => new(0, 0, 30);
+    public override Money Price => new(0, 0, 30);
 
     [DiceThrow(ThrowType._1K3)]
     public byte GetDamage() => (byte)DiceThrow._1K3();

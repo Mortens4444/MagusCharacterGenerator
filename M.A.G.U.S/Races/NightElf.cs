@@ -25,7 +25,7 @@ public class NightElf : Race, IUseRangedWeapons
     public override SpecialQualificationList SpecialQualifications =>
     [
         new BetterHearing(1.5),
-        new BetterSeeing(1.5),
+        new KeenSight(1.5),
         new Ultravision(10),
         new Invisibility(),
     ];

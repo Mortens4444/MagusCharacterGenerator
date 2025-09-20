@@ -4,7 +4,7 @@ namespace M.A.G.U.S.Things.Other;
 
 public class FabricEll : Thing
 {
-	public override string Name => "Fabric, ell";
+	public override string Name => "Cloth, yard";
 
-	public Money Price => new(0, 0, 30);
+	public override Money Price => new(0, 0, 30);
 }

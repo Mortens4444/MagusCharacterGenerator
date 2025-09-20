@@ -88,15 +88,15 @@ public class NastarMonk(byte level) : Class(level), IClass, ILikeMagic
 
     public override QualificationList Qualifications =>
     [
-        new WeaponUsage(),
+        new WeaponUse(),
         new PsiPyarron(QualificationLevel.Master),
-        new LanguageKnowledge(5),
-        new LanguageKnowledge(5),
-        new LanguageKnowledge(5),
+        new LanguageLore(5),
+        new LanguageLore(5),
+        new LanguageLore(5),
         new Physiology(),
         new ReadingAndWriting(),
-        new WoundHealing(),
-        new ReligionKnowledge(),
+        new Healing(),
+        new ReligionLore(),
 
 		// TODO
 		//new Emberismeret
@@ -111,9 +111,9 @@ public class NastarMonk(byte level) : Class(level), IClass, ILikeMagic
 		//new Emberismeret MF 3
 		new ReadingAndWriting(QualificationLevel.Master, 4),
         new Herbalism(level: 5),
-        new AntientLanguageKnowledge(level: 5),
+        new AncientTongueLore(level: 5),
         new Demonology(level: 6),
-        new AntientLanguageKnowledge(QualificationLevel.Master, 7)
+        new AncientTongueLore(QualificationLevel.Master, 7)
     ];
 
     public override List<PercentQualification> PercentQualifications => [];
@@ -121,7 +121,7 @@ public class NastarMonk(byte level) : Class(level), IClass, ILikeMagic
     public override SpecialQualificationList SpecialQualifications =>
     [
         new PriestKyrDisciplinesUsage(),
-        new PriestMagic(),
+        new ClericalMagic(),
         new SlanDisciplinesUsage()
     ];
 

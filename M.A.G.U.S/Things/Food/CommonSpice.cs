@@ -6,5 +6,5 @@ public class CommonSpice : Thing
 {
 	public override string Name => "Common spice";
 
-	public Money Price => new(0, 0, 2);
+	public override Money Price => new(0, 0, 2);
 }

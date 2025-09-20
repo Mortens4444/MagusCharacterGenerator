@@ -6,7 +6,7 @@ public class BrigandineArmor : Thing
 {
 	public override string Name => "Brigandine armor";
 
-	public Money Price => new(4, 0, 0);
+	public override Money Price => new(4, 0, 0);
 
 	public int MovementInhibitingFactor => -2;
 

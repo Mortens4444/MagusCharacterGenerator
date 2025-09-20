@@ -72,8 +72,8 @@ public class Merchant(byte level = 1) : Class(level), IClass
 
     public override QualificationList Qualifications =>
     [
-        new ValueEstimation(),
-        new NewsDistributor()
+        new Appraisal(),
+        new CourierHerald()
    ];
 
     public override QualificationList FutureQualifications => [];

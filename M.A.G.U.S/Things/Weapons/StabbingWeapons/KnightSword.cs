@@ -16,11 +16,11 @@ public class KnightSword : Weapon, IMeleeWeapon
 
     public double Weight => 3.5;
 
-    public Money Price => new(3);
+    public override Money Price => new(3);
 
     [DiceThrow(ThrowType._2K6)]
     [DiceThrowModifier(6)]
     public byte GetDamage() => (byte)(DiceThrow._2K6() + 6);
 
-    public override string Name => "Knight sword";
+    public override string Name => "Knight’s sword";
 }

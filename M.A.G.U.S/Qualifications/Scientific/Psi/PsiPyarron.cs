@@ -12,5 +12,5 @@ public class PsiPyarron : Qualification, IPsi
 
     public PsiKind PsiKind => PsiKind.Pyarron;
 
-    public override string Name => "Psi Pyarron";
+    public override string Name => "Psi, Pyarron";
 }

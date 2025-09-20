@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <v:NotifierPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
                 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                xmlns:conv="clr-namespace:M.A.G.U.S.Assistant.Converters"
                 xmlns:v="clr-namespace:M.A.G.U.S.Assistant.Views"
+                xmlns:m="clr-namespace:M.A.G.U.S.Assistant.Models"
                 xmlns:vm="clr-namespace:M.A.G.U.S.Assistant.ViewModels"
                 xmlns:mc="clr-namespace:Mtf.Maui.Controls;assembly=Mtf.Maui.Controls"
                 x:Class="M.A.G.U.S.Assistant.Views.MarketPage"
@@ -14,6 +16,7 @@
 
     <v:NotifierPage.Resources>
         <ResourceDictionary>
+            <conv:TranslationConverter x:Key="TranslationConverter" />
             <Style x:Key="BoxBorder" TargetType="Border">
                 <Setter Property="StrokeShape" Value="{RoundRectangle CornerRadius=8}"/>
                 <Setter Property="Stroke" Value="{AppThemeBinding Light={StaticResource Gray300}, Dark={StaticResource Gray500}}"/>
@@ -26,35 +29,29 @@
 
     <VerticalStackLayout Spacing="8" Padding="10">
 
-        <!-- Filter sor -->
-        <Grid ColumnDefinitions="*, Auto" RowDefinitions="Auto, Auto" ColumnSpacing="6">
-            <mc:EntryWithLabel Label="Keresés" Text="{Binding SearchText}" Grid.Column="0" Grid.Row="0" />
-            <HorizontalStackLayout Spacing="6" Grid.Column="1" Grid.Row="0">
-                <Button Text="Szűr" Command="{Binding ApplyFilterCommand}" />
-                <Button Text="Töröl" Command="{Binding ClearFilterCommand}" />
-            </HorizontalStackLayout>
+        <Grid ColumnDefinitions="*" RowDefinitions="Auto, Auto" ColumnSpacing="6">
+            <mc:EntryWithLabel Label="Search"
+                       Text="{Binding SearchText}"
+                       Grid.Column="0"
+                       Grid.Row="0" />
 
-            <HorizontalStackLayout Spacing="6" Grid.ColumnSpan="2" Grid.Row="1">
-                <mc:EntryWithLabel Label="Min ár" Text="{Binding MinPriceText}" WidthRequest="120" />
-                <mc:EntryWithLabel Label="Max ár" Text="{Binding MaxPriceText}" WidthRequest="120" />
-            </HorizontalStackLayout>
+            <CollectionView ItemsSource="{Binding FilteredItems}"
+                            SelectionMode="Single"
+                            SelectionChangedCommand="{Binding ItemSelectedCommand}"
+                            Grid.Row="1">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="m:MarketItem">
+                        <Border Style="{StaticResource BoxBorder}" Margin="0,4">
+                            <Grid ColumnDefinitions="*, Auto" ColumnSpacing="8" VerticalOptions="Center">
+                                <!--<mc:MenuItemView ImageName="{Binding ImageName}" LabelText="{Binding Name}" PageType="{x:Null}" Grid.Column="0" VerticalOptions="Center" />-->
+                                <Label Text="{Binding Name, Converter={StaticResource TranslationConverter}}" Grid.Column="0" VerticalOptions="Center" LineBreakMode="TailTruncation"/>
+                                <Label Text="{Binding PriceString}" Grid.Column="1" VerticalOptions="Center" HorizontalOptions="End" FontAttributes="Bold"/>
+                            </Grid>
+                        </Border>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
         </Grid>
-
-        <!-- Elemek listája -->
-        <CollectionView ItemsSource="{Binding FilteredItems}" SelectionMode="Single" SelectionChangedCommand="{Binding ItemSelectedCommand}">
-            <CollectionView.ItemTemplate>
-                <DataTemplate x:DataType="vm:MarketItem">
-                    <Border Style="{StaticResource BoxBorder}" Margin="0,4">
-                        <Grid ColumnDefinitions="Auto, *, Auto" ColumnSpacing="8" VerticalOptions="Center">
-                            <!-- használjuk a megadott stílust -->
-                            <!--<mc:MenuItemView ImageName="{Binding ImageName}" LabelText="{Binding Name}" PageType="{x:Null}" Grid.Column="0" VerticalOptions="Center" />-->
-                            <Label Text="{Binding Description}" Grid.Column="1" VerticalOptions="Center" LineBreakMode="TailTruncation"/>
-                            <Label Text="{Binding PriceString}" Grid.Column="2" VerticalOptions="Center" HorizontalOptions="End" FontAttributes="Bold"/>
-                        </Grid>
-                    </Border>
-                </DataTemplate>
-            </CollectionView.ItemTemplate>
-        </CollectionView>
 
     </VerticalStackLayout>
 </v:NotifierPage>

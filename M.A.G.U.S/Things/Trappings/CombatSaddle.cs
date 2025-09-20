@@ -4,7 +4,7 @@ namespace M.A.G.U.S.Things.Trappings;
 
 public class CombatSaddle : Thing
 {
-	public override string Name => "Combat saddle";
+	public override string Name => "Saddle, war";
 
-	public Money Price => new(0, 5, 0);
+	public override Money Price => new(0, 5, 0);
 }

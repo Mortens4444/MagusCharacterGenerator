@@ -4,7 +4,7 @@ namespace M.A.G.U.S.Things.Other;
 
 public class OilForLamps : Thing
 {
-	public override string Name => "Oil for lamps";
+	public override string Name => "Oil, lamp";
 
-	public Money Price => new(0, 0, 3);
+	public override Money Price => new(0, 0, 3);
 }

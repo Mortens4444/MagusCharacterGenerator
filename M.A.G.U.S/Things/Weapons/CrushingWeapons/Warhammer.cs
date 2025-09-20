@@ -15,7 +15,7 @@ public class Warhammer : Weapon, IMeleeWeapon
 
     public double Weight => 3;
 
-    public Money Price => new(0, 8);
+    public override Money Price => new(0, 8);
 
     [DiceThrow(ThrowType._1K6)]
     [DiceThrowModifier(2)]

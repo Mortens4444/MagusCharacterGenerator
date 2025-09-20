@@ -15,7 +15,7 @@ public class SpikedMace : Weapon, IMeleeWeapon
 
     public double Weight => 2;
 
-    public Money Price => new(1);
+    public override Money Price => new(1);
 
     [DiceThrow(ThrowType._1K6)]
     [DiceThrowModifier(2)]

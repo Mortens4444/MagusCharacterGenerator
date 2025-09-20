@@ -4,7 +4,7 @@ namespace M.A.G.U.S.Things.Other;
 
 public class Deadboltpadlock : Thing
 {
-	public override string Name => "Deadbolt/padlock";
+	public override string Name => "Lock/padlock";
 
-	public Money Price => new(0, 3, 0);
+	public override Money Price => new(0, 3, 0);
 }

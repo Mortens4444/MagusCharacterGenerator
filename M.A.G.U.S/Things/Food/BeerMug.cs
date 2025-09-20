@@ -6,5 +6,5 @@ public class BeerMug : Thing
 {
     public override string Name => "Beer, mug";
 
-    public Money Price => new(0, 0, 1);
+    public override Money Price => new(0, 0, 1);
 }

@@ -5,6 +5,8 @@ using M.A.G.U.S.Assistant.Messages;
 using M.A.G.U.S.Classes;
 using M.A.G.U.S.GameSystem;
 using M.A.G.U.S.Races;
+using M.A.G.U.S.Things.Weapons;
+using M.A.G.U.S.Utils;
 using System.Collections.ObjectModel;
 using System.Reflection;
 using System.Runtime.Versioning;
@@ -16,6 +18,9 @@ namespace M.A.G.U.S.Assistant.ViewModels
     {
         private Character character;
 
+        private Weapon primaryWeapon;
+        private Weapon secondaryWeapon;
+
         public CharacterGeneratorViewModel()
         {
             character = new Character();
@@ -23,9 +28,11 @@ namespace M.A.G.U.S.Assistant.ViewModels
             LoadAvailableTypes();
             SelectedRace = AvailableRaces.FirstOrDefault();
             SelectedClass = AvailableClasses.FirstOrDefault();
-
+            SelectedCombatValueModifier = AvailableCombatValueModifiers.FirstOrDefault();
         }
 
+        public ObservableCollection<string> AvailableCombatValueModifiers { get; } = [ "Base", "With primary weapon", "With secondary weapon" ];
+        //public ObservableCollection<string> AvailableCombatValueModifiers { get; } = [ Lng.Elem("Base"), Lng.Elem("With primary weapon"), Lng.Elem("With secondary weapon") ];
         public ObservableCollection<IRace> AvailableRaces { get; } = [];
         public ObservableCollection<IClass> AvailableClasses { get; } = [];
 
@@ -36,6 +43,16 @@ namespace M.A.G.U.S.Assistant.ViewModels
             set
             {
                 SetProperty(ref selectedLevel, value);
+            }
+        }
+
+        string selectedCombatValueModifier;
+        public string SelectedCombatValueModifier
+        {
+            get => selectedCombatValueModifier;
+            set
+            {
+                SetProperty(ref selectedCombatValueModifier, value);
             }
         }
 
@@ -70,18 +87,18 @@ namespace M.A.G.U.S.Assistant.ViewModels
         {
             if (selectedClass == null)
             {
-                WeakReferenceMessenger.Default.Send(new ShowErrorMessage("Nincs kiválasztva kaszt!"));
+                WeakReferenceMessenger.Default.Send(new ShowErrorMessage("No class selected!"));
                 return;
             }
             
             var instanceClass = InstanceClass(selectedClass.GetType(), 1);
             if (instanceClass == null)
             {
-                WeakReferenceMessenger.Default.Send(new ShowErrorMessage("Kaszt konvertálási hiba!"));
+                WeakReferenceMessenger.Default.Send(new ShowErrorMessage("Class cannot be instantiated!"));
                 return;
             }
 
-            Character = new Character("Mortens", selectedRace, instanceClass);
+            Character = new Character(NameGenerator.Get().ToName(), selectedRace, instanceClass);
         }
 
         private void LoadAvailableTypes()

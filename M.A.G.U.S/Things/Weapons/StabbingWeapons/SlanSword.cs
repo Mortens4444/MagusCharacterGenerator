@@ -16,7 +16,7 @@ public class SlanSword : Weapon, IMeleeWeapon
 
     public double Weight => 1.4;
 
-    public Money Price => new(100);
+    public override Money Price => new(100);
 
     [DiceThrow(ThrowType._1K10)]
     public byte GetDamage() => (byte)(DiceThrow._1K10() + 2);

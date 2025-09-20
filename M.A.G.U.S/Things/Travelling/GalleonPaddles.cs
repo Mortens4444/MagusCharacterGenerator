@@ -4,7 +4,7 @@ namespace M.A.G.U.S.Things.Travelling;
 
 public class GalleonPaddles : Thing
 {
-	public override string Name => "Galleon paddles";
+	public override string Name => "Galley oar";
 
-	public Money Price => new(0, 3, 0);
+	public override Money Price => new(0, 3, 0);
 }

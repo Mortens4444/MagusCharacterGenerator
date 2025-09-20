@@ -88,14 +88,14 @@ public class VelarMonk(byte level) : Class(level), IClass, ILikeMagic
 
     public override QualificationList Qualifications =>
     [
-        new WeaponUsage(),
+        new WeaponUse(),
         new ReadingAndWriting(),
-        new LanguageKnowledge(4),
-        new AntientLanguageKnowledge(),
+        new LanguageLore(4),
+        new AncientTongueLore(),
         new PsiPyarron(QualificationLevel.Master),
-        new WoundHealing(),
-        new ReligionKnowledge(QualificationLevel.Master),
-        new FistFighting(QualificationLevel.Master)
+        new Healing(),
+        new ReligionLore(QualificationLevel.Master),
+        new Fistfight(QualificationLevel.Master)
 
        // TODO
        //new Kínzás elviselése(QualificationLevel.Master),
@@ -108,9 +108,9 @@ public class VelarMonk(byte level) : Class(level), IClass, ILikeMagic
         new Physiology(level: 4),
         new PoisoningAndNeutralization(level: 4),
         new Demonology(level: 5),
-        new WeaponUsage(QualificationLevel.Master, 5),
-        new AntientLanguageKnowledge(QualificationLevel.Master, 6),
-        new WoundHealing(QualificationLevel.Master, 7),
+        new WeaponUse(QualificationLevel.Master, 5),
+        new AncientTongueLore(QualificationLevel.Master, 6),
+        new Healing(QualificationLevel.Master, 7),
         new PoisoningAndNeutralization(QualificationLevel.Master, 8)
     ];
 
@@ -119,7 +119,7 @@ public class VelarMonk(byte level) : Class(level), IClass, ILikeMagic
     public override SpecialQualificationList SpecialQualifications =>
     [
         new PriestKyrDisciplinesUsage(),
-        new PriestMagic()
+        new ClericalMagic()
     ];
 
     [DiceThrow(ThrowType._1K6)]

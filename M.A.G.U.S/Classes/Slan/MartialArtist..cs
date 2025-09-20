@@ -88,16 +88,16 @@ public class MartialArtist(byte level = 1) : Class(level), IClass, IJustFight
     public override QualificationList Qualifications =>
     [
         new PsiSlanWay(),
-        new WeaponUsage(),
-        new WeaponUsage(),
-        new WeaponUsage(),
-        new WeaponUsage(),
-        new WeaponUsage(),
-        new WeaponUsage(),
-        new WeaponUsage(),
-        new WeaponUsage(),
-        new WeaponUsage(),
-        new WeaponUsage(),
+        new WeaponUse(),
+        new WeaponUse(),
+        new WeaponUse(),
+        new WeaponUse(),
+        new WeaponUse(),
+        new WeaponUse(),
+        new WeaponUse(),
+        new WeaponUse(),
+        new WeaponUse(),
+        new WeaponUse(),
         new WeaponThrowing(),
         new WeaponThrowing(),
         new WeaponThrowing(),
@@ -111,10 +111,10 @@ public class MartialArtist(byte level = 1) : Class(level), IClass, IJustFight
 
     public override QualificationList FutureQualifications =>
     [
-        new WoundHealing(level: 2),
+        new Healing(level: 2),
         new WeaponBreaking(QualificationLevel.Master, 4),
         new BlindFighting(QualificationLevel.Master, 5),
-        new WoundHealing(QualificationLevel.Master, 6)
+        new Healing(QualificationLevel.Master, 6)
     ];
 
     public override List<PercentQualification> PercentQualifications =>

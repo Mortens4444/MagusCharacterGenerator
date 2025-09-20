@@ -74,8 +74,8 @@ public class Peasant(byte level = 1) : Class(level), IClass
     [
         new Agriculture(),
         new AnimalBreeding(),
-        new GrowingPlants(),
-        new WeatherForecast()
+        new PlantGrowing(),
+        new WeatherDivination()
    ];
 
     public override QualificationList FutureQualifications => [];

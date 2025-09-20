@@ -16,7 +16,7 @@ public class BastardSword : Weapon, IMeleeWeapon
 
     public double Weight => 2;
 
-    public Money Price => new(2, 5);
+    public override Money Price => new(2, 5);
 
     [DiceThrow(ThrowType._2K6)]
     public byte GetDamage() => (byte)DiceThrow._2K6();

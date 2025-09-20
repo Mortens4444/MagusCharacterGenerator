@@ -6,7 +6,7 @@ public class MitrillLaminarArmor : Thing
 {
 	public override string Name => "Mitrill laminar armor";
 
-	public Money Price => new(4000, 0, 0);
+	public override Money Price => new(4000, 0, 0);
 
 	public int MovementInhibitingFactor => -1;
 

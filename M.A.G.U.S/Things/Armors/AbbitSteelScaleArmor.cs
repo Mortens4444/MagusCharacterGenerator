@@ -6,7 +6,7 @@ public class AbbitSteelScaleArmor : Thing
 {
 	public override string Name => "Abbit steel scale armor";
 
-	public Money Price => new(50, 0, 0);
+	public override Money Price => new(50, 0, 0);
 
 	public int MovementInhibitingFactor => -1;
 

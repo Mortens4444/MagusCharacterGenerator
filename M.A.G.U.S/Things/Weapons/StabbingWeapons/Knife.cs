@@ -16,7 +16,7 @@ public class Knife : Weapon, IMeleeWeapon
 
     public double Weight => 0.2;
 
-    public Money Price => new(0, 0, 50);
+    public override Money Price => new(0, 0, 50);
 
     [DiceThrow(ThrowType._1K5)]
     public byte GetDamage() => (byte)DiceThrow._1K5();

@@ -15,7 +15,7 @@ public class Flail : Weapon, IMeleeWeapon
 
     public double Weight => 2.5;
 
-    public Money Price => new(0, 7);
+    public override Money Price => new(0, 7);
 
     [DiceThrow(ThrowType._1K6)]
     [DiceThrowModifier(1)]

@@ -14,7 +14,7 @@ public class Lasso : Weapon, IMeleeWeapon
 
     public double Weight => 0.6;
 
-    public Money Price => new(0, 0, 80);
+    public override Money Price => new(0, 0, 80);
 
     public byte GetDamage() => 0;
 }

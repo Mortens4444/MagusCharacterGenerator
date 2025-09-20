@@ -27,7 +27,7 @@ public abstract class HalfGiant : Race
     public override QualificationList Qualifications =>
     [
         new Running(),
-        new FishingAndHunting(QualificationLevel.Master)
+        new HuntingAndFishing(QualificationLevel.Master)
     ];
 
     public override SpecialQualificationList SpecialQualifications =>

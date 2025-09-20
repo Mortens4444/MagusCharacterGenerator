@@ -4,5 +4,5 @@ namespace M.A.G.U.S.Things.Other;
 
 public class Fur : Thing
 {
-	public Money Price => new(0, 6, 0);
+	public override Money Price => new(0, 6, 0);
 }

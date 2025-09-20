@@ -4,5 +4,5 @@ namespace M.A.G.U.S.Things.Other;
 
 public class Basket : Thing
 {
-	public Money Price => new(0, 0, 6);
+	public override Money Price => new(0, 0, 6);
 }

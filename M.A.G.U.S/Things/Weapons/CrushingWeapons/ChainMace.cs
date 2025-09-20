@@ -15,11 +15,11 @@ public class ChainMace : Weapon, IMeleeWeapon
 
     public double Weight => 2;
 
-    public Money Price => new(1, 2);
+    public override Money Price => new(1, 2);
 
     [DiceThrow(ThrowType._1K6)]
     [DiceThrowModifier(3)]
     public byte GetDamage() => (byte)(DiceThrow._1K6() + 3);
 
-    public override string Name => "Chain mace";
+    public override string Name => "Flail with chain";
 }

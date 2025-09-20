@@ -15,7 +15,7 @@ public class OneHandedMace : Weapon, IMeleeWeapon
 
     public double Weight => 2;
 
-    public Money Price => new(0, 8);
+    public override Money Price => new(0, 8);
 
     [DiceThrow(ThrowType._1K6)]
     public byte GetDamage() => (byte)DiceThrow._1K6();

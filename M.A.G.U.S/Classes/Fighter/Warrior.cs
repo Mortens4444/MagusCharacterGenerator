@@ -86,9 +86,9 @@ public class Warrior(byte level = 1) : Class(level), IClass, IJustFight
 
     public override QualificationList Qualifications =>
     [
-        new WeaponUsage(),
-            new WeaponUsage(),
-            new WeaponUsage(),
+        new WeaponUse(),
+            new WeaponUse(),
+            new WeaponUse(),
             new Riding(),
             new Swimming(),
             new Running()

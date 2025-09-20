@@ -15,7 +15,7 @@ public class Bola : Weapon, IMeleeWeapon
 
     public double Weight => 0.8;
 
-    public Money Price => new(0, 0, 40);
+    public override Money Price => new(0, 0, 40);
 
     [DiceThrow(ThrowType._1K5)]
     [DiceThrowModifier(1)]

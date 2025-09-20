@@ -6,5 +6,5 @@ public class SaltBlocks : Thing
 {
 	public override string Name => "Salt, blocks";
 
-	public Money Price => new(0, 0, 1);
+	public override Money Price => new(0, 0, 1);
 }

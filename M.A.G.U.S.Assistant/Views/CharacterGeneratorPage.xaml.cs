@@ -7,6 +7,6 @@ public partial class CharacterGeneratorPage : NotifierPage
     public CharacterGeneratorPage()
     {
         InitializeComponent();
-        //Translator.Translate(this);
+        Translator.Translate(this);
     }
 }

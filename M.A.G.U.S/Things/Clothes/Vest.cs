@@ -4,5 +4,5 @@ namespace M.A.G.U.S.Things.Clothes;
 
 public class Vest : Thing
 {
-	public Money Price => new(0, 0, 30);
+	public override Money Price => new(0, 0, 30);
 }

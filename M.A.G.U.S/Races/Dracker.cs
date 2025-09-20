@@ -20,16 +20,16 @@ public class Dracker : Race
 
     public override QualificationList Qualifications =>
     [
-        new DressageTraining(),
+        new AnimalTraining(),
         new Forestry(),
-        new LanguageKnowledge(4),
-        new LanguageKnowledge(3),
-        new LanguageKnowledge(3),
+        new LanguageLore(4),
+        new LanguageLore(3),
+        new LanguageLore(3),
     ];
 
     public override SpecialQualificationList SpecialQualifications =>
     [
-        new BetterSeeing(1.5),
+        new KeenSight(1.5),
 		// Mágiaellenállás * 2,
 		new Ultravision(25),
         new ResistanceToWaterMagic(-6)

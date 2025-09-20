@@ -85,11 +85,11 @@ public class FireWizard(byte level = 1) : Class(level), IClass, ILikeMagic
 
     public override QualificationList Qualifications =>
     [
-        new WeaponUsage(),
-            new WeaponUsage(),
+        new WeaponUse(),
+            new WeaponUse(),
             new PsiPyarron(QualificationLevel.Master),
-            new LanguageKnowledge(4),
-            new LanguageKnowledge(3),
+            new LanguageLore(4),
+            new LanguageLore(3),
             new ReadingAndWriting(),
             new Riding(),
             new Sailing()

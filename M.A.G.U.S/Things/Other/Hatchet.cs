@@ -4,5 +4,5 @@ namespace M.A.G.U.S.Things.Other;
 
 public class Hatchet : Thing
 {
-	public Money Price => new(0, 2, 0);
+	public override Money Price => new(0, 2, 0);
 }

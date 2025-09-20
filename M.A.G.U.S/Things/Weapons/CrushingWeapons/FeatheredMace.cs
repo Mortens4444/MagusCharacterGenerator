@@ -15,11 +15,11 @@ public class FeatheredMace : Weapon, IMeleeWeapon
 
     public double Weight => 2;
 
-    public Money Price => new(1, 1);
+    public override Money Price => new(1, 1);
 
     [DiceThrow(ThrowType._1K6)]
     [DiceThrowModifier(1)]
     public byte GetDamage() => (byte)(DiceThrow._1K6() + 1);
 
-    public override string Name => "Feathered mace";
+    public override string Name => "Flail (thresher)";
 }

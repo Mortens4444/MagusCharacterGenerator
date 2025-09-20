@@ -6,5 +6,5 @@ public class FishingNet : Thing
 {
 	public override string Name => "Fishing net";
 
-	public Money Price => new(0, 0, 80);
+	public override Money Price => new(0, 0, 80);
 }

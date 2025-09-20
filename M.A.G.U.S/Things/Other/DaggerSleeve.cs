@@ -4,7 +4,7 @@ namespace M.A.G.U.S.Things.Other;
 
 public class DaggerSleeve : Thing
 {
-	public override string Name => "Dagger Sleeve";
+	public override string Name => "Dagger sheath";
 
-	public Money Price => new(0, 1, 0);
+	public override Money Price => new(0, 1, 0);
 }

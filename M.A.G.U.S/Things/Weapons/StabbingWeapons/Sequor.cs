@@ -16,7 +16,7 @@ public class Sequor : Weapon, IMeleeWeapon
 
     public double Weight => 0.4;
 
-    public Money Price => new(1, 3);
+    public override Money Price => new(1, 3);
 
     [DiceThrow(ThrowType._1K6)]
     [DiceThrowModifier(2)]

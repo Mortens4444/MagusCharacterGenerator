@@ -16,7 +16,7 @@ public class ThrowingAx : Weapon, IMeleeWeapon
 
     public double Weight => 1.2;
 
-    public Money Price => new(0, 1);
+    public override Money Price => new(0, 1);
 
     [DiceThrow(ThrowType._1K6)]
     public byte GetDamage() => (byte)DiceThrow._1K6();

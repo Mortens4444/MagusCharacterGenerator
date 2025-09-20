@@ -86,22 +86,22 @@ public class Thief(byte level = 1) : Class(level), IClass, IJustFight
 
     public override QualificationList Qualifications =>
     [
-        new WeaponUsage(),
-        new WeaponUsage(),
+        new WeaponUse(),
+        new WeaponUse(),
         new WeaponThrowing(),
-        new LanguageKnowledge(3),
-        new LanguageKnowledge(2),
-        new LanguageKnowledge(2),
-        new ValueEstimation(),
-        new PubFighting()
+        new LanguageLore(3),
+        new LanguageLore(2),
+        new LanguageLore(2),
+        new Appraisal(),
+        new TavernBrawling()
     ];
 
     public override QualificationList FutureQualifications =>
     [
-        new FreeFromBondage(level: 2),
+        new EscapeBonds(level: 2),
         new Knotting(level: 3),
         new Backstab(level: 3),
-        new PubFighting(QualificationLevel.Master, 4),
+        new TavernBrawling(QualificationLevel.Master, 4),
         new WeaponThrowing(QualificationLevel.Master, 5)
     ];
 
@@ -113,10 +113,10 @@ public class Thief(byte level = 1) : Class(level), IClass, IJustFight
         new LockPicking(25),
         new Sneaking(30),
         new Stealth(15),
-        new Tightrope(25),
+        new TightropeWalking(25),
         new PickPocketing(25),
-        new TrapDetect(25),
-        new SecretDoorSearching(15),
+        new TrapDetection(25),
+        new SecretDoorSearch(15),
     ];
 
     public override SpecialQualificationList SpecialQualifications =>

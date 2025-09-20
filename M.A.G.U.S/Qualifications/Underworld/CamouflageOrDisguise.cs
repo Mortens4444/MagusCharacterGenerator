@@ -9,5 +9,5 @@ public class CamouflageOrDisguise : Qualification
     {
     }
 
-    public override string Name => "Camouflage or disguise";
+    public override string Name => "Camouflage/disguise";
 }

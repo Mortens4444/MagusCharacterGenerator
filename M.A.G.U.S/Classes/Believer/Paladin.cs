@@ -87,23 +87,23 @@ public abstract class Paladin(byte level) : Class(level), IClass, IHateRangedWea
 
     public override QualificationList Qualifications =>
     [
-        new WeaponUsage(),
-        new WeaponUsage(),
-        new WeaponUsage(),
-        new WeaponUsage(),
+        new WeaponUse(),
+        new WeaponUse(),
+        new WeaponUse(),
+        new WeaponUse(),
         new PsiPyarron(QualificationLevel.Master),
-        new LanguageKnowledge(5),
-        new LanguageKnowledge(4),
+        new LanguageLore(5),
+        new LanguageLore(4),
         new HeavyArmorWearing(),
-        new ShieldUsing(),
+        new ShieldUse(),
         new Leadership(),
         new ReadingAndWriting(),
-        new ReligionKnowledge(),
+        new ReligionLore(),
         new Etiquette(),
         new Heraldry(),
         new Riding(QualificationLevel.Master),
         new SingingAndMakingMusic(),
-        new HistoryKnowledge()
+        new HistoryLore()
    ];
 
     public override QualificationList FutureQualifications => [];
@@ -112,7 +112,7 @@ public abstract class Paladin(byte level) : Class(level), IClass, IHateRangedWea
 
     public override SpecialQualificationList SpecialQualifications =>
     [
-        new PriestMagic()
+        new ClericalMagic()
     ];
 
     [DiceThrow(ThrowType._1K6)]

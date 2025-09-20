@@ -16,11 +16,11 @@ public class HeadhunterSword : Weapon, IMeleeWeapon
 
     public double Weight => 0.8;
 
-    public Money Price => new(2);
+    public override Money Price => new(2);
 
     [DiceThrow(ThrowType._1K6)]
     [DiceThrowModifier(2)]
     public byte GetDamage() => (byte)(DiceThrow._1K6() + 2);
 
-    public override string Name => "Headhunter sword";
+    public override string Name => "Assassin’s sword";
 }

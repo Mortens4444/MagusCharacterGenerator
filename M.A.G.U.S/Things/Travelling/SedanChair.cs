@@ -6,5 +6,5 @@ public class SedanChair : Thing
 {
 	public override string Name => "Sedan chair";
 
-	public Money Price => new(10, 0, 0);
+	public override Money Price => new(10, 0, 0);
 }

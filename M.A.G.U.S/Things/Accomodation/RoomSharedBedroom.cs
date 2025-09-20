@@ -6,5 +6,5 @@ public class RoomSharedBedroom : Thing
 {
     public override string Name => "Room, shared bedroom";
 
-    public Money Price => new(0, 0, 2);
+    public override Money Price => new(0, 0, 2);
 }

@@ -21,7 +21,7 @@ public class Gnome : Race
     public override QualificationList Qualifications =>
     [
         new Cartography(),
-        new ProfessionKnowledge(Profession.Goldsmith)
+        new Craft(Profession.Goldsmith)
     ];
 
     public override SpecialQualificationList SpecialQualifications =>

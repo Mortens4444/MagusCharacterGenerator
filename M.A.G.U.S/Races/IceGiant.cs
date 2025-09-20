@@ -17,8 +17,8 @@ public class IceGiant : HalfGiant
             var result = base.Qualifications;
             result.AddRange(
             [
-                new DressageTraining(),
-                new WeatherForecast(QualificationLevel.Master)
+                new AnimalTraining(),
+                new WeatherDivination(QualificationLevel.Master)
             ]);
             return result;
         }

@@ -16,7 +16,7 @@ public class MaraSequor : Weapon, IMeleeWeapon
 
     public double Weight => 1;
 
-    public Money Price => new(2);
+    public override Money Price => new(2);
 
     [DiceThrow(ThrowType._2K6)]
     [DiceThrowModifier(2)]

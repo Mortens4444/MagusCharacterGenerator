@@ -38,7 +38,7 @@ public class Draquon : Race
     public override SpecialQualificationList SpecialQualifications =>
         [
             new CanFly(),
-        new BetterSeeing(1.5),
+        new KeenSight(1.5),
         new Ultravision(50),
         new CantLearnPsi(),
         new ExtraMagicResistanceOnLevelUp(5),

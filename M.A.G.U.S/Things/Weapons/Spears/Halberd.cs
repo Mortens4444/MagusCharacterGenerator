@@ -15,7 +15,7 @@ public class Halberd : Weapon, IMeleeWeapon
 
     public double Weight => 3;
 
-    public Money Price => new(5);
+    public override Money Price => new(5);
 
     [DiceThrow(ThrowType._2K6)]
     [DiceThrowModifier(2)]

@@ -15,9 +15,11 @@ public class Harpoon : Weapon, IMeleeWeapon
 
     public double Weight => 2;
 
-    public Money Price => new(0, 5);
+    public override Money Price => new(0, 5);
 
     [DiceThrow(ThrowType._1K10)]
     [DiceThrowModifier(1)]
     public byte GetDamage() => (byte)(DiceThrow._1K10() + 1);
+
+    public override string Name => "Trident";
 }

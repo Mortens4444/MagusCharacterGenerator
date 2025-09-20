@@ -4,5 +4,7 @@ namespace M.A.G.U.S.Things.Other;
 
 public class Earthenware : Thing
 {
-	public Money Price => new(0, 0, 5);
+	public override Money Price => new(0, 0, 5);
+
+    public override string Name => "Clay pot";
 }

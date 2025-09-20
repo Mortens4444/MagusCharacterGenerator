@@ -87,28 +87,28 @@ public class Gladiator(byte level = 1) : Class(level), IClass, IJustFight
 
     public override QualificationList Qualifications =>
     [
-        new WeaponUsage(),
-        new WeaponUsage(),
-        new WeaponUsage(),
-        new WeaponUsage(),
+        new WeaponUse(),
+        new WeaponUse(),
+        new WeaponUse(),
+        new WeaponUse(),
         new Wrestling(),
-        new FistFighting(),
+        new Fistfight(),
         new TwoHandedCombat(),
         new HeavyArmorWearing(),
-        new ShieldUsing(),
+        new ShieldUse(),
         new WeaponBreaking()
     ];
 
     public override QualificationList FutureQualifications =>
     [
-        new WeaponUsage(level: 2),
-        new WeaponUsage(level: 4),
-        new WeaponUsage(QualificationLevel.Master),
+        new WeaponUse(level: 2),
+        new WeaponUse(level: 4),
+        new WeaponUse(QualificationLevel.Master),
         new TwoHandedCombat(QualificationLevel.Master),
         new BlindFighting(level: 6),
-        new WeaponUsage(level: 7),
-        new WeaponUsage(level: 7),
-        new ShieldUsing(QualificationLevel.Master),
+        new WeaponUse(level: 7),
+        new WeaponUse(level: 7),
+        new ShieldUse(QualificationLevel.Master),
         new WeaponBreaking(QualificationLevel.Master)
     ];
 

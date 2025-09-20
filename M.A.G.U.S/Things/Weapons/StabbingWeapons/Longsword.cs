@@ -16,7 +16,7 @@ public class Longsword : Weapon, IMeleeWeapon
 
     public double Weight => 1.5;
 
-    public Money Price => new(1, 5);
+    public override Money Price => new(1, 5);
 
     [DiceThrow(ThrowType._1K10)]
     public byte GetDamage() => (byte)DiceThrow._1K10();

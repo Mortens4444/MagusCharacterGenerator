@@ -72,12 +72,12 @@ public class Craftsman(byte level = 1) : Class(level), IClass
 
     public override QualificationList Qualifications =>
     [
-        new Forging(),
+        new Smithing(),
         new Coinage(),
         new Carpentry(),
         new Architecture(),
         new Tailoring(),
-        new RopeBeating(),
+        new RopeMaking(),
         new Pottery(),
         new ReadingAndWriting()
    ];

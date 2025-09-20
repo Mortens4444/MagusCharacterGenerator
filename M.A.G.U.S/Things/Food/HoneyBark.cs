@@ -6,5 +6,5 @@ public class HoneyBark : Thing
 {
 	public override string Name => "Honey, bark";
 
-	public Money Price => new(0, 0, 4);
+	public override Money Price => new(0, 0, 4);
 }

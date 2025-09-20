@@ -6,7 +6,7 @@ public class MitrillBreastPlate : Thing
 {
 	public override string Name => "Mitrill breast plate";
 
-	public Money Price => new(8000, 0, 0);
+	public override Money Price => new(8000, 0, 0);
 
 	public int MovementInhibitingFactor => -1;
 

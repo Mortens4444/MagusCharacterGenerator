@@ -4,7 +4,7 @@ namespace M.A.G.U.S.Things.Other;
 
 public class Climbingirons : Thing
 {
-	public override string Name => "Climbing-irons";
+	public override string Name => "Climbing spikes";
 
-	public Money Price => new(0, 0, 3);
+	public override Money Price => new(0, 0, 3);
 }

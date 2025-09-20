@@ -15,10 +15,10 @@ public class CarvedClub : Weapon, IMeleeWeapon
 
     public double Weight => 1.3;
 
-    public Money Price => Money.Free;
+    public override Money Price => Money.Free;
 
     [DiceThrow(ThrowType._1K6)]
     public byte GetDamage() => (byte)DiceThrow._1K6();
 
-    public override string Name => "Carved club";
+    public override string Name => "Club";
 }

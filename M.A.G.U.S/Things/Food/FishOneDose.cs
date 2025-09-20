@@ -6,5 +6,5 @@ public class FishOneDose : Thing
 {
 	public override string Name => "Fish, one dose";
 
-	public Money Price => new(0, 0, 1);
+	public override Money Price => new(0, 0, 1);
 }

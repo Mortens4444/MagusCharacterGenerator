@@ -16,7 +16,7 @@ public class SlanDagger : Weapon, IMeleeWeapon
 
     public double Weight => 0.8;
 
-    public Money Price => new(70);
+    public override Money Price => new(70);
 
     [DiceThrow(ThrowType._1K6)]
     [DiceThrowModifier(2)]

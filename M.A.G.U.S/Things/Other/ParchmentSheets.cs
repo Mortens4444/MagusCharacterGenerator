@@ -4,7 +4,7 @@ namespace M.A.G.U.S.Things.Other;
 
 public class ParchmentSheets : Thing
 {
-	public override string Name => "Parchment sheets";
+	public override string Name => "Parchment, sheet";
 
-	public Money Price => new(0, 0, 15);
+	public override Money Price => new(0, 0, 15);
 }

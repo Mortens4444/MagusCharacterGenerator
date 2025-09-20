@@ -88,20 +88,20 @@ public class Knight(byte level = 1) : Class(level), IClass, IHateRangedWeapons
     public override QualificationList Qualifications =>
     [
         new HeavyArmorWearing(),
-        new ShieldUsing(),
-        new WeaponUsage(),
-        new WeaponUsage(),
-        new WeaponUsage(),
-        new WeaponUsage(),
-        new WeaponUsage(),
-        new WeaponKnowledge(),
+        new ShieldUse(),
+        new WeaponUse(),
+        new WeaponUse(),
+        new WeaponUse(),
+        new WeaponUse(),
+        new WeaponUse(),
+        new WeaponLore(),
         new Leadership(),
         new Etiquette(),
         new Riding(QualificationLevel.Master),
-        new LanguageKnowledge(4),
-        new LanguageKnowledge(2),
-        new LanguageKnowledge(2),
-        new LanguageKnowledge(2),
+        new LanguageLore(4),
+        new LanguageLore(2),
+        new LanguageLore(2),
+        new LanguageLore(2),
         new ReadingAndWriting(),
         new Heraldry()
     ];
@@ -109,10 +109,10 @@ public class Knight(byte level = 1) : Class(level), IClass, IHateRangedWeapons
     public override QualificationList FutureQualifications =>
     [
         new Heraldry(QualificationLevel.Master, 3),
-        new ShieldUsing(QualificationLevel.Master, 4),
+        new ShieldUse(QualificationLevel.Master, 4),
         new PsiPyarron(level: 4),
-        new WoundHealing(level: 4),
-        new WeaponUsage(QualificationLevel.Master, 5),
+        new Healing(level: 4),
+        new WeaponUse(QualificationLevel.Master, 5),
         new HeavyArmorWearing(QualificationLevel.Master, 8),
         new Leadership(QualificationLevel.Master, 9),
         new PsiPyarron(QualificationLevel.Master, 12)

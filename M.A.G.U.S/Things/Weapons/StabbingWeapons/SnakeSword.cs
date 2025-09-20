@@ -16,7 +16,7 @@ public class SnakeSword : Weapon, IMeleeWeapon
 
     public double Weight => 1.4;
 
-    public Money Price => new(6);
+    public override Money Price => new(6);
 
     [DiceThrow(ThrowType._1K10)]
     public byte GetDamage() => (byte)DiceThrow._1K10();

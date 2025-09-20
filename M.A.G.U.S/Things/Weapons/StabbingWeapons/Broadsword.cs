@@ -16,9 +16,11 @@ public class Broadsword : Weapon, IMeleeWeapon
 
     public double Weight => 7;
 
-    public Money Price => new(5);
+    public override Money Price => new(5);
 
     [DiceThrow(ThrowType._3K6)]
     [DiceThrowModifier(2)]
     public byte GetDamage() => (byte)(DiceThrow._3K6() + 2);
+
+    override public string Name => "Sword, greatsword";
 }

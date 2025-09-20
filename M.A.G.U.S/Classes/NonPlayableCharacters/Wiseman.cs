@@ -75,9 +75,9 @@ public class Wiseman(byte level = 1) : Class(level), IClass
     public override QualificationList Qualifications =>
     [
         new Teaching(),
-        new ValueEstimation(),
-        new LegendKnowledge(),
-        new HistoryKnowledge(),
+        new Appraisal(),
+        new LegendLore(),
+        new HistoryLore(),
         new ReadingAndWriting()
    ];
 

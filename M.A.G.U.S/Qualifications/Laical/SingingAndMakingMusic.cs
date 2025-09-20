@@ -9,5 +9,5 @@ public class SingingAndMakingMusic : Qualification
     {
     }
 
-    public override string Name => "Singing and making music";
+    public override string Name => "Singing/music making";
 }

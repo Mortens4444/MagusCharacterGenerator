@@ -6,5 +6,5 @@ public class BackpackBig : Thing
 {
 	public override string Name => "Backpack, big";
 
-	public Money Price => new(0, 0, 120);
+	public override Money Price => new(0, 0, 120);
 }

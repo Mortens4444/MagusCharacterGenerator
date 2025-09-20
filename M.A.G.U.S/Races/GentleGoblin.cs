@@ -25,7 +25,7 @@ public class GentleGoblin : Race
     [
         new Infravision(20),
         new UndergroundMasters(5),
-        new BetterSniffing(3)
+        new KeenSmell(3)
     ];
 
     public override string Name => "Gentle goblin";

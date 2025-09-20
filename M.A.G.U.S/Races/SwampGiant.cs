@@ -19,10 +19,10 @@ public class SwampGiant : HalfGiant
             var result = base.Qualifications;
             result.AddRange(
             [
-                new AntientLanguageKnowledge(AntientLanguage.Voul),
+                new AncientTongueLore(AntientLanguage.Voul),
 				//new Mocsárjárás(QualificationLevel.Master),
-				new ProfessionKnowledge(Profession.Carpenter, QualificationLevel.Master),
-                new ValueEstimation()
+				new Craft(Profession.Carpenter, QualificationLevel.Master),
+                new Appraisal()
             ]);
             return result;
         }

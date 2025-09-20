@@ -93,43 +93,43 @@ public class Bard(byte level = 1) : Class(level), IClass, IJustFight
 
     public override QualificationList Qualifications =>
     [
-        new WeaponUsage(),
-        new WeaponUsage(),
-        new WeaponUsage(),
-        new WeaponUsage(),
+        new WeaponUse(),
+        new WeaponUse(),
+        new WeaponUse(),
+        new WeaponUse(),
         new PsiPyarron(),
-        new LanguageKnowledge(5),
-        new LanguageKnowledge(4),
-        new LanguageKnowledge(3),
-        new LanguageKnowledge(2),
-        new LanguageKnowledge(2),
+        new LanguageLore(5),
+        new LanguageLore(4),
+        new LanguageLore(3),
+        new LanguageLore(2),
+        new LanguageLore(2),
         new ReadingAndWriting(),
-        new LegendKnowledge(QualificationLevel.Master),
+        new LegendLore(QualificationLevel.Master),
         new Etiquette(),
         new Riding(),
         new SexualCulture(),
         new SingingAndMakingMusic(),
-        new SoundImitation(),
-        new CardSharper()
+        new Mimicry(),
+        new CardSharping()
    ];
 
     public override QualificationList FutureQualifications =>
     [
-        new ValueEstimation(level: 2),
+        new Appraisal(level: 2),
         new Juggling(level: 2),
-        new PubFighting(level: 2),
-        new FistFighting(level: 3),
+        new TavernBrawling(level: 2),
+        new Fistfight(level: 3),
         new Knotting(level: 3),
         new Dancing(level: 3),
-        new PubFighting(QualificationLevel.Master, 4),
+        new TavernBrawling(QualificationLevel.Master, 4),
         new WeaponThrowing(QualificationLevel.Master, 4),
-        new FreeFromBondage(level: 4),
+        new EscapeBonds(level: 4),
         new Etiquette(QualificationLevel.Master, 4),
-        new CardSharper(QualificationLevel.Master, 5),
+        new CardSharping(QualificationLevel.Master, 5),
         new PsiPyarron(QualificationLevel.Master, 5),
         new Backstab(level: 6),
         new SexualCulture(QualificationLevel.Master, 7),
-        new SoundImitation(QualificationLevel.Master, 8)
+        new Mimicry(QualificationLevel.Master, 8)
     ];
 
     public override List<PercentQualification> PercentQualifications =>
@@ -140,16 +140,16 @@ public class Bard(byte level = 1) : Class(level), IClass, IJustFight
         new LockPicking(25),
         new Sneaking(20),
         new Stealth(10),
-        new Tightrope(5),
+        new TightropeWalking(5),
         new PickPocketing(5),
-        new TrapDetect(10),
-        new SecretDoorSearching(5),
+        new TrapDetection(10),
+        new SecretDoorSearch(5),
     ];
 
     public override SpecialQualificationList SpecialQualifications =>
     [
         new BardDetectMagicalObjects(),
-        new BardMagic()
+        new BardicMagic()
     ];
 
     [DiceThrow(ThrowType._1K6)]

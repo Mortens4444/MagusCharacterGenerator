@@ -4,7 +4,7 @@ namespace M.A.G.U.S.Things.Other;
 
 public class SilkEll : Thing
 {
-	public override string Name => "Silk, ell";
+	public override string Name => "Silk, yard";
 
-	public Money Price => new(0, 8, 0);
+	public override Money Price => new(0, 8, 0);
 }

@@ -4,7 +4,7 @@ namespace M.A.G.U.S.Things.Other;
 
 public class BeltHolster : Thing
 {
-	public override string Name => "Belt holster";
+	public override string Name => "Belt pouch";
 
-	public Money Price => new(0, 0, 70);
+	public override Money Price => new(0, 0, 70);
 }

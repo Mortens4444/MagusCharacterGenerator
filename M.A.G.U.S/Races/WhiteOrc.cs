@@ -28,19 +28,19 @@ public class WhiteOrc : Race
 
     public override List<PercentQualification> PercentQualifications =>
     [
-        new TrapDetect(40)
+        new TrapDetection(40)
     ];
 
     public override QualificationList Qualifications =>
     [
-        new TrackReadingAndHiding()
+        new TrackingConcealment()
     ];
 
     public override SpecialQualificationList SpecialQualifications =>
     [
         new Infravision(100),
         new UndergroundMasters(1),
-        new BetterSniffing(12),
+        new KeenSmell(12),
         new BetterHearing(2.5),
         new DragonSkin()
     ];

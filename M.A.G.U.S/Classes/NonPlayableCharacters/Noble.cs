@@ -72,7 +72,7 @@ public class Noble(byte level = 1) : Class(level), IClass
 
     public override QualificationList Qualifications =>
     [
-        new WeaponUsage(),
+        new WeaponUse(),
         new ReadingAndWriting()
    ];
 

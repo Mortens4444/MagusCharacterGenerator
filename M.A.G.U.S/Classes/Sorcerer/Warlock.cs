@@ -87,14 +87,14 @@ public class Warlord(byte level = 1) : Class(level), IClass, ILikeMagic
 
     public override QualificationList Qualifications =>
     [
-        new WeaponUsage(),
-        new WeaponUsage(),
-        new WeaponUsage(),
+        new WeaponUse(),
+        new WeaponUse(),
+        new WeaponUse(),
         new WeaponThrowing(),
         new PsiPyarron(QualificationLevel.Master),
-        new LanguageKnowledge(3),
-        new LanguageKnowledge(3),
-        new LanguageKnowledge(2),
+        new LanguageLore(3),
+        new LanguageLore(3),
+        new LanguageLore(2),
         new ReadingAndWriting(),
         new PoisoningAndNeutralization(),
         new CamouflageOrDisguise(),
@@ -117,7 +117,7 @@ public class Warlord(byte level = 1) : Class(level), IClass, ILikeMagic
 
     public override SpecialQualificationList SpecialQualifications =>
     [
-        new WarlockMagic()
+        new Warlockry()
     ];
 
     [DiceThrow(ThrowType._1K6)]

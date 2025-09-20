@@ -14,7 +14,7 @@ public class DreinaPaladin(byte level = 1) : Paladin(level)
             var result = base.Qualifications;
             result.AddRange(
             [
-                new HistoryKnowledge(),
+                new HistoryLore(),
                 new Leadership(),
                 new Cartography(),
                 new Heraldry()

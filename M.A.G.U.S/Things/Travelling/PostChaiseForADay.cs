@@ -4,7 +4,7 @@ namespace M.A.G.U.S.Things.Travelling;
 
 public class PostChaiseForADay : Thing
 {
-	public override string Name => "Post chaise for a day";
+	public override string Name => "Stagecoach, daily";
 
-	public Money Price => new(0, 0, 60);
+	public override Money Price => new(0, 0, 60);
 }

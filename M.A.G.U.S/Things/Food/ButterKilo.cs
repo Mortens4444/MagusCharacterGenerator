@@ -6,5 +6,5 @@ public class ButterKilo : Thing
 {
 	public override string Name => "Butter, kilo";
 
-	public Money Price => new(0, 0, 2);
+	public override Money Price => new(0, 0, 2);
 }

@@ -4,7 +4,7 @@ namespace M.A.G.U.S.Things.Other;
 
 public class CastIronFootedBowl : Thing
 {
-	public override string Name => "Cast iron footed bowl";
+	public override string Name => "Iron pot";
 
-	public Money Price => new(0, 0, 10);
+	public override Money Price => new(0, 0, 10);
 }

@@ -23,6 +23,6 @@ public class Orc : Race
     [
         new Infravision(50),
         new UndergroundMasters(2),
-        new BetterSniffing(8)
+        new KeenSmell(8)
     ];
 }

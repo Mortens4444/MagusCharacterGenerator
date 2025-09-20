@@ -15,7 +15,7 @@ public class Fist : Weapon, IMeleeWeapon
 
     public double Weight => 0;
 
-    public Money Price => Money.Free;
+    public override Money Price => Money.Free;
 
     [DiceThrow(ThrowType._1K2)]
     public byte GetDamage() => (byte)DiceThrow._1K2();

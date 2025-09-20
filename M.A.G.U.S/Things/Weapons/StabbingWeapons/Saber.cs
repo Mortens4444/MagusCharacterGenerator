@@ -16,7 +16,7 @@ public class Saber : Weapon, IMeleeWeapon
 
     public double Weight => 1.5;
 
-    public Money Price => new(1, 6);
+    public override Money Price => new(1, 6);
 
     [DiceThrow(ThrowType._1K6)]
     [DiceThrowModifier(2)]

@@ -15,7 +15,7 @@ public class ShortSword : Weapon, IMeleeWeapon
 
     public double Weight => 1;
 
-    public Money Price => new(1);
+    public override Money Price => new(1);
 
     [DiceThrow(ThrowType._1K6)]
     [DiceThrowModifier(1)]

@@ -19,9 +19,9 @@ public class DartonPaladin(byte level = 1) : Paladin(level)
                 new Wrestling(),
                 new WeaponBreaking(),
                 new PoisoningAndNeutralization(),
-                new TrapSetup(),
-                new PubFighting(),
-                new CardSharper()
+                new TrapSetting(),
+                new TavernBrawling(),
+                new CardSharping()
             ]);
             return result;
         }
@@ -34,10 +34,10 @@ public class DartonPaladin(byte level = 1) : Paladin(level)
             var result = base.FutureQualifications;
             result.AddRange(
             [
-                new PubFighting(QualificationLevel.Master, 3),
-                new DressageTraining(level: 3),
-                new CardSharper(QualificationLevel.Master, 4),
-                new WeaponUsage(QualificationLevel.Master, 4),
+                new TavernBrawling(QualificationLevel.Master, 3),
+                new AnimalTraining(level: 3),
+                new CardSharping(QualificationLevel.Master, 4),
+                new WeaponUse(QualificationLevel.Master, 4),
                 new Backstab(level: 7)
             ]);
             return result;

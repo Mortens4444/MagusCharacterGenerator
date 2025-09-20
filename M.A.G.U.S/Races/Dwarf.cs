@@ -20,8 +20,8 @@ public class Dwarf : Race
 
     public override List<PercentQualification> PercentQualifications =>
     [
-        new TrapDetect(35),
-        new SecretDoorSearching(30)
+        new TrapDetection(35),
+        new SecretDoorSearch(30)
     ];
 
     public override SpecialQualificationList SpecialQualifications =>

@@ -89,13 +89,13 @@ public abstract class Priest(byte level) : Class(level), IClass, ILikeMagic
 
     public override QualificationList Qualifications =>
     [
-        new WeaponUsage(),
+        new WeaponUse(),
             new PsiPyarron(QualificationLevel.Master),
-            new LanguageKnowledge(5),
-            new LanguageKnowledge(5),
+            new LanguageLore(5),
+            new LanguageLore(5),
             new ReadingAndWriting(),
-            new ReligionKnowledge(QualificationLevel.Master),
-            new HistoryKnowledge(QualificationLevel.Master),
+            new ReligionLore(QualificationLevel.Master),
+            new HistoryLore(QualificationLevel.Master),
             new SingingAndMakingMusic()
    ];
 
@@ -106,7 +106,7 @@ public abstract class Priest(byte level) : Class(level), IClass, ILikeMagic
     public override SpecialQualificationList SpecialQualifications =>
     [
         new PriestKyrDisciplinesUsage(),
-            new PriestMagic()
+            new ClericalMagic()
     ];
 
     [DiceThrow(ThrowType._1K6)]

@@ -8,8 +8,8 @@
     <ScrollView>
         <VerticalStackLayout>
             <HorizontalStackLayout HorizontalOptions="Center">
-                <mc:MenuItemView ImageName="character_generation" LabelText="Character generator" PageType="{x:Type v:CharacterGeneratorPage}" />
-                <mc:MenuItemView ImageName="map" LabelText="Map" PageType="{x:Type v:WebBrowserPage}" />
+                <mc:MenuItemView ImageName="character_generation" LabelText="Character generation" PageType="{x:Type v:CharacterGeneratorPage}" />
+                <mc:MenuItemView ImageName="map" LabelText="Map" PageType="{x:Type v:MapPage}" />
                 <mc:MenuItemView ImageName="market" LabelText="Market" PageType="{x:Type v:MarketPage}" />
             </HorizontalStackLayout>
             <!--<HorizontalStackLayout HorizontalOptions="Center">

@@ -87,24 +87,24 @@ public class NastarPaladin(byte level) : Class(level), IClass, IHateRangedWeapon
 
     public override QualificationList Qualifications =>
     [
-        new WeaponUsage(),
-        new WeaponUsage(),
-        new WeaponUsage(),
-        new WeaponUsage(),
+        new WeaponUse(),
+        new WeaponUse(),
+        new WeaponUse(),
+        new WeaponUse(),
         new PsiPyarron(QualificationLevel.Master),
-        new LanguageKnowledge(3),
-        new LanguageKnowledge(3),
-        new LanguageKnowledge(3),
+        new LanguageLore(3),
+        new LanguageLore(3),
+        new LanguageLore(3),
         new Etiquette(),
         new HeavyArmorWearing(),
-        new WeaponKnowledge(),
+        new WeaponLore(),
         new Leadership(),
         new ReadingAndWriting(),
         new Heraldry(),
         new Riding(),
-        new WoundHealing(),
-        new HistoryKnowledge(),
-        new ReligionKnowledge()
+        new Healing(),
+        new HistoryLore(),
+        new ReligionLore()
         // new Erkölcs(QualificationLevel.Master)
         // new Helyismeret(60%)
         // new Kultúra(QualificationLevel.Master) Saját
@@ -113,17 +113,17 @@ public class NastarPaladin(byte level) : Class(level), IClass, IHateRangedWeapon
     public override QualificationList FutureQualifications =>
     [
 		// new HárítófegyverHasználat(level: 2)
-		new ProfessionKnowledge(Profession.Smith, level: 3),
-        new HistoryKnowledge(QualificationLevel.Master, 4),
-        new ProfessionKnowledge(Profession.Smith, QualificationLevel.Master, 6),
-        new WeaponUsage(QualificationLevel.Master, 8)
+		new Craft(Profession.Smith, level: 3),
+        new HistoryLore(QualificationLevel.Master, 4),
+        new Craft(Profession.Smith, QualificationLevel.Master, 6),
+        new WeaponUse(QualificationLevel.Master, 8)
     ];
 
     public override List<PercentQualification> PercentQualifications => [];
 
     public override SpecialQualificationList SpecialQualifications =>
     [
-        new PriestMagic()
+        new ClericalMagic()
     ];
 
     [DiceThrow(ThrowType._1K6)]

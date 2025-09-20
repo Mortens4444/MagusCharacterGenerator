@@ -21,15 +21,15 @@ public class Feenhar : Race
     public override SpecialQualificationList SpecialQualifications =>
     [
         new CanFly(),
-        new BetterSeeing(2.5),
+        new KeenSight(2.5),
         new CantLearnPsi(),
         new CanUseTelepathy(),
         new GoodArcher(15),
         new Nightvision(),
-        new CanCallAirElemental(),
+        new SummonAirElemental(),
         new PoisionResistanceEqualWithHealth(),
         new MagicResistanceGrowWithLevelUp(),
-        new CanCallBigBird(),
-        new CanCallBirds()
+        new SummonBigBirds(),
+        new SummonBirds()
     ];
 }

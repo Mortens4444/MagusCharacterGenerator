@@ -27,9 +27,9 @@ public class GorvikRanagolPriest(byte level = 1) : Priest(level)
             var result = base.FutureQualifications;
             result.AddRange(
             [
-                new MagicUsage(level: 3),
+                new Spellcasting(level: 3),
                 new Backstab(QualificationLevel.Master, 5),
-                new MagicUsage(QualificationLevel.Master, 6)
+                new Spellcasting(QualificationLevel.Master, 6)
             ]);
             return result;
         }

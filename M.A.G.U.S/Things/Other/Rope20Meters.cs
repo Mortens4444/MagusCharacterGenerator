@@ -6,5 +6,5 @@ public class Rope20Meters : Thing
 {
 	public override string Name => "Rope (20 meters)";
 
-	public Money Price => new(0, 0, 30);
+	public override Money Price => new(0, 0, 30);
 }

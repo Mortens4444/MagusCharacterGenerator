@@ -89,19 +89,19 @@ public class Headhunter(byte level = 1) : Class(level), IClass, IJustFight
 
     public override QualificationList Qualifications =>
     [
-        new WeaponUsage(),
-        new WeaponUsage(),
-        new WeaponUsage(),
-        new WeaponUsage(),
-        new WeaponUsage(),
-        new WeaponUsage(),
-        new WeaponUsage(),
-        new WeaponUsage(),
-        new WeaponUsage(),
+        new WeaponUse(),
+        new WeaponUse(),
+        new WeaponUse(),
+        new WeaponUse(),
+        new WeaponUse(),
+        new WeaponUse(),
+        new WeaponUse(),
+        new WeaponUse(),
+        new WeaponUse(),
         new WeaponThrowing(),
         new WeaponThrowing(),
         new WeaponThrowing(),
-        new FreeFromBondage(),
+        new EscapeBonds(),
         new PsiPyarron(),
         new Swimming(),
         new Running(),
@@ -111,15 +111,15 @@ public class Headhunter(byte level = 1) : Class(level), IClass, IJustFight
 
     public override QualificationList FutureQualifications =>
     [
-        new FreeFromBondage(level: 2),
-        new FreeFromBondage(QualificationLevel.Master, 2),
+        new EscapeBonds(level: 2),
+        new EscapeBonds(QualificationLevel.Master, 2),
         new BlindFighting(level: 3),
-        new TrackReadingAndHiding(level: 4),
+        new TrackingConcealment(level: 4),
         new CamouflageOrDisguise(QualificationLevel.Master, 4),
         new PsiPyarron(QualificationLevel.Master, 5),
         new BlindFighting(QualificationLevel.Master, 7),
-        new FreeFromBondage(QualificationLevel.Master, 8),
-        new TrackReadingAndHiding(QualificationLevel.Master, 9)
+        new EscapeBonds(QualificationLevel.Master, 8),
+        new TrackingConcealment(QualificationLevel.Master, 9)
     ];
 
     public override List<PercentQualification> PercentQualifications =>
@@ -129,7 +129,7 @@ public class Headhunter(byte level = 1) : Class(level), IClass, IJustFight
         new Jumping(15),
         new Sneaking(20),
         new Stealth(25),
-        new TrapDetect(10)
+        new TrapDetection(10)
     ];
 
     public override SpecialQualificationList SpecialQualifications =>

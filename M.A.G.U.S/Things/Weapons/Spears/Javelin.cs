@@ -15,9 +15,11 @@ public class Javelin : Weapon, IMeleeWeapon
 
     public double Weight => 1.5;
 
-    public Money Price => new(0, 5);
+    public override Money Price => new(0, 5);
 
     [DiceThrow(ThrowType._1K6)]
     [DiceThrowModifier(1)]
     public byte GetDamage() => (byte)(DiceThrow._1K6() + 1);
+
+    public override string Name => "Spear/javelin";
 }

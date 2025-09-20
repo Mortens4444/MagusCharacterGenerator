@@ -93,18 +93,18 @@ public class NastarPriest(byte level) : Class(level), IClass, ILikeMagic
 
     public override QualificationList Qualifications =>
     [
-        new WeaponUsage(),
+        new WeaponUse(),
         new PsiPyarron(QualificationLevel.Master),
-        new LanguageKnowledge(5),
-        new LanguageKnowledge(5),
-        new LanguageKnowledge(5),
+        new LanguageLore(5),
+        new LanguageLore(5),
+        new LanguageLore(5),
         new Etiquette(),
         new ReadingAndWriting(),
         new Herbalism(),
-        new ReligionKnowledge(QualificationLevel.Master),
-        new HistoryKnowledge(),
-        new LegendKnowledge(),
-        new ProfessionKnowledge(Profession.Jeweler),
+        new ReligionLore(QualificationLevel.Master),
+        new HistoryLore(),
+        new LegendLore(),
+        new Craft(Profession.Jeweler),
 
 		// TODO
 		//new Emberismeret()
@@ -116,15 +116,15 @@ public class NastarPriest(byte level) : Class(level), IClass, ILikeMagic
 
     public override QualificationList FutureQualifications =>
     [
-        new LanguageKnowledge(2, 3),
-        new LanguageKnowledge(2, 3),
-        new WoundHealing(level: 3),
+        new LanguageLore(2, 3),
+        new LanguageLore(2, 3),
+        new Healing(level: 3),
         new ReadingAndWriting(QualificationLevel.Master, 4),
-        new LanguageKnowledge(6, 4),
+        new LanguageLore(6, 4),
 		//new Emberismeret MF 5
-		new WoundHealing(QualificationLevel.Master, 5),
-        new LegendKnowledge(QualificationLevel.Master, 6),
-        new ProfessionKnowledge(Profession.Jeweler, QualificationLevel.Master, 8),
+		new Healing(QualificationLevel.Master, 5),
+        new LegendLore(QualificationLevel.Master, 6),
+        new Craft(Profession.Jeweler, QualificationLevel.Master, 8),
 		//new DrágakőMágia(QualificationLevel.Master, 12)
 	];
 
@@ -133,7 +133,7 @@ public class NastarPriest(byte level) : Class(level), IClass, ILikeMagic
     public override SpecialQualificationList SpecialQualifications =>
     [
         new PriestKyrDisciplinesUsage(),
-        new PriestMagic()
+        new ClericalMagic()
     ];
 
     [DiceThrow(ThrowType._1K6)]

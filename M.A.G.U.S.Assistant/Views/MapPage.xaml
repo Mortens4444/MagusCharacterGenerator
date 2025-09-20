@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<v:NotifierPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                xmlns:v="clr-namespace:M.A.G.U.S.Assistant.Views"
+                xmlns:vm="clr-namespace:M.A.G.U.S.Assistant.ViewModels"
+                xmlns:mc="clr-namespace:Mtf.Maui.Controls;assembly=Mtf.Maui.Controls"
+                x:Class="M.A.G.U.S.Assistant.Views.MapPage"
+                x:DataType="vm:WebBrowserViewModel"
+                Title="Map">
+
+    <v:NotifierPage.BindingContext>
+        <vm:WebBrowserViewModel />
+    </v:NotifierPage.BindingContext>
+
+    <v:NotifierPage.Resources>
+        <ResourceDictionary>
+            <Style x:Key="BoxBorder" TargetType="Border">
+                <Setter Property="StrokeShape" Value="{RoundRectangle CornerRadius=8}"/>
+                <Setter Property="Stroke" Value="{AppThemeBinding Light={StaticResource Gray300}, Dark={StaticResource Gray500}}"/>
+                <Setter Property="StrokeThickness" Value="1"/>
+                <Setter Property="Padding" Value="8"/>
+                <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource Gray900}}"/>
+            </Style>
+        </ResourceDictionary>
+    </v:NotifierPage.Resources>
+
+
+    <VerticalStackLayout Spacing="8" Padding="10">
+
+        <WebView x:Name="Browser" Source="{Binding CurrentUrl}" HeightRequest="800"/>
+
+    </VerticalStackLayout>
+
+
+</v:NotifierPage>

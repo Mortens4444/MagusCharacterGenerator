@@ -4,7 +4,7 @@ namespace M.A.G.U.S.Things.Trappings;
 
 public class HorseShoeAndShoeing : Thing
 {
-	public override string Name => "Horse shoe and shoeing";
+	public override string Name => "Horseshoe and shoeing";
 
-	public Money Price => new(0, 1, 0);
+	public override Money Price => new(0, 1, 0);
 }

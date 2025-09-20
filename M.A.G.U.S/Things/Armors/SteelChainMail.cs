@@ -6,7 +6,7 @@ public class SteelChainMail : Thing
 {
 	public override string Name => "Steel chain mail";
 
-	public Money Price => new(12, 0, 0);
+	public override Money Price => new(12, 0, 0);
 
 	public int MovementInhibitingFactor => -1;
 

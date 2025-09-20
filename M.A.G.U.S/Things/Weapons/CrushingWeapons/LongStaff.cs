@@ -15,10 +15,10 @@ public class LongStaff : Weapon, IMeleeWeapon
 
     public double Weight => 1.2;
 
-    public Money Price => new(0, 0, 50);
+    public override Money Price => new(0, 0, 50);
 
     [DiceThrow(ThrowType._1K5)]
     public byte GetDamage() => (byte)DiceThrow._1K5();
 
-    public override string Name => "Long staff";
+    public override string Name => "Quarterstaff";
 }

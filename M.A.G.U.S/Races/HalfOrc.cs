@@ -26,7 +26,7 @@ public class HalfOrc : Race
     [
         new Infravision(10),
         new UndergroundMasters(10),
-        new BetterSniffing(3)
+        new KeenSmell(3)
     ];
 
     public override string Name => "Half-orc";

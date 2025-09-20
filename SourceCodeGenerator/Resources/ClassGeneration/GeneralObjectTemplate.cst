@@ -7,6 +7,6 @@ public class {ClassName} : Thing
 {
 	public override string Name => "{Name}";
 
-	public Money Price => {Price};
+	public override Money Price => {Price};
 }
 

@@ -12,5 +12,5 @@ public class PsiKyrMethod : Qualification, IPsi
 
     public PsiKind PsiKind => PsiKind.Kyr;
 
-    public override string Name => "Psi Kyr method";
+    public override string Name => "Psi, Kyr method";
 }

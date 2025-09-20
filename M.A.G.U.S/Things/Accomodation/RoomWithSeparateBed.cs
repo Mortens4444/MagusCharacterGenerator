@@ -6,6 +6,6 @@ namespace M.A.G.U.S.Things.Accomodation
     {
 		public override string Name => "Room with separate bed";
 
-		public Money Price => new(0, 0, 5);
+		public override Money Price => new(0, 0, 5);
 	}
 }

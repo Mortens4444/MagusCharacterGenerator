@@ -84,17 +84,17 @@ public class Wizard(byte level = 1) : Class(level), IClass, ILikeMagic
 
     public override QualificationList Qualifications =>
     [
-        new WeaponUsage(),
+        new WeaponUse(),
         new PsiKyrMethod(),
-        new LanguageKnowledge(5),
-        new LanguageKnowledge(4),
+        new LanguageLore(5),
+        new LanguageLore(4),
         new ReadingAndWriting(),
         new Alchemy(),
-        new AntientLanguageKnowledge(),
-        new WoundHealing(),
+        new AncientTongueLore(),
+        new Healing(),
         new Physiology(),
-        new LegendKnowledge(),
-        new HistoryKnowledge(),
+        new LegendLore(),
+        new HistoryLore(),
         new RuneMagic()
    ];
 
@@ -103,15 +103,15 @@ public class Wizard(byte level = 1) : Class(level), IClass, ILikeMagic
         new Herbalism(level: 4),
         new Alchemy(QualificationLevel.Master, 6),
         new RuneMagic(QualificationLevel.Master, 6),
-        new LegendKnowledge(QualificationLevel.Master, 7),
-        new HistoryKnowledge(QualificationLevel.Master, 8)
+        new LegendLore(QualificationLevel.Master, 7),
+        new HistoryLore(QualificationLevel.Master, 8)
     ];
 
     public override List<PercentQualification> PercentQualifications => [];
 
     public override SpecialQualificationList SpecialQualifications =>
     [
-        new WizardMagic()
+        new Wizardry()
     ];
 
     [DiceThrow(ThrowType._1K6)]

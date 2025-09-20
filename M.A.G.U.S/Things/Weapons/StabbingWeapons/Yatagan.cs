@@ -16,9 +16,11 @@ public class Yatagan : Weapon, IMeleeWeapon
 
     public double Weight => 0.8;
 
-    public Money Price => new(1, 4);
+    public override Money Price => new(1, 4);
 
     [DiceThrow(ThrowType._1K6)]
     [DiceThrowModifier(2)]
     public byte GetDamage() => (byte)(DiceThrow._1K6() + 2);
+
+    public override string Name => "Sword, yataghan";
 }

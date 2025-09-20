@@ -6,7 +6,7 @@ public class LeatherArmor : Thing
 {
 	public override string Name => "Leather armor";
 
-	public Money Price => new(0, 4, 0);
+	public override Money Price => new(0, 4, 0);
 
 	public int MovementInhibitingFactor => 0;
 

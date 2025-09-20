@@ -6,5 +6,5 @@ public class PaperSheet : Thing
 {
 	public override string Name => "Paper, sheet";
 
-	public Money Price => new(0, 0, 20);
+	public override Money Price => new(0, 0, 20);
 }

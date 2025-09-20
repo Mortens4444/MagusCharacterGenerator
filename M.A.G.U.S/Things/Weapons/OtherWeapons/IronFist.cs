@@ -15,10 +15,10 @@ public class IronFist : Weapon, IMeleeWeapon
 
     public double Weight => 0.2;
 
-    public Money Price => new(0, 1);
+    public override Money Price => new(0, 1);
 
     [DiceThrow(ThrowType._1K3)]
     public byte GetDamage() => (byte)DiceThrow._1K3();
 
-    public override string Name => "IronFist";
+    public override string Name => "Iron fist (knuckle)";
 }

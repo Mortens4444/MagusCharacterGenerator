@@ -93,15 +93,15 @@ public class VelarPriest(byte level) : Class(level), IClass, ILikeMagic
 
     public override QualificationList Qualifications =>
     [
-        new WeaponUsage(),
-        new WeaponUsage(),
-        new LanguageKnowledge(4),
+        new WeaponUse(),
+        new WeaponUse(),
+        new LanguageLore(4),
         new Etiquette(),
         new PsiPyarron(QualificationLevel.Master),
         new ReadingAndWriting(),
-        new WoundHealing(),
-        new ReligionKnowledge(QualificationLevel.Master),
-        new HistoryKnowledge(),
+        new Healing(),
+        new ReligionLore(QualificationLevel.Master),
+        new HistoryLore(),
         new SingingAndMakingMusic(),
 
 		// TODO
@@ -116,7 +116,7 @@ public class VelarPriest(byte level) : Class(level), IClass, ILikeMagic
     [
 		//new Balzsamozás(level: 2)
 		//new Jog/Törvénykezés(level: 2)
-        new HistoryKnowledge(QualificationLevel.Master, 3),
+        new HistoryLore(QualificationLevel.Master, 3),
         new ReadingAndWriting(QualificationLevel.Master, 4),
 		//new Emberismeret(QualificationLevel.Master, 5)
 		//new Balzsamozás(QualificationLevel.Master, 6)
@@ -127,7 +127,7 @@ public class VelarPriest(byte level) : Class(level), IClass, ILikeMagic
     public override SpecialQualificationList SpecialQualifications =>
     [
         new PriestKyrDisciplinesUsage(),
-        new PriestMagic()
+        new ClericalMagic()
     ];
 
     [DiceThrow(ThrowType._1K6)]

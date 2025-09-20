@@ -15,7 +15,7 @@ public class Whip : Weapon, IMeleeWeapon
 
     public double Weight => 0.6;
 
-    public Money Price => new(0, 1);
+    public override Money Price => new(0, 1);
 
     [DiceThrow(ThrowType._1K2)]
     public byte GetDamage() => (byte)DiceThrow._1K2();

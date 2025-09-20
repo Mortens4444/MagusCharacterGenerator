@@ -86,15 +86,15 @@ public class Witch(byte level = 1) : Class(level), IClass, ILikeMagic
 
     public override QualificationList Qualifications =>
     [
-        new WeaponUsage(),
+        new WeaponUse(),
         new WeaponThrowing(),
         new PsiPyarron(QualificationLevel.Master),
-        new LanguageKnowledge(3),
-        new LanguageKnowledge(3),
+        new LanguageLore(3),
+        new LanguageLore(3),
         new Herbalism(),
         new ReadingAndWriting(),
         new PoisoningAndNeutralization(),
-        new WoundHealing(),
+        new Healing(),
         new SexualCulture()
    ];
 
@@ -108,7 +108,7 @@ public class Witch(byte level = 1) : Class(level), IClass, ILikeMagic
 
     public override SpecialQualificationList SpecialQualifications =>
     [
-        new WitchMagic()
+        new Witchcraft()
     ];
 
     [DiceThrow(ThrowType._1K6)]

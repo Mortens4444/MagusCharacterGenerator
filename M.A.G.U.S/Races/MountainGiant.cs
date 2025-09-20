@@ -17,8 +17,8 @@ public class MountainGiant : HalfGiant
 			var result = base.Qualifications;
 			result.AddRange(
 			[
-				new DressageTraining(),
-				new ProfessionKnowledge(Profession.Smith, QualificationLevel.Master)
+				new AnimalTraining(),
+				new Craft(Profession.Smith, QualificationLevel.Master)
 				//new Hegyjárás(QualificationLevel.Master)
 			]);
 			return result;

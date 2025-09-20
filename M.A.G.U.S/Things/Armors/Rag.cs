@@ -4,7 +4,7 @@ namespace M.A.G.U.S.Things.Armors;
 
 public class Rag : Thing
 {
-	public Money Price => new(0, 1, 0);
+	public override Money Price => new(0, 1, 0);
 
 	public int MovementInhibitingFactor => 0;
 

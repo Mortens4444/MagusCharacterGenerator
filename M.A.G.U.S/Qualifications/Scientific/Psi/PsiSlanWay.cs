@@ -12,5 +12,5 @@ public class PsiSlanWay : Qualification, IPsi
 
     public PsiKind PsiKind => PsiKind.Slan;
 
-    public override string Name => "Psi Slan-way";
+    public override string Name => "Psi, Slan way";
 }

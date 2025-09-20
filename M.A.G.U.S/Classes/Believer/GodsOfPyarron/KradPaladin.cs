@@ -14,13 +14,13 @@ public class KradPaladin(byte level = 1) : Paladin(level)
             var result = base.Qualifications;
             result.AddRange(
             [
-                new LanguageKnowledge(3),
-                new LanguageKnowledge(3),
-                new LanguageKnowledge(3),
-                new LanguageKnowledge(3),
+                new LanguageLore(3),
+                new LanguageLore(3),
+                new LanguageLore(3),
+                new LanguageLore(3),
                 new Herbalism(),
-                new LegendKnowledge(),
-                new HistoryKnowledge(),
+                new LegendLore(),
+                new HistoryLore(),
                 new Forestry(),
                 new Cartography(),
                 new Swimming()
@@ -36,8 +36,8 @@ public class KradPaladin(byte level = 1) : Paladin(level)
             var result = base.FutureQualifications;
             result.AddRange(
             [
-                new LegendKnowledge(QualificationLevel.Master, 5),
-                new HistoryKnowledge(QualificationLevel.Master, 5),
+                new LegendLore(QualificationLevel.Master, 5),
+                new HistoryLore(QualificationLevel.Master, 5),
             ]);
             return result;
         }

@@ -13,6 +13,6 @@ public class Wier : Race
     [
         new Infravision(30),
         new BetterHearing(2),
-        new BetterSniffing(2)
+        new KeenSmell(2)
     ];
 }

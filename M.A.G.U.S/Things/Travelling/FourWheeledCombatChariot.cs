@@ -4,7 +4,7 @@ namespace M.A.G.U.S.Things.Travelling;
 
 public class FourWheeledCombatChariot : Thing
 {
-	public override string Name => "Four wheeled combat chariot";
+	public override string Name => "Four-wheeled war chariot";
 
-	public Money Price => new(100, 0, 0);
+	public override Money Price => new(100, 0, 0);
 }

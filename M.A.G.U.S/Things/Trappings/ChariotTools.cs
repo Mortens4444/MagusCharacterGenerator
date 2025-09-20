@@ -6,5 +6,5 @@ public class ChariotTools : Thing
 {
 	public override string Name => "Chariot tools";
 
-	public Money Price => new(0, 6, 0);
+	public override Money Price => new(0, 6, 0);
 }

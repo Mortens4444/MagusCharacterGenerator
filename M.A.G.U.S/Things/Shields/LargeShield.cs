@@ -16,7 +16,7 @@ public class LargeShield : Shield
 
 	public double Weight => 6;
 
-	public Money Price => new(6);
+	public override Money Price => new(6);
 
 	[DiceThrow(ThrowType._1K6)]
 	public byte GetDamage() => (byte)DiceThrow._1K6();

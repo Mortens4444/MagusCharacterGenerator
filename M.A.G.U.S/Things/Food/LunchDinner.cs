@@ -6,5 +6,5 @@ public class LunchDinner : Thing
 {
 	public override string Name => "Lunch, dinner";
 
-	public Money Price => new(0, 0, 5);
+	public override Money Price => new(0, 0, 5);
 }

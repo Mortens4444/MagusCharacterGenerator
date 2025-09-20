@@ -1,4 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.Messaging.Messages;
+using Mtf.LanguageService;
 using Mtf.Maui.Controls.Extensions;
 
 namespace M.A.G.U.S.Assistant.Messages;
@@ -14,10 +15,10 @@ public class ShowErrorMessage : ValueChangedMessage<string>
     { }
 
     public ShowErrorMessage(string title, Exception exception)
-        : base(exception.GetDetails(title))
+        : base(exception.GetDetails(Lng.Elem(title)))
     { }
 
     public ShowErrorMessage(string message)
-        : base(message)
+        : base(Lng.Elem(message))
     { }
 }

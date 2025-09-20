@@ -15,13 +15,13 @@ public class HalfElf : Race, IUseRangedWeapons
     public override QualificationList Qualifications =>
     [
         new Riding(QualificationLevel.Master),
-        new DressageTraining(QualificationLevel.Master)
+        new AnimalTraining(QualificationLevel.Master)
     ];
 
     public override SpecialQualificationList SpecialQualifications =>
     [
         new BetterHearing(1.5),
-        new BetterSeeing(2),
+        new KeenSight(2),
         new GoodRunner(),
         new Infravision(10),
         new ResistanceToNecromantia(-6),

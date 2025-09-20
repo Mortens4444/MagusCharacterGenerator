@@ -3,7 +3,6 @@ using M.A.G.U.S.Classes.Slan;
 using M.A.G.U.S.Classes.Sorcerer;
 using M.A.G.U.S.GameSystem;
 using M.A.G.U.S.Races;
-using System;
 
 namespace MagusCharacterGenerator
 {

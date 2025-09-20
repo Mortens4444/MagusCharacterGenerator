@@ -4,7 +4,7 @@ namespace M.A.G.U.S.Things.Travelling;
 
 public class TravelingCartWithTwoWheels : Thing
 {
-	public override string Name => "Traveling cart with two wheels";
+	public override string Name => "Traveling cart, two-wheeled";
 
-	public Money Price => new(5, 0, 0);
+	public override Money Price => new(5, 0, 0);
 }

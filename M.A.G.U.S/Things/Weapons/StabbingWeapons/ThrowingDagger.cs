@@ -16,7 +16,7 @@ public class ThrowingDagger : Weapon, IMeleeWeapon
 
     public double Weight => 0.5;
 
-    public Money Price => new(0, 1, 50);
+    public override Money Price => new(0, 1, 50);
 
     [DiceThrow(ThrowType._1K6)]
     public byte GetDamage() => (byte)DiceThrow._1K6();
