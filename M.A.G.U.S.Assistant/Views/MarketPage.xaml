@@ -27,31 +27,37 @@
         </ResourceDictionary>
     </v:NotifierPage.Resources>
 
-    <VerticalStackLayout Spacing="8" Padding="10">
-
-        <Grid ColumnDefinitions="*" RowDefinitions="Auto, Auto" ColumnSpacing="6">
+    <Grid Padding="10" RowSpacing="8" RowDefinitions="Auto,*">
+        <Grid Grid.Row="0" ColumnDefinitions="*" ColumnSpacing="6">
             <mc:EntryWithLabel Label="Search"
-                       Text="{Binding SearchText}"
-                       Grid.Column="0"
-                       Grid.Row="0" />
-
-            <CollectionView ItemsSource="{Binding FilteredItems}"
-                            SelectionMode="Single"
-                            SelectionChangedCommand="{Binding ItemSelectedCommand}"
-                            Grid.Row="1">
-                <CollectionView.ItemTemplate>
-                    <DataTemplate x:DataType="m:MarketItem">
-                        <Border Style="{StaticResource BoxBorder}" Margin="0,4">
-                            <Grid ColumnDefinitions="*, Auto" ColumnSpacing="8" VerticalOptions="Center">
-                                <!--<mc:MenuItemView ImageName="{Binding ImageName}" LabelText="{Binding Name}" PageType="{x:Null}" Grid.Column="0" VerticalOptions="Center" />-->
-                                <Label Text="{Binding Name, Converter={StaticResource TranslationConverter}}" Grid.Column="0" VerticalOptions="Center" LineBreakMode="TailTruncation"/>
-                                <Label Text="{Binding PriceString}" Grid.Column="1" VerticalOptions="Center" HorizontalOptions="End" FontAttributes="Bold"/>
-                            </Grid>
-                        </Border>
-                    </DataTemplate>
-                </CollectionView.ItemTemplate>
-            </CollectionView>
+                               Text="{Binding SearchText}"
+                               Grid.Column="0" />
         </Grid>
 
-    </VerticalStackLayout>
+        <CollectionView Grid.Row="1"
+                        ItemsSource="{Binding FilteredItems}"
+                        SelectionMode="Single"
+                        SelectionChangedCommand="{Binding ItemSelectedCommand}"
+                        VerticalOptions="FillAndExpand"
+                        HorizontalOptions="FillAndExpand"
+                        ItemsLayout="VerticalList">
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="m:MarketItem">
+                    <Border Style="{StaticResource BoxBorder}" Margin="0,4">
+                        <Grid ColumnDefinitions="*, Auto" ColumnSpacing="8" VerticalOptions="Center">
+                            <Label Text="{Binding Name, Converter={StaticResource TranslationConverter}}"
+                                   Grid.Column="0"
+                                   VerticalOptions="Center"
+                                   LineBreakMode="TailTruncation"/>
+                            <Label Text="{Binding PriceString}"
+                                   Grid.Column="1"
+                                   VerticalOptions="Center"
+                                   HorizontalOptions="End"
+                                   FontAttributes="Bold"/>
+                        </Grid>
+                    </Border>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </Grid>
 </v:NotifierPage>

@@ -9,6 +9,16 @@ namespace M.A.G.U.S.Assistant.Extensions
         {
             var parts = new List<string>();
 
+            if (money == null)
+            {
+                return Lng.Elem("Free");
+            }
+
+            if (money.Mithrill != 0)
+            {
+                parts.Add($"{Lng.Elem(nameof(money.Mithrill))}: {money.Mithrill}");
+            }
+
             if (money.Gold != 0)
             {
                 parts.Add($"{Lng.Elem(nameof(money.Gold))}: {money.Gold}");

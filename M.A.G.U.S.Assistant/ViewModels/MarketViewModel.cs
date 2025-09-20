@@ -29,12 +29,11 @@ public class MarketViewModel : INotifyPropertyChanged
         }
     }
 
-    public string MinPriceText { get; set; } = String.Empty;
-    public string MaxPriceText { get; set; } = String.Empty;
-
     public ICommand ApplyFilterCommand { get; }
     public ICommand ClearFilterCommand { get; }
     public ICommand ItemSelectedCommand { get; }
+
+    public event PropertyChangedEventHandler? PropertyChanged;
 
     public MarketViewModel()
     {
@@ -46,50 +45,50 @@ public class MarketViewModel : INotifyPropertyChanged
         ApplyFilter();
     }
 
-    void Seed()
+    private void Seed()
     {
         var things = "M.A.G.U.S.Things".CreateInstancesFromNamespace<Thing>();
-        var marketItems = things.Select(t => new MarketItem(t));
+        var marketItems = things.Select(t => new MarketItem(t))
+            .OrderBy(t => t.Name);
 
+        Items.Clear();
         foreach (var marketItem in marketItems)
         {
             Items.Add(marketItem);
         }
     }
 
-    void ApplyFilter()
+    private void ApplyFilter()
     {
         var query = Items.AsEnumerable();
 
         var st = SearchText?.Trim();
         if (!String.IsNullOrWhiteSpace(st))
         {
-            query = query.Where(i => i.Name?.IndexOf(st, StringComparison.CurrentCultureIgnoreCase) >= 0);
+            query = query.Where(i => i.Name?.IndexOf(st, StringComparison.CurrentCultureIgnoreCase) >= 0)
+                .OrderBy(i => i.Name);
         }
 
         FilteredItems.Clear();
-        foreach (var it in query) FilteredItems.Add(it);
+        foreach (var it in query)
+        {
+            FilteredItems.Add(it);
+        }
     }
 
-    void ClearFilter()
+    private void ClearFilter()
     {
         SearchText = String.Empty;
-        MinPriceText = String.Empty;
-        MaxPriceText = String.Empty;
         ApplyFilter();
-        OnPropertyChanged(nameof(MinPriceText));
-        OnPropertyChanged(nameof(MaxPriceText));
     }
 
-    void OnItemSelected(MarketItem? item)
+    private void OnItemSelected(MarketItem? item)
     {
         if (item == null)
         {
             return;
         }
-        // itt navigálhatsz, vagy más UI műveletet hajthatsz végre
     }
 
-    public event PropertyChangedEventHandler? PropertyChanged;
-    void OnPropertyChanged(string name) => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
+    private void OnPropertyChanged(string name) => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
 }

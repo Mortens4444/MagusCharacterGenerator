@@ -10,7 +10,6 @@
   <ItemGroup>
     <Folder Include="GameSystem\MagicalObjects\" />
     <Folder Include="GameSystem\PoisonsAndIllnesses\" />
-    <Folder Include="GameSystem\Weapons\" />
   </ItemGroup>
 
   <ItemGroup>
