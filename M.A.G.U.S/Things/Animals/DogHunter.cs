@@ -4,7 +4,7 @@ namespace M.A.G.U.S.Things.Animals;
 
 public class DogHunter : Thing
 {
-	public override string Name => "Dog, hunter";
+	public override string Name => "Dog, hunting";
 
 	public override Money Price => new(0, 2, 0);
 }

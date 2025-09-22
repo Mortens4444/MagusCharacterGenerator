@@ -2,9 +2,9 @@ using M.A.G.U.S.GameSystem.Valuables;
 
 namespace M.A.G.U.S.Things.Armors;
 
-public class BronzeLaminarArmour : Thing
+public class BronzeLaminarArmor : Thing
 {
-	public override string Name => "Bronze laminar armour";
+	public override string Name => "Bronze lamellar armor";
 
 	public override Money Price => new(30, 0, 0);
 

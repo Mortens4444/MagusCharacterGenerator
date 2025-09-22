@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<v:NotifierPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                xmlns:v="clr-namespace:M.A.G.U.S.Assistant.Views"
+                xmlns:m="clr-namespace:M.A.G.U.S.Assistant.Models"
+                xmlns:vm="clr-namespace:M.A.G.U.S.Assistant.ViewModels"
+                xmlns:gs="clr-namespace:M.A.G.U.S.GameSystem.Languages;assembly=M.A.G.U.S."
+                xmlns:mc="clr-namespace:Mtf.Maui.Controls;assembly=Mtf.Maui.Controls"
+                x:Class="M.A.G.U.S.Assistant.Views.LanguagesPage"
+                x:DataType="vm:LanguagesViewModel"
+                Title="Languages">
+
+    <v:NotifierPage.BindingContext>
+        <vm:LanguagesViewModel />
+    </v:NotifierPage.BindingContext>
+
+    <Grid Padding="10" RowDefinitions="Auto,Auto,*" RowSpacing="8">
+        <!-- Picker: Living / Ancient -->
+        <HorizontalStackLayout Grid.Row="0" Spacing="8" VerticalOptions="Center">
+            <Label Text="Type" VerticalOptions="Center" />
+            <Picker Title="Select type"
+                    ItemsSource="{Binding Types}"
+                    SelectedItem="{Binding SelectedType}" />
+        </HorizontalStackLayout>
+
+        <!-- Search -->
+        <mc:EntryWithLabel Grid.Row="1"
+                           Label="Search"
+                           Text="{Binding SearchText}" />
+
+        <!-- List -->
+        <CollectionView Grid.Row="2"
+                        ItemsSource="{Binding FilteredLanguages}"
+                        SelectionMode="Single"
+                        SelectedItem="{Binding SelectedLanguage, Mode=TwoWay}"
+                        VerticalOptions="FillAndExpand"
+                        ItemsLayout="VerticalList">
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="m:LanguageItem">
+                    <Border Stroke="Gray" StrokeThickness="1" Padding="8" Margin="0,4">
+                        <Grid ColumnDefinitions="Auto,*,Auto" ColumnSpacing="8" VerticalOptions="Center">
+                            <Label Text="{Binding EnumKey}" FontAttributes="Bold" Grid.Column="0" VerticalOptions="Center" />
+                            <StackLayout Grid.Column="1" Spacing="2">
+                                <Label Text="{Binding Name}" FontAttributes="Bold" />
+                                <Label Text="{Binding Description}" FontSize="12" LineBreakMode="WordWrap" />
+                            </StackLayout>
+                            <Button Text="Select" Grid.Column="2" Command="{Binding BindingContext.SelectCommand, Source={x:Reference Name=PageRoot}}" CommandParameter="{Binding}" />
+                        </Grid>
+                    </Border>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </Grid>
+</v:NotifierPage>

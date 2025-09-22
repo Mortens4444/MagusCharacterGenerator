@@ -4,7 +4,7 @@ namespace M.A.G.U.S.Things.Armors;
 
 public class AbbitSteelBreastPlate : Thing
 {
-	public override string Name => "Abbit steel breast plate";
+	public override string Name => "Abbit-steel breastplate";
 
 	public override Money Price => new(200, 0, 0);
 

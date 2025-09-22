@@ -2,9 +2,9 @@ using M.A.G.U.S.GameSystem.Valuables;
 
 namespace M.A.G.U.S.Things.Armors;
 
-public class MitrillChainMail : Thing
+public class MithrilChainmail : Thing
 {
-	public override string Name => "Mitrill chain mail";
+	public override string Name => "Mithril chainmail";
 
 	public override Money Price => new(1200, 0, 0);
 

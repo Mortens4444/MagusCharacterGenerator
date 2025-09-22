@@ -4,7 +4,7 @@ namespace M.A.G.U.S.Things.Armors;
 
 public class HardenedLeatherArmor : Thing
 {
-	public override string Name => "Hardened leather armor";
+	public override string Name => "Hardened leather";
 
 	public override Money Price => new(0, 5, 0);
 

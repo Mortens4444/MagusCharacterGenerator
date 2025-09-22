@@ -2,9 +2,9 @@ using M.A.G.U.S.GameSystem.Valuables;
 
 namespace M.A.G.U.S.Things.Armors;
 
-public class MitrillScaleArmor : Thing
+public class MithrilScaleArmor : Thing
 {
-	public override string Name => "Mitrill scale armor";
+	public override string Name => "Mithril scale armor";
 
 	public override Money Price => new(2000, 0, 0);
 

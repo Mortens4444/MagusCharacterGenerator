@@ -14,9 +14,9 @@ namespace M.A.G.U.S.Assistant.Extensions
                 return Lng.Elem("Free");
             }
 
-            if (money.Mithrill != 0)
+            if (money.Mithril != 0)
             {
-                parts.Add($"{Lng.Elem(nameof(money.Mithrill))}: {money.Mithrill}");
+                parts.Add($"{Lng.Elem(nameof(money.Mithril))}: {money.Mithril}");
             }
 
             if (money.Gold != 0)

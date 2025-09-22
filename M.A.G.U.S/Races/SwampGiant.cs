@@ -42,5 +42,5 @@ public class SwampGiant : HalfGiant
         }
     }
 
-    public override string Name => "Half-giant (Swamp giant)";
+    public override string Name => "Half-giant (swamp giant)";
 }

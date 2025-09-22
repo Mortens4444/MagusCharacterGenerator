@@ -3,7 +3,7 @@ using M.A.G.U.S.Qualifications.Specialities;
 
 namespace M.A.G.U.S.Races;
 
-public class GentleOrc : Race
+public class CourtOrc : Race
 {
     public override short Strength => 2;
 
@@ -24,5 +24,5 @@ public class GentleOrc : Race
         new KeenSmell(5)
     ];
 
-    public override string Name => "Gentle orc";
+    public override string Name => "Court orc";
 }

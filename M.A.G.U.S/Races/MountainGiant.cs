@@ -39,5 +39,5 @@ public class MountainGiant : HalfGiant
 		}
 	}
 
-    public override string Name => "Half-giant (Mountain giant)";
+    public override string Name => "Half-giant (mountain giant)";
 }

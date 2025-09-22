@@ -4,11 +4,11 @@ public class Money(decimal gold, decimal silver = 0, decimal copper = 0) : IComp
 {
     private const decimal CopperPerSilver = 100;
     private const decimal CopperPerGold = 1000;
-    private const decimal CopperPerMithrill = 100000;
+    private const decimal CopperPerMithril = 100000;
 
     public static readonly Money Free = new(0);
 
-    public decimal Mithrill { get; set; }
+    public decimal Mithril { get; set; }
     
     public decimal Gold { get; set; } = gold;
     
@@ -16,7 +16,7 @@ public class Money(decimal gold, decimal silver = 0, decimal copper = 0) : IComp
     
     public decimal Copper { get; set; } = copper;
 
-    public decimal Summa => Mithrill * CopperPerMithrill + Gold * CopperPerGold + Silver * CopperPerSilver + Copper;
+    public decimal Summa => Mithril * CopperPerMithril + Gold * CopperPerGold + Silver * CopperPerSilver + Copper;
 
     public int CompareTo(Money other)
     {
@@ -48,5 +48,5 @@ public class Money(decimal gold, decimal silver = 0, decimal copper = 0) : IComp
     
     public static bool operator >=(Money a, Money b) => ReferenceEquals(a, b) || (a is not null && b is not null && a.Summa >= b.Summa);
 
-    public override string ToString() => $"{Mithrill}m {Gold}g {Silver}s {Copper}c";
+    public override string ToString() => $"{Mithril}m {Gold}g {Silver}s {Copper}c";
 }

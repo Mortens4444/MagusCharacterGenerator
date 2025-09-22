@@ -3,43 +3,41 @@
                 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
                 xmlns:v="clr-namespace:M.A.G.U.S.Assistant.Views"
                 xmlns:vm="clr-namespace:M.A.G.U.S.Assistant.ViewModels"
-                xmlns:m="clr-namespace:M.A.G.U.S.GameSystem.Runes;assembly=M.A.G.U.S."
+                xmlns:m="clr-namespace:M.A.G.U.S.Qualifications;assembly=M.A.G.U.S."
                 xmlns:mc="clr-namespace:Mtf.Maui.Controls;assembly=Mtf.Maui.Controls"
-                x:Class="M.A.G.U.S.Assistant.Views.RunesPage"
-                x:DataType="vm:RunesViewModel"
-                Title="Runes">
+                x:Class="M.A.G.U.S.Assistant.Views.QualificationsPage"
+                x:DataType="vm:QualificationsViewModel"
+                Title="Qualifications">
 
     <v:NotifierPage.BindingContext>
-        <vm:RunesViewModel />
+        <vm:QualificationsViewModel />
     </v:NotifierPage.BindingContext>
 
     <Grid Padding="10" RowSpacing="8" RowDefinitions="Auto,*">
+        <!-- Keresőmező -->
         <Grid Grid.Row="0" ColumnDefinitions="*" ColumnSpacing="6">
             <mc:EntryWithLabel Label="Search"
                                Text="{Binding SearchText}"
                                Grid.Column="0" />
         </Grid>
 
+        <!-- Lista -->
         <CollectionView Grid.Row="1"
-                        ItemsSource="{Binding FilteredRunes}"
+                        ItemsSource="{Binding FilteredQualifications}"
                         SelectionMode="None"
                         VerticalOptions="FillAndExpand"
                         HorizontalOptions="FillAndExpand"
                         ItemsLayout="VerticalList">
             <CollectionView.ItemTemplate>
-                <DataTemplate x:DataType="m:Rune">
+                <DataTemplate x:DataType="m:Qualification">
                     <Border Stroke="Gray" StrokeThickness="1" Padding="8" Margin="0,4">
-                        <Grid ColumnDefinitions="40,*,Auto" ColumnSpacing="8" VerticalOptions="Center">
-                            <Label Text="{Binding Sign}"
-                                   FontSize="24"
-                                   VerticalOptions="Center"
-                                   Grid.Column="0"/>
-                            <StackLayout Grid.Column="1" Spacing="2">
+                        <Grid ColumnDefinitions="*,Auto" ColumnSpacing="8" VerticalOptions="Center">
+                            <StackLayout Grid.Column="0" Spacing="2">
                                 <Label Text="{Binding Name}" FontAttributes="Bold"/>
-                                <Label Text="{Binding Meaning}" FontSize="12" LineBreakMode="WordWrap"/>
+                                <Label Text="{Binding Description}" FontSize="12" LineBreakMode="WordWrap"/>
                             </StackLayout>
-                            <Label Text="{Binding Equivalent}" 
-                                   Grid.Column="2"
+                            <Label Text="{Binding QualificationLevel}" 
+                                   Grid.Column="1"
                                    VerticalOptions="Center"
                                    FontAttributes="Bold"/>
                         </Grid>

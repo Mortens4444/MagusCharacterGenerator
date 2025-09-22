@@ -4,7 +4,7 @@ namespace M.A.G.U.S.Things.Armors;
 
 public class AbbitSteelScaleArmor : Thing
 {
-	public override string Name => "Abbit steel scale armor";
+	public override string Name => "Abbit-steel scale armor";
 
 	public override Money Price => new(50, 0, 0);
 

@@ -4,7 +4,7 @@ namespace M.A.G.U.S.Things.Food;
 
 public class OldWineFromPredoc2Clusters : Thing
 {
-	public override string Name => "Old wine from Predoc 2 clusters";
+	public override string Name => "Predoci vintage 2 cluster";
 
 	public override Money Price => new(0, 0, 50);
 }

@@ -2,9 +2,9 @@ using M.A.G.U.S.GameSystem.Valuables;
 
 namespace M.A.G.U.S.Things.Armors;
 
-public class MitrillBreastPlate : Thing
+public class MithrilBreastplate : Thing
 {
-	public override string Name => "Mitrill breast plate";
+	public override string Name => "Mithril breastplate";
 
 	public override Money Price => new(8000, 0, 0);
 

@@ -1,16 +1,16 @@
 ﻿using M.A.G.U.S.Assistant.Extensions;
 using M.A.G.U.S.Assistant.Models;
-using M.A.G.U.S.GameSystem.Runes;
+using M.A.G.U.S.Qualifications;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Windows.Input;
 
 namespace M.A.G.U.S.Assistant.ViewModels;
 
-public class RunesViewModel : INotifyPropertyChanged
+public class QualificationsViewModel : INotifyPropertyChanged
 {
-    public ObservableCollection<Rune> Runes { get; } = [];
-    public ObservableCollection<Rune> FilteredRunes { get; } = [];
+    public ObservableCollection<Qualification> Qualifications { get; } = [];
+    public ObservableCollection<Qualification> FilteredQualifications { get; } = [];
 
     string _searchText = String.Empty;
     public string SearchText
@@ -34,7 +34,7 @@ public class RunesViewModel : INotifyPropertyChanged
 
     public event PropertyChangedEventHandler? PropertyChanged;
 
-    public RunesViewModel()
+    public QualificationsViewModel()
     {
         ApplyFilterCommand = new RelayCommand(_ => ApplyFilter());
         ClearFilterCommand = new RelayCommand(_ => ClearFilter());
@@ -45,33 +45,31 @@ public class RunesViewModel : INotifyPropertyChanged
 
     private void Seed()
     {
-        var runes = "M.A.G.U.S.GameSystem.Runes".CreateInstancesFromNamespace<Rune>()
-            .OrderBy(r => r.Name);
+        var qualifications = "M.A.G.U.S.Qualifications".CreateInstancesFromNamespace<Qualification>()
+            .OrderBy(q => q.Name);
 
-        Runes.Clear();
-        foreach (var rune in runes)
+        Qualifications.Clear();
+        foreach (var q in qualifications)
         {
-            Runes.Add(rune);
+            Qualifications.Add(q);
         }
     }
 
     private void ApplyFilter()
     {
-        var query = Runes.AsEnumerable();
+        var query = Qualifications.AsEnumerable();
 
         var st = SearchText?.Trim();
         if (!String.IsNullOrWhiteSpace(st))
         {
-            query = query.Where(r =>
-                (r.Name?.IndexOf(st, StringComparison.CurrentCultureIgnoreCase) >= 0) ||
-                (r.Meaning?.IndexOf(st, StringComparison.CurrentCultureIgnoreCase) >= 0))
-                .OrderBy(r => r.Name);
+            query = query.Where(q => q.Name?.IndexOf(st, StringComparison.CurrentCultureIgnoreCase) >= 0)
+                .OrderBy(q => q.Name);
         }
 
-        FilteredRunes.Clear();
-        foreach (var rune in query)
+        FilteredQualifications.Clear();
+        foreach (var q in query)
         {
-            FilteredRunes.Add(rune);
+            FilteredQualifications.Add(q);
         }
     }
 

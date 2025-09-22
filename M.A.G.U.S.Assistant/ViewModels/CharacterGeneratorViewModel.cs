@@ -18,8 +18,8 @@ namespace M.A.G.U.S.Assistant.ViewModels
     {
         private Character character;
 
-        private Weapon primaryWeapon;
-        private Weapon secondaryWeapon;
+        private Weapon? primaryWeapon;
+        private Weapon? secondaryWeapon;
 
         public CharacterGeneratorViewModel()
         {
@@ -32,9 +32,10 @@ namespace M.A.G.U.S.Assistant.ViewModels
         }
 
         public ObservableCollection<string> AvailableCombatValueModifiers { get; } = [ "Base", "With primary weapon", "With secondary weapon" ];
-        //public ObservableCollection<string> AvailableCombatValueModifiers { get; } = [ Lng.Elem("Base"), Lng.Elem("With primary weapon"), Lng.Elem("With secondary weapon") ];
-        public ObservableCollection<IRace> AvailableRaces { get; } = [];
-        public ObservableCollection<IClass> AvailableClasses { get; } = [];
+
+        public ObservableCollection<IRace?> AvailableRaces { get; } = [];
+
+        public ObservableCollection<IClass?> AvailableClasses { get; } = [];
 
         byte selectedLevel;
         public byte SelectedLevel
@@ -56,8 +57,8 @@ namespace M.A.G.U.S.Assistant.ViewModels
             }
         }
 
-        IRace selectedRace;
-        public IRace SelectedRace
+        IRace? selectedRace;
+        public IRace? SelectedRace
         {
             get => selectedRace;
             set
@@ -66,8 +67,8 @@ namespace M.A.G.U.S.Assistant.ViewModels
             }
         }
 
-        IClass selectedClass;
-        public IClass SelectedClass
+        IClass? selectedClass;
+        public IClass? SelectedClass
         {
             get => selectedClass;
             set
@@ -85,6 +86,12 @@ namespace M.A.G.U.S.Assistant.ViewModels
         [RelayCommand]
         public void GenerateCharacter()
         {
+            if (selectedRace == null)
+            {
+                WeakReferenceMessenger.Default.Send(new ShowErrorMessage("No race selected!"));
+                return;
+            }
+
             if (selectedClass == null)
             {
                 WeakReferenceMessenger.Default.Send(new ShowErrorMessage("No class selected!"));
@@ -103,7 +110,6 @@ namespace M.A.G.U.S.Assistant.ViewModels
 
         private void LoadAvailableTypes()
         {
-            // specify the namespace roots you want to scan
             var raceNamespacePrefix = "M.A.G.U.S.Races";
             var classNamespacePrefix = "M.A.G.U.S.Classes";
 
@@ -161,11 +167,17 @@ namespace M.A.G.U.S.Assistant.ViewModels
 
             var sortedRaces = AvailableRaces.OrderBy(r => r.Name).ToArray();
             AvailableRaces.Clear();
-            foreach (var r in sortedRaces) AvailableRaces.Add(r);
+            foreach (var r in sortedRaces)
+            {
+                AvailableRaces.Add(r);
+            }
 
             var sortedClasses = AvailableClasses.OrderBy(c => c.ClassName).ToArray();
             AvailableClasses.Clear();
-            foreach (var c in sortedClasses) AvailableClasses.Add(c);
+            foreach (var c in sortedClasses)
+            {
+                AvailableClasses.Add(c);
+            }
         }
 
         private static IClass? InstanceClass(Type classType, byte level)
@@ -190,7 +202,7 @@ namespace M.A.G.U.S.Assistant.ViewModels
             }
             catch
             {
-                return Array.Empty<Type>();
+                return [];
             }
         }
     }

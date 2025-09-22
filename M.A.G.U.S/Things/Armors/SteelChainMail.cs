@@ -4,7 +4,7 @@ namespace M.A.G.U.S.Things.Armors;
 
 public class SteelChainMail : Thing
 {
-	public override string Name => "Steel chain mail";
+	public override string Name => "Steel chainmail";
 
 	public override Money Price => new(12, 0, 0);
 

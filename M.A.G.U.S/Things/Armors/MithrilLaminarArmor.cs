@@ -2,9 +2,9 @@ using M.A.G.U.S.GameSystem.Valuables;
 
 namespace M.A.G.U.S.Things.Armors;
 
-public class MitrillLaminarArmor : Thing
+public class MithrilLaminarArmor : Thing
 {
-	public override string Name => "Mitrill laminar armor";
+	public override string Name => "Mithril plate armor";
 
 	public override Money Price => new(4000, 0, 0);
 

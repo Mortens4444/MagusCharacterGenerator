@@ -2,9 +2,9 @@ using M.A.G.U.S.GameSystem.Valuables;
 
 namespace M.A.G.U.S.Things.Armors;
 
-public class MitrillFullPlate : Thing
+public class MithrilFullPlate : Thing
 {
-	public override string Name => "Mitrill full plate";
+	public override string Name => "Mithril full plate";
 
 	public override Money Price => new(20000, 0, 0);
 

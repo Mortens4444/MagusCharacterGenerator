@@ -458,6 +458,8 @@ public class Character : IFightModifier, ILiving, IAbilities, INotifyPropertyCha
 
 	public QualificationList Qualifications { get; private set; } = [];
 
+	public SpecialQualificationList SpecialQualifications { get; private set; } = [];
+
     public List<PercentQualification> PercentQualifications { get; private set; } = [];
 
 	#endregion
@@ -541,6 +543,8 @@ public class Character : IFightModifier, ILiving, IAbilities, INotifyPropertyCha
 
 	private void GetQualifications()
 	{
+		SpecialQualifications.AddRange(Race.SpecialQualifications);
+
 		foreach (var caste in Castes)
 		{
 			Qualifications.AddRange(caste.Qualifications);
@@ -557,6 +561,7 @@ public class Character : IFightModifier, ILiving, IAbilities, INotifyPropertyCha
 
         NotifyPropertyChanged(nameof(Qualifications));
         NotifyPropertyChanged(nameof(PercentQualifications));
+        NotifyPropertyChanged(nameof(GameSystem.Qualifications.SpecialQualification));
     }
 
 	private void CalculateFightValues()

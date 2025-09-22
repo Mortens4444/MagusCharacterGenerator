@@ -4,7 +4,7 @@ namespace M.A.G.U.S.Things.Clothes;
 
 public class CapeSilk : Thing
 {
-	public override string Name => "Cape, silk";
+	public override string Name => "Cloak, silk";
 
 	public override Money Price => new(2, 0, 0);
 }

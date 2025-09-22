@@ -39,5 +39,5 @@ public class IceGiant : HalfGiant
         }
     }
 
-    public override string Name => "Half-giant (Ice giant)";
+    public override string Name => "Half-giant (frost giant)";
 }

@@ -5,6 +5,7 @@
                 xmlns:v="clr-namespace:M.A.G.U.S.Assistant.Views"
                 xmlns:vm="clr-namespace:M.A.G.U.S.Assistant.ViewModels"
                 xmlns:local="clr-namespace:M.A.G.U.S.Qualifications;assembly=M.A.G.U.S."
+                xmlns:q="clr-namespace:M.A.G.U.S.GameSystem.Qualifications;assembly=M.A.G.U.S."
                 xmlns:mc="clr-namespace:Mtf.Maui.Controls;assembly=Mtf.Maui.Controls"
                 x:Class="M.A.G.U.S.Assistant.Views.CharacterGeneratorPage"
                 x:DataType="vm:CharacterGeneratorViewModel"
@@ -90,7 +91,7 @@
                                                    IsEnabled="False"
                                                    Grid.Row="1" />
 
-                                <mc:EntryWithLabel Label="Speed"
+                                <mc:EntryWithLabel Label="Quickness"
                                                    Text="{Binding Character.Speed}"
                                                    IsEnabled="False"
                                                    Grid.Row="2" />
@@ -138,8 +139,10 @@
                 <VerticalStackLayout Grid.Column="1" Spacing="10">
                     <Border Style="{StaticResource BoxBorder}">
                         <VerticalStackLayout>
-                            <Label Text="Character name" Style="{StaticResource HeaderLabel}"/>
-                            <Label Text="{Binding Character.Name}" FontSize="18"/>
+                            <!--<Label Text="Character name" Style="{StaticResource HeaderLabel}"/>
+                            <Entry Text="{Binding Character.Name}" FontSize="18"/>-->
+
+                            <mc:EntryWithLabel Label="Character name" Text="{Binding Character.Name}" />
                             <BoxView HeightRequest="1" Color="{AppThemeBinding Light={StaticResource Gray200}, Dark={StaticResource Gray600}}" Margin="0,5"/>
                             <Grid ColumnDefinitions="Auto"
                                   RowDefinitions="Auto, Auto, Auto"
@@ -371,15 +374,13 @@
             <Border Style="{StaticResource BoxBorder}" Margin="0,10" Grid.ColumnSpan="3">
                 <VerticalStackLayout>
                     <Label Text="Percentage qualifications" Style="{StaticResource HeaderLabel}" />
-                    <Grid Padding="6"
-                          ColumnDefinitions="*, Auto"
-                          ColumnSpacing="10">
+                    <Grid Padding="6" ColumnDefinitions="*, Auto" ColumnSpacing="10">
 
                         <Label Text="Name"
                                VerticalOptions="Center"
                                TextColor="Gray"
                                FontAttributes="Bold"/>
-                        
+
                         <Label Text="%"
                                VerticalOptions="Center"
                                Grid.Column="1"
@@ -388,9 +389,7 @@
                                FontAttributes="Bold"/>
                     </Grid>
 
-                    <CollectionView ItemsSource="{Binding Character.PercentQualifications}"
-                                    SelectionMode="None"
-                                    HeightRequest="280">
+                    <CollectionView ItemsSource="{Binding Character.PercentQualifications}" SelectionMode="None" HeightRequest="280">
                         <CollectionView.ItemTemplate>
                             <DataTemplate x:DataType="local:PercentQualification">
                                 <Grid Padding="6"
@@ -403,6 +402,32 @@
                                            VerticalOptions="Center"
                                            Grid.Column="1"
                                            HorizontalTextAlignment="End" />
+                                </Grid>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                </VerticalStackLayout>
+            </Border>
+            
+            <!-- Speciális képzettségek -->
+            <Border Style="{StaticResource BoxBorder}" Margin="0,10" Grid.ColumnSpan="3">
+                <VerticalStackLayout>
+                    <Label Text="Special qualifications" Style="{StaticResource HeaderLabel}" />
+                    <Grid Padding="6" ColumnDefinitions="*" ColumnSpacing="10">
+
+                        <Label Text="Name"
+                               VerticalOptions="Center"
+                               TextColor="Gray"
+                               FontAttributes="Bold"/>
+                    </Grid>
+
+                    <CollectionView ItemsSource="{Binding Character.SpecialQualifications}" SelectionMode="None" HeightRequest="280">
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate x:DataType="q:ISpecialQualification">
+                                <Grid Padding="6" ColumnDefinitions="*" ColumnSpacing="10">
+                                    <Label Text="{Binding Name, Converter={StaticResource TranslationConverter}}"
+                                           VerticalOptions="Center"
+                                           HorizontalOptions="Start" />
                                 </Grid>
                             </DataTemplate>
                         </CollectionView.ItemTemplate>

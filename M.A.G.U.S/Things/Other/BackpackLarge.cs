@@ -2,9 +2,9 @@ using M.A.G.U.S.GameSystem.Valuables;
 
 namespace M.A.G.U.S.Things.Other;
 
-public class BackpackBig : Thing
+public class BackpackLarge : Thing
 {
-	public override string Name => "Backpack, big";
+	public override string Name => "Backpack, large";
 
 	public override Money Price => new(0, 0, 120);
 }

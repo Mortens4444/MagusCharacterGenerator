@@ -4,7 +4,7 @@ namespace M.A.G.U.S.Things.Food;
 
 public class BrandyGlass : Thing
 {
-	public override string Name => "Brandy, glass";
+	public override string Name => "Brandy, bottle";
 
 	public override Money Price => new(0, 0, 2);
 }

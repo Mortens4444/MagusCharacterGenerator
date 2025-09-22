@@ -4,7 +4,7 @@ namespace M.A.G.U.S.Things.Armors;
 
 public class AbbitSteelChainMail : Thing
 {
-	public override string Name => "Abbit steel chain mail";
+	public override string Name => "Abbit-steel chainmail";
 
 	public override Money Price => new(30, 0, 0);
 
