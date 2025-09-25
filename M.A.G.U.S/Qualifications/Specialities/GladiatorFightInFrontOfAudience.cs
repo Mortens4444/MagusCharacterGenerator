@@ -12,4 +12,6 @@ public class GladiatorFightInFrontOfAudience : SpecialQualification, IFightModif
     public short DefendingValue => 5;
 
     public short AimingValue => 0;
+
+    public override string Name => "Combat modifiers with audience";
 }

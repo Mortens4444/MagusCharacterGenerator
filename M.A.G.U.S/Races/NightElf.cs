@@ -18,13 +18,13 @@ public class NightElf : Race, IUseRangedWeapons
 
     public override short Dexterity => 1;
 
-    public override short WillPower => -1;
+    public override short Willpower => -1;
 
     public override short Astral => -1;
 
     public override SpecialQualificationList SpecialQualifications =>
     [
-        new BetterHearing(1.5),
+        new KeenHearing(1.5),
         new KeenSight(1.5),
         new Ultravision(10),
         new Invisibility(),
@@ -34,7 +34,7 @@ public class NightElf : Race, IUseRangedWeapons
     [
         new Sneaking(10),
         new Climbing(10),
-        new Stealth(10)
+        new Hiding(10)
     ];
 
     public override string Name => "Night-elf";

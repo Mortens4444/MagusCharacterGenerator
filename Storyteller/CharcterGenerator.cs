@@ -218,7 +218,7 @@ public partial class CharcterGenerator : Form
 		nudStamina.Value = character.Stamina;
 		nudHealth.Value = character.Health;
 		nudBeauty.Value = character.Beauty;
-		nudWillPower.Value = character.WillPower;
+		nudWillpower.Value = character.Willpower;
 		nudIntelligence.Value = character.Intelligence;
 		nudAstral.Value = character.Astral;
 		nudGold.Value = character.Gold;
@@ -352,7 +352,7 @@ public partial class CharcterGenerator : Form
 		SetDiceThrowLabel(caste, race, nameof(caste.Stamina), lblStaminaDiceThrow);
 		SetDiceThrowLabel(caste, race, nameof(caste.Health), lblHealthDiceThrow);
 		SetDiceThrowLabel(caste, race, nameof(caste.Beauty), lblBeautyDiceThrow);
-		SetDiceThrowLabel(caste, race, nameof(caste.WillPower), lblWillPowerDiceThrow);
+		SetDiceThrowLabel(caste, race, nameof(caste.Willpower), lblWillpowerDiceThrow);
 		SetDiceThrowLabel(caste, race, nameof(caste.Intelligence), lblIntelligenceDiceThrow);
 		SetDiceThrowLabel(caste, race, nameof(caste.Astral), lblAstralDiceThrow);
 		SetDiceThrowLabel(caste, race, nameof(caste.Gold), lblGoldDiceThrow);
@@ -446,9 +446,9 @@ public partial class CharcterGenerator : Form
 		character.Stamina = (short)nudStamina.Value;
 	}
 
-	private void NudWillPower_ValueChanged(object sender, EventArgs e)
+	private void NudWillpower_ValueChanged(object sender, EventArgs e)
 	{
-		character.WillPower = (short)nudWillPower.Value;
+		character.Willpower = (short)nudWillpower.Value;
 	}
 
 	private void NudStrength_ValueChanged(object sender, EventArgs e)

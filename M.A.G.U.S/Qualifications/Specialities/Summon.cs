@@ -2,7 +2,7 @@
 
 namespace M.A.G.U.S.Qualifications.Specialities;
 
-public class Summon : SpecialQualification
+public abstract class Summon : SpecialQualification
 {
     public static byte ServeDurationInHour => 1;
 }

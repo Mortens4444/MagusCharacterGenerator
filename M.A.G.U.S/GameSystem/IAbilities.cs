@@ -16,7 +16,7 @@ public interface IAbilities
 
     short Intelligence { get; }
 
-    short WillPower { get; }
+    short Willpower { get; }
 
     short Astral { get; }
 }

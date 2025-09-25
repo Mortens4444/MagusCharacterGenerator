@@ -1,6 +1,7 @@
 ﻿using M.A.G.U.S.GameSystem.Qualifications;
 using M.A.G.U.S.Qualifications;
 using M.A.G.U.S.Qualifications.Laical;
+using M.A.G.U.S.Qualifications.Scientific;
 using M.A.G.U.S.Qualifications.Specialities;
 
 namespace M.A.G.U.S.Races;
@@ -18,7 +19,8 @@ public class IceGiant : HalfGiant
             result.AddRange(
             [
                 new AnimalTraining(),
-                new WeatherDivination(QualificationLevel.Master)
+                new WeatherDivination(QualificationLevel.Master),
+                new ArticSurvival(QualificationLevel.Master)
             ]);
             return result;
         }
@@ -32,8 +34,7 @@ public class IceGiant : HalfGiant
             result.AddRange(
             [
                 new Infravision(40),
-                new BetterResistanceToCold(50),
-				//new Sarkvidékjárás(QualificationLevel.Master)
+                new BetterResistanceToCold(50)
 			]);
             return result;
         }

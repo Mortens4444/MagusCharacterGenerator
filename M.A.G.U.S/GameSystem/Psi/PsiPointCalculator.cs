@@ -1,12 +1,13 @@
 ﻿using M.A.G.U.S.GameSystem.Qualifications;
 using M.A.G.U.S.Qualifications;
+using M.A.G.U.S.Qualifications.Specialities;
 using M.A.G.U.S.Utils;
 
 namespace M.A.G.U.S.GameSystem.Psi;
 
 public static class PsiPointCalculator
 {
-    public static (IPsi Psi, ushort PsiPoints, byte PsiPointsModifier) Calculate(QualificationList qualifications, short intelligence, byte level)
+    public static (IPsi Psi, ushort PsiPoints, byte PsiPointsModifier) Calculate(QualificationList qualifications, short intelligence, byte level, KyrLore kyrLore)
     {
         ushort psiPoints = 0;
         byte psiPointsModifier = 0;
@@ -14,6 +15,11 @@ public static class PsiPointCalculator
         if (psi != null)
         {
             psiPoints += (ushort)MathHelper.GetAboveAverageValue(intelligence);
+            if (kyrLore != null)
+            {
+                psiPoints += level;
+            }
+
             if (psi.PsiKind == PsiKind.Kyr)
             {
                 psiPointsModifier = PsiUtils.KyrModifier;

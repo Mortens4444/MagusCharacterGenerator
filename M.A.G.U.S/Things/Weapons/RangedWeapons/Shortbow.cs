@@ -19,4 +19,7 @@ public class ShortBow : Weapon, IRangedWeapon
 
     [DiceThrow(ThrowType._1K6)]
     public byte GetDamage() => (byte)DiceThrow._1K6_RangedAttack();
+
+    public override string Name => "Short bow";
+
 }

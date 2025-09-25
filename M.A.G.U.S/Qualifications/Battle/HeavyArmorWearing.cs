@@ -6,4 +6,8 @@ public class HeavyArmorWearing(QualificationLevel qualificationLevel = Qualifica
     : Qualification(qualificationLevel, level)
 {
     public override string Name => "Heavy armor wearing";
+
+    public override byte QpToBaseQualification => 3;
+
+    public override byte QpToMasterQualification => 27;
 }

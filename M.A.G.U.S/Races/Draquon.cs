@@ -26,7 +26,7 @@ public class Draquon : Race
     [
         new Climbing((byte)((DiceThrow._1K6() + 4) * 10)),
         new Falling((byte)((DiceThrow._1K3() + 3) * 10)),
-        new Stealth((byte)((DiceThrow._1K5() + 2) * 10)),
+        new Hiding((byte)((DiceThrow._1K5() + 2) * 10)),
     ];
 
     public override QualificationList Qualifications =>
@@ -37,12 +37,12 @@ public class Draquon : Race
 
     public override SpecialQualificationList SpecialQualifications =>
         [
-            new CanFly(),
+            new Flight(),
         new KeenSight(1.5),
         new Ultravision(50),
         new CantLearnPsi(),
         new ExtraMagicResistanceOnLevelUp(5),
-        new CanUseTelepathy(),
+        new Telepathy(),
 		//new LockPicking(-30)
 		//new PickPocketing(-30)
 		new NotTolerateStrongLight(12, -20)

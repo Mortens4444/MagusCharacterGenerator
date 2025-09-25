@@ -2,10 +2,9 @@
 
 namespace M.A.G.U.S.Qualifications.Laical;
 
-public class Mimicry : Qualification
+public class Mimicry(QualificationLevel qualificationLevel = QualificationLevel.Base, byte level = 1) : Qualification(qualificationLevel, level)
 {
-    public Mimicry(QualificationLevel qualificationLevel = QualificationLevel.Base, byte level = 1)
-        : base(qualificationLevel, level)
-    {
-    }
+    public override byte QpToBaseQualification => 3;
+
+    public override byte QpToMasterQualification => 16;
 }

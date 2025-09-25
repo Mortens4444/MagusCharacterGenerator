@@ -23,4 +23,8 @@ public class AncientTongueLore : Qualification, ICanHaveMany
     }
 
     public override string Name => "Ancient tongue lore";
+    
+    public override byte QpToBaseQualification => 10;
+
+    public override byte QpToMasterQualification => 60;
 }

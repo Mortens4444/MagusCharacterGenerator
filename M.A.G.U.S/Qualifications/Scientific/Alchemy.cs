@@ -2,10 +2,9 @@
 
 namespace M.A.G.U.S.Qualifications.Scientific;
 
-public class Alchemy : Qualification
+public class Alchemy(QualificationLevel qualificationLevel = QualificationLevel.Base, byte level = 1) : Qualification(qualificationLevel, level)
 {
-    public Alchemy(QualificationLevel qualificationLevel = QualificationLevel.Base, byte level = 1)
-        : base(qualificationLevel, level)
-    {
-    }
+    public override byte QpToBaseQualification => 10;
+
+    public override byte QpToMasterQualification => 40;
 }

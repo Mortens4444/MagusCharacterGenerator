@@ -3,4 +3,6 @@
 public class SummonBirds : Summon
 {
     public byte RecallDurationInMinutes => 30;
+
+    public override string Name => "Summon birds";
 }

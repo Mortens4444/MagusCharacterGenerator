@@ -43,7 +43,7 @@ public abstract class Priest(byte level) : Class(level), IClass, ILikeMagic
     [DiceThrow(ThrowType._1K10)]
     [DiceThrowModifier(8)]
     [SpecialTraining]
-    public override short WillPower => DiceThrow._1K10_Plus_8_Plus_SpecialTraining();
+    public override short Willpower => DiceThrow._1K10_Plus_8_Plus_SpecialTraining();
 
     [DiceThrow(ThrowType._1K6)]
     [DiceThrowModifier(12)]
@@ -105,7 +105,7 @@ public abstract class Priest(byte level) : Class(level), IClass, ILikeMagic
 
     public override SpecialQualificationList SpecialQualifications =>
     [
-        new PriestKyrDisciplinesUsage(),
+        new PsiSiegeKyrDisciplineUsage(),
             new ClericalMagic()
     ];
 

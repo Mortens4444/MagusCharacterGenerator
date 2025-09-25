@@ -12,4 +12,6 @@ public class HeadHunterUnknownWeaponUsage : SpecialQualification, IFightModifier
     public short DefendingValue => -10;
 
     public short AimingValue => -15;
+    
+    public override string Name => "Untrained weapon penalty";
 }

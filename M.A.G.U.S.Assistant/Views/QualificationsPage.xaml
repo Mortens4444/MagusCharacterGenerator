@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <v:NotifierPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
                 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                xmlns:conv="clr-namespace:M.A.G.U.S.Assistant.Converters"
                 xmlns:v="clr-namespace:M.A.G.U.S.Assistant.Views"
                 xmlns:vm="clr-namespace:M.A.G.U.S.Assistant.ViewModels"
                 xmlns:m="clr-namespace:M.A.G.U.S.Qualifications;assembly=M.A.G.U.S."
@@ -13,12 +14,43 @@
         <vm:QualificationsViewModel />
     </v:NotifierPage.BindingContext>
 
+    <v:NotifierPage.Resources>
+        <ResourceDictionary>
+            <conv:TranslationConverter x:Key="TranslationConverter" />
+        </ResourceDictionary>
+    </v:NotifierPage.Resources>
+
     <Grid Padding="10" RowSpacing="8" RowDefinitions="Auto,*">
         <!-- Keresőmező -->
         <Grid Grid.Row="0" ColumnDefinitions="*" ColumnSpacing="6">
             <mc:EntryWithLabel Label="Search"
                                Text="{Binding SearchText}"
                                Grid.Column="0" />
+        </Grid>
+
+        <Label Text="Qualifications" Style="{StaticResource HeaderLabel}" />
+        <Grid Padding="6"
+                          ColumnDefinitions="*, Auto, Auto"
+                          ColumnSpacing="10">
+
+            <Label Text="Name"
+                               VerticalOptions="Center"
+                               TextColor="Gray"
+                               FontAttributes="Bold"/>
+
+            <Label Text="Base"
+                               VerticalOptions="Center"
+                               Grid.Column="1"
+                               HorizontalOptions="End"
+                               TextColor="Gray"
+                               FontAttributes="Bold"/>
+
+            <Label Text="Master"
+                               VerticalOptions="Center"
+                               Grid.Column="2"
+                               HorizontalOptions="End"
+                               TextColor="Gray"
+                               FontAttributes="Bold"/>
         </Grid>
 
         <!-- Lista -->
@@ -31,13 +63,19 @@
             <CollectionView.ItemTemplate>
                 <DataTemplate x:DataType="m:Qualification">
                     <Border Stroke="Gray" StrokeThickness="1" Padding="8" Margin="0,4">
-                        <Grid ColumnDefinitions="*,Auto" ColumnSpacing="8" VerticalOptions="Center">
+                        <Grid ColumnDefinitions="*,Auto,Auto" ColumnSpacing="8" VerticalOptions="Center">
                             <StackLayout Grid.Column="0" Spacing="2">
-                                <Label Text="{Binding Name}" FontAttributes="Bold"/>
-                                <Label Text="{Binding Description}" FontSize="12" LineBreakMode="WordWrap"/>
+                                <Label Text="{Binding Name, Converter={StaticResource TranslationConverter}}" FontAttributes="Bold"/>
+                                <Label Text="{Binding Description, Converter={StaticResource TranslationConverter}}" FontSize="12" LineBreakMode="WordWrap"/>
                             </StackLayout>
-                            <Label Text="{Binding QualificationLevel}" 
+
+                            <Label Text="{Binding QpToBaseQualification}" 
                                    Grid.Column="1"
+                                   VerticalOptions="Center"
+                                   FontAttributes="Bold"/>
+
+                            <Label Text="{Binding QpToMasterQualification}" 
+                                   Grid.Column="2"
                                    VerticalOptions="Center"
                                    FontAttributes="Bold"/>
                         </Grid>

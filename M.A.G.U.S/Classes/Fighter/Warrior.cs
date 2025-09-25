@@ -42,7 +42,7 @@ public class Warrior(byte level = 1) : Class(level), IClass, IJustFight
 
     [DiceThrow(ThrowType._2K6)]
     [DiceThrowModifier(6)]
-    public override short WillPower => DiceThrow._2K6_Plus_6();
+    public override short Willpower => DiceThrow._2K6_Plus_6();
 
     [DiceThrow(ThrowType._3K6_2_Times)]
     public override short Astral => DiceThrow._3K6_2_Times();

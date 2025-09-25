@@ -43,7 +43,7 @@ public class Gladiator(byte level = 1) : Class(level), IClass, IJustFight
     public override short Intelligence => DiceThrow._3K6();
 
     [DiceThrow(ThrowType._3K6)]
-    public override short WillPower => DiceThrow._3K6();
+    public override short Willpower => DiceThrow._3K6();
 
     [DiceThrow(ThrowType._3K6)]
     public override short Astral => DiceThrow._3K6();

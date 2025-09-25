@@ -2,10 +2,9 @@
 
 namespace M.A.G.U.S.Qualifications.Scientific;
 
-public class Physiology : Qualification
+public class Physiology(QualificationLevel qualificationLevel = QualificationLevel.Base, byte level = 1) : Qualification(qualificationLevel, level)
 {
-    public Physiology(QualificationLevel qualificationLevel = QualificationLevel.Base, byte level = 1)
-        : base(qualificationLevel, level)
-    {
-    }
+    public override byte QpToBaseQualification => 15;
+
+    public override byte QpToMasterQualification => 45;
 }

@@ -31,11 +31,12 @@ namespace M.A.G.U.S.Assistant.ViewModels
             SelectedCombatValueModifier = AvailableCombatValueModifiers.FirstOrDefault();
         }
 
-        public ObservableCollection<string> AvailableCombatValueModifiers { get; } = [ "Base", "With primary weapon", "With secondary weapon" ];
+        public ObservableCollection<string> AvailableCombatValueModifiers { get; } = new ObservableCollection<string> { "Base", "With primary weapon", "With secondary weapon" };
 
-        public ObservableCollection<IRace?> AvailableRaces { get; } = [];
+        public ObservableCollection<IRace?> AvailableRaces { get; } = new ObservableCollection<IRace?>();
 
-        public ObservableCollection<IClass?> AvailableClasses { get; } = [];
+        public ObservableCollection<IClass?> AvailableClasses { get; } = new ObservableCollection<IClass?>();
+
 
         byte selectedLevel;
         public byte SelectedLevel

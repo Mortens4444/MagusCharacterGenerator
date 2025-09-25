@@ -1,6 +1,6 @@
-<?xml version="1.0" encoding="utf-8" ?>
 <v:NotifierPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
                 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                xmlns:conv="clr-namespace:M.A.G.U.S.Assistant.Converters"
                 xmlns:v="clr-namespace:M.A.G.U.S.Assistant.Views"
                 xmlns:m="clr-namespace:M.A.G.U.S.Assistant.Models"
                 xmlns:vm="clr-namespace:M.A.G.U.S.Assistant.ViewModels"
@@ -8,19 +8,27 @@
                 xmlns:mc="clr-namespace:Mtf.Maui.Controls;assembly=Mtf.Maui.Controls"
                 x:Class="M.A.G.U.S.Assistant.Views.LanguagesPage"
                 x:DataType="vm:LanguagesViewModel"
+                x:Name="PageRoot"
                 Title="Languages">
 
     <v:NotifierPage.BindingContext>
         <vm:LanguagesViewModel />
     </v:NotifierPage.BindingContext>
 
+    <v:NotifierPage.Resources>
+        <ResourceDictionary>
+            <conv:TranslationConverter x:Key="TranslationConverter" />
+            <conv:EnumDescriptionTranslationConverter x:Key="EnumDescriptionTranslationConverter" />
+        </ResourceDictionary>
+    </v:NotifierPage.Resources>
+
     <Grid Padding="10" RowDefinitions="Auto,Auto,*" RowSpacing="8">
         <!-- Picker: Living / Ancient -->
         <HorizontalStackLayout Grid.Row="0" Spacing="8" VerticalOptions="Center">
             <Label Text="Type" VerticalOptions="Center" />
-            <Picker Title="Select type"
-                    ItemsSource="{Binding Types}"
-                    SelectedItem="{Binding SelectedType}" />
+            <Picker ItemsSource="{Binding Types}"
+                    SelectedItem="{Binding SelectedType}"
+                    ItemDisplayBinding="{Binding ., Converter={StaticResource TranslationConverter}}" />
         </HorizontalStackLayout>
 
         <!-- Search -->
@@ -39,12 +47,16 @@
                 <DataTemplate x:DataType="m:LanguageItem">
                     <Border Stroke="Gray" StrokeThickness="1" Padding="8" Margin="0,4">
                         <Grid ColumnDefinitions="Auto,*,Auto" ColumnSpacing="8" VerticalOptions="Center">
-                            <Label Text="{Binding EnumKey}" FontAttributes="Bold" Grid.Column="0" VerticalOptions="Center" />
+                            <!--<Label Text="{Binding EnumKey}" FontAttributes="Bold" Grid.Column="0" VerticalOptions="Center" />-->
                             <StackLayout Grid.Column="1" Spacing="2">
-                                <Label Text="{Binding Name}" FontAttributes="Bold" />
-                                <Label Text="{Binding Description}" FontSize="12" LineBreakMode="WordWrap" />
+                                <Label Text="{Binding Description, Converter={StaticResource EnumDescriptionTranslationConverter}}" FontAttributes="Bold" />
+                                <!--<Label Text="{Binding Description, Converter={StaticResource TranslationConverter}}" FontSize="12" LineBreakMode="WordWrap" />-->
                             </StackLayout>
-                            <Button Text="Select" Grid.Column="2" Command="{Binding BindingContext.SelectCommand, Source={x:Reference Name=PageRoot}}" CommandParameter="{Binding}" />
+                            <!-- használjuk a PageRoot BindingContext-ját -->
+                            <!--<Button Text="Select"
+                                    Grid.Column="2"
+                                    Command="{Binding Source={x:Reference PageRoot}, Path=BindingContext.SelectCommand}"
+                                    CommandParameter="{Binding}" />-->
                         </Grid>
                     </Border>
                 </DataTemplate>

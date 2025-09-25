@@ -16,7 +16,7 @@ public class Goblin : Race
 
     public override short Beauty => -4;
 
-    public override short WillPower => -1;
+    public override short Willpower => -1;
 
     public override short Astral => -2;
 

@@ -43,7 +43,7 @@ public class SwordMaster(byte level = 1) : Class(level), IClass, IJustFight
 
     [DiceThrow(ThrowType._1K6)]
     [DiceThrowModifier(12)]
-    public override short WillPower => DiceThrow._1K6_Plus_12();
+    public override short Willpower => DiceThrow._1K6_Plus_12();
 
     [DiceThrow(ThrowType._1K10)]
     [DiceThrowModifier(8)]
@@ -120,7 +120,7 @@ public class SwordMaster(byte level = 1) : Class(level), IClass, IJustFight
 
     public override SpecialQualificationList SpecialQualifications =>
     [
-        new SlanDodgeFromRangedAttacks(),
+        new SlanDodgeAgainstRangedAttacks(),
         new SwordFighterMagicSword()
     ];
 

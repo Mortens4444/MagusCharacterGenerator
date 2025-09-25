@@ -26,5 +26,12 @@ public class Qualification
 
     public byte MasterQualificationLevel { get; set; }
 
+    public virtual byte QpToBaseQualification { get; }
+
+    public virtual byte? QpToMaxBaseQualification { get; }
+
+    public virtual byte QpToMasterQualification { get; }
+
+
     public Type QualificationType => GetType();
 }

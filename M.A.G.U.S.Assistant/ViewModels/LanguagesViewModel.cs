@@ -1,6 +1,7 @@
 ﻿using M.A.G.U.S.Assistant.Models;
 using M.A.G.U.S.GameSystem.Languages;
 using Mtf.Extensions;
+using Mtf.LanguageService;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Windows.Input;
@@ -9,47 +10,59 @@ namespace M.A.G.U.S.Assistant.ViewModels;
 
 public class LanguagesViewModel : INotifyPropertyChanged
 {
-    public ObservableCollection<string> Types { get; } = ["Living", "Ancient"];
+    public ObservableCollection<LanguageTypes> Types { get; } =
+        [LanguageTypes.Living, LanguageTypes.Ancient];
 
     public ObservableCollection<LanguageItem> Languages { get; } = [];
     public ObservableCollection<LanguageItem> FilteredLanguages { get; } = [];
 
-    string _searchText = String.Empty;
+    string searchText = String.Empty;
     public string SearchText
     {
-        get => _searchText;
+        get => searchText;
         set
         {
-            if (_searchText == value) return;
-            _searchText = value ?? String.Empty;
+            if (searchText == value)
+            {
+                return;
+            }
+
+            searchText = value ?? String.Empty;
             OnPropertyChanged(nameof(SearchText));
             ApplyFilter();
         }
     }
 
-    string _selectedType = "Living";
-    public string SelectedType
+    LanguageTypes selectedType = LanguageTypes.Ancient;
+    public LanguageTypes SelectedType
     {
-        get => _selectedType;
+        get => selectedType;
         set
         {
-            if (_selectedType == value) return;
-            _selectedType = value ?? String.Empty;
+            if (selectedType == value)
+            {
+                return;
+            }
+
+            selectedType = value;
             OnPropertyChanged(nameof(SelectedType));
-            LoadByType(_selectedType);
+            LoadByType(selectedType);
         }
     }
 
-    LanguageItem _selectedLanguage;
-    public LanguageItem SelectedLanguage
+    LanguageItem? selectedLanguage;
+    public LanguageItem? SelectedLanguage
     {
-        get => _selectedLanguage;
+        get => selectedLanguage;
         set
         {
-            if (_selectedLanguage == value) return;
-            _selectedLanguage = value;
+            if (selectedLanguage == value)
+            {
+                return;
+            }
+
+            selectedLanguage = value;
             OnPropertyChanged(nameof(SelectedLanguage));
-            // itt kezelheted a kiválasztást (pl. navigálás vagy mentés)
         }
     }
 
@@ -61,49 +74,45 @@ public class LanguagesViewModel : INotifyPropertyChanged
     {
         SelectCommand = new RelayCommand(o =>
         {
-            if (o is LanguageItem li) SelectedLanguage = li;
+            if (o is LanguageItem li)
+            {
+                SelectedLanguage = li;
+            }
         });
 
-        SelectedType = Types.First();
+        SelectedType = LanguageTypes.Living;
+        LoadByType(selectedType);
     }
 
-    void LoadByType(string type)
+    private void LoadByType(LanguageTypes type)
     {
         Languages.Clear();
 
-        if (type == "Living")
+        var enumItemType = type == LanguageTypes.Living ? typeof(Language) : typeof(AntientLanguage);
+        var items = GetEnumItems(enumItemType).OrderBy(i => Lng.Elem(i.Name));
+        foreach (var item in items)
         {
-            var items = GetEnumItems(typeof(Language)).OrderBy(i => i.Name);
-            foreach (var it in items) Languages.Add(it);
-        }
-        else
-        {
-            var items = GetEnumItems(typeof(AntientLanguage)).OrderBy(i => i.Name);
-            foreach (var it in items) Languages.Add(it);
+            Languages.Add(item);
         }
 
         ApplyFilter();
     }
 
-    IEnumerable<LanguageItem> GetEnumItems(Type enumType)
+    private IEnumerable<LanguageItem> GetEnumItems(Type enumType)
     {
         foreach (var val in Enum.GetValues(enumType))
         {
-            //var member = enumType.GetMember(val.ToString()).FirstOrDefault();
-            //var descAttr = member?.GetCustomAttribute<DescriptionAttribute>();
-            //var desc = descAttr?.Description ?? val.ToString();
-            
             yield return new LanguageItem
             {
-                EnumKey = val.ToString(),
-                Name = val.GetDescription(),
-                Description = String.Empty,
+                EnumKey = val.ToString() ?? String.Empty,
+                Name = val.ToString() ?? String.Empty,
+                Description = val.GetDescription(),
                 SourceEnumValue = val
             };
         }
     }
 
-    void ApplyFilter()
+    private void ApplyFilter()
     {
         var query = Languages.AsEnumerable();
         var st = SearchText?.Trim();

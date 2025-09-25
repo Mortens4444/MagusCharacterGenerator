@@ -1,9 +1,5 @@
 ﻿namespace M.A.G.U.S.Qualifications.Percentages;
 
-public class Sneaking : PercentQualification
+public class Sneaking(byte percent) : PercentQualification(percent)
 {
-    public Sneaking(byte percent)
-        : base(percent)
-    {
-    }
 }

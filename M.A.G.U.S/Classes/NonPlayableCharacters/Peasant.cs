@@ -1,8 +1,8 @@
 ﻿using M.A.G.U.S.GameSystem;
 using M.A.G.U.S.GameSystem.Attributes;
 using M.A.G.U.S.Qualifications;
-using M.A.G.U.S.Qualifications.Laical;
 using M.A.G.U.S.Qualifications.NonPlayableCharacterQualifications;
+using M.A.G.U.S.Qualifications.Scientific;
 
 namespace M.A.G.U.S.Classes.NonPlayableCharacters;
 
@@ -30,7 +30,7 @@ public class Peasant(byte level = 1) : Class(level), IClass
     public override short Intelligence => DiceThrow._2K6();
 
     [DiceThrow(ThrowType._2K6)]
-    public override short WillPower => DiceThrow._2K6();
+    public override short Willpower => DiceThrow._2K6();
 
     [DiceThrow(ThrowType._2K6)]
     public override short Astral => DiceThrow._2K6();

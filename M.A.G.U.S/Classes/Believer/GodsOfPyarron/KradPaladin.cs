@@ -21,7 +21,7 @@ public class KradPaladin(byte level = 1) : Paladin(level)
                 new Herbalism(),
                 new LegendLore(),
                 new HistoryLore(),
-                new Forestry(),
+                new ForestSurvival(),
                 new Cartography(),
                 new Swimming()
             ]);

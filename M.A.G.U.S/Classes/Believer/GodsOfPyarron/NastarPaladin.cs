@@ -42,7 +42,7 @@ public class NastarPaladin(byte level) : Class(level), IClass, IHateRangedWeapon
 
     [DiceThrow(ThrowType._1K10)]
     [DiceThrowModifier(8)]
-    public override short WillPower => DiceThrow._1K10_Plus_8();
+    public override short Willpower => DiceThrow._1K10_Plus_8();
 
     [DiceThrow(ThrowType._1K6)]
     [DiceThrowModifier(12)]

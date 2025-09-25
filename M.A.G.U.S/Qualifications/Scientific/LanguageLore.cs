@@ -23,4 +23,10 @@ public class LanguageLore : Qualification, ICanHaveMany
     }
 
     public override string Name => "Language lore";
+
+    public override byte QpToBaseQualification => 1;
+
+    public override byte? QpToMaxBaseQualification => 5;
+
+    public override byte QpToMasterQualification => 20;
 }

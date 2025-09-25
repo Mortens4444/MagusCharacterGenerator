@@ -20,7 +20,7 @@ public class Reptile : Race
 
     public override short Beauty => -3;
 
-    public override short WillPower => -1;
+    public override short Willpower => -1;
 
     public override short Intelligence => -1;
 

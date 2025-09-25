@@ -9,7 +9,7 @@
                 xmlns:mc="clr-namespace:Mtf.Maui.Controls;assembly=Mtf.Maui.Controls"
                 x:Class="M.A.G.U.S.Assistant.Views.CharacterGeneratorPage"
                 x:DataType="vm:CharacterGeneratorViewModel"
-                Title="M.A.G.U.S. Character sheet">
+                Title="Character sheet">
 
     <v:NotifierPage.BindingContext>
         <vm:CharacterGeneratorViewModel />
@@ -112,7 +112,7 @@
                                                    Grid.Row="5" />
 
                                 <mc:EntryWithLabel Label="Willpower"
-                                                   Text="{Binding Character.WillPower}"
+                                                   Text="{Binding Character.Willpower}"
                                                    IsEnabled="False"
                                                    Grid.Row="6" />
 
@@ -161,11 +161,11 @@
                                                    IsEnabled="False"
                                                    Grid.Row="1" />
 
-                                <mc:EntryWithLabel Label="Alignment"
+                                <!--<mc:EntryWithLabel Label="Alignment"
                                                    Text="{Binding Character.Alignment, Converter={StaticResource TranslationConverter}}"
                                                    HorizontalOptions="Center"
                                                    IsEnabled="False"
-                                                   Grid.Row="2" />
+                                                   Grid.Row="2" />-->
                             </Grid>
                         </VerticalStackLayout>
                     </Border>
@@ -373,7 +373,7 @@
             <!-- Százalékos képzettségek -->
             <Border Style="{StaticResource BoxBorder}" Margin="0,10" Grid.ColumnSpan="3">
                 <VerticalStackLayout>
-                    <Label Text="Percentage qualifications" Style="{StaticResource HeaderLabel}" />
+                    <Label Text="Percent qualifications" Style="{StaticResource HeaderLabel}" />
                     <Grid Padding="6" ColumnDefinitions="*, Auto" ColumnSpacing="10">
 
                         <Label Text="Name"

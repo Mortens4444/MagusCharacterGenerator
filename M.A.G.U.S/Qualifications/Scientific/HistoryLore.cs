@@ -2,12 +2,11 @@
 
 namespace M.A.G.U.S.Qualifications.Scientific;
 
-public class HistoryLore : Qualification
+public class HistoryLore(QualificationLevel qualificationLevel = QualificationLevel.Base, byte level = 1) : Qualification(qualificationLevel, level)
 {
-    public HistoryLore(QualificationLevel qualificationLevel = QualificationLevel.Base, byte level = 1)
-        : base(qualificationLevel, level)
-    {
-    }
-
     public override string Name => "History lore";
+
+    public override byte QpToBaseQualification => 5;
+
+    public override byte QpToMasterQualification => 20;
 }

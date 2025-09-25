@@ -42,7 +42,7 @@ public class Thief(byte level = 1) : Class(level), IClass, IJustFight
     public override short Intelligence => DiceThrow._2K6_Plus_6();
 
     [DiceThrow(ThrowType._3K6)]
-    public override short WillPower => DiceThrow._3K6();
+    public override short Willpower => DiceThrow._3K6();
 
     [DiceThrow(ThrowType._3K6_2_Times)]
     public override short Astral => DiceThrow._3K6_2_Times();
@@ -112,7 +112,7 @@ public class Thief(byte level = 1) : Class(level), IClass, IJustFight
         new Jumping(10),
         new LockPicking(25),
         new Sneaking(30),
-        new Stealth(15),
+        new Hiding(15),
         new TightropeWalking(25),
         new PickPocketing(25),
         new TrapDetection(25),

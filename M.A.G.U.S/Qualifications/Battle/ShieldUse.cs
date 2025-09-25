@@ -6,4 +6,8 @@ public class ShieldUse(QualificationLevel qualificationLevel = QualificationLeve
     : Qualification(qualificationLevel, level)
 {
     public override string Name => "Shield use";
+
+    public override byte QpToBaseQualification => 5;
+
+    public override byte QpToMasterQualification => 30;
 }

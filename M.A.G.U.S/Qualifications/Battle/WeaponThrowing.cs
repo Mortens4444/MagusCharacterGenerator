@@ -9,4 +9,8 @@ public class WeaponThrowing(QualificationLevel qualificationLevel = Qualificatio
     public IWeapon? Weapon { get; set; }
 
     public override string Name => "Weapon throwing";
+
+    public override byte QpToBaseQualification => 4;
+
+    public override byte QpToMasterQualification => 40;
 }

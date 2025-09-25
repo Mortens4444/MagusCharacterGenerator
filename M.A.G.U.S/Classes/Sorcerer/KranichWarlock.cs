@@ -47,7 +47,7 @@ public class KranichWarlock(byte level = 1) : Class(level), IClass, ILikeMagic
 
     [DiceThrow(ThrowType._1K6)]
     [DiceThrowModifier(12)]
-    public override short WillPower => DiceThrow._1K6_Plus_12();
+    public override short Willpower => DiceThrow._1K6_Plus_12();
 
     [DiceThrow(ThrowType._1K6)]
     [DiceThrowModifier(12)]
@@ -127,7 +127,7 @@ public class KranichWarlock(byte level = 1) : Class(level), IClass, ILikeMagic
     public override List<PercentQualification> PercentQualifications =>
     [
         new Sneaking(15),
-            new Stealth(10)
+            new Hiding(10)
     ];
 
     public override SpecialQualificationList SpecialQualifications =>

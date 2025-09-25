@@ -3,6 +3,7 @@ using M.A.G.U.S.Qualifications;
 using M.A.G.U.S.Qualifications.Battle;
 using M.A.G.U.S.Qualifications.Laical;
 using M.A.G.U.S.Qualifications.Scientific;
+using M.A.G.U.S.Qualifications.Underworld;
 
 namespace M.A.G.U.S.Classes.Believer.GodsOfPyarron;
 
@@ -27,7 +28,7 @@ public class ArelPriest(byte level = 1) : Priest(level)
 				new Herbalism(),
 				new Healing(),
 				new AnimalTraining(),
-				new Forestry(QualificationLevel.Master),
+				new ForestSurvival(QualificationLevel.Master),
 				new HuntingAndFishing(QualificationLevel.Master),
 				new Riding()
 			]);

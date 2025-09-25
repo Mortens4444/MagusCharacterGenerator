@@ -2,12 +2,11 @@
 
 namespace M.A.G.U.S.Qualifications.Laical;
 
-public class SexualCulture : Qualification
+public class SexualCulture(QualificationLevel qualificationLevel = QualificationLevel.Base, byte level = 1) : Qualification(qualificationLevel, level)
 {
-    public SexualCulture(QualificationLevel qualificationLevel = QualificationLevel.Base, byte level = 1)
-        : base(qualificationLevel, level)
-    {
-    }
-
     public override string Name => "Sexual culture";
+
+    public override byte QpToBaseQualification => 5;
+
+    public override byte QpToMasterQualification => 30;
 }

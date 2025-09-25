@@ -12,4 +12,6 @@ public class GladiatorFightAgainstOneEnemy : SpecialQualification, IFightModifie
     public short DefendingValue => 10;
 
     public short AimingValue => 0;
+
+    public override string Name => "Combat modifiers against one enemy";
 }

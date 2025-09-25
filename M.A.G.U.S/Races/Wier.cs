@@ -12,7 +12,7 @@ public class Wier : Race
     public override SpecialQualificationList SpecialQualifications =>
     [
         new Infravision(30),
-        new BetterHearing(2),
+        new KeenHearing(2),
         new KeenSmell(2)
     ];
 }

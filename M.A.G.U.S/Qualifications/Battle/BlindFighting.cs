@@ -5,4 +5,8 @@ namespace M.A.G.U.S.Qualifications.Battle;
 public class BlindFighting(QualificationLevel qualificationLevel = QualificationLevel.Base, byte level = 1) : Qualification(qualificationLevel, level)
 {
     public override string Name => "Blind fighting";
+
+    public override byte QpToBaseQualification => 10;
+
+    public override byte QpToMasterQualification => 30;
 }

@@ -24,16 +24,16 @@ public class FireElf : Race, IUseRangedWeapons
     public override QualificationList Qualifications =>
     [
         new AnimalTraining(),
-        new Forestry(QualificationLevel.Master),
+        new ForestSurvival(QualificationLevel.Master),
         new Running(QualificationLevel.Master),
         ];
 
     public override SpecialQualificationList SpecialQualifications =>
     [
-        new BetterHearing(1.5),
+        new KeenHearing(1.5),
         new KeenSight(2),
         new Infravision(30),
-        new ResistanceToNecromantia(-8),
+        new ResistanceToNecromancy(-8),
         new GoodArcher(15),
         new FireMagic()
         ];

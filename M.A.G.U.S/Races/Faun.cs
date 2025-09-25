@@ -16,7 +16,7 @@ public class Faun : Race
 
     public override short Health => 1;
 
-    public override short WillPower => -1;
+    public override short Willpower => -1;
 
     public override short Astral => -2;
 
@@ -26,6 +26,6 @@ public class Faun : Race
 
     public override SpecialQualificationList SpecialQualifications =>
     [
-        new CanLearnOnlyPyarronPsi()
+        new CanOnlyLearnPyarronPsi()
     ];
 }

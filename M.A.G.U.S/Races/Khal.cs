@@ -18,13 +18,13 @@ public class Khal : Race
 
     public override short Health => 3;
 
-    public override short WillPower => -1;
+    public override short Willpower => -1;
 
     public override short Astral => -5;
 
     public override QualificationList Qualifications =>
     [
-        new Forestry(),
+        new ForestSurvival(),
         new HuntingAndFishing(),
         new WeatherDivination(),
         new Swimming(),
@@ -35,7 +35,7 @@ public class Khal : Race
     public override SpecialQualificationList SpecialQualifications =>
     [
         new KeenSight(2),
-        new BetterHearing(2),
+        new KeenHearing(2),
         new KeenSmell(5)
     ];
 }

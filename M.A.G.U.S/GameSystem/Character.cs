@@ -23,7 +23,7 @@ public class Character : IFightModifier, ILiving, IAbilities, INotifyPropertyCha
     private short painTolerancePoints;
 	private short maxPainTolerancePoints;
     private short stamina;
-	private short willPower;
+	private short willpower;
 	private short strength;
 	private short speed;
 	private short dexterity;
@@ -355,14 +355,14 @@ public class Character : IFightModifier, ILiving, IAbilities, INotifyPropertyCha
 		}
 	}
 
-	public short WillPower
+	public short Willpower
 	{
-		get => willPower;
+		get => willpower;
 		set
 		{
-			if (value != willPower)
+			if (value != willpower)
 			{
-				willPower = value;
+				willpower = value;
 				if (calculateChanges)
 				{
 					CalculatePainTolerancePoints();
@@ -510,7 +510,7 @@ public class Character : IFightModifier, ILiving, IAbilities, INotifyPropertyCha
 		Health = (short)(BaseCaste.Health + Race.Health);
 		Beauty = (short)(BaseCaste.Beauty + Race.Beauty);
 		Intelligence = (short)(BaseCaste.Intelligence + Race.Intelligence);
-		WillPower = (short)(BaseCaste.WillPower + Race.WillPower);
+		Willpower = (short)(BaseCaste.Willpower + Race.Willpower);
 		Astral = (short)(BaseCaste.Astral + Race.Astral);
 		Bravery = BaseCaste.Bravery;
 		Erudition = BaseCaste.Erudition;
@@ -551,6 +551,10 @@ public class Character : IFightModifier, ILiving, IAbilities, INotifyPropertyCha
 			PercentQualifications.AddRange(caste.PercentQualifications);
         }
 		var dexterityBasedPercentages = new List<Type> { typeof(Falling), typeof(Climbing), typeof(Jumping) };
+		if (PercentQualifications.Count == 0)
+		{
+			PercentQualifications.AddRange([new Falling(0), new Climbing(0), new Jumping(0)]);
+        }
         foreach (var percentQualification in PercentQualifications)
         {
 			if (dexterityBasedPercentages.Contains(percentQualification.GetType()))
@@ -561,7 +565,7 @@ public class Character : IFightModifier, ILiving, IAbilities, INotifyPropertyCha
 
         NotifyPropertyChanged(nameof(Qualifications));
         NotifyPropertyChanged(nameof(PercentQualifications));
-        NotifyPropertyChanged(nameof(GameSystem.Qualifications.SpecialQualification));
+        NotifyPropertyChanged(nameof(SpecialQualification));
     }
 
 	private void CalculateFightValues()
@@ -609,7 +613,6 @@ public class Character : IFightModifier, ILiving, IAbilities, INotifyPropertyCha
 		}
         HealthPoints += MathHelper.GetAboveAverageValue(Health);
 		MaxHealthPoints = HealthPoints;
-
     }
 
 	private void CalculatePainTolerancePoints()
@@ -619,7 +622,7 @@ public class Character : IFightModifier, ILiving, IAbilities, INotifyPropertyCha
 		{
 			PainTolerancePoints = doubledPainToleranceBase != null ? (byte)(2 * BaseCaste.BasePainTolerancePoints) : BaseCaste.BasePainTolerancePoints;
 			PainTolerancePoints += MathHelper.GetAboveAverageValue(Stamina);
-			PainTolerancePoints += MathHelper.GetAboveAverageValue(WillPower);
+			PainTolerancePoints += MathHelper.GetAboveAverageValue(Willpower);
 			if (BaseCaste.AddPainToleranceOnFirstLevel)
 			{
 				PainTolerancePoints += BaseCaste.GetPainToleranceModifier();
@@ -641,24 +644,30 @@ public class Character : IFightModifier, ILiving, IAbilities, INotifyPropertyCha
 
 	private void CalculateUnconsciousAstralMagicResistance()
 	{
-		UnconsciousAstralMagicResistance = MathHelper.GetAboveAverageValue(Astral);
+        var doubledPainToleranceBase = Race.SpecialQualifications.GetSpeciality<ExtraMagicResistanceOnLevelUp>();
+        UnconsciousAstralMagicResistance = MathHelper.GetAboveAverageValue(Astral);
+		UnconsciousAstralMagicResistance += (short)((BaseCaste.Level - 1) * (doubledPainToleranceBase?.ExtraResistancePoints ?? 0));
 	}
 
 	private void CalculateUnconsciousMentalMagicResistance()
 	{
-		UnconsciousMentalMagicResistance = MathHelper.GetAboveAverageValue(WillPower);
+        var doubledPainToleranceBase = Race.SpecialQualifications.GetSpeciality<ExtraMagicResistanceOnLevelUp>();
+        UnconsciousMentalMagicResistance = MathHelper.GetAboveAverageValue(Willpower);
+        UnconsciousMentalMagicResistance += (short)((BaseCaste.Level - 1) * (doubledPainToleranceBase?.ExtraResistancePoints ?? 0));
 	}
 
 	private void CalculatePsiPoints()
-	{
-		var caste = BaseCaste;
+    {
+        var kyrLore = Race.SpecialQualifications.GetSpeciality<KyrLore>();
+
+        var caste = BaseCaste;
 		//PsiPoints = 0;
 		//foreach (var caste in Castes)
 		{
-			(IPsi psi, ushort psiPoints, byte psiPointsModifier) = PsiPointCalculator.Calculate(Qualifications, Intelligence, caste.Level);
-
-			//if (PsiPoints < psiPoints)
-			{
+			(IPsi psi, ushort psiPoints, byte psiPointsModifier) = PsiPointCalculator.Calculate(Qualifications, Intelligence, caste.Level, kyrLore);
+            
+            //if (PsiPoints < psiPoints)
+            {
 				Psi = psi;
 				PsiPoints = psiPoints;
 				MaxPsiPoints = PsiPoints;
@@ -669,7 +678,9 @@ public class Character : IFightModifier, ILiving, IAbilities, INotifyPropertyCha
 
 	private void CalculateManaPoints()
 	{
-		ManaPoints = 0;
+        var kyrLore = Race.SpecialQualifications.GetSpeciality<KyrLore>();
+
+        ManaPoints = 0;
 		foreach (var caste in Castes)
 		{
 			var sorcery = caste.SpecialQualifications.FirstOrDefault(specialQualification => specialQualification is Sorcery) as Sorcery;
@@ -678,8 +689,13 @@ public class Character : IFightModifier, ILiving, IAbilities, INotifyPropertyCha
 				sorcery.ManaPoints = (ushort)MathHelper.GetAboveAverageValue(Intelligence);
             }
 			var manaPoints = sorcery != null ? sorcery.ManaPoints : (ushort)0;
+			
+			if (kyrLore != null)
+			{
+				manaPoints += BaseCaste.Level;
+			}
 
-			for (int i = 1; i < caste.Level; i++)
+            for (int i = 1; i < caste.Level; i++)
 			{
 				manaPoints += sorcery != null ? sorcery.GetManaPointsModifier() : (ushort)0;
             }

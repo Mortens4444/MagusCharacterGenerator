@@ -20,11 +20,11 @@ public class HalfElf : Race, IUseRangedWeapons
 
     public override SpecialQualificationList SpecialQualifications =>
     [
-        new BetterHearing(1.5),
+        new KeenHearing(1.5),
         new KeenSight(2),
         new GoodRunner(),
         new Infravision(10),
-        new ResistanceToNecromantia(-6),
+        new ResistanceToNecromancy(-6),
         new GoodArcher(10)
     ];
 

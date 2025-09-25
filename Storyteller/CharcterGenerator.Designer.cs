@@ -93,7 +93,7 @@
             lblGold = new Label();
             lblAstralDiceThrow = new Label();
             nudGold = new NumericUpDown();
-            lblWillPowerDiceThrow = new Label();
+            lblWillpowerDiceThrow = new Label();
             lblIntelligenceDiceThrow = new Label();
             lblBeautyDiceThrow = new Label();
             lblHealthDiceThrow = new Label();
@@ -106,9 +106,9 @@
             nudStrength = new NumericUpDown();
             nudAstral = new NumericUpDown();
             nudSpeed = new NumericUpDown();
-            lblWillPower = new Label();
+            lblWillpower = new Label();
             lblSpeed = new Label();
-            nudWillPower = new NumericUpDown();
+            nudWillpower = new NumericUpDown();
             nudDexterity = new NumericUpDown();
             lblIntelligence = new Label();
             lblDexterity = new Label();
@@ -150,7 +150,7 @@
             ((System.ComponentModel.ISupportInitialize)nudStrength).BeginInit();
             ((System.ComponentModel.ISupportInitialize)nudAstral).BeginInit();
             ((System.ComponentModel.ISupportInitialize)nudSpeed).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)nudWillPower).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)nudWillpower).BeginInit();
             ((System.ComponentModel.ISupportInitialize)nudDexterity).BeginInit();
             ((System.ComponentModel.ISupportInitialize)nudIntelligence).BeginInit();
             ((System.ComponentModel.ISupportInitialize)nudHealth).BeginInit();
@@ -783,7 +783,7 @@
             gbAbilities.Controls.Add(lblGold);
             gbAbilities.Controls.Add(lblAstralDiceThrow);
             gbAbilities.Controls.Add(nudGold);
-            gbAbilities.Controls.Add(lblWillPowerDiceThrow);
+            gbAbilities.Controls.Add(lblWillpowerDiceThrow);
             gbAbilities.Controls.Add(lblIntelligenceDiceThrow);
             gbAbilities.Controls.Add(lblBeautyDiceThrow);
             gbAbilities.Controls.Add(lblHealthDiceThrow);
@@ -796,9 +796,9 @@
             gbAbilities.Controls.Add(nudStrength);
             gbAbilities.Controls.Add(nudAstral);
             gbAbilities.Controls.Add(nudSpeed);
-            gbAbilities.Controls.Add(lblWillPower);
+            gbAbilities.Controls.Add(lblWillpower);
             gbAbilities.Controls.Add(lblSpeed);
-            gbAbilities.Controls.Add(nudWillPower);
+            gbAbilities.Controls.Add(nudWillpower);
             gbAbilities.Controls.Add(nudDexterity);
             gbAbilities.Controls.Add(lblIntelligence);
             gbAbilities.Controls.Add(lblDexterity);
@@ -914,14 +914,14 @@
             nudGold.Size = new Size(51, 23);
             nudGold.TabIndex = 29;
             // 
-            // lblWillPowerDiceThrow
+            // lblWillpowerDiceThrow
             // 
-            lblWillPowerDiceThrow.AutoSize = true;
-            lblWillPowerDiceThrow.Location = new Point(59, 370);
-            lblWillPowerDiceThrow.Margin = new Padding(4, 0, 4, 0);
-            lblWillPowerDiceThrow.Name = "lblWillPowerDiceThrow";
-            lblWillPowerDiceThrow.Size = new Size(0, 15);
-            lblWillPowerDiceThrow.TabIndex = 36;
+            lblWillpowerDiceThrow.AutoSize = true;
+            lblWillpowerDiceThrow.Location = new Point(59, 370);
+            lblWillpowerDiceThrow.Margin = new Padding(4, 0, 4, 0);
+            lblWillpowerDiceThrow.Name = "lblWillpowerDiceThrow";
+            lblWillpowerDiceThrow.Size = new Size(0, 15);
+            lblWillpowerDiceThrow.TabIndex = 36;
             // 
             // lblIntelligenceDiceThrow
             // 
@@ -1036,15 +1036,15 @@
             nudSpeed.TabIndex = 7;
             nudSpeed.ValueChanged += NudSpeed_ValueChanged;
             // 
-            // lblWillPower
+            // lblWillpower
             // 
-            lblWillPower.AutoSize = true;
-            lblWillPower.Location = new Point(0, 351);
-            lblWillPower.Margin = new Padding(4, 0, 4, 0);
-            lblWillPower.Name = "lblWillPower";
-            lblWillPower.Size = new Size(60, 15);
-            lblWillPower.TabIndex = 26;
-            lblWillPower.Text = "WillPower";
+            lblWillpower.AutoSize = true;
+            lblWillpower.Location = new Point(0, 351);
+            lblWillpower.Margin = new Padding(4, 0, 4, 0);
+            lblWillpower.Name = "lblWillpower";
+            lblWillpower.Size = new Size(60, 15);
+            lblWillpower.TabIndex = 26;
+            lblWillpower.Text = "Willpower";
             // 
             // lblSpeed
             // 
@@ -1056,15 +1056,15 @@
             lblSpeed.TabIndex = 8;
             lblSpeed.Text = "Speed";
             // 
-            // nudWillPower
+            // nudWillpower
             // 
-            nudWillPower.Location = new Point(4, 368);
-            nudWillPower.Margin = new Padding(4, 3, 4, 3);
-            nudWillPower.Maximum = new decimal(new int[] { 25, 0, 0, 0 });
-            nudWillPower.Name = "nudWillPower";
-            nudWillPower.Size = new Size(51, 23);
-            nudWillPower.TabIndex = 25;
-            nudWillPower.ValueChanged += NudWillPower_ValueChanged;
+            nudWillpower.Location = new Point(4, 368);
+            nudWillpower.Margin = new Padding(4, 3, 4, 3);
+            nudWillpower.Maximum = new decimal(new int[] { 25, 0, 0, 0 });
+            nudWillpower.Name = "nudWillpower";
+            nudWillpower.Size = new Size(51, 23);
+            nudWillpower.TabIndex = 25;
+            nudWillpower.ValueChanged += NudWillpower_ValueChanged;
             // 
             // nudDexterity
             // 
@@ -1224,7 +1224,7 @@
             ((System.ComponentModel.ISupportInitialize)nudStrength).EndInit();
             ((System.ComponentModel.ISupportInitialize)nudAstral).EndInit();
             ((System.ComponentModel.ISupportInitialize)nudSpeed).EndInit();
-            ((System.ComponentModel.ISupportInitialize)nudWillPower).EndInit();
+            ((System.ComponentModel.ISupportInitialize)nudWillpower).EndInit();
             ((System.ComponentModel.ISupportInitialize)nudDexterity).EndInit();
             ((System.ComponentModel.ISupportInitialize)nudIntelligence).EndInit();
             ((System.ComponentModel.ISupportInitialize)nudHealth).EndInit();
@@ -1245,8 +1245,8 @@
 		private System.Windows.Forms.Button btnGenerate;
 		private System.Windows.Forms.Label lblAstral;
 		private System.Windows.Forms.NumericUpDown nudAstral;
-		private System.Windows.Forms.Label lblWillPower;
-		private System.Windows.Forms.NumericUpDown nudWillPower;
+		private System.Windows.Forms.Label lblWillpower;
+		private System.Windows.Forms.NumericUpDown nudWillpower;
 		private System.Windows.Forms.Label lblIntelligence;
 		private System.Windows.Forms.NumericUpDown nudIntelligence;
 		private System.Windows.Forms.Label lblBeauty;
@@ -1310,7 +1310,7 @@
 		private System.Windows.Forms.NumericUpDown nudGold;
 		private System.Windows.Forms.Label lblGold;
 		private System.Windows.Forms.Label lblAstralDiceThrow;
-		private System.Windows.Forms.Label lblWillPowerDiceThrow;
+		private System.Windows.Forms.Label lblWillpowerDiceThrow;
 		private System.Windows.Forms.Label lblIntelligenceDiceThrow;
 		private System.Windows.Forms.Label lblBeautyDiceThrow;
 		private System.Windows.Forms.Label lblHealthDiceThrow;

@@ -4,4 +4,5 @@ namespace M.A.G.U.S.Qualifications.Specialities;
 
 public class DragonSkin : SpecialQualification
 {
+    public override string Name => "Dragon skin";
 }

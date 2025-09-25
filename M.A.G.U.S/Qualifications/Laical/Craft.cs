@@ -20,4 +20,8 @@ public class Craft : Qualification
     {
         Profession = profession;
     }
+
+    public override byte QpToBaseQualification => 2;
+
+    public override byte QpToMasterQualification => 15;
 }

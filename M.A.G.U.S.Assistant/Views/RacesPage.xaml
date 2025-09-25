@@ -65,8 +65,8 @@
                                 <Label Text="{Binding SelectedRace.Beauty}" Grid.Row="5" Grid.Column="1"/>
                                 <Label Text="Intelligence" Grid.Row="6" Grid.Column="0"/>
                                 <Label Text="{Binding SelectedRace.Intelligence}" Grid.Row="6" Grid.Column="1"/>
-                                <Label Text="WillPower" Grid.Row="7" Grid.Column="0"/>
-                                <Label Text="{Binding SelectedRace.WillPower}" Grid.Row="7" Grid.Column="1"/>
+                                <Label Text="Willpower" Grid.Row="7" Grid.Column="0"/>
+                                <Label Text="{Binding SelectedRace.Willpower}" Grid.Row="7" Grid.Column="1"/>
                                 <Label Text="Astral" Grid.Row="8" Grid.Column="0"/>
                                 <Label Text="{Binding SelectedRace.Astral}" Grid.Row="8" Grid.Column="1"/>
                             </Grid>

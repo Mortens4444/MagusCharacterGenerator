@@ -2,10 +2,9 @@
 
 namespace M.A.G.U.S.Qualifications.Laical;
 
-public class Knotting : Qualification
+public class Knotting(QualificationLevel qualificationLevel = QualificationLevel.Base, byte level = 1) : Qualification(qualificationLevel, level)
 {
-    public Knotting(QualificationLevel qualificationLevel = QualificationLevel.Base, byte level = 1)
-        : base(qualificationLevel, level)
-    {
-    }
+    public override byte QpToBaseQualification => 7;
+
+    public override byte QpToMasterQualification => 24;
 }

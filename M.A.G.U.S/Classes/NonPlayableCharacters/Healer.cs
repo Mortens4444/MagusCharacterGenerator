@@ -33,7 +33,7 @@ public class Healer(byte level = 1) : Class(level), IClass
     public override short Intelligence => (short)(DiceThrow._1K6() + 10);
 
     [DiceThrow(ThrowType._2K6)]
-    public override short WillPower => DiceThrow._2K6();
+    public override short Willpower => DiceThrow._2K6();
 
     [DiceThrow(ThrowType._2K6)]
     public override short Astral => DiceThrow._2K6();

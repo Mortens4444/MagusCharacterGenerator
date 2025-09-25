@@ -5,4 +5,6 @@ namespace M.A.G.U.S.Qualifications.Specialities;
 public class GoodArcher(byte aimingBase) : SpecialQualification
 {
     public byte AimingBase { get; } = aimingBase;
+
+    public override string Name => "Good archer";
 }

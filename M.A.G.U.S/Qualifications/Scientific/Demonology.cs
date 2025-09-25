@@ -2,10 +2,9 @@
 
 namespace M.A.G.U.S.Qualifications.Scientific;
 
-public class Demonology : Qualification
+public class Demonology(QualificationLevel qualificationLevel = QualificationLevel.Base, byte level = 1) : Qualification(qualificationLevel, level)
 {
-    public Demonology(QualificationLevel qualificationLevel = QualificationLevel.Base, byte level = 1)
-        : base(qualificationLevel, level)
-    {
-    }
+    public override byte QpToBaseQualification => 20;
+
+    public override byte QpToMasterQualification => 55;
 }

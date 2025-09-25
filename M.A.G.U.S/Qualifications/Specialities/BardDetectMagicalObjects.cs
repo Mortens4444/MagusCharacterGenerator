@@ -4,4 +4,5 @@ namespace M.A.G.U.S.Qualifications.Specialities;
 
 public class BardDetectMagicalObjects : SpecialQualification
 {
+    public override string Name => "Detect magical objects";
 }

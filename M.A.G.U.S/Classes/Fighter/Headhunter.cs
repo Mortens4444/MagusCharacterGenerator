@@ -44,7 +44,7 @@ public class Headhunter(byte level = 1) : Class(level), IClass, IJustFight
 
     [DiceThrow(ThrowType._1K10)]
     [DiceThrowModifier(8)]
-    public override short WillPower => DiceThrow._1K10_Plus_8();
+    public override short Willpower => DiceThrow._1K10_Plus_8();
 
     [DiceThrow(ThrowType._2K6)]
     [DiceThrowModifier(6)]
@@ -128,14 +128,14 @@ public class Headhunter(byte level = 1) : Class(level), IClass, IJustFight
         new Falling(15),
         new Jumping(15),
         new Sneaking(20),
-        new Stealth(25),
+        new Hiding(25),
         new TrapDetection(10)
     ];
 
     public override SpecialQualificationList SpecialQualifications =>
     [
         new HeadHunterDamageIncreasing(),
-        new SlanDisciplinesUsage(),
+        new UseOfSlanDisciplines(),
         new HeadHunterUnknownWeaponUsage(),
         new HeadHunterInitiatingValueIncreasing()
     ];

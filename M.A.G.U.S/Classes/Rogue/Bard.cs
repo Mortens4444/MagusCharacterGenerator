@@ -48,7 +48,7 @@ public class Bard(byte level = 1) : Class(level), IClass, IJustFight
 
     [DiceThrow(ThrowType._2K6)]
     [DiceThrowModifier(6)]
-    public override short WillPower => DiceThrow._2K6_Plus_6();
+    public override short Willpower => DiceThrow._2K6_Plus_6();
 
     [DiceThrow(ThrowType._1K10)]
     [DiceThrowModifier(8)]
@@ -139,7 +139,7 @@ public class Bard(byte level = 1) : Class(level), IClass, IJustFight
         new Jumping(10),
         new LockPicking(25),
         new Sneaking(20),
-        new Stealth(10),
+        new Hiding(10),
         new TightropeWalking(5),
         new PickPocketing(5),
         new TrapDetection(10),

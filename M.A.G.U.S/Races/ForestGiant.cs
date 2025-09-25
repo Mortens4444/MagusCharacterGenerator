@@ -14,7 +14,7 @@ public class ForestGiant : HalfGiant
     public override List<PercentQualification> PercentQualifications =>
     [
         new Sneaking(20),
-        new Stealth(20)
+        new Hiding(20)
     ];
 
     public override QualificationList Qualifications
@@ -24,7 +24,7 @@ public class ForestGiant : HalfGiant
             var result = base.Qualifications;
             result.AddRange(
             [
-                new Forestry(QualificationLevel.Master),
+                new ForestSurvival(QualificationLevel.Master),
                 new TrackingConcealment(),
                 new Craft(Profession.Carpenter, QualificationLevel.Master)
             ]);

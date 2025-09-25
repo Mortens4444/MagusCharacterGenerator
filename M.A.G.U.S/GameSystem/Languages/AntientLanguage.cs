@@ -4,8 +4,6 @@ namespace M.A.G.U.S.GameSystem.Languages;
 
 public enum AntientLanguage
 {
-	[Description("Not choosen")]
-	NotChoosen,
 	[Description("Aquir")]
 	Aquir,
 	[Description("Kyr")]

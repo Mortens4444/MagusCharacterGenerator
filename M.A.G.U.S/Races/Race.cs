@@ -29,7 +29,7 @@ public abstract class Race : IRace
 
     public virtual short Intelligence => 0;
 
-    public virtual short WillPower => 0;
+    public virtual short Willpower => 0;
 
     public virtual short Astral => 0;
 }

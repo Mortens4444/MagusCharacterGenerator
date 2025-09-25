@@ -30,7 +30,7 @@ public class Merchant(byte level = 1) : Class(level), IClass
     public override short Intelligence => DiceThrow._2K6();
 
     [DiceThrow(ThrowType._2K6)]
-    public override short WillPower => DiceThrow._2K6();
+    public override short Willpower => DiceThrow._2K6();
 
     [DiceThrow(ThrowType._2K6)]
     public override short Astral => DiceThrow._2K6();

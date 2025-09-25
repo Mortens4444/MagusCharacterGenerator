@@ -27,7 +27,7 @@ public class Dwarf : Race
     public override SpecialQualificationList SpecialQualifications =>
     [
         new Infravision(30),
-        new PerfectTimeDetection(),
+        new PerfectSenseOfTime(),
         new UndergroundMasters(2),
         new GoodBuildingAgeGuess()
     ];

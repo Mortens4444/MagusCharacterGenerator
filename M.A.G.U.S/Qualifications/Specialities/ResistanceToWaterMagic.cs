@@ -5,4 +5,6 @@ namespace M.A.G.U.S.Qualifications.Specialities;
 public class ResistanceToWaterMagic(sbyte resistanceToMagicModifier) : SpecialQualification
 {
     public sbyte ResistanceToMagicModifier { get; } = resistanceToMagicModifier;
+    
+    public override string Name => "Resistance to water magic";
 }

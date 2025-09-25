@@ -2,10 +2,9 @@
 
 namespace M.A.G.U.S.Qualifications.Laical;
 
-public class Swimming : Qualification
+public class Swimming(QualificationLevel qualificationLevel = QualificationLevel.Base, byte level = 1) : Qualification(qualificationLevel, level)
 {
-    public Swimming(QualificationLevel qualificationLevel = QualificationLevel.Base, byte level = 1)
-        : base(qualificationLevel, level)
-    {
-    }
+    public override byte QpToBaseQualification => 2;
+
+    public override byte QpToMasterQualification => 10;
 }

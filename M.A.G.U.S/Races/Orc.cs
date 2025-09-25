@@ -15,7 +15,7 @@ public class Orc : Race
 
     public override short Intelligence => -3;
 
-    public override short WillPower => 2;
+    public override short Willpower => 2;
 
     public override short Astral => -4;
 

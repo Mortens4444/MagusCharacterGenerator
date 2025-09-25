@@ -10,4 +10,8 @@ public class CamouflageOrDisguise : Qualification
     }
 
     public override string Name => "Camouflage/disguise";
+
+    public override byte QpToBaseQualification => 12;
+
+    public override byte QpToMasterQualification => 24;
 }

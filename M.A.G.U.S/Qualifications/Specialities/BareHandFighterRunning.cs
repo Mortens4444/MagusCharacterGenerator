@@ -4,4 +4,5 @@ namespace M.A.G.U.S.Qualifications.Specialities;
 
 public class BareHandFighterRunning : SpecialQualification
 {
+    public override string Name => "Running";
 }

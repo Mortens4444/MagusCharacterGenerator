@@ -38,7 +38,7 @@ public class Wizard(byte level = 1) : Class(level), IClass, ILikeMagic
     [DiceThrow(ThrowType._1K6)]
     [DiceThrowModifier(12)]
     [SpecialTraining]
-    public override short WillPower => DiceThrow._1K6_Plus_12_Plus_SpecialTraining();
+    public override short Willpower => DiceThrow._1K6_Plus_12_Plus_SpecialTraining();
 
     [DiceThrow(ThrowType._1K6)]
     [DiceThrowModifier(12)]

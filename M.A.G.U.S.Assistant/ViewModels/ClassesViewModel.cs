@@ -1,9 +1,7 @@
 ﻿using global::M.A.G.U.S.Classes;
 using M.A.G.U.S.Assistant.Extensions;
-using M.A.G.U.S.Assistant.Models;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Windows.Input;
 
 namespace M.A.G.U.S.Assistant.ViewModels;
 

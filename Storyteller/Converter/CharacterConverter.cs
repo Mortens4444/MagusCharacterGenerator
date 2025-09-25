@@ -32,7 +32,7 @@ public static class CharacterConverter
 		result.AppendLine($"{Lng.Elem("Health")}: {character.Health}");
 		result.AppendLine($"{Lng.Elem("Beauty")}: {character.Beauty}");
 		result.AppendLine($"{Lng.Elem("Intelligence")}: {character.Intelligence}");
-		result.AppendLine($"{Lng.Elem("WillPower")}: {character.WillPower}");
+		result.AppendLine($"{Lng.Elem("Willpower")}: {character.Willpower}");
 		result.AppendLine($"{Lng.Elem("Astral")}: {character.Astral}");
 		result.AppendLine($"{Lng.Elem("Bravery")}: {character.Bravery}");
 		result.AppendLine($"{Lng.Elem("Erudition")}: {character.Erudition}");

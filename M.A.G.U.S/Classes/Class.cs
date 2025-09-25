@@ -69,7 +69,7 @@ public abstract class Class(byte level) : IClass
 
     public abstract short Intelligence { get; }
 
-    public abstract short WillPower { get; }
+    public abstract short Willpower { get; }
 
     public abstract short Astral { get; }
 

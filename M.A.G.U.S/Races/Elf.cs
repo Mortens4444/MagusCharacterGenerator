@@ -21,7 +21,7 @@ public class Elf : Race, IUseRangedWeapons
     public override QualificationList Qualifications =>
     [
         new Running(QualificationLevel.Master),
-        new Forestry(QualificationLevel.Master),
+        new ForestSurvival(QualificationLevel.Master),
         new AnimalTraining(QualificationLevel.Master),
         new HuntingAndFishing(QualificationLevel.Master),
         new TrackingConcealment(QualificationLevel.Master)
@@ -29,10 +29,10 @@ public class Elf : Race, IUseRangedWeapons
 
     public override SpecialQualificationList SpecialQualifications =>
     [
-        new BetterHearing(2),
+        new KeenHearing(2),
         new KeenSight(2.5),
         new Infravision(50),
-        new ResistanceToNecromantia(-8),
+        new ResistanceToNecromancy(-8),
         new GoodArcher(20)
     ];
 }

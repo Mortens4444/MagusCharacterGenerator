@@ -37,7 +37,7 @@ public class Soldier(byte level = 1) : Class(level), IClass
 
     [DiceThrow(ThrowType._2K6)]
     [DiceThrowModifier(6)]
-    public override short WillPower => DiceThrow._2K6_Plus_6();
+    public override short Willpower => DiceThrow._2K6_Plus_6();
 
     [DiceThrow(ThrowType._2K6)]
     public override short Astral => DiceThrow._2K6();

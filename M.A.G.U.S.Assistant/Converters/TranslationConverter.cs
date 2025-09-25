@@ -7,11 +7,25 @@ namespace M.A.G.U.S.Assistant.Converters
     {
         public object? Convert(object? value, Type targetType, object? parameter, CultureInfo culture)
         {
-            if (value is string key)
+            if (value == null)
+            {
+                return String.Empty;
+            }
+
+            var key = value is string s ? s : value.ToString();
+            if (String.IsNullOrEmpty(key))
+            {
+                return String.Empty;
+            }
+
+            try
             {
                 return Lng.Elem(key);
             }
-            return value;
+            catch
+            {
+                return key;
+            }
         }
 
         public object? ConvertBack(object? value, Type targetType, object? parameter, CultureInfo culture)

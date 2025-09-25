@@ -22,7 +22,7 @@ public class WhiteOrc : Race
 
     public override short Beauty => -2;
 
-    public override short WillPower => -2;
+    public override short Willpower => -2;
 
     public override short Astral => -3;
 
@@ -41,7 +41,7 @@ public class WhiteOrc : Race
         new Infravision(100),
         new UndergroundMasters(1),
         new KeenSmell(12),
-        new BetterHearing(2.5),
+        new KeenHearing(2.5),
         new DragonSkin()
     ];
 

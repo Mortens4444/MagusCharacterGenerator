@@ -10,4 +10,8 @@ public class EscapeBonds : Qualification
     }
 
     public override string Name => "Escape bonds";
+
+    public override byte QpToBaseQualification => 8;
+
+    public override byte QpToMasterQualification => 16;
 }

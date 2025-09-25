@@ -21,7 +21,7 @@ public class Dracker : Race
     public override QualificationList Qualifications =>
     [
         new AnimalTraining(),
-        new Forestry(),
+        new ForestSurvival(),
         new LanguageLore(4),
         new LanguageLore(3),
         new LanguageLore(3),
