@@ -3,7 +3,7 @@ using M.A.G.U.S.GameSystem.Attributes;
 using M.A.G.U.S.GameSystem.FightMode;
 using M.A.G.U.S.GameSystem.Qualifications;
 using M.A.G.U.S.Qualifications;
-using M.A.G.U.S.Qualifications.Battle;
+using M.A.G.U.S.Qualifications.Combat;
 using M.A.G.U.S.Qualifications.Laical;
 using M.A.G.U.S.Qualifications.Magic;
 using M.A.G.U.S.Qualifications.Scientific;
@@ -108,5 +108,5 @@ public class FireWizard(byte level = 1) : Class(level), IClass, ILikeMagic
     [DiceThrowModifier(1)]
     public override byte GetPainToleranceModifier() => (byte)(DiceThrow._1K6() + 1);
 
-    public override string ClassName => "Fire Wizard";
+    public override string Name => "Fire Mage";
 }

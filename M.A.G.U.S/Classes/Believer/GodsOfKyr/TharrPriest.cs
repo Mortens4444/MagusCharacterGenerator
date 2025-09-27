@@ -1,6 +1,6 @@
 ﻿using M.A.G.U.S.GameSystem.Qualifications;
 using M.A.G.U.S.Qualifications;
-using M.A.G.U.S.Qualifications.Battle;
+using M.A.G.U.S.Qualifications.Combat;
 using M.A.G.U.S.Qualifications.Scientific;
 using M.A.G.U.S.Qualifications.Underworld;
 
@@ -38,11 +38,11 @@ public class TharrPriest(byte level = 1) : Priest(level)
 			[
 				new Alchemy(QualificationLevel.Master, 3),
 				new Demonology(QualificationLevel.Master, 4),
-				new RuneMagic(level: 6)
+				new RunicMagic(level: 6)
 			]);
 			return result;
 		}
 	}
 
-    public override string ClassName => "Tharr Priest";
+    public override string Name => "Priest of Tharr";
 }

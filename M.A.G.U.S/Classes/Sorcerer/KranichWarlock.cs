@@ -4,7 +4,7 @@ using M.A.G.U.S.GameSystem.FightMode;
 using M.A.G.U.S.GameSystem.Languages;
 using M.A.G.U.S.GameSystem.Qualifications;
 using M.A.G.U.S.Qualifications;
-using M.A.G.U.S.Qualifications.Battle;
+using M.A.G.U.S.Qualifications.Combat;
 using M.A.G.U.S.Qualifications.Laical;
 using M.A.G.U.S.Qualifications.Magic;
 using M.A.G.U.S.Qualifications.Percentages;
@@ -120,7 +120,7 @@ public class KranichWarlock(byte level = 1) : Class(level), IClass, ILikeMagic
         new Backstab(level: 5),
         new Herbalism(QualificationLevel.Master, 6),
         new AncientTongueLore(AntientLanguage.Aquir, QualificationLevel.Master, 6),
-        new RuneMagic(level: 7),
+        new RunicMagic(level: 7),
         new Demonology(level: 8)
 ];
 
@@ -139,5 +139,5 @@ public class KranichWarlock(byte level = 1) : Class(level), IClass, ILikeMagic
     [DiceThrowModifier(1)]
     public override byte GetPainToleranceModifier() => (byte)(DiceThrow._1K6() + 1);
 
-    public override string ClassName => "Kranich warlock";
+    public override string Name => "Krani Mage";
 }

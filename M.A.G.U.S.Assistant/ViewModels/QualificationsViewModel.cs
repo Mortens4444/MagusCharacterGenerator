@@ -1,16 +1,18 @@
 ﻿using M.A.G.U.S.Assistant.Extensions;
 using M.A.G.U.S.Assistant.Models;
 using M.A.G.U.S.Qualifications;
+using Mtf.LanguageService;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Windows.Input;
 
 namespace M.A.G.U.S.Assistant.ViewModels;
 
-public class QualificationsViewModel : INotifyPropertyChanged
+public partial class QualificationsViewModel : INotifyPropertyChanged
 {
     public ObservableCollection<Qualification> Qualifications { get; } = [];
     public ObservableCollection<Qualification> FilteredQualifications { get; } = [];
+    public ObservableCollection<GroupedQualifications> GroupedQualifications { get; } = [];
 
     string _searchText = String.Empty;
     public string SearchText
@@ -46,7 +48,8 @@ public class QualificationsViewModel : INotifyPropertyChanged
     private void Seed()
     {
         var qualifications = "M.A.G.U.S.Qualifications".CreateInstancesFromNamespace<Qualification>()
-            .OrderBy(q => q.Name);
+            .OrderBy(c => c.Category.Equals("Other", StringComparison.OrdinalIgnoreCase))
+            .ThenBy(q => Lng.Elem(q.Name));
 
         Qualifications.Clear();
         foreach (var q in qualifications)
@@ -62,14 +65,21 @@ public class QualificationsViewModel : INotifyPropertyChanged
         var st = SearchText?.Trim();
         if (!String.IsNullOrWhiteSpace(st))
         {
-            query = query.Where(q => q.Name?.IndexOf(st, StringComparison.CurrentCultureIgnoreCase) >= 0)
-                .OrderBy(q => q.Name);
+            query = query.Where(q => Lng.Elem(q.Name)?.IndexOf(st, StringComparison.CurrentCultureIgnoreCase) >= 0)
+                .OrderBy(c => c.Category.Equals("Other", StringComparison.OrdinalIgnoreCase))
+                .ThenBy(c => Lng.Elem(c.Name));
         }
 
-        FilteredQualifications.Clear();
-        foreach (var q in query)
+        var grouped = query
+            .GroupBy(q => q.Category)
+            .OrderBy(c => c.Key.Equals("Other", StringComparison.OrdinalIgnoreCase))
+            .ThenBy(c => Lng.Elem(c.Key))
+            .Select(g => new GroupedQualifications(Lng.Elem(g.Key), g));
+
+        GroupedQualifications.Clear();
+        foreach (var group in grouped)
         {
-            FilteredQualifications.Add(q);
+            GroupedQualifications.Add(group);
         }
     }
 

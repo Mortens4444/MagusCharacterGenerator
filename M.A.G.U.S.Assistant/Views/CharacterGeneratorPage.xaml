@@ -57,276 +57,279 @@
             <HorizontalStackLayout Spacing="8" VerticalOptions="Center" HorizontalOptions="Center">
                 <Label Text="Caste" VerticalOptions="Center"/>
                 <Picker ItemsSource="{Binding AvailableClasses}"
-                        ItemDisplayBinding="{Binding ClassName, Converter={StaticResource TranslationConverter}}"
+                        ItemDisplayBinding="{Binding Name, Converter={StaticResource TranslationConverter}}"
                         SelectedItem="{Binding SelectedClass}"
                         WidthRequest="220"/>
             </HorizontalStackLayout>
+
+            <mc:NumericUpDownWithLabel Label="Level" Minimum="1" Maximum="1000" Value="{Binding BaseClassLevel}" HorizontalOptions="Center" />
 
             <Button Text="Generate"
                     Command="{Binding GenerateCharacterCommand}"
                     HorizontalOptions="Center"
                     Margin="0,20,0,0"/>
 
-            <Grid ColumnDefinitions="*,*,*" ColumnSpacing="10" RowDefinitions="Auto" MinimumHeightRequest="1000">
+            <!-- Név, faj, kaszt, jellem, TSZ -->
+            <Border Style="{StaticResource BoxBorder}">
+                <VerticalStackLayout>
+                    <Grid ColumnDefinitions="*,Auto">
+                        <mc:EntryWithLabel Label="Character name" Text="{Binding Character.Name}" />
+                        <Button Text="Re-roll"
+                                Command="{Binding GenerateNewNameCommand}"
+                                HorizontalOptions="End"
+                                Margin="0,20,0,0"/>
+                    </Grid>
+                        
+                    <BoxView HeightRequest="1" Color="{AppThemeBinding Light={StaticResource Gray200}, Dark={StaticResource Gray600}}" Margin="0,5"/>
+                    <Grid ColumnDefinitions="*, *"
+                                RowDefinitions="Auto, Auto, Auto"
+                                MinimumWidthRequest="100"                                  
+                                RowSpacing="5">
 
-                <!-- Képességek -->
-                <VerticalStackLayout Grid.Column="0" Spacing="10">
-                    <Border Style="{StaticResource BoxBorder}">
-                        <VerticalStackLayout>
-                            <Label Text="Skills" Style="{StaticResource HeaderLabel}"/>
-                            <Grid ColumnDefinitions="Auto"
-                                  RowDefinitions="Auto, Auto, Auto, Auto, Auto, Auto, Auto, Auto, Auto, Auto"
-                                  RowSpacing="5"
-                                  MinimumWidthRequest="100"
-                                  MaximumWidthRequest="100"
-                                  MinimumHeightRequest="200">
+                        <mc:EntryWithLabel Label="Race"
+                                            Text="{Binding Character.Race.Name, Converter={StaticResource TranslationConverter}}"
+                                            HorizontalOptions="Center"
+                                            IsEnabled="False" />
 
-                                <mc:EntryWithLabel Label="Strength"
-                                                   Text="{Binding Character.Strength}"
-                                                   IsEnabled="False"
-                                                   Grid.Row="0" />
+                        <mc:EntryWithLabel Label="Class"
+                                            Text="{Binding Character.BaseCaste.Name, Converter={StaticResource TranslationConverter}}"
+                                            HorizontalOptions="Center"
+                                            IsEnabled="False"
+                                            Grid.Column="1" />
 
-                                <mc:EntryWithLabel Label="Stamina"
-                                                   Text="{Binding Character.Stamina}"
-                                                   IsEnabled="False"
-                                                   Grid.Row="1" />
+                        <mc:EntryWithLabel Label="Experience level"
+                                            Text="{Binding Character.BaseCaste.Level}"
+                                            HorizontalOptions="Center"
+                                            IsEnabled="False"
+                                            Grid.Row="1"
+                                            Grid.ColumnSpan="2" />
 
-                                <mc:EntryWithLabel Label="Quickness"
-                                                   Text="{Binding Character.Speed}"
-                                                   IsEnabled="False"
-                                                   Grid.Row="2" />
-
-                                <mc:EntryWithLabel Label="Dexterity"
-                                                   Text="{Binding Character.Dexterity}"
-                                                   IsEnabled="False"
-                                                   Grid.Row="3" />
-
-                                <mc:EntryWithLabel Label="Health"
-                                                   Text="{Binding Character.Health}"
-                                                   IsEnabled="False"
-                                                   Grid.Row="4" />
-
-                                <mc:EntryWithLabel Label="Beauty"
-                                                   Text="{Binding Character.Beauty}"
-                                                   IsEnabled="False"
-                                                   Grid.Row="5" />
-
-                                <mc:EntryWithLabel Label="Willpower"
-                                                   Text="{Binding Character.Willpower}"
-                                                   IsEnabled="False"
-                                                   Grid.Row="6" />
-
-                                <mc:EntryWithLabel Label="Intelligence"
-                                                   Text="{Binding Character.Intelligence}"
-                                                   IsEnabled="False"
-                                                   Grid.Row="7" />
-
-                                <mc:EntryWithLabel Label="Astral"
-                                                   Text="{Binding Character.Astral}"
-                                                   IsEnabled="False"
-                                                   Grid.Row="8" />
-
-                                <mc:EntryWithLabel Label="Erudition"
-                                                   Text="{Binding Character.Erudition}"
-                                                   IsEnabled="False"
-                                                   Grid.Row="9" />
-                            </Grid>
-                        </VerticalStackLayout>
-                    </Border>
+                        <!--<mc:EntryWithLabel Label="Alignment"
+                                                Text="{Binding Character.Alignment, Converter={StaticResource TranslationConverter}}"
+                                                HorizontalOptions="Center"
+                                                IsEnabled="False"
+                                                Grid.Row="1"
+                                                Grid.Column="1" />-->
+                    </Grid>
                 </VerticalStackLayout>
+            </Border>
 
-                <!-- Név, faj, kaszt, jellem, TSZ -->
-                <VerticalStackLayout Grid.Column="1" Spacing="10">
-                    <Border Style="{StaticResource BoxBorder}">
-                        <VerticalStackLayout>
-                            <!--<Label Text="Character name" Style="{StaticResource HeaderLabel}"/>
-                            <Entry Text="{Binding Character.Name}" FontSize="18"/>-->
+            <!-- Képességek -->
+            <VerticalStackLayout Spacing="10">
+                <Border Style="{StaticResource BoxBorder}">
+                    <VerticalStackLayout>
+                        <Label Text="Skills" Style="{StaticResource HeaderLabel}"/>
+                        <Grid ColumnDefinitions="*, *"
+                            RowDefinitions="Auto, Auto, Auto, Auto, Auto"
+                            RowSpacing="5"                                  
+                            MinimumHeightRequest="200">
 
-                            <mc:EntryWithLabel Label="Character name" Text="{Binding Character.Name}" />
-                            <BoxView HeightRequest="1" Color="{AppThemeBinding Light={StaticResource Gray200}, Dark={StaticResource Gray600}}" Margin="0,5"/>
-                            <Grid ColumnDefinitions="Auto"
-                                  RowDefinitions="Auto, Auto, Auto"
-                                  MinimumWidthRequest="100"                                  
-                                  RowSpacing="5">
+                            <mc:EntryWithLabel Label="Strength"
+                                            Text="{Binding Character.Strength}"
+                                            IsEnabled="False"
+                                            Grid.Row="0"
+                                            Grid.Column="0" />
 
-                                <mc:EntryWithLabel Label="Race"
-                                                   Text="{Binding Character.Race.Name, Converter={StaticResource TranslationConverter}}"
-                                                   HorizontalOptions="Center"
-                                                   IsEnabled="False"
-                                                   Grid.Row="0" />
+                            <mc:EntryWithLabel Label="Stamina"
+                                            Text="{Binding Character.Stamina}"
+                                            IsEnabled="False"
+                                            Grid.Row="0"
+                                            Grid.Column="1" />
 
-                                <mc:EntryWithLabel Label="Class"
-                                                   Text="{Binding Character.BaseCaste.ClassName, Converter={StaticResource TranslationConverter}}"
-                                                   HorizontalOptions="Center"
-                                                   IsEnabled="False"
-                                                   Grid.Row="1" />
+                            <mc:EntryWithLabel Label="Quickness"
+                                            Text="{Binding Character.Speed}"
+                                            IsEnabled="False"
+                                            Grid.Row="1"
+                                            Grid.Column="0" />
 
-                                <!--<mc:EntryWithLabel Label="Alignment"
-                                                   Text="{Binding Character.Alignment, Converter={StaticResource TranslationConverter}}"
-                                                   HorizontalOptions="Center"
-                                                   IsEnabled="False"
-                                                   Grid.Row="2" />-->
-                            </Grid>
-                        </VerticalStackLayout>
-                    </Border>
+                            <mc:EntryWithLabel Label="Dexterity"
+                                            Text="{Binding Character.Dexterity}"
+                                            IsEnabled="False"
+                                            Grid.Row="1"
+                                            Grid.Column="1" />
 
-                    <!-- Tapasztalati szint -->
-                    <Border Style="{StaticResource BoxBorder}">
-                        <VerticalStackLayout HorizontalOptions="Center" Spacing="5">
-                            <!--<mc:NumericUpDownWithLabel Label="Tapasztalati szint"
-                                Value="{Binding Character.BaseCaste.Level}"
-                                Grid.Row="2"
-                                Grid.Column="0"/>-->
-                            <mc:EntryWithLabel Label="Experience level"
-                                                   Text="{Binding Character.BaseCaste.Level}"
-                                                   IsEnabled="False"
-                                                   Margin="0,0,0,5" />
-                        </VerticalStackLayout>
-                    </Border>
+                            <mc:EntryWithLabel Label="Health"
+                                            Text="{Binding Character.Health}"
+                                            IsEnabled="False"
+                                            Grid.Row="2"
+                                            Grid.Column="0" />
 
-                    <!-- ᛉ-pontok -->
-                    <Border Style="{StaticResource BoxBorder}">
-                        <VerticalStackLayout>
-                            <Label Text="ᛉ-points" Style="{StaticResource HeaderLabel}"/>
-                            <Grid ColumnDefinitions="Auto"
-                                  RowSpacing="5"
-                                  RowDefinitions="Auto, Auto, Auto">
-                                <mc:EntryWithLabel Label="Max. ᛉp"
-                                                    Text="{Binding Character.MaxPsiPoints}"
-                                                    IsEnabled="False"
-                                                    Grid.Row="0" />
+                            <mc:EntryWithLabel Label="Beauty"
+                                            Text="{Binding Character.Beauty}"
+                                            IsEnabled="False"
+                                            Grid.Row="2"
+                                            Grid.Column="1" />
 
-                                <mc:EntryWithLabel Label="Act. ᛉp"
-                                                    Text="{Binding Character.PsiPoints}"
-                                                    IsEnabled="False"
-                                                    Grid.Row="1" />
+                            <mc:EntryWithLabel Label="Willpower"
+                                            Text="{Binding Character.Willpower}"
+                                            IsEnabled="False"
+                                            Grid.Row="3"
+                                            Grid.Column="0" />
 
-                                <mc:EntryWithLabel Label="Max. ᛉp/level"
-                                                   Text="{Binding Character.PsiPointsModifier}"
-                                                   IsEnabled="False"
-                                                   Grid.Row="2" />
-                            </Grid>
-                        </VerticalStackLayout>
-                    </Border>
+                            <mc:EntryWithLabel Label="Intelligence"
+                                            Text="{Binding Character.Intelligence}"
+                                            IsEnabled="False"
+                                            Grid.Row="3"
+                                            Grid.Column="1" />
 
-                    <!-- Mana-pontok -->
-                    <Border Style="{StaticResource BoxBorder}">
-                        <VerticalStackLayout>
-                            <Label Text="Mana-points" Style="{StaticResource HeaderLabel}"/>
-                            <Grid ColumnDefinitions="Auto"
-                                  RowSpacing="5"
-                                  RowDefinitions="Auto, Auto, Auto">
-                                <mc:EntryWithLabel Label="Max. Mp"
-                                                    Text="{Binding Character.MaxManaPointsPerLevel}"
-                                                    IsEnabled="False"
-                                                    Grid.Row="0" />
+                            <mc:EntryWithLabel Label="Astral"
+                                            Text="{Binding Character.Astral}"
+                                            IsEnabled="False"
+                                            Grid.Row="4"
+                                            Grid.Column="0" />
 
-                                <mc:EntryWithLabel Label="Akt. Mp"
-                                                    Text="{Binding Character.ManaPoints}"
-                                                    IsEnabled="False"
-                                                    Grid.Row="1" />
+                            <mc:EntryWithLabel Label="Erudition"
+                                            Text="{Binding Character.Erudition}"
+                                            IsEnabled="False"
+                                            Grid.Row="4"
+                                            Grid.Column="1" />
+                        </Grid>
+                    </VerticalStackLayout>
+                </Border>
+            </VerticalStackLayout>
 
-                                <mc:EntryWithLabel Label="Max. Mp/level"
-                                                   Text="{Binding Character.MaxManaPointsPerLevel}"
-                                                   IsEnabled="False"
-                                                   Grid.Row="2" />
-                            </Grid>
-                        </VerticalStackLayout>
-                    </Border>
-
-                </VerticalStackLayout>
-
+            <VerticalStackLayout Spacing="10">
                 <!-- Életerő -->
-                <VerticalStackLayout Grid.Column="2" Spacing="10">
-                    <Border Style="{StaticResource BoxBorder}">
-                        <VerticalStackLayout>
-                            <Label Text="Health" Style="{StaticResource HeaderLabel}"/>
-                            <Grid ColumnDefinitions="Auto"
-                                  RowDefinitions="Auto, Auto, Auto, Auto, Auto"
-                                  RowSpacing="5">
+                <Border Style="{StaticResource BoxBorder}">
+                <VerticalStackLayout>
+                    <Label Text="Health" Style="{StaticResource HeaderLabel}"/>
+                    <Grid ColumnDefinitions="*, *"
+                            RowDefinitions="Auto, Auto">
 
-                                <mc:EntryWithLabel Label="Max. Hp"
-                                                   Text="{Binding Character.MaxHealthPoints}"
-                                                   IsEnabled="False"
-                                                   WidthRequest="100"
-                                                   Grid.Row="0" />
+                        <mc:EntryWithLabel Label="Max. Hp"
+                                            Text="{Binding Character.MaxHealthPoints}"
+                                            IsEnabled="False"
+                                            WidthRequest="100"
+                                            Grid.Row="0" />
 
-                                <mc:EntryWithLabel Label="Act. Hp"
-                                                   Text="{Binding Character.HealthPoints}"
-                                                   IsEnabled="False"
-                                                   WidthRequest="100"
-                                                   Grid.Row="1" />
+                        <mc:EntryWithLabel Label="Act. Hp"
+                                            Text="{Binding Character.HealthPoints}"
+                                            IsEnabled="False"
+                                            WidthRequest="100"
+                                            Grid.Column="1" />
+                    </Grid>
+                </VerticalStackLayout>
+            </Border>
 
-                                <mc:EntryWithLabel Label="Max. Ptp"
-                                                   Text="{Binding Character.MaxPainTolerancePoints}"
-                                                   IsEnabled="False"
-                                                   WidthRequest="100"
-                                                   Grid.Row="2" />
+                <!-- Fájdalomtűrés -->
+                <Border Style="{StaticResource BoxBorder}">
+                <VerticalStackLayout>
+                    <Label Text="Pain resistance" Style="{StaticResource HeaderLabel}"/>
+                    <Grid ColumnDefinitions="*, *"
+                        RowDefinitions="Auto, Auto, Auto">
 
-                                <mc:EntryWithLabel Label="Act. Ptp"
-                                                   Text="{Binding Character.PainTolerancePoints}"
-                                                   IsEnabled="False"
-                                                   WidthRequest="100"
-                                                   Grid.Row="3" />
+                        <mc:EntryWithLabel Label="Max. Prp"
+                                        Text="{Binding Character.MaxPainTolerancePoints}"
+                                        IsEnabled="False"
+                                        WidthRequest="100" />
 
-                                <mc:EntryWithLabel Label="Act. Ptp"
-                                                   Text="{Binding Character.PainTolerancePoints}"
-                                                   IsEnabled="False"
-                                                   WidthRequest="100"
-                                                   Grid.Row="4" />
-                            </Grid>
-                        </VerticalStackLayout>
-                    </Border>
+                        <mc:EntryWithLabel Label="Act. Prp"
+                                        Text="{Binding Character.PainTolerancePoints}"
+                                        IsEnabled="False"
+                                        WidthRequest="100"
+                                        Grid.Row="1" />
 
-                    <!-- Harcértékek -->
-                    <Border Style="{StaticResource BoxBorder}">
-                        <VerticalStackLayout>
-                            <Label Text="Combat values" Style="{StaticResource HeaderLabel}"/>
+                        <mc:EntryWithLabel Label="Max. Prp/level"
+                                        Text="{Binding Character.PainTolerancePoints}"
+                                        IsEnabled="False"
+                                        WidthRequest="100"
+                                        Grid.Column="1" />
+                    </Grid>
+                </VerticalStackLayout>
+            </Border>
 
-                            <Picker ItemsSource="{Binding AvailableCombatValueModifiers}"
+                <!-- ᛉ-pontok -->
+                <Border Style="{StaticResource BoxBorder}">
+                    <VerticalStackLayout>
+                        <Label Text="ᛉ-points" Style="{StaticResource HeaderLabel}"/>
+                        <Grid ColumnDefinitions="*, *"
+                            RowSpacing="5"
+                            RowDefinitions="Auto, Auto, Auto">
+                            <mc:EntryWithLabel Label="Max. ᛉp"
+                                            Text="{Binding Character.MaxPsiPoints}"
+                                            IsEnabled="False"
+                                            Grid.Row="0" />
+
+                            <mc:EntryWithLabel Label="Act. ᛉp"
+                                            Text="{Binding Character.PsiPoints}"
+                                            IsEnabled="False"
+                                            Grid.Row="1" />
+
+                            <mc:EntryWithLabel Label="Max. ᛉp/level"
+                                            Text="{Binding Character.PsiPointsModifier}"
+                                            IsEnabled="False"
+                                            Grid.Row="0"
+                                            Grid.Column="1" />
+                        </Grid>
+                    </VerticalStackLayout>
+                </Border>
+
+                <!-- Mana-pontok -->
+                <Border Style="{StaticResource BoxBorder}">
+                    <VerticalStackLayout>
+                        <Label Text="Mana-points" Style="{StaticResource HeaderLabel}"/>
+                        <Grid ColumnDefinitions="*, *"
+                        RowSpacing="5"
+                        RowDefinitions="Auto, Auto, Auto">
+                            <mc:EntryWithLabel Label="Max. Mp"
+                                        Text="{Binding Character.MaxManaPointsPerLevel}"
+                                        IsEnabled="False"
+                                        Grid.Row="0" />
+
+                            <mc:EntryWithLabel Label="Akt. Mp"
+                                        Text="{Binding Character.ManaPoints}"
+                                        IsEnabled="False"
+                                        Grid.Row="1" />
+
+                            <mc:EntryWithLabel Label="Max. Mp/level"
+                                        Text="{Binding Character.MaxManaPointsPerLevel}"
+                                        IsEnabled="False"
+                                        Grid.Row="0"
+                                        Grid.Column="1" />
+                        </Grid>
+                    </VerticalStackLayout>
+                </Border>
+
+                <!-- Harcértékek -->
+                <Border Style="{StaticResource BoxBorder}">
+                    <VerticalStackLayout>
+                        <Label Text="Combat values" Style="{StaticResource HeaderLabel}"/>
+
+                        <Picker ItemsSource="{Binding AvailableCombatValueModifiers}"
+                                ItemDisplayBinding="{Binding ., Converter={StaticResource TranslationConverter}}"
                                 SelectedItem="{Binding SelectedCombatValueModifier}"
                                 WidthRequest="220"/>
                             
-                            <Grid ColumnDefinitions="Auto"
-                                  RowDefinitions="Auto, Auto, Auto, Auto"
-                                  RowSpacing="5">
+                        <Grid ColumnDefinitions="*, *"
+                              RowDefinitions="Auto, Auto">
 
-                                <mc:EntryWithLabel Label="Initiator value"
-                                                   Text="{Binding Character.InitiatingValue}"
-                                                   IsEnabled="False"
-                                                   WidthRequest="100"
-                                                   Grid.Row="0"
-                                                   Margin="0,0,0,5" />
+                            <mc:EntryWithLabel Label="Initiator value"
+                                               Text="{Binding Character.InitiatingValue}"
+                                               IsEnabled="False" />
 
-                                <mc:EntryWithLabel Label="Attack value"
-                                                   Text="{Binding Character.AttackingValue}"
-                                                   IsEnabled="False"
-                                                   WidthRequest="100"
-                                                   Grid.Row="1"
-                                                   Margin="0,0,0,5" />
+                            <mc:EntryWithLabel Label="Attack value"
+                                               Text="{Binding Character.AttackingValue}"
+                                               IsEnabled="False"
+                                               Grid.Column="1" />
 
-                                <mc:EntryWithLabel Label="Defense value"
-                                                   Text="{Binding Character.DefendingValue}"
-                                                   IsEnabled="False"
-                                                   WidthRequest="100"
-                                                   Grid.Row="2"
-                                                   Margin="0,0,0,5" />
+                            <mc:EntryWithLabel Label="Defense value"
+                                               Text="{Binding Character.DefendingValue}"
+                                               IsEnabled="False"
+                                               Grid.Row="1" />
 
-                                 <mc:EntryWithLabel Label="Aim value"
-                                                   Text="{Binding Character.AimingValue}"
-                                                   IsEnabled="False"
-                                                   WidthRequest="100"
-                                                   Grid.Row="3"
-                                                   Margin="0,0,0,5" />
-                            </Grid>
-                        </VerticalStackLayout>
-                    </Border>
+                            <mc:EntryWithLabel Label="Aim value"
+                                               Text="{Binding Character.AimingValue}"
+                                               IsEnabled="False"
+                                               Grid.Row="1"
+                                               Grid.Column="1" />
+                        </Grid>
+                    </VerticalStackLayout>
+                </Border>
 
-                </VerticalStackLayout>
-            </Grid>
+            </VerticalStackLayout>
 
             <!-- Képzettségek -->
-            <Border Style="{StaticResource BoxBorder}" Margin="0,10" Grid.ColumnSpan="3">
+            <Border Style="{StaticResource BoxBorder}" Margin="0,10">
                 <VerticalStackLayout>
                     <Label Text="Qualifications" Style="{StaticResource HeaderLabel}" />
                     <Grid Padding="6"
@@ -340,7 +343,6 @@
                         
                         <Label Text="Level"
                                VerticalOptions="Center"
-                               Grid.Column="1"
                                HorizontalOptions="End"
                                TextColor="Gray"
                                FontAttributes="Bold"/>
@@ -361,7 +363,6 @@
 
                                     <Label Text="{Binding QualificationLevel, Converter={StaticResource TranslationConverter}}"
                                            VerticalOptions="Center"
-                                           Grid.Column="1"
                                            HorizontalTextAlignment="End" />
                                 </Grid>
                             </DataTemplate>
@@ -371,7 +372,7 @@
             </Border>
 
             <!-- Százalékos képzettségek -->
-            <Border Style="{StaticResource BoxBorder}" Margin="0,10" Grid.ColumnSpan="3">
+            <Border Style="{StaticResource BoxBorder}" Margin="0,10">
                 <VerticalStackLayout>
                     <Label Text="Percent qualifications" Style="{StaticResource HeaderLabel}" />
                     <Grid Padding="6" ColumnDefinitions="*, Auto" ColumnSpacing="10">
@@ -383,7 +384,6 @@
 
                         <Label Text="%"
                                VerticalOptions="Center"
-                               Grid.Column="1"
                                HorizontalOptions="End"
                                TextColor="Gray"
                                FontAttributes="Bold"/>
@@ -400,7 +400,6 @@
                                            HorizontalOptions="Start" />
                                     <Label Text="{Binding Percent}"
                                            VerticalOptions="Center"
-                                           Grid.Column="1"
                                            HorizontalTextAlignment="End" />
                                 </Grid>
                             </DataTemplate>
@@ -410,7 +409,7 @@
             </Border>
             
             <!-- Speciális képzettségek -->
-            <Border Style="{StaticResource BoxBorder}" Margin="0,10" Grid.ColumnSpan="3">
+            <Border Style="{StaticResource BoxBorder}" Margin="0,10">
                 <VerticalStackLayout>
                     <Label Text="Special qualifications" Style="{StaticResource HeaderLabel}" />
                     <Grid Padding="6" ColumnDefinitions="*" ColumnSpacing="10">

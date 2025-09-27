@@ -2,7 +2,7 @@
 using M.A.G.U.S.GameSystem.Attributes;
 using M.A.G.U.S.Qualifications;
 using M.A.G.U.S.Qualifications.Laical;
-using M.A.G.U.S.Qualifications.NonPlayableCharacterQualifications;
+using M.A.G.U.S.Qualifications.Other;
 
 namespace M.A.G.U.S.Classes.NonPlayableCharacters;
 

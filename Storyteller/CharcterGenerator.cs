@@ -140,7 +140,13 @@ public partial class CharcterGenerator : Form
 			if (selectedSecondaryCaste != null && chkBoxSecondaryCaste.Checked)
 			{
 				var secondCaste = (IClass)Activator.CreateInstance(selectedSecondaryCaste, (byte)nudSecondaryCasteLevel.Value);
-				character = (Character)Activator.CreateInstance(typeof(Character), characterName, race, caste, secondCaste);
+				var created = Activator.CreateInstance(typeof(Character), characterName, race, caste, secondCaste);
+				if (created is not Character c)
+                {
+                    throw new InvalidOperationException("Failed to create Character instance.");
+                }
+
+                character = c;
 			}
 			else
 			{

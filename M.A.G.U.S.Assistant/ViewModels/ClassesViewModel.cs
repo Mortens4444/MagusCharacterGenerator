@@ -1,5 +1,7 @@
 ﻿using global::M.A.G.U.S.Classes;
 using M.A.G.U.S.Assistant.Extensions;
+using M.A.G.U.S.Qualifications;
+using Mtf.LanguageService;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 
@@ -10,61 +12,66 @@ public class ClassesViewModel : INotifyPropertyChanged
     public ObservableCollection<IClass> Classes { get; } = [];
     public ObservableCollection<IClass> FilteredClasses { get; } = [];
 
-    string _searchText = String.Empty;
+    public event PropertyChangedEventHandler? PropertyChanged;
+
+    private string searchText = String.Empty;
+    private IClass selectedClass;
+
     public string SearchText
     {
-        get => _searchText;
+        get => searchText;
         set
         {
-            if (_searchText == value)
+            if (searchText == value)
             {
                 return;
             }
 
-            _searchText = value ?? String.Empty;
+            searchText = value ?? String.Empty;
             OnPropertyChanged(nameof(SearchText));
             ApplyFilter();
         }
     }
 
-    IClass _selectedClass;
     public IClass SelectedClass
     {
-        get => _selectedClass;
+        get => selectedClass;
         set
         {
-            if (_selectedClass == value)
+            if (selectedClass == value)
             {
                 return;
             }
 
-            _selectedClass = value;
+            selectedClass = value;
             OnPropertyChanged(nameof(SelectedClass));
+            OnPropertyChanged(nameof(OrderedQualifications));
         }
     }
 
-    public event PropertyChangedEventHandler? PropertyChanged;
+    public ObservableCollection<Qualification> OrderedQualifications
+    {
+        get
+        {
+            return new ObservableCollection<Qualification>(SelectedClass?.Qualifications.OrderByLocalizedName() ?? []);
+        }
+    }
 
     public ClassesViewModel()
     {
         Seed();
         ApplyFilter();
+        SelectedClass = Classes.First();
     }
 
     private void Seed()
     {
         var classes = "M.A.G.U.S.Classes".CreateInstancesFromNamespace<Class>()
-            .OrderBy(c => c.ClassName);
+            .OrderBy(c => Lng.Elem(c.Name));
 
         Classes.Clear();
         foreach (var cls in classes)
         {
-            // név/set defaultok
-            if (String.IsNullOrEmpty(cls.Name))
-            {
-                cls.Name = cls.ClassName;
-            }
-
             Classes.Add(cls);
         }
     }
@@ -76,9 +83,11 @@ public class ClassesViewModel : INotifyPropertyChanged
         if (!String.IsNullOrWhiteSpace(st))
         {
             query = query.Where(c =>
-                c.ClassName?.IndexOf(st, StringComparison.CurrentCultureIgnoreCase) >= 0)
-                .OrderBy(c => c.ClassName);
+                c.Name?.IndexOf(st, StringComparison.CurrentCultureIgnoreCase) >= 0);
         }
+
+        query = query
+            .OrderBy(c => Lng.Elem(c.Name));
 
         FilteredClasses.Clear();
         foreach (var it in query)
@@ -87,5 +96,5 @@ public class ClassesViewModel : INotifyPropertyChanged
         }
     }
 
-    void OnPropertyChanged(string name) => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
+    private void OnPropertyChanged(string name) => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
 }

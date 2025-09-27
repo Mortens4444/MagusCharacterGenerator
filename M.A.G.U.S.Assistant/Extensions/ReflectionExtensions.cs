@@ -1,4 +1,5 @@
-﻿using System.Reflection;
+﻿using M.A.G.U.S.Qualifications.Underworld;
+using System.Reflection;
 
 namespace M.A.G.U.S.Assistant.Extensions;
 
@@ -24,34 +25,44 @@ public static class ReflectionExtensions
             }
             catch (ReflectionTypeLoadException rex)
             {
-                // ha betöltési hiba volt, vegyük az elérhető típusokat
-                types = rex.Types.Where(t => t != null).ToArray();
+                types = [.. rex.Types.Where(static t => t != null)];
             }
 
             foreach (var type in types)
             {
-                if (type == null) continue;
-                if (!type.IsClass) continue;
-                if (type.IsAbstract) continue;
-                if (type.Namespace == null) continue;
+                if (type == null || !type.IsClass || type.IsAbstract || type.Namespace == null || !typeof(T).IsAssignableFrom(type))
+                //if (type == null || !type.IsClass || type.IsAbstract || type.Namespace == null || !typeof(T).IsAssignableFrom(type) || type.GetConstructor(Type.EmptyTypes) == null)
+                {
+                    continue;
+                }
 
-                // névtér egyezés: kezdődik az adott névtérrel (így az alkönyvtárakat is befogja)
-                if (!type.Namespace.StartsWith(@namespace, StringComparison.Ordinal)) continue;
-
-                // csak ha hozzárendelhető T-hez
-                if (!typeof(T).IsAssignableFrom(type)) continue;
-
-                // kell parameterless ctor
-                if (type.GetConstructor(Type.EmptyTypes) == null) continue;
+                if (!type.Namespace.StartsWith(@namespace, StringComparison.Ordinal))
+                {
+                    continue;
+                }
 
                 try
                 {
-                    var obj = Activator.CreateInstance(type) as T;
-                    if (obj != null) result.Add(obj);
+                    var ctor = type.GetConstructors()
+                       .FirstOrDefault(c => c.GetParameters().All(p => p.HasDefaultValue));
+
+                    if (ctor != null)
+                    {
+                        var args = ctor.GetParameters().Select(p => p.DefaultValue).ToArray();
+                        var instance = ctor.Invoke(args);
+                        result.Add((T)instance);
+                    }
+                    else
+                    {
+                        if (Activator.CreateInstance(type) is T obj)
+                        {
+                            result.Add(obj);
+                        }
+                    }
                 }
-                catch
+                catch (Exception ex)
                 {
-                    // ha példányosítás közben baj van, kihagyjuk (seed-ben nem szabad törnie)
+                    throw;
                 }
             }
         }
@@ -59,34 +70,51 @@ public static class ReflectionExtensions
         return result;
     }
 
-    /// <summary>
-    /// Overload: egy konkrét assembly-ben keresi a névteret.
-    /// </summary>
     public static List<T> CreateInstancesFromNamespace<T>(this Assembly assembly, string @namespace)
         where T : class
     {
-        if (assembly == null) throw new ArgumentNullException(nameof(assembly));
+        if (assembly == null)
+        {
+            throw new ArgumentNullException(nameof(assembly));
+        }
+
         var result = new List<T>();
 
         var types = new Type[0];
         try { types = assembly.GetTypes(); }
-        catch (ReflectionTypeLoadException rex) { types = rex.Types.Where(t => t != null).ToArray(); }
+        catch (ReflectionTypeLoadException rex) { types = [.. rex.Types.Where(t => t != null)]; }
 
         foreach (var type in types)
         {
-            if (type == null) continue;
-            if (!type.IsClass || type.IsAbstract) continue;
-            if (type.Namespace == null) continue;
-            if (!type.Namespace.StartsWith(@namespace, StringComparison.Ordinal)) continue;
-            if (!typeof(T).IsAssignableFrom(type)) continue;
-            if (type.GetConstructor(Type.EmptyTypes) == null) continue;
+            if (type == null || !type.IsClass || type.IsAbstract || type.Namespace == null || !type.Namespace.StartsWith(@namespace, StringComparison.Ordinal) || !typeof(T).IsAssignableFrom(type))
+            //if (type == null || !type.IsClass || type.IsAbstract || type.Namespace == null || !type.Namespace.StartsWith(@namespace, StringComparison.Ordinal) || !typeof(T).IsAssignableFrom(type) || type.GetConstructor(Type.EmptyTypes) == null)
+            {
+                continue;
+            }
 
             try
             {
-                var obj = Activator.CreateInstance(type) as T;
-                if (obj != null) result.Add(obj);
+                var ctor = type.GetConstructors()
+                       .FirstOrDefault(c => c.GetParameters().All(p => p.HasDefaultValue));
+
+                if (ctor != null)
+                {
+                    var args = ctor.GetParameters().Select(p => p.DefaultValue).ToArray();
+                    var instance = ctor.Invoke(args);
+                    result.Add((T)instance);
+                }
+                else
+                {
+                    if (Activator.CreateInstance(type) is T obj)
+                    {
+                        result.Add(obj);
+                    }
+                }
             }
-            catch { }
+            catch (Exception ex)
+            {
+                throw;
+            }
         }
 
         return result;

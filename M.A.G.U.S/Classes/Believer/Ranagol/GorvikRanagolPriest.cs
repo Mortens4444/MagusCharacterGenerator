@@ -1,6 +1,6 @@
 ﻿using M.A.G.U.S.GameSystem.Qualifications;
 using M.A.G.U.S.Qualifications;
-using M.A.G.U.S.Qualifications.Magic;
+using M.A.G.U.S.Qualifications.Scientific;
 using M.A.G.U.S.Qualifications.Underworld;
 
 namespace M.A.G.U.S.Classes.Believer.Ranagol;
@@ -35,5 +35,5 @@ public class GorvikRanagolPriest(byte level = 1) : Priest(level)
         }
     }
 
-    public override string ClassName => "Ranagol Priest (Gorvik)";
+    public override string Name => "Priest of Ranagol (Gorvik)";
 }

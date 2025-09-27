@@ -1,7 +1,7 @@
 ﻿using M.A.G.U.S.GameSystem;
 using M.A.G.U.S.GameSystem.Attributes;
 using M.A.G.U.S.Qualifications;
-using M.A.G.U.S.Qualifications.Battle;
+using M.A.G.U.S.Qualifications.Combat;
 
 namespace M.A.G.U.S.Classes.NonPlayableCharacters;
 
@@ -87,5 +87,5 @@ public class GuardOfficer(byte level = 1) : Class(level), IClass
     [DiceThrow(ThrowType._1K5)]
     public override byte GetPainToleranceModifier() => (byte)DiceThrow._1K5();
 
-    public override string ClassName => "Guard officer";
+    public override string Name => "Guard officer";
 }

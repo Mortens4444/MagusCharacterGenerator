@@ -3,7 +3,7 @@ using M.A.G.U.S.GameSystem.Attributes;
 using M.A.G.U.S.GameSystem.FightMode;
 using M.A.G.U.S.GameSystem.Qualifications;
 using M.A.G.U.S.Qualifications;
-using M.A.G.U.S.Qualifications.Battle;
+using M.A.G.U.S.Qualifications.Combat;
 using M.A.G.U.S.Qualifications.Magic;
 using M.A.G.U.S.Qualifications.Scientific;
 using M.A.G.U.S.Qualifications.Scientific.Psi;
@@ -95,14 +95,14 @@ public class Wizard(byte level = 1) : Class(level), IClass, ILikeMagic
         new Physiology(),
         new LegendLore(),
         new HistoryLore(),
-        new RuneMagic()
+        new RunicMagic()
    ];
 
     public override QualificationList FutureQualifications =>
     [
         new Herbalism(level: 4),
         new Alchemy(QualificationLevel.Master, 6),
-        new RuneMagic(QualificationLevel.Master, 6),
+        new RunicMagic(QualificationLevel.Master, 6),
         new LegendLore(QualificationLevel.Master, 7),
         new HistoryLore(QualificationLevel.Master, 8)
     ];

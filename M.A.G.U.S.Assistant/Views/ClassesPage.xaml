@@ -22,83 +22,45 @@
         </ResourceDictionary>
     </v:NotifierPage.Resources>
 
-    <Grid Padding="10" RowSpacing="8" ColumnSpacing="8" RowDefinitions="Auto,*">
-        <!-- Search -->
+    <Grid Padding="10" RowSpacing="8" ColumnSpacing="8" RowDefinitions="Auto,Auto, *">
         <mc:EntryWithLabel Grid.Row="0" Label="Search" Text="{Binding SearchText}" />
 
-        <!-- Content: kétoszlopos (lista | részletek) -->
-        <Grid Grid.Row="1" ColumnDefinitions="*,2*" ColumnSpacing="8">
-            <!-- Lista -->
-            <CollectionView Grid.Column="0"
-                            ItemsSource="{Binding FilteredClasses}"
-                            SelectionMode="Single"
-                            SelectedItem="{Binding SelectedClass, Mode=TwoWay}"
-                            VerticalOptions="FillAndExpand"
-                            ItemsLayout="VerticalList">
-                <CollectionView.ItemTemplate>
-                    <DataTemplate x:DataType="cls:Class">
-                        <Border Stroke="Gray" StrokeThickness="1" Padding="8" Margin="0,4">
-                            <Grid ColumnDefinitions="*,Auto" RowDefinitions="Auto,Auto" ColumnSpacing="8">
-                                <Label Text="{Binding ClassName, Converter={StaticResource TranslationConverter}}" FontAttributes="Bold" Grid.Column="0" Grid.Row="0" VerticalOptions="Center"/>
-                                <Label Text="Lv. {Binding Level}" Grid.Column="1" Grid.Row="0" VerticalOptions="Center" HorizontalOptions="End"/>
-                                <Label Text="{Binding Name, Converter={StaticResource TranslationConverter}}" Grid.Column="0" Grid.Row="1" FontSize="12" LineBreakMode="TailTruncation"/>
-                                <Label Text="{Binding Gold}" Grid.Column="1" Grid.Row="1" HorizontalOptions="End" FontSize="12"/>
-                            </Grid>
-                        </Border>
-                    </DataTemplate>
-                </CollectionView.ItemTemplate>
-            </CollectionView>
+        <HorizontalStackLayout Grid.Row="1">
+            <Picker ItemsSource="{Binding FilteredClasses}"
+                    ItemDisplayBinding="{Binding Name, Converter={StaticResource TranslationConverter}}"
+                    SelectedItem="{Binding SelectedClass}" />
+        </HorizontalStackLayout>
 
-            <!-- Részletek -->
-            <ScrollView Grid.Column="1" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
-                <!-- ez a Border töltsön ki teljes szélességet -->
+        <Grid Grid.Row="2" ColumnDefinitions="*" ColumnSpacing="8">
+
+            <ScrollView>
                 <Border Stroke="{AppThemeBinding Light={StaticResource Gray300}, Dark={StaticResource Gray500}}"
-            StrokeThickness="1" Padding="10"
-            BackgroundColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource Gray900}}"
-            HorizontalOptions="FillAndExpand">
+                        StrokeThickness="1" Padding="10"
+                        BackgroundColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource Gray900}}">
 
-                    <!-- a StackLayout is töltse ki a szélességet -->
-                    <StackLayout Spacing="8" HorizontalOptions="FillAndExpand">
+                    <StackLayout Spacing="8">
 
-                        <Label Text="{Binding SelectedClass.ClassName}" FontSize="20" FontAttributes="Bold" HorizontalOptions="StartAndExpand"/>
-
-                        <!-- Általános adatok: második oszlop rugalmas -->
-                        <!--<Grid ColumnDefinitions="Auto,*" RowSpacing="6" ColumnSpacing="12" HorizontalOptions="FillAndExpand">
-                            ...
-                        </Grid>
-
-                        <Label Text="Stats" FontAttributes="Bold" Margin="0,8,0,0"/>
-
-                        <Grid ColumnDefinitions="Auto,*" RowSpacing="6" HorizontalOptions="FillAndExpand">
-                            ...
-                        </Grid>-->
-
-                        <!-- Qualifications border: kitöltés -->
                         <Border Stroke="{AppThemeBinding Light={StaticResource Gray300}, Dark={StaticResource Gray500}}"
-                    StrokeThickness="1" Padding="10"
-                    BackgroundColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource Gray900}}"
-                    HorizontalOptions="FillAndExpand">
-                            <VerticalStackLayout Spacing="6" HorizontalOptions="FillAndExpand">
+                                StrokeThickness="1" Padding="10"
+                                BackgroundColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource Gray900}}">
+                            <VerticalStackLayout Spacing="6">
                                 <Label Text="Qualifications" FontAttributes="Bold"/>
-                                <Grid ColumnDefinitions="*, Auto" ColumnSpacing="10" Padding="6" HorizontalOptions="FillAndExpand">
+                                <Grid ColumnDefinitions="*, Auto" ColumnSpacing="10" Padding="6">
                                     <Label Text="Name" VerticalOptions="Center" TextColor="Gray" FontAttributes="Bold"/>
-                                    <Label Text="Level" VerticalOptions="Center" Grid.Column="1" HorizontalOptions="End" TextColor="Gray" FontAttributes="Bold"/>
+                                    <Label Text="Level" VerticalOptions="Center" HorizontalOptions="End" TextColor="Gray" FontAttributes="Bold"/>
                                 </Grid>
 
-                                <CollectionView ItemsSource="{Binding SelectedClass.Qualifications}"
-                                    SelectionMode="None"
-                                    HorizontalOptions="FillAndExpand">
+                                <CollectionView ItemsSource="{Binding OrderedQualifications}"
+                                                SelectionMode="None">
                                     <CollectionView.ItemTemplate>
                                         <DataTemplate x:DataType="local:Qualification">
-                                            <Grid Padding="6" ColumnDefinitions="*,Auto" ColumnSpacing="10" HorizontalOptions="FillAndExpand">
+                                            <Grid Padding="6" ColumnDefinitions="*,Auto" ColumnSpacing="10">
                                                 <Label Text="{Binding Name, Converter={StaticResource TranslationConverter}}"
-                                           VerticalOptions="Center"
-                                           HorizontalOptions="StartAndExpand"
-                                           LineBreakMode="TailTruncation" />
+                                                       VerticalOptions="Center"
+                                                       LineBreakMode="TailTruncation" />
                                                 <Label Text="{Binding QualificationLevel, Converter={StaticResource TranslationConverter}}"
-                                           VerticalOptions="Center"
-                                           Grid.Column="1"
-                                           HorizontalTextAlignment="End" />
+                                                       VerticalOptions="Center"
+                                                       HorizontalTextAlignment="End" />
                                             </Grid>
                                         </DataTemplate>
                                     </CollectionView.ItemTemplate>
@@ -106,7 +68,6 @@
                             </VerticalStackLayout>
                         </Border>
 
-                        <!-- ismételd ezt a HorizontalOptions értéket a többi Border/CollectionView-nál is -->
                     </StackLayout>
                 </Border>
             </ScrollView>

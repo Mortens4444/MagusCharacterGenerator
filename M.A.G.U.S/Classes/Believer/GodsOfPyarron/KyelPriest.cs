@@ -1,6 +1,6 @@
 ﻿using M.A.G.U.S.GameSystem.Qualifications;
 using M.A.G.U.S.Qualifications;
-using M.A.G.U.S.Qualifications.Battle;
+using M.A.G.U.S.Qualifications.Combat;
 using M.A.G.U.S.Qualifications.Laical;
 using M.A.G.U.S.Qualifications.Scientific;
 
@@ -51,5 +51,5 @@ public class KyelPriest(byte level = 1) : Priest(level)
         }
     }
 
-    public override string ClassName => "Kiel Priest";
+    public override string Name => "Priest of Kyel";
 }

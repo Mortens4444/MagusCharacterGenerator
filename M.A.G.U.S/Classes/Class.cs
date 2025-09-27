@@ -9,9 +9,7 @@ public abstract class Class(byte level) : IClass
 
     protected readonly DiceThrow DiceThrow = new();
 
-    public virtual string ClassName => GetType().Name;
-
-    public string Name { get; set; } = String.Empty;
+    public virtual string Name => GetType().Name;
 
     public byte Level { get; set; } = level;
 

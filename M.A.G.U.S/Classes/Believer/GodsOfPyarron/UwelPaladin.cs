@@ -1,6 +1,6 @@
 ﻿using M.A.G.U.S.GameSystem.Qualifications;
 using M.A.G.U.S.Qualifications;
-using M.A.G.U.S.Qualifications.Battle;
+using M.A.G.U.S.Qualifications.Combat;
 using M.A.G.U.S.Qualifications.Laical;
 using M.A.G.U.S.Qualifications.Scientific;
 
@@ -40,5 +40,5 @@ public class UwelPaladin(byte level = 1) : Paladin(level)
         }
     }
 
-    public override string ClassName => "Uwel Paladin";
+    public override string Name => "Paladin of Uwel";
 }

@@ -45,7 +45,7 @@
                                 <Label Text="{Binding Name}" FontAttributes="Bold"/>
                                 <Label Text="{Binding Meaning, Converter={StaticResource TranslationConverter}}" FontSize="12" LineBreakMode="WordWrap"/>
                             </StackLayout>
-                            <Label Text="{Binding Equivalent}" 
+                            <Label Text="{Binding Equivalent}"
                                    Grid.Column="2"
                                    VerticalOptions="Center"
                                    FontAttributes="Bold"/>

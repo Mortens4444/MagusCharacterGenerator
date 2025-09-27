@@ -20,68 +20,41 @@
         </ResourceDictionary>
     </v:NotifierPage.Resources>
 
-    <Grid Padding="10" RowSpacing="8" RowDefinitions="Auto,*">
-        <!-- Keresőmező -->
+    <Grid Padding="10" RowSpacing="8" RowDefinitions="Auto, Auto, *">
+
         <Grid Grid.Row="0" ColumnDefinitions="*" ColumnSpacing="6">
-            <mc:EntryWithLabel Label="Search"
-                               Text="{Binding SearchText}"
-                               Grid.Column="0" />
+            <mc:EntryWithLabel Label="Search" Text="{Binding SearchText}" Grid.Column="0" />
         </Grid>
 
-        <Label Text="Qualifications" Style="{StaticResource HeaderLabel}" />
-        <Grid Padding="6"
-                          ColumnDefinitions="*, Auto, Auto"
-                          ColumnSpacing="10">
-
-            <Label Text="Name"
-                               VerticalOptions="Center"
-                               TextColor="Gray"
-                               FontAttributes="Bold"/>
-
-            <Label Text="Base"
-                               VerticalOptions="Center"
-                               Grid.Column="1"
-                               HorizontalOptions="End"
-                               TextColor="Gray"
-                               FontAttributes="Bold"/>
-
-            <Label Text="Master"
-                               VerticalOptions="Center"
-                               Grid.Column="2"
-                               HorizontalOptions="End"
-                               TextColor="Gray"
-                               FontAttributes="Bold"/>
+        <Grid Padding="6" Grid.Row="1" ColumnDefinitions="*, Auto, Auto" ColumnSpacing="10">
+            <Label Text="Name" VerticalOptions="Center" TextColor="Gray" FontAttributes="Bold" />
+            <Label Text="Basic level" VerticalOptions="Center" Grid.Column="1" HorizontalOptions="End" TextColor="Gray" FontAttributes="Bold" />
+            <Label Text="Master level" VerticalOptions="Center" Grid.Column="2" HorizontalOptions="End" TextColor="Gray" FontAttributes="Bold" />
         </Grid>
 
-        <!-- Lista -->
-        <CollectionView Grid.Row="1"
-                        ItemsSource="{Binding FilteredQualifications}"
-                        SelectionMode="None"
-                        VerticalOptions="FillAndExpand"
-                        HorizontalOptions="FillAndExpand"
-                        ItemsLayout="VerticalList">
+        <CollectionView Grid.Row="2" ItemsSource="{Binding GroupedQualifications}" IsGrouped="True" SelectionMode="None" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" ItemsLayout="VerticalList">
+
+            <CollectionView.GroupHeaderTemplate>
+                <DataTemplate x:DataType="m:GroupedQualifications">
+                    <Label Text="{Binding Category, Converter={StaticResource TranslationConverter}}" FontSize="18" FontAttributes="Bold" TextColor="Yellow" Padding="4,8" />
+                </DataTemplate>
+            </CollectionView.GroupHeaderTemplate>
+
             <CollectionView.ItemTemplate>
                 <DataTemplate x:DataType="m:Qualification">
                     <Border Stroke="Gray" StrokeThickness="1" Padding="8" Margin="0,4">
                         <Grid ColumnDefinitions="*,Auto,Auto" ColumnSpacing="8" VerticalOptions="Center">
                             <StackLayout Grid.Column="0" Spacing="2">
                                 <Label Text="{Binding Name, Converter={StaticResource TranslationConverter}}" FontAttributes="Bold"/>
-                                <Label Text="{Binding Description, Converter={StaticResource TranslationConverter}}" FontSize="12" LineBreakMode="WordWrap"/>
                             </StackLayout>
 
-                            <Label Text="{Binding QpToBaseQualification}" 
-                                   Grid.Column="1"
-                                   VerticalOptions="Center"
-                                   FontAttributes="Bold"/>
-
-                            <Label Text="{Binding QpToMasterQualification}" 
-                                   Grid.Column="2"
-                                   VerticalOptions="Center"
-                                   FontAttributes="Bold"/>
+                            <Label Text="{Binding QpToBaseQualification}" Grid.Column="1" VerticalOptions="Center" FontAttributes="Bold"/>
+                            <Label Text="{Binding QpToMasterQualification}" Grid.Column="2" VerticalOptions="Center" HorizontalTextAlignment="End" MinimumWidthRequest="75" FontAttributes="Bold"/>
                         </Grid>
                     </Border>
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>
+
     </Grid>
 </v:NotifierPage>

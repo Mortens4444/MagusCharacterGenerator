@@ -88,7 +88,7 @@
 		<MauiIcon Include="Resources\AppIcon\appicon.svg" ForegroundFile="Resources\AppIcon\appiconfg.svg" Color="#512BD4" />
 
 		<!-- Splash Screen -->
-		<MauiSplashScreen Include="Resources\Splash\splash.png" Color="#000000" BaseSize="1024,1024" />
+		<MauiSplashScreen Include="Resources\Splash\splash.png" Color="#000000" />
 
 		<!-- Images -->
 		<MauiImage Include="Resources\Images\*" />
@@ -104,7 +104,7 @@
 		<PackageReference Include="Microsoft.Maui.Controls" Version="9.0.110" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="9.0.9" />
 		<PackageReference Include="Mtf.Maui.Controls" Version="1.0.28" />
-		<PackageReference Include="Mtf.MAUI.LanguageService" Version="1.0.23" />
+		<PackageReference Include="Mtf.MAUI.LanguageService" Version="1.0.25" />
 	</ItemGroup>
 
 	<ItemGroup>

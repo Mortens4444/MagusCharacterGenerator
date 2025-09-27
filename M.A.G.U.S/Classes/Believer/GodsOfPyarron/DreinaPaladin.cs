@@ -1,6 +1,5 @@
 ﻿using M.A.G.U.S.Qualifications;
-using M.A.G.U.S.Qualifications.Battle;
-using M.A.G.U.S.Qualifications.Laical;
+using M.A.G.U.S.Qualifications.Combat;
 using M.A.G.U.S.Qualifications.Scientific;
 
 namespace M.A.G.U.S.Classes.Believer.GodsOfPyarron;
@@ -36,5 +35,5 @@ public class DreinaPaladin(byte level = 1) : Paladin(level)
         }
     }
 
-    public override string ClassName => "Dreina Paladin";
+    public override string Name => "Paladin of Dreina";
 }

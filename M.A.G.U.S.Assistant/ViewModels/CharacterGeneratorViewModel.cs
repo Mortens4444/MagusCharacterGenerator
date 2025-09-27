@@ -7,6 +7,7 @@ using M.A.G.U.S.GameSystem;
 using M.A.G.U.S.Races;
 using M.A.G.U.S.Things.Weapons;
 using M.A.G.U.S.Utils;
+using Mtf.LanguageService;
 using System.Collections.ObjectModel;
 using System.Reflection;
 using System.Runtime.Versioning;
@@ -37,18 +38,17 @@ namespace M.A.G.U.S.Assistant.ViewModels
 
         public ObservableCollection<IClass?> AvailableClasses { get; } = new ObservableCollection<IClass?>();
 
-
-        byte selectedLevel;
-        public byte SelectedLevel
+        private byte baseClassLevel = 1;
+        public byte BaseClassLevel
         {
-            get => selectedLevel;
+            get => baseClassLevel;
             set
             {
-                SetProperty(ref selectedLevel, value);
+                SetProperty(ref baseClassLevel, value);
             }
         }
 
-        string selectedCombatValueModifier;
+        private string selectedCombatValueModifier;
         public string SelectedCombatValueModifier
         {
             get => selectedCombatValueModifier;
@@ -98,7 +98,7 @@ namespace M.A.G.U.S.Assistant.ViewModels
                 WeakReferenceMessenger.Default.Send(new ShowErrorMessage("No class selected!"));
                 return;
             }
-            
+
             var instanceClass = InstanceClass(selectedClass.GetType(), 1);
             if (instanceClass == null)
             {
@@ -107,6 +107,16 @@ namespace M.A.G.U.S.Assistant.ViewModels
             }
 
             Character = new Character(NameGenerator.Get().ToName(), selectedRace, instanceClass);
+        }
+
+        [RelayCommand]
+        public void GenerateNewName()
+        {
+            if (Character == null)
+            {
+                GenerateCharacter();
+            }
+            Character.Name = NameGenerator.Get().ToName();
         }
 
         private void LoadAvailableTypes()
@@ -166,14 +176,14 @@ namespace M.A.G.U.S.Assistant.ViewModels
                 }
             }
 
-            var sortedRaces = AvailableRaces.OrderBy(r => r.Name).ToArray();
+            var sortedRaces = AvailableRaces.OrderBy(r => Lng.Elem(r.Name)).ToArray();
             AvailableRaces.Clear();
             foreach (var r in sortedRaces)
             {
                 AvailableRaces.Add(r);
             }
 
-            var sortedClasses = AvailableClasses.OrderBy(c => c.ClassName).ToArray();
+            var sortedClasses = AvailableClasses.OrderBy(c => Lng.Elem(c.Name)).ToArray();
             AvailableClasses.Clear();
             foreach (var c in sortedClasses)
             {

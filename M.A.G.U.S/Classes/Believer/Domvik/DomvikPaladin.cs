@@ -34,5 +34,5 @@ public class DomvikPaladin(byte level = 1) : Paladin(level)
         }
     }
 
-    public override string ClassName => "Domvik Paladin";
+    public override string Name => "Paladin of Domvik";
 }

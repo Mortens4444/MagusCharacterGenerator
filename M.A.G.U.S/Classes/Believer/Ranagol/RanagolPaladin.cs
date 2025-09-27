@@ -1,15 +1,13 @@
 ﻿using M.A.G.U.S.GameSystem.Qualifications;
 using M.A.G.U.S.Qualifications;
-using M.A.G.U.S.Qualifications.Battle;
+using M.A.G.U.S.Qualifications.Combat;
 using M.A.G.U.S.Qualifications.Scientific;
 using M.A.G.U.S.Qualifications.Underworld;
 
 namespace M.A.G.U.S.Classes.Believer.Ranagol;
 
-public class RanagolPaladin : Paladin
+public class RanagolPaladin(byte level = 1) : Paladin(level)
 {
-    public RanagolPaladin(byte level = 1) : base(level) { }
-
     public override QualificationList Qualifications
     {
         get
@@ -39,5 +37,5 @@ public class RanagolPaladin : Paladin
         }
     }
 
-    public override string ClassName => "Ranagol Paladin";
+    public override string Name => "Paladin of Ranagol";
 }

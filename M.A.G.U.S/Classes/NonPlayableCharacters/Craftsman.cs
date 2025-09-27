@@ -1,7 +1,7 @@
 ﻿using M.A.G.U.S.GameSystem;
 using M.A.G.U.S.GameSystem.Attributes;
 using M.A.G.U.S.Qualifications;
-using M.A.G.U.S.Qualifications.NonPlayableCharacterQualifications;
+using M.A.G.U.S.Qualifications.Other;
 using M.A.G.U.S.Qualifications.Scientific;
 
 namespace M.A.G.U.S.Classes.NonPlayableCharacters;
@@ -91,5 +91,5 @@ public class Craftsman(byte level = 1) : Class(level), IClass
     [DiceThrow(ThrowType._1K2)]
     public override byte GetPainToleranceModifier() => (byte)DiceThrow._1K2();
 
-    public override string ClassName => "Craftsman";
+    public override string Name => "Craftsman";
 }

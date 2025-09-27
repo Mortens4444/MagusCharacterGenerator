@@ -3,14 +3,9 @@ using M.A.G.U.S.GameSystem.Qualifications;
 
 namespace M.A.G.U.S.Qualifications.Scientific.Psi;
 
-public class PsiKranic : Qualification, IPsi
+public class PsiKranic(QualificationLevel qualificationLevel = QualificationLevel.Base, byte level = 1) : Qualification(qualificationLevel, level), IPsi
 {
-    public PsiKranic(QualificationLevel qualificationLevel = QualificationLevel.Base, byte level = 1)
-        : base(qualificationLevel, level)
-    {
-    }
-
     public PsiKind PsiKind => PsiKind.Kranich;
 
-    public override string Name => "Psi, Kránic";
+    public override string Name => "Psi, Kranich";
 }

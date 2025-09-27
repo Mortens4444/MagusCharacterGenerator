@@ -5,7 +5,7 @@ namespace M.A.G.U.S.Classes;
 
 public interface IClass : IAbilities
 {
-    string ClassName { get; }
+    string Name { get; }
 
     short Gold { get; }
 

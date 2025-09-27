@@ -3,7 +3,7 @@ using M.A.G.U.S.GameSystem.Attributes;
 using M.A.G.U.S.GameSystem.FightMode;
 using M.A.G.U.S.GameSystem.Qualifications;
 using M.A.G.U.S.Qualifications;
-using M.A.G.U.S.Qualifications.Battle;
+using M.A.G.U.S.Qualifications.Combat;
 using M.A.G.U.S.Qualifications.Laical;
 using M.A.G.U.S.Qualifications.Percentages;
 using M.A.G.U.S.Qualifications.Scientific.Psi;
@@ -143,4 +143,6 @@ public class Headhunter(byte level = 1) : Class(level), IClass, IJustFight
     [DiceThrow(ThrowType._1K6)]
     [DiceThrowModifier(5)]
     public override byte GetPainToleranceModifier() => (byte)(DiceThrow._1K6() + 5);
+
+    public override string Name => "Assassin";
 }

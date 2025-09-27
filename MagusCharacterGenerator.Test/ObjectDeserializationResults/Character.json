@@ -13,12 +13,12 @@
       "$values": [
         {
           "$id": "2",
-          "$type": "M.A.G.U.S.Qualifications.Battle.WeaponUsage, MagusCharacterGenerator",
+          "$type": "M.A.G.U.S.Qualifications.Combat.WeaponUsage, MagusCharacterGenerator",
           "Weapon": null,
           "QualificationLevel": 0,
           "BaseQualificationLevel": 1,
           "MasterQualificationLevel": 0,
-          "QualificationType": "M.A.G.U.S.Qualifications.Battle.WeaponUsage, MagusCharacterGenerator, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
+          "QualificationType": "M.A.G.U.S.Qualifications.Combat.WeaponUsage, MagusCharacterGenerator, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
         },
         {
           "$id": "3",
@@ -81,47 +81,47 @@
         },
         {
           "$id": "10",
-          "$type": "M.A.G.U.S.Qualifications.Battle.WeaponUsage, MagusCharacterGenerator",
+          "$type": "M.A.G.U.S.Qualifications.Combat.WeaponUsage, MagusCharacterGenerator",
           "Weapon": null,
           "QualificationLevel": 0,
           "BaseQualificationLevel": 1,
           "MasterQualificationLevel": 0,
-          "QualificationType": "M.A.G.U.S.Qualifications.Battle.WeaponUsage, MagusCharacterGenerator, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
+          "QualificationType": "M.A.G.U.S.Qualifications.Combat.WeaponUsage, MagusCharacterGenerator, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
         },
         {
           "$id": "11",
-          "$type": "M.A.G.U.S.Qualifications.Battle.WeaponUsage, MagusCharacterGenerator",
+          "$type": "M.A.G.U.S.Qualifications.Combat.WeaponUsage, MagusCharacterGenerator",
           "Weapon": null,
           "QualificationLevel": 0,
           "BaseQualificationLevel": 1,
           "MasterQualificationLevel": 0,
-          "QualificationType": "M.A.G.U.S.Qualifications.Battle.WeaponUsage, MagusCharacterGenerator, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
+          "QualificationType": "M.A.G.U.S.Qualifications.Combat.WeaponUsage, MagusCharacterGenerator, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
         },
         {
           "$id": "12",
-          "$type": "M.A.G.U.S.Qualifications.Battle.WeaponUsage, MagusCharacterGenerator",
+          "$type": "M.A.G.U.S.Qualifications.Combat.WeaponUsage, MagusCharacterGenerator",
           "Weapon": null,
           "QualificationLevel": 0,
           "BaseQualificationLevel": 1,
           "MasterQualificationLevel": 0,
-          "QualificationType": "M.A.G.U.S.Qualifications.Battle.WeaponUsage, MagusCharacterGenerator, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
+          "QualificationType": "M.A.G.U.S.Qualifications.Combat.WeaponUsage, MagusCharacterGenerator, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
         },
         {
           "$id": "13",
-          "$type": "M.A.G.U.S.Qualifications.Battle.WeaponThrowing, MagusCharacterGenerator",
+          "$type": "M.A.G.U.S.Qualifications.Combat.WeaponThrowing, MagusCharacterGenerator",
           "Weapon": null,
           "QualificationLevel": 0,
           "BaseQualificationLevel": 1,
           "MasterQualificationLevel": 0,
-          "QualificationType": "M.A.G.U.S.Qualifications.Battle.WeaponThrowing, MagusCharacterGenerator, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
+          "QualificationType": "M.A.G.U.S.Qualifications.Combat.WeaponThrowing, MagusCharacterGenerator, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
         },
         {
           "$id": "14",
-          "$type": "M.A.G.U.S.Qualifications.Battle.WeaponKnowledge, MagusCharacterGenerator",
+          "$type": "M.A.G.U.S.Qualifications.Combat.WeaponKnowledge, MagusCharacterGenerator",
           "QualificationLevel": 0,
           "BaseQualificationLevel": 1,
           "MasterQualificationLevel": 0,
-          "QualificationType": "M.A.G.U.S.Qualifications.Battle.WeaponKnowledge, MagusCharacterGenerator, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
+          "QualificationType": "M.A.G.U.S.Qualifications.Combat.WeaponKnowledge, MagusCharacterGenerator, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
         },
         {
           "$id": "15",
@@ -213,11 +213,11 @@
       "$values": [
         {
           "$id": "25",
-          "$type": "M.A.G.U.S.Qualifications.Battle.PubFighting, MagusCharacterGenerator",
+          "$type": "M.A.G.U.S.Qualifications.Combat.PubFighting, MagusCharacterGenerator",
           "QualificationLevel": 0,
           "BaseQualificationLevel": 2,
           "MasterQualificationLevel": 0,
-          "QualificationType": "M.A.G.U.S.Qualifications.Battle.PubFighting, MagusCharacterGenerator, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
+          "QualificationType": "M.A.G.U.S.Qualifications.Combat.PubFighting, MagusCharacterGenerator, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
         },
         {
           "$id": "26",
@@ -245,12 +245,12 @@
         },
         {
           "$id": "29",
-          "$type": "M.A.G.U.S.Qualifications.Battle.WeaponUsage, MagusCharacterGenerator",
+          "$type": "M.A.G.U.S.Qualifications.Combat.WeaponUsage, MagusCharacterGenerator",
           "Weapon": null,
           "QualificationLevel": 1,
           "BaseQualificationLevel": 9,
           "MasterQualificationLevel": 9,
-          "QualificationType": "M.A.G.U.S.Qualifications.Battle.WeaponUsage, MagusCharacterGenerator, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
+          "QualificationType": "M.A.G.U.S.Qualifications.Combat.WeaponUsage, MagusCharacterGenerator, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
         }
       ]
     },
@@ -311,12 +311,12 @@
           "$values": [
             {
               "$id": "33",
-              "$type": "M.A.G.U.S.Qualifications.Battle.WeaponUsage, MagusCharacterGenerator",
+              "$type": "M.A.G.U.S.Qualifications.Combat.WeaponUsage, MagusCharacterGenerator",
               "Weapon": null,
               "QualificationLevel": 0,
               "BaseQualificationLevel": 1,
               "MasterQualificationLevel": 0,
-              "QualificationType": "M.A.G.U.S.Qualifications.Battle.WeaponUsage, MagusCharacterGenerator, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
+              "QualificationType": "M.A.G.U.S.Qualifications.Combat.WeaponUsage, MagusCharacterGenerator, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
             },
             {
               "$id": "34",
@@ -379,47 +379,47 @@
             },
             {
               "$id": "41",
-              "$type": "M.A.G.U.S.Qualifications.Battle.WeaponUsage, MagusCharacterGenerator",
+              "$type": "M.A.G.U.S.Qualifications.Combat.WeaponUsage, MagusCharacterGenerator",
               "Weapon": null,
               "QualificationLevel": 0,
               "BaseQualificationLevel": 1,
               "MasterQualificationLevel": 0,
-              "QualificationType": "M.A.G.U.S.Qualifications.Battle.WeaponUsage, MagusCharacterGenerator, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
+              "QualificationType": "M.A.G.U.S.Qualifications.Combat.WeaponUsage, MagusCharacterGenerator, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
             },
             {
               "$id": "42",
-              "$type": "M.A.G.U.S.Qualifications.Battle.WeaponUsage, MagusCharacterGenerator",
+              "$type": "M.A.G.U.S.Qualifications.Combat.WeaponUsage, MagusCharacterGenerator",
               "Weapon": null,
               "QualificationLevel": 0,
               "BaseQualificationLevel": 1,
               "MasterQualificationLevel": 0,
-              "QualificationType": "M.A.G.U.S.Qualifications.Battle.WeaponUsage, MagusCharacterGenerator, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
+              "QualificationType": "M.A.G.U.S.Qualifications.Combat.WeaponUsage, MagusCharacterGenerator, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
             },
             {
               "$id": "43",
-              "$type": "M.A.G.U.S.Qualifications.Battle.WeaponUsage, MagusCharacterGenerator",
+              "$type": "M.A.G.U.S.Qualifications.Combat.WeaponUsage, MagusCharacterGenerator",
               "Weapon": null,
               "QualificationLevel": 0,
               "BaseQualificationLevel": 1,
               "MasterQualificationLevel": 0,
-              "QualificationType": "M.A.G.U.S.Qualifications.Battle.WeaponUsage, MagusCharacterGenerator, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
+              "QualificationType": "M.A.G.U.S.Qualifications.Combat.WeaponUsage, MagusCharacterGenerator, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
             },
             {
               "$id": "44",
-              "$type": "M.A.G.U.S.Qualifications.Battle.WeaponThrowing, MagusCharacterGenerator",
+              "$type": "M.A.G.U.S.Qualifications.Combat.WeaponThrowing, MagusCharacterGenerator",
               "Weapon": null,
               "QualificationLevel": 0,
               "BaseQualificationLevel": 1,
               "MasterQualificationLevel": 0,
-              "QualificationType": "M.A.G.U.S.Qualifications.Battle.WeaponThrowing, MagusCharacterGenerator, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
+              "QualificationType": "M.A.G.U.S.Qualifications.Combat.WeaponThrowing, MagusCharacterGenerator, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
             },
             {
               "$id": "45",
-              "$type": "M.A.G.U.S.Qualifications.Battle.WeaponKnowledge, MagusCharacterGenerator",
+              "$type": "M.A.G.U.S.Qualifications.Combat.WeaponKnowledge, MagusCharacterGenerator",
               "QualificationLevel": 0,
               "BaseQualificationLevel": 1,
               "MasterQualificationLevel": 0,
-              "QualificationType": "M.A.G.U.S.Qualifications.Battle.WeaponKnowledge, MagusCharacterGenerator, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
+              "QualificationType": "M.A.G.U.S.Qualifications.Combat.WeaponKnowledge, MagusCharacterGenerator, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
             },
             {
               "$id": "46",
@@ -511,11 +511,11 @@
           "$values": [
             {
               "$id": "56",
-              "$type": "M.A.G.U.S.Qualifications.Battle.PubFighting, MagusCharacterGenerator",
+              "$type": "M.A.G.U.S.Qualifications.Combat.PubFighting, MagusCharacterGenerator",
               "QualificationLevel": 0,
               "BaseQualificationLevel": 2,
               "MasterQualificationLevel": 0,
-              "QualificationType": "M.A.G.U.S.Qualifications.Battle.PubFighting, MagusCharacterGenerator, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
+              "QualificationType": "M.A.G.U.S.Qualifications.Combat.PubFighting, MagusCharacterGenerator, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
             },
             {
               "$id": "57",
@@ -543,12 +543,12 @@
             },
             {
               "$id": "60",
-              "$type": "M.A.G.U.S.Qualifications.Battle.WeaponUsage, MagusCharacterGenerator",
+              "$type": "M.A.G.U.S.Qualifications.Combat.WeaponUsage, MagusCharacterGenerator",
               "Weapon": null,
               "QualificationLevel": 1,
               "BaseQualificationLevel": 9,
               "MasterQualificationLevel": 9,
-              "QualificationType": "M.A.G.U.S.Qualifications.Battle.WeaponUsage, MagusCharacterGenerator, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
+              "QualificationType": "M.A.G.U.S.Qualifications.Combat.WeaponUsage, MagusCharacterGenerator, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
             }
           ]
         },
@@ -680,12 +680,12 @@
     "$values": [
       {
         "$id": "66",
-        "$type": "M.A.G.U.S.Qualifications.Battle.WeaponUsage, MagusCharacterGenerator",
+        "$type": "M.A.G.U.S.Qualifications.Combat.WeaponUsage, MagusCharacterGenerator",
         "Weapon": null,
         "QualificationLevel": 0,
         "BaseQualificationLevel": 1,
         "MasterQualificationLevel": 0,
-        "QualificationType": "M.A.G.U.S.Qualifications.Battle.WeaponUsage, MagusCharacterGenerator, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
+        "QualificationType": "M.A.G.U.S.Qualifications.Combat.WeaponUsage, MagusCharacterGenerator, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
       },
       {
         "$id": "67",
@@ -748,47 +748,47 @@
       },
       {
         "$id": "74",
-        "$type": "M.A.G.U.S.Qualifications.Battle.WeaponUsage, MagusCharacterGenerator",
+        "$type": "M.A.G.U.S.Qualifications.Combat.WeaponUsage, MagusCharacterGenerator",
         "Weapon": null,
         "QualificationLevel": 0,
         "BaseQualificationLevel": 1,
         "MasterQualificationLevel": 0,
-        "QualificationType": "M.A.G.U.S.Qualifications.Battle.WeaponUsage, MagusCharacterGenerator, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
+        "QualificationType": "M.A.G.U.S.Qualifications.Combat.WeaponUsage, MagusCharacterGenerator, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
       },
       {
         "$id": "75",
-        "$type": "M.A.G.U.S.Qualifications.Battle.WeaponUsage, MagusCharacterGenerator",
+        "$type": "M.A.G.U.S.Qualifications.Combat.WeaponUsage, MagusCharacterGenerator",
         "Weapon": null,
         "QualificationLevel": 0,
         "BaseQualificationLevel": 1,
         "MasterQualificationLevel": 0,
-        "QualificationType": "M.A.G.U.S.Qualifications.Battle.WeaponUsage, MagusCharacterGenerator, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
+        "QualificationType": "M.A.G.U.S.Qualifications.Combat.WeaponUsage, MagusCharacterGenerator, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
       },
       {
         "$id": "76",
-        "$type": "M.A.G.U.S.Qualifications.Battle.WeaponUsage, MagusCharacterGenerator",
+        "$type": "M.A.G.U.S.Qualifications.Combat.WeaponUsage, MagusCharacterGenerator",
         "Weapon": null,
         "QualificationLevel": 0,
         "BaseQualificationLevel": 1,
         "MasterQualificationLevel": 0,
-        "QualificationType": "M.A.G.U.S.Qualifications.Battle.WeaponUsage, MagusCharacterGenerator, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
+        "QualificationType": "M.A.G.U.S.Qualifications.Combat.WeaponUsage, MagusCharacterGenerator, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
       },
       {
         "$id": "77",
-        "$type": "M.A.G.U.S.Qualifications.Battle.WeaponThrowing, MagusCharacterGenerator",
+        "$type": "M.A.G.U.S.Qualifications.Combat.WeaponThrowing, MagusCharacterGenerator",
         "Weapon": null,
         "QualificationLevel": 0,
         "BaseQualificationLevel": 1,
         "MasterQualificationLevel": 0,
-        "QualificationType": "M.A.G.U.S.Qualifications.Battle.WeaponThrowing, MagusCharacterGenerator, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
+        "QualificationType": "M.A.G.U.S.Qualifications.Combat.WeaponThrowing, MagusCharacterGenerator, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
       },
       {
         "$id": "78",
-        "$type": "M.A.G.U.S.Qualifications.Battle.WeaponKnowledge, MagusCharacterGenerator",
+        "$type": "M.A.G.U.S.Qualifications.Combat.WeaponKnowledge, MagusCharacterGenerator",
         "QualificationLevel": 0,
         "BaseQualificationLevel": 1,
         "MasterQualificationLevel": 0,
-        "QualificationType": "M.A.G.U.S.Qualifications.Battle.WeaponKnowledge, MagusCharacterGenerator, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
+        "QualificationType": "M.A.G.U.S.Qualifications.Combat.WeaponKnowledge, MagusCharacterGenerator, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
       },
       {
         "$id": "79",
@@ -875,11 +875,11 @@
       },
       {
         "$id": "89",
-        "$type": "M.A.G.U.S.Qualifications.Battle.PubFighting, MagusCharacterGenerator",
+        "$type": "M.A.G.U.S.Qualifications.Combat.PubFighting, MagusCharacterGenerator",
         "QualificationLevel": 0,
         "BaseQualificationLevel": 2,
         "MasterQualificationLevel": 0,
-        "QualificationType": "M.A.G.U.S.Qualifications.Battle.PubFighting, MagusCharacterGenerator, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
+        "QualificationType": "M.A.G.U.S.Qualifications.Combat.PubFighting, MagusCharacterGenerator, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
       },
       {
         "$id": "90",

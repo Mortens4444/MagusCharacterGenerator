@@ -43,5 +43,5 @@ public class KradPaladin(byte level = 1) : Paladin(level)
         }
     }
 
-    public override string ClassName => "Krad Paladin";
+    public override string Name => "Paladin of Krad";
 }

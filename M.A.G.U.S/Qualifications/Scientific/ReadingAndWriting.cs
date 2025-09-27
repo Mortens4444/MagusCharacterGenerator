@@ -4,7 +4,7 @@ namespace M.A.G.U.S.Qualifications.Scientific;
 
 public class ReadingAndWriting(QualificationLevel qualificationLevel = QualificationLevel.Base, byte level = 1) : Qualification(qualificationLevel, level)
 {
-    public override string Name => "Reading and writing";
+    public override string Name => "Reading/writing";
 
     public override byte QpToBaseQualification => 5;
 

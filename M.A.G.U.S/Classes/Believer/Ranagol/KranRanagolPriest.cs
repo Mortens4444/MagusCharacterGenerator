@@ -24,5 +24,5 @@ public class KranRanagolPriest(byte level = 1) : Priest(level)
         }
     }
 
-    public override string ClassName => "Ranagol Priest (Kran)";
+    public override string Name => "Priest of Ranagol (Kran)";
 }

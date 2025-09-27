@@ -1,7 +1,7 @@
 ﻿using M.A.G.U.S.GameSystem;
 using M.A.G.U.S.GameSystem.Attributes;
 using M.A.G.U.S.Qualifications;
-using M.A.G.U.S.Qualifications.Battle;
+using M.A.G.U.S.Qualifications.Combat;
 
 namespace M.A.G.U.S.Classes.NonPlayableCharacters;
 
@@ -75,7 +75,7 @@ public class Guard(byte level = 1) : Class(level), IClass
         new WeaponUse(),
         new HeavyArmorWearing(),
         new ShieldUse()
-];
+    ];
 
     public override QualificationList FutureQualifications => [];
 

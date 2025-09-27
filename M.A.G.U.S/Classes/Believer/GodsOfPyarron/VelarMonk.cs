@@ -3,7 +3,7 @@ using M.A.G.U.S.GameSystem.Attributes;
 using M.A.G.U.S.GameSystem.FightMode;
 using M.A.G.U.S.GameSystem.Qualifications;
 using M.A.G.U.S.Qualifications;
-using M.A.G.U.S.Qualifications.Battle;
+using M.A.G.U.S.Qualifications.Combat;
 using M.A.G.U.S.Qualifications.Magic;
 using M.A.G.U.S.Qualifications.Scientific;
 using M.A.G.U.S.Qualifications.Scientific.Psi;
@@ -11,7 +11,7 @@ using M.A.G.U.S.Qualifications.Specialities;
 
 namespace M.A.G.U.S.Classes.Believer.GodsOfPyarron;
 
-public class VelarMonk(byte level) : Class(level), IClass, ILikeMagic
+public class VelarMonk(byte level = 1) : Class(level), IClass, ILikeMagic
 {
     [DiceThrow(ThrowType._2K6)]
     [DiceThrowModifier(6)]
@@ -126,5 +126,5 @@ public class VelarMonk(byte level) : Class(level), IClass, ILikeMagic
     [DiceThrowModifier(5)]
     public override byte GetPainToleranceModifier() => (byte)(DiceThrow._1K6() + 5);
 
-    public override string ClassName => "Velar Monk";
+    public override string Name => "Monk of Velar";
 }

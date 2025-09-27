@@ -2,7 +2,7 @@
 
 namespace M.A.G.U.S.Qualifications;
 
-public class Qualification
+public abstract class Qualification
 {
     public Qualification(QualificationLevel qualificationLevel = QualificationLevel.Base, byte level = 1)
     {
@@ -18,8 +18,10 @@ public class Qualification
         }
     }
 
+    public virtual string Category => GetType().Namespace?[(GetType().Namespace.LastIndexOf('.') + 1)..] ?? String.Empty;
+
     public virtual string Name => GetType().Name;
-    
+
     public QualificationLevel QualificationLevel { get; set; }
 
     public byte BaseQualificationLevel { get; private set; }

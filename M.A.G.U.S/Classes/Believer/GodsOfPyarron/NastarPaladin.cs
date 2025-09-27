@@ -3,7 +3,7 @@ using M.A.G.U.S.GameSystem.Attributes;
 using M.A.G.U.S.GameSystem.FightMode;
 using M.A.G.U.S.GameSystem.Qualifications;
 using M.A.G.U.S.Qualifications;
-using M.A.G.U.S.Qualifications.Battle;
+using M.A.G.U.S.Qualifications.Combat;
 using M.A.G.U.S.Qualifications.Laical;
 using M.A.G.U.S.Qualifications.Magic;
 using M.A.G.U.S.Qualifications.Scientific;
@@ -11,7 +11,7 @@ using M.A.G.U.S.Qualifications.Scientific.Psi;
 
 namespace M.A.G.U.S.Classes.Believer.GodsOfPyarron;
 
-public class NastarPaladin(byte level) : Class(level), IClass, IHateRangedWeapons
+public class NastarPaladin(byte level = 1) : Class(level), IClass, IHateRangedWeapons
 {
     [DiceThrow(ThrowType._1K10)]
     [DiceThrowModifier(8)]
@@ -130,5 +130,5 @@ public class NastarPaladin(byte level) : Class(level), IClass, IHateRangedWeapon
     [DiceThrowModifier(5)]
     public override byte GetPainToleranceModifier() => (byte)(DiceThrow._1K6() + 5);
 
-    public override string ClassName => "Nastar Paladin";
+    public override string Name => "Paladin of Nastar";
 }

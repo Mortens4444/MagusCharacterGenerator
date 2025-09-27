@@ -505,7 +505,7 @@ public class Character : IFightModifier, ILiving, IAbilities, INotifyPropertyCha
 	{
 		Strength = (short)(BaseCaste.Strength + Race.Strength);
 		Speed = (short)(BaseCaste.Speed + Race.Speed);
-		Dexterity = (short)(BaseCaste.Dexterity + Race.Dexterity);
+        Dexterity = (short)(BaseCaste.Dexterity + Race.Dexterity);
 		Stamina = (short)(BaseCaste.Stamina + Race.Stamina);
 		Health = (short)(BaseCaste.Health + Race.Health);
 		Beauty = (short)(BaseCaste.Beauty + Race.Beauty);
