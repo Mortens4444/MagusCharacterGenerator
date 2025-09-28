@@ -23,7 +23,6 @@
     </v:NotifierPage.Resources>
 
     <Grid Padding="10" RowDefinitions="Auto,Auto,*" RowSpacing="8">
-        <!-- Picker: Living / Ancient -->
         <HorizontalStackLayout Grid.Row="0" Spacing="8" VerticalOptions="Center">
             <Label Text="Type" VerticalOptions="Center" />
             <Picker ItemsSource="{Binding Types}"
@@ -31,12 +30,8 @@
                     ItemDisplayBinding="{Binding ., Converter={StaticResource TranslationConverter}}" />
         </HorizontalStackLayout>
 
-        <!-- Search -->
-        <mc:EntryWithLabel Grid.Row="1"
-                           Label="Search"
-                           Text="{Binding SearchText}" />
+        <mc:EntryWithLabel Grid.Row="1" Label="Search" Text="{Binding SearchText}" />
 
-        <!-- List -->
         <CollectionView Grid.Row="2"
                         ItemsSource="{Binding FilteredLanguages}"
                         SelectionMode="Single"
@@ -46,13 +41,9 @@
             <CollectionView.ItemTemplate>
                 <DataTemplate x:DataType="m:LanguageItem">
                     <Border Stroke="Gray" StrokeThickness="1" Padding="8" Margin="0,4">
-                        <Grid ColumnDefinitions="Auto,*,Auto" ColumnSpacing="8" VerticalOptions="Center">
-                            <!--<Label Text="{Binding EnumKey}" FontAttributes="Bold" Grid.Column="0" VerticalOptions="Center" />-->
-                            <StackLayout Grid.Column="1" Spacing="2">
-                                <Label Text="{Binding Description, Converter={StaticResource EnumDescriptionTranslationConverter}}" FontAttributes="Bold" />
-                                <!--<Label Text="{Binding Description, Converter={StaticResource TranslationConverter}}" FontSize="12" LineBreakMode="WordWrap" />-->
-                            </StackLayout>
-                            <!-- használjuk a PageRoot BindingContext-ját -->
+                        <Grid ColumnDefinitions="*" ColumnSpacing="8" VerticalOptions="Center">
+                            <Label Text="{Binding Description, Converter={StaticResource TranslationConverter}}" FontAttributes="Bold" />
+
                             <!--<Button Text="Select"
                                     Grid.Column="2"
                                     Command="{Binding Source={x:Reference PageRoot}, Path=BindingContext.SelectCommand}"

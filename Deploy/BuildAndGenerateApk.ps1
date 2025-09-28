@@ -11,7 +11,7 @@ $currentDirectory = Get-Location
 Write-Host "$currentDirectory"
 $project = "C:\Work\MagusCharacterGenerator\M.A.G.U.S.Assistant\M.A.G.U.S.Assistant.csproj"
 Write-Host ".NET Publishing project: $project ..."
-dotnet publish $project -c Release -f net9.0-android /p:AndroidPackageFormat=apk /p:BundleLocalization=hu-HU /p:LocalizationCulture=hu-HU /p:AndroidPackageFormats=aab
+dotnet publish $project -c Release -f net9.0-android /p:AndroidPackageFormat=aab /p:BundleLocalization=hu-HU /p:LocalizationCulture=hu-HU
 #dotnet publish "C:\Work\MagusCharacterGenerator\MagusCharacterGenerator.sln" -c Release -f net9.0-android /p:BundleLocalization=en-GB /p:LocalizationCulture=en-GB
 
 Write-Host "Searching generated APK..."

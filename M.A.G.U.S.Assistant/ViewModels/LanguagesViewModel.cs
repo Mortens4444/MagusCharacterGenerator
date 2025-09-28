@@ -124,7 +124,10 @@ public class LanguagesViewModel : INotifyPropertyChanged
         }
 
         FilteredLanguages.Clear();
-        foreach (var it in query) FilteredLanguages.Add(it);
+        foreach (var it in query)
+        {
+            FilteredLanguages.Add(it);
+        }
     }
 
     void OnPropertyChanged(string name) => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
