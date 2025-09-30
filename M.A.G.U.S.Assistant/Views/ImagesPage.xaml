@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<v:NotifierPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                xmlns:m="clr-namespace:M.A.G.U.S.Assistant.Models"
+                xmlns:vm="clr-namespace:M.A.G.U.S.Assistant.ViewModels"
+                xmlns:v="clr-namespace:M.A.G.U.S.Assistant.Views"
+                xmlns:mc="clr-namespace:Mtf.Maui.Controls;assembly=Mtf.Maui.Controls"
+                x:Class="M.A.G.U.S.Assistant.Views.ImagesPage"
+                x:DataType="vm:ImagesViewModel"
+                Title="Images">
+
+    <v:NotifierPage.BindingContext>
+        <vm:ImagesViewModel />
+    </v:NotifierPage.BindingContext>
+
+    <Grid Padding="10" RowDefinitions="Auto,*,Auto">
+        <Grid Grid.Row="0" ColumnDefinitions="*" ColumnSpacing="6">
+            <mc:EntryWithLabel Label="Search"
+                         Text="{Binding SearchText}"
+                         Grid.Column="0" />
+        </Grid>
+
+        <CollectionView Grid.Row="1"
+                    ItemsSource="{Binding FilteredImages}"
+                    SelectionMode="Single"
+                    SelectedItem="{Binding SelectedImage}"
+                    VerticalOptions="FillAndExpand"
+                    HorizontalOptions="FillAndExpand"
+                    ItemsLayout="VerticalList">
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="m:ImageItem">
+                    <Border Stroke="Gray" StrokeThickness="1" Padding="8" Margin="0,4">
+                        <Grid ColumnDefinitions="80,*,Auto" ColumnSpacing="8" VerticalOptions="Center">
+                            <Image Source="{Binding Thumbnail}" WidthRequest="64" HeightRequest="64" Aspect="AspectFill" Grid.Column="0"/>
+                            <StackLayout Grid.Column="1" Spacing="2" VerticalOptions="Center">
+                                <Label Text="{Binding DisplayName}" FontAttributes="Bold" LineBreakMode="TailTruncation"/>
+                            </StackLayout>
+                        </Grid>
+                    </Border>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </Grid>
+</v:NotifierPage>

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="M.A.G.U.S.Assistant.Views.DiceRollPage"
+             Title="Dice roll">
+
+    <ContentPage.BindingContext>
+        <vm:DiceRollViewModel xmlns:vm="clr-namespace:MagusAssistant.ViewModels" />
+    </ContentPage.BindingContext>
+
+    <ScrollView>
+        <StackLayout Padding="16" Spacing="12">
+            <Label Text="Choose a dice roll type" FontAttributes="Bold" />
+            <Picker x:Name="DicePicker"
+                    ItemsSource="{Binding DiceOptions}"
+                    SelectedItem="{Binding SelectedDice}"
+                    Title="K6, K10, 2K6..." />
+
+            <Button Text="Throw" Command="{Binding RollCommand}" WidthRequest="120" HorizontalOptions="Center" />
+
+            <Border HeightRequest="120" HorizontalOptions="Center">
+                <Grid>
+                    <Image x:Name="DiceImage"
+                           Source="dice.png"
+                           WidthRequest="100"
+                           HeightRequest="100"
+                           HorizontalOptions="Center"
+                           VerticalOptions="Center" />
+                </Grid>
+            </Border>
+
+            <Label Text="Summary" FontAttributes="Bold" />
+            <Label Text="{Binding ResultSummary}" />
+
+            <Label Text="Details" FontAttributes="Bold" />
+            <Label Text="{Binding ResultDetails}" />
+
+        </StackLayout>
+    </ScrollView>
+</ContentPage>

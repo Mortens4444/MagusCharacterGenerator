@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:M.A.G.U.S.Assistant.ViewModels"
+             x:Class="M.A.G.U.S.Assistant.Views.PaintPage"
+             Title="Room Painter">
+
+    <ContentPage.BindingContext>
+        <vm:PaintViewModel />
+    </ContentPage.BindingContext>
+
+    <Grid RowDefinitions="Auto,*,Auto" Padding="12" RowSpacing="8" x:Name="TouchGrid">
+        <!-- Toolbar -->
+        <HorizontalStackLayout Spacing="10">
+            <Picker Title="Shape" ItemsSource="{Binding ShapeOptions}" SelectedIndex="{Binding SelectedShapeIndex}" WidthRequest="160" />
+            <Button Text="Undo" Command="{Binding UndoCommand}" />
+            <Button Text="Clear" Command="{Binding ClearCommand}" />
+            <Label Text="Size" VerticalOptions="Center" />
+            <Slider Minimum="10" Maximum="200" Value="{Binding ShapeSize}" WidthRequest="140" />
+            <Label Text="Color" VerticalOptions="Center" />
+            <Button BackgroundColor="{Binding SelectedColor}" WidthRequest="36" HeightRequest="36" Command="{Binding PickColorCommand}" />
+        </HorizontalStackLayout>
+
+        <!-- Drawing area -->
+        <Frame Grid.Row="1" HasShadow="True" CornerRadius="6" Padding="0" HorizontalOptions="Fill" VerticalOptions="Fill">
+            <GraphicsView x:Name="CanvasView"
+                          Drawable="{Binding CanvasDrawable}"
+                          HorizontalOptions="Fill"
+                          VerticalOptions="Fill"
+                          BackgroundColor="White" />
+        </Frame>
+
+        <!-- Bottom: placed items list -->
+        <StackLayout Grid.Row="2" Orientation="Horizontal" Spacing="8">
+            <Label Text="Placed:" VerticalOptions="Center" />
+            <CollectionView ItemsSource="{Binding Shapes}" SelectionMode="Single" SelectedItem="{Binding SelectedShape}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid Padding="4">
+                            <Label Text="{Binding Description}" />
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </StackLayout>
+    </Grid>
+</ContentPage>

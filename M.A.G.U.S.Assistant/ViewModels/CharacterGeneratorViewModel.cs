@@ -12,209 +12,208 @@ using System.Collections.ObjectModel;
 using System.Reflection;
 using System.Runtime.Versioning;
 
-namespace M.A.G.U.S.Assistant.ViewModels
+namespace M.A.G.U.S.Assistant.ViewModels;
+
+[SupportedOSPlatform("windows10.0.17763.0")]
+public partial class CharacterGeneratorViewModel : ObservableObject
 {
-    [SupportedOSPlatform("windows10.0.17763.0")]
-    public partial class CharacterGeneratorViewModel : ObservableObject
+    private Character character;
+
+    private Weapon? primaryWeapon;
+    private Weapon? secondaryWeapon;
+
+    public CharacterGeneratorViewModel()
     {
-        private Character character;
+        character = new Character();
 
-        private Weapon? primaryWeapon;
-        private Weapon? secondaryWeapon;
+        LoadAvailableTypes();
+        SelectedRace = AvailableRaces.FirstOrDefault();
+        SelectedClass = AvailableClasses.FirstOrDefault();
+        SelectedCombatValueModifier = AvailableCombatValueModifiers.FirstOrDefault();
+    }
 
-        public CharacterGeneratorViewModel()
+    public ObservableCollection<string> AvailableCombatValueModifiers { get; } = new ObservableCollection<string> { "Base", "With primary weapon", "With secondary weapon" };
+
+    public ObservableCollection<IRace?> AvailableRaces { get; } = new ObservableCollection<IRace?>();
+
+    public ObservableCollection<IClass?> AvailableClasses { get; } = new ObservableCollection<IClass?>();
+
+    private byte baseClassLevel = 1;
+    public byte BaseClassLevel
+    {
+        get => baseClassLevel;
+        set
         {
-            character = new Character();
+            SetProperty(ref baseClassLevel, value);
+        }
+    }
 
-            LoadAvailableTypes();
-            SelectedRace = AvailableRaces.FirstOrDefault();
-            SelectedClass = AvailableClasses.FirstOrDefault();
-            SelectedCombatValueModifier = AvailableCombatValueModifiers.FirstOrDefault();
+    private string selectedCombatValueModifier;
+    public string SelectedCombatValueModifier
+    {
+        get => selectedCombatValueModifier;
+        set
+        {
+            SetProperty(ref selectedCombatValueModifier, value);
+        }
+    }
+
+    IRace? selectedRace;
+    public IRace? SelectedRace
+    {
+        get => selectedRace;
+        set
+        {
+            SetProperty(ref selectedRace, value);
+        }
+    }
+
+    IClass? selectedClass;
+    public IClass? SelectedClass
+    {
+        get => selectedClass;
+        set
+        {
+            SetProperty(ref selectedClass, value);
+        }
+    }
+
+    public Character Character
+    {
+        get => character;
+        set => SetProperty(ref character, value);
+    }
+
+    [RelayCommand]
+    public void GenerateCharacter()
+    {
+        if (selectedRace == null)
+        {
+            WeakReferenceMessenger.Default.Send(new ShowErrorMessage("No race selected!"));
+            return;
         }
 
-        public ObservableCollection<string> AvailableCombatValueModifiers { get; } = new ObservableCollection<string> { "Base", "With primary weapon", "With secondary weapon" };
-
-        public ObservableCollection<IRace?> AvailableRaces { get; } = new ObservableCollection<IRace?>();
-
-        public ObservableCollection<IClass?> AvailableClasses { get; } = new ObservableCollection<IClass?>();
-
-        private byte baseClassLevel = 1;
-        public byte BaseClassLevel
+        if (selectedClass == null)
         {
-            get => baseClassLevel;
-            set
-            {
-                SetProperty(ref baseClassLevel, value);
-            }
+            WeakReferenceMessenger.Default.Send(new ShowErrorMessage("No class selected!"));
+            return;
         }
 
-        private string selectedCombatValueModifier;
-        public string SelectedCombatValueModifier
+        var instanceClass = InstanceClass(selectedClass.GetType(), 1);
+        if (instanceClass == null)
         {
-            get => selectedCombatValueModifier;
-            set
-            {
-                SetProperty(ref selectedCombatValueModifier, value);
-            }
+            WeakReferenceMessenger.Default.Send(new ShowErrorMessage("Class cannot be instantiated!"));
+            return;
         }
 
-        IRace? selectedRace;
-        public IRace? SelectedRace
+        Character = new Character(NameGenerator.Get().ToName(), selectedRace, instanceClass);
+    }
+
+    [RelayCommand]
+    public void GenerateNewName()
+    {
+        if (Character == null)
         {
-            get => selectedRace;
-            set
-            {
-                SetProperty(ref selectedRace, value);
-            }
+            GenerateCharacter();
         }
+        Character.Name = NameGenerator.Get().ToName();
+    }
 
-        IClass? selectedClass;
-        public IClass? SelectedClass
+    private void LoadAvailableTypes()
+    {
+        var raceNamespacePrefix = "M.A.G.U.S.Races";
+        var classNamespacePrefix = "M.A.G.U.S.Classes";
+
+        var assemblies = AppDomain.CurrentDomain.GetAssemblies();
+
+        foreach (var asm in assemblies)
         {
-            get => selectedClass;
-            set
+            foreach (var t in GetLoadableTypes(asm))
             {
-                SetProperty(ref selectedClass, value);
-            }
-        }
-
-        public Character Character
-        {
-            get => character;
-            set => SetProperty(ref character, value);
-        }
-
-        [RelayCommand]
-        public void GenerateCharacter()
-        {
-            if (selectedRace == null)
-            {
-                WeakReferenceMessenger.Default.Send(new ShowErrorMessage("No race selected!"));
-                return;
-            }
-
-            if (selectedClass == null)
-            {
-                WeakReferenceMessenger.Default.Send(new ShowErrorMessage("No class selected!"));
-                return;
-            }
-
-            var instanceClass = InstanceClass(selectedClass.GetType(), 1);
-            if (instanceClass == null)
-            {
-                WeakReferenceMessenger.Default.Send(new ShowErrorMessage("Class cannot be instantiated!"));
-                return;
-            }
-
-            Character = new Character(NameGenerator.Get().ToName(), selectedRace, instanceClass);
-        }
-
-        [RelayCommand]
-        public void GenerateNewName()
-        {
-            if (Character == null)
-            {
-                GenerateCharacter();
-            }
-            Character.Name = NameGenerator.Get().ToName();
-        }
-
-        private void LoadAvailableTypes()
-        {
-            var raceNamespacePrefix = "M.A.G.U.S.Races";
-            var classNamespacePrefix = "M.A.G.U.S.Classes";
-
-            var assemblies = AppDomain.CurrentDomain.GetAssemblies();
-
-            foreach (var asm in assemblies)
-            {
-                foreach (var t in GetLoadableTypes(asm))
+                if (t == null || !t.IsClass || t.IsAbstract)
                 {
-                    if (t == null || !t.IsClass || t.IsAbstract)
-                    {
-                        continue;
-                    }
+                    continue;
+                }
 
-                    // Races
-                    if (!String.IsNullOrEmpty(t.Namespace) && t.Namespace.StartsWith(raceNamespacePrefix, StringComparison.Ordinal))
+                // Races
+                if (!String.IsNullOrEmpty(t.Namespace) && t.Namespace.StartsWith(raceNamespacePrefix, StringComparison.Ordinal))
+                {
+                    if (typeof(IRace).IsAssignableFrom(t))
                     {
-                        if (typeof(IRace).IsAssignableFrom(t))
+                        try
                         {
-                            try
+                            if (Activator.CreateInstance(t) is IRace instRace)
                             {
-                                if (Activator.CreateInstance(t) is IRace instRace)
-                                {
-                                    AvailableRaces.Add(instRace);
-                                }
-                            }
-                            catch (Exception ex)
-                            {
-                                WeakReferenceMessenger.Default.Send(new ShowErrorMessage(ex));
+                                AvailableRaces.Add(instRace);
                             }
                         }
-                    }
-
-                    // Classes
-                    if (!String.IsNullOrEmpty(t.Namespace) && t.Namespace.StartsWith(classNamespacePrefix, StringComparison.Ordinal))
-                    {
-                        if (typeof(IClass).IsAssignableFrom(t))
+                        catch (Exception ex)
                         {
-                            try
+                            WeakReferenceMessenger.Default.Send(new ShowErrorMessage(ex));
+                        }
+                    }
+                }
+
+                // Classes
+                if (!String.IsNullOrEmpty(t.Namespace) && t.Namespace.StartsWith(classNamespacePrefix, StringComparison.Ordinal))
+                {
+                    if (typeof(IClass).IsAssignableFrom(t))
+                    {
+                        try
+                        {
+                            var instanceClass = InstanceClass(t, 1);
+                            if (instanceClass != null)
                             {
-                                var instanceClass = InstanceClass(t, 1);
-                                if (instanceClass != null)
-                                {
-                                    AvailableClasses.Add(instanceClass);
-                                }
+                                AvailableClasses.Add(instanceClass);
                             }
-                            catch (Exception ex)
-                            {
-                                WeakReferenceMessenger.Default.Send(new ShowErrorMessage(ex));
-                            }
+                        }
+                        catch (Exception ex)
+                        {
+                            WeakReferenceMessenger.Default.Send(new ShowErrorMessage(ex));
                         }
                     }
                 }
             }
-
-            var sortedRaces = AvailableRaces.OrderBy(r => Lng.Elem(r.Name)).ToArray();
-            AvailableRaces.Clear();
-            foreach (var r in sortedRaces)
-            {
-                AvailableRaces.Add(r);
-            }
-
-            var sortedClasses = AvailableClasses.OrderBy(c => Lng.Elem(c.Name)).ToArray();
-            AvailableClasses.Clear();
-            foreach (var c in sortedClasses)
-            {
-                AvailableClasses.Add(c);
-            }
         }
 
-        private static IClass? InstanceClass(Type classType, byte level)
+        var sortedRaces = AvailableRaces.OrderBy(r => Lng.Elem(r.Name)).ToArray();
+        AvailableRaces.Clear();
+        foreach (var r in sortedRaces)
         {
-            if (Activator.CreateInstance(classType, level) is IClass instanceClass)
-            {
-                return instanceClass;
-            }
-
-            return null;
+            AvailableRaces.Add(r);
         }
 
-        private static Type[] GetLoadableTypes(Assembly assembly)
+        var sortedClasses = AvailableClasses.OrderBy(c => Lng.Elem(c.Name)).ToArray();
+        AvailableClasses.Clear();
+        foreach (var c in sortedClasses)
         {
-            try
-            {
-                return assembly.GetTypes();
-            }
-            catch (ReflectionTypeLoadException e)
-            {
-                return e.Types.Where(t => t != null).ToArray();
-            }
-            catch
-            {
-                return [];
-            }
+            AvailableClasses.Add(c);
+        }
+    }
+
+    private static IClass? InstanceClass(Type classType, byte level)
+    {
+        if (Activator.CreateInstance(classType, level) is IClass instanceClass)
+        {
+            return instanceClass;
+        }
+
+        return null;
+    }
+
+    private static Type[] GetLoadableTypes(Assembly assembly)
+    {
+        try
+        {
+            return assembly.GetTypes();
+        }
+        catch (ReflectionTypeLoadException e)
+        {
+            return e.Types.Where(t => t != null).ToArray();
+        }
+        catch
+        {
+            return [];
         }
     }
 }

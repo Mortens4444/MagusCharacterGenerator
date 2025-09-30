@@ -10,17 +10,13 @@ namespace M.A.G.U.S.Races;
 /// </summary>
 public class NightElf : Race, IUseRangedWeapons
 {
-    public override short Strength => -2;
+    public override short Strength => -1;
 
-    public override short Stamina => -1;
+    public override short Speed => 3;
 
-    public override short Speed => 1;
+    public override short Dexterity => 3;
 
-    public override short Dexterity => 1;
-
-    public override short Willpower => -1;
-
-    public override short Astral => -1;
+    public int AimValue { get; set; } = 10;
 
     public override SpecialQualificationList SpecialQualifications =>
     [

@@ -87,10 +87,68 @@
     <MauiAsset Include="Resources\Raw\**" LogicalName="%(RecursiveDir)%(Filename)%(Extension)" />
   </ItemGroup>
   <ItemGroup>
+    <MauiAsset Remove="Resources\Raw\beast.wav" />
+    <MauiAsset Remove="Resources\Raw\bird_chirping.wav" />
+    <MauiAsset Remove="Resources\Raw\curse_spell.wav" />
+    <MauiAsset Remove="Resources\Raw\dark_cave.wav" />
+    <MauiAsset Remove="Resources\Raw\dark_magic_spell_cast.wav" />
+    <MauiAsset Remove="Resources\Raw\dice_roll.wav" />
+    <MauiAsset Remove="Resources\Raw\fireball_cast.wav" />
+    <MauiAsset Remove="Resources\Raw\fireball_cast_2.wav" />
+    <MauiAsset Remove="Resources\Raw\spell_cast.wav" />
+    <MauiAsset Remove="Resources\Raw\spell_cast_2.wav" />
+    <MauiAsset Remove="Resources\Raw\werewolf_howl.wav" />
+    <MauiAsset Remove="Resources\Raw\yeti-roar.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Remove="Resources\Images\Characters\court_goblin.png" />
+    <None Remove="Resources\Images\Characters\court_orc.png" />
+    <None Remove="Resources\Images\Characters\dwarf.png" />
+    <None Remove="Resources\Images\Characters\elf.png" />
+    <None Remove="Resources\Images\Characters\fire_wizard.png" />
+    <None Remove="Resources\Images\Characters\half_elf.png" />
+    <None Remove="Resources\Images\Characters\half_elf_2.png" />
+    <None Remove="Resources\Images\Characters\khal.png" />
+    <None Remove="Resources\Images\Characters\priest.png" />
+    <None Remove="Resources\Images\Characters\warlock.png" />
+    <None Remove="Resources\Images\Characters\wier.png" />
+    <None Remove="Resources\Images\Characters\witch.png" />
+    <None Remove="Resources\Images\Characters\wizard.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Images\Characters\court_goblin.png" />
+    <EmbeddedResource Include="Resources\Images\Characters\court_orc.png" />
+    <EmbeddedResource Include="Resources\Images\Characters\dwarf.png" />
+    <EmbeddedResource Include="Resources\Images\Characters\elf.png" />
+    <EmbeddedResource Include="Resources\Images\Characters\fire_wizard.png" />
+    <EmbeddedResource Include="Resources\Images\Characters\half_elf.png" />
+    <EmbeddedResource Include="Resources\Images\Characters\half_elf_2.png" />
+    <EmbeddedResource Include="Resources\Images\Characters\khal.png" />
+    <EmbeddedResource Include="Resources\Images\Characters\priest.png" />
+    <EmbeddedResource Include="Resources\Images\Characters\warlock.png" />
+    <EmbeddedResource Include="Resources\Images\Characters\wier.png" />
+    <EmbeddedResource Include="Resources\Images\Characters\witch.png" />
+    <EmbeddedResource Include="Resources\Images\Characters\wizard.png" />
+    <EmbeddedResource Include="Resources\Raw\bird_chirping.wav" />
+    <EmbeddedResource Include="Resources\Raw\fireball_cast.wav" />
+    <EmbeddedResource Include="Resources\Raw\spell_cast_2.wav" />
+    <EmbeddedResource Include="Resources\Raw\spell_cast.wav" />
+    <EmbeddedResource Include="Resources\Raw\dark_magic_spell_cast.wav" />
+    <EmbeddedResource Include="Resources\Raw\fireball_cast_2.wav" />
+    <EmbeddedResource Include="Resources\Raw\curse_spell.wav" />
+    <EmbeddedResource Include="Resources\Raw\beast.wav" />
+    <EmbeddedResource Include="Resources\Raw\yeti-roar.wav" />
+    <EmbeddedResource Include="Resources\Raw\werewolf_howl.wav" />
+    <EmbeddedResource Include="Resources\Raw\dark_cave.wav" />
+    <EmbeddedResource Include="Resources\Raw\dice_roll.wav" />
+  </ItemGroup>
+  <ItemGroup>
     <PackageReference Include="Microsoft.Maui.Controls" Version="9.0.110" />
     <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="9.0.9" />
     <PackageReference Include="Mtf.Maui.Controls" Version="1.0.28" />
-    <PackageReference Include="Mtf.MAUI.LanguageService" Version="1.0.26" />
+    <PackageReference Include="Mtf.MAUI.LanguageService" Version="1.0.29" />
+    <PackageReference Include="Plugin.Maui.Audio" Version="4.0.0" />
+    <PackageReference Include="Xam.Plugin.SimpleAudioPlayer" Version="1.6.0" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\M.A.G.U.S\M.A.G.U.S..csproj" />
@@ -110,6 +168,15 @@
     <MauiXaml Update="Views\ClassesPage.xaml">
       <Generator>MSBuild:Compile</Generator>
     </MauiXaml>
+    <MauiXaml Update="Views\DiceRollPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </MauiXaml>
+    <MauiXaml Update="Views\ImagePreviewPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </MauiXaml>
+    <MauiXaml Update="Views\ImagesPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </MauiXaml>
     <MauiXaml Update="Views\LanguagesPage.xaml">
       <Generator>MSBuild:Compile</Generator>
     </MauiXaml>
@@ -119,6 +186,9 @@
     <MauiXaml Update="Views\MapPage.xaml">
       <Generator>MSBuild:Compile</Generator>
     </MauiXaml>
+    <MauiXaml Update="Views\PaintPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </MauiXaml>
     <MauiXaml Update="Views\QualificationsPage.xaml">
       <Generator>MSBuild:Compile</Generator>
     </MauiXaml>
@@ -126,6 +196,9 @@
       <Generator>MSBuild:Compile</Generator>
     </MauiXaml>
     <MauiXaml Update="Views\RunesPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </MauiXaml>
+    <MauiXaml Update="Views\SoundPage.xaml">
       <Generator>MSBuild:Compile</Generator>
     </MauiXaml>
   </ItemGroup>
