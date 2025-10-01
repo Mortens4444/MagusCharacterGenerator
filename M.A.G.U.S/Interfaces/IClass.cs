@@ -1,9 +1,8 @@
-﻿using M.A.G.U.S.GameSystem;
-using M.A.G.U.S.Qualifications;
+﻿using M.A.G.U.S.Qualifications;
 
-namespace M.A.G.U.S.Classes;
+namespace M.A.G.U.S.Interfaces;
 
-public interface IClass : IAbilities
+public interface IClass : IAttacker, IAbilities
 {
     string Name { get; }
 
@@ -15,14 +14,6 @@ public interface IClass : IAbilities
 
     byte Level { get; }
 
-    byte InitiatingBaseValue { get; }
-
-    byte AttackingBaseValue { get; }
-
-    byte DefendingBaseValue { get; }
-
-    byte AimingBaseValue { get; }
-
     byte FightValueModifier { get; }
 
     byte BaseQualificationPoints { get; }
@@ -32,6 +23,10 @@ public interface IClass : IAbilities
     byte PercentQualificationModifier { get; }
 
     byte BaseLifePoints { get; }
+
+    byte AstralMagicResistance { get; }
+
+    byte MentalMagicResistance { get; }
 
     byte BasePainTolerancePoints { get; }
 
@@ -50,4 +45,6 @@ public interface IClass : IAbilities
     SpecialQualificationList SpecialQualifications { get; }
 
     byte GetPainToleranceModifier();
+
+    ulong ExperiencePoints { get; }
 }

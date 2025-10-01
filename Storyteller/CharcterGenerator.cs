@@ -1,8 +1,8 @@
 ﻿using FontAwesome.Sharp;
-using M.A.G.U.S.Classes;
 using M.A.G.U.S.Classes.Believer.GodsOfPyarron;
 using M.A.G.U.S.GameSystem;
 using M.A.G.U.S.GameSystem.Attributes;
+using M.A.G.U.S.Interfaces;
 using M.A.G.U.S.Races;
 using M.A.G.U.S.Utils;
 using Mtf.Extensions;

@@ -2,8 +2,8 @@
 using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.Messaging;
 using M.A.G.U.S.Assistant.Messages;
-using M.A.G.U.S.Classes;
 using M.A.G.U.S.GameSystem;
+using M.A.G.U.S.Interfaces;
 using M.A.G.U.S.Races;
 using M.A.G.U.S.Things.Weapons;
 using M.A.G.U.S.Utils;

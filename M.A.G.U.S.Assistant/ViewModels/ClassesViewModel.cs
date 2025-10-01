@@ -1,5 +1,6 @@
 ﻿using global::M.A.G.U.S.Classes;
 using M.A.G.U.S.Assistant.Extensions;
+using M.A.G.U.S.Interfaces;
 using M.A.G.U.S.Qualifications;
 using Mtf.LanguageService;
 using System.Collections.ObjectModel;

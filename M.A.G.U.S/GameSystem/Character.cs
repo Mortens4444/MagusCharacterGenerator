@@ -1,10 +1,10 @@
-﻿using M.A.G.U.S.Classes;
-using M.A.G.U.S.Classes.Rogue;
+﻿using M.A.G.U.S.Classes.Rogue;
 using M.A.G.U.S.GameSystem.FightMode;
 using M.A.G.U.S.GameSystem.FightModifier;
 using M.A.G.U.S.GameSystem.Magic;
 using M.A.G.U.S.GameSystem.Psi;
 using M.A.G.U.S.GameSystem.Qualifications;
+using M.A.G.U.S.Interfaces;
 using M.A.G.U.S.Qualifications;
 using M.A.G.U.S.Qualifications.Percentages;
 using M.A.G.U.S.Qualifications.Specialities;

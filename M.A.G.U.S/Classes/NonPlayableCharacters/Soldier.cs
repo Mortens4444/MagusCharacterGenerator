@@ -1,5 +1,6 @@
 ﻿using M.A.G.U.S.GameSystem;
 using M.A.G.U.S.GameSystem.Attributes;
+using M.A.G.U.S.Interfaces;
 using M.A.G.U.S.Qualifications;
 using M.A.G.U.S.Qualifications.Combat;
 using M.A.G.U.S.Qualifications.Scientific;

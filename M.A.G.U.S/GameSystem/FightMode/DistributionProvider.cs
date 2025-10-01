@@ -1,4 +1,4 @@
-﻿using M.A.G.U.S.Classes;
+﻿using M.A.G.U.S.Interfaces;
 using M.A.G.U.S.Races;
 
 namespace M.A.G.U.S.GameSystem.FightMode;

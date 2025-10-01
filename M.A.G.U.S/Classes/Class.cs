@@ -1,4 +1,5 @@
 ﻿using M.A.G.U.S.GameSystem;
+using M.A.G.U.S.Interfaces;
 using M.A.G.U.S.Qualifications;
 
 namespace M.A.G.U.S.Classes;
@@ -70,6 +71,12 @@ public abstract class Class(byte level) : IClass
     public abstract short Willpower { get; }
 
     public abstract short Astral { get; }
+
+    public byte AstralMagicResistance { get; }
+
+    public byte MentalMagicResistance { get; }
+
+    public ulong ExperiencePoints { get; }
 
     public abstract byte GetPainToleranceModifier();
 }

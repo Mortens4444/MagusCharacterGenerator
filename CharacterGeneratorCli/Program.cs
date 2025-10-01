@@ -1,5 +1,5 @@
-﻿using M.A.G.U.S.Classes;
-using M.A.G.U.S.GameSystem;
+﻿using M.A.G.U.S.GameSystem;
+using M.A.G.U.S.Interfaces;
 using M.A.G.U.S.Races;
 using M.A.G.U.S.Utils;
 using System.Reflection;
