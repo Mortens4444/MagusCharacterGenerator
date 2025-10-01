@@ -69,7 +69,7 @@ public class DiceRollViewModel : INotifyPropertyChanged
 
     public DiceRollViewModel()
     {
-        RollCommand = new Command(RollDice);
+        RollCommand = new Command(async () => await RollDiceAsync());
         audioPlayer = CrossSimpleAudioPlayer.Current;
         TryLoadSound();
     }
@@ -90,8 +90,23 @@ public class DiceRollViewModel : INotifyPropertyChanged
         }
     }
 
-    private void RollDice()
+    private async Task RollDiceAsync()
     {
+        var tcs = new TaskCompletionSource<bool>();
+
+        DiceRollRequested?.Invoke(this, tcs);
+
+        try
+        {
+            await tcs.Task;
+        }
+        catch
+        {
+        }
+
+        ResultSummary = String.Empty;
+        ResultDetails = String.Empty;
+
         var pattern = new Regex(@"^(?:(\d+)?[kK])(\d+)$");
         var m = pattern.Match(SelectedDice ?? String.Empty);
         int count = 1;
@@ -124,15 +139,12 @@ public class DiceRollViewModel : INotifyPropertyChanged
                 audioPlayer.Play();
             }
         }
-        catch
+        catch (Exception ex)
         {
-            // ignore
         }
-
-        DiceRolled?.Invoke(this, EventArgs.Empty);
     }
 
-    public event EventHandler DiceRolled;
+    public event EventHandler<TaskCompletionSource<bool>> DiceRollRequested;
 
     private void OnPropertyChanged(string name)
     {

@@ -16,7 +16,7 @@ public partial class DiceRollPage : ContentPage
         InitializeComponent();
         if (ViewModel != null)
         {
-            ViewModel.DiceRolled += OnDiceRolled;
+            ViewModel.DiceRollRequested += OnDiceRollRequested;
         }
     }
 
@@ -82,18 +82,16 @@ public partial class DiceRollPage : ContentPage
 
     private void TriggerRollFromShake()
     {
-        try
-        {
-            Vibration.Default.Vibrate(TimeSpan.FromMilliseconds(80));
-        }
-        catch
-        {
-        }
 
         try
         {
             if (ViewModel?.RollCommand != null && ViewModel.RollCommand.CanExecute(null))
             {
+                try
+                {
+                    Vibration.Default.Vibrate(TimeSpan.FromMilliseconds(80));
+                }
+                catch { }
                 ViewModel.RollCommand.Execute(null);
             }
         }
@@ -102,9 +100,17 @@ public partial class DiceRollPage : ContentPage
         }
     }
 
-    private void OnDiceRolled(object sender, EventArgs e)
+    private async void OnDiceRollRequested(object sender, TaskCompletionSource<bool> tcs)
     {
-        _ = PlayDiceAnimationAsync();
+        try
+        {
+            await PlayDiceAnimationAsync();
+            tcs.SetResult(true);
+        }
+        catch (Exception ex)
+        {
+            tcs.SetException(ex);
+        }
     }
 
     private async Task PlayDiceAnimationAsync()
