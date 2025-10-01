@@ -1,5 +1,5 @@
 ﻿using Mtf.LanguageService;
-using Plugin.SimpleAudioPlayer;
+using Plugin.Maui.Audio;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Text;
@@ -65,12 +65,12 @@ public class DiceRollViewModel : INotifyPropertyChanged
     public ICommand RollCommand { get; }
 
     private readonly Random random = new();
-    private readonly ISimpleAudioPlayer audioPlayer;
-
+#if ANDROID
+    private IAudioPlayer audioPlayer;
+#endif
     public DiceRollViewModel()
     {
         RollCommand = new Command(async () => await RollDiceAsync());
-        audioPlayer = CrossSimpleAudioPlayer.Current;
         TryLoadSound();
     }
 
@@ -78,14 +78,17 @@ public class DiceRollViewModel : INotifyPropertyChanged
     {
         try
         {
+
             var assembly = GetType().Assembly;
             var stream = assembly.GetManifestResourceStream("M.A.G.U.S.Assistant.Resources.Raw.dice_roll.wav");
             if (stream != null)
             {
-                audioPlayer.Load(stream);
+#if ANDROID
+                audioPlayer = AudioManager.Current.CreatePlayer(stream);
+#endif
             }
         }
-        catch
+        catch (Exception ex)
         {
         }
     }
@@ -98,6 +101,15 @@ public class DiceRollViewModel : INotifyPropertyChanged
 
         try
         {
+            try
+            {
+#if ANDROID
+                audioPlayer.Play();
+#endif
+            }
+            catch (Exception ex)
+            {
+            }
             await tcs.Task;
         }
         catch
@@ -131,17 +143,6 @@ public class DiceRollViewModel : INotifyPropertyChanged
 
         ResultSummary = total.ToString();
         ResultDetails = sbDetails.ToString();
-
-        try
-        {
-            if (audioPlayer != null && audioPlayer.CanSeek)
-            {
-                audioPlayer.Play();
-            }
-        }
-        catch (Exception ex)
-        {
-        }
     }
 
     public event EventHandler<TaskCompletionSource<bool>> DiceRollRequested;

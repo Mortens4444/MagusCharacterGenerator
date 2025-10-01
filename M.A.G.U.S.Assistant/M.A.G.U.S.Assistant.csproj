@@ -148,7 +148,6 @@
     <PackageReference Include="Mtf.Maui.Controls" Version="1.0.28" />
     <PackageReference Include="Mtf.MAUI.LanguageService" Version="1.0.29" />
     <PackageReference Include="Plugin.Maui.Audio" Version="4.0.0" />
-    <PackageReference Include="Xam.Plugin.SimpleAudioPlayer" Version="1.6.0" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\M.A.G.U.S\M.A.G.U.S..csproj" />
