@@ -15,8 +15,6 @@
         <mc:EntryWithLabel Label="Search"
                        Text="{Binding SearchText}"
                        Grid.Row="0" />
-        
-        <Label Text="Sounds (Resources.Raw/*.wav)" FontAttributes="Bold" />
 
         <CollectionView Grid.Row="1"
                         ItemsSource="{Binding FilteredSounds}"

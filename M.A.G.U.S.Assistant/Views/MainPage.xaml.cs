@@ -8,10 +8,11 @@ namespace M.A.G.U.S.Assistant.Views;
 
 public partial class MainPage : NotifierPage
 {
+    private Dictionary<object, string> originalTextElements;
+
     public MainPage()
     {
         InitializeComponent();
-        //Lng.DefaultLanguage = Language.Hungarian;
 
         var languages = Enum.GetValues(typeof(ImplementedLanguage)).Cast<ImplementedLanguage>()
             .OrderBy(l => l.GetDescription())
@@ -26,9 +27,11 @@ public partial class MainPage : NotifierPage
         {
             var selected = languages[LanguagePicker.SelectedIndex];
             Lng.DefaultLanguage = selected.ToLanguage();
-            Translator.Translate(this);
+            if (originalTextElements != null)
+            {
+                Translator.SetOriginalTexts(originalTextElements);
+            }
+            originalTextElements = Translator.Translate(this);
         };
-
-        Translator.Translate(this);
     }
 }

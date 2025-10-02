@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:M.A.G.U.S.Assistant.ViewModels"
+             xmlns:mc="clr-namespace:Mtf.Maui.Controls;assembly=Mtf.Maui.Controls"
+             x:Class="M.A.G.U.S.Assistant.Views.AboutPage"
+             Title="AboutPage">
+    <ContentPage.BindingContext>
+        <vm:AboutPageViewModel />
+    </ContentPage.BindingContext>
+
+    <ScrollView>
+
+        <VerticalStackLayout Padding="20"
+                             Spacing="15"
+                             VerticalOptions="Center"
+                             HorizontalOptions="Center">
+
+            <Label Text="{Binding AppName}"
+                   HorizontalOptions="Center"
+                   FontAttributes="Bold"
+                   FontSize="Title" />
+
+            <Label Text="{Binding AppVersion}" HorizontalOptions="Center"/>
+
+            <!--<mc:Hyperlink LinkLabel="Update" Url="https://samu.us/mortens/com.mortens.h4ckw1thm3-signed.apk" HorizontalOptions="Center" />-->
+            <mc:Hyperlink LinkLabel="Privacy Policy" Url="https://samu.us/mortens/MPrivacyPolicy.txt" HorizontalOptions="Center" />
+
+            <Label Text="{Binding AppEmail}"
+                   HorizontalOptions="Center"
+                   TextColor="LightBlue">
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="OnEmailLabelTappedAsync" />
+                </Label.GestureRecognizers>
+            </Label>
+
+            <Border>
+                <VerticalStackLayout>
+                    <Label 
+                        Text="Credits"
+                        FontSize="Large"
+                        FontAttributes="Bold"
+                        HorizontalOptions="Center" />
+
+                    <Label x:Name="CreditsLbl"
+                        FontSize="Medium"
+                        FontAttributes="Bold"
+                        LineBreakMode="WordWrap" />
+                </VerticalStackLayout>
+            </Border>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

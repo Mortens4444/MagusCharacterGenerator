@@ -1,6 +1,5 @@
 ﻿beast - Beast 9 by NearTheAtmoshphere -- https://freesound.org/s/676482/ -- License: Creative Commons 0
 bird_chirping - Lappi. Kevät tunturikoivikossa aamulla / Lapland. Spring in a birch grove in an arctic hill in the morning, birds by YleArkisto -- https://freesound.org/s/243014/ -- License: Attribution 4.0
-curse_spell - 11095 ancestor curse spell.wav by Robinhood76 -- https://freesound.org/s/631769/ -- License: Attribution NonCommercial 4.0
 dark_cave - Sounds of the beast in the dark cave with dark metallic sounds in the background by Simonus18 -- https://freesound.org/s/809059/ -- License: Creative Commons 0
 dark_magic_spell_cast - Dark Magic Cast Loop Short by EminYILDIRIM -- https://freesound.org/s/550326/ -- License: Attribution 4.0
 dice_roll - Dice Rolling on Table by Flem0527 -- https://freesound.org/s/629982/ -- License: Creative Commons 0
@@ -12,7 +11,6 @@ roar_3 - roar08.wav by CZghost -- https://freesound.org/s/613682/ -- License: At
 spell_cast - Magic spell cast pitch down.wav by ryusa -- https://freesound.org/s/531088/ -- License: Attribution 4.0
 spell_cast_2 - Spell Cast / Buff / High Tone by SypherZent -- https://freesound.org/s/420676/ -- License: Creative Commons 0
 werewolf_howl - CREAHmn_Werewolf Howl, Single_Nicholas Judy_TDC by designerschoice -- https://freesound.org/s/805436/ -- License: Creative Commons 0
-wolf_howl Large Wolf Howl by adrilahan -- https://freesound.org/s/172652/ -- License: Attribution NonCommercial 3.0
 yeti_roar - Yeti Roar - Skiing Game - Roar SFX Remix (2 of 2) by el_boss -- https://freesound.org/s/751713/ -- License: Creative Commons 0
 zombie - Zombie drool by l4red0 -- https://freesound.org/s/181371/ -- License: Attribution 4.0
 zombie_2 - Zombie2.wav by CrocyTC -- https://freesound.org/s/353062/ -- License: Creative Commons 0

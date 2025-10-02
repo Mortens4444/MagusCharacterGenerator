@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFrameworks>net9.0-android;net9.0-ios;net9.0-maccatalyst</TargetFrameworks>
     <TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('windows'))">$(TargetFrameworks);net9.0-windows10.0.19041.0</TargetFrameworks>
@@ -89,7 +89,7 @@
   <ItemGroup>
     <MauiAsset Remove="Resources\Raw\beast.wav" />
     <MauiAsset Remove="Resources\Raw\bird_chirping.wav" />
-    <MauiAsset Remove="Resources\Raw\curse_spell.wav" />
+    <MauiAsset Remove="Resources\Raw\Credits.txt" />
     <MauiAsset Remove="Resources\Raw\dark_cave.wav" />
     <MauiAsset Remove="Resources\Raw\dark_magic_spell_cast.wav" />
     <MauiAsset Remove="Resources\Raw\dice_roll.wav" />
@@ -130,12 +130,12 @@
     <EmbeddedResource Include="Resources\Images\Characters\witch.png" />
     <EmbeddedResource Include="Resources\Images\Characters\wizard.png" />
     <EmbeddedResource Include="Resources\Raw\bird_chirping.wav" />
+    <EmbeddedResource Include="Resources\Raw\Credits.txt" />
     <EmbeddedResource Include="Resources\Raw\fireball_cast.wav" />
     <EmbeddedResource Include="Resources\Raw\spell_cast_2.wav" />
     <EmbeddedResource Include="Resources\Raw\spell_cast.wav" />
     <EmbeddedResource Include="Resources\Raw\dark_magic_spell_cast.wav" />
     <EmbeddedResource Include="Resources\Raw\fireball_cast_2.wav" />
-    <EmbeddedResource Include="Resources\Raw\curse_spell.wav" />
     <EmbeddedResource Include="Resources\Raw\beast.wav" />
     <EmbeddedResource Include="Resources\Raw\yeti-roar.wav" />
     <EmbeddedResource Include="Resources\Raw\werewolf_howl.wav" />
@@ -148,7 +148,7 @@
     <PackageReference Include="Microsoft.Maui.Graphics" Version="9.0.110" />
     <PackageReference Include="Microsoft.Maui.Graphics.Skia" Version="9.0.110" />
     <PackageReference Include="Mtf.Maui.Controls" Version="1.0.28" />
-    <PackageReference Include="Mtf.MAUI.LanguageService" Version="1.0.29" />
+    <PackageReference Include="Mtf.MAUI.LanguageService" Version="1.0.32" />
     <PackageReference Include="Plugin.Maui.Audio" Version="4.0.0" />
   </ItemGroup>
   <ItemGroup>
@@ -163,6 +163,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <MauiXaml Update="Views\AboutPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </MauiXaml>
     <MauiXaml Update="Views\CharacterGeneratorPage.xaml">
       <Generator>MSBuild:Compile</Generator>
     </MauiXaml>

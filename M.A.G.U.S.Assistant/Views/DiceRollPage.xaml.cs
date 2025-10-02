@@ -1,3 +1,5 @@
+using CommunityToolkit.Mvvm.Messaging;
+using M.A.G.U.S.Assistant.Messages;
 using MagusAssistant.ViewModels;
 using Mtf.LanguageService.MAUI;
 
@@ -20,7 +22,7 @@ public partial class DiceRollPage : ContentPage
         }
     }
 
-    protected override async void OnAppearing()
+    protected override void OnAppearing()
     {
         base.OnAppearing();
         Translator.Translate(this);
@@ -33,8 +35,9 @@ public partial class DiceRollPage : ContentPage
                 Accelerometer.Start(SensorSpeed.UI);
             }
         }
-        catch
+        catch (Exception ex)
         {
+            WeakReferenceMessenger.Default.Send(new ShowErrorMessage(ex.Message));
         }
     }
 
@@ -50,12 +53,13 @@ public partial class DiceRollPage : ContentPage
                 Accelerometer.Stop();
             }
         }
-        catch
+        catch (Exception ex)
         {
+            WeakReferenceMessenger.Default.Send(new ShowErrorMessage(ex.Message));
         }
     }
 
-    private void OnAccelerometerReadingChanged(object sender, AccelerometerChangedEventArgs e)
+    private void OnAccelerometerReadingChanged(object? sender, AccelerometerChangedEventArgs e)
     {
         try
         {
@@ -75,8 +79,9 @@ public partial class DiceRollPage : ContentPage
                 }
             }
         }
-        catch
+        catch (Exception ex)
         {
+            WeakReferenceMessenger.Default.Send(new ShowErrorMessage(ex.Message));
         }
     }
 
@@ -91,16 +96,20 @@ public partial class DiceRollPage : ContentPage
                 {
                     Vibration.Default.Vibrate(TimeSpan.FromMilliseconds(80));
                 }
-                catch { }
+                catch (Exception ex)
+                {
+                    WeakReferenceMessenger.Default.Send(new ShowErrorMessage(ex.Message));
+                }
                 ViewModel.RollCommand.Execute(null);
             }
         }
-        catch
+        catch (Exception ex)
         {
+            WeakReferenceMessenger.Default.Send(new ShowErrorMessage(ex.Message));
         }
     }
 
-    private async void OnDiceRollRequested(object sender, TaskCompletionSource<bool> tcs)
+    private async void OnDiceRollRequested(object? sender, TaskCompletionSource<bool> tcs)
     {
         try
         {

@@ -20,4 +20,6 @@ public class Flail : Weapon, IMeleeWeapon
     [DiceThrow(ThrowType._1K6)]
     [DiceThrowModifier(1)]
     public byte GetDamage() => (byte)(DiceThrow._1K6() + 1);
+
+    public override string Name => "Flail (thresher)";
 }

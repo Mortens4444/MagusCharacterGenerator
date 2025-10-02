@@ -7,7 +7,7 @@
 
     <ScrollView>
         <VerticalStackLayout Padding="16" Spacing="12">
-            <Label Text="Language:" FontAttributes="Bold" />
+            <Label Text="Language" FontAttributes="Bold" />
             <Picker x:Name="LanguagePicker"
                 Title="Select language" />
 
@@ -31,13 +31,18 @@
                     <HorizontalStackLayout HorizontalOptions="Center">
                         <mc:MenuItemView ImageName="classes" LabelText="Classes" PageType="{x:Type v:ClassesPage}" WidthRequest="100" HeightRequest="100" />
                         <mc:MenuItemView ImageName="races" LabelText="Races" PageType="{x:Type v:RacesPage}" WidthRequest="100" HeightRequest="100" />
-                        <mc:MenuItemView ImageName="dice_rolL" LabelText="Dice role" PageType="{x:Type v:DiceRollPage}" WidthRequest="100" HeightRequest="100" />
+                        <mc:MenuItemView ImageName="dice_rolL" LabelText="Dice roll" PageType="{x:Type v:DiceRollPage}" WidthRequest="100" HeightRequest="100" />
                     </HorizontalStackLayout>
                     <HorizontalStackLayout HorizontalOptions="Center">
                         <mc:MenuItemView ImageName="paint" LabelText="Room Painter" PageType="{x:Type v:PaintPage}" WidthRequest="100" HeightRequest="100" />
                         <mc:MenuItemView ImageName="sounds" LabelText="Sounds" PageType="{x:Type v:SoundPage}" WidthRequest="100" HeightRequest="100" />
                         <mc:MenuItemView ImageName="images" LabelText="Images" PageType="{x:Type v:ImagesPage}" WidthRequest="100" HeightRequest="100" />
                     </HorizontalStackLayout>
+
+                    <HorizontalStackLayout HorizontalOptions="Center">
+                        <mc:MenuItemView ImageName="about" LabelText="About" PageType="{x:Type v:AboutPage}" WidthRequest="100" HeightRequest="100" />
+                    </HorizontalStackLayout>
+
                 </VerticalStackLayout>
             </ScrollView>
         </VerticalStackLayout>
