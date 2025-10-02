@@ -1,5 +1,4 @@
-﻿using M.A.G.U.S.Assistant.Models;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Windows.Input;
 
@@ -9,38 +8,43 @@ namespace M.A.G.U.S.Assistant.ViewModels
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
-        public ObservableCollection<string> ShapeOptions { get; } = new ObservableCollection<string>
+        public ObservableCollection<ItemOption> ItemOptions { get; } = new ObservableCollection<ItemOption>
         {
-            "Chair", "Table", "Wall", "GlassSphere", "Human"
+            new ItemOption { Name = "Chair", Icon = "chair_top.png" },
+            new ItemOption { Name = "Table", Icon = "table_top.png" },
+            new ItemOption { Name = "Carpet", Icon = "rug_top.png" },
+            new ItemOption { Name = "Shelf", Icon = "shelf_top.png" },
+            new ItemOption { Name = "Door", Icon = "door_top.png" }
         };
 
-        public ObservableCollection<DrawableShape> Shapes { get; } = new ObservableCollection<DrawableShape>();
+        public ObservableCollection<PlacedItem> PlacedItems { get; } = new ObservableCollection<PlacedItem>();
 
-        private int selectedShapeIndex;
-        public int SelectedShapeIndex
+        private int selectedModeIndex;
+        public ObservableCollection<string> Modes { get; } = new ObservableCollection<string> { "Place", "Draw", "Select" };
+        public int SelectedModeIndex
         {
-            get => selectedShapeIndex;
+            get => selectedModeIndex;
             set
             {
-                if (selectedShapeIndex == value) return;
-                selectedShapeIndex = value;
-                OnPropertyChanged(nameof(SelectedShapeIndex));
+                if (selectedModeIndex == value) return;
+                selectedModeIndex = value;
+                OnPropertyChanged(nameof(SelectedModeIndex));
             }
         }
 
-        private DrawableShape selectedShape;
-        public DrawableShape SelectedShape
+        private ItemOption selectedItemOption;
+        public ItemOption SelectedItemOption
         {
-            get => selectedShape;
+            get => selectedItemOption;
             set
             {
-                if (selectedShape == value) return;
-                selectedShape = value;
-                OnPropertyChanged(nameof(SelectedShape));
+                if (selectedItemOption == value) return;
+                selectedItemOption = value;
+                OnPropertyChanged(nameof(SelectedItemOption));
             }
         }
 
-        private double shapeSize = 60;
+        private double shapeSize = 80;
         public double ShapeSize
         {
             get => shapeSize;
@@ -52,7 +56,7 @@ namespace M.A.G.U.S.Assistant.ViewModels
             }
         }
 
-        private Color selectedColor = Colors.SaddleBrown;
+        private Color selectedColor = Colors.White;
         public Color SelectedColor
         {
             get => selectedColor;
@@ -64,70 +68,180 @@ namespace M.A.G.U.S.Assistant.ViewModels
             }
         }
 
+        public ICommand PickPresetColorCommand { get; }
+        public ICommand OpenColorPickerCommand { get; }
         public ICommand UndoCommand { get; }
         public ICommand ClearCommand { get; }
-        public ICommand PickColorCommand { get; }
 
-        public CanvasDrawable CanvasDrawable { get; }
+        public GraphicsCanvasDrawable CanvasDrawable { get; }
+
+        // For simple drawing mode
+        public ObservableCollection<PointF> CurrentStroke { get; } = new ObservableCollection<PointF>();
+
+        // last touch used by tap fallback
+        public Point? LastTouch { get; private set; }
+
+        // manipulation temp variables
+        private PlacedItem hotItem;
 
         public PaintViewModel()
         {
-            UndoCommand = new Command(() =>
+            PickPresetColorCommand = new Command<string>(p =>
             {
-                if (Shapes.Any()) Shapes.RemoveAt(Shapes.Count - 1);
-                CanvasDrawable.Invalidate();
+                // prefer explicit mapping instead of non-existent FromName
+                SelectedColor = p switch
+                {
+                    "Black" => Colors.Black,
+                    "White" => Colors.White,
+                    "SaddleBrown" => Colors.SaddleBrown,
+                    "Red" => Colors.Red,
+                    "Orange" => Colors.Orange,
+                    "Yellow" => Colors.Yellow,
+                    "Green" => Colors.Green,
+                    "Blue" => Colors.Blue,
+                    "Purple" => Colors.Purple,
+                    _ when !string.IsNullOrEmpty(p) && p.StartsWith("#") => Color.FromArgb(p),
+                    _ => SelectedColor
+                };
             });
 
-            ClearCommand = new Command(() =>
+            OpenColorPickerCommand = new Command(async () =>
             {
-                Shapes.Clear();
-                CanvasDrawable.Invalidate();
-            });
-
-            PickColorCommand = new Command(async () =>
-            {
-                // egyszerű color picker modal (bővíthető)
                 var page = new ContentPage { Title = "Pick color" };
-                var picker = new Entry { Placeholder = "#AARRGGBB vagy név" };
+                var entry = new Entry { Placeholder = String.Empty };
                 var ok = new Button { Text = "OK" };
                 ok.Clicked += (s, e) =>
                 {
                     try
                     {
-                        var col = Color.FromArgb(picker.Text);
-                        SelectedColor = col;
+                        SelectedColor = Color.FromArgb(entry.Text);
                     }
                     catch
                     {
-                        // ignore invalid
                     }
                     Application.Current.MainPage.Navigation.PopModalAsync();
                 };
-                page.Content = new StackLayout { Padding = 12, Children = { picker, ok } };
+                page.Content = new StackLayout { Padding = 12, Children = { entry, ok } };
                 await Application.Current.MainPage.Navigation.PushModalAsync(page);
             });
 
-            CanvasDrawable = new CanvasDrawable(this);
+            UndoCommand = new Command(() =>
+            {
+                if (PlacedItems.Any()) PlacedItems.RemoveAt(PlacedItems.Count - 1);
+                CanvasDrawable.Invalidate();
+            });
+
+            ClearCommand = new Command(() =>
+            {
+                PlacedItems.Clear();
+                CanvasDrawable.ClearStrokes();
+                CanvasDrawable.Invalidate();
+            });
+
+            CanvasDrawable = new GraphicsCanvasDrawable(this);
         }
 
-        public void PlaceShape(double x, double y)
+        public void RecordTouch(double x, double y)
         {
-            var typeName = ShapeOptions[Math.Max(0, Math.Min(ShapeOptions.Count - 1, SelectedShapeIndex))];
-            var shape = new DrawableShape
+            LastTouch = new Point(x, y);
+        }
+
+        public void PlaceItem(double x, double y)
+        {
+            if (SelectedModeIndex == 1) // Draw mode
             {
-                Type = typeName,
+                // start a stroke
+                CurrentStroke.Clear();
+                CurrentStroke.Add(new PointF((float)x, (float)y));
+                CanvasDrawable.Invalidate();
+                return;
+            }
+
+            var option = SelectedItemOption ?? ItemOptions.FirstOrDefault();
+            if (option == null) return;
+
+            var item = new PlacedItem
+            {
+                Icon = option.Icon,
                 X = (float)x,
                 Y = (float)y,
-                Size = (float)ShapeSize,
-                Color = SelectedColor,
+                Width = (float)ShapeSize,
+                Height = (float)ShapeSize,
+                Rotation = 0f
             };
-
-            Shapes.Add(shape);
+            PlacedItems.Add(item);
             CanvasDrawable.Invalidate();
         }
 
-        internal void Invalidate() => CanvasDrawable.Invalidate();
+        public void HandlePan(float deltaX, float deltaY)
+        {
+            // move hotItem while panning
+            if (hotItem == null)
+            {
+                // hit test last touch to select an item
+                hotItem = FindItemUnderLastTouch();
+            }
+
+            if (hotItem != null)
+            {
+                hotItem.X += deltaX;
+                hotItem.Y += deltaY;
+                CanvasDrawable.Invalidate();
+            }
+        }
+
+        public void HandlePinch(float scale)
+        {
+            if (hotItem == null) hotItem = FindItemUnderLastTouch();
+            if (hotItem == null) return;
+            hotItem.Width *= scale;
+            hotItem.Height *= scale;
+            CanvasDrawable.Invalidate();
+        }
+
+        public void EndManipulation()
+        {
+            hotItem = null;
+        }
+
+        private PlacedItem FindItemUnderLastTouch()
+        {
+            if (!LastTouch.HasValue) return null;
+            var p = LastTouch.Value;
+            // search from top-most (last) to first
+            for (var i = PlacedItems.Count - 1; i >= 0; i--)
+            {
+                var it = PlacedItems[i];
+                var left = it.X - it.Width / 2;
+                var top = it.Y - it.Height / 2;
+                if (p.X >= left && p.X <= left + it.Width && p.Y >= top && p.Y <= top + it.Height)
+                    return it;
+            }
+            return null;
+        }
+
+        public void Invalidate()
+        {
+            CanvasDrawable?.Invalidate();
+        }
 
         private void OnPropertyChanged(string name) => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
+    }
+
+    public class ItemOption
+    {
+        public string Name { get; set; }
+        public string Icon { get; set; }
+    }
+
+    public class PlacedItem
+    {
+        public string Icon { get; set; }
+        public float X { get; set; }
+        public float Y { get; set; }
+        public float Width { get; set; }
+        public float Height { get; set; }
+        public float Rotation { get; set; }
+        public Microsoft.Maui.Graphics.IImage Image { get; internal set; }
     }
 }

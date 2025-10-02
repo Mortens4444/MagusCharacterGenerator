@@ -1,47 +1,71 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:vm="clr-namespace:M.A.G.U.S.Assistant.ViewModels"
-             x:Class="M.A.G.U.S.Assistant.Views.PaintPage"
-             Title="Room Painter">
+<ContentPage
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+    xmlns:vm="clr-namespace:M.A.G.U.S.Assistant.ViewModels"
+    x:Class="M.A.G.U.S.Assistant.Views.PaintPage"
+    BackgroundColor="Black">
 
     <ContentPage.BindingContext>
         <vm:PaintViewModel />
     </ContentPage.BindingContext>
 
-    <Grid RowDefinitions="Auto,*,Auto" Padding="12" RowSpacing="8" x:Name="TouchGrid">
-        <!-- Toolbar -->
-        <HorizontalStackLayout Spacing="10">
-            <Picker Title="Shape" ItemsSource="{Binding ShapeOptions}" SelectedIndex="{Binding SelectedShapeIndex}" WidthRequest="160" />
+    <Grid RowDefinitions="Auto,Auto,*,Auto" Padding="8" RowSpacing="6">
+        <ScrollView Orientation="Horizontal" Grid.Row="0">
+            <HorizontalStackLayout Spacing="8" Padding="6">
+                <Button WidthRequest="36" HeightRequest="36" BackgroundColor="Black" Command="{Binding PickPresetColorCommand}" CommandParameter="Black" />
+                <Button WidthRequest="36" HeightRequest="36" BackgroundColor="White" Command="{Binding PickPresetColorCommand}" CommandParameter="White" />
+                <Button WidthRequest="36" HeightRequest="36" BackgroundColor="SaddleBrown" Command="{Binding PickPresetColorCommand}" CommandParameter="SaddleBrown" />
+                <Button WidthRequest="36" HeightRequest="36" BackgroundColor="Red" Command="{Binding PickPresetColorCommand}" CommandParameter="Red" />
+                <Button WidthRequest="36" HeightRequest="36" BackgroundColor="Orange" Command="{Binding PickPresetColorCommand}" CommandParameter="Orange" />
+                <Button WidthRequest="36" HeightRequest="36" BackgroundColor="Yellow" Command="{Binding PickPresetColorCommand}" CommandParameter="Yellow" />
+                <Button WidthRequest="36" HeightRequest="36" BackgroundColor="Green" Command="{Binding PickPresetColorCommand}" CommandParameter="Green" />
+                <Button WidthRequest="36" HeightRequest="36" BackgroundColor="Blue" Command="{Binding PickPresetColorCommand}" CommandParameter="Blue" />
+                <Button WidthRequest="36" HeightRequest="36" BackgroundColor="Purple" Command="{Binding PickPresetColorCommand}" CommandParameter="Purple" />
+                <Button WidthRequest="36" HeightRequest="36" BackgroundColor="Transparent" BorderColor="Gray" Text="+" Command="{Binding OpenColorPickerCommand}" />
+            </HorizontalStackLayout>
+        </ScrollView>
+
+        <CollectionView Grid.Row="1" ItemsLayout="HorizontalList" ItemsSource="{Binding ItemOptions}" HeightRequest="76" SelectionMode="Single" SelectedItem="{Binding SelectedItemOption}">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Grid Padding="6">
+                        <Frame Padding="4" CornerRadius="6" HasShadow="False" BackgroundColor="White">
+                            <Image Source="{Binding Icon}" WidthRequest="56" HeightRequest="56" Aspect="AspectFit" />
+                        </Frame>
+                    </Grid>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+        <!--<GraphicsView x:Name="CanvasView" Drawable="{Binding CanvasDrawable}">
+            <GraphicsView.Behaviors>
+                <toolkit:TouchEffect Capture="True" TouchAction="OnTouchAction" />
+            </GraphicsView.Behaviors>
+        </GraphicsView>-->
+        
+        <Frame Grid.Row="2" HasShadow="True" CornerRadius="8" Padding="0" >
+            <GraphicsView x:Name="CanvasView" Drawable="{Binding CanvasDrawable}" BackgroundColor="Transparent"
+                          HorizontalOptions="Fill" VerticalOptions="Fill" HeightRequest="520"
+                          StartInteraction="CanvasView_StartInteraction"
+                          DragInteraction="CanvasView_DragInteraction"
+                          EndInteraction="CanvasView_EndInteraction"
+                          CancelInteraction="CanvasView_CancelInteraction">
+                <GraphicsView.GestureRecognizers>
+                    <PanGestureRecognizer PanUpdated="OnPanUpdated" />                    
+                    <PinchGestureRecognizer PinchUpdated="OnPinchUpdated" />
+                </GraphicsView.GestureRecognizers>
+            </GraphicsView>
+        </Frame>
+
+        <HorizontalStackLayout Grid.Row="3" Spacing="8" Padding="4">
             <Button Text="Undo" Command="{Binding UndoCommand}" />
             <Button Text="Clear" Command="{Binding ClearCommand}" />
             <Label Text="Size" VerticalOptions="Center" />
-            <Slider Minimum="10" Maximum="200" Value="{Binding ShapeSize}" WidthRequest="140" />
-            <Label Text="Color" VerticalOptions="Center" />
-            <Button BackgroundColor="{Binding SelectedColor}" WidthRequest="36" HeightRequest="36" Command="{Binding PickColorCommand}" />
+            <Slider Minimum="10" Maximum="300" Value="{Binding ShapeSize}" WidthRequest="160" />
+            <Label Text="Mode" VerticalOptions="Center" />
+            <Picker Title="Mode" ItemsSource="{Binding Modes}" SelectedIndex="{Binding SelectedModeIndex}" WidthRequest="140" />
         </HorizontalStackLayout>
-
-        <!-- Drawing area -->
-        <Frame Grid.Row="1" HasShadow="True" CornerRadius="6" Padding="0" HorizontalOptions="Fill" VerticalOptions="Fill">
-            <GraphicsView x:Name="CanvasView"
-                          Drawable="{Binding CanvasDrawable}"
-                          HorizontalOptions="Fill"
-                          VerticalOptions="Fill"
-                          BackgroundColor="White" />
-        </Frame>
-
-        <!-- Bottom: placed items list -->
-        <StackLayout Grid.Row="2" Orientation="Horizontal" Spacing="8">
-            <Label Text="Placed:" VerticalOptions="Center" />
-            <CollectionView ItemsSource="{Binding Shapes}" SelectionMode="Single" SelectedItem="{Binding SelectedShape}">
-                <CollectionView.ItemTemplate>
-                    <DataTemplate>
-                        <Grid Padding="4">
-                            <Label Text="{Binding Description}" />
-                        </Grid>
-                    </DataTemplate>
-                </CollectionView.ItemTemplate>
-            </CollectionView>
-        </StackLayout>
     </Grid>
 </ContentPage>

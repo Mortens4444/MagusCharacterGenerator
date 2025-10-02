@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFrameworks>net9.0-android;net9.0-ios;net9.0-maccatalyst</TargetFrameworks>
     <TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('windows'))">$(TargetFrameworks);net9.0-windows10.0.19041.0</TargetFrameworks>
@@ -23,7 +23,7 @@
     <ApplicationId>com.mortens.MAGUS.Assistant</ApplicationId>
     <!-- Versions -->
     <MajorVersion>1</MajorVersion>
-    <MinorVersion>2</MinorVersion>
+    <MinorVersion>3</MinorVersion>
     <BuildNumber>0</BuildNumber>
     <PatchNumber>0</PatchNumber>
     <FileVersion>$(MajorVersion).$(MinorVersion).$(BuildNumber).$(PatchNumber)</FileVersion>
@@ -145,6 +145,8 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.Maui.Controls" Version="9.0.110" />
     <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="9.0.9" />
+    <PackageReference Include="Microsoft.Maui.Graphics" Version="9.0.110" />
+    <PackageReference Include="Microsoft.Maui.Graphics.Skia" Version="9.0.110" />
     <PackageReference Include="Mtf.Maui.Controls" Version="1.0.28" />
     <PackageReference Include="Mtf.MAUI.LanguageService" Version="1.0.29" />
     <PackageReference Include="Plugin.Maui.Audio" Version="4.0.0" />

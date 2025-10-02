@@ -1,6 +1,4 @@
-﻿using M.A.G.U.S.Assistant.Models;
-
-namespace M.A.G.U.S.Assistant.ViewModels;
+﻿namespace M.A.G.U.S.Assistant.ViewModels;
 
 public class CanvasDrawable : IDrawable
 {
@@ -14,15 +12,22 @@ public class CanvasDrawable : IDrawable
     public void Draw(ICanvas canvas, RectF dirtyRect)
     {
         canvas.SaveState();
+
+        // háttér
         canvas.FillColor = Colors.White;
         canvas.FillRectangle(dirtyRect);
 
-        // draw grid for orientation (optional)
+        // rács
         DrawGrid(canvas, dirtyRect);
 
-        foreach (var s in viewModel.Shapes)
+        // PlacedItems rajzolása (ikon vagy fallback forma)
+        if (viewModel.PlacedItems != null)
         {
-            DrawShape(canvas, s);
+            for (var i = 0; i < viewModel.PlacedItems.Count; i++)
+            {
+                var it = viewModel.PlacedItems[i];
+                DrawPlacedItem(canvas, it);
+            }
         }
 
         canvas.RestoreState();
@@ -30,73 +35,72 @@ public class CanvasDrawable : IDrawable
 
     public void Invalidate()
     {
-        // Nothing here — GraphicsView will call invalidate via binding to this instance.
+        // a GraphicsView-et a Page invalidálja, itt nem kell semmit csinálni
     }
 
     private void DrawGrid(ICanvas canvas, RectF rect)
     {
-        var step = 50;
+        var step = 50f;
         canvas.StrokeColor = Colors.LightGray;
         canvas.StrokeSize = 0.5f;
-        for (var x = 0; x < rect.Width; x += step) canvas.DrawLine(x, 0, x, rect.Height);
-        for (var y = 0; y < rect.Height; y += step) canvas.DrawLine(0, y, rect.Width, y);
+        for (var x = 0f; x < rect.Width; x += step) canvas.DrawLine(x, 0, x, rect.Height);
+        for (var y = 0f; y < rect.Height; y += step) canvas.DrawLine(0, y, rect.Width, y);
     }
 
-    private void DrawShape(ICanvas canvas, DrawableShape s)
+    private void DrawPlacedItem(ICanvas canvas, PlacedItem it)
     {
-        canvas.SaveState();
-        canvas.FillColor = s.Color;
-        canvas.StrokeColor = Colors.Black;
-        canvas.StrokeSize = 2;
+        var rect = new RectF(it.X - it.Width / 2f, it.Y - it.Height / 2f, it.Width, it.Height);
 
-        var half = s.Size / 2f;
-        var cx = s.X;
-        var cy = s.Y;
-
-        switch (s.Type)
+        // ha van betöltött IImage, rajzoljuk
+        if (it.Image != null)
         {
-            case "Chair":
-                DrawChair(canvas, cx, cy, s.Size);
-                break;
-            case "Table":
-                // top-down table = rectangle with legs
-                canvas.FillRoundedRectangle(cx - half, cy - half, s.Size, s.Size * 0.6f, 6);
-                break;
-            case "Wall":
-                // wall as long rectangle
-                canvas.FillRectangle(cx - half * 2, cy - half / 2, s.Size * 2, s.Size / 3);
-                break;
-            case "GlassSphere":
-                // circle with glare (glass look)
-                canvas.FillColor = s.Color.WithAlpha(0.5f);
-                canvas.FillCircle(cx, cy, half);
-                canvas.StrokeColor = Colors.LightGray;
-                canvas.DrawCircle(cx, cy, half);
-                canvas.FillColor = Colors.White.WithAlpha(0.25f);
-                canvas.FillEllipse(cx - half / 2, cy - half / 2, half * 0.6f, half * 0.4f);
-                break;
-            case "Human":
-                // simplified top-down human: circle (head) + body ellipse
-                canvas.FillCircle(cx, cy - half * 0.25f, half * 0.45f);
-                canvas.FillEllipse(cx - half * 0.6f, cy + half * 0.05f, s.Size * 0.9f, half);
-                break;
-            default:
-                // fallback: simple square
-                canvas.FillRectangle(cx - half, cy - half, s.Size, s.Size);
-                break;
+            canvas.DrawImage(it.Image, rect.X, rect.Y, rect.Width, rect.Height);
+            return;
         }
 
-        canvas.RestoreState();
+        // különböző típusok top-down megjelenítése (ha Icon típusból tudunk dönteni)
+        var type = it.Icon?.ToLowerInvariant() ?? String.Empty;
+
+        if (type.Contains("chair"))
+        {
+            DrawChair(canvas, rect);
+        }
+        else if (type.Contains("table"))
+        {
+            canvas.FillColor = Colors.SaddleBrown;
+            canvas.FillRoundedRectangle(rect.X, rect.Y + rect.Height * 0.15f, rect.Width, rect.Height * 0.7f, 6);
+        }
+        else if (type.Contains("rug") || type.Contains("carpet"))
+        {
+            canvas.FillColor = Colors.DarkOliveGreen;
+            canvas.FillRoundedRectangle(rect.X, rect.Y, rect.Width, rect.Height, 8);
+        }
+        else
+        {
+            // fallback: egyszerű négyzet
+            canvas.FillColor = Colors.LightGray;
+            canvas.FillRectangle(rect);
+        }
+
+        // körvonal
+        canvas.StrokeColor = Colors.Black;
+        canvas.StrokeSize = 1;
+        canvas.DrawRectangle(rect);
     }
 
-    private void DrawChair(ICanvas canvas, float cx, float cy, float size)
+    private void DrawChair(ICanvas canvas, RectF rect)
     {
+        var cx = rect.X + rect.Width / 2f;
+        var cy = rect.Y + rect.Height / 2f;
+        var size = Math.Min(rect.Width, rect.Height);
         var half = size / 2f;
-        // seat
+
+        canvas.FillColor = Colors.SaddleBrown;
+        // ülőke
         canvas.FillRoundedRectangle(cx - half * 0.6f, cy - half * 0.1f, size * 0.6f, size * 0.4f, 4);
-        // backrest (top of chair)
+        // háttámla
         canvas.FillRoundedRectangle(cx - half * 0.6f, cy - half * 0.55f, size * 0.6f, size * 0.25f, 3);
-        // legs (small rectangles)
+        // lábak
         var legW = size * 0.08f;
         var legH = size * 0.12f;
         canvas.FillRectangle(cx - half * 0.55f, cy + half * 0.25f, legW, legH);
