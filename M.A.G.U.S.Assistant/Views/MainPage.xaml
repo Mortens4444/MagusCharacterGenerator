@@ -26,7 +26,9 @@
                     <!--<HorizontalStackLayout HorizontalOptions="Center">
                         <mc:MenuItemView ImageName="psi" LabelText="Psi" PageType="{x:Type v:PsiPage}" WidthRequest="100" HeightRequest="100" />
                         <mc:MenuItemView ImageName="magic" LabelText="Magic" PageType="{x:Type v:MagicPage}" WidthRequest="100" HeightRequest="100" />
-                        <mc:MenuItemView ImageName="poisons" LabelText="Qualifications" PageType="{x:Type v:PoisonsPage}" WidthRequest="100" HeightRequest="100" />
+                        <mc:MenuItemView ImageName="poisons" LabelText="Poisons" PageType="{x:Type v:PoisonsPage}" WidthRequest="100" HeightRequest="100" />
+                        <mc:MenuItemView ImageName="gemstone" LabelText="Gemstones" PageType="{x:Type v:GemstonesPage}" WidthRequest="100" HeightRequest="100" />
+                        <mc:MenuItemView ImageName="magical_items" LabelText="MagicalItems" PageType="{x:Type v:MagicalItemsPage}" WidthRequest="100" HeightRequest="100" />
                     </HorizontalStackLayout>-->
                     <HorizontalStackLayout HorizontalOptions="Center">
                         <mc:MenuItemView ImageName="classes" LabelText="Classes" PageType="{x:Type v:ClassesPage}" WidthRequest="100" HeightRequest="100" />

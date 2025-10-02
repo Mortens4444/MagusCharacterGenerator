@@ -43,11 +43,6 @@
                     <Border Stroke="Gray" StrokeThickness="1" Padding="8" Margin="0,4">
                         <Grid ColumnDefinitions="*" ColumnSpacing="8" VerticalOptions="Center">
                             <Label Text="{Binding Description, Converter={StaticResource TranslationConverter}}" FontAttributes="Bold" />
-
-                            <!--<Button Text="Select"
-                                    Grid.Column="2"
-                                    Command="{Binding Source={x:Reference PageRoot}, Path=BindingContext.SelectCommand}"
-                                    CommandParameter="{Binding}" />-->
                         </Grid>
                     </Border>
                 </DataTemplate>

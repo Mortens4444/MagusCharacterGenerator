@@ -24,36 +24,15 @@
         </ResourceDictionary>
     </v:NotifierPage.Resources>
 
-
-    <!--<VerticalStackLayout Spacing="8"
-                         Padding="10"
-                         Rowd
-                         >
-
-        <WebView x:Name="Browser" Source="{Binding CurrentUrl}" HeightRequest="800"/>
-        <mc:Hyperlink LinkLabel="kalandozok.hu" Url="https://kalandozok.hu/" />
-
-    </VerticalStackLayout>-->
     <Grid Padding="10" RowSpacing="8">
         <Grid.RowDefinitions>
-            <!-- WebView kitölti a rendelkezésre álló helyet -->
             <RowDefinition Height="*" />
-            <!-- Link magassága automatikus -->
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
-        <WebView x:Name="Browser"
-             Source="{Binding CurrentUrl}"
-             Grid.Row="0"
-             VerticalOptions="FillAndExpand"
-             HorizontalOptions="FillAndExpand" />
+        <WebView x:Name="Browser" Source="{Binding CurrentUrl}" Grid.Row="0" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" />
 
-        <mc:Hyperlink Grid.Row="1"
-                  LinkLabel="kalandozok.hu"
-                  Url="https://kalandozok.hu/"
-                  HorizontalOptions="Center"
-                  VerticalOptions="End"
-                  Margin="0,8,0,0" />
+        <mc:Hyperlink Grid.Row="1" LinkLabel="kalandozok.hu" Url="https://kalandozok.hu/" HorizontalOptions="Center" VerticalOptions="End" Margin="0,8,0,0" />
     </Grid>
 
 </v:NotifierPage>
