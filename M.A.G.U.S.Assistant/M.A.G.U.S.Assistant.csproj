@@ -199,7 +199,7 @@
     <MauiXaml Update="Views\RacesPage.xaml">
       <Generator>MSBuild:Compile</Generator>
     </MauiXaml>
-    <MauiXaml Update="Views\RunesPage.xaml">
+    <MauiXaml Update="Views\SearchListPage.xaml">
       <Generator>MSBuild:Compile</Generator>
     </MauiXaml>
     <MauiXaml Update="Views\SoundPage.xaml">

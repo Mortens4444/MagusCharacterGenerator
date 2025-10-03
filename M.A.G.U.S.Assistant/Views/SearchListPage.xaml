@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:conv="clr-namespace:M.A.G.U.S.Assistant.Converters"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:m="clr-namespace:M.A.G.U.S.Assistant.Models"
+             xmlns:vm="clr-namespace:M.A.G.U.S.Assistant.ViewModels"
+             x:Class="M.A.G.U.S.Assistant.Views.SearchListPage"
+             x:DataType="vm:SearchListViewModel"
+             Title="{Binding PageTitle}">
+
+    <ContentPage.BindingContext>
+        <vm:SearchListViewModel />
+    </ContentPage.BindingContext>
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <conv:TranslationConverter x:Key="TranslationConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    
+    <Grid Padding="10" RowDefinitions="Auto,Auto,*" RowSpacing="8">
+        <HorizontalStackLayout Grid.Row="0" Spacing="8" VerticalOptions="Center">
+            <Label Text="{Binding LabelText, FallbackValue='Search'}" VerticalOptions="Center" />
+            <Entry Text="{Binding SearchText}" Placeholder="Search..." HorizontalOptions="FillAndExpand" />
+            <Button Text="Clear" Command="{Binding ClearCommand}" />
+        </HorizontalStackLayout>
+
+        <CollectionView Grid.Row="2"
+                        ItemsSource="{Binding FilteredItems}"
+                        SelectionMode="Single"
+                        SelectedItem="{Binding SelectedItem, Mode=TwoWay}"
+                        VerticalOptions="FillAndExpand"
+                        ItemsLayout="VerticalList">
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="m:DisplayItem">
+                    <Border Stroke="Gray" StrokeThickness="1" Padding="8" Margin="0,4">
+                        <Grid ColumnDefinitions="*,Auto" ColumnSpacing="8" VerticalOptions="Center">
+                            <StackLayout>
+                                <Label Text="{Binding Title, Converter={StaticResource TranslationConverter}}" FontAttributes="Bold" />
+
+                                <Label Text="{Binding Subtitle}" FontSize="12" LineBreakMode="TailTruncation" />
+                            </StackLayout>
+                            <Label Text="{Binding RightText}" VerticalOptions="Center" Grid.Column="1" FontAttributes="Bold" />
+                        </Grid>
+                    </Border>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </Grid>
+</ContentPage>

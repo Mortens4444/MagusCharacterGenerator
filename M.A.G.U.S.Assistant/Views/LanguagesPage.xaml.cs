@@ -8,5 +8,5 @@ public partial class LanguagesPage : NotifierPage
 	{
 		InitializeComponent();
 		Translator.Translate(this);
-    }
+	}
 }
