@@ -1,4 +1,5 @@
 ﻿using M.A.G.U.S.GameSystem.Languages;
+using M.A.G.U.S.GameSystem.Qualifications;
 using M.A.G.U.S.Qualifications;
 using M.A.G.U.S.Qualifications.Laical;
 using M.A.G.U.S.Qualifications.Scientific;
@@ -21,14 +22,14 @@ public class Kyr : Race
 
     public override SpecialQualificationList SpecialQualifications =>
     [
-        new Infravision(50),
-        new UndergroundMasters(2),
-        new KeenSmell(8)
+        new Ultravision(5),
+        new ExtraPsiPointOnLevelUp(1),
+        new ExtraManaPointOnLevelUp(1)
     ];
 
     public override QualificationList Qualifications =>
     [
-        new AncientTongueLore(AntientLanguage.Kyr),
-        new Etiquette()
+        new AncientTongueLore(AntientLanguage.Kyr, QualificationLevel.Master),
+        new Etiquette(QualificationLevel.Master)
     ];
 }

@@ -13,7 +13,7 @@ using M.A.G.U.S.Qualifications.Underworld;
 
 namespace M.A.G.U.S.Classes.Sorcerer;
 
-public class Warlord(byte level = 1) : Class(level), IClass, ILikeMagic
+public class Warlock(byte level = 1) : Class(level), IClass, ILikeMagic
 {
     [DiceThrow(ThrowType._3K6_2_Times)]
     public override short Strength => DiceThrow._3K6_2_Times();

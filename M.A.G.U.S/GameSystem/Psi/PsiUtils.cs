@@ -15,10 +15,6 @@ public static class PsiUtils
 
     public static ushort GetPsiPoints(byte modifier, int masterLevel, int baseLevel)
     {
-		if (masterLevel == baseLevel)
-		{
-			return 0;
-		}
 		return (ushort)(modifier * (masterLevel - (baseLevel - 1)) + AdditionalPsiBase);
     }
 }

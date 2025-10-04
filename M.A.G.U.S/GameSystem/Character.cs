@@ -536,7 +536,7 @@ public class Character : IFightModifier, ILiving, IAbilities, INotifyPropertyCha
 		else
 		{
 			// TwinCaste
-			// When it got the new caste?
+			// When it got the new class?
 			throw new NotImplementedException();
 		}
 	}

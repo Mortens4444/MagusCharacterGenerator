@@ -118,7 +118,7 @@
             <VerticalStackLayout Spacing="10">
                 <Border Style="{StaticResource BoxBorder}">
                     <VerticalStackLayout>
-                        <Label Text="Skills" Style="{StaticResource HeaderLabel}"/>
+                        <Label Text="Abilities" Style="{StaticResource HeaderLabel}"/>
                         <Grid ColumnDefinitions="*, *"
                             RowDefinitions="Auto, Auto, Auto, Auto, Auto"
                             RowSpacing="5"                                  
@@ -407,11 +407,11 @@
                     </CollectionView>
                 </VerticalStackLayout>
             </Border>
-            
-            <!-- Speciális képzettségek -->
+
+            <!-- Speciális képességek -->
             <Border Style="{StaticResource BoxBorder}" Margin="0,10">
                 <VerticalStackLayout>
-                    <Label Text="Special qualifications" Style="{StaticResource HeaderLabel}" />
+                    <Label Text="Special Abilities" Style="{StaticResource HeaderLabel}" />
                     <Grid Padding="6" ColumnDefinitions="*" ColumnSpacing="10">
 
                         <Label Text="Name"

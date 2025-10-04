@@ -8,11 +8,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="GameSystem\MagicalObjects\" />
-    <Folder Include="GameSystem\PoisonsAndIllnesses\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <None Include="Qualifications\Specialities\CannotTolerateStrongLight.cs" />
   </ItemGroup>
 
