@@ -1,4 +1,8 @@
-﻿namespace M.A.G.U.S.Assistant.Models;
+﻿using M.A.G.U.S.Assistant.Extensions;
+using M.A.G.U.S.GameSystem.MagicalObjects;
+using M.A.G.U.S.GameSystem.PoisonsAndIllnesses;
+
+namespace M.A.G.U.S.Assistant.Models;
 
 public class DisplayItem
 {
@@ -51,10 +55,45 @@ public class DisplayItem
                 Key = String.Empty,
                 Title = g.Name ?? String.Empty,
                 Subtitle = g.Description ?? String.Empty,
-                RightText = String.Empty
+                RightText = g.Price.ToTranslatedString()
             };
         }
 
         return new DisplayItem { Source = gemstoneObj, Title = gemstoneObj?.ToString() ?? String.Empty };
+    }
+
+    internal static DisplayItem FromMagicalObject(object magicalObj)
+    {
+        
+        if (magicalObj is MagicalObject mo)
+        {
+            return new DisplayItem
+            {
+                Source = mo,
+                Key = String.Empty,
+                Title = mo.Name ?? String.Empty,
+                Subtitle = mo.Description ?? String.Empty,
+                RightText = String.Empty
+            };
+        }
+
+        return new DisplayItem { Source = magicalObj, Title = magicalObj?.ToString() ?? String.Empty };
+    }
+
+    internal static DisplayItem FromPoison(object poisonObj)
+    {
+        if (poisonObj is Poison p)
+        {
+            return new DisplayItem
+            {
+                Source = p,
+                Key = String.Empty,
+                Title = p.Name ?? String.Empty,
+                Subtitle = p.Description ?? String.Empty,
+                RightText = p.Price.ToTranslatedString()
+            };
+        }
+
+        return new DisplayItem { Source = poisonObj, Title = poisonObj?.ToString() ?? String.Empty };
     }
 }

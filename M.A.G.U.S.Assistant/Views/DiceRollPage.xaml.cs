@@ -1,6 +1,6 @@
 using CommunityToolkit.Mvvm.Messaging;
 using M.A.G.U.S.Assistant.Messages;
-using MagusAssistant.ViewModels;
+using M.A.G.U.S.Assistant.ViewModels;
 using Mtf.LanguageService.MAUI;
 
 namespace M.A.G.U.S.Assistant.Views;
@@ -10,7 +10,7 @@ public partial class DiceRollPage : ContentPage
     private DiceRollViewModel ViewModel => BindingContext as DiceRollViewModel;
 
     private DateTime lastShake = DateTime.MinValue;
-    private const double ShakeThreshold = 20.0; // m/s^2
+    private const double ShakeThresholdG = 2.2;
     private const int ShakeDebounceMs = 800;
 
     public DiceRollPage()
@@ -69,7 +69,7 @@ public partial class DiceRollPage : ContentPage
 
             var total = Math.Sqrt(ax * ax + ay * ay + az * az);
 
-            if (total > ShakeThreshold)
+            if (total > ShakeThresholdG)
             {
                 var now = DateTime.UtcNow;
                 if ((now - lastShake).TotalMilliseconds > ShakeDebounceMs)

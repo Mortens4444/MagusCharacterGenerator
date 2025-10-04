@@ -37,8 +37,12 @@ public enum Language
     Ogre,
     [Description("Reptilian")]
     Reptilian,
-    [Description("Gnoll")]
-    Gnoll,
     [Description("Hobgoblin")]
-    Hobgoblin
+    Hobgoblin,
+    [Description("Niarei")]
+    Niarei,
+    [Description("Enosukean")]
+    Enosukean,
+    [Description("Khal")]
+    Khal
 }

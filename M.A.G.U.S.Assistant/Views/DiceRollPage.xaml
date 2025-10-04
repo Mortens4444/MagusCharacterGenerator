@@ -5,7 +5,7 @@
              Title="Dice roll">
 
     <ContentPage.BindingContext>
-        <vm:DiceRollViewModel xmlns:vm="clr-namespace:MagusAssistant.ViewModels" />
+        <vm:DiceRollViewModel xmlns:vm="clr-namespace:M.A.G.U.S.Assistant.ViewModels" />
     </ContentPage.BindingContext>
 
     <ScrollView>

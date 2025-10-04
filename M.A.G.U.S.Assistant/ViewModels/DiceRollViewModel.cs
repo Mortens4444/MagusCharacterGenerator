@@ -6,7 +6,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Windows.Input;
 
-namespace MagusAssistant.ViewModels;
+namespace M.A.G.U.S.Assistant.ViewModels;
 
 public class DiceRollViewModel : INotifyPropertyChanged
 {
