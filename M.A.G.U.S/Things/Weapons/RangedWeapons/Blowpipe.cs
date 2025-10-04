@@ -3,7 +3,7 @@ using M.A.G.U.S.GameSystem.Valuables;
 
 namespace M.A.G.U.S.Things.Weapons.AimingWeapons;
 
-public class BlowPipe : Weapon, IRangedWeapon
+public class Blowpipe : Weapon, IRangedWeapon
 {
     public double AttacksPerRound => 3;
 

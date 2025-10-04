@@ -8,8 +8,7 @@
     <ScrollView>
         <VerticalStackLayout Padding="16" Spacing="12">
             <Label Text="Language" FontAttributes="Bold" />
-            <Picker x:Name="LanguagePicker"
-                Title="Select language" />
+            <Picker x:Name="LanguagePicker" Title="Select language" />
 
             <ScrollView>
                 <VerticalStackLayout>

@@ -3,7 +3,7 @@ using M.A.G.U.S.GameSystem.Valuables;
 
 namespace M.A.G.U.S.Things.Weapons.AimingWeapons;
 
-public class LongBow : Weapon, IRangedWeapon
+public class Longbow : Weapon, IRangedWeapon
 {
     public double AttacksPerRound => 2;
 

@@ -29,6 +29,18 @@ public class SearchListViewModel : INotifyPropertyChanged
         }
     }
 
+    private string pageTitle = String.Empty;
+    public string PageTitle
+    {
+        get => pageTitle;
+        set
+        {
+            if (pageTitle == value) return;
+            pageTitle = value ?? String.Empty;
+            OnPropertyChanged(nameof(PageTitle));
+        }
+    }
+
     DisplayItem? selectedItem;
     public DisplayItem? SelectedItem
     {

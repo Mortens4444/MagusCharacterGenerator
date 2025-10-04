@@ -8,6 +8,8 @@ public class Money(decimal gold, decimal silver = 0, decimal copper = 0) : IComp
 
     public static readonly Money Free = new(0);
 
+    public static readonly Money Double = new(0);
+
     public decimal Mithril { get; set; }
     
     public decimal Gold { get; set; } = gold;

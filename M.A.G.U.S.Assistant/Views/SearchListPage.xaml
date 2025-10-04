@@ -18,10 +18,9 @@
     </ContentPage.Resources>
     
     <Grid Padding="10" RowDefinitions="Auto,Auto,*" RowSpacing="8">
-        <Grid Grid.Row="0" VerticalOptions="Center" ColumnDefinitions="Auto, *, Auto">
-            <Label Grid.Column="0" Text="{Binding LabelText, FallbackValue='Search'}" />
-            <Entry Grid.Column="1" Text="{Binding SearchText}" Placeholder="Search..." />
-            <Button Grid.Column="2" Text="Clear" Command="{Binding ClearCommand}" />
+        <Grid Grid.Row="0" VerticalOptions="Center" ColumnDefinitions="*, Auto">
+            <Entry Grid.Column="0" Text="{Binding SearchText}" Placeholder="Search..." />
+            <Button Grid.Column="1" Text="Clear" Command="{Binding ClearCommand}" />
         </Grid>
 
         <CollectionView Grid.Row="2"
@@ -37,7 +36,7 @@
                             <StackLayout>
                                 <Label Text="{Binding Title, Converter={StaticResource TranslationConverter}}" FontAttributes="Bold" />
 
-                                <Label Text="{Binding Subtitle}" FontSize="12" LineBreakMode="TailTruncation" />
+                                <Label Text="{Binding Subtitle, Converter={StaticResource TranslationConverter}}" FontSize="12" LineBreakMode="TailTruncation" />
                             </StackLayout>
                             <Label Text="{Binding RightText}" VerticalOptions="Center" Grid.Column="1" FontAttributes="Bold" />
                         </Grid>
