@@ -1,6 +1,7 @@
 ﻿using M.A.G.U.S.Assistant.Extensions;
-using M.A.G.U.S.GameSystem.MagicalObjects;
 using M.A.G.U.S.GameSystem.PoisonsAndIllnesses;
+using M.A.G.U.S.Things.Gemstones;
+using M.A.G.U.S.Things.MagicalObjects;
 
 namespace M.A.G.U.S.Assistant.Models;
 
@@ -47,7 +48,7 @@ public class DisplayItem
 
     public static DisplayItem FromGemstone(object gemstoneObj)
     {
-        if (gemstoneObj is GameSystem.Gemstones.Gemstone g)
+        if (gemstoneObj is Gemstone g)
         {
             return new DisplayItem
             {

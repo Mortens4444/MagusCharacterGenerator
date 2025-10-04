@@ -3,7 +3,7 @@ using M.A.G.U.S.GameSystem.Valuables;
 
 namespace M.A.G.U.S.Things.Weapons.AimingWeapons;
 
-public class ShortBow : Weapon, IRangedWeapon
+public class Shortbow : Weapon, IRangedWeapon
 {
     public double AttacksPerRound => 2;
 
@@ -19,7 +19,4 @@ public class ShortBow : Weapon, IRangedWeapon
 
     [DiceThrow(ThrowType._1K6)]
     public byte GetDamage() => (byte)DiceThrow._1K6_RangedAttack();
-
-    public override string Name => "Short bow";
-
 }

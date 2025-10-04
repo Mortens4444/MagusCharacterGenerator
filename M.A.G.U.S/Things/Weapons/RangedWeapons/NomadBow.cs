@@ -20,5 +20,5 @@ public class NomadBow : Weapon, IRangedWeapon
     [DiceThrow(ThrowType._1K10)]
     public byte GetDamage() => (byte)DiceThrow._1K10_RangedAttack();
 
-    public override string Name => "Nomad bow";
+    public override string Name => "Recurve bow";
 }

@@ -23,8 +23,8 @@ public partial class SearchListPage : ContentPage
     public SearchListPage(string title, IEnumerable<Models.DisplayItem> items)
     {
         InitializeComponent();
-        Translator.Translate(this);
         PageTitle = title;
+        Translator.Translate(this);
         ViewModel?.LoadItems(items);
     }
 }

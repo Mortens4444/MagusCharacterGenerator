@@ -33,5 +33,7 @@ public partial class MainPage : NotifierPage
             }
             originalTextElements = Translator.Translate(this);
         };
+
+        originalTextElements = Translator.Translate(this);
     }
 }
