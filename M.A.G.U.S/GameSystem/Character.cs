@@ -49,11 +49,11 @@ public class Character : IFightModifier, ILiving, IAbilities, INotifyPropertyCha
 
 	public Character() { }
 
-	public Character(string name, IRace race, params IClass[] castes)
+	public Character(string name, IRace race, params IClass[] classes)
 	{
 		Name = name;
-		BaseCaste = castes.First();
-		Castes = castes;
+		BaseCaste = classes.First();
+		Castes = classes;
 		Race = race;
 		CreateFirstLevel();
 	}

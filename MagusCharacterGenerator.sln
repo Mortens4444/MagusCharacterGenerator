@@ -5,7 +5,7 @@ VisualStudioVersion = 17.14.36408.4
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MagusCharacterGenerator", "MagusCharacterGenerator\MagusCharacterGenerator.csproj", "{83B44BE6-52F1-49D5-863F-EBC73161CD5F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MagusCharacterGenerator.Test", "MagusCharacterGenerator.Test\MagusCharacterGenerator.Test.csproj", "{A7305089-26C6-433F-8514-18731EAED0C1}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "M.A.G.U.S.Test", "MagusCharacterGenerator.Test\M.A.G.U.S.Test.csproj", "{A7305089-26C6-433F-8514-18731EAED0C1}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Storyteller", "Storyteller\Storyteller.csproj", "{CCABDB75-10FB-446A-8CCF-5CE896FC1C3D}"
 EndProject

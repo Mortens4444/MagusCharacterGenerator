@@ -6,7 +6,7 @@ public class QualificationList : List<Qualification>
 {
     public void UpgradeOrAddQualification(Qualification newMasterQualification)
     {
-        // WeaponUsage, WeaponThrow should be handled => Or main weapons should be listed first!
+        // WeaponUse, WeaponThrow should be handled => Or main weapons should be listed first!
         var firstBaseQualification = this.FirstOrDefault(
             qualification => qualification.GetType().Equals(newMasterQualification.GetType())
             && qualification.QualificationLevel == QualificationLevel.Base);

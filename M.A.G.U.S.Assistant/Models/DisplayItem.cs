@@ -1,7 +1,9 @@
 ﻿using M.A.G.U.S.Assistant.Extensions;
 using M.A.G.U.S.GameSystem.PoisonsAndIllnesses;
+using M.A.G.U.S.GameSystem.Runes;
 using M.A.G.U.S.Things.Gemstones;
 using M.A.G.U.S.Things.MagicalObjects;
+using Mtf.LanguageService;
 
 namespace M.A.G.U.S.Assistant.Models;
 
@@ -31,7 +33,7 @@ public class DisplayItem
 
     public static DisplayItem FromRune(object runeObj)
     {
-        if (runeObj is GameSystem.Runes.Rune r)
+        if (runeObj is Rune r)
         {
             return new DisplayItem
             {
@@ -74,7 +76,7 @@ public class DisplayItem
                 Key = String.Empty,
                 Title = mo.Name ?? String.Empty,
                 Subtitle = mo.Description ?? String.Empty,
-                RightText = String.Empty
+                RightText = $"{mo.ManaPoints} {Lng.Elem("MP")}"
             };
         }
 
