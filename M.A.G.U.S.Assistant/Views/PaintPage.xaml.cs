@@ -1,13 +1,10 @@
-using System;
-using Microsoft.Maui.Controls;
-using Microsoft.Maui.Controls.Xaml;
 using M.A.G.U.S.Assistant.ViewModels;
 
 
 namespace M.A.G.U.S.Assistant.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class PaintPage : ContentPage
+    public partial class PaintPage : NotifierPage
     {
         private PaintViewModel ViewModel => BindingContext as PaintViewModel;
 

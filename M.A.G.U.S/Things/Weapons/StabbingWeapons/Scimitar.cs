@@ -21,4 +21,6 @@ public class Scimitar : Weapon, IMeleeWeapon
     [DiceThrow(ThrowType._1K6)]
     [DiceThrowModifier(3)]
     public byte GetDamage() => (byte)(DiceThrow._1K6() + 3);
+
+    public override string Name => "Sword, scimitar";
 }

@@ -22,5 +22,5 @@ public class JadJambiya : Weapon, IMeleeWeapon
     [DiceThrowModifier(1)]
     public byte GetDamage() => (byte)(DiceThrow._1K6() + 1);
 
-    public override string Name => "Jad Jambiya";
+    public override string Name => "Jad jambiya";
 }

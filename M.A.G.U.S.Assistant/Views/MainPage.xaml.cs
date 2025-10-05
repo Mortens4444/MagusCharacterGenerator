@@ -8,8 +8,6 @@ namespace M.A.G.U.S.Assistant.Views;
 
 public partial class MainPage : NotifierPage
 {
-    private Dictionary<object, string> originalTextElements;
-
     public MainPage()
     {
         InitializeComponent();
@@ -33,7 +31,5 @@ public partial class MainPage : NotifierPage
             }
             originalTextElements = Translator.Translate(this);
         };
-
-        originalTextElements = Translator.Translate(this);
     }
 }

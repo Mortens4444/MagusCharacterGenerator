@@ -1,21 +1,22 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+<v:NotifierPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:conv="clr-namespace:M.A.G.U.S.Assistant.Converters"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:m="clr-namespace:M.A.G.U.S.Assistant.Models"
+             xmlns:v="clr-namespace:M.A.G.U.S.Assistant.Views"
              xmlns:vm="clr-namespace:M.A.G.U.S.Assistant.ViewModels"
              x:Class="M.A.G.U.S.Assistant.Views.SearchListPage"
              x:DataType="vm:SearchListViewModel"
              Title="{Binding PageTitle}">
 
-    <ContentPage.BindingContext>
+    <v:NotifierPage.BindingContext>
         <vm:SearchListViewModel />
-    </ContentPage.BindingContext>
-    <ContentPage.Resources>
+    </v:NotifierPage.BindingContext>
+    <v:NotifierPage.Resources>
         <ResourceDictionary>
             <conv:TranslationConverter x:Key="TranslationConverter" />
         </ResourceDictionary>
-    </ContentPage.Resources>
+    </v:NotifierPage.Resources>
     
     <Grid Padding="10" RowDefinitions="Auto,Auto,*" RowSpacing="8">
         <Grid Grid.Row="0" VerticalOptions="Center" ColumnDefinitions="*, Auto">
@@ -45,4 +46,4 @@
             </CollectionView.ItemTemplate>
         </CollectionView>
     </Grid>
-</ContentPage>
+</v:NotifierPage>

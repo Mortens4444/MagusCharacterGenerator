@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="M.A.G.U.S.Assistant.Views.ImagePreviewPage"
-             Title="Preview">
+<v:NotifierPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+              xmlns:v="clr-namespace:M.A.G.U.S.Assistant.Views"
+              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+              x:Class="M.A.G.U.S.Assistant.Views.ImagePreviewPage"
+              Title="Preview">
 
     <Grid Padding="12">
         <Image x:Name="PreviewImage" Aspect="AspectFit" />
         <Button Text="Close" VerticalOptions="End" HorizontalOptions="Center" Clicked="CloseClicked" />
     </Grid>
-</ContentPage>
+</v:NotifierPage>
