@@ -137,7 +137,7 @@ public class Headhunter(byte level = 1) : Class(level), IClass, IJustFight
     [
         new HeadHunterDamageIncreasing(),
         new UseOfSlanDisciplines(),
-        new HeadHunterUnknownWeaponUsage(),
+        new HeadHunterUnknownWeaponUse(),
         new HeadHunterInitiatingValueIncreasing()
     ];
 

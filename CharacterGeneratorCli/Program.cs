@@ -38,7 +38,7 @@ class Program
 	{
 		try
 		{
-			var magusCharacterGeneratorTypes = Assembly.Load("MagusCharacterGenerator").GetTypes();
+			var magusCharacterGeneratorTypes = Assembly.Load("M.A.G.U.S.").GetTypes();
 			var races = magusCharacterGeneratorTypes
 				.Where(type => !type.IsInterface && !type.IsAbstract && typeof(IRace).IsAssignableFrom(type))
 				.Select(raceType => (IRace)Activator.CreateInstance(raceType));

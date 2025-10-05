@@ -8,4 +8,6 @@ public class WarSaddle : MagicalObject
 
 
     public override Money Price => new(6);
+
+    public override int ManaPoints => 43;
 }

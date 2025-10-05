@@ -1,5 +1,4 @@
 ﻿using M.A.G.U.S.Utils;
-using NUnit.Framework;
 
 namespace M.A.G.U.S.Test
 {
@@ -9,7 +8,7 @@ namespace M.A.G.U.S.Test
 		[Test]
 		public void SerializePrimitives()
 		{
-			TestSerialization(new
+            TestSerialization(new
 				{
 					Byte = (byte)255,
 					Short = (short)-2,
@@ -29,7 +28,7 @@ namespace M.A.G.U.S.Test
 		[Test]
 		public void SerializeArrays()
 		{
-			TestSerialization(new
+            TestSerialization(new
 				{
 					Bytes = new byte[] { 1, 2, 3 },
 					Strings = new[] { "a", "b", "c" }
@@ -40,7 +39,7 @@ namespace M.A.G.U.S.Test
 		[Test]
 		public void SerializeLists()
 		{
-			TestSerialization(new
+            TestSerialization(new
 				{
 					Bytes = new List<byte> { 1, 2, 3 },
 					Strings = new List<string> { "a", "b", "c" }
@@ -48,9 +47,9 @@ namespace M.A.G.U.S.Test
 				"M.A.G.U.S.Test.ObjectSerializationResults.Lists.json");
 		}
 
-		private void TestSerialization(object obj, string serializationResultFileName)
+		private static void TestSerialization(object obj, string serializationResultFileName)
 		{
-			var expectedSerializationContent = EmbeddedResourceReader.Get(serializationResultFileName);
+			var expectedSerializationContent = EmbeddedResourceReader.Get(serializationResultFileName, typeof(ObjectSerializerTest).Assembly);
 			var actualSerializationContent = ObjectSerializer.GetSerializedString(obj);
 			Assert.That(expectedSerializationContent, Is.EqualTo(actualSerializationContent));
 		}

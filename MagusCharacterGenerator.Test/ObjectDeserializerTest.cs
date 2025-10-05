@@ -5,7 +5,6 @@ using M.A.G.U.S.GameSystem.Languages;
 using M.A.G.U.S.Qualifications.Scientific;
 using M.A.G.U.S.Races;
 using M.A.G.U.S.Utils;
-using NUnit.Framework;
 
 namespace M.A.G.U.S.Test
 {
@@ -50,7 +49,7 @@ namespace M.A.G.U.S.Test
 		[Test]
 		public void DeserializeCharacter()
 		{
-			var savedCharacterJson = EmbeddedResourceReader.Get("M.A.G.U.S.Test.ObjectDeserializationResults.Character.json");
+			var savedCharacterJson = EmbeddedResourceReader.Get("M.A.G.U.S.Test.ObjectDeserializationResults.Character.json", typeof(ObjectDeserializerTest).Assembly);
 			var character = ObjectSerializer.LoadContent<Character>(savedCharacterJson);
 			Assert.That(character.Castes, Is.Not.Null);
 		}

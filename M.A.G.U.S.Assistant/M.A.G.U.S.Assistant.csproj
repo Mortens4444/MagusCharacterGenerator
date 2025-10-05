@@ -23,7 +23,7 @@
     <ApplicationId>com.mortens.MAGUS.Assistant</ApplicationId>
     <!-- Versions -->
     <MajorVersion>1</MajorVersion>
-    <MinorVersion>4</MinorVersion>
+    <MinorVersion>5</MinorVersion>
     <BuildNumber>0</BuildNumber>
     <PatchNumber>0</PatchNumber>
     <FileVersion>$(MajorVersion).$(MinorVersion).$(BuildNumber).$(PatchNumber)</FileVersion>
@@ -148,7 +148,7 @@
     <PackageReference Include="Microsoft.Maui.Graphics" Version="9.0.110" />
     <PackageReference Include="Microsoft.Maui.Graphics.Skia" Version="9.0.110" />
     <PackageReference Include="Mtf.Maui.Controls" Version="1.0.28" />
-    <PackageReference Include="Mtf.MAUI.LanguageService" Version="1.0.33" />
+    <PackageReference Include="Mtf.MAUI.LanguageService" Version="1.0.34" />
     <PackageReference Include="Plugin.Maui.Audio" Version="4.0.0" />
   </ItemGroup>
   <ItemGroup>

@@ -1,256 +1,256 @@
 ﻿{
   "$id": "1",
-  "$type": "M.A.G.U.S.GameSystem.Character, MagusCharacterGenerator",
+  "$type": "M.A.G.U.S.GameSystem.Character, M.A.G.U.S.",
   "Images": {
-    "$type": "System.Collections.Generic.List`1[[M.A.G.U.S.GameSystem.CharacterImage, MagusCharacterGenerator]], mscorlib",
+    "$type": "System.Collections.Generic.List`1[[M.A.G.U.S.GameSystem.CharacterImage, M.A.G.U.S.]], mscorlib",
     "$values": []
   },
   "Name": "Aefrez",
   "BaseCaste": {
-    "$type": "M.A.G.U.S.Classes.Believer.GodsOfPyarron.ArelPriest, MagusCharacterGenerator",
+    "$type": "M.A.G.U.S.Classes.Believer.GodsOfPyarron.ArelPriest, M.A.G.U.S.",
     "Qualifications": {
-      "$type": "M.A.G.U.S.Qualifications.QualificationList, MagusCharacterGenerator",
+      "$type": "M.A.G.U.S.Qualifications.QualificationList, M.A.G.U.S.",
       "$values": [
         {
           "$id": "2",
-          "$type": "M.A.G.U.S.Qualifications.Combat.WeaponUsage, MagusCharacterGenerator",
+          "$type": "M.A.G.U.S.Qualifications.Combat.WeaponUse, M.A.G.U.S.",
           "Weapon": null,
           "QualificationLevel": 0,
           "BaseQualificationLevel": 1,
           "MasterQualificationLevel": 0,
-          "QualificationType": "M.A.G.U.S.Qualifications.Combat.WeaponUsage, MagusCharacterGenerator, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
+          "QualificationType": "M.A.G.U.S.Qualifications.Combat.WeaponUse, M.A.G.U.S., Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
         },
         {
           "$id": "3",
-          "$type": "M.A.G.U.S.Qualifications.Scientific.Psi.PsiPyarron, MagusCharacterGenerator",
+          "$type": "M.A.G.U.S.Qualifications.Scientific.Psi.PsiPyarron, M.A.G.U.S.",
           "PsiKind": 0,
           "QualificationLevel": 1,
           "BaseQualificationLevel": 1,
           "MasterQualificationLevel": 1,
-          "QualificationType": "M.A.G.U.S.Qualifications.Scientific.Psi.PsiPyarron, MagusCharacterGenerator, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
+          "QualificationType": "M.A.G.U.S.Qualifications.Scientific.Psi.PsiPyarron, M.A.G.U.S., Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
         },
         {
           "$id": "4",
-          "$type": "M.A.G.U.S.Qualifications.Scientific.LanguageKnowledge, MagusCharacterGenerator",
+          "$type": "M.A.G.U.S.Qualifications.Scientific.LanguageLore, M.A.G.U.S.",
           "Language": 0,
           "QualificationLevel": 0,
           "BaseQualificationLevel": 1,
           "MasterQualificationLevel": 0,
-          "QualificationType": "M.A.G.U.S.Qualifications.Scientific.LanguageKnowledge, MagusCharacterGenerator, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
+          "QualificationType": "M.A.G.U.S.Qualifications.Scientific.LanguageLore, M.A.G.U.S., Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
         },
         {
           "$id": "5",
-          "$type": "M.A.G.U.S.Qualifications.Scientific.LanguageKnowledge, MagusCharacterGenerator",
+          "$type": "M.A.G.U.S.Qualifications.Scientific.LanguageLore, M.A.G.U.S.",
           "Language": 0,
           "QualificationLevel": 0,
           "BaseQualificationLevel": 1,
           "MasterQualificationLevel": 0,
-          "QualificationType": "M.A.G.U.S.Qualifications.Scientific.LanguageKnowledge, MagusCharacterGenerator, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
+          "QualificationType": "M.A.G.U.S.Qualifications.Scientific.LanguageLore, M.A.G.U.S., Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
         },
         {
           "$id": "6",
-          "$type": "M.A.G.U.S.Qualifications.Scientific.ReadingAndWriting, MagusCharacterGenerator",
+          "$type": "M.A.G.U.S.Qualifications.Scientific.ReadingAndWriting, M.A.G.U.S.",
           "QualificationLevel": 0,
           "BaseQualificationLevel": 1,
           "MasterQualificationLevel": 0,
-          "QualificationType": "M.A.G.U.S.Qualifications.Scientific.ReadingAndWriting, MagusCharacterGenerator, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
+          "QualificationType": "M.A.G.U.S.Qualifications.Scientific.ReadingAndWriting, M.A.G.U.S., Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
         },
         {
           "$id": "7",
-          "$type": "M.A.G.U.S.Qualifications.Scientific.ReligionKnowledge, MagusCharacterGenerator",
+          "$type": "M.A.G.U.S.Qualifications.Scientific.ReligionLore, M.A.G.U.S.",
           "QualificationLevel": 1,
           "BaseQualificationLevel": 1,
           "MasterQualificationLevel": 1,
-          "QualificationType": "M.A.G.U.S.Qualifications.Scientific.ReligionKnowledge, MagusCharacterGenerator, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
+          "QualificationType": "M.A.G.U.S.Qualifications.Scientific.ReligionLore, M.A.G.U.S., Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
         },
         {
           "$id": "8",
-          "$type": "M.A.G.U.S.Qualifications.Scientific.HistoryKnowledge, MagusCharacterGenerator",
+          "$type": "M.A.G.U.S.Qualifications.Scientific.HistoryLore, M.A.G.U.S.",
           "QualificationLevel": 1,
           "BaseQualificationLevel": 1,
           "MasterQualificationLevel": 1,
-          "QualificationType": "M.A.G.U.S.Qualifications.Scientific.HistoryKnowledge, MagusCharacterGenerator, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
+          "QualificationType": "M.A.G.U.S.Qualifications.Scientific.HistoryLore, M.A.G.U.S., Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
         },
         {
           "$id": "9",
-          "$type": "M.A.G.U.S.Qualifications.Laical.SingingAndMakingMusic, MagusCharacterGenerator",
+          "$type": "M.A.G.U.S.Qualifications.Laical.SingingAndMakingMusic, M.A.G.U.S.",
           "QualificationLevel": 0,
           "BaseQualificationLevel": 1,
           "MasterQualificationLevel": 0,
-          "QualificationType": "M.A.G.U.S.Qualifications.Laical.SingingAndMakingMusic, MagusCharacterGenerator, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
+          "QualificationType": "M.A.G.U.S.Qualifications.Laical.SingingAndMakingMusic, M.A.G.U.S., Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
         },
         {
           "$id": "10",
-          "$type": "M.A.G.U.S.Qualifications.Combat.WeaponUsage, MagusCharacterGenerator",
+          "$type": "M.A.G.U.S.Qualifications.Combat.WeaponUse, M.A.G.U.S.",
           "Weapon": null,
           "QualificationLevel": 0,
           "BaseQualificationLevel": 1,
           "MasterQualificationLevel": 0,
-          "QualificationType": "M.A.G.U.S.Qualifications.Combat.WeaponUsage, MagusCharacterGenerator, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
+          "QualificationType": "M.A.G.U.S.Qualifications.Combat.WeaponUse, M.A.G.U.S., Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
         },
         {
           "$id": "11",
-          "$type": "M.A.G.U.S.Qualifications.Combat.WeaponUsage, MagusCharacterGenerator",
+          "$type": "M.A.G.U.S.Qualifications.Combat.WeaponUse, M.A.G.U.S.",
           "Weapon": null,
           "QualificationLevel": 0,
           "BaseQualificationLevel": 1,
           "MasterQualificationLevel": 0,
-          "QualificationType": "M.A.G.U.S.Qualifications.Combat.WeaponUsage, MagusCharacterGenerator, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
+          "QualificationType": "M.A.G.U.S.Qualifications.Combat.WeaponUse, M.A.G.U.S., Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
         },
         {
           "$id": "12",
-          "$type": "M.A.G.U.S.Qualifications.Combat.WeaponUsage, MagusCharacterGenerator",
+          "$type": "M.A.G.U.S.Qualifications.Combat.WeaponUse, M.A.G.U.S.",
           "Weapon": null,
           "QualificationLevel": 0,
           "BaseQualificationLevel": 1,
           "MasterQualificationLevel": 0,
-          "QualificationType": "M.A.G.U.S.Qualifications.Combat.WeaponUsage, MagusCharacterGenerator, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
+          "QualificationType": "M.A.G.U.S.Qualifications.Combat.WeaponUse, M.A.G.U.S., Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
         },
         {
           "$id": "13",
-          "$type": "M.A.G.U.S.Qualifications.Combat.WeaponThrowing, MagusCharacterGenerator",
+          "$type": "M.A.G.U.S.Qualifications.Combat.WeaponThrowing, M.A.G.U.S.",
           "Weapon": null,
           "QualificationLevel": 0,
           "BaseQualificationLevel": 1,
           "MasterQualificationLevel": 0,
-          "QualificationType": "M.A.G.U.S.Qualifications.Combat.WeaponThrowing, MagusCharacterGenerator, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
+          "QualificationType": "M.A.G.U.S.Qualifications.Combat.WeaponThrowing, M.A.G.U.S., Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
         },
         {
           "$id": "14",
-          "$type": "M.A.G.U.S.Qualifications.Combat.WeaponKnowledge, MagusCharacterGenerator",
+          "$type": "M.A.G.U.S.Qualifications.Combat.WeaponLore, M.A.G.U.S.",
           "QualificationLevel": 0,
           "BaseQualificationLevel": 1,
           "MasterQualificationLevel": 0,
-          "QualificationType": "M.A.G.U.S.Qualifications.Combat.WeaponKnowledge, MagusCharacterGenerator, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
+          "QualificationType": "M.A.G.U.S.Qualifications.Combat.WeaponLore, M.A.G.U.S., Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
         },
         {
           "$id": "15",
-          "$type": "M.A.G.U.S.Qualifications.Scientific.LanguageKnowledge, MagusCharacterGenerator",
+          "$type": "M.A.G.U.S.Qualifications.Scientific.LanguageLore, M.A.G.U.S.",
           "Language": 0,
           "QualificationLevel": 0,
           "BaseQualificationLevel": 1,
           "MasterQualificationLevel": 0,
-          "QualificationType": "M.A.G.U.S.Qualifications.Scientific.LanguageKnowledge, MagusCharacterGenerator, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
+          "QualificationType": "M.A.G.U.S.Qualifications.Scientific.LanguageLore, M.A.G.U.S., Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
         },
         {
           "$id": "16",
-          "$type": "M.A.G.U.S.Qualifications.Scientific.LanguageKnowledge, MagusCharacterGenerator",
+          "$type": "M.A.G.U.S.Qualifications.Scientific.LanguageLore, M.A.G.U.S.",
           "Language": 0,
           "QualificationLevel": 0,
           "BaseQualificationLevel": 1,
           "MasterQualificationLevel": 0,
-          "QualificationType": "M.A.G.U.S.Qualifications.Scientific.LanguageKnowledge, MagusCharacterGenerator, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
+          "QualificationType": "M.A.G.U.S.Qualifications.Scientific.LanguageLore, M.A.G.U.S., Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
         },
         {
           "$id": "17",
-          "$type": "M.A.G.U.S.Qualifications.Scientific.LanguageKnowledge, MagusCharacterGenerator",
+          "$type": "M.A.G.U.S.Qualifications.Scientific.LanguageLore, M.A.G.U.S.",
           "Language": 0,
           "QualificationLevel": 0,
           "BaseQualificationLevel": 1,
           "MasterQualificationLevel": 0,
-          "QualificationType": "M.A.G.U.S.Qualifications.Scientific.LanguageKnowledge, MagusCharacterGenerator, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
+          "QualificationType": "M.A.G.U.S.Qualifications.Scientific.LanguageLore, M.A.G.U.S., Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
         },
         {
           "$id": "18",
-          "$type": "M.A.G.U.S.Qualifications.Laical.WeatherForecast, MagusCharacterGenerator",
+          "$type": "M.A.G.U.S.Qualifications.Scientific.WeatherDivination, M.A.G.U.S.",
           "QualificationLevel": 0,
           "BaseQualificationLevel": 1,
           "MasterQualificationLevel": 0,
-          "QualificationType": "M.A.G.U.S.Qualifications.Laical.WeatherForecast, MagusCharacterGenerator, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
+          "QualificationType": "M.A.G.U.S.Qualifications.Scientific.WeatherDivination, M.A.G.U.S., Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
         },
         {
           "$id": "19",
-          "$type": "M.A.G.U.S.Qualifications.Scientific.Herbalism, MagusCharacterGenerator",
+          "$type": "M.A.G.U.S.Qualifications.Scientific.Herbalism, M.A.G.U.S.",
           "QualificationLevel": 0,
           "BaseQualificationLevel": 1,
           "MasterQualificationLevel": 0,
-          "QualificationType": "M.A.G.U.S.Qualifications.Scientific.Herbalism, MagusCharacterGenerator, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
+          "QualificationType": "M.A.G.U.S.Qualifications.Scientific.Herbalism, M.A.G.U.S., Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
         },
         {
           "$id": "20",
-          "$type": "M.A.G.U.S.Qualifications.Scientific.WoundHealing, MagusCharacterGenerator",
+          "$type": "M.A.G.U.S.Qualifications.Scientific.Healing, M.A.G.U.S.",
           "QualificationLevel": 0,
           "BaseQualificationLevel": 1,
           "MasterQualificationLevel": 0,
-          "QualificationType": "M.A.G.U.S.Qualifications.Scientific.WoundHealing, MagusCharacterGenerator, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
+          "QualificationType": "M.A.G.U.S.Qualifications.Scientific.Healing, M.A.G.U.S., Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
         },
         {
           "$id": "21",
-          "$type": "M.A.G.U.S.Qualifications.Laical.DressageTraining, MagusCharacterGenerator",
+          "$type": "M.A.G.U.S.Qualifications.Laical.Riding, M.A.G.U.S.",
           "QualificationLevel": 0,
           "BaseQualificationLevel": 1,
           "MasterQualificationLevel": 0,
-          "QualificationType": "M.A.G.U.S.Qualifications.Laical.DressageTraining, MagusCharacterGenerator, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
+          "QualificationType": "M.A.G.U.S.Qualifications.Laical.Riding, M.A.G.U.S., Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
         },
         {
           "$id": "22",
-          "$type": "M.A.G.U.S.Qualifications.Laical.Forestry, MagusCharacterGenerator",
+          "$type": "M.A.G.U.S.Qualifications.Laical.ForestSurvival, M.A.G.U.S.",
           "QualificationLevel": 1,
           "BaseQualificationLevel": 1,
           "MasterQualificationLevel": 1,
-          "QualificationType": "M.A.G.U.S.Qualifications.Laical.Forestry, MagusCharacterGenerator, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
+          "QualificationType": "M.A.G.U.S.Qualifications.Laical.ForestSurvival, M.A.G.U.S., Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
         },
         {
           "$id": "23",
-          "$type": "M.A.G.U.S.Qualifications.Laical.FishingAndHunting, MagusCharacterGenerator",
+          "$type": "M.A.G.U.S.Qualifications.Laical.HuntingAndFishing, M.A.G.U.S.",
           "QualificationLevel": 1,
           "BaseQualificationLevel": 1,
           "MasterQualificationLevel": 1,
-          "QualificationType": "M.A.G.U.S.Qualifications.Laical.FishingAndHunting, MagusCharacterGenerator, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
+          "QualificationType": "M.A.G.U.S.Qualifications.Laical.HuntingAndFishing, M.A.G.U.S., Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
         },
         {
           "$id": "24",
-          "$type": "M.A.G.U.S.Qualifications.Laical.Riding, MagusCharacterGenerator",
+          "$type": "M.A.G.U.S.Qualifications.Laical.Riding, M.A.G.U.S.",
           "QualificationLevel": 0,
           "BaseQualificationLevel": 1,
           "MasterQualificationLevel": 0,
-          "QualificationType": "M.A.G.U.S.Qualifications.Laical.Riding, MagusCharacterGenerator, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
+          "QualificationType": "M.A.G.U.S.Qualifications.Laical.Riding, M.A.G.U.S., Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
         }
       ]
     },
     "FutureQualifications": {
-      "$type": "M.A.G.U.S.Qualifications.QualificationList, MagusCharacterGenerator",
+      "$type": "M.A.G.U.S.Qualifications.QualificationList, M.A.G.U.S.",
       "$values": [
         {
           "$id": "25",
-          "$type": "M.A.G.U.S.Qualifications.Combat.PubFighting, MagusCharacterGenerator",
+          "$type": "M.A.G.U.S.Qualifications.Underworld.TavernBrawling, M.A.G.U.S.",
           "QualificationLevel": 0,
           "BaseQualificationLevel": 2,
           "MasterQualificationLevel": 0,
-          "QualificationType": "M.A.G.U.S.Qualifications.Combat.PubFighting, MagusCharacterGenerator, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
+          "QualificationType": "M.A.G.U.S.Qualifications.Underworld.TavernBrawling, M.A.G.U.S., Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
         },
         {
           "$id": "26",
-          "$type": "M.A.G.U.S.Qualifications.Scientific.LegendKnowledge, MagusCharacterGenerator",
+          "$type": "M.A.G.U.S.Qualifications.Scientific.LegendLore, M.A.G.U.S.",
           "QualificationLevel": 0,
           "BaseQualificationLevel": 3,
           "MasterQualificationLevel": 0,
-          "QualificationType": "M.A.G.U.S.Qualifications.Scientific.LegendKnowledge, MagusCharacterGenerator, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
+          "QualificationType": "M.A.G.U.S.Qualifications.Scientific.LegendLore, M.A.G.U.S., Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
         },
         {
           "$id": "27",
-          "$type": "M.A.G.U.S.Qualifications.Laical.TrapSetup, MagusCharacterGenerator",
+          "$type": "M.A.G.U.S.Qualifications.Laical.TrapSetting, M.A.G.U.S.",
           "QualificationLevel": 0,
           "BaseQualificationLevel": 4,
           "MasterQualificationLevel": 0,
-          "QualificationType": "M.A.G.U.S.Qualifications.Laical.TrapSetup, MagusCharacterGenerator, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
+          "QualificationType": "M.A.G.U.S.Qualifications.Laical.TrapSetting, M.A.G.U.S., Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
         },
         {
           "$id": "28",
-          "$type": "M.A.G.U.S.Qualifications.Laical.TrackReadingAndHiding, MagusCharacterGenerator",
+          "$type": "M.A.G.U.S.Qualifications.Laical.TrackingConcealment, M.A.G.U.S.",
           "QualificationLevel": 0,
           "BaseQualificationLevel": 5,
           "MasterQualificationLevel": 0,
-          "QualificationType": "M.A.G.U.S.Qualifications.Laical.TrackReadingAndHiding, MagusCharacterGenerator, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
+          "QualificationType": "M.A.G.U.S.Qualifications.Laical.TrackingConcealment, M.A.G.U.S., Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
         },
         {
           "$id": "29",
-          "$type": "M.A.G.U.S.Qualifications.Combat.WeaponUsage, MagusCharacterGenerator",
+          "$type": "M.A.G.U.S.Qualifications.Combat.WeaponUse, M.A.G.U.S.",
           "Weapon": null,
           "QualificationLevel": 1,
           "BaseQualificationLevel": 9,
           "MasterQualificationLevel": 9,
-          "QualificationType": "M.A.G.U.S.Qualifications.Combat.WeaponUsage, MagusCharacterGenerator, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
+          "QualificationType": "M.A.G.U.S.Qualifications.Combat.WeaponUse, M.A.G.U.S., Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
         }
       ]
     },
@@ -280,19 +280,19 @@
     "AddPainToleranceOnFirstLevel": false,
     "AddQualificationPointsOnFirstLevel": true,
     "PercentQualifications": {
-      "$type": "System.Collections.Generic.List`1[[M.A.G.U.S.Qualifications.PercentQualification, MagusCharacterGenerator]], mscorlib",
+      "$type": "System.Collections.Generic.List`1[[M.A.G.U.S.Qualifications.PercentQualification, M.A.G.U.S.]], mscorlib",
       "$values": []
     },
     "SpecialQualifications": {
-      "$type": "M.A.G.U.S.Qualifications.SpecialQualificationList, MagusCharacterGenerator",
+      "$type": "M.A.G.U.S.Qualifications.SpecialQualificationList, M.A.G.U.S.",
       "$values": [
         {
           "$id": "30",
-          "$type": "M.A.G.U.S.Qualifications.Specialities.PriestKyrDisciplinesUsage, MagusCharacterGenerator"
+          "$type": "M.A.G.U.S.Qualifications.Specialities.PsiSiegeKyrDisciplineUsage, M.A.G.U.S."
         },
         {
           "$id": "31",
-          "$type": "M.A.G.U.S.Qualifications.Magic.PriestMagic, MagusCharacterGenerator",
+          "$type": "M.A.G.U.S.Qualifications.Magic.ClericalMagic, M.A.G.U.S.",
           "ManaPoints": 9
         }
       ]
@@ -301,254 +301,254 @@
     "Level": 1
   },
   "Castes": {
-    "$type": "M.A.G.U.S.Classes.ICaste[], MagusCharacterGenerator",
+    "$type": "M.A.G.U.S.Interfaces.IClass[], M.A.G.U.S.",
     "$values": [
       {
         "$id": "32",
-        "$type": "M.A.G.U.S.Classes.Believer.GodsOfPyarron.ArelPriest, MagusCharacterGenerator",
+        "$type": "M.A.G.U.S.Classes.Believer.GodsOfPyarron.ArelPriest, M.A.G.U.S.",
         "Qualifications": {
-          "$type": "M.A.G.U.S.Qualifications.QualificationList, MagusCharacterGenerator",
+          "$type": "M.A.G.U.S.Qualifications.QualificationList, M.A.G.U.S.",
           "$values": [
             {
               "$id": "33",
-              "$type": "M.A.G.U.S.Qualifications.Combat.WeaponUsage, MagusCharacterGenerator",
+              "$type": "M.A.G.U.S.Qualifications.Combat.WeaponUse, M.A.G.U.S.",
               "Weapon": null,
               "QualificationLevel": 0,
               "BaseQualificationLevel": 1,
               "MasterQualificationLevel": 0,
-              "QualificationType": "M.A.G.U.S.Qualifications.Combat.WeaponUsage, MagusCharacterGenerator, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
+              "QualificationType": "M.A.G.U.S.Qualifications.Combat.WeaponUse, M.A.G.U.S., Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
             },
             {
               "$id": "34",
-              "$type": "M.A.G.U.S.Qualifications.Scientific.Psi.PsiPyarron, MagusCharacterGenerator",
+              "$type": "M.A.G.U.S.Qualifications.Scientific.Psi.PsiPyarron, M.A.G.U.S.",
               "PsiKind": 0,
               "QualificationLevel": 1,
               "BaseQualificationLevel": 1,
               "MasterQualificationLevel": 1,
-              "QualificationType": "M.A.G.U.S.Qualifications.Scientific.Psi.PsiPyarron, MagusCharacterGenerator, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
+              "QualificationType": "M.A.G.U.S.Qualifications.Scientific.Psi.PsiPyarron, M.A.G.U.S., Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
             },
             {
               "$id": "35",
-              "$type": "M.A.G.U.S.Qualifications.Scientific.LanguageKnowledge, MagusCharacterGenerator",
+              "$type": "M.A.G.U.S.Qualifications.Scientific.LanguageLore, M.A.G.U.S.",
               "Language": 0,
               "QualificationLevel": 0,
               "BaseQualificationLevel": 1,
               "MasterQualificationLevel": 0,
-              "QualificationType": "M.A.G.U.S.Qualifications.Scientific.LanguageKnowledge, MagusCharacterGenerator, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
+              "QualificationType": "M.A.G.U.S.Qualifications.Scientific.LanguageLore, M.A.G.U.S., Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
             },
             {
               "$id": "36",
-              "$type": "M.A.G.U.S.Qualifications.Scientific.LanguageKnowledge, MagusCharacterGenerator",
+              "$type": "M.A.G.U.S.Qualifications.Scientific.LanguageLore, M.A.G.U.S.",
               "Language": 0,
               "QualificationLevel": 0,
               "BaseQualificationLevel": 1,
               "MasterQualificationLevel": 0,
-              "QualificationType": "M.A.G.U.S.Qualifications.Scientific.LanguageKnowledge, MagusCharacterGenerator, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
+              "QualificationType": "M.A.G.U.S.Qualifications.Scientific.LanguageLore, M.A.G.U.S., Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
             },
             {
               "$id": "37",
-              "$type": "M.A.G.U.S.Qualifications.Scientific.ReadingAndWriting, MagusCharacterGenerator",
+              "$type": "M.A.G.U.S.Qualifications.Scientific.ReadingAndWriting, M.A.G.U.S.",
               "QualificationLevel": 0,
               "BaseQualificationLevel": 1,
               "MasterQualificationLevel": 0,
-              "QualificationType": "M.A.G.U.S.Qualifications.Scientific.ReadingAndWriting, MagusCharacterGenerator, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
+              "QualificationType": "M.A.G.U.S.Qualifications.Scientific.ReadingAndWriting, M.A.G.U.S., Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
             },
             {
               "$id": "38",
-              "$type": "M.A.G.U.S.Qualifications.Scientific.ReligionKnowledge, MagusCharacterGenerator",
+              "$type": "M.A.G.U.S.Qualifications.Scientific.ReligionLore, M.A.G.U.S.",
               "QualificationLevel": 1,
               "BaseQualificationLevel": 1,
               "MasterQualificationLevel": 1,
-              "QualificationType": "M.A.G.U.S.Qualifications.Scientific.ReligionKnowledge, MagusCharacterGenerator, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
+              "QualificationType": "M.A.G.U.S.Qualifications.Scientific.ReligionLore, M.A.G.U.S., Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
             },
             {
               "$id": "39",
-              "$type": "M.A.G.U.S.Qualifications.Scientific.HistoryKnowledge, MagusCharacterGenerator",
+              "$type": "M.A.G.U.S.Qualifications.Scientific.HistoryLore, M.A.G.U.S.",
               "QualificationLevel": 1,
               "BaseQualificationLevel": 1,
               "MasterQualificationLevel": 1,
-              "QualificationType": "M.A.G.U.S.Qualifications.Scientific.HistoryKnowledge, MagusCharacterGenerator, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
+              "QualificationType": "M.A.G.U.S.Qualifications.Scientific.HistoryLore, M.A.G.U.S., Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
             },
             {
               "$id": "40",
-              "$type": "M.A.G.U.S.Qualifications.Laical.SingingAndMakingMusic, MagusCharacterGenerator",
+              "$type": "M.A.G.U.S.Qualifications.Laical.SingingAndMakingMusic, M.A.G.U.S.",
               "QualificationLevel": 0,
               "BaseQualificationLevel": 1,
               "MasterQualificationLevel": 0,
-              "QualificationType": "M.A.G.U.S.Qualifications.Laical.SingingAndMakingMusic, MagusCharacterGenerator, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
+              "QualificationType": "M.A.G.U.S.Qualifications.Laical.SingingAndMakingMusic, M.A.G.U.S., Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
             },
             {
               "$id": "41",
-              "$type": "M.A.G.U.S.Qualifications.Combat.WeaponUsage, MagusCharacterGenerator",
+              "$type": "M.A.G.U.S.Qualifications.Combat.WeaponUse, M.A.G.U.S.",
               "Weapon": null,
               "QualificationLevel": 0,
               "BaseQualificationLevel": 1,
               "MasterQualificationLevel": 0,
-              "QualificationType": "M.A.G.U.S.Qualifications.Combat.WeaponUsage, MagusCharacterGenerator, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
+              "QualificationType": "M.A.G.U.S.Qualifications.Combat.WeaponUse, M.A.G.U.S., Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
             },
             {
               "$id": "42",
-              "$type": "M.A.G.U.S.Qualifications.Combat.WeaponUsage, MagusCharacterGenerator",
+              "$type": "M.A.G.U.S.Qualifications.Combat.WeaponUse, M.A.G.U.S.",
               "Weapon": null,
               "QualificationLevel": 0,
               "BaseQualificationLevel": 1,
               "MasterQualificationLevel": 0,
-              "QualificationType": "M.A.G.U.S.Qualifications.Combat.WeaponUsage, MagusCharacterGenerator, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
+              "QualificationType": "M.A.G.U.S.Qualifications.Combat.WeaponUse, M.A.G.U.S., Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
             },
             {
               "$id": "43",
-              "$type": "M.A.G.U.S.Qualifications.Combat.WeaponUsage, MagusCharacterGenerator",
+              "$type": "M.A.G.U.S.Qualifications.Combat.WeaponUse, M.A.G.U.S.",
               "Weapon": null,
               "QualificationLevel": 0,
               "BaseQualificationLevel": 1,
               "MasterQualificationLevel": 0,
-              "QualificationType": "M.A.G.U.S.Qualifications.Combat.WeaponUsage, MagusCharacterGenerator, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
+              "QualificationType": "M.A.G.U.S.Qualifications.Combat.WeaponUse, M.A.G.U.S., Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
             },
             {
               "$id": "44",
-              "$type": "M.A.G.U.S.Qualifications.Combat.WeaponThrowing, MagusCharacterGenerator",
+              "$type": "M.A.G.U.S.Qualifications.Combat.WeaponThrowing, M.A.G.U.S.",
               "Weapon": null,
               "QualificationLevel": 0,
               "BaseQualificationLevel": 1,
               "MasterQualificationLevel": 0,
-              "QualificationType": "M.A.G.U.S.Qualifications.Combat.WeaponThrowing, MagusCharacterGenerator, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
+              "QualificationType": "M.A.G.U.S.Qualifications.Combat.WeaponThrowing, M.A.G.U.S., Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
             },
             {
               "$id": "45",
-              "$type": "M.A.G.U.S.Qualifications.Combat.WeaponKnowledge, MagusCharacterGenerator",
+              "$type": "M.A.G.U.S.Qualifications.Combat.WeaponLore, M.A.G.U.S.",
               "QualificationLevel": 0,
               "BaseQualificationLevel": 1,
               "MasterQualificationLevel": 0,
-              "QualificationType": "M.A.G.U.S.Qualifications.Combat.WeaponKnowledge, MagusCharacterGenerator, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
+              "QualificationType": "M.A.G.U.S.Qualifications.Combat.WeaponLore, M.A.G.U.S., Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
             },
             {
               "$id": "46",
-              "$type": "M.A.G.U.S.Qualifications.Scientific.LanguageKnowledge, MagusCharacterGenerator",
+              "$type": "M.A.G.U.S.Qualifications.Scientific.LanguageLore, M.A.G.U.S.",
               "Language": 0,
               "QualificationLevel": 0,
               "BaseQualificationLevel": 1,
               "MasterQualificationLevel": 0,
-              "QualificationType": "M.A.G.U.S.Qualifications.Scientific.LanguageKnowledge, MagusCharacterGenerator, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
+              "QualificationType": "M.A.G.U.S.Qualifications.Scientific.LanguageLore, M.A.G.U.S., Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
             },
             {
               "$id": "47",
-              "$type": "M.A.G.U.S.Qualifications.Scientific.LanguageKnowledge, MagusCharacterGenerator",
+              "$type": "M.A.G.U.S.Qualifications.Scientific.LanguageLore, M.A.G.U.S.",
               "Language": 0,
               "QualificationLevel": 0,
               "BaseQualificationLevel": 1,
               "MasterQualificationLevel": 0,
-              "QualificationType": "M.A.G.U.S.Qualifications.Scientific.LanguageKnowledge, MagusCharacterGenerator, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
+              "QualificationType": "M.A.G.U.S.Qualifications.Scientific.LanguageLore, M.A.G.U.S., Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
             },
             {
               "$id": "48",
-              "$type": "M.A.G.U.S.Qualifications.Scientific.LanguageKnowledge, MagusCharacterGenerator",
+              "$type": "M.A.G.U.S.Qualifications.Scientific.LanguageLore, M.A.G.U.S.",
               "Language": 0,
               "QualificationLevel": 0,
               "BaseQualificationLevel": 1,
               "MasterQualificationLevel": 0,
-              "QualificationType": "M.A.G.U.S.Qualifications.Scientific.LanguageKnowledge, MagusCharacterGenerator, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
+              "QualificationType": "M.A.G.U.S.Qualifications.Scientific.LanguageLore, M.A.G.U.S., Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
             },
             {
               "$id": "49",
-              "$type": "M.A.G.U.S.Qualifications.Laical.WeatherForecast, MagusCharacterGenerator",
+              "$type": "M.A.G.U.S.Qualifications.Scientific.WeatherDivination, M.A.G.U.S.",
               "QualificationLevel": 0,
               "BaseQualificationLevel": 1,
               "MasterQualificationLevel": 0,
-              "QualificationType": "M.A.G.U.S.Qualifications.Laical.WeatherForecast, MagusCharacterGenerator, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
+              "QualificationType": "M.A.G.U.S.Qualifications.Scientific.WeatherDivination, M.A.G.U.S., Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
             },
             {
               "$id": "50",
-              "$type": "M.A.G.U.S.Qualifications.Scientific.Herbalism, MagusCharacterGenerator",
+              "$type": "M.A.G.U.S.Qualifications.Scientific.Herbalism, M.A.G.U.S.",
               "QualificationLevel": 0,
               "BaseQualificationLevel": 1,
               "MasterQualificationLevel": 0,
-              "QualificationType": "M.A.G.U.S.Qualifications.Scientific.Herbalism, MagusCharacterGenerator, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
+              "QualificationType": "M.A.G.U.S.Qualifications.Scientific.Herbalism, M.A.G.U.S., Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
             },
             {
               "$id": "51",
-              "$type": "M.A.G.U.S.Qualifications.Scientific.WoundHealing, MagusCharacterGenerator",
+              "$type": "M.A.G.U.S.Qualifications.Scientific.Healing, M.A.G.U.S.",
               "QualificationLevel": 0,
               "BaseQualificationLevel": 1,
               "MasterQualificationLevel": 0,
-              "QualificationType": "M.A.G.U.S.Qualifications.Scientific.WoundHealing, MagusCharacterGenerator, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
+              "QualificationType": "M.A.G.U.S.Qualifications.Scientific.Healing, M.A.G.U.S., Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
             },
             {
               "$id": "52",
-              "$type": "M.A.G.U.S.Qualifications.Laical.DressageTraining, MagusCharacterGenerator",
+              "$type": "M.A.G.U.S.Qualifications.Laical.Riding, M.A.G.U.S.",
               "QualificationLevel": 0,
               "BaseQualificationLevel": 1,
               "MasterQualificationLevel": 0,
-              "QualificationType": "M.A.G.U.S.Qualifications.Laical.DressageTraining, MagusCharacterGenerator, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
+              "QualificationType": "M.A.G.U.S.Qualifications.Laical.Riding, M.A.G.U.S., Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
             },
             {
               "$id": "53",
-              "$type": "M.A.G.U.S.Qualifications.Laical.Forestry, MagusCharacterGenerator",
+              "$type": "M.A.G.U.S.Qualifications.Laical.ForestSurvival, M.A.G.U.S.",
               "QualificationLevel": 1,
               "BaseQualificationLevel": 1,
               "MasterQualificationLevel": 1,
-              "QualificationType": "M.A.G.U.S.Qualifications.Laical.Forestry, MagusCharacterGenerator, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
+              "QualificationType": "M.A.G.U.S.Qualifications.Laical.ForestSurvival, M.A.G.U.S., Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
             },
             {
               "$id": "54",
-              "$type": "M.A.G.U.S.Qualifications.Laical.FishingAndHunting, MagusCharacterGenerator",
+              "$type": "M.A.G.U.S.Qualifications.Laical.HuntingAndFishing, M.A.G.U.S.",
               "QualificationLevel": 1,
               "BaseQualificationLevel": 1,
               "MasterQualificationLevel": 1,
-              "QualificationType": "M.A.G.U.S.Qualifications.Laical.FishingAndHunting, MagusCharacterGenerator, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
+              "QualificationType": "M.A.G.U.S.Qualifications.Laical.HuntingAndFishing, M.A.G.U.S., Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
             },
             {
               "$id": "55",
-              "$type": "M.A.G.U.S.Qualifications.Laical.Riding, MagusCharacterGenerator",
+              "$type": "M.A.G.U.S.Qualifications.Laical.Riding, M.A.G.U.S.",
               "QualificationLevel": 0,
               "BaseQualificationLevel": 1,
               "MasterQualificationLevel": 0,
-              "QualificationType": "M.A.G.U.S.Qualifications.Laical.Riding, MagusCharacterGenerator, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
+              "QualificationType": "M.A.G.U.S.Qualifications.Laical.Riding, M.A.G.U.S., Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
             }
           ]
         },
         "FutureQualifications": {
-          "$type": "M.A.G.U.S.Qualifications.QualificationList, MagusCharacterGenerator",
+          "$type": "M.A.G.U.S.Qualifications.QualificationList, M.A.G.U.S.",
           "$values": [
             {
               "$id": "56",
-              "$type": "M.A.G.U.S.Qualifications.Combat.PubFighting, MagusCharacterGenerator",
+              "$type": "M.A.G.U.S.Qualifications.Underworld.TavernBrawling, M.A.G.U.S.",
               "QualificationLevel": 0,
               "BaseQualificationLevel": 2,
               "MasterQualificationLevel": 0,
-              "QualificationType": "M.A.G.U.S.Qualifications.Combat.PubFighting, MagusCharacterGenerator, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
+              "QualificationType": "M.A.G.U.S.Qualifications.Underworld.TavernBrawling, M.A.G.U.S., Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
             },
             {
               "$id": "57",
-              "$type": "M.A.G.U.S.Qualifications.Scientific.LegendKnowledge, MagusCharacterGenerator",
+              "$type": "M.A.G.U.S.Qualifications.Scientific.LegendLore, M.A.G.U.S.",
               "QualificationLevel": 0,
               "BaseQualificationLevel": 3,
               "MasterQualificationLevel": 0,
-              "QualificationType": "M.A.G.U.S.Qualifications.Scientific.LegendKnowledge, MagusCharacterGenerator, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
+              "QualificationType": "M.A.G.U.S.Qualifications.Scientific.LegendLore, M.A.G.U.S., Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
             },
             {
               "$id": "58",
-              "$type": "M.A.G.U.S.Qualifications.Laical.TrapSetup, MagusCharacterGenerator",
+              "$type": "M.A.G.U.S.Qualifications.Laical.TrapSetting, M.A.G.U.S.",
               "QualificationLevel": 0,
               "BaseQualificationLevel": 4,
               "MasterQualificationLevel": 0,
-              "QualificationType": "M.A.G.U.S.Qualifications.Laical.TrapSetup, MagusCharacterGenerator, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
+              "QualificationType": "M.A.G.U.S.Qualifications.Laical.TrapSetting, M.A.G.U.S., Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
             },
             {
               "$id": "59",
-              "$type": "M.A.G.U.S.Qualifications.Laical.TrackReadingAndHiding, MagusCharacterGenerator",
+              "$type": "M.A.G.U.S.Qualifications.Laical.TrackingConcealment, M.A.G.U.S.",
               "QualificationLevel": 0,
               "BaseQualificationLevel": 5,
               "MasterQualificationLevel": 0,
-              "QualificationType": "M.A.G.U.S.Qualifications.Laical.TrackReadingAndHiding, MagusCharacterGenerator, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
+              "QualificationType": "M.A.G.U.S.Qualifications.Laical.TrackingConcealment, M.A.G.U.S., Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
             },
             {
               "$id": "60",
-              "$type": "M.A.G.U.S.Qualifications.Combat.WeaponUsage, MagusCharacterGenerator",
+              "$type": "M.A.G.U.S.Qualifications.Combat.WeaponUse, M.A.G.U.S.",
               "Weapon": null,
               "QualificationLevel": 1,
               "BaseQualificationLevel": 9,
               "MasterQualificationLevel": 9,
-              "QualificationType": "M.A.G.U.S.Qualifications.Combat.WeaponUsage, MagusCharacterGenerator, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
+              "QualificationType": "M.A.G.U.S.Qualifications.Combat.WeaponUse, M.A.G.U.S., Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
             }
           ]
         },
@@ -578,19 +578,19 @@
         "AddPainToleranceOnFirstLevel": false,
         "AddQualificationPointsOnFirstLevel": true,
         "PercentQualifications": {
-          "$type": "System.Collections.Generic.List`1[[M.A.G.U.S.Qualifications.PercentQualification, MagusCharacterGenerator]], mscorlib",
+          "$type": "System.Collections.Generic.List`1[[M.A.G.U.S.Qualifications.PercentQualification, M.A.G.U.S.]], mscorlib",
           "$values": []
         },
         "SpecialQualifications": {
-          "$type": "M.A.G.U.S.Qualifications.SpecialQualificationList, MagusCharacterGenerator",
+          "$type": "M.A.G.U.S.Qualifications.SpecialQualificationList, M.A.G.U.S.",
           "$values": [
             {
               "$id": "61",
-              "$type": "M.A.G.U.S.Qualifications.Specialities.PriestKyrDisciplinesUsage, MagusCharacterGenerator"
+              "$type": "M.A.G.U.S.Qualifications.Specialities.PsiSiegeKyrDisciplineUsage, M.A.G.U.S."
             },
             {
               "$id": "62",
-              "$type": "M.A.G.U.S.Qualifications.Magic.PriestMagic, MagusCharacterGenerator",
+              "$type": "M.A.G.U.S.Qualifications.Magic.ClericalMagic, M.A.G.U.S.",
               "ManaPoints": 9
             }
           ]
@@ -601,35 +601,35 @@
     ]
   },
   "Race": {
-    "$type": "M.A.G.U.S.Races.Amund, MagusCharacterGenerator",
+    "$type": "M.A.G.U.S.Races.Amund, M.A.G.U.S.",
     "Strength": 1,
     "Stamina": 1,
     "Beauty": 3,
     "Astral": -1,
     "SpecialQualifications": {
-      "$type": "M.A.G.U.S.Qualifications.SpecialQualificationList, MagusCharacterGenerator",
+      "$type": "M.A.G.U.S.Qualifications.SpecialQualificationList, M.A.G.U.S.",
       "$values": [
         {
           "$id": "63",
-          "$type": "M.A.G.U.S.Qualifications.Specialities.CantLearnPsi, MagusCharacterGenerator"
+          "$type": "M.A.G.U.S.Qualifications.Specialities.CantLearnPsi, M.A.G.U.S."
         },
         {
           "$id": "64",
-          "$type": "M.A.G.U.S.Qualifications.Specialities.ExtraMagicResistanceOnLevelUp, MagusCharacterGenerator",
+          "$type": "M.A.G.U.S.Qualifications.Specialities.ExtraMagicResistanceOnLevelUp, M.A.G.U.S.",
           "ExtraResistancePoints": 4
         },
         {
           "$id": "65",
-          "$type": "M.A.G.U.S.Qualifications.Specialities.MagicalResistanceRegeneration, MagusCharacterGenerator"
+          "$type": "M.A.G.U.S.Qualifications.Specialities.MagicalResistanceRegeneration, M.A.G.U.S."
         }
       ]
     },
     "Qualifications": {
-      "$type": "M.A.G.U.S.Qualifications.QualificationList, MagusCharacterGenerator",
+      "$type": "M.A.G.U.S.Qualifications.QualificationList, M.A.G.U.S.",
       "$values": []
     },
     "PercentQualifications": {
-      "$type": "System.Collections.Generic.List`1[[M.A.G.U.S.Qualifications.PercentQualification, MagusCharacterGenerator]], mscorlib",
+      "$type": "System.Collections.Generic.List`1[[M.A.G.U.S.Qualifications.PercentQualification, M.A.G.U.S.]], mscorlib",
       "$values": []
     },
     "Speed": 0,
@@ -661,254 +661,254 @@
   "Bravery": 13,
   "Erudition": 0,
   "Sorcery": {
-    "$type": "M.A.G.U.S.Qualifications.Magic.PriestMagic, MagusCharacterGenerator",
+    "$type": "M.A.G.U.S.Qualifications.Magic.ClericalMagic, M.A.G.U.S.",
     "ManaPoints": 9
   },
   "Psi": {
-    "$type": "M.A.G.U.S.Qualifications.Scientific.Psi.PsiPyarron, MagusCharacterGenerator",
+    "$type": "M.A.G.U.S.Qualifications.Scientific.Psi.PsiPyarron, M.A.G.U.S.",
     "PsiKind": 0,
     "QualificationLevel": 1,
     "BaseQualificationLevel": 1,
     "MasterQualificationLevel": 1,
-    "QualificationType": "M.A.G.U.S.Qualifications.Scientific.Psi.PsiPyarron, MagusCharacterGenerator, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
+    "QualificationType": "M.A.G.U.S.Qualifications.Scientific.Psi.PsiPyarron, M.A.G.U.S., Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
   },
   "ManaPoints": 9,
   "PsiPoints": 2,
   "PsiPointsModifier": 4,
   "Qualifications": {
-    "$type": "M.A.G.U.S.Qualifications.QualificationList, MagusCharacterGenerator",
+    "$type": "M.A.G.U.S.Qualifications.QualificationList, M.A.G.U.S.",
     "$values": [
       {
         "$id": "66",
-        "$type": "M.A.G.U.S.Qualifications.Combat.WeaponUsage, MagusCharacterGenerator",
+        "$type": "M.A.G.U.S.Qualifications.Combat.WeaponUse, M.A.G.U.S.",
         "Weapon": null,
         "QualificationLevel": 0,
         "BaseQualificationLevel": 1,
         "MasterQualificationLevel": 0,
-        "QualificationType": "M.A.G.U.S.Qualifications.Combat.WeaponUsage, MagusCharacterGenerator, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
+        "QualificationType": "M.A.G.U.S.Qualifications.Combat.WeaponUse, M.A.G.U.S., Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
       },
       {
         "$id": "67",
-        "$type": "M.A.G.U.S.Qualifications.Scientific.Psi.PsiPyarron, MagusCharacterGenerator",
+        "$type": "M.A.G.U.S.Qualifications.Scientific.Psi.PsiPyarron, M.A.G.U.S.",
         "PsiKind": 0,
         "QualificationLevel": 1,
         "BaseQualificationLevel": 1,
         "MasterQualificationLevel": 1,
-        "QualificationType": "M.A.G.U.S.Qualifications.Scientific.Psi.PsiPyarron, MagusCharacterGenerator, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
+        "QualificationType": "M.A.G.U.S.Qualifications.Scientific.Psi.PsiPyarron, M.A.G.U.S., Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
       },
       {
         "$id": "68",
-        "$type": "M.A.G.U.S.Qualifications.Scientific.LanguageKnowledge, MagusCharacterGenerator",
+        "$type": "M.A.G.U.S.Qualifications.Scientific.LanguageLore, M.A.G.U.S.",
         "Language": 0,
         "QualificationLevel": 0,
         "BaseQualificationLevel": 1,
         "MasterQualificationLevel": 0,
-        "QualificationType": "M.A.G.U.S.Qualifications.Scientific.LanguageKnowledge, MagusCharacterGenerator, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
+        "QualificationType": "M.A.G.U.S.Qualifications.Scientific.LanguageLore, M.A.G.U.S., Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
       },
       {
         "$id": "69",
-        "$type": "M.A.G.U.S.Qualifications.Scientific.LanguageKnowledge, MagusCharacterGenerator",
+        "$type": "M.A.G.U.S.Qualifications.Scientific.LanguageLore, M.A.G.U.S.",
         "Language": 0,
         "QualificationLevel": 0,
         "BaseQualificationLevel": 1,
         "MasterQualificationLevel": 0,
-        "QualificationType": "M.A.G.U.S.Qualifications.Scientific.LanguageKnowledge, MagusCharacterGenerator, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
+        "QualificationType": "M.A.G.U.S.Qualifications.Scientific.LanguageLore, M.A.G.U.S., Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
       },
       {
         "$id": "70",
-        "$type": "M.A.G.U.S.Qualifications.Scientific.ReadingAndWriting, MagusCharacterGenerator",
+        "$type": "M.A.G.U.S.Qualifications.Scientific.ReadingAndWriting, M.A.G.U.S.",
         "QualificationLevel": 0,
         "BaseQualificationLevel": 1,
         "MasterQualificationLevel": 0,
-        "QualificationType": "M.A.G.U.S.Qualifications.Scientific.ReadingAndWriting, MagusCharacterGenerator, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
+        "QualificationType": "M.A.G.U.S.Qualifications.Scientific.ReadingAndWriting, M.A.G.U.S., Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
       },
       {
         "$id": "71",
-        "$type": "M.A.G.U.S.Qualifications.Scientific.ReligionKnowledge, MagusCharacterGenerator",
+        "$type": "M.A.G.U.S.Qualifications.Scientific.ReligionLore, M.A.G.U.S.",
         "QualificationLevel": 1,
         "BaseQualificationLevel": 1,
         "MasterQualificationLevel": 1,
-        "QualificationType": "M.A.G.U.S.Qualifications.Scientific.ReligionKnowledge, MagusCharacterGenerator, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
+        "QualificationType": "M.A.G.U.S.Qualifications.Scientific.ReligionLore, M.A.G.U.S., Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
       },
       {
         "$id": "72",
-        "$type": "M.A.G.U.S.Qualifications.Scientific.HistoryKnowledge, MagusCharacterGenerator",
+        "$type": "M.A.G.U.S.Qualifications.Scientific.HistoryLore, M.A.G.U.S.",
         "QualificationLevel": 1,
         "BaseQualificationLevel": 1,
         "MasterQualificationLevel": 1,
-        "QualificationType": "M.A.G.U.S.Qualifications.Scientific.HistoryKnowledge, MagusCharacterGenerator, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
+        "QualificationType": "M.A.G.U.S.Qualifications.Scientific.HistoryLore, M.A.G.U.S., Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
       },
       {
         "$id": "73",
-        "$type": "M.A.G.U.S.Qualifications.Laical.SingingAndMakingMusic, MagusCharacterGenerator",
+        "$type": "M.A.G.U.S.Qualifications.Laical.SingingAndMakingMusic, M.A.G.U.S.",
         "QualificationLevel": 0,
         "BaseQualificationLevel": 1,
         "MasterQualificationLevel": 0,
-        "QualificationType": "M.A.G.U.S.Qualifications.Laical.SingingAndMakingMusic, MagusCharacterGenerator, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
+        "QualificationType": "M.A.G.U.S.Qualifications.Laical.SingingAndMakingMusic, M.A.G.U.S., Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
       },
       {
         "$id": "74",
-        "$type": "M.A.G.U.S.Qualifications.Combat.WeaponUsage, MagusCharacterGenerator",
+        "$type": "M.A.G.U.S.Qualifications.Combat.WeaponUse, M.A.G.U.S.",
         "Weapon": null,
         "QualificationLevel": 0,
         "BaseQualificationLevel": 1,
         "MasterQualificationLevel": 0,
-        "QualificationType": "M.A.G.U.S.Qualifications.Combat.WeaponUsage, MagusCharacterGenerator, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
+        "QualificationType": "M.A.G.U.S.Qualifications.Combat.WeaponUse, M.A.G.U.S., Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
       },
       {
         "$id": "75",
-        "$type": "M.A.G.U.S.Qualifications.Combat.WeaponUsage, MagusCharacterGenerator",
+        "$type": "M.A.G.U.S.Qualifications.Combat.WeaponUse, M.A.G.U.S.",
         "Weapon": null,
         "QualificationLevel": 0,
         "BaseQualificationLevel": 1,
         "MasterQualificationLevel": 0,
-        "QualificationType": "M.A.G.U.S.Qualifications.Combat.WeaponUsage, MagusCharacterGenerator, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
+        "QualificationType": "M.A.G.U.S.Qualifications.Combat.WeaponUse, M.A.G.U.S., Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
       },
       {
         "$id": "76",
-        "$type": "M.A.G.U.S.Qualifications.Combat.WeaponUsage, MagusCharacterGenerator",
+        "$type": "M.A.G.U.S.Qualifications.Combat.WeaponUse, M.A.G.U.S.",
         "Weapon": null,
         "QualificationLevel": 0,
         "BaseQualificationLevel": 1,
         "MasterQualificationLevel": 0,
-        "QualificationType": "M.A.G.U.S.Qualifications.Combat.WeaponUsage, MagusCharacterGenerator, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
+        "QualificationType": "M.A.G.U.S.Qualifications.Combat.WeaponUse, M.A.G.U.S., Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
       },
       {
         "$id": "77",
-        "$type": "M.A.G.U.S.Qualifications.Combat.WeaponThrowing, MagusCharacterGenerator",
+        "$type": "M.A.G.U.S.Qualifications.Combat.WeaponThrowing, M.A.G.U.S.",
         "Weapon": null,
         "QualificationLevel": 0,
         "BaseQualificationLevel": 1,
         "MasterQualificationLevel": 0,
-        "QualificationType": "M.A.G.U.S.Qualifications.Combat.WeaponThrowing, MagusCharacterGenerator, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
+        "QualificationType": "M.A.G.U.S.Qualifications.Combat.WeaponThrowing, M.A.G.U.S., Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
       },
       {
         "$id": "78",
-        "$type": "M.A.G.U.S.Qualifications.Combat.WeaponKnowledge, MagusCharacterGenerator",
+        "$type": "M.A.G.U.S.Qualifications.Combat.WeaponLore, M.A.G.U.S.",
         "QualificationLevel": 0,
         "BaseQualificationLevel": 1,
         "MasterQualificationLevel": 0,
-        "QualificationType": "M.A.G.U.S.Qualifications.Combat.WeaponKnowledge, MagusCharacterGenerator, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
+        "QualificationType": "M.A.G.U.S.Qualifications.Combat.WeaponLore, M.A.G.U.S., Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
       },
       {
         "$id": "79",
-        "$type": "M.A.G.U.S.Qualifications.Scientific.LanguageKnowledge, MagusCharacterGenerator",
+        "$type": "M.A.G.U.S.Qualifications.Scientific.LanguageLore, M.A.G.U.S.",
         "Language": 0,
         "QualificationLevel": 0,
         "BaseQualificationLevel": 1,
         "MasterQualificationLevel": 0,
-        "QualificationType": "M.A.G.U.S.Qualifications.Scientific.LanguageKnowledge, MagusCharacterGenerator, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
+        "QualificationType": "M.A.G.U.S.Qualifications.Scientific.LanguageLore, M.A.G.U.S., Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
       },
       {
         "$id": "80",
-        "$type": "M.A.G.U.S.Qualifications.Scientific.LanguageKnowledge, MagusCharacterGenerator",
+        "$type": "M.A.G.U.S.Qualifications.Scientific.LanguageLore, M.A.G.U.S.",
         "Language": 0,
         "QualificationLevel": 0,
         "BaseQualificationLevel": 1,
         "MasterQualificationLevel": 0,
-        "QualificationType": "M.A.G.U.S.Qualifications.Scientific.LanguageKnowledge, MagusCharacterGenerator, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
+        "QualificationType": "M.A.G.U.S.Qualifications.Scientific.LanguageLore, M.A.G.U.S., Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
       },
       {
         "$id": "81",
-        "$type": "M.A.G.U.S.Qualifications.Scientific.LanguageKnowledge, MagusCharacterGenerator",
+        "$type": "M.A.G.U.S.Qualifications.Scientific.LanguageLore, M.A.G.U.S.",
         "Language": 0,
         "QualificationLevel": 0,
         "BaseQualificationLevel": 1,
         "MasterQualificationLevel": 0,
-        "QualificationType": "M.A.G.U.S.Qualifications.Scientific.LanguageKnowledge, MagusCharacterGenerator, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
+        "QualificationType": "M.A.G.U.S.Qualifications.Scientific.LanguageLore, M.A.G.U.S., Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
       },
       {
         "$id": "82",
-        "$type": "M.A.G.U.S.Qualifications.Laical.WeatherForecast, MagusCharacterGenerator",
+        "$type": "M.A.G.U.S.Qualifications.Scientific.WeatherDivination, M.A.G.U.S.",
         "QualificationLevel": 0,
         "BaseQualificationLevel": 1,
         "MasterQualificationLevel": 0,
-        "QualificationType": "M.A.G.U.S.Qualifications.Laical.WeatherForecast, MagusCharacterGenerator, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
+        "QualificationType": "M.A.G.U.S.Qualifications.Scientific.WeatherDivination, M.A.G.U.S., Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
       },
       {
         "$id": "83",
-        "$type": "M.A.G.U.S.Qualifications.Scientific.Herbalism, MagusCharacterGenerator",
+        "$type": "M.A.G.U.S.Qualifications.Scientific.Herbalism, M.A.G.U.S.",
         "QualificationLevel": 0,
         "BaseQualificationLevel": 1,
         "MasterQualificationLevel": 0,
-        "QualificationType": "M.A.G.U.S.Qualifications.Scientific.Herbalism, MagusCharacterGenerator, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
+        "QualificationType": "M.A.G.U.S.Qualifications.Scientific.Herbalism, M.A.G.U.S., Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
       },
       {
         "$id": "84",
-        "$type": "M.A.G.U.S.Qualifications.Scientific.WoundHealing, MagusCharacterGenerator",
+        "$type": "M.A.G.U.S.Qualifications.Scientific.Healing, M.A.G.U.S.",
         "QualificationLevel": 0,
         "BaseQualificationLevel": 1,
         "MasterQualificationLevel": 0,
-        "QualificationType": "M.A.G.U.S.Qualifications.Scientific.WoundHealing, MagusCharacterGenerator, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
+        "QualificationType": "M.A.G.U.S.Qualifications.Scientific.Healing, M.A.G.U.S., Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
       },
       {
         "$id": "85",
-        "$type": "M.A.G.U.S.Qualifications.Laical.DressageTraining, MagusCharacterGenerator",
+        "$type": "M.A.G.U.S.Qualifications.Laical.Riding, M.A.G.U.S.",
         "QualificationLevel": 0,
         "BaseQualificationLevel": 1,
         "MasterQualificationLevel": 0,
-        "QualificationType": "M.A.G.U.S.Qualifications.Laical.DressageTraining, MagusCharacterGenerator, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
+        "QualificationType": "M.A.G.U.S.Qualifications.Laical.Riding, M.A.G.U.S., Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
       },
       {
         "$id": "86",
-        "$type": "M.A.G.U.S.Qualifications.Laical.Forestry, MagusCharacterGenerator",
+        "$type": "M.A.G.U.S.Qualifications.Laical.ForestSurvival, M.A.G.U.S.",
         "QualificationLevel": 1,
         "BaseQualificationLevel": 1,
         "MasterQualificationLevel": 1,
-        "QualificationType": "M.A.G.U.S.Qualifications.Laical.Forestry, MagusCharacterGenerator, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
+        "QualificationType": "M.A.G.U.S.Qualifications.Laical.ForestSurvival, M.A.G.U.S., Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
       },
       {
         "$id": "87",
-        "$type": "M.A.G.U.S.Qualifications.Laical.FishingAndHunting, MagusCharacterGenerator",
+        "$type": "M.A.G.U.S.Qualifications.Laical.HuntingAndFishing, M.A.G.U.S.",
         "QualificationLevel": 1,
         "BaseQualificationLevel": 1,
         "MasterQualificationLevel": 1,
-        "QualificationType": "M.A.G.U.S.Qualifications.Laical.FishingAndHunting, MagusCharacterGenerator, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
+        "QualificationType": "M.A.G.U.S.Qualifications.Laical.HuntingAndFishing, M.A.G.U.S., Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
       },
       {
         "$id": "88",
-        "$type": "M.A.G.U.S.Qualifications.Laical.Riding, MagusCharacterGenerator",
+        "$type": "M.A.G.U.S.Qualifications.Laical.Riding, M.A.G.U.S.",
         "QualificationLevel": 0,
         "BaseQualificationLevel": 1,
         "MasterQualificationLevel": 0,
-        "QualificationType": "M.A.G.U.S.Qualifications.Laical.Riding, MagusCharacterGenerator, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
+        "QualificationType": "M.A.G.U.S.Qualifications.Laical.Riding, M.A.G.U.S., Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
       },
       {
         "$id": "89",
-        "$type": "M.A.G.U.S.Qualifications.Combat.PubFighting, MagusCharacterGenerator",
+        "$type": "M.A.G.U.S.Qualifications.Underworld.TavernBrawling, M.A.G.U.S.",
         "QualificationLevel": 0,
         "BaseQualificationLevel": 2,
         "MasterQualificationLevel": 0,
-        "QualificationType": "M.A.G.U.S.Qualifications.Combat.PubFighting, MagusCharacterGenerator, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
+        "QualificationType": "M.A.G.U.S.Qualifications.Underworld.TavernBrawling, M.A.G.U.S., Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
       },
       {
         "$id": "90",
-        "$type": "M.A.G.U.S.Qualifications.Scientific.LegendKnowledge, MagusCharacterGenerator",
+        "$type": "M.A.G.U.S.Qualifications.Scientific.LegendLore, M.A.G.U.S.",
         "QualificationLevel": 0,
         "BaseQualificationLevel": 3,
         "MasterQualificationLevel": 0,
-        "QualificationType": "M.A.G.U.S.Qualifications.Scientific.LegendKnowledge, MagusCharacterGenerator, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
+        "QualificationType": "M.A.G.U.S.Qualifications.Scientific.LegendLore, M.A.G.U.S., Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
       },
       {
         "$id": "91",
-        "$type": "M.A.G.U.S.Qualifications.Laical.TrapSetup, MagusCharacterGenerator",
+        "$type": "M.A.G.U.S.Qualifications.Laical.TrapSetting, M.A.G.U.S.",
         "QualificationLevel": 0,
         "BaseQualificationLevel": 4,
         "MasterQualificationLevel": 0,
-        "QualificationType": "M.A.G.U.S.Qualifications.Laical.TrapSetup, MagusCharacterGenerator, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
+        "QualificationType": "M.A.G.U.S.Qualifications.Laical.TrapSetting, M.A.G.U.S., Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
       },
       {
         "$id": "92",
-        "$type": "M.A.G.U.S.Qualifications.Laical.TrackReadingAndHiding, MagusCharacterGenerator",
+        "$type": "M.A.G.U.S.Qualifications.Laical.TrackingConcealment, M.A.G.U.S.",
         "QualificationLevel": 0,
         "BaseQualificationLevel": 5,
         "MasterQualificationLevel": 0,
-        "QualificationType": "M.A.G.U.S.Qualifications.Laical.TrackReadingAndHiding, MagusCharacterGenerator, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
+        "QualificationType": "M.A.G.U.S.Qualifications.Laical.TrackingConcealment, M.A.G.U.S., Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
       }
     ]
   },
   "PercentQualifications": {
-    "$type": "System.Collections.Generic.List`1[[M.A.G.U.S.Qualifications.PercentQualification, MagusCharacterGenerator]], mscorlib",
+    "$type": "System.Collections.Generic.List`1[[M.A.G.U.S.Qualifications.PercentQualification, M.A.G.U.S.]], mscorlib",
     "$values": []
   }
 }

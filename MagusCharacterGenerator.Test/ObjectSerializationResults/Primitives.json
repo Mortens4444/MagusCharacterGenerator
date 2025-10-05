@@ -1,6 +1,6 @@
 ﻿{
   "$id": "1",
-  "$type": "<>f__AnonymousType1`11[[System.Byte, mscorlib],[System.Int16, mscorlib],[System.UInt16, mscorlib],[System.Int32, mscorlib],[System.UInt32, mscorlib],[System.Int64, mscorlib],[System.UInt64, mscorlib],[System.Single, mscorlib],[System.Double, mscorlib],[System.String, mscorlib],[System.Char, mscorlib]], M.A.G.U.S.Test",
+  "$type": "<>f__AnonymousType1`11[[System.Byte, System.Private.CoreLib],[System.Int16, System.Private.CoreLib],[System.UInt16, System.Private.CoreLib],[System.Int32, System.Private.CoreLib],[System.UInt32, System.Private.CoreLib],[System.Int64, System.Private.CoreLib],[System.UInt64, System.Private.CoreLib],[System.Single, System.Private.CoreLib],[System.Double, System.Private.CoreLib],[System.String, System.Private.CoreLib],[System.Char, System.Private.CoreLib]], M.A.G.U.S.Test",
   "Byte": 255,
   "Short": -2,
   "UShort": 1,

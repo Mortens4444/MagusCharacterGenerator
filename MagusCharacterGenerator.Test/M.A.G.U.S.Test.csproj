@@ -1,0 +1,51 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net9.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <UseWindowsForms>true</UseWindowsForms>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Languages\**" />
+    <EmbeddedResource Remove="Languages\**" />
+    <None Remove="Languages\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="ObjectDeserializationResults\Character.json" />
+    <None Remove="ObjectSerializationResults\Arrays.json" />
+    <None Remove="ObjectSerializationResults\Lists.json" />
+    <None Remove="ObjectSerializationResults\Primitives.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="ObjectDeserializationResults\Character.json" />
+    <EmbeddedResource Include="ObjectSerializationResults\Arrays.json" />
+    <EmbeddedResource Include="ObjectSerializationResults\Lists.json" />
+    <EmbeddedResource Include="ObjectSerializationResults\Primitives.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\M.A.G.U.S\M.A.G.U.S..csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="coverlet.collector" Version="6.0.4">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="18.0.0" />
+    <PackageReference Include="NUnit" Version="4.4.0" />
+    <PackageReference Include="NUnit.Analyzers" Version="4.10.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="NUnit3TestAdapter" Version="5.1.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Using Include="NUnit.Framework" />
+  </ItemGroup>
+</Project>

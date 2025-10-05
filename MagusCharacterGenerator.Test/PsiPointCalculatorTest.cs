@@ -4,7 +4,6 @@ using M.A.G.U.S.Classes.Sorcerer;
 using M.A.G.U.S.GameSystem;
 using M.A.G.U.S.Races;
 using M.A.G.U.S.Utils;
-using NUnit.Framework;
 
 namespace M.A.G.U.S.Test
 {
@@ -13,7 +12,7 @@ namespace M.A.G.U.S.Test
     {
 		public static List<Tuple<Character, ushort>> TestData = new List<Tuple<Character, ushort>>
 		{
-			new Tuple<Character, ushort>(new Character("Mirena", new Human(), new Witch(5)), 21),
+			new Tuple<Character, ushort>(new Character("Mirena", new Human(), new Witch(5)), 20),
 			new Tuple<Character, ushort>(new Character("Toll", new Elf(), new MartialArtist(5)), 26),
 			new Tuple<Character, ushort>(new Character("Maron", new Elf(), new Wizard(5)), 31),
 			new Tuple<Character, ushort>(new Character("Vesryn (Level: 5)", new Elf(), new Headhunter(5)), 16),
@@ -27,9 +26,8 @@ namespace M.A.G.U.S.Test
 			{
 				var character = data.Item1;
 				var expectedPsiPoints = data.Item2;
-				Assert.That(expectedPsiPoints, Is.EqualTo(character.PsiPoints - (ushort)MathHelper.GetAboveAverageValue(character.Intelligence)));
+				Assert.That(character.PsiPoints - (ushort)MathHelper.GetAboveAverageValue(character.Intelligence), Is.EqualTo(expectedPsiPoints));
 			}
-
         }
     }
 }

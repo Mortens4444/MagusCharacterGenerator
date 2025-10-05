@@ -7,4 +7,6 @@ public class HealingPotionHp : MagicalObject
     public override string Name => "Healing Potion (1 HP)";
 
     public override Money Price => new(1);
+
+    public override int ManaPoints => 4;
 }
