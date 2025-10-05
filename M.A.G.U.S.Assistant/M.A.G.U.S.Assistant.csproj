@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFrameworks>net9.0-android;net9.0-ios;net9.0-maccatalyst</TargetFrameworks>
     <TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('windows'))">$(TargetFrameworks);net9.0-windows10.0.19041.0</TargetFrameworks>
@@ -148,7 +148,7 @@
     <PackageReference Include="Microsoft.Maui.Graphics" Version="9.0.110" />
     <PackageReference Include="Microsoft.Maui.Graphics.Skia" Version="9.0.110" />
     <PackageReference Include="Mtf.Maui.Controls" Version="1.0.28" />
-    <PackageReference Include="Mtf.MAUI.LanguageService" Version="1.0.34" />
+    <PackageReference Include="Mtf.MAUI.LanguageService" Version="1.0.35" />
     <PackageReference Include="Plugin.Maui.Audio" Version="4.0.0" />
   </ItemGroup>
   <ItemGroup>

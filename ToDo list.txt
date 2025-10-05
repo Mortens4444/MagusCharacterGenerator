@@ -2,15 +2,38 @@
 - Karakterlap nyomtatása
 - Új kasztok (harcosok, stb...)
 - Drágakövek
-- Mérgek
 - Ynev fõbb helyei
 - Karakter származás
 - Bestiárium (SourceCodeGenerator)
 - Pszi diszciplínák (SourceCodeGenerator)
 - Mágiarendszer (SourceCodeGenerator)
-- Képzettségek
 - FIXME: Multi-caste
 - Videóklippek lejátszása
+
+- Change dice roll type selection to numericupdown (count selection) and picker (only types-k2, k3, k6, k10, k100) S
+- Add weapon to character (easily changable way) S (Depends on 34)
+- Max. Distance for a day S (Depends on 34)
+- Sound finish, set buttons to correct state S
+
+- Page translation problems M
+- Map page open pdf? M
+- Show Illnesses M
+- Calculate weight of items M
+- Other modifier tables M
+
+- Fix RoomPainterPage L
+- ClassesPage, show more info, like in RacesPage L
+- Character.cs Generation fixes, calculate combat modifiers, pain resistance, psi, mana, magic resistance L
+- Buy Qualifications for character L
+- 34. Buy items on market L
+
+- Add more animations, images and sounds XL
+- Psi XXL
+- Show Bestiary XXXL
+- Combat simulator XXXL
+- Show stories and create digital map, for them (map, and sounds), store story descriptions XXXL
+- Create a story for every qualification XXXL
+- Magic XXXL
 
 https://www.yumpu.com/hu/document/view/5842996/magus-puska-071-verzio-http-wwwszerepjatektk/5
 https://nemaakos.wordpress.com/magus/jatek-elmelet/harc-es-szimulacio/

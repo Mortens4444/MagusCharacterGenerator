@@ -21,5 +21,5 @@ public class ThrowingAx : Weapon, IMeleeWeapon
     [DiceThrow(ThrowType._1K6)]
     public byte GetDamage() => (byte)DiceThrow._1K6();
 
-    public override string Name => "Throwing ax";
+    public override string Name => "Throwing axe";
 }

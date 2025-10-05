@@ -5,7 +5,7 @@ using Mtf.LanguageService.MAUI;
 
 namespace M.A.G.U.S.Assistant.Views;
 
-public partial class DiceRollPage : ContentPage
+public partial class DiceRollPage : NotifierPage
 {
     private DiceRollViewModel ViewModel => BindingContext as DiceRollViewModel;
 

@@ -1,10 +1,9 @@
 using M.A.G.U.S.Assistant.ViewModels;
-using Mtf.LanguageService.MAUI;
 
 namespace M.A.G.U.S.Assistant.Views;
 
 [XamlCompilation(XamlCompilationOptions.Compile)]
-public partial class SearchListPage : ContentPage
+public partial class SearchListPage : NotifierPage
 {
     private SearchListViewModel ViewModel => BindingContext as SearchListViewModel;
 
@@ -24,7 +23,6 @@ public partial class SearchListPage : ContentPage
     {
         InitializeComponent();
         PageTitle = title;
-        Translator.Translate(this);
         ViewModel?.LoadItems(items);
     }
 }

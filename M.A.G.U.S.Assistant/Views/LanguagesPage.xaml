@@ -27,7 +27,7 @@
             <Label Text="Type" VerticalOptions="Center" />
             <Picker ItemsSource="{Binding Types}"
                     SelectedItem="{Binding SelectedType}"
-                    ItemDisplayBinding="{Binding ., Converter={StaticResource EnumDescriptionTranslationConverter}}" />
+                    ItemDisplayBinding="{Binding ., Converter={StaticResource TranslationConverter}}" />
         </HorizontalStackLayout>
 
         <mc:EntryWithLabel Grid.Row="1" Label="Search" Text="{Binding SearchText}" />

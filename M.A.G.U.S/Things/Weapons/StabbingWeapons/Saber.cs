@@ -21,4 +21,6 @@ public class Saber : Weapon, IMeleeWeapon
     [DiceThrow(ThrowType._1K6)]
     [DiceThrowModifier(2)]
     public byte GetDamage() => (byte)(DiceThrow._1K6() + 2);
+
+    public override string Name => "Sword, sabre";
 }

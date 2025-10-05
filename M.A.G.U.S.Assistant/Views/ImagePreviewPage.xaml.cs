@@ -1,10 +1,9 @@
 using M.A.G.U.S.Assistant.Models;
-using M.A.G.U.S.Assistant.ViewModels;
 using System.Reflection;
 
 namespace M.A.G.U.S.Assistant.Views;
 
-public partial class ImagePreviewPage : ContentPage
+public partial class ImagePreviewPage : NotifierPage
 {
     private readonly ImageItem item;
 

@@ -238,6 +238,42 @@
                 </VerticalStackLayout>
             </Border>
 
+                <!-- Harcértékek -->
+                <Border Style="{StaticResource BoxBorder}">
+                    <VerticalStackLayout>
+                        <Label Text="Combat values" Style="{StaticResource HeaderLabel}"/>
+
+                        <Picker ItemsSource="{Binding AvailableCombatValueModifiers}"
+                                ItemDisplayBinding="{Binding ., Converter={StaticResource TranslationConverter}}"
+                                SelectedItem="{Binding SelectedCombatValueModifier}"
+                                WidthRequest="220"/>
+
+                        <Grid ColumnDefinitions="*, *"
+                              RowDefinitions="Auto, Auto">
+
+                            <mc:EntryWithLabel Label="Initiator value"
+                                               Text="{Binding Character.InitiatingValue}"
+                                               IsEnabled="False" />
+
+                            <mc:EntryWithLabel Label="Attack value"
+                                               Text="{Binding Character.AttackingValue}"
+                                               IsEnabled="False"
+                                               Grid.Column="1" />
+
+                            <mc:EntryWithLabel Label="Defense value"
+                                               Text="{Binding Character.DefendingValue}"
+                                               IsEnabled="False"
+                                               Grid.Row="1" />
+
+                            <mc:EntryWithLabel Label="Aim value"
+                                               Text="{Binding Character.AimingValue}"
+                                               IsEnabled="False"
+                                               Grid.Row="1"
+                                               Grid.Column="1" />
+                        </Grid>
+                    </VerticalStackLayout>
+                </Border>
+
                 <!-- ᛉ-pontok -->
                 <Border Style="{StaticResource BoxBorder}">
                     <VerticalStackLayout>
@@ -286,42 +322,6 @@
                                         IsEnabled="False"
                                         Grid.Row="0"
                                         Grid.Column="1" />
-                        </Grid>
-                    </VerticalStackLayout>
-                </Border>
-
-                <!-- Harcértékek -->
-                <Border Style="{StaticResource BoxBorder}">
-                    <VerticalStackLayout>
-                        <Label Text="Combat values" Style="{StaticResource HeaderLabel}"/>
-
-                        <Picker ItemsSource="{Binding AvailableCombatValueModifiers}"
-                                ItemDisplayBinding="{Binding ., Converter={StaticResource TranslationConverter}}"
-                                SelectedItem="{Binding SelectedCombatValueModifier}"
-                                WidthRequest="220"/>
-                            
-                        <Grid ColumnDefinitions="*, *"
-                              RowDefinitions="Auto, Auto">
-
-                            <mc:EntryWithLabel Label="Initiator value"
-                                               Text="{Binding Character.InitiatingValue}"
-                                               IsEnabled="False" />
-
-                            <mc:EntryWithLabel Label="Attack value"
-                                               Text="{Binding Character.AttackingValue}"
-                                               IsEnabled="False"
-                                               Grid.Column="1" />
-
-                            <mc:EntryWithLabel Label="Defense value"
-                                               Text="{Binding Character.DefendingValue}"
-                                               IsEnabled="False"
-                                               Grid.Row="1" />
-
-                            <mc:EntryWithLabel Label="Aim value"
-                                               Text="{Binding Character.AimingValue}"
-                                               IsEnabled="False"
-                                               Grid.Row="1"
-                                               Grid.Column="1" />
                         </Grid>
                     </VerticalStackLayout>
                 </Border>

@@ -2,7 +2,7 @@ using M.A.G.U.S.Assistant.ViewModels;
 
 namespace M.A.G.U.S.Assistant.Views;
 
-public partial class AboutPage : ContentPage
+public partial class AboutPage : NotifierPage
 {
     public AboutPage()
     {
