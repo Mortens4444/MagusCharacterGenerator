@@ -10,7 +10,6 @@
 - FIXME: Multi-caste
 - Videóklippek lejátszása
 
-- Change dice roll type selection to numericupdown (count selection) and picker (only types-k2, k3, k6, k10, k100) S
 - Add weapon to character (easily changable way) S (Depends on 34)
 - Max. Distance for a day S (Depends on 34)
 

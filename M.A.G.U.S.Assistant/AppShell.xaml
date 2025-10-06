@@ -5,8 +5,7 @@
        xmlns:v="clr-namespace:M.A.G.U.S.Assistant.Views"
        Title="M.A.G.U.S.Assistant">
 
-    <ShellContent Title="M.A.G.U.S. Assistant"
-                  ContentTemplate="{DataTemplate v:MainPage}"
+    <ShellContent ContentTemplate="{DataTemplate v:MainPage}"
                   Route="MainPage" />
 
 </Shell>

@@ -1,5 +1,7 @@
 ﻿using Mtf.LanguageService;
+#if ANDROID
 using Plugin.Maui.Audio;
+#endif
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Text;
@@ -12,11 +14,26 @@ public class DiceRollViewModel : INotifyPropertyChanged
 {
     public event PropertyChangedEventHandler PropertyChanged;
 
-    public ObservableCollection<string> DiceOptions { get; } = new ObservableCollection<string>
+    public ObservableCollection<string> DiceType { get; } = new ObservableCollection<string>
     {
-        "K4", "K6", "K8", "K10", "K12", "K20", "K100",
-        "2K6", "3K6", "2K10", "3K8"
+        "K2", "K3", "K4", "K6", "K8", "K10", "K12", "K20", "K100"
     };
+
+    private byte diceCount = 1;
+    public byte DiceCount
+    {
+        get => diceCount;
+        set
+        {
+            if (diceCount == value)
+            {
+                return;
+            }
+
+            diceCount = value;
+            OnPropertyChanged(nameof(DiceCount));
+        }
+    }
 
     private string selectedDice = "K6";
     public string SelectedDice
@@ -24,7 +41,11 @@ public class DiceRollViewModel : INotifyPropertyChanged
         get => selectedDice;
         set
         {
-            if (selectedDice == value) return;
+            if (selectedDice == value)
+            {
+                return;
+            }
+
             selectedDice = value;
             OnPropertyChanged(nameof(SelectedDice));
         }
@@ -120,7 +141,7 @@ public class DiceRollViewModel : INotifyPropertyChanged
         ResultDetails = String.Empty;
 
         var pattern = new Regex(@"^(?:(\d+)?[kK])(\d+)$");
-        var m = pattern.Match(SelectedDice ?? String.Empty);
+        var m = pattern.Match($"{DiceCount}{SelectedDice}" ?? String.Empty);
         int count = 1;
         int sides = 6;
         if (m.Success)
