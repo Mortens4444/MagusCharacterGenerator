@@ -13,7 +13,7 @@ public class ShortSword : Weapon, IMeleeWeapon
 
     public byte DefendingValue => 14;
 
-    public double Weight => 1;
+    public override double Weight => 1;
 
     public override Money Price => new(1);
 

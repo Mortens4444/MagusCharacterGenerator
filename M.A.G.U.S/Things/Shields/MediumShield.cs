@@ -14,7 +14,7 @@ public class MediumShield : Shield
 
     public byte MovementObstructiveFactor => 1;
 
-    public double Weight => 3;
+    public override double Weight => 3;
 
     public override Money Price => new(1, 6);
 

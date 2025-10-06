@@ -13,7 +13,7 @@ public class CarvedClub : Weapon, IMeleeWeapon
 
     public byte DefendingValue => 14;
 
-    public double Weight => 1.3;
+    public override double Weight => 1.3;
 
     public override Money Price => Money.Free;
 

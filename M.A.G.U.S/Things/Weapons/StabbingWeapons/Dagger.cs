@@ -14,7 +14,7 @@ public class Dagger : Weapon, IMeleeWeapon
 
     public byte DefendingValue => 2;
 
-    public double Weight => 0.3;
+    public override double Weight => 0.3;
 
     public override Money Price => new(0, 1);
 

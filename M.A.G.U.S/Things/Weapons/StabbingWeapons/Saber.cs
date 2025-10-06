@@ -14,7 +14,7 @@ public class Saber : Weapon, IMeleeWeapon
 
     public byte DefendingValue => 17;
 
-    public double Weight => 1.5;
+    public override double Weight => 1.5;
 
     public override Money Price => new(1, 6);
 

@@ -12,5 +12,5 @@ public class AbbitSteelBreastPlate : Thing
 
 	public int DamageSusceptiveValue => 8;
 
-	public int Weight => 12;
+	public override double Weight => 12;
 }

@@ -12,5 +12,5 @@ public class BronzeLaminarArmor : Thing
 
 	public int DamageSusceptiveValue => 2;
 
-	public int Weight => 18;
+	public override double Weight => 18;
 }

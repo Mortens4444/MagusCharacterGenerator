@@ -30,9 +30,9 @@
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
-        <WebView x:Name="Browser" Source="{Binding CurrentUrl}" Grid.Row="0" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" />
+        <WebView x:Name="Browser" Source="{Binding CurrentUrl}" Grid.Row="0" />
 
-        <mc:Hyperlink Grid.Row="1" LinkLabel="kalandozok.hu" Url="https://kalandozok.hu/" HorizontalOptions="Center" VerticalOptions="End" Margin="0,8,0,0" />
+        <mc:Hyperlink Grid.Row="1" LinkLabel="kalandozok.hu" Url="https://kalandozok.hu/ynev/" HorizontalOptions="Center" VerticalOptions="End" Margin="0,8,0,0" />
     </Grid>
 
 </v:NotifierPage>

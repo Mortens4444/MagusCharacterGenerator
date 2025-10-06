@@ -13,7 +13,7 @@ public class Javelin : Weapon, IMeleeWeapon
 
     public byte DefendingValue => 5;
 
-    public double Weight => 1.5;
+    public override double Weight => 1.5;
 
     public override Money Price => new(0, 5);
 

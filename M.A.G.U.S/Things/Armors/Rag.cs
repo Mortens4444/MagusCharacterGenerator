@@ -10,7 +10,7 @@ public class Rag : Thing
 
 	public int DamageSusceptiveValue => 1;
 
-	public int Weight => 5;
+	public override double Weight => 5;
 
     public override string Name => "Cloth";
 }

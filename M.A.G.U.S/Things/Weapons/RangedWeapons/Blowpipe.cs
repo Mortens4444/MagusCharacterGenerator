@@ -13,7 +13,7 @@ public class Blowpipe : Weapon, IRangedWeapon
 
     public ushort Distance => 30;
 
-    public double Weight => 0.2;
+    public override double Weight => 0.2;
 
     public override Money Price => new(0, 6);
 

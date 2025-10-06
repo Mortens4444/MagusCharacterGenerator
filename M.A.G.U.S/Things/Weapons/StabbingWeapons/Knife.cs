@@ -14,7 +14,7 @@ public class Knife : Weapon, IMeleeWeapon
 
     public byte DefendingValue => 0;
 
-    public double Weight => 0.2;
+    public override double Weight => 0.2;
 
     public override Money Price => new(0, 0, 50);
 

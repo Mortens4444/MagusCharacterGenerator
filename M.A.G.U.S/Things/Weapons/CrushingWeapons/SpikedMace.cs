@@ -13,7 +13,7 @@ public class SpikedMace : Weapon, IMeleeWeapon
 
     public byte DefendingValue => 13;
 
-    public double Weight => 2;
+    public override double Weight => 2;
 
     public override Money Price => new(1);
 

@@ -13,7 +13,7 @@ public class Halberd : Weapon, IMeleeWeapon
 
     public byte DefendingValue => 15;
 
-    public double Weight => 3;
+    public override double Weight => 3;
 
     public override Money Price => new(5);
 

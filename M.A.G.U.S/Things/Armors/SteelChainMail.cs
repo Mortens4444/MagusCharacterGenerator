@@ -2,7 +2,7 @@ using M.A.G.U.S.GameSystem.Valuables;
 
 namespace M.A.G.U.S.Things.Armors;
 
-public class SteelChainMail : Thing
+public class SteelChainmail : Thing
 {
 	public override string Name => "Steel chainmail";
 
@@ -12,5 +12,5 @@ public class SteelChainMail : Thing
 
 	public int DamageSusceptiveValue => 3;
 
-	public int Weight => 20;
+	public override double Weight => 20;
 }

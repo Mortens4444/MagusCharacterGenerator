@@ -14,7 +14,7 @@ public class SlanSword : Weapon, IMeleeWeapon
 
     public byte DefendingValue => 12;
 
-    public double Weight => 1.4;
+    public override double Weight => 1.4;
 
     public override Money Price => new(100);
 

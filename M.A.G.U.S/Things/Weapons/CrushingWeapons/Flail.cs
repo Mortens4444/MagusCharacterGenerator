@@ -13,7 +13,7 @@ public class Flail : Weapon, IMeleeWeapon
 
     public byte DefendingValue => 5;
 
-    public double Weight => 2.5;
+    public override double Weight => 2.5;
 
     public override Money Price => new(0, 7);
 

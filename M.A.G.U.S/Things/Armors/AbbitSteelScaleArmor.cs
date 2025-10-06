@@ -12,5 +12,5 @@ public class AbbitSteelScaleArmor : Thing
 
 	public int DamageSusceptiveValue => 4;
 
-	public int Weight => 7;
+	public override double Weight => 7;
 }

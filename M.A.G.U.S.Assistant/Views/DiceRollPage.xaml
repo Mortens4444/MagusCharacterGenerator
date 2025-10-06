@@ -2,6 +2,7 @@
 <v:NotifierPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
                 xmlns:v="clr-namespace:M.A.G.U.S.Assistant.Views"
                 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                xmlns:mc="clr-namespace:Mtf.Maui.Controls;assembly=Mtf.Maui.Controls"
                 xmlns:vm="clr-namespace:M.A.G.U.S.Assistant.ViewModels"
                 x:Class="M.A.G.U.S.Assistant.Views.DiceRollPage"
                 Title="Dice roll">
@@ -13,15 +14,23 @@
     <Grid RowDefinitions="Auto,Auto,Auto,*,Auto" Padding="16" RowSpacing="12">
         <Label Text="Choose a dice roll type" FontAttributes="Bold" Grid.Row="0" />
 
-        <Grid Grid.Row="1" ColumnDefinitions="*,Auto" ColumnSpacing="8">
+        <Grid Grid.Row="1" ColumnDefinitions="Auto,*,Auto" ColumnSpacing="8">
+            <mc:NumericUpDownWithLabel x:Name="DiceCounter"
+                                       Grid.Column="0"
+                                       Label="Number of dices"
+                                       Minimum="1"
+                                       Maximum="10"
+                                       Value="{Binding DiceCount}" />
+
             <Picker x:Name="DicePicker"
-                    Grid.Column="0"
-                    ItemsSource="{Binding DiceOptions}"
+                    Grid.Column="1"
+                    ItemsSource="{Binding DiceType}"
                     SelectedItem="{Binding SelectedDice}"
+                    VerticalTextAlignment="Center"
                     Title="K6, K10, 2K6..." />
 
             <Button Text="Throw"
-                    Grid.Column="1"
+                    Grid.Column="2"
                     Command="{Binding RollCommand}"
                     WidthRequest="120" />
         </Grid>

@@ -13,7 +13,7 @@ public class LightCrossbow : Weapon, IRangedWeapon
 
     public ushort Distance => 50;
 
-    public double Weight => 3.5;
+    public override double Weight => 3.5;
 
     public override Money Price => new(8);
 

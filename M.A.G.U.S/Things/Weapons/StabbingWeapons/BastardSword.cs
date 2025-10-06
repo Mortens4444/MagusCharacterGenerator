@@ -14,7 +14,7 @@ public class BastardSword : Weapon, IMeleeWeapon
 
     public byte DefendingValue => 12;
 
-    public double Weight => 2;
+    public override double Weight => 2;
 
     public override Money Price => new(2, 5);
 

@@ -13,7 +13,7 @@ public class NomadBow : Weapon, IRangedWeapon
 
     public ushort Distance => 180;
 
-    public double Weight => 0.7;
+    public override double Weight => 0.7;
 
     public override Money Price => new(25);
 

@@ -12,5 +12,5 @@ public class HardenedLeatherArmor : Thing
 
 	public int DamageSusceptiveValue => 2;
 
-	public int Weight => 7;
+	public override double Weight => 7;
 }

@@ -13,7 +13,7 @@ public class Longbow : Weapon, IRangedWeapon
 
     public ushort Distance => 110;
 
-    public double Weight => 0.7;
+    public override double Weight => 0.7;
 
     public override Money Price => new(3, 5);
 

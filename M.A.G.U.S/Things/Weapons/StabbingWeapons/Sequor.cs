@@ -14,7 +14,7 @@ public class Sequor : Weapon, IMeleeWeapon
 
     public byte DefendingValue => 16;
 
-    public double Weight => 0.4;
+    public override double Weight => 0.4;
 
     public override Money Price => new(1, 3);
 

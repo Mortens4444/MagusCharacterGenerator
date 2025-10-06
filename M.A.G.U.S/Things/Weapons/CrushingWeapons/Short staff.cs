@@ -13,7 +13,7 @@ public class Shortstaff : Weapon, IMeleeWeapon
 
     public byte DefendingValue => 17;
 
-    public double Weight => 0.7;
+    public override double Weight => 0.7;
 
     public override Money Price => new(0, 0, 30);
 

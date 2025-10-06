@@ -13,7 +13,7 @@ public class Garrote : Weapon, IMeleeWeapon
 
     public byte DefendingValue => 0;//-20;
 
-    public double Weight => 0.1;
+    public override double Weight => 0.1;
 
     public override Money Price => new(0, 1);
 

@@ -14,7 +14,7 @@ public class Broadsword : Weapon, IMeleeWeapon
 
     public byte DefendingValue => 2;
 
-    public double Weight => 7;
+    public override double Weight => 7;
 
     public override Money Price => new(5);
 

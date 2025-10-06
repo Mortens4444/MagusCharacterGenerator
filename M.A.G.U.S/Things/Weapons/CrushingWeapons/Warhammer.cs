@@ -13,7 +13,7 @@ public class Warhammer : Weapon, IMeleeWeapon
 
     public byte DefendingValue => 8;
 
-    public double Weight => 3;
+    public override double Weight => 3;
 
     public override Money Price => new(0, 8);
 

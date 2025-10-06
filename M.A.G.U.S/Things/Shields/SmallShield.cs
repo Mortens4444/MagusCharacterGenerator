@@ -14,7 +14,7 @@ public class SmallShield : Shield
 
     public byte MovementObstructiveFactor => 0;
 
-    public double Weight => 1;
+    public override double Weight => 1;
 
     public override Money Price => new(0, 6);
 

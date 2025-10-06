@@ -184,9 +184,6 @@
     <MauiXaml Update="Views\LanguagesPage.xaml">
       <Generator>MSBuild:Compile</Generator>
     </MauiXaml>
-    <MauiXaml Update="Views\MarketPage.xaml">
-      <Generator>MSBuild:Compile</Generator>
-    </MauiXaml>
     <MauiXaml Update="Views\MapPage.xaml">
       <Generator>MSBuild:Compile</Generator>
     </MauiXaml>

@@ -1,6 +1,7 @@
 ﻿using M.A.G.U.S.Assistant.Extensions;
 using M.A.G.U.S.GameSystem.PoisonsAndIllnesses;
 using M.A.G.U.S.GameSystem.Runes;
+using M.A.G.U.S.Things;
 using M.A.G.U.S.Things.Gemstones;
 using M.A.G.U.S.Things.MagicalObjects;
 using Mtf.LanguageService;
@@ -39,7 +40,7 @@ public class DisplayItem
             {
                 Source = r,
                 Key = r.Sign.ToString() ?? String.Empty,
-                Title = $"{r.Sign} - {r.Name}" ?? String.Empty,
+                Title = $"{r.Sign} - {r.Name}",
                 Subtitle = r.Meaning ?? String.Empty,
                 RightText = r.Equivalent ?? String.Empty
             };
@@ -65,9 +66,8 @@ public class DisplayItem
         return new DisplayItem { Source = gemstoneObj, Title = gemstoneObj?.ToString() ?? String.Empty };
     }
 
-    internal static DisplayItem FromMagicalObject(object magicalObj)
+    public static DisplayItem FromMagicalObject(object magicalObj)
     {
-        
         if (magicalObj is MagicalObject mo)
         {
             return new DisplayItem
@@ -75,15 +75,15 @@ public class DisplayItem
                 Source = mo,
                 Key = String.Empty,
                 Title = mo.Name ?? String.Empty,
-                Subtitle = mo.Description ?? String.Empty,
-                RightText = $"{mo.ManaPoints} {Lng.Elem("MP")}"
+                Subtitle = $"{mo.ManaPoints} {Lng.Elem("MP")}",
+                RightText = mo.Price?.ToTranslatedString() ?? String.Empty
             };
         }
 
         return new DisplayItem { Source = magicalObj, Title = magicalObj?.ToString() ?? String.Empty };
     }
 
-    internal static DisplayItem FromPoison(object poisonObj)
+    public static DisplayItem FromPoison(object poisonObj)
     {
         if (poisonObj is Poison p)
         {
@@ -98,5 +98,22 @@ public class DisplayItem
         }
 
         return new DisplayItem { Source = poisonObj, Title = poisonObj?.ToString() ?? String.Empty };
+    }
+
+    public static DisplayItem FromThing(object thingObj)
+    {
+        if (thingObj is Thing t)
+        {
+            return new DisplayItem
+            {
+                Source = t,
+                Key = String.Empty,
+                Title = t.Name ?? String.Empty,
+                Subtitle = $"{t.Weight} {Lng.Elem("Kg")}",
+                RightText = t.Price?.ToTranslatedString() ?? String.Empty
+            };
+        }
+
+        return new DisplayItem { Source = thingObj, Title = thingObj?.ToString() ?? String.Empty };
     }
 }

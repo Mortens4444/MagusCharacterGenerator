@@ -13,7 +13,7 @@ public class TwoHandedMace : Weapon, IMeleeWeapon
 
     public byte DefendingValue => 6;
 
-    public double Weight => 3;
+    public override double Weight => 3;
 
     public override Money Price => new(1, 2);
 

@@ -14,7 +14,7 @@ public class BattleAx : Weapon, IMeleeWeapon
 
     public byte DefendingValue => 8;
 
-    public double Weight => 2.5;
+    public override double Weight => 2.5;
 
     public override Money Price => new(0, 8);
 

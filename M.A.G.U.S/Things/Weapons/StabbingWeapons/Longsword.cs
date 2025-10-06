@@ -14,7 +14,7 @@ public class Longsword : Weapon, IMeleeWeapon
 
     public byte DefendingValue => 16;
 
-    public double Weight => 1.5;
+    public override double Weight => 1.5;
 
     public override Money Price => new(1, 5);
 

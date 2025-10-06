@@ -14,7 +14,7 @@ public class ShadlekianMace : Weapon, IMeleeWeapon
 
     public byte DefendingValue => 14;
 
-    public double Weight => 1.8;
+    public override double Weight => 1.8;
 
     public override Money Price => new(1, 3);
 

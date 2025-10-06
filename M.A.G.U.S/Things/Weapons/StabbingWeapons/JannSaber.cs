@@ -14,7 +14,7 @@ public class JannSaber : Weapon, IMeleeWeapon
 
     public byte DefendingValue => 17;
 
-    public double Weight => 120;
+    public override double Weight => 120;
 
     public override Money Price => new(0, 5);
 
