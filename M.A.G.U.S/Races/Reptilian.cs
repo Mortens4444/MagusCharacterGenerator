@@ -8,7 +8,7 @@ namespace M.A.G.U.S.Races;
 /// <summary>
 /// https://kalandozok.hu/cikkgyujtemeny/kieg%C3%A9sz%C3%ADt%C5%91k/fajok/j%C3%A1tszhat%C3%B3-fajok/faun-h%C3%BCll%C5%91-r63/
 /// </summary>
-public class Reptile : Race
+public class Reptilian : Race
 {
     public override short Strength => 1;
 

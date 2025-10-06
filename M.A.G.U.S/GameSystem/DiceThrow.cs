@@ -80,6 +80,11 @@ public class DiceThrow
         return RandomProvider.GetSecureRandomShort(2, 20);
     }
 
+    public short _3K10()
+    {
+        return RandomProvider.GetSecureRandomShort(3, 30);
+    }
+
     public short _2K10_RangedAttack()
     {
         return (short)(RangedAttack(1, 10) + RangedAttack(1, 10));

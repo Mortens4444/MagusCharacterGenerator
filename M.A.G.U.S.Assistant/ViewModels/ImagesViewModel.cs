@@ -54,7 +54,8 @@ public class ImagesViewModel : INotifyPropertyChanged
         {
             var asm = Assembly.GetExecutingAssembly();
             var names = asm.GetManifestResourceNames()
-                .Where(n => n.IndexOf(".Resources.Images.Characters.", StringComparison.OrdinalIgnoreCase) >= 0 &&
+                .Where(n => (n.IndexOf(".Resources.Images.Bestiary.", StringComparison.OrdinalIgnoreCase) >= 0 ||
+                            n.IndexOf(".Resources.Images.Characters.", StringComparison.OrdinalIgnoreCase) >= 0) &&
                             (n.EndsWith(".png", StringComparison.OrdinalIgnoreCase) ||
                              n.EndsWith(".jpg", StringComparison.OrdinalIgnoreCase) ||
                              n.EndsWith(".jpeg", StringComparison.OrdinalIgnoreCase) ||
@@ -77,12 +78,15 @@ public class ImagesViewModel : INotifyPropertyChanged
     private void ApplyFilter()
     {
         var q = (SearchText ?? String.Empty).Trim();
-        var filtered = string.IsNullOrEmpty(q)
-            ? AllImages
-            : new ObservableCollection<ImageItem>(AllImages.Where(i => i.DisplayName.IndexOf(q, StringComparison.OrdinalIgnoreCase) >= 0));
+        var filtered = (String.IsNullOrEmpty(q) ? AllImages : new ObservableCollection<ImageItem>(AllImages.Where(i => i.DisplayName.IndexOf(q, StringComparison.OrdinalIgnoreCase) >= 0)))
+            .OrderBy(comparer => comparer.DisplayName);
 
         FilteredImages.Clear();
-        foreach (var it in filtered) FilteredImages.Add(it);
+        foreach (var it in filtered)
+        {
+            FilteredImages.Add(it);
+        }
+
         OnPropertyChanged(nameof(FilteredImages));
     }
 

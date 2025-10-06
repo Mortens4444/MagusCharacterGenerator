@@ -1,5 +1,7 @@
 ﻿using M.A.G.U.S.Assistant.Models;
+#if ANDROID
 using Plugin.Maui.Audio;
+#endif
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Reflection;
@@ -145,6 +147,7 @@ public class SoundViewModel : INotifyPropertyChanged
 
 #if ANDROID
             audioPlayer = AudioManager.Current.CreatePlayer(stream);
+            audioPlayer.PlaybackEnded += OnPlaybackEnded;
             audioPlayer.Volume = (float)Volume;
             audioPlayer.Play();
 #endif
@@ -159,12 +162,13 @@ public class SoundViewModel : INotifyPropertyChanged
         ((Command)StopCommand).ChangeCanExecute();
     }
 
-    private void OnPlaybackEnded(object sender, EventArgs e)
+    private void OnPlaybackEnded(object? sender, EventArgs e)
     {
-        IsPlaying = false;
 #if ANDROID
         if (audioPlayer != null)
         {
+            IsPlaying = false;
+            OnPropertyChanged(nameof(CanPlay));
             audioPlayer.PlaybackEnded -= OnPlaybackEnded;
         }
 #endif
