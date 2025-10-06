@@ -13,7 +13,7 @@ public class HeavyCavalryLance : Weapon, IMeleeWeapon
 
     public byte DefendingValue => 0;
 
-    public double Weight => 5;
+    public override double Weight => 5;
 
     public override Money Price => new(1, 5);
 

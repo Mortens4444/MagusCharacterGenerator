@@ -12,5 +12,5 @@ public class MithrilChainmail : Thing
 
 	public int DamageSusceptiveValue => 5;
 
-	public int Weight => 10;
+	public override double Weight => 10;
 }

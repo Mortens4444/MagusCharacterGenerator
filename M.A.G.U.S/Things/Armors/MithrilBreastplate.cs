@@ -12,5 +12,5 @@ public class MithrilBreastplate : Thing
 
 	public int DamageSusceptiveValue => 6;
 
-	public int Weight => 6;
+	public override double Weight => 6;
 }

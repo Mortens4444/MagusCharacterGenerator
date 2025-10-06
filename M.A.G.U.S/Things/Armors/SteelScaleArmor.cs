@@ -12,5 +12,5 @@ public class SteelScaleArmor : Thing
 
 	public int DamageSusceptiveValue => 3;
 
-	public int Weight => 16;
+	public override double Weight => 16;
 }

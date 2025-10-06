@@ -14,7 +14,7 @@ public class SlanStar : Weapon, IMeleeWeapon
 
     public byte DefendingValue => 4;
 
-    public double Weight => 0.1;
+    public override double Weight => 0.1;
 
     public override Money Price => new(0, 0, 40);
 

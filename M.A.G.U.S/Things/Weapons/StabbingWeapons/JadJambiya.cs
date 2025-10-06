@@ -14,7 +14,7 @@ public class JadJambiya : Weapon, IMeleeWeapon
 
     public byte DefendingValue => 15;
 
-    public double Weight => 0.8;
+    public override double Weight => 0.8;
 
     public override Money Price => new(60);
 

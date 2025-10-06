@@ -13,7 +13,7 @@ public class Fist : Weapon, IMeleeWeapon
 
     public byte DefendingValue => 1;
 
-    public double Weight => 0;
+    public override double Weight => 0;
 
     public override Money Price => Money.Free;
 

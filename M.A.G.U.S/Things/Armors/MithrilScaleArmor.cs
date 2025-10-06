@@ -12,5 +12,5 @@ public class MithrilScaleArmor : Thing
 
 	public int DamageSusceptiveValue => 5;
 
-	public int Weight => 5;
+	public override double Weight => 5;
 }

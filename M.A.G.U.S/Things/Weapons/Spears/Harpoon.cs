@@ -13,7 +13,7 @@ public class Harpoon : Weapon, IMeleeWeapon
 
     public byte DefendingValue => 10;
 
-    public double Weight => 2;
+    public override double Weight => 2;
 
     public override Money Price => new(0, 5);
 

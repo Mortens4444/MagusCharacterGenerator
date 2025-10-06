@@ -14,7 +14,7 @@ public class LargeShield : Shield
 
 	public byte MovementObstructiveFactor => 5;
 
-	public double Weight => 6;
+	public override double Weight => 6;
 
 	public override Money Price => new(6);
 

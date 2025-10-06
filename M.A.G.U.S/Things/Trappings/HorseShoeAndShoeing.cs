@@ -2,7 +2,7 @@ using M.A.G.U.S.GameSystem.Valuables;
 
 namespace M.A.G.U.S.Things.Trappings;
 
-public class HorseShoeAndShoeing : Thing
+public class HorseshoeAndShoeing : Thing
 {
 	public override string Name => "Horseshoe and shoeing";
 

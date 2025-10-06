@@ -14,7 +14,7 @@ public class MaraSequor : Weapon, IMeleeWeapon
 
     public byte DefendingValue => 14;
 
-    public double Weight => 1;
+    public override double Weight => 1;
 
     public override Money Price => new(2);
 

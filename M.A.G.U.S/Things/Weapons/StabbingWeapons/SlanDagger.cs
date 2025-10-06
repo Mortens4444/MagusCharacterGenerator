@@ -14,7 +14,7 @@ public class SlanDagger : Weapon, IMeleeWeapon
 
     public byte DefendingValue => 6;
 
-    public double Weight => 0.8;
+    public override double Weight => 0.8;
 
     public override Money Price => new(70);
 

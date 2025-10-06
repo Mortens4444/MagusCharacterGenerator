@@ -13,7 +13,7 @@ public class AquirianCrossbow : Weapon, IRangedWeapon
 
     public ushort Distance => 35;
 
-    public double Weight => 2;
+    public override double Weight => 2;
 
     public override Money Price => new(1000);
 

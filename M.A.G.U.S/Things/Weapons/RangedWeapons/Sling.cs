@@ -13,7 +13,7 @@ public class Sling : Weapon, IRangedWeapon
 
     public ushort Distance => 100;
 
-    public double Weight => 0.1;
+    public override double Weight => 0.1;
 
     public override Money Price => new(0, 0, 30);
 

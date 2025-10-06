@@ -12,5 +12,5 @@ public class BrigandineArmor : Thing
 
 	public int DamageSusceptiveValue => 3;
 
-	public int Weight => 15;
+	public override double Weight => 15;
 }

@@ -14,7 +14,7 @@ public class Yatagan : Weapon, IMeleeWeapon
 
     public byte DefendingValue => 14;
 
-    public double Weight => 0.8;
+    public override double Weight => 0.8;
 
     public override Money Price => new(1, 4);
 

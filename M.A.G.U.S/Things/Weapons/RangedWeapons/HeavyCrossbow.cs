@@ -13,7 +13,7 @@ public class HeavyCrossbow : Weapon, IRangedWeapon
 
     public ushort Distance => 60;
 
-    public double Weight => 6;
+    public override double Weight => 6;
 
     public override Money Price => new(12);
 

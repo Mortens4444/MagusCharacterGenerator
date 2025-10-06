@@ -14,7 +14,7 @@ public class OneHandedHatchet : Weapon, IMeleeWeapon
 
     public byte DefendingValue => 11;
 
-    public double Weight => 2;
+    public override double Weight => 2;
 
     public override Money Price => new(0, 6);
 

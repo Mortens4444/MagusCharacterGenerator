@@ -14,7 +14,7 @@ public class ThrowingAx : Weapon, IMeleeWeapon
 
     public byte DefendingValue => 4;
 
-    public double Weight => 1.2;
+    public override double Weight => 1.2;
 
     public override Money Price => new(0, 1);
 

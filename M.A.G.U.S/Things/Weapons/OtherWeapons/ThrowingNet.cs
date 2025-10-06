@@ -12,7 +12,7 @@ public class ThrowingNet : Weapon, IMeleeWeapon
 
     public byte DefendingValue => 4;
 
-    public double Weight => 1;
+    public override double Weight => 1;
 
     public override Money Price => new(0, 3);
 

@@ -12,5 +12,5 @@ public class AbbitSteelChainMail : Thing
 
 	public int DamageSusceptiveValue => 4;
 
-	public int Weight => 12;
+	public override double Weight => 12;
 }

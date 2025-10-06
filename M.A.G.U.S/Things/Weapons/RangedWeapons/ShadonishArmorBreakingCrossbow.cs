@@ -12,7 +12,7 @@ public class ShadonishArmorBreakingCrossbow : Weapon, IRangedWeapon
 
     public ushort Distance => 80;
 
-    public double Weight => 8;
+    public override double Weight => 8;
 
     public override Money Price => new(40);
 

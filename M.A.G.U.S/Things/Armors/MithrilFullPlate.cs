@@ -12,5 +12,5 @@ public class MithrilFullPlate : Thing
 
 	public int DamageSusceptiveValue => 8;
 
-	public int Weight => 10;
+	public override double Weight => 10;
 }

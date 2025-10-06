@@ -12,5 +12,5 @@ public class RingArmor : Thing
 
 	public int DamageSusceptiveValue => 1;
 
-	public int Weight => 12;
+	public override double Weight => 12;
 }

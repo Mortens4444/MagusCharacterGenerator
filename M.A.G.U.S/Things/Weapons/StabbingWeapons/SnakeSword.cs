@@ -14,7 +14,7 @@ public class SnakeSword : Weapon, IMeleeWeapon
 
     public byte DefendingValue => 15;
 
-    public double Weight => 1.4;
+    public override double Weight => 1.4;
 
     public override Money Price => new(6);
 

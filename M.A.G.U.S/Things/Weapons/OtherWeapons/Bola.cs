@@ -13,7 +13,7 @@ public class Bola : Weapon, IMeleeWeapon
 
     public byte DefendingValue => 2;
 
-    public double Weight => 0.8;
+    public override double Weight => 0.8;
 
     public override Money Price => new(0, 0, 40);
 

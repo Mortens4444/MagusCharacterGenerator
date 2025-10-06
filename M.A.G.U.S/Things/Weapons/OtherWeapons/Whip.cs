@@ -13,7 +13,7 @@ public class Whip : Weapon, IMeleeWeapon
 
     public byte DefendingValue => 0;
 
-    public double Weight => 0.6;
+    public override double Weight => 0.6;
 
     public override Money Price => new(0, 1);
 

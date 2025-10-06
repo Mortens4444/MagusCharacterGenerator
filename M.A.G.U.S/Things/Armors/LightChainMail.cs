@@ -12,5 +12,5 @@ public class LightChainMail : Thing
 
 	public int DamageSusceptiveValue => 2;
 
-	public int Weight => 20;
+	public override double Weight => 20;
 }

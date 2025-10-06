@@ -13,7 +13,7 @@ public class KahreiCrossbow : Weapon, IRangedWeapon
 
     public ushort Distance => 30;
 
-    public double Weight => 3;
+    public override double Weight => 3;
 
     public override Money Price => new(80);
 
