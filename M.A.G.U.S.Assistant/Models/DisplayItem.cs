@@ -39,7 +39,7 @@ public class DisplayItem
             {
                 Source = r,
                 Key = r.Sign.ToString() ?? String.Empty,
-                Title = r.Name ?? String.Empty,
+                Title = $"{r.Sign} - {r.Name}" ?? String.Empty,
                 Subtitle = r.Meaning ?? String.Empty,
                 RightText = r.Equivalent ?? String.Empty
             };

@@ -12,6 +12,8 @@ public enum ThrowType
     _1K10,
     [Description("2D10")]
     _2K10,
+    [Description("3D10")]
+    _3K10,
     [Description("3D6")]
 	_3K6,
 	[Description("3D6")]
