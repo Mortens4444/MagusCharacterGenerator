@@ -1,4 +1,5 @@
 ﻿using M.A.G.U.S.Assistant.Extensions;
+using M.A.G.U.S.Bestiary;
 using M.A.G.U.S.GameSystem.PoisonsAndIllnesses;
 using M.A.G.U.S.GameSystem.Runes;
 using M.A.G.U.S.Things;
@@ -115,5 +116,22 @@ public class DisplayItem
         }
 
         return new DisplayItem { Source = thingObj, Title = thingObj?.ToString() ?? String.Empty };
+    }
+
+    public static DisplayItem FromCreature(object creatureObj)
+    {
+        if (creatureObj is Creature c)
+        {
+            return new DisplayItem
+            {
+                Source = c,
+                Key = String.Empty,
+                Title = c.Name ?? String.Empty,
+                Subtitle = $"{Lng.Elem("Speed")} {c.Speed}",
+                RightText = Lng.Elem(c.Occurrence.ToString())
+            };
+        }
+
+        return new DisplayItem { Source = creatureObj, Title = creatureObj?.ToString() ?? String.Empty };
     }
 }

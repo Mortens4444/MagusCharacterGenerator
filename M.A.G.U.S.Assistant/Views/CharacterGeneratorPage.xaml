@@ -4,6 +4,8 @@
                 xmlns:conv="clr-namespace:M.A.G.U.S.Assistant.Converters"
                 xmlns:v="clr-namespace:M.A.G.U.S.Assistant.Views"
                 xmlns:vm="clr-namespace:M.A.G.U.S.Assistant.ViewModels"
+                xmlns:gs="clr-namespace:M.A.G.U.S.GameSystem;assembly=M.A.G.U.S."
+                xmlns:t="clr-namespace:M.A.G.U.S.Things;assembly=M.A.G.U.S."
                 xmlns:local="clr-namespace:M.A.G.U.S.Qualifications;assembly=M.A.G.U.S."
                 xmlns:q="clr-namespace:M.A.G.U.S.GameSystem.Qualifications;assembly=M.A.G.U.S."
                 xmlns:mc="clr-namespace:Mtf.Maui.Controls;assembly=Mtf.Maui.Controls"
@@ -191,52 +193,52 @@
             <VerticalStackLayout Spacing="10">
                 <!-- Életerő -->
                 <Border Style="{StaticResource BoxBorder}">
-                <VerticalStackLayout>
-                    <Label Text="Health" Style="{StaticResource HeaderLabel}"/>
-                    <Grid ColumnDefinitions="*, *"
-                            RowDefinitions="Auto, Auto">
+                    <VerticalStackLayout>
+                        <Label Text="Health" Style="{StaticResource HeaderLabel}"/>
+                        <Grid ColumnDefinitions="*, *"
+                                RowDefinitions="Auto, Auto">
 
-                        <mc:EntryWithLabel Label="Max. Hp"
-                                            Text="{Binding Character.MaxHealthPoints}"
-                                            IsEnabled="False"
-                                            WidthRequest="100"
-                                            Grid.Row="0" />
+                            <mc:EntryWithLabel Label="Max. Hp"
+                                                Text="{Binding Character.MaxHealthPoints}"
+                                                IsEnabled="False"
+                                                WidthRequest="100"
+                                                Grid.Row="0" />
 
-                        <mc:EntryWithLabel Label="Act. Hp"
-                                            Text="{Binding Character.HealthPoints}"
-                                            IsEnabled="False"
-                                            WidthRequest="100"
-                                            Grid.Column="1" />
-                    </Grid>
-                </VerticalStackLayout>
-            </Border>
+                            <mc:EntryWithLabel Label="Act. Hp"
+                                                Text="{Binding Character.HealthPoints}"
+                                                IsEnabled="False"
+                                                WidthRequest="100"
+                                                Grid.Column="1" />
+                        </Grid>
+                    </VerticalStackLayout>
+                </Border>
 
                 <!-- Fájdalomtűrés -->
                 <Border Style="{StaticResource BoxBorder}">
-                <VerticalStackLayout>
-                    <Label Text="Pain resistance" Style="{StaticResource HeaderLabel}"/>
-                    <Grid ColumnDefinitions="*, *"
-                        RowDefinitions="Auto, Auto, Auto">
+                    <VerticalStackLayout>
+                        <Label Text="Pain resistance" Style="{StaticResource HeaderLabel}"/>
+                        <Grid ColumnDefinitions="*, *"
+                            RowDefinitions="Auto, Auto, Auto">
 
-                        <mc:EntryWithLabel Label="Max. Prp"
-                                        Text="{Binding Character.MaxPainTolerancePoints}"
-                                        IsEnabled="False"
-                                        WidthRequest="100" />
+                            <mc:EntryWithLabel Label="Max. Prp"
+                                            Text="{Binding Character.MaxPainTolerancePoints}"
+                                            IsEnabled="False"
+                                            WidthRequest="100" />
 
-                        <mc:EntryWithLabel Label="Act. Prp"
-                                        Text="{Binding Character.PainTolerancePoints}"
-                                        IsEnabled="False"
-                                        WidthRequest="100"
-                                        Grid.Row="1" />
+                            <mc:EntryWithLabel Label="Act. Prp"
+                                            Text="{Binding Character.PainTolerancePoints}"
+                                            IsEnabled="False"
+                                            WidthRequest="100"
+                                            Grid.Row="1" />
 
-                        <mc:EntryWithLabel Label="Max. Prp/level"
-                                        Text="{Binding Character.PainTolerancePoints}"
-                                        IsEnabled="False"
-                                        WidthRequest="100"
-                                        Grid.Column="1" />
-                    </Grid>
-                </VerticalStackLayout>
-            </Border>
+                            <mc:EntryWithLabel Label="Max. Prp/level"
+                                            Text="{Binding Character.PainTolerancePoints}"
+                                            IsEnabled="False"
+                                            WidthRequest="100"
+                                            Grid.Column="1" />
+                        </Grid>
+                    </VerticalStackLayout>
+                </Border>
 
                 <!-- Harcértékek -->
                 <Border Style="{StaticResource BoxBorder}">
@@ -427,6 +429,77 @@
                                     <Label Text="{Binding Name, Converter={StaticResource TranslationConverter}}"
                                            VerticalOptions="Center"
                                            HorizontalOptions="Start" />
+                                </Grid>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                </VerticalStackLayout>
+            </Border>
+
+            <!-- Pénz -->
+            <Border Style="{StaticResource BoxBorder}">
+                <VerticalStackLayout>
+                    <Label Text="Money" Style="{StaticResource HeaderLabel}"/>
+                    <Grid ColumnDefinitions="*, *"
+                 RowDefinitions="Auto, Auto, Auto">
+
+                        <mc:EntryWithLabel Label="Copper"
+                                 Text="{Binding Character.Copper}"
+                                 IsEnabled="False"
+                                 WidthRequest="100" />
+
+                        <mc:EntryWithLabel Label="Silver"
+                                 Text="{Binding Character.Silver}"
+                                 IsEnabled="False"
+                                 WidthRequest="100"
+                                 Grid.Row="1" />
+
+                        <mc:EntryWithLabel Label="Gold"
+                                 Text="{Binding Character.Gold}"
+                                 IsEnabled="False"
+                                 WidthRequest="100"
+                                 Grid.Column="1" />
+
+                        <mc:EntryWithLabel Label="Mithril"
+                                 Text="{Binding Character.Mithril}"
+                                 IsEnabled="False"
+                                 WidthRequest="100"
+                                 Grid.Row="1"
+                                 Grid.Column="1" />
+                    </Grid>
+                </VerticalStackLayout>
+            </Border>
+
+            <mc:MenuItemView ImageName="market" LabelText="Market" PageType="{x:Type v:MarketPage}" WidthRequest="100" HeightRequest="100" Parameter="{Binding Character}" />
+            
+            <!-- Felszerelés -->
+            <Border Style="{StaticResource BoxBorder}" Margin="0,10">
+                <VerticalStackLayout>
+                    <Label Text="Equipment" Style="{StaticResource HeaderLabel}" />
+                    <Grid Padding="6" ColumnDefinitions="*, Auto" ColumnSpacing="10">
+
+                        <Label Text="Name"
+                               VerticalOptions="Center"
+                               TextColor="Gray"
+                               FontAttributes="Bold"/>
+                        
+                        <Label Text="Weight"
+                               VerticalOptions="Center"
+                               HorizontalOptions="End"
+                               TextColor="Gray"
+                               FontAttributes="Bold"/>
+                    </Grid>
+
+                    <CollectionView ItemsSource="{Binding Character.Equipment}" SelectionMode="None" HeightRequest="280">
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate x:DataType="t:Thing">
+                                <Grid Padding="6" ColumnDefinitions="*,Auto" ColumnSpacing="10">
+                                    <Label Text="{Binding Name, Converter={StaticResource TranslationConverter}}"
+                                           VerticalOptions="Center"
+                                           HorizontalOptions="Start" />
+                                    <Label Text="{Binding Weight, Converter={StaticResource TranslationConverter}}"
+                                           VerticalOptions="Center"
+                                           HorizontalTextAlignment="End" />
                                 </Grid>
                             </DataTemplate>
                         </CollectionView.ItemTemplate>

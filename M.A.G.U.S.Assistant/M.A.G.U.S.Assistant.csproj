@@ -101,6 +101,12 @@
     <MauiAsset Remove="Resources\Raw\yeti-roar.wav" />
   </ItemGroup>
   <ItemGroup>
+    <None Remove="Resources\Images\Bestiary\bear.png" />
+    <None Remove="Resources\Images\Bestiary\falcon.png" />
+    <None Remove="Resources\Images\Bestiary\giant_spider.png" />
+    <None Remove="Resources\Images\Bestiary\panther.png" />
+    <None Remove="Resources\Images\Bestiary\spider.png" />
+    <None Remove="Resources\Images\Bestiary\wolf.png" />
     <None Remove="Resources\Images\Characters\court_goblin.png" />
     <None Remove="Resources\Images\Characters\court_orc.png" />
     <None Remove="Resources\Images\Characters\dwarf.png" />
@@ -116,6 +122,12 @@
     <None Remove="Resources\Images\Characters\wizard.png" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Resources\Images\Bestiary\bear.png" />
+    <EmbeddedResource Include="Resources\Images\Bestiary\falcon.png" />
+    <EmbeddedResource Include="Resources\Images\Bestiary\giant_spider.png" />
+    <EmbeddedResource Include="Resources\Images\Bestiary\panther.png" />
+    <EmbeddedResource Include="Resources\Images\Bestiary\spider.png" />
+    <EmbeddedResource Include="Resources\Images\Bestiary\wolf.png" />
     <EmbeddedResource Include="Resources\Images\Characters\court_goblin.png" />
     <EmbeddedResource Include="Resources\Images\Characters\court_orc.png" />
     <EmbeddedResource Include="Resources\Images\Characters\dwarf.png" />
@@ -185,6 +197,9 @@
       <Generator>MSBuild:Compile</Generator>
     </MauiXaml>
     <MauiXaml Update="Views\MapPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </MauiXaml>
+    <MauiXaml Update="Views\ObjectInspectorPage.xaml">
       <Generator>MSBuild:Compile</Generator>
     </MauiXaml>
     <MauiXaml Update="Views\PaintPage.xaml">
