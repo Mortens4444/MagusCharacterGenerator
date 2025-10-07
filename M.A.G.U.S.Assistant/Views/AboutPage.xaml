@@ -17,7 +17,7 @@
                              VerticalOptions="Center"
                              HorizontalOptions="Center">
 
-            <Label Text="{Binding AppName}"
+            <Label Text="M.A.G.U.S. Assistant"
                    HorizontalOptions="Center"
                    FontAttributes="Bold"
                    FontSize="Title" />

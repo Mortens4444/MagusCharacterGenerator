@@ -1,10 +1,13 @@
-﻿namespace M.A.G.U.S.Enums;
+﻿using System.ComponentModel;
+
+namespace M.A.G.U.S.Enums;
 
 public enum Occurrence
 {
-    Common,
+    [Description("Frequent")]
     Frequent,
-    Uncommon,
+    [Description("Rare")]
     Rare,
+    [Description("Very rare")]
     VeryRare
 }

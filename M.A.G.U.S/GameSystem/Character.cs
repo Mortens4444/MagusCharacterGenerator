@@ -4,11 +4,14 @@ using M.A.G.U.S.GameSystem.FightModifier;
 using M.A.G.U.S.GameSystem.Magic;
 using M.A.G.U.S.GameSystem.Psi;
 using M.A.G.U.S.GameSystem.Qualifications;
+using M.A.G.U.S.GameSystem.Runes;
+using M.A.G.U.S.GameSystem.Valuables;
 using M.A.G.U.S.Interfaces;
 using M.A.G.U.S.Qualifications;
 using M.A.G.U.S.Qualifications.Percentages;
 using M.A.G.U.S.Qualifications.Specialities;
 using M.A.G.U.S.Races;
+using M.A.G.U.S.Things;
 using M.A.G.U.S.Utils;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
@@ -41,6 +44,7 @@ public class Character : IFightModifier, ILiving, IAbilities, INotifyPropertyCha
 	private ushort maxManaPoints;
     private ushort qualificationPoints;
 	private bool calculateChanges;
+	private Money money = new(0);
 
 	// TODO: Pass the correct method to count
 	private readonly MultiCasteMode multiCasteMode = MultiCasteMode.Normal_Or_SwitchedCaste;
@@ -97,6 +101,63 @@ public class Character : IFightModifier, ILiving, IAbilities, INotifyPropertyCha
             }
         }
     }
+
+    public decimal Mithril
+    {
+        get => money.Mithril;
+        set
+        {
+            if (money.Mithril != value)
+            {
+                money.Mithril = value;
+                NotifyPropertyChanged();
+                NotifyPropertyChanged(nameof(money.Summa));
+            }
+        }
+    }
+
+    public decimal Gold
+    {
+        get => money.Gold;
+        set
+        {
+            if (money.Gold != value)
+            {
+                money.Gold = value;
+                NotifyPropertyChanged();
+                NotifyPropertyChanged(nameof(money.Summa));
+            }
+        }
+    }
+
+    public decimal Silver
+    {
+        get => money.Silver;
+        set
+        {
+            if (money.Silver != value)
+            {
+                money.Silver = value;
+                NotifyPropertyChanged();
+                NotifyPropertyChanged(nameof(money.Summa));
+            }
+        }
+    }
+
+    public decimal Copper
+    {
+        get => money.Copper;
+        set
+        {
+            if (money.Copper != value)
+            {
+                money.Copper = value;
+                NotifyPropertyChanged();
+                NotifyPropertyChanged(nameof(money.Summa));
+            }
+        }
+    }
+
     public ushort PercentQualificationPoints { get; set; }
 
 	public ushort QualificationPoints
@@ -390,8 +451,6 @@ public class Character : IFightModifier, ILiving, IAbilities, INotifyPropertyCha
 		}
 	}
 
-	public short Gold { get; set; }
-
 	public short Bravery { get; set; }
 
 	public short Erudition { get; set; }
@@ -462,9 +521,11 @@ public class Character : IFightModifier, ILiving, IAbilities, INotifyPropertyCha
 
     public List<PercentQualification> PercentQualifications { get; private set; } = [];
 
-	#endregion
+    public List<Thing> Equipment { get; private set; } = [];
 
-	private void NotifyPropertyChanged([CallerMemberName] string propertyName = "")
+    #endregion
+
+    private void NotifyPropertyChanged([CallerMemberName] string propertyName = "")
 	{
 		PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
 	}
@@ -498,7 +559,7 @@ public class Character : IFightModifier, ILiving, IAbilities, INotifyPropertyCha
 
 	private void CalculateGold()
 	{
-		Gold = (short)Castes.Sum(caste => caste.Gold);
+		money.Gold += (short)Castes.Sum(caste => caste.Gold);
 	}
 
 	private void GenerateAbilities()

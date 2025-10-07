@@ -11,13 +11,11 @@
         <vm:DiceRollViewModel />
     </v:NotifierPage.BindingContext>
 
-    <Grid RowDefinitions="Auto,Auto,Auto,*,Auto" Padding="16" RowSpacing="12">
-        <Label Text="Choose a dice roll type" FontAttributes="Bold" Grid.Row="0" />
+    <Grid RowDefinitions="Auto,*,Auto" Padding="16" RowSpacing="12">
 
-        <Grid Grid.Row="1" ColumnDefinitions="Auto,*,Auto" ColumnSpacing="8">
+        <Grid Grid.Row="0" ColumnDefinitions="Auto,*,Auto" ColumnSpacing="8">
             <mc:NumericUpDownWithLabel x:Name="DiceCounter"
                                        Grid.Column="0"
-                                       Label="Number of dices"
                                        Minimum="1"
                                        Maximum="10"
                                        Value="{Binding DiceCount}" />
@@ -26,16 +24,21 @@
                     Grid.Column="1"
                     ItemsSource="{Binding DiceType}"
                     SelectedItem="{Binding SelectedDice}"
+                    HorizontalTextAlignment="Center"
                     VerticalTextAlignment="Center"
-                    Title="K6, K10, 2K6..." />
+                    VerticalOptions="End"
+                    />
 
             <Button Text="Throw"
                     Grid.Column="2"
                     Command="{Binding RollCommand}"
-                    WidthRequest="120" />
+                    HeightRequest="40"
+                    FontSize="14"
+                    VerticalOptions="End"
+                    WidthRequest="100" />
         </Grid>
 
-        <ScrollView Grid.Row="3">
+        <ScrollView Grid.Row="1" Margin="50">
             <StackLayout Spacing="8">
                 <Label Text="Summary"
                        FontAttributes="Bold"
@@ -54,7 +57,7 @@
             </StackLayout>
         </ScrollView>
 
-        <Grid Grid.Row="4" VerticalOptions="End" HeightRequest="200">
+        <Grid Grid.Row="2" VerticalOptions="End" HeightRequest="200">
             <Image x:Name="DiceImage" Source="dice.png" Aspect="AspectFit" HorizontalOptions="Fill" VerticalOptions="Fill" />
         </Grid>
     </Grid>
