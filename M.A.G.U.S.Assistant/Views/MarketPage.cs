@@ -8,7 +8,16 @@ namespace M.A.G.U.S.Assistant.Views;
 
 public class MarketPage : SearchListPage
 {
-    private readonly Character? character;
+    private Character? character;
+
+    public Character? Character
+    {
+        get => character;
+        set
+        {
+            character = value;
+        }
+    }
 
     public MarketPage()
         : base("Market",
@@ -21,7 +30,7 @@ public class MarketPage : SearchListPage
     }
 
     public MarketPage(Character character)
-                : base("Market",
+        : base($"{Lng.Elem("Market")} - {character.Name}",
             "M.A.G.U.S.Things"
                 .CreateInstancesFromNamespace<Thing>()
                 .OrderBy(r => Lng.Elem(r.Name))

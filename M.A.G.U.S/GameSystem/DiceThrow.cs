@@ -65,6 +65,11 @@ public class DiceThrow
         return RandomProvider.GetSecureRandomShort(15, 20);
     }
 
+    public short _1K9()
+    {
+        return RandomProvider.GetSecureRandomShort(1, 9);
+    }
+
     public short _1K10()
     {
         return RandomProvider.GetSecureRandomShort(1, 10);
@@ -113,27 +118,27 @@ public class DiceThrow
         return RandomProvider.GetSecureRandomShort(11, 20);
     }
 
-		public short _1K100()
-		{
-			return RandomProvider.GetSecureRandomShort(1, 100);
-		}
+	public short _1K100()
+	{
+		return RandomProvider.GetSecureRandomShort(1, 100);
+	}
 
-		public short _2K100()
-		{
-			return RandomProvider.GetSecureRandomShort(1, 200);
-		}
+	public short _2K100()
+	{
+		return RandomProvider.GetSecureRandomShort(1, 200);
+	}
 
-		public short _3K100()
-		{
-			return RandomProvider.GetSecureRandomShort(1, 300);
-		}
+	public short _3K100()
+	{
+		return RandomProvider.GetSecureRandomShort(1, 300);
+	}
 
-		public short _2K6_Plus_3()
-		{
-			return RandomProvider.GetSecureRandomShort(5, 15);
-		}
+	public short _2K6_Plus_3()
+	{
+		return RandomProvider.GetSecureRandomShort(5, 15);
+	}
 
-		public short _2K6_Plus_6()
+	public short _2K6_Plus_6()
     {
         return RandomProvider.GetSecureRandomShort(8, 18);
     }

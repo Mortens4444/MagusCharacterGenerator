@@ -1,5 +1,6 @@
 ﻿using global::M.A.G.U.S.Classes;
 using M.A.G.U.S.Assistant.Extensions;
+using M.A.G.U.S.Assistant.Models;
 using M.A.G.U.S.Interfaces;
 using M.A.G.U.S.Qualifications;
 using Mtf.LanguageService;
@@ -47,6 +48,26 @@ public class ClassesViewModel : INotifyPropertyChanged
             selectedClass = value;
             OnPropertyChanged(nameof(SelectedClass));
             OnPropertyChanged(nameof(OrderedQualifications));
+            SetDiceStats();
+        }
+    }
+
+    private void SetDiceStats()
+    {
+        var stats = selectedClass?.GetDiceStats() ?? [];
+        diceStats.Clear();
+        foreach (var stat in stats)
+        {
+            diceStats.Add(stat);
+        }
+    }
+
+    private ObservableCollection<DiceStat> diceStats = new();
+    public ObservableCollection<DiceStat> DiceStats
+    {
+        get
+        {
+            return diceStats;
         }
     }
 

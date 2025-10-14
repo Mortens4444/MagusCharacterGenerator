@@ -7,6 +7,7 @@ using System.ComponentModel;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Windows.Input;
+using Microsoft.Maui.Devices;
 
 namespace M.A.G.U.S.Assistant.ViewModels;
 
@@ -16,7 +17,7 @@ public class DiceRollViewModel : INotifyPropertyChanged
 
     public ObservableCollection<string> DiceType { get; } = new ObservableCollection<string>
     {
-        "K2", "K3", "K4", "K6", "K8", "K10", "K12", "K20", "K100"
+        "K2", "K3", "K4", "K6", "K8", "K9", "K10", "K12", "K20", "K100"
     };
 
     private byte diceCount = 1;
@@ -104,6 +105,10 @@ public class DiceRollViewModel : INotifyPropertyChanged
             var stream = assembly.GetManifestResourceStream("M.A.G.U.S.Assistant.Resources.Raw.dice_roll.wav");
             if (stream != null)
             {
+                if (Vibration.Default.IsSupported)
+                {
+                    Vibration.Default.Vibrate(TimeSpan.FromMilliseconds(200));
+                }
 #if ANDROID
                 audioPlayer = AudioManager.Current.CreatePlayer(stream);
 #endif

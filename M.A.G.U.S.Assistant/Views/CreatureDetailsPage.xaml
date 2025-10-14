@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<v:NotifierPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+              xmlns:v="clr-namespace:M.A.G.U.S.Assistant.Views"
+              xmlns:vm="clr-namespace:M.A.G.U.S.Assistant.ViewModels"
+              x:Class="M.A.G.U.S.Assistant.Views.CreatureDetailsPage"
+              x:DataType="vm:CreatureDetailsViewModel">
+
+    <v:NotifierPage.BindingContext>
+        <vm:CreatureDetailsViewModel />
+    </v:NotifierPage.BindingContext>
+
+    <ScrollView>
+        <StackLayout Padding="12" Spacing="12">
+            <!-- Top summary -->
+            <Border Padding="10">
+                <Grid ColumnDefinitions="Auto, *" RowDefinitions="Auto,Auto" ColumnSpacing="12" RowSpacing="6">
+                    <Label Text="Number appearing:" FontAttributes="Bold" Grid.Row="0" Grid.Column="0" />
+                    <Label Text="{Binding NumberAppearing}" Grid.Row="0" Grid.Column="1" />
+                </Grid>
+            </Border>
+
+            <!-- Properties two-column -->
+            <Border Padding="8">
+                <Grid ColumnDefinitions="2*,3*" RowSpacing="6" ColumnSpacing="12" RowDefinitions="*,*,*,*,*,*,*,*,*,*,*,*,*,*">
+                    <!-- Static list of properties you mentioned on the screenshot -->
+                    <Label Text="Occurrence" Grid.Row="0" Grid.Column="0" FontAttributes="Bold" />
+                    <Label Text="{Binding Occurrence}" Grid.Row="0" Grid.Column="1" />
+
+                    <Label Text="Intelligence" Grid.Row="1" Grid.Column="0" FontAttributes="Bold" />
+                    <Label Text="{Binding Intelligence}" Grid.Row="1" Grid.Column="1" />
+
+                    <Label Text="Size" Grid.Row="2" Grid.Column="0" FontAttributes="Bold" />
+                    <Label Text="{Binding Size}" Grid.Row="2" Grid.Column="1" />
+
+                    <Label Text="Speed" Grid.Row="3" Grid.Column="0" FontAttributes="Bold" />
+                    <Label Text="{Binding Speed}" Grid.Row="3" Grid.Column="1" />
+
+                    <Label Text="Attack Value" Grid.Row="4" Grid.Column="0" FontAttributes="Bold" />
+                    <Label Text="{Binding AttackValue}" Grid.Row="4" Grid.Column="1" />
+
+                    <Label Text="Defense Value" Grid.Row="5" Grid.Column="0" FontAttributes="Bold" />
+                    <Label Text="{Binding DefenseValue}" Grid.Row="5" Grid.Column="1" />
+
+                    <Label Text="Initiating Value" Grid.Row="6" Grid.Column="0" FontAttributes="Bold" />
+                    <Label Text="{Binding InitiatingValue}" Grid.Row="6" Grid.Column="1" />
+
+                    <Label Text="Max Health Points" Grid.Row="7" Grid.Column="0" FontAttributes="Bold" />
+                    <Label Text="{Binding MaxHealthPoints}" Grid.Row="7" Grid.Column="1" />
+
+                    <Label Text="Health Points" Grid.Row="8" Grid.Column="0" FontAttributes="Bold" />
+                    <Label Text="{Binding HealthPoints}" Grid.Row="8" Grid.Column="1" />
+
+                    <Label Text="Max Pain Tolerance" Grid.Row="9" Grid.Column="0" FontAttributes="Bold" />
+                    <Label Text="{Binding MaxPainTolerancePoints}" Grid.Row="9" Grid.Column="1" />
+
+                    <Label Text="Pain Tolerance" Grid.Row="10" Grid.Column="0" FontAttributes="Bold" />
+                    <Label Text="{Binding PainTolerancePoints}" Grid.Row="10" Grid.Column="1" />
+
+                    <Label Text="Poison Resistance" Grid.Row="11" Grid.Column="0" FontAttributes="Bold" />
+                    <Label Text="{Binding PoisonResistance}" Grid.Row="11" Grid.Column="1" />
+
+                    <Label Text="Experience Points" Grid.Row="12" Grid.Column="0" FontAttributes="Bold" />
+                    <Label Text="{Binding ExperiencePoints}" Grid.Row="12" Grid.Column="1" />
+
+                    <Label Text="Attacks per Round" Grid.Row="13" Grid.Column="0" FontAttributes="Bold" />
+                    <Label Text="{Binding AttacksPerRound}" Grid.Row="13" Grid.Column="1" />
+                </Grid>
+            </Border>
+
+            <!-- Damage area -->
+            <Border Padding="10">
+                <StackLayout Spacing="8">
+                    <Grid ColumnDefinitions="*,*,*">
+                        <Button Text="Initiate" Command="{Binding InitiateCommand}" />
+                        <Button Grid.Column="1" Text="Attack" Command="{Binding AttackCommand}" />
+                        <Button Grid.Column="2" Text="Roll Damage" Command="{Binding RollDamageCommand}" />
+                    </Grid>
+                    
+                    <Label Text="Place of attack" FontAttributes="Bold" Grid.Row="1" Grid.Column="0" />
+                    <Label Text="{Binding PlaceOfAttack}" Grid.Row="1" Grid.Column="1" />
+
+                    <Label Text="{Binding LastActionName}" FontSize="16" FontAttributes="Bold" />
+                    <Label Text="{Binding LastAction}" FontSize="12" Opacity="0.8" />
+                </StackLayout>
+            </Border>
+        </StackLayout>
+    </ScrollView>
+</v:NotifierPage>

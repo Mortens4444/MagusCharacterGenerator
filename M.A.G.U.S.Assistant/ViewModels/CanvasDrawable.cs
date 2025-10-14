@@ -1,13 +1,10 @@
-﻿namespace M.A.G.U.S.Assistant.ViewModels;
+﻿using M.A.G.U.S.Assistant.Models;
 
-public class CanvasDrawable : IDrawable
+namespace M.A.G.U.S.Assistant.ViewModels;
+
+public class CanvasDrawable(PaintWizardViewModel vm) : IDrawable
 {
-    private readonly PaintViewModel viewModel;
-
-    public CanvasDrawable(PaintViewModel vm)
-    {
-        viewModel = vm;
-    }
+    private readonly PaintWizardViewModel viewModel = vm;
 
     public void Draw(ICanvas canvas, RectF dirtyRect)
     {
@@ -54,12 +51,12 @@ public class CanvasDrawable : IDrawable
         // ha van betöltött IImage, rajzoljuk
         if (it.Image != null)
         {
-            canvas.DrawImage(it.Image, rect.X, rect.Y, rect.Width, rect.Height);
+            //canvas.DrawImage(it.Image, rect.X, rect.Y, rect.Width, rect.Height);
             return;
         }
 
         // különböző típusok top-down megjelenítése (ha Icon típusból tudunk dönteni)
-        var type = it.Icon?.ToLowerInvariant() ?? String.Empty;
+        var type = "chair";//it.Icon?.ToLowerInvariant() ?? String.Empty;
 
         if (type.Contains("chair"))
         {

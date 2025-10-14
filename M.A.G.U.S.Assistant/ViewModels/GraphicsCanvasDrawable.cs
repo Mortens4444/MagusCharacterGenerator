@@ -6,10 +6,10 @@ namespace M.A.G.U.S.Assistant.ViewModels
 {
     public class GraphicsCanvasDrawable : IDrawable
     {
-        private readonly PaintViewModel vm;
+        private readonly PaintWizardViewModel vm;
         private readonly ObservableCollection<ObservableCollection<PointF>> strokes = new ObservableCollection<ObservableCollection<PointF>>();
 
-        public GraphicsCanvasDrawable(PaintViewModel viewModel)
+        public GraphicsCanvasDrawable(PaintWizardViewModel viewModel)
         {
             vm = viewModel;
         }
@@ -49,7 +49,7 @@ namespace M.A.G.U.S.Assistant.ViewModels
                 if (it.Image != null)
                 {
                     // IImage, helyes overload: (IImage, x, y, width, height)
-                    canvas.DrawImage(it.Image, rect.X, rect.Y, rect.Width, rect.Height);
+                    //canvas.DrawImage(it.Image, rect.X, rect.Y, rect.Width, rect.Height);
                 }
                 else
                 {
@@ -60,17 +60,17 @@ namespace M.A.G.U.S.Assistant.ViewModels
             }
 
             // draw active stroke
-            if (vm.CurrentStroke.Count > 1)
-            {
-                canvas.StrokeSize = 4;
-                canvas.StrokeColor = vm.SelectedColor;
-                for (var i = 1; i < vm.CurrentStroke.Count; i++)
-                {
-                    var a = vm.CurrentStroke[i - 1];
-                    var b = vm.CurrentStroke[i];
-                    canvas.DrawLine(a.X, a.Y, b.X, b.Y);
-                }
-            }
+            //if (vm.CurrentStroke.Count > 1)
+            //{
+            //    canvas.StrokeSize = 4;
+            //    canvas.StrokeColor = vm.SelectedColor;
+            //    for (var i = 1; i < vm.CurrentStroke.Count; i++)
+            //    {
+            //        var a = vm.CurrentStroke[i - 1];
+            //        var b = vm.CurrentStroke[i];
+            //        canvas.DrawLine(a.X, a.Y, b.X, b.Y);
+            //    }
+            //}
 
             canvas.RestoreState();
         }

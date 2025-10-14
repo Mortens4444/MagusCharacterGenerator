@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<v:NotifierPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+              xmlns:v="clr-namespace:M.A.G.U.S.Assistant.Views"
+              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+              x:Class="M.A.G.U.S.Assistant.Views.PaintWizardPage"
+              Title="Kert szerkesztő">
+
+    <Grid RowDefinitions="Auto,Auto,*,Auto" ColumnDefinitions="*,300">
+        <!-- Inputs -->
+        <StackLayout Orientation="Horizontal" Padding="10" Spacing="8" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2">
+            <Label Text="Szélesség (m):" VerticalOptions="Center"/>
+            <Entry x:Name="WidthMetersEntry" WidthRequest="90" Keyboard="Numeric" Text="{Binding WidthMeters}" />
+            <Label Text="Hossz (m):" VerticalOptions="Center" />
+            <Entry x:Name="HeightMetersEntry" WidthRequest="90" Keyboard="Numeric" Text="{Binding HeightMeters}" />
+            <Button Text="Létrehoz" Command="{Binding CreateGridCommand}" />
+            <Label Text="{Binding GridInfo}" VerticalOptions="Center" HorizontalOptions="EndAndExpand"/>
+        </StackLayout>
+
+        <!-- Mode buttons -->
+        <StackLayout Orientation="Horizontal" Padding="10" Spacing="8" Grid.Row="1" Grid.Column="0">
+            <Button Text="{Binding IsDrawingWalls, Converter={StaticResource BoolToTextConverter}, ConverterParameter='Ceruza|Mozgat'}"
+              Command="{Binding ToggleDrawModeCommand}" />
+            <Button Text="Visszavonás" Command="{Binding UndoCommand}" />
+            <Button Text="Töröl mind" Command="{Binding ClearCommand}" />
+            <Label Text="Zoom:" VerticalOptions="Center"/>
+            <Slider Minimum="0.2" Maximum="4" Value="{Binding Zoom, Mode=TwoWay}" WidthRequest="200"/>
+        </StackLayout>
+
+        <!-- Palette on the right -->
+        <Frame Grid.Row="0" Grid.RowSpan="3" Grid.Column="1" Padding="8" Margin="8" BackgroundColor="#f5f5f5" HasShadow="True">
+            <StackLayout>
+                <Label Text="Paletta" FontAttributes="Bold" />
+                <CollectionView ItemsSource="{Binding PaletteItems}" SelectionMode="Single" SelectedItem="{Binding SelectedPaletteItem}">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Frame Padding="6" Margin="4" BorderColor="#ddd">
+                                <Grid ColumnDefinitions="64, *">
+                                    <Image Source="{Binding Image}" WidthRequest="48" HeightRequest="48" />
+                                    <StackLayout Grid.Column="1">
+                                        <Label Text="{Binding Name}" FontAttributes="Bold" />
+                                        <Label Text="{Binding SizeDisplay}" FontSize="12"/>
+                                    </StackLayout>
+                                    <!-- Optional: DragGestureRecognizer (platform dependent). Kezdetnek csak kattintás -->
+                                </Grid>
+                            </Frame>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+                <Label Text="Kattints egy elemet, majd katt a vászonra a elhelyezéshez." FontSize="12" TextColor="Gray"/>
+            </StackLayout>
+        </Frame>
+
+        <!-- Canvas area -->
+        <ScrollView Grid.Row="2" Grid.Column="0" HorizontalScrollBarVisibility="Always" VerticalScrollBarVisibility="Always">
+            <!-- Zoom/pan container -->
+            <ContentView x:Name="ZoomContainer" BackgroundColor="White" HorizontalOptions="Start" VerticalOptions="Start">
+                <AbsoluteLayout x:Name="GridCanvas" BackgroundColor="#fafafa"
+                                WidthRequest="{Binding CanvasWidth}" HeightRequest="{Binding CanvasHeight}">
+                    <AbsoluteLayout.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="GridCanvas_Tapped" NumberOfTapsRequired="1" />
+                        <PanGestureRecognizer PanUpdated="GridCanvas_PanUpdated" />
+                    </AbsoluteLayout.GestureRecognizers>
+                </AbsoluteLayout>
+            </ContentView>
+        </ScrollView>
+
+        <!-- Bottom: simple status / coordinates -->
+        <StackLayout Orientation="Horizontal" Grid.Row="3" Grid.Column="0" Padding="8">
+            <Label Text="{Binding Status}" />
+        </StackLayout>
+
+    </Grid>
+</v:NotifierPage>
