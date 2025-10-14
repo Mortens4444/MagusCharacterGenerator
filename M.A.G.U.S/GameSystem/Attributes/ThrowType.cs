@@ -18,9 +18,11 @@ public enum ThrowType
 	_3K6,
 	[Description("3D6")]
 	_3K6_2_Times,
-	[Description("1D1")]
-	_1K1,
-	[Description("1D5")]
+    [Description("1D1")]
+    _1K1,
+    [Description("1D9")]
+    _1K9,
+    [Description("1D5")]
 	_1K5,
 	[Description("1D2")]
 	_1K2,

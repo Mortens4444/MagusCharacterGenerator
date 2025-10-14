@@ -1,4 +1,9 @@
+using CommunityToolkit.Mvvm.Messaging;
+using M.A.G.U.S.Assistant.Models;
 using M.A.G.U.S.Assistant.ViewModels;
+using M.A.G.U.S.Bestiary;
+using Mtf.LanguageService;
+using Mtf.Maui.Controls.Models;
 
 namespace M.A.G.U.S.Assistant.Views;
 
@@ -7,22 +12,32 @@ public partial class SearchListPage : NotifierPage
 {
     private SearchListViewModel ViewModel => BindingContext as SearchListViewModel;
 
-    public string PageTitle
-    {
-        get => Title ?? String.Empty;
-        set => Title = value;
-    }
-
-    public string LabelText
-    {
-        get => String.Empty;
-        set { /* placeholder for binding */ }
-    }
-
-    public SearchListPage(string title, IEnumerable<Models.DisplayItem> items)
+    public SearchListPage(string title, IEnumerable<DisplayItem> items)
     {
         InitializeComponent();
-        PageTitle = title;
+        Title = title;
         ViewModel?.LoadItems(items);
+    }
+
+    void OnDetailsClicked(object sender, EventArgs e)
+    {
+        try
+        {
+            var selected = ViewModel?.SelectedItem;
+            if (selected == null)
+            {
+                WeakReferenceMessenger.Default.Send(Lng.Elem("Select a creature first"));
+            }
+
+            var objToInspect = (object)selected;
+            var page = (Page)(objToInspect is DisplayItem displayItem ?
+                new CreatureDetailsPage(displayItem.Source as Creature) :
+                new ObjectInspectorPage(objToInspect));
+            Navigation.PushAsync(page);
+        }
+        catch (Exception ex)
+        {
+            WeakReferenceMessenger.Default.Send(new ShowErrorMessage(ex.Message));
+        }
     }
 }

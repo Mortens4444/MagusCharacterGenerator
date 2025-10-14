@@ -47,6 +47,19 @@ public abstract class Creature
 
     public abstract byte GetDamage();
 
+    public int GetInitiate()
+    {
+        var roll = DiceThrow._1K10();
+        return InitiatingValue + roll;
+    }
+    
+    public (AttackImpact impact, int value) GetAttack()
+    {
+        var roll = DiceThrow._1K100();
+        var impact = roll == 100 ? AttackImpact.Critical : roll == 1 ? AttackImpact.Fatal : AttackImpact.Normal;
+        return (impact, AttackValue + roll);
+    }
+
     public abstract byte GetNumberAppearing();
 
     public virtual string Name => GetType().Name;

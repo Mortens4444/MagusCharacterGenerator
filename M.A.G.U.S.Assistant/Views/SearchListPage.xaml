@@ -6,8 +6,7 @@
              xmlns:v="clr-namespace:M.A.G.U.S.Assistant.Views"
              xmlns:vm="clr-namespace:M.A.G.U.S.Assistant.ViewModels"
              x:Class="M.A.G.U.S.Assistant.Views.SearchListPage"
-             x:DataType="vm:SearchListViewModel"
-             Title="{Binding PageTitle}">
+             x:DataType="vm:SearchListViewModel">
 
     <v:NotifierPage.BindingContext>
         <vm:SearchListViewModel />
@@ -18,9 +17,9 @@
         </ResourceDictionary>
     </v:NotifierPage.Resources>
     
-    <Grid Padding="10" RowDefinitions="Auto,Auto,*" RowSpacing="8">
-        <Grid Grid.Row="0" VerticalOptions="Center" ColumnDefinitions="*, Auto">
-            <Entry Grid.Column="0" Text="{Binding SearchText}" Placeholder="Search..." />
+    <Grid Padding="10" RowDefinitions="Auto,Auto" RowSpacing="8">
+        <Grid Grid.Row="0" VerticalOptions="Center" ColumnDefinitions="*, Auto, Auto">
+            <Entry Grid.Column="0" Text="{Binding SearchText}" Placeholder="Search…" />
             <Button Grid.Column="1" Text="Clear" Command="{Binding ClearCommand}" />
         </Grid>
 
@@ -45,5 +44,16 @@
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>
+        <Button x:Name="DetailsButton" Text="Details" Clicked="OnDetailsClicked">
+            <Button.Triggers>
+                <!-- Ha SelectedItem == null, akkor IsVisible = False -->
+                <DataTrigger TargetType="Button"
+                             Binding="{Binding SelectedItem}"
+                             Value="{x:Null}">
+                    <Setter Property="IsVisible" Value="False" />
+                </DataTrigger>
+            </Button.Triggers>
+        </Button>
+
     </Grid>
 </v:NotifierPage>

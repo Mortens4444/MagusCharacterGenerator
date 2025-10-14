@@ -102,11 +102,19 @@
   </ItemGroup>
   <ItemGroup>
     <None Remove="Resources\Images\Bestiary\bear.png" />
+    <None Remove="Resources\Images\Bestiary\dragon.png" />
     <None Remove="Resources\Images\Bestiary\falcon.png" />
     <None Remove="Resources\Images\Bestiary\giant_spider.png" />
+    <None Remove="Resources\Images\Bestiary\goblin.png" />
+    <None Remove="Resources\Images\Bestiary\golem.png" />
+    <None Remove="Resources\Images\Bestiary\lizard_wizard.png" />
+    <None Remove="Resources\Images\Bestiary\orc.png" />
     <None Remove="Resources\Images\Bestiary\panther.png" />
     <None Remove="Resources\Images\Bestiary\spider.png" />
+    <None Remove="Resources\Images\Bestiary\vampire.png" />
+    <None Remove="Resources\Images\Bestiary\werewolf.png" />
     <None Remove="Resources\Images\Bestiary\wolf.png" />
+    <None Remove="Resources\Images\Bestiary\zombie.png" />
     <None Remove="Resources\Images\Characters\court_goblin.png" />
     <None Remove="Resources\Images\Characters\court_orc.png" />
     <None Remove="Resources\Images\Characters\dwarf.png" />
@@ -123,11 +131,19 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\Images\Bestiary\bear.png" />
+    <EmbeddedResource Include="Resources\Images\Bestiary\dragon.png" />
     <EmbeddedResource Include="Resources\Images\Bestiary\falcon.png" />
     <EmbeddedResource Include="Resources\Images\Bestiary\giant_spider.png" />
+    <EmbeddedResource Include="Resources\Images\Bestiary\goblin.png" />
+    <EmbeddedResource Include="Resources\Images\Bestiary\golem.png" />
+    <EmbeddedResource Include="Resources\Images\Bestiary\lizard_wizard.png" />
+    <EmbeddedResource Include="Resources\Images\Bestiary\orc.png" />
     <EmbeddedResource Include="Resources\Images\Bestiary\panther.png" />
     <EmbeddedResource Include="Resources\Images\Bestiary\spider.png" />
+    <EmbeddedResource Include="Resources\Images\Bestiary\vampire.png" />
+    <EmbeddedResource Include="Resources\Images\Bestiary\werewolf.png" />
     <EmbeddedResource Include="Resources\Images\Bestiary\wolf.png" />
+    <EmbeddedResource Include="Resources\Images\Bestiary\zombie.png" />
     <EmbeddedResource Include="Resources\Images\Characters\court_goblin.png" />
     <EmbeddedResource Include="Resources\Images\Characters\court_orc.png" />
     <EmbeddedResource Include="Resources\Images\Characters\dwarf.png" />
@@ -159,7 +175,7 @@
     <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="9.0.9" />
     <PackageReference Include="Microsoft.Maui.Graphics" Version="9.0.110" />
     <PackageReference Include="Microsoft.Maui.Graphics.Skia" Version="9.0.110" />
-    <PackageReference Include="Mtf.Maui.Controls" Version="1.0.28" />
+    <PackageReference Include="Mtf.Maui.Controls" Version="1.0.30" />
     <PackageReference Include="Mtf.MAUI.LanguageService" Version="1.0.36" />
     <PackageReference Include="Plugin.Maui.Audio" Version="4.0.0" />
   </ItemGroup>
@@ -184,6 +200,9 @@
     <MauiXaml Update="Views\ClassesPage.xaml">
       <Generator>MSBuild:Compile</Generator>
     </MauiXaml>
+    <MauiXaml Update="Views\CreatureDetailsPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </MauiXaml>
     <MauiXaml Update="Views\DiceRollPage.xaml">
       <Generator>MSBuild:Compile</Generator>
     </MauiXaml>
@@ -202,7 +221,7 @@
     <MauiXaml Update="Views\ObjectInspectorPage.xaml">
       <Generator>MSBuild:Compile</Generator>
     </MauiXaml>
-    <MauiXaml Update="Views\PaintPage.xaml">
+    <MauiXaml Update="Views\PaintWizardPage.xaml">
       <Generator>MSBuild:Compile</Generator>
     </MauiXaml>
     <MauiXaml Update="Views\QualificationsPage.xaml">

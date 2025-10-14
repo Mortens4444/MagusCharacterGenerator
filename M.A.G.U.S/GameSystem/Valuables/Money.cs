@@ -8,7 +8,6 @@ public class Money : IComparable<Money>, IEquatable<Money>
 
     public static readonly Money Free = new(0);
 
-
     public Money(decimal gold = 0, decimal silver = 0, decimal copper = 0, decimal mithril = 0)
     {
         Mithril = mithril;
@@ -43,7 +42,7 @@ public class Money : IComparable<Money>, IEquatable<Money>
 
     public int CompareTo(Money other)
     {
-        if (ReferenceEquals(other, null))
+        if (other is null)
         {
             return 1;
         }
@@ -75,19 +74,21 @@ public class Money : IComparable<Money>, IEquatable<Money>
 
     public static Money operator +(Money a, Money b)
     {
-        if (a == null) throw new ArgumentNullException(nameof(a));
-        if (b == null) throw new ArgumentNullException(nameof(b));
+        ArgumentNullException.ThrowIfNull(a);
+        ArgumentNullException.ThrowIfNull(b);
 
         return FromCopper(a.Summa + b.Summa);
     }
 
     public static Money operator -(Money a, Money b)
     {
-        if (a == null) throw new ArgumentNullException(nameof(a));
-        if (b == null) throw new ArgumentNullException(nameof(b));
+        ArgumentNullException.ThrowIfNull(a);
+        ArgumentNullException.ThrowIfNull(b);
 
         if (a.Summa < b.Summa)
+        {
             throw new InvalidOperationException("Insufficient funds.");
+        }
 
         return FromCopper(a.Summa - b.Summa);
     }

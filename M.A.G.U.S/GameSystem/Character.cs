@@ -44,7 +44,7 @@ public class Character : IFightModifier, ILiving, IAbilities, INotifyPropertyCha
 	private ushort maxManaPoints;
     private ushort qualificationPoints;
 	private bool calculateChanges;
-	private Money money = new(0);
+	private readonly Money money = new(0);
 
 	// TODO: Pass the correct method to count
 	private readonly MultiCasteMode multiCasteMode = MultiCasteMode.Normal_Or_SwitchedCaste;
