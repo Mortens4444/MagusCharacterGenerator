@@ -1,6 +1,6 @@
 namespace M.A.G.U.S.Assistant.Views;
 
-public partial class QualificationsPage : NotifierPage
+internal partial class QualificationsPage : NotifierPage
 {
     public QualificationsPage() => InitializeComponent();
 }

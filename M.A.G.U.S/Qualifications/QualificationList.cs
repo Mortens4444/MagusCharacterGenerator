@@ -1,8 +1,9 @@
 ﻿using M.A.G.U.S.GameSystem.Qualifications;
+using System.Collections.ObjectModel;
 
 namespace M.A.G.U.S.Qualifications;
 
-public class QualificationList : List<Qualification>
+public class QualificationList : ObservableCollection<Qualification>
 {
     public void UpgradeOrAddQualification(Qualification newMasterQualification)
     {

@@ -2,7 +2,7 @@ using M.A.G.U.S.Assistant.ViewModels;
 
 namespace M.A.G.U.S.Assistant.Views;
 
-public partial class ImagesPage : NotifierPage
+internal partial class ImagesPage : NotifierPage
 {
 	public ImagesPage()
 	{

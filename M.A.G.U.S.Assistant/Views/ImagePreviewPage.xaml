@@ -3,6 +3,7 @@
               xmlns:v="clr-namespace:M.A.G.U.S.Assistant.Views"
               xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
               x:Class="M.A.G.U.S.Assistant.Views.ImagePreviewPage"
+              x:ClassModifier="internal"
               Title="Preview">
 
     <Grid Padding="12">

@@ -1,11 +1,11 @@
-using M.A.G.U.S.Assistant.Extensions;
 using M.A.G.U.S.Assistant.Models;
 using M.A.G.U.S.GameSystem.PoisonsAndIllnesses;
+using Mtf.Extensions;
 using Mtf.LanguageService;
 
 namespace M.A.G.U.S.Assistant.Views;
 
-public class PoisonsPage : SearchListPage
+internal partial class PoisonsPage : SearchListPage
 {
     public PoisonsPage()
         : base("Poisons",

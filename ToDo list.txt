@@ -3,7 +3,7 @@
 - Add new classes (Warriors, etc.) - Új kasztok (harcosok, stb...)
 - Ynev fõbb helyei
 - Karakter származás
-- FIXME: Multi-caste
+- FIXME: Multi-class
 - Play Videos (Videóklippek lejátszása)
 
 - Add weapon to character (easily changable way) S (Depends on 34)

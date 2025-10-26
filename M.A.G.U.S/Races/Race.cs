@@ -15,21 +15,27 @@ public abstract class Race : IRace
 
     public virtual SpecialQualificationList SpecialQualifications => [];
 
-    public virtual short Strength => 0;
+    public virtual sbyte Strength => 0;
 
-    public virtual short Speed => 0;
+    public virtual sbyte Speed => 0;
 
-    public virtual short Dexterity => 0;
+    public virtual sbyte Dexterity => 0;
 
-    public virtual short Stamina => 0;
+    public virtual sbyte Stamina => 0;
 
-    public virtual short Health => 0;
+    public virtual sbyte Health => 0;
 
-    public virtual short Beauty => 0;
+    public virtual sbyte Beauty => 0;
 
-    public virtual short Intelligence => 0;
+    public virtual sbyte Intelligence => 0;
 
-    public virtual short Willpower => 0;
+    public virtual sbyte Willpower => 0;
 
-    public virtual short Astral => 0;
+    public virtual sbyte Astral => 0;
+
+    public sbyte Bravery => 0;
+
+    public sbyte Erudition => 0;
+
+    public sbyte Detection => 0;
 }

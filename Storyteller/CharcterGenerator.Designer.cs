@@ -36,14 +36,14 @@
             btnAdd = new Button();
             gbGeneral = new GroupBox();
             lblName = new Label();
-            nudSecondaryCasteLevel = new NumericUpDown();
+            nudSecondaryClassLevel = new NumericUpDown();
             lblRace = new Label();
-            lblSecondaryCasteLevel = new Label();
-            cbCaste = new ComboBox();
-            cbSecondaryCaste = new ComboBox();
+            lblSecondaryClassLevel = new Label();
+            cbClass = new ComboBox();
+            cbSecondaryClass = new ComboBox();
             cbRace = new ComboBox();
-            chkBoxSecondaryCaste = new CheckBox();
-            lblCaste = new Label();
+            chkBoxSecondaryClass = new CheckBox();
+            lblClass = new Label();
             tbName = new TextBox();
             lblLevel = new Label();
             nudLevel = new NumericUpDown();
@@ -124,7 +124,7 @@
             panelMain.SuspendLayout();
             gbCharacter.SuspendLayout();
             gbGeneral.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)nudSecondaryCasteLevel).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)nudSecondaryClassLevel).BeginInit();
             ((System.ComponentModel.ISupportInitialize)nudLevel).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pbCharacter).BeginInit();
             gbModifiers.SuspendLayout();
@@ -244,14 +244,14 @@
             // gbGeneral
             // 
             gbGeneral.Controls.Add(lblName);
-            gbGeneral.Controls.Add(nudSecondaryCasteLevel);
+            gbGeneral.Controls.Add(nudSecondaryClassLevel);
             gbGeneral.Controls.Add(lblRace);
-            gbGeneral.Controls.Add(lblSecondaryCasteLevel);
-            gbGeneral.Controls.Add(cbCaste);
-            gbGeneral.Controls.Add(cbSecondaryCaste);
+            gbGeneral.Controls.Add(lblSecondaryClassLevel);
+            gbGeneral.Controls.Add(cbClass);
+            gbGeneral.Controls.Add(cbSecondaryClass);
             gbGeneral.Controls.Add(cbRace);
-            gbGeneral.Controls.Add(chkBoxSecondaryCaste);
-            gbGeneral.Controls.Add(lblCaste);
+            gbGeneral.Controls.Add(chkBoxSecondaryClass);
+            gbGeneral.Controls.Add(lblClass);
             gbGeneral.Controls.Add(tbName);
             gbGeneral.Controls.Add(lblLevel);
             gbGeneral.Controls.Add(nudLevel);
@@ -274,17 +274,17 @@
             lblName.TabIndex = 35;
             lblName.Text = "Name";
             // 
-            // nudSecondaryCasteLevel
+            // nudSecondaryClassLevel
             // 
-            nudSecondaryCasteLevel.Enabled = false;
-            nudSecondaryCasteLevel.Location = new Point(285, 195);
-            nudSecondaryCasteLevel.Margin = new Padding(4, 3, 4, 3);
-            nudSecondaryCasteLevel.Maximum = new decimal(new int[] { 255, 0, 0, 0 });
-            nudSecondaryCasteLevel.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
-            nudSecondaryCasteLevel.Name = "nudSecondaryCasteLevel";
-            nudSecondaryCasteLevel.Size = new Size(51, 23);
-            nudSecondaryCasteLevel.TabIndex = 48;
-            nudSecondaryCasteLevel.Value = new decimal(new int[] { 1, 0, 0, 0 });
+            nudSecondaryClassLevel.Enabled = false;
+            nudSecondaryClassLevel.Location = new Point(285, 195);
+            nudSecondaryClassLevel.Margin = new Padding(4, 3, 4, 3);
+            nudSecondaryClassLevel.Maximum = new decimal(new int[] { 255, 0, 0, 0 });
+            nudSecondaryClassLevel.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
+            nudSecondaryClassLevel.Name = "nudSecondaryClassLevel";
+            nudSecondaryClassLevel.Size = new Size(51, 23);
+            nudSecondaryClassLevel.TabIndex = 48;
+            nudSecondaryClassLevel.Value = new decimal(new int[] { 1, 0, 0, 0 });
             // 
             // lblRace
             // 
@@ -296,38 +296,38 @@
             lblRace.TabIndex = 2;
             lblRace.Text = "Race";
             // 
-            // lblSecondaryCasteLevel
+            // lblSecondaryClassLevel
             // 
-            lblSecondaryCasteLevel.AutoSize = true;
-            lblSecondaryCasteLevel.Location = new Point(282, 175);
-            lblSecondaryCasteLevel.Margin = new Padding(4, 0, 4, 0);
-            lblSecondaryCasteLevel.Name = "lblSecondaryCasteLevel";
-            lblSecondaryCasteLevel.Size = new Size(34, 15);
-            lblSecondaryCasteLevel.TabIndex = 47;
-            lblSecondaryCasteLevel.Text = "Level";
+            lblSecondaryClassLevel.AutoSize = true;
+            lblSecondaryClassLevel.Location = new Point(282, 175);
+            lblSecondaryClassLevel.Margin = new Padding(4, 0, 4, 0);
+            lblSecondaryClassLevel.Name = "lblSecondaryClassLevel";
+            lblSecondaryClassLevel.Size = new Size(34, 15);
+            lblSecondaryClassLevel.TabIndex = 47;
+            lblSecondaryClassLevel.Text = "Level";
             // 
-            // cbCaste
+            // cbClass
             // 
-            cbCaste.DropDownStyle = ComboBoxStyle.DropDownList;
-            cbCaste.FormattingEnabled = true;
-            cbCaste.Location = new Point(7, 140);
-            cbCaste.Margin = new Padding(4, 3, 4, 3);
-            cbCaste.Name = "cbCaste";
-            cbCaste.Size = new Size(270, 23);
-            cbCaste.TabIndex = 1;
-            cbCaste.SelectedIndexChanged += CbCaste_SelectedIndexChanged;
+            cbClass.DropDownStyle = ComboBoxStyle.DropDownList;
+            cbClass.FormattingEnabled = true;
+            cbClass.Location = new Point(7, 140);
+            cbClass.Margin = new Padding(4, 3, 4, 3);
+            cbClass.Name = "cbClass";
+            cbClass.Size = new Size(270, 23);
+            cbClass.TabIndex = 1;
+            cbClass.SelectedIndexChanged += CbClass_SelectedIndexChanged;
             // 
-            // cbSecondaryCaste
+            // cbSecondaryClass
             // 
-            cbSecondaryCaste.DropDownStyle = ComboBoxStyle.DropDownList;
-            cbSecondaryCaste.Enabled = false;
-            cbSecondaryCaste.FormattingEnabled = true;
-            cbSecondaryCaste.Location = new Point(7, 194);
-            cbSecondaryCaste.Margin = new Padding(4, 3, 4, 3);
-            cbSecondaryCaste.Name = "cbSecondaryCaste";
-            cbSecondaryCaste.Size = new Size(270, 23);
-            cbSecondaryCaste.TabIndex = 46;
-            cbSecondaryCaste.SelectedIndexChanged += CbSecondaryCaste_SelectedIndexChanged;
+            cbSecondaryClass.DropDownStyle = ComboBoxStyle.DropDownList;
+            cbSecondaryClass.Enabled = false;
+            cbSecondaryClass.FormattingEnabled = true;
+            cbSecondaryClass.Location = new Point(7, 194);
+            cbSecondaryClass.Margin = new Padding(4, 3, 4, 3);
+            cbSecondaryClass.Name = "cbSecondaryClass";
+            cbSecondaryClass.Size = new Size(270, 23);
+            cbSecondaryClass.TabIndex = 46;
+            cbSecondaryClass.SelectedIndexChanged += CbSecondaryClass_SelectedIndexChanged;
             // 
             // cbRace
             // 
@@ -340,27 +340,27 @@
             cbRace.TabIndex = 3;
             cbRace.SelectedIndexChanged += CbRace_SelectedIndexChanged;
             // 
-            // chkBoxSecondaryCaste
+            // chkBoxSecondaryClass
             // 
-            chkBoxSecondaryCaste.AutoSize = true;
-            chkBoxSecondaryCaste.Location = new Point(7, 171);
-            chkBoxSecondaryCaste.Margin = new Padding(4, 3, 4, 3);
-            chkBoxSecondaryCaste.Name = "chkBoxSecondaryCaste";
-            chkBoxSecondaryCaste.Size = new Size(111, 19);
-            chkBoxSecondaryCaste.TabIndex = 44;
-            chkBoxSecondaryCaste.Text = "Secondary caste";
-            chkBoxSecondaryCaste.UseVisualStyleBackColor = true;
-            chkBoxSecondaryCaste.CheckedChanged += ChkBoxSecondaryCaste_CheckedChanged;
+            chkBoxSecondaryClass.AutoSize = true;
+            chkBoxSecondaryClass.Location = new Point(7, 171);
+            chkBoxSecondaryClass.Margin = new Padding(4, 3, 4, 3);
+            chkBoxSecondaryClass.Name = "chkBoxSecondaryClass";
+            chkBoxSecondaryClass.Size = new Size(111, 19);
+            chkBoxSecondaryClass.TabIndex = 44;
+            chkBoxSecondaryClass.Text = "Secondary class";
+            chkBoxSecondaryClass.UseVisualStyleBackColor = true;
+            chkBoxSecondaryClass.CheckedChanged += ChkBoxSecondaryClass_CheckedChanged;
             // 
-            // lblCaste
+            // lblClass
             // 
-            lblCaste.AutoSize = true;
-            lblCaste.Location = new Point(4, 119);
-            lblCaste.Margin = new Padding(4, 0, 4, 0);
-            lblCaste.Name = "lblCaste";
-            lblCaste.Size = new Size(36, 15);
-            lblCaste.TabIndex = 0;
-            lblCaste.Text = "Caste";
+            lblClass.AutoSize = true;
+            lblClass.Location = new Point(4, 119);
+            lblClass.Margin = new Padding(4, 0, 4, 0);
+            lblClass.Name = "lblClass";
+            lblClass.Size = new Size(36, 15);
+            lblClass.TabIndex = 0;
+            lblClass.Text = "Class";
             // 
             // tbName
             // 
@@ -1193,7 +1193,7 @@
             gbCharacter.ResumeLayout(false);
             gbGeneral.ResumeLayout(false);
             gbGeneral.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)nudSecondaryCasteLevel).EndInit();
+            ((System.ComponentModel.ISupportInitialize)nudSecondaryClassLevel).EndInit();
             ((System.ComponentModel.ISupportInitialize)nudLevel).EndInit();
             ((System.ComponentModel.ISupportInitialize)pbCharacter).EndInit();
             gbModifiers.ResumeLayout(false);
@@ -1239,8 +1239,8 @@
         private System.Windows.Forms.Panel panelMain;
 		private System.Windows.Forms.ComboBox cbRace;
 		private System.Windows.Forms.Label lblRace;
-		private System.Windows.Forms.ComboBox cbCaste;
-		private System.Windows.Forms.Label lblCaste;
+		private System.Windows.Forms.ComboBox cbClass;
+		private System.Windows.Forms.Label lblClass;
 		private System.Windows.Forms.GroupBox gbCharacter;
 		private System.Windows.Forms.Button btnGenerate;
 		private System.Windows.Forms.Label lblAstral;
@@ -1302,10 +1302,10 @@
 		private System.Windows.Forms.Button btnBrowse;
 		private System.Windows.Forms.OpenFileDialog ofdCharacterImage;
 		private System.Windows.Forms.ComboBox cbImageSizeMode;
-		private System.Windows.Forms.NumericUpDown nudSecondaryCasteLevel;
-		private System.Windows.Forms.Label lblSecondaryCasteLevel;
-		private System.Windows.Forms.ComboBox cbSecondaryCaste;
-		private System.Windows.Forms.CheckBox chkBoxSecondaryCaste;
+		private System.Windows.Forms.NumericUpDown nudSecondaryClassLevel;
+		private System.Windows.Forms.Label lblSecondaryClassLevel;
+		private System.Windows.Forms.ComboBox cbSecondaryClass;
+		private System.Windows.Forms.CheckBox chkBoxSecondaryClass;
 		private System.Windows.Forms.GroupBox gbGeneral;
 		private System.Windows.Forms.NumericUpDown nudGold;
 		private System.Windows.Forms.Label lblGold;

@@ -4,26 +4,27 @@ using System.Globalization;
 
 namespace M.A.G.U.S.Assistant.Converters;
 
-public class EnumDescriptionTranslationConverter : IValueConverter
+internal class EnumDescriptionTranslationConverter : IValueConverter
 {
-    public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+    public object Convert(object? value, Type targetType, object? parameter, CultureInfo culture)
     {
         if (value == null)
         {
             return String.Empty;
         }
 
+        var str = value.ToString() ?? String.Empty;
         var type = value.GetType();
         if (!type.IsEnum)
         {
-            return value.ToString();
+            return str;
         }
 
-        var description = type.GetMember(value.ToString()).GetDescription();
+        var description = type.GetMember(str).GetDescription();
         return Lng.Elem(description);
     }
 
-    public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+    public object? ConvertBack(object? value, Type targetType, object? parameter, CultureInfo culture)
     {
         return value;
     }

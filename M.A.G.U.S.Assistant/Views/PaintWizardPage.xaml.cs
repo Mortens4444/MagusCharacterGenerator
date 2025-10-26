@@ -3,7 +3,7 @@ using Microsoft.Maui.Layouts;
 
 namespace M.A.G.U.S.Assistant.Views;
 
-public partial class PaintWizardPage : NotifierPage
+internal partial class PaintWizardPage : NotifierPage
 {
     private readonly PaintWizardViewModel vm;
 

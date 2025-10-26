@@ -9,12 +9,12 @@ using System.Windows.Input;
 
 namespace M.A.G.U.S.Assistant.ViewModels;
 
-public class SoundViewModel : INotifyPropertyChanged
+internal class SoundViewModel : INotifyPropertyChanged
 {
     public event PropertyChangedEventHandler PropertyChanged;
 
-    private readonly ObservableCollection<SoundItem> allSounds = new ObservableCollection<SoundItem>();
-    public ObservableCollection<SoundItem> FilteredSounds { get; } = new ObservableCollection<SoundItem>();
+    private readonly ObservableCollection<SoundItem> allSounds = [];
+    public ObservableCollection<SoundItem> FilteredSounds { get; } = [];
 
     public ObservableCollection<SoundItem> Sounds => FilteredSounds; // backward compatibility
 
@@ -24,7 +24,11 @@ public class SoundViewModel : INotifyPropertyChanged
         get => selectedSound;
         set
         {
-            if (selectedSound == value) return;
+            if (selectedSound == value)
+            {
+                return;
+            }
+
             selectedSound = value;
             OnPropertyChanged(nameof(SelectedSound));
             OnSelectedSoundChanged();

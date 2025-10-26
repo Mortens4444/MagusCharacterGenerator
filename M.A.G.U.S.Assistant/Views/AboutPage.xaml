@@ -5,6 +5,7 @@
              xmlns:vm="clr-namespace:M.A.G.U.S.Assistant.ViewModels"
              xmlns:mc="clr-namespace:Mtf.Maui.Controls;assembly=Mtf.Maui.Controls"
              x:Class="M.A.G.U.S.Assistant.Views.AboutPage"
+             x:ClassModifier="internal"
              Title="About">
     <v:NotifierPage.BindingContext>
         <vm:AboutPageViewModel />

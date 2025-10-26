@@ -6,7 +6,7 @@ using System.Windows.Input;
 
 namespace M.A.G.U.S.Assistant.ViewModels;
 
-public class ImagesViewModel : INotifyPropertyChanged
+internal partial class ImagesViewModel : INotifyPropertyChanged
 {
     public event PropertyChangedEventHandler PropertyChanged;
 
@@ -32,10 +32,17 @@ public class ImagesViewModel : INotifyPropertyChanged
         get => selectedImage;
         set
         {
-            if (selectedImage == value) return;
+            if (selectedImage == value)
+            {
+                return;
+            }
+
             selectedImage = value;
             OnPropertyChanged(nameof(SelectedImage));
-            if (selectedImage != null) Preview(selectedImage);
+            if (selectedImage != null)
+            {
+                _ = PreviewAsync(selectedImage);
+            }
         }
     }
 
@@ -43,7 +50,7 @@ public class ImagesViewModel : INotifyPropertyChanged
 
     public ImagesViewModel()
     {
-        PreviewCommand = new Command<ImageItem>(Preview);
+        PreviewCommand = new Command<ImageItem>(item => _ = PreviewAsync(item));
         LoadImages();
         ApplyFilter();
     }
@@ -90,14 +97,15 @@ public class ImagesViewModel : INotifyPropertyChanged
         OnPropertyChanged(nameof(FilteredImages));
     }
 
-    private async void Preview(ImageItem item)
+    private static async Task PreviewAsync(ImageItem item)
     {
         if (item == null) return;
 
         try
         {
             var page = new Views.ImagePreviewPage(item);
-            await Application.Current.MainPage.Navigation.PushModalAsync(page);
+            //await Windows[0].Page.Navigation.PushModalAsync(page).ConfigureAwait(true);
+            await Application.Current.MainPage.Navigation.PushModalAsync(page).ConfigureAwait(true);
         }
         catch
         {

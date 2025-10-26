@@ -4,7 +4,7 @@
 
 //namespace M.A.G.U.S.Assistant.ViewModels
 //{
-//    public class PaintViewModel : INotifyPropertyChanged
+//    internal class PaintViewModel : INotifyPropertyChanged
 //    {
 //        public event PropertyChangedEventHandler PropertyChanged;
 

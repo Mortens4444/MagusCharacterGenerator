@@ -7,6 +7,7 @@
                 xmlns:mc="clr-namespace:Mtf.Maui.Controls;assembly=Mtf.Maui.Controls"
                 x:Class="M.A.G.U.S.Assistant.Views.ImagesPage"
                 x:DataType="vm:ImagesViewModel"
+                x:ClassModifier="internal"
                 Title="Images">
 
     <v:NotifierPage.BindingContext>

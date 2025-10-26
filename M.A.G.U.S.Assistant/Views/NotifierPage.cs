@@ -7,7 +7,7 @@ using ShowInfoMessage = M.A.G.U.S.Assistant.Messages.ShowInfoMessage;
 
 namespace M.A.G.U.S.Assistant.Views;
 
-public partial class NotifierPage : ContentPage
+internal partial class NotifierPage : ContentPage
 {
     protected Dictionary<object, string> originalTextElements;
 

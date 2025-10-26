@@ -8,21 +8,21 @@ namespace M.A.G.U.S.Races;
 /// </summary>
 public class Faun : Race
 {
-    public override short Speed => 1;
+    public override sbyte Speed => 1;
 
-    public override short Dexterity => 1;
+    public override sbyte Dexterity => 1;
 
-    public override short Beauty => -2;
+    public override sbyte Beauty => -2;
 
-    public override short Health => 1;
+    public override sbyte Health => 1;
 
-    public override short Willpower => -1;
+    public override sbyte Willpower => -1;
 
-    public override short Astral => -2;
+    public override sbyte Astral => -2;
 
-    public override short Stamina => 2;
+    public override sbyte Stamina => 2;
 
-    public override short Intelligence => 1;
+    public override sbyte Intelligence => 1;
 
     public override SpecialQualificationList SpecialQualifications =>
     [

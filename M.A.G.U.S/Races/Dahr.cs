@@ -7,13 +7,13 @@ namespace M.A.G.U.S.Races;
 /// </summary>
 public class Dahr : Race
 {
-    public override short Strength => -2;
+    public override sbyte Strength => -2;
 
-    public override short Stamina => 1;
+    public override sbyte Stamina => 1;
 
-    public override short Speed => 2;
+    public override sbyte Speed => 2;
 
-    public override short Health => -2;
+    public override sbyte Health => -2;
 
     public override SpecialQualificationList SpecialQualifications =>
     [

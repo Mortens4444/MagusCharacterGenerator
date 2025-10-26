@@ -9,44 +9,48 @@ namespace M.A.G.U.S.Classes.NonPlayableCharacters;
 public class Healer(byte level = 1) : Class(level), IClass
 {
     [DiceThrow(ThrowType._1K10)]
-    public override short Strength => DiceThrow._1K10();
+    public override sbyte Strength => DiceThrow._1K10();
 
     [DiceThrow(ThrowType._1K6)]
     [DiceThrowModifier(6)]
-    public override short Speed => (short)(DiceThrow._1K6() + 6);
+    public override sbyte Speed => (sbyte)(DiceThrow._1K6() + 6);
 
     [DiceThrow(ThrowType._1K6)]
     [DiceThrowModifier(6)]
-    public override short Dexterity => (short)(DiceThrow._1K6() + 6);
+    public override sbyte Dexterity => (sbyte)(DiceThrow._1K6() + 6);
 
     [DiceThrow(ThrowType._1K10)]
-    public override short Stamina => DiceThrow._1K10();
+    public override sbyte Stamina => DiceThrow._1K10();
 
     [DiceThrow(ThrowType._1K6)]
     [DiceThrowModifier(6)]
-    public override short Health => (short)(DiceThrow._1K6() + 6);
+    public override sbyte Health => (sbyte)(DiceThrow._1K6() + 6);
 
     [DiceThrow(ThrowType._2K6)]
-    public override short Beauty => DiceThrow._2K6();
+    public override sbyte Beauty => DiceThrow._2K6();
 
     [DiceThrow(ThrowType._1K6)]
     [DiceThrowModifier(10)]
-    public override short Intelligence => (short)(DiceThrow._1K6() + 10);
+    public override sbyte Intelligence => (sbyte)(DiceThrow._1K6() + 10);
 
     [DiceThrow(ThrowType._2K6)]
-    public override short Willpower => DiceThrow._2K6();
+    public override sbyte Willpower => DiceThrow._2K6();
 
     [DiceThrow(ThrowType._2K6)]
-    public override short Astral => DiceThrow._2K6();
+    public override sbyte Astral => DiceThrow._2K6();
 
     [DiceThrow(ThrowType._1K2)]
-    public override short Gold => DiceThrow._1K2();
+    public override byte Gold => (byte)DiceThrow._1K2();
 
     [DiceThrow(ThrowType._1K6)]
-    public override byte Bravery => (byte)DiceThrow._1K6();
+    public override sbyte Bravery => DiceThrow._1K6();
 
     [DiceThrow(ThrowType._3K6)]
-    public override byte Erudition => (byte)DiceThrow._3K6();
+    public override sbyte Erudition => DiceThrow._3K6();
+
+    [DiceThrow(ThrowType._2K6)]
+    [DiceThrowModifier(6)]
+    public override sbyte Detection => (sbyte)(DiceThrow._2K6() + 6);
 
     public override byte InitiatingBaseValue => 1;
 

@@ -4,10 +4,8 @@ using Mtf.LanguageService;
 
 namespace M.A.G.U.S.Assistant.Views;
 
-public partial class CreatureDetailsPage : NotifierPage
+internal partial class CreatureDetailsPage : NotifierPage
 {
-    //public CreatureDetailsPage() => InitializeComponent();
-
     public CreatureDetailsPage(Creature creature)
     {
         ArgumentNullException.ThrowIfNull(creature);

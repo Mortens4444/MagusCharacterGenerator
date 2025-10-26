@@ -17,48 +17,52 @@ public class NastarPaladin(byte level = 1) : Class(level), IClass, IHateRangedWe
     [DiceThrow(ThrowType._1K10)]
     [DiceThrowModifier(8)]
     [SpecialTraining]
-    public override short Strength => DiceThrow._1K10_Plus_8_Plus_SpecialTraining();
+    public override sbyte Strength => DiceThrow._1K10_Plus_8_Plus_SpecialTraining();
 
     [DiceThrow(ThrowType._3K6_2_Times)]
-    public override short Speed => DiceThrow._3K6_2_Times();
+    public override sbyte Speed => DiceThrow._3K6_2_Times();
 
     [DiceThrow(ThrowType._3K6_2_Times)]
-    public override short Dexterity => DiceThrow._3K6_2_Times();
+    public override sbyte Dexterity => DiceThrow._3K6_2_Times();
 
     [DiceThrow(ThrowType._1K10)]
     [DiceThrowModifier(8)]
-    public override short Stamina => DiceThrow._1K10_Plus_8();
+    public override sbyte Stamina => DiceThrow._1K10_Plus_8();
 
     [DiceThrow(ThrowType._1K10)]
     [DiceThrowModifier(10)]
-    public override short Health => DiceThrow._1K10_Plus_10();
+    public override sbyte Health => DiceThrow._1K10_Plus_10();
 
     [DiceThrow(ThrowType._1K10)]
     [DiceThrowModifier(8)]
-    public override short Beauty => DiceThrow._1K10_Plus_8();
+    public override sbyte Beauty => DiceThrow._1K10_Plus_8();
 
     [DiceThrow(ThrowType._2K6)]
     [DiceThrowModifier(6)]
-    public override short Intelligence => DiceThrow._2K6_Plus_6();
+    public override sbyte Intelligence => DiceThrow._2K6_Plus_6();
 
     [DiceThrow(ThrowType._1K10)]
     [DiceThrowModifier(8)]
-    public override short Willpower => DiceThrow._1K10_Plus_8();
+    public override sbyte Willpower => DiceThrow._1K10_Plus_8();
 
     [DiceThrow(ThrowType._1K6)]
     [DiceThrowModifier(12)]
-    public override short Astral => DiceThrow._1K6_Plus_12();
+    public override sbyte Astral => DiceThrow._1K6_Plus_12();
 
     [DiceThrow(ThrowType._1K6)]
-    public override short Gold => DiceThrow._1K6();
+    public override byte Gold => (byte)DiceThrow._1K6();
 
     [DiceThrow(ThrowType._2K6)]
     [DiceThrowModifier(8)]
-    public override byte Bravery => (byte)(DiceThrow._2K6() + 8);
+    public override sbyte Bravery => (sbyte)(DiceThrow._2K6() + 8);
 
     [DiceThrow(ThrowType._2K6)]
     [DiceThrowModifier(8)]
-    public override byte Erudition => (byte)(DiceThrow._2K6() + 8);
+    public override sbyte Erudition => (sbyte)(DiceThrow._2K6() + 8);
+
+    [DiceThrow(ThrowType._1K10)]
+    [DiceThrowModifier(8)]
+    public override sbyte Detection => (sbyte)(DiceThrow._1K10_Plus_8());
 
     public override byte InitiatingBaseValue => 5;
 

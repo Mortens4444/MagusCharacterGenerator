@@ -6,17 +6,17 @@ namespace M.A.G.U.S.Races;
 
 public class Dwarf : Race
 {
-    public override short Strength => 1;
+    public override sbyte Strength => 1;
 
-    public override short Stamina => 1;
+    public override sbyte Stamina => 1;
 
-    public override short Health => 1;
+    public override sbyte Health => 1;
 
-    public override short Beauty => -2;
+    public override sbyte Beauty => -2;
 
-    public override short Intelligence => -1;
+    public override sbyte Intelligence => -1;
 
-    public override short Astral => -1;
+    public override sbyte Astral => -1;
 
     public override List<PercentQualification> PercentQualifications =>
     [

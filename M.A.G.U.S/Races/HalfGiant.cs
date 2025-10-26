@@ -10,19 +10,19 @@ namespace M.A.G.U.S.Races;
 /// </summary>
 public abstract class HalfGiant : Race
 {
-    public override short Strength => 3;
+    public override sbyte Strength => 3;
 
-    public override short Stamina => 2;
+    public override sbyte Stamina => 2;
 
-    public override short Health => 3;
+    public override sbyte Health => 3;
 
-    public override short Beauty => -1;
+    public override sbyte Beauty => -1;
 
-    public override short Intelligence => -1;
+    public override sbyte Intelligence => -1;
 
-    public override short Speed => -1;
+    public override sbyte Speed => -1;
 
-    public override short Astral => -3;
+    public override sbyte Astral => -3;
 
     public override QualificationList Qualifications =>
     [

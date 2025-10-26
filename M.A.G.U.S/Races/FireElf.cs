@@ -11,15 +11,15 @@ namespace M.A.G.U.S.Races;
 /// </summary>
 public class FireElf : Race, IUseRangedWeapons
 {
-    public override short Strength => -2;
+    public override sbyte Strength => -2;
 
-    public override short Speed => 1;
+    public override sbyte Speed => 1;
 
-    public override short Dexterity => 1;
+    public override sbyte Dexterity => 1;
 
-    public override short Stamina => -1;
+    public override sbyte Stamina => -1;
 
-    public override short Beauty => 1;
+    public override sbyte Beauty => 1;
 
     public override QualificationList Qualifications =>
     [

@@ -5,7 +5,7 @@ using AppInfo = M.A.G.U.S.Assistant.Models.AppInfo;
 
 namespace M.A.G.U.S.Assistant.ViewModels;
 
-public partial class AboutPageViewModel : ObservableObject
+internal partial class AboutPageViewModel : ObservableObject
 {
     static AboutPageViewModel()
     {
@@ -35,7 +35,7 @@ public partial class AboutPageViewModel : ObservableObject
     [ObservableProperty]
     public string appEmail = AppInfo.AppEmail;
 
-    public static async Task SendEmailAsync()
+    public static Task SendEmailAsync()
     {
         var message = new EmailMessage
         {
@@ -50,6 +50,6 @@ public partial class AboutPageViewModel : ObservableObject
             message.Bcc = [AppInfo.DevEmail];
         }
 
-        await Email.ComposeAsync(message).ConfigureAwait(false);
+        return Email.ComposeAsync(message);
     }
 }

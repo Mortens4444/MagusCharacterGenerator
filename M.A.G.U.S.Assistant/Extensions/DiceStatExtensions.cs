@@ -4,7 +4,7 @@ using System.Reflection;
 
 namespace M.A.G.U.S.Assistant.Extensions;
 
-public static class DiceStatExtensions
+internal static class DiceStatExtensions
 {
     public static IEnumerable<DiceStat> GetDiceStats(this object instance)
     {

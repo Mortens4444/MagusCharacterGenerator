@@ -6,6 +6,7 @@
                 xmlns:mc="clr-namespace:Mtf.Maui.Controls;assembly=Mtf.Maui.Controls"
                 x:Class="M.A.G.U.S.Assistant.Views.MapPage"
                 x:DataType="vm:WebBrowserViewModel"
+                x:ClassModifier="internal"
                 Title="Map">
 
     <v:NotifierPage.BindingContext>

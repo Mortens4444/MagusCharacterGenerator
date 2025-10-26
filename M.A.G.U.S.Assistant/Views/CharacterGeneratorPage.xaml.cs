@@ -1,6 +1,6 @@
 namespace M.A.G.U.S.Assistant.Views;
 
-public partial class CharacterGeneratorPage : NotifierPage
+internal partial class CharacterGeneratorPage : NotifierPage
 {
     public CharacterGeneratorPage() => InitializeComponent();
 }

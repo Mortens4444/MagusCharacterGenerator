@@ -2,7 +2,7 @@
 
 namespace M.A.G.U.S.Assistant.Models;
 
-public class AppInfo
+internal class AppInfo
 {
     public string AppName { get; private set; }
 

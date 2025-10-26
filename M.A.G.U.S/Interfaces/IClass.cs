@@ -6,11 +6,7 @@ public interface IClass : IAttacker, IAbilities
 {
     string Name { get; }
 
-    short Gold { get; }
-
-    byte Bravery { get; }
-
-    byte Erudition { get; }
+    byte Gold { get; }
 
     byte Level { get; }
 

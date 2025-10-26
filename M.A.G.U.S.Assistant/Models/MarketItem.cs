@@ -5,19 +5,11 @@ using Mtf.LanguageService;
 
 namespace M.A.G.U.S.Assistant.Models;
 
-public class MarketItem
+internal class MarketItem(Thing thing)
 {
-    public MarketItem(Thing thing)
-    {
-        Name = Lng.Elem(thing.Name);
-        Description = thing.Description ?? String.Empty;
-        PriceString = thing.Price.ToTranslatedString();
-        ImageName = thing.ImageName;
-    }
-
-    public string Name { get; set; } = String.Empty;
-    public string ImageName { get; set; } = String.Empty;
-    public string Description { get; set; } = String.Empty;
+    public string Name { get; set; } = Lng.Elem(thing.Name);
+    public string ImageName { get; set; } = thing.ImageName ?? String.Empty;
+    public string Description { get; set; } = thing.Description ?? String.Empty;
     public Money Price { get; set; } = Money.Free;
-    public string PriceString { get; set; } = String.Empty;
+    public string PriceString { get; set; } = thing.Price.ToTranslatedString();
 }

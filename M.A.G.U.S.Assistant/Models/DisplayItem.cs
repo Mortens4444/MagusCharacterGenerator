@@ -2,6 +2,7 @@
 using M.A.G.U.S.Bestiary;
 using M.A.G.U.S.GameSystem.PoisonsAndIllnesses;
 using M.A.G.U.S.GameSystem.Runes;
+using M.A.G.U.S.GameSystem.Valuables;
 using M.A.G.U.S.Things;
 using M.A.G.U.S.Things.Gemstones;
 using M.A.G.U.S.Things.MagicalObjects;
@@ -11,11 +12,17 @@ namespace M.A.G.U.S.Assistant.Models;
 
 public class DisplayItem
 {
-    public object? Source { get; init; } // eredeti objektum
-    public string Key { get; init; } = String.Empty; // pl. enum key vagy sign
-    public string Title { get; init; } = String.Empty; // főcím (Name)
-    public string Subtitle { get; init; } = String.Empty; // leírás / meaning
-    public string RightText { get; init; } = String.Empty; // pl. Equivalent, Type, stb.
+    public object? Source { get; init; }
+    
+    public string Key { get; init; } = String.Empty;
+    
+    public string Title { get; init; } = String.Empty;
+    
+    public string Subtitle { get; init; } = String.Empty;
+    
+    public string RightText { get; init; } = String.Empty;
+
+    public bool Enabled { get; init; } = true;
 
     public static DisplayItem FromLanguageItem(object languageItem)
     {
@@ -101,7 +108,7 @@ public class DisplayItem
         return new DisplayItem { Source = poisonObj, Title = poisonObj?.ToString() ?? String.Empty };
     }
 
-    public static DisplayItem FromThing(object thingObj)
+    public static DisplayItem FromThing(object thingObj, Money? maxMoney)
     {
         if (thingObj is Thing t)
         {
@@ -111,7 +118,8 @@ public class DisplayItem
                 Key = String.Empty,
                 Title = t.Name ?? String.Empty,
                 Subtitle = $"{t.Weight} {Lng.Elem("Kg")}",
-                RightText = t.Price?.ToTranslatedString() ?? String.Empty
+                RightText = t.Price?.ToTranslatedString() ?? String.Empty,
+                Enabled = maxMoney is null || t.Price <= maxMoney
             };
         }
 

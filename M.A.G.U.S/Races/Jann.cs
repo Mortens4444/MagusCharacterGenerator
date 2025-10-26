@@ -7,7 +7,7 @@ namespace M.A.G.U.S.Races;
 
 public class Jann : Race
 {
-    public override short Intelligence => 2;
+    public override sbyte Intelligence => 2;
 
     public override QualificationList Qualifications =>
     [

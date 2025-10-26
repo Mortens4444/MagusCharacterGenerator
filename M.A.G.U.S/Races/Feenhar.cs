@@ -10,13 +10,13 @@ namespace M.A.G.U.S.Races;
 /// </summary>
 public class Feenhar : Race
 {
-    public override short Dexterity => 1;
+    public override sbyte Dexterity => 1;
 
-    public override short Speed => 1;
+    public override sbyte Speed => 1;
 
-    public override short Beauty => -2;
+    public override sbyte Beauty => -2;
 
-    public override short Astral => -1;
+    public override sbyte Astral => -1;
 
     public override SpecialQualificationList SpecialQualifications =>
     [

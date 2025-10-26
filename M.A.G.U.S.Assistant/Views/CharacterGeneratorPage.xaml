@@ -11,6 +11,7 @@
                 xmlns:mc="clr-namespace:Mtf.Maui.Controls;assembly=Mtf.Maui.Controls"
                 x:Class="M.A.G.U.S.Assistant.Views.CharacterGeneratorPage"
                 x:DataType="vm:CharacterGeneratorViewModel"
+                x:ClassModifier="internal"
                 Title="Character sheet">
 
     <v:NotifierPage.BindingContext>
@@ -57,7 +58,7 @@
             </HorizontalStackLayout>
 
             <HorizontalStackLayout Spacing="8" VerticalOptions="Center" HorizontalOptions="Center">
-                <Label Text="Caste" VerticalOptions="Center"/>
+                <Label Text="Class" VerticalOptions="Center"/>
                 <Picker ItemsSource="{Binding AvailableClasses}"
                         ItemDisplayBinding="{Binding Name, Converter={StaticResource TranslationConverter}}"
                         SelectedItem="{Binding SelectedClass}"
@@ -94,13 +95,13 @@
                                             IsEnabled="False" />
 
                         <mc:EntryWithLabel Label="Class"
-                                            Text="{Binding Character.BaseCaste.Name, Converter={StaticResource TranslationConverter}}"
+                                            Text="{Binding Character.BaseClass.Name, Converter={StaticResource TranslationConverter}}"
                                             HorizontalOptions="Center"
                                             IsEnabled="False"
                                             Grid.Column="1" />
 
                         <mc:EntryWithLabel Label="Experience level"
-                                            Text="{Binding Character.BaseCaste.Level}"
+                                            Text="{Binding Character.BaseClass.Level}"
                                             HorizontalOptions="Center"
                                             IsEnabled="False"
                                             Grid.Row="1"

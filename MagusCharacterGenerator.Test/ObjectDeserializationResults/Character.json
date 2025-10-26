@@ -6,7 +6,7 @@
     "$values": []
   },
   "Name": "Aefrez",
-  "BaseCaste": {
+  "BaseClass": {
     "$type": "M.A.G.U.S.Classes.Believer.GodsOfPyarron.ArelPriest, M.A.G.U.S.",
     "Qualifications": {
       "$type": "M.A.G.U.S.Qualifications.QualificationList, M.A.G.U.S.",
@@ -300,7 +300,7 @@
     "Name": null,
     "Level": 1
   },
-  "Castes": {
+  "Classes": {
     "$type": "M.A.G.U.S.Interfaces.IClass[], M.A.G.U.S.",
     "$values": [
       {

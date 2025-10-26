@@ -13,13 +13,13 @@ public static class CharacterConverter
 
 		result.AppendLine($"{Lng.Elem("Name")}: {character.Name}");
 
-		var primaryCaste = character.Castes[0];
+		var primaryClass = character.Classes[0];
 		result.AppendLine($"{Lng.Elem("Race")}: {character.Race}");
-		result.AppendLine($"{primaryCaste} ({primaryCaste.Level}. {Lng.Elem("Level")})");
-		if (character.Castes.Length > 1)
+		result.AppendLine($"{primaryClass} ({primaryClass.Level}. {Lng.Elem("Level")})");
+		if (character.Classes.Length > 1)
 		{
-			var secondaryCaste = character.Castes[1];
-			result.AppendLine($"{secondaryCaste} ({secondaryCaste.Level}. {Lng.Elem("Level")})");
+			var secondaryClass = character.Classes[1];
+			result.AppendLine($"{secondaryClass} ({secondaryClass.Level}. {Lng.Elem("Level")})");
 		}
 		result.AppendLine();
 

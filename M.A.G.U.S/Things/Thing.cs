@@ -8,7 +8,7 @@ public abstract class Thing
 
     public string? ImageName => Name.ToLower();
 
-    public virtual Money Price => Money.Free;
+    public virtual Money Price => new Money(1);
 
     public string? Description { get; set; }
 

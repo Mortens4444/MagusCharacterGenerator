@@ -1,6 +1,6 @@
 ﻿namespace M.A.G.U.S.Assistant.Models;
 
-public class LanguageItem
+internal class LanguageItem
 {
     public string EnumKey { get; set; } = String.Empty;
 
@@ -8,5 +8,5 @@ public class LanguageItem
 
     public string Description { get; set; } = String.Empty;
 
-    public object SourceEnumValue { get; set; }
+    public object SourceEnumValue { get; set; } = new();
 }

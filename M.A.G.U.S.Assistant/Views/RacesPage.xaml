@@ -9,6 +9,7 @@
                 xmlns:local="clr-namespace:M.A.G.U.S.Qualifications;assembly=M.A.G.U.S."
                 xmlns:q="clr-namespace:M.A.G.U.S.GameSystem.Qualifications;assembly=M.A.G.U.S."
                 x:Class="M.A.G.U.S.Assistant.Views.RacesPage"
+                x:ClassModifier="internal"
                 x:DataType="vm:RacesViewModel"
                 Title="Races">
 

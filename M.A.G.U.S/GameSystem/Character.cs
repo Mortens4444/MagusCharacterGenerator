@@ -1,10 +1,10 @@
-﻿using M.A.G.U.S.Classes.Rogue;
+﻿using M.A.G.U.S.Classes.Fighter;
+using M.A.G.U.S.Classes.Rogue;
 using M.A.G.U.S.GameSystem.FightMode;
 using M.A.G.U.S.GameSystem.FightModifier;
 using M.A.G.U.S.GameSystem.Magic;
 using M.A.G.U.S.GameSystem.Psi;
 using M.A.G.U.S.GameSystem.Qualifications;
-using M.A.G.U.S.GameSystem.Runes;
 using M.A.G.U.S.GameSystem.Valuables;
 using M.A.G.U.S.Interfaces;
 using M.A.G.U.S.Qualifications;
@@ -12,7 +12,10 @@ using M.A.G.U.S.Qualifications.Percentages;
 using M.A.G.U.S.Qualifications.Specialities;
 using M.A.G.U.S.Races;
 using M.A.G.U.S.Things;
+using M.A.G.U.S.Things.Weapons;
 using M.A.G.U.S.Utils;
+using Mtf.Extensions;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
@@ -20,45 +23,55 @@ namespace M.A.G.U.S.GameSystem;
 
 public class Character : IFightModifier, ILiving, IAbilities, INotifyPropertyChanged
 {
-	private short health;
+	private sbyte strength;
+    private sbyte stamina;
+	private sbyte speed;
+	private sbyte dexterity;
+	private sbyte health;
+	private sbyte willpower;
+	private sbyte intelligence;
+	private sbyte astral;
+
 	private short healthPoints;
 	private short maxHealthPoints;
     private short painTolerancePoints;
 	private short maxPainTolerancePoints;
-    private short stamina;
-	private short willpower;
-	private short strength;
-	private short speed;
-	private short dexterity;
 	private short initiatingValue;
 	private short attackingValue;
 	private short defendingValue;
 	private short aimingValue;
 	private short unconsciousAstralMagicResistance;
 	private short unconsciousMentalMagicResistance;
-	private short astral;
-	private short intelligence;
 	private ushort psiPoints;
 	private ushort maxPsiPoints;
     private ushort manaPoints;
 	private ushort maxManaPoints;
     private ushort qualificationPoints;
 	private bool calculateChanges;
-	private readonly Money money = new(0);
+	private Money money = new(0);
+    private Weapon? primaryWeapon;
+    private Weapon? secondaryWeapon;
+    private string name;
+    private IRace race;
 
-	// TODO: Pass the correct method to count
-	private readonly MultiCasteMode multiCasteMode = MultiCasteMode.Normal_Or_SwitchedCaste;
+    // TODO: Pass the correct method to count
+    private readonly MultiClassMode multiClassMode = MultiClassMode.Normal_Or_SwitchedClass;
 
 	public event PropertyChangedEventHandler? PropertyChanged;
 
-	public Character() { }
+	public Character()
+	{
+		name = "Nobody";
+		race = new Human();
+		BaseClass = new Warrior();
+	}
 
 	public Character(string name, IRace race, params IClass[] classes)
 	{
-		Name = name;
-		BaseCaste = classes.First();
-		Castes = classes;
-		Race = race;
+		this.name = name;
+        this.race = race;
+		BaseClass = classes.First();
+		Classes = classes;
 		CreateFirstLevel();
 	}
 
@@ -71,7 +84,6 @@ public class Character : IFightModifier, ILiving, IAbilities, INotifyPropertyCha
 
 	//public IEnumerable<Image> Images { get; set; }
 
-    private string name;
     public string Name
     {
         get => name;
@@ -84,11 +96,10 @@ public class Character : IFightModifier, ILiving, IAbilities, INotifyPropertyCha
             }
         }
     }
-    public IClass BaseCaste { get; set; }
+    public IClass BaseClass { get; set; }
 
-	public IClass[] Castes { get; set; }
+	public IClass[] Classes { get; set; }
 
-    private IRace race;
     public IRace Race
     {
         get => race;
@@ -99,6 +110,20 @@ public class Character : IFightModifier, ILiving, IAbilities, INotifyPropertyCha
                 race = value;
                 NotifyPropertyChanged();
             }
+        }
+    }
+
+    public Money Money
+	{
+        get => money;
+        set
+        {
+            if (money != value)
+            {
+                money = value;
+                NotifyPropertyChanged();
+				NotifyPropertyChanged(nameof(money.Summa));
+			}
         }
     }
 
@@ -302,7 +327,7 @@ public class Character : IFightModifier, ILiving, IAbilities, INotifyPropertyCha
         }
     }
 
-    public short Strength
+    public sbyte Strength
 	{
 		get => strength;
 		set
@@ -319,7 +344,7 @@ public class Character : IFightModifier, ILiving, IAbilities, INotifyPropertyCha
 		}
 	}
 
-	public short Speed
+	public sbyte Speed
 	{
 		get => speed;
 		set
@@ -336,7 +361,7 @@ public class Character : IFightModifier, ILiving, IAbilities, INotifyPropertyCha
 		}
 	}
 
-	public short Dexterity
+	public sbyte Dexterity
 	{
 		get => dexterity;
 		set
@@ -354,7 +379,7 @@ public class Character : IFightModifier, ILiving, IAbilities, INotifyPropertyCha
 		}
 	}
 
-	public short Stamina
+	public sbyte Stamina
 	{
 		get => stamina;
 		set
@@ -371,7 +396,7 @@ public class Character : IFightModifier, ILiving, IAbilities, INotifyPropertyCha
         }
 	}
 
-	public short Health
+	public sbyte Health
 	{
 		get => health;
 		set
@@ -388,16 +413,9 @@ public class Character : IFightModifier, ILiving, IAbilities, INotifyPropertyCha
 		}
 	}
 
-	public short Beauty { get; set; }
+	public sbyte Beauty { get; set; }
 
-    public string Birthplace { get; set; }
-    public string CasteNames { get; set; }
-    public string ExperienceLevel { get; set; }
-    public string InArmorInitiative { get; set; }
-    public string School { get; set; }
-    public string Alignment { get; set; }
-
-    public short Intelligence
+    public sbyte Intelligence
 	{
 		get => intelligence;
 		set
@@ -416,7 +434,7 @@ public class Character : IFightModifier, ILiving, IAbilities, INotifyPropertyCha
 		}
 	}
 
-	public short Willpower
+	public sbyte Willpower
 	{
 		get => willpower;
 		set
@@ -434,7 +452,7 @@ public class Character : IFightModifier, ILiving, IAbilities, INotifyPropertyCha
 		}
 	}
 
-	public short Astral
+	public sbyte Astral
 	{
 		get => astral;
 		set
@@ -451,11 +469,19 @@ public class Character : IFightModifier, ILiving, IAbilities, INotifyPropertyCha
 		}
 	}
 
-	public short Bravery { get; set; }
+	public sbyte Bravery { get; set; }
 
-	public short Erudition { get; set; }
+	public sbyte Erudition { get; set; }
 
-	public Sorcery Sorcery { get; set; }
+    public sbyte Detection { get; set; }
+
+    public string Birthplace { get; set; }
+
+    public string School { get; set; }
+
+    public string Alignment { get; set; }
+
+    public Sorcery? Sorcery { get; set; }
 
 	public IPsi Psi { get; set; }
 
@@ -519,9 +545,9 @@ public class Character : IFightModifier, ILiving, IAbilities, INotifyPropertyCha
 
 	public SpecialQualificationList SpecialQualifications { get; private set; } = [];
 
-    public List<PercentQualification> PercentQualifications { get; private set; } = [];
+    public ObservableCollection<PercentQualification> PercentQualifications { get; private set; } = [];
 
-    public List<Thing> Equipment { get; private set; } = [];
+    public ObservableCollection<Thing> Equipment { get; private set; } = [];
 
     #endregion
 
@@ -548,7 +574,6 @@ public class Character : IFightModifier, ILiving, IAbilities, INotifyPropertyCha
 		CalculatePainTolerancePoints();
 
 		CalculateManaPoints();
-		CalculateCasteSpecificLevelUps();
 		CalculatePsiPoints();
 
 		CalculateUnconsciousAstralMagicResistance();
@@ -559,44 +584,45 @@ public class Character : IFightModifier, ILiving, IAbilities, INotifyPropertyCha
 
 	private void CalculateGold()
 	{
-		money.Gold += (short)Castes.Sum(caste => caste.Gold);
+		money.Gold += (short)Classes.Sum(@class => @class.Gold);
 	}
 
 	private void GenerateAbilities()
 	{
-		Strength = (short)(BaseCaste.Strength + Race.Strength);
-		Speed = (short)(BaseCaste.Speed + Race.Speed);
-        Dexterity = (short)(BaseCaste.Dexterity + Race.Dexterity);
-		Stamina = (short)(BaseCaste.Stamina + Race.Stamina);
-		Health = (short)(BaseCaste.Health + Race.Health);
-		Beauty = (short)(BaseCaste.Beauty + Race.Beauty);
-		Intelligence = (short)(BaseCaste.Intelligence + Race.Intelligence);
-		Willpower = (short)(BaseCaste.Willpower + Race.Willpower);
-		Astral = (short)(BaseCaste.Astral + Race.Astral);
-		Bravery = BaseCaste.Bravery;
-		Erudition = BaseCaste.Erudition;
-	}
+		Strength = (sbyte)(BaseClass.Strength + Race.Strength);
+		Speed = (sbyte)(BaseClass.Speed + Race.Speed);
+        Dexterity = (sbyte)(BaseClass.Dexterity + Race.Dexterity);
+		Stamina = (sbyte)(BaseClass.Stamina + Race.Stamina);
+		Health = (sbyte)(BaseClass.Health + Race.Health);
+		Beauty = (sbyte)(BaseClass.Beauty + Race.Beauty);
+		Intelligence = (sbyte)(BaseClass.Intelligence + Race.Intelligence);
+		Willpower = (sbyte)(BaseClass.Willpower + Race.Willpower);
+		Astral = (sbyte)(BaseClass.Astral + Race.Astral);
+		Bravery = BaseClass.Bravery;
+		Erudition = BaseClass.Erudition;
+		Detection = BaseClass.Detection;
+    }
 
 	private void CalculateQualificationPoints()
 	{
-		if (multiCasteMode == MultiCasteMode.Normal_Or_SwitchedCaste)
+		if (multiClassMode == MultiClassMode.Normal_Or_SwitchedClass)
 		{
-			QualificationPoints = BaseCaste.BaseQualificationPoints;
+			QualificationPoints = BaseClass.BaseQualificationPoints;
 			QualificationPoints += (ushort)MathHelper.GetAboveAverageValue(Intelligence);
 			QualificationPoints += (ushort)MathHelper.GetAboveAverageValue(Dexterity);
-			if (BaseCaste.AddQualificationPointsOnFirstLevel)
+			if (BaseClass.AddQualificationPointsOnFirstLevel)
 			{
-				QualificationPoints += BaseCaste.QualificationPointsModifier;
+				QualificationPoints += BaseClass.QualificationPointsModifier;
 			}
-			for (int i = 1; i < BaseCaste.Level; i++)
+			for (int i = 1; i < BaseClass.Level; i++)
 			{
-				QualificationPoints += BaseCaste.QualificationPointsModifier;
-				PercentQualificationPoints += BaseCaste.PercentQualificationModifier;
+				QualificationPoints += BaseClass.QualificationPointsModifier;
+				PercentQualificationPoints += BaseClass.PercentQualificationModifier;
 			}
 		}
 		else
 		{
-			// TwinCaste
+			// TwinClass
 			// When it got the new class?
 			throw new NotImplementedException();
 		}
@@ -605,13 +631,29 @@ public class Character : IFightModifier, ILiving, IAbilities, INotifyPropertyCha
 	private void GetQualifications()
 	{
 		SpecialQualifications.AddRange(Race.SpecialQualifications);
+		Qualifications.Clear();
 
-		foreach (var caste in Castes)
+        foreach (var @class in Classes)
 		{
-			Qualifications.AddRange(caste.Qualifications);
-			PercentQualifications.AddRange(caste.PercentQualifications);
+			Qualifications.AddRange(@class.Qualifications);
+			PercentQualifications.AddRange(@class.PercentQualifications);
+
+            var newQualifications = @class.FutureQualifications
+				.Where(futureQualification => futureQualification.MasterQualificationLevel <= @class.Level);
+
+            var newBaseQualifications = newQualifications
+                .Where(futureQualification => futureQualification.QualificationLevel == QualificationLevel.Base);
+
+            Qualifications.AddRange(newBaseQualifications);
+
+            var newMasterQualifications = newQualifications.Except(newBaseQualifications).Concat(Race.Qualifications);
+            foreach (var newMasterQualification in newMasterQualifications)
+            {
+                Qualifications.UpgradeOrAddQualification(newMasterQualification);
+            }
+
         }
-		var dexterityBasedPercentages = new List<Type> { typeof(Falling), typeof(Climbing), typeof(Jumping) };
+        var dexterityBasedPercentages = new List<Type> { typeof(Falling), typeof(Climbing), typeof(Jumping) };
 		if (PercentQualifications.Count == 0)
 		{
 			PercentQualifications.AddRange([new Falling(0), new Climbing(0), new Jumping(0)]);
@@ -633,26 +675,26 @@ public class Character : IFightModifier, ILiving, IAbilities, INotifyPropertyCha
 	{
 		var initiatorRace = Race.SpecialQualifications.GetSpeciality<GoodInitiator>();
 		
-		InitiatingValue = initiatorRace != null ? initiatorRace.InitiatingBase : BaseCaste.InitiatingBaseValue;
+		InitiatingValue = initiatorRace != null ? initiatorRace.InitiatingBase : BaseClass.InitiatingBaseValue;
 		InitiatingValue += MathHelper.GetAboveAverageValue(Speed);
 		InitiatingValue += MathHelper.GetAboveAverageValue(Dexterity);
 
-		AttackingValue = BaseCaste.AttackingBaseValue;
+		AttackingValue = BaseClass.AttackingBaseValue;
 		AttackingValue += MathHelper.GetAboveAverageValue(Strength);
 		AttackingValue += MathHelper.GetAboveAverageValue(Speed);
 		AttackingValue += MathHelper.GetAboveAverageValue(Dexterity);
 
-		DefendingValue = BaseCaste.DefendingBaseValue;
+		DefendingValue = BaseClass.DefendingBaseValue;
 		DefendingValue += MathHelper.GetAboveAverageValue(Speed);
 		DefendingValue += MathHelper.GetAboveAverageValue(Dexterity);
 
-		var archerCaste = BaseCaste.SpecialQualifications.FirstOrDefault(specialQualification => specialQualification is GoodArcher) as GoodArcher;
+		var archerClass = BaseClass.SpecialQualifications.FirstOrDefault(specialQualification => specialQualification is GoodArcher) as GoodArcher;
 		var archerRace = Race.SpecialQualifications.GetSpeciality<GoodArcher>();
 
 		try
 		{
-			AimingValue = archerCaste != null ? archerCaste.AimingBase :
-				archerRace != null ? archerRace.AimingBase : BaseCaste.AimingBaseValue;
+			AimingValue = archerClass != null ? archerClass.AimingBase :
+				archerRace != null ? archerRace.AimingBase : BaseClass.AimingBaseValue;
 			AimingValue += MathHelper.GetAboveAverageValue(Dexterity);
 		}
 		catch (InvalidOperationException)
@@ -660,14 +702,14 @@ public class Character : IFightModifier, ILiving, IAbilities, INotifyPropertyCha
 			AimingValue = 0;
 		}
 
-		var (attackPercentage, defencePercentage, aimingPercentage) = DistributionProvider.Get(BaseCaste, Race);
+		var (attackPercentage, defencePercentage, aimingPercentage) = DistributionProvider.Get(BaseClass, Race);
 		DistributeAttackModifierPoints(attackPercentage, defencePercentage, aimingPercentage);
 	}
 
 	private void CalculateLifePoints()
 	{
 		var additionalLifePoints = Race.SpecialQualifications.GetSpeciality<AdditionalLifePoints>();
-		HealthPoints = BaseCaste.BaseLifePoints;
+		HealthPoints = BaseClass.BaseLifePoints;
 		if (additionalLifePoints != null)
 		{
             HealthPoints = additionalLifePoints.ExtraLifePoints;
@@ -679,19 +721,19 @@ public class Character : IFightModifier, ILiving, IAbilities, INotifyPropertyCha
 	private void CalculatePainTolerancePoints()
 	{
 		var doubledPainToleranceBase = Race.SpecialQualifications.GetSpeciality<DoubledPainToleranceBase>();
-		if (multiCasteMode == MultiCasteMode.Normal_Or_SwitchedCaste)
+		if (multiClassMode == MultiClassMode.Normal_Or_SwitchedClass)
 		{
-			PainTolerancePoints = doubledPainToleranceBase != null ? (byte)(2 * BaseCaste.BasePainTolerancePoints) : BaseCaste.BasePainTolerancePoints;
+			PainTolerancePoints = doubledPainToleranceBase != null ? (byte)(2 * BaseClass.BasePainTolerancePoints) : BaseClass.BasePainTolerancePoints;
 			PainTolerancePoints += MathHelper.GetAboveAverageValue(Stamina);
 			PainTolerancePoints += MathHelper.GetAboveAverageValue(Willpower);
-			if (BaseCaste.AddPainToleranceOnFirstLevel)
+			if (BaseClass.AddPainToleranceOnFirstLevel)
 			{
-				PainTolerancePoints += BaseCaste.GetPainToleranceModifier();
+				PainTolerancePoints += BaseClass.GetPainToleranceModifier();
 			}
 
-			for (int i = 1; i < BaseCaste.Level; i++)
+			for (int i = 1; i < BaseClass.Level; i++)
 			{
-				PainTolerancePoints += BaseCaste.GetPainToleranceModifier();
+				PainTolerancePoints += BaseClass.GetPainToleranceModifier();
 			}
 		}
 		else
@@ -707,25 +749,25 @@ public class Character : IFightModifier, ILiving, IAbilities, INotifyPropertyCha
 	{
         var doubledPainToleranceBase = Race.SpecialQualifications.GetSpeciality<ExtraMagicResistanceOnLevelUp>();
         UnconsciousAstralMagicResistance = MathHelper.GetAboveAverageValue(Astral);
-		UnconsciousAstralMagicResistance += (short)((BaseCaste.Level - 1) * (doubledPainToleranceBase?.ExtraResistancePoints ?? 0));
+		UnconsciousAstralMagicResistance += (short)((BaseClass.Level - 1) * (doubledPainToleranceBase?.ExtraResistancePoints ?? 0));
 	}
 
 	private void CalculateUnconsciousMentalMagicResistance()
 	{
         var doubledPainToleranceBase = Race.SpecialQualifications.GetSpeciality<ExtraMagicResistanceOnLevelUp>();
         UnconsciousMentalMagicResistance = MathHelper.GetAboveAverageValue(Willpower);
-        UnconsciousMentalMagicResistance += (short)((BaseCaste.Level - 1) * (doubledPainToleranceBase?.ExtraResistancePoints ?? 0));
+        UnconsciousMentalMagicResistance += (short)((BaseClass.Level - 1) * (doubledPainToleranceBase?.ExtraResistancePoints ?? 0));
 	}
 
 	private void CalculatePsiPoints()
     {
         var kyrLore = Race.SpecialQualifications.GetSpeciality<KyrLore>();
 
-        var caste = BaseCaste;
-		//PsiPoints = 0;
-		//foreach (var caste in Castes)
-		{
-			(IPsi psi, ushort psiPoints, byte psiPointsModifier) = PsiPointCalculator.Calculate(Qualifications, Intelligence, caste.Level, kyrLore);
+        var @class = BaseClass;
+        //PsiPoints = 0;
+        //foreach (var @class in Classes)
+        {
+            (IPsi psi, ushort psiPoints, byte psiPointsModifier) = PsiPointCalculator.Calculate(Qualifications, Intelligence, @class.Level, kyrLore);
             
             //if (PsiPoints < psiPoints)
             {
@@ -742,27 +784,27 @@ public class Character : IFightModifier, ILiving, IAbilities, INotifyPropertyCha
         var kyrLore = Race.SpecialQualifications.GetSpeciality<KyrLore>();
 
         ManaPoints = 0;
-		foreach (var caste in Castes)
+		foreach (var @class in Classes)
 		{
-			var sorcery = caste.SpecialQualifications.FirstOrDefault(specialQualification => specialQualification is Sorcery) as Sorcery;
-			if (BaseCaste is Bard)
+			var sorcery = @class.SpecialQualifications.FirstOrDefault(specialQualification => specialQualification is Sorcery) as Sorcery;
+			if (sorcery != null)
 			{
-				sorcery.ManaPoints = (ushort)MathHelper.GetAboveAverageValue(Intelligence);
-            }
-			var manaPoints = sorcery != null ? sorcery.ManaPoints : (ushort)0;
-			
-			if (kyrLore != null)
-			{
-				manaPoints += BaseCaste.Level;
+				if (BaseClass is Bard)
+				{
+					sorcery.ManaPoints = (ushort)MathHelper.GetAboveAverageValue(Intelligence);
+				}
+				var manaPoints = sorcery.ManaPoints;
+				if (kyrLore != null)
+				{
+					manaPoints += BaseClass.Level;
+				}
+				for (int i = 1; i < @class.Level; i++)
+				{
+					manaPoints += sorcery.GetManaPointsModifier();
+				}
+				MaxManaPointsPerLevel = sorcery.GetManaPointsModifier();
 			}
-
-            for (int i = 1; i < caste.Level; i++)
-			{
-				manaPoints += sorcery != null ? sorcery.GetManaPointsModifier() : (ushort)0;
-            }
-
-			MaxManaPointsPerLevel = sorcery != null ? sorcery.GetManaPointsModifier() : (ushort)0;
-
+			
             if (ManaPoints < manaPoints)
 			{
 				Sorcery = sorcery;
@@ -772,32 +814,11 @@ public class Character : IFightModifier, ILiving, IAbilities, INotifyPropertyCha
 		MaxManaPoints = ManaPoints;
     }
 
-	// FIXME: Multi-caste
-	private void CalculateCasteSpecificLevelUps()
-	{
-		foreach (var caste in Castes)
-		{
-			var newQualifications = caste.FutureQualifications
-				.Where(futureQualification => futureQualification.MasterQualificationLevel <= caste.Level);
-
-			var newBaseQualifications = newQualifications
-				.Where(futureQualification => futureQualification.QualificationLevel == QualificationLevel.Base);
-
-			Qualifications.AddRange(newBaseQualifications);
-
-			var newMasterQualifications = newQualifications.Except(newBaseQualifications).Concat(Race.Qualifications);
-			foreach (var newMasterQualification in newMasterQualifications)
-			{
-				Qualifications.UpgradeOrAddQualification(newMasterQualification);
-			}
-		}
-	}
-
 	private void DistributeAttackModifierPoints(byte attackPercentage, byte defencePercentage, byte aimingPercentage)
 	{
-		foreach (var caste in Castes)
+		foreach (var @class in Classes)
 		{
-			var fightValues = (caste.AddFightValueOnFirstLevel ? caste.Level : caste.Level - 1) * caste.FightValueModifier;
+			var fightValues = (@class.AddFightValueOnFirstLevel ? @class.Level : @class.Level - 1) * @class.FightValueModifier;
 			var attackPoints = MathHelper.GetModifier(fightValues, attackPercentage);
 			var defencePoints = MathHelper.GetModifier(fightValues, defencePercentage);
 			var aimingPoints = MathHelper.GetModifier(fightValues, aimingPercentage);
@@ -813,4 +834,28 @@ public class Character : IFightModifier, ILiving, IAbilities, INotifyPropertyCha
 			AimingValue += aimingPoints;
 		}
 	}
+
+    public void LevelUp()
+    {
+		CalculateManaPoints();
+    }
+
+	public void Buy(Thing thing)
+	{
+		Money -= thing.Price;
+        if (thing is Weapon weapon)
+        {
+            if (primaryWeapon == null)
+            {
+				primaryWeapon = weapon;
+            }
+            else
+            {
+                secondaryWeapon ??= weapon;
+            }
+        }
+        Equipment.Add(thing);
+		NotifyPropertyChanged(nameof(Money));
+		NotifyPropertyChanged(nameof(Equipment));
+    }
 }

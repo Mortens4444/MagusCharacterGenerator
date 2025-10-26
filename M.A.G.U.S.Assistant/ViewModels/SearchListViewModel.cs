@@ -5,12 +5,12 @@ using System.Windows.Input;
 
 namespace M.A.G.U.S.Assistant.ViewModels;
 
-public class SearchListViewModel : INotifyPropertyChanged
+internal class SearchListViewModel : INotifyPropertyChanged
 {
     public event PropertyChangedEventHandler? PropertyChanged;
 
-    public ObservableCollection<DisplayItem> Items { get; } = new ObservableCollection<DisplayItem>();
-    public ObservableCollection<DisplayItem> FilteredItems { get; } = new ObservableCollection<DisplayItem>();
+    public ObservableCollection<DisplayItem> Items { get; } = [];
+    public ObservableCollection<DisplayItem> FilteredItems { get; } = [];
 
     string searchText = String.Empty;
     public string SearchText

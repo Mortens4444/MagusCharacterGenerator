@@ -8,7 +8,7 @@ using System.Windows.Input;
 
 namespace M.A.G.U.S.Assistant.ViewModels;
 
-public class LanguagesViewModel : INotifyPropertyChanged
+internal class LanguagesViewModel : INotifyPropertyChanged
 {
     public ObservableCollection<LanguageTypes> Types { get; } =
         [LanguageTypes.Living, LanguageTypes.Ancient];
@@ -98,7 +98,7 @@ public class LanguagesViewModel : INotifyPropertyChanged
         ApplyFilter();
     }
 
-    private IEnumerable<LanguageItem> GetEnumItems(Type enumType)
+    private static IEnumerable<LanguageItem> GetEnumItems(Type enumType)
     {
         foreach (var val in Enum.GetValues(enumType))
         {

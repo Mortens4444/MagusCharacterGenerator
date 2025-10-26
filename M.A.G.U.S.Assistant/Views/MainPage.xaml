@@ -3,7 +3,8 @@
                 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
                 xmlns:mc="clr-namespace:Mtf.Maui.Controls;assembly=Mtf.Maui.Controls"
                 xmlns:v="clr-namespace:M.A.G.U.S.Assistant.Views"
-                x:Class="M.A.G.U.S.Assistant.Views.MainPage">
+                x:Class="M.A.G.U.S.Assistant.Views.MainPage"
+                x:ClassModifier="internal">
 
     <ScrollView>
         <VerticalStackLayout Padding="16" Spacing="12">

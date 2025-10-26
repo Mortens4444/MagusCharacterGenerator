@@ -1,10 +1,10 @@
-using M.A.G.U.S.Assistant.Extensions;
 using M.A.G.U.S.Assistant.Models;
 using M.A.G.U.S.GameSystem.Runes;
+using Mtf.Extensions;
 
 namespace M.A.G.U.S.Assistant.Views;
 
-public class RunesPage : SearchListPage
+internal partial class RunesPage : SearchListPage
 {
     public RunesPage()
         : base("Runes",

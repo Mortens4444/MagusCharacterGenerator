@@ -3,6 +3,7 @@ using M.A.G.U.S.Qualifications;
 using M.A.G.U.S.Qualifications.Laical;
 using M.A.G.U.S.Qualifications.Percentages;
 using M.A.G.U.S.Qualifications.Specialities;
+using Mtf.Extensions;
 
 namespace M.A.G.U.S.Races;
 

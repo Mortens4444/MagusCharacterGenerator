@@ -51,7 +51,7 @@
             tsmiGetImages = new ToolStripMenuItem();
             tsmiGoogle = new ToolStripMenuItem();
             tsmiPinterest = new ToolStripMenuItem();
-            tsmiCastes = new ToolStripMenuItem();
+            tsmiClasses = new ToolStripMenuItem();
             tsmiKranichWarlock = new ToolStripMenuItem();
             tsmiNastarPriest = new ToolStripMenuItem();
             tsmiVelarPriest = new ToolStripMenuItem();
@@ -226,7 +226,7 @@
             // 
             // tsmiAccessories
             // 
-            tsmiAccessories.DropDownItems.AddRange(new ToolStripItem[] { tsmiArkenForge, tsmiGetSounds, tsmiGetImages, tsmiCastes, tsmiOther });
+            tsmiAccessories.DropDownItems.AddRange(new ToolStripItem[] { tsmiArkenForge, tsmiGetSounds, tsmiGetImages, tsmiClasses, tsmiOther });
             tsmiAccessories.Name = "tsmiAccessories";
             tsmiAccessories.Size = new Size(80, 20);
             tsmiAccessories.Text = "Accessories";
@@ -266,12 +266,12 @@
             tsmiPinterest.Text = "Pinterest";
             tsmiPinterest.Click += TsmiPinterest_Click;
             // 
-            // tsmiCastes
+            // tsmiClasses
             // 
-            tsmiCastes.DropDownItems.AddRange(new ToolStripItem[] { tsmiKranichWarlock, tsmiNastarPriest, tsmiVelarPriest });
-            tsmiCastes.Name = "tsmiCastes";
-            tsmiCastes.Size = new Size(133, 22);
-            tsmiCastes.Text = "Castes";
+            tsmiClasses.DropDownItems.AddRange(new ToolStripItem[] { tsmiKranichWarlock, tsmiNastarPriest, tsmiVelarPriest });
+            tsmiClasses.Name = "tsmiClasses";
+            tsmiClasses.Size = new Size(133, 22);
+            tsmiClasses.Text = "Classes";
             // 
             // tsmiKranichWarlock
             // 
@@ -1225,7 +1225,7 @@
 		private System.Windows.Forms.CheckBox chkSoundsLoop;
 		private System.Windows.Forms.ColumnHeader chLoop;
 		private System.Windows.Forms.ColumnHeader chLoopMusic;
-		private System.Windows.Forms.ToolStripMenuItem tsmiCastes;
+		private System.Windows.Forms.ToolStripMenuItem tsmiClasses;
 		private System.Windows.Forms.ToolStripMenuItem tsmiKranichWarlock;
 		private System.Windows.Forms.ToolStripMenuItem tsmiNastarPriest;
 		private System.Windows.Forms.ToolStripMenuItem tsmiVelarPriest;

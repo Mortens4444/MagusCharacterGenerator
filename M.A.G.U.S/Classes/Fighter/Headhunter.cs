@@ -17,50 +17,54 @@ public class Headhunter(byte level = 1) : Class(level), IClass, IJustFight
 {
     [DiceThrow(ThrowType._2K6)]
     [DiceThrowModifier(6)]
-    public override short Strength => DiceThrow._2K6_Plus_6();
+    public override sbyte Strength => DiceThrow._2K6_Plus_6();
 
     [DiceThrow(ThrowType._1K6)]
     [DiceThrowModifier(12)]
     [SpecialTraining]
-    public override short Speed => DiceThrow._1K6_Plus_12_Plus_SpecialTraining();
+    public override sbyte Speed => DiceThrow._1K6_Plus_12_Plus_SpecialTraining();
 
     [DiceThrow(ThrowType._1K10)]
     [DiceThrowModifier(8)]
-    public override short Dexterity => DiceThrow._1K10_Plus_8();
+    public override sbyte Dexterity => DiceThrow._1K10_Plus_8();
 
     [DiceThrow(ThrowType._1K6)]
     [DiceThrowModifier(12)]
     [SpecialTraining]
-    public override short Stamina => DiceThrow._1K6_Plus_12_Plus_SpecialTraining();
+    public override sbyte Stamina => DiceThrow._1K6_Plus_12_Plus_SpecialTraining();
 
     [DiceThrow(ThrowType._1K10)]
     [DiceThrowModifier(10)]
-    public override short Health => DiceThrow._1K10_Plus_10();
+    public override sbyte Health => DiceThrow._1K10_Plus_10();
 
     [DiceThrow(ThrowType._3K6)]
-    public override short Beauty => DiceThrow._3K6();
+    public override sbyte Beauty => DiceThrow._3K6();
 
     [DiceThrow(ThrowType._3K6_2_Times)]
-    public override short Intelligence => DiceThrow._3K6_2_Times();
+    public override sbyte Intelligence => DiceThrow._3K6_2_Times();
 
     [DiceThrow(ThrowType._1K10)]
     [DiceThrowModifier(8)]
-    public override short Willpower => DiceThrow._1K10_Plus_8();
+    public override sbyte Willpower => DiceThrow._1K10_Plus_8();
 
     [DiceThrow(ThrowType._2K6)]
     [DiceThrowModifier(6)]
-    public override short Astral => DiceThrow._2K6_Plus_6();
+    public override sbyte Astral => DiceThrow._2K6_Plus_6();
 
     [DiceThrow(ThrowType._1K6)]
-    public override short Gold => DiceThrow._1K6();
+    public override byte Gold => (byte)DiceThrow._1K6();
 
     [DiceThrow(ThrowType._2K6)]
     [DiceThrowModifier(8)]
-    public override byte Bravery => (byte)(DiceThrow._2K6() + 8);
+    public override sbyte Bravery => (sbyte)(DiceThrow._2K6() + 8);
 
     [DiceThrow(ThrowType._2K6)]
     [DiceThrowModifier(8)]
-    public override byte Erudition => (byte)(DiceThrow._2K6() + 8);
+    public override sbyte Erudition => (sbyte)(DiceThrow._2K6() + 8);
+
+    [DiceThrow(ThrowType._1K6)]
+    [DiceThrowModifier(12)]
+    public override sbyte Detection => (sbyte)(DiceThrow._1K6() + 12);
 
     public override byte InitiatingBaseValue => 10;
 

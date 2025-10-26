@@ -12,13 +12,13 @@ namespace M.A.G.U.S.Races;
 /// </summary>
 public class Kyr : Race
 {
-    public override short Strength => -2;
+    public override sbyte Strength => -2;
 
-    public override short Beauty => 1;
+    public override sbyte Beauty => 1;
 
-    public override short Intelligence => -2;
+    public override sbyte Intelligence => -2;
 
-    public override short Willpower => 1;
+    public override sbyte Willpower => 1;
 
     public override SpecialQualificationList SpecialQualifications =>
     [

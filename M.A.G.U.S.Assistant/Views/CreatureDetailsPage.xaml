@@ -4,6 +4,7 @@
               xmlns:v="clr-namespace:M.A.G.U.S.Assistant.Views"
               xmlns:vm="clr-namespace:M.A.G.U.S.Assistant.ViewModels"
               x:Class="M.A.G.U.S.Assistant.Views.CreatureDetailsPage"
+              x:ClassModifier="internal"
               x:DataType="vm:CreatureDetailsViewModel">
 
     <v:NotifierPage.BindingContext>

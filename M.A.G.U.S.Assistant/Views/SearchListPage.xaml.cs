@@ -2,15 +2,16 @@ using CommunityToolkit.Mvvm.Messaging;
 using M.A.G.U.S.Assistant.Models;
 using M.A.G.U.S.Assistant.ViewModels;
 using M.A.G.U.S.Bestiary;
+using M.A.G.U.S.Things;
 using Mtf.LanguageService;
 using Mtf.Maui.Controls.Models;
 
 namespace M.A.G.U.S.Assistant.Views;
 
 [XamlCompilation(XamlCompilationOptions.Compile)]
-public partial class SearchListPage : NotifierPage
+internal partial class SearchListPage : NotifierPage
 {
-    private SearchListViewModel ViewModel => BindingContext as SearchListViewModel;
+    internal SearchListViewModel ViewModel => BindingContext as SearchListViewModel;
 
     public SearchListPage(string title, IEnumerable<DisplayItem> items)
     {
@@ -19,7 +20,7 @@ public partial class SearchListPage : NotifierPage
         ViewModel?.LoadItems(items);
     }
 
-    void OnDetailsClicked(object sender, EventArgs e)
+    protected virtual void OnDetailsClicked(object sender, EventArgs e)
     {
         try
         {
@@ -31,7 +32,9 @@ public partial class SearchListPage : NotifierPage
 
             var objToInspect = (object)selected;
             var page = (Page)(objToInspect is DisplayItem displayItem ?
-                new CreatureDetailsPage(displayItem.Source as Creature) :
+                displayItem.Source is Creature creature ? 
+                    new CreatureDetailsPage(creature) :
+                    new ItemDetailsPage(displayItem.Source as Thing) :
                 new ObjectInspectorPage(objToInspect));
             Navigation.PushAsync(page);
         }

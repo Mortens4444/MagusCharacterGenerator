@@ -39,6 +39,8 @@ public class Money : IComparable<Money>, IEquatable<Money>
     public decimal Copper { get; set; }
 
     public decimal Summa => Mithril * CopperPerMithril + Gold * CopperPerGold + Silver * CopperPerSilver + Copper;
+    
+    public bool IsZero => Mithril == 0 && Gold == 0 && Silver == 0 && Copper == 0;
 
     public int CompareTo(Money other)
     {
@@ -54,7 +56,7 @@ public class Money : IComparable<Money>, IEquatable<Money>
 
     public bool IsAtLeast(ulong copperAmount) => Summa >= copperAmount;
 
-    public override bool Equals(object obj) => Equals(obj as Money);
+    public override bool Equals(object? obj) => Equals(obj as Money);
     public bool Equals(Money other) => other is not null && Summa == other.Summa;
     public override int GetHashCode() => Summa.GetHashCode();
 

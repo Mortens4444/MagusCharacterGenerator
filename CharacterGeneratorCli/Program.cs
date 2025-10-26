@@ -44,24 +44,24 @@ class Program
 				.Select(raceType => (IRace)Activator.CreateInstance(raceType));
 			var selectedRace = races.First(race => race.ToString().ToLower() == characterGenerationDto.Race);
 
-			var castes = magusCharacterGeneratorTypes
+			var classes = magusCharacterGeneratorTypes
 				.Where(type => !type.IsAbstract && typeof(IClass).IsAssignableFrom(type))
-				.Select(casteType => (IClass)Activator.CreateInstance(casteType, (byte)1));
-			var selectedCaste = castes.First(caste => caste.ToString().ToLower() == characterGenerationDto.Caste);
+				.Select(classType => (IClass)Activator.CreateInstance(classType, (byte)1));
+			var selectedClass = classes.First(@class => @class.ToString().ToLower() == characterGenerationDto.Class);
 
-			var primaryCatse = (IClass)Activator.CreateInstance(selectedCaste.GetType(), Convert.ToByte(characterGenerationDto.Level));
+			var primaryClass = (IClass)Activator.CreateInstance(selectedClass.GetType(), Convert.ToByte(characterGenerationDto.Level));
 			Character character;
-			if (!String.IsNullOrEmpty(characterGenerationDto.SecondaryCaste))
+			if (!String.IsNullOrEmpty(characterGenerationDto.SecondaryClass))
 			{
-				var secondarySelectedCaste = castes.First(caste => caste.ToString().ToLower() == characterGenerationDto.SecondaryCaste);
-				var secondaryCaste = (IClass)Activator.CreateInstance(secondarySelectedCaste.GetType(), Convert.ToByte(characterGenerationDto.SecondaryLevel));
-				character = (Character)Activator.CreateInstance(typeof(Character), characterGenerationDto.Name, selectedRace, primaryCatse, secondaryCaste);
+				var secondarySelectedClass = classes.First(@class => @class.ToString().ToLower() == characterGenerationDto.SecondaryClass);
+				var secondaryClass = Activator.CreateInstance(secondarySelectedClass.GetType(), Convert.ToByte(characterGenerationDto.SecondaryLevel)) as IClass;
+				character = Activator.CreateInstance(typeof(Character), characterGenerationDto.Name, selectedRace, primaryClass, secondaryClass) as Character ?? throw new InvalidOperationException();
 			}
 			else
 			{
-				character = (Character)Activator.CreateInstance(typeof(Character), characterGenerationDto.Name, selectedRace, primaryCatse);
+				character = Activator.CreateInstance(typeof(Character), characterGenerationDto.Name, selectedRace, primaryClass) as Character ?? throw new InvalidOperationException();
 			}
-			character.CalculateChanges();
+			character?.CalculateChanges();
 			return character;
 		}
 		catch

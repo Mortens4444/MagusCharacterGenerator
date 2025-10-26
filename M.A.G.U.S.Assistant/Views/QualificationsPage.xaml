@@ -8,6 +8,7 @@
                 xmlns:mc="clr-namespace:Mtf.Maui.Controls;assembly=Mtf.Maui.Controls"
                 x:Class="M.A.G.U.S.Assistant.Views.QualificationsPage"
                 x:DataType="vm:QualificationsViewModel"
+                x:ClassModifier="internal"
                 Title="Qualifications">
 
     <v:NotifierPage.BindingContext>

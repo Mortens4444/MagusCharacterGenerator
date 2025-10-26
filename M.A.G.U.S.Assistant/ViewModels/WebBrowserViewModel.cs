@@ -3,7 +3,7 @@ using System.Windows.Input;
 
 namespace M.A.G.U.S.Assistant.ViewModels;
 
-public class WebBrowserViewModel : ObservableObject
+internal class WebBrowserViewModel : ObservableObject
 {
     public WebBrowserViewModel()
     {

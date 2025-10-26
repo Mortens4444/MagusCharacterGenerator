@@ -21,7 +21,7 @@ namespace M.A.G.U.S.Test
 				Name = "Anuman",
 				Lst = new List<byte> { 1, 2, 3 },
 				Lng = new LanguageLore(Language.Kranich, 3),
-				Caste = new ArelPriest(1),
+				Class = new ArelPriest(1),
 				Race = new Orc(),
 				Character = new Character("Anuman", new Amund(), new ArelPriest(1))
 			};
@@ -32,7 +32,7 @@ namespace M.A.G.U.S.Test
 			Assert.That(anonymousClass.Name, Is.EqualTo(deserializedAnonymousClassJson.Name));
 			Assert.That(anonymousClass.Lst, Is.EqualTo(deserializedAnonymousClassJson.Lst));
 			Assert.That(anonymousClass.Lng.ToString(), Is.EqualTo(deserializedAnonymousClassJson.Lng.ToString()));
-			Assert.That(anonymousClass.Caste.ToString(), Is.EqualTo(deserializedAnonymousClassJson.Caste.ToString()));
+			Assert.That(anonymousClass.Class.ToString(), Is.EqualTo(deserializedAnonymousClassJson.Class.ToString()));
 			Assert.That(anonymousClass.Race.ToString(), Is.EqualTo(deserializedAnonymousClassJson.Race.ToString()));
 			Assert.That(anonymousClass.Character.ToString(), Is.EqualTo(deserializedAnonymousClassJson.Character.ToString()));
 		}
@@ -51,7 +51,7 @@ namespace M.A.G.U.S.Test
 		{
 			var savedCharacterJson = EmbeddedResourceReader.Get("M.A.G.U.S.Test.ObjectDeserializationResults.Character.json", typeof(ObjectDeserializerTest).Assembly);
 			var character = ObjectSerializer.LoadContent<Character>(savedCharacterJson);
-			Assert.That(character.Castes, Is.Not.Null);
+			Assert.That(character.Classes, Is.Not.Null);
 		}
 	}
 }

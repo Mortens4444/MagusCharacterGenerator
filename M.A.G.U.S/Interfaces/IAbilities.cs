@@ -2,21 +2,27 @@
 
 public interface IAbilities
 {
-    short Strength { get; }
+    sbyte Strength { get; }
 
-    short Speed { get; }
+    sbyte Speed { get; }
 
-    short Dexterity { get; }
+    sbyte Dexterity { get; }
 
-    short Stamina { get; }
+    sbyte Stamina { get; }
 
-    short Health { get; }
+    sbyte Health { get; }
 
-    short Beauty { get; }
+    sbyte Beauty { get; }
 
-    short Intelligence { get; }
+    sbyte Intelligence { get; }
 
-    short Willpower { get; }
+    sbyte Willpower { get; }
 
-    short Astral { get; }
+    sbyte Astral { get; }
+
+    sbyte Bravery { get; }
+
+    sbyte Erudition { get; }
+
+    sbyte Detection { get; }
 }

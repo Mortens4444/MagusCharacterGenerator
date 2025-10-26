@@ -19,8 +19,8 @@ class CommandLineArgumentsParser
 						break;
 
 					case "-c":
-					case "--caste":
-						result.Caste = args[++i].ToLower();
+					case "--class":
+						result.Class = args[++i].ToLower();
 						break;
 
 					case "-l":
@@ -29,8 +29,8 @@ class CommandLineArgumentsParser
 						break;
 
 					case "-sc":
-					case "--secondary-caste":
-						result.SecondaryCaste = args[++i].ToLower();
+					case "--secondary-class":
+						result.SecondaryClass = args[++i].ToLower();
 						break;
 
 					case "-sl":

@@ -1,6 +1,5 @@
-﻿using M.A.G.U.S.Assistant.Extensions;
-using M.A.G.U.S.Assistant.Models;
-using M.A.G.U.S.Qualifications;
+﻿using M.A.G.U.S.Qualifications;
+using Mtf.Extensions;
 using Mtf.LanguageService;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -8,7 +7,7 @@ using System.Windows.Input;
 
 namespace M.A.G.U.S.Assistant.ViewModels;
 
-public partial class QualificationsViewModel : INotifyPropertyChanged
+internal partial class QualificationsViewModel : INotifyPropertyChanged
 {
     public ObservableCollection<Qualification> Qualifications { get; } = [];
     public ObservableCollection<Qualification> FilteredQualifications { get; } = [];

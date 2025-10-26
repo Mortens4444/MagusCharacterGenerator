@@ -7,11 +7,10 @@ using System.ComponentModel;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Windows.Input;
-using Microsoft.Maui.Devices;
 
 namespace M.A.G.U.S.Assistant.ViewModels;
 
-public class DiceRollViewModel : INotifyPropertyChanged
+internal class DiceRollViewModel : INotifyPropertyChanged
 {
     public event PropertyChangedEventHandler PropertyChanged;
 

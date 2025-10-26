@@ -9,6 +9,7 @@
                 x:Class="M.A.G.U.S.Assistant.Views.LanguagesPage"
                 x:DataType="vm:LanguagesViewModel"
                 x:Name="PageRoot"
+                x:ClassModifier="internal"
                 Title="Languages">
 
     <v:NotifierPage.BindingContext>

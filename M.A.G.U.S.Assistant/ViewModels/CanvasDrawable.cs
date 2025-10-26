@@ -2,7 +2,7 @@
 
 namespace M.A.G.U.S.Assistant.ViewModels;
 
-public class CanvasDrawable(PaintWizardViewModel vm) : IDrawable
+internal class CanvasDrawable(PaintWizardViewModel vm) : IDrawable
 {
     private readonly PaintWizardViewModel viewModel = vm;
 

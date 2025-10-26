@@ -5,7 +5,6 @@ using M.A.G.U.S.Assistant.Messages;
 using M.A.G.U.S.GameSystem;
 using M.A.G.U.S.Interfaces;
 using M.A.G.U.S.Races;
-using M.A.G.U.S.Things.Weapons;
 using M.A.G.U.S.Utils;
 using Mtf.LanguageService;
 using System.Collections.ObjectModel;
@@ -15,12 +14,10 @@ using System.Runtime.Versioning;
 namespace M.A.G.U.S.Assistant.ViewModels;
 
 [SupportedOSPlatform("windows10.0.17763.0")]
-public partial class CharacterGeneratorViewModel : ObservableObject
+internal partial class CharacterGeneratorViewModel : ObservableObject
 {
     private Character character;
-
-    private Weapon? primaryWeapon;
-    private Weapon? secondaryWeapon;
+    private byte baseClassLevel = 1;
 
     public CharacterGeneratorViewModel()
     {
@@ -38,7 +35,6 @@ public partial class CharacterGeneratorViewModel : ObservableObject
 
     public ObservableCollection<IClass?> AvailableClasses { get; } = new ObservableCollection<IClass?>();
 
-    private byte baseClassLevel = 1;
     public byte BaseClassLevel
     {
         get => baseClassLevel;
@@ -99,7 +95,7 @@ public partial class CharacterGeneratorViewModel : ObservableObject
             return;
         }
 
-        var instanceClass = InstanceClass(selectedClass.GetType(), 1);
+        var instanceClass = InstanceClass(selectedClass.GetType(), baseClassLevel);
         if (instanceClass == null)
         {
             WeakReferenceMessenger.Default.Send(new ShowErrorMessage("Class cannot be instantiated!"));
@@ -107,6 +103,7 @@ public partial class CharacterGeneratorViewModel : ObservableObject
         }
 
         Character = new Character(NameGenerator.Get().ToName(), selectedRace, instanceClass);
+        Character.LevelUp();
     }
 
     [RelayCommand]

@@ -1,12 +1,12 @@
-﻿using M.A.G.U.S.Assistant.Extensions;
-using M.A.G.U.S.Races;
+﻿using M.A.G.U.S.Races;
+using Mtf.Extensions;
 using Mtf.LanguageService;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 
 namespace M.A.G.U.S.Assistant.ViewModels;
 
-public class RacesViewModel : INotifyPropertyChanged
+internal partial class RacesViewModel : INotifyPropertyChanged
 {
     public ObservableCollection<Race> Races { get; } = [];
     public ObservableCollection<Race> FilteredRaces { get; } = [];

@@ -14,11 +14,7 @@ public abstract class Class(byte level) : IClass
 
     public byte Level { get; set; } = level;
 
-    public abstract short Gold { get; }
-
-    public abstract byte Bravery { get; }
-
-    public abstract byte Erudition { get; }
+    public abstract byte Gold { get; }
 
     public abstract byte InitiatingBaseValue { get; }
 
@@ -54,23 +50,29 @@ public abstract class Class(byte level) : IClass
 
     public abstract SpecialQualificationList SpecialQualifications { get; }
 
-    public abstract short Strength { get; }
+    public abstract sbyte Strength { get; }
 
-    public abstract short Speed { get; }
+    public abstract sbyte Speed { get; }
 
-    public abstract short Dexterity { get; }
+    public abstract sbyte Dexterity { get; }
 
-    public abstract short Stamina { get; }
+    public abstract sbyte Stamina { get; }
 
-    public abstract short Health { get; }
+    public abstract sbyte Health { get; }
 
-    public abstract short Beauty { get; }
+    public abstract sbyte Beauty { get; }
 
-    public abstract short Intelligence { get; }
+    public abstract sbyte Intelligence { get; }
 
-    public abstract short Willpower { get; }
+    public abstract sbyte Willpower { get; }
 
-    public abstract short Astral { get; }
+    public abstract sbyte Astral { get; }
+
+    public abstract sbyte Bravery { get; }
+
+    public abstract sbyte Erudition { get; }
+
+    public abstract sbyte Detection { get; }
 
     public byte AstralMagicResistance { get; }
 

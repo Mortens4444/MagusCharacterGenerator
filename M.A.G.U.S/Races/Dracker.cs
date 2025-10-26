@@ -10,13 +10,13 @@ namespace M.A.G.U.S.Races;
 /// </summary>
 public class Dracker : Race
 {
-    public override short Strength => 1;
+    public override sbyte Strength => 1;
 
-    public override short Stamina => 1;
+    public override sbyte Stamina => 1;
 
-    public override short Speed => 1;
+    public override sbyte Speed => 1;
 
-    public override short Health => -1;
+    public override sbyte Health => -1;
 
     public override QualificationList Qualifications =>
     [

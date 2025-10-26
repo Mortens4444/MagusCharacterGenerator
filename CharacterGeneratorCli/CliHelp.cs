@@ -9,10 +9,10 @@ static class CliHelp
 		Console.WriteLine("Arguments:");
 		Console.WriteLine("----------");
 		Console.WriteLine("-n, --name: Name of the character");
-		Console.WriteLine("-c, --caste: Primary caste of the character");
-		Console.WriteLine("-l, --level: Level of the primary caste");
-		Console.WriteLine("-sc, --secondary-caste: Secondary caste of the character");
-		Console.WriteLine("-sl, --secondary-level: Level of the secondary caste");
+		Console.WriteLine("-c, --class: Primary class of the character");
+		Console.WriteLine("-l, --level: Level of the primary class");
+		Console.WriteLine("-sc, --secondary-class: Secondary class of the character");
+		Console.WriteLine("-sl, --secondary-level: Level of the secondary class");
 		Console.WriteLine("-r, --race: Race of the character");
 	}
 }

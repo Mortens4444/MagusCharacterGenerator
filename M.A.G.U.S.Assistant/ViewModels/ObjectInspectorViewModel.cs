@@ -3,39 +3,41 @@ using System.Reflection;
 using CommunityToolkit.Mvvm.ComponentModel;
 using M.A.G.U.S.Assistant.Models;
 
-namespace M.A.G.U.S.Assistant.ViewModels
-{
-    public class ObjectInspectorViewModel : ObservableObject
-    {
-        public ObservableCollection<PropertyItem> Properties { get; } = new();
+namespace M.A.G.U.S.Assistant.ViewModels;
 
-        object inspectedObject;
-        public object InspectedObject
+internal class ObjectInspectorViewModel : ObservableObject
+{
+    public ObservableCollection<PropertyItem> Properties { get; } = [];
+
+    private object inspectedObject;
+
+    public object InspectedObject
+    {
+        get => inspectedObject;
+        set
         {
-            get => inspectedObject;
-            set
+            if (SetProperty(ref inspectedObject, value))
             {
-                if (SetProperty(ref inspectedObject, value))
-                {
-                    LoadProperties();
-                }
+                LoadProperties();
             }
         }
+    }
 
-        void LoadProperties()
+    void LoadProperties()
+    {
+        Properties.Clear();
+        if (inspectedObject == null)
         {
-            Properties.Clear();
-            if (inspectedObject == null)
-                return;
+            return;
+        }
 
-            var type = inspectedObject.GetType();
-            foreach (var prop in type.GetProperties(BindingFlags.Public | BindingFlags.Instance))
+        var type = inspectedObject.GetType();
+        foreach (var prop in type.GetProperties(BindingFlags.Public | BindingFlags.Instance))
+        {
+            if (prop.CanRead)
             {
-                if (prop.CanRead)
-                {
-                    var value = prop.GetValue(inspectedObject);
-                    Properties.Add(new PropertyItem(prop.Name, value));
-                }
+                var value = prop.GetValue(inspectedObject);
+                Properties.Add(new PropertyItem(prop.Name, value));
             }
         }
     }

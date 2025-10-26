@@ -12,15 +12,15 @@ namespace M.A.G.U.S.Races;
 /// </summary>
 public class Draquon : Race
 {
-    public override short Strength => 2;
+    public override sbyte Strength => 2;
 
-    public override short Stamina => 1;
+    public override sbyte Stamina => 1;
 
-    public override short Health => 1;
+    public override sbyte Health => 1;
 
-    public override short Beauty => -1;
+    public override sbyte Beauty => -1;
 
-    public override short Astral => -2;
+    public override sbyte Astral => -2;
 
     public override List<PercentQualification> PercentQualifications =>
     [

@@ -2,7 +2,7 @@
 
 namespace M.A.G.U.S.Assistant.Messages;
 
-public class ShowInfoMessage : ValueChangedMessage<string>
+internal class ShowInfoMessage : ValueChangedMessage<string>
 {
     public string Title { get; init; }
 

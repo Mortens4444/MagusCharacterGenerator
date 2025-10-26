@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFrameworks>net9.0-android;net9.0-ios;net9.0-maccatalyst</TargetFrameworks>
     <TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('windows'))">$(TargetFrameworks);net9.0-windows10.0.19041.0</TargetFrameworks>
@@ -23,7 +23,7 @@
     <ApplicationId>com.mortens.MAGUS.Assistant</ApplicationId>
     <!-- Versions -->
     <MajorVersion>1</MajorVersion>
-    <MinorVersion>5</MinorVersion>
+    <MinorVersion>6</MinorVersion>
     <BuildNumber>0</BuildNumber>
     <PatchNumber>0</PatchNumber>
     <FileVersion>$(MajorVersion).$(MinorVersion).$(BuildNumber).$(PatchNumber)</FileVersion>
@@ -171,11 +171,11 @@
     <EmbeddedResource Include="Resources\Raw\dice_roll.wav" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Microsoft.Maui.Controls" Version="9.0.110" />
-    <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="9.0.9" />
-    <PackageReference Include="Microsoft.Maui.Graphics" Version="9.0.110" />
-    <PackageReference Include="Microsoft.Maui.Graphics.Skia" Version="9.0.110" />
-    <PackageReference Include="Mtf.Maui.Controls" Version="1.0.30" />
+    <PackageReference Include="Microsoft.Maui.Controls" Version="9.0.120" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="9.0.10" />
+    <PackageReference Include="Microsoft.Maui.Graphics" Version="9.0.120" />
+    <PackageReference Include="Microsoft.Maui.Graphics.Skia" Version="9.0.120" />
+    <PackageReference Include="Mtf.Maui.Controls" Version="1.0.32" />
     <PackageReference Include="Mtf.MAUI.LanguageService" Version="1.0.36" />
     <PackageReference Include="Plugin.Maui.Audio" Version="4.0.0" />
   </ItemGroup>
@@ -185,6 +185,9 @@
   <ItemGroup>
     <Compile Update="Views\CharacterGeneratorPage.xaml.cs">
       <DependentUpon>CharacterGeneratorPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\ItemDetailsPage.xaml.cs">
+      <DependentUpon>ItemDetailsPage.xaml</DependentUpon>
     </Compile>
     <Compile Update="Views\MapPage.xaml.cs">
       <DependentUpon>MapPage.xaml</DependentUpon>
@@ -198,6 +201,9 @@
       <Generator>MSBuild:Compile</Generator>
     </MauiXaml>
     <MauiXaml Update="Views\ClassesPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </MauiXaml>
+    <MauiXaml Update="Views\ItemDetailsPage.xaml">
       <Generator>MSBuild:Compile</Generator>
     </MauiXaml>
     <MauiXaml Update="Views\CreatureDetailsPage.xaml">
@@ -236,5 +242,8 @@
     <MauiXaml Update="Views\SoundPage.xaml">
       <Generator>MSBuild:Compile</Generator>
     </MauiXaml>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Resources\Images\Gems\" />
   </ItemGroup>
 </Project>

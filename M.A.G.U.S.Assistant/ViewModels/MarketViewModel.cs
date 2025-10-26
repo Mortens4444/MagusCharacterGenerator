@@ -1,15 +1,16 @@
-﻿using M.A.G.U.S.Assistant.Extensions;
-using M.A.G.U.S.Assistant.Models;
+﻿using M.A.G.U.S.Assistant.Models;
 using M.A.G.U.S.Things;
+using Mtf.Extensions;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Windows.Input;
 
 namespace M.A.G.U.S.Assistant.ViewModels;
 
-public class MarketViewModel : INotifyPropertyChanged
+internal partial class MarketViewModel : INotifyPropertyChanged
 {
     public ObservableCollection<MarketItem> Items { get; } = [];
+
     public ObservableCollection<MarketItem> FilteredItems { get; } = [];
 
     string _searchText = String.Empty;
@@ -82,7 +83,7 @@ public class MarketViewModel : INotifyPropertyChanged
         ApplyFilter();
     }
 
-    private void OnItemSelected(MarketItem? item)
+    private static void OnItemSelected(MarketItem? item)
     {
         if (item == null)
         {

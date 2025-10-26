@@ -3,6 +3,7 @@
               xmlns:v="clr-namespace:M.A.G.U.S.Assistant.Views"
               xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
               x:Class="M.A.G.U.S.Assistant.Views.PaintWizardPage"
+              x:ClassModifier="internal"
               Title="Kert szerkesztő">
 
     <Grid RowDefinitions="Auto,Auto,*,Auto" ColumnDefinitions="*,300">

@@ -3,13 +3,14 @@ using M.A.G.U.S.Assistant.Extensions;
 using M.A.G.U.S.Assistant.Models;
 using M.A.G.U.S.Interfaces;
 using M.A.G.U.S.Qualifications;
+using Mtf.Extensions;
 using Mtf.LanguageService;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 
 namespace M.A.G.U.S.Assistant.ViewModels;
 
-public class ClassesViewModel : INotifyPropertyChanged
+internal partial class ClassesViewModel : INotifyPropertyChanged
 {
     public ObservableCollection<IClass> Classes { get; } = [];
     public ObservableCollection<IClass> FilteredClasses { get; } = [];
@@ -62,7 +63,7 @@ public class ClassesViewModel : INotifyPropertyChanged
         }
     }
 
-    private ObservableCollection<DiceStat> diceStats = new();
+    private readonly ObservableCollection<DiceStat> diceStats = [];
     public ObservableCollection<DiceStat> DiceStats
     {
         get

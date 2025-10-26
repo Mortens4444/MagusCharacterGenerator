@@ -4,7 +4,7 @@ using Mtf.Maui.Controls.Extensions;
 
 namespace M.A.G.U.S.Assistant.Messages;
 
-public class ShowErrorMessage : ValueChangedMessage<string>
+internal class ShowErrorMessage : ValueChangedMessage<string>
 {
     public ShowErrorMessage(Exception exception)
 #if DEBUG

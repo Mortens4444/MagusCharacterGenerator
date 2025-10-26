@@ -23,7 +23,7 @@ public partial class CharcterGenerator : Form
 
 	private Type selectedRace = typeof(Amund);
 	private Type selectedClass = typeof(ArelPriest);
-	private Type selectedSecondaryCaste;
+	private Type selectedSecondaryClass;
 	private Character character;
 	private readonly List<CharacterImage> images = [];
 	private int shownImageIndex = 0;
@@ -102,18 +102,18 @@ public partial class CharcterGenerator : Form
 
 		var classesWithTypes = magusCharacterGeneratorTypes
 			.Where(type => !type.IsAbstract && typeof(IClass).IsAssignableFrom(type))
-            .Select(casteType => (Class: Activator.CreateInstance(casteType, (byte)1), Type: casteType))
-			.OrderBy(casteWithType => casteWithType.Class.ToString());
+            .Select(classType => (Class: Activator.CreateInstance(classType, (byte)1), Type: classType))
+			.OrderBy(classWithType => classWithType.Class.ToString());
 
 		foreach (var classWithTypes in classesWithTypes)
 		{
-			var casteName = Lng.Elem(classWithTypes.Class.ToString());
-			classes.Add(casteName, classWithTypes.Type);
-			cbCaste.Items.Add(casteName);
-			cbSecondaryCaste.Items.Add(casteName);
+			var className = Lng.Elem(classWithTypes.Class.ToString());
+			classes.Add(className, classWithTypes.Type);
+			cbClass.Items.Add(className);
+			cbSecondaryClass.Items.Add(className);
 		}
-		cbCaste.SelectedIndex = 0;
-		cbSecondaryCaste.SelectedIndex = 0;
+		cbClass.SelectedIndex = 0;
+		cbSecondaryClass.SelectedIndex = 0;
 
 		Generate();
 	}
@@ -136,11 +136,11 @@ public partial class CharcterGenerator : Form
 			tbName.Text = characterName;
 
 			var race = (IRace)Activator.CreateInstance(selectedRace);
-			var caste = (IClass)Activator.CreateInstance(selectedClass, (byte)nudLevel.Value);
-			if (selectedSecondaryCaste != null && chkBoxSecondaryCaste.Checked)
+			var @class = (IClass)Activator.CreateInstance(selectedClass, (byte)nudLevel.Value);
+			if (selectedSecondaryClass != null && chkBoxSecondaryClass.Checked)
 			{
-				var secondCaste = (IClass)Activator.CreateInstance(selectedSecondaryCaste, (byte)nudSecondaryCasteLevel.Value);
-				var created = Activator.CreateInstance(typeof(Character), characterName, race, caste, secondCaste);
+				var secondaryClass = (IClass)Activator.CreateInstance(selectedSecondaryClass, (byte)nudSecondaryClassLevel.Value);
+				var created = Activator.CreateInstance(typeof(Character), characterName, race, @class, secondaryClass);
 				if (created is not Character c)
                 {
                     throw new InvalidOperationException("Failed to create Character instance.");
@@ -150,7 +150,7 @@ public partial class CharcterGenerator : Form
 			}
 			else
 			{
-				character = (Character)Activator.CreateInstance(typeof(Character), characterName, race, caste);
+				character = (Character)Activator.CreateInstance(typeof(Character), characterName, race, @class);
 			}
 			character.PropertyChanged += Character_PropertyChanged;
 			character.CalculateChanges();
@@ -167,14 +167,14 @@ public partial class CharcterGenerator : Form
 		cbRace.Text = character.Race.ToString();
 		tbName.Text = character.Name;
 
-		nudLevel.Value = character.Castes[0].Level;
-		cbCaste.Text = character.Castes[0].ToString();
+		nudLevel.Value = character.Classes[0].Level;
+		cbClass.Text = character.Classes[0].ToString();
 
-		chkBoxSecondaryCaste.Checked = character.Castes.Length > 1;
-		if (chkBoxSecondaryCaste.Checked)
+		chkBoxSecondaryClass.Checked = character.Classes.Length > 1;
+		if (chkBoxSecondaryClass.Checked)
 		{
-			nudSecondaryCasteLevel.Value = character.Castes[1].Level;
-			cbSecondaryCaste.Text = character.Castes[1].ToString();
+			nudSecondaryClassLevel.Value = character.Classes[1].Level;
+			cbSecondaryClass.Text = character.Classes[1].ToString();
 		}
 
 		LoadCharacterProperties();
@@ -337,9 +337,9 @@ public partial class CharcterGenerator : Form
 		SetDiceThrowLabel();
 	}
 
-	private void CbCaste_SelectedIndexChanged(object sender, EventArgs e)
+	private void CbClass_SelectedIndexChanged(object sender, EventArgs e)
 	{
-		selectedClass = classes[cbCaste.SelectedItem.ToString()];
+		selectedClass = classes[cbClass.SelectedItem.ToString()];
 		SetDiceThrowLabel();
 	}
 
@@ -350,28 +350,28 @@ public partial class CharcterGenerator : Form
 			return;
 		}
 
-		var caste = (IClass)Activator.CreateInstance(selectedClass, (byte)nudLevel.Value);
+		var @class = (IClass)Activator.CreateInstance(selectedClass, (byte)nudLevel.Value);
 		var race = (IRace)Activator.CreateInstance(selectedRace);
-		SetDiceThrowLabel(caste, race, nameof(caste.Strength), lblStrengthDiceThrow);
-		SetDiceThrowLabel(caste, race, nameof(caste.Speed), lblSpeedDiceThrow);
-		SetDiceThrowLabel(caste, race, nameof(caste.Dexterity), lblDexterityDiceThrow);
-		SetDiceThrowLabel(caste, race, nameof(caste.Stamina), lblStaminaDiceThrow);
-		SetDiceThrowLabel(caste, race, nameof(caste.Health), lblHealthDiceThrow);
-		SetDiceThrowLabel(caste, race, nameof(caste.Beauty), lblBeautyDiceThrow);
-		SetDiceThrowLabel(caste, race, nameof(caste.Willpower), lblWillpowerDiceThrow);
-		SetDiceThrowLabel(caste, race, nameof(caste.Intelligence), lblIntelligenceDiceThrow);
-		SetDiceThrowLabel(caste, race, nameof(caste.Astral), lblAstralDiceThrow);
-		SetDiceThrowLabel(caste, race, nameof(caste.Gold), lblGoldDiceThrow);
-		SetDiceThrowLabel(caste, race, nameof(caste.Bravery), lblBraveryDiceThrow);
-		SetDiceThrowLabel(caste, race, nameof(caste.Erudition), lblEruditionDiceThrow);
+		SetDiceThrowLabel(@class, race, nameof(@class.Strength), lblStrengthDiceThrow);
+		SetDiceThrowLabel(@class, race, nameof(@class.Speed), lblSpeedDiceThrow);
+		SetDiceThrowLabel(@class, race, nameof(@class.Dexterity), lblDexterityDiceThrow);
+		SetDiceThrowLabel(@class, race, nameof(@class.Stamina), lblStaminaDiceThrow);
+		SetDiceThrowLabel(@class, race, nameof(@class.Health), lblHealthDiceThrow);
+		SetDiceThrowLabel(@class, race, nameof(@class.Beauty), lblBeautyDiceThrow);
+		SetDiceThrowLabel(@class, race, nameof(@class.Willpower), lblWillpowerDiceThrow);
+		SetDiceThrowLabel(@class, race, nameof(@class.Intelligence), lblIntelligenceDiceThrow);
+		SetDiceThrowLabel(@class, race, nameof(@class.Astral), lblAstralDiceThrow);
+		SetDiceThrowLabel(@class, race, nameof(@class.Gold), lblGoldDiceThrow);
+		SetDiceThrowLabel(@class, race, nameof(@class.Bravery), lblBraveryDiceThrow);
+		SetDiceThrowLabel(@class, race, nameof(@class.Erudition), lblEruditionDiceThrow);
 	}
 
 	private void SetDiceThrowLabel(IClass @class, IRace race, string propertyName, Label label)
 	{
-		var casteAttributes = @class.GetCustomAttributes(propertyName);
-		var diceThrow = casteAttributes.GetAttribute<DiceThrowAttribute>();
-            var diceThrowModifier = casteAttributes.GetAttribute<DiceThrowModifierAttribute>();
-		var specialTrainingAttribute = casteAttributes.GetAttribute<SpecialTrainingAttribute>();
+		var classAttributes = @class.GetCustomAttributes(propertyName);
+		var diceThrow = classAttributes.GetAttribute<DiceThrowAttribute>();
+            var diceThrowModifier = classAttributes.GetAttribute<DiceThrowModifierAttribute>();
+		var specialTrainingAttribute = classAttributes.GetAttribute<SpecialTrainingAttribute>();
 		label.Text = Lng.Elem(diceThrow.DiceThrowType.GetDescription());
 		if (diceThrowModifier != null)
 		{
@@ -392,9 +392,9 @@ public partial class CharcterGenerator : Form
 		}
 	}
 
-	private void CbSecondaryCaste_SelectedIndexChanged(object sender, EventArgs e)
+	private void CbSecondaryClass_SelectedIndexChanged(object sender, EventArgs e)
 	{
-		selectedSecondaryCaste = classes[cbSecondaryCaste.SelectedItem.ToString()];
+		selectedSecondaryClass = classes[cbSecondaryClass.SelectedItem.ToString()];
 	}
 
 	private void BtnDone_Click(object sender, EventArgs e)
@@ -432,7 +432,7 @@ public partial class CharcterGenerator : Form
 	{
 		return new CharacterImage
 		{
-			ImageFile = (string)pbCharacter.Image.Tag,
+			ImageFile = pbCharacter.Image?.Tag as string ?? String.Empty,
 			SizeMode = GetSizeModeFromComboBoxSelection()
 		};
 	}
@@ -444,42 +444,42 @@ public partial class CharcterGenerator : Form
 
 	private void NudHealth_ValueChanged(object sender, EventArgs e)
 	{
-		character.Health = (short)nudHealth.Value;
+		character.Health = (sbyte)nudHealth.Value;
 	}
 
 	private void NudStamina_ValueChanged(object sender, EventArgs e)
 	{
-		character.Stamina = (short)nudStamina.Value;
+		character.Stamina = (sbyte)nudStamina.Value;
 	}
 
 	private void NudWillpower_ValueChanged(object sender, EventArgs e)
 	{
-		character.Willpower = (short)nudWillpower.Value;
+		character.Willpower = (sbyte)nudWillpower.Value;
 	}
 
 	private void NudStrength_ValueChanged(object sender, EventArgs e)
 	{
-		character.Strength = (short)nudStrength.Value;
+		character.Strength = (sbyte)nudStrength.Value;
 	}
 
 	private void NudSpeed_ValueChanged(object sender, EventArgs e)
 	{
-		character.Speed = (short)nudSpeed.Value;
+		character.Speed = (sbyte)nudSpeed.Value;
 	}
 
 	private void NudDexterity_ValueChanged(object sender, EventArgs e)
 	{
-		character.Dexterity = (short)nudDexterity.Value;
+		character.Dexterity = (sbyte)nudDexterity.Value;
 	}
 
 	private void NudAstral_ValueChanged(object sender, EventArgs e)
 	{
-		character.Astral = (short)nudAstral.Value;
+		character.Astral = (sbyte)nudAstral.Value;
 	}
 
 	private void NudIntelligence_ValueChanged(object sender, EventArgs e)
 	{
-		character.Intelligence = (short)nudIntelligence.Value;
+		character.Intelligence = (sbyte)nudIntelligence.Value;
 	}
 
 	private void BtnBrowse_Click(object sender, EventArgs e)
@@ -496,10 +496,10 @@ public partial class CharcterGenerator : Form
 		pbCharacter.SizeMode = GetSizeModeFromComboBoxSelection();
 	}
 
-	private void ChkBoxSecondaryCaste_CheckedChanged(object sender, EventArgs e)
+	private void ChkBoxSecondaryClass_CheckedChanged(object sender, EventArgs e)
 	{
-		cbSecondaryCaste.Enabled = chkBoxSecondaryCaste.Checked;
-		nudSecondaryCasteLevel.Enabled = chkBoxSecondaryCaste.Checked;
+		cbSecondaryClass.Enabled = chkBoxSecondaryClass.Checked;
+		nudSecondaryClassLevel.Enabled = chkBoxSecondaryClass.Checked;
 	}
 
 	private void BtnAdd_Click(object sender, EventArgs e)

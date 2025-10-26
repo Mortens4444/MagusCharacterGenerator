@@ -3,7 +3,7 @@ using Mtf.LanguageService;
 
 namespace M.A.G.U.S.Assistant.Extensions;
 
-public static class QualificationsExtensions
+internal static class QualificationsExtensions
 {
     public static IEnumerable<Qualification> OrderByLocalizedName(this IEnumerable<Qualification> source)
     {

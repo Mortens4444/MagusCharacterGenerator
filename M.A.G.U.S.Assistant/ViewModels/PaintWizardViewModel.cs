@@ -5,13 +5,13 @@ using System.Windows.Input;
 
 namespace M.A.G.U.S.Assistant.ViewModels;
 
-public class PaintWizardViewModel : INotifyPropertyChanged
+internal class PaintWizardViewModel : INotifyPropertyChanged
 {
     // alap: 1 px = 1 cm (pixelsPerCm = 1), a Zoom megszorozza
     private const int PixelsPerCmBase = 1;
 
-    public ObservableCollection<PaletteItem> PaletteItems { get; } = new ObservableCollection<PaletteItem>();
-    public ObservableCollection<PlacedItem> PlacedItems { get; } = new ObservableCollection<PlacedItem>();
+    public ObservableCollection<PaletteItem> PaletteItems { get; } = [];
+    public ObservableCollection<PlacedItem> PlacedItems { get; } = [];
 
     private double zoom = 1.0;
     public double Zoom
