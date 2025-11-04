@@ -47,7 +47,6 @@
 
                     <HorizontalStackLayout HorizontalOptions="Fill" Spacing="8" Grid.Row="2">
                         <Button Text="Buy" Command="{Binding BuyCommand}" />
-                        <Button Text="Close" Command="{Binding CloseCommand}" />
                     </HorizontalStackLayout>
                 </Grid>
             </Border>

@@ -6,8 +6,8 @@
 - FIXME: Multi-class
 - Play Videos (Videóklippek lejátszása)
 
-- Add weapon to character (easily changable way) S (Depends on 34)
-- Max. Distance for a day S (Depends on 34)
+- Add weapon to character (easily changable way) S
+- Max. Distance for a day S
 
 - Map page open pdf? M
 - Show Illnesses M
@@ -18,7 +18,6 @@
 - ClassesPage, show more info, like in RacesPage L
 - Character.cs Generation fixes, calculate combat modifiers, pain resistance, psi, mana, magic resistance L
 - Buy Qualifications for character L
-- 34. Buy items on market, show bougth items on CharactersPage L
 
 - Add more animations, images and sounds XL
 - Psi XXL (Pszi diszciplínák)
@@ -30,3 +29,5 @@
 
 https://www.yumpu.com/hu/document/view/5842996/magus-puska-071-verzio-http-wwwszerepjatektk/5
 https://nemaakos.wordpress.com/magus/jatek-elmelet/harc-es-szimulacio/
+
+Get more sounds - https://freesound.org/search/?q=fell&f=&s=Automatic+by+relevance&si_tags=0&si_name=0&si_description=0&si_packname=0&si_sound_id=0&si_username=0&d0=0&d1=*&ig=0&r=0&g=1&dp=0&cm=0&mm=0

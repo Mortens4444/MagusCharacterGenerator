@@ -1,4 +1,6 @@
-﻿using Mtf.LanguageService;
+﻿using CommunityToolkit.Mvvm.Messaging;
+using Mtf.LanguageService;
+using Mtf.Maui.Controls.Models;
 #if ANDROID
 using Plugin.Maui.Audio;
 #endif
@@ -12,7 +14,7 @@ namespace M.A.G.U.S.Assistant.ViewModels;
 
 internal class DiceRollViewModel : INotifyPropertyChanged
 {
-    public event PropertyChangedEventHandler PropertyChanged;
+    public event PropertyChangedEventHandler? PropertyChanged;
 
     public ObservableCollection<string> DiceType { get; } = new ObservableCollection<string>
     {
@@ -115,6 +117,7 @@ internal class DiceRollViewModel : INotifyPropertyChanged
         }
         catch (Exception ex)
         {
+            WeakReferenceMessenger.Default.Send(new ShowErrorMessage(ex.Message));
         }
     }
 
@@ -137,8 +140,9 @@ internal class DiceRollViewModel : INotifyPropertyChanged
             }
             await tcs.Task;
         }
-        catch
+        catch (Exception ex)
         {
+            WeakReferenceMessenger.Default.Send(new ShowErrorMessage(ex.Message));
         }
 
         ResultSummary = String.Empty;

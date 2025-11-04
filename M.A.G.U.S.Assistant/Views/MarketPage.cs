@@ -59,12 +59,22 @@ internal partial class MarketPage : SearchListPage
                 var page = new ItemDetailsPage(thing);
                 if (page.BindingContext is ItemDetailsViewModel vm)
                 {
-                    void handler(object? s, ThingPurchasedEventArgs args)
+                    async void handler(object? s, ThingPurchasedEventArgs args)
                     {
                         try
                         {
                             Character?.Buy(args.Thing);
-                            Device.BeginInvokeOnMainThread(async () => await Navigation.PopAsync());
+                            if (Dispatcher != null)
+                            {
+                                await Dispatcher.DispatchAsync(async () =>
+                                {
+                                    await Navigation.PopAsync().ConfigureAwait(false);
+                                }).ConfigureAwait(false);
+                            }
+                            else
+                            {
+                                await Navigation.PopAsync().ConfigureAwait(false);
+                            }
                         }
                         catch (Exception ex)
                         {

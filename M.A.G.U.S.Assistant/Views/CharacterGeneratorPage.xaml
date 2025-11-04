@@ -445,24 +445,24 @@
                  RowDefinitions="Auto, Auto, Auto">
 
                         <mc:EntryWithLabel Label="Copper"
-                                 Text="{Binding Character.Copper}"
+                                 Text="{Binding Character.Money.Copper}"
                                  IsEnabled="False"
                                  WidthRequest="100" />
 
                         <mc:EntryWithLabel Label="Silver"
-                                 Text="{Binding Character.Silver}"
+                                 Text="{Binding Character.Money.Silver}"
                                  IsEnabled="False"
                                  WidthRequest="100"
                                  Grid.Row="1" />
 
                         <mc:EntryWithLabel Label="Gold"
-                                 Text="{Binding Character.Gold}"
+                                 Text="{Binding Character.Money.Gold}"
                                  IsEnabled="False"
                                  WidthRequest="100"
                                  Grid.Column="1" />
 
                         <mc:EntryWithLabel Label="Mithril"
-                                 Text="{Binding Character.Mithril}"
+                                 Text="{Binding Character.Money.Mithril}"
                                  IsEnabled="False"
                                  WidthRequest="100"
                                  Grid.Row="1"
@@ -484,7 +484,7 @@
                                TextColor="Gray"
                                FontAttributes="Bold"/>
                         
-                        <Label Text="Weight"
+                        <Label Text="Weight (kg)"
                                VerticalOptions="Center"
                                HorizontalOptions="End"
                                TextColor="Gray"

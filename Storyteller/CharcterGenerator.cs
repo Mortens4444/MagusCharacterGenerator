@@ -62,7 +62,7 @@ public partial class CharcterGenerator : Form
         LoadImageFromPath(pbCharacter, imageToLoad);
 	}
 
-    public void LoadImageFromPath(PictureBox pictureBox, string imagePath)
+    public static void LoadImageFromPath(PictureBox pictureBox, string imagePath)
     {
         try
         {
@@ -203,13 +203,13 @@ public partial class CharcterGenerator : Form
 			//item.SubItems.Add();
 			var text = $"{Lng.Elem(qualification.Name)} ({Lng.Elem(qualification.QualificationLevel.GetDescription())})";
 			var endIndex = text.LastIndexOf(' ');
-			var name = text.Substring(0, endIndex);
+			var name = text[..endIndex];
 			var item = new ListViewItem(name);
 			if (i++ % 2 == 0)
 			{
 				item.BackColor = Color.LightBlue;
 			}
-			item.SubItems.Add(text.Substring(endIndex + 1));
+			item.SubItems.Add(text[(endIndex + 1)..]);
 			lvQualifications.Items.Add(item);
 		}
 
@@ -227,7 +227,7 @@ public partial class CharcterGenerator : Form
 		nudWillpower.Value = character.Willpower;
 		nudIntelligence.Value = character.Intelligence;
 		nudAstral.Value = character.Astral;
-		nudGold.Value = character.Gold;
+		nudGold.Value = character.Money.Gold;
 		nudBravery.Value = character.Bravery;
 		nudErudition.Value = character.Erudition;
 	}
@@ -352,21 +352,21 @@ public partial class CharcterGenerator : Form
 
 		var @class = (IClass)Activator.CreateInstance(selectedClass, (byte)nudLevel.Value);
 		var race = (IRace)Activator.CreateInstance(selectedRace);
-		SetDiceThrowLabel(@class, race, nameof(@class.Strength), lblStrengthDiceThrow);
-		SetDiceThrowLabel(@class, race, nameof(@class.Speed), lblSpeedDiceThrow);
-		SetDiceThrowLabel(@class, race, nameof(@class.Dexterity), lblDexterityDiceThrow);
-		SetDiceThrowLabel(@class, race, nameof(@class.Stamina), lblStaminaDiceThrow);
-		SetDiceThrowLabel(@class, race, nameof(@class.Health), lblHealthDiceThrow);
-		SetDiceThrowLabel(@class, race, nameof(@class.Beauty), lblBeautyDiceThrow);
-		SetDiceThrowLabel(@class, race, nameof(@class.Willpower), lblWillpowerDiceThrow);
-		SetDiceThrowLabel(@class, race, nameof(@class.Intelligence), lblIntelligenceDiceThrow);
-		SetDiceThrowLabel(@class, race, nameof(@class.Astral), lblAstralDiceThrow);
-		SetDiceThrowLabel(@class, race, nameof(@class.Gold), lblGoldDiceThrow);
-		SetDiceThrowLabel(@class, race, nameof(@class.Bravery), lblBraveryDiceThrow);
-		SetDiceThrowLabel(@class, race, nameof(@class.Erudition), lblEruditionDiceThrow);
+        SetDiceThrowLabel(@class, race, nameof(@class.Strength), lblStrengthDiceThrow);
+        SetDiceThrowLabel(@class, race, nameof(@class.Speed), lblSpeedDiceThrow);
+        SetDiceThrowLabel(@class, race, nameof(@class.Dexterity), lblDexterityDiceThrow);
+        SetDiceThrowLabel(@class, race, nameof(@class.Stamina), lblStaminaDiceThrow);
+        SetDiceThrowLabel(@class, race, nameof(@class.Health), lblHealthDiceThrow);
+        SetDiceThrowLabel(@class, race, nameof(@class.Beauty), lblBeautyDiceThrow);
+        SetDiceThrowLabel(@class, race, nameof(@class.Willpower), lblWillpowerDiceThrow);
+        SetDiceThrowLabel(@class, race, nameof(@class.Intelligence), lblIntelligenceDiceThrow);
+        SetDiceThrowLabel(@class, race, nameof(@class.Astral), lblAstralDiceThrow);
+        SetDiceThrowLabel(@class, race, nameof(@class.Gold), lblGoldDiceThrow);
+        SetDiceThrowLabel(@class, race, nameof(@class.Bravery), lblBraveryDiceThrow);
+        SetDiceThrowLabel(@class, race, nameof(@class.Erudition), lblEruditionDiceThrow);
 	}
 
-	private void SetDiceThrowLabel(IClass @class, IRace race, string propertyName, Label label)
+	private static void SetDiceThrowLabel(IClass @class, IRace race, string propertyName, Label label)
 	{
 		var classAttributes = @class.GetCustomAttributes(propertyName);
 		var diceThrow = classAttributes.GetAttribute<DiceThrowAttribute>();
@@ -526,11 +526,8 @@ public partial class CharcterGenerator : Form
 		}
 
 		var currentImage = CreateCharacterImage();
-		if (images.Contains(currentImage))
-		{
-			images.Remove(currentImage);
-		}
-		shownImageIndex = 0;
+        images.Remove(currentImage);
+        shownImageIndex = 0;
 		SetAddRemoveButtonState();
 	}
 

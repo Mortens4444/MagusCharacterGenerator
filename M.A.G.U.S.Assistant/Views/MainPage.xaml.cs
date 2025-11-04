@@ -12,7 +12,7 @@ internal partial class MainPage : NotifierPage
     {
         InitializeComponent();
 
-        var languages = Enum.GetValues(typeof(ImplementedLanguage)).Cast<ImplementedLanguage>()
+        var languages = Enum.GetValues<ImplementedLanguage>().Cast<ImplementedLanguage>()
             .OrderBy(l => l.GetDescription())
             .ToList();
         foreach (var lang in languages)

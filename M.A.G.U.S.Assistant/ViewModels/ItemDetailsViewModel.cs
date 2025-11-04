@@ -6,7 +6,7 @@ using System.Windows.Input;
 
 namespace M.A.G.U.S.Assistant.ViewModels;
 
-internal class ItemDetailsViewModel : ObservableObject
+internal partial class ItemDetailsViewModel : ObservableObject
 {
     private readonly Thing? thing;
 
@@ -23,7 +23,6 @@ internal class ItemDetailsViewModel : ObservableObject
         ImageSource = ImageSourceFromName(thing.ImageName);
 
         BuyCommand = new RelayCommand(_ => OnBuy());
-        CloseCommand = new RelayCommand(_ => OnClose());
     }
 
     public string Name { get; } = String.Empty;
@@ -33,7 +32,6 @@ internal class ItemDetailsViewModel : ObservableObject
     public ImageSource? ImageSource { get; }
 
     public ICommand BuyCommand { get; } = new RelayCommand(_ => { });
-    public ICommand CloseCommand { get; } = new RelayCommand(_ => { });
 
     public event EventHandler<ThingPurchasedEventArgs>? Purchased;
     public event EventHandler? Closed;
@@ -56,11 +54,6 @@ internal class ItemDetailsViewModel : ObservableObject
         }
 
         OnPurchased(thing);
-    }
-
-    private void OnClose()
-    {
-        OnClosed();
     }
 
     private static ImageSource? ImageSourceFromName(string? imageName)

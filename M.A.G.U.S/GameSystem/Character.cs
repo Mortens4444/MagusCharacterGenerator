@@ -127,62 +127,6 @@ public class Character : IFightModifier, ILiving, IAbilities, INotifyPropertyCha
         }
     }
 
-    public decimal Mithril
-    {
-        get => money.Mithril;
-        set
-        {
-            if (money.Mithril != value)
-            {
-                money.Mithril = value;
-                NotifyPropertyChanged();
-                NotifyPropertyChanged(nameof(money.Summa));
-            }
-        }
-    }
-
-    public decimal Gold
-    {
-        get => money.Gold;
-        set
-        {
-            if (money.Gold != value)
-            {
-                money.Gold = value;
-                NotifyPropertyChanged();
-                NotifyPropertyChanged(nameof(money.Summa));
-            }
-        }
-    }
-
-    public decimal Silver
-    {
-        get => money.Silver;
-        set
-        {
-            if (money.Silver != value)
-            {
-                money.Silver = value;
-                NotifyPropertyChanged();
-                NotifyPropertyChanged(nameof(money.Summa));
-            }
-        }
-    }
-
-    public decimal Copper
-    {
-        get => money.Copper;
-        set
-        {
-            if (money.Copper != value)
-            {
-                money.Copper = value;
-                NotifyPropertyChanged();
-                NotifyPropertyChanged(nameof(money.Summa));
-            }
-        }
-    }
-
     public ushort PercentQualificationPoints { get; set; }
 
 	public ushort QualificationPoints
