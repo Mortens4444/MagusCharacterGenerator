@@ -38,7 +38,7 @@ internal partial class MarketPage : SearchListPage
             "M.A.G.U.S.Things"
                 .CreateInstancesFromNamespace<Thing>()
                 .OrderBy(r => Lng.Elem(r.Name))
-                .Select(r => DisplayItem.FromThing(r, character.Money)))
+                .Select(r => DisplayItem.FromThing(r, character)))
     {
         this.character = character;
     }
@@ -64,6 +64,7 @@ internal partial class MarketPage : SearchListPage
                         try
                         {
                             Character?.Buy(args.Thing);
+                            RefreshAffordability();
                             if (Dispatcher != null)
                             {
                                 await Dispatcher.DispatchAsync(async () =>
@@ -98,6 +99,17 @@ internal partial class MarketPage : SearchListPage
         catch (Exception ex)
         {
             WeakReferenceMessenger.Default.Send(new ShowErrorMessage(ex.Message));
+        }
+    }
+
+    private void RefreshAffordability()
+    {
+        var items = ViewModel?.Items;
+        if (items == null) return;
+
+        foreach (var item in items.OfType<DisplayItem>())
+        {
+            item.OnPropertyChanged(nameof(DisplayItem.Enabled));
         }
     }
 }

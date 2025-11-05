@@ -1,4 +1,4 @@
-$solutionDirectory = "C:\Work\MagusCharacterGenerator"
+$solutionDirectory = "F:\Work\MagusCharacterGenerator"
 $path = "$solutionDirectory\M.A.G.U.S.Assistant\bin\Release\net9.0-android\publish"
 
 Write-Host "Cleaning...";

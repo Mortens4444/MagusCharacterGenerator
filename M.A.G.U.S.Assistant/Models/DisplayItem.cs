@@ -1,16 +1,17 @@
 ﻿using M.A.G.U.S.Assistant.Extensions;
 using M.A.G.U.S.Bestiary;
+using M.A.G.U.S.GameSystem;
 using M.A.G.U.S.GameSystem.PoisonsAndIllnesses;
 using M.A.G.U.S.GameSystem.Runes;
-using M.A.G.U.S.GameSystem.Valuables;
 using M.A.G.U.S.Things;
 using M.A.G.U.S.Things.Gemstones;
 using M.A.G.U.S.Things.MagicalObjects;
 using Mtf.LanguageService;
+using System.ComponentModel;
 
 namespace M.A.G.U.S.Assistant.Models;
 
-public class DisplayItem
+internal partial class DisplayItem : INotifyPropertyChanged
 {
     public object? Source { get; init; }
     
@@ -22,7 +23,23 @@ public class DisplayItem
     
     public string RightText { get; init; } = String.Empty;
 
-    public bool Enabled { get; init; } = true;
+    public Character? Character { get; init; }
+
+    public bool Enabled
+    {
+        get
+        {
+            if (Source is Thing thing)
+            {
+                return Character?.Money is null || thing.Price is null || thing.Price <= Character.Money;
+            }
+            return true;
+        }
+    }
+
+    public event PropertyChangedEventHandler? PropertyChanged;
+
+    public void OnPropertyChanged(string name) => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
 
     public static DisplayItem FromLanguageItem(object languageItem)
     {
@@ -108,7 +125,7 @@ public class DisplayItem
         return new DisplayItem { Source = poisonObj, Title = poisonObj?.ToString() ?? String.Empty };
     }
 
-    public static DisplayItem FromThing(object thingObj, Money? maxMoney)
+    public static DisplayItem FromThing(object thingObj, Character? character)
     {
         if (thingObj is Thing t)
         {
@@ -119,7 +136,7 @@ public class DisplayItem
                 Title = t.Name ?? String.Empty,
                 Subtitle = $"{t.Weight} {Lng.Elem("Kg")}",
                 RightText = t.Price?.ToTranslatedString() ?? String.Empty,
-                Enabled = maxMoney is null || t.Price <= maxMoney
+                Character = character
             };
         }
 

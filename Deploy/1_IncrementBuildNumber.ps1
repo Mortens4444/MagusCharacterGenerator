@@ -3,7 +3,7 @@ param(
     [string]$ManifestPath = "..\M.A.G.U.S.Assistant\Platforms\Android\AndroidManifest.xml"
 )
 
-$currentDirectory = "C:\Work\MagusCharacterGenerator\Deploy"
+$currentDirectory = "F:\Work\MagusCharacterGenerator\Deploy"
 $csprojFullPath = [System.IO.Path]::Combine($currentDirectory, $CsprojPath)
 $manifestFullPath = [System.IO.Path]::Combine($currentDirectory, $ManifestPath)
 
