@@ -21,7 +21,7 @@
 
 - Add more animations, images and sounds XL
 - Psi XXL (Pszi diszciplínák)
-- Show Bestiary XXXL (Bestiárium)
+- Add more beasts to Bestiary XXXL (Bestiárium)
 - Combat simulator XXXL (Harcrendszer)
 - Show stories and create digital map, for them (map, and sounds), store story descriptions XXXL
 - Create a story for every qualification XXXL

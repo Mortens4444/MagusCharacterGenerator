@@ -1,5 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using M.A.G.U.S.Assistant.CustomEventArgs;
+using M.A.G.U.S.Assistant.Extensions;
 using M.A.G.U.S.GameSystem.Valuables;
 using M.A.G.U.S.Things;
 using System.Windows.Input;
@@ -18,7 +19,7 @@ internal partial class ItemDetailsViewModel : ObservableObject
 
         Name = thing.Name;
         Description = thing.Description ?? String.Empty;
-        Money = thing.Price;
+        Money = thing.Price.ToTranslatedString();
         Weight = thing.Weight;
         ImageSource = ImageSourceFromName(thing.ImageName);
 
@@ -27,7 +28,7 @@ internal partial class ItemDetailsViewModel : ObservableObject
 
     public string Name { get; } = String.Empty;
     public string Description { get; } = String.Empty;
-    public Money Money { get; } = default!;
+    public string Money { get; } = String.Empty;
     public double Weight { get; }
     public ImageSource? ImageSource { get; }
 

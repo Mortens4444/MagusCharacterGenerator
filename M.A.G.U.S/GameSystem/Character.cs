@@ -59,25 +59,27 @@ public class Character : IFightModifier, ILiving, IAbilities, INotifyPropertyCha
 
 	public event PropertyChangedEventHandler? PropertyChanged;
 
-	public Character()
+    public Character()
 	{
 		name = "Nobody";
 		race = new Human();
 		BaseClass = new Warrior();
-	}
+		Equipment.CollectionChanged += (s, e) => OnPropertyChanged(nameof(TotalWeight));
+    }
 
-	public Character(string name, IRace race, params IClass[] classes)
+    public Character(string name, IRace race, params IClass[] classes)
 	{
 		this.name = name;
         this.race = race;
 		BaseClass = classes.First();
 		Classes = classes;
 		CreateFirstLevel();
-	}
+        Equipment.CollectionChanged += (s, e) => OnPropertyChanged(nameof(TotalWeight));
+    }
 
-	#region Properties
+    #region Properties
 
-	public void CalculateChanges()
+    public void CalculateChanges()
 	{
 		calculateChanges = true;
 	}
@@ -92,7 +94,7 @@ public class Character : IFightModifier, ILiving, IAbilities, INotifyPropertyCha
             if (name != value)
             {
                 name = value;
-                NotifyPropertyChanged();
+                OnPropertyChanged();
             }
         }
     }
@@ -108,7 +110,7 @@ public class Character : IFightModifier, ILiving, IAbilities, INotifyPropertyCha
             if (race != value)
             {
                 race = value;
-                NotifyPropertyChanged();
+                OnPropertyChanged();
             }
         }
     }
@@ -121,8 +123,8 @@ public class Character : IFightModifier, ILiving, IAbilities, INotifyPropertyCha
             if (money != value)
             {
                 money = value;
-                NotifyPropertyChanged();
-				NotifyPropertyChanged(nameof(money.Summa));
+                OnPropertyChanged();
+				OnPropertyChanged(nameof(money.Summa));
 			}
         }
     }
@@ -137,7 +139,7 @@ public class Character : IFightModifier, ILiving, IAbilities, INotifyPropertyCha
 			if (value != qualificationPoints)
 			{
 				qualificationPoints = value;
-				NotifyPropertyChanged();
+				OnPropertyChanged();
 			}
 		}
 	}
@@ -150,7 +152,7 @@ public class Character : IFightModifier, ILiving, IAbilities, INotifyPropertyCha
 			if (value != unconsciousAstralMagicResistance)
 			{
 				unconsciousAstralMagicResistance = value;
-				NotifyPropertyChanged();
+				OnPropertyChanged();
 			}
 		}
 	}
@@ -163,7 +165,7 @@ public class Character : IFightModifier, ILiving, IAbilities, INotifyPropertyCha
 			if (value != unconsciousMentalMagicResistance)
 			{
 				unconsciousMentalMagicResistance = value;
-				NotifyPropertyChanged();
+				OnPropertyChanged();
 			}
 		}
 	}
@@ -176,7 +178,7 @@ public class Character : IFightModifier, ILiving, IAbilities, INotifyPropertyCha
 			if (value != initiatingValue)
 			{
 				initiatingValue = value;
-				NotifyPropertyChanged();
+				OnPropertyChanged();
 			}
 		}
 	}
@@ -189,7 +191,7 @@ public class Character : IFightModifier, ILiving, IAbilities, INotifyPropertyCha
 			if (value != attackingValue)
 			{
 				attackingValue = value;
-				NotifyPropertyChanged();
+				OnPropertyChanged();
 			}
 		}
 	}
@@ -202,7 +204,7 @@ public class Character : IFightModifier, ILiving, IAbilities, INotifyPropertyCha
 			if (value != defendingValue)
 			{
 				defendingValue = value;
-				NotifyPropertyChanged();
+				OnPropertyChanged();
 			}
 		}
 	}
@@ -215,7 +217,7 @@ public class Character : IFightModifier, ILiving, IAbilities, INotifyPropertyCha
 			if (value != aimingValue)
 			{
 				aimingValue = value;
-				NotifyPropertyChanged();
+				OnPropertyChanged();
 			}
 		}
 	}
@@ -228,7 +230,7 @@ public class Character : IFightModifier, ILiving, IAbilities, INotifyPropertyCha
 			if (value != healthPoints)
 			{
 				healthPoints = value;
-				NotifyPropertyChanged();
+				OnPropertyChanged();
 			}
 		}
 	}
@@ -241,7 +243,7 @@ public class Character : IFightModifier, ILiving, IAbilities, INotifyPropertyCha
 			if (value != maxHealthPoints)
 			{
                 maxHealthPoints = value;
-				NotifyPropertyChanged();
+				OnPropertyChanged();
 			}
 		}
 	}
@@ -254,7 +256,7 @@ public class Character : IFightModifier, ILiving, IAbilities, INotifyPropertyCha
 			if (value != painTolerancePoints)
 			{
 				painTolerancePoints = value;
-				NotifyPropertyChanged();
+				OnPropertyChanged();
 			}
 		}
     }
@@ -266,7 +268,7 @@ public class Character : IFightModifier, ILiving, IAbilities, INotifyPropertyCha
             if (value != maxPainTolerancePoints)
             {
                 maxPainTolerancePoints = value;
-                NotifyPropertyChanged();
+                OnPropertyChanged();
             }
         }
     }
@@ -283,7 +285,7 @@ public class Character : IFightModifier, ILiving, IAbilities, INotifyPropertyCha
 				{
 					CalculateFightValues();
 				}
-                NotifyPropertyChanged();
+                OnPropertyChanged();
             }
 		}
 	}
@@ -300,7 +302,7 @@ public class Character : IFightModifier, ILiving, IAbilities, INotifyPropertyCha
 				{
 					CalculateFightValues();
 				}
-                NotifyPropertyChanged();
+                OnPropertyChanged();
             }
 		}
 	}
@@ -318,7 +320,7 @@ public class Character : IFightModifier, ILiving, IAbilities, INotifyPropertyCha
 					CalculateFightValues();
 					CalculateQualificationPoints();
 				}
-                NotifyPropertyChanged();
+                OnPropertyChanged();
             }
 		}
 	}
@@ -336,7 +338,7 @@ public class Character : IFightModifier, ILiving, IAbilities, INotifyPropertyCha
 					CalculatePainTolerancePoints();
 				}
 			}
-            NotifyPropertyChanged();
+            OnPropertyChanged();
         }
 	}
 
@@ -352,7 +354,7 @@ public class Character : IFightModifier, ILiving, IAbilities, INotifyPropertyCha
 				{
 					CalculateLifePoints();
 				}
-                NotifyPropertyChanged();
+                OnPropertyChanged();
             }
 		}
 	}
@@ -373,7 +375,7 @@ public class Character : IFightModifier, ILiving, IAbilities, INotifyPropertyCha
 					CalculateManaPoints();
 					CalculateQualificationPoints();
 				}
-                NotifyPropertyChanged();
+                OnPropertyChanged();
             }
 		}
 	}
@@ -391,7 +393,7 @@ public class Character : IFightModifier, ILiving, IAbilities, INotifyPropertyCha
 					CalculatePainTolerancePoints();
 					CalculateUnconsciousMentalMagicResistance();
 				}
-                NotifyPropertyChanged();
+                OnPropertyChanged();
             }
 		}
 	}
@@ -408,7 +410,7 @@ public class Character : IFightModifier, ILiving, IAbilities, INotifyPropertyCha
 				{
 					CalculateUnconsciousAstralMagicResistance();
 				}
-                NotifyPropertyChanged();
+                OnPropertyChanged();
             }
 		}
 	}
@@ -437,7 +439,7 @@ public class Character : IFightModifier, ILiving, IAbilities, INotifyPropertyCha
 			if (value != manaPoints)
 			{
 				manaPoints = value;
-				NotifyPropertyChanged();
+				OnPropertyChanged();
             }
 		}
 	}
@@ -450,7 +452,7 @@ public class Character : IFightModifier, ILiving, IAbilities, INotifyPropertyCha
             if (value != maxManaPoints)
             {
                 maxManaPoints = value;
-                NotifyPropertyChanged();
+                OnPropertyChanged();
             }
         }
     }
@@ -465,7 +467,7 @@ public class Character : IFightModifier, ILiving, IAbilities, INotifyPropertyCha
 			if (value != psiPoints)
 			{
 				psiPoints = value;
-				NotifyPropertyChanged();
+				OnPropertyChanged();
 			}
 		}
 	}
@@ -478,7 +480,7 @@ public class Character : IFightModifier, ILiving, IAbilities, INotifyPropertyCha
             if (value != maxPsiPoints)
             {
                 maxPsiPoints = value;
-                NotifyPropertyChanged();
+                OnPropertyChanged();
             }
         }
     }
@@ -495,12 +497,12 @@ public class Character : IFightModifier, ILiving, IAbilities, INotifyPropertyCha
 
     #endregion
 
-    private void NotifyPropertyChanged([CallerMemberName] string propertyName = "")
+    private void OnPropertyChanged([CallerMemberName] string propertyName = "")
 	{
 		PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
 	}
 
-	public static Character Load(string fullPath)
+    public static Character Load(string fullPath)
 	{
 		var result = ObjectSerializer.LoadFile<Character>(fullPath);
 		result.CalculateChanges();
@@ -610,9 +612,9 @@ public class Character : IFightModifier, ILiving, IAbilities, INotifyPropertyCha
             }
         }
 
-        NotifyPropertyChanged(nameof(Qualifications));
-        NotifyPropertyChanged(nameof(PercentQualifications));
-        NotifyPropertyChanged(nameof(SpecialQualification));
+        OnPropertyChanged(nameof(Qualifications));
+        OnPropertyChanged(nameof(PercentQualifications));
+        OnPropertyChanged(nameof(SpecialQualification));
     }
 
 	private void CalculateFightValues()
@@ -686,7 +688,7 @@ public class Character : IFightModifier, ILiving, IAbilities, INotifyPropertyCha
 		}
 
 		MaxPainTolerancePoints = PainTolerancePoints;
-		NotifyPropertyChanged(nameof(PainTolerancePoints));
+		OnPropertyChanged(nameof(PainTolerancePoints));
 	}
 
 	private void CalculateUnconsciousAstralMagicResistance()
@@ -799,7 +801,10 @@ public class Character : IFightModifier, ILiving, IAbilities, INotifyPropertyCha
             }
         }
         Equipment.Add(thing);
-		NotifyPropertyChanged(nameof(Money));
-		NotifyPropertyChanged(nameof(Equipment));
+		OnPropertyChanged(nameof(Money));
+		OnPropertyChanged(nameof(Equipment));
+		OnPropertyChanged(nameof(TotalWeight));
     }
+
+    public double TotalWeight => Equipment?.Sum(e => e.Weight) ?? 0;
 }
