@@ -1,4 +1,4 @@
-﻿namespace M.A.G.U.S.GameSystem.FightModifier;
+﻿namespace M.A.G.U.S.GameSystem.FightModifiers;
 
 public interface IFightModifier
 {

@@ -7,7 +7,11 @@ public static class DistributionProvider
 {
     public static (byte AttackPercentage, byte DefensePercentage, byte AimingPercentage) Get(IClass @class, IRace race)
     {
-        if ((@class is IUseRangedWeapons) || (race is IUseRangedWeapons))
+        if ((@class is IUseRangedWeapons) && (race is IUseRangedWeapons))
+        {
+            return (10, 10, 80);
+        }
+        else if ((@class is IUseRangedWeapons) || (race is IUseRangedWeapons))
         {
             return (25, 25, 50);
         }

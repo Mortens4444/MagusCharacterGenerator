@@ -1,6 +1,4 @@
-﻿using M.A.G.U.S.GameSystem.FightModifier;
-
-namespace M.A.G.U.S.GameSystem.FightModifiers;
+﻿namespace M.A.G.U.S.GameSystem.FightModifiers;
 
 public class FightToGetHostage : IFightModifier
 {

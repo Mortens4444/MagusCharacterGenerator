@@ -1,20 +1,23 @@
-﻿using M.A.G.U.S.GameSystem.Qualifications;
-using M.A.G.U.S.Qualifications;
+﻿using M.A.G.U.S.GameSystem.Psi;
+using M.A.G.U.S.GameSystem.Qualifications;
 using M.A.G.U.S.Qualifications.Specialities;
 using M.A.G.U.S.Utils;
 
-namespace M.A.G.U.S.GameSystem.Psi;
+namespace M.A.G.U.S.GameSystem;
 
-public static class PsiPointCalculator
+public static class PsiPoints
 {
-    public static (IPsi Psi, ushort PsiPoints, byte PsiPointsModifier) Calculate(QualificationList qualifications, short intelligence, byte level, KyrLore kyrLore)
+    public static PsiAttributes Calculate(Character character)
     {
+        var kyrLore = character.Race.SpecialQualifications.GetSpeciality<KyrLore>();
+        var level = character.BaseClass.Level;
         ushort psiPoints = 0;
         byte psiPointsModifier = 0;
-        var psi = qualifications.FirstOrDefault(qualification => qualification is IPsi) as IPsi;
+
+        var psi = character.Qualifications.FirstOrDefault(qualification => qualification is IPsi) as IPsi;
         if (psi != null)
         {
-            psiPoints += (ushort)MathHelper.GetAboveAverageValue(intelligence);
+            psiPoints += (ushort)MathHelper.GetAboveAverageValue(character.Intelligence);
             if (kyrLore != null)
             {
                 psiPoints += level;
@@ -37,7 +40,7 @@ public static class PsiPointCalculator
 
                 var basePsiPoints = PsiUtils.GetPsiPoints(PsiUtils.PyarronBaseModifier, psi.MasterQualificationLevel, psi.BaseQualificationLevel);
                 psiPoints += basePsiPoints;
-                                   
+
                 var masterPsiPoints = basePsiPoints == 0 ?
                     PsiUtils.GetPsiPoints(PsiUtils.PyarronMasterModifier, level, psi.MasterQualificationLevel) :
                     PsiUtils.GetPsiPoints(PsiUtils.PyarronMasterModifier, level - psi.MasterQualificationLevel);
@@ -55,6 +58,12 @@ public static class PsiPointCalculator
                 psiPoints += PsiUtils.GetPsiPoints(PsiUtils.PyarronBaseModifier, level, psi.BaseQualificationLevel);
             }
         }
-        return (psi, psiPoints, psiPointsModifier);
+
+        return new PsiAttributes
+        {
+            Psi = psi,
+            PsiPoints = psiPoints,
+            PsiPointsModifier = psiPointsModifier
+        };
     }
 }

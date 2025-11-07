@@ -1,10 +1,8 @@
-﻿using M.A.G.U.S.GameSystem.FightModifier;
-
-namespace M.A.G.U.S.GameSystem.FightModifiers;
+﻿namespace M.A.G.U.S.GameSystem.FightModifiers;
 
 public class AttackFromAmbush : IFightModifier
 {
-    public short InitiatingValue => short.MaxValue;
+    public short InitiatingValue => Int16.MaxValue;
 
     public short AttackingValue => 30;
 

@@ -206,7 +206,7 @@ internal partial class CharacterGeneratorViewModel : ObservableObject
         }
         catch (ReflectionTypeLoadException e)
         {
-            return e.Types.Where(t => t != null).ToArray();
+            return [.. e.Types.Where(static t => t != null)];
         }
         catch
         {
