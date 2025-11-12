@@ -1,7 +1,7 @@
 ﻿using M.A.G.U.S.GameSystem.Attributes;
 using M.A.G.U.S.GameSystem.Valuables;
 
-namespace M.A.G.U.S.Things.Weapons.AimingWeapons;
+namespace M.A.G.U.S.Things.Weapons.RangedWeapons;
 
 public class Sling : Weapon, IRangedWeapon
 {

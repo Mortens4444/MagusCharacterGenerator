@@ -1,8 +1,7 @@
 ﻿using M.A.G.U.S.GameSystem.Attributes;
 using M.A.G.U.S.GameSystem.Valuables;
-using M.A.G.U.S.Things.Weapons;
 
-namespace M.A.G.U.S.Things.StabbingWeapons;
+namespace M.A.G.U.S.Things.Weapons.StabbingWeapons;
 
 public class TwoHandedHatchet : Weapon, IMeleeWeapon
 {

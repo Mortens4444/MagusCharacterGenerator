@@ -1,5 +1,6 @@
 ﻿using M.A.G.U.S.Assistant.Models;
 using M.A.G.U.S.GameSystem.Attributes;
+using Mtf.LanguageService;
 using System.Reflection;
 
 namespace M.A.G.U.S.Assistant.Extensions;
@@ -21,7 +22,10 @@ internal static class DiceStatExtensions
             var throwAttr = prop.GetCustomAttributes(false)
                                 .OfType<DiceThrowAttribute>()
                                 .FirstOrDefault();
-            if (throwAttr == null) continue;
+            if (throwAttr == null)
+            {
+                continue;
+            }
 
             var modAttr = prop.GetCustomAttributes(false)
                               .OfType<DiceThrowModifierAttribute>()
@@ -41,7 +45,7 @@ internal static class DiceStatExtensions
 
             var stat = new DiceStat
             {
-                Name = prop.Name,
+                Name = Lng.Elem(prop.Name),
                 Formula = formula,
                 Modifier = modAttr != null ? modAttr.Modifier : 0,
                 HasSpecialTraining = special,

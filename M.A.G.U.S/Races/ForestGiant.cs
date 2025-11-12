@@ -46,5 +46,5 @@ public class ForestGiant : HalfGiant
         }
     }
 
-    public override string Name => "Half-giant (Forest giant)";
+    public override string Name => "Half-giant (forest giant)";
 }
