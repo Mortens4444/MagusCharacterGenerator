@@ -6,16 +6,16 @@ public enum Language
 {
     [Description("Kranich")]
     Kranich,
-    [Description("Pyarroni")]
-    Pyarroni,
+    [Description("Pyarronian")]
+    Pyarronian,
     [Description("Erv")]
     Erv,
     [Description("Shadonian")]
     Shadonian,
-    [Description("Toroni")]
-    Toroni,
-    [Description("Doran")]
-    Doran,
+    [Description("Toronian")]
+    Toronian,
+    [Description("Doranian")]
+    Doranian,
     [Description("Jad")]
     Jad,
     [Description("Amund")]
@@ -25,8 +25,6 @@ public enum Language
 
     [Description("Elf")]
     Elf,
-    [Description("Dwarf")]
-    Dwarf,
     [Description("Orc")]
     Orc,
     [Description("Goblin")]
@@ -41,8 +39,34 @@ public enum Language
     Hobgoblin,
     [Description("Niarei")]
     Niarei,
-    [Description("Enosukean")]
-    Enosukean,
     [Description("Khal")]
-    Khal
+    Khal,
+
+    Tchashka,
+    Jadal,
+
+    [Description("Eme-Chran")]
+    EmeChran,
+    Anagmar,
+    Asis,
+    Emrelin,
+    Dwoon,
+    Sinemosian,
+    Tiadlanian,
+    Dolamin,
+    Enosukean,
+    Ilanorian,
+    Lupaar,
+    Dakh,
+
+    [Description("Yanna'an")]
+    YannaAn,
+    Godoran,
+    Ryekin,
+    Snil,
+    Hilar,
+    Vanir,
+
+    [Description("Gredh'il adf Laj")]
+    GredhIlAdfLadzs
 }
