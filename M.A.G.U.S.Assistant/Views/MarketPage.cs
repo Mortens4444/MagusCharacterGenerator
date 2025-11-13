@@ -105,7 +105,10 @@ internal partial class MarketPage : SearchListPage
     private void RefreshAffordability()
     {
         var items = ViewModel?.Items;
-        if (items == null) return;
+        if (items == null)
+        {
+            return;
+        }
 
         foreach (var item in items.OfType<DisplayItem>())
         {

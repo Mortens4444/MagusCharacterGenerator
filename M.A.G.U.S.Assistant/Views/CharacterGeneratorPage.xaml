@@ -507,7 +507,7 @@
                     </CollectionView>
                     <Grid Padding="6" ColumnDefinitions="*,Auto" ColumnSpacing="10" Margin="0,6,0,0">
                         <Label Text="Total weight (kg)" VerticalOptions="Center" TextColor="Gray" FontAttributes="Bold" />
-                        <Label Text="{Binding Character.TotalWeight, StringFormat='{0:N2}'}" FontAttributes="Bold" HorizontalOptions="End" Margin="0,4,10,0" />
+                        <Label Text="{Binding Character.TotalEquipmentWeight}" FontAttributes="Bold" HorizontalOptions="End" Margin="0,4,10,0" />
                     </Grid>
                 </VerticalStackLayout>
             </Border>

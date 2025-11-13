@@ -53,6 +53,7 @@ public class Character : IFightModifier, ILiving, IAbilities, INotifyPropertyCha
     private Weapon? secondaryWeapon;
     private string name;
     private IRace race;
+    private string totalEquipmentWeight;
 
     // TODO: Pass the correct method to count
     private readonly MultiClassMode multiClassMode = MultiClassMode.Normal_Or_SwitchedClass;
@@ -482,6 +483,19 @@ public class Character : IFightModifier, ILiving, IAbilities, INotifyPropertyCha
         }
     }
 
+    public string TotalEquipmentWeight
+    {
+        get => totalEquipmentWeight;
+        set
+        {
+            if (value != totalEquipmentWeight)
+            {
+                totalEquipmentWeight = value;
+                OnPropertyChanged();
+            }
+        }
+    }
+
     public byte PsiPointsModifier { get; set; }
 
 	public QualificationList Qualifications { get; private set; } = [];
@@ -507,11 +521,11 @@ public class Character : IFightModifier, ILiving, IAbilities, INotifyPropertyCha
 
     private void EquipmentOnCollectionChanged(object? sender, NotifyCollectionChangedEventArgs e)
     {
-        Debug.WriteLine($"Equipment changed. TotalWeight={TotalWeight}");
-        OnPropertyChanged(nameof(TotalWeight));
+        TotalEquipmentWeight = (Equipment?.Sum(e => e.Weight) ?? 0).ToString("N1");
+        Debug.WriteLine($"Equipment changed. TotalEquipmentWeight={TotalEquipmentWeight}");
     }
 
-    private void OnPropertyChanged([CallerMemberName] string propertyName = "")
+    public void OnPropertyChanged([CallerMemberName] string propertyName = "")
 	{
 		PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
 	}
@@ -550,7 +564,7 @@ public class Character : IFightModifier, ILiving, IAbilities, INotifyPropertyCha
 	private void GenerateAbilities()
 	{
 		Strength = (sbyte)(BaseClass.Strength + Race.Strength);
-		Speed = (sbyte)(BaseClass.Speed + Race.Speed);
+		Quickness = (sbyte)(BaseClass.Quickness + Race.Quickness);
         Dexterity = (sbyte)(BaseClass.Dexterity + Race.Dexterity);
 		Stamina = (sbyte)(BaseClass.Stamina + Race.Stamina);
 		Health = (sbyte)(BaseClass.Health + Race.Health);
@@ -694,9 +708,5 @@ public class Character : IFightModifier, ILiving, IAbilities, INotifyPropertyCha
         }
         Equipment.Add(thing);
 		OnPropertyChanged(nameof(Money));
-		OnPropertyChanged(nameof(Equipment));
-		OnPropertyChanged(nameof(TotalWeight));
     }
-
-    public double TotalWeight => Equipment?.Sum(e => e.Weight) ?? 0;
 }
