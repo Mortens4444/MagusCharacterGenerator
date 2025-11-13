@@ -1,6 +1,9 @@
 ﻿using M.A.G.U.S.Assistant.Models;
+using M.A.G.U.S.Utils;
+using Mtf.LanguageService;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Reflection;
 using System.Windows.Input;
 
@@ -8,10 +11,10 @@ namespace M.A.G.U.S.Assistant.ViewModels;
 
 internal partial class ImagesViewModel : INotifyPropertyChanged
 {
-    public event PropertyChangedEventHandler PropertyChanged;
+    public event PropertyChangedEventHandler? PropertyChanged;
 
-    public ObservableCollection<ImageItem> AllImages { get; } = new ObservableCollection<ImageItem>();
-    public ObservableCollection<ImageItem> FilteredImages { get; } = new ObservableCollection<ImageItem>();
+    public ObservableCollection<ImageItem> AllImages { get; } = [];
+    public ObservableCollection<ImageItem> FilteredImages { get; } = [];
 
     private string searchText = String.Empty;
     public string SearchText
@@ -26,8 +29,8 @@ internal partial class ImagesViewModel : INotifyPropertyChanged
         }
     }
 
-    private ImageItem selectedImage;
-    public ImageItem SelectedImage
+    private ImageItem? selectedImage;
+    public ImageItem? SelectedImage
     {
         get => selectedImage;
         set
@@ -61,8 +64,8 @@ internal partial class ImagesViewModel : INotifyPropertyChanged
         {
             var asm = Assembly.GetExecutingAssembly();
             var names = asm.GetManifestResourceNames()
-                .Where(n => (n.IndexOf(".Resources.Images.Bestiary.", StringComparison.OrdinalIgnoreCase) >= 0 ||
-                            n.IndexOf(".Resources.Images.Characters.", StringComparison.OrdinalIgnoreCase) >= 0) &&
+                .Where(n => (n.Contains(".Resources.Images.Bestiary.", StringComparison.OrdinalIgnoreCase) ||
+                            n.Contains(".Resources.Images.Characters.", StringComparison.OrdinalIgnoreCase)) &&
                             (n.EndsWith(".png", StringComparison.OrdinalIgnoreCase) ||
                              n.EndsWith(".jpg", StringComparison.OrdinalIgnoreCase) ||
                              n.EndsWith(".jpeg", StringComparison.OrdinalIgnoreCase) ||
@@ -72,20 +75,19 @@ internal partial class ImagesViewModel : INotifyPropertyChanged
             foreach (var name in names)
             {
                 var display = name.Split('.')[^2];
-                AllImages.Add(new ImageItem { ResourceId = name, DisplayName = display });
+                AllImages.Add(new ImageItem { ResourceId = name, DisplayName = Lng.Elem(display.ToName()) });
             }
         }
-        catch
+        catch (Exception ex)
         {
-            // ha embedded resource helyett MauiAsset-et használsz,
-            // akkor ide átalakítás kell: FileSystem.OpenAppPackageFileAsync("Resources/Images/xxx.png")
+            Debug.WriteLine($"Load images error: {ex}");
         }
     }
 
     private void ApplyFilter()
     {
         var q = (SearchText ?? String.Empty).Trim();
-        var filtered = (String.IsNullOrEmpty(q) ? AllImages : new ObservableCollection<ImageItem>(AllImages.Where(i => i.DisplayName.IndexOf(q, StringComparison.OrdinalIgnoreCase) >= 0)))
+        var filtered = (String.IsNullOrEmpty(q) ? AllImages : new ObservableCollection<ImageItem>(AllImages.Where(i => i.DisplayName.Contains(q, StringComparison.OrdinalIgnoreCase))))
             .OrderBy(comparer => comparer.DisplayName);
 
         FilteredImages.Clear();
@@ -99,17 +101,24 @@ internal partial class ImagesViewModel : INotifyPropertyChanged
 
     private static async Task PreviewAsync(ImageItem item)
     {
-        if (item == null) return;
+        if (item == null)
+        {
+            return;
+        }
 
         try
         {
             var page = new Views.ImagePreviewPage(item);
-            //await Windows[0].Page.Navigation.PushModalAsync(page).ConfigureAwait(true);
-            await Application.Current.MainPage.Navigation.PushModalAsync(page).ConfigureAwait(true);
+            var windows = Application.Current?.Windows;
+            var mainPage = (windows != null && windows.Count > 0) ? windows[0].Page : null;
+            if (mainPage?.Navigation != null)
+            {
+                await mainPage.Navigation.PushModalAsync(page).ConfigureAwait(true);
+            }
         }
-        catch
+        catch (Exception ex)
         {
-            // ignore navigation errors
+            Debug.WriteLine($"Preview error: {ex}");
         }
     }
 

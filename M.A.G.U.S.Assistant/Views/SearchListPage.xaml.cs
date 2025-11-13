@@ -31,12 +31,15 @@ internal partial class SearchListPage : NotifierPage
             }
 
             var objToInspect = (object)selected;
-            var page = (Page)(objToInspect is DisplayItem displayItem ?
-                displayItem.Source is Creature creature ? 
-                    new CreatureDetailsPage(creature) :
-                    new ItemDetailsPage(displayItem.Source as Thing) :
-                new ObjectInspectorPage(objToInspect));
-            Navigation.PushAsync(page);
+            if (objToInspect != null)
+            {
+                var page = (Page)(objToInspect is DisplayItem displayItem ?
+                    displayItem.Source is Creature creature ? 
+                        new CreatureDetailsPage(creature) :
+                        new ItemDetailsPage(displayItem.Source as Thing) :
+                    new ObjectInspectorPage(objToInspect));
+                Navigation.PushAsync(page);
+            }
         }
         catch (Exception ex)
         {

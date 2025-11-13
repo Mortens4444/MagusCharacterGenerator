@@ -11,7 +11,7 @@ namespace M.A.G.U.S.Assistant.ViewModels;
 
 internal class SoundViewModel : INotifyPropertyChanged
 {
-    public event PropertyChangedEventHandler PropertyChanged;
+    public event PropertyChangedEventHandler? PropertyChanged;
 
     private readonly ObservableCollection<SoundItem> allSounds = [];
     public ObservableCollection<SoundItem> FilteredSounds { get; } = [];
@@ -103,8 +103,9 @@ internal class SoundViewModel : INotifyPropertyChanged
         {
             var asm = Assembly.GetExecutingAssembly();
             var names = asm.GetManifestResourceNames()
-                .Where(n => n.IndexOf(".Resources.Raw.", StringComparison.OrdinalIgnoreCase) >= 0
-                            && (n.EndsWith(".wav", StringComparison.OrdinalIgnoreCase) || n.EndsWith(".mp3", StringComparison.OrdinalIgnoreCase)))
+                .Where(n => n.Contains(".Resources.Raw.", StringComparison.OrdinalIgnoreCase) &&
+                    (n.EndsWith(".wav", StringComparison.OrdinalIgnoreCase)
+                    || n.EndsWith(".mp3", StringComparison.OrdinalIgnoreCase)))
                 .OrderBy(n => n);
 
             foreach (var name in names)
@@ -124,7 +125,7 @@ internal class SoundViewModel : INotifyPropertyChanged
         var q = (SearchText ?? String.Empty).Trim();
         var filtered = string.IsNullOrEmpty(q)
             ? allSounds
-            : new ObservableCollection<SoundItem>(allSounds.Where(s => s.DisplayName.IndexOf(q, StringComparison.OrdinalIgnoreCase) >= 0));
+            : new ObservableCollection<SoundItem>(allSounds.Where(s => s.DisplayName.Contains(q, StringComparison.OrdinalIgnoreCase)));
 
         FilteredSounds.Clear();
         foreach (var it in filtered) FilteredSounds.Add(it);
@@ -193,7 +194,10 @@ internal class SoundViewModel : INotifyPropertyChanged
 #endif
             IsPlaying = false;
         }
-        catch { }
+        catch (Exception ex)
+        {
+            System.Diagnostics.Debug.WriteLine($"Stop error: {ex}");
+        }
         finally
         {
             ((Command)PlayCommand).ChangeCanExecute();

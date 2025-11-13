@@ -178,7 +178,7 @@ public class DiceThrow
         var special = _1K100();
         if (special == 1)
         {
-            throw new Exception("The character died on the special training.");
+            throw new Exception("The character died during special training.");
         }
 
         if (special < 21)

@@ -102,8 +102,15 @@ internal partial class CharacterGeneratorViewModel : ObservableObject
             return;
         }
 
-        Character = new Character(NameGenerator.Get().ToName(), selectedRace, instanceClass);
-        Character.LevelUp();
+        try
+        {
+            Character = new Character(NameGenerator.Get().ToName(), selectedRace, instanceClass);
+            Character.LevelUp();
+        }
+        catch (Exception ex)
+        {
+            WeakReferenceMessenger.Default.Send(new ShowErrorMessage(ex));
+        }
     }
 
     [RelayCommand]

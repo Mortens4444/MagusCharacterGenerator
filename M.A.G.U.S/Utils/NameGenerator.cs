@@ -1,10 +1,11 @@
 ﻿using Mtf.Extensions;
 using Mtf.Extensions.Services;
 using System.Text;
+using System.Text.RegularExpressions;
 
 namespace M.A.G.U.S.Utils;
 
-public static class NameGenerator
+public static partial class NameGenerator
 {
 	private delegate char CharGenerator();
 
@@ -45,10 +46,19 @@ public static class NameGenerator
 
     public static string ToName(this string text)
     {
-        var result = new StringBuilder();
-        result.Append(Char.ToUpper(text.First()));
-        result.Append(text.Substring(1).ToLower());
-        return result.ToString();
+        if (String.IsNullOrWhiteSpace(text))
+            return String.Empty;
+
+        var cleaned = FindUnderscores().Replace(text, " ");
+        cleaned = FindNumbers().Replace(cleaned, String.Empty);
+        cleaned = FindWhitespaces().Replace(cleaned, " ").Trim();
+
+        if (cleaned.Length == 0)
+            return String.Empty;
+
+        cleaned = cleaned.ToLowerInvariant();
+        return char.ToUpperInvariant(cleaned[0]) + (cleaned.Length > 1 ? cleaned.Substring(1) : String.Empty);
+
     }
 
     private static char GenerateFromChars(IReadOnlyList<char> chars)
@@ -60,4 +70,13 @@ public static class NameGenerator
 	{
 		return GenerateFromChars(Environment.TickCount % 2 == 0 ? chars1 : chars2);
 	}
+
+	[GeneratedRegex("_+")]
+	private static partial Regex FindUnderscores();
+
+    [GeneratedRegex(@"\d+")]
+    private static partial Regex FindNumbers();
+
+    [GeneratedRegex(@"\s+")]
+    private static partial Regex FindWhitespaces();
 }

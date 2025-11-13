@@ -41,6 +41,7 @@
     <UseWindowsForms>false</UseWindowsForms>
     <UseWPF>false</UseWPF>
     <RunAOTCompilation>false</RunAOTCompilation>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <JavaMaxHeapSize>1G</JavaMaxHeapSize>
     <AndroidEnableMultiDex>true</AndroidEnableMultiDex>
     <SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios'">15.0</SupportedOSPlatformVersion>
@@ -176,7 +177,7 @@
     <PackageReference Include="Microsoft.Maui.Graphics" Version="9.0.120" />
     <PackageReference Include="Microsoft.Maui.Graphics.Skia" Version="9.0.120" />
     <PackageReference Include="Mtf.Maui.Controls" Version="2.0.40" />
-    <PackageReference Include="Mtf.MAUI.LanguageService" Version="1.0.43" />
+    <PackageReference Include="Mtf.MAUI.LanguageService" Version="1.0.44" />
     <PackageReference Include="Plugin.Maui.Audio" Version="4.0.0" />
   </ItemGroup>
   <ItemGroup>

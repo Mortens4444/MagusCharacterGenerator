@@ -16,7 +16,7 @@
             <!-- Top summary -->
             <Border Padding="10">
                 <Grid ColumnDefinitions="Auto, *" RowDefinitions="Auto,Auto" ColumnSpacing="12" RowSpacing="6">
-                    <Label Text="Number appearing:" FontAttributes="Bold" Grid.Row="0" Grid.Column="0" />
+                    <Label Text="Number appearing" FontAttributes="Bold" Grid.Row="0" Grid.Column="0" />
                     <Label Text="{Binding NumberAppearing}" Grid.Row="0" Grid.Column="1" />
                 </Grid>
             </Border>
@@ -37,34 +37,34 @@
                     <Label Text="Speed" Grid.Row="3" Grid.Column="0" FontAttributes="Bold" />
                     <Label Text="{Binding Speed}" Grid.Row="3" Grid.Column="1" />
 
-                    <Label Text="Attack Value" Grid.Row="4" Grid.Column="0" FontAttributes="Bold" />
+                    <Label Text="Attack value" Grid.Row="4" Grid.Column="0" FontAttributes="Bold" />
                     <Label Text="{Binding AttackValue}" Grid.Row="4" Grid.Column="1" />
 
-                    <Label Text="Defense Value" Grid.Row="5" Grid.Column="0" FontAttributes="Bold" />
+                    <Label Text="Defense value" Grid.Row="5" Grid.Column="0" FontAttributes="Bold" />
                     <Label Text="{Binding DefenseValue}" Grid.Row="5" Grid.Column="1" />
 
-                    <Label Text="Initiating Value" Grid.Row="6" Grid.Column="0" FontAttributes="Bold" />
+                    <Label Text="Initiating value" Grid.Row="6" Grid.Column="0" FontAttributes="Bold" />
                     <Label Text="{Binding InitiatingValue}" Grid.Row="6" Grid.Column="1" />
 
-                    <Label Text="Max Health Points" Grid.Row="7" Grid.Column="0" FontAttributes="Bold" />
+                    <Label Text="Max health points" Grid.Row="7" Grid.Column="0" FontAttributes="Bold" />
                     <Label Text="{Binding MaxHealthPoints}" Grid.Row="7" Grid.Column="1" />
 
-                    <Label Text="Health Points" Grid.Row="8" Grid.Column="0" FontAttributes="Bold" />
+                    <Label Text="Health points" Grid.Row="8" Grid.Column="0" FontAttributes="Bold" />
                     <Label Text="{Binding HealthPoints}" Grid.Row="8" Grid.Column="1" />
 
-                    <Label Text="Max Pain Tolerance" Grid.Row="9" Grid.Column="0" FontAttributes="Bold" />
+                    <Label Text="Max pain tolerance points" Grid.Row="9" Grid.Column="0" FontAttributes="Bold" />
                     <Label Text="{Binding MaxPainTolerancePoints}" Grid.Row="9" Grid.Column="1" />
 
-                    <Label Text="Pain Tolerance" Grid.Row="10" Grid.Column="0" FontAttributes="Bold" />
+                    <Label Text="Pain tolerance points" Grid.Row="10" Grid.Column="0" FontAttributes="Bold" />
                     <Label Text="{Binding PainTolerancePoints}" Grid.Row="10" Grid.Column="1" />
 
-                    <Label Text="Poison Resistance" Grid.Row="11" Grid.Column="0" FontAttributes="Bold" />
+                    <Label Text="Poison resistance" Grid.Row="11" Grid.Column="0" FontAttributes="Bold" />
                     <Label Text="{Binding PoisonResistance}" Grid.Row="11" Grid.Column="1" />
 
-                    <Label Text="Experience Points" Grid.Row="12" Grid.Column="0" FontAttributes="Bold" />
+                    <Label Text="Experience points" Grid.Row="12" Grid.Column="0" FontAttributes="Bold" />
                     <Label Text="{Binding ExperiencePoints}" Grid.Row="12" Grid.Column="1" />
 
-                    <Label Text="Attacks per Round" Grid.Row="13" Grid.Column="0" FontAttributes="Bold" />
+                    <Label Text="Attacks per round" Grid.Row="13" Grid.Column="0" FontAttributes="Bold" />
                     <Label Text="{Binding AttacksPerRound}" Grid.Row="13" Grid.Column="1" />
                 </Grid>
             </Border>

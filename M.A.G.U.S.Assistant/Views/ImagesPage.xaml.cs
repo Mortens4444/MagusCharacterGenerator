@@ -7,8 +7,7 @@ internal partial class ImagesPage : NotifierPage
 	public ImagesPage()
 	{
 		InitializeComponent();
-        this.BindingContext = new ImagesViewModel();
-        //this.SetValue(Microsoft.Maui.Controls.Xaml.Xaml.IsInefficientModeProperty, false);
-        this.Resources.Add("ImagesPageRoot", this); // ha szeretnéd x:Reference helyett
+        BindingContext = new ImagesViewModel();
+        Resources.Add("ImagesPageRoot", this);
     }
 }
