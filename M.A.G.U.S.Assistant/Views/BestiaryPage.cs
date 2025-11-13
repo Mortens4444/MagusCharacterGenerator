@@ -10,7 +10,7 @@ internal partial class BestiaryPage : SearchListPage
     public BestiaryPage()
         : base("Bestiary",
             "M.A.G.U.S.Bestiary"
-                .CreateInstancesFromNamespace< Creature> ()
+                .CreateInstancesFromNamespace<Creature>()
                 .OrderBy(r => Lng.Elem(r.Name))
                 .Select(r => DisplayItem.FromCreature(r)))
     {

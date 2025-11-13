@@ -43,7 +43,7 @@
                     <Label Text="Defense value" Grid.Row="5" Grid.Column="0" FontAttributes="Bold" />
                     <Label Text="{Binding DefenseValue}" Grid.Row="5" Grid.Column="1" />
 
-                    <Label Text="Initiating value" Grid.Row="6" Grid.Column="0" FontAttributes="Bold" />
+                    <Label Text="Initiator value" Grid.Row="6" Grid.Column="0" FontAttributes="Bold" />
                     <Label Text="{Binding InitiatingValue}" Grid.Row="6" Grid.Column="1" />
 
                     <Label Text="Max health points" Grid.Row="7" Grid.Column="0" FontAttributes="Bold" />
@@ -72,7 +72,7 @@
             <!-- Damage area -->
             <Border Padding="10">
                 <StackLayout Spacing="8">
-                    <Grid ColumnDefinitions="*,*,*">
+                    <Grid ColumnDefinitions="4*,3*,3*">
                         <Button Text="Initiate" Command="{Binding InitiateCommand}" />
                         <Button Grid.Column="1" Text="Attack" Command="{Binding AttackCommand}" />
                         <Button Grid.Column="2" Text="Roll Damage" Command="{Binding RollDamageCommand}" />

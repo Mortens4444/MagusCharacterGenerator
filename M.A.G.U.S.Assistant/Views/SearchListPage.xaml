@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <v:NotifierPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:conv="clr-namespace:M.A.G.U.S.Assistant.Converters"
+             xmlns:c="clr-namespace:M.A.G.U.S.Assistant.Converters"
+             xmlns:conv="clr-namespace:Mtf.Maui.Controls.Converters;assembly=Mtf.Maui.Controls"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:m="clr-namespace:M.A.G.U.S.Assistant.Models"
              xmlns:v="clr-namespace:M.A.G.U.S.Assistant.Views"
@@ -14,7 +15,7 @@
     </v:NotifierPage.BindingContext>
     <v:NotifierPage.Resources>
         <ResourceDictionary>
-            <conv:TranslationConverter x:Key="TranslationConverter" />
+            <c:TranslationConverter x:Key="TranslationConverter" />
             <conv:BoolToColorConverter x:Key="BoolToColorConverter" EnabledColor="White" DisabledColor="#888888" />
         </ResourceDictionary>
     </v:NotifierPage.Resources>
@@ -25,37 +26,32 @@
             <Button Grid.Column="1" Text="Clear" Command="{Binding ClearCommand}" />
         </Grid>
 
-        <!--<ScrollView>-->
-            <CollectionView Grid.Row="1"
+        <CollectionView Grid.Row="1"
                             ItemsSource="{Binding FilteredItems}"
                             SelectionMode="Single"
                             SelectedItem="{Binding SelectedItem, Mode=TwoWay}"
                             ItemsLayout="VerticalList">
-                <CollectionView.ItemTemplate>
-                    <DataTemplate x:DataType="m:DisplayItem">
-                        <Border Stroke="Gray" StrokeThickness="1" Padding="8" Margin="0,4">
-                            <Grid ColumnDefinitions="*,Auto" ColumnSpacing="8" VerticalOptions="Center">
-                                <StackLayout>
-                                    <Label Text="{Binding Title, Converter={StaticResource TranslationConverter}}" FontAttributes="Bold"
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="m:DisplayItem">
+                    <Border Stroke="Gray" StrokeThickness="1" Padding="8" Margin="0,4">
+                        <Grid ColumnDefinitions="*,Auto" ColumnSpacing="8" VerticalOptions="Center">
+                            <StackLayout>
+                                <Label Text="{Binding Title, Converter={StaticResource TranslationConverter}}" FontAttributes="Bold"
                                            TextColor="{Binding Enabled, Converter={StaticResource BoolToColorConverter}}" />
 
-                                    <Label Text="{Binding Subtitle, Converter={StaticResource TranslationConverter}}" FontSize="12" LineBreakMode="TailTruncation"
+                                <Label Text="{Binding Subtitle, Converter={StaticResource TranslationConverter}}" FontSize="12" LineBreakMode="TailTruncation"
                                            TextColor="{Binding Enabled, Converter={StaticResource BoolToColorConverter}}" />
-                                </StackLayout>
-                                <Label Text="{Binding RightText}" VerticalOptions="Center" Grid.Column="1" FontAttributes="Bold"
+                            </StackLayout>
+                            <Label Text="{Binding RightText}" VerticalOptions="Center" Grid.Column="1" FontAttributes="Bold"
                                        TextColor="{Binding Enabled, Converter={StaticResource BoolToColorConverter}}" />
-                            </Grid>
-                        </Border>
-                    </DataTemplate>
-                </CollectionView.ItemTemplate>
-            </CollectionView>
-        <!--</ScrollView>-->
+                        </Grid>
+                    </Border>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
         <Button Grid.Row="2" x:Name="DetailsButton" Text="Details" Clicked="OnDetailsClicked">
             <Button.Triggers>
-                <!-- Ha SelectedItem == null, akkor IsVisible = False -->
-                <DataTrigger TargetType="Button"
-                             Binding="{Binding SelectedItem}"
-                             Value="{x:Null}">
+                <DataTrigger TargetType="Button" Binding="{Binding SelectedItem}" Value="{x:Null}">
                     <Setter Property="IsVisible" Value="False" />
                 </DataTrigger>
             </Button.Triggers>

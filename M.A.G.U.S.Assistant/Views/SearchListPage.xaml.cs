@@ -27,7 +27,7 @@ internal partial class SearchListPage : NotifierPage
             var selected = ViewModel?.SelectedItem;
             if (selected == null)
             {
-                WeakReferenceMessenger.Default.Send(Lng.Elem("Select a creature first"));
+                WeakReferenceMessenger.Default.Send(Lng.Elem("Select an item first"));
             }
 
             var objToInspect = (object)selected;

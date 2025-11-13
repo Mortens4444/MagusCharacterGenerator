@@ -177,7 +177,7 @@
     <PackageReference Include="Microsoft.Maui.Graphics" Version="9.0.120" />
     <PackageReference Include="Microsoft.Maui.Graphics.Skia" Version="9.0.120" />
     <PackageReference Include="Mtf.Maui.Controls" Version="2.0.40" />
-    <PackageReference Include="Mtf.MAUI.LanguageService" Version="1.0.44" />
+    <PackageReference Include="Mtf.MAUI.LanguageService" Version="1.0.45" />
     <PackageReference Include="Plugin.Maui.Audio" Version="4.0.0" />
   </ItemGroup>
   <ItemGroup>
