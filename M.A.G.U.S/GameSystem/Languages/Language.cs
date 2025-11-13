@@ -10,18 +10,18 @@ public enum Language
     Pyarroni,
     [Description("Erv")]
     Erv,
-    [Description("Shadoni")]
-    Shadoni,
+    [Description("Shadonian")]
+    Shadonian,
     [Description("Toroni")]
     Toroni,
     [Description("Doran")]
     Doran,
-    [Description("Dzsad")]
-    Dzsad,
+    [Description("Jad")]
+    Jad,
     [Description("Amund")]
     Amund,
-    [Description("Godoni")]
-    Godoni,
+    [Description("Godonian")]
+    Godonian,
 
     [Description("Elf")]
     Elf,

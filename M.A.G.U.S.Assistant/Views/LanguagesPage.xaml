@@ -37,7 +37,6 @@
                         ItemsSource="{Binding FilteredLanguages}"
                         SelectionMode="Single"
                         SelectedItem="{Binding SelectedLanguage, Mode=TwoWay}"
-                        VerticalOptions="FillAndExpand"
                         ItemsLayout="VerticalList">
             <CollectionView.ItemTemplate>
                 <DataTemplate x:DataType="m:LanguageItem">

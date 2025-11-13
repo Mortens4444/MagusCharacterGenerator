@@ -89,7 +89,7 @@ internal class LanguagesViewModel : INotifyPropertyChanged
         Languages.Clear();
 
         var enumItemType = type == LanguageTypes.Living ? typeof(Language) : typeof(AntientLanguage);
-        var items = GetEnumItems(enumItemType).OrderBy(i => Lng.Elem(i.Name));
+        var items = GetEnumItems(enumItemType).OrderBy(i => Lng.Elem(i.Description));
         foreach (var item in items)
         {
             Languages.Add(item);

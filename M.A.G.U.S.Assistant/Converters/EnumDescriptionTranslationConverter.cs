@@ -17,7 +17,7 @@ internal class EnumDescriptionTranslationConverter : IValueConverter
         var type = value.GetType();
         if (!type.IsEnum)
         {
-            return str;
+            return Lng.Elem(str);
         }
 
         var description = type.GetMember(str).GetDescription();
