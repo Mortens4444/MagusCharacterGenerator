@@ -25,7 +25,7 @@ public class KranichWarlock(byte level = 1) : Class(level), IClass, ILikeMagic
 
     [DiceThrow(ThrowType._1K10)]
     [DiceThrowModifier(8)]
-    public override sbyte Speed => DiceThrow._1K10_Plus_8();
+    public override sbyte Quickness => DiceThrow._1K10_Plus_8();
 
     [DiceThrow(ThrowType._1K6)]
     [DiceThrowModifier(12)]

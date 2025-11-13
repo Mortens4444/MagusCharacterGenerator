@@ -14,16 +14,16 @@ public static class FightValues
         var initiatorRace = character.Race.SpecialQualifications.GetSpeciality<GoodInitiator>();
 
         result.InitiatingValue = initiatorRace != null ? initiatorRace.InitiatingBase : character.BaseClass.InitiatingBaseValue;
-        result.InitiatingValue += MathHelper.GetAboveAverageValue(character.Speed);
+        result.InitiatingValue += MathHelper.GetAboveAverageValue(character.Quickness);
         result.InitiatingValue += MathHelper.GetAboveAverageValue(character.Dexterity);
 
         result.AttackingValue = character.BaseClass.AttackingBaseValue;
         result.AttackingValue += MathHelper.GetAboveAverageValue(character.Strength);
-        result.AttackingValue += MathHelper.GetAboveAverageValue(character.Speed);
+        result.AttackingValue += MathHelper.GetAboveAverageValue(character.Quickness);
         result.AttackingValue += MathHelper.GetAboveAverageValue(character.Dexterity);
 
         result.DefendingValue = character.BaseClass.DefendingBaseValue;
-        result.DefendingValue += MathHelper.GetAboveAverageValue(character.Speed);
+        result.DefendingValue += MathHelper.GetAboveAverageValue(character.Quickness);
         result.DefendingValue += MathHelper.GetAboveAverageValue(character.Dexterity);
 
         var archerClass = character.BaseClass.SpecialQualifications.FirstOrDefault(specialQualification => specialQualification is GoodArcher) as GoodArcher;

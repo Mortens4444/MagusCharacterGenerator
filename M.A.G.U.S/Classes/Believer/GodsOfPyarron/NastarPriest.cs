@@ -24,7 +24,7 @@ public class NastarPriest(byte level = 1) : Class(level), IClass, ILikeMagic
     public override sbyte Strength => DiceThrow._2K6_Plus_6();
 
     [DiceThrow(ThrowType._3K6_2_Times)]
-    public override sbyte Speed => DiceThrow._3K6_2_Times();
+    public override sbyte Quickness => DiceThrow._3K6_2_Times();
 
     [DiceThrow(ThrowType._3K6_2_Times)]
     public override sbyte Dexterity => DiceThrow._3K6_2_Times();

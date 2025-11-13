@@ -13,39 +13,39 @@
 
 			<VerticalStackLayout>
 				<HorizontalStackLayout HorizontalOptions="Center">
-					<mc:MenuItemView ImageName="character_generation" LabelText="Character generation" PageType="{x:Type v:CharacterGeneratorPage}" WidthRequest="100" HeightRequest="100" />
-					<mc:MenuItemView ImageName="map" LabelText="Map" PageType="{x:Type v:MapPage}" WidthRequest="100" HeightRequest="100" />
-					<mc:MenuItemView ImageName="market" LabelText="Market" PageType="{x:Type v:MarketPage}" WidthRequest="100" HeightRequest="100" />
+                    <mc:MenuItem ImageName="character_generation" LabelText="Character generation" PageType="{x:Type v:CharacterGeneratorPage}" WidthRequest="100" HeightRequest="100" />
+                    <mc:MenuItem ImageName="map" LabelText="Map" PageType="{x:Type v:MapPage}" WidthRequest="100" HeightRequest="100" />
+                    <mc:MenuItem ImageName="market" LabelText="Market" PageType="{x:Type v:MarketPage}" WidthRequest="100" HeightRequest="100" />
 				</HorizontalStackLayout>
 				<HorizontalStackLayout HorizontalOptions="Center">
-					<mc:MenuItemView ImageName="qualifications" LabelText="Qualifications" PageType="{x:Type v:QualificationsPage}" WidthRequest="100" HeightRequest="100" />
-					<mc:MenuItemView ImageName="runes" LabelText="Runes" PageType="{x:Type v:RunesPage}" WidthRequest="100" HeightRequest="100" />
-					<mc:MenuItemView ImageName="languages" LabelText="Languages" PageType="{x:Type v:LanguagesPage}" WidthRequest="100" HeightRequest="100" />
+                    <mc:MenuItem ImageName="qualifications" LabelText="Qualifications" PageType="{x:Type v:QualificationsPage}" WidthRequest="100" HeightRequest="100" />
+                    <mc:MenuItem ImageName="runes" LabelText="Runes" PageType="{x:Type v:RunesPage}" WidthRequest="100" HeightRequest="100" />
+                    <mc:MenuItem ImageName="languages" LabelText="Languages" PageType="{x:Type v:LanguagesPage}" WidthRequest="100" HeightRequest="100" />
 				</HorizontalStackLayout>
 				<HorizontalStackLayout HorizontalOptions="Center">
-					<mc:MenuItemView ImageName="gemstone" LabelText="Gemstones" PageType="{x:Type v:GemstonesPage}" WidthRequest="100" HeightRequest="100" />
-					<mc:MenuItemView ImageName="magical_items" LabelText="Magic items" PageType="{x:Type v:MagicalObjectsPage}" WidthRequest="100" HeightRequest="100" />
-					<mc:MenuItemView ImageName="poisons" LabelText="Poisons" PageType="{x:Type v:PoisonsPage}" WidthRequest="100" HeightRequest="100" />
+                    <mc:MenuItem ImageName="gemstone" LabelText="Gemstones" PageType="{x:Type v:GemstonesPage}" WidthRequest="100" HeightRequest="100" />
+                    <mc:MenuItem ImageName="magical_items" LabelText="Magic items" PageType="{x:Type v:MagicalObjectsPage}" WidthRequest="100" HeightRequest="100" />
+                    <mc:MenuItem ImageName="poisons" LabelText="Poisons" PageType="{x:Type v:PoisonsPage}" WidthRequest="100" HeightRequest="100" />
 				</HorizontalStackLayout>
-					<!--<mc:MenuItemView ImageName="psi" LabelText="Psi" PageType="{x:Type v:PsiPage}" WidthRequest="100" HeightRequest="100" />
-					<mc:MenuItemView ImageName="magic" LabelText="Magic" PageType="{x:Type v:MagicPage}" WidthRequest="100" HeightRequest="100" />
-					<mc:MenuItemView ImageName="cities" LabelText="Cities" PageType="{x:Type v:CitiesPage}" WidthRequest="100" HeightRequest="100" />
+					<!--<mc:MenuItem ImageName="psi" LabelText="Psi" PageType="{x:Type v:PsiPage}" WidthRequest="100" HeightRequest="100" />
+					<mc:MenuItem ImageName="magic" LabelText="Magic" PageType="{x:Type v:MagicPage}" WidthRequest="100" HeightRequest="100" />
+					<mc:MenuItem ImageName="cities" LabelText="Cities" PageType="{x:Type v:CitiesPage}" WidthRequest="100" HeightRequest="100" />
 					
 					-->
 				<HorizontalStackLayout HorizontalOptions="Center">
-					<mc:MenuItemView ImageName="classes" LabelText="Classes" PageType="{x:Type v:ClassesPage}" WidthRequest="100" HeightRequest="100" />
-					<mc:MenuItemView ImageName="races" LabelText="Races" PageType="{x:Type v:RacesPage}" WidthRequest="100" HeightRequest="100" />
-					<mc:MenuItemView ImageName="dice_rolL" LabelText="Dice roll" PageType="{x:Type v:DiceRollPage}" WidthRequest="100" HeightRequest="100" />
+                    <mc:MenuItem ImageName="classes" LabelText="Classes" PageType="{x:Type v:ClassesPage}" WidthRequest="100" HeightRequest="100" />
+                    <mc:MenuItem ImageName="races" LabelText="Races" PageType="{x:Type v:RacesPage}" WidthRequest="100" HeightRequest="100" />
+                    <mc:MenuItem ImageName="dice_rolL" LabelText="Dice roll" PageType="{x:Type v:DiceRollPage}" WidthRequest="100" HeightRequest="100" />
 				</HorizontalStackLayout>
 				<HorizontalStackLayout HorizontalOptions="Center">
-					<!--<mc:MenuItemView ImageName="paint" LabelText="Room Painter" PageType="{x:Type v:PaintPage}" WidthRequest="100" HeightRequest="100" />-->
-					<mc:MenuItemView ImageName="sounds" LabelText="Sounds" PageType="{x:Type v:SoundPage}" WidthRequest="100" HeightRequest="100" />
-					<mc:MenuItemView ImageName="images" LabelText="Images" PageType="{x:Type v:ImagesPage}" WidthRequest="100" HeightRequest="100" />
+                    <!--<mc:MenuItem ImageName="paint" LabelText="Room Painter" PageType="{x:Type v:PaintPage}" WidthRequest="100" HeightRequest="100" />-->
+                    <mc:MenuItem ImageName="sounds" LabelText="Sounds" PageType="{x:Type v:SoundPage}" WidthRequest="100" HeightRequest="100" />
+                    <mc:MenuItem ImageName="images" LabelText="Images" PageType="{x:Type v:ImagesPage}" WidthRequest="100" HeightRequest="100" />
 				</HorizontalStackLayout>
 
 				<HorizontalStackLayout HorizontalOptions="Center">
-					<mc:MenuItemView ImageName="bestiary" LabelText="Bestiary" PageType="{x:Type v:BestiaryPage}" WidthRequest="100" HeightRequest="100" />
-					<mc:MenuItemView ImageName="about" LabelText="About" PageType="{x:Type v:AboutPage}" WidthRequest="100" HeightRequest="100" />
+                    <mc:MenuItem ImageName="bestiary" LabelText="Bestiary" PageType="{x:Type v:BestiaryPage}" WidthRequest="100" HeightRequest="100" />
+                    <mc:MenuItem ImageName="about" LabelText="About" PageType="{x:Type v:AboutPage}" WidthRequest="100" HeightRequest="100" />
 				</HorizontalStackLayout>
 
 			</VerticalStackLayout>

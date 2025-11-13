@@ -20,7 +20,7 @@ public abstract class HalfGiant : Race
 
     public override sbyte Intelligence => -1;
 
-    public override sbyte Speed => -1;
+    public override sbyte Quickness => -1;
 
     public override sbyte Astral => -3;
 

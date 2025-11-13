@@ -12,7 +12,7 @@ public class Reptilian : Race
 {
     public override sbyte Strength => 1;
 
-    public override sbyte Speed => 2;
+    public override sbyte Quickness => 2;
 
     public override sbyte Dexterity => 2;
 

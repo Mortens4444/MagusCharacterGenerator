@@ -21,7 +21,7 @@ public class Thief(byte level = 1) : Class(level), IClass, IJustFight
     [DiceThrow(ThrowType._1K10)]
     [DiceThrowModifier(8)]
     [SpecialTraining]
-    public override sbyte Speed => DiceThrow._1K10_Plus_8_Plus_SpecialTraining();
+    public override sbyte Quickness => DiceThrow._1K10_Plus_8_Plus_SpecialTraining();
 
     [DiceThrow(ThrowType._1K6)]
     [DiceThrowModifier(12)]

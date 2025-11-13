@@ -287,7 +287,7 @@ public class Character : IFightModifier, ILiving, IAbilities, INotifyPropertyCha
 		}
 	}
 
-	public sbyte Speed
+	public sbyte Quickness
 	{
 		get => speed;
 		set

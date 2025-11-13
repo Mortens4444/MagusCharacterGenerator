@@ -219,7 +219,7 @@ public partial class CharcterGenerator : Form
 	private void LoadCharacterProperties()
 	{
 		nudStrength.Value = character.Strength;
-		nudSpeed.Value = character.Speed;
+		nudSpeed.Value = character.Quickness;
 		nudDexterity.Value = character.Dexterity;
 		nudStamina.Value = character.Stamina;
 		nudHealth.Value = character.Health;
@@ -353,7 +353,7 @@ public partial class CharcterGenerator : Form
 		var @class = (IClass)Activator.CreateInstance(selectedClass, (byte)nudLevel.Value);
 		var race = (IRace)Activator.CreateInstance(selectedRace);
         SetDiceThrowLabel(@class, race, nameof(@class.Strength), lblStrengthDiceThrow);
-        SetDiceThrowLabel(@class, race, nameof(@class.Speed), lblSpeedDiceThrow);
+        SetDiceThrowLabel(@class, race, nameof(@class.Quickness), lblSpeedDiceThrow);
         SetDiceThrowLabel(@class, race, nameof(@class.Dexterity), lblDexterityDiceThrow);
         SetDiceThrowLabel(@class, race, nameof(@class.Stamina), lblStaminaDiceThrow);
         SetDiceThrowLabel(@class, race, nameof(@class.Health), lblHealthDiceThrow);
@@ -464,7 +464,7 @@ public partial class CharcterGenerator : Form
 
 	private void NudSpeed_ValueChanged(object sender, EventArgs e)
 	{
-		character.Speed = (sbyte)nudSpeed.Value;
+		character.Quickness = (sbyte)nudSpeed.Value;
 	}
 
 	private void NudDexterity_ValueChanged(object sender, EventArgs e)

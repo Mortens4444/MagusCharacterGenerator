@@ -10,7 +10,7 @@ public class HalfElf : Race, IUseRangedWeapons
 {
     public override sbyte Strength => -1;
 
-    public override sbyte Speed => 1;
+    public override sbyte Quickness => 1;
 
     public override QualificationList Qualifications =>
     [

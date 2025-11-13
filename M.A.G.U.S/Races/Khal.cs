@@ -10,7 +10,7 @@ public class Khal : Race
 {
     public override sbyte Strength => 3;
 
-    public override sbyte Speed => 2;
+    public override sbyte Quickness => 2;
 
     public override sbyte Dexterity => 1;
 

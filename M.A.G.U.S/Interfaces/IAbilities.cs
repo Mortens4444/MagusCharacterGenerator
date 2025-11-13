@@ -4,7 +4,7 @@ public interface IAbilities
 {
     sbyte Strength { get; }
 
-    sbyte Speed { get; }
+    sbyte Quickness { get; }
 
     sbyte Dexterity { get; }
 

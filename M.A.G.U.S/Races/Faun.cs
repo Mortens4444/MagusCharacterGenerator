@@ -8,7 +8,7 @@ namespace M.A.G.U.S.Races;
 /// </summary>
 public class Faun : Race
 {
-    public override sbyte Speed => 1;
+    public override sbyte Quickness => 1;
 
     public override sbyte Dexterity => 1;
 

@@ -13,7 +13,7 @@ public class Healer(byte level = 1) : Class(level), IClass
 
     [DiceThrow(ThrowType._1K6)]
     [DiceThrowModifier(6)]
-    public override sbyte Speed => (sbyte)(DiceThrow._1K6() + 6);
+    public override sbyte Quickness => (sbyte)(DiceThrow._1K6() + 6);
 
     [DiceThrow(ThrowType._1K6)]
     [DiceThrowModifier(6)]

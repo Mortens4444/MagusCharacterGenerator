@@ -12,7 +12,7 @@ public class NightElf : Race, IUseRangedWeapons
 {
     public override sbyte Strength => -1;
 
-    public override sbyte Speed => 3;
+    public override sbyte Quickness => 3;
 
     public override sbyte Dexterity => 3;
 

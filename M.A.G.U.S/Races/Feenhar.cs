@@ -12,7 +12,7 @@ public class Feenhar : Race
 {
     public override sbyte Dexterity => 1;
 
-    public override sbyte Speed => 1;
+    public override sbyte Quickness => 1;
 
     public override sbyte Beauty => -2;
 

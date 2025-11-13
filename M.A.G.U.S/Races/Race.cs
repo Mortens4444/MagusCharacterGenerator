@@ -17,7 +17,7 @@ public abstract class Race : IRace
 
     public virtual sbyte Strength => 0;
 
-    public virtual sbyte Speed => 0;
+    public virtual sbyte Quickness => 0;
 
     public virtual sbyte Dexterity => 0;
 

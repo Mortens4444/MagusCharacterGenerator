@@ -21,7 +21,7 @@ public class MartialArtist(byte level = 1) : Class(level), IClass, IJustFight
 
     [DiceThrow(ThrowType._1K6)]
     [DiceThrowModifier(14)]
-    public override sbyte Speed => DiceThrow._1K6_Plus_14();
+    public override sbyte Quickness => DiceThrow._1K6_Plus_14();
 
     [DiceThrow(ThrowType._1K6)]
     [DiceThrowModifier(12)]

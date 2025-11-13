@@ -13,7 +13,7 @@ public class Noble(byte level = 1) : Class(level), IClass
     public override sbyte Strength => DiceThrow._1K10();
 
     [DiceThrow(ThrowType._1K10)]
-    public override sbyte Speed => DiceThrow._1K10();
+    public override sbyte Quickness => DiceThrow._1K10();
 
     [DiceThrow(ThrowType._1K10)]
     public override sbyte Dexterity => DiceThrow._1K10();

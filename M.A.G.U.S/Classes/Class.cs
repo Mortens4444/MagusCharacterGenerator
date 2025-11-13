@@ -52,7 +52,7 @@ public abstract class Class(byte level) : IClass
 
     public abstract sbyte Strength { get; }
 
-    public abstract sbyte Speed { get; }
+    public abstract sbyte Quickness { get; }
 
     public abstract sbyte Dexterity { get; }
 

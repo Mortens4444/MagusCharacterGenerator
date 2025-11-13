@@ -12,7 +12,7 @@ public class GuardOfficer(byte level = 1) : Class(level), IClass
     public override sbyte Strength => DiceThrow._3K6();
 
     [DiceThrow(ThrowType._3K6)]
-    public override sbyte Speed => DiceThrow._3K6();
+    public override sbyte Quickness => DiceThrow._3K6();
 
     [DiceThrow(ThrowType._3K6)]
     public override sbyte Dexterity => DiceThrow._3K6();

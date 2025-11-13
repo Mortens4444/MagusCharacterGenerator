@@ -19,7 +19,7 @@ public class Witch(byte level = 1) : Class(level), IClass, ILikeMagic
 
     [DiceThrow(ThrowType._2K6)]
     [DiceThrowModifier(6)]
-    public override sbyte Speed => DiceThrow._2K6_Plus_6();
+    public override sbyte Quickness => DiceThrow._2K6_Plus_6();
 
     [DiceThrow(ThrowType._1K10)]
     [DiceThrowModifier(8)]

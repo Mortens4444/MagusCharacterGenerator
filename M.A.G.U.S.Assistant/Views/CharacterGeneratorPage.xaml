@@ -471,7 +471,7 @@
                 </VerticalStackLayout>
             </Border>
 
-            <mc:MenuItemView ImageName="market" LabelText="Market" PageType="{x:Type v:MarketPage}" WidthRequest="100" HeightRequest="100" Parameter="{Binding Character}" />
+            <mc:MenuItem ImageName="market" LabelText="Market" PageType="{x:Type v:MarketPage}" WidthRequest="100" HeightRequest="100" Parameter="{Binding Character}" />
             
             <!-- Felszerelés -->
             <Border Style="{StaticResource BoxBorder}" Margin="0,10">

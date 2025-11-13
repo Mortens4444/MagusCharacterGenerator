@@ -11,7 +11,7 @@ public class Dahr : Race
 
     public override sbyte Stamina => 1;
 
-    public override sbyte Speed => 2;
+    public override sbyte Quickness => 2;
 
     public override sbyte Health => -2;
 

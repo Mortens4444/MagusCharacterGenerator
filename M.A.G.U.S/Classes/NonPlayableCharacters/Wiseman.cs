@@ -14,7 +14,7 @@ public class Wiseman(byte level = 1) : Class(level), IClass
     public override sbyte Strength => DiceThrow._1K10();
 
     [DiceThrow(ThrowType._2K6)]
-    public override sbyte Speed => DiceThrow._2K6();
+    public override sbyte Quickness => DiceThrow._2K6();
 
     [DiceThrow(ThrowType._2K6)]
     public override sbyte Dexterity => DiceThrow._2K6();

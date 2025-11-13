@@ -12,7 +12,7 @@ public class Goblin : Race
 
     public override sbyte Dexterity => 3;
 
-    public override sbyte Speed => 3;
+    public override sbyte Quickness => 3;
 
     public override sbyte Beauty => -4;
 

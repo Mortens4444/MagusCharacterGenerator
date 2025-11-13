@@ -19,7 +19,7 @@ public class Warrior(byte level = 1) : Class(level), IClass, IJustFight
     [DiceThrow(ThrowType._2K6)]
     [DiceThrowModifier(6)]
     [SpecialTraining]
-    public override sbyte Speed => DiceThrow._2K6_Plus_6_Plus_SpecialTraining();
+    public override sbyte Quickness => DiceThrow._2K6_Plus_6_Plus_SpecialTraining();
 
     [DiceThrow(ThrowType._2K6)]
     [DiceThrowModifier(6)]

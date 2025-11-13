@@ -14,7 +14,7 @@ public class Dracker : Race
 
     public override sbyte Stamina => 1;
 
-    public override sbyte Speed => 1;
+    public override sbyte Quickness => 1;
 
     public override sbyte Health => -1;
 

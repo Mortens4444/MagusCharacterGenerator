@@ -26,7 +26,7 @@ public static class CharacterConverter
 		result.AppendLine($"{Lng.Elem("Skills")}");
 		result.AppendLine("--------------------------------------");
 		result.AppendLine($"{Lng.Elem("Strength")}: {character.Strength}");
-		result.AppendLine($"{Lng.Elem("Speed")}: {character.Speed}");
+		result.AppendLine($"{Lng.Elem("Quickness")}: {character.Quickness}");
 		result.AppendLine($"{Lng.Elem("Dexterity")}: {character.Dexterity}");
 		result.AppendLine($"{Lng.Elem("Stamina")}: {character.Stamina}");
 		result.AppendLine($"{Lng.Elem("Health")}: {character.Health}");

@@ -16,7 +16,7 @@ public class WhiteOrc : Race
 
     public override sbyte Dexterity => 1;
 
-    public override sbyte Speed => 1;
+    public override sbyte Quickness => 1;
 
     public override sbyte Health => 2;
 

@@ -13,7 +13,7 @@ public class FireElf : Race, IUseRangedWeapons
 {
     public override sbyte Strength => -2;
 
-    public override sbyte Speed => 1;
+    public override sbyte Quickness => 1;
 
     public override sbyte Dexterity => 1;
 

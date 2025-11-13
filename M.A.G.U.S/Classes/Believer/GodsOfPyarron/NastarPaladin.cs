@@ -20,7 +20,7 @@ public class NastarPaladin(byte level = 1) : Class(level), IClass, IHateRangedWe
     public override sbyte Strength => DiceThrow._1K10_Plus_8_Plus_SpecialTraining();
 
     [DiceThrow(ThrowType._3K6_2_Times)]
-    public override sbyte Speed => DiceThrow._3K6_2_Times();
+    public override sbyte Quickness => DiceThrow._3K6_2_Times();
 
     [DiceThrow(ThrowType._3K6_2_Times)]
     public override sbyte Dexterity => DiceThrow._3K6_2_Times();
