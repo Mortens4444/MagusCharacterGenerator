@@ -12,7 +12,6 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{363C1DDC-6617-43F2-AA31-A2A43E3DDE64}"
 	ProjectSection(SolutionItems) = preProject
 		ToDo list.txt = ToDo list.txt
-		Deploy\Utils.ps1 = Deploy\Utils.ps1
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CharacterGeneratorCli", "CharacterGeneratorCli\CharacterGeneratorCli.csproj", "{406FAB14-8171-45CB-BEBC-F46924DA8A56}"

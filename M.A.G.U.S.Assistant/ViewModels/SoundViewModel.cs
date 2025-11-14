@@ -128,7 +128,10 @@ internal class SoundViewModel : INotifyPropertyChanged
             : new ObservableCollection<SoundItem>(allSounds.Where(s => s.DisplayName.Contains(q, StringComparison.OrdinalIgnoreCase)));
 
         FilteredSounds.Clear();
-        foreach (var it in filtered) FilteredSounds.Add(it);
+        foreach (var it in filtered)
+        {
+            FilteredSounds.Add(it);
+        }
 
         OnPropertyChanged(nameof(FilteredSounds));
         ((Command)PlayCommand).ChangeCanExecute();

@@ -119,7 +119,11 @@ internal class PaintWizardViewModel : INotifyPropertyChanged
 
     private void Undo()
     {
-        if (!undoStack.Any()) return;
+        if (!undoStack.Any())
+        {
+            return;
+        }
+
         var action = undoStack.Pop();
         action?.Invoke();
     }
