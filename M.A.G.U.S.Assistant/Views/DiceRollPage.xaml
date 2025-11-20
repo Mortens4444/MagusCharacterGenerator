@@ -4,6 +4,7 @@
                 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
                 xmlns:mc="clr-namespace:Mtf.Maui.Controls;assembly=Mtf.Maui.Controls"
                 xmlns:vm="clr-namespace:M.A.G.U.S.Assistant.ViewModels"
+                xmlns:conv="clr-namespace:Mtf.LanguageService.MAUI.Converters;assembly=Mtf.LanguageService.MAUI"
                 x:Class="M.A.G.U.S.Assistant.Views.DiceRollPage"
                 x:ClassModifier="internal"
                 Title="Dice roll">
@@ -11,7 +12,13 @@
     <v:NotifierPage.BindingContext>
         <vm:DiceRollViewModel />
     </v:NotifierPage.BindingContext>
-
+    
+    <v:NotifierPage.Resources>
+        <ResourceDictionary>
+            <conv:EnumDescriptionTranslationConverter x:Key="EnumDescriptionTranslationConverter" />
+        </ResourceDictionary>
+    </v:NotifierPage.Resources>
+    
     <Grid RowDefinitions="Auto,*,Auto" Padding="16" RowSpacing="12">
 
         <Grid Grid.Row="0" ColumnDefinitions="Auto,*,Auto" ColumnSpacing="8">
@@ -23,12 +30,12 @@
 
             <Picker x:Name="DicePicker"
                     Grid.Column="1"
-                    ItemsSource="{Binding DiceType}"
+                    ItemsSource="{Binding DiceTypes}"
                     SelectedItem="{Binding SelectedDice}"
+                    ItemDisplayBinding="{Binding Converter={StaticResource EnumDescriptionTranslationConverter}}"
                     HorizontalTextAlignment="Center"
                     VerticalTextAlignment="Center"
-                    VerticalOptions="End"
-                    />
+                    VerticalOptions="End" />
 
             <Button Text="Throw"
                     Grid.Column="2"

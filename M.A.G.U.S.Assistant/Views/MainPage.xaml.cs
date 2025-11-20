@@ -8,6 +8,8 @@ namespace M.A.G.U.S.Assistant.Views;
 
 internal partial class MainPage : NotifierPage
 {
+    private Dictionary<object, string> originalTextElements;
+
     public MainPage()
     {
         InitializeComponent();
@@ -19,17 +21,20 @@ internal partial class MainPage : NotifierPage
         {
             LanguagePicker.Items.Add(lang.GetDescription());
         }
-        LanguagePicker.SelectedIndex = languages.IndexOf(Lng.DefaultLanguage.ToImplementedLanguage());
-
         LanguagePicker.SelectedIndexChanged += (s, e) =>
         {
             var selected = languages[LanguagePicker.SelectedIndex];
             Lng.DefaultLanguage = selected.ToLanguage();
-            if (originalTextElements != null)
+            if (originalTextElements == null)
+            {
+                originalTextElements = Translator.Translate(this);
+            }
+            else
             {
                 Translator.SetOriginalTexts(originalTextElements);
+                _ = Translator.Translate(this);
             }
-            originalTextElements = Translator.Translate(this);
         };
+        LanguagePicker.SelectedIndex = languages.IndexOf(Lng.DefaultLanguage.ToImplementedLanguage());
     }
 }

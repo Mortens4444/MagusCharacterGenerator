@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <v:NotifierPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:c="clr-namespace:M.A.G.U.S.Assistant.Converters"
+             xmlns:c="clr-namespace:Mtf.LanguageService.MAUI.Converters;assembly=Mtf.LanguageService.MAUI"
              xmlns:conv="clr-namespace:Mtf.Maui.Controls.Converters;assembly=Mtf.Maui.Controls"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:m="clr-namespace:M.A.G.U.S.Assistant.Models"

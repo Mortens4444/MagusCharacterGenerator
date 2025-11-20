@@ -1,4 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.Messaging;
+using M.A.G.U.S.Enums;
 using Mtf.LanguageService;
 using Mtf.Maui.Controls.Models;
 #if ANDROID
@@ -37,19 +38,17 @@ internal class DiceRollViewModel : INotifyPropertyChanged
         }
     }
 
-    private string selectedDice = "K6";
-    public string SelectedDice
+    public IEnumerable<DiceType> DiceTypes { get; } = Enum.GetValues<DiceType>().Cast<DiceType>();
+
+    private DiceType selectedDice;
+    public DiceType SelectedDice
     {
         get => selectedDice;
         set
         {
-            if (selectedDice == value)
-            {
-                return;
-            }
-
+            if (selectedDice == value) return;
             selectedDice = value;
-            OnPropertyChanged(nameof(SelectedDice));
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(SelectedDice)));
         }
     }
 
@@ -148,9 +147,9 @@ internal class DiceRollViewModel : INotifyPropertyChanged
         ResultSummary = String.Empty;
         ResultDetails = String.Empty;
 
-        var pattern = new Regex(@"^(?:(\d+)?[kK])(\d+)$");
-        var m = pattern.Match($"{DiceCount}{SelectedDice}" ?? String.Empty);
-        int count = 1;
+        var pattern = new Regex(@"^(?:(\d+)?[dD])(\d+)$");
+        var m = pattern.Match($"{SelectedDice}");
+        int count = DiceCount;
         int sides = 6;
         if (m.Success)
         {

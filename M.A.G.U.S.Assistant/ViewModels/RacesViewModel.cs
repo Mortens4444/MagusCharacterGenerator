@@ -67,7 +67,6 @@ internal partial class RacesViewModel : INotifyPropertyChanged
     private void ApplyFilter()
     {
         var query = Races.AsEnumerable();
-
         var st = SearchText?.Trim();
         if (!String.IsNullOrWhiteSpace(st))
         {

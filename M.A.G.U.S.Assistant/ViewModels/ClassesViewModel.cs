@@ -84,7 +84,7 @@ internal partial class ClassesViewModel : INotifyPropertyChanged
     {
         Seed();
         ApplyFilter();
-        SelectedClass = Classes.First();
+        //SelectedClass = Classes.First();
     }
 
     private void Seed()
@@ -106,11 +106,9 @@ internal partial class ClassesViewModel : INotifyPropertyChanged
         if (!String.IsNullOrWhiteSpace(st))
         {
             query = query.Where(c =>
-                c.Name?.IndexOf(st, StringComparison.CurrentCultureIgnoreCase) >= 0);
+                c.Name?.IndexOf(st, StringComparison.CurrentCultureIgnoreCase) >= 0)
+                .OrderBy(c => Lng.Elem(c.Name));
         }
-
-        query = query
-            .OrderBy(c => Lng.Elem(c.Name));
 
         FilteredClasses.Clear();
         foreach (var it in query)

@@ -9,8 +9,6 @@ namespace M.A.G.U.S.Assistant.Views;
 
 internal partial class NotifierPage : ContentPage
 {
-    protected Dictionary<object, string> originalTextElements;
-
     public NotifierPage()
     {
         WeakReferenceMessenger.Default.Register<ShowPage>(this, (sender, message) =>
@@ -32,7 +30,7 @@ internal partial class NotifierPage : ContentPage
         base.OnAppearing();
         try
         {
-            originalTextElements = Translator.Translate(this);
+            _ = Translator.Translate(this);
         }
         catch (Exception ex)
         {
