@@ -13,8 +13,12 @@ using M.A.G.U.S.Qualifications.Specialities;
 
 namespace M.A.G.U.S.Classes.Believer;
 
-public abstract class Priest(byte level) : Class(level), IClass, ILikeMagic
+public abstract class Priest : Class, IClass, ILikeMagic
 {
+    public Priest() : base(1) { }
+
+    public Priest(byte level) : base(level) { }
+
     [DiceThrow(ThrowType._2K6)]
     [DiceThrowModifier(6)]
     public override sbyte Strength => DiceThrow._2K6_Plus_6();

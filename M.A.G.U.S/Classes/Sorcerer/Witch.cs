@@ -12,8 +12,12 @@ using M.A.G.U.S.Qualifications.Scientific.Psi;
 
 namespace M.A.G.U.S.Classes.Sorcerer;
 
-public class Witch(byte level = 1) : Class(level), IClass, ILikeMagic
+public class Witch : Class, IClass, ILikeMagic
 {
+    public Witch() : base(1) { }
+
+    public Witch(byte level) : base(level) { }
+
     [DiceThrow(ThrowType._3K6)]
     public override sbyte Strength => DiceThrow._3K6();
 

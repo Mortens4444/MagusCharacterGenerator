@@ -6,8 +6,12 @@ using M.A.G.U.S.Qualifications.Scientific;
 
 namespace M.A.G.U.S.Classes.Believer.GodsOfPyarron;
 
-public class KyelPriest(byte level = 1) : Priest(level)
+public class KyelPriest : Priest
 {
+    public KyelPriest() : base(1) { }
+
+    public KyelPriest(byte level) : base(level) { }
+
     public override QualificationList Qualifications
     {
         get

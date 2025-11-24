@@ -6,8 +6,12 @@ using M.A.G.U.S.Qualifications.Underworld;
 
 namespace M.A.G.U.S.Classes.Believer.Ranagol;
 
-public class RanagolPaladin(byte level = 1) : Paladin(level)
+public class RanagolPaladin : Paladin
 {
+    public RanagolPaladin() : base(1) { }
+
+    public RanagolPaladin(byte level) : base(level) { }
+
     public override QualificationList Qualifications
     {
         get

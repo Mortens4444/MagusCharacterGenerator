@@ -6,8 +6,12 @@ using M.A.G.U.S.Qualifications.Underworld;
 
 namespace M.A.G.U.S.Classes.Believer.GodsOfKyr;
 
-public class TharrPriest(byte level = 1) : Priest(level)
+public class TharrPriest : Priest
 {
+    public TharrPriest() : base(1) { }
+
+    public TharrPriest(byte level) : base(level) { }
+
     public override QualificationList Qualifications
 	{
 		get

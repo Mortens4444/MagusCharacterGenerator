@@ -17,8 +17,12 @@ namespace M.A.G.U.S.Classes.Believer.GodsOfPyarron;
 /// Nastar = Krad
 /// https://nemaakos.files.wordpress.com/2014/10/nastar2.pdf
 /// </summary>
-public class NastarPriest(byte level = 1) : Class(level), IClass, ILikeMagic
+public class NastarPriest : Class, IClass, ILikeMagic
 {
+    public NastarPriest() : base(1) { }
+
+    public NastarPriest(byte level) : base(level) { }
+
     [DiceThrow(ThrowType._2K6)]
     [DiceThrowModifier(6)]
     public override sbyte Strength => DiceThrow._2K6_Plus_6();

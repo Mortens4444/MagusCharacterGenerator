@@ -13,8 +13,12 @@ using M.A.G.U.S.Qualifications.Specialities;
 
 namespace M.A.G.U.S.Classes.Believer.GodsOfPyarron;
 
-public class VelarPaladin(byte level = 1) : Class(level), IClass, ILikeMagic
+public class VelarPaladin : Class, IClass, ILikeMagic
 {
+    public VelarPaladin() : base(1) { }
+
+    public VelarPaladin(byte level) : base(level) { }
+
     [DiceThrow(ThrowType._2K6)]
     [DiceThrowModifier(6)]
     public override sbyte Strength => DiceThrow._2K6_Plus_6();

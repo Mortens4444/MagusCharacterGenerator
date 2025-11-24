@@ -18,8 +18,12 @@ namespace M.A.G.U.S.Classes.Sorcerer;
 /// <summary>
 /// https://www.kalandozok.hu/magus/kalandozok/jatszhatokasztok/magiahasznalo/boszorkanymester/kraniboszorkanymester(mg)kalandozok.pdf
 /// </summary>
-public class KranichWarlock(byte level = 1) : Class(level), IClass, ILikeMagic
+public class KranichWarlock : Class, IClass, ILikeMagic
 {
+    public KranichWarlock() : base(1) { }
+
+    public KranichWarlock(byte level) : base(level) { }
+
     [DiceThrow(ThrowType._3K6_2_Times)]
     public override sbyte Strength => DiceThrow._3K6_2_Times();
 

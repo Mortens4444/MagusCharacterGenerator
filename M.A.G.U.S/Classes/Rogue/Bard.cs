@@ -15,8 +15,12 @@ using M.A.G.U.S.Qualifications.Underworld;
 
 namespace M.A.G.U.S.Classes.Rogue;
 
-public class Bard(byte level = 1) : Class(level), IClass, IJustFight
+public class Bard : Class, IClass, IJustFight
 {
+    public Bard() : base(1) { }
+
+    public Bard(byte level) : base(level) { }
+
     [DiceThrow(ThrowType._1K10)]
     [DiceThrowModifier(8)]
     public override sbyte Strength => DiceThrow._1K10_Plus_8();

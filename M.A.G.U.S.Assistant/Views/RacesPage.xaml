@@ -13,10 +13,6 @@
                 x:DataType="vm:RacesViewModel"
                 Title="Races">
 
-    <v:NotifierPage.BindingContext>
-        <vm:RacesViewModel />
-    </v:NotifierPage.BindingContext>
-
     <v:NotifierPage.Resources>
         <ResourceDictionary>
             <conv:TranslationConverter x:Key="TranslationConverter" />

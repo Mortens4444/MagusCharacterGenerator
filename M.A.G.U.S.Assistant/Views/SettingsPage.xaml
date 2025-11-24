@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<v:NotifierPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                xmlns:v="clr-namespace:M.A.G.U.S.Assistant.Views"
+                xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                x:Class="M.A.G.U.S.Assistant.Views.SettingsPage"
+                Title="Settings"
+                x:ClassModifier="internal">
+    
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="20">
+
+            <Label Text="Character Creation Rules" 
+                   FontSize="18" 
+                   FontAttributes="Bold" 
+                   TextColor="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource White}}"/>
+
+            <Border StrokeShape="RoundRectangle 10" Padding="15" StrokeThickness="0" 
+                    BackgroundColor="{AppThemeBinding Light={StaticResource Gray100}, Dark={StaticResource Gray600}}">
+                <Grid ColumnDefinitions="*, Auto">
+                    <Label Grid.Column="0" 
+                           Text="Add combat value modifiers at level 1 for all classes" 
+                           VerticalOptions="Center" 
+                           LineBreakMode="WordWrap"/>
+                    <Switch Grid.Column="1" IsToggled="{Binding AddFightValueOnFirstLevelForAllClass}" />
+                </Grid>
+            </Border>
+
+            <Border StrokeShape="RoundRectangle 10" Padding="15" StrokeThickness="0"
+                    BackgroundColor="{AppThemeBinding Light={StaticResource Gray100}, Dark={StaticResource Gray600}}">
+                <Grid ColumnDefinitions="*, Auto">
+                    <Label Grid.Column="0" 
+                           Text="Add pain tolerance points modifiers at level 1 for all classes" 
+                           VerticalOptions="Center"
+                           LineBreakMode="WordWrap"/>
+                    <Switch Grid.Column="1" IsToggled="{Binding AddPainToleranceOnFirstLevelForAllClass}" />
+                </Grid>
+            </Border>
+
+            <Border StrokeShape="RoundRectangle 10" Padding="15" StrokeThickness="0"
+                    BackgroundColor="{AppThemeBinding Light={StaticResource Gray100}, Dark={StaticResource Gray600}}">
+                <Grid ColumnDefinitions="*, Auto">
+                    <Label Grid.Column="0" 
+                           Text="Add skill points modifiers at level 1 for all classes" 
+                           VerticalOptions="Center"
+                           LineBreakMode="WordWrap"/>
+                    <Switch Grid.Column="1" IsToggled="{Binding AddQualificationPointsOnFirstLevelForAllClass}" />
+                </Grid>
+            </Border>
+
+        </VerticalStackLayout>
+    </ScrollView>
+</v:NotifierPage>

@@ -12,8 +12,12 @@ using M.A.G.U.S.Qualifications.Scientific.Psi;
 
 namespace M.A.G.U.S.Classes.Believer;
 
-public abstract class Paladin(byte level) : Class(level), IClass, IHateRangedWeapons
+public abstract class Paladin : Class, IClass, IHateRangedWeapons
 {
+    public Paladin() : base(1) { }
+
+    public Paladin(byte level) : base(level) { }
+
     [DiceThrow(ThrowType._1K10)]
     [DiceThrowModifier(8)]
     [SpecialTraining]

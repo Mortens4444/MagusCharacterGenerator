@@ -7,8 +7,12 @@ using M.A.G.U.S.Qualifications.Scientific;
 
 namespace M.A.G.U.S.Classes.Believer.Domvik;
 
-public class DomvikPriest(byte level = 1) : Priest(level)
+public class DomvikPriest : Priest
 {
+    public DomvikPriest() : base(1) { }
+
+    public DomvikPriest(byte level) : base(level) { }
+
     public override QualificationList Qualifications
 	{
 		get

@@ -5,8 +5,12 @@ using M.A.G.U.S.Qualifications.Underworld;
 
 namespace M.A.G.U.S.Classes.Believer.Ranagol;
 
-public class GorvikRanagolPriest(byte level = 1) : Priest(level)
+public class GorvikRanagolPriest : Priest
 {
+    public GorvikRanagolPriest() : base(1) { }
+
+    public GorvikRanagolPriest(byte level) : base(level) { }
+
     public override QualificationList Qualifications
     {
         get

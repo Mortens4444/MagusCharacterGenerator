@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<v:NotifierPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                xmlns:conv="clr-namespace:Mtf.Maui.Controls.Converters;assembly=Mtf.Maui.Controls"
+                xmlns:v="clr-namespace:M.A.G.U.S.Assistant.Views"
+                xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                xmlns:vm="clr-namespace:M.A.G.U.S.Assistant.ViewModels"
+                xmlns:model="clr-namespace:M.A.G.U.S.GameSystem;assembly=M.A.G.U.S."
+                x:Class="M.A.G.U.S.Assistant.Views.CharactersPage"
+                x:DataType="vm:CharactersViewModel"
+                Title="Characters"
+                x:ClassModifier="internal"
+                BackgroundColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource Gray900}}">
+    
+    <v:NotifierPage.Resources>
+        <ResourceDictionary>
+            <conv:InverseBooleanConverter x:Key="InverseBooleanConverter" />
+        </ResourceDictionary>
+    </v:NotifierPage.Resources>
+    
+    <Grid RowDefinitions="Auto, *">
+
+        <Label Grid.Row="0" 
+               Text="Manage your characters" 
+               Padding="15"
+               TextColor="Gray"
+               IsVisible="{Binding IsEmpty, Converter={StaticResource InverseBooleanConverter}}"/>
+        <RefreshView Grid.Row="1" 
+                     IsRefreshing="{Binding IsLoading}"
+                     Command="{Binding LoadCharactersAsyncCommand}">
+
+            <Grid>
+                <VerticalStackLayout VerticalOptions="Center" 
+                                     HorizontalOptions="Center" 
+                                     IsVisible="{Binding IsEmpty}"
+                                     Spacing="10">
+                    <Label Text="No characters found." 
+                           HorizontalOptions="Center"
+                           FontSize="18" />
+                    <Label Text="Go to 'Character generation' to create one." 
+                           TextColor="Gray"
+                           HorizontalOptions="Center"/>
+                </VerticalStackLayout>
+
+                <CollectionView ItemsSource="{Binding Characters}"
+                                SelectionMode="Single"
+                                SelectionChangedCommand="{Binding OpenDetailsCommand}"
+                                SelectionChangedCommandParameter="{Binding Source={RelativeSource Self}, Path=SelectedItem}">
+
+                    <CollectionView.ItemsLayout>
+                        <LinearItemsLayout Orientation="Vertical" ItemSpacing="10" />
+                    </CollectionView.ItemsLayout>
+
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate x:DataType="model:Character">
+                            <SwipeView>
+                                <SwipeView.RightItems>
+                                    <SwipeItems>
+                                        <SwipeItem Text="Delete"
+                                                   BackgroundColor="#FF3B30"
+                                                   Command="{Binding Source={RelativeSource AncestorType={x:Type vm:CharactersViewModel}}, Path=DeleteCharacterCommand}"
+                                                   CommandParameter="{Binding .}" />
+                                    </SwipeItems>
+                                </SwipeView.RightItems>
+
+                                <Border StrokeShape="RoundRectangle 10"
+                                        StrokeThickness="1"
+                                        Margin="10,0"
+                                        Padding="15"
+                                        BackgroundColor="{AppThemeBinding Light={StaticResource Gray100}, Dark={StaticResource Gray800}}">
+                                    <Border.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type vm:CharactersViewModel}}, Path=OpenDetailsCommand}"
+                                                              CommandParameter="{Binding .}"/>
+                                    </Border.GestureRecognizers>
+
+                                    <Grid ColumnDefinitions="*, Auto">
+                                        <VerticalStackLayout Grid.Column="0" Spacing="2">
+                                            <Label Text="{Binding Name}" 
+                                                   FontAttributes="Bold" 
+                                                   FontSize="18"/>
+
+                                            <HorizontalStackLayout Spacing="5">
+                                                <Label Text="{Binding Race}" TextColor="{AppThemeBinding Light=Gray, Dark=LightGray}"/>
+                                                <Label Text="-" TextColor="Gray"/>
+                                                <Label Text="{Binding BaseClass.Name}" TextColor="{AppThemeBinding Light=Gray, Dark=LightGray}"/>
+                                            </HorizontalStackLayout>
+
+                                            <Label Text="{Binding Level, StringFormat='Level {0}'}" 
+                                                   FontSize="12" 
+                                                   TextColor="{StaticResource Primary}"/>
+                                        </VerticalStackLayout>
+
+                                        <ImageButton Grid.Column="1"
+                                                     Source="trash_icon.png" 
+                                                     HeightRequest="24"
+                                                     WidthRequest="24"
+                                                     VerticalOptions="Center"
+                                                     Command="{Binding Source={RelativeSource AncestorType={x:Type vm:CharactersViewModel}}, Path=DeleteCharacterCommand}"
+                                                     CommandParameter="{Binding .}">
+                                        </ImageButton>
+                                    </Grid>
+                                </Border>
+                            </SwipeView>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </Grid>
+        </RefreshView>
+    </Grid>
+</v:NotifierPage>

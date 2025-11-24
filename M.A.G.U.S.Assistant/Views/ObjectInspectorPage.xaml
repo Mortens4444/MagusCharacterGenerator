@@ -7,10 +7,6 @@
              x:ClassModifier="internal"
              Title="Object Inspector">
 
-    <v:NotifierPage.BindingContext>
-        <vm:ObjectInspectorViewModel />
-    </v:NotifierPage.BindingContext>
-
     <CollectionView ItemsSource="{Binding Properties}" Margin="10">
         <CollectionView.ItemTemplate>
             <DataTemplate>

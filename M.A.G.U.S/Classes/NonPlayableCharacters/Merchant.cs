@@ -7,8 +7,12 @@ using M.A.G.U.S.Qualifications.Other;
 
 namespace M.A.G.U.S.Classes.NonPlayableCharacters;
 
-public class Merchant(byte level = 1) : Class(level), IClass
+public class Merchant : Class, IClass
 {
+    public Merchant() : base(1) { }
+
+    public Merchant(byte level) : base(level) { }
+
     [DiceThrow(ThrowType._2K6)]
     public override sbyte Strength => DiceThrow._2K6();
 

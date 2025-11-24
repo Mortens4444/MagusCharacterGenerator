@@ -7,8 +7,12 @@ using M.A.G.U.S.Qualifications.Scientific;
 
 namespace M.A.G.U.S.Classes.NonPlayableCharacters;
 
-public class Craftsman(byte level = 1) : Class(level), IClass
+public class Craftsman : Class, IClass
 {
+    public Craftsman() : base(1) { }
+
+    public Craftsman(byte level) : base(level) { }
+
     [DiceThrow(ThrowType._2K6)]
     public override sbyte Strength => DiceThrow._2K6();
 

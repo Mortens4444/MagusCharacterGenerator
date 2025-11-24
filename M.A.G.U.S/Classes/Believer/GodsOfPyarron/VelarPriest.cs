@@ -17,8 +17,12 @@ namespace M.A.G.U.S.Classes.Believer.GodsOfPyarron;
 /// Velar = Kyel
 /// https://nemaakos.files.wordpress.com/2015/12/velar.pdf
 /// </summary>
-public class VelarPriest(byte level = 1) : Class(level), IClass, ILikeMagic
+public class VelarPriest : Class, IClass, ILikeMagic
 {
+    public VelarPriest() : base(1) { }
+
+    public VelarPriest(byte level) : base(level) { }
+
     [DiceThrow(ThrowType._2K6)]
     [DiceThrowModifier(6)]
     public override sbyte Strength => DiceThrow._2K6_Plus_6();

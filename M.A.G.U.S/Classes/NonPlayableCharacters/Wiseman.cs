@@ -8,8 +8,12 @@ using M.A.G.U.S.Qualifications.Scientific;
 
 namespace M.A.G.U.S.Classes.NonPlayableCharacters;
 
-public class Wiseman(byte level = 1) : Class(level), IClass
+public class Wiseman : Class, IClass
 {
+    public Wiseman() : base(1) { }
+
+    public Wiseman(byte level) : base(level) { }
+
     [DiceThrow(ThrowType._1K10)]
     public override sbyte Strength => DiceThrow._1K10();
 

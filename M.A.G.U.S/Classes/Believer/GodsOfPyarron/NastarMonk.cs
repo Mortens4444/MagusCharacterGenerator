@@ -12,8 +12,12 @@ using M.A.G.U.S.Qualifications.Specialities;
 
 namespace M.A.G.U.S.Classes.Believer.GodsOfPyarron;
 
-public class NastarMonk(byte level = 1) : Class(level), IClass, ILikeMagic
+public class NastarMonk : Class, IClass, ILikeMagic
 {
+    public NastarMonk() : base(1) { }
+
+    public NastarMonk(byte level) : base(level) { }
+
     [DiceThrow(ThrowType._2K6)]
     [DiceThrowModifier(6)]
     public override sbyte Strength => DiceThrow._2K6_Plus_6();

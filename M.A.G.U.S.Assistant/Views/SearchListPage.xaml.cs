@@ -13,9 +13,10 @@ internal partial class SearchListPage : NotifierPage
 {
     internal SearchListViewModel ViewModel => BindingContext as SearchListViewModel;
 
-    public SearchListPage(string title, IEnumerable<DisplayItem> items)
+    public SearchListPage(SearchListViewModel viewModel, string title, IEnumerable<DisplayItem> items)
     {
         InitializeComponent();
+        BindingContext = viewModel;
         Title = title;
         ViewModel?.LoadItems(items);
     }
@@ -37,7 +38,7 @@ internal partial class SearchListPage : NotifierPage
                     displayItem.Source is Creature creature ? 
                         new CreatureDetailsPage(creature) :
                         new ItemDetailsPage(displayItem.Source as Thing) :
-                    new ObjectInspectorPage(objToInspect));
+                    new ObjectInspectorPage(new ObjectInspectorViewModel(), objToInspect));
                 Navigation.PushAsync(page);
             }
         }

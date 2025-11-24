@@ -12,12 +12,12 @@ internal partial class PaintWizardPage : NotifierPage
     private double lastPanX, lastPanY;
     private double startTranslationX, startTranslationY;
 
-    public PaintWizardPage()
+    public PaintWizardPage(PaintWizardViewModel viewModel)
     {
         InitializeComponent();
-        vm = new PaintWizardViewModel();
-        BindingContext = vm;
-
+        BindingContext = viewModel;
+        vm = viewModel;
+        
         // alap grid létrehozás (vagy felhasználó hozza létre)
         vm.CreateGridCommand.Execute(null);
 

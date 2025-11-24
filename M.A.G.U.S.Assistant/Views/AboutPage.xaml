@@ -7,9 +7,6 @@
              x:Class="M.A.G.U.S.Assistant.Views.AboutPage"
              x:ClassModifier="internal"
              Title="About">
-    <v:NotifierPage.BindingContext>
-        <vm:AboutPageViewModel />
-    </v:NotifierPage.BindingContext>
 
     <ScrollView>
 

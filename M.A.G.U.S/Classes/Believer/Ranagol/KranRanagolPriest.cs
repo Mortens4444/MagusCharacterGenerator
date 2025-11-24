@@ -1,13 +1,16 @@
 ﻿using M.A.G.U.S.GameSystem.Languages;
 using M.A.G.U.S.GameSystem.Qualifications;
 using M.A.G.U.S.Qualifications;
-using M.A.G.U.S.Qualifications.Magic;
 using M.A.G.U.S.Qualifications.Scientific;
 
 namespace M.A.G.U.S.Classes.Believer.Ranagol;
 
-public class KranRanagolPriest(byte level = 1) : Priest(level)
+public class KranRanagolPriest : Priest
 {
+    public KranRanagolPriest() : base(1) { }
+
+    public KranRanagolPriest(byte level) : base(level) { }
+
     public override QualificationList FutureQualifications
     {
         get

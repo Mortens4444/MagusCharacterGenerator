@@ -13,9 +13,10 @@ internal partial class DiceRollPage : NotifierPage
     private const double ShakeThresholdG = 2.2;
     private const int ShakeDebounceMs = 800;
 
-    public DiceRollPage()
+    public DiceRollPage(DiceRollViewModel viewModel)
     {
         InitializeComponent();
+        BindingContext = viewModel;
         if (ViewModel != null)
         {
             ViewModel.DiceRollRequested += OnDiceRollRequested;

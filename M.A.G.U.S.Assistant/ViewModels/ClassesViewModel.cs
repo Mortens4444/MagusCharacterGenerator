@@ -1,5 +1,4 @@
-﻿using global::M.A.G.U.S.Classes;
-using M.A.G.U.S.Assistant.Extensions;
+﻿using M.A.G.U.S.Assistant.Extensions;
 using M.A.G.U.S.Assistant.Models;
 using M.A.G.U.S.Interfaces;
 using M.A.G.U.S.Qualifications;
@@ -12,13 +11,27 @@ namespace M.A.G.U.S.Assistant.ViewModels;
 
 internal partial class ClassesViewModel : INotifyPropertyChanged
 {
-    public ObservableCollection<IClass> Classes { get; } = [];
-    public ObservableCollection<IClass> FilteredClasses { get; } = [];
+    public IList<IClass> classes;
 
     public event PropertyChangedEventHandler? PropertyChanged;
 
     private string searchText = String.Empty;
     private IClass selectedClass;
+    private ObservableCollection<IClass> filteredClasses = [];
+
+    public ObservableCollection<IClass> FilteredClasses
+    {
+        get => filteredClasses;
+        private set
+        {
+            if (filteredClasses == value)
+            {
+                return;
+            }
+            filteredClasses = value ?? [];
+            OnPropertyChanged(nameof(FilteredClasses));
+        }
+    }
 
     public string SearchText
     {
@@ -64,56 +77,29 @@ internal partial class ClassesViewModel : INotifyPropertyChanged
     }
 
     private readonly ObservableCollection<DiceStat> diceStats = [];
-    public ObservableCollection<DiceStat> DiceStats
-    {
-        get
-        {
-            return diceStats;
-        }
-    }
+    public ObservableCollection<DiceStat> DiceStats => diceStats;
 
-    public ObservableCollection<Qualification> OrderedQualifications
-    {
-        get
-        {
-            return new ObservableCollection<Qualification>(SelectedClass?.Qualifications.OrderByLocalizedName() ?? []);
-        }
-    }
+    public ObservableCollection<Qualification> OrderedQualifications => new(SelectedClass?.Qualifications.OrderByLocalizedName() ?? []);
 
     public ClassesViewModel()
     {
-        Seed();
+        classes = [.. "M.A.G.U.S.Classes".CreateInstancesFromNamespace<IClass>().OrderBy(c => Lng.Elem(c.Name))];
         ApplyFilter();
-        //SelectedClass = Classes.First();
-    }
-
-    private void Seed()
-    {
-        var classes = "M.A.G.U.S.Classes".CreateInstancesFromNamespace<Class>()
-            .OrderBy(c => Lng.Elem(c.Name));
-
-        Classes.Clear();
-        foreach (var cls in classes)
-        {
-            Classes.Add(cls);
-        }
+        SelectedClass = classes.First();
     }
 
     private void ApplyFilter()
     {
-        var query = Classes.AsEnumerable();
         var st = SearchText?.Trim();
         if (!String.IsNullOrWhiteSpace(st))
         {
-            query = query.Where(c =>
-                c.Name?.IndexOf(st, StringComparison.CurrentCultureIgnoreCase) >= 0)
-                .OrderBy(c => Lng.Elem(c.Name));
+            FilteredClasses = new ObservableCollection<IClass>(classes.Where(c =>
+                Lng.Elem(c.Name).Contains(st, StringComparison.CurrentCultureIgnoreCase))
+                .OrderBy(c => Lng.Elem(c.Name)));
         }
-
-        FilteredClasses.Clear();
-        foreach (var it in query)
+        else
         {
-            FilteredClasses.Add(it);
+            FilteredClasses = new ObservableCollection<IClass>(classes);
         }
     }
 

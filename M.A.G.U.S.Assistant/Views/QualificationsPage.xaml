@@ -11,10 +11,6 @@
                 x:ClassModifier="internal"
                 Title="Qualifications">
 
-    <v:NotifierPage.BindingContext>
-        <vm:QualificationsViewModel />
-    </v:NotifierPage.BindingContext>
-
     <v:NotifierPage.Resources>
         <ResourceDictionary>
             <conv:TranslationConverter x:Key="TranslationConverter" />

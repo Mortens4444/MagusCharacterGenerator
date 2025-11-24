@@ -6,8 +6,12 @@ using M.A.G.U.S.Qualifications.Combat;
 
 namespace M.A.G.U.S.Classes.NonPlayableCharacters;
 
-public class Guard(byte level = 1) : Class(level), IClass
+public class Guard : Class, IClass
 {
+    public Guard() : base(1) { }
+
+    public Guard(byte level) : base(level) { }
+
     [DiceThrow(ThrowType._3K6)]
     public override sbyte Strength => DiceThrow._3K6();
 

@@ -7,8 +7,12 @@ using M.A.G.U.S.Qualifications.Underworld;
 
 namespace M.A.G.U.S.Classes.Believer.GodsOfPyarron;
 
-public class DartonPaladin(byte level = 1) : Paladin(level)
+public class DartonPaladin : Paladin
 {
+    public DartonPaladin() : base(1) { }
+
+    public DartonPaladin(byte level) : base(level) { }
+
     public override QualificationList Qualifications
     {
         get

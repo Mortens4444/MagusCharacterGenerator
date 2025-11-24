@@ -4,8 +4,12 @@ using M.A.G.U.S.Qualifications.Scientific;
 
 namespace M.A.G.U.S.Classes.Believer.GodsOfPyarron;
 
-public class DreinaPaladin(byte level = 1) : Paladin(level)
+public class DreinaPaladin : Paladin
 {
+    public DreinaPaladin() : base(1) { }
+
+    public DreinaPaladin(byte level) : base(level) { }
+
     public override QualificationList Qualifications
     {
         get

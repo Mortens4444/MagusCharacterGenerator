@@ -13,6 +13,7 @@
     <v:NotifierPage.BindingContext>
         <vm:SearchListViewModel />
     </v:NotifierPage.BindingContext>
+
     <v:NotifierPage.Resources>
         <ResourceDictionary>
             <c:TranslationConverter x:Key="TranslationConverter" />

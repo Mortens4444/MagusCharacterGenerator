@@ -7,8 +7,12 @@ using M.A.G.U.S.Qualifications.Scientific;
 
 namespace M.A.G.U.S.Classes.NonPlayableCharacters;
 
-public class Soldier(byte level = 1) : Class(level), IClass
+public class Soldier : Class, IClass
 {
+    public Soldier() : base(1) { }
+
+    public Soldier(byte level) : base(level) { }
+
     [DiceThrow(ThrowType._2K6)]
     [DiceThrowModifier(6)]
     public override sbyte Strength => DiceThrow._2K6_Plus_6();

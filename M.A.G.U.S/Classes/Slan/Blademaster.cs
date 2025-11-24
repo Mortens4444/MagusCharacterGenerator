@@ -12,8 +12,12 @@ using M.A.G.U.S.Qualifications.Specialities;
 
 namespace M.A.G.U.S.Classes.Slan;
 
-public class Blademaster(byte level = 1) : Class(level), IClass, IJustFight
+public class Blademaster : Class, IClass, IJustFight
 {
+    public Blademaster() : base(1) { }
+
+    public Blademaster(byte level) : base(level) { }
+
     [DiceThrow(ThrowType._1K10)]
     [DiceThrowModifier(8)]
     public override sbyte Strength => DiceThrow._1K10_Plus_8();

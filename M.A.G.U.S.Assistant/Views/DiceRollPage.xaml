@@ -8,10 +8,6 @@
                 x:Class="M.A.G.U.S.Assistant.Views.DiceRollPage"
                 x:ClassModifier="internal"
                 Title="Dice roll">
-
-    <v:NotifierPage.BindingContext>
-        <vm:DiceRollViewModel />
-    </v:NotifierPage.BindingContext>
     
     <v:NotifierPage.Resources>
         <ResourceDictionary>

@@ -13,8 +13,12 @@ using M.A.G.U.S.Qualifications.Underworld;
 
 namespace M.A.G.U.S.Classes.Fighter;
 
-public class Headhunter(byte level = 1) : Class(level), IClass, IJustFight
+public class Headhunter : Class, IClass, IJustFight
 {
+    public Headhunter() : base(1) { }
+
+    public Headhunter(byte level) : base(level) { }
+
     [DiceThrow(ThrowType._2K6)]
     [DiceThrowModifier(6)]
     public override sbyte Strength => DiceThrow._2K6_Plus_6();

@@ -14,10 +14,6 @@
                 x:ClassModifier="internal"
                 Title="Classes">
 
-    <v:NotifierPage.BindingContext>
-        <vm:ClassesViewModel />
-    </v:NotifierPage.BindingContext>
-
     <v:NotifierPage.Resources>
         <ResourceDictionary>
             <conv:TranslationConverter x:Key="TranslationConverter" />

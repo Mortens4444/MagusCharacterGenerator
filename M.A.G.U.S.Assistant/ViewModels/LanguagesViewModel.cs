@@ -8,7 +8,7 @@ using System.Windows.Input;
 
 namespace M.A.G.U.S.Assistant.ViewModels;
 
-internal class LanguagesViewModel : INotifyPropertyChanged
+internal partial class LanguagesViewModel : INotifyPropertyChanged
 {
     public ObservableCollection<LanguageTypes> Types { get; } =
         [LanguageTypes.Living, LanguageTypes.Ancient];

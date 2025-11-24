@@ -6,8 +6,12 @@ using M.A.G.U.S.Qualifications.Scientific;
 
 namespace M.A.G.U.S.Classes.Believer.GodsOfPyarron;
 
-public class UwelPaladin(byte level = 1) : Paladin(level)
+public class UwelPaladin : Paladin
 {
+    public UwelPaladin() : base(1) { }
+
+    public UwelPaladin(byte level) : base(level) { }
+
     public override QualificationList Qualifications
     {
         get

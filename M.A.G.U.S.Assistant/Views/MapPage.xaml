@@ -9,10 +9,6 @@
                 x:ClassModifier="internal"
                 Title="Map">
 
-    <v:NotifierPage.BindingContext>
-        <vm:WebBrowserViewModel />
-    </v:NotifierPage.BindingContext>
-
     <v:NotifierPage.Resources>
         <ResourceDictionary>
             <Style x:Key="BoxBorder" TargetType="Border">

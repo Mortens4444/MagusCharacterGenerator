@@ -41,10 +41,12 @@
                     <!--<mc:MenuItem ImageName="paint" LabelText="Room Painter" PageType="{x:Type v:PaintPage}" WidthRequest="100" HeightRequest="100" />-->
                     <mc:MenuItem ImageName="sounds" LabelText="Sounds" PageType="{x:Type v:SoundPage}" WidthRequest="100" HeightRequest="100" />
                     <mc:MenuItem ImageName="images" LabelText="Images" PageType="{x:Type v:ImagesPage}" WidthRequest="100" HeightRequest="100" />
+                    <mc:MenuItem ImageName="bestiary" LabelText="Bestiary" PageType="{x:Type v:BestiaryPage}" WidthRequest="100" HeightRequest="100" />
 				</HorizontalStackLayout>
 
 				<HorizontalStackLayout HorizontalOptions="Center">
-                    <mc:MenuItem ImageName="bestiary" LabelText="Bestiary" PageType="{x:Type v:BestiaryPage}" WidthRequest="100" HeightRequest="100" />
+                    <mc:MenuItem ImageName="character_list" LabelText="Characters" PageType="{x:Type v:CharactersPage}" WidthRequest="100" HeightRequest="100" />
+                    <mc:MenuItem ImageName="settings" LabelText="Settings" PageType="{x:Type v:SettingsPage}" WidthRequest="100" HeightRequest="100" />
                     <mc:MenuItem ImageName="about" LabelText="About" PageType="{x:Type v:AboutPage}" WidthRequest="100" HeightRequest="100" />
 				</HorizontalStackLayout>
 

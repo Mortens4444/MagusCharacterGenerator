@@ -11,8 +11,12 @@ using M.A.G.U.S.Qualifications.Scientific.Psi;
 
 namespace M.A.G.U.S.Classes.Fighter;
 
-public class Knight(byte level = 1) : Class(level), IClass, IHateRangedWeapons
+public class Knight : Class, IClass, IHateRangedWeapons
 {
+    public Knight() : base(1) { }
+
+    public Knight(byte level) : base(level) { }
+
     [DiceThrow(ThrowType._1K6)]
     [DiceThrowModifier(12)]
     [SpecialTraining]

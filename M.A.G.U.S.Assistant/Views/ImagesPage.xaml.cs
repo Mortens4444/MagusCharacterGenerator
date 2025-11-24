@@ -4,10 +4,10 @@ namespace M.A.G.U.S.Assistant.Views;
 
 internal partial class ImagesPage : NotifierPage
 {
-	public ImagesPage()
+	public ImagesPage(ImagesViewModel viewModel)
 	{
 		InitializeComponent();
-        BindingContext = new ImagesViewModel();
+        BindingContext = viewModel;
         Resources.Add("ImagesPageRoot", this);
     }
 }

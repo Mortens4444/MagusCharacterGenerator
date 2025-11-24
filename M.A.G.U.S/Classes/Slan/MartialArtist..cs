@@ -13,8 +13,12 @@ using M.A.G.U.S.Qualifications.Specialities;
 
 namespace M.A.G.U.S.Classes.Slan;
 
-public class MartialArtist(byte level = 1) : Class(level), IClass, IJustFight
+public class MartialArtist : Class, IClass, IJustFight
 {
+    public MartialArtist() : base(1) { }
+
+    public MartialArtist(byte level) : base(level) { }
+
     [DiceThrow(ThrowType._1K10)]
     [DiceThrowModifier(8)]
     public override sbyte Strength => DiceThrow._1K10_Plus_8();

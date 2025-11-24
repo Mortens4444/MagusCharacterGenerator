@@ -12,8 +12,12 @@ using M.A.G.U.S.Qualifications.Scientific.Psi;
 
 namespace M.A.G.U.S.Classes.Sorcerer;
 
-public class FireWizard(byte level = 1) : Class(level), IClass, ILikeMagic
+public class FireWizard : Class, IClass, ILikeMagic
 {
+    public FireWizard() : base(1) { }
+
+    public FireWizard(byte level) : base(level) { }
+
     [DiceThrow(ThrowType._2K6)]
     [DiceThrowModifier(6)]
     public override sbyte Strength => DiceThrow._2K6_Plus_6();

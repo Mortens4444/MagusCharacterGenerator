@@ -13,14 +13,14 @@ using System.Windows.Input;
 
 namespace M.A.G.U.S.Assistant.ViewModels;
 
-internal class DiceRollViewModel : INotifyPropertyChanged
+internal partial class DiceRollViewModel : INotifyPropertyChanged
 {
     public event PropertyChangedEventHandler? PropertyChanged;
 
-    public ObservableCollection<string> DiceType { get; } = new ObservableCollection<string>
-    {
+    public ObservableCollection<string> DiceType { get; } =
+    [
         "K2", "K3", "K4", "K6", "K8", "K9", "K10", "K12", "K20", "K100"
-    };
+    ];
 
     private byte diceCount = 1;
     public byte DiceCount

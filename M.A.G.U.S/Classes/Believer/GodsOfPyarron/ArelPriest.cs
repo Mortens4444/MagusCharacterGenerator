@@ -7,8 +7,12 @@ using M.A.G.U.S.Qualifications.Underworld;
 
 namespace M.A.G.U.S.Classes.Believer.GodsOfPyarron;
 
-public class ArelPriest(byte level = 1) : Priest(level)
+public class ArelPriest : Priest
 {
+    public ArelPriest() : base(1) { }
+
+    public ArelPriest(byte level) : base(level) { }
+
     public override QualificationList Qualifications
 	{
 		get

@@ -1,5 +1,4 @@
 using M.A.G.U.S.Assistant.Models;
-using M.A.G.U.S.Assistant.Services;
 using System.Reflection;
 
 namespace M.A.G.U.S.Assistant.Views;

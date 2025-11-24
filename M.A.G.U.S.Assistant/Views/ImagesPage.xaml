@@ -10,10 +10,6 @@
                 x:ClassModifier="internal"
                 Title="Images">
 
-    <v:NotifierPage.BindingContext>
-        <vm:ImagesViewModel />
-    </v:NotifierPage.BindingContext>
-
     <Grid Padding="10" RowDefinitions="Auto,*,Auto">
         <Grid Grid.Row="0" ColumnDefinitions="*" ColumnSpacing="6">
             <mc:EntryWithLabel Label="Search"

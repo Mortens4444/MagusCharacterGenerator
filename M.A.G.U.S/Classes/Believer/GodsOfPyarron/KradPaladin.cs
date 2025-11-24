@@ -5,8 +5,12 @@ using M.A.G.U.S.Qualifications.Scientific;
 
 namespace M.A.G.U.S.Classes.Believer.GodsOfPyarron;
 
-public class KradPaladin(byte level = 1) : Paladin(level)
+public class KradPaladin : Paladin
 {
+    public KradPaladin() : base(1) { }
+
+    public KradPaladin(byte level) : base(level) { }
+
     public override QualificationList Qualifications
     {
         get

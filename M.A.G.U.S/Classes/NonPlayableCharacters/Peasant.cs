@@ -7,8 +7,12 @@ using M.A.G.U.S.Qualifications.Scientific;
 
 namespace M.A.G.U.S.Classes.NonPlayableCharacters;
 
-public class Peasant(byte level = 1) : Class(level), IClass
+public class Peasant : Class, IClass
 {
+    public Peasant() : base(1) { }
+
+    public Peasant(byte level) : base(level) { }
+
     [DiceThrow(ThrowType._3K6)]
     public override sbyte Strength => DiceThrow._3K6();
 

@@ -8,10 +8,6 @@
              x:ClassModifier="internal"
              Title="Sounds">
 
-    <v:NotifierPage.BindingContext>
-        <vm:SoundViewModel />
-    </v:NotifierPage.BindingContext>
-
     <Grid Padding="12" RowDefinitions="Auto,*,Auto" RowSpacing="8">
 
         <mc:EntryWithLabel Label="Search"

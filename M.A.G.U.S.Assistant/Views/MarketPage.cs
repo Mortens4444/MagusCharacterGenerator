@@ -23,18 +23,17 @@ internal partial class MarketPage : SearchListPage
         }
     }
 
-    public MarketPage()
-        : base("Market",
-            "M.A.G.U.S.Things"
-                .CreateInstancesFromNamespace<Thing>()
-                .OrderBy(r => Lng.Elem(r.Name))
-                .Select(r => DisplayItem.FromThing(r, null)))
+    public MarketPage(SearchListViewModel viewModel)
+        : base(viewModel,
+            "Market",
+            "M.A.G.U.S.Things".CreateInstancesFromNamespace<Thing>().OrderBy(r => Lng.Elem(r.Name)).Select(r => DisplayItem.FromThing(r, null)))
     {
         character = null;
     }
 
-    public MarketPage(Character character)
-        : base($"{Lng.Elem("Market")} - {character.Name}",
+    public MarketPage(SearchListViewModel viewModel, Character character)
+        : base(viewModel,
+            $"{Lng.Elem("Market")} - {character.Name}",
             "M.A.G.U.S.Things"
                 .CreateInstancesFromNamespace<Thing>()
                 .OrderBy(r => Lng.Elem(r.Name))

@@ -5,8 +5,12 @@ using M.A.G.U.S.Qualifications.Scientific;
 
 namespace M.A.G.U.S.Classes.Believer.Domvik;
 
-public class DomvikPaladin(byte level = 1) : Paladin(level)
+public class DomvikPaladin : Paladin
 {
+    public DomvikPaladin() : base(1) { }
+
+    public DomvikPaladin(byte level) : base(level) { }
+
     public override QualificationList Qualifications
     {
         get

@@ -13,8 +13,12 @@ using M.A.G.U.S.Qualifications.Underworld;
 
 namespace M.A.G.U.S.Classes.Rogue;
 
-public class Thief(byte level = 1) : Class(level), IClass, IJustFight
+public class Thief : Class, IClass, IJustFight
 {
+    public Thief() : base(1) { }
+
+    public Thief(byte level) : base(level) { }
+
     [DiceThrow(ThrowType._3K6_2_Times)]
     public override sbyte Strength => DiceThrow._3K6_2_Times();
 

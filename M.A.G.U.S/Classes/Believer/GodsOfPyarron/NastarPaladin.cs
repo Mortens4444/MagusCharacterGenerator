@@ -12,8 +12,12 @@ using M.A.G.U.S.Qualifications.Scientific.Psi;
 
 namespace M.A.G.U.S.Classes.Believer.GodsOfPyarron;
 
-public class NastarPaladin(byte level = 1) : Class(level), IClass, IHateRangedWeapons
+public class NastarPaladin : Class, IClass, IHateRangedWeapons
 {
+    public NastarPaladin() : base(1) { }
+
+    public NastarPaladin(byte level) : base(level) { }
+
     [DiceThrow(ThrowType._1K10)]
     [DiceThrowModifier(8)]
     [SpecialTraining]

@@ -13,8 +13,12 @@ using M.A.G.U.S.Qualifications.Underworld;
 
 namespace M.A.G.U.S.Classes.Sorcerer;
 
-public class Warlock(byte level = 1) : Class(level), IClass, ILikeMagic
+public class Warlock : Class, IClass, ILikeMagic
 {
+    public Warlock() : base(1) { }
+
+    public Warlock(byte level) : base(level) { }
+
     [DiceThrow(ThrowType._3K6_2_Times)]
     public override sbyte Strength => DiceThrow._3K6_2_Times();
 
