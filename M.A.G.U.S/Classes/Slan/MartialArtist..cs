@@ -94,7 +94,7 @@ public class MartialArtist : Class, IClass, IJustFight
 
     public override bool AddQualificationPointsOnFirstLevel => true;
 
-    public override QualificationList Qualifications =>
+    public override QualificationList Qualifications => BuildQualifications(
     [
         new PsiSlanWay(),
         new WeaponUse(),
@@ -116,15 +116,15 @@ public class MartialArtist : Class, IClass, IJustFight
         new Swimming(),
         new Running(),
         new BlindFighting()
-   ];
+    ]);
 
-    public override QualificationList FutureQualifications =>
+    public override QualificationList FutureQualifications => BuildQualifications(
     [
         new Healing(level: 2),
         new WeaponBreaking(QualificationLevel.Master, 4),
         new BlindFighting(QualificationLevel.Master, 5),
         new Healing(QualificationLevel.Master, 6)
-    ];
+    ]);
 
     public override List<PercentQualification> PercentQualifications =>
     [

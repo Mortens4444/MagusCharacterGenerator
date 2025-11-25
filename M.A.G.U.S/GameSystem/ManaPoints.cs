@@ -1,6 +1,6 @@
 ﻿using M.A.G.U.S.Classes.Rogue;
-using M.A.G.U.S.Enums;
 using M.A.G.U.S.GameSystem.Magic;
+using M.A.G.U.S.Interfaces;
 using M.A.G.U.S.Qualifications.Specialities;
 using M.A.G.U.S.Utils;
 
@@ -8,7 +8,7 @@ namespace M.A.G.U.S.GameSystem;
 
 public static class ManaPoints
 {
-    public static SorceryAttributes Calculate(Character character)
+    public static SorceryAttributes Calculate(Character character, ISettings settings)
     {
         var kyrLore = character.Race.SpecialQualifications.GetSpeciality<KyrLore>();
 

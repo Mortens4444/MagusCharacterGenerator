@@ -100,7 +100,7 @@ public class NastarPriest : Class, IClass, ILikeMagic
 
     public override bool AddQualificationPointsOnFirstLevel => true;
 
-    public override QualificationList Qualifications =>
+    public override QualificationList Qualifications => BuildQualifications(
     [
         new WeaponUse(),
         new PsiPyarron(QualificationLevel.Master),
@@ -121,9 +121,9 @@ public class NastarPriest : Class, IClass, ILikeMagic
 		//new Helyismeret 60%
 		//new Kultúra (Saját)
 		//new ÉkszerészSzakma
-    ];
+    ]);
 
-    public override QualificationList FutureQualifications =>
+    public override QualificationList FutureQualifications => BuildQualifications(
     [
         new LanguageLore(2, 3),
         new LanguageLore(2, 3),
@@ -135,7 +135,7 @@ public class NastarPriest : Class, IClass, ILikeMagic
         new LegendLore(QualificationLevel.Master, 6),
         new Craft(Profession.Jeweler, QualificationLevel.Master, 8),
 		//new DrágakőMágia(QualificationLevel.Master, 12)
-	];
+	]);
 
     public override List<PercentQualification> PercentQualifications => [];
 

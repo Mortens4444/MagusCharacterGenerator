@@ -94,7 +94,7 @@ public class Knight : Class, IClass, IHateRangedWeapons
 
     public override bool AddQualificationPointsOnFirstLevel => true;
 
-    public override QualificationList Qualifications =>
+    public override QualificationList Qualifications => BuildQualifications(
     [
         new HeavyArmorWearing(),
         new ShieldUse(),
@@ -113,9 +113,9 @@ public class Knight : Class, IClass, IHateRangedWeapons
         new LanguageLore(2),
         new ReadingAndWriting(),
         new Heraldry()
-    ];
+    ]);
 
-    public override QualificationList FutureQualifications =>
+    public override QualificationList FutureQualifications => BuildQualifications(
     [
         new Heraldry(QualificationLevel.Master, 3),
         new ShieldUse(QualificationLevel.Master, 4),
@@ -125,7 +125,7 @@ public class Knight : Class, IClass, IHateRangedWeapons
         new HeavyArmorWearing(QualificationLevel.Master, 8),
         new Leadership(QualificationLevel.Master, 9),
         new PsiPyarron(QualificationLevel.Master, 12)
-    ];
+    ]);
 
     public override List<PercentQualification> PercentQualifications => [];
 

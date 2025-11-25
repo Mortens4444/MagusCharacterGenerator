@@ -7,8 +7,6 @@
 
 - Problem with total weight
 - Bestriary: _1_5_meters
-- Sounds: Name should be fixed, translated
-- Classes not opening on my phone and in release mode
 
 - Add weapon to character (easily changable way) S
 - Max. Distance for a day S

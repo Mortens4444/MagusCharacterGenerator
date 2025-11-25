@@ -1,5 +1,7 @@
 ﻿using M.A.G.U.S.Qualifications;
 using M.A.G.U.S.Qualifications.Specialities;
+using Mtf.Extensions.Services;
+using System.Text;
 
 namespace M.A.G.U.S.Races;
 
@@ -25,4 +27,11 @@ public class Orc : Race
         new UndergroundMasters(2),
         new KeenSmell(8)
     ];
+
+    public override string GenerateCharacterName()
+    {
+        var consonants = new[] { 'k', 'g', 'r', 'h', 's' };
+        var vowels = new[] { 'a', 'o', 'u' };
+        return GenerateCharacterName(consonants, vowels);
+    }
 }

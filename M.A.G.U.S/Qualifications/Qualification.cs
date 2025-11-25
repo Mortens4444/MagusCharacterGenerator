@@ -10,10 +10,11 @@ public abstract class Qualification
         if (qualificationLevel == QualificationLevel.Base)
         {
             BaseQualificationLevel = level;
+            MasterQualificationLevel = 0;
         }
         else
         {
-            BaseQualificationLevel = level;
+            BaseQualificationLevel = 0;
             MasterQualificationLevel = level;
         }
     }

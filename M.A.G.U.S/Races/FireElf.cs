@@ -3,6 +3,8 @@ using M.A.G.U.S.GameSystem.Qualifications;
 using M.A.G.U.S.Qualifications;
 using M.A.G.U.S.Qualifications.Laical;
 using M.A.G.U.S.Qualifications.Specialities;
+using Mtf.Extensions.Services;
+using System.Text;
 
 namespace M.A.G.U.S.Races;
 
@@ -26,7 +28,7 @@ public class FireElf : Race, IUseRangedWeapons
         new AnimalTraining(),
         new ForestSurvival(QualificationLevel.Master),
         new Running(QualificationLevel.Master),
-        ];
+    ];
 
     public override SpecialQualificationList SpecialQualifications =>
     [
@@ -36,7 +38,27 @@ public class FireElf : Race, IUseRangedWeapons
         new ResistanceToNecromancy(-8),
         new GoodArcher(15),
         new FireMagic()
-        ];
+    ];
+
+    public override string GenerateCharacterName()
+    {
+        var start = new[]
+        {
+            "Ae", "Ela", "Iri", "Lia", "Sera", "Eli", "Ari", "Nae", "Yri", "Lora"
+        };
+
+        var middle = new[]
+        {
+            "li", "ne", "ri", "ya", "el", "ien", "ara", "ira", "the"
+        };
+
+        var end = new[]
+        {
+            "el", "iel", "ion", "ir", "iel", "wyn", "riel", "anor"
+        };
+
+        return GenerateCharacterName(start, middle, end);
+    }
 
     public override string Name => "Fire-elf";
 }

@@ -23,7 +23,7 @@ public class RanagolPaladin : Paladin
                 new WeaponBreaking(),
                 new Backstab()
             ]);
-            return result;
+            return BuildQualifications(result);
         }
     }
 
@@ -37,7 +37,7 @@ public class RanagolPaladin : Paladin
                 new PoisoningAndNeutralization(level: 3),
                 new Backstab(QualificationLevel.Master, 6)
             ]);
-            return result;
+            return BuildQualifications(result);
         }
     }
 

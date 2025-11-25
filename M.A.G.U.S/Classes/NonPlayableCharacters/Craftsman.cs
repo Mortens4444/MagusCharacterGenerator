@@ -79,7 +79,7 @@ public class Craftsman : Class, IClass
 
     public override bool AddQualificationPointsOnFirstLevel => false;
 
-    public override QualificationList Qualifications =>
+    public override QualificationList Qualifications => BuildQualifications(
     [
         new Smithing(),
         new Coinage(),
@@ -89,9 +89,9 @@ public class Craftsman : Class, IClass
         new RopeMaking(),
         new Pottery(),
         new ReadingAndWriting()
-   ];
+    ]);
 
-    public override QualificationList FutureQualifications => [];
+    public override QualificationList FutureQualifications => BuildQualifications([]);
 
     public override List<PercentQualification> PercentQualifications => [];
 

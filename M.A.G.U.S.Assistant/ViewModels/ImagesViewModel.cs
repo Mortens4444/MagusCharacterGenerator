@@ -63,19 +63,23 @@ internal partial class ImagesViewModel : INotifyPropertyChanged
         try
         {
             var asm = Assembly.GetExecutingAssembly();
-            var names = asm.GetManifestResourceNames()
+            var images = asm.GetManifestResourceNames()
                 .Where(n => (n.Contains(".Resources.Images.Bestiary.", StringComparison.OrdinalIgnoreCase) ||
                             n.Contains(".Resources.Images.Characters.", StringComparison.OrdinalIgnoreCase)) &&
                             (n.EndsWith(".png", StringComparison.OrdinalIgnoreCase) ||
                              n.EndsWith(".jpg", StringComparison.OrdinalIgnoreCase) ||
                              n.EndsWith(".jpeg", StringComparison.OrdinalIgnoreCase) ||
                              n.EndsWith(".svg", StringComparison.OrdinalIgnoreCase)))
-                .OrderBy(n => n);
+                .Select(name =>
+                {
+                    var display = name.Split('.')[^2];
+                    return new ImageItem { ResourceId = name, DisplayName = Lng.Elem(display.ToName()) };
+                })
+                .OrderBy(i => i.DisplayName);
 
-            foreach (var name in names)
+            foreach (var image in images)
             {
-                var display = name.Split('.')[^2];
-                AllImages.Add(new ImageItem { ResourceId = name, DisplayName = Lng.Elem(display.ToName()) });
+                AllImages.Add(image);
             }
         }
         catch (Exception ex)

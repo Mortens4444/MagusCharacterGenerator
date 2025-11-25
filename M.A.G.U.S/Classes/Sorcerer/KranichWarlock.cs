@@ -12,6 +12,7 @@ using M.A.G.U.S.Qualifications.Percentages;
 using M.A.G.U.S.Qualifications.Scientific;
 using M.A.G.U.S.Qualifications.Scientific.Psi;
 using M.A.G.U.S.Qualifications.Underworld;
+using System.Collections.Generic;
 
 namespace M.A.G.U.S.Classes.Sorcerer;
 
@@ -99,44 +100,71 @@ public class KranichWarlock : Class, IClass, ILikeMagic
 
     public override bool AddQualificationPointsOnFirstLevel => true;
 
-    public override QualificationList Qualifications =>
+    //public override QualificationList Qualifications
+    //{
+    //    get
+    //    {
+    //        var list = new QualificationList
+    //        {
+    //            new WeaponUse(),
+    //            new WeaponUse(),
+    //            new WeaponThrowing(),
+    //            new ReadingAndWriting(),
+    //            new PoisoningAndNeutralization(),
+    //            new CamouflageOrDisguise(),
+    //            new LanguageLore(Language.Kranich, 3),
+    //            new Alchemy(),
+    //            new AncientTongueLore(AntientLanguage.Aquir),
+    //            new Etiquette() //Kranich
+    //        };
+
+    //        if (Intelligence >= 12 && Willpower >= 12 && Astral >= 12)
+    //        {
+    //            list.Add(new PsiKranic(QualificationLevel.Master));
+    //        }
+
+    //        return list;
+    //    }
+    //}
+
+    public override QualificationList Qualifications => BuildQualifications(
     [
         new WeaponUse(),
-            new WeaponUse(),
-            new WeaponThrowing(),
-            new PsiKranic(QualificationLevel.Master),
-            new ReadingAndWriting(),
-            new PoisoningAndNeutralization(),
-            new CamouflageOrDisguise(),
-            new LanguageLore(Language.Kranich, 3),
-            new Alchemy(),
+        new WeaponUse(),
+        new WeaponThrowing(),
+        new PsiKranic(QualificationLevel.Master),
+        new ReadingAndWriting(),
+        new PoisoningAndNeutralization(),
+        new CamouflageOrDisguise(),
+        new LanguageLore(Language.Kranich, 3),
+        new Alchemy(),
         new AncientTongueLore(AntientLanguage.Aquir),
         new Etiquette(), //Kranich
 
 		//new Cluture(QualificationLevel.Master) // Order
 		//new Helyismeret 60%
-   ];
+    ]);
 
-    public override QualificationList FutureQualifications =>
+    public override QualificationList FutureQualifications => BuildQualifications(
     [
         new Craft(Profession.TattoMaker, level: 2),
         new ReligionLore(level: 2),
-            new Herbalism(level: 3),
+        new Herbalism(level: 3),
         new Alchemy(QualificationLevel.Master, 3),
         new Etiquette(QualificationLevel.Master, 4), //Kranich
-            new PoisoningAndNeutralization(QualificationLevel.Master, 4),
+        new PoisoningAndNeutralization(QualificationLevel.Master, 4),
         new Craft(Profession.TattoMaker, QualificationLevel.Master, 5),
         new Backstab(level: 5),
         new Herbalism(QualificationLevel.Master, 6),
         new AncientTongueLore(AntientLanguage.Aquir, QualificationLevel.Master, 6),
         new RunicMagic(level: 7),
         new Demonology(level: 8)
-];
+    ]);
 
     public override List<PercentQualification> PercentQualifications =>
     [
         new Sneaking(15),
-            new Hiding(10)
+        new Hiding(10)
     ];
 
     public override SpecialQualificationList SpecialQualifications =>
@@ -148,5 +176,5 @@ public class KranichWarlock : Class, IClass, ILikeMagic
     [DiceThrowModifier(1)]
     public override byte GetPainToleranceModifier() => (byte)(DiceThrow._1K6() + 1);
 
-    public override string Name => "Krani Mage";
+    public override string Name => "Kranich Mage";
 }

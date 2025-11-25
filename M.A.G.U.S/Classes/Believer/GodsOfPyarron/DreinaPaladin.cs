@@ -22,7 +22,7 @@ public class DreinaPaladin : Paladin
                 new Cartography(),
                 new Heraldry()
             ]);
-            return result;
+            return BuildQualifications(result);
         }
     }
 
@@ -35,7 +35,7 @@ public class DreinaPaladin : Paladin
             [
                 new Cartography(level: 4)
             ]);
-            return result;
+            return BuildQualifications(result);
         }
     }
 

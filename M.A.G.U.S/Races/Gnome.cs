@@ -29,4 +29,24 @@ public class Gnome : Race
     [
         new Infravision(25)
     ];
+
+    public override string GenerateCharacterName()
+    {
+        var start = new[]
+        {
+            "Pip", "Fen", "Tib", "Vok", "Kli", "Ned", "Fli", "Tek"
+        };
+
+        var middle = new[]
+        {
+            "li", "ti", "ke", "fi", "ne", "re"
+        };
+
+        var end = new[]
+        {
+            "in", "ek", "en", "ik", "et", "inor"
+        };
+
+        return GenerateCharacterName(start, middle, end);
+    }
 }

@@ -93,7 +93,7 @@ public class Witch : Class, IClass, ILikeMagic
 
     public override bool AddQualificationPointsOnFirstLevel => true;
 
-    public override QualificationList Qualifications =>
+    public override QualificationList Qualifications => BuildQualifications(
     [
         new WeaponUse(),
         new WeaponThrowing(),
@@ -105,13 +105,13 @@ public class Witch : Class, IClass, ILikeMagic
         new PoisoningAndNeutralization(),
         new Healing(),
         new SexualCulture()
-   ];
+    ]);
 
-    public override QualificationList FutureQualifications =>
+    public override QualificationList FutureQualifications => BuildQualifications(
     [
         new PoisoningAndNeutralization(QualificationLevel.Master, 4),
         new Herbalism(QualificationLevel.Master, 5)
-    ];
+    ]);
 
     public override List<PercentQualification> PercentQualifications => [];
 

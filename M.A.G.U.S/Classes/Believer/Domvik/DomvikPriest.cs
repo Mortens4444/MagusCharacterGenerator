@@ -28,7 +28,7 @@ public class DomvikPriest : Priest
 				new Heraldry(),
 				new Riding()
 			]);
-			return result;
+			return BuildQualifications(result);
 		}
 	}
 
@@ -43,7 +43,7 @@ public class DomvikPriest : Priest
 				new AncientTongueLore(AntientLanguage.LinguaDomini, QualificationLevel.Master, 3),
 				new PoisoningAndNeutralization(QualificationLevel.Master, 3),
 			]);
-			return result;
+			return BuildQualifications(result);
 		}
 	}
 

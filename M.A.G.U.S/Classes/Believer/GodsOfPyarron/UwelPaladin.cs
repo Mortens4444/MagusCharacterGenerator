@@ -24,7 +24,7 @@ public class UwelPaladin : Paladin
                 new WeaponBreaking(),
                 new Disarmament()
             ]);
-            return result;
+            return BuildQualifications(result);
         }
     }
 
@@ -40,7 +40,7 @@ public class UwelPaladin : Paladin
                 new Healing(QualificationLevel.Master, 5),
                 new HeavyArmorWearing(QualificationLevel.Master, 6)
             ]);
-            return result;
+            return BuildQualifications(result);
         }
     }
 

@@ -96,7 +96,7 @@ public class VelarPaladin : Class, IClass, ILikeMagic
 
     public override bool AddQualificationPointsOnFirstLevel => true;
 
-    public override QualificationList Qualifications =>
+    public override QualificationList Qualifications => BuildQualifications(
     [
         new WeaponUse(),
         new WeaponUse(),
@@ -119,9 +119,9 @@ public class VelarPaladin : Class, IClass, ILikeMagic
 		//new Helyismeret 60%
 		//new Kultúra (QualificationLevel.Master) //Saját
 		//new Jog/Törvénykezés()
-   ];
+    ]);
 
-    public override QualificationList FutureQualifications =>
+    public override QualificationList FutureQualifications => BuildQualifications(
     [
         new Heraldry(level: 2),
 		//new Emberismeret(QualificationLevel.Master, 3)
@@ -129,7 +129,7 @@ public class VelarPaladin : Class, IClass, ILikeMagic
 		new Healing(QualificationLevel.Master, 4),
         new Leadership(level: 5),
         new TwoHandedCombat(QualificationLevel.Master, 6)
-    ];
+    ]);
 
     public override List<PercentQualification> PercentQualifications => [];
 

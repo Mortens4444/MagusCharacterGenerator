@@ -1,10 +1,11 @@
-﻿using M.A.G.U.S.Utils;
+﻿using M.A.G.U.S.Interfaces;
+using M.A.G.U.S.Utils;
 
 namespace M.A.G.U.S.GameSystem;
 
 public static class QualificationPoints
 {
-    public static (ushort QualificationPoints, ushort PercentQualificationPoints) Calculate(Character character)
+    public static (ushort QualificationPoints, ushort PercentQualificationPoints) Calculate(Character character, ISettings settings)
     {
         ushort qualificationPoints = 0;
         ushort percentQualificationPoints = 0;
@@ -13,7 +14,7 @@ public static class QualificationPoints
             qualificationPoints = character.BaseClass.BaseQualificationPoints;
             qualificationPoints += (ushort)MathHelper.GetAboveAverageValue(character.Intelligence);
             qualificationPoints += (ushort)MathHelper.GetAboveAverageValue(character.Dexterity);
-            if (character.BaseClass.AddQualificationPointsOnFirstLevel)
+            if (character.BaseClass.AddQualificationPointsOnFirstLevel || settings.AddQualificationPointsOnFirstLevelForAllClass)
             {
                 qualificationPoints += character.BaseClass.QualificationPointsModifier;
             }

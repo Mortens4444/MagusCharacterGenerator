@@ -32,4 +32,24 @@ public class Kyr : Race
         new AncientTongueLore(AntientLanguage.Kyr, QualificationLevel.Master),
         new Etiquette(QualificationLevel.Master)
     ];
+
+    public override string GenerateCharacterName()
+    {
+        var start = new[]
+        {
+            "Ael", "Lir", "Ser", "Nae", "Rhe", "Myr", "Aen", "Hir"
+        };
+
+        var middle = new[]
+        {
+            "ia", "ae", "el", "an", "ir", "ys", "ari"
+        };
+
+        var end = new[]
+        {
+            "el", "ion", "ir", "ar", "iel", "oras", "yss"
+        };
+
+        return GenerateCharacterName(start, middle, end);
+    }
 }

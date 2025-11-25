@@ -1,210 +1,173 @@
 ﻿{
   "$id": "1",
   "$type": "M.A.G.U.S.GameSystem.Character, M.A.G.U.S.",
-  "Images": {
-    "$type": "System.Collections.Generic.List`1[[M.A.G.U.S.GameSystem.CharacterImage, M.A.G.U.S.]], mscorlib",
-    "$values": []
-  },
-  "Name": "Aefrez",
+  "Name": "Mirena",
   "BaseClass": {
-    "$type": "M.A.G.U.S.Classes.Believer.GodsOfPyarron.ArelPriest, M.A.G.U.S.",
+    "$id": "2",
+    "$type": "M.A.G.U.S.Classes.Sorcerer.Witch, M.A.G.U.S.",
+    "Strength": 11,
+    "Quickness": 9,
+    "Dexterity": 14,
+    "Stamina": 6,
+    "Health": 15,
+    "Beauty": 19,
+    "Intelligence": 9,
+    "Willpower": 11,
+    "Astral": 10,
+    "Gold": 2,
+    "Bravery": 17,
+    "Erudition": 13,
+    "Detection": 12,
+    "InitiatingBaseValue": 6,
+    "AttackingBaseValue": 14,
+    "DefendingBaseValue": 69,
+    "AimingBaseValue": 0,
+    "FightValueModifier": 4,
+    "BaseQualificationPoints": 8,
+    "QualificationPointsModifier": 12,
+    "PercentQualificationModifier": 0,
+    "BaseLifePoints": 3,
+    "BasePainTolerancePoints": 1,
+    "AddFightValueOnFirstLevel": false,
+    "AddPainToleranceOnFirstLevel": false,
+    "AddQualificationPointsOnFirstLevel": true,
     "Qualifications": {
       "$type": "M.A.G.U.S.Qualifications.QualificationList, M.A.G.U.S.",
       "$values": [
         {
-          "$id": "2",
+          "$id": "3",
           "$type": "M.A.G.U.S.Qualifications.Combat.WeaponUse, M.A.G.U.S.",
           "Weapon": null,
+          "Name": "Weapon use",
+          "QpToBaseQualification": 3,
+          "QpToMasterQualification": 30,
+          "Category": "Combat",
           "QualificationLevel": 0,
           "BaseQualificationLevel": 1,
           "MasterQualificationLevel": 0,
+          "QpToMaxBaseQualification": null,
           "QualificationType": "M.A.G.U.S.Qualifications.Combat.WeaponUse, M.A.G.U.S., Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
-        },
-        {
-          "$id": "3",
-          "$type": "M.A.G.U.S.Qualifications.Scientific.Psi.PsiPyarron, M.A.G.U.S.",
-          "PsiKind": 0,
-          "QualificationLevel": 1,
-          "BaseQualificationLevel": 1,
-          "MasterQualificationLevel": 1,
-          "QualificationType": "M.A.G.U.S.Qualifications.Scientific.Psi.PsiPyarron, M.A.G.U.S., Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
         },
         {
           "$id": "4",
-          "$type": "M.A.G.U.S.Qualifications.Scientific.LanguageLore, M.A.G.U.S.",
-          "Language": 0,
-          "QualificationLevel": 0,
-          "BaseQualificationLevel": 1,
-          "MasterQualificationLevel": 0,
-          "QualificationType": "M.A.G.U.S.Qualifications.Scientific.LanguageLore, M.A.G.U.S., Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
-        },
-        {
-          "$id": "5",
-          "$type": "M.A.G.U.S.Qualifications.Scientific.LanguageLore, M.A.G.U.S.",
-          "Language": 0,
-          "QualificationLevel": 0,
-          "BaseQualificationLevel": 1,
-          "MasterQualificationLevel": 0,
-          "QualificationType": "M.A.G.U.S.Qualifications.Scientific.LanguageLore, M.A.G.U.S., Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
-        },
-        {
-          "$id": "6",
-          "$type": "M.A.G.U.S.Qualifications.Scientific.ReadingAndWriting, M.A.G.U.S.",
-          "QualificationLevel": 0,
-          "BaseQualificationLevel": 1,
-          "MasterQualificationLevel": 0,
-          "QualificationType": "M.A.G.U.S.Qualifications.Scientific.ReadingAndWriting, M.A.G.U.S., Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
-        },
-        {
-          "$id": "7",
-          "$type": "M.A.G.U.S.Qualifications.Scientific.ReligionLore, M.A.G.U.S.",
-          "QualificationLevel": 1,
-          "BaseQualificationLevel": 1,
-          "MasterQualificationLevel": 1,
-          "QualificationType": "M.A.G.U.S.Qualifications.Scientific.ReligionLore, M.A.G.U.S., Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
-        },
-        {
-          "$id": "8",
-          "$type": "M.A.G.U.S.Qualifications.Scientific.HistoryLore, M.A.G.U.S.",
-          "QualificationLevel": 1,
-          "BaseQualificationLevel": 1,
-          "MasterQualificationLevel": 1,
-          "QualificationType": "M.A.G.U.S.Qualifications.Scientific.HistoryLore, M.A.G.U.S., Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
-        },
-        {
-          "$id": "9",
-          "$type": "M.A.G.U.S.Qualifications.Laical.SingingAndMakingMusic, M.A.G.U.S.",
-          "QualificationLevel": 0,
-          "BaseQualificationLevel": 1,
-          "MasterQualificationLevel": 0,
-          "QualificationType": "M.A.G.U.S.Qualifications.Laical.SingingAndMakingMusic, M.A.G.U.S., Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
-        },
-        {
-          "$id": "10",
-          "$type": "M.A.G.U.S.Qualifications.Combat.WeaponUse, M.A.G.U.S.",
-          "Weapon": null,
-          "QualificationLevel": 0,
-          "BaseQualificationLevel": 1,
-          "MasterQualificationLevel": 0,
-          "QualificationType": "M.A.G.U.S.Qualifications.Combat.WeaponUse, M.A.G.U.S., Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
-        },
-        {
-          "$id": "11",
-          "$type": "M.A.G.U.S.Qualifications.Combat.WeaponUse, M.A.G.U.S.",
-          "Weapon": null,
-          "QualificationLevel": 0,
-          "BaseQualificationLevel": 1,
-          "MasterQualificationLevel": 0,
-          "QualificationType": "M.A.G.U.S.Qualifications.Combat.WeaponUse, M.A.G.U.S., Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
-        },
-        {
-          "$id": "12",
-          "$type": "M.A.G.U.S.Qualifications.Combat.WeaponUse, M.A.G.U.S.",
-          "Weapon": null,
-          "QualificationLevel": 0,
-          "BaseQualificationLevel": 1,
-          "MasterQualificationLevel": 0,
-          "QualificationType": "M.A.G.U.S.Qualifications.Combat.WeaponUse, M.A.G.U.S., Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
-        },
-        {
-          "$id": "13",
           "$type": "M.A.G.U.S.Qualifications.Combat.WeaponThrowing, M.A.G.U.S.",
           "Weapon": null,
+          "Name": "Weapon throwing",
+          "QpToBaseQualification": 4,
+          "QpToMasterQualification": 40,
+          "Category": "Combat",
           "QualificationLevel": 0,
           "BaseQualificationLevel": 1,
           "MasterQualificationLevel": 0,
+          "QpToMaxBaseQualification": null,
           "QualificationType": "M.A.G.U.S.Qualifications.Combat.WeaponThrowing, M.A.G.U.S., Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
         },
         {
-          "$id": "14",
-          "$type": "M.A.G.U.S.Qualifications.Combat.WeaponLore, M.A.G.U.S.",
-          "QualificationLevel": 0,
-          "BaseQualificationLevel": 1,
-          "MasterQualificationLevel": 0,
-          "QualificationType": "M.A.G.U.S.Qualifications.Combat.WeaponLore, M.A.G.U.S., Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
+          "$id": "5",
+          "$type": "M.A.G.U.S.Qualifications.Scientific.Psi.PsiPyarron, M.A.G.U.S.",
+          "PsiKind": 0,
+          "Name": "Psi, Pyarron",
+          "QpToBaseQualification": 10,
+          "QpToMasterQualification": 55,
+          "Category": "Psi",
+          "QualificationLevel": 1,
+          "BaseQualificationLevel": 0,
+          "MasterQualificationLevel": 1,
+          "QpToMaxBaseQualification": null,
+          "QualificationType": "M.A.G.U.S.Qualifications.Scientific.Psi.PsiPyarron, M.A.G.U.S., Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
         },
         {
-          "$id": "15",
+          "$id": "6",
           "$type": "M.A.G.U.S.Qualifications.Scientific.LanguageLore, M.A.G.U.S.",
           "Language": 0,
+          "Name": "Language lore",
+          "QpToBaseQualification": 1,
+          "QpToMaxBaseQualification": 5,
+          "QpToMasterQualification": 20,
+          "Category": "Scientific",
           "QualificationLevel": 0,
           "BaseQualificationLevel": 1,
           "MasterQualificationLevel": 0,
           "QualificationType": "M.A.G.U.S.Qualifications.Scientific.LanguageLore, M.A.G.U.S., Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
         },
         {
-          "$id": "16",
+          "$id": "7",
           "$type": "M.A.G.U.S.Qualifications.Scientific.LanguageLore, M.A.G.U.S.",
           "Language": 0,
+          "Name": "Language lore",
+          "QpToBaseQualification": 1,
+          "QpToMaxBaseQualification": 5,
+          "QpToMasterQualification": 20,
+          "Category": "Scientific",
           "QualificationLevel": 0,
           "BaseQualificationLevel": 1,
           "MasterQualificationLevel": 0,
           "QualificationType": "M.A.G.U.S.Qualifications.Scientific.LanguageLore, M.A.G.U.S., Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
         },
         {
-          "$id": "17",
-          "$type": "M.A.G.U.S.Qualifications.Scientific.LanguageLore, M.A.G.U.S.",
-          "Language": 0,
-          "QualificationLevel": 0,
-          "BaseQualificationLevel": 1,
-          "MasterQualificationLevel": 0,
-          "QualificationType": "M.A.G.U.S.Qualifications.Scientific.LanguageLore, M.A.G.U.S., Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
-        },
-        {
-          "$id": "18",
-          "$type": "M.A.G.U.S.Qualifications.Scientific.WeatherDivination, M.A.G.U.S.",
-          "QualificationLevel": 0,
-          "BaseQualificationLevel": 1,
-          "MasterQualificationLevel": 0,
-          "QualificationType": "M.A.G.U.S.Qualifications.Scientific.WeatherDivination, M.A.G.U.S., Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
-        },
-        {
-          "$id": "19",
+          "$id": "8",
           "$type": "M.A.G.U.S.Qualifications.Scientific.Herbalism, M.A.G.U.S.",
+          "QpToBaseQualification": 5,
+          "QpToMasterQualification": 35,
+          "Category": "Scientific",
+          "Name": "Herbalism",
           "QualificationLevel": 0,
           "BaseQualificationLevel": 1,
           "MasterQualificationLevel": 0,
+          "QpToMaxBaseQualification": null,
           "QualificationType": "M.A.G.U.S.Qualifications.Scientific.Herbalism, M.A.G.U.S., Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
         },
         {
-          "$id": "20",
-          "$type": "M.A.G.U.S.Qualifications.Scientific.Healing, M.A.G.U.S.",
+          "$id": "9",
+          "$type": "M.A.G.U.S.Qualifications.Scientific.ReadingAndWriting, M.A.G.U.S.",
+          "Name": "Reading/writing",
+          "QpToBaseQualification": 5,
+          "QpToMasterQualification": 25,
+          "Category": "Scientific",
           "QualificationLevel": 0,
           "BaseQualificationLevel": 1,
           "MasterQualificationLevel": 0,
+          "QpToMaxBaseQualification": null,
+          "QualificationType": "M.A.G.U.S.Qualifications.Scientific.ReadingAndWriting, M.A.G.U.S., Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
+        },
+        {
+          "$id": "10",
+          "$type": "M.A.G.U.S.Qualifications.Scientific.PoisoningAndNeutralization, M.A.G.U.S.",
+          "Name": "Poisoning/neutralization",
+          "QpToBaseQualification": 15,
+          "QpToMasterQualification": 60,
+          "Category": "Scientific",
+          "QualificationLevel": 0,
+          "BaseQualificationLevel": 1,
+          "MasterQualificationLevel": 0,
+          "QpToMaxBaseQualification": null,
+          "QualificationType": "M.A.G.U.S.Qualifications.Scientific.PoisoningAndNeutralization, M.A.G.U.S., Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
+        },
+        {
+          "$id": "11",
+          "$type": "M.A.G.U.S.Qualifications.Scientific.Healing, M.A.G.U.S.",
+          "QpToBaseQualification": 15,
+          "QpToMasterQualification": 30,
+          "Category": "Scientific",
+          "Name": "Healing",
+          "QualificationLevel": 0,
+          "BaseQualificationLevel": 1,
+          "MasterQualificationLevel": 0,
+          "QpToMaxBaseQualification": null,
           "QualificationType": "M.A.G.U.S.Qualifications.Scientific.Healing, M.A.G.U.S., Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
         },
         {
-          "$id": "21",
-          "$type": "M.A.G.U.S.Qualifications.Laical.Riding, M.A.G.U.S.",
+          "$id": "12",
+          "$type": "M.A.G.U.S.Qualifications.Laical.SexualCulture, M.A.G.U.S.",
+          "Name": "Sexual culture",
+          "QpToBaseQualification": 5,
+          "QpToMasterQualification": 30,
+          "Category": "Laical",
           "QualificationLevel": 0,
           "BaseQualificationLevel": 1,
           "MasterQualificationLevel": 0,
-          "QualificationType": "M.A.G.U.S.Qualifications.Laical.Riding, M.A.G.U.S., Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
-        },
-        {
-          "$id": "22",
-          "$type": "M.A.G.U.S.Qualifications.Laical.ForestSurvival, M.A.G.U.S.",
-          "QualificationLevel": 1,
-          "BaseQualificationLevel": 1,
-          "MasterQualificationLevel": 1,
-          "QualificationType": "M.A.G.U.S.Qualifications.Laical.ForestSurvival, M.A.G.U.S., Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
-        },
-        {
-          "$id": "23",
-          "$type": "M.A.G.U.S.Qualifications.Laical.HuntingAndFishing, M.A.G.U.S.",
-          "QualificationLevel": 1,
-          "BaseQualificationLevel": 1,
-          "MasterQualificationLevel": 1,
-          "QualificationType": "M.A.G.U.S.Qualifications.Laical.HuntingAndFishing, M.A.G.U.S., Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
-        },
-        {
-          "$id": "24",
-          "$type": "M.A.G.U.S.Qualifications.Laical.Riding, M.A.G.U.S.",
-          "QualificationLevel": 0,
-          "BaseQualificationLevel": 1,
-          "MasterQualificationLevel": 0,
-          "QualificationType": "M.A.G.U.S.Qualifications.Laical.Riding, M.A.G.U.S., Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
+          "QpToMaxBaseQualification": null,
+          "QualificationType": "M.A.G.U.S.Qualifications.Laical.SexualCulture, M.A.G.U.S., Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
         }
       ]
     },
@@ -212,703 +175,314 @@
       "$type": "M.A.G.U.S.Qualifications.QualificationList, M.A.G.U.S.",
       "$values": [
         {
-          "$id": "25",
-          "$type": "M.A.G.U.S.Qualifications.Underworld.TavernBrawling, M.A.G.U.S.",
-          "QualificationLevel": 0,
-          "BaseQualificationLevel": 2,
-          "MasterQualificationLevel": 0,
-          "QualificationType": "M.A.G.U.S.Qualifications.Underworld.TavernBrawling, M.A.G.U.S., Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
-        },
-        {
-          "$id": "26",
-          "$type": "M.A.G.U.S.Qualifications.Scientific.LegendLore, M.A.G.U.S.",
-          "QualificationLevel": 0,
-          "BaseQualificationLevel": 3,
-          "MasterQualificationLevel": 0,
-          "QualificationType": "M.A.G.U.S.Qualifications.Scientific.LegendLore, M.A.G.U.S., Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
-        },
-        {
-          "$id": "27",
-          "$type": "M.A.G.U.S.Qualifications.Laical.TrapSetting, M.A.G.U.S.",
-          "QualificationLevel": 0,
-          "BaseQualificationLevel": 4,
-          "MasterQualificationLevel": 0,
-          "QualificationType": "M.A.G.U.S.Qualifications.Laical.TrapSetting, M.A.G.U.S., Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
-        },
-        {
-          "$id": "28",
-          "$type": "M.A.G.U.S.Qualifications.Laical.TrackingConcealment, M.A.G.U.S.",
-          "QualificationLevel": 0,
-          "BaseQualificationLevel": 5,
-          "MasterQualificationLevel": 0,
-          "QualificationType": "M.A.G.U.S.Qualifications.Laical.TrackingConcealment, M.A.G.U.S., Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
-        },
-        {
-          "$id": "29",
-          "$type": "M.A.G.U.S.Qualifications.Combat.WeaponUse, M.A.G.U.S.",
-          "Weapon": null,
+          "$id": "13",
+          "$type": "M.A.G.U.S.Qualifications.Scientific.PoisoningAndNeutralization, M.A.G.U.S.",
+          "Name": "Poisoning/neutralization",
+          "QpToBaseQualification": 15,
+          "QpToMasterQualification": 60,
+          "Category": "Scientific",
           "QualificationLevel": 1,
-          "BaseQualificationLevel": 9,
-          "MasterQualificationLevel": 9,
-          "QualificationType": "M.A.G.U.S.Qualifications.Combat.WeaponUse, M.A.G.U.S., Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
+          "BaseQualificationLevel": 0,
+          "MasterQualificationLevel": 4,
+          "QpToMaxBaseQualification": null,
+          "QualificationType": "M.A.G.U.S.Qualifications.Scientific.PoisoningAndNeutralization, M.A.G.U.S., Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
+        },
+        {
+          "$id": "14",
+          "$type": "M.A.G.U.S.Qualifications.Scientific.Herbalism, M.A.G.U.S.",
+          "QpToBaseQualification": 5,
+          "QpToMasterQualification": 35,
+          "Category": "Scientific",
+          "Name": "Herbalism",
+          "QualificationLevel": 1,
+          "BaseQualificationLevel": 0,
+          "MasterQualificationLevel": 5,
+          "QpToMaxBaseQualification": null,
+          "QualificationType": "M.A.G.U.S.Qualifications.Scientific.Herbalism, M.A.G.U.S., Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
         }
       ]
     },
-    "Strength": 16,
-    "Speed": 18,
-    "Dexterity": 12,
-    "Stamina": 14,
-    "Health": 15,
-    "Beauty": 17,
-    "Intelligence": 12,
-    "Willpower": 17,
-    "Astral": 12,
-    "Gold": 6,
-    "Bravery": 12,
-    "Erudition": 13,
-    "InitiatingBaseValue": 5,
-    "AttackingBaseValue": 17,
-    "DefendingBaseValue": 72,
-    "AimingBaseValue": 0,
-    "FightValueModifier": 8,
-    "BaseQualificationPoints": 6,
-    "QualificationPointsModifier": 10,
-    "PercentQualificationModifier": 0,
-    "BaseLifePoints": 6,
-    "BasePainTolerancePoints": 6,
-    "AddFightValueOnFirstLevel": false,
-    "AddPainToleranceOnFirstLevel": false,
-    "AddQualificationPointsOnFirstLevel": true,
     "PercentQualifications": {
-      "$type": "System.Collections.Generic.List`1[[M.A.G.U.S.Qualifications.PercentQualification, M.A.G.U.S.]], mscorlib",
+      "$type": "System.Collections.Generic.List`1[[M.A.G.U.S.Qualifications.PercentQualification, M.A.G.U.S.]], System.Private.CoreLib",
       "$values": []
     },
     "SpecialQualifications": {
       "$type": "M.A.G.U.S.Qualifications.SpecialQualificationList, M.A.G.U.S.",
       "$values": [
         {
-          "$id": "30",
-          "$type": "M.A.G.U.S.Qualifications.Specialities.PsiSiegeKyrDisciplineUsage, M.A.G.U.S."
-        },
-        {
-          "$id": "31",
-          "$type": "M.A.G.U.S.Qualifications.Magic.ClericalMagic, M.A.G.U.S.",
-          "ManaPoints": 9
+          "$id": "15",
+          "$type": "M.A.G.U.S.Qualifications.Magic.Witchcraft, M.A.G.U.S.",
+          "ManaPoints": 8,
+          "Name": "Witchcraft"
         }
       ]
     },
-    "Name": null,
-    "Level": 1
+    "Name": "Witch",
+    "Level": 5,
+    "AstralMagicResistance": 0,
+    "MentalMagicResistance": 0,
+    "ExperiencePoints": 0
   },
   "Classes": {
     "$type": "M.A.G.U.S.Interfaces.IClass[], M.A.G.U.S.",
     "$values": [
       {
-        "$id": "32",
-        "$type": "M.A.G.U.S.Classes.Believer.GodsOfPyarron.ArelPriest, M.A.G.U.S.",
-        "Qualifications": {
-          "$type": "M.A.G.U.S.Qualifications.QualificationList, M.A.G.U.S.",
-          "$values": [
-            {
-              "$id": "33",
-              "$type": "M.A.G.U.S.Qualifications.Combat.WeaponUse, M.A.G.U.S.",
-              "Weapon": null,
-              "QualificationLevel": 0,
-              "BaseQualificationLevel": 1,
-              "MasterQualificationLevel": 0,
-              "QualificationType": "M.A.G.U.S.Qualifications.Combat.WeaponUse, M.A.G.U.S., Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
-            },
-            {
-              "$id": "34",
-              "$type": "M.A.G.U.S.Qualifications.Scientific.Psi.PsiPyarron, M.A.G.U.S.",
-              "PsiKind": 0,
-              "QualificationLevel": 1,
-              "BaseQualificationLevel": 1,
-              "MasterQualificationLevel": 1,
-              "QualificationType": "M.A.G.U.S.Qualifications.Scientific.Psi.PsiPyarron, M.A.G.U.S., Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
-            },
-            {
-              "$id": "35",
-              "$type": "M.A.G.U.S.Qualifications.Scientific.LanguageLore, M.A.G.U.S.",
-              "Language": 0,
-              "QualificationLevel": 0,
-              "BaseQualificationLevel": 1,
-              "MasterQualificationLevel": 0,
-              "QualificationType": "M.A.G.U.S.Qualifications.Scientific.LanguageLore, M.A.G.U.S., Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
-            },
-            {
-              "$id": "36",
-              "$type": "M.A.G.U.S.Qualifications.Scientific.LanguageLore, M.A.G.U.S.",
-              "Language": 0,
-              "QualificationLevel": 0,
-              "BaseQualificationLevel": 1,
-              "MasterQualificationLevel": 0,
-              "QualificationType": "M.A.G.U.S.Qualifications.Scientific.LanguageLore, M.A.G.U.S., Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
-            },
-            {
-              "$id": "37",
-              "$type": "M.A.G.U.S.Qualifications.Scientific.ReadingAndWriting, M.A.G.U.S.",
-              "QualificationLevel": 0,
-              "BaseQualificationLevel": 1,
-              "MasterQualificationLevel": 0,
-              "QualificationType": "M.A.G.U.S.Qualifications.Scientific.ReadingAndWriting, M.A.G.U.S., Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
-            },
-            {
-              "$id": "38",
-              "$type": "M.A.G.U.S.Qualifications.Scientific.ReligionLore, M.A.G.U.S.",
-              "QualificationLevel": 1,
-              "BaseQualificationLevel": 1,
-              "MasterQualificationLevel": 1,
-              "QualificationType": "M.A.G.U.S.Qualifications.Scientific.ReligionLore, M.A.G.U.S., Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
-            },
-            {
-              "$id": "39",
-              "$type": "M.A.G.U.S.Qualifications.Scientific.HistoryLore, M.A.G.U.S.",
-              "QualificationLevel": 1,
-              "BaseQualificationLevel": 1,
-              "MasterQualificationLevel": 1,
-              "QualificationType": "M.A.G.U.S.Qualifications.Scientific.HistoryLore, M.A.G.U.S., Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
-            },
-            {
-              "$id": "40",
-              "$type": "M.A.G.U.S.Qualifications.Laical.SingingAndMakingMusic, M.A.G.U.S.",
-              "QualificationLevel": 0,
-              "BaseQualificationLevel": 1,
-              "MasterQualificationLevel": 0,
-              "QualificationType": "M.A.G.U.S.Qualifications.Laical.SingingAndMakingMusic, M.A.G.U.S., Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
-            },
-            {
-              "$id": "41",
-              "$type": "M.A.G.U.S.Qualifications.Combat.WeaponUse, M.A.G.U.S.",
-              "Weapon": null,
-              "QualificationLevel": 0,
-              "BaseQualificationLevel": 1,
-              "MasterQualificationLevel": 0,
-              "QualificationType": "M.A.G.U.S.Qualifications.Combat.WeaponUse, M.A.G.U.S., Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
-            },
-            {
-              "$id": "42",
-              "$type": "M.A.G.U.S.Qualifications.Combat.WeaponUse, M.A.G.U.S.",
-              "Weapon": null,
-              "QualificationLevel": 0,
-              "BaseQualificationLevel": 1,
-              "MasterQualificationLevel": 0,
-              "QualificationType": "M.A.G.U.S.Qualifications.Combat.WeaponUse, M.A.G.U.S., Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
-            },
-            {
-              "$id": "43",
-              "$type": "M.A.G.U.S.Qualifications.Combat.WeaponUse, M.A.G.U.S.",
-              "Weapon": null,
-              "QualificationLevel": 0,
-              "BaseQualificationLevel": 1,
-              "MasterQualificationLevel": 0,
-              "QualificationType": "M.A.G.U.S.Qualifications.Combat.WeaponUse, M.A.G.U.S., Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
-            },
-            {
-              "$id": "44",
-              "$type": "M.A.G.U.S.Qualifications.Combat.WeaponThrowing, M.A.G.U.S.",
-              "Weapon": null,
-              "QualificationLevel": 0,
-              "BaseQualificationLevel": 1,
-              "MasterQualificationLevel": 0,
-              "QualificationType": "M.A.G.U.S.Qualifications.Combat.WeaponThrowing, M.A.G.U.S., Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
-            },
-            {
-              "$id": "45",
-              "$type": "M.A.G.U.S.Qualifications.Combat.WeaponLore, M.A.G.U.S.",
-              "QualificationLevel": 0,
-              "BaseQualificationLevel": 1,
-              "MasterQualificationLevel": 0,
-              "QualificationType": "M.A.G.U.S.Qualifications.Combat.WeaponLore, M.A.G.U.S., Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
-            },
-            {
-              "$id": "46",
-              "$type": "M.A.G.U.S.Qualifications.Scientific.LanguageLore, M.A.G.U.S.",
-              "Language": 0,
-              "QualificationLevel": 0,
-              "BaseQualificationLevel": 1,
-              "MasterQualificationLevel": 0,
-              "QualificationType": "M.A.G.U.S.Qualifications.Scientific.LanguageLore, M.A.G.U.S., Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
-            },
-            {
-              "$id": "47",
-              "$type": "M.A.G.U.S.Qualifications.Scientific.LanguageLore, M.A.G.U.S.",
-              "Language": 0,
-              "QualificationLevel": 0,
-              "BaseQualificationLevel": 1,
-              "MasterQualificationLevel": 0,
-              "QualificationType": "M.A.G.U.S.Qualifications.Scientific.LanguageLore, M.A.G.U.S., Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
-            },
-            {
-              "$id": "48",
-              "$type": "M.A.G.U.S.Qualifications.Scientific.LanguageLore, M.A.G.U.S.",
-              "Language": 0,
-              "QualificationLevel": 0,
-              "BaseQualificationLevel": 1,
-              "MasterQualificationLevel": 0,
-              "QualificationType": "M.A.G.U.S.Qualifications.Scientific.LanguageLore, M.A.G.U.S., Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
-            },
-            {
-              "$id": "49",
-              "$type": "M.A.G.U.S.Qualifications.Scientific.WeatherDivination, M.A.G.U.S.",
-              "QualificationLevel": 0,
-              "BaseQualificationLevel": 1,
-              "MasterQualificationLevel": 0,
-              "QualificationType": "M.A.G.U.S.Qualifications.Scientific.WeatherDivination, M.A.G.U.S., Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
-            },
-            {
-              "$id": "50",
-              "$type": "M.A.G.U.S.Qualifications.Scientific.Herbalism, M.A.G.U.S.",
-              "QualificationLevel": 0,
-              "BaseQualificationLevel": 1,
-              "MasterQualificationLevel": 0,
-              "QualificationType": "M.A.G.U.S.Qualifications.Scientific.Herbalism, M.A.G.U.S., Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
-            },
-            {
-              "$id": "51",
-              "$type": "M.A.G.U.S.Qualifications.Scientific.Healing, M.A.G.U.S.",
-              "QualificationLevel": 0,
-              "BaseQualificationLevel": 1,
-              "MasterQualificationLevel": 0,
-              "QualificationType": "M.A.G.U.S.Qualifications.Scientific.Healing, M.A.G.U.S., Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
-            },
-            {
-              "$id": "52",
-              "$type": "M.A.G.U.S.Qualifications.Laical.Riding, M.A.G.U.S.",
-              "QualificationLevel": 0,
-              "BaseQualificationLevel": 1,
-              "MasterQualificationLevel": 0,
-              "QualificationType": "M.A.G.U.S.Qualifications.Laical.Riding, M.A.G.U.S., Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
-            },
-            {
-              "$id": "53",
-              "$type": "M.A.G.U.S.Qualifications.Laical.ForestSurvival, M.A.G.U.S.",
-              "QualificationLevel": 1,
-              "BaseQualificationLevel": 1,
-              "MasterQualificationLevel": 1,
-              "QualificationType": "M.A.G.U.S.Qualifications.Laical.ForestSurvival, M.A.G.U.S., Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
-            },
-            {
-              "$id": "54",
-              "$type": "M.A.G.U.S.Qualifications.Laical.HuntingAndFishing, M.A.G.U.S.",
-              "QualificationLevel": 1,
-              "BaseQualificationLevel": 1,
-              "MasterQualificationLevel": 1,
-              "QualificationType": "M.A.G.U.S.Qualifications.Laical.HuntingAndFishing, M.A.G.U.S., Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
-            },
-            {
-              "$id": "55",
-              "$type": "M.A.G.U.S.Qualifications.Laical.Riding, M.A.G.U.S.",
-              "QualificationLevel": 0,
-              "BaseQualificationLevel": 1,
-              "MasterQualificationLevel": 0,
-              "QualificationType": "M.A.G.U.S.Qualifications.Laical.Riding, M.A.G.U.S., Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
-            }
-          ]
-        },
-        "FutureQualifications": {
-          "$type": "M.A.G.U.S.Qualifications.QualificationList, M.A.G.U.S.",
-          "$values": [
-            {
-              "$id": "56",
-              "$type": "M.A.G.U.S.Qualifications.Underworld.TavernBrawling, M.A.G.U.S.",
-              "QualificationLevel": 0,
-              "BaseQualificationLevel": 2,
-              "MasterQualificationLevel": 0,
-              "QualificationType": "M.A.G.U.S.Qualifications.Underworld.TavernBrawling, M.A.G.U.S., Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
-            },
-            {
-              "$id": "57",
-              "$type": "M.A.G.U.S.Qualifications.Scientific.LegendLore, M.A.G.U.S.",
-              "QualificationLevel": 0,
-              "BaseQualificationLevel": 3,
-              "MasterQualificationLevel": 0,
-              "QualificationType": "M.A.G.U.S.Qualifications.Scientific.LegendLore, M.A.G.U.S., Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
-            },
-            {
-              "$id": "58",
-              "$type": "M.A.G.U.S.Qualifications.Laical.TrapSetting, M.A.G.U.S.",
-              "QualificationLevel": 0,
-              "BaseQualificationLevel": 4,
-              "MasterQualificationLevel": 0,
-              "QualificationType": "M.A.G.U.S.Qualifications.Laical.TrapSetting, M.A.G.U.S., Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
-            },
-            {
-              "$id": "59",
-              "$type": "M.A.G.U.S.Qualifications.Laical.TrackingConcealment, M.A.G.U.S.",
-              "QualificationLevel": 0,
-              "BaseQualificationLevel": 5,
-              "MasterQualificationLevel": 0,
-              "QualificationType": "M.A.G.U.S.Qualifications.Laical.TrackingConcealment, M.A.G.U.S., Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
-            },
-            {
-              "$id": "60",
-              "$type": "M.A.G.U.S.Qualifications.Combat.WeaponUse, M.A.G.U.S.",
-              "Weapon": null,
-              "QualificationLevel": 1,
-              "BaseQualificationLevel": 9,
-              "MasterQualificationLevel": 9,
-              "QualificationType": "M.A.G.U.S.Qualifications.Combat.WeaponUse, M.A.G.U.S., Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
-            }
-          ]
-        },
-        "Strength": 8,
-        "Speed": 18,
-        "Dexterity": 15,
-        "Stamina": 18,
-        "Health": 11,
-        "Beauty": 12,
-        "Intelligence": 11,
-        "Willpower": 17,
-        "Astral": 10,
-        "Gold": 3,
-        "Bravery": 10,
-        "Erudition": 15,
-        "InitiatingBaseValue": 5,
-        "AttackingBaseValue": 17,
-        "DefendingBaseValue": 72,
-        "AimingBaseValue": 0,
-        "FightValueModifier": 8,
-        "BaseQualificationPoints": 6,
-        "QualificationPointsModifier": 10,
-        "PercentQualificationModifier": 0,
-        "BaseLifePoints": 6,
-        "BasePainTolerancePoints": 6,
-        "AddFightValueOnFirstLevel": false,
-        "AddPainToleranceOnFirstLevel": false,
-        "AddQualificationPointsOnFirstLevel": true,
-        "PercentQualifications": {
-          "$type": "System.Collections.Generic.List`1[[M.A.G.U.S.Qualifications.PercentQualification, M.A.G.U.S.]], mscorlib",
-          "$values": []
-        },
-        "SpecialQualifications": {
-          "$type": "M.A.G.U.S.Qualifications.SpecialQualificationList, M.A.G.U.S.",
-          "$values": [
-            {
-              "$id": "61",
-              "$type": "M.A.G.U.S.Qualifications.Specialities.PsiSiegeKyrDisciplineUsage, M.A.G.U.S."
-            },
-            {
-              "$id": "62",
-              "$type": "M.A.G.U.S.Qualifications.Magic.ClericalMagic, M.A.G.U.S.",
-              "ManaPoints": 9
-            }
-          ]
-        },
-        "Name": null,
-        "Level": 1
+        "$ref": "2"
       }
     ]
   },
   "Race": {
-    "$type": "M.A.G.U.S.Races.Amund, M.A.G.U.S.",
-    "Strength": 1,
-    "Stamina": 1,
-    "Beauty": 3,
-    "Astral": -1,
-    "SpecialQualifications": {
-      "$type": "M.A.G.U.S.Qualifications.SpecialQualificationList, M.A.G.U.S.",
-      "$values": [
-        {
-          "$id": "63",
-          "$type": "M.A.G.U.S.Qualifications.Specialities.CantLearnPsi, M.A.G.U.S."
-        },
-        {
-          "$id": "64",
-          "$type": "M.A.G.U.S.Qualifications.Specialities.ExtraMagicResistanceOnLevelUp, M.A.G.U.S.",
-          "ExtraResistancePoints": 4
-        },
-        {
-          "$id": "65",
-          "$type": "M.A.G.U.S.Qualifications.Specialities.MagicalResistanceRegeneration, M.A.G.U.S."
-        }
-      ]
-    },
+    "$id": "16",
+    "$type": "M.A.G.U.S.Races.Human, M.A.G.U.S.",
+    "Name": "Human",
     "Qualifications": {
       "$type": "M.A.G.U.S.Qualifications.QualificationList, M.A.G.U.S.",
       "$values": []
     },
     "PercentQualifications": {
-      "$type": "System.Collections.Generic.List`1[[M.A.G.U.S.Qualifications.PercentQualification, M.A.G.U.S.]], mscorlib",
+      "$type": "System.Collections.Generic.List`1[[M.A.G.U.S.Qualifications.PercentQualification, M.A.G.U.S.]], System.Private.CoreLib",
       "$values": []
     },
-    "Speed": 0,
+    "SpecialQualifications": {
+      "$type": "M.A.G.U.S.Qualifications.SpecialQualificationList, M.A.G.U.S.",
+      "$values": []
+    },
+    "Strength": 0,
+    "Quickness": 0,
     "Dexterity": 0,
+    "Stamina": 0,
     "Health": 0,
+    "Beauty": 0,
     "Intelligence": 0,
-    "Willpower": 0
+    "Willpower": 0,
+    "Astral": 0,
+    "Bravery": 0,
+    "Erudition": 0,
+    "Detection": 0
   },
+  "Money": {
+    "$id": "17",
+    "$type": "M.A.G.U.S.GameSystem.Valuables.Money, M.A.G.U.S.",
+    "Mithril": 0.0,
+    "Gold": 8.0,
+    "Silver": 0.0,
+    "Copper": 0.0,
+    "Summa": 8000.0,
+    "IsZero": false
+  },
+  "MultiClassMode": 0,
   "PercentQualificationPoints": 0,
-  "QualificationPoints": 26,
-  "UnconsciousAstralMagicResistance": 0,
-  "UnconsciousMentalMagicResistance": 9,
-  "InitiatingValue": 16,
-  "AttackingValue": 31,
-  "DefendingValue": 83,
-  "AimingValue": 8,
-  "LifePoints": 13,
-  "PainTolerancePoints": 19,
-  "Strength": 13,
-  "Speed": 13,
-  "Dexterity": 18,
-  "Stamina": 14,
-  "Health": 17,
-  "Beauty": 23,
-  "Intelligence": 12,
-  "Willpower": 19,
-  "Astral": 9,
-  "Gold": 3,
-  "Bravery": 13,
-  "Erudition": 0,
+  "QualificationPoints": 76,
+  "UnconsciousAstralMagicResistance": 9,
+  "UnconsciousMentalMagicResistance": 1,
+  "InitiatingValue": 11,
+  "AttackingValue": 26,
+  "DefendingValue": 81,
+  "AimingValue": 11,
+  "HealthPoints": 3,
+  "MaxHealthPoints": 3,
+  "PainTolerancePoints": 24,
+  "MaxPainTolerancePoints": 24,
+  "Strength": 5,
+  "Quickness": 9,
+  "Dexterity": 15,
+  "Stamina": 8,
+  "Health": 8,
+  "Beauty": 19,
+  "Intelligence": 13,
+  "Willpower": 11,
+  "Astral": 19,
+  "Bravery": 12,
+  "Erudition": 18,
+  "Detection": 11,
+  "Birthplace": null,
+  "School": null,
+  "Alignment": null,
   "Sorcery": {
-    "$type": "M.A.G.U.S.Qualifications.Magic.ClericalMagic, M.A.G.U.S.",
-    "ManaPoints": 9
+    "$id": "18",
+    "$type": "M.A.G.U.S.Qualifications.Magic.Witchcraft, M.A.G.U.S.",
+    "ManaPoints": 8,
+    "Name": "Witchcraft"
   },
   "Psi": {
+    "$id": "19",
     "$type": "M.A.G.U.S.Qualifications.Scientific.Psi.PsiPyarron, M.A.G.U.S.",
     "PsiKind": 0,
+    "Name": "Psi, Pyarron",
+    "QpToBaseQualification": 10,
+    "QpToMasterQualification": 55,
+    "Category": "Psi",
     "QualificationLevel": 1,
-    "BaseQualificationLevel": 1,
+    "BaseQualificationLevel": 0,
     "MasterQualificationLevel": 1,
+    "QpToMaxBaseQualification": null,
     "QualificationType": "M.A.G.U.S.Qualifications.Scientific.Psi.PsiPyarron, M.A.G.U.S., Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
   },
-  "ManaPoints": 9,
-  "PsiPoints": 2,
+  "ManaPoints": 40,
+  "MaxManaPoints": 40,
+  "MaxManaPointsPerLevel": 8,
+  "PsiPoints": 24,
+  "MaxPsiPoints": 24,
+  "TotalEquipmentWeight": null,
   "PsiPointsModifier": 4,
   "Qualifications": {
     "$type": "M.A.G.U.S.Qualifications.QualificationList, M.A.G.U.S.",
     "$values": [
       {
-        "$id": "66",
+        "$id": "20",
         "$type": "M.A.G.U.S.Qualifications.Combat.WeaponUse, M.A.G.U.S.",
         "Weapon": null,
+        "Name": "Weapon use",
+        "QpToBaseQualification": 3,
+        "QpToMasterQualification": 30,
+        "Category": "Combat",
         "QualificationLevel": 0,
         "BaseQualificationLevel": 1,
         "MasterQualificationLevel": 0,
+        "QpToMaxBaseQualification": null,
         "QualificationType": "M.A.G.U.S.Qualifications.Combat.WeaponUse, M.A.G.U.S., Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
       },
       {
-        "$id": "67",
-        "$type": "M.A.G.U.S.Qualifications.Scientific.Psi.PsiPyarron, M.A.G.U.S.",
-        "PsiKind": 0,
-        "QualificationLevel": 1,
-        "BaseQualificationLevel": 1,
-        "MasterQualificationLevel": 1,
-        "QualificationType": "M.A.G.U.S.Qualifications.Scientific.Psi.PsiPyarron, M.A.G.U.S., Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
-      },
-      {
-        "$id": "68",
-        "$type": "M.A.G.U.S.Qualifications.Scientific.LanguageLore, M.A.G.U.S.",
-        "Language": 0,
-        "QualificationLevel": 0,
-        "BaseQualificationLevel": 1,
-        "MasterQualificationLevel": 0,
-        "QualificationType": "M.A.G.U.S.Qualifications.Scientific.LanguageLore, M.A.G.U.S., Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
-      },
-      {
-        "$id": "69",
-        "$type": "M.A.G.U.S.Qualifications.Scientific.LanguageLore, M.A.G.U.S.",
-        "Language": 0,
-        "QualificationLevel": 0,
-        "BaseQualificationLevel": 1,
-        "MasterQualificationLevel": 0,
-        "QualificationType": "M.A.G.U.S.Qualifications.Scientific.LanguageLore, M.A.G.U.S., Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
-      },
-      {
-        "$id": "70",
-        "$type": "M.A.G.U.S.Qualifications.Scientific.ReadingAndWriting, M.A.G.U.S.",
-        "QualificationLevel": 0,
-        "BaseQualificationLevel": 1,
-        "MasterQualificationLevel": 0,
-        "QualificationType": "M.A.G.U.S.Qualifications.Scientific.ReadingAndWriting, M.A.G.U.S., Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
-      },
-      {
-        "$id": "71",
-        "$type": "M.A.G.U.S.Qualifications.Scientific.ReligionLore, M.A.G.U.S.",
-        "QualificationLevel": 1,
-        "BaseQualificationLevel": 1,
-        "MasterQualificationLevel": 1,
-        "QualificationType": "M.A.G.U.S.Qualifications.Scientific.ReligionLore, M.A.G.U.S., Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
-      },
-      {
-        "$id": "72",
-        "$type": "M.A.G.U.S.Qualifications.Scientific.HistoryLore, M.A.G.U.S.",
-        "QualificationLevel": 1,
-        "BaseQualificationLevel": 1,
-        "MasterQualificationLevel": 1,
-        "QualificationType": "M.A.G.U.S.Qualifications.Scientific.HistoryLore, M.A.G.U.S., Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
-      },
-      {
-        "$id": "73",
-        "$type": "M.A.G.U.S.Qualifications.Laical.SingingAndMakingMusic, M.A.G.U.S.",
-        "QualificationLevel": 0,
-        "BaseQualificationLevel": 1,
-        "MasterQualificationLevel": 0,
-        "QualificationType": "M.A.G.U.S.Qualifications.Laical.SingingAndMakingMusic, M.A.G.U.S., Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
-      },
-      {
-        "$id": "74",
-        "$type": "M.A.G.U.S.Qualifications.Combat.WeaponUse, M.A.G.U.S.",
-        "Weapon": null,
-        "QualificationLevel": 0,
-        "BaseQualificationLevel": 1,
-        "MasterQualificationLevel": 0,
-        "QualificationType": "M.A.G.U.S.Qualifications.Combat.WeaponUse, M.A.G.U.S., Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
-      },
-      {
-        "$id": "75",
-        "$type": "M.A.G.U.S.Qualifications.Combat.WeaponUse, M.A.G.U.S.",
-        "Weapon": null,
-        "QualificationLevel": 0,
-        "BaseQualificationLevel": 1,
-        "MasterQualificationLevel": 0,
-        "QualificationType": "M.A.G.U.S.Qualifications.Combat.WeaponUse, M.A.G.U.S., Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
-      },
-      {
-        "$id": "76",
-        "$type": "M.A.G.U.S.Qualifications.Combat.WeaponUse, M.A.G.U.S.",
-        "Weapon": null,
-        "QualificationLevel": 0,
-        "BaseQualificationLevel": 1,
-        "MasterQualificationLevel": 0,
-        "QualificationType": "M.A.G.U.S.Qualifications.Combat.WeaponUse, M.A.G.U.S., Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
-      },
-      {
-        "$id": "77",
+        "$id": "21",
         "$type": "M.A.G.U.S.Qualifications.Combat.WeaponThrowing, M.A.G.U.S.",
         "Weapon": null,
+        "Name": "Weapon throwing",
+        "QpToBaseQualification": 4,
+        "QpToMasterQualification": 40,
+        "Category": "Combat",
         "QualificationLevel": 0,
         "BaseQualificationLevel": 1,
         "MasterQualificationLevel": 0,
+        "QpToMaxBaseQualification": null,
         "QualificationType": "M.A.G.U.S.Qualifications.Combat.WeaponThrowing, M.A.G.U.S., Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
       },
       {
-        "$id": "78",
-        "$type": "M.A.G.U.S.Qualifications.Combat.WeaponLore, M.A.G.U.S.",
-        "QualificationLevel": 0,
-        "BaseQualificationLevel": 1,
-        "MasterQualificationLevel": 0,
-        "QualificationType": "M.A.G.U.S.Qualifications.Combat.WeaponLore, M.A.G.U.S., Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
+        "$ref": "19"
       },
       {
-        "$id": "79",
+        "$id": "22",
         "$type": "M.A.G.U.S.Qualifications.Scientific.LanguageLore, M.A.G.U.S.",
         "Language": 0,
+        "Name": "Language lore",
+        "QpToBaseQualification": 1,
+        "QpToMaxBaseQualification": 5,
+        "QpToMasterQualification": 20,
+        "Category": "Scientific",
         "QualificationLevel": 0,
         "BaseQualificationLevel": 1,
         "MasterQualificationLevel": 0,
         "QualificationType": "M.A.G.U.S.Qualifications.Scientific.LanguageLore, M.A.G.U.S., Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
       },
       {
-        "$id": "80",
+        "$id": "23",
         "$type": "M.A.G.U.S.Qualifications.Scientific.LanguageLore, M.A.G.U.S.",
         "Language": 0,
+        "Name": "Language lore",
+        "QpToBaseQualification": 1,
+        "QpToMaxBaseQualification": 5,
+        "QpToMasterQualification": 20,
+        "Category": "Scientific",
         "QualificationLevel": 0,
         "BaseQualificationLevel": 1,
         "MasterQualificationLevel": 0,
         "QualificationType": "M.A.G.U.S.Qualifications.Scientific.LanguageLore, M.A.G.U.S., Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
       },
       {
-        "$id": "81",
-        "$type": "M.A.G.U.S.Qualifications.Scientific.LanguageLore, M.A.G.U.S.",
-        "Language": 0,
-        "QualificationLevel": 0,
-        "BaseQualificationLevel": 1,
-        "MasterQualificationLevel": 0,
-        "QualificationType": "M.A.G.U.S.Qualifications.Scientific.LanguageLore, M.A.G.U.S., Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
-      },
-      {
-        "$id": "82",
-        "$type": "M.A.G.U.S.Qualifications.Scientific.WeatherDivination, M.A.G.U.S.",
-        "QualificationLevel": 0,
-        "BaseQualificationLevel": 1,
-        "MasterQualificationLevel": 0,
-        "QualificationType": "M.A.G.U.S.Qualifications.Scientific.WeatherDivination, M.A.G.U.S., Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
-      },
-      {
-        "$id": "83",
+        "$id": "24",
         "$type": "M.A.G.U.S.Qualifications.Scientific.Herbalism, M.A.G.U.S.",
-        "QualificationLevel": 0,
+        "QpToBaseQualification": 5,
+        "QpToMasterQualification": 35,
+        "Category": "Scientific",
+        "Name": "Herbalism",
+        "QualificationLevel": 1,
         "BaseQualificationLevel": 1,
-        "MasterQualificationLevel": 0,
+        "MasterQualificationLevel": 5,
+        "QpToMaxBaseQualification": null,
         "QualificationType": "M.A.G.U.S.Qualifications.Scientific.Herbalism, M.A.G.U.S., Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
       },
       {
-        "$id": "84",
-        "$type": "M.A.G.U.S.Qualifications.Scientific.Healing, M.A.G.U.S.",
+        "$id": "25",
+        "$type": "M.A.G.U.S.Qualifications.Scientific.ReadingAndWriting, M.A.G.U.S.",
+        "Name": "Reading/writing",
+        "QpToBaseQualification": 5,
+        "QpToMasterQualification": 25,
+        "Category": "Scientific",
         "QualificationLevel": 0,
         "BaseQualificationLevel": 1,
         "MasterQualificationLevel": 0,
+        "QpToMaxBaseQualification": null,
+        "QualificationType": "M.A.G.U.S.Qualifications.Scientific.ReadingAndWriting, M.A.G.U.S., Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
+      },
+      {
+        "$id": "26",
+        "$type": "M.A.G.U.S.Qualifications.Scientific.PoisoningAndNeutralization, M.A.G.U.S.",
+        "Name": "Poisoning/neutralization",
+        "QpToBaseQualification": 15,
+        "QpToMasterQualification": 60,
+        "Category": "Scientific",
+        "QualificationLevel": 1,
+        "BaseQualificationLevel": 1,
+        "MasterQualificationLevel": 4,
+        "QpToMaxBaseQualification": null,
+        "QualificationType": "M.A.G.U.S.Qualifications.Scientific.PoisoningAndNeutralization, M.A.G.U.S., Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
+      },
+      {
+        "$id": "27",
+        "$type": "M.A.G.U.S.Qualifications.Scientific.Healing, M.A.G.U.S.",
+        "QpToBaseQualification": 15,
+        "QpToMasterQualification": 30,
+        "Category": "Scientific",
+        "Name": "Healing",
+        "QualificationLevel": 0,
+        "BaseQualificationLevel": 1,
+        "MasterQualificationLevel": 0,
+        "QpToMaxBaseQualification": null,
         "QualificationType": "M.A.G.U.S.Qualifications.Scientific.Healing, M.A.G.U.S., Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
       },
       {
-        "$id": "85",
-        "$type": "M.A.G.U.S.Qualifications.Laical.Riding, M.A.G.U.S.",
+        "$id": "28",
+        "$type": "M.A.G.U.S.Qualifications.Laical.SexualCulture, M.A.G.U.S.",
+        "Name": "Sexual culture",
+        "QpToBaseQualification": 5,
+        "QpToMasterQualification": 30,
+        "Category": "Laical",
         "QualificationLevel": 0,
         "BaseQualificationLevel": 1,
         "MasterQualificationLevel": 0,
-        "QualificationType": "M.A.G.U.S.Qualifications.Laical.Riding, M.A.G.U.S., Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
-      },
-      {
-        "$id": "86",
-        "$type": "M.A.G.U.S.Qualifications.Laical.ForestSurvival, M.A.G.U.S.",
-        "QualificationLevel": 1,
-        "BaseQualificationLevel": 1,
-        "MasterQualificationLevel": 1,
-        "QualificationType": "M.A.G.U.S.Qualifications.Laical.ForestSurvival, M.A.G.U.S., Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
-      },
-      {
-        "$id": "87",
-        "$type": "M.A.G.U.S.Qualifications.Laical.HuntingAndFishing, M.A.G.U.S.",
-        "QualificationLevel": 1,
-        "BaseQualificationLevel": 1,
-        "MasterQualificationLevel": 1,
-        "QualificationType": "M.A.G.U.S.Qualifications.Laical.HuntingAndFishing, M.A.G.U.S., Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
-      },
-      {
-        "$id": "88",
-        "$type": "M.A.G.U.S.Qualifications.Laical.Riding, M.A.G.U.S.",
-        "QualificationLevel": 0,
-        "BaseQualificationLevel": 1,
-        "MasterQualificationLevel": 0,
-        "QualificationType": "M.A.G.U.S.Qualifications.Laical.Riding, M.A.G.U.S., Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
-      },
-      {
-        "$id": "89",
-        "$type": "M.A.G.U.S.Qualifications.Underworld.TavernBrawling, M.A.G.U.S.",
-        "QualificationLevel": 0,
-        "BaseQualificationLevel": 2,
-        "MasterQualificationLevel": 0,
-        "QualificationType": "M.A.G.U.S.Qualifications.Underworld.TavernBrawling, M.A.G.U.S., Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
-      },
-      {
-        "$id": "90",
-        "$type": "M.A.G.U.S.Qualifications.Scientific.LegendLore, M.A.G.U.S.",
-        "QualificationLevel": 0,
-        "BaseQualificationLevel": 3,
-        "MasterQualificationLevel": 0,
-        "QualificationType": "M.A.G.U.S.Qualifications.Scientific.LegendLore, M.A.G.U.S., Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
-      },
-      {
-        "$id": "91",
-        "$type": "M.A.G.U.S.Qualifications.Laical.TrapSetting, M.A.G.U.S.",
-        "QualificationLevel": 0,
-        "BaseQualificationLevel": 4,
-        "MasterQualificationLevel": 0,
-        "QualificationType": "M.A.G.U.S.Qualifications.Laical.TrapSetting, M.A.G.U.S., Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
-      },
-      {
-        "$id": "92",
-        "$type": "M.A.G.U.S.Qualifications.Laical.TrackingConcealment, M.A.G.U.S.",
-        "QualificationLevel": 0,
-        "BaseQualificationLevel": 5,
-        "MasterQualificationLevel": 0,
-        "QualificationType": "M.A.G.U.S.Qualifications.Laical.TrackingConcealment, M.A.G.U.S., Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
+        "QpToMaxBaseQualification": null,
+        "QualificationType": "M.A.G.U.S.Qualifications.Laical.SexualCulture, M.A.G.U.S., Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
       }
     ]
   },
+  "SpecialQualifications": {
+    "$type": "M.A.G.U.S.Qualifications.SpecialQualificationList, M.A.G.U.S.",
+    "$values": []
+  },
   "PercentQualifications": {
-    "$type": "System.Collections.Generic.List`1[[M.A.G.U.S.Qualifications.PercentQualification, M.A.G.U.S.]], mscorlib",
+    "$type": "System.Collections.ObjectModel.ObservableCollection`1[[M.A.G.U.S.Qualifications.PercentQualification, M.A.G.U.S.]], System.ObjectModel",
+    "$values": [
+      {
+        "$id": "29",
+        "$type": "M.A.G.U.S.Qualifications.Percentages.Falling, M.A.G.U.S.",
+        "Percent": 5,
+        "Name": "Falling"
+      },
+      {
+        "$id": "30",
+        "$type": "M.A.G.U.S.Qualifications.Percentages.Climbing, M.A.G.U.S.",
+        "Name": "Climbing",
+        "Percent": 5
+      },
+      {
+        "$id": "31",
+        "$type": "M.A.G.U.S.Qualifications.Percentages.Jumping, M.A.G.U.S.",
+        "Percent": 5,
+        "Name": "Jumping"
+      }
+    ]
+  },
+  "Equipment": {
+    "$type": "System.Collections.ObjectModel.ObservableCollection`1[[M.A.G.U.S.Things.Thing, M.A.G.U.S.]], System.ObjectModel",
     "$values": []
   }
 }

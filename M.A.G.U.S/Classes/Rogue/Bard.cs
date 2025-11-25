@@ -100,7 +100,7 @@ public class Bard : Class, IClass, IJustFight
 
     public override bool AddQualificationPointsOnFirstLevel => true;
 
-    public override QualificationList Qualifications =>
+    public override QualificationList Qualifications => BuildQualifications(
     [
         new WeaponUse(),
         new WeaponUse(),
@@ -120,9 +120,9 @@ public class Bard : Class, IClass, IJustFight
         new SingingAndMakingMusic(),
         new Mimicry(),
         new CardSharping()
-   ];
+    ]);
 
-    public override QualificationList FutureQualifications =>
+    public override QualificationList FutureQualifications => BuildQualifications(
     [
         new Appraisal(level: 2),
         new Juggling(level: 2),
@@ -139,7 +139,7 @@ public class Bard : Class, IClass, IJustFight
         new Backstab(level: 6),
         new SexualCulture(QualificationLevel.Master, 7),
         new Mimicry(QualificationLevel.Master, 8)
-    ];
+    ]);
 
     public override List<PercentQualification> PercentQualifications =>
     [

@@ -91,7 +91,7 @@ public class Wizard : Class, IClass, ILikeMagic
 
     public override bool AddQualificationPointsOnFirstLevel => true;
 
-    public override QualificationList Qualifications =>
+    public override QualificationList Qualifications => BuildQualifications(
     [
         new WeaponUse(),
         new PsiKyrMethod(),
@@ -105,16 +105,16 @@ public class Wizard : Class, IClass, ILikeMagic
         new LegendLore(),
         new HistoryLore(),
         new RunicMagic()
-   ];
+   ]);
 
-    public override QualificationList FutureQualifications =>
+    public override QualificationList FutureQualifications => BuildQualifications(
     [
         new Herbalism(level: 4),
         new Alchemy(QualificationLevel.Master, 6),
         new RunicMagic(QualificationLevel.Master, 6),
         new LegendLore(QualificationLevel.Master, 7),
         new HistoryLore(QualificationLevel.Master, 8)
-    ];
+    ]);
 
     public override List<PercentQualification> PercentQualifications => [];
 

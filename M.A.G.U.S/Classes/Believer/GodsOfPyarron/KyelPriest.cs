@@ -34,7 +34,7 @@ public class KyelPriest : Priest
                 new Herbalism(),
                 new Disarmament()
             ]);
-            return result;
+            return BuildQualifications(result);
         }
     }
 
@@ -51,7 +51,7 @@ public class KyelPriest : Priest
                 new Physiology(level: 6),
                 new Disarmament(QualificationLevel.Master, 7),
             ]);
-            return result;
+            return BuildQualifications(result);
         }
     }
 

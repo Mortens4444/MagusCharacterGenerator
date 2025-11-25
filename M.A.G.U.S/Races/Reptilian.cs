@@ -2,6 +2,8 @@
 using M.A.G.U.S.Qualifications.Laical;
 using M.A.G.U.S.Qualifications.Percentages;
 using M.A.G.U.S.Qualifications.Specialities;
+using Mtf.Extensions.Services;
+using System.Text;
 
 namespace M.A.G.U.S.Races;
 
@@ -48,4 +50,24 @@ public class Reptilian : Race
 		// InvisibleFrom3rdLevelIfSorcerer
 		// AlakváltásFrom7thLevelIfSorcerer
 	];
+
+    public override string GenerateCharacterName()
+    {
+        var start = new[]
+        {
+            "Ssa", "Kra", "Zhe", "Ska", "Thra", "Xir", "Szo", "Rha", "Ksa"
+        };
+
+        var middle = new[]
+        {
+            "ss", "kr", "xz", "zh", "sk", "th", "sr"
+        };
+
+        var end = new[]
+        {
+            "ak", "esh", "ith", "zek", "rax", "ssar", "zash"
+        };
+
+        return GenerateCharacterName(start, middle, end);
+    }
 }

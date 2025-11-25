@@ -29,7 +29,7 @@ public class TharrPriest : Priest
 				new Alchemy(),
 				new Demonology()
 			]);
-			return result;
+			return BuildQualifications(result);
 		}
 	}
 
@@ -44,7 +44,7 @@ public class TharrPriest : Priest
 				new Demonology(QualificationLevel.Master, 4),
 				new RunicMagic(level: 6)
 			]);
-			return result;
+			return BuildQualifications(result);
 		}
 	}
 

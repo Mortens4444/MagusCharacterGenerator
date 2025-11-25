@@ -57,20 +57,25 @@ public class Character : IFightModifier, ILiving, IAbilities, INotifyPropertyCha
 
     // TODO: Pass the correct method to count
     private readonly MultiClassMode multiClassMode = MultiClassMode.Normal_Or_SwitchedClass;
+	private readonly ISettings? settings;
 
 	public event PropertyChangedEventHandler? PropertyChanged;
 
-    public Character()
+    public Character() : this(null) { }
+
+    public Character(ISettings? settings)
 	{
-		name = "Nobody";
+        this.settings = settings;
+        name = "Nobody";
 		race = new Human();
 		BaseClass = new Warrior();
         EnsureEquipmentSubscription();
     }
 
-    public Character(string name, IRace race, params IClass[] classes)
+    public Character(ISettings settings, string name, IRace race, params IClass[] classes)
 	{
-		this.name = name;
+		this.settings = settings;
+        this.name = name;
         this.race = race;
 		BaseClass = classes.First();
 		Classes = classes;
@@ -281,7 +286,7 @@ public class Character : IFightModifier, ILiving, IAbilities, INotifyPropertyCha
 				strength = value;
 				if (calculateChanges)
 				{
-					CalculateFightValues();
+					CalculateFightValues(settings);
 				}
                 OnPropertyChanged();
             }
@@ -298,7 +303,7 @@ public class Character : IFightModifier, ILiving, IAbilities, INotifyPropertyCha
 				speed = value;
 				if (calculateChanges)
 				{
-					CalculateFightValues();
+					CalculateFightValues(settings);
 				}
                 OnPropertyChanged();
             }
@@ -315,8 +320,8 @@ public class Character : IFightModifier, ILiving, IAbilities, INotifyPropertyCha
 				dexterity = value;
 				if (calculateChanges)
 				{
-					CalculateFightValues();
-					CalculateQualificationPoints();
+					CalculateFightValues(settings);
+					CalculateQualificationPoints(settings);
                 }
                 OnPropertyChanged();
             }
@@ -333,7 +338,7 @@ public class Character : IFightModifier, ILiving, IAbilities, INotifyPropertyCha
 				stamina = value;
 				if (calculateChanges)
 				{
-                    CalculatePainTolerancePoints();
+                    CalculatePainTolerancePoints(settings);
 				}
 			}
             OnPropertyChanged();
@@ -369,9 +374,9 @@ public class Character : IFightModifier, ILiving, IAbilities, INotifyPropertyCha
 				intelligence = value;
 				if (calculateChanges)
 				{
-					CalculatePsiPoints();
-					CalculateManaPoints();
-					CalculateQualificationPoints();
+					CalculatePsiPoints(settings);
+					CalculateManaPoints(settings);
+					CalculateQualificationPoints(settings);
 				}
                 OnPropertyChanged();
             }
@@ -388,7 +393,7 @@ public class Character : IFightModifier, ILiving, IAbilities, INotifyPropertyCha
 				willpower = value;
 				if (calculateChanges)
 				{
-					CalculatePainTolerancePoints();
+					CalculatePainTolerancePoints(settings);
 					CalculateUnconsciousMentalMagicResistance();
 				}
                 OnPropertyChanged();
@@ -540,15 +545,15 @@ public class Character : IFightModifier, ILiving, IAbilities, INotifyPropertyCha
 	private void CreateFirstLevel()
 	{
 		GenerateAbilities();			
-		CalculateQualificationPoints();
+		CalculateQualificationPoints(settings);
 		GetQualifications();
-		CalculateFightValues();
+		CalculateFightValues(settings);
 
 		CalculateLifePoints();
-		CalculatePainTolerancePoints();
+		CalculatePainTolerancePoints(settings);
 
-		CalculateManaPoints();
-		CalculatePsiPoints();
+		CalculateManaPoints(settings);
+		CalculatePsiPoints(settings);
 
 		CalculateUnconsciousAstralMagicResistance();
 		CalculateUnconsciousMentalMagicResistance();
@@ -577,16 +582,16 @@ public class Character : IFightModifier, ILiving, IAbilities, INotifyPropertyCha
 		Detection = BaseClass.Detection;
     }
 
-    private void CalculatePainTolerancePoints()
+    private void CalculatePainTolerancePoints(ISettings settings)
     {
-        PainTolerancePoints = GameSystem.PainTolerancePoints.Calculate(this);
+        PainTolerancePoints = GameSystem.PainTolerancePoints.Calculate(this, settings);
         MaxPainTolerancePoints = PainTolerancePoints;
         OnPropertyChanged(nameof(PainTolerancePoints));
     }
 
-    private void CalculateQualificationPoints()
+    private void CalculateQualificationPoints(ISettings settings)
     {
-        var (qualificationPoints, percentQualificationPoints) = GameSystem.QualificationPoints.Calculate(this);
+        var (qualificationPoints, percentQualificationPoints) = GameSystem.QualificationPoints.Calculate(this, settings);
         QualificationPoints = qualificationPoints;
         PercentQualificationPoints = percentQualificationPoints;
     }
@@ -634,9 +639,9 @@ public class Character : IFightModifier, ILiving, IAbilities, INotifyPropertyCha
         OnPropertyChanged(nameof(SpecialQualification));
     }
 
-	private void CalculateFightValues()
+	private void CalculateFightValues(ISettings settings)
 	{
-        var fightModifiers = FightValues.Calculate(this);
+        var fightModifiers = FightValues.Calculate(this, settings);
 		InitiatingValue = fightModifiers.InitiatingValue;
         AttackingValue = fightModifiers.AttackingValue;
         DefendingValue = fightModifiers.DefendingValue;
@@ -669,18 +674,18 @@ public class Character : IFightModifier, ILiving, IAbilities, INotifyPropertyCha
         UnconsciousMentalMagicResistance += (short)((BaseClass.Level - 1) * (doubledPainToleranceBase?.ExtraResistancePoints ?? 0));
 	}
 
-	private void CalculatePsiPoints()
+	private void CalculatePsiPoints(ISettings settings)
     {
-        var psiAttributes = GameSystem.PsiPoints.Calculate(this);
+        var psiAttributes = GameSystem.PsiPoints.Calculate(this, settings);
 		Psi = psiAttributes.Psi;
 		PsiPoints = psiAttributes.PsiPoints;
         MaxPsiPoints = psiAttributes.PsiPoints;
         PsiPointsModifier = psiAttributes.PsiPointsModifier;
     }
 
-	private void CalculateManaPoints()
+	private void CalculateManaPoints(ISettings settings)
 	{
-		var sorceryAttributes = GameSystem.ManaPoints.Calculate(this);
+		var sorceryAttributes = GameSystem.ManaPoints.Calculate(this, settings);
 		Sorcery = sorceryAttributes.Sorcery;
         ManaPoints = sorceryAttributes.ManaPoints;
 		MaxManaPoints = sorceryAttributes.ManaPoints;
@@ -689,7 +694,7 @@ public class Character : IFightModifier, ILiving, IAbilities, INotifyPropertyCha
 
     public void LevelUp()
     {
-		CalculateManaPoints();
+		CalculateManaPoints(settings);
     }
 
 	public void Buy(Thing thing)

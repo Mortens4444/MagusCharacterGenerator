@@ -36,7 +36,7 @@ public class ArelPriest : Priest
 				new HuntingAndFishing(QualificationLevel.Master),
 				new Riding()
 			]);
-			return result;
+			return BuildQualifications(result);
 		}
 	}
 
@@ -53,7 +53,7 @@ public class ArelPriest : Priest
 				new TrackingConcealment(level: 5),
 				new WeaponUse(QualificationLevel.Master, 9),
 			]);
-			return result;
+			return BuildQualifications(result);
 		}
 	}
 

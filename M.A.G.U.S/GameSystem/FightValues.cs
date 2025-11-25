@@ -8,7 +8,7 @@ namespace M.A.G.U.S.GameSystem;
 
 public static class FightValues
 {
-    public static FightModifier Calculate(Character character)
+    public static FightModifier Calculate(Character character, ISettings settings)
     {
         var result = new FightModifier();
         var initiatorRace = character.Race.SpecialQualifications.GetSpeciality<GoodInitiator>();
@@ -41,7 +41,7 @@ public static class FightValues
         }
 
         var (attackPercentage, defencePercentage, aimingPercentage) = DistributionProvider.Get(character.BaseClass, character.Race);
-        var levelUpFightModifier = Calculate(character.BaseClass, attackPercentage, defencePercentage, aimingPercentage);
+        var levelUpFightModifier = Calculate(settings, character.BaseClass, attackPercentage, defencePercentage, aimingPercentage);
         result.InitiatingValue += levelUpFightModifier.InitiatingValue;
         result.AttackingValue += levelUpFightModifier.AttackingValue;
         result.DefendingValue += levelUpFightModifier.DefendingValue;
@@ -49,9 +49,9 @@ public static class FightValues
         return result;
     }
 
-    private static FightModifier Calculate(IClass @class, byte attackPercentage, byte defencePercentage, byte aimingPercentage)
+    private static FightModifier Calculate(ISettings settings, IClass @class, byte attackPercentage, byte defencePercentage, byte aimingPercentage)
     {
-        var fightValues = (@class.AddFightValueOnFirstLevel ? @class.Level : @class.Level - 1) * @class.FightValueModifier;
+        var fightValues = (@class.AddFightValueOnFirstLevel || settings.AddFightValueOnFirstLevelForAllClass ? @class.Level : @class.Level - 1) * @class.FightValueModifier;
         var attackPoints = MathHelper.GetModifier(fightValues, attackPercentage);
         var defencePoints = MathHelper.GetModifier(fightValues, defencePercentage);
         var aimingPoints = MathHelper.GetModifier(fightValues, aimingPercentage);

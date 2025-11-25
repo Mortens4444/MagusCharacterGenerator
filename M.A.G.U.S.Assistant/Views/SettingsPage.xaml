@@ -29,7 +29,7 @@
                     BackgroundColor="{AppThemeBinding Light={StaticResource Gray100}, Dark={StaticResource Gray600}}">
                 <Grid ColumnDefinitions="*, Auto">
                     <Label Grid.Column="0" 
-                           Text="Add pain tolerance points modifiers at level 1 for all classes" 
+                           Text="Add pain tolerance point modifiers at level 1 for all classes" 
                            VerticalOptions="Center"
                            LineBreakMode="WordWrap"/>
                     <Switch Grid.Column="1" IsToggled="{Binding AddPainToleranceOnFirstLevelForAllClass}" />
@@ -40,7 +40,29 @@
                     BackgroundColor="{AppThemeBinding Light={StaticResource Gray100}, Dark={StaticResource Gray600}}">
                 <Grid ColumnDefinitions="*, Auto">
                     <Label Grid.Column="0" 
-                           Text="Add skill points modifiers at level 1 for all classes" 
+                           Text="Add skill point modifiers at level 1 for all classes" 
+                           VerticalOptions="Center"
+                           LineBreakMode="WordWrap"/>
+                    <Switch Grid.Column="1" IsToggled="{Binding AddQualificationPointsOnFirstLevelForAllClass}" />
+                </Grid>
+            </Border>
+
+            <Border StrokeShape="RoundRectangle 10" Padding="15" StrokeThickness="0"
+                    BackgroundColor="{AppThemeBinding Light={StaticResource Gray100}, Dark={StaticResource Gray600}}">
+                <Grid ColumnDefinitions="*, Auto">
+                    <Label Grid.Column="0" 
+                           Text="Add mana point modifiers at level 1 for all classes" 
+                           VerticalOptions="Center"
+                           LineBreakMode="WordWrap"/>
+                    <Switch Grid.Column="1" IsToggled="{Binding AddManaPointsOnFirstLevelForAllClass}" />
+                </Grid>
+            </Border>
+
+            <Border StrokeShape="RoundRectangle 10" Padding="15" StrokeThickness="0"
+                    BackgroundColor="{AppThemeBinding Light={StaticResource Gray100}, Dark={StaticResource Gray600}}">
+                <Grid ColumnDefinitions="*, Auto">
+                    <Label Grid.Column="0" 
+                           Text="Add psi point modifiers at level 1 for all classes" 
                            VerticalOptions="Center"
                            LineBreakMode="WordWrap"/>
                     <Switch Grid.Column="1" IsToggled="{Binding AddQualificationPointsOnFirstLevelForAllClass}" />

@@ -94,7 +94,7 @@ public class NastarPaladin : Class, IClass, IHateRangedWeapons
 
     public override bool AddQualificationPointsOnFirstLevel => true;
 
-    public override QualificationList Qualifications =>
+    public override QualificationList Qualifications => BuildQualifications(
     [
         new WeaponUse(),
         new WeaponUse(),
@@ -117,16 +117,16 @@ public class NastarPaladin : Class, IClass, IHateRangedWeapons
         // new Erkölcs(QualificationLevel.Master)
         // new Helyismeret(60%)
         // new Kultúra(QualificationLevel.Master) Saját
-    ];
+    ]);
 
-    public override QualificationList FutureQualifications =>
+    public override QualificationList FutureQualifications => BuildQualifications(
     [
 		// new HárítófegyverHasználat(level: 2)
 		new Craft(Profession.Smith, level: 3),
         new HistoryLore(QualificationLevel.Master, 4),
         new Craft(Profession.Smith, QualificationLevel.Master, 6),
         new WeaponUse(QualificationLevel.Master, 8)
-    ];
+    ]);
 
     public override List<PercentQualification> PercentQualifications => [];
 

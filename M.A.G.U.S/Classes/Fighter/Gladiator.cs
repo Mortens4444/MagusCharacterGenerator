@@ -94,7 +94,7 @@ public class Gladiator : Class, IClass, IJustFight
 
     public override bool AddQualificationPointsOnFirstLevel => true;
 
-    public override QualificationList Qualifications =>
+    public override QualificationList Qualifications => BuildQualifications(
     [
         new WeaponUse(),
         new WeaponUse(),
@@ -106,9 +106,9 @@ public class Gladiator : Class, IClass, IJustFight
         new HeavyArmorWearing(),
         new ShieldUse(),
         new WeaponBreaking()
-    ];
+    ]);
 
-    public override QualificationList FutureQualifications =>
+    public override QualificationList FutureQualifications => BuildQualifications(
     [
         new WeaponUse(level: 2),
         new WeaponUse(level: 4),
@@ -119,7 +119,7 @@ public class Gladiator : Class, IClass, IJustFight
         new WeaponUse(level: 7),
         new ShieldUse(QualificationLevel.Master),
         new WeaponBreaking(QualificationLevel.Master)
-    ];
+    ]);
 
     public override List<PercentQualification> PercentQualifications =>
     [

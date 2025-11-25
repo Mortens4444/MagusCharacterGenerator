@@ -94,7 +94,7 @@ public abstract class Paladin : Class, IClass, IHateRangedWeapons
 
     public override bool AddQualificationPointsOnFirstLevel => true;
 
-    public override QualificationList Qualifications =>
+    public override QualificationList Qualifications => BuildQualifications(
     [
         new WeaponUse(),
         new WeaponUse(),
@@ -113,9 +113,9 @@ public abstract class Paladin : Class, IClass, IHateRangedWeapons
         new Riding(QualificationLevel.Master),
         new SingingAndMakingMusic(),
         new HistoryLore()
-   ];
+    ]);
 
-    public override QualificationList FutureQualifications => [];
+    public override QualificationList FutureQualifications => BuildQualifications([]);
 
     public override List<PercentQualification> PercentQualifications => [];
 

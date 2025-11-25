@@ -78,16 +78,16 @@ public class GuardOfficer : Class, IClass
 
     public override bool AddQualificationPointsOnFirstLevel => false;
 
-    public override QualificationList Qualifications =>
+    public override QualificationList Qualifications => BuildQualifications(
     [
         new WeaponUse(),
         new WeaponUse(),
         new HeavyArmorWearing(),
         new ShieldUse(),
         new Leadership()
-   ];
+    ]);
 
-    public override QualificationList FutureQualifications => [];
+    public override QualificationList FutureQualifications => BuildQualifications([]);
 
     public override List<PercentQualification> PercentQualifications => [];
 

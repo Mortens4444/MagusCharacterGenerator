@@ -23,7 +23,7 @@ namespace M.A.G.U.S.Test
 				Lng = new LanguageLore(Language.Kranich, 3),
 				Class = new ArelPriest(1),
 				Race = new Orc(),
-				Character = new Character("Anuman", new Amund(), new ArelPriest(1))
+				Character = new Character(new Settings(false), "Anuman", new Amund(), new ArelPriest(1))
 			};
 			var anonymousClassJson = ObjectSerializer.GetSerializedString(anonymousClass);
 			var deserializedAnonymousClassJson = ObjectSerializer.LoadContent<dynamic>(anonymousClassJson);
@@ -40,7 +40,7 @@ namespace M.A.G.U.S.Test
 		[Test]
 		public void SerializeAndDeserializeCharacter()
 		{
-			var character = new Character("Mirena", new Human(), new Witch(5));
+			var character = new Character(new Settings(false), "Mirena", new Human(), new Witch(5));
 			var characterJson = ObjectSerializer.GetSerializedString(character);
 			var deserializedCharacter = ObjectSerializer.LoadContent<Character>(characterJson);
 			Assert.That(character.Race.ToString(), Is.EqualTo(deserializedCharacter.Race.ToString()));

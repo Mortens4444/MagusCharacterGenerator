@@ -20,7 +20,7 @@ public class GorvikRanagolPriest : Priest
             [
                 new Backstab()
             ]);
-            return result;
+            return BuildQualifications(result);
         }
     }
 
@@ -35,7 +35,7 @@ public class GorvikRanagolPriest : Priest
                 new Backstab(QualificationLevel.Master, 5),
                 new Spellcasting(QualificationLevel.Master, 6)
             ]);
-            return result;
+            return BuildQualifications(result);
         }
     }
 

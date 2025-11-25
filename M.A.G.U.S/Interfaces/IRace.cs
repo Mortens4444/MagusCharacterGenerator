@@ -12,4 +12,6 @@ public interface IRace : IAbilities
     List<PercentQualification> PercentQualifications { get; }
 
     SpecialQualificationList SpecialQualifications { get; }
+
+    string GenerateCharacterName();
 }

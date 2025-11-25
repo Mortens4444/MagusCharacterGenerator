@@ -23,7 +23,7 @@
     <ApplicationId>com.mortens.MAGUS.Assistant</ApplicationId>
     <!-- Versions -->
     <MajorVersion>1</MajorVersion>
-    <MinorVersion>13</MinorVersion>
+    <MinorVersion>14</MinorVersion>
     <BuildNumber>0</BuildNumber>
     <PatchNumber>0</PatchNumber>
     <FileVersion>$(MajorVersion).$(MinorVersion).$(BuildNumber).$(PatchNumber)</FileVersion>
@@ -88,88 +88,201 @@
     <MauiAsset Include="Resources\Raw\**" LogicalName="%(RecursiveDir)%(Filename)%(Extension)" />
   </ItemGroup>
   <ItemGroup>
+    <MauiAsset Remove="Resources\Raw\bear_growl.wav" />
     <MauiAsset Remove="Resources\Raw\beast.wav" />
     <MauiAsset Remove="Resources\Raw\bird_chirping.wav" />
+    <MauiAsset Remove="Resources\Raw\church_bell.wav" />
     <MauiAsset Remove="Resources\Raw\Credits.txt" />
     <MauiAsset Remove="Resources\Raw\dark_cave.wav" />
     <MauiAsset Remove="Resources\Raw\dark_magic_spell_cast.wav" />
+    <MauiAsset Remove="Resources\Raw\demon.wav" />
     <MauiAsset Remove="Resources\Raw\dice_roll.wav" />
+    <MauiAsset Remove="Resources\Raw\dragon_growl.wav" />
+    <MauiAsset Remove="Resources\Raw\drain_music.wav" />
     <MauiAsset Remove="Resources\Raw\fireball_cast.wav" />
     <MauiAsset Remove="Resources\Raw\fireball_cast_2.wav" />
+    <MauiAsset Remove="Resources\Raw\horn.aiff" />
+    <MauiAsset Remove="Resources\Raw\horn.wav" />
+    <MauiAsset Remove="Resources\Raw\horse.wav" />
+    <MauiAsset Remove="Resources\Raw\man_ouch.wav" />
+    <MauiAsset Remove="Resources\Raw\orc_ouch.wav" />
+    <MauiAsset Remove="Resources\Raw\roar.wav" />
+    <MauiAsset Remove="Resources\Raw\roar_2.mp3" />
+    <MauiAsset Remove="Resources\Raw\roar_3.wav" />
+    <MauiAsset Remove="Resources\Raw\rubbing-metal.wav" />
+    <MauiAsset Remove="Resources\Raw\scream.wav" />
+    <MauiAsset Remove="Resources\Raw\scream_2.mp3" />
+    <MauiAsset Remove="Resources\Raw\scream_3.wav" />
     <MauiAsset Remove="Resources\Raw\spell_cast.wav" />
     <MauiAsset Remove="Resources\Raw\spell_cast_2.wav" />
+    <MauiAsset Remove="Resources\Raw\sword_fight.mp3" />
     <MauiAsset Remove="Resources\Raw\werewolf_howl.wav" />
+    <MauiAsset Remove="Resources\Raw\wolf.mp3" />
     <MauiAsset Remove="Resources\Raw\yeti-roar.wav" />
+    <MauiAsset Remove="Resources\Raw\zombie.wav" />
+    <MauiAsset Remove="Resources\Raw\zombie_2.wav" />
+    <MauiAsset Remove="Resources\Raw\zombie_3.wav" />
+    <MauiAsset Remove="Resources\Raw\zombie_4.wav" />
+    <MauiAsset Remove="Resources\Raw\zombie_eating.mp3" />
   </ItemGroup>
   <ItemGroup>
+    <None Remove="Resources\Images\Bestiary\bat.png" />
     <None Remove="Resources\Images\Bestiary\bear.png" />
+    <None Remove="Resources\Images\Bestiary\crocodile.png" />
     <None Remove="Resources\Images\Bestiary\dragon.png" />
+    <None Remove="Resources\Images\Bestiary\eagle.png" />
     <None Remove="Resources\Images\Bestiary\falcon.png" />
     <None Remove="Resources\Images\Bestiary\giant_spider.png" />
     <None Remove="Resources\Images\Bestiary\goblin.png" />
     <None Remove="Resources\Images\Bestiary\golem.png" />
+    <None Remove="Resources\Images\Bestiary\heavy_armored_hourse.png" />
+    <None Remove="Resources\Images\Bestiary\light_armored_hourse.png" />
     <None Remove="Resources\Images\Bestiary\lizard_wizard.png" />
+    <None Remove="Resources\Images\Bestiary\mummy.png" />
     <None Remove="Resources\Images\Bestiary\orc.png" />
+    <None Remove="Resources\Images\Bestiary\orc_2.png" />
     <None Remove="Resources\Images\Bestiary\panther.png" />
+    <None Remove="Resources\Images\Bestiary\rhyno.png" />
+    <None Remove="Resources\Images\Bestiary\shark.png" />
     <None Remove="Resources\Images\Bestiary\spider.png" />
     <None Remove="Resources\Images\Bestiary\vampire.png" />
+    <None Remove="Resources\Images\Bestiary\war_dog.png" />
     <None Remove="Resources\Images\Bestiary\werewolf.png" />
     <None Remove="Resources\Images\Bestiary\wolf.png" />
     <None Remove="Resources\Images\Bestiary\zombie.png" />
+    <None Remove="Resources\Images\Characters\arel_priest.png" />
+    <None Remove="Resources\Images\Characters\bard.png" />
     <None Remove="Resources\Images\Characters\court_goblin.png" />
     <None Remove="Resources\Images\Characters\court_orc.png" />
+    <None Remove="Resources\Images\Characters\craftsman.png" />
     <None Remove="Resources\Images\Characters\dwarf.png" />
+    <None Remove="Resources\Images\Characters\dwarf_2.png" />
     <None Remove="Resources\Images\Characters\elf.png" />
     <None Remove="Resources\Images\Characters\fire_wizard.png" />
+    <None Remove="Resources\Images\Characters\freenhar.png" />
+    <None Remove="Resources\Images\Characters\gladiator.png" />
+    <None Remove="Resources\Images\Characters\gladiator_2.png" />
+    <None Remove="Resources\Images\Characters\guard.png" />
     <None Remove="Resources\Images\Characters\half_elf.png" />
     <None Remove="Resources\Images\Characters\half_elf_2.png" />
+    <None Remove="Resources\Images\Characters\headhunter.png" />
+    <None Remove="Resources\Images\Characters\healer.png" />
     <None Remove="Resources\Images\Characters\khal.png" />
+    <None Remove="Resources\Images\Characters\khal_2.png" />
+    <None Remove="Resources\Images\Characters\knight.png" />
+    <None Remove="Resources\Images\Characters\merchant.png" />
+    <None Remove="Resources\Images\Characters\nobel.png" />
+    <None Remove="Resources\Images\Characters\peasant.png" />
     <None Remove="Resources\Images\Characters\priest.png" />
+    <None Remove="Resources\Images\Characters\ranagol_paladin.png" />
+    <None Remove="Resources\Images\Characters\reptilian.png" />
+    <None Remove="Resources\Images\Characters\slan.png" />
+    <None Remove="Resources\Images\Characters\slan_2.png" />
+    <None Remove="Resources\Images\Characters\soldier.png" />
+    <None Remove="Resources\Images\Characters\thief.png" />
     <None Remove="Resources\Images\Characters\warlock.png" />
     <None Remove="Resources\Images\Characters\wier.png" />
+    <None Remove="Resources\Images\Characters\wiseman.png" />
     <None Remove="Resources\Images\Characters\witch.png" />
+    <None Remove="Resources\Images\Characters\witch_2.png" />
     <None Remove="Resources\Images\Characters\wizard.png" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Resources\Images\Bestiary\bat.png" />
     <EmbeddedResource Include="Resources\Images\Bestiary\bear.png" />
+    <EmbeddedResource Include="Resources\Images\Bestiary\crocodile.png" />
     <EmbeddedResource Include="Resources\Images\Bestiary\dragon.png" />
+    <EmbeddedResource Include="Resources\Images\Bestiary\eagle.png" />
     <EmbeddedResource Include="Resources\Images\Bestiary\falcon.png" />
     <EmbeddedResource Include="Resources\Images\Bestiary\giant_spider.png" />
     <EmbeddedResource Include="Resources\Images\Bestiary\goblin.png" />
     <EmbeddedResource Include="Resources\Images\Bestiary\golem.png" />
+    <EmbeddedResource Include="Resources\Images\Bestiary\heavy_armored_hourse.png" />
+    <EmbeddedResource Include="Resources\Images\Bestiary\light_armored_hourse.png" />
     <EmbeddedResource Include="Resources\Images\Bestiary\lizard_wizard.png" />
+    <EmbeddedResource Include="Resources\Images\Bestiary\mummy.png" />
     <EmbeddedResource Include="Resources\Images\Bestiary\orc.png" />
+    <EmbeddedResource Include="Resources\Images\Bestiary\orc_2.png" />
     <EmbeddedResource Include="Resources\Images\Bestiary\panther.png" />
+    <EmbeddedResource Include="Resources\Images\Bestiary\rhyno.png" />
+    <EmbeddedResource Include="Resources\Images\Bestiary\shark.png" />
     <EmbeddedResource Include="Resources\Images\Bestiary\spider.png" />
     <EmbeddedResource Include="Resources\Images\Bestiary\vampire.png" />
+    <EmbeddedResource Include="Resources\Images\Bestiary\war_dog.png" />
     <EmbeddedResource Include="Resources\Images\Bestiary\werewolf.png" />
     <EmbeddedResource Include="Resources\Images\Bestiary\wolf.png" />
     <EmbeddedResource Include="Resources\Images\Bestiary\zombie.png" />
+    <EmbeddedResource Include="Resources\Images\Characters\arel_priest.png" />
+    <EmbeddedResource Include="Resources\Images\Characters\bard.png" />
     <EmbeddedResource Include="Resources\Images\Characters\court_goblin.png" />
     <EmbeddedResource Include="Resources\Images\Characters\court_orc.png" />
+    <EmbeddedResource Include="Resources\Images\Characters\craftsman.png" />
     <EmbeddedResource Include="Resources\Images\Characters\dwarf.png" />
+    <EmbeddedResource Include="Resources\Images\Characters\dwarf_2.png" />
     <EmbeddedResource Include="Resources\Images\Characters\elf.png" />
     <EmbeddedResource Include="Resources\Images\Characters\fire_wizard.png" />
+    <EmbeddedResource Include="Resources\Images\Characters\freenhar.png" />
+    <EmbeddedResource Include="Resources\Images\Characters\gladiator.png" />
+    <EmbeddedResource Include="Resources\Images\Characters\gladiator_2.png" />
+    <EmbeddedResource Include="Resources\Images\Characters\guard.png" />
     <EmbeddedResource Include="Resources\Images\Characters\half_elf.png" />
     <EmbeddedResource Include="Resources\Images\Characters\half_elf_2.png" />
+    <EmbeddedResource Include="Resources\Images\Characters\headhunter.png" />
+    <EmbeddedResource Include="Resources\Images\Characters\healer.png" />
     <EmbeddedResource Include="Resources\Images\Characters\khal.png" />
+    <EmbeddedResource Include="Resources\Images\Characters\khal_2.png" />
+    <EmbeddedResource Include="Resources\Images\Characters\knight.png" />
+    <EmbeddedResource Include="Resources\Images\Characters\merchant.png" />
+    <EmbeddedResource Include="Resources\Images\Characters\nobel.png" />
+    <EmbeddedResource Include="Resources\Images\Characters\peasant.png" />
     <EmbeddedResource Include="Resources\Images\Characters\priest.png" />
+    <EmbeddedResource Include="Resources\Images\Characters\ranagol_paladin.png" />
+    <EmbeddedResource Include="Resources\Images\Characters\reptilian.png" />
+    <EmbeddedResource Include="Resources\Images\Characters\slan.png" />
+    <EmbeddedResource Include="Resources\Images\Characters\slan_2.png" />
+    <EmbeddedResource Include="Resources\Images\Characters\soldier.png" />
+    <EmbeddedResource Include="Resources\Images\Characters\thief.png" />
     <EmbeddedResource Include="Resources\Images\Characters\warlock.png" />
     <EmbeddedResource Include="Resources\Images\Characters\wier.png" />
+    <EmbeddedResource Include="Resources\Images\Characters\wiseman.png" />
     <EmbeddedResource Include="Resources\Images\Characters\witch.png" />
+    <EmbeddedResource Include="Resources\Images\Characters\witch_2.png" />
     <EmbeddedResource Include="Resources\Images\Characters\wizard.png" />
+    <EmbeddedResource Include="Resources\Raw\bear_growl.wav" />
     <EmbeddedResource Include="Resources\Raw\bird_chirping.wav" />
+    <EmbeddedResource Include="Resources\Raw\church_bell.wav" />
     <EmbeddedResource Include="Resources\Raw\Credits.txt" />
+    <EmbeddedResource Include="Resources\Raw\demon.wav" />
+    <EmbeddedResource Include="Resources\Raw\dragon_growl.wav" />
+    <EmbeddedResource Include="Resources\Raw\drain_music.wav" />
     <EmbeddedResource Include="Resources\Raw\fireball_cast.wav" />
+    <EmbeddedResource Include="Resources\Raw\horn.wav" />
+    <EmbeddedResource Include="Resources\Raw\horse.wav" />
+    <EmbeddedResource Include="Resources\Raw\man_ouch.wav" />
+    <EmbeddedResource Include="Resources\Raw\orc_ouch.wav" />
+    <EmbeddedResource Include="Resources\Raw\roar.wav" />
+    <EmbeddedResource Include="Resources\Raw\roar_2.mp3" />
+    <EmbeddedResource Include="Resources\Raw\roar_3.wav" />
+    <EmbeddedResource Include="Resources\Raw\rubbing-metal.wav" />
+    <EmbeddedResource Include="Resources\Raw\scream.wav" />
+    <EmbeddedResource Include="Resources\Raw\scream_2.mp3" />
+    <EmbeddedResource Include="Resources\Raw\scream_3.wav" />
     <EmbeddedResource Include="Resources\Raw\spell_cast_2.wav" />
     <EmbeddedResource Include="Resources\Raw\spell_cast.wav" />
     <EmbeddedResource Include="Resources\Raw\dark_magic_spell_cast.wav" />
     <EmbeddedResource Include="Resources\Raw\fireball_cast_2.wav" />
     <EmbeddedResource Include="Resources\Raw\beast.wav" />
+    <EmbeddedResource Include="Resources\Raw\sword_fight.mp3" />
+    <EmbeddedResource Include="Resources\Raw\wolf.mp3" />
     <EmbeddedResource Include="Resources\Raw\yeti-roar.wav" />
     <EmbeddedResource Include="Resources\Raw\werewolf_howl.wav" />
     <EmbeddedResource Include="Resources\Raw\dark_cave.wav" />
     <EmbeddedResource Include="Resources\Raw\dice_roll.wav" />
+    <EmbeddedResource Include="Resources\Raw\zombie.wav" />
+    <EmbeddedResource Include="Resources\Raw\zombie_2.wav" />
+    <EmbeddedResource Include="Resources\Raw\zombie_3.wav" />
+    <EmbeddedResource Include="Resources\Raw\zombie_4.wav" />
+    <EmbeddedResource Include="Resources\Raw\zombie_eating.mp3" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.Maui.Controls" Version="9.0.120" />
@@ -177,7 +290,7 @@
     <PackageReference Include="Microsoft.Maui.Graphics" Version="9.0.120" />
     <PackageReference Include="Microsoft.Maui.Graphics.Skia" Version="9.0.120" />
     <PackageReference Include="Mtf.Maui.Controls" Version="2.0.40" />
-    <PackageReference Include="Mtf.MAUI.LanguageService" Version="1.0.51" />
+    <PackageReference Include="Mtf.MAUI.LanguageService" Version="1.0.53" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.4" />
     <PackageReference Include="Plugin.Maui.Audio" Version="4.0.0" />
     <PackageReference Include="sqlite-net-pcl" Version="1.9.172" />

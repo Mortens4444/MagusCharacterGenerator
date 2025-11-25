@@ -1,5 +1,7 @@
 ﻿using M.A.G.U.S.Qualifications;
 using M.A.G.U.S.Qualifications.Specialities;
+using Mtf.Extensions.Services;
+using System.Text;
 
 namespace M.A.G.U.S.Races;
 
@@ -27,6 +29,13 @@ public class CourtGoblin : Race
         new UndergroundMasters(5),
         new KeenSmell(3)
     ];
+
+    public override string GenerateCharacterName()
+    {
+        var consonants = new[] { 'k', 'g', 't', 'z', 's', 'b', 'p', 'd' };
+        var vowels = new[] { 'a', 'e', 'i' };
+        return GenerateCharacterName(consonants, vowels);
+    }
 
     public override string Name => "Court goblin";
 }

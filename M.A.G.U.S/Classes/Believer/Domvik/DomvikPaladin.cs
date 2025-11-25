@@ -21,7 +21,7 @@ public class DomvikPaladin : Paladin
                 new AncientTongueLore(AntientLanguage.LinguaDomini),
                 new Healing(),
             ]);
-            return result;
+            return BuildQualifications(result);
         }
     }
 
@@ -34,7 +34,7 @@ public class DomvikPaladin : Paladin
             [
                 new AncientTongueLore(AntientLanguage.LinguaDomini, QualificationLevel.Master, 4),
             ]);
-            return result;
+            return BuildQualifications(result);
         }
     }
 

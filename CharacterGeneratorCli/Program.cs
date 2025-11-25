@@ -26,7 +26,7 @@ class Program
 
 		if (String.IsNullOrEmpty(characterGenerationDto.Name))
 		{
-			characterGenerationDto.Name = NameGenerator.Get().ToName();
+			characterGenerationDto.Name = NameGenerator.Get(null).ToName();
 		}
 
 		var character = Generate(characterGenerationDto);

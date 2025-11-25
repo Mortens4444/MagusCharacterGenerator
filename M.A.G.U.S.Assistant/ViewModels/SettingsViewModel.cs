@@ -1,88 +1,91 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
-using M.A.G.U.S.Assistant.Database.Repositories;
+using M.A.G.U.S.Assistant.Services;
 
 namespace M.A.G.U.S.Assistant.ViewModels;
 
 internal partial class SettingsViewModel : ObservableObject
 {
-    private readonly SettingsRepository settingsRepository;
+    private readonly SettingsService settingsService;
 
-    private bool addQualificationPointsOnFirstLevelForAllClass = true;
-    private bool addFightValueOnFirstLevelForAllClass = true;
-    private bool addPainToleranceOnFirstLevelForAllClass = true;
-
-    private const string KeyFightValue = "Setting_FightValueFirstLevel";
-    private const string KeyPainTolerance = "Setting_PainToleranceFirstLevel";
-    private const string KeyQualification = "Setting_QualificationPointsFirstLevel";
-
-    public SettingsViewModel(SettingsRepository settingsRepository)
+    public SettingsViewModel(SettingsService settingsService)
     {
-        this.settingsRepository = settingsRepository;
-        Task.Run(LoadSettingsAsync);
+        this.settingsService = settingsService;
+        Task.Run(async () =>
+        {
+            await settingsService.LoadAsync().ConfigureAwait(false);
+            MainThread.BeginInvokeOnMainThread(() =>
+            {
+                OnPropertyChanged(nameof(AddFightValueOnFirstLevelForAllClass));
+                OnPropertyChanged(nameof(AddPainToleranceOnFirstLevelForAllClass));
+                OnPropertyChanged(nameof(AddQualificationPointsOnFirstLevelForAllClass));
+                OnPropertyChanged(nameof(AddManaPointsOnFirstLevelForAllClass));
+                OnPropertyChanged(nameof(AddPsiPointsOnFirstLevelForAllClass));
+            });
+        });
     }
 
     public bool AddFightValueOnFirstLevelForAllClass
     {
-        get => addFightValueOnFirstLevelForAllClass;
+        get => settingsService.AddFightValueOnFirstLevelForAllClass;
         set
         {
-            if (SetProperty(ref addFightValueOnFirstLevelForAllClass, value))
+            if (settingsService.AddFightValueOnFirstLevelForAllClass != value)
             {
-                OnAddFightValueOnFirstLevelForAllClassChanged(value);
+                settingsService.SaveAddFightValueAsync(value);
+                OnPropertyChanged();
             }
         }
-    }
-
-    public void OnAddFightValueOnFirstLevelForAllClassChanged(bool value)
-    {
-        _ = settingsRepository.SaveBoolSettingAsync(KeyFightValue, value);
     }
 
     public bool AddPainToleranceOnFirstLevelForAllClass
     {
-        get => addPainToleranceOnFirstLevelForAllClass;
+        get => settingsService.AddPainToleranceOnFirstLevelForAllClass;
         set
         {
-            if (SetProperty(ref addPainToleranceOnFirstLevelForAllClass, value))
+            if (settingsService.AddPainToleranceOnFirstLevelForAllClass != value)
             {
-                OnAddPainToleranceOnFirstLevelForAllClassChanged(value);
+                settingsService.SaveAddPainToleranceAsync(value);
+                OnPropertyChanged();
             }
         }
-    }
-
-    public void OnAddPainToleranceOnFirstLevelForAllClassChanged(bool value)
-    {
-        _ = settingsRepository.SaveBoolSettingAsync(KeyPainTolerance, value);
     }
 
     public bool AddQualificationPointsOnFirstLevelForAllClass
     {
-        get => addQualificationPointsOnFirstLevelForAllClass;
+        get => settingsService.AddQualificationPointsOnFirstLevelForAllClass;
         set
         {
-            if (SetProperty(ref addQualificationPointsOnFirstLevelForAllClass, value))
+            if (settingsService.AddQualificationPointsOnFirstLevelForAllClass != value)
             {
-                OnAddQualificationPointsOnFirstLevelForAllClassChanged(value);
+                settingsService.SaveAddQualificationAsync(value);
+                OnPropertyChanged();
             }
         }
     }
 
-    public void OnAddQualificationPointsOnFirstLevelForAllClassChanged(bool value)
+    public bool AddManaPointsOnFirstLevelForAllClass
     {
-        _ = settingsRepository.SaveBoolSettingAsync(KeyQualification, value);
+        get => settingsService.AddManaPointsOnFirstLevelForAllClass;
+        set
+        {
+            if (settingsService.AddManaPointsOnFirstLevelForAllClass != value)
+            {
+                settingsService.SaveAddManaAsync(value);
+                OnPropertyChanged();
+            }
+        }
     }
 
-    private async Task LoadSettingsAsync()
+    public bool AddPsiPointsOnFirstLevelForAllClass
     {
-        var fightVal = await settingsRepository.GetBoolSettingAsync(KeyFightValue, true).ConfigureAwait(false);
-        var painVal = await settingsRepository.GetBoolSettingAsync(KeyPainTolerance, true).ConfigureAwait(false);
-        var qualVal = await settingsRepository.GetBoolSettingAsync(KeyQualification, true).ConfigureAwait(false);
-
-        MainThread.BeginInvokeOnMainThread(() =>
+        get => settingsService.AddPsiPointsOnFirstLevelForAllClass;
+        set
         {
-            AddFightValueOnFirstLevelForAllClass = fightVal;
-            AddPainToleranceOnFirstLevelForAllClass = painVal;
-            AddQualificationPointsOnFirstLevelForAllClass = qualVal;
-        });
+            if (settingsService.AddPsiPointsOnFirstLevelForAllClass != value)
+            {
+                settingsService.SaveAddPsiAsync(value);
+                OnPropertyChanged();
+            }
+        }
     }
 }

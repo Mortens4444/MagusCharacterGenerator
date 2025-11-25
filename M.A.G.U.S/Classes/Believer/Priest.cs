@@ -96,7 +96,7 @@ public abstract class Priest : Class, IClass, ILikeMagic
 
     public override bool AddQualificationPointsOnFirstLevel => true;
 
-    public override QualificationList Qualifications =>
+    public override QualificationList Qualifications => BuildQualifications(
     [
         new WeaponUse(),
         new PsiPyarron(QualificationLevel.Master),
@@ -106,9 +106,9 @@ public abstract class Priest : Class, IClass, ILikeMagic
         new ReligionLore(QualificationLevel.Master),
         new HistoryLore(QualificationLevel.Master),
         new SingingAndMakingMusic()
-   ];
+    ]);
 
-    public override QualificationList FutureQualifications => [];
+    public override QualificationList FutureQualifications => BuildQualifications([]);
 
     public override List<PercentQualification> PercentQualifications => [];
 

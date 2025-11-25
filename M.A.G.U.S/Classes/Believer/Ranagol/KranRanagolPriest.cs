@@ -23,7 +23,7 @@ public class KranRanagolPriest : Priest
                 new Spellcasting(QualificationLevel.Master, 6),
                 new AncientTongueLore(AntientLanguage.Aquir, QualificationLevel.Master, 11)
             ]);
-            return result;
+            return BuildQualifications(result);
         }
     }
 

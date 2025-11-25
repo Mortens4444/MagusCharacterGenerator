@@ -2,6 +2,8 @@
 using M.A.G.U.S.Qualifications;
 using M.A.G.U.S.Qualifications.Percentages;
 using M.A.G.U.S.Qualifications.Specialities;
+using Mtf.Extensions.Services;
+using System.Text;
 
 namespace M.A.G.U.S.Races;
 
@@ -32,6 +34,26 @@ public class NightElf : Race, IUseRangedWeapons
         new Climbing(10),
         new Hiding(10)
     ];
+
+    public override string GenerateCharacterName()
+    {
+        var start = new[]
+        {
+            "Ae", "Ela", "Iri", "Lia", "Sera", "Eli", "Ari", "Nae", "Yri", "Lora"
+        };
+
+        var middle = new[]
+        {
+            "li", "ne", "ri", "ya", "el", "ien", "ara", "ira", "the"
+        };
+
+        var end = new[]
+        {
+            "el", "iel", "ion", "ir", "iel", "wyn", "riel", "anor"
+        };
+
+        return GenerateCharacterName(start, middle, end);
+    }
 
     public override string Name => "Night-elf";
 }

@@ -95,7 +95,7 @@ public class Blademaster : Class, IClass, IJustFight
 
     public override bool AddQualificationPointsOnFirstLevel => true;
 
-    public override QualificationList Qualifications =>
+    public override QualificationList Qualifications => BuildQualifications(
     [
         new PsiSlanWay(),
         new WeaponUse(),
@@ -110,15 +110,15 @@ public class Blademaster : Class, IClass, IJustFight
         new Riding(),
         new Swimming(),
         new Running()
-   ];
+    ]);
 
-    public override QualificationList FutureQualifications =>
+    public override QualificationList FutureQualifications => BuildQualifications(
     [
         new Riding(QualificationLevel.Master, 3),
         new WeaponBreaking(QualificationLevel.Master, 4),
         new BlindFighting(QualificationLevel.Master, 5),
         new WeaponUse(QualificationLevel.Master, 5)
-    ];
+    ]);
 
     public override List<PercentQualification> PercentQualifications =>
     [

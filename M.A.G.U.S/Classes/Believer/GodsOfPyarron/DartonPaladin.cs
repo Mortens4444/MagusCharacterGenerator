@@ -27,7 +27,7 @@ public class DartonPaladin : Paladin
                 new TavernBrawling(),
                 new CardSharping()
             ]);
-            return result;
+            return BuildQualifications(result);
         }
     }
 
@@ -44,7 +44,7 @@ public class DartonPaladin : Paladin
                 new WeaponUse(QualificationLevel.Master, 4),
                 new Backstab(level: 7)
             ]);
-            return result;
+            return BuildQualifications(result);
         }
     }
 

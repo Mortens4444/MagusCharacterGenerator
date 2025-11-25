@@ -94,9 +94,9 @@ public class Soldier : Class, IClass
         new ShieldUse(),
         new Leadership(),
         new ReadingAndWriting()
-   ];
+    ];
 
-    public override QualificationList FutureQualifications => [];
+    public override QualificationList FutureQualifications => BuildQualifications([]);
 
     public override List<PercentQualification> PercentQualifications => [];
 

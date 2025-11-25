@@ -1,4 +1,5 @@
 ﻿using M.A.G.U.S.GameSystem;
+using M.A.G.U.S.GameSystem.Psi;
 using M.A.G.U.S.Interfaces;
 using M.A.G.U.S.Qualifications;
 
@@ -81,4 +82,23 @@ public abstract class Class(byte level) : IClass
     public ulong ExperiencePoints { get; }
 
     public abstract byte GetPainToleranceModifier();
+
+    protected QualificationList BuildQualifications(IEnumerable<Qualification> qualifications)
+    {
+        var result = new QualificationList();
+
+        foreach (var qualification in qualifications)
+        {
+            if (qualification is IPsi && Intelligence > 11 && Willpower > 11 && Astral > 11)
+            {
+                result.Add(qualification);
+            }
+            else
+            {
+                result.Add(qualification);
+            }
+        }
+
+        return result;
+    }
 }

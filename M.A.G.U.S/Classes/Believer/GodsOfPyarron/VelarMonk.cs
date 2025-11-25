@@ -95,7 +95,7 @@ public class VelarMonk : Class, IClass, ILikeMagic
 
     public override bool AddQualificationPointsOnFirstLevel => true;
 
-    public override QualificationList Qualifications =>
+    public override QualificationList Qualifications => BuildQualifications(
     [
         new WeaponUse(),
         new ReadingAndWriting(),
@@ -110,9 +110,9 @@ public class VelarMonk : Class, IClass, ILikeMagic
        //new Kínzás elviselése(QualificationLevel.Master),
        //new Kultúra (QualificationLevel.Master) //Saját
        //new Helyismeret 60%
-   ];
+    ]);
 
-    public override QualificationList FutureQualifications =>
+    public override QualificationList FutureQualifications => BuildQualifications(
     [
         new Physiology(level: 4),
         new PoisoningAndNeutralization(level: 4),
@@ -121,7 +121,7 @@ public class VelarMonk : Class, IClass, ILikeMagic
         new AncientTongueLore(QualificationLevel.Master, 6),
         new Healing(QualificationLevel.Master, 7),
         new PoisoningAndNeutralization(QualificationLevel.Master, 8)
-    ];
+    ]);
 
     public override List<PercentQualification> PercentQualifications => [];
 

@@ -1,4 +1,7 @@
 ﻿using M.A.G.U.S.Assistant.Models;
+using M.A.G.U.S.Utils;
+using Mtf.LanguageService;
+
 #if ANDROID
 using Plugin.Maui.Audio;
 #endif
@@ -41,7 +44,11 @@ internal class SoundViewModel : INotifyPropertyChanged
         get => isPlaying;
         private set
         {
-            if (isPlaying == value) return;
+            if (isPlaying == value)
+            {
+                return;
+            }
+
             isPlaying = value;
             OnPropertyChanged(nameof(IsPlaying));
             OnPropertyChanged(nameof(CanPlay));
@@ -56,7 +63,11 @@ internal class SoundViewModel : INotifyPropertyChanged
         get => volume;
         set
         {
-            if (Math.Abs(volume - value) < 0.001) return;
+            if (Math.Abs(volume - value) < 0.001)
+            {
+                return;
+            }
+
             volume = value;
             OnPropertyChanged(nameof(Volume));
 #if ANDROID
@@ -71,7 +82,11 @@ internal class SoundViewModel : INotifyPropertyChanged
         get => searchText;
         set
         {
-            if (searchText == value) return;
+            if (searchText == value)
+            {
+                return;
+            }
+
             searchText = value ?? String.Empty;
             OnPropertyChanged(nameof(SearchText));
             ApplyFilter();
@@ -102,16 +117,20 @@ internal class SoundViewModel : INotifyPropertyChanged
         try
         {
             var asm = Assembly.GetExecutingAssembly();
-            var names = asm.GetManifestResourceNames()
+            var sounds = asm.GetManifestResourceNames()
                 .Where(n => n.Contains(".Resources.Raw.", StringComparison.OrdinalIgnoreCase) &&
-                    (n.EndsWith(".wav", StringComparison.OrdinalIgnoreCase)
-                    || n.EndsWith(".mp3", StringComparison.OrdinalIgnoreCase)))
-                .OrderBy(n => n);
+                    (n.EndsWith(".wav", StringComparison.OrdinalIgnoreCase) ||
+                    n.EndsWith(".mp3", StringComparison.OrdinalIgnoreCase)))
+                .Select(name =>
+                {
+                    var display = name.Split('.')[^2];
+                    return new SoundItem { ResourceId = name, DisplayName = Lng.Elem(display.ToName()) };
+                })
+                .OrderBy(s => s.DisplayName);
 
-            foreach (var name in names)
+            foreach (var sound in sounds)
             {
-                var display = name.Split('.')[^2];
-                allSounds.Add(new SoundItem { ResourceId = name, DisplayName = display });
+                allSounds.Add(sound);
             }
         }
         catch
@@ -122,15 +141,14 @@ internal class SoundViewModel : INotifyPropertyChanged
 
     private void ApplyFilter()
     {
-        var q = (SearchText ?? String.Empty).Trim();
-        var filtered = string.IsNullOrEmpty(q)
-            ? allSounds
-            : new ObservableCollection<SoundItem>(allSounds.Where(s => s.DisplayName.Contains(q, StringComparison.OrdinalIgnoreCase)));
+        var queryText = (SearchText ?? String.Empty).Trim();
+        var filteredSounds = String.IsNullOrEmpty(queryText) ? allSounds
+            : new ObservableCollection<SoundItem>(allSounds.Where(s => s.DisplayName.Contains(queryText, StringComparison.OrdinalIgnoreCase)));
 
         FilteredSounds.Clear();
-        foreach (var it in filtered)
+        foreach (var filteredSound in filteredSounds)
         {
-            FilteredSounds.Add(it);
+            FilteredSounds.Add(filteredSound);
         }
 
         OnPropertyChanged(nameof(FilteredSounds));

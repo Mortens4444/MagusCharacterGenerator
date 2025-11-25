@@ -93,20 +93,20 @@ public class Warrior : Class, IClass, IJustFight
 
     public override bool AddQualificationPointsOnFirstLevel => true;
 
-    public override QualificationList Qualifications =>
+    public override QualificationList Qualifications => BuildQualifications(
     [
         new WeaponUse(),
-            new WeaponUse(),
-            new WeaponUse(),
-            new Riding(),
-            new Swimming(),
-            new Running()
-    ];
+        new WeaponUse(),
+        new WeaponUse(),
+        new Riding(),
+        new Swimming(),
+        new Running()
+    ]);
 
-    public override QualificationList FutureQualifications =>
+    public override QualificationList FutureQualifications => BuildQualifications(
     [
         new Leadership(level: 6)
-    ];
+    ]);
 
     public override List<PercentQualification> PercentQualifications =>
     [

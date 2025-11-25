@@ -1,5 +1,7 @@
 ﻿using M.A.G.U.S.Qualifications;
 using M.A.G.U.S.Qualifications.Specialities;
+using Mtf.Extensions.Services;
+using System.Text;
 
 namespace M.A.G.U.S.Races;
 
@@ -28,6 +30,13 @@ public class HalfOrc : Race
         new UndergroundMasters(10),
         new KeenSmell(3)
     ];
+
+    public override string GenerateCharacterName()
+    {
+        var consonants = new[] { 'k', 'g', 'r', 'h', 's' };
+        var vowels = new[] { 'a', 'o', 'u' };
+        return GenerateCharacterName(consonants, vowels);
+    }
 
     public override string Name => "Half-orc";
 }

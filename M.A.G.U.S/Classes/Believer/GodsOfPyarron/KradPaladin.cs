@@ -29,7 +29,7 @@ public class KradPaladin : Paladin
                 new Cartography(),
                 new Swimming()
             ]);
-            return result;
+            return BuildQualifications(result);
         }
     }
 
@@ -43,7 +43,7 @@ public class KradPaladin : Paladin
                 new LegendLore(QualificationLevel.Master, 5),
                 new HistoryLore(QualificationLevel.Master, 5),
             ]);
-            return result;
+            return BuildQualifications(result);
         }
     }
 

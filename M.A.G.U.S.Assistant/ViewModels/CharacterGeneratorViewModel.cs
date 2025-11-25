@@ -2,6 +2,7 @@
 using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.Messaging;
 using M.A.G.U.S.Assistant.Messages;
+using M.A.G.U.S.Assistant.Services;
 using M.A.G.U.S.GameSystem;
 using M.A.G.U.S.Interfaces;
 using M.A.G.U.S.Races;
@@ -16,12 +17,15 @@ namespace M.A.G.U.S.Assistant.ViewModels;
 [SupportedOSPlatform("windows10.0.17763.0")]
 internal partial class CharacterGeneratorViewModel : ObservableObject
 {
+    private readonly SettingsService settingsService;
+
     private Character character;
     private byte baseClassLevel = 1;
 
-    public CharacterGeneratorViewModel()
+    public CharacterGeneratorViewModel(SettingsService settingsService)
     {
-        character = new Character();
+        this.settingsService = settingsService;
+        character = new Character(settingsService);
 
         LoadAvailableTypes();
         SelectedRace = AvailableRaces.FirstOrDefault();
@@ -104,7 +108,7 @@ internal partial class CharacterGeneratorViewModel : ObservableObject
 
         try
         {
-            Character = new Character(NameGenerator.Get().ToName(), selectedRace, instanceClass);
+            Character = new Character(settingsService, NameGenerator.Get(selectedRace), selectedRace, instanceClass);
             Character.LevelUp();
         }
         catch (Exception ex)
@@ -120,7 +124,7 @@ internal partial class CharacterGeneratorViewModel : ObservableObject
         {
             GenerateCharacter();
         }
-        Character.Name = NameGenerator.Get().ToName();
+        Character.Name = NameGenerator.Get(Character.Race).ToName();
     }
 
     private void LoadAvailableTypes()

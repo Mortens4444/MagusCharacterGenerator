@@ -1,5 +1,6 @@
 ﻿using M.A.G.U.S.GameSystem.Psi;
 using M.A.G.U.S.GameSystem.Qualifications;
+using M.A.G.U.S.Interfaces;
 using M.A.G.U.S.Qualifications.Specialities;
 using M.A.G.U.S.Utils;
 
@@ -7,63 +8,109 @@ namespace M.A.G.U.S.GameSystem;
 
 public static class PsiPoints
 {
-    public static PsiAttributes Calculate(Character character)
+    public const byte KyrModifier = 6;
+    public const byte SlanModifier = 5;
+    public const byte PyarronMasterModifier = 4;
+    public const byte PyarronBaseModifier = 3;
+
+    public static PsiAttributes Calculate(Character character, ISettings settings)
     {
-        var kyrLore = character.Race.SpecialQualifications.GetSpeciality<KyrLore>();
-        var level = character.BaseClass.Level;
-        ushort psiPoints = 0;
-        byte psiPointsModifier = 0;
+        var currentLevel = character.BaseClass.Level;
+        ushort totalPsiPoints = 0;
 
-        var psi = character.Qualifications.FirstOrDefault(qualification => qualification is IPsi) as IPsi;
-        if (psi != null)
+        var allPsiSources = character.Qualifications.Concat(character.BaseClass.FutureQualifications)
+                                                    .OfType<IPsi>();
+
+        var timeline = new List<PsiEvent>();
+        foreach (var psi in allPsiSources)
         {
-            psiPoints += (ushort)MathHelper.GetAboveAverageValue(character.Intelligence);
-            if (kyrLore != null)
+            if (psi.BaseQualificationLevel > 0 && psi.BaseQualificationLevel <= currentLevel)
             {
-                psiPoints += level;
-            }
-
-            if (psi.PsiKind == PsiKind.Kyr)
-            {
-                psiPointsModifier = PsiUtils.KyrModifier;
-                psiPoints += PsiUtils.GetPsiPoints(PsiUtils.KyrModifier, level);
-            }
-            else if (psi.PsiKind == PsiKind.Slan)
-            {
-                psiPointsModifier = PsiUtils.SlanModifier;
-                psiPoints += PsiUtils.GetPsiPoints(PsiUtils.SlanModifier, level);
-
-            }
-            else if (psi.QualificationLevel == QualificationLevel.Master)
-            {
-                psiPointsModifier = PsiUtils.PyarronMasterModifier;
-
-                var basePsiPoints = PsiUtils.GetPsiPoints(PsiUtils.PyarronBaseModifier, psi.MasterQualificationLevel, psi.BaseQualificationLevel);
-                psiPoints += basePsiPoints;
-
-                var masterPsiPoints = basePsiPoints == 0 ?
-                    PsiUtils.GetPsiPoints(PsiUtils.PyarronMasterModifier, level, psi.MasterQualificationLevel) :
-                    PsiUtils.GetPsiPoints(PsiUtils.PyarronMasterModifier, level - psi.MasterQualificationLevel);
-                psiPoints += masterPsiPoints;
-
-                if ((basePsiPoints > 0) && (masterPsiPoints > 0))
+                timeline.Add(new PsiEvent
                 {
-                    // In this case the AdditionalPsiBase added two times.
-                    psiPoints -= PsiUtils.AdditionalPsiBase;
-                }
+                    Level = psi.BaseQualificationLevel,
+                    Modifier = GetModifier(psi.PsiKind, QualificationLevel.Base),
+                    SourceSkill = psi
+                });
             }
-            else
+
+            if (psi.MasterQualificationLevel > 0 && psi.MasterQualificationLevel <= currentLevel)
             {
-                psiPointsModifier = PsiUtils.PyarronBaseModifier;
-                psiPoints += PsiUtils.GetPsiPoints(PsiUtils.PyarronBaseModifier, level, psi.BaseQualificationLevel);
+                timeline.Add(new PsiEvent
+                {
+                    Level = psi.MasterQualificationLevel,
+                    Modifier = GetModifier(psi.PsiKind, QualificationLevel.Master),
+                    SourceSkill = psi
+                });
             }
         }
 
+        if (!timeline.Any())
+        {
+            return new PsiAttributes { Psi = null, PsiPoints = 0, PsiPointsModifier = 0 };
+        }
+
+        totalPsiPoints += (ushort)MathHelper.GetAboveAverageValue(character.Intelligence);
+
+        var kyrLore = character.Race.SpecialQualifications.GetSpeciality<KyrLore>();
+        if (kyrLore != null)
+        {
+            totalPsiPoints += currentLevel;
+        }
+
+        bool isBasePsiInitialized = false;
+        byte currentBestModifier = 0;
+
+        for (byte lvl = 1; lvl <= currentLevel; lvl++)
+        {
+            var activeEvents = timeline.Where(e => e.Level <= lvl).ToList();
+            if (!activeEvents.Any())
+            {
+                continue;
+            }
+
+            byte maxModifierAtLevel = activeEvents.Max(e => e.Modifier);
+            currentBestModifier = maxModifierAtLevel;
+            if (maxModifierAtLevel > 0)
+            {
+                if (!isBasePsiInitialized)
+                {
+                    totalPsiPoints += (ushort)(maxModifierAtLevel + 1);
+                    isBasePsiInitialized = true;
+                }
+
+                if (lvl > 1 || settings.AddPsiPointsOnFirstLevelForAllClass)
+                {
+                    totalPsiPoints += maxModifierAtLevel;
+                }
+            }
+        }
+
+        var bestEvent = timeline
+            .OrderByDescending(e => e.Modifier)
+            .ThenByDescending(e => e.Level)
+            .FirstOrDefault();
+
         return new PsiAttributes
         {
-            Psi = psi,
-            PsiPoints = psiPoints,
-            PsiPointsModifier = psiPointsModifier
+            Psi = bestEvent?.SourceSkill,
+            PsiPoints = totalPsiPoints,
+            PsiPointsModifier = currentBestModifier
         };
+    }
+
+    private static byte GetModifier(PsiKind kind, QualificationLevel level)
+    {
+        if (kind == PsiKind.Kyr)
+        {
+            return KyrModifier;
+        }
+
+        if (kind == PsiKind.Slan)
+        {
+            return SlanModifier;
+        }
+
+        return level == QualificationLevel.Master ? PyarronMasterModifier : PyarronBaseModifier;
     }
 }

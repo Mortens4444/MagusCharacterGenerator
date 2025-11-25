@@ -79,13 +79,13 @@ public class Merchant : Class, IClass
 
     public override bool AddQualificationPointsOnFirstLevel => false;
 
-    public override QualificationList Qualifications =>
+    public override QualificationList Qualifications => BuildQualifications(
     [
         new Appraisal(),
         new CourierHerald()
-   ];
+    ]);
 
-    public override QualificationList FutureQualifications => [];
+    public override QualificationList FutureQualifications => BuildQualifications([]);
 
     public override List<PercentQualification> PercentQualifications => [];
 

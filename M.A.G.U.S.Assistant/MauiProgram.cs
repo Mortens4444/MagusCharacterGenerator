@@ -93,6 +93,7 @@ internal static class MauiProgram
         builder.Services.AddSingleton<DatabaseContext>();
         builder.Services.AddSingleton<CharacterRepository>();
         builder.Services.AddSingleton<SettingsRepository>();
+        builder.Services.AddSingleton<SettingsService>();
 
         AppDomain.CurrentDomain.UnhandledException += (sender, args) =>
         {

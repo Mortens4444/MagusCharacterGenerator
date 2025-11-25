@@ -95,7 +95,7 @@ public class NastarMonk : Class, IClass, ILikeMagic
 
     public override bool AddQualificationPointsOnFirstLevel => true;
 
-    public override QualificationList Qualifications =>
+    public override QualificationList Qualifications => BuildQualifications(
     [
         new WeaponUse(),
         new PsiPyarron(QualificationLevel.Master),
@@ -113,9 +113,9 @@ public class NastarMonk : Class, IClass, ILikeMagic
 		//new Helyismeret 60%
 		//new Kultúra(QualificationLevel.Master), Saját
 		//new KínzásElviselése()
-    ];
+    ]);
 
-    public override QualificationList FutureQualifications =>
+    public override QualificationList FutureQualifications => BuildQualifications(
     [
 		//new Emberismeret MF 3
 		new ReadingAndWriting(QualificationLevel.Master, 4),
@@ -123,7 +123,7 @@ public class NastarMonk : Class, IClass, ILikeMagic
         new AncientTongueLore(level: 5),
         new Demonology(level: 6),
         new AncientTongueLore(QualificationLevel.Master, 7)
-    ];
+    ]);
 
     public override List<PercentQualification> PercentQualifications => [];
 

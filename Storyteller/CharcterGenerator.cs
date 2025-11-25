@@ -132,7 +132,7 @@ public partial class CharcterGenerator : Form
 
 		try
 		{
-			var characterName = !String.IsNullOrEmpty(tbName.Text) ? tbName.Text : NameGenerator.Get().ToName();
+			var characterName = !String.IsNullOrEmpty(tbName.Text) ? tbName.Text : NameGenerator.Get(null).ToName();
 			tbName.Text = characterName;
 
 			var race = (IRace)Activator.CreateInstance(selectedRace);

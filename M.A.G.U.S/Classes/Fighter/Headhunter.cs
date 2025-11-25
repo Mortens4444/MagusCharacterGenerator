@@ -96,7 +96,7 @@ public class Headhunter : Class, IClass, IJustFight
 
     public override bool AddQualificationPointsOnFirstLevel => true;
 
-    public override QualificationList Qualifications =>
+    public override QualificationList Qualifications => BuildQualifications(
     [
         new WeaponUse(),
         new WeaponUse(),
@@ -116,9 +116,9 @@ public class Headhunter : Class, IClass, IJustFight
         new Running(),
         new CamouflageOrDisguise(),
         new Backstab()
-    ];
+    ]);
 
-    public override QualificationList FutureQualifications =>
+    public override QualificationList FutureQualifications => BuildQualifications(
     [
         new EscapeBonds(level: 2),
         new EscapeBonds(QualificationLevel.Master, 2),
@@ -129,7 +129,7 @@ public class Headhunter : Class, IClass, IJustFight
         new BlindFighting(QualificationLevel.Master, 7),
         new EscapeBonds(QualificationLevel.Master, 8),
         new TrackingConcealment(QualificationLevel.Master, 9)
-    ];
+    ]);
 
     public override List<PercentQualification> PercentQualifications =>
     [

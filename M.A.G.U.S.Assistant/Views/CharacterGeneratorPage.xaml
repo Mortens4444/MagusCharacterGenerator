@@ -59,15 +59,15 @@
                         
                     <BoxView HeightRequest="1" Color="{AppThemeBinding Light={StaticResource Gray200}, Dark={StaticResource Gray600}}" Margin="0,5"/>
                     <Grid ColumnDefinitions="*, *"
-                                RowDefinitions="Auto, Auto, Auto"
-                                MinimumWidthRequest="100"                                  
-                                RowSpacing="5">
+                          RowDefinitions="Auto, Auto, Auto"
+                          MinimumWidthRequest="100"
+                          RowSpacing="5">
 
                         <mc:EntryWithLabel Label="Race"
-                                            Text="{Binding Character.Race.Name, Converter={StaticResource TranslationConverter}}"
-                                            HorizontalOptions="Center"
-                                            IsEnabled="False" />
-
+                                           Text="{Binding Character.Race.Name, Converter={StaticResource TranslationConverter}}"
+                                           HorizontalOptions="Center"
+                                           IsEnabled="False" />
+                        
                         <mc:EntryWithLabel Label="Class"
                                             Text="{Binding Character.BaseClass.Name, Converter={StaticResource TranslationConverter}}"
                                             HorizontalOptions="Center"
@@ -98,7 +98,7 @@
                         <Label Text="Abilities" Style="{StaticResource HeaderLabel}"/>
                         <Grid ColumnDefinitions="*, *"
                             RowDefinitions="Auto, Auto, Auto, Auto, Auto"
-                            RowSpacing="5"                                  
+                            RowSpacing="5"
                             MinimumHeightRequest="200">
 
                             <mc:EntryWithLabel Label="Strength"
@@ -285,7 +285,7 @@
                         RowSpacing="5"
                         RowDefinitions="Auto, Auto, Auto">
                             <mc:EntryWithLabel Label="Max. Mp"
-                                        Text="{Binding Character.MaxManaPointsPerLevel}"
+                                        Text="{Binding Character.MaxManaPoints}"
                                         IsEnabled="False"
                                         Grid.Row="0" />
 

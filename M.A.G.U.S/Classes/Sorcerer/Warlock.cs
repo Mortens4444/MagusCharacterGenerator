@@ -94,7 +94,7 @@ public class Warlock : Class, IClass, ILikeMagic
 
     public override bool AddQualificationPointsOnFirstLevel => true;
 
-    public override QualificationList Qualifications =>
+    public override QualificationList Qualifications => BuildQualifications(
     [
         new WeaponUse(),
         new WeaponUse(),
@@ -108,15 +108,15 @@ public class Warlock : Class, IClass, ILikeMagic
         new PoisoningAndNeutralization(),
         new CamouflageOrDisguise(),
         new Herbalism(),
-   ];
+    ]);
 
-    public override QualificationList FutureQualifications =>
+    public override QualificationList FutureQualifications => BuildQualifications(
     [
         new Backstab(level: 2),
         new PoisoningAndNeutralization(QualificationLevel.Master, 4),
         new Backstab(QualificationLevel.Master, 5),
         new Herbalism(QualificationLevel.Master, 6)
-    ];
+    ]);
 
     public override List<PercentQualification> PercentQualifications =>
     [

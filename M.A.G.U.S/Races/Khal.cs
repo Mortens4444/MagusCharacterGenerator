@@ -3,6 +3,7 @@ using M.A.G.U.S.Qualifications;
 using M.A.G.U.S.Qualifications.Laical;
 using M.A.G.U.S.Qualifications.Scientific;
 using M.A.G.U.S.Qualifications.Specialities;
+using System.Text;
 
 namespace M.A.G.U.S.Races;
 
@@ -38,4 +39,24 @@ public class Khal : Race
         new KeenHearing(2),
         new KeenSmell(5)
     ];
+
+    public override string GenerateCharacterName()
+    {
+        var start = new[] { "Ka", "Sha", "Rha", "Ma", "Kha", "Tha" };
+        var middle = new[] { "ruk", "zar", "mar", "hak", "gath", "rhun" };
+        var end = new[] { "ar", "ok", "an", "ur", "ath" };
+
+        var result = new StringBuilder();
+        result.Append(start[random.Next(start.Length)]);
+
+        if (random.Next(2) == 1)
+        {
+            result.Append(middle[random.Next(middle.Length)]);
+        }
+
+        result.Append(end[random.Next(end.Length)]);
+
+        var name = result.ToString();
+        return Char.ToUpperInvariant(name[0]) + name[1..];
+    }
 }

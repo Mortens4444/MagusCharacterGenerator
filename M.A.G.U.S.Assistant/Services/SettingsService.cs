@@ -1,0 +1,60 @@
+﻿using M.A.G.U.S.Assistant.Database.Repositories;
+using M.A.G.U.S.Interfaces;
+
+namespace M.A.G.U.S.Assistant.Services;
+
+internal sealed class SettingsService(SettingsRepository repo) : ISettings
+{
+    private readonly SettingsRepository repo = repo;
+
+    public bool AddFightValueOnFirstLevelForAllClass { get; private set; }
+    public bool AddPainToleranceOnFirstLevelForAllClass { get; private set; }
+    public bool AddQualificationPointsOnFirstLevelForAllClass { get; private set; }
+    public bool AddManaPointsOnFirstLevelForAllClass { get; private set; }
+    public bool AddPsiPointsOnFirstLevelForAllClass { get; private set; }
+
+    private const string KeyFightValue = "Setting_FightValueFirstLevel";
+    private const string KeyPainTolerance = "Setting_PainToleranceFirstLevel";
+    private const string KeyQualification = "Setting_QualificationPointsFirstLevel";
+    private const string KeyMana = "Setting_ManaPointsFirstLevel";
+    private const string KeyPsi = "Setting_PsiPointsFirstLevel";
+
+    public async Task LoadAsync()
+    {
+        AddFightValueOnFirstLevelForAllClass = await repo.GetBoolSettingAsync(KeyFightValue, true).ConfigureAwait(false);
+        AddPainToleranceOnFirstLevelForAllClass = await repo.GetBoolSettingAsync(KeyPainTolerance, true).ConfigureAwait(false);
+        AddQualificationPointsOnFirstLevelForAllClass = await repo.GetBoolSettingAsync(KeyQualification, true).ConfigureAwait(false);
+        AddManaPointsOnFirstLevelForAllClass = await repo.GetBoolSettingAsync(KeyMana, false).ConfigureAwait(false);
+        AddPsiPointsOnFirstLevelForAllClass = await repo.GetBoolSettingAsync(KeyPsi, false).ConfigureAwait(false);
+    }
+
+    public Task SaveAddFightValueAsync(bool value)
+    {
+        AddFightValueOnFirstLevelForAllClass = value;
+        return repo.SaveBoolSettingAsync(KeyFightValue, value);
+    }
+
+    public Task SaveAddPainToleranceAsync(bool value)
+    {
+        AddPainToleranceOnFirstLevelForAllClass = value;
+        return repo.SaveBoolSettingAsync(KeyPainTolerance, value);
+    }
+
+    public Task SaveAddQualificationAsync(bool value)
+    {
+        AddQualificationPointsOnFirstLevelForAllClass = value;
+        return repo.SaveBoolSettingAsync(KeyQualification, value);
+    }
+
+    public Task SaveAddManaAsync(bool value)
+    {
+        AddManaPointsOnFirstLevelForAllClass = value;
+        return repo.SaveBoolSettingAsync(KeyMana, value);
+    }
+
+    public Task SaveAddPsiAsync(bool value)
+    {
+        AddPsiPointsOnFirstLevelForAllClass = value;
+        return repo.SaveBoolSettingAsync(KeyPsi, value);
+    }
+}

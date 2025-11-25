@@ -79,15 +79,15 @@ public class Peasant : Class, IClass
 
     public override bool AddQualificationPointsOnFirstLevel => false;
 
-    public override QualificationList Qualifications =>
+    public override QualificationList Qualifications => BuildQualifications(
     [
         new Agriculture(),
         new AnimalBreeding(),
         new PlantGrowing(),
         new WeatherDivination()
-   ];
+    ]);
 
-    public override QualificationList FutureQualifications => [];
+    public override QualificationList FutureQualifications => BuildQualifications([]);
 
     public override List<PercentQualification> PercentQualifications => [];
 

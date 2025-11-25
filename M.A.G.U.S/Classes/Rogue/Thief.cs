@@ -93,7 +93,7 @@ public class Thief : Class, IClass, IJustFight
 
     public override bool AddQualificationPointsOnFirstLevel => true;
 
-    public override QualificationList Qualifications =>
+    public override QualificationList Qualifications => BuildQualifications(
     [
         new WeaponUse(),
         new WeaponUse(),
@@ -103,16 +103,16 @@ public class Thief : Class, IClass, IJustFight
         new LanguageLore(2),
         new Appraisal(),
         new TavernBrawling()
-    ];
+    ]);
 
-    public override QualificationList FutureQualifications =>
+    public override QualificationList FutureQualifications => BuildQualifications(
     [
         new EscapeBonds(level: 2),
         new Knotting(level: 3),
         new Backstab(level: 3),
         new TavernBrawling(QualificationLevel.Master, 4),
         new WeaponThrowing(QualificationLevel.Master, 5)
-    ];
+    ]);
 
     public override List<PercentQualification> PercentQualifications =>
     [
