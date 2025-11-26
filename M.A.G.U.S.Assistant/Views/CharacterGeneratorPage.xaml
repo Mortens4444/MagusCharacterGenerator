@@ -2,6 +2,7 @@
 <v:NotifierPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
                 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
                 xmlns:conv="clr-namespace:Mtf.LanguageService.MAUI.Converters;assembly=Mtf.LanguageService.MAUI"
+                xmlns:converters="clr-namespace:M.A.G.U.S.Assistant.Converters"
                 xmlns:v="clr-namespace:M.A.G.U.S.Assistant.Views"
                 xmlns:vm="clr-namespace:M.A.G.U.S.Assistant.ViewModels"
                 xmlns:gs="clr-namespace:M.A.G.U.S.GameSystem;assembly=M.A.G.U.S."
@@ -17,6 +18,7 @@
     <v:NotifierPage.Resources>
         <ResourceDictionary>
             <conv:TranslationConverter x:Key="TranslationConverter" />
+            <converters:QualificationSorterConverter x:Key="QualificationSorter" />
         </ResourceDictionary>
     </v:NotifierPage.Resources>
 
@@ -309,38 +311,19 @@
             <Border Style="{StaticResource BoxBorder}" Margin="0,10">
                 <VerticalStackLayout>
                     <Label Text="Qualifications" Style="{StaticResource HeaderLabel}" />
-                    <Grid Padding="6"
-                          ColumnDefinitions="*, Auto"
-                          ColumnSpacing="10">
-
-                        <Label Text="Name"
-                               VerticalOptions="Center"
-                               TextColor="Gray"
-                               FontAttributes="Bold"/>
-                        
-                        <Label Text="Level"
-                               VerticalOptions="Center"
-                               HorizontalOptions="End"
-                               TextColor="Gray"
-                               FontAttributes="Bold"/>
+                    <Grid Padding="6" ColumnDefinitions="*, Auto" ColumnSpacing="10">
+                        <Label Text="Name" VerticalOptions="Center" TextColor="Gray" FontAttributes="Bold"/>
+                        <Label Text="Level" VerticalOptions="Center" HorizontalOptions="End" TextColor="Gray" FontAttributes="Bold"/>
                     </Grid>
 
-                    <CollectionView ItemsSource="{Binding Character.Qualifications}"
+                    <CollectionView ItemsSource="{Binding Character.Qualifications, Converter={StaticResource QualificationSorter}}"
                                     SelectionMode="None"
                                     HeightRequest="280">
                         <CollectionView.ItemTemplate>
                             <DataTemplate x:DataType="local:Qualification">
-                                <Grid Padding="6"
-                                      ColumnDefinitions="*,Auto"
-                                      ColumnSpacing="10">
-
-                                    <Label Text="{Binding Name, Converter={StaticResource TranslationConverter}}"
-                                           VerticalOptions="Center"
-                                           HorizontalOptions="Start" />
-
-                                    <Label Text="{Binding QualificationLevel, Converter={StaticResource TranslationConverter}}"
-                                           VerticalOptions="Center"
-                                           HorizontalTextAlignment="End" />
+                                <Grid Padding="6" ColumnDefinitions="*,Auto" ColumnSpacing="10">
+                                    <Label Text="{Binding Name, Converter={StaticResource TranslationConverter}}" VerticalOptions="Center" HorizontalOptions="Start" />
+                                    <Label Text="{Binding QualificationLevel, Converter={StaticResource TranslationConverter}}" VerticalOptions="Center" HorizontalTextAlignment="End" />
                                 </Grid>
                             </DataTemplate>
                         </CollectionView.ItemTemplate>
@@ -353,31 +336,16 @@
                 <VerticalStackLayout>
                     <Label Text="Percent qualifications" Style="{StaticResource HeaderLabel}" />
                     <Grid Padding="6" ColumnDefinitions="*, Auto" ColumnSpacing="10">
-
-                        <Label Text="Name"
-                               VerticalOptions="Center"
-                               TextColor="Gray"
-                               FontAttributes="Bold"/>
-
-                        <Label Text="%"
-                               VerticalOptions="Center"
-                               HorizontalOptions="End"
-                               TextColor="Gray"
-                               FontAttributes="Bold"/>
+                        <Label Text="Name" VerticalOptions="Center" TextColor="Gray" FontAttributes="Bold"/>
+                        <Label Text="%" VerticalOptions="Center" HorizontalOptions="End" TextColor="Gray" FontAttributes="Bold"/>
                     </Grid>
 
-                    <CollectionView ItemsSource="{Binding Character.PercentQualifications}" SelectionMode="None" HeightRequest="280">
+                    <CollectionView ItemsSource="{Binding Character.PercentQualifications, Converter={StaticResource QualificationSorter}}" SelectionMode="None" HeightRequest="280">
                         <CollectionView.ItemTemplate>
                             <DataTemplate x:DataType="local:PercentQualification">
-                                <Grid Padding="6"
-                                      ColumnDefinitions="*,Auto"
-                                      ColumnSpacing="10">
-                                    <Label Text="{Binding Name, Converter={StaticResource TranslationConverter}}"
-                                           VerticalOptions="Center"
-                                           HorizontalOptions="Start" />
-                                    <Label Text="{Binding Percent}"
-                                           VerticalOptions="Center"
-                                           HorizontalTextAlignment="End" />
+                                <Grid Padding="6" ColumnDefinitions="*,Auto" ColumnSpacing="10">
+                                    <Label Text="{Binding Name, Converter={StaticResource TranslationConverter}}" VerticalOptions="Center" HorizontalOptions="Start" />
+                                    <Label Text="{Binding Percent}" VerticalOptions="Center" HorizontalTextAlignment="End" />
                                 </Grid>
                             </DataTemplate>
                         </CollectionView.ItemTemplate>
@@ -390,20 +358,14 @@
                 <VerticalStackLayout>
                     <Label Text="Special Abilities" Style="{StaticResource HeaderLabel}" />
                     <Grid Padding="6" ColumnDefinitions="*" ColumnSpacing="10">
-
-                        <Label Text="Name"
-                               VerticalOptions="Center"
-                               TextColor="Gray"
-                               FontAttributes="Bold"/>
+                        <Label Text="Name" VerticalOptions="Center" TextColor="Gray" FontAttributes="Bold"/>
                     </Grid>
 
-                    <CollectionView ItemsSource="{Binding Character.SpecialQualifications}" SelectionMode="None" HeightRequest="280">
+                    <CollectionView ItemsSource="{Binding Character.SpecialQualifications, Converter={StaticResource QualificationSorter}}" SelectionMode="None" HeightRequest="280">
                         <CollectionView.ItemTemplate>
                             <DataTemplate x:DataType="q:ISpecialQualification">
                                 <Grid Padding="6" ColumnDefinitions="*" ColumnSpacing="10">
-                                    <Label Text="{Binding Name, Converter={StaticResource TranslationConverter}}"
-                                           VerticalOptions="Center"
-                                           HorizontalOptions="Start" />
+                                    <Label Text="{Binding Name, Converter={StaticResource TranslationConverter}}" VerticalOptions="Center" HorizontalOptions="Start" />
                                 </Grid>
                             </DataTemplate>
                         </CollectionView.ItemTemplate>
@@ -415,32 +377,11 @@
             <Border Style="{StaticResource BoxBorder}">
                 <VerticalStackLayout>
                     <Label Text="Money" Style="{StaticResource HeaderLabel}"/>
-                    <Grid ColumnDefinitions="*, *"
-                 RowDefinitions="Auto, Auto, Auto">
-
-                        <mc:EntryWithLabel Label="Copper"
-                                 Text="{Binding Character.Money.Copper}"
-                                 IsEnabled="False"
-                                 WidthRequest="100" />
-
-                        <mc:EntryWithLabel Label="Silver"
-                                 Text="{Binding Character.Money.Silver}"
-                                 IsEnabled="False"
-                                 WidthRequest="100"
-                                 Grid.Row="1" />
-
-                        <mc:EntryWithLabel Label="Gold"
-                                 Text="{Binding Character.Money.Gold}"
-                                 IsEnabled="False"
-                                 WidthRequest="100"
-                                 Grid.Column="1" />
-
-                        <mc:EntryWithLabel Label="Mithril"
-                                 Text="{Binding Character.Money.Mithril}"
-                                 IsEnabled="False"
-                                 WidthRequest="100"
-                                 Grid.Row="1"
-                                 Grid.Column="1" />
+                    <Grid ColumnDefinitions="*, *" RowDefinitions="Auto, Auto, Auto">
+                        <mc:EntryWithLabel Label="Copper" Text="{Binding Character.Money.Copper}" IsEnabled="False" WidthRequest="100" />
+                        <mc:EntryWithLabel Label="Silver" Text="{Binding Character.Money.Silver}" IsEnabled="False" WidthRequest="100" Grid.Row="1" />
+                        <mc:EntryWithLabel Label="Gold" Text="{Binding Character.Money.Gold}" IsEnabled="False" WidthRequest="100" Grid.Column="1" />
+                        <mc:EntryWithLabel Label="Mithril" Text="{Binding Character.Money.Mithril}" IsEnabled="False" WidthRequest="100" Grid.Row="1" Grid.Column="1" />
                     </Grid>
                 </VerticalStackLayout>
             </Border>
@@ -452,29 +393,16 @@
                 <VerticalStackLayout>
                     <Label Text="Equipment" Style="{StaticResource HeaderLabel}" />
                     <Grid Padding="6" ColumnDefinitions="*, Auto" ColumnSpacing="10">
-
-                        <Label Text="Name"
-                               VerticalOptions="Center"
-                               TextColor="Gray"
-                               FontAttributes="Bold"/>
-                        
-                        <Label Text="Weight (kg)"
-                               VerticalOptions="Center"
-                               HorizontalOptions="End"
-                               TextColor="Gray"
-                               FontAttributes="Bold"/>
+                        <Label Text="Name" VerticalOptions="Center" TextColor="Gray" FontAttributes="Bold"/>
+                        <Label Text="Weight (kg)" VerticalOptions="Center" HorizontalOptions="End" TextColor="Gray" FontAttributes="Bold"/>
                     </Grid>
 
                     <CollectionView ItemsSource="{Binding Character.Equipment}" SelectionMode="None" HeightRequest="280">
                         <CollectionView.ItemTemplate>
                             <DataTemplate x:DataType="t:Thing">
                                 <Grid Padding="6" ColumnDefinitions="*,Auto" ColumnSpacing="10">
-                                    <Label Text="{Binding Name, Converter={StaticResource TranslationConverter}}"
-                                           VerticalOptions="Center"
-                                           HorizontalOptions="Start" />
-                                    <Label Text="{Binding Weight, Converter={StaticResource TranslationConverter}}"
-                                           VerticalOptions="Center"
-                                           HorizontalTextAlignment="End" />
+                                    <Label Text="{Binding Name, Converter={StaticResource TranslationConverter}}" VerticalOptions="Center" HorizontalOptions="Start" />
+                                    <Label Text="{Binding Weight, Converter={StaticResource TranslationConverter}}" VerticalOptions="Center" HorizontalTextAlignment="End" />
                                 </Grid>
                             </DataTemplate>
                         </CollectionView.ItemTemplate>

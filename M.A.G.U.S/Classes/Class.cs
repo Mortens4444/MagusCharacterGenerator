@@ -89,9 +89,12 @@ public abstract class Class(byte level) : IClass
 
         foreach (var qualification in qualifications)
         {
-            if (qualification is IPsi && Intelligence > 11 && Willpower > 11 && Astral > 11)
+            if (qualification is IPsi)
             {
-                result.Add(qualification);
+                if (Intelligence > 11 && Willpower > 11 && Astral > 11)
+                {
+                    result.Add(qualification);
+                }
             }
             else
             {

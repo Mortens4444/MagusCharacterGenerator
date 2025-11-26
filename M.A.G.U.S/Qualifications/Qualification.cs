@@ -29,6 +29,8 @@ public abstract class Qualification
 
     public byte MasterQualificationLevel { get; set; }
 
+    public byte ActualLevel => QualificationLevel == QualificationLevel.Base ? BaseQualificationLevel : MasterQualificationLevel;
+
     public virtual byte QpToBaseQualification { get; }
 
     public virtual byte? QpToMaxBaseQualification { get; }

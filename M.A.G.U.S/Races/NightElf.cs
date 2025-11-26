@@ -2,8 +2,6 @@
 using M.A.G.U.S.Qualifications;
 using M.A.G.U.S.Qualifications.Percentages;
 using M.A.G.U.S.Qualifications.Specialities;
-using Mtf.Extensions.Services;
-using System.Text;
 
 namespace M.A.G.U.S.Races;
 

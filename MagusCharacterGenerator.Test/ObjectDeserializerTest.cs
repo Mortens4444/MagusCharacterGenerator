@@ -24,7 +24,7 @@ namespace M.A.G.U.S.Test
                 Lng = new LanguageLore(Language.Kranich, 3),
                 Class = new ArelPriest(1),
                 Race = new Orc(),
-                Character = GetCharacter("Anuman", new Amund(), new ArelPriest(1))
+                Character = GetCharacter("Anuman", new Amund(), typeof(ArelPriest), 1)
             };
             var anonymousClassJson = ObjectSerializer.GetSerializedString(anonymousClass);
             var deserializedAnonymousClassJson = ObjectSerializer.LoadContent<dynamic>(anonymousClassJson);
@@ -41,7 +41,7 @@ namespace M.A.G.U.S.Test
         [Test]
 		public void SerializeAndDeserializeCharacter()
 		{
-			var character = GetCharacter("Mirena", new Human(), new Witch(5));
+			var character = GetCharacter("Mirena", new Human(), typeof(Witch), 5);
 			var characterJson = ObjectSerializer.GetSerializedString(character);
 			var deserializedCharacter = ObjectSerializer.LoadContent<Character>(characterJson);
 			Assert.That(character.Race.ToString(), Is.EqualTo(deserializedCharacter.Race.ToString()));
@@ -55,13 +55,14 @@ namespace M.A.G.U.S.Test
 			Assert.That(character.Classes, Is.Not.Null);
 		}
 
-        private static Character GetCharacter(string name, IRace race, IClass @class)
+        private static Character GetCharacter(string name, IRace race, Type classType, byte level)
         {
             Character? character = null;
             do
             {
                 try
                 {
+                    var @class = (IClass)Activator.CreateInstance(classType, level);
                     character = new Character(new Settings(false), name, race, @class);
                 }
                 catch { }

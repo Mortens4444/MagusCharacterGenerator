@@ -10,6 +10,9 @@ public static class ManaPoints
 {
     public static SorceryAttributes Calculate(Character character, ISettings settings)
     {
+        var extraManaPointsOnLevelUp = character.Race.SpecialQualifications.GetSpeciality<ExtraManaPointOnLevelUp>();
+        var extraManaPoints = extraManaPointsOnLevelUp == null ? 0 : extraManaPointsOnLevelUp.ExtraManaPoints * character.BaseClass.Level;
+
         var kyrLore = character.Race.SpecialQualifications.GetSpeciality<KyrLore>();
 
         var result = new SorceryAttributes
@@ -33,9 +36,12 @@ public static class ManaPoints
                 {
                     manaPoints += character.BaseClass.Level;
                 }
-                for (int i = 1; i < @class.Level; i++)
+                for (int lvl = 1; lvl <= @class.Level; lvl++)
                 {
-                    manaPoints += sorcery.GetManaPointsModifier();
+                    if (lvl > 1 || settings.AddManaPointsOnFirstLevelForAllClass)
+                    {
+                        manaPoints += sorcery.GetManaPointsModifier();
+                    }
                 }
                 //maxManaPointsPerLevel = sorcery.GetManaPointsModifier();
 
@@ -43,7 +49,7 @@ public static class ManaPoints
                 {
                     result = new SorceryAttributes
                     {
-                        ManaPoints = manaPoints,
+                        ManaPoints = (ushort)(manaPoints + extraManaPoints),
                         MaxManaPointsPerLevel = sorcery.GetManaPointsModifier(),
                         Sorcery = sorcery
                     };

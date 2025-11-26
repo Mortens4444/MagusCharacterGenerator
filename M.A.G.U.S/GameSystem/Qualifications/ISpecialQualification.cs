@@ -2,4 +2,5 @@
 
 public interface ISpecialQualification
 {
+    string Name { get; }
 }

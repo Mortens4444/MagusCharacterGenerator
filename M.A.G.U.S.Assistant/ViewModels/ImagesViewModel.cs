@@ -66,10 +66,7 @@ internal partial class ImagesViewModel : INotifyPropertyChanged
             var images = asm.GetManifestResourceNames()
                 .Where(n => (n.Contains(".Resources.Images.Bestiary.", StringComparison.OrdinalIgnoreCase) ||
                             n.Contains(".Resources.Images.Characters.", StringComparison.OrdinalIgnoreCase)) &&
-                            (n.EndsWith(".png", StringComparison.OrdinalIgnoreCase) ||
-                             n.EndsWith(".jpg", StringComparison.OrdinalIgnoreCase) ||
-                             n.EndsWith(".jpeg", StringComparison.OrdinalIgnoreCase) ||
-                             n.EndsWith(".svg", StringComparison.OrdinalIgnoreCase)))
+                            n.EndsWith(".png", StringComparison.OrdinalIgnoreCase))
                 .Select(name =>
                 {
                     var display = name.Split('.')[^2];

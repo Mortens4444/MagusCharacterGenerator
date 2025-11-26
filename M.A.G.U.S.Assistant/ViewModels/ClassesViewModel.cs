@@ -1,7 +1,6 @@
 ﻿using M.A.G.U.S.Assistant.Extensions;
 using M.A.G.U.S.Assistant.Models;
 using M.A.G.U.S.Interfaces;
-using M.A.G.U.S.Qualifications;
 using Mtf.Extensions;
 using Mtf.LanguageService;
 using System.Collections.ObjectModel;
@@ -61,7 +60,6 @@ internal partial class ClassesViewModel : INotifyPropertyChanged
 
             selectedClass = value;
             OnPropertyChanged(nameof(SelectedClass));
-            OnPropertyChanged(nameof(OrderedQualifications));
             SetDiceStats();
         }
     }
@@ -78,8 +76,6 @@ internal partial class ClassesViewModel : INotifyPropertyChanged
 
     private readonly ObservableCollection<DiceStat> diceStats = [];
     public ObservableCollection<DiceStat> DiceStats => diceStats;
-
-    public ObservableCollection<Qualification> OrderedQualifications => new(SelectedClass?.Qualifications.OrderByLocalizedName() ?? []);
 
     public ClassesViewModel()
     {

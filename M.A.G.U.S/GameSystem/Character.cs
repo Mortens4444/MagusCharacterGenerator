@@ -600,7 +600,6 @@ public class Character : IFightModifier, ILiving, IAbilities, INotifyPropertyCha
 	{
 		SpecialQualifications.AddRange(Race.SpecialQualifications);
 		Qualifications.Clear();
-
         foreach (var @class in Classes)
 		{
 			Qualifications.AddRange(@class.Qualifications);
@@ -619,7 +618,6 @@ public class Character : IFightModifier, ILiving, IAbilities, INotifyPropertyCha
             {
                 Qualifications.UpgradeOrAddQualification(newMasterQualification);
             }
-
         }
         var dexterityBasedPercentages = new List<Type> { typeof(Falling), typeof(Climbing), typeof(Jumping) };
 		if (PercentQualifications.Count == 0)

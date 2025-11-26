@@ -15,6 +15,9 @@ public static class PsiPoints
 
     public static PsiAttributes Calculate(Character character, ISettings settings)
     {
+        var extraPsiPointsOnLevelUp = character.Race.SpecialQualifications.GetSpeciality<ExtraPsiPointOnLevelUp>();
+        var extraPsiPoints = extraPsiPointsOnLevelUp == null ? 0 : extraPsiPointsOnLevelUp.ExtraPoints * character.BaseClass.Level;
+
         var currentLevel = character.BaseClass.Level;
         ushort totalPsiPoints = 0;
 
@@ -94,7 +97,7 @@ public static class PsiPoints
         return new PsiAttributes
         {
             Psi = bestEvent?.SourceSkill,
-            PsiPoints = totalPsiPoints,
+            PsiPoints = (ushort)(totalPsiPoints + extraPsiPoints),
             PsiPointsModifier = currentBestModifier
         };
     }
