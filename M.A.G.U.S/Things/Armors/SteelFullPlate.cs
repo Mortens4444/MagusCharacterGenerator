@@ -13,4 +13,6 @@ public class SteelFullPlate : Thing
 	public int DamageSusceptiveValue => 6;
 
 	public override double Weight => 35;
+
+    public override string Description => "A complete, heavy harness of well-made steel plates. This heavy defence turns aside most common attacks but requires great strength and stamina to wear and fight effectively in.";
 }

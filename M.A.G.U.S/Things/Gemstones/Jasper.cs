@@ -6,5 +6,5 @@ public class Jasper : Gemstone
 {
     public Jasper() : base("poisons") { }
 
-    public override Money Price => new Money(6);
+    public override Money Price => new(6);
 }

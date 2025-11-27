@@ -6,5 +6,5 @@ public class Aquamarine : Gemstone
 {
     public Aquamarine() : base("elementals (primordial water)") { }
 
-    public override Money Price => new Money(50);
+    public override Money Price => new(50);
 }

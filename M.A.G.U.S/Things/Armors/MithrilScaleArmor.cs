@@ -13,4 +13,6 @@ public class MithrilScaleArmor : Thing
 	public int DamageSusceptiveValue => 5;
 
 	public override double Weight => 5;
+
+    public override string Description => "Scales made of Mithril, sewn onto a cloth backing. A supremely light and flexible defense that guards against slashes with magic-touched resilience.";
 }

@@ -6,5 +6,5 @@ public class Amethyst : Gemstone
 {
     public Amethyst() : base("drunkenness") { }
 
-    public override Money Price => new Money(10);
+    public override Money Price => new(10);
 }

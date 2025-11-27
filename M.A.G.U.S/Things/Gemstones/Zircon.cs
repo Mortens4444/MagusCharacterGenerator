@@ -6,5 +6,5 @@ public class Zircon : Gemstone
 {
     public Zircon() : base("time, time magic") { }
 
-    public override Money Price => new Money(5);
+    public override Money Price => new(5);
 }

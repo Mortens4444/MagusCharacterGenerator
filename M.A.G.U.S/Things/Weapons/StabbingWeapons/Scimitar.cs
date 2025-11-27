@@ -22,4 +22,6 @@ public class Scimitar : Weapon, IMeleeWeapon
     public byte GetDamage() => (byte)(DiceThrow._1K6() + 3);
 
     public override string Name => "Sword, scimitar";
+
+    public override string Description => "A deeply curved, single-edged blade from the Southern realms, designed to maximize cutting power and commonly associated with desert warriors.";
 }

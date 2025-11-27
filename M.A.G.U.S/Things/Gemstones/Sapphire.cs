@@ -6,6 +6,6 @@ public class Sapphire : Gemstone
 {
     public Sapphire() : base("magic resistance, counterspell") { }
 
-    public override Money Price => new Money(200);
+    public override Money Price => new(200);
 
 }

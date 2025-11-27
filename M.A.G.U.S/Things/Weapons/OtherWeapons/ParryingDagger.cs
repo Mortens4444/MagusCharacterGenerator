@@ -21,4 +21,6 @@ public class ParryingDagger : Weapon, IMeleeWeapon
     public byte GetDamage() => (byte)DiceThrow._1K6();
 
     public override string Name => "Parrying dagger";
+
+    public override string Description => "A sturdy, often broad-bladed dagger held in the off-hand, used primarily to deflect and catch enemy blades during a sword fight.";
 }

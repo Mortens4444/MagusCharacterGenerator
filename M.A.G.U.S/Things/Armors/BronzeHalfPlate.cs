@@ -13,4 +13,6 @@ public class BronzeHalfPlate : Thing
 	public int DamageSusceptiveValue => 4;
 
 	public override double Weight => 35;
+
+    public override string Description => "Bronze plate armour focused on protecting the torso and upper limbs. A heavier, older style of defense, often borne by veterans who rely on their bronze weapons and gear.";
 }

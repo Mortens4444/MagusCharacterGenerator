@@ -19,4 +19,6 @@ public class Spear : Weapon, IMeleeWeapon
 
     [DiceThrow(ThrowType._1K10)]
     public byte GetDamage() => (byte)(DiceThrow._1K10());
+
+    public override string Description => "A simple wooden shaft with a sharp metal head. The most common weapon in the world, used for thrusting, throwing, and guarding against cavalry.";
 }

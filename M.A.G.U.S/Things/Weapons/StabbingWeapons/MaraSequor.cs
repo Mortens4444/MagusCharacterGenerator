@@ -22,4 +22,6 @@ public class MaraSequor : Weapon, IMeleeWeapon
     public byte GetDamage() => (byte)(DiceThrow._2K6() + 2);
 
     public override string Name => "Mara-sequor";
+
+    public override string Description => "A specialized, heavy cutting sword with a broad, curved blade, often associated with gladiatorial combat or the brutal legions of Mara.";
 }

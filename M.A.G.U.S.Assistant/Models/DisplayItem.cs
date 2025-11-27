@@ -117,7 +117,7 @@ internal partial class DisplayItem : INotifyPropertyChanged
                 Source = p,
                 Key = String.Empty,
                 Title = p.Name ?? String.Empty,
-                Subtitle = p.Description ?? String.Empty,
+                Subtitle = p.Description,
                 RightText = p.Price.ToTranslatedString()
             };
         }

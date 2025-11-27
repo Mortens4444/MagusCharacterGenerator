@@ -22,4 +22,6 @@ public class HeadhunterSword : Weapon, IMeleeWeapon
     public byte GetDamage() => (byte)(DiceThrow._1K6() + 2);
 
     public override string Name => "Assassin’s sword";
+
+    public override string Description => "A heavy, curved blade with a distinctive, often jagged edge, favoured by tribal warriors for its ability to decapitate foes cleanly.";
 }

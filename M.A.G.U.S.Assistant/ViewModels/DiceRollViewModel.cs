@@ -5,7 +5,6 @@ using Mtf.Maui.Controls.Models;
 #if ANDROID
 using Plugin.Maui.Audio;
 #endif
-using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -16,11 +15,6 @@ namespace M.A.G.U.S.Assistant.ViewModels;
 internal partial class DiceRollViewModel : INotifyPropertyChanged
 {
     public event PropertyChangedEventHandler? PropertyChanged;
-
-    public ObservableCollection<string> DiceType { get; } =
-    [
-        "K2", "K3", "K4", "K6", "K8", "K9", "K10", "K12", "K20", "K100"
-    ];
 
     private byte diceCount = 1;
     public byte DiceCount
@@ -46,9 +40,62 @@ internal partial class DiceRollViewModel : INotifyPropertyChanged
         get => selectedDice;
         set
         {
-            if (selectedDice == value) return;
+            if (selectedDice == value)
+            {
+                return;
+            }
+
             selectedDice = value;
+            IsCustomSelected = selectedDice == DiceType.Custom;
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(SelectedDice)));
+        }
+    }
+
+    private bool isCustomSelected;
+    public bool IsCustomSelected
+    {
+        get => isCustomSelected;
+        private set
+        {
+            if (isCustomSelected == value)
+            {
+                return;
+            }
+
+            isCustomSelected = value;
+            OnPropertyChanged(nameof(IsCustomSelected));
+        }
+    }
+
+    private int customFrom = 1;
+    public int CustomFrom
+    {
+        get => customFrom;
+        set
+        {
+            if (customFrom == value)
+            {
+                return;
+            }
+
+            customFrom = Math.Max(1, value);
+            OnPropertyChanged(nameof(CustomFrom));
+        }
+    }
+
+    private int customTo = 6;
+    public int CustomTo
+    {
+        get => customTo;
+        set
+        {
+            if (customTo == value)
+            {
+                return;
+            }
+
+            customTo = Math.Max(1, value);
+            OnPropertyChanged(nameof(CustomTo));
         }
     }
 
@@ -151,6 +198,41 @@ internal partial class DiceRollViewModel : INotifyPropertyChanged
         var m = pattern.Match($"{SelectedDice}");
         int count = DiceCount;
         int sides = 6;
+        var sbDetails = new StringBuilder();
+        var total = 0;
+
+        if (SelectedDice == DiceType.Custom)
+        {
+            var from = CustomFrom;
+            var to = CustomTo;
+            if (from <= 0)
+            {
+                from = 1;
+            }
+
+            if (to <= 0)
+            {
+                to = 1;
+            }
+
+            if (from > to)
+            {
+                (from, to) = (to, from);
+            }
+
+            sides = to;
+            for (var i = 0; i < count; i++)
+            {
+                var roll = random.Next(from, to + 1);
+                total += roll;
+                sbDetails.AppendFormat($"{Lng.Elem("Dice roll")} {i + 1}: {roll}{Environment.NewLine}");
+            }
+
+            ResultSummary = total.ToString();
+            ResultDetails = sbDetails.ToString();
+            return;
+        }
+
         if (m.Success)
         {
             if (!String.IsNullOrEmpty(m.Groups[1].Value))
@@ -160,8 +242,6 @@ internal partial class DiceRollViewModel : INotifyPropertyChanged
             Int32.TryParse(m.Groups[2].Value, out sides);
         }
 
-        var sbDetails = new StringBuilder();
-        var total = 0;
         for (var i = 0; i < count; i++)
         {
             var roll = random.Next(1, sides + 1);

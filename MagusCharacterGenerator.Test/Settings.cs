@@ -2,14 +2,9 @@
 
 namespace M.A.G.U.S.Test
 {
-    class Settings : ISettings
+    class Settings(bool addPsiPointOnFirstLevel) : ISettings
     {
-        private readonly bool addPsiPointOnFirstLevel;
-
-        public Settings(bool addPsiPointOnFirstLevel)
-        {
-            this.addPsiPointOnFirstLevel = addPsiPointOnFirstLevel;
-        }
+        private readonly bool addPsiPointOnFirstLevel = addPsiPointOnFirstLevel;
 
         public bool AddFightValueOnFirstLevelForAllClass => true;
 
@@ -20,5 +15,13 @@ namespace M.A.G.U.S.Test
         public bool AddManaPointsOnFirstLevelForAllClass => true;
 
         public bool AddPsiPointsOnFirstLevelForAllClass => addPsiPointOnFirstLevel;
+
+        public bool AutoDistributeCombatValues => true;
+
+        public bool AutoDistributeQualificationPoints => true;
+
+        public bool AutoIncreasePainTolerance => true;
+
+        public bool AutoGenerateSkills => true;
     }
 }

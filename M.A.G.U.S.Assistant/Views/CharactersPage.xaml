@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <v:NotifierPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                xmlns:c="clr-namespace:Mtf.LanguageService.MAUI.Converters;assembly=Mtf.LanguageService.MAUI"
                 xmlns:conv="clr-namespace:Mtf.Maui.Controls.Converters;assembly=Mtf.Maui.Controls"
                 xmlns:v="clr-namespace:M.A.G.U.S.Assistant.Views"
                 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
@@ -14,31 +15,18 @@
     <v:NotifierPage.Resources>
         <ResourceDictionary>
             <conv:InverseBooleanConverter x:Key="InverseBooleanConverter" />
+            <c:TranslationConverter x:Key="TranslationConverter" />
         </ResourceDictionary>
     </v:NotifierPage.Resources>
     
     <Grid RowDefinitions="Auto, *">
 
-        <Label Grid.Row="0" 
-               Text="Manage your characters" 
-               Padding="15"
-               TextColor="Gray"
-               IsVisible="{Binding IsEmpty, Converter={StaticResource InverseBooleanConverter}}"/>
-        <RefreshView Grid.Row="1" 
-                     IsRefreshing="{Binding IsLoading}"
-                     Command="{Binding LoadCharactersAsyncCommand}">
+        <RefreshView Grid.Row="1" IsRefreshing="{Binding IsLoading}" Command="{Binding LoadCharactersCommand}">
 
             <Grid>
-                <VerticalStackLayout VerticalOptions="Center" 
-                                     HorizontalOptions="Center" 
-                                     IsVisible="{Binding IsEmpty}"
-                                     Spacing="10">
-                    <Label Text="No characters found." 
-                           HorizontalOptions="Center"
-                           FontSize="18" />
-                    <Label Text="Go to 'Character generation' to create one." 
-                           TextColor="Gray"
-                           HorizontalOptions="Center"/>
+                <VerticalStackLayout VerticalOptions="Center" HorizontalOptions="Center" IsVisible="{Binding IsEmpty}" Spacing="10">
+                    <Label Text="No characters found." HorizontalOptions="Center" FontSize="18" />
+                    <Label Text="Go to 'Character generation' to create one." TextColor="Gray" HorizontalOptions="Center"/>
                 </VerticalStackLayout>
 
                 <CollectionView ItemsSource="{Binding Characters}"
@@ -64,9 +52,9 @@
 
                                 <Border StrokeShape="RoundRectangle 10"
                                         StrokeThickness="1"
-                                        Margin="10,0"
+                                        Margin="10"
                                         Padding="15"
-                                        BackgroundColor="{AppThemeBinding Light={StaticResource Gray100}, Dark={StaticResource Gray800}}">
+                                        BackgroundColor="{AppThemeBinding Light={StaticResource Gray100}, Dark={StaticResource Gray900}}">
                                     <Border.GestureRecognizers>
                                         <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type vm:CharactersViewModel}}, Path=OpenDetailsCommand}"
                                                               CommandParameter="{Binding .}"/>
@@ -79,18 +67,18 @@
                                                    FontSize="18"/>
 
                                             <HorizontalStackLayout Spacing="5">
-                                                <Label Text="{Binding Race}" TextColor="{AppThemeBinding Light=Gray, Dark=LightGray}"/>
+                                                <Label Text="{Binding Race.Name, Converter={StaticResource TranslationConverter}}" TextColor="{AppThemeBinding Light=Gray, Dark=LightGray}"/>
                                                 <Label Text="-" TextColor="Gray"/>
-                                                <Label Text="{Binding BaseClass.Name}" TextColor="{AppThemeBinding Light=Gray, Dark=LightGray}"/>
+                                                <Label Text="{Binding BaseClass.Name, Converter={StaticResource TranslationConverter}}" TextColor="{AppThemeBinding Light=Gray, Dark=LightGray}"/>
                                             </HorizontalStackLayout>
 
-                                            <Label Text="{Binding Level, StringFormat='Level {0}'}" 
+                                            <Label Text="{Binding BaseClass.Level, StringFormat='Level {0}'}" 
                                                    FontSize="12" 
                                                    TextColor="{StaticResource Primary}"/>
                                         </VerticalStackLayout>
 
                                         <ImageButton Grid.Column="1"
-                                                     Source="trash_icon.png" 
+                                                     Source="delete.png" 
                                                      HeightRequest="24"
                                                      WidthRequest="24"
                                                      VerticalOptions="Center"

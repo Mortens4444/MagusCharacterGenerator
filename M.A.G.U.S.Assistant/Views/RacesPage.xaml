@@ -50,8 +50,8 @@
                             <Grid ColumnDefinitions="Auto,Auto" RowSpacing="6" ColumnSpacing="12" RowDefinitions="Auto, Auto, Auto, Auto, Auto, Auto, Auto, Auto, Auto">
                                 <Label Text="Strength" Grid.Row="0" Grid.Column="0"/>
                                 <Label Text="{Binding SelectedRace.Strength}" Grid.Row="0" Grid.Column="1"/>
-                                <Label Text="Speed" Grid.Row="1" Grid.Column="0"/>
-                                <Label Text="{Binding SelectedRace.Speed}" Grid.Row="1" Grid.Column="1"/>
+                                <Label Text="Quickness" Grid.Row="1" Grid.Column="0"/>
+                                <Label Text="{Binding SelectedRace.Quickness}" Grid.Row="1" Grid.Column="1"/>
                                 <Label Text="Dexterity" Grid.Row="2" Grid.Column="0"/>
                                 <Label Text="{Binding SelectedRace.Dexterity}" Grid.Row="2" Grid.Column="1"/>
                                 <Label Text="Stamina" Grid.Row="3" Grid.Column="0"/>

@@ -13,4 +13,6 @@ public class AbbitSteelBreastPlate : Thing
 	public int DamageSusceptiveValue => 8;
 
 	public override double Weight => 12;
+
+    public override string Description => "A finely wrought, single piece of Abbit-steel, meticulously hammered to protect the vital organs of the chest. It offers superior frontal defense compared to common steel, albeit at a heavy price.";
 }

@@ -6,5 +6,5 @@ public class Onyx : Gemstone
 {
     public Onyx() : base("discord, enmity") { }
 
-    public override Money Price => new Money(5);
+    public override Money Price => new(5);
 }

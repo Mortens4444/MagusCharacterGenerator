@@ -52,8 +52,7 @@ internal partial class ImagePreviewPage : NotifierPage
     {
         try
         {
-            var asm = Assembly.GetExecutingAssembly();
-            PreviewImage.Source = ImageSource.FromResource(item.ResourceId, asm);
+            PreviewImage.Source = ImageSource.FromFile(item.ResourceId);
         }
         catch
         {

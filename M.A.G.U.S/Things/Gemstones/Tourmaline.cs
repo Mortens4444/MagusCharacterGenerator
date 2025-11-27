@@ -6,5 +6,5 @@ public class Tourmaline : Gemstone
 {
     public Tourmaline() : base("combat, protection") { }
 
-    public override Money Price => new Money(10);
+    public override Money Price => new(10);
 }

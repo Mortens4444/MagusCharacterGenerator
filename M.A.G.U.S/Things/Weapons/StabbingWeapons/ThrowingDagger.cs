@@ -21,4 +21,6 @@ public class ThrowingDagger : Weapon, IMeleeWeapon
     public byte GetDamage() => (byte)DiceThrow._1K6();
 
     public override string Name => "Throwing dagger";
+
+    public override string Description => "A light, well-balanced dagger designed solely for accuracy and swift flight. Used as a surprise attack or to disable a retreating enemy.";
 }

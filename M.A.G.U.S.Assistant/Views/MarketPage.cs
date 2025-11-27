@@ -12,23 +12,11 @@ namespace M.A.G.U.S.Assistant.Views;
 
 internal partial class MarketPage : SearchListPage
 {
-    private Character? character;
-
-    public Character? Character
-    {
-        get => character;
-        set
-        {
-            character = value;
-        }
-    }
-
     public MarketPage(SearchListViewModel viewModel)
         : base(viewModel,
             "Market",
             "M.A.G.U.S.Things".CreateInstancesFromNamespace<Thing>().OrderBy(r => Lng.Elem(r.Name)).Select(r => DisplayItem.FromThing(r, null)))
     {
-        character = null;
     }
 
     public MarketPage(SearchListViewModel viewModel, Character character)
@@ -39,7 +27,7 @@ internal partial class MarketPage : SearchListPage
                 .OrderBy(r => Lng.Elem(r.Name))
                 .Select(r => DisplayItem.FromThing(r, character)))
     {
-        this.character = character;
+        viewModel.Character = character;
     }
 
     protected override void OnDetailsClicked(object sender, EventArgs e)
@@ -62,7 +50,7 @@ internal partial class MarketPage : SearchListPage
                     {
                         try
                         {
-                            Character?.Buy(args.Thing);
+                            ViewModel?.Character?.Buy(args.Thing);
                             RefreshAffordability();
                             if (Dispatcher != null)
                             {

@@ -13,4 +13,6 @@ public class BrigandineArmor : Thing
 	public int DamageSusceptiveValue => 3;
 
 	public override double Weight => 15;
+
+    public override string Description => "A flexible cuirass of heavy cloth or canvas, inside of which are riveted many small metal plates. It offers respectable defense while appearing deceptively simple and granting stealthier movement than full plate.";
 }

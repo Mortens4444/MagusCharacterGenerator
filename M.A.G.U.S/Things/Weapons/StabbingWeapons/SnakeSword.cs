@@ -21,4 +21,6 @@ public class SnakeSword : Weapon, IMeleeWeapon
     public byte GetDamage() => (byte)DiceThrow._1K10();
 
     public override string Name => "Snake sword";
+
+    public override string Description => "A thin, highly flexible sword whose blade appears to writhe and flow like a serpent, capable of delivering unexpected cuts and disarms.";
 }

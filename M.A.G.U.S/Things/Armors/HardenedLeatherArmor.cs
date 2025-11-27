@@ -13,4 +13,6 @@ public class HardenedLeatherArmor : Thing
 	public int DamageSusceptiveValue => 2;
 
 	public override double Weight => 7;
+
+    public override string Description => "Thick leather that has been boiled or treated with wax and oil to make it nearly as tough as wood. Offers good defense against bludgeons and slashes, yet remains relatively light and supple.";
 }

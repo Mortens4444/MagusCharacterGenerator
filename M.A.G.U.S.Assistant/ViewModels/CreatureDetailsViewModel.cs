@@ -8,9 +8,9 @@ using System.Windows.Input;
 
 namespace M.A.G.U.S.Assistant.ViewModels;
 
-internal class CreatureDetailsViewModel : ObservableObject
+internal partial class CreatureDetailsViewModel : ObservableObject
 {
-    private readonly Creature creature;
+    public Creature Creature { get; init; }
 
     public ICommand InitiateCommand { get; }
     public ICommand AttackCommand { get; }
@@ -20,7 +20,7 @@ internal class CreatureDetailsViewModel : ObservableObject
 
     public CreatureDetailsViewModel(Creature creature)
     {
-        this.creature = creature ?? throw new ArgumentNullException(nameof(creature));
+        Creature = creature ?? throw new ArgumentNullException(nameof(creature));
         NumberAppearing = creature.GetNumberAppearing();
         InitiateCommand = new Command(OnInitiate);
         AttackCommand = new Command(OnAttack);
@@ -28,20 +28,20 @@ internal class CreatureDetailsViewModel : ObservableObject
         LastAction = String.Empty;
     }
 
-    public string Occurrence => creature.Occurrence.ToString();
-    public string Intelligence => creature.Intelligence.ToString();
-    public string Size => creature.Size.ToString();
-    public int Speed => creature.Speed;
-    public int AttackValue => creature.AttackValue;
-    public int DefenseValue => creature.DefenseValue;
-    public int InitiatingValue => creature.InitiatingValue;
-    public int MaxHealthPoints => creature.MaxHealthPoints;
-    public int HealthPoints => creature.HealthPoints;
-    public int MaxPainTolerancePoints => creature.MaxPainTolerancePoints;
-    public int PainTolerancePoints => creature.PainTolerancePoints;
-    public byte? PoisonResistance => creature.PoisonResistance;
-    public uint ExperiencePoints => creature.ExperiencePoints;
-    public double AttacksPerRound => creature.AttacksPerRound;
+    public string Occurrence => Creature.Occurrence.ToString();
+    public string Intelligence => Creature.Intelligence.ToString();
+    public Enums.Size Size => Creature.Size;
+    public int Speed => Creature.Speed;
+    public int AttackValue => Creature.AttackValue;
+    public int DefenseValue => Creature.DefenseValue;
+    public int InitiatingValue => Creature.InitiatingValue;
+    public int MaxHealthPoints => Creature.MaxHealthPoints;
+    public int HealthPoints => Creature.HealthPoints;
+    public int MaxPainTolerancePoints => Creature.MaxPainTolerancePoints;
+    public int PainTolerancePoints => Creature.PainTolerancePoints;
+    public byte? PoisonResistance => Creature.PoisonResistance;
+    public uint ExperiencePoints => Creature.ExperiencePoints;
+    public double AttacksPerRound => Creature.AttacksPerRound;
 
     private int numberAppearing;
     public int NumberAppearing
@@ -78,7 +78,7 @@ internal class CreatureDetailsViewModel : ObservableObject
         {
             PlaceOfAttack = String.Empty;
             LastActionName = Lng.Elem("Initiate");
-            LastAction = creature.GetInitiate().ToString();
+            LastAction = Creature.GetInitiate().ToString();
         }
         catch (Exception ex)
         {
@@ -94,7 +94,7 @@ internal class CreatureDetailsViewModel : ObservableObject
             hitLocation = HitLocationSelector.Get();
             PlaceOfAttack = Lng.Elem(hitLocation.GetDescription());
             LastActionName = Lng.Elem("Attack");
-            var (impact, value) = creature.GetAttack();
+            var (impact, value) = Creature.GetAttack();
             LastAction = impact == AttackImpact.Normal ? value.ToString() : $"{Lng.Elem(impact.ToString())} {value}";
         }
         catch (Exception ex)
@@ -108,7 +108,7 @@ internal class CreatureDetailsViewModel : ObservableObject
     {
         try
         {
-            var dmg = creature.GetDamage();
+            var dmg = Creature.GetDamage();
             var final = (byte)(hitLocation == Enums.PlaceOfAttack.Head ? dmg * 2 : dmg);
             LastActionName = Lng.Elem("Damage");
             LastAction = final.ToString();

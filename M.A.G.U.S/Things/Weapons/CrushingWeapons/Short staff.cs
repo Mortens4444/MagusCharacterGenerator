@@ -21,4 +21,6 @@ public class Shortstaff : Weapon, IMeleeWeapon
     public byte GetDamage() => (byte)DiceThrow._1K3();
 
     public override string Name => "Short staff";
+
+    public override string Description => "A shorter, easily concealed staff of wood or heavy iron. Good for quick defensive work and close-quarters fighting.";
 }

@@ -22,4 +22,6 @@ public class SlanDagger : Weapon, IMeleeWeapon
     public byte GetDamage() => (byte)(DiceThrow._1K6() + 2);
 
     public override string Name => "Slan dagger";
+
+    public override string Description => "A sinister, often serrated or wickedly curved dagger associated with the dark rituals or assassination styles of the Slan cults.";
 }

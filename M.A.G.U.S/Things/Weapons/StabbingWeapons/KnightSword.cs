@@ -22,4 +22,6 @@ public class KnightSword : Weapon, IMeleeWeapon
     public byte GetDamage() => (byte)(DiceThrow._2K6() + 6);
 
     public override string Name => "Knight’s sword";
+
+    public override string Description => "A classic, straight-bladed sword of exceptional quality and balance, fit for a mounted or foot knight. Its guard is often adorned with noble insignia.";
 }

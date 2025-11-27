@@ -13,4 +13,6 @@ public class AbbitSteelScaleArmor : Thing
 	public int DamageSusceptiveValue => 4;
 
 	public override double Weight => 7;
+
+    public override string Description => "A leather or fabric backing upon which are sewn numerous small, overlapping Abbit-steel scales. It grants good coverage, shrugging off glancing blows with the resilience of the rare metal.";
 }

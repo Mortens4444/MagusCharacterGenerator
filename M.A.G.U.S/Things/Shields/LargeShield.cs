@@ -22,4 +22,6 @@ public class LargeShield : Shield
 	public byte GetDamage() => (byte)DiceThrow._1K6();
 
 	public override string Name => "Large shield";
+
+    public override string Description => "A tower of stout wood and leather, often reinforced with bands of iron, extending from the shoulder to the knee. It offers maximum coverage to the wielder, fit for defending a narrow passage or forming a shield wall, though cumbersome in quick combat.";
 }

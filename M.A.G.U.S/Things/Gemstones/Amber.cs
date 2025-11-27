@@ -6,5 +6,5 @@ public class Amber : Gemstone
 {
     public Amber() : base("illnesses") { }
 
-    public override Money Price => new Money(20);
+    public override Money Price => new(20);
 }

@@ -8,5 +8,5 @@ public class TigersEye : Gemstone
 
     public override string Name => "Tiger's Eye";
 
-    public override Money Price => new Money(4);
+    public override Money Price => new(4);
 }

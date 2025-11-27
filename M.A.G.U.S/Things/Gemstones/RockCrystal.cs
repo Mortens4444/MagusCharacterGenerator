@@ -8,5 +8,5 @@ public class RockCrystal : Gemstone
 
     public override string Name => "Rose Crystal";
 
-    public override Money Price => new Money(8);
+    public override Money Price => new(8);
 }

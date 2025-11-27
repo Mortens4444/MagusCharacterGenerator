@@ -22,4 +22,6 @@ public class Broadsword : Weapon, IMeleeWeapon
     public byte GetDamage() => (byte)(DiceThrow._3K6() + 2);
 
     override public string Name => "Sword, greatsword";
+
+    public override string Description => "A wide-bladed, heavy sword designed primarily for powerful cutting and cleaving blows rather than piercing thrusts.";
 }

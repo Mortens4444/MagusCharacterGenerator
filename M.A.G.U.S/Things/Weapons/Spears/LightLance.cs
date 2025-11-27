@@ -21,4 +21,6 @@ public class LightLance : Weapon, IMeleeWeapon
     public byte GetDamage() => (byte)(DiceThrow._1K10());
 
     override public string Name => "Light lance";
+
+    public override string Description => "A slender, shorter lance used by light horsemen or skirmishers. Easier to handle than a heavy lance but lacking its sheer destructive force.";
 }

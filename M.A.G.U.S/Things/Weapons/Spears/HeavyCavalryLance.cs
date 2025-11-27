@@ -21,4 +21,6 @@ public class HeavyCavalryLance : Weapon, IMeleeWeapon
     public byte GetDamage() => (byte)(DiceThrow._2K10());
 
     public override string Name => "Heavy cavalry lance";
+
+    public override string Description => "A thick, reinforced lance designed for the heaviest armoured knights on the largest warhorses. The shaft is often protected by a vamplate near the grip.";
 }

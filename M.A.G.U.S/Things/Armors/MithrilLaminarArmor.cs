@@ -13,4 +13,6 @@ public class MithrilLaminarArmor : Thing
 	public int DamageSusceptiveValue => 5;
 
 	public override double Weight => 5;
+
+    public override string Description => "Overlapping strips of lightweight Mithril, combining the strengths of plate and mail with incredible weight savings.";
 }

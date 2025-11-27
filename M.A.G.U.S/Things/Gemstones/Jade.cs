@@ -6,5 +6,5 @@ public class Jade : Gemstone
 {
     public Jade() : base("music, singing, dance, sounds") { }
 
-    public override Money Price => new Money(15);
+    public override Money Price => new(15);
 }

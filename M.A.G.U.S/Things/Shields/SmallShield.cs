@@ -22,4 +22,6 @@ public class SmallShield : Shield
     public byte GetDamage() => (byte)DiceThrow._1K6();
 
     public override string Name => "Small shield";
+
+    public override string Description => "A light, round buckler or tightly curved shield, small enough to be worn on the forearm. It is used not for broad coverage, but for parrying incoming blows and deflecting arrows, granting the wielder great agility.";
 }

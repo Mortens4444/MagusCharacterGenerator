@@ -18,22 +18,21 @@ namespace M.A.G.U.S.Assistant.ViewModels;
 internal partial class CharacterGeneratorViewModel : ObservableObject
 {
     private readonly SettingsService settingsService;
+    private readonly CharacterService characterService;
 
     private Character character;
     private byte baseClassLevel = 1;
 
-    public CharacterGeneratorViewModel(SettingsService settingsService)
+    public CharacterGeneratorViewModel(SettingsService settingsService, CharacterService characterService)
     {
         this.settingsService = settingsService;
+        this.characterService = characterService;
         character = new Character(settingsService);
 
         LoadAvailableTypes();
         SelectedRace = AvailableRaces.FirstOrDefault();
         SelectedClass = AvailableClasses.FirstOrDefault();
-        SelectedCombatValueModifier = AvailableCombatValueModifiers.FirstOrDefault();
     }
-
-    public ObservableCollection<string> AvailableCombatValueModifiers { get; } = ["Base", "With primary weapon", "With secondary weapon"];
 
     public ObservableCollection<IRace?> AvailableRaces { get; } = [];
 
@@ -48,17 +47,7 @@ internal partial class CharacterGeneratorViewModel : ObservableObject
         }
     }
 
-    private string selectedCombatValueModifier;
-    public string SelectedCombatValueModifier
-    {
-        get => selectedCombatValueModifier;
-        set
-        {
-            SetProperty(ref selectedCombatValueModifier, value);
-        }
-    }
-
-    IRace? selectedRace;
+    private IRace? selectedRace;
     public IRace? SelectedRace
     {
         get => selectedRace;
@@ -68,7 +57,7 @@ internal partial class CharacterGeneratorViewModel : ObservableObject
         }
     }
 
-    IClass? selectedClass;
+    private IClass? selectedClass;
     public IClass? SelectedClass
     {
         get => selectedClass;
@@ -115,6 +104,13 @@ internal partial class CharacterGeneratorViewModel : ObservableObject
         {
             WeakReferenceMessenger.Default.Send(new ShowErrorMessage(ex));
         }
+    }
+
+    [RelayCommand]
+    public void SaveCharacter()
+    {
+        characterService.SaveAsync(Character);
+        WeakReferenceMessenger.Default.Send(new ShowInfoMessage("Character saved", String.Format("Successfully saved {0}", Character.Name)));
     }
 
     [RelayCommand]

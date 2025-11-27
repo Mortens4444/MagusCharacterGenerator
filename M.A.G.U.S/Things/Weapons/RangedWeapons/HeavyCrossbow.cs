@@ -22,4 +22,6 @@ public class HeavyCrossbow : Weapon, IRangedWeapon
     public byte GetDamage() => (byte)(DiceThrow._1K10_RangedAttack() + 2);
 
     public override string Name => "Heavy crossbow";
+
+    public override string Description => "A massive, powerful crossbow requiring a crank or lever to draw its immense string. Its bolt can pierce heavy armour but takes a long time to reload.";
 }

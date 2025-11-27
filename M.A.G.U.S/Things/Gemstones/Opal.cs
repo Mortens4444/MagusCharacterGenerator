@@ -6,5 +6,5 @@ public class Opal : Gemstone
 {
     public Opal() : base("magic of natural materials") { }
 
-    public override Money Price => new Money(120);
+    public override Money Price => new(120);
 }

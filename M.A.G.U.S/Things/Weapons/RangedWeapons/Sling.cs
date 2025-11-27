@@ -19,4 +19,6 @@ public class Sling : Weapon, IRangedWeapon
 
     [DiceThrow(ThrowType._1K5)]
     public byte GetDamage() => (byte)DiceThrow._1K5_RangedAttack();
+
+    public override string Description => "A simple strap of leather or woven material used to hurl stones or lead pellets. Though cheap and requiring practice, it can deliver a deadly blow at range.";
 }

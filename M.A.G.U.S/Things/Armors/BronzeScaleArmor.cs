@@ -13,4 +13,6 @@ public class BronzeScaleArmor : Thing
     public int DamageSusceptiveValue => 2;
 
     public override double Weight => 18;
+
+    public override string Description => "Numerous small bronze scales attached to a strong backing. A good, affordable defense that sheds light blows well, though vulnerable to a direct piercing thrust between the scales.";
 }

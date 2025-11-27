@@ -6,5 +6,5 @@ public class Hematite : Gemstone
 {
     public Hematite() : base("combat, attack") { }
 
-    public override Money Price => new Money(6);
+    public override Money Price => new(6);
 }

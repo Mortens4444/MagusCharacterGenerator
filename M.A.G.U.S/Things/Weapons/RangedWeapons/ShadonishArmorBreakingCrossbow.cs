@@ -19,4 +19,6 @@ public class ShadonishArmorBreakingCrossbow : Weapon, IRangedWeapon
     public byte GetDamage() => (byte)DiceThrow._2K10_RangedAttack();
 
     public override string Name => "Shadonian armor-piercing crossbow";
+
+    public override string Description => "A brutally powerful crossbow engineered by Shadonish smiths, specifically designed to penetrate the thickest plate armour with a heavy, piercing bolt.";
 }

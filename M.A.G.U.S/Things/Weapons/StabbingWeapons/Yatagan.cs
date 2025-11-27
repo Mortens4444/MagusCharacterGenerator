@@ -22,4 +22,6 @@ public class Yatagan : Weapon, IMeleeWeapon
     public byte GetDamage() => (byte)(DiceThrow._1K6() + 2);
 
     public override string Name => "Sword, yataghan";
+
+    public override string Description => "A curved, single-edged sword with a distinctive flared tip, common in Eastern armies. Designed for powerful, deep cutting strokes.";
 }

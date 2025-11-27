@@ -13,4 +13,6 @@ public class RingArmor : Thing
 	public int DamageSusceptiveValue => 1;
 
 	public override double Weight => 12;
+
+    public override string Description => "A garment, often leather or thick cloth, onto which large metal rings are individually stitched or linked. Provides minimal protection compared to true mail, but is cheap and quick to repair.";
 }

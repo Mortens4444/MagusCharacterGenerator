@@ -21,4 +21,6 @@ public class TwoHandedMace : Weapon, IMeleeWeapon
     public byte GetDamage() => (byte)DiceThrow._3K6();
 
     public override string Name => "Two-handed mace";
+
+    public override string Description => "A massive, heavy mace requiring both hands to wield. Its blows can shatter stone and iron, making it the weapon of giants or highly trained, powerful champions.";
 }

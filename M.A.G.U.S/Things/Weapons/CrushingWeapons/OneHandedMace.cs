@@ -21,4 +21,6 @@ public class OneHandedMace : Weapon, IMeleeWeapon
     public byte GetDamage() => (byte)DiceThrow._1K6();
 
     public override string Name => "One-handed mace";
+
+    public override string Description => "A stout, one-handed club with a weighted, often flanged, metal head. Excellent for denting helms and breaking bones, especially effective against armoured foes.";
 }

@@ -6,5 +6,5 @@ public class Moonstone : Gemstone
 {
     public Moonstone() : base("shapeshifters, roaming beasts, night terrors") { }
 
-    public override Money Price => new Money(7);
+    public override Money Price => new(7);
 }

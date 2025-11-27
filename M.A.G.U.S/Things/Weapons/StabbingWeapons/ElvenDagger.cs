@@ -22,4 +22,6 @@ public class ElvenDagger : Weapon, IMeleeWeapon
     public byte GetDamage() => (byte)(DiceThrow._1K6() + 1);
 
     public override string Name => "Elven dagger";
+
+    public override string Description => "A slender, beautifully crafted dagger of Elven make, known for its keen edge and fine balance, often bearing magical properties.";
 }

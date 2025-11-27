@@ -21,4 +21,6 @@ public class SlanSword : Weapon, IMeleeWeapon
     public byte GetDamage() => (byte)(DiceThrow._1K10() + 2);
 
     public override string Name => "Slan sword";
+
+    public override string Description => "A full-sized, ritualistic or combat sword used by the Slan cultists, likely bearing disturbing symbols or unconventional, wicked geometry.";
 }

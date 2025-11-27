@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFrameworks>net9.0-android;net9.0-ios;net9.0-maccatalyst</TargetFrameworks>
     <TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('windows'))">$(TargetFrameworks);net9.0-windows10.0.19041.0</TargetFrameworks>
@@ -23,7 +23,7 @@
     <ApplicationId>com.mortens.MAGUS.Assistant</ApplicationId>
     <!-- Versions -->
     <MajorVersion>1</MajorVersion>
-    <MinorVersion>15</MinorVersion>
+    <MinorVersion>16</MinorVersion>
     <BuildNumber>0</BuildNumber>
     <PatchNumber>0</PatchNumber>
     <FileVersion>$(MajorVersion).$(MinorVersion).$(BuildNumber).$(PatchNumber)</FileVersion>
@@ -145,6 +145,26 @@
     <MauiAsset Remove="Resources\Raw\zombie_eating.mp3" />
   </ItemGroup>
   <ItemGroup>
+    <MauiImage Remove="Resources\Images\images_manifest.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Remove="Resources\Images\Accomodation\bath.png" />
+    <None Remove="Resources\Images\Accomodation\room_ornate.png" />
+    <None Remove="Resources\Images\Accomodation\room_separate_bed.png" />
+    <None Remove="Resources\Images\Accomodation\room_single.png" />
+    <None Remove="Resources\Images\Accomodation\room_suite.png" />
+    <None Remove="Resources\Images\Accomodation\stables.png" />
+    <None Remove="Resources\Images\Animals\calf.png" />
+    <None Remove="Resources\Images\Animals\camel.png" />
+    <None Remove="Resources\Images\Animals\cat.png" />
+    <None Remove="Resources\Images\Animals\cow.png" />
+    <None Remove="Resources\Images\Animals\dog_guard.png" />
+    <None Remove="Resources\Images\Animals\goat.png" />
+    <None Remove="Resources\Images\Animals\goose.png" />
+    <None Remove="Resources\Images\Animals\hen.png" />
+    <None Remove="Resources\Images\Animals\horse_traveler.png" />
+    <None Remove="Resources\Images\Animals\pig.png" />
+    <None Remove="Resources\Images\Animals\turkey.png" />
     <None Remove="Resources\Images\Bestiary\bat.png" />
     <None Remove="Resources\Images\Bestiary\bear.png" />
     <None Remove="Resources\Images\Bestiary\crocodile.png" />
@@ -207,66 +227,67 @@
     <None Remove="Resources\Images\Characters\wizard.png" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Resources\Images\Bestiary\bat.png" />
-    <EmbeddedResource Include="Resources\Images\Bestiary\bear.png" />
-    <EmbeddedResource Include="Resources\Images\Bestiary\crocodile.png" />
-    <EmbeddedResource Include="Resources\Images\Bestiary\dragon.png" />
-    <EmbeddedResource Include="Resources\Images\Bestiary\eagle.png" />
-    <EmbeddedResource Include="Resources\Images\Bestiary\falcon.png" />
-    <EmbeddedResource Include="Resources\Images\Bestiary\giant_spider.png" />
-    <EmbeddedResource Include="Resources\Images\Bestiary\goblin.png" />
-    <EmbeddedResource Include="Resources\Images\Bestiary\golem.png" />
-    <EmbeddedResource Include="Resources\Images\Bestiary\heavy_armored_hourse.png" />
-    <EmbeddedResource Include="Resources\Images\Bestiary\light_armored_hourse.png" />
-    <EmbeddedResource Include="Resources\Images\Bestiary\lizard_wizard.png" />
-    <EmbeddedResource Include="Resources\Images\Bestiary\mummy.png" />
-    <EmbeddedResource Include="Resources\Images\Bestiary\orc.png" />
-    <EmbeddedResource Include="Resources\Images\Bestiary\orc_2.png" />
-    <EmbeddedResource Include="Resources\Images\Bestiary\panther.png" />
-    <EmbeddedResource Include="Resources\Images\Bestiary\rhyno.png" />
-    <EmbeddedResource Include="Resources\Images\Bestiary\shark.png" />
-    <EmbeddedResource Include="Resources\Images\Bestiary\spider.png" />
-    <EmbeddedResource Include="Resources\Images\Bestiary\vampire.png" />
-    <EmbeddedResource Include="Resources\Images\Bestiary\war_dog.png" />
-    <EmbeddedResource Include="Resources\Images\Bestiary\werewolf.png" />
-    <EmbeddedResource Include="Resources\Images\Bestiary\wolf.png" />
-    <EmbeddedResource Include="Resources\Images\Bestiary\zombie.png" />
-    <EmbeddedResource Include="Resources\Images\Characters\arel_priest.png" />
-    <EmbeddedResource Include="Resources\Images\Characters\bard.png" />
-    <EmbeddedResource Include="Resources\Images\Characters\court_goblin.png" />
-    <EmbeddedResource Include="Resources\Images\Characters\court_orc.png" />
-    <EmbeddedResource Include="Resources\Images\Characters\craftsman.png" />
-    <EmbeddedResource Include="Resources\Images\Characters\dwarf.png" />
-    <EmbeddedResource Include="Resources\Images\Characters\dwarf_2.png" />
-    <EmbeddedResource Include="Resources\Images\Characters\elf.png" />
-    <EmbeddedResource Include="Resources\Images\Characters\fire_wizard.png" />
-    <EmbeddedResource Include="Resources\Images\Characters\freenhar.png" />
-    <EmbeddedResource Include="Resources\Images\Characters\gladiator.png" />
-    <EmbeddedResource Include="Resources\Images\Characters\gladiator_2.png" />
-    <EmbeddedResource Include="Resources\Images\Characters\guard.png" />
-    <EmbeddedResource Include="Resources\Images\Characters\half_elf.png" />
-    <EmbeddedResource Include="Resources\Images\Characters\half_elf_2.png" />
-    <EmbeddedResource Include="Resources\Images\Characters\headhunter.png" />
-    <EmbeddedResource Include="Resources\Images\Characters\healer.png" />
-    <EmbeddedResource Include="Resources\Images\Characters\khal.png" />
-    <EmbeddedResource Include="Resources\Images\Characters\khal_2.png" />
-    <EmbeddedResource Include="Resources\Images\Characters\knight.png" />
-    <EmbeddedResource Include="Resources\Images\Characters\merchant.png" />
-    <EmbeddedResource Include="Resources\Images\Characters\nobel.png" />
-    <EmbeddedResource Include="Resources\Images\Characters\peasant.png" />
-    <EmbeddedResource Include="Resources\Images\Characters\priest.png" />
-    <EmbeddedResource Include="Resources\Images\Characters\ranagol_paladin.png" />
-    <EmbeddedResource Include="Resources\Images\Characters\reptilian.png" />
-    <EmbeddedResource Include="Resources\Images\Characters\slan.png" />
-    <EmbeddedResource Include="Resources\Images\Characters\slan_2.png" />
-    <EmbeddedResource Include="Resources\Images\Characters\soldier.png" />
-    <EmbeddedResource Include="Resources\Images\Characters\thief.png" />
-    <EmbeddedResource Include="Resources\Images\Characters\warlock.png" />
-    <EmbeddedResource Include="Resources\Images\Characters\wier.png" />
-    <EmbeddedResource Include="Resources\Images\Characters\wiseman.png" />
-    <EmbeddedResource Include="Resources\Images\Characters\witch.png" />
-    <EmbeddedResource Include="Resources\Images\Characters\witch_2.png" />
-    <EmbeddedResource Include="Resources\Images\Characters\wizard.png" />
+    <MauiImage Include="Resources\Images\Bestiary\bat.png" />
+    <MauiImage Include="Resources\Images\Bestiary\bear.png" />
+    <MauiImage Include="Resources\Images\Bestiary\crocodile.png" />
+    <MauiImage Include="Resources\Images\Bestiary\dragon.png" />
+    <MauiImage Include="Resources\Images\Bestiary\eagle.png" />
+    <MauiImage Include="Resources\Images\Bestiary\falcon.png" />
+    <MauiImage Include="Resources\Images\Bestiary\giant_spider.png" />
+    <MauiImage Include="Resources\Images\Bestiary\goblin.png" />
+    <MauiImage Include="Resources\Images\Bestiary\golem.png" />
+    <MauiImage Include="Resources\Images\Animals\horse_heavy_war.png" />
+    <MauiImage Include="Resources\Images\Animals\horse_light_war.png" />
+    <MauiImage Include="Resources\Images\Bestiary\lizard_wizard.png" />
+    <MauiImage Include="Resources\Images\Bestiary\mummy.png" />
+    <MauiImage Include="Resources\Images\Bestiary\orc.png" />
+    <MauiImage Include="Resources\Images\Bestiary\orc_2.png" />
+    <MauiImage Include="Resources\Images\Bestiary\panther.png" />
+    <MauiImage Include="Resources\Images\Bestiary\rhyno.png" />
+    <MauiImage Include="Resources\Images\Bestiary\shark.png" />
+    <MauiImage Include="Resources\Images\Bestiary\spider.png" />
+    <MauiImage Include="Resources\Images\Bestiary\vampire.png" />
+    <MauiImage Include="Resources\Images\Animals\dog_war.png" />
+    <MauiImage Include="Resources\Images\Bestiary\werewolf.png" />
+    <MauiImage Include="Resources\Images\Bestiary\wolf.png" />
+    <MauiImage Include="Resources\Images\Bestiary\zombie.png" />
+    <MauiImage Include="Resources\Images\Characters\arel_priest.png" />
+    <MauiImage Include="Resources\Images\Characters\bard.png" />
+    <MauiImage Include="Resources\Images\Characters\court_goblin.png" />
+    <MauiImage Include="Resources\Images\Characters\court_orc.png" />
+    <MauiImage Include="Resources\Images\Characters\craftsman.png" />
+    <MauiImage Include="Resources\Images\Characters\dwarf.png" />
+    <MauiImage Include="Resources\Images\Characters\dwarf_2.png" />
+    <MauiImage Include="Resources\Images\Characters\elf.png" />
+    <MauiImage Include="Resources\Images\Characters\fire_wizard.png" />
+    <MauiImage Include="Resources\Images\Characters\freenhar.png" />
+    <MauiImage Include="Resources\Images\Characters\gladiator.png" />
+    <MauiImage Include="Resources\Images\Characters\gladiator_2.png" />
+    <MauiImage Include="Resources\Images\Characters\guard.png" />
+    <MauiImage Include="Resources\Images\Characters\half_elf.png" />
+    <MauiImage Include="Resources\Images\Characters\half_elf_2.png" />
+    <MauiImage Include="Resources\Images\Characters\headhunter.png" />
+    <MauiImage Include="Resources\Images\Characters\healer.png" />
+    <MauiImage Include="Resources\Images\Characters\khal.png" />
+    <MauiImage Include="Resources\Images\Characters\khal_2.png" />
+    <MauiImage Include="Resources\Images\Characters\knight.png" />
+    <MauiImage Include="Resources\Images\Characters\merchant.png" />
+    <MauiImage Include="Resources\Images\Characters\nobel.png" />
+    <MauiImage Include="Resources\Images\Characters\peasant.png" />
+    <MauiImage Include="Resources\Images\Characters\priest.png" />
+    <MauiImage Include="Resources\Images\Characters\ranagol_paladin.png" />
+    <MauiImage Include="Resources\Images\Characters\reptilian.png" />
+    <MauiImage Include="Resources\Images\Characters\slan.png" />
+    <MauiImage Include="Resources\Images\Characters\slan_2.png" />
+    <MauiImage Include="Resources\Images\Characters\soldier.png" />
+    <MauiImage Include="Resources\Images\Characters\thief.png" />
+    <MauiImage Include="Resources\Images\Characters\warlock.png" />
+    <MauiImage Include="Resources\Images\Characters\wier.png" />
+    <MauiImage Include="Resources\Images\Characters\wiseman.png" />
+    <MauiImage Include="Resources\Images\Characters\witch.png" />
+    <MauiImage Include="Resources\Images\Characters\witch_2.png" />
+    <MauiImage Include="Resources\Images\Characters\wizard.png" />
+    <EmbeddedResource Include="Resources\Images\images_manifest.txt" />
     <EmbeddedResource Include="Resources\Raw\bear_growl.wav" />
     <EmbeddedResource Include="Resources\Raw\beast.mp3" />
     <EmbeddedResource Include="Resources\Raw\bird_chirping.mp3" />
@@ -310,7 +331,7 @@
     <PackageReference Include="Microsoft.Maui.Graphics" Version="9.0.120" />
     <PackageReference Include="Microsoft.Maui.Graphics.Skia" Version="9.0.120" />
     <PackageReference Include="Mtf.Maui.Controls" Version="2.0.40" />
-    <PackageReference Include="Mtf.MAUI.LanguageService" Version="1.0.53" />
+    <PackageReference Include="Mtf.MAUI.LanguageService" Version="1.0.55" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.4" />
     <PackageReference Include="Plugin.Maui.Audio" Version="4.0.0" />
     <PackageReference Include="sqlite-net-pcl" Version="1.9.172" />
@@ -321,6 +342,9 @@
   <ItemGroup>
     <Compile Update="Views\CharacterGeneratorPage.xaml.cs">
       <DependentUpon>CharacterGeneratorPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\CharacterDetailsPage.xaml.cs">
+      <DependentUpon>CharacterDetailsPage.xaml</DependentUpon>
     </Compile>
     <Compile Update="Views\ItemDetailsPage.xaml.cs">
       <DependentUpon>ItemDetailsPage.xaml</DependentUpon>
@@ -333,6 +357,9 @@
     <MauiXaml Update="Views\AboutPage.xaml">
       <Generator>MSBuild:Compile</Generator>
     </MauiXaml>
+    <MauiXaml Update="Views\CharacterDetailsView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </MauiXaml>
     <MauiXaml Update="Views\CharacterGeneratorPage.xaml">
       <Generator>MSBuild:Compile</Generator>
     </MauiXaml>
@@ -340,6 +367,9 @@
       <Generator>MSBuild:Compile</Generator>
     </MauiXaml>
     <MauiXaml Update="Views\ClassesPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </MauiXaml>
+    <MauiXaml Update="Views\CharacterDetailsPage.xaml">
       <Generator>MSBuild:Compile</Generator>
     </MauiXaml>
     <MauiXaml Update="Views\ItemDetailsPage.xaml">
@@ -386,6 +416,50 @@
     </MauiXaml>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Resources\Images\Gems\" />
+    <Folder Include="Resources\Images\Gemstones\" />
+    <Folder Include="Resources\Images\Armors\" />
+    <Folder Include="Resources\Images\Clothes\" />
+    <Folder Include="Resources\Images\Debauchery\" />
+    <Folder Include="Resources\Images\Travelling\" />
+    <Folder Include="Resources\Images\Trappings\" />
+    <Folder Include="Resources\Images\Shields\" />
+    <Folder Include="Resources\Images\Other\" />
+    <Folder Include="Resources\Images\Weapons\CrushingWeapons\" />
+    <Folder Include="Resources\Images\Weapons\StabbingWeapons\" />
+    <Folder Include="Resources\Images\Weapons\Spears\" />
+    <Folder Include="Resources\Images\Weapons\RangedWeapons\" />
+    <Folder Include="Resources\Images\Weapons\OtherWeapons\" />
   </ItemGroup>
+  <ItemGroup>
+    <MauiImage Include="Resources\Images\Accomodation\bath.png" />
+    <MauiImage Include="Resources\Images\Accomodation\room_common_dormitory.png" />
+    <MauiImage Include="Resources\Images\Accomodation\room_ornate.png" />
+    <MauiImage Include="Resources\Images\Accomodation\room_separate_bed.png" />
+    <MauiImage Include="Resources\Images\Accomodation\room_single.png" />
+    <MauiImage Include="Resources\Images\Accomodation\room_suite.png" />
+    <MauiImage Include="Resources\Images\Accomodation\stables.png" />
+    <MauiImage Include="Resources\Images\Animals\calf.png" />
+    <MauiImage Include="Resources\Images\Animals\camel.png" />
+    <MauiImage Include="Resources\Images\Animals\cat.png" />
+    <MauiImage Include="Resources\Images\Animals\cow.png" />
+    <MauiImage Include="Resources\Images\Animals\dog_guard.png" />
+    <MauiImage Include="Resources\Images\Animals\goat.png" />
+    <MauiImage Include="Resources\Images\Animals\goose.png" />
+    <MauiImage Include="Resources\Images\Animals\hen.png" />
+    <MauiImage Include="Resources\Images\Animals\horse_traveler.png" />
+    <MauiImage Include="Resources\Images\Animals\pig.png" />
+    <MauiImage Include="Resources\Images\Animals\turkey.png" />
+  </ItemGroup>
+  <Target Name="GenerateImageManifest" BeforeTargets="BeforeBuild">
+    <ItemGroup>
+      <AllImages Include="@(MauiImage)" />
+    </ItemGroup>
+
+    <PropertyGroup>
+      <ImageManifestPath>$(ProjectDir)Resources\Images\images_manifest.txt</ImageManifestPath>
+    </PropertyGroup>
+
+    <!--<WriteLinesToFile File="$(ImageManifestPath)" Lines="@(AllImages->'%(RelativeDir)%(Filename)%(Extension)')" Overwrite="true" Encoding="UTF-8" />-->
+    <WriteLinesToFile File="$(ImageManifestPath)" Lines="@(AllImages->'%(Filename)%(Extension)')" Overwrite="true" Encoding="UTF-8" />
+  </Target>
 </Project>

@@ -6,5 +6,5 @@ public class Agate : Gemstone
 {
     public Agate() : base("sleep") { }
 
-    public override Money Price => new Money(2);
+    public override Money Price => new(2);
 }

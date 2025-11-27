@@ -13,4 +13,6 @@ public class MithrilBreastplate : Thing
 	public int DamageSusceptiveValue => 6;
 
 	public override double Weight => 6;
+
+    public override string Description => "A breastplate forged from Mithril, the legendary light metal. It offers defense rivalling the heaviest steel, yet feels light as silk upon the body, prized by all warriors.";
 }

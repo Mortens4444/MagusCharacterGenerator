@@ -19,4 +19,6 @@ public class Knife : Weapon, IMeleeWeapon
 
     [DiceThrow(ThrowType._1K5)]
     public byte GetDamage() => (byte)DiceThrow._1K5();
+
+    public override string Description => "A small, utilitarian blade used for carving, skinning, preparing food, and other common tasks. Every man should carry one.";
 }

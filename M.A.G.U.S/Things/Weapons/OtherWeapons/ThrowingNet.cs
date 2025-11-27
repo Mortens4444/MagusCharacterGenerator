@@ -19,4 +19,6 @@ public class ThrowingNet : Weapon, IMeleeWeapon
     public byte GetDamage() => 0;
 
     public override string Name => "Throwing net";
+
+    public override string Description => "A weighted, woven net thrown to entangle and immobilize an enemy, allowing the wielder time to close in or escape.";
 }

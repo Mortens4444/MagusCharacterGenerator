@@ -20,4 +20,6 @@ public class Ramiera : Weapon, IMeleeWeapon
     [DiceThrow(ThrowType._1K6)]
     [DiceThrowModifier(1)]
     public byte GetDamage() => (byte)(DiceThrow._1K6() + 1);
+
+    public override string Description => "A long, thin, piercing sword with a sharp point, favoured by those who fight in plate armour and seek the gaps in their opponent's defense.";
 }

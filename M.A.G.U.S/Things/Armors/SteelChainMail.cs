@@ -13,4 +13,6 @@ public class SteelChainmail : Thing
 	public int DamageSusceptiveValue => 3;
 
 	public override double Weight => 20;
+
+    public override string Description => "The classic mail shirt of interlocking steel rings. Offers excellent defense against slicing weapons and is flexible, making it the standard protection for most professional soldiers.";
 }

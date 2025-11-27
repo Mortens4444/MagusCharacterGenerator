@@ -22,4 +22,6 @@ public class MediumShield : Shield
     public byte GetDamage() => (byte)DiceThrow._1K6();
 
     public override string Name => "Medium shield";
+
+    public override string Description => "A common, round or kite-shaped shield, usually crafted from thick planking covered in hide and reinforced by a central boss of steel. It strikes a fine balance between protection and mobility, the standard defense for most foot soldiers.";
 }

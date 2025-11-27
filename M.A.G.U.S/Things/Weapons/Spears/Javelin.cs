@@ -22,4 +22,6 @@ public class Javelin : Weapon, IMeleeWeapon
     public byte GetDamage() => (byte)(DiceThrow._1K6() + 1);
 
     public override string Name => "Spear/javelin";
+
+    public override string Description => "A light, slender throwing spear designed to be cast at the foe before closing to melee. Easily carried in a sheaf and effective against unarmoured targets.";
 }

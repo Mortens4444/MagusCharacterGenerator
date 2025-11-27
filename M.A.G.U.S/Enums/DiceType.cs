@@ -13,5 +13,6 @@ public enum DiceType
     [Description("D10")] D10,
     [Description("D12")] D12,
     [Description("D20")] D20,
-    [Description("D100")] D100
+    [Description("D100")] D100,
+    Custom
 }

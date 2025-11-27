@@ -21,4 +21,6 @@ public class CarvedClub : Weapon, IMeleeWeapon
     public byte GetDamage() => (byte)DiceThrow._1K6();
 
     public override string Name => "Club";
+
+    public override string Description => "A heavy cudgel of wood, often crudely fashioned but decorated with simple carvings. The common weapon of bandits, peasants, or those with little coin for true steel.";
 }

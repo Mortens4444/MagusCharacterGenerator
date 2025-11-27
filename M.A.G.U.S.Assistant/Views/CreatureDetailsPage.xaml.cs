@@ -1,16 +1,14 @@
 using M.A.G.U.S.Assistant.ViewModels;
-using M.A.G.U.S.Bestiary;
 using Mtf.LanguageService;
 
 namespace M.A.G.U.S.Assistant.Views;
 
 internal partial class CreatureDetailsPage : NotifierPage
 {
-    public CreatureDetailsPage(Creature creature)
+    public CreatureDetailsPage(CreatureDetailsViewModel creatureDetailsViewModel)
     {
-        ArgumentNullException.ThrowIfNull(creature);
         InitializeComponent();
-        Title = Lng.Elem(creature.Name);
-        BindingContext = new CreatureDetailsViewModel(creature);
+        Title = Lng.Elem(creatureDetailsViewModel.Creature.Name);
+        BindingContext = creatureDetailsViewModel;
     }
 }

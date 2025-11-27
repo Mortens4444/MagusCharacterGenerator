@@ -13,4 +13,6 @@ public class BronzeBreastPlate : Thing
 	public int DamageSusceptiveValue => 3;
 
 	public override double Weight => 20;
+
+    public override string Description => "A thick bronze plate cast or hammered to protect the chest. Less resilient than steel but more affordable, it serves as the core defense for guards or soldiers in lands where iron is scarce.";
 }

@@ -21,4 +21,6 @@ public class TwoHandedHatchet : Weapon, IMeleeWeapon
     public byte GetDamage() => (byte)DiceThrow._3K6();
 
     public override string Name => "Two-handed axe";
+
+    public override string Description => "A heavy axe requiring both hands, used to split wood and foes alike. A weapon of pure destructive force.";
 }

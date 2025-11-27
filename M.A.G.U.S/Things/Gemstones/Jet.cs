@@ -6,5 +6,5 @@ public class Jet : Gemstone
 {
     public Jet() : base("elementals (primordial earth)") { }
 
-    public override Money Price => new Money(12);
+    public override Money Price => new(12);
 }

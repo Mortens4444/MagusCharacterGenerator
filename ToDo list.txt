@@ -1,12 +1,7 @@
-- Print Character sheet (Karakterlap nyomtatása)
-- Add new classes (Warriors, etc.) - Új kasztok (harcosok, stb...)
-- Ynev fõbb helyei
-- Karakter származás
-- FIXME: Multi-class
-- Play Videos (Videóklippek lejátszása)
-
+- Market hide button, click and open like in ImagesPage, cannot buy with null Character
+- Sort equipment
 - Problem with total weight
-- Bestriary: _1_5_meters
+- Harcérték módodítók elosztása
 
 - Add weapon to character (easily changable way) S
 - Max. Distance for a day S
@@ -28,6 +23,13 @@
 - Show stories and create digital map, for them (map, and sounds), store story descriptions XXXL
 - Create a story for every qualification XXXL
 - Magic XXXL (Mágiarendszer)
+
+- Print Character sheet (Karakterlap nyomtatása)
+- Add new classes (Warriors, etc.) - Új kasztok (harcosok, stb...)
+- Ynev fõbb helyei
+- Karakter származás
+- FIXME: Multi-class
+- Play Videos (Videóklippek lejátszása)
 
 https://www.yumpu.com/hu/document/view/5842996/magus-puska-071-verzio-http-wwwszerepjatektk/5
 https://nemaakos.wordpress.com/magus/jatek-elmelet/harc-es-szimulacio/

@@ -36,7 +36,7 @@ internal partial class SearchListPage : NotifierPage
             {
                 var page = (Page)(objToInspect is DisplayItem displayItem ?
                     displayItem.Source is Creature creature ? 
-                        new CreatureDetailsPage(creature) :
+                        new CreatureDetailsPage(new CreatureDetailsViewModel(creature)) :
                         new ItemDetailsPage(displayItem.Source as Thing) :
                     new ObjectInspectorPage(new ObjectInspectorViewModel(), objToInspect));
                 Navigation.PushAsync(page);

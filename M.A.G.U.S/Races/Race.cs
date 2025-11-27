@@ -12,6 +12,8 @@ public abstract class Race : IRace
 
     public virtual string Name => GetType().Name;
 
+    public override string ToString() => Name;
+
     public virtual QualificationList Qualifications => [];
 
     public virtual List<PercentQualification> PercentQualifications => [];

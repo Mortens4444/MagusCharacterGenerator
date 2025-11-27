@@ -21,4 +21,6 @@ public class KahreiCrossbow : Weapon, IRangedWeapon
     public byte GetDamage() => (byte)DiceThrow._1K3_RangedAttack();
 
     public override string Name => "Kahrei crossbow";
+
+    public override string Description => "A unique, intricately designed crossbow of Kahrei origin, known for its unique firing mechanism and tendency to favour heavier, specialized bolts.";
 }

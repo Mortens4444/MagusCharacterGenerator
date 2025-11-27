@@ -20,4 +20,6 @@ public class Halberd : Weapon, IMeleeWeapon
     [DiceThrow(ThrowType._2K6)]
     [DiceThrowModifier(2)]
     public byte GetDamage() => (byte)(DiceThrow._2K6() + 2);
+
+    public override string Description => "A versatile polearm featuring an axe blade for chopping, a sharp spike for thrusting, and a hook for dismounting riders. The weapon of elite city guards.";
 }

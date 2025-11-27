@@ -21,4 +21,6 @@ public class BattleAx : Weapon, IMeleeWeapon
     public byte GetDamage() => (byte)DiceThrow._1K10();
 
     public override string Name => "Battle pick";
+
+    public override string Description => "A heavy-bladed axe with a long handle, designed for chopping through shields, mail, and flesh with crushing force.";
 }

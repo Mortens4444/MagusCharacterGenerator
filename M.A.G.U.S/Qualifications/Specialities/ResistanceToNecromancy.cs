@@ -6,5 +6,5 @@ public class ResistanceToNecromancy(sbyte resistanceToMagicModifier) : SpecialQu
 {
     public sbyte ResistanceToMagicModifier { get; } = resistanceToMagicModifier;
 
-    public override string Name => "Resistance to necromancy";
+    public override string Name => resistanceToMagicModifier < 0 ? "Weak necromantic resistance" : "Strong necromantic resistance";
 }

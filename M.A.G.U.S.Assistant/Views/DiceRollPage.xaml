@@ -4,6 +4,7 @@
                 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
                 xmlns:mc="clr-namespace:Mtf.Maui.Controls;assembly=Mtf.Maui.Controls"
                 xmlns:vm="clr-namespace:M.A.G.U.S.Assistant.ViewModels"
+                xmlns:enum="clr-namespace:M.A.G.U.S.Enums;assembly=M.A.G.U.S."
                 xmlns:conv="clr-namespace:Mtf.LanguageService.MAUI.Converters;assembly=Mtf.LanguageService.MAUI"
                 x:Class="M.A.G.U.S.Assistant.Views.DiceRollPage"
                 x:ClassModifier="internal"
@@ -33,6 +34,20 @@
                     VerticalTextAlignment="Center"
                     VerticalOptions="End" />
 
+            <HorizontalStackLayout Grid.Column="1" Grid.Row="0" Spacing="8">
+                <HorizontalStackLayout.Triggers>
+                    <DataTrigger TargetType="HorizontalStackLayout" Binding="{Binding SelectedDice}" Value="{x:Static enum:DiceType.Custom}">
+                        <Setter Property="IsVisible" Value="True" />
+                    </DataTrigger>
+                    <DataTrigger TargetType="HorizontalStackLayout" Binding="{Binding SelectedDice}" Value="{x:Static enum:DiceType.D2}">
+                        <Setter Property="IsVisible" Value="False" />
+                    </DataTrigger>
+                </HorizontalStackLayout.Triggers>
+
+                <mc:NumericUpDownWithLabel Label="From" Minimum="1" Maximum="10000" Value="{Binding CustomFrom}" WidthRequest="90" />
+                <mc:NumericUpDownWithLabel Label="To"   Minimum="1" Maximum="10000" Value="{Binding CustomTo}"  WidthRequest="90" />
+            </HorizontalStackLayout>
+            
             <Button Text="Throw"
                     Grid.Column="2"
                     Command="{Binding RollCommand}"

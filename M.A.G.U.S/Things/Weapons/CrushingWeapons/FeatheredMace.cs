@@ -22,4 +22,6 @@ public class FeatheredMace : Weapon, IMeleeWeapon
     public byte GetDamage() => (byte)(DiceThrow._1K6() + 1);
 
     public override string Name => "Flail (thresher)";
+
+    public override string Description => "A heavy, headed weapon bearing several flat, sharp flanges radiating from the centre. Designed to pierce and rend heavy plate armour with repeated blows.";
 }

@@ -6,11 +6,11 @@ public abstract class Thing
 {
     public virtual string Name => GetType().Name;
 
-    public string? ImageName => Name.ToLower();
+    public string ImageName => $"{Name.ToLower().Replace(" ", "_").Replace(",", String.Empty)}.png";
 
-    public virtual Money Price => new Money(1);
+    public virtual Money Price => new(1);
 
-    public string? Description { get; set; }
+    public virtual string Description { get; protected set; } = "";
 
     /// <summary>
     /// Weight in kilograms.

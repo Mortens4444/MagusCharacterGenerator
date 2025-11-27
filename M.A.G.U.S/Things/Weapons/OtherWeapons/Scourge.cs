@@ -19,4 +19,6 @@ public class Scourge : Weapon, IMeleeWeapon
 
     [DiceThrow(ThrowType._1K3)]
     public byte GetDamage() => (byte)DiceThrow._1K3();
+
+    public override string Description => "A multi-tailed whip, often tipped with lead or sharp metal pieces. Used for painful punishment and torture, or as a terrifying weapon in combat.";
 }

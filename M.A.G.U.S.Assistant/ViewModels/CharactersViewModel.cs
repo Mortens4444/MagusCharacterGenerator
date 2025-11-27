@@ -1,14 +1,15 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using M.A.G.U.S.Assistant.Database.Repositories;
+using M.A.G.U.S.Assistant.Services;
 using M.A.G.U.S.GameSystem;
+using Mtf.LanguageService;
 using System.Collections.ObjectModel;
 
 namespace M.A.G.U.S.Assistant.ViewModels;
 
-internal partial class CharactersViewModel(CharacterRepository characterRepository) : ObservableObject
+internal partial class CharactersViewModel(CharacterService characterService) : ObservableObject
 {
-    private readonly CharacterRepository characterRepository = characterRepository;
+    private readonly CharacterService characterService = characterService;
     private bool isLoading;
     private bool isEmpty;
 
@@ -26,6 +27,7 @@ internal partial class CharactersViewModel(CharacterRepository characterReposito
         set => SetProperty(ref isEmpty, value);
     }
 
+    [RelayCommand]
     public async Task LoadCharactersAsync()
     {
         if (IsLoading)
@@ -36,13 +38,17 @@ internal partial class CharactersViewModel(CharacterRepository characterReposito
         try
         {
             IsLoading = true;
-            var list = await characterRepository.GetAllCharactersAsync().ConfigureAwait(false);
+            var list = await characterService.GetAllAsync().ConfigureAwait(false);
 
-            Characters.Clear();
-            foreach (var character in list)
+            await MainThread.InvokeOnMainThreadAsync(() =>
             {
-                Characters.Add(character);
-            }
+                Characters.Clear();
+                foreach (var character in list)
+                {
+                    Characters.Add(character);
+                }
+                IsEmpty = Characters.Count == 0;
+            }).ConfigureAwait(false);
 
             IsEmpty = Characters.Count == 0;
         }
@@ -65,14 +71,14 @@ internal partial class CharactersViewModel(CharacterRepository characterReposito
         }
 
         bool confirm = await Shell.Current.DisplayAlert(
-            "Delete Character",
-            $"Are you sure you want to delete '{character.Name}'? This cannot be undone.",
+            Lng.Elem("Delete Character"),
+            Lng.Elem(String.Format("Are you sure you want to delete '{0}'? This cannot be undone.", character.Name)),
             "Delete",
             "Cancel").ConfigureAwait(false);
 
         if (confirm)
         {
-            await characterRepository.DeleteCharacterAsync(character.Name).ConfigureAwait(false);
+            await characterService.DeleteAsync(character.Name).ConfigureAwait(false);
             Characters.Remove(character);
             IsEmpty = Characters.Count == 0;
         }
@@ -81,7 +87,10 @@ internal partial class CharactersViewModel(CharacterRepository characterReposito
     [RelayCommand]
     private static async Task OpenDetailsAsync(Character character)
     {
-        if (character == null) return;
+        if (character == null)
+        {
+            return;
+        }
 
         await Shell.Current.GoToAsync($"CharacterDetailsPage?name={character.Name}").ConfigureAwait(false);
 

@@ -6,5 +6,5 @@ public class Malachite : Gemstone
 {
     public Malachite() : base("effects unknown") { }
 
-    public override Money Price => new Money(1);
+    public override Money Price => new(1);
 }

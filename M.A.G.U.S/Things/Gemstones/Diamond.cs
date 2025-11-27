@@ -6,5 +6,5 @@ public class Diamond : Gemstone
 {
     public Diamond() : base("undeads, poisons, illnesses") { }
 
-    public override Money Price => new Money(500);
+    public override Money Price => new(500);
 }

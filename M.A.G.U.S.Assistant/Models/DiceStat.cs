@@ -1,4 +1,5 @@
-﻿using Mtf.LanguageService;
+﻿using Mtf.Extensions;
+using Mtf.LanguageService;
 
 namespace M.A.G.U.S.Assistant.Models;
 
@@ -16,7 +17,10 @@ internal class DiceStat
         {
             var modPart = Modifier != 0 ? $" + {Modifier}" : String.Empty;
             var specialPart = HasSpecialTraining ? $" + {Lng.Elem("Special Training")}" : String.Empty;
-            return $"{Formula}{modPart}{specialPart}";
+            var normalizedFormula = Formula.EndsWith("_2_Times", StringComparison.Ordinal)
+                ? Formula[..Formula.IndexOf("_2_Times", StringComparison.Ordinal)] + " " + Lng.Elem("(2 times)")
+                : Formula;
+            return $"{normalizedFormula}{modPart}{specialPart}";
         }
     }
 

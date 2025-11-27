@@ -21,4 +21,6 @@ public class OneHandedHatchet : Weapon, IMeleeWeapon
     public byte GetDamage() => (byte)DiceThrow._1K10();
 
     public override string Name => "One-handed axe";
+
+    public override string Description => "A simple, single-handed axe used for both labour and combat. An inexpensive and versatile sidearm.";
 }

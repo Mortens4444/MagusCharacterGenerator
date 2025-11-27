@@ -21,4 +21,6 @@ public class BastardSword : Weapon, IMeleeWeapon
     public byte GetDamage() => (byte)DiceThrow._2K6();
 
     public override string Name => "Bastard sword";
+
+    public override string Description => "A sword of intermediate size, too large for one hand but light enough to be wielded with one hand and a shield by a strong man. The 'hand-and-a-half' sword.";
 }

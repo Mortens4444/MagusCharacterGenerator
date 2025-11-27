@@ -13,4 +13,6 @@ public class BronzeLaminarArmor : Thing
 	public int DamageSusceptiveValue => 2;
 
 	public override double Weight => 18;
+
+    public override string Description => "Overlapping strips of bronze metal, offering a compromise between the sturdiness of plate and the flexibility of mail. Common among older legions and city watches.";
 }

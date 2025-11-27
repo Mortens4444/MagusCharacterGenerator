@@ -6,5 +6,5 @@ public class Chrysoprase : Gemstone
 {
     public Chrysoprase() : base("invisibility, stealth") { }
 
-    public override Money Price => new Money(5);
+    public override Money Price => new(5);
 }

@@ -22,4 +22,6 @@ public class JadJambiya : Weapon, IMeleeWeapon
     public byte GetDamage() => (byte)(DiceThrow._1K6() + 1);
 
     public override string Name => "Jad jambiya";
+
+    public override string Description => "A curved, double-edged dagger from the desert lands of Jad, often worn openly as a symbol of status and used for fierce, close-in fighting.";
 }

@@ -6,5 +6,5 @@ public class Coral : Gemstone
 {
     public Coral() : base("seas, sailing, swimming") { }
 
-    public override Money Price => new Money(13);
+    public override Money Price => new(13);
 }

@@ -1,7 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using M.A.G.U.S.Assistant.CustomEventArgs;
 using M.A.G.U.S.Assistant.Extensions;
-using M.A.G.U.S.GameSystem.Valuables;
 using M.A.G.U.S.Things;
 using System.Windows.Input;
 
@@ -18,19 +17,22 @@ internal partial class ItemDetailsViewModel : ObservableObject
         this.thing = thing ?? throw new ArgumentNullException(nameof(thing));
 
         Name = thing.Name;
-        Description = thing.Description ?? String.Empty;
+        Description = thing.Description;
         Money = thing.Price.ToTranslatedString();
         Weight = thing.Weight;
-        ImageSource = ImageSourceFromName(thing.ImageName);
+        ImageName = thing.ImageName;
 
         BuyCommand = new RelayCommand(_ => OnBuy());
     }
 
     public string Name { get; } = String.Empty;
     public string Description { get; } = String.Empty;
+    public string ImageName { get; } = String.Empty;
+    public string ImageName2 { get; } = String.Empty;
     public string Money { get; } = String.Empty;
     public double Weight { get; }
     public ImageSource? ImageSource { get; }
+    public ImageSource? ImageSource2 { get; }
 
     public ICommand BuyCommand { get; } = new RelayCommand(_ => { });
 
@@ -55,22 +57,5 @@ internal partial class ItemDetailsViewModel : ObservableObject
         }
 
         OnPurchased(thing);
-    }
-
-    private static ImageSource? ImageSourceFromName(string? imageName)
-    {
-        try
-        {
-            if (String.IsNullOrEmpty(imageName))
-            {
-                return null;
-            }
-
-            return ImageSource.FromResource(imageName, typeof(ItemDetailsViewModel).Assembly);
-        }
-        catch
-        {
-            return null;
-        }
     }
 }

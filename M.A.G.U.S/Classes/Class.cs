@@ -13,6 +13,8 @@ public abstract class Class(byte level) : IClass
 
     public virtual string Name => GetType().Name;
 
+    public override string ToString() => Name;
+
     public byte Level { get; set; } = level;
 
     public abstract byte Gold { get; }

@@ -63,20 +63,37 @@ internal partial class ImagesViewModel : INotifyPropertyChanged
         try
         {
             var asm = Assembly.GetExecutingAssembly();
-            var images = asm.GetManifestResourceNames()
-                .Where(n => (n.Contains(".Resources.Images.Bestiary.", StringComparison.OrdinalIgnoreCase) ||
-                            n.Contains(".Resources.Images.Characters.", StringComparison.OrdinalIgnoreCase)) &&
-                            n.EndsWith(".png", StringComparison.OrdinalIgnoreCase))
-                .Select(name =>
-                {
-                    var display = name.Split('.')[^2];
-                    return new ImageItem { ResourceId = name, DisplayName = Lng.Elem(display.ToName()) };
-                })
-                .OrderBy(i => i.DisplayName);
+            var resourceName = asm
+                .GetManifestResourceNames()
+                .FirstOrDefault(n => n.EndsWith("images_manifest.txt", StringComparison.OrdinalIgnoreCase));
 
-            foreach (var image in images)
+            if (resourceName == null)
             {
-                AllImages.Add(image);
+                Debug.WriteLine("images_manifest.txt not found in embedded resources.");
+                return;
+            }
+
+            using var stream = asm.GetManifestResourceStream(resourceName);
+            if (stream == null) return;
+
+            using var reader = new StreamReader(stream);
+            var lines = reader.ReadToEnd()
+                .Split('\n', StringSplitOptions.RemoveEmptyEntries);
+
+            foreach (var line in lines)
+            {
+                var trimmed = line.Trim();
+                if (trimmed.Length == 0) continue;
+
+                var display = Path.GetFileNameWithoutExtension(trimmed).Split('.')[^1];
+
+                var item = new ImageItem
+                {
+                    ResourceId = trimmed,
+                    DisplayName = Lng.Elem(display.ToName())
+                };
+
+                AllImages.Add(item);
             }
         }
         catch (Exception ex)
@@ -87,8 +104,8 @@ internal partial class ImagesViewModel : INotifyPropertyChanged
 
     private void ApplyFilter()
     {
-        var q = (SearchText ?? String.Empty).Trim();
-        var filtered = (String.IsNullOrEmpty(q) ? AllImages : new ObservableCollection<ImageItem>(AllImages.Where(i => i.DisplayName.Contains(q, StringComparison.OrdinalIgnoreCase))))
+        var filtered = (String.IsNullOrEmpty(SearchText) ? AllImages :
+            new ObservableCollection<ImageItem>(AllImages.Where(i => i.DisplayName.Contains(SearchText, StringComparison.OrdinalIgnoreCase))))
             .OrderBy(comparer => comparer.DisplayName);
 
         FilteredImages.Clear();

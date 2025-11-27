@@ -6,5 +6,5 @@ public class Azurite : Gemstone
 {
     public Azurite() : base("astrology, celestial bodies") { }
 
-    public override Money Price => new Money(1);
+    public override Money Price => new(1);
 }

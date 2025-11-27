@@ -19,4 +19,6 @@ public class Shortbow : Weapon, IRangedWeapon
 
     [DiceThrow(ThrowType._1K6)]
     public byte GetDamage() => (byte)DiceThrow._1K6_RangedAttack();
+
+    public override string Description => "A small, simple bow used for hunting small game or by those with little strength. Its range and power are limited, but it is easy to master.";
 }

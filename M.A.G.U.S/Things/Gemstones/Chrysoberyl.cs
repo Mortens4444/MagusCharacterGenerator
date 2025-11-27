@@ -6,5 +6,5 @@ public class Chrysoberyl : Gemstone
 {
     public Chrysoberyl() : base("soul") { }
 
-    public override Money Price => new Money(10);
+    public override Money Price => new(10);
 }

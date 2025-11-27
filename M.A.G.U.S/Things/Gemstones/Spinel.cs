@@ -6,5 +6,5 @@ public class Spinel : Gemstone
 {
     public Spinel() : base("combat") { }
 
-    public override Money Price => new Money(40);
+    public override Money Price => new(40);
 }

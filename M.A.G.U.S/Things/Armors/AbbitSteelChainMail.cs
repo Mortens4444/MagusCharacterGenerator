@@ -13,4 +13,6 @@ public class AbbitSteelChainMail : Thing
 	public int DamageSusceptiveValue => 4;
 
 	public override double Weight => 12;
+
+    public override string Description => "A shirt of interlocking rings fashioned from the rare and potent Abbit-steel. It is lighter than plate yet resists slashes and piercing thrusts with exceptional resilience.";
 }

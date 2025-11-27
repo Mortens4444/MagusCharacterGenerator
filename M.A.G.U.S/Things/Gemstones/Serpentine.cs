@@ -6,5 +6,5 @@ public class Serpentine : Gemstone
 {
     public Serpentine() : base("mental") { }
 
-    public override Money Price => new Money(6);
+    public override Money Price => new(6);
 }

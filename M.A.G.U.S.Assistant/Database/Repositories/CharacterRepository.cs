@@ -18,25 +18,66 @@ internal class CharacterRepository(DatabaseContext context)
 
     public async Task SaveCharacterAsync(Character character)
     {
-        var connection = await context.GetConnectionAsync().ConfigureAwait(false);
-        string json = JsonConvert.SerializeObject(character, jsonSettings);
-
-        var existing = await connection.Table<CharacterEntity>().FirstOrDefaultAsync(c => c.Name == character.Name).ConfigureAwait(false);
-
-        var entity = existing ?? new CharacterEntity();
-        entity.Name = character.Name;
-        entity.RaceName = character.Race?.ToString() ?? "Unknown";
-        entity.ClassName = character.BaseClass?.ToString() ?? "Unknown";
-        entity.LastModified = DateTime.Now;
-        entity.JsonData = json;
-
-        if (entity.Id != 0)
+        var existing = await GetEntityByNameAsync(character.Name).ConfigureAwait(false);
+        if (existing == null)
         {
-            await connection.UpdateAsync(entity).ConfigureAwait(false);
+            await InsertCharacterAsync(character).ConfigureAwait(false);
         }
         else
         {
-            await connection.InsertAsync(entity).ConfigureAwait(false);
+            await UpdateCharacterAsync(character).ConfigureAwait(false);
+        }
+    }
+
+    public async Task InsertCharacterAsync(Character character)
+    {
+        var connection = await context.GetConnectionAsync().ConfigureAwait(false);
+        var exists = (await connection.Table<CharacterEntity>().CountAsync(c => c.Name == character.Name).ConfigureAwait(false)) > 0;
+        if (exists)
+        {
+            throw new InvalidOperationException($"Character with name '{character.Name}' already exists.");
+        }
+
+        var entity = new CharacterEntity
+        {
+            Name = character.Name,
+            RaceName = character.Race?.ToString() ?? String.Empty,
+            ClassName = character.BaseClass?.ToString() ?? String.Empty,
+            LastModified = DateTime.Now,
+            JsonData = JsonConvert.SerializeObject(character, jsonSettings)
+        };
+
+        await connection.InsertAsync(entity).ConfigureAwait(false);
+    }
+
+    public async Task UpdateCharacterAsync(Character character)
+    {
+        var connection = await context.GetConnectionAsync().ConfigureAwait(false);
+        var entity = await connection.Table<CharacterEntity>().FirstOrDefaultAsync(c => c.Name == character.Name).ConfigureAwait(false) ?? throw new InvalidOperationException($"Character with name '{character.Name}' not found.");
+        entity.RaceName = character.Race?.ToString() ?? String.Empty;
+        entity.ClassName = character.BaseClass?.ToString() ?? String.Empty;
+        entity.LastModified = DateTime.Now;
+        entity.JsonData = JsonConvert.SerializeObject(character, jsonSettings);
+
+        await connection.UpdateAsync(entity).ConfigureAwait(false);
+    }
+
+    public async Task<Character?> GetByNameAsync(string name)
+    {
+        var connection = await context.GetConnectionAsync().ConfigureAwait(false);
+        var entity = await connection.Table<CharacterEntity>().FirstOrDefaultAsync(c => c.Name == name).ConfigureAwait(false);
+        if (entity == null) return null;
+
+        try
+        {
+            var character = JsonConvert.DeserializeObject<Character>(entity.JsonData, jsonSettings);
+            character?.CalculateChanges();
+            return character;
+        }
+        catch (Exception ex)
+        {
+            Debug.WriteLine($"Error deserializing character '{name}': {ex.Message}");
+            return null;
         }
     }
 
@@ -73,5 +114,11 @@ internal class CharacterRepository(DatabaseContext context)
         {
             await connection.DeleteAsync(entity).ConfigureAwait(false);
         }
+    }
+
+    private async Task<CharacterEntity?> GetEntityByNameAsync(string name)
+    {
+        var connection = await context.GetConnectionAsync().ConfigureAwait(false);
+        return await connection.Table<CharacterEntity>().FirstOrDefaultAsync(c => c.Name == name).ConfigureAwait(false);
     }
 }

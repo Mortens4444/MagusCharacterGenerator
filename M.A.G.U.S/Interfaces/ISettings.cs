@@ -11,4 +11,12 @@ public interface ISettings
     bool AddManaPointsOnFirstLevelForAllClass { get; }
 
     bool AddPsiPointsOnFirstLevelForAllClass { get; }
+
+    bool AutoDistributeCombatValues { get; }
+    
+    bool AutoDistributeQualificationPoints { get; }
+    
+    bool AutoIncreasePainTolerance { get; }
+    
+    bool AutoGenerateSkills { get; }
 }

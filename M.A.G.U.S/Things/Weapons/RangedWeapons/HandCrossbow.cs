@@ -21,4 +21,6 @@ public class HandCrossbow : Weapon, IRangedWeapon
     public byte GetDamage() => (byte)DiceThrow._1K3_RangedAttack();
 
     public override string Name => "Hand crossbow";
+
+    public override string Description => "A small, easily concealed crossbow, capable of being fired with one hand. Ideal for nobles, rogues, or those needing a surprise ranged attack.";
 }

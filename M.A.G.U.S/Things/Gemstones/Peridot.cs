@@ -6,5 +6,5 @@ public class Peridot : Gemstone
 {
     public Peridot() : base("astral") { }
 
-    public override Money Price => new Money(60);
+    public override Money Price => new(60);
 }

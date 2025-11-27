@@ -6,5 +6,5 @@ public class Turquoise : Gemstone
 {
     public Turquoise() : base("horses, riding") { }
 
-    public override Money Price => new Money(2);
+    public override Money Price => new(2);
 }

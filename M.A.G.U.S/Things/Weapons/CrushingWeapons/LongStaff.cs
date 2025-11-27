@@ -21,4 +21,6 @@ public class LongStaff : Weapon, IMeleeWeapon
     public byte GetDamage() => (byte)DiceThrow._1K5();
 
     public override string Name => "Quarterstaff";
+
+    public override string Description => "A six-foot pole of seasoned wood, often tipped with iron. The humble yet effective weapon of monks, pilgrims, and guards, used for sweeping, tripping, and bludgeoning.";
 }

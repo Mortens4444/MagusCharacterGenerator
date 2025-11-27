@@ -13,4 +13,6 @@ public class SteelLaminarArmor : Thing
 	public int DamageSusceptiveValue => 3;
 
 	public override double Weight => 16;
+
+    public override string Description => "Protection made of horizontal steel strips, riveted or laced together. It offers superior deflection against blunt force and is highly durable.";
 }

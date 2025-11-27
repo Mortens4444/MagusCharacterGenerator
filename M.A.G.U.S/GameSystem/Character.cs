@@ -602,18 +602,14 @@ public class Character : IFightModifier, ILiving, IAbilities, INotifyPropertyCha
 		Qualifications.Clear();
         foreach (var @class in Classes)
 		{
-			Qualifications.AddRange(@class.Qualifications);
+			Qualifications.AddRange(@class.Qualifications.Concat(Race.Qualifications));
 			PercentQualifications.AddRange(@class.PercentQualifications);
 
             var newQualifications = @class.FutureQualifications
-				.Where(futureQualification => futureQualification.MasterQualificationLevel <= @class.Level);
+				.Where(futureQualification => futureQualification.ActualLevel <= @class.Level);
 
-            var newBaseQualifications = newQualifications
-                .Where(futureQualification => futureQualification.QualificationLevel == QualificationLevel.Base);
-
-            Qualifications.AddRange(newBaseQualifications);
-
-            var newMasterQualifications = newQualifications.Except(newBaseQualifications).Concat(Race.Qualifications);
+            Qualifications.AddRange(newQualifications.Where(q => q.QualificationLevel == QualificationLevel.Base));
+			var newMasterQualifications = newQualifications.Where(q => q.QualificationLevel == QualificationLevel.Master);
             foreach (var newMasterQualification in newMasterQualifications)
             {
                 Qualifications.UpgradeOrAddQualification(newMasterQualification);

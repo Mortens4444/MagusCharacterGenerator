@@ -6,5 +6,5 @@ public class Nephrite : Gemstone
 {
     public Nephrite() : base("elementals (elemental force)") { }
 
-    public override Money Price => new Money(9);
+    public override Money Price => new(9);
 }

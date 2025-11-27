@@ -21,4 +21,6 @@ public class CavalryLance : Weapon, IMeleeWeapon
     public byte GetDamage() => (byte)(DiceThrow._1K6());
 
     public override string Name => "Cavalry lance";
+
+    public override string Description => "A long, tapering wooden shaft with a sharp head, wielded by a mounted warrior. Designed to deliver a single, devastating charge against a foe.";
 }

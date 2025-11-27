@@ -20,4 +20,6 @@ public class Rapier : Weapon, IMeleeWeapon
     [DiceThrow(ThrowType._1K6)]
     [DiceThrowModifier(2)]
     public byte GetDamage() => (byte)(DiceThrow._1K6() + 2);
+
+    public override string Description => "A very thin, elegant thrusting sword with a complex hilt to protect the hand. Used by duelists and fencing masters who prize speed and precision over brute force.";
 }

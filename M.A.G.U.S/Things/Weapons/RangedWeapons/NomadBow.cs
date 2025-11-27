@@ -21,4 +21,6 @@ public class NomadBow : Weapon, IRangedWeapon
     public byte GetDamage() => (byte)DiceThrow._1K10_RangedAttack();
 
     public override string Name => "Recurve bow";
+
+    public override string Description => "A short, powerful composite bow favoured by horse riders and desert tribes. Easily used from the saddle and capable of rapid firing.";
 }

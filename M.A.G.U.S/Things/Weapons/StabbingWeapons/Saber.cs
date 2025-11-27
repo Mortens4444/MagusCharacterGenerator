@@ -22,4 +22,6 @@ public class Saber : Weapon, IMeleeWeapon
     public byte GetDamage() => (byte)(DiceThrow._1K6() + 2);
 
     public override string Name => "Sword, sabre";
+
+    public override string Description => "A curved, single-edged sword primarily used for cutting and slashing, often favoured by light cavalry and skilled duelists.";
 }

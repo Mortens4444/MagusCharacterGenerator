@@ -10,10 +10,6 @@
              x:ClassModifier="internal"
              x:DataType="vm:SearchListViewModel">
 
-    <v:NotifierPage.BindingContext>
-        <vm:SearchListViewModel />
-    </v:NotifierPage.BindingContext>
-
     <v:NotifierPage.Resources>
         <ResourceDictionary>
             <c:TranslationConverter x:Key="TranslationConverter" />
@@ -53,6 +49,9 @@
         <Button Grid.Row="2" x:Name="DetailsButton" Text="Details" Clicked="OnDetailsClicked">
             <Button.Triggers>
                 <DataTrigger TargetType="Button" Binding="{Binding SelectedItem}" Value="{x:Null}">
+                    <Setter Property="IsVisible" Value="False" />
+                </DataTrigger>
+                <DataTrigger TargetType="Button" Binding="{Binding IsCharacterSet}" Value="False">
                     <Setter Property="IsVisible" Value="False" />
                 </DataTrigger>
             </Button.Triggers>

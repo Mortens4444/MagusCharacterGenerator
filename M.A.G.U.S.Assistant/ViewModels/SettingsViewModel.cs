@@ -20,6 +20,11 @@ internal partial class SettingsViewModel : ObservableObject
                 OnPropertyChanged(nameof(AddQualificationPointsOnFirstLevelForAllClass));
                 OnPropertyChanged(nameof(AddManaPointsOnFirstLevelForAllClass));
                 OnPropertyChanged(nameof(AddPsiPointsOnFirstLevelForAllClass));
+
+                OnPropertyChanged(nameof(AutoDistributeCombatValues));
+                OnPropertyChanged(nameof(AutoDistributeQualificationPoints));
+                OnPropertyChanged(nameof(AutoGenerateSkills));
+                OnPropertyChanged(nameof(AutoIncreasePainTolerance));
             });
         });
     }
@@ -84,6 +89,58 @@ internal partial class SettingsViewModel : ObservableObject
             if (settingsService.AddPsiPointsOnFirstLevelForAllClass != value)
             {
                 settingsService.SaveAddPsiAsync(value);
+                OnPropertyChanged();
+            }
+        }
+    }
+
+    public bool AutoDistributeCombatValues
+    {
+        get => settingsService.AutoDistributeCombatValues;
+        set
+        {
+            if (settingsService.AutoDistributeCombatValues != value)
+            {
+                settingsService.SaveAutoCombatValueDistributionAsync(value);
+                OnPropertyChanged();
+            }
+        }
+    }
+
+    public bool AutoDistributeQualificationPoints
+    {
+        get => settingsService.AutoDistributeQualificationPoints;
+        set
+        {
+            if (settingsService.AutoDistributeQualificationPoints != value)
+            {
+                settingsService.SaveAutoQualificationPointsDistributionAsync(value);
+                OnPropertyChanged();
+            }
+        }
+    }
+
+    public bool AutoGenerateSkills
+    {
+        get => settingsService.AutoGenerateSkills;
+        set
+        {
+            if (settingsService.AutoGenerateSkills != value)
+            {
+                settingsService.SaveAutoGenerateSkillsAsync(value);
+                OnPropertyChanged();
+            }
+        }
+    }
+
+    public bool AutoIncreasePainTolerance
+    {
+        get => settingsService.AutoIncreasePainTolerance;
+        set
+        {
+            if (settingsService.AutoIncreasePainTolerance != value)
+            {
+                settingsService.SaveAutoPainToleranceIncreaseAsync(value);
                 OnPropertyChanged();
             }
         }

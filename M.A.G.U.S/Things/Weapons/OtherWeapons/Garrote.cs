@@ -19,4 +19,6 @@ public class Garrote : Weapon, IMeleeWeapon
 
     [DiceThrow(ThrowType._1K10)]
     public byte GetDamage() => (byte)DiceThrow._1K10();
+
+    public override string Description => "A loop of wire or fine cord used to strangle a foe silently and quickly. The weapon of assassins and silent killers.";
 }

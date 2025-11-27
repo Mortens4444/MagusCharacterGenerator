@@ -22,4 +22,6 @@ public class ShortSword : Weapon, IMeleeWeapon
     public byte GetDamage() => (byte)(DiceThrow._1K6() + 1);
 
     public override string Name => "Short sword";
+
+    public override string Description => "A sturdy, reliable sword with a short, wide blade. Excellent for fighting in close quarters, such as in ruins, dense forests, or on a crowded ship deck.";
 }

@@ -6,5 +6,5 @@ public class Carnelian : Gemstone
 {
     public Carnelian() : base("evil beings, enemies, ill-wishers") { }
 
-    public override Money Price => new Money(5);
+    public override Money Price => new(5);
 }

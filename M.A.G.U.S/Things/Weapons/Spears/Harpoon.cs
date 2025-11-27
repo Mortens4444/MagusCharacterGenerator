@@ -22,4 +22,6 @@ public class Harpoon : Weapon, IMeleeWeapon
     public byte GetDamage() => (byte)(DiceThrow._1K10() + 1);
 
     public override string Name => "Trident";
+
+    public override string Description => "A long spear with a barbed head attached to a retrieval rope. Used primarily for hunting great sea beasts or securing small ships.";
 }

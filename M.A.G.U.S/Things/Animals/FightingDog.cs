@@ -7,4 +7,6 @@ public class FightingDog : Thing
     public override string Name => "Dog, war";
 
     public override Money Price => new(0, 8, 0);
+
+    public override string Description => "A fierce, heavily muscled war dog, often clad in leather armour, trained only for the purpose of attacking and subduing men in battle or pit fights. Highly aggressive and dangerous.";
 }

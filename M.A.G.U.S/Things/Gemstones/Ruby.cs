@@ -6,5 +6,5 @@ public class Ruby : Gemstone
 {
     public Ruby() : base("general magical stone") { }
 
-    public override Money Price => new Money(500);
+    public override Money Price => new(500);
 }

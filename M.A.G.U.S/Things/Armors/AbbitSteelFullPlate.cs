@@ -13,4 +13,6 @@ public class AbbitSteelFullPlate : Thing
 	public int DamageSusceptiveValue => 7;
 
 	public override double Weight => 15;
+
+    public override string Description => "The peak of personal defense. Full-body harness of polished Abbit-steel plates, articulated at every joint. Grants the wearer the fortitude of a walking fortress, though only the wealthiest or most storied champions possess it.";
 }

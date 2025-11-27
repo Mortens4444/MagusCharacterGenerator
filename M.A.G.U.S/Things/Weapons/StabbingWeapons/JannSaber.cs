@@ -22,4 +22,6 @@ public class JannSaber : Weapon, IMeleeWeapon
     public byte GetDamage() => (byte)(DiceThrow._1K6() + 3);
 
     public override string Name => "Sword, jann sabre";
+
+    public override string Description => "A long, elegantly curved sabre used by the Jann desert warriors. Its balance and edge are optimized for deadly sweeping cuts from horseback.";
 }

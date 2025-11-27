@@ -6,5 +6,5 @@ public class Emerald : Gemstone
 {
     public Emerald() : base("general magical stone") { }
 
-    public override Money Price => new Money(300);
+    public override Money Price => new(300);
 }

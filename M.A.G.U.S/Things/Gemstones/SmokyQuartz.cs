@@ -8,5 +8,5 @@ public class SmokyQuartz : Gemstone
 
     public override string Name => "Smoky Quartz";
 
-    public override Money Price => new Money(7);
+    public override Money Price => new(7);
 }

@@ -99,6 +99,4 @@ public class Craftsman : Class, IClass
 
     [DiceThrow(ThrowType._1K2)]
     public override byte GetPainToleranceModifier() => (byte)DiceThrow._1K2();
-
-    public override string Name => "Craftsman";
 }

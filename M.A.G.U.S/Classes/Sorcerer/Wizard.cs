@@ -105,7 +105,7 @@ public class Wizard : Class, IClass, ILikeMagic
         new LegendLore(),
         new HistoryLore(),
         new RunicMagic()
-   ]);
+    ]);
 
     public override QualificationList FutureQualifications => BuildQualifications(
     [

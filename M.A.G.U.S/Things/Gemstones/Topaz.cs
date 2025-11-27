@@ -6,5 +6,5 @@ public class Topaz : Gemstone
 {
     public Topaz() : base("air force") { }
 
-    public override Money Price => new Money(50);
+    public override Money Price => new(50);
 }

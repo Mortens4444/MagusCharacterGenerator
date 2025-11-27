@@ -13,4 +13,6 @@ public class MithrilHalfPlate : Thing
 	public int DamageSusceptiveValue => 7;
 
 	public override double Weight => 8;
+
+    public override string Description => "Mithril plate harness covering the torso, arms, and thighs. Offers elite protection where it matters most, allowing the wearer to focus on rapid combat manoeuvres.";
 }

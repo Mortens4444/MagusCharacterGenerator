@@ -8,5 +8,5 @@ public class BlackOpal : Gemstone
 
     public override string Name => "Black (Sonioni) Opal";
 
-    public override Money Price => new Money(100);
+    public override Money Price => new(100);
 }

@@ -13,5 +13,13 @@ namespace M.A.G.U.S.Test
         public bool AddManaPointsOnFirstLevelForAllClass => true;
 
         public bool AddPsiPointsOnFirstLevelForAllClass => true;
+
+        public bool AutoDistributeCombatValues => true;
+
+        public bool AutoDistributeQualificationPoints => true;
+
+        public bool AutoIncreasePainTolerance => true;
+
+        public bool AutoGenerateSkills => true;
     }
 }

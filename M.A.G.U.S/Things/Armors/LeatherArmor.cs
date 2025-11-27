@@ -13,4 +13,6 @@ public class LeatherArmor : Thing
 	public int DamageSusceptiveValue => 1;
 
 	public override double Weight => 8;
+
+    public override string Description => "Simple armour made from boiled or treated leather hides. Provides basic protection against minor cuts and scrapes, favoured by bandits, hunters, and those who need unrestricted movement.";
 }

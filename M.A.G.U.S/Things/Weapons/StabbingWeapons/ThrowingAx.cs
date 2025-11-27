@@ -21,4 +21,6 @@ public class ThrowingAx : Weapon, IMeleeWeapon
     public byte GetDamage() => (byte)DiceThrow._1K6();
 
     public override string Name => "Throwing axe";
+
+    public override string Description => "A small, balanced axe designed to be hurled at the enemy before engaging in melee, often used to soften the enemy line or distract a foe.";
 }

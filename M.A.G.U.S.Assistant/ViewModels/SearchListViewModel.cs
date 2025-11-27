@@ -1,18 +1,39 @@
 ﻿using M.A.G.U.S.Assistant.Models;
+using M.A.G.U.S.GameSystem;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Windows.Input;
 
 namespace M.A.G.U.S.Assistant.ViewModels;
 
-internal class SearchListViewModel : INotifyPropertyChanged
+internal partial class SearchListViewModel : INotifyPropertyChanged
 {
     public event PropertyChangedEventHandler? PropertyChanged;
 
     public ObservableCollection<DisplayItem> Items { get; } = [];
     public ObservableCollection<DisplayItem> FilteredItems { get; } = [];
 
-    string searchText = String.Empty;
+    private Character? character;
+
+    public Character? Character
+    {
+        get => character;
+        set
+        {
+            if (character == value)
+            {
+                return;
+            }
+
+            character = value;
+            OnPropertyChanged(nameof(Character));
+            OnPropertyChanged(nameof(IsCharacterSet));
+        }
+    }
+
+    public bool IsCharacterSet => Character != null;
+
+    private string searchText = String.Empty;
     public string SearchText
     {
         get => searchText;
@@ -35,13 +56,17 @@ internal class SearchListViewModel : INotifyPropertyChanged
         get => pageTitle;
         set
         {
-            if (pageTitle == value) return;
+            if (pageTitle == value)
+            {
+                return;
+            }
+
             pageTitle = value ?? String.Empty;
             OnPropertyChanged(nameof(PageTitle));
         }
     }
 
-    DisplayItem? selectedItem;
+    private DisplayItem? selectedItem;
     public DisplayItem? SelectedItem
     {
         get => selectedItem;
@@ -74,6 +99,8 @@ internal class SearchListViewModel : INotifyPropertyChanged
         {
             SearchText = String.Empty;
         });
+
+        Character = null;
     }
 
     public void LoadItems(IEnumerable<DisplayItem> items)

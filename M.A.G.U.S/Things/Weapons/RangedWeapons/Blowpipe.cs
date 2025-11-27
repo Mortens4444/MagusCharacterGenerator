@@ -26,4 +26,6 @@ public class Blowpipe : Weapon, IRangedWeapon
         }
         return 0;
     }
+
+    public override string Description => "A simple, slender tube used to silently launch small, often poisoned, darts. A weapon of ambush and subtle execution.";
 }

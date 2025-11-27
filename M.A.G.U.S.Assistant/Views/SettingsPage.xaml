@@ -2,9 +2,11 @@
 <v:NotifierPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
                 xmlns:v="clr-namespace:M.A.G.U.S.Assistant.Views"
                 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                xmlns:vm="clr-namespace:M.A.G.U.S.Assistant.ViewModels"
                 x:Class="M.A.G.U.S.Assistant.Views.SettingsPage"
                 Title="Settings"
-                x:ClassModifier="internal">
+                x:ClassModifier="internal"
+                x:DataType="vm:SettingsViewModel">
     
     <ScrollView>
         <VerticalStackLayout Padding="20" Spacing="20">
@@ -66,6 +68,50 @@
                            VerticalOptions="Center"
                            LineBreakMode="WordWrap"/>
                     <Switch Grid.Column="1" IsToggled="{Binding AddQualificationPointsOnFirstLevelForAllClass}" />
+                </Grid>
+            </Border>
+
+            <Border StrokeShape="RoundRectangle 10" Padding="15" StrokeThickness="0"
+                    BackgroundColor="{AppThemeBinding Light={StaticResource Gray100}, Dark={StaticResource Gray600}}">
+                <Grid ColumnDefinitions="*, Auto">
+                    <Label Grid.Column="0" 
+                           Text="Automatic Skill Generation" 
+                           VerticalOptions="Center"
+                           LineBreakMode="WordWrap"/>
+                    <Switch Grid.Column="1" IsToggled="{Binding AutoGenerateSkills}" />
+                </Grid>
+            </Border>
+
+            <Border StrokeShape="RoundRectangle 10" Padding="15" StrokeThickness="0"
+                    BackgroundColor="{AppThemeBinding Light={StaticResource Gray100}, Dark={StaticResource Gray600}}">
+                <Grid ColumnDefinitions="*, Auto">
+                    <Label Grid.Column="0" 
+                           Text="Automatic Combat Value Distribution" 
+                           VerticalOptions="Center"
+                           LineBreakMode="WordWrap"/>
+                    <Switch Grid.Column="1" IsToggled="{Binding AutoDistributeCombatValues}" />
+                </Grid>
+            </Border>
+
+            <Border StrokeShape="RoundRectangle 10" Padding="15" StrokeThickness="0"
+                    BackgroundColor="{AppThemeBinding Light={StaticResource Gray100}, Dark={StaticResource Gray600}}">
+                <Grid ColumnDefinitions="*, Auto">
+                    <Label Grid.Column="0" 
+                           Text="Automatic Qualification Point Distribution" 
+                           VerticalOptions="Center"
+                           LineBreakMode="WordWrap"/>
+                    <Switch Grid.Column="1" IsToggled="{Binding AutoDistributeQualificationPoints}" />
+                </Grid>
+            </Border>
+
+            <Border StrokeShape="RoundRectangle 10" Padding="15" StrokeThickness="0"
+                    BackgroundColor="{AppThemeBinding Light={StaticResource Gray100}, Dark={StaticResource Gray600}}">
+                <Grid ColumnDefinitions="*, Auto">
+                    <Label Grid.Column="0" 
+                           Text="Automatic Pain Tolerance Increase" 
+                           VerticalOptions="Center"
+                           LineBreakMode="WordWrap"/>
+                    <Switch Grid.Column="1" IsToggled="{Binding AutoIncreasePainTolerance}" />
                 </Grid>
             </Border>
 

@@ -6,5 +6,5 @@ public class Alexandrite : Gemstone
 {
     public Alexandrite() : base("demons") { }
 
-    public override Money Price => new Money(20);
+    public override Money Price => new(20);
 }

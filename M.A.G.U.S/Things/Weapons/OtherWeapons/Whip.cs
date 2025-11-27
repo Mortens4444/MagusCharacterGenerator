@@ -19,4 +19,6 @@ public class Whip : Weapon, IMeleeWeapon
 
     [DiceThrow(ThrowType._1K2)]
     public byte GetDamage() => (byte)DiceThrow._1K2();
+
+    public override string Description => "A long, flexible strip of leather, used to lash and sting the target. While it lacks killing power, it can distract, disarm, or inflict great pain.";
 }

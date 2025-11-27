@@ -21,4 +21,6 @@ public class IronFist : Weapon, IMeleeWeapon
     public byte GetDamage() => (byte)DiceThrow._1K3();
 
     public override string Name => "Iron fist (knuckle)";
+
+    public override string Description => "A heavy gauntlet or fist-wrap of iron, designed to greatly augment the damage done by a punch, capable of shattering a jaw or cracking a rib.";
 }

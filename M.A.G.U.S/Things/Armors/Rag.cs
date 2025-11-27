@@ -13,4 +13,6 @@ public class Rag : Thing
 	public override double Weight => 5;
 
     public override string Name => "Cloth";
+
+    public override string Description => "A piece of tattered, simple cloth wrapped about the body. Offers only the most pathetic defense against the elements and virtually none against a drawn weapon.";
 }

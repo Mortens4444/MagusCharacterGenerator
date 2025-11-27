@@ -12,12 +12,21 @@ internal sealed class SettingsService(SettingsRepository repo) : ISettings
     public bool AddQualificationPointsOnFirstLevelForAllClass { get; private set; }
     public bool AddManaPointsOnFirstLevelForAllClass { get; private set; }
     public bool AddPsiPointsOnFirstLevelForAllClass { get; private set; }
+    public bool AutoDistributeCombatValues { get; private set; }
+    public bool AutoDistributeQualificationPoints { get; private set; }
+    public bool AutoIncreasePainTolerance { get; private set; }
+    public bool AutoGenerateSkills { get; private set; }
 
     private const string KeyFightValue = "Setting_FightValueFirstLevel";
     private const string KeyPainTolerance = "Setting_PainToleranceFirstLevel";
     private const string KeyQualification = "Setting_QualificationPointsFirstLevel";
     private const string KeyMana = "Setting_ManaPointsFirstLevel";
     private const string KeyPsi = "Setting_PsiPointsFirstLevel";
+
+    private const string KeyCombatValue = "Setting_CombatValueDistribution";
+    private const string KeyQualificationPoints = "Setting_QualificationPointsDistribution";
+    private const string KeyPainToleranceIncrease = "Setting_PainToleranceIncrease";
+    private const string KeySkills = "Setting_SkillGeneration";
 
     public async Task LoadAsync()
     {
@@ -26,6 +35,11 @@ internal sealed class SettingsService(SettingsRepository repo) : ISettings
         AddQualificationPointsOnFirstLevelForAllClass = await repo.GetBoolSettingAsync(KeyQualification, true).ConfigureAwait(false);
         AddManaPointsOnFirstLevelForAllClass = await repo.GetBoolSettingAsync(KeyMana, false).ConfigureAwait(false);
         AddPsiPointsOnFirstLevelForAllClass = await repo.GetBoolSettingAsync(KeyPsi, false).ConfigureAwait(false);
+
+        AutoDistributeCombatValues = await repo.GetBoolSettingAsync(KeyCombatValue, false).ConfigureAwait(false);
+        AutoDistributeQualificationPoints = await repo.GetBoolSettingAsync(KeyQualificationPoints, false).ConfigureAwait(false);
+        AutoIncreasePainTolerance = await repo.GetBoolSettingAsync(KeyPainToleranceIncrease, false).ConfigureAwait(false);
+        AutoGenerateSkills = await repo.GetBoolSettingAsync(KeySkills, false).ConfigureAwait(false);
     }
 
     public Task SaveAddFightValueAsync(bool value)
@@ -56,5 +70,29 @@ internal sealed class SettingsService(SettingsRepository repo) : ISettings
     {
         AddPsiPointsOnFirstLevelForAllClass = value;
         return repo.SaveBoolSettingAsync(KeyPsi, value);
+    }
+
+    public Task SaveAutoCombatValueDistributionAsync(bool value)
+    {
+        AutoDistributeCombatValues = value;
+        return repo.SaveBoolSettingAsync(KeyCombatValue, value);
+    }
+
+    public Task SaveAutoQualificationPointsDistributionAsync(bool value)
+    {
+        AutoDistributeQualificationPoints = value;
+        return repo.SaveBoolSettingAsync(KeyQualificationPoints, value);
+    }
+
+    public Task SaveAutoPainToleranceIncreaseAsync(bool value)
+    {
+        AutoIncreasePainTolerance = value;
+        return repo.SaveBoolSettingAsync(KeyPainToleranceIncrease, value);
+    }
+
+    public Task SaveAutoGenerateSkillsAsync(bool value)
+    {
+        AutoGenerateSkills = value;
+        return repo.SaveBoolSettingAsync(KeySkills, value);
     }
 }

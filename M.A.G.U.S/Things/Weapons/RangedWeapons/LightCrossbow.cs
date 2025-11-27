@@ -22,4 +22,6 @@ public class LightCrossbow : Weapon, IRangedWeapon
     public byte GetDamage() => (byte)(DiceThrow._1K6_RangedAttack() + 1);
 
     public override string Name => "Light crossbow";
+
+    public override string Description => "A simple, wooden crossbow that can be drawn by hand or with a small hook. Reliable and quick to load, but lacks the power of its heavier brethren.";
 }

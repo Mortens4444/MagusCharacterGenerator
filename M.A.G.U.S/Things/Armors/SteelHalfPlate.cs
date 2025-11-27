@@ -13,4 +13,6 @@ public class SteelHalfPlate : Thing
 	public int DamageSusceptiveValue => 5;
 
 	public override double Weight => 30;
+
+    public override string Description => "Steel plate that protects the torso and upper limbs, leaving the lower body in mail or leather. A favoured choice for cavalry, balancing solid protection with the necessity of riding.";
 }

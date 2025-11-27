@@ -6,5 +6,5 @@ public class Obsidian : Gemstone
 {
     public Obsidian() : base("necromancy") { }
 
-    public override Money Price => new Money(3);
+    public override Money Price => new(3);
 }

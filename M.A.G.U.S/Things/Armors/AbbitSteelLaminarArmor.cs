@@ -13,4 +13,6 @@ public class AbbitSteelLaminarArmor : Thing
 	public int DamageSusceptiveValue => 4;
 
 	public override double Weight => 7;
+
+    public override string Description => "Protection formed from overlapping horizontal strips of Abbit-steel. This design affords excellent flexibility while ensuring that no single strip can be easily breached by a thrust.";
 }

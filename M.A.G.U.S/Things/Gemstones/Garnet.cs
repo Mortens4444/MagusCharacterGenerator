@@ -6,5 +6,5 @@ public class Garnet : Gemstone
 {
     public Garnet() : base("elementals (primordial fire)") { }
 
-    public override Money Price => new Money(30);
+    public override Money Price => new(30);
 }

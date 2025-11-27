@@ -6,5 +6,5 @@ public class Pearl : Gemstone
 {
     public Pearl() : base("healing") { }
 
-    public override Money Price => new Money(300);
+    public override Money Price => new(300);
 }

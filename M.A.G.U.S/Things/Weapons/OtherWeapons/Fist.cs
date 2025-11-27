@@ -19,4 +19,6 @@ public class Fist : Weapon, IMeleeWeapon
 
     [DiceThrow(ThrowType._1K2)]
     public byte GetDamage() => (byte)DiceThrow._1K2();
+
+    public override string Description => "The natural weapon of the hand, used when steel is unavailable or forbidden. Though rarely deadly, a trained fist can knock a foe senseless.";
 }

@@ -6,5 +6,5 @@ public class Chalcedony : Gemstone
 {
     public Chalcedony() : base("undeads") { }
 
-    public override Money Price => new Money(4);
+    public override Money Price => new(4);
 }

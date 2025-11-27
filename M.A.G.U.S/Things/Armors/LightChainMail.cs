@@ -13,4 +13,6 @@ public class LightChainMail : Thing
 	public int DamageSusceptiveValue => 2;
 
 	public override double Weight => 20;
+
+    public override string Description => "A hauberk of smaller, lighter rings than standard chainmail, or mail made of less sturdy wire. It offers decent protection against slicing while preserving greater speed and agility.";
 }

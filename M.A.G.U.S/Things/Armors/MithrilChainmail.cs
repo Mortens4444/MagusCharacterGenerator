@@ -13,4 +13,6 @@ public class MithrilChainmail : Thing
 	public int DamageSusceptiveValue => 5;
 
 	public override double Weight => 10;
+
+    public override string Description => "Mail crafted from Mithril rings. It provides extraordinary protection for its near-negligible weight, allowing the wearer to move with speed and tireless grace.";
 }

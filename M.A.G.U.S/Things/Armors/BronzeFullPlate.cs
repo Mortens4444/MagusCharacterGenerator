@@ -13,4 +13,6 @@ public class BronzeFullPlate : Thing
 	public int DamageSusceptiveValue => 5;
 
 	public override double Weight => 40;
+
+    public override string Description => "A comprehensive set of articulated bronze plates covering the entire body. While visually magnificent, the soft metal is prone to dents and requires a strong wearer to bear its weight.";
 }

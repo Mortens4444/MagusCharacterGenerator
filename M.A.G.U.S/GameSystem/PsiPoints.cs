@@ -15,6 +15,12 @@ public static class PsiPoints
 
     public static PsiAttributes Calculate(Character character, ISettings settings)
     {
+        var cantLearnPsi = character.Race.SpecialQualifications.GetSpeciality<CantLearnPsi>();
+        if (cantLearnPsi != null)
+        {
+            return new PsiAttributes { Psi = null, PsiPoints = 0, PsiPointsModifier = 0 };
+        }
+
         var extraPsiPointsOnLevelUp = character.Race.SpecialQualifications.GetSpeciality<ExtraPsiPointOnLevelUp>();
         var extraPsiPoints = extraPsiPointsOnLevelUp == null ? 0 : extraPsiPointsOnLevelUp.ExtraPoints * character.BaseClass.Level;
 
@@ -48,7 +54,7 @@ public static class PsiPoints
             }
         }
 
-        if (!timeline.Any())
+        if (timeline.Count == 0)
         {
             return new PsiAttributes { Psi = null, PsiPoints = 0, PsiPointsModifier = 0 };
         }
@@ -67,7 +73,7 @@ public static class PsiPoints
         for (byte lvl = 1; lvl <= currentLevel; lvl++)
         {
             var activeEvents = timeline.Where(e => e.Level <= lvl).ToList();
-            if (!activeEvents.Any())
+            if (activeEvents.Count == 0)
             {
                 continue;
             }

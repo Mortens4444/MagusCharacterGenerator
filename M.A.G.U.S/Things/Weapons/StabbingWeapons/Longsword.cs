@@ -19,4 +19,6 @@ public class Longsword : Weapon, IMeleeWeapon
 
     [DiceThrow(ThrowType._1K10)]
     public byte GetDamage() => (byte)DiceThrow._1K10();
+
+    public override string Description => "A long, two-edged, straight sword wielded primarily with two hands for powerful cuts and thrusts, a symbol of high skill and dedication to martial prowess.";
 }

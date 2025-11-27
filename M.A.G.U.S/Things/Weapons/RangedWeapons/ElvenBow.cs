@@ -19,4 +19,6 @@ public class ElvenBow : Weapon, IRangedWeapon
     public byte GetDamage() => (byte)DiceThrow._2K6_RangedAttack();
 
     public override string Name => "Elven bow";
+
+    public override string Description => "A beautifully crafted longbow made from rare, resilient woods. Its draw is light, yet its arrows fly further and with greater accuracy than common bows.";
 }

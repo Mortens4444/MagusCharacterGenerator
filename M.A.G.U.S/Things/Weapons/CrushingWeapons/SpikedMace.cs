@@ -22,4 +22,6 @@ public class SpikedMace : Weapon, IMeleeWeapon
     public byte GetDamage() => (byte)(DiceThrow._1K6() + 2);
 
     public override string Name => "Spiked mace";
+
+    public override string Description => "A ferocious mace whose head is covered entirely in sharp, piercing spikes. It both crushes and punctures, leaving grievous wounds even through heavy clothing.";
 }
