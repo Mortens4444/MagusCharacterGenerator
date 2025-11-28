@@ -1,16 +1,17 @@
+using CommunityToolkit.Mvvm.Messaging;
 using M.A.G.U.S.Assistant.ViewModels;
 using Mtf.LanguageService.MAUI;
-using System.Diagnostics;
+using Mtf.Maui.Controls.Models;
 
 namespace M.A.G.U.S.Assistant.Views;
 
-internal partial class ObjectInspectorPage : NotifierPage
+internal partial class ObjectObserverPage : NotifierPage
 {
-    public ObjectInspectorPage(ObjectInspectorViewModel viewModel, object obj)
+    public ObjectObserverPage(ObjectObserverViewModel viewModel, object obj)
     {
         InitializeComponent();
         BindingContext = viewModel;
-        if (BindingContext is ObjectInspectorViewModel vm)
+        if (BindingContext is ObjectObserverViewModel vm)
         {
             vm.InspectedObject = obj;
         }
@@ -25,7 +26,7 @@ internal partial class ObjectInspectorPage : NotifierPage
         }
         catch (Exception ex)
         {
-            Debug.WriteLine($"Translate error: {ex}");
+            WeakReferenceMessenger.Default.Send(new ShowErrorMessage(ex));
         }
     }
 }

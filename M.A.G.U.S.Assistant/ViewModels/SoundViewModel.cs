@@ -1,10 +1,9 @@
-﻿using M.A.G.U.S.Assistant.Models;
+﻿using CommunityToolkit.Mvvm.Messaging;
+using M.A.G.U.S.Assistant.Interfaces;
+using M.A.G.U.S.Assistant.Models;
 using M.A.G.U.S.Utils;
 using Mtf.LanguageService;
-
-#if ANDROID
-using Plugin.Maui.Audio;
-#endif
+using Mtf.Maui.Controls.Models;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Reflection;
@@ -12,17 +11,16 @@ using System.Windows.Input;
 
 namespace M.A.G.U.S.Assistant.ViewModels;
 
-internal class SoundViewModel : INotifyPropertyChanged
+internal partial class SoundViewModel : INotifyPropertyChanged
 {
     public event PropertyChangedEventHandler? PropertyChanged;
 
+    private readonly ISoundPlayer soundPlayer;
     private readonly ObservableCollection<SoundItem> allSounds = [];
     public ObservableCollection<SoundItem> FilteredSounds { get; } = [];
 
-    public ObservableCollection<SoundItem> Sounds => FilteredSounds; // backward compatibility
-
-    private SoundItem selectedSound;
-    public SoundItem SelectedSound
+    private SoundItem? selectedSound;
+    public SoundItem? SelectedSound
     {
         get => selectedSound;
         set
@@ -54,7 +52,6 @@ internal class SoundViewModel : INotifyPropertyChanged
             OnPropertyChanged(nameof(CanPlay));
         }
     }
-
     public bool CanPlay => SelectedSound != null && !IsPlaying;
 
     private double volume = 1.0;
@@ -70,9 +67,7 @@ internal class SoundViewModel : INotifyPropertyChanged
 
             volume = value;
             OnPropertyChanged(nameof(Volume));
-#if ANDROID
-            audioPlayer.Volume = (float)volume;
-#endif
+            soundPlayer.SetVolume(volume);
         }
     }
 
@@ -96,13 +91,17 @@ internal class SoundViewModel : INotifyPropertyChanged
     public ICommand PlayCommand { get; }
     public ICommand StopCommand { get; }
 
-#if ANDROID
-    private IAudioPlayer audioPlayer;
-#endif
-
-    public SoundViewModel()
+    public SoundViewModel(ISoundPlayer soundPlayer)
     {
-        PlayCommand = new Command(Play, () => CanPlay);
+        this.soundPlayer = soundPlayer ?? throw new ArgumentNullException(nameof(soundPlayer));
+        this.soundPlayer.PlaybackEnded += OnPlaybackEnded;
+
+        PlayCommand = new Command(() =>
+            {
+                PlayAsync().ConfigureAwait(false).GetAwaiter().GetResult();
+            },
+            () => CanPlay
+        );
         StopCommand = new Command(Stop, () => IsPlaying);
 
         Volume = 1.0;
@@ -120,7 +119,7 @@ internal class SoundViewModel : INotifyPropertyChanged
             var sounds = asm.GetManifestResourceNames()
                 .Where(n => n.Contains(".Resources.Raw.", StringComparison.OrdinalIgnoreCase) &&
                     (n.EndsWith(".wav", StringComparison.OrdinalIgnoreCase) ||
-                    n.EndsWith(".mp3", StringComparison.OrdinalIgnoreCase)))
+                     n.EndsWith(".mp3", StringComparison.OrdinalIgnoreCase)))
                 .Select(name =>
                 {
                     var display = name.Split('.')[^2];
@@ -133,9 +132,9 @@ internal class SoundViewModel : INotifyPropertyChanged
                 allSounds.Add(sound);
             }
         }
-        catch
+        catch (Exception ex)
         {
-            // ignore
+            WeakReferenceMessenger.Default.Send(new ShowErrorMessage(ex));
         }
     }
 
@@ -162,42 +161,33 @@ internal class SoundViewModel : INotifyPropertyChanged
         ((Command)PlayCommand).ChangeCanExecute();
     }
 
-    private void Play()
+    private Task PlayAsync()
     {
-        if (SelectedSound == null) return;
+        if (SelectedSound == null)
+        {
+            return Task.CompletedTask;
+        }
 
         try
         {
-            var asm = Assembly.GetExecutingAssembly();
-            var stream = asm.GetManifestResourceStream(SelectedSound.ResourceId) ?? throw new FileNotFoundException("Embedded resource not found", SelectedSound.ResourceId);
-
-#if ANDROID
-            audioPlayer = AudioManager.Current.CreatePlayer(stream);
-            audioPlayer.PlaybackEnded += OnPlaybackEnded;
-            audioPlayer.Volume = (float)Volume;
-            audioPlayer.Play();
-#endif
             IsPlaying = true;
+            return soundPlayer.PlayAsync(SelectedSound, Volume);
         }
         catch (Exception ex)
         {
-            System.Diagnostics.Debug.WriteLine($"Play error: {ex}");
+            WeakReferenceMessenger.Default.Send(new ShowErrorMessage(ex));
+            return Task.CompletedTask;
         }
-
-        ((Command)PlayCommand).ChangeCanExecute();
-        ((Command)StopCommand).ChangeCanExecute();
+        finally
+        {
+            ((Command)PlayCommand).ChangeCanExecute();
+            ((Command)StopCommand).ChangeCanExecute();
+        }
     }
 
     private void OnPlaybackEnded(object? sender, EventArgs e)
     {
-#if ANDROID
-        if (audioPlayer != null)
-        {
-            IsPlaying = false;
-            OnPropertyChanged(nameof(CanPlay));
-            audioPlayer.PlaybackEnded -= OnPlaybackEnded;
-        }
-#endif
+        IsPlaying = false;
         ((Command)PlayCommand).ChangeCanExecute();
         ((Command)StopCommand).ChangeCanExecute();
     }
@@ -206,18 +196,12 @@ internal class SoundViewModel : INotifyPropertyChanged
     {
         try
         {
-#if ANDROID
-            if (audioPlayer != null && audioPlayer.IsPlaying)
-            {
-                audioPlayer.Stop();
-                audioPlayer.PlaybackEnded -= OnPlaybackEnded;
-            }
-#endif
+            soundPlayer.Stop();
             IsPlaying = false;
         }
         catch (Exception ex)
         {
-            System.Diagnostics.Debug.WriteLine($"Stop error: {ex}");
+            WeakReferenceMessenger.Default.Send(new ShowErrorMessage(ex));
         }
         finally
         {

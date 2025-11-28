@@ -5,7 +5,7 @@ using M.A.G.U.S.Assistant.Models;
 
 namespace M.A.G.U.S.Assistant.ViewModels;
 
-internal partial class ObjectInspectorViewModel : ObservableObject
+internal partial class ObjectObserverViewModel : ObservableObject
 {
     public ObservableCollection<PropertyItem> Properties { get; } = [];
 

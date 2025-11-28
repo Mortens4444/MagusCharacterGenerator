@@ -33,7 +33,7 @@ internal partial class NotifierPage : ContentPage
         }
         catch (Exception ex)
         {
-            Debug.WriteLine($"Translate error: {ex}");
+            WeakReferenceMessenger.Default.Send(new ShowErrorMessage(ex));
         }
     }
 

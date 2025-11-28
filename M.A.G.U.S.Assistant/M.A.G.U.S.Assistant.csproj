@@ -360,6 +360,9 @@
     <Compile Update="Views\MapPage.xaml.cs">
       <DependentUpon>MapPage.xaml</DependentUpon>
     </Compile>
+    <Compile Update="Views\ObjectObserverPage.xaml.cs">
+      <DependentUpon>ObjectObserverPage.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <MauiXaml Update="Views\AboutPage.xaml">
@@ -401,7 +404,7 @@
     <MauiXaml Update="Views\MapPage.xaml">
       <Generator>MSBuild:Compile</Generator>
     </MauiXaml>
-    <MauiXaml Update="Views\ObjectInspectorPage.xaml">
+    <MauiXaml Update="Views\ObjectObserverPage.xaml">
       <Generator>MSBuild:Compile</Generator>
     </MauiXaml>
     <MauiXaml Update="Views\PaintWizardPage.xaml">

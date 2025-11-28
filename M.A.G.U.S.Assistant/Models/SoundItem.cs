@@ -1,6 +1,6 @@
 ﻿namespace M.A.G.U.S.Assistant.Models;
 
-internal class SoundItem
+public class SoundItem
 {
     public string ResourceId { get; set; } = String.Empty;
 

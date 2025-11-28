@@ -1,5 +1,7 @@
-﻿using M.A.G.U.S.Assistant.Database.Entities;
+﻿using CommunityToolkit.Mvvm.Messaging;
+using M.A.G.U.S.Assistant.Database.Entities;
 using M.A.G.U.S.GameSystem;
+using Mtf.Maui.Controls.Models;
 using Newtonsoft.Json;
 using System.Diagnostics;
 
@@ -76,7 +78,7 @@ internal class CharacterRepository(DatabaseContext context)
         }
         catch (Exception ex)
         {
-            Debug.WriteLine($"Error deserializing character '{name}': {ex.Message}");
+            WeakReferenceMessenger.Default.Send(new ShowErrorMessage(ex));
             return null;
         }
     }
@@ -100,7 +102,7 @@ internal class CharacterRepository(DatabaseContext context)
             }
             catch (Exception ex)
             {
-                Debug.WriteLine($"Error: {ex.Message}");
+                WeakReferenceMessenger.Default.Send(new ShowErrorMessage(ex));
             }
         }
         return characters;

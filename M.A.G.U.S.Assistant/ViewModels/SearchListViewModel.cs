@@ -163,7 +163,7 @@ internal partial class SearchListViewModel : INotifyPropertyChanged
                 }
                 else
                 {
-                    page = new ObjectInspectorPage(new ObjectInspectorViewModel(), item);
+                    page = new ObjectObserverPage(new ObjectObserverViewModel(), item);
                 }
 
                 await mainPage.Navigation.PushAsync(page).ConfigureAwait(true);

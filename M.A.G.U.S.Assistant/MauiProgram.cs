@@ -1,9 +1,12 @@
-﻿using M.A.G.U.S.Assistant.Database;
+﻿using CommunityToolkit.Mvvm.Messaging;
+using M.A.G.U.S.Assistant.Database;
 using M.A.G.U.S.Assistant.Database.Repositories;
+using M.A.G.U.S.Assistant.Interfaces;
 using M.A.G.U.S.Assistant.Services;
 using M.A.G.U.S.Assistant.ViewModels;
 using M.A.G.U.S.Assistant.Views;
 using Microsoft.Extensions.Logging;
+using Mtf.Maui.Controls.Models;
 using System.Diagnostics;
 
 namespace M.A.G.U.S.Assistant;
@@ -25,6 +28,12 @@ internal static class MauiProgram
         builder.Logging.AddDebug();
 #endif
 
+#if ANDROID
+        builder.Services.AddSingleton<ISoundPlayer, Platforms.Android.SoundPlayer>();
+#elif WINDOWS
+        builder.Services.AddSingleton<ISoundPlayer, Platforms.Windows.SoundPlayer>();
+#endif
+
         RegisterPages(builder);
         RegisterViewModels(builder);
         RegisterRepositories(builder);
@@ -35,12 +44,14 @@ internal static class MauiProgram
             var exception = args.ExceptionObject as Exception;
             Console.Error.WriteLine($"{exception}");
             Debug.WriteLine($"Global error: {exception}");
+            WeakReferenceMessenger.Default.Send(new ShowErrorMessage(exception));
         };
 
         TaskScheduler.UnobservedTaskException += (sender, args) =>
         {
             Console.Error.WriteLine($"{args.Exception}");
             Debug.WriteLine($"Task error: {args.Exception}");
+            WeakReferenceMessenger.Default.Send(new ShowErrorMessage(args.Exception));
         };
 
         return builder.Build();
@@ -90,7 +101,7 @@ internal static class MauiProgram
             typeof(ItemDetailsViewModel),
             typeof(LanguagesViewModel),
             typeof(MarketViewModel),
-            typeof(ObjectInspectorViewModel),
+            typeof(ObjectObserverViewModel),
             //typeof(PaintViewModel),
             typeof(PaintWizardViewModel),
             typeof(QualificationsViewModel),
@@ -128,7 +139,7 @@ internal static class MauiProgram
             typeof(MapPage),
             typeof(MarketPage),
             typeof(NotifierPage),
-            typeof(ObjectInspectorPage),
+            typeof(ObjectObserverPage),
             typeof(PaintWizardPage),
             typeof(PoisonsPage),
             typeof(QualificationsPage),
