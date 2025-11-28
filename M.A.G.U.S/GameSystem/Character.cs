@@ -16,7 +16,6 @@ using Mtf.Extensions;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.ComponentModel;
-using System.Diagnostics;
 using System.Runtime.CompilerServices;
 
 namespace M.A.G.U.S.GameSystem;
@@ -520,7 +519,6 @@ public class Character : IFightModifier, ILiving, IAbilities, INotifyPropertyCha
 
     private void EnsureEquipmentSubscription()
     {
-        Equipment.CollectionChanged -= EquipmentOnCollectionChanged;
         Equipment.CollectionChanged += EquipmentOnCollectionChanged;
     }
 
@@ -528,7 +526,6 @@ public class Character : IFightModifier, ILiving, IAbilities, INotifyPropertyCha
     {
         TotalEquipmentWeight = (Equipment?.Sum(e => e.Weight) ?? 0).ToString("N1");
         OnPropertyChanged(nameof(Equipment));
-        OnPropertyChanged(nameof(TotalEquipmentWeight));
     }
 
     public void OnPropertyChanged([CallerMemberName] string propertyName = "")

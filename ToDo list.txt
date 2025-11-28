@@ -1,4 +1,3 @@
-- Sort equipment
 - Problem with total weight
 - Harcérték módodítók elosztása
 

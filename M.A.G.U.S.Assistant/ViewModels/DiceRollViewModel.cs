@@ -1,10 +1,8 @@
 ﻿using CommunityToolkit.Mvvm.Messaging;
+using M.A.G.U.S.Assistant.Interfaces;
 using M.A.G.U.S.Enums;
 using Mtf.LanguageService;
 using Mtf.Maui.Controls.Models;
-#if ANDROID
-using Plugin.Maui.Audio;
-#endif
 using System.ComponentModel;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -15,8 +13,31 @@ namespace M.A.G.U.S.Assistant.ViewModels;
 internal partial class DiceRollViewModel : INotifyPropertyChanged
 {
     public event PropertyChangedEventHandler? PropertyChanged;
-
+    private readonly ISoundPlayer soundPlayer;
+    private readonly Random random = new();
+    private DiceType selectedDice = DiceType.D100;
+    private int customFrom = 1;
+    private bool isCustomSelected;
     private byte diceCount = 1;
+    private int customTo = 6;
+    private string resultSummary = String.Empty;
+    private string resultDetails = String.Empty;
+
+    public DiceRollViewModel(ISoundPlayer soundPlayer)
+    {
+        this.soundPlayer = soundPlayer ?? throw new ArgumentNullException(nameof(soundPlayer));
+        RollCommand = new Command(() =>
+        {
+            _ = RollDiceAsync().ConfigureAwait(false);
+        });
+    }
+
+    public event EventHandler<TaskCompletionSource<bool>>? DiceRollRequested;
+
+    public ICommand RollCommand { get; }
+
+    public IEnumerable<DiceType> DiceTypes { get; } = Enum.GetValues<DiceType>().Cast<DiceType>();
+
     public byte DiceCount
     {
         get => diceCount;
@@ -32,9 +53,6 @@ internal partial class DiceRollViewModel : INotifyPropertyChanged
         }
     }
 
-    public IEnumerable<DiceType> DiceTypes { get; } = Enum.GetValues<DiceType>().Cast<DiceType>();
-
-    private DiceType selectedDice;
     public DiceType SelectedDice
     {
         get => selectedDice;
@@ -51,7 +69,6 @@ internal partial class DiceRollViewModel : INotifyPropertyChanged
         }
     }
 
-    private bool isCustomSelected;
     public bool IsCustomSelected
     {
         get => isCustomSelected;
@@ -67,7 +84,6 @@ internal partial class DiceRollViewModel : INotifyPropertyChanged
         }
     }
 
-    private int customFrom = 1;
     public int CustomFrom
     {
         get => customFrom;
@@ -83,7 +99,6 @@ internal partial class DiceRollViewModel : INotifyPropertyChanged
         }
     }
 
-    private int customTo = 6;
     public int CustomTo
     {
         get => customTo;
@@ -99,7 +114,6 @@ internal partial class DiceRollViewModel : INotifyPropertyChanged
         }
     }
 
-    private string resultSummary = String.Empty;
     public string ResultSummary
     {
         get => resultSummary;
@@ -115,7 +129,6 @@ internal partial class DiceRollViewModel : INotifyPropertyChanged
         }
     }
 
-    private string resultDetails = String.Empty;
     public string ResultDetails
     {
         get => resultDetails;
@@ -131,64 +144,25 @@ internal partial class DiceRollViewModel : INotifyPropertyChanged
         }
     }
 
-    public ICommand RollCommand { get; }
-
-    private readonly Random random = new();
-#if ANDROID
-    private IAudioPlayer audioPlayer;
-#endif
-    public DiceRollViewModel()
-    {
-        RollCommand = new Command(async () => await RollDiceAsync());
-        TryLoadSound();
-    }
-
-    private void TryLoadSound()
-    {
-        try
-        {
-
-            var assembly = GetType().Assembly;
-            var stream = assembly.GetManifestResourceStream("M.A.G.U.S.Assistant.Resources.Raw.dice_roll.wav");
-            if (stream != null)
-            {
-                if (Vibration.Default.IsSupported)
-                {
-                    Vibration.Default.Vibrate(TimeSpan.FromMilliseconds(200));
-                }
-#if ANDROID
-                audioPlayer = AudioManager.Current.CreatePlayer(stream);
-#endif
-            }
-        }
-        catch (Exception ex)
-        {
-            WeakReferenceMessenger.Default.Send(new ShowErrorMessage(ex.Message));
-        }
-    }
-
     private async Task RollDiceAsync()
     {
         var tcs = new TaskCompletionSource<bool>();
-
         DiceRollRequested?.Invoke(this, tcs);
 
         try
         {
-            try
+            if (Vibration.Default.IsSupported)
             {
-#if ANDROID
-                audioPlayer.Play();
-#endif
+                Vibration.Default.Vibrate(TimeSpan.FromMilliseconds(200));
             }
-            catch (Exception ex)
+            await soundPlayer.PlayAsync(new Models.SoundItem
             {
-            }
-            await tcs.Task;
+                ResourceId = "M.A.G.U.S.Assistant.Resources.Raw.dice_roll.mp3"
+            }, 1).ConfigureAwait(false);
         }
         catch (Exception ex)
         {
-            WeakReferenceMessenger.Default.Send(new ShowErrorMessage(ex.Message));
+            WeakReferenceMessenger.Default.Send(new ShowErrorMessage(ex));
         }
 
         ResultSummary = String.Empty;
@@ -252,8 +226,6 @@ internal partial class DiceRollViewModel : INotifyPropertyChanged
         ResultSummary = total.ToString();
         ResultDetails = sbDetails.ToString();
     }
-
-    public event EventHandler<TaskCompletionSource<bool>> DiceRollRequested;
 
     private void OnPropertyChanged(string name)
     {

@@ -23,5 +23,5 @@ public class SlanDagger : Weapon, IMeleeWeapon
 
     public override string Name => "Slan dagger";
 
-    public override string Description => "A sinister, often serrated or wickedly curved dagger associated with the dark rituals or assassination styles of the Slan cults.";
+    public override string Description => "A finely crafted blade favored by Slan martial artists. Its slender shape allows for swift, precise strikes, often used to disable an opponent before they can react. The dagger is balanced for both close-quarters combat and agile defensive maneuvers.";
 }

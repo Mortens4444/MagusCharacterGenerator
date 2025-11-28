@@ -15,7 +15,7 @@ using System.Runtime.Versioning;
 namespace M.A.G.U.S.Assistant.ViewModels;
 
 [SupportedOSPlatform("windows10.0.17763.0")]
-internal partial class CharacterGeneratorViewModel : ObservableObject
+internal partial class CharacterGeneratorViewModel : CharacterViewModel
 {
     private readonly SettingsService settingsService;
     private readonly CharacterService characterService;

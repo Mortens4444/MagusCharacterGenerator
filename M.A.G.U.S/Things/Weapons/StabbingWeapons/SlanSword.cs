@@ -22,5 +22,5 @@ public class SlanSword : Weapon, IMeleeWeapon
 
     public override string Name => "Slan sword";
 
-    public override string Description => "A full-sized, ritualistic or combat sword used by the Slan cultists, likely bearing disturbing symbols or unconventional, wicked geometry.";
+    public override string Description => "A long, curved weapon resembling a katana, crafted for the graceful but deadly fighting techniques of the Slan. Its flexible steel and razor-sharp edge make it ideal for sweeping cuts, rapid combinations, and the signature flowing movements characteristic of Slan swordmasters.";
 }

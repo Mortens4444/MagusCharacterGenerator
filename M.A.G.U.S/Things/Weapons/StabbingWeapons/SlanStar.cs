@@ -22,5 +22,5 @@ public class SlanStar : Weapon, IMeleeWeapon
 
     public override string Name => "Slan star";
 
-    public override string Description => "A deadly, multi-pointed throwing weapon often associated with the Slan. It rotates when thrown, dealing severe, jagged cuts to the target.";
+    public override string Description => "A traditional throwing weapon used by Slan warriors. Forged for accuracy and silent strikes, the Slan star is designed to be launched in fluid motion, complementing the Slan’s disciplined combat style. It serves both as a distraction tool and a lethal ranged option.";
 }

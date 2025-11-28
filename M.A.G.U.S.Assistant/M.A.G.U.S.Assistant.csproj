@@ -88,68 +88,42 @@
     <MauiAsset Include="Resources\Raw\**" LogicalName="%(RecursiveDir)%(Filename)%(Extension)" />
   </ItemGroup>
   <ItemGroup>
-    <MauiAsset Remove="Resources\Raw\bear_growl.wav" />
+    <MauiAsset Remove="Resources\Raw\bear_growl.mp3" />
     <MauiAsset Remove="Resources\Raw\beast.mp3" />
-    <MauiAsset Remove="Resources\Raw\beast.wav" />
     <MauiAsset Remove="Resources\Raw\bird_chirping.mp3" />
-    <MauiAsset Remove="Resources\Raw\bird_chirping.wav" />
     <MauiAsset Remove="Resources\Raw\church_bell.mp3" />
-    <MauiAsset Remove="Resources\Raw\church_bell.wav" />
     <MauiAsset Remove="Resources\Raw\Credits.txt" />
     <MauiAsset Remove="Resources\Raw\dark_cave.mp3" />
-    <MauiAsset Remove="Resources\Raw\dark_cave.wav" />
     <MauiAsset Remove="Resources\Raw\dark_magic_spell_cast.mp3" />
-    <MauiAsset Remove="Resources\Raw\dark_magic_spell_cast.wav" />
     <MauiAsset Remove="Resources\Raw\demon.mp3" />
-    <MauiAsset Remove="Resources\Raw\demon.wav" />
-    <MauiAsset Remove="Resources\Raw\dice_roll.wav" />
+    <MauiAsset Remove="Resources\Raw\dice_roll.mp3" />
     <MauiAsset Remove="Resources\Raw\dragon_growl.mp3" />
-    <MauiAsset Remove="Resources\Raw\dragon_growl.wav" />
     <MauiAsset Remove="Resources\Raw\drain_music.mp3" />
-    <MauiAsset Remove="Resources\Raw\drain_music.wav" />
     <MauiAsset Remove="Resources\Raw\fireball_cast.mp3" />
-    <MauiAsset Remove="Resources\Raw\fireball_cast.wav" />
     <MauiAsset Remove="Resources\Raw\fireball_cast_2.mp3" />
-    <MauiAsset Remove="Resources\Raw\fireball_cast_2.wav" />
     <MauiAsset Remove="Resources\Raw\horn.aiff" />
     <MauiAsset Remove="Resources\Raw\horn.mp3" />
-    <MauiAsset Remove="Resources\Raw\horn.wav" />
     <MauiAsset Remove="Resources\Raw\horn_2.mp3" />
     <MauiAsset Remove="Resources\Raw\horse.mp3" />
-    <MauiAsset Remove="Resources\Raw\horse.wav" />
     <MauiAsset Remove="Resources\Raw\man_ouch.mp3" />
-    <MauiAsset Remove="Resources\Raw\man_ouch.wav" />
     <MauiAsset Remove="Resources\Raw\orc_ouch.mp3" />
-    <MauiAsset Remove="Resources\Raw\orc_ouch.wav" />
     <MauiAsset Remove="Resources\Raw\roar.mp3" />
-    <MauiAsset Remove="Resources\Raw\roar.wav" />
     <MauiAsset Remove="Resources\Raw\roar_2.mp3" />
     <MauiAsset Remove="Resources\Raw\roar_3.mp3" />
-    <MauiAsset Remove="Resources\Raw\roar_3.wav" />
     <MauiAsset Remove="Resources\Raw\rubbing-metal.mp3" />
-    <MauiAsset Remove="Resources\Raw\rubbing-metal.wav" />
     <MauiAsset Remove="Resources\Raw\scream.mp3" />
-    <MauiAsset Remove="Resources\Raw\scream.wav" />
     <MauiAsset Remove="Resources\Raw\scream_2.mp3" />
     <MauiAsset Remove="Resources\Raw\scream_3.mp3" />
-    <MauiAsset Remove="Resources\Raw\scream_3.wav" />
     <MauiAsset Remove="Resources\Raw\spell_cast.mp3" />
-    <MauiAsset Remove="Resources\Raw\spell_cast.wav" />
     <MauiAsset Remove="Resources\Raw\spell_cast_2.mp3" />
-    <MauiAsset Remove="Resources\Raw\spell_cast_2.wav" />
     <MauiAsset Remove="Resources\Raw\sword_fight.mp3" />
     <MauiAsset Remove="Resources\Raw\werewolf_howl.mp3" />
-    <MauiAsset Remove="Resources\Raw\werewolf_howl.wav" />
     <MauiAsset Remove="Resources\Raw\wolf.mp3" />
     <MauiAsset Remove="Resources\Raw\yeti-roar.mp3" />
-    <MauiAsset Remove="Resources\Raw\yeti-roar.wav" />
     <MauiAsset Remove="Resources\Raw\zombie.mp3" />
-    <MauiAsset Remove="Resources\Raw\zombie.wav" />
     <MauiAsset Remove="Resources\Raw\zombie_2.mp3" />
-    <MauiAsset Remove="Resources\Raw\zombie_2.wav" />
-    <MauiAsset Remove="Resources\Raw\zombie_3.wav" />
+    <MauiAsset Remove="Resources\Raw\zombie_3.mp3" />
     <MauiAsset Remove="Resources\Raw\zombie_4.mp3" />
-    <MauiAsset Remove="Resources\Raw\zombie_4.wav" />
     <MauiAsset Remove="Resources\Raw\zombie_eating.mp3" />
   </ItemGroup>
   <ItemGroup>
@@ -296,7 +270,7 @@
     <MauiImage Include="Resources\Images\Characters\witch_2.png" />
     <MauiImage Include="Resources\Images\Characters\wizard.png" />
     <EmbeddedResource Include="Resources\Images\images_manifest.txt" />
-    <EmbeddedResource Include="Resources\Raw\bear_growl.wav" />
+    <EmbeddedResource Include="Resources\Raw\bear_growl.mp3" />
     <EmbeddedResource Include="Resources\Raw\beast.mp3" />
     <EmbeddedResource Include="Resources\Raw\bird_chirping.mp3" />
     <EmbeddedResource Include="Resources\Raw\church_bell.mp3" />
@@ -304,6 +278,7 @@
     <EmbeddedResource Include="Resources\Raw\dark_cave.mp3" />
     <EmbeddedResource Include="Resources\Raw\dark_magic_spell_cast.mp3" />
     <EmbeddedResource Include="Resources\Raw\demon.mp3" />
+    <EmbeddedResource Include="Resources\Raw\dice_roll.mp3" />
     <EmbeddedResource Include="Resources\Raw\dragon_growl.mp3" />
     <EmbeddedResource Include="Resources\Raw\drain_music.mp3" />
     <EmbeddedResource Include="Resources\Raw\fireball_cast.mp3" />
@@ -325,11 +300,10 @@
     <EmbeddedResource Include="Resources\Raw\sword_fight.mp3" />
     <EmbeddedResource Include="Resources\Raw\werewolf_howl.mp3" />
     <EmbeddedResource Include="Resources\Raw\wolf.mp3" />
-    <EmbeddedResource Include="Resources\Raw\dice_roll.wav" />
     <EmbeddedResource Include="Resources\Raw\yeti-roar.mp3" />
     <EmbeddedResource Include="Resources\Raw\zombie.mp3" />
     <EmbeddedResource Include="Resources\Raw\zombie_2.mp3" />
-    <EmbeddedResource Include="Resources\Raw\zombie_3.wav" />
+    <EmbeddedResource Include="Resources\Raw\zombie_3.mp3" />
     <EmbeddedResource Include="Resources\Raw\zombie_4.mp3" />
     <EmbeddedResource Include="Resources\Raw\zombie_eating.mp3" />
   </ItemGroup>
@@ -339,7 +313,7 @@
     <PackageReference Include="Microsoft.Maui.Graphics" Version="9.0.120" />
     <PackageReference Include="Microsoft.Maui.Graphics.Skia" Version="9.0.120" />
     <PackageReference Include="Mtf.Maui.Controls" Version="2.0.40" />
-    <PackageReference Include="Mtf.MAUI.LanguageService" Version="1.0.55" />
+    <PackageReference Include="Mtf.MAUI.LanguageService" Version="1.0.56" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.4" />
     <PackageReference Include="Plugin.Maui.Audio" Version="4.0.0" />
     <PackageReference Include="sqlite-net-pcl" Version="1.9.172" />

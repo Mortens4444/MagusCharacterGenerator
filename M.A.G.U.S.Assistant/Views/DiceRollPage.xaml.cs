@@ -28,6 +28,7 @@ internal partial class DiceRollPage : NotifierPage
         base.OnAppearing();
         Translator.Translate(this);
 
+#if ANDROID
         try
         {
             Accelerometer.ReadingChanged += OnAccelerometerReadingChanged;
@@ -38,14 +39,15 @@ internal partial class DiceRollPage : NotifierPage
         }
         catch (Exception ex)
         {
-            WeakReferenceMessenger.Default.Send(new ShowErrorMessage(ex.Message));
+            WeakReferenceMessenger.Default.Send(new ShowErrorMessage(ex));
         }
+#endif
     }
 
     protected override void OnDisappearing()
     {
         base.OnDisappearing();
-
+#if ANDROID
         try
         {
             Accelerometer.ReadingChanged -= OnAccelerometerReadingChanged;
@@ -56,8 +58,9 @@ internal partial class DiceRollPage : NotifierPage
         }
         catch (Exception ex)
         {
-            WeakReferenceMessenger.Default.Send(new ShowErrorMessage(ex.Message));
+            WeakReferenceMessenger.Default.Send(new ShowErrorMessage(ex));
         }
+#endif
     }
 
     private void OnAccelerometerReadingChanged(object? sender, AccelerometerChangedEventArgs e)
@@ -82,25 +85,16 @@ internal partial class DiceRollPage : NotifierPage
         }
         catch (Exception ex)
         {
-            WeakReferenceMessenger.Default.Send(new ShowErrorMessage(ex.Message));
+            WeakReferenceMessenger.Default.Send(new ShowErrorMessage(ex));
         }
     }
 
     private void TriggerRollFromShake()
     {
-
         try
         {
             if (ViewModel?.RollCommand != null && ViewModel.RollCommand.CanExecute(null))
             {
-                try
-                {
-                    Vibration.Default.Vibrate(TimeSpan.FromMilliseconds(80));
-                }
-                catch (Exception ex)
-                {
-                    WeakReferenceMessenger.Default.Send(new ShowErrorMessage(ex.Message));
-                }
                 ViewModel.RollCommand.Execute(null);
             }
         }
@@ -135,8 +129,9 @@ internal partial class DiceRollPage : NotifierPage
             await DiceImage.TranslateTo(6, 0, 40);
             await DiceImage.TranslateTo(0, 0, 30);
         }
-        catch
+        catch (Exception ex)
         {
+            WeakReferenceMessenger.Default.Send(new ShowErrorMessage(ex));
         }
     }
 }
