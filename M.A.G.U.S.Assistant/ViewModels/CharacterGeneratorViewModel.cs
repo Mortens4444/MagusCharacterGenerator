@@ -1,13 +1,13 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.Messaging;
-using M.A.G.U.S.Assistant.Messages;
 using M.A.G.U.S.Assistant.Services;
 using M.A.G.U.S.GameSystem;
 using M.A.G.U.S.Interfaces;
 using M.A.G.U.S.Races;
 using M.A.G.U.S.Utils;
 using Mtf.LanguageService;
+using Mtf.Maui.Controls.Models;
 using System.Collections.ObjectModel;
 using System.Reflection;
 using System.Runtime.Versioning;

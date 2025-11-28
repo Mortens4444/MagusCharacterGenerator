@@ -1,9 +1,8 @@
 ﻿using CommunityToolkit.Mvvm.Messaging;
 using M.A.G.U.S.Assistant.Messages;
 using Mtf.LanguageService.MAUI;
+using Mtf.Maui.Controls.Models;
 using System.Diagnostics;
-using ShowErrorMessage = M.A.G.U.S.Assistant.Messages.ShowErrorMessage;
-using ShowInfoMessage = M.A.G.U.S.Assistant.Messages.ShowInfoMessage;
 
 namespace M.A.G.U.S.Assistant.Views;
 

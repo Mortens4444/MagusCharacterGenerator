@@ -5,7 +5,7 @@ using M.A.G.U.S.Assistant.Models;
 
 namespace M.A.G.U.S.Assistant.ViewModels;
 
-internal class ObjectInspectorViewModel : ObservableObject
+internal partial class ObjectInspectorViewModel : ObservableObject
 {
     public ObservableCollection<PropertyItem> Properties { get; } = [];
 
@@ -23,7 +23,7 @@ internal class ObjectInspectorViewModel : ObservableObject
         }
     }
 
-    void LoadProperties()
+    private void LoadProperties()
     {
         Properties.Clear();
         if (inspectedObject == null)

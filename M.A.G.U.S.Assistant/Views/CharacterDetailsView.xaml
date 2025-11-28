@@ -10,8 +10,9 @@
              xmlns:q="clr-namespace:M.A.G.U.S.GameSystem.Qualifications;assembly=M.A.G.U.S."
              xmlns:mc="clr-namespace:Mtf.Maui.Controls;assembly=Mtf.Maui.Controls"
              x:ClassModifier="internal"
-             x:DataType="vm:CharacterDetailsViewModel"
              x:Class="M.A.G.U.S.Assistant.Views.CharacterDetailsView">
+             <!--x:DataType="vm:CharacterGeneratorViewModel"-->
+             <!--x:DataType="vm:CharacterDetailsViewModel"-->
 
     <ContentView.Resources>
         <ResourceDictionary>

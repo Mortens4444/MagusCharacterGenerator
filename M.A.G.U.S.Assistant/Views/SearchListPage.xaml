@@ -23,39 +23,24 @@
             <Button Grid.Column="1" Text="Clear" Command="{Binding ClearCommand}" />
         </Grid>
 
-        <CollectionView Grid.Row="1"
-                            ItemsSource="{Binding FilteredItems}"
-                            SelectionMode="Single"
-                            SelectedItem="{Binding SelectedItem, Mode=TwoWay}"
-                            ItemsLayout="VerticalList">
+        <CollectionView Grid.Row="1" ItemsSource="{Binding FilteredItems}" SelectionMode="Single" SelectedItem="{Binding SelectedItem, Mode=TwoWay}" ItemsLayout="VerticalList">
             <CollectionView.ItemTemplate>
                 <DataTemplate x:DataType="m:DisplayItem">
                     <Border Stroke="Gray" StrokeThickness="1" Padding="8" Margin="0,4">
                         <Grid ColumnDefinitions="*,Auto" ColumnSpacing="8" VerticalOptions="Center">
                             <StackLayout>
                                 <Label Text="{Binding Title, Converter={StaticResource TranslationConverter}}" FontAttributes="Bold"
-                                           TextColor="{Binding Enabled, Converter={StaticResource BoolToColorConverter}}" />
-
+                                       TextColor="{Binding Enabled, Converter={StaticResource BoolToColorConverter}}" />
                                 <Label Text="{Binding Subtitle, Converter={StaticResource TranslationConverter}}" FontSize="12" LineBreakMode="TailTruncation"
-                                           TextColor="{Binding Enabled, Converter={StaticResource BoolToColorConverter}}" />
+                                       TextColor="{Binding Enabled, Converter={StaticResource BoolToColorConverter}}" />
                             </StackLayout>
                             <Label Text="{Binding RightText}" VerticalOptions="Center" Grid.Column="1" FontAttributes="Bold"
-                                       TextColor="{Binding Enabled, Converter={StaticResource BoolToColorConverter}}" />
+                                   TextColor="{Binding Enabled, Converter={StaticResource BoolToColorConverter}}" />
                         </Grid>
                     </Border>
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>
-        <Button Grid.Row="2" x:Name="DetailsButton" Text="Details" Clicked="OnDetailsClicked">
-            <Button.Triggers>
-                <DataTrigger TargetType="Button" Binding="{Binding SelectedItem}" Value="{x:Null}">
-                    <Setter Property="IsVisible" Value="False" />
-                </DataTrigger>
-                <DataTrigger TargetType="Button" Binding="{Binding IsCharacterSet}" Value="False">
-                    <Setter Property="IsVisible" Value="False" />
-                </DataTrigger>
-            </Button.Triggers>
-        </Button>
 
     </Grid>
 </v:NotifierPage>

@@ -12,16 +12,10 @@
 
     <Grid Padding="10" RowDefinitions="Auto,*,Auto">
         <Grid Grid.Row="0" ColumnDefinitions="*" ColumnSpacing="6">
-            <mc:EntryWithLabel Label="Search"
-                         Text="{Binding SearchText}"
-                         Grid.Column="0" />
+            <mc:EntryWithLabel Label="Search" Text="{Binding SearchText}" Grid.Column="0" />
         </Grid>
 
-        <CollectionView Grid.Row="1"
-                    ItemsSource="{Binding FilteredImages}"
-                    SelectionMode="Single"
-                    SelectedItem="{Binding SelectedImage}"
-                    ItemsLayout="VerticalList">
+        <CollectionView Grid.Row="1" SelectionMode="Single" ItemsLayout="VerticalList" ItemsSource="{Binding FilteredImages}" SelectedItem="{Binding SelectedImage}">
             <CollectionView.ItemTemplate>
                 <DataTemplate x:DataType="m:ImageItem">
                     <Border Stroke="Gray" StrokeThickness="1" Padding="8" Margin="0,4">

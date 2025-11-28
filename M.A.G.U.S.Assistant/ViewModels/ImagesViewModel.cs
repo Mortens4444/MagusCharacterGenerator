@@ -22,7 +22,11 @@ internal partial class ImagesViewModel : INotifyPropertyChanged
         get => searchText;
         set
         {
-            if (searchText == value) return;
+            if (searchText == value)
+            {
+                return;
+            }
+
             searchText = value;
             OnPropertyChanged(nameof(SearchText));
             ApplyFilter();
@@ -63,10 +67,7 @@ internal partial class ImagesViewModel : INotifyPropertyChanged
         try
         {
             var asm = Assembly.GetExecutingAssembly();
-            var resourceName = asm
-                .GetManifestResourceNames()
-                .FirstOrDefault(n => n.EndsWith("images_manifest.txt", StringComparison.OrdinalIgnoreCase));
-
+            var resourceName = asm.GetManifestResourceNames().FirstOrDefault(n => n.EndsWith("images_manifest.txt", StringComparison.OrdinalIgnoreCase));
             if (resourceName == null)
             {
                 Debug.WriteLine("images_manifest.txt not found in embedded resources.");
@@ -74,19 +75,23 @@ internal partial class ImagesViewModel : INotifyPropertyChanged
             }
 
             using var stream = asm.GetManifestResourceStream(resourceName);
-            if (stream == null) return;
+            if (stream == null)
+            {
+                return;
+            }
 
             using var reader = new StreamReader(stream);
-            var lines = reader.ReadToEnd()
-                .Split('\n', StringSplitOptions.RemoveEmptyEntries);
+            var lines = reader.ReadToEnd().Split('\n', StringSplitOptions.RemoveEmptyEntries);
 
             foreach (var line in lines)
             {
                 var trimmed = line.Trim();
-                if (trimmed.Length == 0) continue;
+                if (trimmed.Length == 0)
+                {
+                    continue;
+                }
 
                 var display = Path.GetFileNameWithoutExtension(trimmed).Split('.')[^1];
-
                 var item = new ImageItem
                 {
                     ResourceId = trimmed,

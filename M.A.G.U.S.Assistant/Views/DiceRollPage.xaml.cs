@@ -1,7 +1,7 @@
 using CommunityToolkit.Mvvm.Messaging;
-using M.A.G.U.S.Assistant.Messages;
 using M.A.G.U.S.Assistant.ViewModels;
 using Mtf.LanguageService.MAUI;
+using Mtf.Maui.Controls.Models;
 
 namespace M.A.G.U.S.Assistant.Views;
 

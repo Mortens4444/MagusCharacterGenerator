@@ -1,5 +1,11 @@
-﻿using M.A.G.U.S.Assistant.Models;
+﻿using CommunityToolkit.Mvvm.Messaging;
+using M.A.G.U.S.Assistant.CustomEventArgs;
+using M.A.G.U.S.Assistant.Models;
+using M.A.G.U.S.Assistant.Views;
+using M.A.G.U.S.Bestiary;
 using M.A.G.U.S.GameSystem;
+using M.A.G.U.S.Things;
+using Mtf.Maui.Controls.Models;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Windows.Input;
@@ -27,11 +33,8 @@ internal partial class SearchListViewModel : INotifyPropertyChanged
 
             character = value;
             OnPropertyChanged(nameof(Character));
-            OnPropertyChanged(nameof(IsCharacterSet));
         }
     }
-
-    public bool IsCharacterSet => Character != null;
 
     private string searchText = String.Empty;
     public string SearchText
@@ -79,6 +82,11 @@ internal partial class SearchListViewModel : INotifyPropertyChanged
 
             selectedItem = value;
             OnPropertyChanged(nameof(SelectedItem));
+
+            if (selectedItem != null)
+            {
+                _ = OpenDetailsAsync(selectedItem);
+            }
         }
     }
 
@@ -133,5 +141,65 @@ internal partial class SearchListViewModel : INotifyPropertyChanged
         }
     }
 
-    void OnPropertyChanged(string name) => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
+    private void OnPropertyChanged(string name) => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
+
+    private async Task OpenDetailsAsync(DisplayItem item)
+    {
+        try
+        {
+            var mainPage = Application.Current != null && Application.Current.Windows.Count > 0 ? Application.Current.Windows[0].Page : null;
+            if (mainPage?.Navigation != null)
+            {
+                Page page;
+                if (item.Source is Creature creature)
+                {
+                    page = new CreatureDetailsPage(new CreatureDetailsViewModel(creature));
+                }
+                else if (item.Source is Thing thing)
+                {
+                    var itemDetailsViewModel = new ItemDetailsViewModel(Character, thing);
+                    itemDetailsViewModel.Purchased += PurchaseHandler;
+                    page = new ItemDetailsPage(itemDetailsViewModel);
+                }
+                else
+                {
+                    page = new ObjectInspectorPage(new ObjectInspectorViewModel(), item);
+                }
+
+                await mainPage.Navigation.PushAsync(page).ConfigureAwait(true);
+            }
+        }
+        catch (Exception ex)
+        {
+            WeakReferenceMessenger.Default.Send(new ShowErrorMessage(ex.Message));
+        }
+    }
+
+    private void PurchaseHandler(object? s, ThingPurchasedEventArgs args)
+    {
+        try
+        {
+            Character?.Buy(args.Thing);
+            RefreshAffordability();
+            var mainPage = Application.Current != null && Application.Current.Windows.Count > 0 ? Application.Current.Windows[0].Page : null;
+            mainPage?.Navigation.PopAsync().ConfigureAwait(false);
+        }
+        catch (Exception ex)
+        {
+            WeakReferenceMessenger.Default.Send(new ShowErrorMessage(ex.Message));
+        }
+    }
+
+    private void RefreshAffordability()
+    {
+        if (Items == null)
+        {
+            return;
+        }
+
+        foreach (var item in Items.OfType<DisplayItem>())
+        {
+            item.OnPropertyChanged(nameof(DisplayItem.Enabled));
+        }
+    }
 }

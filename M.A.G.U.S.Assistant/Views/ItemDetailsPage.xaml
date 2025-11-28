@@ -15,10 +15,6 @@
         </ResourceDictionary>
     </v:NotifierPage.Resources>
 
-    <v:NotifierPage.BindingContext>
-        <vm:ItemDetailsViewModel />
-    </v:NotifierPage.BindingContext>
-
     <ScrollView>
         <StackLayout Padding="12" Spacing="12">
 
@@ -54,7 +50,13 @@
             </Border>
 
             <HorizontalStackLayout Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" HorizontalOptions="Center" Spacing="12" Margin="0,8,0,0">
-                <Button Text="Buy" Command="{Binding BuyCommand}" CornerRadius="10" Padding="12,8" />
+                <Button Text="Buy" Command="{Binding BuyCommand}" CornerRadius="10" >
+                    <Button.Triggers>
+                        <DataTrigger TargetType="Button" Binding="{Binding IsBuyButtonVisible}" Value="False">
+                            <Setter Property="IsVisible" Value="False" />
+                        </DataTrigger>
+                    </Button.Triggers>
+                </Button>
             </HorizontalStackLayout>
 
         </StackLayout>

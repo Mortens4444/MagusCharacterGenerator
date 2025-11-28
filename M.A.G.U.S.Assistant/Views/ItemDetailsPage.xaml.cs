@@ -1,16 +1,14 @@
 using M.A.G.U.S.Assistant.ViewModels;
-using M.A.G.U.S.Things;
 using Mtf.LanguageService;
 
 namespace M.A.G.U.S.Assistant.Views;
 
 internal partial class ItemDetailsPage : NotifierPage
 {
-    public ItemDetailsPage(Thing thing)
+    public ItemDetailsPage(ItemDetailsViewModel itemDetailsViewModel)
     {
-        ArgumentNullException.ThrowIfNull(thing);
         InitializeComponent();
-        Title = Lng.Elem(thing.Name);
-        BindingContext = new ItemDetailsViewModel(thing);
+        Title = Lng.Elem(itemDetailsViewModel.Thing.Name);
+        BindingContext = itemDetailsViewModel;
     }
 }

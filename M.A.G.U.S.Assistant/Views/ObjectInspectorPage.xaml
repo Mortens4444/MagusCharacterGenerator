@@ -3,17 +3,16 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:v="clr-namespace:M.A.G.U.S.Assistant.Views"
              xmlns:vm="clr-namespace:M.A.G.U.S.Assistant.ViewModels"
+             xmlns:m="clr-namespace:M.A.G.U.S.Assistant.Models"
              x:Class="M.A.G.U.S.Assistant.Views.ObjectInspectorPage"
              x:ClassModifier="internal"
+             x:DataType="vm:ObjectInspectorViewModel"
              Title="Object Inspector">
 
     <CollectionView ItemsSource="{Binding Properties}" Margin="10">
         <CollectionView.ItemTemplate>
-            <DataTemplate>
-                <Grid ColumnDefinitions="*,2*"
-                      Padding="4"
-                      RowSpacing="4"
-                      ColumnSpacing="8">
+            <DataTemplate x:DataType="m:PropertyItem">
+                <Grid ColumnDefinitions="*, 2*" Padding="4" RowSpacing="4" ColumnSpacing="8">
                     <Label Text="{Binding Name}" FontAttributes="Bold" />
                     <Label Text="{Binding Value}" Grid.Column="1" LineBreakMode="WordWrap" />
                 </Grid>

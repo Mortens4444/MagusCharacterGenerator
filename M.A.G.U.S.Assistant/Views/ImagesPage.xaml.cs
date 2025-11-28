@@ -8,6 +8,5 @@ internal partial class ImagesPage : NotifierPage
 	{
 		InitializeComponent();
         BindingContext = viewModel;
-        Resources.Add("ImagesPageRoot", this);
     }
 }

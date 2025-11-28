@@ -526,6 +526,7 @@ public class Character : IFightModifier, ILiving, IAbilities, INotifyPropertyCha
 
     private void EquipmentOnCollectionChanged(object? sender, NotifyCollectionChangedEventArgs e)
     {
+        OnPropertyChanged(nameof(Equipment));
         TotalEquipmentWeight = (Equipment?.Sum(e => e.Weight) ?? 0).ToString("N1");
         Debug.WriteLine($"Equipment changed. TotalEquipmentWeight={TotalEquipmentWeight}");
     }

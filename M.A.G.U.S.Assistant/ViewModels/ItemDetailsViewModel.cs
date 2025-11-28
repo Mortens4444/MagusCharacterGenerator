@@ -1,6 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using M.A.G.U.S.Assistant.CustomEventArgs;
 using M.A.G.U.S.Assistant.Extensions;
+using M.A.G.U.S.GameSystem;
 using M.A.G.U.S.Things;
 using System.Windows.Input;
 
@@ -8,13 +9,12 @@ namespace M.A.G.U.S.Assistant.ViewModels;
 
 internal partial class ItemDetailsViewModel : ObservableObject
 {
-    private readonly Thing? thing;
+    public Thing Thing { get; private set; }
 
-    public ItemDetailsViewModel() { }
-
-    public ItemDetailsViewModel(Thing thing)
+    public ItemDetailsViewModel(Character? character, Thing thing)
     {
-        this.thing = thing ?? throw new ArgumentNullException(nameof(thing));
+        Thing = thing;
+        IsBuyButtonVisible = character != null && character.Money >= thing.Price;
 
         Name = thing.Name;
         Description = thing.Description;
@@ -22,40 +22,28 @@ internal partial class ItemDetailsViewModel : ObservableObject
         Weight = thing.Weight;
         ImageName = thing.ImageName;
 
-        BuyCommand = new RelayCommand(_ => OnBuy());
+        BuyCommand = new RelayCommand(_ =>  OnPurchased(Thing));
     }
 
+    public bool IsBuyButtonVisible { get; init; }
     public string Name { get; } = String.Empty;
     public string Description { get; } = String.Empty;
     public string ImageName { get; } = String.Empty;
-    public string ImageName2 { get; } = String.Empty;
     public string Money { get; } = String.Empty;
     public double Weight { get; }
-    public ImageSource? ImageSource { get; }
-    public ImageSource? ImageSource2 { get; }
 
     public ICommand BuyCommand { get; } = new RelayCommand(_ => { });
 
     public event EventHandler<ThingPurchasedEventArgs>? Purchased;
     public event EventHandler? Closed;
 
-    protected virtual void OnPurchased(Thing t)
+    protected virtual void OnPurchased(Thing thing)
     {
-        Purchased?.Invoke(this, new ThingPurchasedEventArgs(t));
+        Purchased?.Invoke(this, new ThingPurchasedEventArgs(thing));
     }
 
     protected virtual void OnClosed()
     {
         Closed?.Invoke(this, EventArgs.Empty);
-    }
-
-    private void OnBuy()
-    {
-        if (thing == null)
-        {
-            return;
-        }
-
-        OnPurchased(thing);
     }
 }
