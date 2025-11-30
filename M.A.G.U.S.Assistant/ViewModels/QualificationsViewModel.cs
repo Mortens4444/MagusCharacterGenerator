@@ -11,9 +11,23 @@ internal partial class QualificationsViewModel : INotifyPropertyChanged
 {
     public ObservableCollection<Qualification> Qualifications { get; } = [];
     public ObservableCollection<Qualification> FilteredQualifications { get; } = [];
-    public ObservableCollection<GroupedQualifications> GroupedQualifications { get; } = [];
+    public ObservableCollection<GroupedQualifications> GroupedQualifications
+    {
+        get => groupedQualifications;
+        set
+        {
+            if (groupedQualifications == value)
+            {
+                return;
+            }
 
+            groupedQualifications = value;
+            OnPropertyChanged(nameof(GroupedQualifications));
+        }
+    }
     string _searchText = String.Empty;
+    private ObservableCollection<GroupedQualifications> groupedQualifications = [];
+
     public string SearchText
     {
         get => _searchText;
@@ -75,18 +89,10 @@ internal partial class QualificationsViewModel : INotifyPropertyChanged
             .ThenBy(c => Lng.Elem(c.Key))
             .Select(g => new GroupedQualifications(Lng.Elem(g.Key), g));
 
-        try
+        MainThread.BeginInvokeOnMainThread(() =>
         {
-            GroupedQualifications.Clear();
-            foreach (var group in grouped)
-            {
-                GroupedQualifications.Add(group);
-            }
-        }
-        catch (Exception ex)
-        {
-            System.Diagnostics.Debug.WriteLine($"Error: {ex.Message}");
-        }
+            GroupedQualifications = new ObservableCollection<GroupedQualifications>(grouped);
+        });
     }
 
     private void ClearFilter()
