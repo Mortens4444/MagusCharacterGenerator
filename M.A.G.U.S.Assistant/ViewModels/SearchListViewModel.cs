@@ -3,23 +3,82 @@ using M.A.G.U.S.Assistant.CustomEventArgs;
 using M.A.G.U.S.Assistant.Models;
 using M.A.G.U.S.Assistant.Views;
 using M.A.G.U.S.Bestiary;
+using M.A.G.U.S.Enums;
 using M.A.G.U.S.GameSystem;
 using M.A.G.U.S.Things;
+using Mtf.LanguageService;
 using Mtf.Maui.Controls.Models;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Reflection;
 using System.Windows.Input;
 
 namespace M.A.G.U.S.Assistant.ViewModels;
 
 internal partial class SearchListViewModel : INotifyPropertyChanged
 {
+    private Character? character;
+    private bool showOnlyAffordable = false;
+    private string searchText = String.Empty;
+    private double priceMultiplier = 1.0;
+    private string categoryFilter = String.Empty;
+    private string pageTitle = String.Empty;
+    private DisplayItem? selectedItem;
+    private CancellationTokenSource? filterCancellationTokenSource;
+
+    private void OnPropertyChanged(string name) => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
+
+    public SearchListViewModel()
+    {
+        SelectCommand = new RelayCommand(o =>
+        {
+            if (o is DisplayItem di)
+            {
+                SelectedItem = di;
+            }
+        });
+
+        ClearCommand = new RelayCommand(_ =>
+        {
+            SearchText = String.Empty;
+        });
+
+        Character = null;
+        PriceMultiplier = 1.0;
+
+        SetCategories();
+    }
+
     public event PropertyChangedEventHandler? PropertyChanged;
 
-    public ObservableCollection<DisplayItem> Items { get; } = [];
-    public ObservableCollection<DisplayItem> FilteredItems { get; } = [];
+    public ICommand SelectCommand { get; }
+    public ICommand ClearCommand { get; }
 
-    private Character? character;
+    public ObservableCollection<DisplayItem> Items { get; } = [];
+
+    public ObservableCollection<DisplayItem> FilteredItems { get; } = [];
+    
+    public bool IsCharacterSet => Character != null;
+
+    public ObservableCollection<ThingCategory> Categories { get; set; }
+
+    private ThingCategory selectedCategory = ThingCategory.All;
+
+    public ThingCategory SelectedCategory
+    {
+        get => selectedCategory;
+        set
+        {
+            if (selectedCategory == value)
+            {
+                return;
+            }
+
+            selectedCategory = value;
+            OnPropertyChanged(nameof(SelectedCategory));
+            ApplyFilter();
+        }
+    }
 
     public Character? Character
     {
@@ -33,10 +92,62 @@ internal partial class SearchListViewModel : INotifyPropertyChanged
 
             character = value;
             OnPropertyChanged(nameof(Character));
+            OnPropertyChanged(nameof(IsCharacterSet));
+            DebounceApplyFilter();
         }
     }
 
-    private string searchText = String.Empty;
+    public string CategoryFilter
+    {
+        get => categoryFilter;
+        set
+        {
+            if (categoryFilter == value)
+            {
+                return;
+            }
+
+            categoryFilter = value ?? String.Empty;
+            OnPropertyChanged(nameof(CategoryFilter));
+            ApplyFilter();
+        }
+    }
+
+    public double PriceMultiplier
+    {
+        get => priceMultiplier;
+        set
+        {
+            var newValue = Math.Max(0.0, value);
+            if (Math.Abs(priceMultiplier - newValue) < 0.001)
+            {
+                return;
+            }
+
+            priceMultiplier = newValue;
+            OnPropertyChanged(nameof(PriceMultiplier));
+
+            RefreshAllItems();
+            DebounceApplyFilter();
+        }
+    }
+
+    public bool ShowOnlyAffordable
+    {
+        get => showOnlyAffordable;
+        set
+        {
+            if (showOnlyAffordable == value)
+            {
+                return;
+            }
+
+            showOnlyAffordable = value;
+            OnPropertyChanged(nameof(ShowOnlyAffordable));
+            DebounceApplyFilter();
+        }
+    }
+
     public string SearchText
     {
         get => searchText;
@@ -49,11 +160,10 @@ internal partial class SearchListViewModel : INotifyPropertyChanged
 
             searchText = value ?? String.Empty;
             OnPropertyChanged(nameof(SearchText));
-            ApplyFilter();
+            DebounceApplyFilter();
         }
     }
 
-    private string pageTitle = String.Empty;
     public string PageTitle
     {
         get => pageTitle;
@@ -69,7 +179,6 @@ internal partial class SearchListViewModel : INotifyPropertyChanged
         }
     }
 
-    private DisplayItem? selectedItem;
     public DisplayItem? SelectedItem
     {
         get => selectedItem;
@@ -90,27 +199,6 @@ internal partial class SearchListViewModel : INotifyPropertyChanged
         }
     }
 
-    public ICommand SelectCommand { get; }
-    public ICommand ClearCommand { get; }
-
-    public SearchListViewModel()
-    {
-        SelectCommand = new RelayCommand(o =>
-        {
-            if (o is DisplayItem di)
-            {
-                SelectedItem = di;
-            }
-        });
-
-        ClearCommand = new RelayCommand(_ =>
-        {
-            SearchText = String.Empty;
-        });
-
-        Character = null;
-    }
-
     public void LoadItems(IEnumerable<DisplayItem> items)
     {
         Items.Clear();
@@ -126,12 +214,23 @@ internal partial class SearchListViewModel : INotifyPropertyChanged
     {
         var q = Items.AsEnumerable();
         var st = SearchText?.Trim();
+
         if (!String.IsNullOrWhiteSpace(st))
         {
             q = q.Where(i =>
-                (i.Title?.IndexOf(st, StringComparison.CurrentCultureIgnoreCase) >= 0) ||
-                (i.Subtitle?.IndexOf(st, StringComparison.CurrentCultureIgnoreCase) >= 0) ||
-                (i.Key?.IndexOf(st, StringComparison.CurrentCultureIgnoreCase) >= 0));
+                (Lng.Elem(i.Title)?.IndexOf(st, StringComparison.InvariantCultureIgnoreCase) >= 0) ||
+                (i.Subtitle?.IndexOf(st, StringComparison.InvariantCultureIgnoreCase) >= 0) ||
+                (i.Key?.IndexOf(st, StringComparison.InvariantCultureIgnoreCase) >= 0));
+        }
+
+        if (SelectedCategory is ThingCategory thingCategory && thingCategory != ThingCategory.All)
+        {
+            q = q.Where(i => i.Source?.GetType().Namespace?.IndexOf(thingCategory.ToString(), StringComparison.InvariantCultureIgnoreCase) >= 0);
+        }
+
+        if (ShowOnlyAffordable && Character != null)
+        {
+            q = q.Where(i => i.Enabled);
         }
 
         FilteredItems.Clear();
@@ -140,8 +239,6 @@ internal partial class SearchListViewModel : INotifyPropertyChanged
             FilteredItems.Add(it);
         }
     }
-
-    private void OnPropertyChanged(string name) => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
 
     private async Task OpenDetailsAsync(DisplayItem item)
     {
@@ -190,6 +287,45 @@ internal partial class SearchListViewModel : INotifyPropertyChanged
         }
     }
 
+    private Task DebounceApplyFilter()
+    {
+        filterCancellationTokenSource?.Cancel();
+        filterCancellationTokenSource = new CancellationTokenSource();
+        var token = filterCancellationTokenSource.Token;
+
+        return Task.Delay(300, token)
+            .ContinueWith(t =>
+            {
+                if (t.IsCanceled)
+                {
+                    return;
+                }
+
+                MainThread.BeginInvokeOnMainThread(() =>
+                {
+                    ApplyFilter();
+                });
+            }, token, TaskContinuationOptions.None, TaskScheduler.FromCurrentSynchronizationContext());
+    }
+
+    private void RefreshAllItems()
+    {
+        if (Items == null)
+        {
+            return;
+        }
+
+        foreach (var item in Items.OfType<DisplayItem>())
+        {
+            if (item.Source is Thing thing)
+            {
+                thing.PriceMultiplier = PriceMultiplier;
+                item.OnPropertyChanged(nameof(DisplayItem.RightText));
+                item.OnPropertyChanged(nameof(DisplayItem.Enabled));
+            }
+        }
+    }
+
     private void RefreshAffordability()
     {
         if (Items == null)
@@ -201,5 +337,28 @@ internal partial class SearchListViewModel : INotifyPropertyChanged
         {
             item.OnPropertyChanged(nameof(DisplayItem.Enabled));
         }
+    }
+
+    private void SetCategories()
+    {
+        var values = Enum.GetValues<ThingCategory>();
+
+        var ordered = values
+            .Where(v => v != ThingCategory.All)
+            .OrderBy(v =>
+            {
+                var desc = v.GetType()
+                            .GetField(v.ToString())?
+                            .GetCustomAttribute<DescriptionAttribute>()?
+                            .Description ?? v.ToString();
+
+                var translated = Lng.Elem(desc);
+                return translated ?? desc;
+            })
+            .ToList();
+
+        ordered.Insert(0, ThingCategory.All);
+
+        Categories = new ObservableCollection<ThingCategory>(ordered);
     }
 }

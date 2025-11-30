@@ -14,11 +14,11 @@ internal partial class ItemDetailsViewModel : ObservableObject
     public ItemDetailsViewModel(Character? character, Thing thing)
     {
         Thing = thing;
-        IsBuyButtonVisible = character != null && character.Money >= thing.Price;
+        IsBuyButtonVisible = character != null && character.Money >= thing.MultipliedPrice;
 
         Name = thing.Name;
         Description = thing.Description;
-        Money = thing.Price.ToTranslatedString();
+        Money = thing.MultipliedPrice.ToTranslatedString();
         Weight = thing.Weight;
         ImageName = thing.ImageName;
 

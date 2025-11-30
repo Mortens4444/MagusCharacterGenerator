@@ -11,7 +11,7 @@ internal partial class MagicalObjectsPage : SearchListPage
     public MagicalObjectsPage(SearchListViewModel viewModel)
         : base(viewModel,
             "Magic items",
-            "M.A.G.U.S.Things.MagicalObjects".CreateInstancesFromNamespace<MagicalObject>().OrderBy(r => Lng.Elem(r.Name)).Select(DisplayItem.FromMagicalObject))
+            "M.A.G.U.S.Things.MagicalObjects".CreateInstancesFromNamespace<MagicalObject>().OrderBy(r => Lng.Elem(r.Name)).Select(DisplayItem.FromObject))
     {
     }
 }

@@ -4,6 +4,7 @@
              xmlns:conv="clr-namespace:Mtf.Maui.Controls.Converters;assembly=Mtf.Maui.Controls"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:m="clr-namespace:M.A.G.U.S.Assistant.Models"
+             xmlns:mc="clr-namespace:Mtf.Maui.Controls;assembly=Mtf.Maui.Controls"
              xmlns:v="clr-namespace:M.A.G.U.S.Assistant.Views"
              xmlns:vm="clr-namespace:M.A.G.U.S.Assistant.ViewModels"
              x:Class="M.A.G.U.S.Assistant.Views.SearchListPage"
@@ -13,15 +14,33 @@
     <v:NotifierPage.Resources>
         <ResourceDictionary>
             <c:TranslationConverter x:Key="TranslationConverter" />
+            <c:EnumDescriptionTranslationConverter x:Key="EnumDescriptionTranslationConverter" />
             <conv:BoolToColorConverter x:Key="BoolToColorConverter" EnabledColor="White" DisabledColor="#888888" />
         </ResourceDictionary>
     </v:NotifierPage.Resources>
-    
-    <Grid Padding="10" RowDefinitions="Auto, *, Auto" RowSpacing="8">
-        <Grid VerticalOptions="Center" ColumnDefinitions="*, Auto, Auto">
-            <Entry Grid.Column="0" Text="{Binding SearchText}" Placeholder="Search…" />
-            <Button Grid.Column="1" Text="Clear" Command="{Binding ClearCommand}" />
-        </Grid>
+
+    <Grid RowDefinitions="Auto, *, Auto" Padding="10" RowSpacing="8">
+
+        <StackLayout Orientation="Vertical" Spacing="8" Grid.Row="0">
+
+            <Grid VerticalOptions="Center" ColumnDefinitions="*, Auto, Auto, Auto, Auto">
+                <Entry Grid.Column="0" Text="{Binding SearchText}" Placeholder="Search…" />
+                <Button Grid.Column="1" Text="Clear" Command="{Binding ClearCommand}" />
+                <Picker Grid.Column="2" Title="Category…" ItemsSource="{Binding Categories}"
+                        SelectedItem="{Binding SelectedCategory}" WidthRequest="150"
+                        ItemDisplayBinding="{Binding ., Converter={StaticResource EnumDescriptionTranslationConverter}}" />
+
+                <CheckBox Grid.Column="3" IsChecked="{Binding ShowOnlyAffordable}" VerticalOptions="End" HorizontalOptions="Center" IsVisible="{Binding IsCharacterSet}" />
+                <Label Grid.Column="3" Text="Affordable" FontSize="12" HorizontalOptions="Center" VerticalOptions="Start" IsVisible="{Binding IsCharacterSet}" />
+
+                <mc:NumericUpDownWithLabel Grid.Column="4" Label="Price Multiplier"
+                                           Minimum="0.0" Maximum="10.0" Increment="0.1"
+                                           Value="{Binding PriceMultiplier}" 
+                                           WidthRequest="160" DecimalPlaces="1" />
+
+            </Grid>
+
+        </StackLayout>
 
         <CollectionView Grid.Row="1" ItemsSource="{Binding FilteredItems}" SelectionMode="Single" SelectedItem="{Binding SelectedItem, Mode=TwoWay}" ItemsLayout="VerticalList">
             <CollectionView.ItemTemplate>
@@ -43,4 +62,5 @@
         </CollectionView>
 
     </Grid>
+
 </v:NotifierPage>

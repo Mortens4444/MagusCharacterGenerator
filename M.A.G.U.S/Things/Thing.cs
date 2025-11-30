@@ -10,6 +10,10 @@ public abstract class Thing
 
     public virtual Money Price => new(1);
 
+    public double PriceMultiplier { get; set; } = 1;
+
+    public virtual Money MultipliedPrice => Price * PriceMultiplier;
+
     public virtual string Description { get; protected set; } = "";
 
     /// <summary>

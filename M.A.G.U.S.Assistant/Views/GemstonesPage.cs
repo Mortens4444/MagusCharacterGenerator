@@ -10,7 +10,7 @@ internal partial class GemstonesPage : SearchListPage
     public GemstonesPage(SearchListViewModel viewModel)
         : base(viewModel,
             "Gemstones",
-            "M.A.G.U.S.Things.Gemstones".CreateInstancesFromNamespace<Gemstone>().OrderBy(r => r.Name).Select(DisplayItem.FromGemstone))
+            "M.A.G.U.S.Things.Gemstones".CreateInstancesFromNamespace<Gemstone>().OrderBy(r => r.Name).Select(DisplayItem.FromObject))
     {
     }
 }

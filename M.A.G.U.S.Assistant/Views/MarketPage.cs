@@ -12,7 +12,7 @@ internal partial class MarketPage : SearchListPage
     public MarketPage(SearchListViewModel viewModel)
         : base(viewModel,
             "Market",
-            "M.A.G.U.S.Things".CreateInstancesFromNamespace<Thing>().OrderBy(r => Lng.Elem(r.Name)).Select(r => DisplayItem.FromThing(r, null)))
+            "M.A.G.U.S.Things".CreateInstancesFromNamespace<Thing>().OrderBy(r => Lng.Elem(r.Name)).Select(DisplayItem.FromObject))
     {
     }
 
@@ -22,7 +22,7 @@ internal partial class MarketPage : SearchListPage
             "M.A.G.U.S.Things"
                 .CreateInstancesFromNamespace<Thing>()
                 .OrderBy(r => Lng.Elem(r.Name))
-                .Select(r => DisplayItem.FromThing(r, character)))
+                .Select(r => DisplayItem.FromObject(r, character)))
     {
         viewModel.Character = character;
     }

@@ -11,7 +11,7 @@ internal partial class PoisonsPage : SearchListPage
     public PoisonsPage(SearchListViewModel viewModel)
         : base(viewModel,
             "Poisons",
-            "M.A.G.U.S.GameSystem.Poisons".CreateInstancesFromNamespace<Poison>().OrderBy(r => Lng.Elem(r.Name)).Select(DisplayItem.FromPoison))
+            "M.A.G.U.S.GameSystem.Poisons".CreateInstancesFromNamespace<Poison>().OrderBy(r => Lng.Elem(r.Name)).Select(DisplayItem.FromObject))
     {
     }
 }

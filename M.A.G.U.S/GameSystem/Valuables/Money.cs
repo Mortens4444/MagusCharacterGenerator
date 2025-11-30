@@ -42,7 +42,7 @@ public class Money : IComparable<Money>, IEquatable<Money>
     
     public bool IsZero => Mithril == 0 && Gold == 0 && Silver == 0 && Copper == 0;
 
-    public int CompareTo(Money other)
+    public int CompareTo(Money? other)
     {
         if (other is null)
         {
@@ -57,10 +57,10 @@ public class Money : IComparable<Money>, IEquatable<Money>
     public bool IsAtLeast(ulong copperAmount) => Summa >= copperAmount;
 
     public override bool Equals(object? obj) => Equals(obj as Money);
-    public bool Equals(Money other) => other is not null && Summa == other.Summa;
+    public bool Equals(Money? other) => other is not null && Summa == other.Summa;
     public override int GetHashCode() => Summa.GetHashCode();
 
-    public static bool operator ==(Money a, Money b) => ReferenceEquals(a, b) || (!ReferenceEquals(a, null) && !ReferenceEquals(b, null) && a.Summa == b.Summa);
+    public static bool operator ==(Money a, Money b) => ReferenceEquals(a, b) || (a is not null && b is not null && a.Summa == b.Summa);
     
     public static bool operator !=(Money a, Money b) => !(a == b);
 
@@ -73,6 +73,13 @@ public class Money : IComparable<Money>, IEquatable<Money>
     public static bool operator >=(Money a, Money b) => ReferenceEquals(a, b) || (a is not null && b is not null && a.Summa >= b.Summa);
 
     public override string ToString() => $"{Mithril}m {Gold}g {Silver}s {Copper}c";
+
+    public static Money operator *(Money money, double priceMultiplier)
+    {
+        ArgumentNullException.ThrowIfNull(money);
+
+        return FromCopper(money.Summa * (decimal)priceMultiplier);
+    }
 
     public static Money operator +(Money a, Money b)
     {
