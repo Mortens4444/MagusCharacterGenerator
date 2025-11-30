@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <v:NotifierPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:c="clr-namespace:Mtf.LanguageService.MAUI.Converters;assembly=Mtf.LanguageService.MAUI"
              xmlns:conv="clr-namespace:Mtf.Maui.Controls.Converters;assembly=Mtf.Maui.Controls"
+             xmlns:c="clr-namespace:Mtf.LanguageService.MAUI.Converters;assembly=Mtf.LanguageService.MAUI"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:m="clr-namespace:M.A.G.U.S.Assistant.Models"
              xmlns:mc="clr-namespace:Mtf.Maui.Controls;assembly=Mtf.Maui.Controls"
@@ -13,9 +13,9 @@
 
     <v:NotifierPage.Resources>
         <ResourceDictionary>
+            <conv:BoolToColorConverter x:Key="BoolToColorConverter" EnabledColor="White" DisabledColor="#888888" />
             <c:TranslationConverter x:Key="TranslationConverter" />
             <c:EnumDescriptionTranslationConverter x:Key="EnumDescriptionTranslationConverter" />
-            <conv:BoolToColorConverter x:Key="BoolToColorConverter" EnabledColor="White" DisabledColor="#888888" />
         </ResourceDictionary>
     </v:NotifierPage.Resources>
 
@@ -23,17 +23,18 @@
 
         <StackLayout Orientation="Vertical" Spacing="8" Grid.Row="0">
 
-            <Grid VerticalOptions="Center" ColumnDefinitions="*, Auto, Auto, Auto, Auto">
-                <Entry Grid.Column="0" Text="{Binding SearchText}" Placeholder="Search…" />
-                <Button Grid.Column="1" Text="Clear" Command="{Binding ClearCommand}" />
-                <Picker Grid.Column="2" Title="Category…" ItemsSource="{Binding Categories}"
-                        SelectedItem="{Binding SelectedCategory}" WidthRequest="150"
+            <Grid VerticalOptions="Center" RowDefinitions="Auto, Auto" ColumnDefinitions="*, Auto, Auto">
+                <Entry Grid.Column="0" Grid.ColumnSpan="2" Text="{Binding SearchText}" Placeholder="Search…" />
+                <Button Grid.Column="2" Text="Clear" Command="{Binding ClearCommand}" />
+                
+                <Picker Grid.Row="1" Title="Category…" ItemsSource="{Binding Categories}"
+                        SelectedItem="{Binding SelectedCategory}" HorizontalOptions="Fill"
                         ItemDisplayBinding="{Binding ., Converter={StaticResource EnumDescriptionTranslationConverter}}" />
 
-                <CheckBox Grid.Column="3" IsChecked="{Binding ShowOnlyAffordable}" VerticalOptions="End" HorizontalOptions="Center" IsVisible="{Binding IsCharacterSet}" />
-                <Label Grid.Column="3" Text="Affordable" FontSize="12" HorizontalOptions="Center" VerticalOptions="Start" IsVisible="{Binding IsCharacterSet}" />
+                <Label Grid.Row="1" Grid.Column="1" Text="Affordable" FontSize="12" HorizontalOptions="Center" VerticalOptions="Start" IsVisible="{Binding IsCharacterSet}" />
+                <CheckBox Grid.Row="1" Grid.Column="1" IsChecked="{Binding ShowOnlyAffordable}" VerticalOptions="End" HorizontalOptions="Center" IsVisible="{Binding IsCharacterSet}" />
 
-                <mc:NumericUpDownWithLabel Grid.Column="4" Label="Price Multiplier"
+                <mc:NumericUpDownWithLabel Grid.Row="1" Grid.Column="2" Label="Price Multiplier"
                                            Minimum="0.0" Maximum="10.0" Increment="0.1"
                                            Value="{Binding PriceMultiplier}" 
                                            WidthRequest="160" DecimalPlaces="1" />

@@ -2,6 +2,7 @@
 
 namespace M.A.G.U.S.GameSystem.Attributes;
 
+// New ThrowTypes should be implemented in DiceThrow.Throw method also.
 public enum ThrowType
 {
 	[Description("1D6")]

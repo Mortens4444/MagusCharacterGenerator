@@ -131,20 +131,14 @@
   </ItemGroup>
   <ItemGroup>
     <None Remove="Resources\Images\Accomodation\bath.png" />
-    <None Remove="Resources\Images\Accomodation\room_ornate.png" />
-    <None Remove="Resources\Images\Accomodation\room_separate_bed.png" />
-    <None Remove="Resources\Images\Accomodation\room_single.png" />
-    <None Remove="Resources\Images\Accomodation\room_suite.png" />
     <None Remove="Resources\Images\Accomodation\stables.png" />
     <None Remove="Resources\Images\Animals\calf.png" />
     <None Remove="Resources\Images\Animals\camel.png" />
     <None Remove="Resources\Images\Animals\cat.png" />
     <None Remove="Resources\Images\Animals\cow.png" />
-    <None Remove="Resources\Images\Animals\dog_guard.png" />
     <None Remove="Resources\Images\Animals\goat.png" />
     <None Remove="Resources\Images\Animals\goose.png" />
     <None Remove="Resources\Images\Animals\hen.png" />
-    <None Remove="Resources\Images\Animals\horse_traveler.png" />
     <None Remove="Resources\Images\Animals\pig.png" />
     <None Remove="Resources\Images\Animals\turkey.png" />
     <None Remove="Resources\Images\Bestiary\bat.png" />
@@ -218,8 +212,8 @@
     <MauiImage Include="Resources\Images\Bestiary\giant_spider.png" />
     <MauiImage Include="Resources\Images\Bestiary\goblin.png" />
     <MauiImage Include="Resources\Images\Bestiary\golem.png" />
-    <MauiImage Include="Resources\Images\Animals\horse_heavy_war.png" />
-    <MauiImage Include="Resources\Images\Animals\horse_light_war.png" />
+    <MauiImage Include="Resources\Images\Animals\heavy_war_horse.png" />
+    <MauiImage Include="Resources\Images\Animals\light_war_horse.png" />
     <MauiImage Include="Resources\Images\Bestiary\lizard_wizard.png" />
     <MauiImage Include="Resources\Images\Bestiary\mummy.png" />
     <MauiImage Include="Resources\Images\Bestiary\orc.png" />
@@ -229,7 +223,7 @@
     <MauiImage Include="Resources\Images\Bestiary\shark.png" />
     <MauiImage Include="Resources\Images\Bestiary\spider.png" />
     <MauiImage Include="Resources\Images\Bestiary\vampire.png" />
-    <MauiImage Include="Resources\Images\Animals\dog_war.png" />
+    <MauiImage Include="Resources\Images\Animals\war_dog.png" />
     <MauiImage Include="Resources\Images\Bestiary\werewolf.png" />
     <MauiImage Include="Resources\Images\Bestiary\wolf.png" />
     <MauiImage Include="Resources\Images\Bestiary\zombie.png" />
@@ -313,7 +307,7 @@
     <PackageReference Include="Microsoft.Maui.Graphics" Version="9.0.120" />
     <PackageReference Include="Microsoft.Maui.Graphics.Skia" Version="9.0.120" />
     <PackageReference Include="Mtf.Maui.Controls" Version="2.0.41" />
-    <PackageReference Include="Mtf.MAUI.LanguageService" Version="1.0.57" />
+    <PackageReference Include="Mtf.MAUI.LanguageService" Version="1.0.62" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.4" />
     <PackageReference Include="Plugin.Maui.Audio" Version="4.0.0" />
     <PackageReference Include="sqlite-net-pcl" Version="1.9.172" />
@@ -417,21 +411,21 @@
   </ItemGroup>
   <ItemGroup>
     <MauiImage Include="Resources\Images\Accomodation\bath.png" />
-    <MauiImage Include="Resources\Images\Accomodation\room_common_dormitory.png" />
-    <MauiImage Include="Resources\Images\Accomodation\room_ornate.png" />
-    <MauiImage Include="Resources\Images\Accomodation\room_separate_bed.png" />
-    <MauiImage Include="Resources\Images\Accomodation\room_single.png" />
-    <MauiImage Include="Resources\Images\Accomodation\room_suite.png" />
+    <MauiImage Include="Resources\Images\Accomodation\common_dormitory_room.png" />
+    <MauiImage Include="Resources\Images\Accomodation\ornate_room.png" />
+    <MauiImage Include="Resources\Images\Accomodation\room_with_separate_bed.png" />
+    <MauiImage Include="Resources\Images\Accomodation\single_room.png" />
+    <MauiImage Include="Resources\Images\Accomodation\suite_room.png" />
     <MauiImage Include="Resources\Images\Accomodation\stables.png" />
     <MauiImage Include="Resources\Images\Animals\calf.png" />
     <MauiImage Include="Resources\Images\Animals\camel.png" />
     <MauiImage Include="Resources\Images\Animals\cat.png" />
     <MauiImage Include="Resources\Images\Animals\cow.png" />
-    <MauiImage Include="Resources\Images\Animals\dog_guard.png" />
+    <MauiImage Include="Resources\Images\Animals\guard_dog.png" />
     <MauiImage Include="Resources\Images\Animals\goat.png" />
     <MauiImage Include="Resources\Images\Animals\goose.png" />
     <MauiImage Include="Resources\Images\Animals\hen.png" />
-    <MauiImage Include="Resources\Images\Animals\horse_traveler.png" />
+    <MauiImage Include="Resources\Images\Animals\traveler_horse.png" />
     <MauiImage Include="Resources\Images\Animals\pig.png" />
     <MauiImage Include="Resources\Images\Animals\turkey.png" />
   </ItemGroup>

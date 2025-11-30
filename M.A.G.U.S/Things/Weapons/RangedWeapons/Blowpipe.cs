@@ -18,14 +18,7 @@ public class Blowpipe : Weapon, IRangedWeapon
     public override Money Price => new(0, 6);
 
     [DiceThrow(ThrowType._1K1)]
-    public byte GetDamage()
-    {
-        if (DiceThrow._1K6() == 6)
-        {
-            return 1;
-        }
-        return 0;
-    }
+    public byte GetDamage() => DiceThrow._1K1();
 
     public override string Description => "A simple, slender tube used to silently launch small, often poisoned, darts. A weapon of ambush and subtle execution.";
 }

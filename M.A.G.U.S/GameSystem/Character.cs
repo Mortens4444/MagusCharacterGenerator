@@ -1,4 +1,4 @@
-﻿using M.A.G.U.S.Classes.Fighter;
+﻿using M.A.G.U.S.Classes.NonPlayableCharacters;
 using M.A.G.U.S.GameSystem.FightModifiers;
 using M.A.G.U.S.GameSystem.Magic;
 using M.A.G.U.S.GameSystem.Psi;
@@ -67,7 +67,7 @@ public class Character : IFightModifier, ILiving, IAbilities, INotifyPropertyCha
         this.settings = settings;
         name = "Nobody";
 		race = new Human();
-		BaseClass = new Warrior();
+		BaseClass = new Craftsman();
         EnsureEquipmentSubscription();
     }
 

@@ -1,4 +1,5 @@
-﻿using Mtf.Extensions.Services;
+﻿using M.A.G.U.S.GameSystem.Attributes;
+using Mtf.Extensions.Services;
 
 namespace M.A.G.U.S.GameSystem;
 
@@ -49,6 +50,11 @@ public class DiceThrow
         return RangedAttack(1, 6) + RangedAttack(1, 6);
     }
 
+    public sbyte _1K6_Plus_10()
+    {
+        return (sbyte)RandomProvider.GetSecureRandomByte(11, 16);
+    }
+
     public sbyte _1K6_Plus_12()
     {
         return (sbyte)RandomProvider.GetSecureRandomByte(13, 18);
@@ -63,6 +69,15 @@ public class DiceThrow
     public sbyte _1K6_Plus_14()
     {
         return (sbyte)RandomProvider.GetSecureRandomByte(15, 20);
+    }
+
+    public byte _1K1()
+    {
+        if (_1K6() == 6)
+        {
+            return 1;
+        }
+        return 0;
     }
 
     public sbyte _1K9()
@@ -159,6 +174,34 @@ public class DiceThrow
         var first = (sbyte)RandomProvider.GetSecureRandomByte(3, 18);
         var second = (sbyte)RandomProvider.GetSecureRandomByte(3, 18);
         return Math.Max(first, second);
+    }
+
+    public short Throw(DiceThrowAttribute? diceThrowAttribute, DiceThrowModifierAttribute? diceThrowModifierAttribute, SpecialTrainingAttribute? specialTrainingAttribute)
+    {
+        ArgumentNullException.ThrowIfNull(diceThrowAttribute);
+        return Throw(diceThrowAttribute.DiceThrowType, diceThrowModifierAttribute?.Modifier ?? 0, specialTrainingAttribute != null);
+    }
+
+    public short Throw(ThrowType throwType, byte modifier = 0, bool specialTraing = false)
+    {
+        var throwResult = throwType switch
+        {
+            ThrowType._1K2 => _1K2(),
+            ThrowType._1K3 => _1K3(),
+            ThrowType._1K5 => _1K5(),
+            ThrowType._1K6 => _1K6(),
+            ThrowType._1K9 => _1K9(),
+            ThrowType._1K10 => _1K10(),
+            ThrowType._2K10 => _2K10(),
+            ThrowType._3K10 => _3K10(),
+            ThrowType._2K6 => _2K6(),
+            ThrowType._3K6 => _3K6(),
+            ThrowType._3K6_2_Times => _3K6_2_Times(),
+            ThrowType._1K100 => _1K100(),
+            ThrowType._3K100 => _3K100(),
+            _ => throw new ArgumentOutOfRangeException(nameof(throwType))
+        };
+        return specialTraing ? SpecialTraining((sbyte)(throwResult + modifier)) : (short)(throwResult + modifier);
     }
 
     private static int RangedAttack(int min, int max)

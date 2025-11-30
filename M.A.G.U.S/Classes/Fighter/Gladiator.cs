@@ -19,54 +19,54 @@ public class Gladiator : Class, IClass, IJustFight
     [DiceThrow(ThrowType._1K6)]
     [DiceThrowModifier(12)]
     [SpecialTraining]
-    public override sbyte Strength => DiceThrow._1K6_Plus_12_Plus_SpecialTraining();
+    public override sbyte Strength { get; set; }
 
     [DiceThrow(ThrowType._2K6)]
     [DiceThrowModifier(6)]
     [SpecialTraining]
-    public override sbyte Quickness => DiceThrow._2K6_Plus_6_Plus_SpecialTraining();
+    public override sbyte Quickness { get; set; }
 
     [DiceThrow(ThrowType._2K6)]
     [DiceThrowModifier(6)]
     [SpecialTraining]
-    public override sbyte Dexterity => DiceThrow._2K6_Plus_6_Plus_SpecialTraining();
+    public override sbyte Dexterity { get; set; }
 
     [DiceThrow(ThrowType._1K6)]
     [DiceThrowModifier(12)]
     [SpecialTraining]
-    public override sbyte Stamina => DiceThrow._1K6_Plus_12_Plus_SpecialTraining();
+    public override sbyte Stamina { get; set; }
 
     [DiceThrow(ThrowType._1K10)]
     [DiceThrowModifier(10)]
-    public override sbyte Health => DiceThrow._1K10_Plus_10();
+    public override sbyte Health { get; set; }
 
     [DiceThrow(ThrowType._2K6)]
     [DiceThrowModifier(6)]
-    public override sbyte Beauty => DiceThrow._2K6_Plus_6();
+    public override sbyte Beauty { get; set; }
 
     [DiceThrow(ThrowType._3K6)]
-    public override sbyte Intelligence => DiceThrow._3K6();
+    public override sbyte Intelligence { get; set; }
 
     [DiceThrow(ThrowType._3K6)]
-    public override sbyte Willpower => DiceThrow._3K6();
+    public override sbyte Willpower { get; set; }
 
     [DiceThrow(ThrowType._3K6)]
-    public override sbyte Astral => DiceThrow._3K6();
+    public override sbyte Astral { get; set; }
 
     [DiceThrow(ThrowType._2K6)]
-    public override byte Gold => (byte)DiceThrow._2K6();
-
-    [DiceThrow(ThrowType._2K6)]
-    [DiceThrowModifier(8)]
-    public override sbyte Bravery => (sbyte)(DiceThrow._2K6() + 8);
+    public override byte Gold { get; set; }
 
     [DiceThrow(ThrowType._2K6)]
     [DiceThrowModifier(8)]
-    public override sbyte Erudition => (sbyte)(DiceThrow._2K6() + 8);
+    public override sbyte Bravery { get; set; }
+
+    [DiceThrow(ThrowType._2K6)]
+    [DiceThrowModifier(8)]
+    public override sbyte Erudition { get; set; }
 
     [DiceThrow(ThrowType._2K6)]
     [DiceThrowModifier(6)]
-    public override sbyte Detection => (sbyte)(DiceThrow._2K6() + 6);
+    public override sbyte Detection { get; set; }
 
     public override byte InitiatingBaseValue => 9;
 

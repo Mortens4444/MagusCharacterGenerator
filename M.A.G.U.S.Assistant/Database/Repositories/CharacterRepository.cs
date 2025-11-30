@@ -3,7 +3,6 @@ using M.A.G.U.S.Assistant.Database.Entities;
 using M.A.G.U.S.GameSystem;
 using Mtf.Maui.Controls.Models;
 using Newtonsoft.Json;
-using System.Diagnostics;
 
 namespace M.A.G.U.S.Assistant.Database.Repositories;
 
@@ -68,7 +67,10 @@ internal class CharacterRepository(DatabaseContext context)
     {
         var connection = await context.GetConnectionAsync().ConfigureAwait(false);
         var entity = await connection.Table<CharacterEntity>().FirstOrDefaultAsync(c => c.Name == name).ConfigureAwait(false);
-        if (entity == null) return null;
+        if (entity == null)
+        {
+            return null;
+        }
 
         try
         {
