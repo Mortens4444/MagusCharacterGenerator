@@ -64,7 +64,7 @@ internal partial class QualificationsViewModel : INotifyPropertyChanged
         var st = SearchText?.Trim();
         if (!String.IsNullOrWhiteSpace(st))
         {
-            query = query.Where(q => Lng.Elem(q.Name)?.IndexOf(st, StringComparison.CurrentCultureIgnoreCase) >= 0)
+            query = query.Where(q => Lng.Elem(q.Name)?.IndexOf(st, StringComparison.InvariantCultureIgnoreCase) >= 0)
                 .OrderBy(c => c.Category.Equals("Other", StringComparison.OrdinalIgnoreCase))
                 .ThenBy(c => Lng.Elem(c.Name));
         }
@@ -75,10 +75,17 @@ internal partial class QualificationsViewModel : INotifyPropertyChanged
             .ThenBy(c => Lng.Elem(c.Key))
             .Select(g => new GroupedQualifications(Lng.Elem(g.Key), g));
 
-        GroupedQualifications.Clear();
-        foreach (var group in grouped)
+        try
         {
-            GroupedQualifications.Add(group);
+            GroupedQualifications.Clear();
+            foreach (var group in grouped)
+            {
+                GroupedQualifications.Add(group);
+            }
+        }
+        catch (Exception ex)
+        {
+            System.Diagnostics.Debug.WriteLine($"Error: {ex.Message}");
         }
     }
 

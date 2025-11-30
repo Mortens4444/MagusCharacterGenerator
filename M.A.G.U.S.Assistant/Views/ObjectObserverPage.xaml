@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <v:NotifierPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:c="clr-namespace:Mtf.LanguageService.MAUI.Converters;assembly=Mtf.LanguageService.MAUI"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:v="clr-namespace:M.A.G.U.S.Assistant.Views"
              xmlns:vm="clr-namespace:M.A.G.U.S.Assistant.ViewModels"
@@ -8,13 +9,19 @@
              x:ClassModifier="internal"
              x:DataType="vm:ObjectObserverViewModel"
              Title="Object Observer">
-
+    
+    <v:NotifierPage.Resources>
+        <ResourceDictionary>
+            <c:TranslationConverter x:Key="TranslationConverter" />
+        </ResourceDictionary>
+    </v:NotifierPage.Resources>
+    
     <CollectionView ItemsSource="{Binding Properties}" Margin="10">
         <CollectionView.ItemTemplate>
             <DataTemplate x:DataType="m:PropertyItem">
                 <Grid ColumnDefinitions="*, 2*" Padding="4" RowSpacing="4" ColumnSpacing="8">
-                    <Label Text="{Binding Name}" FontAttributes="Bold" />
-                    <Label Text="{Binding Value}" Grid.Column="1" LineBreakMode="WordWrap" />
+                    <Label Text="{Binding Name, Converter={StaticResource TranslationConverter}}" FontAttributes="Bold" />
+                    <Label Text="{Binding Value, Converter={StaticResource TranslationConverter}}" Grid.Column="1" LineBreakMode="WordWrap" />
                 </Grid>
             </DataTemplate>
         </CollectionView.ItemTemplate>

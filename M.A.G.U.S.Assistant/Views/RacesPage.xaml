@@ -27,7 +27,7 @@
                             ItemsSource="{Binding FilteredRaces}"
                             SelectionMode="Single"
                             SelectedItem="{Binding SelectedRace, Mode=TwoWay}"
-                            VerticalOptions="FillAndExpand"
+                            VerticalOptions="Fill"
                             ItemsLayout="VerticalList">
                 <CollectionView.ItemTemplate>
                     <DataTemplate x:DataType="r:Race">
@@ -40,7 +40,7 @@
                 </CollectionView.ItemTemplate>
             </CollectionView>
 
-            <ScrollView Grid.Column="1" VerticalOptions="FillAndExpand">
+            <ScrollView Grid.Column="1" VerticalOptions="Fill">
                 <StackLayout Spacing="8">
                     <Border Stroke="{AppThemeBinding Light={StaticResource Gray300}, Dark={StaticResource Gray500}}"
                             StrokeThickness="1" Padding="10" BackgroundColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource Gray900}}">

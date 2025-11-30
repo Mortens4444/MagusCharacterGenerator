@@ -58,11 +58,27 @@ internal partial class SearchListViewModel : INotifyPropertyChanged
 
     public ObservableCollection<DisplayItem> FilteredItems { get; } = [];
     
-    public bool IsCharacterSet => Character != null;
+    public bool IsCharacterSet => Character != null && ShowAdvancedFilters;
 
     public ObservableCollection<ThingCategory> Categories { get; set; }
 
+    public bool ShowAdvancedFilters
+    {
+        get => showAdvancedFilters;
+        set
+        {
+            if (showAdvancedFilters == value)
+            {
+                return;
+            }
+
+            showAdvancedFilters = value;
+            OnPropertyChanged(nameof(ShowAdvancedFilters));
+        }
+    }
+
     private ThingCategory selectedCategory = ThingCategory.All;
+    private bool showAdvancedFilters;
 
     public ThingCategory SelectedCategory
     {
@@ -219,8 +235,8 @@ internal partial class SearchListViewModel : INotifyPropertyChanged
         {
             q = q.Where(i =>
                 (Lng.Elem(i.Title)?.IndexOf(st, StringComparison.InvariantCultureIgnoreCase) >= 0) ||
-                (i.Subtitle?.IndexOf(st, StringComparison.InvariantCultureIgnoreCase) >= 0) ||
-                (i.Key?.IndexOf(st, StringComparison.InvariantCultureIgnoreCase) >= 0));
+                (Lng.Elem(i.Subtitle)?.IndexOf(st, StringComparison.InvariantCultureIgnoreCase) >= 0) ||
+                (Lng.Elem(i.Key)?.IndexOf(st, StringComparison.InvariantCultureIgnoreCase) >= 0));
         }
 
         if (SelectedCategory is ThingCategory thingCategory && thingCategory != ThingCategory.All)

@@ -1,6 +1,7 @@
 ﻿using M.A.G.U.S.Assistant.Models;
 using M.A.G.U.S.Things;
 using Mtf.Extensions;
+using Mtf.LanguageService;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Windows.Input;
@@ -66,8 +67,8 @@ internal partial class MarketViewModel : INotifyPropertyChanged
         var st = SearchText?.Trim();
         if (!String.IsNullOrWhiteSpace(st))
         {
-            query = query.Where(i => i.Name?.IndexOf(st, StringComparison.CurrentCultureIgnoreCase) >= 0)
-                .OrderBy(i => i.Name);
+            query = query.Where(i => Lng.Elem(i.Name)?.IndexOf(st, StringComparison.InvariantCultureIgnoreCase) >= 0)
+                .OrderBy(i => Lng.Elem(i.Name));
         }
 
         FilteredItems.Clear();

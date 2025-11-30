@@ -56,7 +56,7 @@
                                    Grid.Column="0" 
                                    Grid.ColumnSpan="3" 
                                    Spacing="16"
-                                   IsVisible="{Binding IsCustomSelected}" 
+                                   IsVisible="{Binding IsCustomSelected}"
                                    HorizontalOptions="Center">
 
                 <mc:NumericUpDownWithLabel Label="Min" Minimum="1" Maximum="10000" Value="{Binding CustomFrom}" WidthRequest="150" />

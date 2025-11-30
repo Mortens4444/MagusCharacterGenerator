@@ -70,10 +70,7 @@ internal partial class RacesViewModel : INotifyPropertyChanged
         var st = SearchText?.Trim();
         if (!String.IsNullOrWhiteSpace(st))
         {
-            query = query.Where(r =>
-                (r.Name?.IndexOf(st, StringComparison.CurrentCultureIgnoreCase) >= 0) ||
-                (r.GetType().Name?.IndexOf(st, StringComparison.CurrentCultureIgnoreCase) >= 0))
-                .OrderBy(r => Lng.Elem(r.Name));
+            query = query.Where(r => Lng.Elem(r.Name)?.IndexOf(st, StringComparison.InvariantCultureIgnoreCase) >= 0).OrderBy(r => Lng.Elem(r.Name));
         }
 
         FilteredRaces.Clear();

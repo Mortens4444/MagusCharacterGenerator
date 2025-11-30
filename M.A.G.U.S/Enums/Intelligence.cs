@@ -6,5 +6,5 @@ public enum Intelligence
     Low,
     Average,
     High,
-    Sentient
+    Outstanding
 }

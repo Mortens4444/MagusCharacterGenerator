@@ -29,7 +29,8 @@
                 
                 <Picker Grid.Row="1" Title="Category…" ItemsSource="{Binding Categories}"
                         SelectedItem="{Binding SelectedCategory}" HorizontalOptions="Fill"
-                        ItemDisplayBinding="{Binding ., Converter={StaticResource EnumDescriptionTranslationConverter}}" />
+                        ItemDisplayBinding="{Binding ., Converter={StaticResource EnumDescriptionTranslationConverter}}"
+                        IsVisible="{Binding ShowAdvancedFilters}" />
 
                 <Label Grid.Row="1" Grid.Column="1" Text="Affordable" FontSize="12" HorizontalOptions="Center" VerticalOptions="Start" IsVisible="{Binding IsCharacterSet}" />
                 <CheckBox Grid.Row="1" Grid.Column="1" IsChecked="{Binding ShowOnlyAffordable}" VerticalOptions="End" HorizontalOptions="Center" IsVisible="{Binding IsCharacterSet}" />
@@ -37,7 +38,8 @@
                 <mc:NumericUpDownWithLabel Grid.Row="1" Grid.Column="2" Label="Price Multiplier"
                                            Minimum="0.0" Maximum="10.0" Increment="0.1"
                                            Value="{Binding PriceMultiplier}" 
-                                           WidthRequest="160" DecimalPlaces="1" />
+                                           WidthRequest="160" DecimalPlaces="1"
+                                           IsVisible="{Binding ShowAdvancedFilters}" />
 
             </Grid>
 

@@ -1,4 +1,6 @@
-﻿namespace M.A.G.U.S.Enums;
+﻿using System.ComponentModel;
+
+namespace M.A.G.U.S.Enums;
 
 public enum Alignment
 {
@@ -6,8 +8,12 @@ public enum Alignment
     Death,
     Chaos,
     Order,
+    [Description("Chaos, life")]
     ChaosLife,
+    [Description("Order, life")]
     OrderLife,
+    [Description("Chaos, death")]
     ChaosDeath,
+    [Description("Order, death")]
     OrderDeath
 }

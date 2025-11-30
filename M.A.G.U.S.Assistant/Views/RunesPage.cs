@@ -6,7 +6,7 @@ using Mtf.Extensions;
 namespace M.A.G.U.S.Assistant.Views;
 
 internal partial class RunesPage(SearchListViewModel viewModel) :
-    SearchListPage(viewModel, "Runes",
+    SearchListPage(viewModel, false, "Runes",
         "M.A.G.U.S.GameSystem.Runes".CreateInstancesFromNamespace<Rune>().OrderBy(r => r.Name).Select(DisplayItem.FromObject))
 {
 }

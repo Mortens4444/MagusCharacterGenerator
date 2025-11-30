@@ -8,8 +8,7 @@ namespace M.A.G.U.S.Assistant.Views;
 internal partial class GemstonesPage : SearchListPage
 {
     public GemstonesPage(SearchListViewModel viewModel)
-        : base(viewModel,
-            "Gemstones",
+        : base(viewModel, false, "Gemstones",
             "M.A.G.U.S.Things.Gemstones".CreateInstancesFromNamespace<Gemstone>().OrderBy(r => r.Name).Select(DisplayItem.FromObject))
     {
     }

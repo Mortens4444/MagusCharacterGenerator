@@ -15,7 +15,7 @@ internal partial class ClassesViewModel : INotifyPropertyChanged
     public event PropertyChangedEventHandler? PropertyChanged;
 
     private string searchText = String.Empty;
-    private IClass selectedClass;
+    private IClass? selectedClass;
     private ObservableCollection<IClass> filteredClasses = [];
 
     public ObservableCollection<IClass> FilteredClasses
@@ -48,7 +48,7 @@ internal partial class ClassesViewModel : INotifyPropertyChanged
         }
     }
 
-    public IClass SelectedClass
+    public IClass? SelectedClass
     {
         get => selectedClass;
         set
@@ -90,7 +90,7 @@ internal partial class ClassesViewModel : INotifyPropertyChanged
         if (!String.IsNullOrWhiteSpace(st))
         {
             FilteredClasses = new ObservableCollection<IClass>(classes.Where(c =>
-                Lng.Elem(c.Name).Contains(st, StringComparison.CurrentCultureIgnoreCase))
+                Lng.Elem(c.Name).Contains(st, StringComparison.InvariantCultureIgnoreCase))
                 .OrderBy(c => Lng.Elem(c.Name)));
         }
         else

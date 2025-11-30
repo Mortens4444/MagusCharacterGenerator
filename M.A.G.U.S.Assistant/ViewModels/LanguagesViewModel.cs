@@ -119,8 +119,8 @@ internal partial class LanguagesViewModel : INotifyPropertyChanged
         if (!String.IsNullOrWhiteSpace(st))
         {
             query = query.Where(l =>
-                (l.Name?.IndexOf(st, StringComparison.CurrentCultureIgnoreCase) >= 0) ||
-                (l.EnumKey?.IndexOf(st, StringComparison.CurrentCultureIgnoreCase) >= 0));
+                (Lng.Elem(l.Name)?.IndexOf(st, StringComparison.InvariantCultureIgnoreCase) >= 0) ||
+                (Lng.Elem(l.EnumKey)?.IndexOf(st, StringComparison.InvariantCultureIgnoreCase) >= 0));
         }
 
         FilteredLanguages.Clear();
