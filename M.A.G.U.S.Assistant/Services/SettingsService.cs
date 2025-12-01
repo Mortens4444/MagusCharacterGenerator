@@ -1,5 +1,6 @@
 ﻿using M.A.G.U.S.Assistant.Database.Repositories;
 using M.A.G.U.S.Interfaces;
+using Mtf.LanguageService.Enums;
 
 namespace M.A.G.U.S.Assistant.Services;
 
@@ -16,6 +17,8 @@ internal sealed class SettingsService(SettingsRepository repo) : ISettings
     public bool AutoDistributeQualificationPoints { get; private set; }
     public bool AutoIncreasePainTolerance { get; private set; }
     public bool AutoGenerateSkills { get; private set; }
+
+    private const string KeyLanguage = "Setting_Language";
 
     private const string KeyFightValue = "Setting_FightValueFirstLevel";
     private const string KeyPainTolerance = "Setting_PainToleranceFirstLevel";
@@ -94,5 +97,16 @@ internal sealed class SettingsService(SettingsRepository repo) : ISettings
     {
         AutoGenerateSkills = value;
         return repo.SaveBoolSettingAsync(KeySkills, value);
+    }
+
+    public async Task<Language> GetCurrentLanguageAsync()
+    {
+        var langString = await repo.GetSettingAsync(KeyLanguage).ConfigureAwait(false);
+        return Enum.TryParse<Language>(langString, out var savedLanguage) ? savedLanguage : Language.Hungarian;
+    }
+
+    public Task SaveDefaultLanguageAsync(Language language)
+    {
+        return repo.SaveSettingAsync(KeyLanguage, language.ToString());
     }
 }

@@ -1,5 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using M.A.G.U.S.Assistant.Services;
+using Mtf.LanguageService.Enums;
 
 namespace M.A.G.U.S.Assistant.ViewModels;
 
@@ -143,6 +144,16 @@ internal partial class SettingsViewModel : ObservableObject
                 settingsService.SaveAutoPainToleranceIncreaseAsync(value);
                 OnPropertyChanged();
             }
+        }
+    }
+
+    public Language CurrentLanguage
+    {
+        get => settingsService.GetCurrentLanguageAsync().GetAwaiter().GetResult();
+        set
+        {
+            settingsService.SaveDefaultLanguageAsync(value);
+            OnPropertyChanged();
         }
     }
 }

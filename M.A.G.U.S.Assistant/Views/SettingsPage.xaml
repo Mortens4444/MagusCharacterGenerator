@@ -10,7 +10,15 @@
     
     <ScrollView>
         <VerticalStackLayout Padding="20" Spacing="20">
-
+            
+            <Border StrokeShape="RoundRectangle 10" Padding="15" StrokeThickness="0"
+                BackgroundColor="{AppThemeBinding Light={StaticResource Gray100}, Dark={StaticResource Gray600}}">
+                <Grid ColumnDefinitions="*, Auto">
+                    <Label Grid.Column="0" Text="Language" VerticalOptions="Center" FontAttributes="Bold"/>
+                    <Picker Grid.Column="1" x:Name="LanguagePicker" Title="Select language" WidthRequest="200" />
+                </Grid>
+            </Border>
+            
             <Label Text="Character Creation Rules" 
                    FontSize="18" 
                    FontAttributes="Bold" 

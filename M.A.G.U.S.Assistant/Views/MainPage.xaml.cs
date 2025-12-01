@@ -1,41 +1,32 @@
-﻿using Mtf.Extensions;
+﻿using M.A.G.U.S.Assistant.Services;
 using Mtf.LanguageService;
-using Mtf.LanguageService.Enums;
-using Mtf.LanguageService.Extensions;
 using Mtf.LanguageService.MAUI;
 
 namespace M.A.G.U.S.Assistant.Views;
 
 internal partial class MainPage : NotifierPage
 {
-    private Dictionary<object, string> originalTextElements;
+    private readonly SettingsService settingsService;
+    private Dictionary<object, string>? originalTextElements;
 
-    public MainPage()
+    public MainPage(SettingsService settingsService)
     {
+        this.settingsService = settingsService;
         InitializeComponent();
-
-        var languages = Enum.GetValues<ImplementedLanguage>().Cast<ImplementedLanguage>()
-            .OrderBy(l => l.GetDescription())
-            .ToList();
-        foreach (var lang in languages)
+        if (originalTextElements == null)
         {
-            LanguagePicker.Items.Add(lang.GetDescription());
+            originalTextElements = Translator.Translate(this);
         }
-        LanguagePicker.SelectedIndexChanged += (s, e) =>
+    }
+
+    protected override void OnAppearing()
+    {
+        base.OnAppearing();
+        if (originalTextElements != null)
         {
-            var selected = languages[LanguagePicker.SelectedIndex];
-            Lng.DefaultLanguage = selected.ToLanguage();
-            if (originalTextElements == null)
-            {
-                originalTextElements = Translator.Translate(this);
-            }
-            else
-            {
-                AppShell.Current.Title = Lng.Elem("M.A.G.U.S. Assistant");
-                Translator.SetOriginalTexts(originalTextElements);
-                _ = Translator.Translate(this);
-            }
-        };
-        LanguagePicker.SelectedIndex = languages.IndexOf(Lng.DefaultLanguage.ToImplementedLanguage());
+            Translator.SetOriginalTexts(originalTextElements);
+        }
+        Lng.DefaultLanguage = settingsService.GetCurrentLanguageAsync().GetAwaiter().GetResult();
+        _ = Translator.Translate(this);
     }
 }

@@ -42,9 +42,12 @@ internal static class MauiProgram
         AppDomain.CurrentDomain.UnhandledException += (sender, args) =>
         {
             var exception = args.ExceptionObject as Exception;
-            Console.Error.WriteLine($"{exception}");
-            Debug.WriteLine($"Global error: {exception}");
-            WeakReferenceMessenger.Default.Send(new ShowErrorMessage(exception));
+            if (exception != null)
+            {
+                Console.Error.WriteLine($"{exception}");
+                Debug.WriteLine($"Global error: {exception}");
+                WeakReferenceMessenger.Default.Send(new ShowErrorMessage(exception));
+            }
         };
 
         TaskScheduler.UnobservedTaskException += (sender, args) =>
@@ -136,6 +139,7 @@ internal static class MauiProgram
             typeof(ItemDetailsPage),
             typeof(LanguagesPage),
             typeof(MagicalObjectsPage),
+            typeof(MainPage),
             typeof(MapPage),
             typeof(MarketPage),
             typeof(NotifierPage),

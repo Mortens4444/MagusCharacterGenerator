@@ -8,9 +8,6 @@
 
     <ScrollView>
         <VerticalStackLayout Padding="16" Spacing="12">
-            <Label Text="Language" FontAttributes="Bold" />
-            <Picker x:Name="LanguagePicker" Title="Select language" />
-
 			<VerticalStackLayout>
 				<HorizontalStackLayout HorizontalOptions="Center">
                     <mc:MenuItem ImageName="character_generation" LabelText="Character generation" PageType="{x:Type v:CharacterGeneratorPage}" WidthRequest="100" HeightRequest="100" />
