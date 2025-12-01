@@ -17,7 +17,10 @@ public class Headhunter : Class, IClass, IJustFight
 {
     public Headhunter() : base(1) { }
 
-    public Headhunter(byte level) : base(level) { }
+    public Headhunter(byte level) : base(level)
+    {
+        GenerateSkills();
+    }
 
     [DiceThrow(ThrowType._2K6)]
     [DiceThrowModifier(6)]

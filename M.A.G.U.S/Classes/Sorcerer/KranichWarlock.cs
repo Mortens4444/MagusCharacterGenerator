@@ -22,7 +22,10 @@ public class KranichWarlock : Class, IClass, ILikeMagic
 {
     public KranichWarlock() : base(1) { }
 
-    public KranichWarlock(byte level) : base(level) { }
+    public KranichWarlock(byte level) : base(level)
+    {
+        GenerateSkills();
+    }
 
     [DiceThrow(ThrowType._3K6_2_Times)]
     public override sbyte Strength { get; set; }

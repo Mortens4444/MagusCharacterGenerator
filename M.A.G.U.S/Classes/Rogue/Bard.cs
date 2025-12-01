@@ -19,7 +19,10 @@ public class Bard : Class, IClass, IJustFight
 {
     public Bard() : base(1) { }
 
-    public Bard(byte level) : base(level) { }
+    public Bard(byte level) : base(level)
+    {
+        GenerateSkills();
+    }
 
     [DiceThrow(ThrowType._1K10)]
     [DiceThrowModifier(8)]

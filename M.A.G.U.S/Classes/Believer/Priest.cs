@@ -17,7 +17,10 @@ public abstract class Priest : Class, IClass, ILikeMagic
 {
     public Priest() : base(1) { }
 
-    public Priest(byte level) : base(level) { }
+    public Priest(byte level) : base(level)
+    {
+        GenerateSkills();
+    }
 
     [DiceThrow(ThrowType._2K6)]
     [DiceThrowModifier(6)]

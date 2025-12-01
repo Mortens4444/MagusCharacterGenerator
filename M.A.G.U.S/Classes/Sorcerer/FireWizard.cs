@@ -16,7 +16,10 @@ public class FireWizard : Class, IClass, ILikeMagic
 {
     public FireWizard() : base(1) { }
 
-    public FireWizard(byte level) : base(level) { }
+    public FireWizard(byte level) : base(level)
+    {
+        GenerateSkills();
+    }
 
     [DiceThrow(ThrowType._2K6)]
     [DiceThrowModifier(6)]

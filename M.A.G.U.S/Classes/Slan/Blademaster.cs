@@ -16,7 +16,10 @@ public class Blademaster : Class, IClass, IJustFight
 {
     public Blademaster() : base(1) { }
 
-    public Blademaster(byte level) : base(level) { }
+    public Blademaster(byte level) : base(level)
+    {
+        GenerateSkills();
+    }
 
     [DiceThrow(ThrowType._1K10)]
     [DiceThrowModifier(8)]

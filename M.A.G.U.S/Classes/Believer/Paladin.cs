@@ -16,7 +16,10 @@ public abstract class Paladin : Class, IClass, IHateRangedWeapons
 {
     public Paladin() : base(1) { }
 
-    public Paladin(byte level) : base(level) { }
+    public Paladin(byte level) : base(level)
+    {
+        GenerateSkills();
+    }
 
     [DiceThrow(ThrowType._1K10)]
     [DiceThrowModifier(8)]

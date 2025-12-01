@@ -15,7 +15,10 @@ public class Knight : Class, IClass, IHateRangedWeapons
 {
     public Knight() : base(1) { }
 
-    public Knight(byte level) : base(level) { }
+    public Knight(byte level) : base(level)
+    {
+        GenerateSkills();
+    }
 
     [DiceThrow(ThrowType._1K6)]
     [DiceThrowModifier(12)]

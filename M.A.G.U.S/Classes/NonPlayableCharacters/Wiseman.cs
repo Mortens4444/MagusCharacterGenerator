@@ -12,7 +12,10 @@ public class Wiseman : Class, IClass
 {
     public Wiseman() : base(1) { }
 
-    public Wiseman(byte level) : base(level) { }
+    public Wiseman(byte level) : base(level)
+    {
+        GenerateSkills();
+    }
 
     [DiceThrow(ThrowType._1K10)]
     public override sbyte Strength { get; set; }

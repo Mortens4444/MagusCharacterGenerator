@@ -13,7 +13,10 @@ public class Warrior : Class, IClass, IJustFight
 {
     public Warrior() : base(1) { }
 
-    public Warrior(byte level) : base(level) { }
+    public Warrior(byte level) : base(level)
+    {
+        GenerateSkills();
+    }
 
     [DiceThrow(ThrowType._1K6)]
     [DiceThrowModifier(12)]

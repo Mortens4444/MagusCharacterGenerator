@@ -17,7 +17,10 @@ public class Warlock : Class, IClass, ILikeMagic
 {
     public Warlock() : base(1) { }
 
-    public Warlock(byte level) : base(level) { }
+    public Warlock(byte level) : base(level)
+    {
+        GenerateSkills();
+    }
 
     [DiceThrow(ThrowType._3K6_2_Times)]
     public override sbyte Strength { get; set; }

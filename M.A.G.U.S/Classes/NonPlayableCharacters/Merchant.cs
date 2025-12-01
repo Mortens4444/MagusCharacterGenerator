@@ -11,7 +11,10 @@ public class Merchant : Class, IClass
 {
     public Merchant() : base(1) { }
 
-    public Merchant(byte level) : base(level) { }
+    public Merchant(byte level) : base(level)
+    {
+        GenerateSkills();
+    }
 
     [DiceThrow(ThrowType._2K6)]
     public override sbyte Strength { get; set; }

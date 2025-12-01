@@ -10,7 +10,10 @@ public class Healer : Class, IClass
 {
     public Healer() : base(1) { }
 
-    public Healer(byte level) : base(level) { }
+    public Healer(byte level) : base(level)
+    {
+        GenerateSkills();
+    }
 
     [DiceThrow(ThrowType._1K10)]
     public override sbyte Strength { get; set; }

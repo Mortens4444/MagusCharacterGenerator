@@ -16,7 +16,10 @@ public class Witch : Class, IClass, ILikeMagic
 {
     public Witch() : base(1) { }
 
-    public Witch(byte level) : base(level) { }
+    public Witch(byte level) : base(level)
+    {
+        GenerateSkills();
+    }
 
     [DiceThrow(ThrowType._3K6)]
     public override sbyte Strength { get; set; }

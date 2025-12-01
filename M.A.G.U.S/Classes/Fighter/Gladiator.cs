@@ -14,7 +14,10 @@ public class Gladiator : Class, IClass, IJustFight
 {
     public Gladiator() : base(1) { }
 
-    public Gladiator(byte level) : base(level) { }
+    public Gladiator(byte level) : base(level)
+    {
+        GenerateSkills();
+    }
 
     [DiceThrow(ThrowType._1K6)]
     [DiceThrowModifier(12)]

@@ -31,6 +31,7 @@ internal partial class MainPage : NotifierPage
             }
             else
             {
+                AppShell.Current.Title = Lng.Elem("M.A.G.U.S. Assistant");
                 Translator.SetOriginalTexts(originalTextElements);
                 _ = Translator.Translate(this);
             }

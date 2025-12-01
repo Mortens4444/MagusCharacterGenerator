@@ -11,7 +11,10 @@ public class Craftsman : Class, IClass
 {
     public Craftsman() : base(1) { }
 
-    public Craftsman(byte level) : base(level) { }
+    public Craftsman(byte level) : base(level)
+    {
+        GenerateSkills();
+    }
 
     [DiceThrow(ThrowType._2K6)]
     public override sbyte Strength { get; set; }

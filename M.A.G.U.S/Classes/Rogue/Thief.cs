@@ -17,7 +17,10 @@ public class Thief : Class, IClass, IJustFight
 {
     public Thief() : base(1) { }
 
-    public Thief(byte level) : base(level) { }
+    public Thief(byte level) : base(level)
+    {
+        GenerateSkills();
+    }
 
     [DiceThrow(ThrowType._3K6_2_Times)]
     public override sbyte Strength { get; set; }

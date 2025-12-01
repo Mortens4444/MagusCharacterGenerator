@@ -17,7 +17,10 @@ public class MartialArtist : Class, IClass, IJustFight
 {
     public MartialArtist() : base(1) { }
 
-    public MartialArtist(byte level) : base(level) { }
+    public MartialArtist(byte level) : base(level)
+    {
+        GenerateSkills();
+    }
 
     [DiceThrow(ThrowType._1K10)]
     [DiceThrowModifier(8)]

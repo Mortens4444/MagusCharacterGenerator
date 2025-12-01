@@ -11,7 +11,10 @@ public class Peasant : Class, IClass
 {
     public Peasant() : base(1) { }
 
-    public Peasant(byte level) : base(level) { }
+    public Peasant(byte level) : base(level)
+    {
+        GenerateSkills();
+    }
 
     [DiceThrow(ThrowType._3K6)]
     public override sbyte Strength { get; set; }

@@ -11,7 +11,10 @@ public class Soldier : Class, IClass
 {
     public Soldier() : base(1) { }
 
-    public Soldier(byte level) : base(level) { }
+    public Soldier(byte level) : base(level)
+    {
+        GenerateSkills();
+    }
 
     [DiceThrow(ThrowType._2K6)]
     [DiceThrowModifier(6)]

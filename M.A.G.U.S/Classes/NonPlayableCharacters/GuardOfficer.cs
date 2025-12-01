@@ -10,7 +10,10 @@ public class GuardOfficer : Class, IClass
 {
     public GuardOfficer() : base(1) { }
 
-    public GuardOfficer(byte level) : base(level) { }
+    public GuardOfficer(byte level) : base(level)
+    {
+        GenerateSkills();
+    }
 
     [DiceThrow(ThrowType._3K6)]
     public override sbyte Strength { get; set; }

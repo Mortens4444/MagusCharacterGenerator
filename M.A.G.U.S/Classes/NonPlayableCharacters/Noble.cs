@@ -11,7 +11,10 @@ public class Noble : Class, IClass
 {
     public Noble() : base(1) { }
 
-    public Noble(byte level) : base(level) { }
+    public Noble(byte level) : base(level)
+    {
+        GenerateSkills();
+    }
 
     [DiceThrow(ThrowType._1K10)]
     public override sbyte Strength { get; set; }
