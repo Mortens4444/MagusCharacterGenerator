@@ -22,69 +22,75 @@ namespace M.A.G.U.S.GameSystem;
 
 public class Character : IFightModifier, ILiving, IAbilities, INotifyPropertyChanged
 {
-	private sbyte strength;
+    private sbyte strength;
     private sbyte stamina;
-	private sbyte speed;
-	private sbyte dexterity;
-	private sbyte health;
-	private sbyte willpower;
-	private sbyte intelligence;
-	private sbyte astral;
+    private sbyte speed;
+    private sbyte dexterity;
+    private sbyte health;
+    private sbyte willpower;
+    private sbyte intelligence;
+    private sbyte astral;
 
-	private short healthPoints;
-	private short maxHealthPoints;
+    private short healthPoints;
+    private short maxHealthPoints;
     private short painTolerancePoints;
-	private short maxPainTolerancePoints;
-	private short initiatingValue;
-	private short attackingValue;
-	private short defendingValue;
-	private short aimingValue;
-	private short unconsciousAstralMagicResistance;
-	private short unconsciousMentalMagicResistance;
-	private ushort psiPoints;
-	private ushort maxPsiPoints;
+    private short maxPainTolerancePoints;
+    private short initiatingValue;
+    private short attackingValue;
+    private short defendingValue;
+    private short aimingValue;
+    private short unconsciousAstralMagicResistance;
+    private short unconsciousMentalMagicResistance;
+    private ushort psiPoints;
+    private ushort maxPsiPoints;
     private ushort manaPoints;
-	private ushort maxManaPoints;
+    private ushort maxManaPoints;
     private ushort qualificationPoints;
-	private bool calculateChanges;
-	private Money money = new(0);
+    private bool calculateChanges;
+    private Money money = new(0);
     private Weapon? primaryWeapon;
     private Weapon? secondaryWeapon;
     private string name;
     private IRace race;
     private string totalEquipmentWeight;
+    private short totalCombatModifierPool;
+    private short totalCurrentlyAllocated;
+    private short initiatingValueOriginal;
+    private short attackingValueOriginal;
+    private short defendingValueOriginal;
+    private short aimingValueOriginal;
 
     // TODO: Pass the correct method to count
     private readonly MultiClassMode multiClassMode = MultiClassMode.Normal_Or_SwitchedClass;
-	private readonly ISettings? settings;
+    private readonly ISettings? settings;
 
-	public event PropertyChangedEventHandler? PropertyChanged;
+    public event PropertyChangedEventHandler? PropertyChanged;
 
     public Character() : this(null) { }
 
     public Character(ISettings? settings)
-	{
+    {
         this.settings = settings;
         name = "Nobody";
-		race = new Human();
-		BaseClass = new Craftsman();
+        race = new Human();
+        BaseClass = new Craftsman();
         EnsureEquipmentSubscription();
     }
 
-    public Character(ISettings settings, string name, IRace race, params IClass[] classes)
-	{
-		this.settings = settings;
+    public Character(ISettings? settings, string name, IRace race, params IClass[] classes)
+    {
+        this.settings = settings;
         this.name = name;
         this.race = race;
-		BaseClass = classes.First();
-		Classes = classes;
-		CreateFirstLevel();
+        BaseClass = classes.First();
+        Classes = classes;
+        CreateFirstLevel();
         EnsureEquipmentSubscription();
     }
 
     #region Properties
 
-	//public IEnumerable<Image> Images { get; set; }
+    //public IEnumerable<Image> Images { get; set; }
 
     public string Name
     {
@@ -98,9 +104,18 @@ public class Character : IFightModifier, ILiving, IAbilities, INotifyPropertyCha
             }
         }
     }
+
     public IClass BaseClass { get; set; }
 
-	public IClass[] Classes { get; set; }
+    public IClass[] Classes { get; set; }
+
+    public string RaceName => Race.Name ?? String.Empty;
+
+    public string Class => BaseClass.Name ?? String.Empty;
+
+    public byte Level => BaseClass.Level;
+
+    public byte FightValueModifier => BaseClass.FightValueModifier;
 
     public IRace Race
     {
@@ -116,7 +131,7 @@ public class Character : IFightModifier, ILiving, IAbilities, INotifyPropertyCha
     }
 
     public Money Money
-	{
+    {
         get => money;
         set
         {
@@ -124,8 +139,8 @@ public class Character : IFightModifier, ILiving, IAbilities, INotifyPropertyCha
             {
                 money = value;
                 OnPropertyChanged();
-				OnPropertyChanged(nameof(money.Summa));
-			}
+                OnPropertyChanged(nameof(money.Summa));
+            }
         }
     }
 
@@ -133,135 +148,255 @@ public class Character : IFightModifier, ILiving, IAbilities, INotifyPropertyCha
 
     public ushort PercentQualificationPoints { get; set; }
 
-	public ushort QualificationPoints
-	{
-		get => qualificationPoints;
-		set
-		{
-			if (value != qualificationPoints)
-			{
-				qualificationPoints = value;
-				OnPropertyChanged();
-			}
-		}
-	}
-
-	public short UnconsciousAstralMagicResistance
-	{
-		get => unconsciousAstralMagicResistance;
-		set
-		{
-			if (value != unconsciousAstralMagicResistance)
-			{
-				unconsciousAstralMagicResistance = value;
-				OnPropertyChanged();
-			}
-		}
-	}
-
-	public short UnconsciousMentalMagicResistance
-	{
-		get => unconsciousMentalMagicResistance;
-		set
-		{
-			if (value != unconsciousMentalMagicResistance)
-			{
-				unconsciousMentalMagicResistance = value;
-				OnPropertyChanged();
-			}
-		}
-	}
-
-	public short InitiatingValue
-	{
-		get => initiatingValue;
-		set
-		{
-			if (value != initiatingValue)
-			{
-				initiatingValue = value;
-				OnPropertyChanged();
-			}
-		}
-	}
-
-	public short AttackingValue
-	{
-		get => attackingValue;
-		set
-		{
-			if (value != attackingValue)
-			{
-				attackingValue = value;
-				OnPropertyChanged();
-			}
-		}
-	}
-
-	public short DefendingValue
-	{
-		get => defendingValue;
-		set
-		{
-			if (value != defendingValue)
-			{
-				defendingValue = value;
-				OnPropertyChanged();
-			}
-		}
-	}
-
-	public short AimingValue
-	{
-		get => aimingValue;
-		set
-		{
-			if (value != aimingValue)
-			{
-				aimingValue = value;
-				OnPropertyChanged();
-			}
-		}
-	}
-
-	public short HealthPoints
+    public ushort QualificationPoints
     {
-		get => healthPoints;
-		set
-		{
-			if (value != healthPoints)
-			{
-				healthPoints = value;
-				OnPropertyChanged();
-			}
-		}
-	}
-
-	public short MaxHealthPoints
-    {
-		get => maxHealthPoints;
-		set
-		{
-			if (value != maxHealthPoints)
-			{
-                maxHealthPoints = value;
-				OnPropertyChanged();
-			}
-		}
-	}
-
-	public short PainTolerancePoints
-	{
-		get => painTolerancePoints;
-		set
-		{
-			if (value != painTolerancePoints)
-			{
-				painTolerancePoints = value;
-				OnPropertyChanged();
-			}
-		}
+        get => qualificationPoints;
+        set
+        {
+            if (value != qualificationPoints)
+            {
+                qualificationPoints = value;
+                OnPropertyChanged();
+            }
+        }
     }
+
+    public short UnconsciousAstralMagicResistance
+    {
+        get => unconsciousAstralMagicResistance;
+        set
+        {
+            if (value != unconsciousAstralMagicResistance)
+            {
+                unconsciousAstralMagicResistance = value;
+                OnPropertyChanged();
+            }
+        }
+    }
+
+    public short UnconsciousMentalMagicResistance
+    {
+        get => unconsciousMentalMagicResistance;
+        set
+        {
+            if (value != unconsciousMentalMagicResistance)
+            {
+                unconsciousMentalMagicResistance = value;
+                OnPropertyChanged();
+            }
+        }
+    }
+
+    private short combatModifier;
+    public short CombatModifier
+    {
+        get
+        {
+            return combatModifier;
+        }
+        set
+        {
+            if (combatModifier == value)
+            {
+                return;
+            }
+
+            combatModifier = value;
+            SetCombatModifierHelperVariables(value);
+            OnPropertyChanged();
+            OnMaxLimitsChanged();
+        }
+    }
+
+    public short InitiatingValueOriginal
+    {
+        get => initiatingValueOriginal;
+        private set
+        {
+            if (initiatingValueOriginal == value)
+            {
+                return;
+            }
+
+            initiatingValueOriginal = value;
+            OnPropertyChanged();
+            OnPropertyChanged(nameof(InitiatingValueMaxLimit));
+        }
+    }
+
+    public short AttackingValueOriginal
+    {
+        get => attackingValueOriginal;
+        private set
+        {
+            if (attackingValueOriginal == value)
+            {
+                return;
+            }
+
+            attackingValueOriginal = value;
+            OnPropertyChanged();
+            OnPropertyChanged(nameof(AttackingValueMaxLimit));
+        }
+    }
+
+    public short DefendingValueOriginal
+    {
+        get => defendingValueOriginal;
+        private set
+        {
+            if (defendingValueOriginal == value)
+            {
+                return;
+            }
+
+            defendingValueOriginal = value;
+            OnPropertyChanged();
+            OnPropertyChanged(nameof(DefendingValueMaxLimit));
+        }
+    }
+    public short AimingValueOriginal
+    {
+        get => aimingValueOriginal;
+        private set
+        {
+            if (aimingValueOriginal == value)
+            {
+                return;
+            }
+
+            aimingValueOriginal = value;
+            OnPropertyChanged();
+            OnPropertyChanged(nameof(AimingValueMaxLimit));
+        }
+    }
+
+    public bool CanAllocateCombatModifier => CombatModifier != 0;
+
+    public short InitiatingValueMaxLimit => (short)(InitiatingValue + CombatModifier);
+
+    public short AttackingValueMaxLimit => (short)(AttackingValue + CombatModifier);
+
+    public short DefendingValueMaxLimit => (short)(DefendingValue + CombatModifier);
+
+    public short AimingValueMaxLimit => (short)(AimingValue + CombatModifier);
+
+    public short InitiatingValue
+    {
+        get => initiatingValue;
+        set
+        {
+            if (value == initiatingValue)
+            {
+                return;
+            }
+            if (InitiatingValueOriginal == 0)
+            {
+                InitiatingValueOriginal = value;
+            }
+            initiatingValue = value;
+            OnPropertyChanged();
+            
+            RecalculateAllocatedCombatModifiers();
+        }
+    }
+
+    public short AttackingValue
+    {
+        get => attackingValue;
+        set
+        {
+            if (value != attackingValue)
+            {
+                if (AttackingValueOriginal == 0)
+                {
+                    AttackingValueOriginal = value;
+                }
+                attackingValue = value;
+                OnPropertyChanged();
+
+                RecalculateAllocatedCombatModifiers();
+            }
+        }
+    }
+
+    public short DefendingValue
+    {
+        get => defendingValue;
+        set
+        {
+            if (value != defendingValue)
+            {
+                if (DefendingValueOriginal == 0)
+                {
+                    DefendingValueOriginal = value;
+                }
+                defendingValue = value;
+                OnPropertyChanged();
+
+                RecalculateAllocatedCombatModifiers();
+            }
+        }
+    }
+
+    public short AimingValue
+    {
+        get => aimingValue;
+        set
+        {
+            if (value != aimingValue)
+            {
+                if (AimingValueOriginal == 0)
+                {
+                    AimingValueOriginal = value;
+                }
+                aimingValue = value;
+                OnPropertyChanged();
+
+                RecalculateAllocatedCombatModifiers();
+            }
+        }
+    }
+
+    public short HealthPoints
+    {
+        get => healthPoints;
+        set
+        {
+            if (value != healthPoints)
+            {
+                healthPoints = value;
+                OnPropertyChanged();
+            }
+        }
+    }
+
+    public short MaxHealthPoints
+    {
+        get => maxHealthPoints;
+        set
+        {
+            if (value != maxHealthPoints)
+            {
+                maxHealthPoints = value;
+                OnPropertyChanged();
+            }
+        }
+    }
+
+    public short PainTolerancePoints
+    {
+        get => painTolerancePoints;
+        set
+        {
+            if (value != painTolerancePoints)
+            {
+                painTolerancePoints = value;
+                OnPropertyChanged();
+            }
+        }
+    }
+
     public short MaxPainTolerancePoints
     {
         get => maxPainTolerancePoints;
@@ -276,150 +411,150 @@ public class Character : IFightModifier, ILiving, IAbilities, INotifyPropertyCha
     }
 
     public sbyte Strength
-	{
-		get => strength;
-		set
-		{
-			if (value != strength)
-			{
-				strength = value;
-				if (calculateChanges)
-				{
-					CalculateFightValues(settings);
-				}
-                OnPropertyChanged();
-            }
-		}
-	}
-
-	public sbyte Quickness
-	{
-		get => speed;
-		set
-		{
-			if (value != speed)
-			{
-				speed = value;
-				if (calculateChanges)
-				{
-					CalculateFightValues(settings);
-				}
-                OnPropertyChanged();
-            }
-		}
-	}
-
-	public sbyte Dexterity
-	{
-		get => dexterity;
-		set
-		{
-			if (value != dexterity)
-			{
-				dexterity = value;
-				if (calculateChanges)
-				{
-					CalculateFightValues(settings);
-					CalculateQualificationPoints(settings);
+    {
+        get => strength;
+        set
+        {
+            if (value != strength)
+            {
+                strength = value;
+                if (calculateChanges)
+                {
+                    CalculateFightValues(settings);
                 }
                 OnPropertyChanged();
             }
-		}
-	}
+        }
+    }
+
+    public sbyte Quickness
+    {
+        get => speed;
+        set
+        {
+            if (value != speed)
+            {
+                speed = value;
+                if (calculateChanges)
+                {
+                    CalculateFightValues(settings);
+                }
+                OnPropertyChanged();
+            }
+        }
+    }
+
+    public sbyte Dexterity
+    {
+        get => dexterity;
+        set
+        {
+            if (value != dexterity)
+            {
+                dexterity = value;
+                if (calculateChanges)
+                {
+                    CalculateFightValues(settings);
+                    CalculateQualificationPoints(settings);
+                }
+                OnPropertyChanged();
+            }
+        }
+    }
 
     public sbyte Stamina
-	{
-		get => stamina;
-		set
-		{
-			if (value != stamina)
-			{
-				stamina = value;
-				if (calculateChanges)
-				{
+    {
+        get => stamina;
+        set
+        {
+            if (value != stamina)
+            {
+                stamina = value;
+                if (calculateChanges)
+                {
                     CalculatePainTolerancePoints(settings);
-				}
-			}
+                }
+            }
             OnPropertyChanged();
         }
-	}
+    }
 
     public sbyte Health
-	{
-		get => health;
-		set
-		{
-			if (value != health)
-			{
-				health = value;
-				if (calculateChanges)
-				{
-					CalculateLifePoints();
-				}
+    {
+        get => health;
+        set
+        {
+            if (value != health)
+            {
+                health = value;
+                if (calculateChanges)
+                {
+                    CalculateLifePoints();
+                }
                 OnPropertyChanged();
             }
-		}
-	}
+        }
+    }
 
-	public sbyte Beauty { get; set; }
+    public sbyte Beauty { get; set; }
 
     public sbyte Intelligence
-	{
-		get => intelligence;
-		set
-		{
-			if (value != intelligence)
-			{
-				intelligence = value;
-				if (calculateChanges)
-				{
-					CalculatePsiPoints(settings);
-					CalculateManaPoints(settings);
-					CalculateQualificationPoints(settings);
-				}
+    {
+        get => intelligence;
+        set
+        {
+            if (value != intelligence)
+            {
+                intelligence = value;
+                if (calculateChanges)
+                {
+                    CalculatePsiPoints(settings);
+                    CalculateManaPoints(settings);
+                    CalculateQualificationPoints(settings);
+                }
                 OnPropertyChanged();
             }
-		}
-	}
+        }
+    }
 
     public sbyte Willpower
-	{
-		get => willpower;
-		set
-		{
-			if (value != willpower)
-			{
-				willpower = value;
-				if (calculateChanges)
-				{
-					CalculatePainTolerancePoints(settings);
-					CalculateUnconsciousMentalMagicResistance();
-				}
+    {
+        get => willpower;
+        set
+        {
+            if (value != willpower)
+            {
+                willpower = value;
+                if (calculateChanges)
+                {
+                    CalculatePainTolerancePoints(settings);
+                    CalculateUnconsciousMentalMagicResistance();
+                }
                 OnPropertyChanged();
             }
-		}
-	}
+        }
+    }
 
-	public sbyte Astral
-	{
-		get => astral;
-		set
-		{
-			if (value != astral)
-			{
-				astral = value;
-				if (calculateChanges)
-				{
-					CalculateUnconsciousAstralMagicResistance();
-				}
+    public sbyte Astral
+    {
+        get => astral;
+        set
+        {
+            if (value != astral)
+            {
+                astral = value;
+                if (calculateChanges)
+                {
+                    CalculateUnconsciousAstralMagicResistance();
+                }
                 OnPropertyChanged();
             }
-		}
-	}
+        }
+    }
 
-	public sbyte Bravery { get; set; }
+    public sbyte Bravery { get; set; }
 
-	public sbyte Erudition { get; set; }
+    public sbyte Erudition { get; set; }
 
     public sbyte Detection { get; set; }
 
@@ -431,20 +566,20 @@ public class Character : IFightModifier, ILiving, IAbilities, INotifyPropertyCha
 
     public Sorcery? Sorcery { get; set; }
 
-	public IPsi? Psi { get; set; }
+    public IPsi? Psi { get; set; }
 
-	public ushort ManaPoints
-	{
-		get => manaPoints;
-		set
-		{
-			if (value != manaPoints)
-			{
-				manaPoints = value;
-				OnPropertyChanged();
+    public ushort ManaPoints
+    {
+        get => manaPoints;
+        set
+        {
+            if (value != manaPoints)
+            {
+                manaPoints = value;
+                OnPropertyChanged();
             }
-		}
-	}
+        }
+    }
 
     public ushort MaxManaPoints
     {
@@ -462,17 +597,17 @@ public class Character : IFightModifier, ILiving, IAbilities, INotifyPropertyCha
     public ushort MaxManaPointsPerLevel { get; set; }
 
     public ushort PsiPoints
-	{
-		get => psiPoints;
-		set
-		{
-			if (value != psiPoints)
-			{
-				psiPoints = value;
-				OnPropertyChanged();
-			}
-		}
-	}
+    {
+        get => psiPoints;
+        set
+        {
+            if (value != psiPoints)
+            {
+                psiPoints = value;
+                OnPropertyChanged();
+            }
+        }
+    }
 
     public ushort MaxPsiPoints
     {
@@ -502,15 +637,38 @@ public class Character : IFightModifier, ILiving, IAbilities, INotifyPropertyCha
 
     public byte PsiPointsModifier { get; set; }
 
-	public QualificationList Qualifications { get; private set; } = [];
+    public QualificationList Qualifications { get; private set; } = [];
 
-	public SpecialQualificationList SpecialQualifications { get; private set; } = [];
+    public SpecialQualificationList SpecialQualifications { get; private set; } = [];
 
     public ObservableCollection<PercentQualification> PercentQualifications { get; private set; } = [];
 
     public ObservableCollection<Thing> Equipment { get; init; } = [];
 
     #endregion
+
+    private void RecalculateAllocatedCombatModifiers()
+    {
+        var initiatorAllocated = Math.Max(0, InitiatingValue - InitiatingValueOriginal);
+        var attackAllocated = Math.Max(0, AttackingValue - AttackingValueOriginal);
+        var defenseAllocated = Math.Max(0, DefendingValue - DefendingValueOriginal);
+        var aimAllocated = Math.Max(0, AimingValue - AimingValueOriginal);
+
+        totalCurrentlyAllocated = (short)(initiatorAllocated + attackAllocated + defenseAllocated + aimAllocated);
+
+        combatModifier = (short)(totalCombatModifierPool - totalCurrentlyAllocated);
+
+        OnPropertyChanged(nameof(CombatModifier));
+        OnMaxLimitsChanged();
+    }
+
+    private void OnMaxLimitsChanged()
+    {
+        OnPropertyChanged(nameof(InitiatingValueMaxLimit));
+        OnPropertyChanged(nameof(AttackingValueMaxLimit));
+        OnPropertyChanged(nameof(DefendingValueMaxLimit));
+        OnPropertyChanged(nameof(AimingValueMaxLimit));
+    }
 
     public void CalculateChanges()
     {
@@ -529,65 +687,65 @@ public class Character : IFightModifier, ILiving, IAbilities, INotifyPropertyCha
     }
 
     public void OnPropertyChanged([CallerMemberName] string propertyName = "")
-	{
-		PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-	}
-
-    public static Character Load(string fullPath)
-	{
-		var result = ObjectSerializer.LoadFile<Character>(fullPath);
-		result.CalculateChanges();
-		return result;
-	}
-
-	private void CreateFirstLevel()
-	{
-		GenerateAbilities();			
-		CalculateQualificationPoints(settings);
-		GetQualifications();
-		CalculateFightValues(settings);
-
-		CalculateLifePoints();
-		CalculatePainTolerancePoints(settings);
-
-		CalculateManaPoints(settings);
-		CalculatePsiPoints(settings);
-
-		CalculateUnconsciousAstralMagicResistance();
-		CalculateUnconsciousMentalMagicResistance();
-
-		CalculateGold();
-	}
-
-	private void CalculateGold()
-	{
-		money.Gold += (short)Classes.Sum(@class => @class.Gold);
-	}
-
-	private void GenerateAbilities()
-	{
-		Strength = (sbyte)(BaseClass.Strength + Race.Strength);
-		Quickness = (sbyte)(BaseClass.Quickness + Race.Quickness);
-        Dexterity = (sbyte)(BaseClass.Dexterity + Race.Dexterity);
-		Stamina = (sbyte)(BaseClass.Stamina + Race.Stamina);
-		Health = (sbyte)(BaseClass.Health + Race.Health);
-		Beauty = (sbyte)(BaseClass.Beauty + Race.Beauty);
-		Intelligence = (sbyte)(BaseClass.Intelligence + Race.Intelligence);
-		Willpower = (sbyte)(BaseClass.Willpower + Race.Willpower);
-		Astral = (sbyte)(BaseClass.Astral + Race.Astral);
-		Bravery = BaseClass.Bravery;
-		Erudition = BaseClass.Erudition;
-		Detection = BaseClass.Detection;
+    {
+        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
     }
 
-    private void CalculatePainTolerancePoints(ISettings settings)
+    public static Character Load(string fullPath)
+    {
+        var result = ObjectSerializer.LoadFile<Character>(fullPath);
+        result.CalculateChanges();
+        return result;
+    }
+
+    private void CreateFirstLevel()
+    {
+        GenerateAbilities();
+        CalculateQualificationPoints(settings);
+        GetQualifications();
+        CalculateFightValues(settings);
+
+        CalculateLifePoints();
+        CalculatePainTolerancePoints(settings);
+
+        CalculateManaPoints(settings);
+        CalculatePsiPoints(settings);
+
+        CalculateUnconsciousAstralMagicResistance();
+        CalculateUnconsciousMentalMagicResistance();
+
+        CalculateGold();
+    }
+
+    private void CalculateGold()
+    {
+        money.Gold += (short)Classes.Sum(@class => @class.Gold);
+    }
+
+    private void GenerateAbilities()
+    {
+        Strength = (sbyte)(BaseClass.Strength + Race.Strength);
+        Quickness = (sbyte)(BaseClass.Quickness + Race.Quickness);
+        Dexterity = (sbyte)(BaseClass.Dexterity + Race.Dexterity);
+        Stamina = (sbyte)(BaseClass.Stamina + Race.Stamina);
+        Health = (sbyte)(BaseClass.Health + Race.Health);
+        Beauty = (sbyte)(BaseClass.Beauty + Race.Beauty);
+        Intelligence = (sbyte)(BaseClass.Intelligence + Race.Intelligence);
+        Willpower = (sbyte)(BaseClass.Willpower + Race.Willpower);
+        Astral = (sbyte)(BaseClass.Astral + Race.Astral);
+        Bravery = BaseClass.Bravery;
+        Erudition = BaseClass.Erudition;
+        Detection = BaseClass.Detection;
+    }
+
+    private void CalculatePainTolerancePoints(ISettings? settings)
     {
         PainTolerancePoints = GameSystem.PainTolerancePoints.Calculate(this, settings);
         MaxPainTolerancePoints = PainTolerancePoints;
         OnPropertyChanged(nameof(PainTolerancePoints));
     }
 
-    private void CalculateQualificationPoints(ISettings settings)
+    private void CalculateQualificationPoints(ISettings? settings)
     {
         var (qualificationPoints, percentQualificationPoints) = GameSystem.QualificationPoints.Calculate(this, settings);
         QualificationPoints = qualificationPoints;
@@ -595,34 +753,58 @@ public class Character : IFightModifier, ILiving, IAbilities, INotifyPropertyCha
     }
 
     private void GetQualifications()
-	{
-		SpecialQualifications.AddRange(Race.SpecialQualifications);
-		Qualifications.Clear();
+    {
+        Qualifications.Clear();
+        PercentQualifications.Clear();
+        SpecialQualifications.Clear();
+
         foreach (var @class in Classes)
-		{
-			Qualifications.AddRange(@class.Qualifications.Concat(Race.Qualifications));
-			PercentQualifications.AddRange(@class.PercentQualifications);
+        {
+            Qualifications.AddRange(@class.Qualifications.Concat(Race.Qualifications));
+            PercentQualifications.AddRange(@class.PercentQualifications);
 
             var newQualifications = @class.FutureQualifications
-				.Where(futureQualification => futureQualification.ActualLevel <= @class.Level);
+                .Where(futureQualification => futureQualification.ActualLevel <= @class.Level);
 
             Qualifications.AddRange(newQualifications.Where(q => q.QualificationLevel == QualificationLevel.Base));
-			var newMasterQualifications = newQualifications.Where(q => q.QualificationLevel == QualificationLevel.Master);
+            var newMasterQualifications = newQualifications.Where(q => q.QualificationLevel == QualificationLevel.Master);
             foreach (var newMasterQualification in newMasterQualifications)
             {
                 Qualifications.UpgradeOrAddQualification(newMasterQualification);
             }
         }
         var dexterityBasedPercentages = new List<Type> { typeof(Falling), typeof(Climbing), typeof(Jumping) };
-		if (PercentQualifications.Count == 0)
-		{
-			PercentQualifications.AddRange([new Falling(0), new Climbing(0), new Jumping(0)]);
-        }
         foreach (var percentQualification in PercentQualifications)
         {
-			if (dexterityBasedPercentages.Contains(percentQualification.GetType()))
-			{
+            if (dexterityBasedPercentages.Contains(percentQualification.GetType()))
+            {
                 percentQualification.Percent += (byte)MathHelper.GetAboveAverageValue(Dexterity);
+            }
+        }
+        if (PercentQualifications.FirstOrDefault(pq => pq is Falling) == null)
+        {
+            PercentQualifications.Add(new Falling(0));
+        }
+        if (PercentQualifications.FirstOrDefault(pq => pq is Climbing) == null)
+        {
+            PercentQualifications.Add(new Climbing(0));
+        }
+        if (PercentQualifications.FirstOrDefault(pq => pq is Jumping) == null)
+        {
+            PercentQualifications.Add(new Jumping(0));
+        }
+        
+        SpecialQualifications.AddRange(BaseClass.SpecialQualifications);
+        SpecialQualifications.AddRange(Race.SpecialQualifications);
+        var cantLearnPsi = SpecialQualifications.GetSpeciality<CantLearnPsi>();
+        if (cantLearnPsi != null)
+        {
+            for (int i = Qualifications.Count - 1; i >= 0; i--)
+            {
+                if (Qualifications[i] is IPsi)
+                {
+                    Qualifications.RemoveAt(i);
+                }
             }
         }
 
@@ -631,72 +813,76 @@ public class Character : IFightModifier, ILiving, IAbilities, INotifyPropertyCha
         OnPropertyChanged(nameof(SpecialQualification));
     }
 
-	private void CalculateFightValues(ISettings settings)
-	{
+    private void CalculateFightValues(ISettings? settings)
+    {
         var fightModifiers = FightValues.Calculate(this, settings);
-		InitiatingValue = fightModifiers.InitiatingValue;
+
+        InitiatingValue = fightModifiers.InitiatingValue;
         AttackingValue = fightModifiers.AttackingValue;
         DefendingValue = fightModifiers.DefendingValue;
         AimingValue = fightModifiers.AimingValue;
+
+        CombatModifier = fightModifiers.CombatModifier;
+    }
+
+    private void SetCombatModifierHelperVariables(short combatModifier)
+    {
+        totalCombatModifierPool = combatModifier;
+        totalCurrentlyAllocated = 0;
     }
 
     private void CalculateLifePoints()
-	{
-		var additionalLifePoints = Race.SpecialQualifications.GetSpeciality<AdditionalLifePoints>();
-		HealthPoints = BaseClass.BaseLifePoints;
-		if (additionalLifePoints != null)
-		{
+    {
+        var additionalLifePoints = Race.SpecialQualifications.GetSpeciality<AdditionalLifePoints>();
+        HealthPoints = BaseClass.BaseLifePoints;
+        if (additionalLifePoints != null)
+        {
             HealthPoints = additionalLifePoints.ExtraLifePoints;
-		}
+        }
         HealthPoints += MathHelper.GetAboveAverageValue(Health);
-		MaxHealthPoints = HealthPoints;
+        MaxHealthPoints = HealthPoints;
     }
 
-	private void CalculateUnconsciousAstralMagicResistance()
-	{
+    private void CalculateUnconsciousAstralMagicResistance()
+    {
         var doubledPainToleranceBase = Race.SpecialQualifications.GetSpeciality<ExtraMagicResistanceOnLevelUp>();
         UnconsciousAstralMagicResistance = MathHelper.GetAboveAverageValue(Astral);
-		UnconsciousAstralMagicResistance += (short)((BaseClass.Level - 1) * (doubledPainToleranceBase?.ExtraResistancePoints ?? 0));
-	}
+        UnconsciousAstralMagicResistance += (short)((BaseClass.Level - 1) * (doubledPainToleranceBase?.ExtraResistancePoints ?? 0));
+    }
 
-	private void CalculateUnconsciousMentalMagicResistance()
-	{
+    private void CalculateUnconsciousMentalMagicResistance()
+    {
         var doubledPainToleranceBase = Race.SpecialQualifications.GetSpeciality<ExtraMagicResistanceOnLevelUp>();
         UnconsciousMentalMagicResistance = MathHelper.GetAboveAverageValue(Willpower);
         UnconsciousMentalMagicResistance += (short)((BaseClass.Level - 1) * (doubledPainToleranceBase?.ExtraResistancePoints ?? 0));
-	}
+    }
 
-	private void CalculatePsiPoints(ISettings settings)
+    private void CalculatePsiPoints(ISettings? settings)
     {
         var psiAttributes = GameSystem.PsiPoints.Calculate(this, settings);
-		Psi = psiAttributes.Psi;
-		PsiPoints = psiAttributes.PsiPoints;
+        Psi = psiAttributes.Psi;
+        PsiPoints = psiAttributes.PsiPoints;
         MaxPsiPoints = psiAttributes.PsiPoints;
         PsiPointsModifier = psiAttributes.PsiPointsModifier;
     }
 
-	private void CalculateManaPoints(ISettings settings)
-	{
-		var sorceryAttributes = GameSystem.ManaPoints.Calculate(this, settings);
-		Sorcery = sorceryAttributes.Sorcery;
-        ManaPoints = sorceryAttributes.ManaPoints;
-		MaxManaPoints = sorceryAttributes.ManaPoints;
-		MaxManaPointsPerLevel = sorceryAttributes.MaxManaPointsPerLevel;
-    }
-
-    public void LevelUp()
+    private void CalculateManaPoints(ISettings? settings)
     {
-		CalculateManaPoints(settings);
+        var sorceryAttributes = GameSystem.ManaPoints.Calculate(this, settings);
+        Sorcery = sorceryAttributes.Sorcery;
+        ManaPoints = sorceryAttributes.ManaPoints;
+        MaxManaPoints = sorceryAttributes.ManaPoints;
+        MaxManaPointsPerLevel = sorceryAttributes.MaxManaPointsPerLevel;
     }
 
-	public void Buy(Thing thing)
-	{
-		Money -= thing.Price;
+    public void Buy(Thing thing)
+    {
+        Money -= thing.Price;
         if (thing is Weapon weapon)
         {
             if (primaryWeapon == null)
             {
-				primaryWeapon = weapon;
+                primaryWeapon = weapon;
             }
             else
             {
@@ -704,6 +890,6 @@ public class Character : IFightModifier, ILiving, IAbilities, INotifyPropertyCha
             }
         }
         Equipment.Add(thing);
-		OnPropertyChanged(nameof(Money));
+        OnPropertyChanged(nameof(Money));
     }
 }

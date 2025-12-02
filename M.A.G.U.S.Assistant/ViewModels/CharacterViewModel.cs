@@ -1,4 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
+using M.A.G.U.S.GameSystem;
 using System.Collections.ObjectModel;
 
 namespace M.A.G.U.S.Assistant.ViewModels;
@@ -6,6 +7,12 @@ namespace M.A.G.U.S.Assistant.ViewModels;
 internal partial class CharacterViewModel : ObservableObject
 {
     private string selectedCombatValueModifier;
+    private Character? character;
+
+    public CharacterViewModel()
+    {
+        selectedCombatValueModifier = AvailableCombatValueModifiers.First();
+    }
 
     public ObservableCollection<string> AvailableCombatValueModifiers { get; } = ["Base", "With primary weapon", "With secondary weapon"];
 
@@ -15,6 +22,20 @@ internal partial class CharacterViewModel : ObservableObject
         set
         {
             SetProperty(ref selectedCombatValueModifier, value);
+        }
+    }
+
+    public Character? Character
+    {
+        get => character;
+        protected set
+        {
+            if (character == value)
+            {
+                return;
+            }
+
+            SetProperty(ref character, value);
         }
     }
 }

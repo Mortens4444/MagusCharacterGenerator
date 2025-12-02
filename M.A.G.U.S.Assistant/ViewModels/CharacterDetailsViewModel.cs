@@ -1,5 +1,4 @@
 ﻿using M.A.G.U.S.Assistant.Services;
-using M.A.G.U.S.GameSystem;
 
 namespace M.A.G.U.S.Assistant.ViewModels;
 
@@ -8,7 +7,6 @@ internal partial class CharacterDetailsViewModel : CharacterViewModel
 {
     private readonly CharacterService characterService;
     private string characterName = String.Empty;
-    private Character? character;
 
     public CharacterDetailsViewModel(CharacterService characterService)
     {
@@ -26,12 +24,6 @@ internal partial class CharacterDetailsViewModel : CharacterViewModel
                 _ = LoadCharacterAsync(value);
             }
         }
-    }
-
-    public Character? Character
-    {
-        get => character;
-        private set => SetProperty(ref character, value);
     }
 
     private async Task LoadCharacterAsync(string name)

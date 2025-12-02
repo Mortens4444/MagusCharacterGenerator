@@ -139,7 +139,6 @@ internal static class MauiProgram
             typeof(ItemDetailsPage),
             typeof(LanguagesPage),
             typeof(MagicalObjectsPage),
-            typeof(MainPage),
             typeof(MapPage),
             typeof(MarketPage),
             typeof(NotifierPage),

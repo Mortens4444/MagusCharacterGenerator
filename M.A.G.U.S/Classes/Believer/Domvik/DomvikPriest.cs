@@ -9,7 +9,7 @@ namespace M.A.G.U.S.Classes.Believer.Domvik;
 
 public class DomvikPriest : Priest
 {
-    public DomvikPriest() : base(1) { }
+    public DomvikPriest() : base() { }
 
     public DomvikPriest(byte level) : base(level) { }
 

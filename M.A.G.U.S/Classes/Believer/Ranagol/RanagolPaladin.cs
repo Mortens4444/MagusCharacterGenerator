@@ -8,7 +8,7 @@ namespace M.A.G.U.S.Classes.Believer.Ranagol;
 
 public class RanagolPaladin : Paladin
 {
-    public RanagolPaladin() : base(1) { }
+    public RanagolPaladin() : base() { }
 
     public RanagolPaladin(byte level) : base(level) { }
 

@@ -48,6 +48,20 @@
                     </VerticalStackLayout>
                 </Border>
 
+                <!-- Harcértékek -->
+                <Border Style="{StaticResource BoxBorder}">
+                    <VerticalStackLayout>
+                        <Label Text="Combat values" Style="{StaticResource HeaderLabel}"/>
+                        <Grid ColumnDefinitions="*, *" RowDefinitions="Auto, Auto, Auto">
+                            <mc:EntryWithLabel Label="Initiator value" Text="{Binding SelectedClass.InitiatingBaseValue}" IsEnabled="False" />
+                            <mc:EntryWithLabel Label="Attack value" Text="{Binding SelectedClass.AttackingBaseValue}" IsEnabled="False" Grid.Column="1" />
+                            <mc:EntryWithLabel Label="Defense value" Text="{Binding SelectedClass.DefendingBaseValue}" IsEnabled="False" Grid.Row="1" />
+                            <mc:EntryWithLabel Label="Aim value" Text="{Binding SelectedClass.AimingBaseValue}" IsEnabled="False" Grid.Row="1" Grid.Column="1" />
+                            <mc:EntryWithLabel Label="CM/level" Text="{Binding SelectedClass.FightValueModifier}" IsEnabled="False" Grid.Row="2" />
+                        </Grid>
+                    </VerticalStackLayout>
+                </Border>
+
                 <!-- Képezettségek -->
                 <Border Stroke="{AppThemeBinding Light={StaticResource Gray300}, Dark={StaticResource Gray500}}"
                     StrokeThickness="1" Padding="10"

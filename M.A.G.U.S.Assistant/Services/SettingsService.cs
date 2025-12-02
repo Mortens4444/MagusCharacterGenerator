@@ -4,9 +4,9 @@ using Mtf.LanguageService.Enums;
 
 namespace M.A.G.U.S.Assistant.Services;
 
-internal sealed class SettingsService(SettingsRepository repo) : ISettings
+internal sealed class SettingsService : ISettings
 {
-    private readonly SettingsRepository repo = repo;
+    private readonly SettingsRepository settingsRepository;
 
     public bool AddFightValueOnFirstLevelForAllClass { get; private set; }
     public bool AddPainToleranceOnFirstLevelForAllClass { get; private set; }
@@ -31,82 +31,88 @@ internal sealed class SettingsService(SettingsRepository repo) : ISettings
     private const string KeyPainToleranceIncrease = "Setting_PainToleranceIncrease";
     private const string KeySkills = "Setting_SkillGeneration";
 
-    public async Task LoadAsync()
+    public SettingsService(SettingsRepository settingsRepository)
     {
-        AddFightValueOnFirstLevelForAllClass = await repo.GetBoolSettingAsync(KeyFightValue, true).ConfigureAwait(false);
-        AddPainToleranceOnFirstLevelForAllClass = await repo.GetBoolSettingAsync(KeyPainTolerance, true).ConfigureAwait(false);
-        AddQualificationPointsOnFirstLevelForAllClass = await repo.GetBoolSettingAsync(KeyQualification, true).ConfigureAwait(false);
-        AddManaPointsOnFirstLevelForAllClass = await repo.GetBoolSettingAsync(KeyMana, false).ConfigureAwait(false);
-        AddPsiPointsOnFirstLevelForAllClass = await repo.GetBoolSettingAsync(KeyPsi, false).ConfigureAwait(false);
+        this.settingsRepository = settingsRepository;
+        LoadAsync().GetAwaiter().GetResult();
+    }
 
-        AutoDistributeCombatValues = await repo.GetBoolSettingAsync(KeyCombatValue, false).ConfigureAwait(false);
-        AutoDistributeQualificationPoints = await repo.GetBoolSettingAsync(KeyQualificationPoints, false).ConfigureAwait(false);
-        AutoIncreasePainTolerance = await repo.GetBoolSettingAsync(KeyPainToleranceIncrease, false).ConfigureAwait(false);
-        AutoGenerateSkills = await repo.GetBoolSettingAsync(KeySkills, false).ConfigureAwait(false);
+    private async Task LoadAsync()
+    {
+        AddFightValueOnFirstLevelForAllClass = await settingsRepository.GetBoolSettingAsync(KeyFightValue, Constants.AddFightValueOnFirstLevelForAllClass).ConfigureAwait(false);
+        AddPainToleranceOnFirstLevelForAllClass = await settingsRepository.GetBoolSettingAsync(KeyPainTolerance, Constants.AddPainToleranceOnFirstLevelForAllClass).ConfigureAwait(false);
+        AddQualificationPointsOnFirstLevelForAllClass = await settingsRepository.GetBoolSettingAsync(KeyQualification, Constants.AddQualificationPointsOnFirstLevelForAllClass).ConfigureAwait(false);
+        AddManaPointsOnFirstLevelForAllClass = await settingsRepository.GetBoolSettingAsync(KeyMana, Constants.AddManaPointsOnFirstLevelForAllClass).ConfigureAwait(false);
+        AddPsiPointsOnFirstLevelForAllClass = await settingsRepository.GetBoolSettingAsync(KeyPsi, Constants.AddPsiPointsOnFirstLevelForAllClass).ConfigureAwait(false);
+
+        AutoDistributeCombatValues = await settingsRepository.GetBoolSettingAsync(KeyCombatValue, Constants.AutoDistributeCombatValues).ConfigureAwait(false);
+        AutoDistributeQualificationPoints = await settingsRepository.GetBoolSettingAsync(KeyQualificationPoints, Constants.AutoDistributeQualificationPoints).ConfigureAwait(false);
+        AutoIncreasePainTolerance = await settingsRepository.GetBoolSettingAsync(KeyPainToleranceIncrease, Constants.AutoIncreasePainTolerance).ConfigureAwait(false);
+        AutoGenerateSkills = await settingsRepository.GetBoolSettingAsync(KeySkills, Constants.AutoGenerateSkills).ConfigureAwait(false);
     }
 
     public Task SaveAddFightValueAsync(bool value)
     {
         AddFightValueOnFirstLevelForAllClass = value;
-        return repo.SaveBoolSettingAsync(KeyFightValue, value);
+        return settingsRepository.SaveBoolSettingAsync(KeyFightValue, value);
     }
 
     public Task SaveAddPainToleranceAsync(bool value)
     {
         AddPainToleranceOnFirstLevelForAllClass = value;
-        return repo.SaveBoolSettingAsync(KeyPainTolerance, value);
+        return settingsRepository.SaveBoolSettingAsync(KeyPainTolerance, value);
     }
 
     public Task SaveAddQualificationAsync(bool value)
     {
         AddQualificationPointsOnFirstLevelForAllClass = value;
-        return repo.SaveBoolSettingAsync(KeyQualification, value);
+        return settingsRepository.SaveBoolSettingAsync(KeyQualification, value);
     }
 
     public Task SaveAddManaAsync(bool value)
     {
         AddManaPointsOnFirstLevelForAllClass = value;
-        return repo.SaveBoolSettingAsync(KeyMana, value);
+        return settingsRepository.SaveBoolSettingAsync(KeyMana, value);
     }
 
     public Task SaveAddPsiAsync(bool value)
     {
         AddPsiPointsOnFirstLevelForAllClass = value;
-        return repo.SaveBoolSettingAsync(KeyPsi, value);
+        return settingsRepository.SaveBoolSettingAsync(KeyPsi, value);
     }
 
     public Task SaveAutoCombatValueDistributionAsync(bool value)
     {
         AutoDistributeCombatValues = value;
-        return repo.SaveBoolSettingAsync(KeyCombatValue, value);
+        return settingsRepository.SaveBoolSettingAsync(KeyCombatValue, value);
     }
 
     public Task SaveAutoQualificationPointsDistributionAsync(bool value)
     {
         AutoDistributeQualificationPoints = value;
-        return repo.SaveBoolSettingAsync(KeyQualificationPoints, value);
+        return settingsRepository.SaveBoolSettingAsync(KeyQualificationPoints, value);
     }
 
     public Task SaveAutoPainToleranceIncreaseAsync(bool value)
     {
         AutoIncreasePainTolerance = value;
-        return repo.SaveBoolSettingAsync(KeyPainToleranceIncrease, value);
+        return settingsRepository.SaveBoolSettingAsync(KeyPainToleranceIncrease, value);
     }
 
     public Task SaveAutoGenerateSkillsAsync(bool value)
     {
         AutoGenerateSkills = value;
-        return repo.SaveBoolSettingAsync(KeySkills, value);
+        return settingsRepository.SaveBoolSettingAsync(KeySkills, value);
     }
 
     public async Task<Language> GetCurrentLanguageAsync()
     {
-        var langString = await repo.GetSettingAsync(KeyLanguage).ConfigureAwait(false);
-        return Enum.TryParse<Language>(langString, out var savedLanguage) ? savedLanguage : Language.Hungarian;
+        var langString = await settingsRepository.GetSettingAsync(KeyLanguage).ConfigureAwait(false);
+        return Enum.TryParse<Language>(langString, out var savedLanguage) ? savedLanguage : Constants.DefaultLanguage;
     }
 
     public Task SaveDefaultLanguageAsync(Language language)
     {
-        return repo.SaveSettingAsync(KeyLanguage, language.ToString());
+        return settingsRepository.SaveSettingAsync(KeyLanguage, language.ToString());
     }
 }

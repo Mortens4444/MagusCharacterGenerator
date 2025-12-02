@@ -17,7 +17,10 @@ public class VelarPaladin : Class, IClass, ILikeMagic
 {
     public VelarPaladin() : base(1) { }
 
-    public VelarPaladin(byte level) : base(level) { }
+    public VelarPaladin(byte level) : base(level)
+    {
+        GenerateSkills();
+    }
 
     [DiceThrow(ThrowType._2K6)]
     [DiceThrowModifier(6)]

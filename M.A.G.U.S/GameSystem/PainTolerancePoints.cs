@@ -6,7 +6,7 @@ namespace M.A.G.U.S.GameSystem;
 
 public static class PainTolerancePoints
 {
-    public static short Calculate(Character character, ISettings settings)
+    public static short Calculate(Character character, ISettings? settings)
     {
         short painTolerancePoints = 0;
         var doubledPainToleranceBase = character.Race.SpecialQualifications.GetSpeciality<DoubledPainToleranceBase>();
@@ -15,7 +15,7 @@ public static class PainTolerancePoints
             painTolerancePoints = doubledPainToleranceBase != null ? (byte)(2 * character.BaseClass.BasePainTolerancePoints) : character.BaseClass.BasePainTolerancePoints;
             painTolerancePoints += MathHelper.GetAboveAverageValue(character.Stamina);
             painTolerancePoints += MathHelper.GetAboveAverageValue(character.Willpower);
-            if (character.BaseClass.AddPainToleranceOnFirstLevel || settings.AddPainToleranceOnFirstLevelForAllClass)
+            if (character.BaseClass.AddPainToleranceOnFirstLevel || (settings?.AddPainToleranceOnFirstLevelForAllClass ?? true))
             {
                 painTolerancePoints += character.BaseClass.GetPainToleranceModifier();
             }

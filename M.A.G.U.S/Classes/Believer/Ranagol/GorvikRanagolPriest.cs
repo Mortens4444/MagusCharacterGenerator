@@ -7,7 +7,7 @@ namespace M.A.G.U.S.Classes.Believer.Ranagol;
 
 public class GorvikRanagolPriest : Priest
 {
-    public GorvikRanagolPriest() : base(1) { }
+    public GorvikRanagolPriest() : base() { }
 
     public GorvikRanagolPriest(byte level) : base(level) { }
 

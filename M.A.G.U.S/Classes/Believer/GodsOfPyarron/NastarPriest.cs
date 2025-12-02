@@ -21,7 +21,10 @@ public class NastarPriest : Class, IClass, ILikeMagic
 {
     public NastarPriest() : base(1) { }
 
-    public NastarPriest(byte level) : base(level) { }
+    public NastarPriest(byte level) : base(level)
+    {
+        GenerateSkills();
+    }
 
     [DiceThrow(ThrowType._2K6)]
     [DiceThrowModifier(6)]

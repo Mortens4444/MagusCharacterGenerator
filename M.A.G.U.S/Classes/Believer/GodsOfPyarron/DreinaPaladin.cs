@@ -6,7 +6,7 @@ namespace M.A.G.U.S.Classes.Believer.GodsOfPyarron;
 
 public class DreinaPaladin : Paladin
 {
-    public DreinaPaladin() : base(1) { }
+    public DreinaPaladin() : base() { }
 
     public DreinaPaladin(byte level) : base(level) { }
 

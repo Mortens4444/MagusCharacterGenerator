@@ -11,23 +11,16 @@ internal partial class SettingsViewModel : ObservableObject
     public SettingsViewModel(SettingsService settingsService)
     {
         this.settingsService = settingsService;
-        Task.Run(async () =>
-        {
-            await settingsService.LoadAsync().ConfigureAwait(false);
-            MainThread.BeginInvokeOnMainThread(() =>
-            {
-                OnPropertyChanged(nameof(AddFightValueOnFirstLevelForAllClass));
-                OnPropertyChanged(nameof(AddPainToleranceOnFirstLevelForAllClass));
-                OnPropertyChanged(nameof(AddQualificationPointsOnFirstLevelForAllClass));
-                OnPropertyChanged(nameof(AddManaPointsOnFirstLevelForAllClass));
-                OnPropertyChanged(nameof(AddPsiPointsOnFirstLevelForAllClass));
+        OnPropertyChanged(nameof(AddFightValueOnFirstLevelForAllClass));
+        OnPropertyChanged(nameof(AddPainToleranceOnFirstLevelForAllClass));
+        OnPropertyChanged(nameof(AddQualificationPointsOnFirstLevelForAllClass));
+        OnPropertyChanged(nameof(AddManaPointsOnFirstLevelForAllClass));
+        OnPropertyChanged(nameof(AddPsiPointsOnFirstLevelForAllClass));
 
-                OnPropertyChanged(nameof(AutoDistributeCombatValues));
-                OnPropertyChanged(nameof(AutoDistributeQualificationPoints));
-                OnPropertyChanged(nameof(AutoGenerateSkills));
-                OnPropertyChanged(nameof(AutoIncreasePainTolerance));
-            });
-        });
+        OnPropertyChanged(nameof(AutoDistributeCombatValues));
+        OnPropertyChanged(nameof(AutoDistributeQualificationPoints));
+        OnPropertyChanged(nameof(AutoGenerateSkills));
+        OnPropertyChanged(nameof(AutoIncreasePainTolerance));
     }
 
     public bool AddFightValueOnFirstLevelForAllClass

@@ -43,7 +43,7 @@ internal partial class CharactersViewModel(CharacterService characterService) : 
             await MainThread.InvokeOnMainThreadAsync(() =>
             {
                 Characters.Clear();
-                foreach (var character in list)
+                foreach (var character in list.OrderBy(c => c.Name))
                 {
                     Characters.Add(character);
                 }

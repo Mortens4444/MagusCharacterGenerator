@@ -9,7 +9,7 @@ namespace M.A.G.U.S.Classes.Believer.GodsOfPyarron;
 
 public class ArelPriest : Priest
 {
-    public ArelPriest() : base(1) { }
+    public ArelPriest() : base() { }
 
     public ArelPriest(byte level) : base(level) { }
 

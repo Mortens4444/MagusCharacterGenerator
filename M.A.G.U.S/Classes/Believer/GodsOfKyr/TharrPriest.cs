@@ -8,7 +8,7 @@ namespace M.A.G.U.S.Classes.Believer.GodsOfKyr;
 
 public class TharrPriest : Priest
 {
-    public TharrPriest() : base(1) { }
+    public TharrPriest() : base() { }
 
     public TharrPriest(byte level) : base(level) { }
 

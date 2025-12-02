@@ -7,7 +7,7 @@ namespace M.A.G.U.S.Classes.Believer.GodsOfPyarron;
 
 public class KradPaladin : Paladin
 {
-    public KradPaladin() : base(1) { }
+    public KradPaladin() : base() { }
 
     public KradPaladin(byte level) : base(level) { }
 

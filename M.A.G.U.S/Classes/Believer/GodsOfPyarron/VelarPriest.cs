@@ -21,7 +21,10 @@ public class VelarPriest : Class, IClass, ILikeMagic
 {
     public VelarPriest() : base(1) { }
 
-    public VelarPriest(byte level) : base(level) { }
+    public VelarPriest(byte level) : base(level)
+    {
+        GenerateSkills();
+    }
 
     [DiceThrow(ThrowType._2K6)]
     [DiceThrowModifier(6)]

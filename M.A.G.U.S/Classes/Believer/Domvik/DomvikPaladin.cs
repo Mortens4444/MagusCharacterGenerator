@@ -7,7 +7,7 @@ namespace M.A.G.U.S.Classes.Believer.Domvik;
 
 public class DomvikPaladin : Paladin
 {
-    public DomvikPaladin() : base(1) { }
+    public DomvikPaladin() : base() { }
 
     public DomvikPaladin(byte level) : base(level) { }
 

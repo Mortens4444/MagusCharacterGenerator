@@ -7,7 +7,7 @@ namespace M.A.G.U.S.Classes.Believer.Ranagol;
 
 public class KranRanagolPriest : Priest
 {
-    public KranRanagolPriest() : base(1) { }
+    public KranRanagolPriest() : base() { }
 
     public KranRanagolPriest(byte level) : base(level) { }
 

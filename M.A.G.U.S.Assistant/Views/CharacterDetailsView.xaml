@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:conv="clr-namespace:Mtf.LanguageService.MAUI.Converters;assembly=Mtf.LanguageService.MAUI"
              xmlns:converters="clr-namespace:M.A.G.U.S.Assistant.Converters"
+             xmlns:mcc="clr-namespace:Mtf.Maui.Controls.Converters;assembly=Mtf.Maui.Controls"
              xmlns:v="clr-namespace:M.A.G.U.S.Assistant.Views"
              xmlns:vm="clr-namespace:M.A.G.U.S.Assistant.ViewModels"
              xmlns:t="clr-namespace:M.A.G.U.S.Things;assembly=M.A.G.U.S."
@@ -10,15 +11,16 @@
              xmlns:q="clr-namespace:M.A.G.U.S.GameSystem.Qualifications;assembly=M.A.G.U.S."
              xmlns:mc="clr-namespace:Mtf.Maui.Controls;assembly=Mtf.Maui.Controls"
              x:ClassModifier="internal"
+             x:DataType="vm:CharacterViewModel"
              x:Class="M.A.G.U.S.Assistant.Views.CharacterDetailsView">
-             <!--x:DataType="vm:CharacterGeneratorViewModel"-->
-             <!--x:DataType="vm:CharacterDetailsViewModel"-->
 
     <ContentView.Resources>
         <ResourceDictionary>
             <conv:TranslationConverter x:Key="TranslationConverter" />
             <converters:QualificationSorterConverter x:Key="QualificationSorter" />
             <converters:EquipmentSorterConverter x:Key="EquipmentSorter" />
+            <mcc:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter" />
+            <mcc:BoolToVisibilityConverter x:Key="NotBoolToVisibilityConverter" Invert="True" />
         </ResourceDictionary>
     </ContentView.Resources>
     
@@ -38,18 +40,18 @@
                         RowSpacing="5">
 
                     <mc:EntryWithLabel Label="Race"
-                                       Text="{Binding Character.Race.Name, Converter={StaticResource TranslationConverter}}"
+                                       Text="{Binding Character.RaceName, Converter={StaticResource TranslationConverter}}"
                                        HorizontalOptions="Center"
                                        IsEnabled="False" />
 
                     <mc:EntryWithLabel Label="Class"
-                                       Text="{Binding Character.BaseClass.Name, Converter={StaticResource TranslationConverter}}"
+                                       Text="{Binding Character.Class, Converter={StaticResource TranslationConverter}}"
                                        HorizontalOptions="Center"
                                        IsEnabled="False"
                                        Grid.Column="1" />
 
                     <mc:EntryWithLabel Label="Experience level"
-                                       Text="{Binding Character.BaseClass.Level}"
+                                       Text="{Binding Character.Level}"
                                        HorizontalOptions="Center"
                                        IsEnabled="False"
                                        Grid.Row="1"
@@ -120,11 +122,21 @@
                             SelectedItem="{Binding SelectedCombatValueModifier}"
                             WidthRequest="220"/>
 
-                    <Grid ColumnDefinitions="*, *" RowDefinitions="Auto, Auto">
-                        <mc:EntryWithLabel Label="Initiator value" Text="{Binding Character.InitiatingValue}" IsEnabled="False" />
-                        <mc:EntryWithLabel Label="Attack value" Text="{Binding Character.AttackingValue}" IsEnabled="False" Grid.Column="1" />
-                        <mc:EntryWithLabel Label="Defense value" Text="{Binding Character.DefendingValue}" IsEnabled="False" Grid.Row="1" />
-                        <mc:EntryWithLabel Label="Aim value" Text="{Binding Character.AimingValue}" IsEnabled="False" Grid.Row="1" Grid.Column="1" />
+                    <Grid ColumnDefinitions="*, *" RowDefinitions="Auto, Auto, Auto">
+                        <mc:NumericUpDownWithLabel Label="Initiator value" Minimum="{Binding Character.InitiatingValueOriginal}" Maximum="{Binding Character.InitiatingValueMaxLimit}" Value="{Binding Character.InitiatingValue, Mode=TwoWay}" IsVisible="{Binding Character.CanAllocateCombatModifier, Converter={StaticResource BoolToVisibilityConverter}}" />
+                        <mc:EntryWithLabel Label="Initiator value" Text="{Binding Character.InitiatingValue}" IsEnabled="False" IsVisible="{Binding Character.CanAllocateCombatModifier, Converter={StaticResource NotBoolToVisibilityConverter}}" />
+
+                        <mc:NumericUpDownWithLabel Label="Attack value" Minimum="{Binding Character.AttackingValueOriginal}" Maximum="{Binding Character.AttackingValueMaxLimit}" Value="{Binding Character.AttackingValue, Mode=TwoWay}" IsVisible="{Binding Character.CanAllocateCombatModifier, Converter={StaticResource BoolToVisibilityConverter}}" Grid.Column="1" />
+                        <mc:EntryWithLabel Label="Attack value" Text="{Binding Character.AttackingValue}" IsEnabled="False" IsVisible="{Binding Character.CanAllocateCombatModifier, Converter={StaticResource NotBoolToVisibilityConverter}}" Grid.Column="1" />
+
+                        <mc:NumericUpDownWithLabel Label="Defense value" Minimum="{Binding Character.DefendingValueOriginal}" Maximum="{Binding Character.DefendingValueMaxLimit}" Value="{Binding Character.DefendingValue, Mode=TwoWay}" IsVisible="{Binding Character.CanAllocateCombatModifier, Converter={StaticResource BoolToVisibilityConverter}}" Grid.Row="1" />
+                        <mc:EntryWithLabel Label="Defense value" Text="{Binding Character.DefendingValue}" IsEnabled="False" IsVisible="{Binding Character.CanAllocateCombatModifier, Converter={StaticResource NotBoolToVisibilityConverter}}" Grid.Row="1" />
+
+                        <mc:NumericUpDownWithLabel Label="Aim value" Minimum="{Binding Character.AimingValueOriginal}" Maximum="{Binding Character.AimingValueMaxLimit}" Value="{Binding Character.AimingValue, Mode=TwoWay}" IsVisible="{Binding Character.CanAllocateCombatModifier, Converter={StaticResource BoolToVisibilityConverter}}" Grid.Row="1" Grid.Column="1" />
+                        <mc:EntryWithLabel Label="Aim value" Text="{Binding Character.AimingValue}" IsEnabled="False" IsVisible="{Binding Character.CanAllocateCombatModifier, Converter={StaticResource NotBoolToVisibilityConverter}}" Grid.Row="1" Grid.Column="1" />
+                        
+                        <mc:EntryWithLabel Label="Combat modifier" Text="{Binding Character.CombatModifier}" IsEnabled="False" Grid.Row="2" />
+                        <mc:EntryWithLabel Label="Combat modifier/level" Text="{Binding Character.FightValueModifier}" IsEnabled="False" Grid.Row="2" Grid.Column="1" />
                     </Grid>
                 </VerticalStackLayout>
             </Border>

@@ -1,5 +1,4 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
-using CommunityToolkit.Mvvm.Input;
+﻿using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.Messaging;
 using M.A.G.U.S.Assistant.Services;
 using M.A.G.U.S.GameSystem;
@@ -20,14 +19,13 @@ internal partial class CharacterGeneratorViewModel : CharacterViewModel
     private readonly SettingsService settingsService;
     private readonly CharacterService characterService;
 
-    private Character character;
     private byte baseClassLevel = 1;
 
     public CharacterGeneratorViewModel(SettingsService settingsService, CharacterService characterService)
     {
         this.settingsService = settingsService;
         this.characterService = characterService;
-        character = new Character(settingsService);
+        Character = new Character(settingsService);
 
         LoadAvailableTypes();
         SelectedRace = AvailableRaces.FirstOrDefault();
@@ -67,12 +65,6 @@ internal partial class CharacterGeneratorViewModel : CharacterViewModel
         }
     }
 
-    public Character Character
-    {
-        get => character;
-        set => SetProperty(ref character, value);
-    }
-
     [RelayCommand]
     public void GenerateCharacter()
     {
@@ -98,7 +90,6 @@ internal partial class CharacterGeneratorViewModel : CharacterViewModel
         try
         {
             Character = new Character(settingsService, NameGenerator.Get(selectedRace), selectedRace, instanceClass);
-            Character.LevelUp();
         }
         catch (Exception ex)
         {
@@ -116,11 +107,10 @@ internal partial class CharacterGeneratorViewModel : CharacterViewModel
     [RelayCommand]
     public void GenerateNewName()
     {
-        if (Character == null)
+        if (Character != null)
         {
-            GenerateCharacter();
+            Character.Name = NameGenerator.Get(Character.Race).ToName();
         }
-        Character.Name = NameGenerator.Get(Character.Race).ToName();
     }
 
     private void LoadAvailableTypes()
@@ -165,7 +155,7 @@ internal partial class CharacterGeneratorViewModel : CharacterViewModel
                     {
                         try
                         {
-                            var instanceClass = InstanceClass(t, 1);
+                            var instanceClass = InstanceClass(t);
                             if (instanceClass != null)
                             {
                                 AvailableClasses.Add(instanceClass);
@@ -195,11 +185,35 @@ internal partial class CharacterGeneratorViewModel : CharacterViewModel
         }
     }
 
+    private static IClass? InstanceClass(Type classType)
+    {
+        try
+        {
+            if (Activator.CreateInstance(classType) is IClass instanceClass)
+            {
+                return instanceClass;
+            }
+        }
+        catch (TargetInvocationException ex)
+        {
+            WeakReferenceMessenger.Default.Send(new ShowErrorMessage(ex.InnerException ?? ex));
+        }
+
+        return null;
+    }
+
     private static IClass? InstanceClass(Type classType, byte level)
     {
-        if (Activator.CreateInstance(classType, level) is IClass instanceClass)
+        try
         {
-            return instanceClass;
+            if (Activator.CreateInstance(classType, level) is IClass instanceClass)
+            {
+                return instanceClass;
+            }
+        }
+        catch (TargetInvocationException ex)
+        {
+            WeakReferenceMessenger.Default.Send(new ShowErrorMessage(ex.InnerException ?? ex));
         }
 
         return null;

@@ -13,7 +13,7 @@ public static class PsiPoints
     public const byte PyarronMasterModifier = 4;
     public const byte PyarronBaseModifier = 3;
 
-    public static PsiAttributes Calculate(Character character, ISettings settings)
+    public static PsiAttributes Calculate(Character character, ISettings? settings)
     {
         var cantLearnPsi = character.Race.SpecialQualifications.GetSpeciality<CantLearnPsi>();
         if (cantLearnPsi != null)
@@ -88,7 +88,7 @@ public static class PsiPoints
                     isBasePsiInitialized = true;
                 }
 
-                if (lvl > 1 || settings.AddPsiPointsOnFirstLevelForAllClass)
+                if (lvl > 1 || (settings?.AddPsiPointsOnFirstLevelForAllClass ?? false))
                 {
                     totalPsiPoints += maxModifierAtLevel;
                 }

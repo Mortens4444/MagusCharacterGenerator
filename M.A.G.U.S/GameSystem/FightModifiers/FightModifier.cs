@@ -9,4 +9,6 @@ public sealed class FightModifier : IFightModifier
     public short DefendingValue { get; set; }
 
     public short AimingValue { get; set; }
+
+    public short CombatModifier { get; set; }
 }

@@ -8,7 +8,7 @@ namespace M.A.G.U.S.Classes.Believer.GodsOfPyarron;
 
 public class KyelPriest : Priest
 {
-    public KyelPriest() : base(1) { }
+    public KyelPriest() : base() { }
 
     public KyelPriest(byte level) : base(level) { }
 

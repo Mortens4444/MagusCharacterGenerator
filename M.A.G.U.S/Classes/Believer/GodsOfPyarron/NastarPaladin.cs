@@ -16,7 +16,10 @@ public class NastarPaladin : Class, IClass, IHateRangedWeapons
 {
     public NastarPaladin() : base(1) { }
 
-    public NastarPaladin(byte level) : base(level) { }
+    public NastarPaladin(byte level) : base(level)
+    {
+        GenerateSkills();
+    }
 
     [DiceThrow(ThrowType._1K10)]
     [DiceThrowModifier(8)]

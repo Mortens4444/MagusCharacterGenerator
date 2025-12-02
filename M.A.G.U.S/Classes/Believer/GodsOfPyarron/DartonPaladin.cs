@@ -9,7 +9,7 @@ namespace M.A.G.U.S.Classes.Believer.GodsOfPyarron;
 
 public class DartonPaladin : Paladin
 {
-    public DartonPaladin() : base(1) { }
+    public DartonPaladin() : base() { }
 
     public DartonPaladin(byte level) : base(level) { }
 

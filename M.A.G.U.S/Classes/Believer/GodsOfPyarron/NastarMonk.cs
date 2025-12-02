@@ -16,7 +16,10 @@ public class NastarMonk : Class, IClass, ILikeMagic
 {
     public NastarMonk() : base(1) { }
 
-    public NastarMonk(byte level) : base(level) { }
+    public NastarMonk(byte level) : base(level)
+    {
+        GenerateSkills();
+    }
 
     [DiceThrow(ThrowType._2K6)]
     [DiceThrowModifier(6)]

@@ -8,7 +8,7 @@ namespace M.A.G.U.S.GameSystem;
 
 public static class ManaPoints
 {
-    public static SorceryAttributes Calculate(Character character, ISettings settings)
+    public static SorceryAttributes Calculate(Character character, ISettings? settings)
     {
         var extraManaPointsOnLevelUp = character.Race.SpecialQualifications.GetSpeciality<ExtraManaPointOnLevelUp>();
         var extraManaPoints = extraManaPointsOnLevelUp == null ? 0 : extraManaPointsOnLevelUp.ExtraManaPoints * character.BaseClass.Level;
@@ -38,7 +38,7 @@ public static class ManaPoints
                 }
                 for (int lvl = 1; lvl <= @class.Level; lvl++)
                 {
-                    if (lvl > 1 || settings.AddManaPointsOnFirstLevelForAllClass)
+                    if (lvl > 1 || (settings?.AddManaPointsOnFirstLevelForAllClass ?? false))
                     {
                         manaPoints += sorcery.GetManaPointsModifier();
                     }
