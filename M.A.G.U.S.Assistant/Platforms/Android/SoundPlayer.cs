@@ -1,5 +1,6 @@
 ﻿using M.A.G.U.S.Assistant.Interfaces;
 using M.A.G.U.S.Assistant.Models;
+using M.A.G.U.S.Assistant.Services;
 using Plugin.Maui.Audio;
 using System.Reflection;
 
@@ -13,7 +14,7 @@ public class SoundPlayer : ISoundPlayer
 
     public Task PlayAsync(string sound)
     {
-        return PlayAsync(new SoundItem { ResourceId = $"M.A.G.U.S.Assistant.Resources.Raw.{sound}.mp3" }, 1);
+        return PlayAsync(new SoundItem { ResourceId = EmbeddedResourceHelper.GetResourceId(sound) }, 1);
     }
 
     public Task PlayAsync(SoundItem sound, double volume)

@@ -17,8 +17,9 @@
     <ScrollView>
         <StackLayout Padding="12" Spacing="12">
 
+            <!-- Image & sound -->
             <Image Source="{Binding Image}" HeightRequest="200" Aspect="AspectFit" />
-            <Button Text="🔈" BackgroundColor="Transparent" Command="{Binding PlaySoundCommand}"/>
+            <Button Text="🔈" BackgroundColor="Transparent" Command="{Binding PlaySoundCommand}" IsVisible="{Binding IsSoundAvailable}" />
             
             <!-- Top summary -->
             <Border Padding="10">

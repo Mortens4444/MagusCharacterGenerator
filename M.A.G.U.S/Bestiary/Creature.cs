@@ -1,5 +1,6 @@
 ﻿using M.A.G.U.S.Enums;
 using M.A.G.U.S.GameSystem;
+using M.A.G.U.S.GameSystem.Psi;
 
 namespace M.A.G.U.S.Bestiary;
 
@@ -40,6 +41,12 @@ public abstract class Creature
     public virtual string[] Sounds => [ $"{Name.Replace(" ", "_").ToLower()}" ];
 
     public Alignment? Alignment { get; set; }
+    
+    public IPsi Psi { get; set; }
+
+    public byte PsiPoints { get; set; }
+
+    public byte ManaPoints { get; set; }
 
     protected readonly DiceThrow DiceThrow = new();
 

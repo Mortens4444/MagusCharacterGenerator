@@ -30,6 +30,7 @@ internal partial class CreatureDetailsViewModel : ObservableObject
     {
         this.soundPlayer = soundPlayer;
         Creature = creature ?? throw new ArgumentNullException(nameof(creature));
+        IsSoundAvailable = Creature.Sounds.Any(s => !String.IsNullOrWhiteSpace(s) && soundPlayer.HasEmbeddedSound(s));
 
         var method = creature.GetType().GetMethod(nameof(creature.GetNumberAppearing));
         var throwType = method?.GetCustomAttribute<DiceThrowAttribute>()?.DiceThrowType;
@@ -99,6 +100,13 @@ internal partial class CreatureDetailsViewModel : ObservableObject
     {
         get => lastAction;
         set => SetProperty(ref lastAction, value);
+    }
+
+    private bool isSoundAvailable;
+    public bool IsSoundAvailable
+    {
+        get => isSoundAvailable;
+        set => SetProperty(ref isSoundAvailable, value);
     }
 
     [RelayCommand]
