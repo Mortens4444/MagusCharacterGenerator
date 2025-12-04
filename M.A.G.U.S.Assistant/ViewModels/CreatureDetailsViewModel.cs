@@ -2,6 +2,7 @@
 using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.Messaging;
 using M.A.G.U.S.Assistant.Interfaces;
+using M.A.G.U.S.Assistant.Services;
 using M.A.G.U.S.Bestiary;
 using M.A.G.U.S.Enums;
 using M.A.G.U.S.GameSystem.Attributes;
@@ -30,7 +31,7 @@ internal partial class CreatureDetailsViewModel : ObservableObject
     {
         this.soundPlayer = soundPlayer;
         Creature = creature ?? throw new ArgumentNullException(nameof(creature));
-        IsSoundAvailable = Creature.Sounds.Any(s => !String.IsNullOrWhiteSpace(s) && soundPlayer.HasEmbeddedSound(s));
+        IsSoundAvailable = Creature.Sounds.Any(s => !String.IsNullOrWhiteSpace(s) && EmbeddedResourceHelper.HasEmbeddedSound(s));
 
         var method = creature.GetType().GetMethod(nameof(creature.GetNumberAppearing));
         var throwType = method?.GetCustomAttribute<DiceThrowAttribute>()?.DiceThrowType;
@@ -58,8 +59,8 @@ internal partial class CreatureDetailsViewModel : ObservableObject
         LastAction = String.Empty;
     }
 
-    public string Occurrence => Creature.Occurrence.ToString();
-    public string Intelligence => Creature.Intelligence.ToString();
+    public Occurrence Occurrence => Creature.Occurrence;
+    public Intelligence Intelligence => Creature.Intelligence;
     public M.A.G.U.S.Enums.Size Size => Creature.Size;
     public int Speed => Creature.Speed;
     public int AttackValue => Creature.AttackValue;

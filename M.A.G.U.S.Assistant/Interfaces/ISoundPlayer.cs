@@ -2,7 +2,7 @@
 
 namespace M.A.G.U.S.Assistant.Interfaces;
 
-public interface ISoundPlayer
+internal interface ISoundPlayer
 {
     Task PlayAsync(string sound);
 

@@ -9,7 +9,7 @@ public sealed class Wolf : Creature
     public Wolf()
     {
         Occurrence = Occurrence.Frequent;
-        Size = Size.Small;
+        Size = Size.Human;
         Speed = 120;
         AttackValue = 35;
         DefenseValue = 60;

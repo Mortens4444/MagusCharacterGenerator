@@ -35,6 +35,7 @@ heavy_war_horse.png
 light_war_horse.png
 gray_dolpine.png
 killer_whale.png
+lizard_creature.png
 lizard_wizard.png
 mummy.png
 narwhal.png

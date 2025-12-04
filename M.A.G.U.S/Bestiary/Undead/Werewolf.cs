@@ -29,5 +29,5 @@ public sealed class Werewolf : LivingDead
 
     public override byte GetNumberAppearing() => 1;
 
-    public override string[] Sounds => [ "werewolf_howl" ];
+    public override string[] Sounds => ["werewolf_howl"];
 }

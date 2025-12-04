@@ -1,7 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.Messaging;
 using M.A.G.U.S.Assistant.Enums;
 using M.A.G.U.S.Assistant.Interfaces;
-using M.A.G.U.S.Assistant.Models;
 using M.A.G.U.S.Assistant.Services;
 using Mtf.LanguageService;
 using Mtf.Maui.Controls.Models;

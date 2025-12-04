@@ -72,9 +72,9 @@ internal partial class CharactersViewModel(CharacterService characterService) : 
 
         bool confirm = await Shell.Current.DisplayAlert(
             Lng.Elem("Delete Character"),
-            Lng.Elem(String.Format("Are you sure you want to delete '{0}'? This cannot be undone.", character.Name)),
-            "Delete",
-            "Cancel").ConfigureAwait(false);
+            String.Format(Lng.Elem("Are you sure you want to delete '{0}'? This cannot be undone."), character.Name),
+            Lng.Elem("Delete"),
+            Lng.Elem("Cancel")).ConfigureAwait(false);
 
         if (confirm)
         {

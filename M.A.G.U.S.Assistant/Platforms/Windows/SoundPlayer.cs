@@ -32,7 +32,8 @@ internal partial class SoundPlayer : ISoundPlayer, IDisposable
         var buffer = new byte[8192];
         while (true)
         {
-            var read = await resourceStream.ReadAsync(buffer, 0, buffer.Length).ConfigureAwait(false);
+            var memory = new Memory<byte>(buffer);
+            var read = await resourceStream.ReadAsync(memory, CancellationToken.None).ConfigureAwait(false);
             if (read <= 0)
             {
                 break;
@@ -98,6 +99,11 @@ internal partial class SoundPlayer : ISoundPlayer, IDisposable
     public void Dispose()
     {
         Stop();
+        if (currentStream != null)
+        {
+            currentStream.Dispose();
+            currentStream = null;
+        }
         GC.SuppressFinalize(this);
     }
 }

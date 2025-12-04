@@ -12,6 +12,8 @@ public abstract class Creature
     
     public Size Size { get; protected set; }
 
+    public byte ArmorClass { get; protected set; }
+
     public byte Speed { get; protected set; }
 
     public byte AttackValue { get; protected set; }
@@ -35,6 +37,8 @@ public abstract class Creature
     public uint ExperiencePoints { get; protected set; }
 
     public double AttacksPerRound { get; protected set; } = 1;
+
+    public string Description { get; protected set; }
 
     public virtual string[] Images => [ $"{Name.Replace(" ", "_").ToLower()}.png" ];
 

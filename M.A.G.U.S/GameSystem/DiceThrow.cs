@@ -199,6 +199,8 @@ public class DiceThrow
             ThrowType._3D6_2_Times => _3D6_2_Times(),
             ThrowType._1D100 => _1D100(),
             ThrowType._3D100 => _3D100(),
+            ThrowType._4D10 => _4D10(),
+            ThrowType._10D10 => _10D10(),
             _ => throw new ArgumentOutOfRangeException(nameof(throwType))
         };
         return specialTraing ? SpecialTraining((sbyte)(throwResult + modifier)) : (short)(throwResult + modifier);
@@ -246,5 +248,15 @@ public class DiceThrow
         }
 
         return 20;
+    }
+
+    public byte _4D10()
+    {
+        return RandomProvider.GetSecureRandomByte(4, 40);
+    }
+
+    public byte _10D10()
+    {
+        return RandomProvider.GetSecureRandomByte(10, 100);
     }
 }

@@ -1,24 +1,31 @@
 - Problem with total weight
 - Harcérték módodítók elosztása
 
-- Add weapon to character (easily changable way) S
+- Buy qualifications
+- SFÉ
+- Buy poison
+- Keen hearing/seeing should have shown the multiplier also (ex. 2x)
+- Save on Android did not show message from success operation
+- After buying something on the market, refresh the affordable items list
+- Add weapon to character (easily changeable way) S
 - Max. Distance for a day S
 
-- Map page open pdf? M
+- Summa of weights is wrong in release mode.
+- Should appear in equipment list?
+- Can the MapPage open PDFs also? M
 - Show Illnesses M
-- Calculate weight of items M
 - Other modifier tables M
 
 - Fix RoomPainterPage L
 - ClassesPage, show more info, like in RacesPage L
-- Character.cs Generation fixes, calculate combat modifiers, pain resistance, psi, mana, magic resistance L
+- Character.cs pain resistance, mana, magic resistance L
 - Buy Qualifications for character L
 
-- Add more animations, images and sounds XL
+- Add more animations, images, and sounds XL
 - Psi XXL (Pszi diszciplínák)
 - Add more beasts to Bestiary XXXL (Bestiárium)
 - Combat simulator XXXL (Harcrendszer)
-- Show stories and create digital map, for them (map, and sounds), store story descriptions XXXL
+- Show stories and paint a digital map, for them (map, and sounds), store story descriptions XXXL
 - Create a story for every qualification XXXL
 - Magic XXXL (Mágiarendszer)
 
@@ -26,7 +33,7 @@
 - Add new classes (Warriors, etc.) - Új kasztok (harcosok, stb...)
 - Ynev fõbb helyei
 - Karakter származás
-- FIXME: Multi-class
+- FIXME: Multi-class (+ age of character should be introduced)
 - Play Videos (Videóklippek lejátszása)
 
 https://www.yumpu.com/hu/document/view/5842996/magus-puska-071-verzio-http-wwwszerepjatektk/5

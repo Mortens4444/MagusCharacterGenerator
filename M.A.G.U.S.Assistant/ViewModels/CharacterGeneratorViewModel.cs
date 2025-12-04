@@ -80,15 +80,15 @@ internal partial class CharacterGeneratorViewModel : CharacterViewModel
             return;
         }
 
-        var instanceClass = InstanceClass(selectedClass.GetType(), baseClassLevel);
-        if (instanceClass == null)
-        {
-            WeakReferenceMessenger.Default.Send(new ShowErrorMessage("Class cannot be instantiated!"));
-            return;
-        }
-
         try
         {
+            var instanceClass = InstanceClass(selectedClass.GetType(), baseClassLevel);
+            if (instanceClass == null)
+            {
+                WeakReferenceMessenger.Default.Send(new ShowErrorMessage("Class cannot be instantiated!"));
+                return;
+            }
+
             Character = new Character(settingsService, NameGenerator.Get(selectedRace), selectedRace, instanceClass);
         }
         catch (Exception ex)

@@ -154,6 +154,7 @@
     <None Remove="Resources\Images\Bestiary\heavy_armored_hourse.png" />
     <None Remove="Resources\Images\Bestiary\killer_whale.png" />
     <None Remove="Resources\Images\Bestiary\light_armored_hourse.png" />
+    <None Remove="Resources\Images\Bestiary\lizard_creature.png" />
     <None Remove="Resources\Images\Bestiary\lizard_wizard.png" />
     <None Remove="Resources\Images\Bestiary\mummy.png" />
     <None Remove="Resources\Images\Bestiary\narwhal.png" />
@@ -219,6 +220,7 @@
     <MauiImage Include="Resources\Images\Animals\light_war_horse.png" />
     <MauiImage Include="Resources\Images\Bestiary\gray_dolpine.png" />
     <MauiImage Include="Resources\Images\Bestiary\killer_whale.png" />
+    <MauiImage Include="Resources\Images\Bestiary\lizard_creature.png" />
     <MauiImage Include="Resources\Images\Bestiary\lizard_wizard.png" />
     <MauiImage Include="Resources\Images\Bestiary\mummy.png" />
     <MauiImage Include="Resources\Images\Bestiary\narwhal.png" />
@@ -446,6 +448,6 @@
       <ImageManifestPath>$(ProjectDir)Resources\Images\images_manifest.txt</ImageManifestPath>
     </PropertyGroup>
     <!--<WriteLinesToFile File="$(ImageManifestPath)" Lines="@(AllImages->'%(RelativeDir)%(Filename)%(Extension)')" Overwrite="true" Encoding="UTF-8" />-->
-    <WriteLinesToFile File="$(ImageManifestPath)" Lines="@(AllImages-&gt;'%(Filename)%(Extension)')" Overwrite="true" Encoding="UTF-8" />
+    <WriteLinesToFile File="$(ImageManifestPath)" Lines="@(AllImages->'%(Filename)%(Extension)')" Overwrite="true" Encoding="UTF-8" />
   </Target>
 </Project>

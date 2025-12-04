@@ -29,11 +29,13 @@ public sealed class LizardWizard : Creature
         ExperiencePoints = 7000;
     }
 
-    public override string Name => "Lizard wizard";
+    public override string Name => "Lizard wizard (Snil-veh)";
 
     [DiceThrow(ThrowType._2D6)]
     [DiceThrowModifier(4)]
     public override byte GetDamage() => (byte)(DiceThrow._2D6() + 4);
 
     public override byte GetNumberAppearing() => 1;
+
+    public override string[] Images => ["lizard_wizard"];
 }
