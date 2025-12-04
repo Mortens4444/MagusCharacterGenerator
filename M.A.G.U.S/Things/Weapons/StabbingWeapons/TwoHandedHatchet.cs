@@ -17,8 +17,8 @@ public class TwoHandedHatchet : Weapon, IMeleeWeapon
 
     public override Money Price => new(2);
 
-    [DiceThrow(ThrowType._3K6)]
-    public byte GetDamage() => (byte)DiceThrow._3K6();
+    [DiceThrow(ThrowType._3D6)]
+    public byte GetDamage() => (byte)DiceThrow._3D6();
 
     public override string Name => "Two-handed axe";
 

@@ -17,9 +17,9 @@ public class KnightSword : Weapon, IMeleeWeapon
 
     public override Money Price => new(3);
 
-    [DiceThrow(ThrowType._2K6)]
+    [DiceThrow(ThrowType._2D6)]
     [DiceThrowModifier(6)]
-    public byte GetDamage() => (byte)(DiceThrow._2K6() + 6);
+    public byte GetDamage() => (byte)(DiceThrow._2D6() + 6);
 
     public override string Name => "Knight’s sword";
 

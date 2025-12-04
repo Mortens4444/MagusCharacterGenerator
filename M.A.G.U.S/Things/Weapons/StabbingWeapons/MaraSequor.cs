@@ -17,9 +17,9 @@ public class MaraSequor : Weapon, IMeleeWeapon
 
     public override Money Price => new(2);
 
-    [DiceThrow(ThrowType._2K6)]
+    [DiceThrow(ThrowType._2D6)]
     [DiceThrowModifier(2)]
-    public byte GetDamage() => (byte)(DiceThrow._2K6() + 2);
+    public byte GetDamage() => (byte)(DiceThrow._2D6() + 2);
 
     public override string Name => "Mara-sequor";
 

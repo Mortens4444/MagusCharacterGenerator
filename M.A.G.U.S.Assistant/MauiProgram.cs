@@ -30,14 +30,17 @@ internal static class MauiProgram
 
 #if ANDROID
         builder.Services.AddSingleton<ISoundPlayer, Platforms.Android.SoundPlayer>();
+        builder.Services.AddSingleton<IShakeService, Platforms.Android.ShakeService>();
 #elif WINDOWS
         builder.Services.AddSingleton<ISoundPlayer, Platforms.Windows.SoundPlayer>();
+        builder.Services.AddSingleton<IShakeService, Platforms.Windows.ShakeService>();
 #endif
 
         RegisterPages(builder);
         RegisterViewModels(builder);
         RegisterRepositories(builder);
         RegisterServices(builder);
+        RegisterSingletonServices(builder);
 
         AppDomain.CurrentDomain.UnhandledException += (sender, args) =>
         {
@@ -71,6 +74,18 @@ internal static class MauiProgram
         foreach (var serviceType in serviceTypes)
         {
             builder.Services.AddTransient(serviceType);
+        }
+    }
+
+    private static void RegisterSingletonServices(MauiAppBuilder builder)
+    {
+        var serviceTypes = new List<Type>
+        {
+            //typeof(ShakeService)
+        };
+        foreach (var serviceType in serviceTypes)
+        {
+            builder.Services.AddSingleton(serviceType);
         }
     }
 
@@ -109,6 +124,7 @@ internal static class MauiProgram
             typeof(PaintWizardViewModel),
             typeof(QualificationsViewModel),
             typeof(RacesViewModel),
+            typeof(RollFormulaViewModel),
             typeof(SearchListViewModel),
             typeof(SettingsViewModel),
             typeof(SoundViewModel),
@@ -147,6 +163,7 @@ internal static class MauiProgram
             typeof(PoisonsPage),
             typeof(QualificationsPage),
             typeof(RacesPage),
+            typeof(RollFormulaPage),
             typeof(RunesPage),
             typeof(SearchListPage),
             typeof(SettingsPage),

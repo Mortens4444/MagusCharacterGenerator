@@ -16,6 +16,10 @@
 
     <ScrollView>
         <StackLayout Padding="12" Spacing="12">
+
+            <Image Source="{Binding Image}" HeightRequest="200" Aspect="AspectFit" />
+            <Button Text="🔈" BackgroundColor="Transparent" Command="{Binding PlaySoundCommand}"/>
+            
             <!-- Top summary -->
             <Border Padding="10">
                 <Grid ColumnDefinitions="Auto, *" RowDefinitions="Auto,Auto" ColumnSpacing="12" RowSpacing="6">
@@ -49,14 +53,8 @@
                     <Label Text="Initiator value" Grid.Row="6" Grid.Column="0" FontAttributes="Bold" />
                     <Label Text="{Binding InitiatingValue}" Grid.Row="6" Grid.Column="1" />
 
-                    <Label Text="Max health points" Grid.Row="7" Grid.Column="0" FontAttributes="Bold" />
-                    <Label Text="{Binding MaxHealthPoints}" Grid.Row="7" Grid.Column="1" />
-
                     <Label Text="Health points" Grid.Row="8" Grid.Column="0" FontAttributes="Bold" />
                     <Label Text="{Binding HealthPoints}" Grid.Row="8" Grid.Column="1" />
-
-                    <Label Text="Max pain tolerance points" Grid.Row="9" Grid.Column="0" FontAttributes="Bold" />
-                    <Label Text="{Binding MaxPainTolerancePoints}" Grid.Row="9" Grid.Column="1" />
 
                     <Label Text="Pain tolerance points" Grid.Row="10" Grid.Column="0" FontAttributes="Bold" />
                     <Label Text="{Binding PainTolerancePoints}" Grid.Row="10" Grid.Column="1" />

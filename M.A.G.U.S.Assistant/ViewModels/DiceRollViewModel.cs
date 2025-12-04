@@ -1,5 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.Messaging;
 using M.A.G.U.S.Assistant.Interfaces;
+using M.A.G.U.S.Assistant.Services;
 using M.A.G.U.S.Enums;
 using Mtf.LanguageService;
 using Mtf.Maui.Controls.Models;
@@ -14,6 +15,7 @@ internal partial class DiceRollViewModel : INotifyPropertyChanged
 {
     public event PropertyChangedEventHandler? PropertyChanged;
     private readonly ISoundPlayer soundPlayer;
+    private readonly IShakeService shakeService;
     private readonly Random random = new();
     private DiceType selectedDice = DiceType.D100;
     private int customFrom = 1;
@@ -23,9 +25,12 @@ internal partial class DiceRollViewModel : INotifyPropertyChanged
     private string resultSummary = String.Empty;
     private string resultDetails = String.Empty;
 
-    public DiceRollViewModel(ISoundPlayer soundPlayer)
+    public DiceRollViewModel(ISoundPlayer soundPlayer, IShakeService shakeService)
     {
         this.soundPlayer = soundPlayer ?? throw new ArgumentNullException(nameof(soundPlayer));
+        this.shakeService = shakeService ?? throw new ArgumentNullException(nameof(shakeService));
+        shakeService.ShakeDetected += OnShakeDetected;
+
         RollCommand = new Command(() =>
         {
             _ = RollDiceAsync().ConfigureAwait(false);
@@ -35,6 +40,8 @@ internal partial class DiceRollViewModel : INotifyPropertyChanged
     public event EventHandler<TaskCompletionSource<bool>>? DiceRollRequested;
 
     public ICommand RollCommand { get; }
+
+    public IShakeService ShakeService => shakeService;
 
     public IEnumerable<DiceType> DiceTypes { get; } = Enum.GetValues<DiceType>().Cast<DiceType>();
 
@@ -144,6 +151,11 @@ internal partial class DiceRollViewModel : INotifyPropertyChanged
         }
     }
 
+    private void OnShakeDetected(object? sender, EventArgs e)
+    {
+        CommandExecutor.ExecuteOnUIThread(RollCommand);
+    }
+
     private async Task RollDiceAsync()
     {
         var tcs = new TaskCompletionSource<bool>();
@@ -155,10 +167,7 @@ internal partial class DiceRollViewModel : INotifyPropertyChanged
             {
                 Vibration.Default.Vibrate(TimeSpan.FromMilliseconds(200));
             }
-            await soundPlayer.PlayAsync(new Models.SoundItem
-            {
-                ResourceId = "M.A.G.U.S.Assistant.Resources.Raw.dice_roll.mp3"
-            }, 1).ConfigureAwait(false);
+            await soundPlayer.PlayAsync("dice_roll").ConfigureAwait(false);
         }
         catch (Exception ex)
         {

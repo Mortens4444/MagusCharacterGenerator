@@ -14,7 +14,7 @@ public class ClericalMagic : Sorcery
 
     public override ushort GetManaPointsModifier()
     {
-        return (ushort)(diceThrow._1K3() + 6);
+        return (ushort)(diceThrow._1D3() + 6);
     }
 
     public override string Name => "Clerical magic";

@@ -17,8 +17,8 @@ public class SlanSword : Weapon, IMeleeWeapon
 
     public override Money Price => new(100);
 
-    [DiceThrow(ThrowType._1K10)]
-    public byte GetDamage() => (byte)(DiceThrow._1K10() + 2);
+    [DiceThrow(ThrowType._1D10)]
+    public byte GetDamage() => (byte)(DiceThrow._1D10() + 2);
 
     public override string Name => "Slan sword";
 

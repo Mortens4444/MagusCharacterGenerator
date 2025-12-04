@@ -11,6 +11,11 @@ public class SoundPlayer : ISoundPlayer
 
     public event EventHandler? PlaybackEnded;
 
+    public Task PlayAsync(string sound)
+    {
+        return PlayAsync(new SoundItem { ResourceId = $"M.A.G.U.S.Assistant.Resources.Raw.{sound}.mp3" }, 1);
+    }
+
     public Task PlayAsync(SoundItem sound, double volume)
     {
         ArgumentNullException.ThrowIfNull(sound);

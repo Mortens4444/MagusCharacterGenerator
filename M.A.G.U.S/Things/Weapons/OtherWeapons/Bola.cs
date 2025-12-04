@@ -17,9 +17,9 @@ public class Bola : Weapon, IMeleeWeapon
 
     public override Money Price => new(0, 0, 40);
 
-    [DiceThrow(ThrowType._1K5)]
+    [DiceThrow(ThrowType._1D5)]
     [DiceThrowModifier(1)]
-    public byte GetDamage() => (byte)(DiceThrow._1K5() + 1);
+    public byte GetDamage() => (byte)(DiceThrow._1D5() + 1);
 
     public override string Description => "A throwing weapon consisting of weights connected by cords. Thrown to entangle the legs of running beasts or men, bringing them down swiftly.";
 }

@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFrameworks>net9.0-android;net9.0-ios;net9.0-maccatalyst</TargetFrameworks>
     <TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('windows'))">$(TargetFrameworks);net9.0-windows10.0.19041.0</TargetFrameworks>
@@ -23,7 +23,7 @@
     <ApplicationId>com.mortens.MAGUS.Assistant</ApplicationId>
     <!-- Versions -->
     <MajorVersion>1</MajorVersion>
-    <MinorVersion>16</MinorVersion>
+    <MinorVersion>17</MinorVersion>
     <BuildNumber>0</BuildNumber>
     <PatchNumber>0</PatchNumber>
     <FileVersion>$(MajorVersion).$(MinorVersion).$(BuildNumber).$(PatchNumber)</FileVersion>
@@ -150,10 +150,13 @@
     <None Remove="Resources\Images\Bestiary\giant_spider.png" />
     <None Remove="Resources\Images\Bestiary\goblin.png" />
     <None Remove="Resources\Images\Bestiary\golem.png" />
+    <None Remove="Resources\Images\Bestiary\gray_dolpine.png" />
     <None Remove="Resources\Images\Bestiary\heavy_armored_hourse.png" />
+    <None Remove="Resources\Images\Bestiary\killer_whale.png" />
     <None Remove="Resources\Images\Bestiary\light_armored_hourse.png" />
     <None Remove="Resources\Images\Bestiary\lizard_wizard.png" />
     <None Remove="Resources\Images\Bestiary\mummy.png" />
+    <None Remove="Resources\Images\Bestiary\narwhal.png" />
     <None Remove="Resources\Images\Bestiary\orc.png" />
     <None Remove="Resources\Images\Bestiary\orc_2.png" />
     <None Remove="Resources\Images\Bestiary\panther.png" />
@@ -214,8 +217,11 @@
     <MauiImage Include="Resources\Images\Bestiary\golem.png" />
     <MauiImage Include="Resources\Images\Animals\heavy_war_horse.png" />
     <MauiImage Include="Resources\Images\Animals\light_war_horse.png" />
+    <MauiImage Include="Resources\Images\Bestiary\gray_dolpine.png" />
+    <MauiImage Include="Resources\Images\Bestiary\killer_whale.png" />
     <MauiImage Include="Resources\Images\Bestiary\lizard_wizard.png" />
     <MauiImage Include="Resources\Images\Bestiary\mummy.png" />
+    <MauiImage Include="Resources\Images\Bestiary\narwhal.png" />
     <MauiImage Include="Resources\Images\Bestiary\orc.png" />
     <MauiImage Include="Resources\Images\Bestiary\orc_2.png" />
     <MauiImage Include="Resources\Images\Bestiary\panther.png" />
@@ -307,7 +313,7 @@
     <PackageReference Include="Microsoft.Maui.Graphics" Version="9.0.120" />
     <PackageReference Include="Microsoft.Maui.Graphics.Skia" Version="9.0.120" />
     <PackageReference Include="Mtf.Maui.Controls" Version="2.0.44" />
-    <PackageReference Include="Mtf.MAUI.LanguageService" Version="1.0.64" />
+    <PackageReference Include="Mtf.MAUI.LanguageService" Version="1.0.65" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.4" />
     <PackageReference Include="Plugin.Maui.Audio" Version="4.0.0" />
     <PackageReference Include="sqlite-net-pcl" Version="1.9.172" />
@@ -384,6 +390,9 @@
     <MauiXaml Update="Views\RacesPage.xaml">
       <Generator>MSBuild:Compile</Generator>
     </MauiXaml>
+    <MauiXaml Update="Views\RollFormulaPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </MauiXaml>
     <MauiXaml Update="Views\SearchListPage.xaml">
       <Generator>MSBuild:Compile</Generator>
     </MauiXaml>
@@ -433,12 +442,10 @@
     <ItemGroup>
       <AllImages Include="@(MauiImage)" />
     </ItemGroup>
-
     <PropertyGroup>
       <ImageManifestPath>$(ProjectDir)Resources\Images\images_manifest.txt</ImageManifestPath>
     </PropertyGroup>
-
     <!--<WriteLinesToFile File="$(ImageManifestPath)" Lines="@(AllImages->'%(RelativeDir)%(Filename)%(Extension)')" Overwrite="true" Encoding="UTF-8" />-->
-    <WriteLinesToFile File="$(ImageManifestPath)" Lines="@(AllImages->'%(Filename)%(Extension)')" Overwrite="true" Encoding="UTF-8" />
+    <WriteLinesToFile File="$(ImageManifestPath)" Lines="@(AllImages-&gt;'%(Filename)%(Extension)')" Overwrite="true" Encoding="UTF-8" />
   </Target>
 </Project>

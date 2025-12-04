@@ -17,9 +17,9 @@ public class Sequor : Weapon, IMeleeWeapon
 
     public override Money Price => new(1, 3);
 
-    [DiceThrow(ThrowType._1K6)]
+    [DiceThrow(ThrowType._1D6)]
     [DiceThrowModifier(2)]
-    public byte GetDamage() => (byte)(DiceThrow._1K6() + 2);
+    public byte GetDamage() => (byte)(DiceThrow._1D6() + 2);
 
     public override string Description => "A standard, efficient cutting sword used by legionaries and professional soldiers, designed for reliable, steady performance in formation combat.";
 }

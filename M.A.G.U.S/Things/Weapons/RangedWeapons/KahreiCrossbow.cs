@@ -17,8 +17,8 @@ public class KahreiCrossbow : Weapon, IRangedWeapon
 
     public override Money Price => new(80);
 
-    [DiceThrow(ThrowType._1K3)]
-    public byte GetDamage() => (byte)DiceThrow._1K3_RangedAttack();
+    [DiceThrow(ThrowType._1D3)]
+    public byte GetDamage() => (byte)DiceThrow._1D3_RangedAttack();
 
     public override string Name => "Kahrei crossbow";
 

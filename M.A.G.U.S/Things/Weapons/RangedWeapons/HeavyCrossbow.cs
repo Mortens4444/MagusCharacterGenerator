@@ -17,9 +17,9 @@ public class HeavyCrossbow : Weapon, IRangedWeapon
 
     public override Money Price => new(12);
 
-    [DiceThrow(ThrowType._1K10)]
+    [DiceThrow(ThrowType._1D10)]
     [DiceThrowModifier(2)]
-    public byte GetDamage() => (byte)(DiceThrow._1K10_RangedAttack() + 2);
+    public byte GetDamage() => (byte)(DiceThrow._1D10_RangedAttack() + 2);
 
     public override string Name => "Heavy crossbow";
 

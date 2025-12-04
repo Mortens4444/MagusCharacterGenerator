@@ -14,9 +14,7 @@ public sealed class Narwhal : Creature
         Speed = 220;
         AttackValue = 150;
         DefenseValue = 170;
-        MaxHealthPoints = 24;
         HealthPoints = 24;
-        MaxPainTolerancePoints = 32;
         PainTolerancePoints = 32;
         AstralMagicResistance = 0;
         MentalMagicResistance = 0;
@@ -24,10 +22,10 @@ public sealed class Narwhal : Creature
         ExperiencePoints = 580;
     }
 
-    [DiceThrow(ThrowType._2K10)]
-    public override byte GetDamage() => (byte)(DiceThrow._2K10());
+    [DiceThrow(ThrowType._2D10)]
+    public override byte GetDamage() => (byte)(DiceThrow._2D10());
 
 
-    [DiceThrow(ThrowType._1K6)]
-    public override byte GetNumberAppearing() => (byte)DiceThrow._1K6();
+    [DiceThrow(ThrowType._1D6)]
+    public override byte GetNumberAppearing() => (byte)DiceThrow._1D6();
 }

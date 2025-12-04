@@ -17,8 +17,8 @@ public class ParryingDagger : Weapon, IMeleeWeapon
 
     public override Money Price => new(0, 2);
 
-    [DiceThrow(ThrowType._1K6)]
-    public byte GetDamage() => (byte)DiceThrow._1K6();
+    [DiceThrow(ThrowType._1D6)]
+    public byte GetDamage() => (byte)DiceThrow._1D6();
 
     public override string Name => "Parrying dagger";
 

@@ -17,8 +17,8 @@ public class BattleAx : Weapon, IMeleeWeapon
 
     public override Money Price => new(0, 8);
 
-    [DiceThrow(ThrowType._1K10)]
-    public byte GetDamage() => (byte)DiceThrow._1K10();
+    [DiceThrow(ThrowType._1D10)]
+    public byte GetDamage() => (byte)DiceThrow._1D10();
 
     public override string Name => "Battle pick";
 

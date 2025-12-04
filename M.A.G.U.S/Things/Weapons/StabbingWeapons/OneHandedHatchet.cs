@@ -17,8 +17,8 @@ public class OneHandedHatchet : Weapon, IMeleeWeapon
 
     public override Money Price => new(0, 6);
 
-    [DiceThrow(ThrowType._1K10)]
-    public byte GetDamage() => (byte)DiceThrow._1K10();
+    [DiceThrow(ThrowType._1D10)]
+    public byte GetDamage() => (byte)DiceThrow._1D10();
 
     public override string Name => "One-handed axe";
 

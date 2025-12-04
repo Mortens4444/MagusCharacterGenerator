@@ -9,10 +9,6 @@ internal partial class DiceRollPage : NotifierPage
 {
     private DiceRollViewModel ViewModel => BindingContext as DiceRollViewModel;
 
-    private DateTime lastShake = DateTime.MinValue;
-    private const double ShakeThresholdG = 2.2;
-    private const int ShakeDebounceMs = 800;
-
     public DiceRollPage(DiceRollViewModel viewModel)
     {
         InitializeComponent();
@@ -27,80 +23,27 @@ internal partial class DiceRollPage : NotifierPage
     {
         base.OnAppearing();
         Translator.Translate(this);
-
-#if ANDROID
         try
         {
-            Accelerometer.ReadingChanged += OnAccelerometerReadingChanged;
-            if (!Accelerometer.IsMonitoring)
-            {
-                Accelerometer.Start(SensorSpeed.UI);
-            }
+            ViewModel.ShakeService.Start();
         }
         catch (Exception ex)
         {
             WeakReferenceMessenger.Default.Send(new ShowErrorMessage(ex));
         }
-#endif
     }
 
     protected override void OnDisappearing()
     {
         base.OnDisappearing();
-#if ANDROID
+
         try
         {
-            Accelerometer.ReadingChanged -= OnAccelerometerReadingChanged;
-            if (Accelerometer.IsMonitoring)
-            {
-                Accelerometer.Stop();
-            }
+            ViewModel.ShakeService.Stop();
         }
         catch (Exception ex)
         {
             WeakReferenceMessenger.Default.Send(new ShowErrorMessage(ex));
-        }
-#endif
-    }
-
-    private void OnAccelerometerReadingChanged(object? sender, AccelerometerChangedEventArgs e)
-    {
-        try
-        {
-            var ax = e.Reading.Acceleration.X;
-            var ay = e.Reading.Acceleration.Y;
-            var az = e.Reading.Acceleration.Z;
-
-            var total = Math.Sqrt(ax * ax + ay * ay + az * az);
-
-            if (total > ShakeThresholdG)
-            {
-                var now = DateTime.UtcNow;
-                if ((now - lastShake).TotalMilliseconds > ShakeDebounceMs)
-                {
-                    lastShake = now;
-                    MainThread.BeginInvokeOnMainThread(() => TriggerRollFromShake());
-                }
-            }
-        }
-        catch (Exception ex)
-        {
-            WeakReferenceMessenger.Default.Send(new ShowErrorMessage(ex));
-        }
-    }
-
-    private void TriggerRollFromShake()
-    {
-        try
-        {
-            if (ViewModel?.RollCommand != null && ViewModel.RollCommand.CanExecute(null))
-            {
-                ViewModel.RollCommand.Execute(null);
-            }
-        }
-        catch (Exception ex)
-        {
-            WeakReferenceMessenger.Default.Send(new ShowErrorMessage(ex.Message));
         }
     }
 
@@ -108,7 +51,7 @@ internal partial class DiceRollPage : NotifierPage
     {
         try
         {
-            await PlayDiceAnimationAsync();
+            await PlayDiceAnimationAsync().ConfigureAwait(false);
             tcs.SetResult(true);
         }
         catch (Exception ex)
@@ -121,13 +64,13 @@ internal partial class DiceRollPage : NotifierPage
     {
         try
         {
-            await DiceImage.RotateTo(360, 500);
+            await DiceImage.RotateTo(360, 500).ConfigureAwait(true);
             DiceImage.Rotation = 0;
-            await DiceImage.TranslateTo(-10, 0, 50);
-            await DiceImage.TranslateTo(10, 0, 50);
-            await DiceImage.TranslateTo(-6, 0, 40);
-            await DiceImage.TranslateTo(6, 0, 40);
-            await DiceImage.TranslateTo(0, 0, 30);
+            await DiceImage.TranslateTo(-10, 0, 50).ConfigureAwait(true);
+            await DiceImage.TranslateTo(10, 0, 50).ConfigureAwait(true);
+            await DiceImage.TranslateTo(-6, 0, 40).ConfigureAwait(true);
+            await DiceImage.TranslateTo(6, 0, 40).ConfigureAwait(true);
+            await DiceImage.TranslateTo(0, 0, 30).ConfigureAwait(true);
         }
         catch (Exception ex)
         {

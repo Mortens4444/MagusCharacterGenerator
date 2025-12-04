@@ -17,9 +17,9 @@ public class ChainMace : Weapon, IMeleeWeapon
 
     public override Money Price => new(1, 2);
 
-    [DiceThrow(ThrowType._1K6)]
+    [DiceThrow(ThrowType._1D6)]
     [DiceThrowModifier(3)]
-    public byte GetDamage() => (byte)(DiceThrow._1K6() + 3);
+    public byte GetDamage() => (byte)(DiceThrow._1D6() + 3);
 
     public override string Name => "Flail with chain";
 

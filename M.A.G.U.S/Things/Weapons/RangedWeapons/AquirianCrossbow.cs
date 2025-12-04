@@ -17,8 +17,8 @@ public class AquirianCrossbow : Weapon, IRangedWeapon
 
     public override Money Price => new(1000);
 
-    [DiceThrow(ThrowType._1K5)]
-    public byte GetDamage() => (byte)DiceThrow._1K5_RangedAttack();
+    [DiceThrow(ThrowType._1D5)]
+    public byte GetDamage() => (byte)DiceThrow._1D5_RangedAttack();
 
     public override string Name => "Aquir crossbow";
 

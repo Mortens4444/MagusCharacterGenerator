@@ -17,9 +17,9 @@ public class LightCrossbow : Weapon, IRangedWeapon
 
     public override Money Price => new(8);
 
-    [DiceThrow(ThrowType._1K6)]
+    [DiceThrow(ThrowType._1D6)]
     [DiceThrowModifier(1)]
-    public byte GetDamage() => (byte)(DiceThrow._1K6_RangedAttack() + 1);
+    public byte GetDamage() => (byte)(DiceThrow._1D6_RangedAttack() + 1);
 
     public override string Name => "Light crossbow";
 

@@ -1,27 +1,56 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
+using CommunityToolkit.Mvvm.Messaging;
+using M.A.G.U.S.Assistant.Interfaces;
 using M.A.G.U.S.Bestiary;
 using M.A.G.U.S.Enums;
+using M.A.G.U.S.GameSystem.Attributes;
 using M.A.G.U.S.Utils;
 using Mtf.Extensions;
+using Mtf.Extensions.Services;
 using Mtf.LanguageService;
+using Mtf.Maui.Controls.Models;
+using System.Globalization;
+using System.Reflection;
 using System.Windows.Input;
 
 namespace M.A.G.U.S.Assistant.ViewModels;
 
 internal partial class CreatureDetailsViewModel : ObservableObject
 {
+    private readonly ISoundPlayer soundPlayer;
+
     public Creature Creature { get; init; }
 
     public ICommand InitiateCommand { get; }
     public ICommand AttackCommand { get; }
     public ICommand RollDamageCommand { get; }
 
-    public CreatureDetailsViewModel() { }
-
-    public CreatureDetailsViewModel(Creature creature)
+    public CreatureDetailsViewModel(ISoundPlayer soundPlayer, Creature creature)
     {
+        this.soundPlayer = soundPlayer;
         Creature = creature ?? throw new ArgumentNullException(nameof(creature));
-        NumberAppearing = creature.GetNumberAppearing();
+
+        var method = creature.GetType().GetMethod(nameof(creature.GetNumberAppearing));
+        var throwType = method?.GetCustomAttribute<DiceThrowAttribute>()?.DiceThrowType;
+        var modifier = method?.GetCustomAttribute<DiceThrowModifierAttribute>()?.Modifier;
+
+        var rolled = creature.GetNumberAppearing();
+
+        if (throwType != null)
+        {
+            var desc = Lng.Elem(throwType.Value.GetDescription());
+            var modText = modifier.HasValue && modifier.Value != 0
+                ? (modifier.Value > 0 ? $" + {modifier.Value}" : $" - {Math.Abs(modifier.Value)}")
+                : String.Empty;
+
+            NumberAppearing = $"{desc}{modText} = {rolled.ToString(CultureInfo.InvariantCulture)}";
+        }
+        else
+        {
+            NumberAppearing = rolled.ToString(CultureInfo.InvariantCulture);
+        }
+
         InitiateCommand = new Command(OnInitiate);
         AttackCommand = new Command(OnAttack);
         RollDamageCommand = new Command(OnRollDamage);
@@ -30,21 +59,21 @@ internal partial class CreatureDetailsViewModel : ObservableObject
 
     public string Occurrence => Creature.Occurrence.ToString();
     public string Intelligence => Creature.Intelligence.ToString();
-    public Enums.Size Size => Creature.Size;
+    public M.A.G.U.S.Enums.Size Size => Creature.Size;
     public int Speed => Creature.Speed;
     public int AttackValue => Creature.AttackValue;
     public int DefenseValue => Creature.DefenseValue;
     public int InitiatingValue => Creature.InitiatingValue;
-    public int MaxHealthPoints => Creature.MaxHealthPoints;
-    public int HealthPoints => Creature.HealthPoints;
-    public int MaxPainTolerancePoints => Creature.MaxPainTolerancePoints;
-    public int PainTolerancePoints => Creature.PainTolerancePoints;
+    public byte? HealthPoints => Creature.HealthPoints;
+    public byte? PainTolerancePoints => Creature.PainTolerancePoints;
     public byte? PoisonResistance => Creature.PoisonResistance;
     public uint ExperiencePoints => Creature.ExperiencePoints;
     public double AttacksPerRound => Creature.AttacksPerRound;
+    public string Image => Creature.Images.Length - 1 != 0 ? Creature.Images[RandomProvider.GetSecureRandomInt(0, Creature.Images.Length)] : Creature.Images[0];
+    public string Sound => Creature.Sounds.Length - 1 != 0 ? Creature.Sounds[RandomProvider.GetSecureRandomInt(0, Creature.Sounds.Length)] : Creature.Sounds[0];
 
-    private int numberAppearing;
-    public int NumberAppearing
+    private string numberAppearing;
+    public string NumberAppearing
     {
         get => numberAppearing;
         set => SetProperty(ref numberAppearing, value);
@@ -70,6 +99,24 @@ internal partial class CreatureDetailsViewModel : ObservableObject
     {
         get => lastAction;
         set => SetProperty(ref lastAction, value);
+    }
+
+    [RelayCommand]
+    public async Task PlaySoundAsync()
+    {
+        try
+        {
+            if (!String.IsNullOrWhiteSpace(Sound))
+            {
+                await soundPlayer.PlayAsync(Sound).ConfigureAwait(false);
+            }
+        }
+        catch (Exception ex)
+        {
+#if DEBUG
+            WeakReferenceMessenger.Default.Send(new ShowErrorMessage(ex));
+#endif
+        }
     }
 
     private void OnInitiate()
@@ -109,7 +156,7 @@ internal partial class CreatureDetailsViewModel : ObservableObject
         try
         {
             var dmg = Creature.GetDamage();
-            var final = (byte)(hitLocation == Enums.PlaceOfAttack.Head ? dmg * 2 : dmg);
+            var final = (byte)(hitLocation == M.A.G.U.S.Enums.PlaceOfAttack.Head ? dmg * 2 : dmg);
             LastActionName = Lng.Elem("Damage");
             LastAction = final.ToString();
         }

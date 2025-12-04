@@ -66,8 +66,13 @@ internal partial class NotifierPage : ContentPage
                                  $"Method: {callingMethod}\n" +
                                  $"Line: {lineNumber}\n\n" +
                                  $"Full Stack Trace:\n{exception.StackTrace}";
-            await Clipboard.SetTextAsync(fullMessage).ConfigureAwait(false);
+            try
+            {
+                await Clipboard.SetTextAsync(fullMessage).ConfigureAwait(false);
+            }
+            catch { }
             await DisplayAlert(title, fullMessage, "OK").ConfigureAwait(false);
+            return;
         }
 
         await DisplayAlert("Error", exceptionDetails, "OK").ConfigureAwait(false);

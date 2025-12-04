@@ -14,9 +14,7 @@ public sealed class KillerWhale : Creature
         Speed = 120;
         AttackValue = 95;
         DefenseValue = 70;
-        MaxHealthPoints = 30;
         HealthPoints = 30;
-        MaxPainTolerancePoints = 68;
         PainTolerancePoints = 68;
         AstralMagicResistance = 0;
         MentalMagicResistance = 0;
@@ -26,10 +24,10 @@ public sealed class KillerWhale : Creature
 
     public override string Name => "Killer whale";
 
-    [DiceThrow(ThrowType._3K10)]
-    public override byte GetDamage() => (byte)DiceThrow._3K10();
+    [DiceThrow(ThrowType._3D10)]
+    public override byte GetDamage() => (byte)DiceThrow._3D10();
 
 
-    [DiceThrow(ThrowType._1K6)]
-    public override byte GetNumberAppearing() => (byte)DiceThrow._1K6();
+    [DiceThrow(ThrowType._1D6)]
+    public override byte GetNumberAppearing() => (byte)DiceThrow._1D6();
 }

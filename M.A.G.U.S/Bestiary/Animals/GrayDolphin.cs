@@ -15,9 +15,7 @@ public sealed class GrayDolphin : Creature
         AttackValue = 40;
         DefenseValue = 80;
         InitiatingValue = 20;
-        MaxHealthPoints = 15;
         HealthPoints = 15;
-        MaxPainTolerancePoints = 30;
         PainTolerancePoints = 30;
         AstralMagicResistance = 3;
         MentalMagicResistance = 3;
@@ -28,10 +26,10 @@ public sealed class GrayDolphin : Creature
 
     public override string Name => "Gray dolphin";
 
-    [DiceThrow(ThrowType._1K6)]
+    [DiceThrow(ThrowType._1D6)]
     [DiceThrowModifier(2)]
-    public override byte GetDamage() => (byte)(DiceThrow._1K6() + 2);
+    public override byte GetDamage() => (byte)(DiceThrow._1D6() + 2);
 
-    [DiceThrow(ThrowType._2K6)]
-    public override byte GetNumberAppearing() => (byte)DiceThrow._2K6();
+    [DiceThrow(ThrowType._2D6)]
+    public override byte GetNumberAppearing() => (byte)DiceThrow._2D6();
 }

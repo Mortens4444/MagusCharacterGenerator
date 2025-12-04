@@ -24,9 +24,9 @@ public class Draquon : Race
 
     public override List<PercentQualification> PercentQualifications =>
     [
-        new Climbing((byte)((DiceThrow._1K6() + 4) * 10)),
-        new Falling((byte)((DiceThrow._1K3() + 3) * 10)),
-        new Hiding((byte)((DiceThrow._1K5() + 2) * 10)),
+        new Climbing((byte)((DiceThrow._1D6() + 4) * 10)),
+        new Falling((byte)((DiceThrow._1D3() + 3) * 10)),
+        new Hiding((byte)((DiceThrow._1D5() + 2) * 10)),
     ];
 
     public override QualificationList Qualifications =>

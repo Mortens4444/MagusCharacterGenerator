@@ -17,9 +17,9 @@ public class Longbow : Weapon, IRangedWeapon
 
     public override Money Price => new(3, 5);
 
-    [DiceThrow(ThrowType._1K6)]
+    [DiceThrow(ThrowType._1D6)]
     [DiceThrowModifier(1)]
-    public byte GetDamage() => (byte)(DiceThrow._1K6_RangedAttack() + 1);
+    public byte GetDamage() => (byte)(DiceThrow._1D6_RangedAttack() + 1);
 
     public override string Description => "A tall bow made of a single stave of yew or ash. Requires great strength and practice to master, but fires arrows with devastating range and power.";
 }

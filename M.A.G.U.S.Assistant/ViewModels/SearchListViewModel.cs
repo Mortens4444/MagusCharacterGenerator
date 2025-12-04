@@ -1,5 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.Messaging;
 using M.A.G.U.S.Assistant.CustomEventArgs;
+using M.A.G.U.S.Assistant.Interfaces;
 using M.A.G.U.S.Assistant.Models;
 using M.A.G.U.S.Assistant.Views;
 using M.A.G.U.S.Bestiary;
@@ -27,9 +28,11 @@ internal partial class SearchListViewModel : INotifyPropertyChanged
     private CancellationTokenSource? filterCancellationTokenSource;
 
     private void OnPropertyChanged(string name) => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
+    private ISoundPlayer soundPlayer;
 
-    public SearchListViewModel()
+    public SearchListViewModel(ISoundPlayer soundPlayer)
     {
+        this.soundPlayer = soundPlayer;
         SelectCommand = new RelayCommand(o =>
         {
             if (o is DisplayItem di)
@@ -266,7 +269,7 @@ internal partial class SearchListViewModel : INotifyPropertyChanged
                 Page page;
                 if (item.Source is Creature creature)
                 {
-                    page = new CreatureDetailsPage(new CreatureDetailsViewModel(creature));
+                    page = new CreatureDetailsPage(new CreatureDetailsViewModel(soundPlayer, creature));
                 }
                 else if (item.Source is Thing thing)
                 {
@@ -284,7 +287,7 @@ internal partial class SearchListViewModel : INotifyPropertyChanged
         }
         catch (Exception ex)
         {
-            WeakReferenceMessenger.Default.Send(new ShowErrorMessage(ex.Message));
+            WeakReferenceMessenger.Default.Send(new ShowErrorMessage(ex));
         }
     }
 
@@ -299,7 +302,7 @@ internal partial class SearchListViewModel : INotifyPropertyChanged
         }
         catch (Exception ex)
         {
-            WeakReferenceMessenger.Default.Send(new ShowErrorMessage(ex.Message));
+            WeakReferenceMessenger.Default.Send(new ShowErrorMessage(ex));
         }
     }
 

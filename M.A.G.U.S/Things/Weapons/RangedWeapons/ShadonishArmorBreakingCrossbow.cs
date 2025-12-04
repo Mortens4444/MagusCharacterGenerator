@@ -16,7 +16,7 @@ public class ShadonishArmorBreakingCrossbow : Weapon, IRangedWeapon
 
     public override Money Price => new(40);
 
-    public byte GetDamage() => (byte)DiceThrow._2K10_RangedAttack();
+    public byte GetDamage() => (byte)DiceThrow._2D10_RangedAttack();
 
     public override string Name => "Shadonian armor-piercing crossbow";
 

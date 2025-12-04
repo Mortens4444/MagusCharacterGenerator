@@ -21,52 +21,52 @@ public class Witch : Class, IClass, ILikeMagic
         GenerateSkills();
     }
 
-    [DiceThrow(ThrowType._3K6)]
+    [DiceThrow(ThrowType._3D6)]
     public override sbyte Strength { get; set; }
 
-    [DiceThrow(ThrowType._2K6)]
+    [DiceThrow(ThrowType._2D6)]
     [DiceThrowModifier(6)]
     public override sbyte Quickness { get; set; }
 
-    [DiceThrow(ThrowType._1K10)]
+    [DiceThrow(ThrowType._1D10)]
     [DiceThrowModifier(8)]
     public override sbyte Dexterity { get; set; }
 
-    [DiceThrow(ThrowType._3K6)]
+    [DiceThrow(ThrowType._3D6)]
     public override sbyte Stamina { get; set; }
 
-    [DiceThrow(ThrowType._2K6)]
+    [DiceThrow(ThrowType._2D6)]
     [DiceThrowModifier(6)]
     public override sbyte Health { get; set; }
 
-    [DiceThrow(ThrowType._1K6)]
+    [DiceThrow(ThrowType._1D6)]
     [DiceThrowModifier(14)]
     public override sbyte Beauty { get; set; }
 
-    [DiceThrow(ThrowType._2K6)]
+    [DiceThrow(ThrowType._2D6)]
     [DiceThrowModifier(6)]
     public override sbyte Intelligence { get; set; }
 
-    [DiceThrow(ThrowType._2K6)]
+    [DiceThrow(ThrowType._2D6)]
     [DiceThrowModifier(6)]
     public override sbyte Willpower { get; set; }
 
-    [DiceThrow(ThrowType._1K6)]
+    [DiceThrow(ThrowType._1D6)]
     [DiceThrowModifier(12)]
     public override sbyte Astral { get; set; }
 
-    [DiceThrow(ThrowType._2K6)]
+    [DiceThrow(ThrowType._2D6)]
     public override byte Gold { get; set; }
 
-    [DiceThrow(ThrowType._2K6)]
+    [DiceThrow(ThrowType._2D6)]
     [DiceThrowModifier(8)]
     public override sbyte Bravery { get; set; }
 
-    [DiceThrow(ThrowType._2K6)]
+    [DiceThrow(ThrowType._2D6)]
     [DiceThrowModifier(8)]
     public override sbyte Erudition { get; set; }
 
-    [DiceThrow(ThrowType._2K6)]
+    [DiceThrow(ThrowType._2D6)]
     [DiceThrowModifier(6)]
     public override sbyte Detection { get; set; }
 
@@ -123,6 +123,6 @@ public class Witch : Class, IClass, ILikeMagic
         new Witchcraft()
     ];
 
-    [DiceThrow(ThrowType._1K6)]
-    public override byte GetPainToleranceModifier() => (byte)DiceThrow._1K6();
+    [DiceThrow(ThrowType._1D6)]
+    public override byte GetPainToleranceModifier() => (byte)DiceThrow._1D6();
 }

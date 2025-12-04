@@ -27,17 +27,17 @@ public abstract class Creature
 
     public byte? PoisonResistance { get; protected set; }
 
-    public byte MaxHealthPoints { get; protected set; }
+    public byte? HealthPoints { get; protected set; }
 
-    public byte HealthPoints { get; protected set; }
-
-    public byte MaxPainTolerancePoints { get; protected set; }
-
-    public byte PainTolerancePoints { get; protected set; }
+    public byte? PainTolerancePoints { get; protected set; }
 
     public uint ExperiencePoints { get; protected set; }
 
     public double AttacksPerRound { get; protected set; } = 1;
+
+    public virtual string[] Images => [ $"{Name.Replace(" ", "_").ToLower()}.png" ];
+
+    public virtual string[] Sounds => [ $"{Name.Replace(" ", "_").ToLower()}" ];
 
     public Alignment? Alignment { get; set; }
 
@@ -49,13 +49,13 @@ public abstract class Creature
 
     public int GetInitiate()
     {
-        var roll = DiceThrow._1K10();
+        var roll = DiceThrow._1D10();
         return InitiatingValue + roll;
     }
     
     public (AttackImpact impact, int value) GetAttack()
     {
-        var roll = DiceThrow._1K100();
+        var roll = DiceThrow._1D100();
         var impact = roll == 100 ? AttackImpact.Critical : roll == 1 ? AttackImpact.Fatal : AttackImpact.Normal;
         return (impact, AttackValue + roll);
     }

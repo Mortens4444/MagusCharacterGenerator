@@ -17,9 +17,9 @@ public class SlanDagger : Weapon, IMeleeWeapon
 
     public override Money Price => new(70);
 
-    [DiceThrow(ThrowType._1K6)]
+    [DiceThrow(ThrowType._1D6)]
     [DiceThrowModifier(2)]
-    public byte GetDamage() => (byte)(DiceThrow._1K6() + 2);
+    public byte GetDamage() => (byte)(DiceThrow._1D6() + 2);
 
     public override string Name => "Slan dagger";
 

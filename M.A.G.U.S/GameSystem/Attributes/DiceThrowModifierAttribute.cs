@@ -1,11 +1,7 @@
 ﻿namespace M.A.G.U.S.GameSystem.Attributes;
 
-public class DiceThrowModifierAttribute : Attribute
+[AttributeUsage(AttributeTargets.Property | AttributeTargets.Method)]
+public class DiceThrowModifierAttribute(byte modifier) : Attribute
 {
-    public byte Modifier { get; }
-
-    public DiceThrowModifierAttribute(byte modifier)
-    {
-        Modifier = modifier;
-    }
+    public byte Modifier { get; } = modifier;
 }

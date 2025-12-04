@@ -17,8 +17,8 @@ public class NomadBow : Weapon, IRangedWeapon
 
     public override Money Price => new(25);
 
-    [DiceThrow(ThrowType._1K10)]
-    public byte GetDamage() => (byte)DiceThrow._1K10_RangedAttack();
+    [DiceThrow(ThrowType._1D10)]
+    public byte GetDamage() => (byte)DiceThrow._1D10_RangedAttack();
 
     public override string Name => "Recurve bow";
 

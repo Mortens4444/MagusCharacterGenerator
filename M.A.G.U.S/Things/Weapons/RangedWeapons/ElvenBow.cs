@@ -16,7 +16,7 @@ public class ElvenBow : Weapon, IRangedWeapon
 
     public override Money Price => new(120);
 
-    public byte GetDamage() => (byte)DiceThrow._2K6_RangedAttack();
+    public byte GetDamage() => (byte)DiceThrow._2D6_RangedAttack();
 
     public override string Name => "Elven bow";
 

@@ -18,8 +18,8 @@ public class MediumShield : Shield
 
     public override Money Price => new(1, 6);
 
-    [DiceThrow(ThrowType._1K6)]
-    public byte GetDamage() => (byte)DiceThrow._1K6();
+    [DiceThrow(ThrowType._1D6)]
+    public byte GetDamage() => (byte)DiceThrow._1D6();
 
     public override string Name => "Medium shield";
 

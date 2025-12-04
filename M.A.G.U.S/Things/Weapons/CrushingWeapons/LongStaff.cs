@@ -17,8 +17,8 @@ public class LongStaff : Weapon, IMeleeWeapon
 
     public override Money Price => new(0, 0, 50);
 
-    [DiceThrow(ThrowType._1K5)]
-    public byte GetDamage() => (byte)DiceThrow._1K5();
+    [DiceThrow(ThrowType._1D5)]
+    public byte GetDamage() => (byte)DiceThrow._1D5();
 
     public override string Name => "Quarterstaff";
 

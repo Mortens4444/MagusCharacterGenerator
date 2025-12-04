@@ -17,8 +17,8 @@ public class SlanStar : Weapon, IMeleeWeapon
 
     public override Money Price => new(0, 0, 40);
 
-    [DiceThrow(ThrowType._1K3)]
-    public byte GetDamage() => (byte)DiceThrow._1K3();
+    [DiceThrow(ThrowType._1D3)]
+    public byte GetDamage() => (byte)DiceThrow._1D3();
 
     public override string Name => "Slan star";
 

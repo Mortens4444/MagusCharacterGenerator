@@ -9,7 +9,7 @@ public static class HitLocationSelector
 
     public static PlaceOfAttack Get()
     {
-        var result = diceThrow._1K9();
+        var result = diceThrow._1D9();
         return result switch
         {
             1 or 2 => PlaceOfAttack.WeaponWieldingArm,

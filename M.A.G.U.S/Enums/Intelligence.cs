@@ -2,6 +2,7 @@
 
 public enum Intelligence
 {
+    None,
     Animal,
     Low,
     Average,
