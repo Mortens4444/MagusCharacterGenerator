@@ -7,11 +7,11 @@ public class FeatheredMace : Weapon, IMeleeWeapon
 {
     public double AttacksPerRound => 1;
 
-    public byte InitiatingValue => 7;
+    public int InitiatingValue => 7;
 
-    public byte AttackingValue => 12;
+    public int AttackingValue => 12;
 
-    public byte DefendingValue => 13;
+    public int DefendingValue => 13;
 
     public override double Weight => 2;
 
@@ -19,7 +19,7 @@ public class FeatheredMace : Weapon, IMeleeWeapon
 
     [DiceThrow(ThrowType._1D6)]
     [DiceThrowModifier(1)]
-    public byte GetDamage() => (byte)(DiceThrow._1D6() + 1);
+    public override int GetDamage() => DiceThrow._1D6() + 1;
 
     public override string Name => "Flail (thresher)";
 

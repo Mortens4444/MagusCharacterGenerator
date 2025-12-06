@@ -2,7 +2,7 @@
 
 public class SummonAirElemental : Summon
 {
-    public byte RecallDurationInDays => 3;
+    public int RecallDurationInDays => 3;
 
     override public string Name => "Summon air elemental";
 }

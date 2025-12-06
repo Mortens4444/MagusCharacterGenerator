@@ -2,22 +2,22 @@
 
 public static class AttributeUtils
 {
-	public static short GetPropertyShortValue(this object instance, string propertyName)
+	public static int GetIntPropertyValue(this object instance, string propertyName)
 	{
 		var value = instance.GetPropertyValue(propertyName);
-		return value == null ? (short)0 : (short)value;
+		return value == null ? 0 : (int)value;
 	}
 
-	public static object GetPropertyValue(this object instance, string propertyName)
+	public static object? GetPropertyValue(this object instance, string propertyName)
 	{
 		var property = instance.GetType().GetProperty(propertyName);
-		return property == null ? null : property.GetValue(instance);
+		return property?.GetValue(instance);
 	}
 
-	public static object[] GetCustomAttributes(this object instance, string propertyName)
+	public static object[]? GetCustomAttributes(this object instance, string propertyName)
 	{
 		var property = instance.GetType().GetProperty(propertyName);
-		return property.GetCustomAttributes(false);
+		return property?.GetCustomAttributes(false);
 	}
 
 	public static T GetAttribute<T>(this object[] attributes)

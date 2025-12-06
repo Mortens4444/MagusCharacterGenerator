@@ -12,21 +12,21 @@ namespace M.A.G.U.S.Races;
 /// </summary>
 public class Draquon : Race
 {
-    public override sbyte Strength => 2;
+    public override int Strength => 2;
 
-    public override sbyte Stamina => 1;
+    public override int Stamina => 1;
 
-    public override sbyte Health => 1;
+    public override int Health => 1;
 
-    public override sbyte Beauty => -1;
+    public override int Beauty => -1;
 
-    public override sbyte Astral => -2;
+    public override int Astral => -2;
 
     public override List<PercentQualification> PercentQualifications =>
     [
-        new Climbing((byte)((DiceThrow._1D6() + 4) * 10)),
-        new Falling((byte)((DiceThrow._1D3() + 3) * 10)),
-        new Hiding((byte)((DiceThrow._1D5() + 2) * 10)),
+        new Climbing((DiceThrow._1D6() + 4) * 10),
+        new Falling((DiceThrow._1D3() + 3) * 10),
+        new Hiding((DiceThrow._1D5() + 2) * 10),
     ];
 
     public override QualificationList Qualifications =>

@@ -2,11 +2,11 @@
 
 namespace M.A.G.U.S.Qualifications.Specialities;
 
-public class NotTolerateStrongLight(byte maximumToleratedLightEnergy, sbyte modifierInStrongLight) : SpecialQualification
+public class NotTolerateStrongLight(int maximumToleratedLightEnergy, int modifierInStrongLight) : SpecialQualification
 {
-    public byte MaximumToleratedLightEnergy { get; } = maximumToleratedLightEnergy;
+    public int MaximumToleratedLightEnergy { get; } = maximumToleratedLightEnergy;
 
-    public sbyte ModifierInStrongLight { get; } = modifierInStrongLight;
+    public int ModifierInStrongLight { get; } = modifierInStrongLight;
 
     public override string Name => "Cannot tolerate strong light";
 }

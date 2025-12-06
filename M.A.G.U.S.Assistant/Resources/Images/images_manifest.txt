@@ -33,7 +33,7 @@ goblin.png
 golem.png
 heavy_war_horse.png
 light_war_horse.png
-gray_dolpine.png
+gray_dolpin.png
 killer_whale.png
 lizard_creature.png
 lizard_wizard.png

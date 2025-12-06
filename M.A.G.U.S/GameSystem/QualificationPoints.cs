@@ -5,15 +5,15 @@ namespace M.A.G.U.S.GameSystem;
 
 public static class QualificationPoints
 {
-    public static (ushort QualificationPoints, ushort PercentQualificationPoints) Calculate(Character character, ISettings? settings)
+    public static (int QualificationPoints, int PercentQualificationPoints) Calculate(Character character, ISettings? settings)
     {
-        ushort qualificationPoints = 0;
-        ushort percentQualificationPoints = 0;
+        int qualificationPoints = 0;
+        int percentQualificationPoints = 0;
         if (character.MultiClassMode == MultiClassMode.Normal_Or_SwitchedClass)
         {
             qualificationPoints = character.BaseClass.BaseQualificationPoints;
-            qualificationPoints += (ushort)MathHelper.GetAboveAverageValue(character.Intelligence);
-            qualificationPoints += (ushort)MathHelper.GetAboveAverageValue(character.Dexterity);
+            qualificationPoints += MathHelper.GetAboveAverageValue(character.Intelligence);
+            qualificationPoints += MathHelper.GetAboveAverageValue(character.Dexterity);
             if (character.BaseClass.AddQualificationPointsOnFirstLevel || (settings?.AddQualificationPointsOnFirstLevelForAllClass ?? true))
             {
                 qualificationPoints += character.BaseClass.QualificationPointsModifier;

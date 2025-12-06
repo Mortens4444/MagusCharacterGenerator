@@ -7,11 +7,11 @@ public class Broadsword : Weapon, IMeleeWeapon
 {
     public double AttacksPerRound => 1 / 2;
 
-    public byte InitiatingValue => 0;
+    public int InitiatingValue => 0;
 
-    public byte AttackingValue => 6;
+    public int AttackingValue => 6;
 
-    public byte DefendingValue => 2;
+    public int DefendingValue => 2;
 
     public override double Weight => 7;
 
@@ -19,7 +19,7 @@ public class Broadsword : Weapon, IMeleeWeapon
 
     [DiceThrow(ThrowType._3D6)]
     [DiceThrowModifier(2)]
-    public byte GetDamage() => (byte)(DiceThrow._3D6() + 2);
+    public override int GetDamage() => DiceThrow._3D6() + 2;
 
     override public string Name => "Sword, greatsword";
 

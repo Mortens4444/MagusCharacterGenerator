@@ -2,11 +2,11 @@
 
 public interface IFightModifier
 {
-    short InitiatingValue { get; }
+    int InitiatingValue { get; }
 
-    short AttackingValue { get; }
+    int AttackingValue { get; }
 
-    short DefendingValue { get; }
+    int DefendingValue { get; }
 
-    short AimingValue { get; }
+    int AimingValue { get; }
 }

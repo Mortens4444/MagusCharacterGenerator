@@ -2,9 +2,9 @@
 
 namespace M.A.G.U.S.Qualifications.Specialities;
 
-public class UndergroundMasters(byte deviationInMeters) : SpecialQualification
+public class UndergroundMasters(int deviationInMeters) : SpecialQualification
 {
-    public byte DeviationInMeters { get; } = deviationInMeters;
+    public int DeviationInMeters { get; } = deviationInMeters;
 
     public override string Name => "Masters of the underground";
 }

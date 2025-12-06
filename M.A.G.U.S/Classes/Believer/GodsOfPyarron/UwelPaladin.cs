@@ -10,7 +10,7 @@ public class UwelPaladin : Paladin
 {
     public UwelPaladin() : base() { }
 
-    public UwelPaladin(byte level) : base(level)
+    public UwelPaladin(int level) : base(level)
     {
         GenerateSkills();
     }

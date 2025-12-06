@@ -9,7 +9,7 @@ public class LoreMagic : Sorcery
         ManaPoints = 10;
     }
 
-    public override ushort GetManaPointsModifier()
+    public override int GetManaPointsModifier()
     {
         return 0;
     }

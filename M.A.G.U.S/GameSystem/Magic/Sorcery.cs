@@ -4,9 +4,9 @@ namespace M.A.G.U.S.GameSystem.Magic;
 
 public abstract class Sorcery : SpecialQualification
 {
-    public ushort ManaPoints { get; set; }
+    public int ManaPoints { get; set; }
 
-    public virtual ushort GetManaPointsModifier()
+    public virtual int GetManaPointsModifier()
     {
         return ManaPoints;
     }

@@ -7,18 +7,18 @@ public class LightLance : Weapon, IMeleeWeapon
 {
     public double AttacksPerRound => 1;
 
-    public byte InitiatingValue => 2;
+    public int InitiatingValue => 2;
 
-    public byte AttackingValue => 11;
+    public int AttackingValue => 11;
 
-    public byte DefendingValue => 12;
+    public int DefendingValue => 12;
 
     public override double Weight => 2;
 
     public override Money Price => new(0, 9);
 
     [DiceThrow(ThrowType._1D10)]
-    public byte GetDamage() => (byte)(DiceThrow._1D10());
+    public override int GetDamage() => DiceThrow._1D10();
 
     override public string Name => "Light lance";
 

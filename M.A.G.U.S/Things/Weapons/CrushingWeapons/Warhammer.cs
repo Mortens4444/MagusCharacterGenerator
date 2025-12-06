@@ -7,11 +7,11 @@ public class Warhammer : Weapon, IMeleeWeapon
 {
     public double AttacksPerRound => 1;
 
-    public byte InitiatingValue => 5;
+    public int InitiatingValue => 5;
 
-    public byte AttackingValue => 10;
+    public int AttackingValue => 10;
 
-    public byte DefendingValue => 8;
+    public int DefendingValue => 8;
 
     public override double Weight => 3;
 
@@ -19,7 +19,7 @@ public class Warhammer : Weapon, IMeleeWeapon
 
     [DiceThrow(ThrowType._1D6)]
     [DiceThrowModifier(2)]
-    public byte GetDamage() => (byte)(DiceThrow._1D6() + 2);
+    public override int GetDamage() => DiceThrow._1D6() + 2;
 
     public override string Description => "A weapon designed to defeat armour, featuring a heavy blunt head for crushing and a long, slender spike on the reverse for piercing plates.";
 }

@@ -8,15 +8,15 @@ namespace M.A.G.U.S.Races;
 
 public class Elf : Race, IUseRangedWeapons
 {
-    public override sbyte Strength => -2;
+    public override int Strength => -2;
 
-    public override sbyte Quickness => 1;
+    public override int Quickness => 1;
 
-    public override sbyte Dexterity => 1;
+    public override int Dexterity => 1;
 
-    public override sbyte Stamina => -1;
+    public override int Stamina => -1;
 
-    public override sbyte Beauty => 1;
+    public override int Beauty => 1;
 
     public override QualificationList Qualifications =>
     [

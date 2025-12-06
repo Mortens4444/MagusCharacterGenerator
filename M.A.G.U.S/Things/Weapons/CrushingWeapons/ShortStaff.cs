@@ -3,22 +3,22 @@ using M.A.G.U.S.GameSystem.Valuables;
 
 namespace M.A.G.U.S.Things.Weapons.CrushingWeapons;
 
-public class Shortstaff : Weapon, IMeleeWeapon
+public class ShortStaff : Weapon, IMeleeWeapon
 {
     public double AttacksPerRound => 1;
 
-    public byte InitiatingValue => 9;
+    public int InitiatingValue => 9;
 
-    public byte AttackingValue => 9;
+    public int AttackingValue => 9;
 
-    public byte DefendingValue => 17;
+    public int DefendingValue => 17;
 
     public override double Weight => 0.7;
 
     public override Money Price => new(0, 0, 30);
 
     [DiceThrow(ThrowType._1D3)]
-    public byte GetDamage() => (byte)DiceThrow._1D3();
+    public override int GetDamage() => DiceThrow._1D3();
 
     public override string Name => "Short staff";
 

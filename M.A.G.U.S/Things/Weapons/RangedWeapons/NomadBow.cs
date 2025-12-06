@@ -7,18 +7,18 @@ public class NomadBow : Weapon, IRangedWeapon
 {
     public double AttacksPerRound => 2;
 
-    public byte InitiatingValue => 3;
+    public int InitiatingValue => 3;
 
-    public byte AimingValue => 8;
+    public int AimingValue => 8;
 
-    public ushort Distance => 180;
+    public int Distance => 180;
 
     public override double Weight => 0.7;
 
     public override Money Price => new(25);
 
-    [DiceThrow(ThrowType._1D10)]
-    public byte GetDamage() => (byte)DiceThrow._1D10_RangedAttack();
+    [DiceThrow(ThrowType._1D10_Ranged)]
+    public override int GetDamage() => DiceThrow._1D10_RangedAttack();
 
     public override string Name => "Recurve bow";
 

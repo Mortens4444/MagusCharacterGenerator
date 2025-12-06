@@ -5,17 +5,17 @@ namespace M.A.G.U.S.Races;
 
 public class CourtOrc : Race
 {
-    public override sbyte Strength => 2;
+    public override int Strength => 2;
 
-    public override sbyte Stamina => 1;
+    public override int Stamina => 1;
 
-    public override sbyte Health => 2;
+    public override int Health => 2;
 
-    public override sbyte Beauty => -3;
+    public override int Beauty => -3;
 
-    public override sbyte Intelligence => -1;
+    public override int Intelligence => -1;
 
-    public override sbyte Astral => -3;
+    public override int Astral => -3;
 
     public override SpecialQualificationList SpecialQualifications =>
     [

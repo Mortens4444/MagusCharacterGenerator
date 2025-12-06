@@ -2,11 +2,11 @@
 
 public class FightToGetHostage : IFightModifier
 {
-    public short InitiatingValue => -5;
+    public int InitiatingValue => -5;
 
-    public short AttackingValue => -5;
+    public int AttackingValue => -5;
 
-    public short DefendingValue => -15;
+    public int DefendingValue => -15;
 
-    public short AimingValue => 0;
+    public int AimingValue => 0;
 }

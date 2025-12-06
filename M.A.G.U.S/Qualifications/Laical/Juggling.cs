@@ -2,9 +2,9 @@
 
 namespace M.A.G.U.S.Qualifications.Laical;
 
-public class Juggling(QualificationLevel qualificationLevel = QualificationLevel.Base, byte level = 1) : Qualification(qualificationLevel, level)
+public class Juggling(QualificationLevel qualificationLevel = QualificationLevel.Base, int level = 1) : Qualification(qualificationLevel, level)
 {
-    public override byte QpToBaseQualification => 3;
+    public override int QpToBaseQualification => 3;
 
-    public override byte QpToMasterQualification => 10;
+    public override int QpToMasterQualification => 10;
 }

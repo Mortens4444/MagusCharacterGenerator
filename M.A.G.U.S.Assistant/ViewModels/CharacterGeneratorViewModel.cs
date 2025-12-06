@@ -19,7 +19,7 @@ internal partial class CharacterGeneratorViewModel : CharacterViewModel
     private readonly SettingsService settingsService;
     private readonly CharacterService characterService;
 
-    private byte baseClassLevel = 1;
+    private int baseClassLevel = 1;
 
     public CharacterGeneratorViewModel(SettingsService settingsService, CharacterService characterService)
     {
@@ -36,7 +36,7 @@ internal partial class CharacterGeneratorViewModel : CharacterViewModel
 
     public ObservableCollection<IClass?> AvailableClasses { get; } = [];
 
-    public byte BaseClassLevel
+    public int BaseClassLevel
     {
         get => baseClassLevel;
         set
@@ -202,7 +202,7 @@ internal partial class CharacterGeneratorViewModel : CharacterViewModel
         return null;
     }
 
-    private static IClass? InstanceClass(Type classType, byte level)
+    private static IClass? InstanceClass(Type classType, int level)
     {
         try
         {

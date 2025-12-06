@@ -5,13 +5,13 @@ namespace M.A.G.U.S.Races;
 
 public class Amund : Race
 {
-    public override sbyte Strength => 1;
+    public override int Strength => 1;
 
-    public override sbyte Stamina => 1;
+    public override int Stamina => 1;
 
-    public override sbyte Beauty => 3;
+    public override int Beauty => 3;
 
-    public override sbyte Astral => -1;
+    public override int Astral => -1;
 
     public override SpecialQualificationList SpecialQualifications =>
     [

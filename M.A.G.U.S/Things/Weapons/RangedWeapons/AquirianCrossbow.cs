@@ -7,18 +7,18 @@ public class AquirianCrossbow : Weapon, IRangedWeapon
 {
     public double AttacksPerRound => 2;
 
-    public byte InitiatingValue => 5;
+    public int InitiatingValue => 5;
 
-    public byte AimingValue => 18;
+    public int AimingValue => 18;
 
-    public ushort Distance => 35;
+    public int Distance => 35;
 
     public override double Weight => 2;
 
     public override Money Price => new(1000);
 
-    [DiceThrow(ThrowType._1D5)]
-    public byte GetDamage() => (byte)DiceThrow._1D5_RangedAttack();
+    [DiceThrow(ThrowType._1D5_Ranged)]
+    public override int GetDamage() => DiceThrow._1D5_RangedAttack();
 
     public override string Name => "Aquir crossbow";
 

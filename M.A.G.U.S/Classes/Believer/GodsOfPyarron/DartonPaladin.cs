@@ -11,7 +11,7 @@ public class DartonPaladin : Paladin
 {
     public DartonPaladin() : base() { }
 
-    public DartonPaladin(byte level) : base(level) { }
+    public DartonPaladin(int level) : base(level) { }
 
     public override QualificationList Qualifications
     {

@@ -10,21 +10,21 @@ namespace M.A.G.U.S.Races;
 /// </summary>
 public class WhiteOrc : Race
 {
-    public override sbyte Strength => 3;
+    public override int Strength => 3;
 
-    public override sbyte Stamina => 1;
+    public override int Stamina => 1;
 
-    public override sbyte Dexterity => 1;
+    public override int Dexterity => 1;
 
-    public override sbyte Quickness => 1;
+    public override int Quickness => 1;
 
-    public override sbyte Health => 2;
+    public override int Health => 2;
 
-    public override sbyte Beauty => -2;
+    public override int Beauty => -2;
 
-    public override sbyte Willpower => -2;
+    public override int Willpower => -2;
 
-    public override sbyte Astral => -3;
+    public override int Astral => -3;
 
     public override List<PercentQualification> PercentQualifications =>
     [

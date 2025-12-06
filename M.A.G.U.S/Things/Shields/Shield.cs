@@ -1,8 +1,7 @@
-﻿using M.A.G.U.S.GameSystem;
+﻿using M.A.G.U.S.Things.Weapons;
 
 namespace M.A.G.U.S.Things.Shields;
 
-public abstract class Shield : Thing
+public abstract class Shield : Weapon
 {
-    protected readonly DiceThrow DiceThrow = new();
 }

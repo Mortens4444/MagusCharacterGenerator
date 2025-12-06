@@ -15,20 +15,20 @@ internal partial class RollFormulaViewModel : INotifyPropertyChanged
 {
     public event PropertyChangedEventHandler? PropertyChanged;
     public event EventHandler<TaskCompletionSource<bool>>? RollRequested;
-    public event EventHandler<(short Result, ExecutionMode Mode)>? RollCompleted;
+    public event EventHandler<(int Result, ExecutionMode Mode)>? RollCompleted;
 
     private readonly Random random = new();
     private readonly ISoundPlayer soundPlayer;
     private readonly IShakeService shakeService;
 
     private string formula;
-    private short diceModifier;
+    private int diceModifier;
     private bool isUserInputMode;
     private string userModifierString = String.Empty;
     private string resultSummary = String.Empty;
     private string resultDetails = String.Empty;
 
-    public RollFormulaViewModel(ISoundPlayer soundPlayer, IShakeService shakeService, string formula, short diceModifier = 0, bool defaultToAuto = true)
+    public RollFormulaViewModel(ISoundPlayer soundPlayer, IShakeService shakeService, string formula, int diceModifier = 0, bool defaultToAuto = true)
     {
         this.soundPlayer = soundPlayer ?? throw new ArgumentNullException(nameof(soundPlayer));
         this.shakeService = shakeService ?? throw new ArgumentNullException(nameof(shakeService));
@@ -64,7 +64,7 @@ internal partial class RollFormulaViewModel : INotifyPropertyChanged
         }
     }
 
-    public short DiceModifier
+    public int DiceModifier
     {
         get => diceModifier;
         private set
@@ -173,7 +173,7 @@ internal partial class RollFormulaViewModel : INotifyPropertyChanged
 
         if (IsUserInputMode)
         {
-            if (!short.TryParse(UserModifierString, out var userVal))
+            if (!int.TryParse(UserModifierString, out var userVal))
             {
                 ResultDetails = Lng.Elem("Invalid modifier");
                 return;
@@ -211,7 +211,7 @@ internal partial class RollFormulaViewModel : INotifyPropertyChanged
         ResultSummary = grandTotal.ToString();
         ResultDetails = sb.ToString();
 
-        RollCompleted?.Invoke(this, ((short)grandTotal, ExecutionMode.Auto));
+        RollCompleted?.Invoke(this, (grandTotal, ExecutionMode.Auto));
     }
 
     private (int Count, int Sides, int Times) ParseFormula(string f)

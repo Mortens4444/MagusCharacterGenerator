@@ -7,18 +7,18 @@ public class OneHandedHatchet : Weapon, IMeleeWeapon
 {
     public double AttacksPerRound => 1;
 
-    public byte InitiatingValue => 5;
+    public int InitiatingValue => 5;
 
-    public byte AttackingValue => 12;
+    public int AttackingValue => 12;
 
-    public byte DefendingValue => 11;
+    public int DefendingValue => 11;
 
     public override double Weight => 2;
 
     public override Money Price => new(0, 6);
 
     [DiceThrow(ThrowType._1D10)]
-    public byte GetDamage() => (byte)DiceThrow._1D10();
+    public override int GetDamage() => DiceThrow._1D10();
 
     public override string Name => "One-handed axe";
 

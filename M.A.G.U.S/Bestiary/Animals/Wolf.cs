@@ -22,8 +22,8 @@ public sealed class Wolf : Creature
     }
 
     [DiceThrow(ThrowType._1D6)]
-    public override byte GetDamage() => (byte)DiceThrow._1D6();
+    public override int GetDamage() => DiceThrow._1D6();
 
     [DiceThrow(ThrowType._2D10)]
-    public override byte GetNumberAppearing() => (byte)DiceThrow._2D10();
+    public override int GetNumberAppearing() => DiceThrow._2D10();
 }

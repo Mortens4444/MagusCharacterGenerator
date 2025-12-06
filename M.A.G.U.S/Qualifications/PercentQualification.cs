@@ -1,8 +1,8 @@
 ﻿namespace M.A.G.U.S.Qualifications;
 
-public class PercentQualification(byte percent)
+public class PercentQualification(int percent)
 {
-    public byte Percent { get; set; } = percent;
+    public int Percent { get; set; } = percent;
 
     public virtual string Name => GetType().Name;
 

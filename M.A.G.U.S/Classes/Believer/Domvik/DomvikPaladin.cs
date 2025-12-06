@@ -9,7 +9,7 @@ public class DomvikPaladin : Paladin
 {
     public DomvikPaladin() : base() { }
 
-    public DomvikPaladin(byte level) : base(level) { }
+    public DomvikPaladin(int level) : base(level) { }
 
     public override QualificationList Qualifications
     {

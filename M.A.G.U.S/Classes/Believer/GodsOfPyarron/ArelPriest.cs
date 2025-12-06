@@ -11,7 +11,7 @@ public class ArelPriest : Priest
 {
     public ArelPriest() : base() { }
 
-    public ArelPriest(byte level) : base(level) { }
+    public ArelPriest(int level) : base(level) { }
 
     public override QualificationList Qualifications
 	{

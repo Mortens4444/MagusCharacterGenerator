@@ -4,7 +4,7 @@ public class PsiAttributes
 {
     public IPsi? Psi { get; set; }
 
-    public ushort PsiPoints { get; set; }
+    public int PsiPoints { get; set; }
 
-    public byte PsiPointsModifier { get; set; }
+    public int PsiPointsModifier { get; set; }
 }

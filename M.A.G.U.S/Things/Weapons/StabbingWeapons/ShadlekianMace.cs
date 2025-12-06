@@ -7,11 +7,11 @@ public class ShadlekianMace : Weapon, IMeleeWeapon
 {
     public double AttacksPerRound => 1;
 
-    public byte InitiatingValue => 8;
+    public int InitiatingValue => 8;
 
-    public byte AttackingValue => 13;
+    public int AttackingValue => 13;
 
-    public byte DefendingValue => 14;
+    public int DefendingValue => 14;
 
     public override double Weight => 1.8;
 
@@ -19,7 +19,7 @@ public class ShadlekianMace : Weapon, IMeleeWeapon
 
     [DiceThrow(ThrowType._1D6)]
     [DiceThrowModifier(1)]
-    public byte GetDamage() => (byte)(DiceThrow._1D6() + 1);
+    public override int GetDamage() => DiceThrow._1D6() + 1;
 
     public override string Name => "Shadleki mace";
 

@@ -7,11 +7,11 @@ public class MaraSequor : Weapon, IMeleeWeapon
 {
     public double AttacksPerRound => 1;
 
-    public byte InitiatingValue => 7;
+    public int InitiatingValue => 7;
 
-    public byte AttackingValue => 16;
+    public int AttackingValue => 16;
 
-    public byte DefendingValue => 14;
+    public int DefendingValue => 14;
 
     public override double Weight => 1;
 
@@ -19,7 +19,7 @@ public class MaraSequor : Weapon, IMeleeWeapon
 
     [DiceThrow(ThrowType._2D6)]
     [DiceThrowModifier(2)]
-    public byte GetDamage() => (byte)(DiceThrow._2D6() + 2);
+    public override int GetDamage() => DiceThrow._2D6() + 2;
 
     public override string Name => "Mara-sequor";
 

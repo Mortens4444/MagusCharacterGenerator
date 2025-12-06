@@ -2,7 +2,7 @@
 
 public interface ILiving
 {
-    short HealthPoints { get; }
+    int HealthPoints { get; }
 
-    short PainTolerancePoints { get; }
+    int PainTolerancePoints { get; }
 }

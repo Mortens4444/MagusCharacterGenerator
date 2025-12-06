@@ -20,29 +20,29 @@ public abstract class Race : IRace
 
     public virtual SpecialQualificationList SpecialQualifications => [];
 
-    public virtual sbyte Strength => 0;
+    public virtual int Strength => 0;
 
-    public virtual sbyte Quickness => 0;
+    public virtual int Quickness => 0;
 
-    public virtual sbyte Dexterity => 0;
+    public virtual int Dexterity => 0;
 
-    public virtual sbyte Stamina => 0;
+    public virtual int Stamina => 0;
 
-    public virtual sbyte Health => 0;
+    public virtual int Health => 0;
 
-    public virtual sbyte Beauty => 0;
+    public virtual int Beauty => 0;
 
-    public virtual sbyte Intelligence => 0;
+    public virtual int Intelligence => 0;
 
-    public virtual sbyte Willpower => 0;
+    public virtual int Willpower => 0;
 
-    public virtual sbyte Astral => 0;
+    public virtual int Astral => 0;
 
-    public sbyte Bravery => 0;
+    public int Bravery => 0;
 
-    public sbyte Erudition => 0;
+    public int Erudition => 0;
 
-    public sbyte Detection => 0;
+    public int Detection => 0;
 
     public virtual string GenerateCharacterName()
     {
@@ -61,7 +61,7 @@ public abstract class Race : IRace
             "is", "on", "ar", "ir", "en", "ael", "or", "uth", "as", "el"
         };
 
-        var syllableCount = RandomProvider.GetSecureRandomShort(1, 3);
+        var syllableCount = RandomProvider.GetSecureRandomInt(1, 3);
         var result = new StringBuilder();
 
         var s = start[random.Next(start.Length)];
@@ -82,7 +82,7 @@ public abstract class Race : IRace
 
     protected static string GenerateCharacterName(char[] consonants, char[] vowels)
     {
-        var length = RandomProvider.GetSecureRandomShort(3, 6);
+        var length = RandomProvider.GetSecureRandomInt(3, 6);
         var result = new StringBuilder();
 
         for (var i = 0; i < length; i++)
@@ -108,7 +108,7 @@ public abstract class Race : IRace
         var result = new StringBuilder();
         result.Append(start[random.Next(start.Length)]);
 
-        var count = RandomProvider.GetSecureRandomShort(0, 2);
+        var count = RandomProvider.GetSecureRandomInt(0, 2);
         for (var i = 0; i < count; i++)
         {
             result.Append(middle[random.Next(middle.Length)]);

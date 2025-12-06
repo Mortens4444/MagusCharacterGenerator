@@ -7,11 +7,11 @@ public class ChainMace : Weapon, IMeleeWeapon
 {
     public double AttacksPerRound => 1;
 
-    public byte InitiatingValue => 4;
+    public int InitiatingValue => 4;
 
-    public byte AttackingValue => 13;
+    public int AttackingValue => 13;
 
-    public byte DefendingValue => 11;
+    public int DefendingValue => 11;
 
     public override double Weight => 2;
 
@@ -19,7 +19,7 @@ public class ChainMace : Weapon, IMeleeWeapon
 
     [DiceThrow(ThrowType._1D6)]
     [DiceThrowModifier(3)]
-    public byte GetDamage() => (byte)(DiceThrow._1D6() + 3);
+    public override int GetDamage() => DiceThrow._1D6() + 3;
 
     public override string Name => "Flail with chain";
 

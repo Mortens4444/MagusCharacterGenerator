@@ -10,21 +10,21 @@ namespace M.A.G.U.S.Races;
 /// </summary>
 public class Reptilian : Race
 {
-    public override sbyte Strength => 1;
+    public override int Strength => 1;
 
-    public override sbyte Quickness => 2;
+    public override int Quickness => 2;
 
-    public override sbyte Dexterity => 2;
+    public override int Dexterity => 2;
 
-    public override sbyte Stamina => -1;
+    public override int Stamina => -1;
 
-    public override sbyte Beauty => -3;
+    public override int Beauty => -3;
 
-    public override sbyte Willpower => -1;
+    public override int Willpower => -1;
 
-    public override sbyte Intelligence => -1;
+    public override int Intelligence => -1;
 
-    public override sbyte Astral => -2;
+    public override int Astral => -2;
 
     public override List<PercentQualification> PercentQualifications =>
     [

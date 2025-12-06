@@ -11,7 +11,7 @@ public class DomvikPriest : Priest
 {
     public DomvikPriest() : base() { }
 
-    public DomvikPriest(byte level) : base(level) { }
+    public DomvikPriest(int level) : base(level) { }
 
     public override QualificationList Qualifications
 	{

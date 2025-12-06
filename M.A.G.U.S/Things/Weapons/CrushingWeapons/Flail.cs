@@ -7,11 +7,11 @@ public class Flail : Weapon, IMeleeWeapon
 {
     public double AttacksPerRound => 1;
 
-    public byte InitiatingValue => 1;
+    public int InitiatingValue => 1;
 
-    public byte AttackingValue => 6;
+    public int AttackingValue => 6;
 
-    public byte DefendingValue => 5;
+    public int DefendingValue => 5;
 
     public override double Weight => 2.5;
 
@@ -19,7 +19,7 @@ public class Flail : Weapon, IMeleeWeapon
 
     [DiceThrow(ThrowType._1D6)]
     [DiceThrowModifier(1)]
-    public byte GetDamage() => (byte)(DiceThrow._1D6() + 1);
+    public override int GetDamage() => DiceThrow._1D6() + 1;
 
     public override string Name => "Flail (thresher)";
 

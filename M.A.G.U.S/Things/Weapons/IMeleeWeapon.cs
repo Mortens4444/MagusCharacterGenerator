@@ -4,7 +4,7 @@ namespace M.A.G.U.S.Things.Weapons;
 
 public interface IMeleeWeapon : IWeapon
 {
-    byte AttackingValue { get; }
+    int AttackingValue { get; }
 
-    byte DefendingValue { get; }
+    int DefendingValue { get; }
 }

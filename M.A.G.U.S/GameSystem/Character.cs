@@ -22,30 +22,30 @@ namespace M.A.G.U.S.GameSystem;
 
 public class Character : IFightModifier, ILiving, IAbilities, INotifyPropertyChanged
 {
-    private sbyte strength;
-    private sbyte stamina;
-    private sbyte speed;
-    private sbyte dexterity;
-    private sbyte health;
-    private sbyte willpower;
-    private sbyte intelligence;
-    private sbyte astral;
+    private int strength;
+    private int stamina;
+    private int speed;
+    private int dexterity;
+    private int health;
+    private int willpower;
+    private int intelligence;
+    private int astral;
 
-    private short healthPoints;
-    private short maxHealthPoints;
-    private short painTolerancePoints;
-    private short maxPainTolerancePoints;
-    private short initiatingValue;
-    private short attackingValue;
-    private short defendingValue;
-    private short aimingValue;
-    private short unconsciousAstralMagicResistance;
-    private short unconsciousMentalMagicResistance;
-    private ushort psiPoints;
-    private ushort maxPsiPoints;
-    private ushort manaPoints;
-    private ushort maxManaPoints;
-    private ushort qualificationPoints;
+    private int healthPoints;
+    private int maxHealthPoints;
+    private int painTolerancePoints;
+    private int maxPainTolerancePoints;
+    private int initiatingValue;
+    private int attackingValue;
+    private int defendingValue;
+    private int aimingValue;
+    private int unconsciousAstralMagicResistance;
+    private int unconsciousMentalMagicResistance;
+    private int psiPoints;
+    private int maxPsiPoints;
+    private int manaPoints;
+    private int maxManaPoints;
+    private int qualificationPoints;
     private bool calculateChanges;
     private Money money = new(0);
     private Weapon? primaryWeapon;
@@ -53,12 +53,12 @@ public class Character : IFightModifier, ILiving, IAbilities, INotifyPropertyCha
     private string name;
     private IRace race;
     private string totalEquipmentWeight;
-    private short totalCombatModifierPool;
-    private short totalCurrentlyAllocated;
-    private short initiatingValueOriginal;
-    private short attackingValueOriginal;
-    private short defendingValueOriginal;
-    private short aimingValueOriginal;
+    private int totalCombatModifierPool;
+    private int totalCurrentlyAllocated;
+    private int initiatingValueOriginal;
+    private int attackingValueOriginal;
+    private int defendingValueOriginal;
+    private int aimingValueOriginal;
 
     // TODO: Pass the correct method to count
     private readonly MultiClassMode multiClassMode = MultiClassMode.Normal_Or_SwitchedClass;
@@ -113,9 +113,9 @@ public class Character : IFightModifier, ILiving, IAbilities, INotifyPropertyCha
 
     public string Class => BaseClass.Name ?? String.Empty;
 
-    public byte Level => BaseClass.Level;
+    public int Level => BaseClass.Level;
 
-    public byte FightValueModifier => BaseClass.FightValueModifier;
+    public int FightValueModifier => BaseClass.FightValueModifier;
 
     public IRace Race
     {
@@ -146,9 +146,9 @@ public class Character : IFightModifier, ILiving, IAbilities, INotifyPropertyCha
 
     public MultiClassMode MultiClassMode => multiClassMode;
 
-    public ushort PercentQualificationPoints { get; set; }
+    public int PercentQualificationPoints { get; set; }
 
-    public ushort QualificationPoints
+    public int QualificationPoints
     {
         get => qualificationPoints;
         set
@@ -161,7 +161,7 @@ public class Character : IFightModifier, ILiving, IAbilities, INotifyPropertyCha
         }
     }
 
-    public short UnconsciousAstralMagicResistance
+    public int UnconsciousAstralMagicResistance
     {
         get => unconsciousAstralMagicResistance;
         set
@@ -174,7 +174,7 @@ public class Character : IFightModifier, ILiving, IAbilities, INotifyPropertyCha
         }
     }
 
-    public short UnconsciousMentalMagicResistance
+    public int UnconsciousMentalMagicResistance
     {
         get => unconsciousMentalMagicResistance;
         set
@@ -187,8 +187,8 @@ public class Character : IFightModifier, ILiving, IAbilities, INotifyPropertyCha
         }
     }
 
-    private short combatModifier;
-    public short CombatModifier
+    private int combatModifier;
+    public int CombatModifier
     {
         get
         {
@@ -208,7 +208,7 @@ public class Character : IFightModifier, ILiving, IAbilities, INotifyPropertyCha
         }
     }
 
-    public short InitiatingValueOriginal
+    public int InitiatingValueOriginal
     {
         get => initiatingValueOriginal;
         private set
@@ -224,7 +224,7 @@ public class Character : IFightModifier, ILiving, IAbilities, INotifyPropertyCha
         }
     }
 
-    public short AttackingValueOriginal
+    public int AttackingValueOriginal
     {
         get => attackingValueOriginal;
         private set
@@ -240,7 +240,7 @@ public class Character : IFightModifier, ILiving, IAbilities, INotifyPropertyCha
         }
     }
 
-    public short DefendingValueOriginal
+    public int DefendingValueOriginal
     {
         get => defendingValueOriginal;
         private set
@@ -255,7 +255,7 @@ public class Character : IFightModifier, ILiving, IAbilities, INotifyPropertyCha
             OnPropertyChanged(nameof(DefendingValueMaxLimit));
         }
     }
-    public short AimingValueOriginal
+    public int AimingValueOriginal
     {
         get => aimingValueOriginal;
         private set
@@ -273,15 +273,15 @@ public class Character : IFightModifier, ILiving, IAbilities, INotifyPropertyCha
 
     public bool CanAllocateCombatModifier => CombatModifier != 0;
 
-    public short InitiatingValueMaxLimit => (short)(InitiatingValue + CombatModifier);
+    public int InitiatingValueMaxLimit => InitiatingValue + CombatModifier;
 
-    public short AttackingValueMaxLimit => (short)(AttackingValue + CombatModifier);
+    public int AttackingValueMaxLimit => AttackingValue + CombatModifier;
 
-    public short DefendingValueMaxLimit => (short)(DefendingValue + CombatModifier);
+    public int DefendingValueMaxLimit => DefendingValue + CombatModifier;
 
-    public short AimingValueMaxLimit => (short)(AimingValue + CombatModifier);
+    public int AimingValueMaxLimit => AimingValue + CombatModifier;
 
-    public short InitiatingValue
+    public int InitiatingValue
     {
         get => initiatingValue;
         set
@@ -301,7 +301,7 @@ public class Character : IFightModifier, ILiving, IAbilities, INotifyPropertyCha
         }
     }
 
-    public short AttackingValue
+    public int AttackingValue
     {
         get => attackingValue;
         set
@@ -320,7 +320,7 @@ public class Character : IFightModifier, ILiving, IAbilities, INotifyPropertyCha
         }
     }
 
-    public short DefendingValue
+    public int DefendingValue
     {
         get => defendingValue;
         set
@@ -339,7 +339,7 @@ public class Character : IFightModifier, ILiving, IAbilities, INotifyPropertyCha
         }
     }
 
-    public short AimingValue
+    public int AimingValue
     {
         get => aimingValue;
         set
@@ -358,7 +358,7 @@ public class Character : IFightModifier, ILiving, IAbilities, INotifyPropertyCha
         }
     }
 
-    public short HealthPoints
+    public int HealthPoints
     {
         get => healthPoints;
         set
@@ -371,7 +371,7 @@ public class Character : IFightModifier, ILiving, IAbilities, INotifyPropertyCha
         }
     }
 
-    public short MaxHealthPoints
+    public int MaxHealthPoints
     {
         get => maxHealthPoints;
         set
@@ -384,7 +384,7 @@ public class Character : IFightModifier, ILiving, IAbilities, INotifyPropertyCha
         }
     }
 
-    public short PainTolerancePoints
+    public int PainTolerancePoints
     {
         get => painTolerancePoints;
         set
@@ -397,7 +397,7 @@ public class Character : IFightModifier, ILiving, IAbilities, INotifyPropertyCha
         }
     }
 
-    public short MaxPainTolerancePoints
+    public int MaxPainTolerancePoints
     {
         get => maxPainTolerancePoints;
         set
@@ -410,7 +410,7 @@ public class Character : IFightModifier, ILiving, IAbilities, INotifyPropertyCha
         }
     }
 
-    public sbyte Strength
+    public int Strength
     {
         get => strength;
         set
@@ -427,7 +427,7 @@ public class Character : IFightModifier, ILiving, IAbilities, INotifyPropertyCha
         }
     }
 
-    public sbyte Quickness
+    public int Quickness
     {
         get => speed;
         set
@@ -444,7 +444,7 @@ public class Character : IFightModifier, ILiving, IAbilities, INotifyPropertyCha
         }
     }
 
-    public sbyte Dexterity
+    public int Dexterity
     {
         get => dexterity;
         set
@@ -462,7 +462,7 @@ public class Character : IFightModifier, ILiving, IAbilities, INotifyPropertyCha
         }
     }
 
-    public sbyte Stamina
+    public int Stamina
     {
         get => stamina;
         set
@@ -479,7 +479,7 @@ public class Character : IFightModifier, ILiving, IAbilities, INotifyPropertyCha
         }
     }
 
-    public sbyte Health
+    public int Health
     {
         get => health;
         set
@@ -496,9 +496,9 @@ public class Character : IFightModifier, ILiving, IAbilities, INotifyPropertyCha
         }
     }
 
-    public sbyte Beauty { get; set; }
+    public int Beauty { get; set; }
 
-    public sbyte Intelligence
+    public int Intelligence
     {
         get => intelligence;
         set
@@ -517,7 +517,7 @@ public class Character : IFightModifier, ILiving, IAbilities, INotifyPropertyCha
         }
     }
 
-    public sbyte Willpower
+    public int Willpower
     {
         get => willpower;
         set
@@ -535,7 +535,7 @@ public class Character : IFightModifier, ILiving, IAbilities, INotifyPropertyCha
         }
     }
 
-    public sbyte Astral
+    public int Astral
     {
         get => astral;
         set
@@ -552,11 +552,11 @@ public class Character : IFightModifier, ILiving, IAbilities, INotifyPropertyCha
         }
     }
 
-    public sbyte Bravery { get; set; }
+    public int Bravery { get; set; }
 
-    public sbyte Erudition { get; set; }
+    public int Erudition { get; set; }
 
-    public sbyte Detection { get; set; }
+    public int Detection { get; set; }
 
     public string Birthplace { get; set; }
 
@@ -568,7 +568,7 @@ public class Character : IFightModifier, ILiving, IAbilities, INotifyPropertyCha
 
     public IPsi? Psi { get; set; }
 
-    public ushort ManaPoints
+    public int ManaPoints
     {
         get => manaPoints;
         set
@@ -581,7 +581,7 @@ public class Character : IFightModifier, ILiving, IAbilities, INotifyPropertyCha
         }
     }
 
-    public ushort MaxManaPoints
+    public int MaxManaPoints
     {
         get => maxManaPoints;
         set
@@ -594,9 +594,9 @@ public class Character : IFightModifier, ILiving, IAbilities, INotifyPropertyCha
         }
     }
 
-    public ushort MaxManaPointsPerLevel { get; set; }
+    public int MaxManaPointsPerLevel { get; set; }
 
-    public ushort PsiPoints
+    public int PsiPoints
     {
         get => psiPoints;
         set
@@ -609,7 +609,7 @@ public class Character : IFightModifier, ILiving, IAbilities, INotifyPropertyCha
         }
     }
 
-    public ushort MaxPsiPoints
+    public int MaxPsiPoints
     {
         get => maxPsiPoints;
         set
@@ -635,7 +635,7 @@ public class Character : IFightModifier, ILiving, IAbilities, INotifyPropertyCha
         }
     }
 
-    public byte PsiPointsModifier { get; set; }
+    public int PsiPointsModifier { get; set; }
 
     public QualificationList Qualifications { get; private set; } = [];
 
@@ -654,9 +654,9 @@ public class Character : IFightModifier, ILiving, IAbilities, INotifyPropertyCha
         var defenseAllocated = Math.Max(0, DefendingValue - DefendingValueOriginal);
         var aimAllocated = Math.Max(0, AimingValue - AimingValueOriginal);
 
-        totalCurrentlyAllocated = (short)(initiatorAllocated + attackAllocated + defenseAllocated + aimAllocated);
+        totalCurrentlyAllocated = initiatorAllocated + attackAllocated + defenseAllocated + aimAllocated;
 
-        combatModifier = (short)(totalCombatModifierPool - totalCurrentlyAllocated);
+        combatModifier = totalCombatModifierPool - totalCurrentlyAllocated;
 
         OnPropertyChanged(nameof(CombatModifier));
         OnMaxLimitsChanged();
@@ -719,20 +719,20 @@ public class Character : IFightModifier, ILiving, IAbilities, INotifyPropertyCha
 
     private void CalculateGold()
     {
-        money.Gold += (short)Classes.Sum(@class => @class.Gold);
+        money.Gold += Classes.Sum(@class => @class.Gold);
     }
 
     private void GenerateAbilities()
     {
-        Strength = (sbyte)(BaseClass.Strength + Race.Strength);
-        Quickness = (sbyte)(BaseClass.Quickness + Race.Quickness);
-        Dexterity = (sbyte)(BaseClass.Dexterity + Race.Dexterity);
-        Stamina = (sbyte)(BaseClass.Stamina + Race.Stamina);
-        Health = (sbyte)(BaseClass.Health + Race.Health);
-        Beauty = (sbyte)(BaseClass.Beauty + Race.Beauty);
-        Intelligence = (sbyte)(BaseClass.Intelligence + Race.Intelligence);
-        Willpower = (sbyte)(BaseClass.Willpower + Race.Willpower);
-        Astral = (sbyte)(BaseClass.Astral + Race.Astral);
+        Strength = BaseClass.Strength + Race.Strength;
+        Quickness = BaseClass.Quickness + Race.Quickness;
+        Dexterity = BaseClass.Dexterity + Race.Dexterity;
+        Stamina = BaseClass.Stamina + Race.Stamina;
+        Health = BaseClass.Health + Race.Health;
+        Beauty = BaseClass.Beauty + Race.Beauty;
+        Intelligence = BaseClass.Intelligence + Race.Intelligence;
+        Willpower = BaseClass.Willpower + Race.Willpower;
+        Astral = BaseClass.Astral + Race.Astral;
         Bravery = BaseClass.Bravery;
         Erudition = BaseClass.Erudition;
         Detection = BaseClass.Detection;
@@ -778,7 +778,7 @@ public class Character : IFightModifier, ILiving, IAbilities, INotifyPropertyCha
         {
             if (dexterityBasedPercentages.Contains(percentQualification.GetType()))
             {
-                percentQualification.Percent += (byte)MathHelper.GetAboveAverageValue(Dexterity);
+                percentQualification.Percent += MathHelper.GetAboveAverageValue(Dexterity);
             }
         }
         if (PercentQualifications.FirstOrDefault(pq => pq is Falling) == null)
@@ -825,7 +825,7 @@ public class Character : IFightModifier, ILiving, IAbilities, INotifyPropertyCha
         CombatModifier = fightModifiers.CombatModifier;
     }
 
-    private void SetCombatModifierHelperVariables(short combatModifier)
+    private void SetCombatModifierHelperVariables(int combatModifier)
     {
         totalCombatModifierPool = combatModifier;
         totalCurrentlyAllocated = 0;
@@ -847,14 +847,14 @@ public class Character : IFightModifier, ILiving, IAbilities, INotifyPropertyCha
     {
         var doubledPainToleranceBase = Race.SpecialQualifications.GetSpeciality<ExtraMagicResistanceOnLevelUp>();
         UnconsciousAstralMagicResistance = MathHelper.GetAboveAverageValue(Astral);
-        UnconsciousAstralMagicResistance += (short)((BaseClass.Level - 1) * (doubledPainToleranceBase?.ExtraResistancePoints ?? 0));
+        UnconsciousAstralMagicResistance += (BaseClass.Level - 1) * (doubledPainToleranceBase?.ExtraResistancePoints ?? 0);
     }
 
     private void CalculateUnconsciousMentalMagicResistance()
     {
         var doubledPainToleranceBase = Race.SpecialQualifications.GetSpeciality<ExtraMagicResistanceOnLevelUp>();
         UnconsciousMentalMagicResistance = MathHelper.GetAboveAverageValue(Willpower);
-        UnconsciousMentalMagicResistance += (short)((BaseClass.Level - 1) * (doubledPainToleranceBase?.ExtraResistancePoints ?? 0));
+        UnconsciousMentalMagicResistance += (BaseClass.Level - 1) * (doubledPainToleranceBase?.ExtraResistancePoints ?? 0);
     }
 
     private void CalculatePsiPoints(ISettings? settings)

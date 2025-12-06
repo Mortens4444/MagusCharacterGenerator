@@ -23,9 +23,9 @@ public sealed class Narwhal : Creature
     }
 
     [DiceThrow(ThrowType._2D10)]
-    public override byte GetDamage() => (byte)(DiceThrow._2D10());
+    public override int GetDamage() => DiceThrow._2D10();
 
 
     [DiceThrow(ThrowType._1D6)]
-    public override byte GetNumberAppearing() => (byte)DiceThrow._1D6();
+    public override int GetNumberAppearing() => DiceThrow._1D6();
 }

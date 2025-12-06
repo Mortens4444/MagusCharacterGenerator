@@ -10,11 +10,11 @@ namespace M.A.G.U.S.Races;
 /// </summary>
 public class NightElf : Race, IUseRangedWeapons
 {
-    public override sbyte Strength => -1;
+    public override int Strength => -1;
 
-    public override sbyte Quickness => 3;
+    public override int Quickness => 3;
 
-    public override sbyte Dexterity => 3;
+    public override int Dexterity => 3;
 
     public int AimValue { get; set; } = 10;
 

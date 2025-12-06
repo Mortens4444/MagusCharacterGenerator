@@ -7,11 +7,11 @@ public class SlanDagger : Weapon, IMeleeWeapon
 {
     public double AttacksPerRound => 2;
 
-    public byte InitiatingValue => 9;
+    public int InitiatingValue => 9;
 
-    public byte AttackingValue => 14;
+    public int AttackingValue => 14;
 
-    public byte DefendingValue => 6;
+    public int DefendingValue => 6;
 
     public override double Weight => 0.8;
 
@@ -19,7 +19,7 @@ public class SlanDagger : Weapon, IMeleeWeapon
 
     [DiceThrow(ThrowType._1D6)]
     [DiceThrowModifier(2)]
-    public byte GetDamage() => (byte)(DiceThrow._1D6() + 2);
+    public override int GetDamage() => DiceThrow._1D6() + 2;
 
     public override string Name => "Slan dagger";
 

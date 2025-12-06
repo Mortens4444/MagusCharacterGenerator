@@ -2,7 +2,7 @@
 
 public class Falling : PercentQualification
 {
-    public Falling(byte percent)
+    public Falling(int percent)
         : base(percent)
     {
     }

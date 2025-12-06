@@ -4,7 +4,7 @@ internal interface IFighter : IAttacker, ILiving
 {
     double AttacksPerRound { get; }
 
-    byte GetDamage();
+    int GetDamage();
 
     ulong ExperiencePoints { get; }
 }

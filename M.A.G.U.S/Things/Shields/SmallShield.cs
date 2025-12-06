@@ -8,18 +8,18 @@ public class SmallShield : Shield
 {
     public double AttacksPerRound => 1;
 
-    public byte InitiatingValue => 1;
+    public int InitiatingValue => 1;
 
-    public byte DefendingValue => 20;
+    public int DefendingValue => 20;
 
-    public byte MovementObstructiveFactor => 0;
+    public int MovementObstructiveFactor => 0;
 
     public override double Weight => 1;
 
     public override Money Price => new(0, 6);
 
     [DiceThrow(ThrowType._1D6)]
-    public byte GetDamage() => (byte)DiceThrow._1D6();
+    public override int GetDamage() => DiceThrow._1D6();
 
     public override string Name => "Small shield";
 

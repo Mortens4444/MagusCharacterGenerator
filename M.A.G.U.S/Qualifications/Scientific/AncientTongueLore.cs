@@ -11,12 +11,12 @@ public class AncientTongueLore : Qualification, ICanHaveMany
     [JsonConstructor]
     public AncientTongueLore() { }
 
-    public AncientTongueLore(QualificationLevel qualificationLevel = QualificationLevel.Base, byte level = 1)
+    public AncientTongueLore(QualificationLevel qualificationLevel = QualificationLevel.Base, int level = 1)
             : base(qualificationLevel, level)
     {
     }
 
-    public AncientTongueLore(AntientLanguage language, QualificationLevel qualificationLevel = QualificationLevel.Base, byte level = 1)
+    public AncientTongueLore(AntientLanguage language, QualificationLevel qualificationLevel = QualificationLevel.Base, int level = 1)
         : base(qualificationLevel, level)
     {
         Language = language;
@@ -24,7 +24,7 @@ public class AncientTongueLore : Qualification, ICanHaveMany
 
     public override string Name => "Ancient tongue lore";
     
-    public override byte QpToBaseQualification => 10;
+    public override int QpToBaseQualification => 10;
 
-    public override byte QpToMasterQualification => 60;
+    public override int QpToMasterQualification => 60;
 }

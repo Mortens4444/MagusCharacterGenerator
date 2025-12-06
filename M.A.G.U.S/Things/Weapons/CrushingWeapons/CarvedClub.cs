@@ -7,18 +7,18 @@ public class CarvedClub : Weapon, IMeleeWeapon
 {
     public double AttacksPerRound => 1;
 
-    public byte InitiatingValue => 2;
+    public int InitiatingValue => 2;
 
-    public byte AttackingValue => 7;
+    public int AttackingValue => 7;
 
-    public byte DefendingValue => 14;
+    public int DefendingValue => 14;
 
     public override double Weight => 1.3;
 
     public override Money Price => Money.Free;
 
     [DiceThrow(ThrowType._1D6)]
-    public byte GetDamage() => (byte)DiceThrow._1D6();
+    public override int GetDamage() => DiceThrow._1D6();
 
     public override string Name => "Club";
 

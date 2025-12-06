@@ -2,11 +2,11 @@
 
 public class DefendingFight : IFightModifier
 {
-    public short InitiatingValue => short.MinValue;
+    public int InitiatingValue => int.MinValue;
 
-    public short AttackingValue => 0;
+    public int AttackingValue => 0;
 
-    public short DefendingValue => 40;
+    public int DefendingValue => 40;
 
-    public short AimingValue => 0;
+    public int AimingValue => 0;
 }

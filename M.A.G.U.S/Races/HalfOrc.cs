@@ -8,19 +8,19 @@ namespace M.A.G.U.S.Races;
 /// </summary>
 public class HalfOrc : Race
 {
-    public override sbyte Strength => 2;
+    public override int Strength => 2;
 
-    public override sbyte Stamina => 2;
+    public override int Stamina => 2;
 
-    public override sbyte Health => 1;
+    public override int Health => 1;
 
-    public override sbyte Beauty => -3;
+    public override int Beauty => -3;
 
-    public override sbyte Intelligence => -2;
+    public override int Intelligence => -2;
 
-    public override sbyte Willpower => -1;
+    public override int Willpower => -1;
 
-    public override sbyte Astral => -2;
+    public override int Astral => -2;
 
     public override SpecialQualificationList SpecialQualifications =>
     [

@@ -14,30 +14,30 @@ namespace M.A.G.U.S.Test
         private static readonly ISettings addPsiOnFirstLevelSettings = new Settings(true);
         private static readonly ISettings doNotAddPsiOnFirstLevelSettings = new Settings(false);
 
-        private static List<Tuple<Character, ushort>> GetTestData()
+        private static List<Tuple<Character, int>> GetTestData()
         {
             return
             [
-                new Tuple<Character, ushort>(new Character(addPsiOnFirstLevelSettings, "Mirena", new Human(), new Witch(5)), 25),
-                new Tuple<Character, ushort>(new Character(addPsiOnFirstLevelSettings, "Toll", new Elf(), new MartialArtist(5)), 31),
-                new Tuple<Character, ushort>(new Character(addPsiOnFirstLevelSettings, "Maron", new Elf(), new Wizard(5)), 37),
-                new Tuple<Character, ushort>(new Character(addPsiOnFirstLevelSettings, "Vesryn (Level: 5)", new Elf(), new Headhunter(5)), 20),
-                new Tuple<Character, ushort>(new Character(addPsiOnFirstLevelSettings, "Vesryn (Level: 6)", new Elf(), new Headhunter(6)), 24),
+                new Tuple<Character, int>(new Character(addPsiOnFirstLevelSettings, "Mirena", new Human(), new Witch(5)), 25),
+                new Tuple<Character, int>(new Character(addPsiOnFirstLevelSettings, "Toll", new Elf(), new MartialArtist(5)), 31),
+                new Tuple<Character, int>(new Character(addPsiOnFirstLevelSettings, "Maron", new Elf(), new Wizard(5)), 37),
+                new Tuple<Character, int>(new Character(addPsiOnFirstLevelSettings, "Vesryn (Level: 5)", new Elf(), new Headhunter(5)), 20),
+                new Tuple<Character, int>(new Character(addPsiOnFirstLevelSettings, "Vesryn (Level: 6)", new Elf(), new Headhunter(6)), 24),
 
-                new Tuple<Character, ushort>(new Character(doNotAddPsiOnFirstLevelSettings, "Mirena", new Human(), new Witch(5)), 21),
-                new Tuple<Character, ushort>(new Character(doNotAddPsiOnFirstLevelSettings, "Toll", new Elf(), new MartialArtist(5)), 26),
-                new Tuple<Character, ushort>(new Character(doNotAddPsiOnFirstLevelSettings, "Maron", new Elf(), new Wizard(5)), 31),
-                new Tuple<Character, ushort>(new Character(doNotAddPsiOnFirstLevelSettings, "Vesryn (Level: 5)", new Elf(), new Headhunter(5)), 17),
-                new Tuple<Character, ushort>(new Character(doNotAddPsiOnFirstLevelSettings, "Vesryn (Level: 6)", new Elf(), new Headhunter(6)), 21),
+                new Tuple<Character, int>(new Character(doNotAddPsiOnFirstLevelSettings, "Mirena", new Human(), new Witch(5)), 21),
+                new Tuple<Character, int>(new Character(doNotAddPsiOnFirstLevelSettings, "Toll", new Elf(), new MartialArtist(5)), 26),
+                new Tuple<Character, int>(new Character(doNotAddPsiOnFirstLevelSettings, "Maron", new Elf(), new Wizard(5)), 31),
+                new Tuple<Character, int>(new Character(doNotAddPsiOnFirstLevelSettings, "Vesryn (Level: 5)", new Elf(), new Headhunter(5)), 17),
+                new Tuple<Character, int>(new Character(doNotAddPsiOnFirstLevelSettings, "Vesryn (Level: 6)", new Elf(), new Headhunter(6)), 21),
 
-                new Tuple<Character, ushort>(new Character(doNotAddPsiOnFirstLevelSettings, "Mirena", new Kyr(), new Witch(5)), 26),
+                new Tuple<Character, int>(new Character(doNotAddPsiOnFirstLevelSettings, "Mirena", new Kyr(), new Witch(5)), 26),
             ];
         }
 
         [Test]
         public void TestPsiPoints()
         {
-            List<Tuple<Character, ushort>>? testData = null;
+            List<Tuple<Character, int>>? testData = null;
             do
             {
                 try
@@ -53,7 +53,7 @@ namespace M.A.G.U.S.Test
             {
                 var character = data.Item1;
                 var expectedPsiPoints = data.Item2;
-                Assert.That(character.PsiPoints - (ushort)MathHelper.GetAboveAverageValue(character.Intelligence), Is.EqualTo(expectedPsiPoints));
+                Assert.That(character.PsiPoints - MathHelper.GetAboveAverageValue(character.Intelligence), Is.EqualTo(expectedPsiPoints));
             }
         }
     }

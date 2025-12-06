@@ -2,7 +2,7 @@
 
 public class SummonBigBirds : Summon
 {
-    public static byte RecallDurationInDays => 1;
+    public static int RecallDurationInDays => 1;
 
     public override string Name => "Summon big birds";
 }

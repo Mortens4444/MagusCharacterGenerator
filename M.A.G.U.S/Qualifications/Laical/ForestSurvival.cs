@@ -2,11 +2,11 @@
 
 namespace M.A.G.U.S.Qualifications.Laical;
 
-public class ForestSurvival(QualificationLevel qualificationLevel = QualificationLevel.Base, byte level = 1) : Qualification(qualificationLevel, level)
+public class ForestSurvival(QualificationLevel qualificationLevel = QualificationLevel.Base, int level = 1) : Qualification(qualificationLevel, level)
 {
     public override string Name => "Forest survival";
 
-    public override byte QpToBaseQualification => 5;
+    public override int QpToBaseQualification => 5;
 
-    public override byte QpToMasterQualification => 14;
+    public override int QpToMasterQualification => 14;
 }

@@ -7,18 +7,18 @@ public class BattleAx : Weapon, IMeleeWeapon
 {
     public double AttacksPerRound => 1;
 
-    public byte InitiatingValue => 5;
+    public int InitiatingValue => 5;
 
-    public byte AttackingValue => 11;
+    public int AttackingValue => 11;
 
-    public byte DefendingValue => 8;
+    public int DefendingValue => 8;
 
     public override double Weight => 2.5;
 
     public override Money Price => new(0, 8);
 
     [DiceThrow(ThrowType._1D10)]
-    public byte GetDamage() => (byte)DiceThrow._1D10();
+    public override int GetDamage() => DiceThrow._1D10();
 
     public override string Name => "Battle pick";
 

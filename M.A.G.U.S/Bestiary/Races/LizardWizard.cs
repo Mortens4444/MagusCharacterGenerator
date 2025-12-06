@@ -33,9 +33,9 @@ public sealed class LizardWizard : Creature
 
     [DiceThrow(ThrowType._2D6)]
     [DiceThrowModifier(4)]
-    public override byte GetDamage() => (byte)(DiceThrow._2D6() + 4);
+    public override int GetDamage() => DiceThrow._2D6() + 4;
 
-    public override byte GetNumberAppearing() => 1;
+    public override int GetNumberAppearing() => 1;
 
     public override string[] Images => ["lizard_wizard"];
 }

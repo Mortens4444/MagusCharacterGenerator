@@ -2,7 +2,7 @@
 
 public class PickPocketing : PercentQualification
 {
-    public PickPocketing(byte percent)
+    public PickPocketing(int percent)
         : base(percent)
     {
     }

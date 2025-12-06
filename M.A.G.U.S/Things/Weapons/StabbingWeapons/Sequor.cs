@@ -7,11 +7,11 @@ public class Sequor : Weapon, IMeleeWeapon
 {
     public double AttacksPerRound => 2;
 
-    public byte InitiatingValue => 8;
+    public int InitiatingValue => 8;
 
-    public byte AttackingValue => 13;
+    public int AttackingValue => 13;
 
-    public byte DefendingValue => 16;
+    public int DefendingValue => 16;
 
     public override double Weight => 0.4;
 
@@ -19,7 +19,7 @@ public class Sequor : Weapon, IMeleeWeapon
 
     [DiceThrow(ThrowType._1D6)]
     [DiceThrowModifier(2)]
-    public byte GetDamage() => (byte)(DiceThrow._1D6() + 2);
+    public override int GetDamage() => DiceThrow._1D6() + 2;
 
     public override string Description => "A standard, efficient cutting sword used by legionaries and professional soldiers, designed for reliable, steady performance in formation combat.";
 }

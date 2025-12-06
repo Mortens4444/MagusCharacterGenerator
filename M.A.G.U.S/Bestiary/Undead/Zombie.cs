@@ -25,10 +25,10 @@ public sealed class Zombie : LivingDead
     }
 
     [DiceThrow(ThrowType._1D6)]
-    public override byte GetDamage() => (byte)DiceThrow._1D6();
+    public override int GetDamage() => DiceThrow._1D6();
 
     [DiceThrow(ThrowType._1D100)]
-    public override byte GetNumberAppearing() => (byte)DiceThrow._1D100(); // Should be "Variable" (change to string?)
+    public override int GetNumberAppearing() => DiceThrow._1D100(); // Should be "Variable" (change to string?)
 
     public override string[] Sounds => ["zombie", "zombie_2", "zombie_3", "zombie_4", "zombie_eating"];
 }

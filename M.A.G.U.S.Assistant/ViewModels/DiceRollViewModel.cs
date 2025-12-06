@@ -20,7 +20,7 @@ internal partial class DiceRollViewModel : INotifyPropertyChanged
     private DiceType selectedDice = DiceType.D100;
     private int customFrom = 1;
     private bool isCustomSelected;
-    private byte diceCount = 1;
+    private int diceCount = 1;
     private int customTo = 6;
     private string resultSummary = String.Empty;
     private string resultDetails = String.Empty;
@@ -45,7 +45,7 @@ internal partial class DiceRollViewModel : INotifyPropertyChanged
 
     public IEnumerable<DiceType> DiceTypes { get; } = Enum.GetValues<DiceType>().Cast<DiceType>();
 
-    public byte DiceCount
+    public int DiceCount
     {
         get => diceCount;
         set

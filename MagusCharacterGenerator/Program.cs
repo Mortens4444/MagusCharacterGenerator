@@ -13,8 +13,7 @@ namespace MagusCharacterGenerator
         {
             //Lng.ChangeToLanguage(Language.English);
 
-            var level = (byte)6;
-
+            var level = 6;
             var witch = new Character(new Settings(), "Mirena", new Human(), new Witch(level));
             Console.WriteLine(witch);
 

@@ -9,7 +9,7 @@ public class KranRanagolPriest : Priest
 {
     public KranRanagolPriest() : base() { }
 
-    public KranRanagolPriest(byte level) : base(level) { }
+    public KranRanagolPriest(int level) : base(level) { }
 
     public override QualificationList FutureQualifications
     {

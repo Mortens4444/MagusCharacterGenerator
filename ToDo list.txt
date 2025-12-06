@@ -1,5 +1,4 @@
 - Problem with total weight
-- Harcérték módodítók elosztása
 
 - Buy qualifications
 - SFÉ

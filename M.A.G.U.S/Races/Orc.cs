@@ -5,19 +5,19 @@ namespace M.A.G.U.S.Races;
 
 public class Orc : Race
 {
-    public override sbyte Strength => 3;
+    public override int Strength => 3;
 
-    public override sbyte Stamina => 3;
+    public override int Stamina => 3;
 
-    public override sbyte Health => 2;
+    public override int Health => 2;
 
-    public override sbyte Beauty => -3;
+    public override int Beauty => -3;
 
-    public override sbyte Intelligence => -3;
+    public override int Intelligence => -3;
 
-    public override sbyte Willpower => 2;
+    public override int Willpower => 2;
 
-    public override sbyte Astral => -4;
+    public override int Astral => -4;
 
     public override SpecialQualificationList SpecialQualifications =>
     [

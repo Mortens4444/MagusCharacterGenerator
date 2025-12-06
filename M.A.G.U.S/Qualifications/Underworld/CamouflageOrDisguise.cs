@@ -4,14 +4,14 @@ namespace M.A.G.U.S.Qualifications.Underworld;
 
 public class CamouflageOrDisguise : Qualification
 {
-    public CamouflageOrDisguise(QualificationLevel qualificationLevel = QualificationLevel.Base, byte level = 1)
+    public CamouflageOrDisguise(QualificationLevel qualificationLevel = QualificationLevel.Base, int level = 1)
         : base(qualificationLevel, level)
     {
     }
 
     public override string Name => "Camouflage/disguise";
 
-    public override byte QpToBaseQualification => 12;
+    public override int QpToBaseQualification => 12;
 
-    public override byte QpToMasterQualification => 24;
+    public override int QpToMasterQualification => 24;
 }

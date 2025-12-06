@@ -2,6 +2,7 @@
 <v:NotifierPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
               xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
               xmlns:v="clr-namespace:M.A.G.U.S.Assistant.Views"
+              xmlns:m="clr-namespace:M.A.G.U.S.GameSystem;assembly=M.A.G.U.S."
               xmlns:vm="clr-namespace:M.A.G.U.S.Assistant.ViewModels"
               xmlns:conv="clr-namespace:Mtf.LanguageService.MAUI.Converters;assembly=Mtf.LanguageService.MAUI"
               x:Class="M.A.G.U.S.Assistant.Views.CreatureDetailsPage"
@@ -10,12 +11,13 @@
 
     <v:NotifierPage.Resources>
         <ResourceDictionary>
+            <conv:TranslationConverter x:Key="TranslationConverter" />
             <conv:EnumDescriptionTranslationConverter x:Key="EnumDescriptionTranslationConverter" />
         </ResourceDictionary>
     </v:NotifierPage.Resources>
 
     <ScrollView>
-        <StackLayout Padding="12" Spacing="12">
+        <StackLayout Padding="12" Spacing="8">
 
             <!-- Image & sound -->
             <Image Source="{Binding Image}" HeightRequest="200" Aspect="AspectFit" />
@@ -45,41 +47,62 @@
                     <Label Text="Speed" Grid.Row="3" Grid.Column="0" FontAttributes="Bold" />
                     <Label Text="{Binding Speed}" Grid.Row="3" Grid.Column="1" />
 
-                    <Label Text="Attack value" Grid.Row="4" Grid.Column="0" FontAttributes="Bold" />
-                    <Label Text="{Binding AttackValue}" Grid.Row="4" Grid.Column="1" />
-
+                    <Label Text="Attack modes" Grid.Row="4" Grid.Column="0" FontAttributes="Bold" />
+                    <StackLayout Grid.Row="4" Grid.Column="1" Spacing="0">
+                        <CollectionView ItemsSource="{Binding AttackModes}">
+                            <CollectionView.ItemTemplate>
+                                <DataTemplate x:DataType="m:Attack">
+                                    <Label>
+                                        <Label.Text>
+                                            <MultiBinding StringFormat="{}{0} - {1}">
+                                                <Binding Path="Name" Converter="{StaticResource TranslationConverter}" />
+                                                <Binding Path="Value" />
+                                            </MultiBinding>
+                                        </Label.Text>
+                                    </Label>
+                                </DataTemplate>
+                            </CollectionView.ItemTemplate>
+                        </CollectionView>
+                    </StackLayout>
+                    
                     <Label Text="Defense value" Grid.Row="5" Grid.Column="0" FontAttributes="Bold" />
                     <Label Text="{Binding DefenseValue}" Grid.Row="5" Grid.Column="1" />
 
                     <Label Text="Initiator value" Grid.Row="6" Grid.Column="0" FontAttributes="Bold" />
                     <Label Text="{Binding InitiatingValue}" Grid.Row="6" Grid.Column="1" />
 
-                    <Label Text="Health points" Grid.Row="8" Grid.Column="0" FontAttributes="Bold" />
-                    <Label Text="{Binding HealthPoints}" Grid.Row="8" Grid.Column="1" />
+                    <Label Text="Health points" Grid.Row="7" Grid.Column="0" FontAttributes="Bold" />
+                    <Label Text="{Binding HealthPoints}" Grid.Row="7" Grid.Column="1" />
 
-                    <Label Text="Pain tolerance points" Grid.Row="10" Grid.Column="0" FontAttributes="Bold" />
-                    <Label Text="{Binding PainTolerancePoints}" Grid.Row="10" Grid.Column="1" />
+                    <Label Text="Pain tolerance points" Grid.Row="8" Grid.Column="0" FontAttributes="Bold" />
+                    <Label Text="{Binding PainTolerancePoints}" Grid.Row="8" Grid.Column="1" />
 
-                    <Label Text="Poison resistance" Grid.Row="11" Grid.Column="0" FontAttributes="Bold" />
-                    <Label Text="{Binding PoisonResistance}" Grid.Row="11" Grid.Column="1" />
+                    <Label Text="Poison resistance" Grid.Row="9" Grid.Column="0" FontAttributes="Bold" />
+                    <Label Text="{Binding PoisonResistance}" Grid.Row="9" Grid.Column="1" />
 
-                    <Label Text="Experience points" Grid.Row="12" Grid.Column="0" FontAttributes="Bold" />
-                    <Label Text="{Binding ExperiencePoints}" Grid.Row="12" Grid.Column="1" />
+                    <Label Text="Experience points" Grid.Row="10" Grid.Column="0" FontAttributes="Bold" />
+                    <Label Text="{Binding ExperiencePoints}" Grid.Row="10" Grid.Column="1" />
 
-                    <Label Text="Attacks per round" Grid.Row="13" Grid.Column="0" FontAttributes="Bold" />
-                    <Label Text="{Binding AttacksPerRound}" Grid.Row="13" Grid.Column="1" />
+                    <Label Text="Attacks per round" Grid.Row="11" Grid.Column="0" FontAttributes="Bold" />
+                    <Label Text="{Binding AttacksPerRound}" Grid.Row="11" Grid.Column="1" />
                 </Grid>
             </Border>
 
             <!-- Damage area -->
             <Border Padding="10">
                 <StackLayout Spacing="8">
-                    <Grid ColumnDefinitions="4*,3*,3*">
-                        <Button Text="Initiate" Command="{Binding InitiateCommand}" />
-                        <Button Grid.Column="1" Text="Attack" Command="{Binding AttackCommand}" />
-                        <Button Grid.Column="2" Text="Roll Damage" Command="{Binding RollDamageCommand}" />
+                    <Grid ColumnDefinitions="4*,3*,3*" RowDefinitions="Auto, Auto">
+                        <Label Text="Attack mode" FontAttributes="Bold" VerticalOptions="Center" />
+                        <Picker ItemsSource="{Binding AttackModes}"
+                                ItemDisplayBinding="{Binding Name, Converter={StaticResource TranslationConverter}}"
+                                SelectedItem="{Binding SelectedAttackMode}"
+                                Grid.Column="1"
+                                Grid.ColumnSpan="2"/>
+                        <Button Grid.Row="1" Text="Initiate" Command="{Binding InitiateCommand}" />
+                        <Button Grid.Row="1" Grid.Column="1" Text="Attack" Command="{Binding AttackCommand}" />
+                        <Button Grid.Row="1" Grid.Column="2" Text="Roll Damage" Command="{Binding RollDamageCommand}" />
                     </Grid>
-                    
+
                     <Label Text="Place of attack" FontAttributes="Bold" Grid.Row="1" Grid.Column="0" />
                     <Label Text="{Binding PlaceOfAttack}" Grid.Row="1" Grid.Column="1" />
 

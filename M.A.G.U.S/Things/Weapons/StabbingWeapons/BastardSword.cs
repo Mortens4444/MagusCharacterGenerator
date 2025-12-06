@@ -7,18 +7,18 @@ public class BastardSword : Weapon, IMeleeWeapon
 {
     public double AttacksPerRound => 1;
 
-    public byte InitiatingValue => 4;
+    public int InitiatingValue => 4;
 
-    public byte AttackingValue => 13;
+    public int AttackingValue => 13;
 
-    public byte DefendingValue => 12;
+    public int DefendingValue => 12;
 
     public override double Weight => 2;
 
     public override Money Price => new(2, 5);
 
     [DiceThrow(ThrowType._2D6)]
-    public byte GetDamage() => (byte)DiceThrow._2D6();
+    public override int GetDamage() => DiceThrow._2D6();
 
     public override string Name => "Bastard sword";
 

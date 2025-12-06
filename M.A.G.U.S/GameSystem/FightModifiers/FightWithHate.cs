@@ -2,11 +2,11 @@
 
 public class FightWithHate : IFightModifier
 {
-    public short InitiatingValue => 3;
+    public int InitiatingValue => 3;
 
-    public short AttackingValue => 10;
+    public int AttackingValue => 10;
 
-    public short DefendingValue => -20;
+    public int DefendingValue => -20;
 
-    public short AimingValue => -20;
+    public int AimingValue => -20;
 }

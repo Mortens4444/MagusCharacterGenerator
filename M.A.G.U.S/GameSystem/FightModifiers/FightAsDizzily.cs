@@ -2,11 +2,11 @@
 
 public class FightAsDizzily : IFightModifier
 {
-    public short InitiatingValue => -15;
+    public int InitiatingValue => -15;
 
-    public short AttackingValue => -20;
+    public int AttackingValue => -20;
 
-    public short DefendingValue => -25;
+    public int DefendingValue => -25;
 
-    public short AimingValue => -30;
+    public int AimingValue => -30;
 }

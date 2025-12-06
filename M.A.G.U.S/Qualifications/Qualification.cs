@@ -4,7 +4,7 @@ namespace M.A.G.U.S.Qualifications;
 
 public abstract class Qualification
 {
-    public Qualification(QualificationLevel qualificationLevel = QualificationLevel.Base, byte level = 1)
+    public Qualification(QualificationLevel qualificationLevel = QualificationLevel.Base, int level = 1)
     {
         QualificationLevel = qualificationLevel;
         if (qualificationLevel == QualificationLevel.Base)
@@ -25,17 +25,17 @@ public abstract class Qualification
 
     public QualificationLevel QualificationLevel { get; set; }
 
-    public byte BaseQualificationLevel { get; private set; }
+    public int BaseQualificationLevel { get; private set; }
 
-    public byte MasterQualificationLevel { get; set; }
+    public int MasterQualificationLevel { get; set; }
 
-    public byte ActualLevel => QualificationLevel == QualificationLevel.Base ? BaseQualificationLevel : MasterQualificationLevel;
+    public int ActualLevel => QualificationLevel == QualificationLevel.Base ? BaseQualificationLevel : MasterQualificationLevel;
 
-    public virtual byte QpToBaseQualification { get; }
+    public virtual int QpToBaseQualification { get; }
 
-    public virtual byte? QpToMaxBaseQualification { get; }
+    public virtual int? QpToMaxBaseQualification { get; }
 
-    public virtual byte QpToMasterQualification { get; }
+    public virtual int QpToMasterQualification { get; }
 
 
     public Type QualificationType => GetType();

@@ -21,7 +21,6 @@ public static class ManaPoints
             MaxManaPointsPerLevel = 0,
             Sorcery = null
         };
-        //ushort maxManaPointsPerLevel = 0;
         foreach (var @class in character.Classes)
         {
             var sorcery = @class.SpecialQualifications.FirstOrDefault(specialQualification => specialQualification is Sorcery) as Sorcery;
@@ -29,7 +28,7 @@ public static class ManaPoints
             {
                 if (character.BaseClass is Bard)
                 {
-                    sorcery.ManaPoints = (ushort)MathHelper.GetAboveAverageValue(character.Intelligence);
+                    sorcery.ManaPoints = MathHelper.GetAboveAverageValue(character.Intelligence);
                 }
                 var manaPoints = sorcery.ManaPoints;
                 if (kyrLore != null)
@@ -49,7 +48,7 @@ public static class ManaPoints
                 {
                     result = new SorceryAttributes
                     {
-                        ManaPoints = (ushort)(manaPoints + extraManaPoints),
+                        ManaPoints = manaPoints + extraManaPoints,
                         MaxManaPointsPerLevel = sorcery.GetManaPointsModifier(),
                         Sorcery = sorcery
                     };

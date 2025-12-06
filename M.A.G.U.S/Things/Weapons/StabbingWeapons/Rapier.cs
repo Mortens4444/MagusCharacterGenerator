@@ -7,11 +7,11 @@ public class Rapier : Weapon, IMeleeWeapon
 {
     public double AttacksPerRound => 2;
 
-    public byte InitiatingValue => 9;
+    public int InitiatingValue => 9;
 
-    public byte AttackingValue => 12;
+    public int AttackingValue => 12;
 
-    public byte DefendingValue => 14;
+    public int DefendingValue => 14;
 
     public override double Weight => 0.8;
 
@@ -19,7 +19,7 @@ public class Rapier : Weapon, IMeleeWeapon
 
     [DiceThrow(ThrowType._1D6)]
     [DiceThrowModifier(2)]
-    public byte GetDamage() => (byte)(DiceThrow._1D6() + 2);
+    public override int GetDamage() => DiceThrow._1D6() + 2;
 
     public override string Description => "A very thin, elegant thrusting sword with a complex hilt to protect the hand. Used by duelists and fencing masters who prize speed and precision over brute force.";
 }

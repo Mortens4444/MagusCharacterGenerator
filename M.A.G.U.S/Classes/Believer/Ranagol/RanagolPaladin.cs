@@ -10,7 +10,7 @@ public class RanagolPaladin : Paladin
 {
     public RanagolPaladin() : base() { }
 
-    public RanagolPaladin(byte level) : base(level) { }
+    public RanagolPaladin(int level) : base(level) { }
 
     public override QualificationList Qualifications
     {

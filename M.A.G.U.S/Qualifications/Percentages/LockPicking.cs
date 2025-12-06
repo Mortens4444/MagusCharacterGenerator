@@ -2,7 +2,7 @@
 
 public class LockPicking : PercentQualification
 {
-    public LockPicking(byte percent)
+    public LockPicking(int percent)
         : base(percent)
     {
     }

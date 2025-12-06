@@ -46,7 +46,7 @@ class Program
 
 			var classes = magusCharacterGeneratorTypes
 				.Where(type => !type.IsAbstract && typeof(IClass).IsAssignableFrom(type))
-				.Select(classType => (IClass)Activator.CreateInstance(classType, (byte)1));
+				.Select(classType => (IClass)Activator.CreateInstance(classType, 1));
 			var selectedClass = classes.First(@class => @class.ToString().ToLower() == characterGenerationDto.Class);
 
 			var primaryClass = (IClass)Activator.CreateInstance(selectedClass.GetType(), Convert.ToByte(characterGenerationDto.Level));

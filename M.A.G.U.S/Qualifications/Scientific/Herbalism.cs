@@ -2,9 +2,9 @@
 
 namespace M.A.G.U.S.Qualifications.Scientific;
 
-public class Herbalism(QualificationLevel qualificationLevel = QualificationLevel.Base, byte level = 1) : Qualification(qualificationLevel, level)
+public class Herbalism(QualificationLevel qualificationLevel = QualificationLevel.Base, int level = 1) : Qualification(qualificationLevel, level)
 {
-    public override byte QpToBaseQualification => 5;
+    public override int QpToBaseQualification => 5;
 
-    public override byte QpToMasterQualification => 35;
+    public override int QpToMasterQualification => 35;
 }

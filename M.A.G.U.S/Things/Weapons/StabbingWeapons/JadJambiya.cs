@@ -7,11 +7,11 @@ public class JadJambiya : Weapon, IMeleeWeapon
 {
     public double AttacksPerRound => 2;
 
-    public byte InitiatingValue => 10;
+    public int InitiatingValue => 10;
 
-    public byte AttackingValue => 12;
+    public int AttackingValue => 12;
 
-    public byte DefendingValue => 15;
+    public int DefendingValue => 15;
 
     public override double Weight => 0.8;
 
@@ -19,7 +19,7 @@ public class JadJambiya : Weapon, IMeleeWeapon
 
     [DiceThrow(ThrowType._1D6)]
     [DiceThrowModifier(1)]
-    public byte GetDamage() => (byte)(DiceThrow._1D6() + 1);
+    public override int GetDamage() => DiceThrow._1D6() + 1;
 
     public override string Name => "Jad jambiya";
 

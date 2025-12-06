@@ -8,17 +8,17 @@ namespace M.A.G.U.S.Races;
 /// </summary>
 public class Goblin : Race
 {
-    public override sbyte Strength => -2;
+    public override int Strength => -2;
 
-    public override sbyte Dexterity => 3;
+    public override int Dexterity => 3;
 
-    public override sbyte Quickness => 3;
+    public override int Quickness => 3;
 
-    public override sbyte Beauty => -4;
+    public override int Beauty => -4;
 
-    public override sbyte Willpower => -1;
+    public override int Willpower => -1;
 
-    public override sbyte Astral => -2;
+    public override int Astral => -2;
 
     public override SpecialQualificationList SpecialQualifications =>
     [

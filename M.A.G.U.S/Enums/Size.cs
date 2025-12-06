@@ -11,4 +11,5 @@ public enum Size
     Small,
     Human,
     Big,
+    Huge
 }

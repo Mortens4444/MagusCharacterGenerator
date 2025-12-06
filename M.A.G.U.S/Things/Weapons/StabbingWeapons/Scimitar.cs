@@ -7,11 +7,11 @@ public class Scimitar : Weapon, IMeleeWeapon
 {
     public double AttacksPerRound => 1;
 
-    public byte InitiatingValue => 6;
+    public int InitiatingValue => 6;
 
-    public byte AttackingValue => 14;
+    public int AttackingValue => 14;
 
-    public byte DefendingValue => 15;
+    public int DefendingValue => 15;
 
     public override double Weight => 2;
 
@@ -19,7 +19,7 @@ public class Scimitar : Weapon, IMeleeWeapon
 
     [DiceThrow(ThrowType._1D6)]
     [DiceThrowModifier(3)]
-    public byte GetDamage() => (byte)(DiceThrow._1D6() + 3);
+    public override int GetDamage() => DiceThrow._1D6() + 3;
 
     public override string Name => "Sword, scimitar";
 

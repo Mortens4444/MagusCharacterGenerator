@@ -4,7 +4,7 @@ namespace M.A.G.U.S.Things.Weapons;
 
 public interface IRangedWeapon : IWeapon
 {
-    byte AimingValue { get; }
+    int AimingValue { get; }
 
-    ushort Distance { get; }
+    int Distance { get; }
 }

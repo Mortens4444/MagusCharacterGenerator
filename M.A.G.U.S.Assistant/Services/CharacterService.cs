@@ -18,4 +18,6 @@ internal class CharacterService(CharacterRepository characterRepository)
     public Task UpdateAsync(Character character) => characterRepository.UpdateCharacterAsync(character);
 
     public Task DeleteAsync(string name) => characterRepository.DeleteCharacterAsync(name);
+
+    public Task DeleteAllAsync() => characterRepository.DeleteAllCharacterAsync();
 }

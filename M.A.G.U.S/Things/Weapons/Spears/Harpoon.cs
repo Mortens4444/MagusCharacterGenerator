@@ -7,11 +7,11 @@ public class Harpoon : Weapon, IMeleeWeapon
 {
     public double AttacksPerRound => 1;
 
-    public byte InitiatingValue => 4;
+    public int InitiatingValue => 4;
 
-    public byte AttackingValue => 15;
+    public int AttackingValue => 15;
 
-    public byte DefendingValue => 10;
+    public int DefendingValue => 10;
 
     public override double Weight => 2;
 
@@ -19,7 +19,7 @@ public class Harpoon : Weapon, IMeleeWeapon
 
     [DiceThrow(ThrowType._1D10)]
     [DiceThrowModifier(1)]
-    public byte GetDamage() => (byte)(DiceThrow._1D10() + 1);
+    public override int GetDamage() => DiceThrow._1D10() + 1;
 
     public override string Name => "Trident";
 

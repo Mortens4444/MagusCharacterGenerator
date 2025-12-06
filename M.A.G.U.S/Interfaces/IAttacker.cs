@@ -2,11 +2,11 @@
 
 public interface IAttacker
 {
-    byte InitiatingBaseValue { get; }
+    int InitiatingBaseValue { get; }
 
-    byte AttackingBaseValue { get; }
+    int AttackingBaseValue { get; }
 
-    byte DefendingBaseValue { get; }
+    int DefendingBaseValue { get; }
 
-    byte AimingBaseValue { get; }
+    int AimingBaseValue { get; }
 }

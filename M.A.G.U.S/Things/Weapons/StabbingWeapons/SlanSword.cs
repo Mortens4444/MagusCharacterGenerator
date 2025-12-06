@@ -7,18 +7,18 @@ public class SlanSword : Weapon, IMeleeWeapon
 {
     public double AttacksPerRound => 1;
 
-    public byte InitiatingValue => 8;
+    public int InitiatingValue => 8;
 
-    public byte AttackingValue => 20;
+    public int AttackingValue => 20;
 
-    public byte DefendingValue => 12;
+    public int DefendingValue => 12;
 
     public override double Weight => 1.4;
 
     public override Money Price => new(100);
 
     [DiceThrow(ThrowType._1D10)]
-    public byte GetDamage() => (byte)(DiceThrow._1D10() + 2);
+    public override int GetDamage() => DiceThrow._1D10() + 2;
 
     public override string Name => "Slan sword";
 

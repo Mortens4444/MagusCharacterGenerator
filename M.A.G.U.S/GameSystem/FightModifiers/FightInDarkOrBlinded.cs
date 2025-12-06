@@ -2,11 +2,11 @@
 
 public class FightInDarkOrBlinded : IFightModifier
 {
-    public short InitiatingValue => -20;
+    public int InitiatingValue => -20;
 
-    public short AttackingValue => -60;
+    public int AttackingValue => -60;
 
-    public short DefendingValue => -70;
+    public int DefendingValue => -70;
 
-    public short AimingValue => -150;
+    public int AimingValue => -150;
 }

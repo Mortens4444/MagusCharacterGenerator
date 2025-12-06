@@ -2,7 +2,7 @@
 
 namespace M.A.G.U.S.Qualifications.Specialities;
 
-public class Ultravision(byte distanceInMeters) : SpecialQualification
+public class Ultravision(int distanceInMeters) : SpecialQualification
 {
-    public byte DistanceInMeters { get; } = distanceInMeters;
+    public int DistanceInMeters { get; } = distanceInMeters;
 }

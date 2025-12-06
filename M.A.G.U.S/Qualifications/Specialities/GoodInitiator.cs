@@ -2,7 +2,7 @@
 
 namespace M.A.G.U.S.Qualifications.Specialities;
 
-public class GoodInitiator(byte initiatingBase) : SpecialQualification
+public class GoodInitiator(int initiatingBase) : SpecialQualification
 {
-    public byte InitiatingBase { get; } = initiatingBase;
+    public int InitiatingBase { get; } = initiatingBase;
 }

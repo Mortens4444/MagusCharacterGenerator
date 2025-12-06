@@ -9,7 +9,7 @@ namespace M.A.G.U.S.Races;
 
 public class Jann : Race
 {
-    public override sbyte Intelligence => 2;
+    public override int Intelligence => 2;
 
     public override QualificationList Qualifications =>
     [
@@ -31,7 +31,7 @@ public class Jann : Race
         var result = new StringBuilder();
         result.Append(start[random.Next(start.Length)]);
 
-        var count = RandomProvider.GetSecureRandomShort(0, 2);
+        var count = RandomProvider.GetSecureRandomInt(0, 2);
         for (var i = 0; i < count; i++)
         {
             result.Append(middle[random.Next(middle.Length)]);

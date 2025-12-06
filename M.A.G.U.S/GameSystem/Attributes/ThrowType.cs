@@ -5,10 +5,40 @@ namespace M.A.G.U.S.GameSystem.Attributes;
 // New ThrowTypes should be implemented in DiceThrow.Throw method also and the description should be present in LanguageElements.ods.
 public enum ThrowType
 {
-	[Description("1D6")]
-	_1D6,
-	[Description("2D6")]
-	_2D6,
+    [Description("1D6")]
+    _1D6,
+    [Description("1D6")]
+    _1D6_Ranged,
+    [Description("2D6")]
+    _2D6,
+    [Description("2D6")]
+    _2D6_Ranged,
+    [Description("3D6")]
+    _3D6_Ranged,
+    [Description("4D6")]
+    _4D6_Ranged,
+    [Description("5D6")]
+    _5D6_Ranged,
+    [Description("6D6")]
+    _6D6_Ranged,
+    [Description("7D6")]
+    _7D6_Ranged,
+    [Description("8D6")]
+    _8D6_Ranged,
+    [Description("9D6")]
+    _9D6_Ranged,
+    [Description("10D6")]
+    _10D6_Ranged,
+    [Description("11D6")]
+    _11D6_Ranged,
+    [Description("12D6")]
+    _12D6_Ranged,
+    [Description("13D6")]
+    _13D6_Ranged,
+    [Description("14D6")]
+    _14D6_Ranged,
+    [Description("15D6")]
+    _15D6_Ranged,
     [Description("1D10")]
     _1D10,
     [Description("2D10")]
@@ -39,4 +69,26 @@ public enum ThrowType
     _4D10,
     [Description("10D10")]
     _10D10,
+    [Description("4D6")]
+    _4D6,
+    [Description("5D6")]
+    _5D6,
+    [Description("7D6")]
+    _7D6,
+    [Description("8D6")]
+    _8D6,
+    [Description("10D6")]
+    _10D6,
+    [Description("14D6")]
+    _14D6,
+    [Description("15D6")]
+    _15D6,
+    [Description("1D10")]
+    _1D10_Ranged,
+    [Description("2D10")]
+    _2D10_Ranged,
+    [Description("1D3")]
+    _1D3_Ranged,
+    [Description("1D5")]
+    _1D5_Ranged,
 }

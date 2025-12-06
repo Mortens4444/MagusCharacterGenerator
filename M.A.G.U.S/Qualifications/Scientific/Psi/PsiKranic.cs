@@ -3,7 +3,7 @@ using M.A.G.U.S.GameSystem.Qualifications;
 
 namespace M.A.G.U.S.Qualifications.Scientific.Psi;
 
-public class PsiKranic(QualificationLevel qualificationLevel = QualificationLevel.Base, byte level = 1) : Qualification(qualificationLevel, level), IPsi
+public class PsiKranic(QualificationLevel qualificationLevel = QualificationLevel.Base, int level = 1) : Qualification(qualificationLevel, level), IPsi
 {
     public PsiKind PsiKind => PsiKind.Kranich;
 

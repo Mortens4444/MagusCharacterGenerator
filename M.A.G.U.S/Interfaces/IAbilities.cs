@@ -2,27 +2,27 @@
 
 public interface IAbilities
 {
-    sbyte Strength { get; }
+    int Strength { get; }
 
-    sbyte Quickness { get; }
+    int Quickness { get; }
 
-    sbyte Dexterity { get; }
+    int Dexterity { get; }
 
-    sbyte Stamina { get; }
+    int Stamina { get; }
 
-    sbyte Health { get; }
+    int Health { get; }
 
-    sbyte Beauty { get; }
+    int Beauty { get; }
 
-    sbyte Intelligence { get; }
+    int Intelligence { get; }
 
-    sbyte Willpower { get; }
+    int Willpower { get; }
 
-    sbyte Astral { get; }
+    int Astral { get; }
 
-    sbyte Bravery { get; }
+    int Bravery { get; }
 
-    sbyte Erudition { get; }
+    int Erudition { get; }
 
-    sbyte Detection { get; }
+    int Detection { get; }
 }

@@ -2,11 +2,11 @@
 
 public class AttackFromAmbush : IFightModifier
 {
-    public short InitiatingValue => Int16.MaxValue;
+    public int InitiatingValue => Int16.MaxValue;
 
-    public short AttackingValue => 30;
+    public int AttackingValue => 30;
 
-    public short DefendingValue => 0;
+    public int DefendingValue => 0;
 
-    public short AimingValue => 10;
+    public int AimingValue => 10;
 }

@@ -6,6 +6,7 @@ using M.A.G.U.S.GameSystem.Runes;
 using M.A.G.U.S.Things;
 using M.A.G.U.S.Things.Gemstones;
 using M.A.G.U.S.Things.MagicalObjects;
+using Mtf.Extensions;
 using Mtf.LanguageService;
 using System.ComponentModel;
 
@@ -72,8 +73,8 @@ internal partial class DisplayItem : INotifyPropertyChanged
             {
                 Gemstone gemstone => gemstone.MultipliedPrice.ToTranslatedString() ?? String.Empty,
                 Thing thing => thing.MultipliedPrice?.ToTranslatedString() ?? String.Empty,
-                Rune rune => rune.Meaning ?? String.Empty,
-                Creature creature => Lng.Elem(creature.Occurrence.ToString()),
+                Rune rune => Lng.Elem(rune.Meaning) ?? String.Empty,
+                Creature creature => Lng.Elem(creature.Occurrence.GetDescription().ToString()),
                 _ => String.Empty
             };
         }

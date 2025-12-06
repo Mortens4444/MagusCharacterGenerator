@@ -2,12 +2,12 @@
 
 namespace M.A.G.U.S.Qualifications.Combat;
 
-public class ShieldUse(QualificationLevel qualificationLevel = QualificationLevel.Base, byte level = 1)
+public class ShieldUse(QualificationLevel qualificationLevel = QualificationLevel.Base, int level = 1)
     : Qualification(qualificationLevel, level)
 {
     public override string Name => "Shield use";
 
-    public override byte QpToBaseQualification => 5;
+    public override int QpToBaseQualification => 5;
 
-    public override byte QpToMasterQualification => 30;
+    public override int QpToMasterQualification => 30;
 }

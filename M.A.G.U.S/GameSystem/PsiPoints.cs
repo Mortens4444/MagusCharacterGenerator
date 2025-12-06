@@ -8,10 +8,10 @@ namespace M.A.G.U.S.GameSystem;
 
 public static class PsiPoints
 {
-    public const byte KyrModifier = 6;
-    public const byte SlanModifier = 5;
-    public const byte PyarronMasterModifier = 4;
-    public const byte PyarronBaseModifier = 3;
+    public const int KyrModifier = 6;
+    public const int SlanModifier = 5;
+    public const int PyarronMasterModifier = 4;
+    public const int PyarronBaseModifier = 3;
 
     public static PsiAttributes Calculate(Character character, ISettings? settings)
     {
@@ -25,7 +25,7 @@ public static class PsiPoints
         var extraPsiPoints = extraPsiPointsOnLevelUp == null ? 0 : extraPsiPointsOnLevelUp.ExtraPoints * character.BaseClass.Level;
 
         var currentLevel = character.BaseClass.Level;
-        ushort totalPsiPoints = 0;
+        int totalPsiPoints = 0;
 
         var allPsiSources = character.Qualifications.Concat(character.BaseClass.FutureQualifications)
                                                     .OfType<IPsi>();
@@ -59,7 +59,7 @@ public static class PsiPoints
             return new PsiAttributes { Psi = null, PsiPoints = 0, PsiPointsModifier = 0 };
         }
 
-        totalPsiPoints += (ushort)MathHelper.GetAboveAverageValue(character.Intelligence);
+        totalPsiPoints += MathHelper.GetAboveAverageValue(character.Intelligence);
 
         var kyrLore = character.Race.SpecialQualifications.GetSpeciality<KyrLore>();
         if (kyrLore != null)
@@ -68,9 +68,9 @@ public static class PsiPoints
         }
 
         bool isBasePsiInitialized = false;
-        byte currentBestModifier = 0;
+        int currentBestModifier = 0;
 
-        for (byte lvl = 1; lvl <= currentLevel; lvl++)
+        for (int lvl = 1; lvl <= currentLevel; lvl++)
         {
             var activeEvents = timeline.Where(e => e.Level <= lvl).ToList();
             if (activeEvents.Count == 0)
@@ -78,13 +78,13 @@ public static class PsiPoints
                 continue;
             }
 
-            byte maxModifierAtLevel = activeEvents.Max(e => e.Modifier);
+            int maxModifierAtLevel = activeEvents.Max(e => e.Modifier);
             currentBestModifier = maxModifierAtLevel;
             if (maxModifierAtLevel > 0)
             {
                 if (!isBasePsiInitialized)
                 {
-                    totalPsiPoints += (ushort)(maxModifierAtLevel + 1);
+                    totalPsiPoints += maxModifierAtLevel + 1;
                     isBasePsiInitialized = true;
                 }
 
@@ -103,12 +103,12 @@ public static class PsiPoints
         return new PsiAttributes
         {
             Psi = bestEvent?.SourceSkill,
-            PsiPoints = (ushort)(totalPsiPoints + extraPsiPoints),
+            PsiPoints = totalPsiPoints + extraPsiPoints,
             PsiPointsModifier = currentBestModifier
         };
     }
 
-    private static byte GetModifier(PsiKind kind, QualificationLevel level)
+    private static int GetModifier(PsiKind kind, QualificationLevel level)
     {
         if (kind == PsiKind.Kyr)
         {

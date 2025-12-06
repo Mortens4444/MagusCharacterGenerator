@@ -2,13 +2,13 @@
 
 public sealed class FightModifier : IFightModifier
 {
-    public short InitiatingValue { get; set; }
+    public int InitiatingValue { get; set; }
 
-    public short AttackingValue { get; set; }
+    public int AttackingValue { get; set; }
 
-    public short DefendingValue { get; set; }
+    public int DefendingValue { get; set; }
 
-    public short AimingValue { get; set; }
+    public int AimingValue { get; set; }
 
-    public short CombatModifier { get; set; }
+    public int CombatModifier { get; set; }
 }

@@ -2,9 +2,9 @@
 
 namespace M.A.G.U.S.Qualifications.Underworld;
 
-public class Backstab(QualificationLevel qualificationLevel = QualificationLevel.Base, byte level = 1) : Qualification(qualificationLevel, level)
+public class Backstab(QualificationLevel qualificationLevel = QualificationLevel.Base, int level = 1) : Qualification(qualificationLevel, level)
 {
-    public override byte QpToBaseQualification => 10;
+    public override int QpToBaseQualification => 10;
 
-    public override byte QpToMasterQualification => 25;
+    public override int QpToMasterQualification => 25;
 }

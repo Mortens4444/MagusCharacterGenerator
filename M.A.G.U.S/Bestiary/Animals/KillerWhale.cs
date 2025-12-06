@@ -25,9 +25,9 @@ public sealed class KillerWhale : Creature
     public override string Name => "Killer whale";
 
     [DiceThrow(ThrowType._3D10)]
-    public override byte GetDamage() => (byte)DiceThrow._3D10();
+    public override int GetDamage() => DiceThrow._3D10();
 
 
     [DiceThrow(ThrowType._1D6)]
-    public override byte GetNumberAppearing() => (byte)DiceThrow._1D6();
+    public override int GetNumberAppearing() => DiceThrow._1D6();
 }

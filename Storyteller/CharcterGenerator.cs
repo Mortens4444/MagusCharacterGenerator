@@ -102,7 +102,7 @@ public partial class CharcterGenerator : Form
 
 		var classesWithTypes = magusCharacterGeneratorTypes
 			.Where(type => !type.IsAbstract && typeof(IClass).IsAssignableFrom(type))
-            .Select(classType => (Class: Activator.CreateInstance(classType, (byte)1), Type: classType))
+            .Select(classType => (Class: Activator.CreateInstance(classType, 1), Type: classType))
 			.OrderBy(classWithType => classWithType.Class.ToString());
 
 		foreach (var classWithTypes in classesWithTypes)
@@ -136,10 +136,10 @@ public partial class CharcterGenerator : Form
 			tbName.Text = characterName;
 
 			var race = (IRace)Activator.CreateInstance(selectedRace);
-			var @class = (IClass)Activator.CreateInstance(selectedClass, (byte)nudLevel.Value);
+			var @class = (IClass)Activator.CreateInstance(selectedClass, (int)nudLevel.Value);
 			if (selectedSecondaryClass != null && chkBoxSecondaryClass.Checked)
 			{
-				var secondaryClass = (IClass)Activator.CreateInstance(selectedSecondaryClass, (byte)nudSecondaryClassLevel.Value);
+				var secondaryClass = (IClass)Activator.CreateInstance(selectedSecondaryClass, (int)nudSecondaryClassLevel.Value);
 				var created = Activator.CreateInstance(typeof(Character), characterName, race, @class, secondaryClass);
 				if (created is not Character c)
                 {
@@ -350,7 +350,7 @@ public partial class CharcterGenerator : Form
 			return;
 		}
 
-		var @class = (IClass)Activator.CreateInstance(selectedClass, (byte)nudLevel.Value);
+		var @class = (IClass)Activator.CreateInstance(selectedClass, (int)nudLevel.Value);
 		var race = (IRace)Activator.CreateInstance(selectedRace);
         SetDiceThrowLabel(@class, race, nameof(@class.Strength), lblStrengthDiceThrow);
         SetDiceThrowLabel(@class, race, nameof(@class.Quickness), lblSpeedDiceThrow);
@@ -369,10 +369,10 @@ public partial class CharcterGenerator : Form
 	private static void SetDiceThrowLabel(IClass @class, IRace race, string propertyName, Label label)
 	{
 		var classAttributes = @class.GetCustomAttributes(propertyName);
-		var diceThrow = classAttributes.GetAttribute<DiceThrowAttribute>();
-            var diceThrowModifier = classAttributes.GetAttribute<DiceThrowModifierAttribute>();
-		var specialTrainingAttribute = classAttributes.GetAttribute<SpecialTrainingAttribute>();
-		label.Text = Lng.Elem(diceThrow.DiceThrowType.GetDescription());
+		var diceThrow = classAttributes?.GetAttribute<DiceThrowAttribute>();
+        var diceThrowModifier = classAttributes?.GetAttribute<DiceThrowModifierAttribute>();
+		var specialTrainingAttribute = classAttributes?.GetAttribute<SpecialTrainingAttribute>();
+		label.Text = Lng.Elem(diceThrow?.DiceThrowType.GetDescription()) ?? String.Empty;
 		if (diceThrowModifier != null)
 		{
 			label.Text += $" + {diceThrowModifier.Modifier}";
@@ -385,7 +385,7 @@ public partial class CharcterGenerator : Form
 		{
 			label.Text += " (2x)";
 		}
-		var raceModifier = race.GetPropertyShortValue(propertyName);
+		var raceModifier = race.GetIntPropertyValue(propertyName);
 		if (raceModifier != 0)
 		{
 			label.Text += raceModifier < 0 ? $" - {Math.Abs(raceModifier)}" : $" + {raceModifier}";
@@ -444,42 +444,42 @@ public partial class CharcterGenerator : Form
 
 	private void NudHealth_ValueChanged(object sender, EventArgs e)
 	{
-		character.Health = (sbyte)nudHealth.Value;
+		character.Health = (int)nudHealth.Value;
 	}
 
 	private void NudStamina_ValueChanged(object sender, EventArgs e)
 	{
-		character.Stamina = (sbyte)nudStamina.Value;
+		character.Stamina = (int)nudStamina.Value;
 	}
 
 	private void NudWillpower_ValueChanged(object sender, EventArgs e)
 	{
-		character.Willpower = (sbyte)nudWillpower.Value;
+		character.Willpower = (int)nudWillpower.Value;
 	}
 
 	private void NudStrength_ValueChanged(object sender, EventArgs e)
 	{
-		character.Strength = (sbyte)nudStrength.Value;
+		character.Strength = (int)nudStrength.Value;
 	}
 
 	private void NudSpeed_ValueChanged(object sender, EventArgs e)
 	{
-		character.Quickness = (sbyte)nudSpeed.Value;
+		character.Quickness = (int)nudSpeed.Value;
 	}
 
 	private void NudDexterity_ValueChanged(object sender, EventArgs e)
 	{
-		character.Dexterity = (sbyte)nudDexterity.Value;
+		character.Dexterity = (int)nudDexterity.Value;
 	}
 
 	private void NudAstral_ValueChanged(object sender, EventArgs e)
 	{
-		character.Astral = (sbyte)nudAstral.Value;
+		character.Astral = (int)nudAstral.Value;
 	}
 
 	private void NudIntelligence_ValueChanged(object sender, EventArgs e)
 	{
-		character.Intelligence = (sbyte)nudIntelligence.Value;
+		character.Intelligence = (int)nudIntelligence.Value;
 	}
 
 	private void BtnBrowse_Click(object sender, EventArgs e)

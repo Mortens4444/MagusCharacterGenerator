@@ -20,7 +20,7 @@ internal class DiceStat
             var normalizedFormula = Formula.EndsWith("_2_Times", StringComparison.Ordinal)
                 ? Formula[..Formula.IndexOf("_2_Times", StringComparison.Ordinal)] + " " + Lng.Elem("(2 times)")
                 : Formula;
-            return $"{normalizedFormula}{modPart}{specialPart}";
+            return $"{Lng.Elem(normalizedFormula)}{modPart}{specialPart}";
         }
     }
 

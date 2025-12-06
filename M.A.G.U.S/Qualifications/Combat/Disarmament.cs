@@ -2,9 +2,9 @@
 
 namespace M.A.G.U.S.Qualifications.Combat;
 
-public class Disarmament(QualificationLevel qualificationLevel = QualificationLevel.Base, byte level = 1) : Qualification(qualificationLevel, level)
+public class Disarmament(QualificationLevel qualificationLevel = QualificationLevel.Base, int level = 1) : Qualification(qualificationLevel, level)
 {
-    public override byte QpToBaseQualification => 7;
+    public override int QpToBaseQualification => 7;
 
-    public override byte QpToMasterQualification => 18;
+    public override int QpToMasterQualification => 18;
 }

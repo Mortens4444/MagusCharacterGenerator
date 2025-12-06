@@ -7,5 +7,5 @@ public class Flight : SpecialQualification
 {
     private readonly DiceThrow diceThrow = new();
 
-    public byte FlightSpeed => (byte)(60 + diceThrow._1D10());
+    public int FlightSpeed => 60 + diceThrow._1D10();
 }

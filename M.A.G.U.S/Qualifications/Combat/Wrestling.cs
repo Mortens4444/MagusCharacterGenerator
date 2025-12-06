@@ -2,10 +2,10 @@
 
 namespace M.A.G.U.S.Qualifications.Combat;
 
-public class Wrestling(QualificationLevel qualificationLevel = QualificationLevel.Base, byte level = 1)
+public class Wrestling(QualificationLevel qualificationLevel = QualificationLevel.Base, int level = 1)
 	: Qualification(qualificationLevel, level)
 {
-    public override byte QpToBaseQualification => 8;
+    public override int QpToBaseQualification => 8;
 
-    public override byte QpToMasterQualification => 15;
+    public override int QpToMasterQualification => 15;
 }

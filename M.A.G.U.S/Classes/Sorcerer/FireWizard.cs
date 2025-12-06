@@ -16,78 +16,78 @@ public class FireWizard : Class, IClass, ILikeMagic
 {
     public FireWizard() : base(1) { }
 
-    public FireWizard(byte level) : base(level)
+    public FireWizard(int level) : base(level)
     {
         GenerateSkills();
     }
 
     [DiceThrow(ThrowType._2D6)]
     [DiceThrowModifier(6)]
-    public override sbyte Strength { get; set; }
+    public override int Strength { get; set; }
 
     [DiceThrow(ThrowType._3D6_2_Times)]
-    public override sbyte Quickness { get; set; }
+    public override int Quickness { get; set; }
 
     [DiceThrow(ThrowType._3D6_2_Times)]
-    public override sbyte Dexterity { get; set; }
+    public override int Dexterity { get; set; }
 
     [DiceThrow(ThrowType._2D6)]
     [DiceThrowModifier(6)]
-    public override sbyte Stamina { get; set; }
+    public override int Stamina { get; set; }
 
     [DiceThrow(ThrowType._2D6)]
     [DiceThrowModifier(6)]
-    public override sbyte Health { get; set; }
+    public override int Health { get; set; }
 
     [DiceThrow(ThrowType._3D6)]
-    public override sbyte Beauty { get; set; }
+    public override int Beauty { get; set; }
 
     [DiceThrow(ThrowType._2D6)]
     [DiceThrowModifier(6)]
-    public override sbyte Intelligence { get; set; }
+    public override int Intelligence { get; set; }
 
     [DiceThrow(ThrowType._2D6)]
     [DiceThrowModifier(6)]
-    public override sbyte Willpower { get; set; }
+    public override int Willpower { get; set; }
 
     [DiceThrow(ThrowType._2D6)]
     [DiceThrowModifier(6)]
-    public override sbyte Astral { get; set; }
+    public override int Astral { get; set; }
 
     [DiceThrow(ThrowType._3D6)]
-    public override byte Gold { get; set; }
+    public override int Gold { get; set; }
 
     [DiceThrow(ThrowType._2D6)]
     [DiceThrowModifier(8)]
-    public override sbyte Bravery { get; set; }
+    public override int Bravery { get; set; }
 
     [DiceThrow(ThrowType._2D6)]
     [DiceThrowModifier(8)]
-    public override sbyte Erudition { get; set; }
+    public override int Erudition { get; set; }
 
     [DiceThrow(ThrowType._2D6)]
     [DiceThrowModifier(6)]
-    public override sbyte Detection { get; set; }
+    public override int Detection { get; set; }
 
-    public override byte InitiatingBaseValue => 6;
+    public override int InitiatingBaseValue => 6;
 
-    public override byte AttackingBaseValue => 17;
+    public override int AttackingBaseValue => 17;
 
-    public override byte DefendingBaseValue => 72;
+    public override int DefendingBaseValue => 72;
 
-    public override byte AimingBaseValue => 0;
+    public override int AimingBaseValue => 0;
 
-    public override byte FightValueModifier => 8;
+    public override int FightValueModifier => 8;
 
-    public override byte BaseQualificationPoints => 3;
+    public override int BaseQualificationPoints => 3;
 
-    public override byte QualificationPointsModifier => 5;
+    public override int QualificationPointsModifier => 5;
 
-    public override byte PercentQualificationModifier => 0;
+    public override int PercentQualificationModifier => 0;
 
-    public override byte BaseLifePoints => 5;
+    public override int BaseLifePoints => 5;
 
-    public override byte BasePainTolerancePoints => 4;
+    public override int BasePainTolerancePoints => 4;
 
     public override bool AddFightValueOnFirstLevel => false;
 
@@ -118,7 +118,7 @@ public class FireWizard : Class, IClass, ILikeMagic
 
     [DiceThrow(ThrowType._1D6)]
     [DiceThrowModifier(1)]
-    public override byte GetPainToleranceModifier() => (byte)(DiceThrow._1D6() + 1);
+    public override int GetPainToleranceModifier() => DiceThrow._1D6() + 1;
 
     public override string Name => "Fire Mage";
 }

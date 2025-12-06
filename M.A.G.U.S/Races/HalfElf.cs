@@ -8,9 +8,9 @@ namespace M.A.G.U.S.Races;
 
 public class HalfElf : Race, IUseRangedWeapons
 {
-    public override sbyte Strength => -1;
+    public override int Strength => -1;
 
-    public override sbyte Quickness => 1;
+    public override int Quickness => 1;
 
     public override QualificationList Qualifications =>
     [

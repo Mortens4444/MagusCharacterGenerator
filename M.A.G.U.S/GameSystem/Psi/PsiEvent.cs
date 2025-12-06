@@ -2,9 +2,9 @@
 
 public class PsiEvent
 {
-    public byte Level { get; set; }
+    public int Level { get; set; }
 
-    public byte Modifier { get; set; }
+    public int Modifier { get; set; }
 
     public IPsi SourceSkill { get; set; }
 }

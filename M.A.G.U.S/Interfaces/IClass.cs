@@ -6,25 +6,25 @@ public interface IClass : IAttacker, IAbilities
 {
     string Name { get; }
 
-    byte Gold { get; }
+    int Gold { get; }
 
-    byte Level { get; }
+    int Level { get; }
 
-    byte FightValueModifier { get; }
+    int FightValueModifier { get; }
 
-    byte BaseQualificationPoints { get; }
+    int BaseQualificationPoints { get; }
 
-    byte QualificationPointsModifier { get; }
+    int QualificationPointsModifier { get; }
 
-    byte PercentQualificationModifier { get; }
+    int PercentQualificationModifier { get; }
 
-    byte BaseLifePoints { get; }
+    int BaseLifePoints { get; }
 
-    byte AstralMagicResistance { get; }
+    int AstralMagicResistance { get; }
 
-    byte MentalMagicResistance { get; }
+    int MentalMagicResistance { get; }
 
-    byte BasePainTolerancePoints { get; }
+    int BasePainTolerancePoints { get; }
 
     bool AddFightValueOnFirstLevel { get; }
 
@@ -40,7 +40,7 @@ public interface IClass : IAttacker, IAbilities
 
     SpecialQualificationList SpecialQualifications { get; }
 
-    byte GetPainToleranceModifier();
+    int GetPainToleranceModifier();
 
     ulong ExperiencePoints { get; }
 }

@@ -2,11 +2,11 @@
 
 public class FightInSemiDarkness : IFightModifier
 {
-    public short InitiatingValue => -15;
+    public int InitiatingValue => -15;
 
-    public short AttackingValue => -30;
+    public int AttackingValue => -30;
 
-    public short DefendingValue => -35;
+    public int DefendingValue => -35;
 
-    public short AimingValue => -70;
+    public int AimingValue => -70;
 }

@@ -20,7 +20,7 @@ namespace M.A.G.U.S.Test
                 Value = 1,
                 Date = DateTime.MaxValue,
                 Name = "Anuman",
-                Lst = new List<byte> { 1, 2, 3 },
+                Lst = new List<int> { 1, 2, 3 },
                 Lng = new LanguageLore(Language.Kranich, 3),
                 Class = new ArelPriest(1),
                 Race = new Orc(),
@@ -55,7 +55,7 @@ namespace M.A.G.U.S.Test
 			Assert.That(character.Classes, Is.Not.Null);
 		}
 
-        private static Character GetCharacter(string name, IRace race, Type classType, byte level)
+        private static Character GetCharacter(string name, IRace race, Type classType, int level)
         {
             Character? character = null;
             do

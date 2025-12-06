@@ -5,14 +5,13 @@ using M.A.G.U.S.Assistant.Interfaces;
 using M.A.G.U.S.Assistant.Services;
 using M.A.G.U.S.Bestiary;
 using M.A.G.U.S.Enums;
-using M.A.G.U.S.GameSystem.Attributes;
+using M.A.G.U.S.GameSystem;
+using M.A.G.U.S.Things.Weapons;
 using M.A.G.U.S.Utils;
 using Mtf.Extensions;
 using Mtf.Extensions.Services;
 using Mtf.LanguageService;
 using Mtf.Maui.Controls.Models;
-using System.Globalization;
-using System.Reflection;
 using System.Windows.Input;
 
 namespace M.A.G.U.S.Assistant.ViewModels;
@@ -22,6 +21,7 @@ internal partial class CreatureDetailsViewModel : ObservableObject
     private readonly ISoundPlayer soundPlayer;
 
     public Creature Creature { get; init; }
+    public Attack SelectedAttackMode { get; set; }
 
     public ICommand InitiateCommand { get; }
     public ICommand AttackCommand { get; }
@@ -31,27 +31,11 @@ internal partial class CreatureDetailsViewModel : ObservableObject
     {
         this.soundPlayer = soundPlayer;
         Creature = creature ?? throw new ArgumentNullException(nameof(creature));
+        SelectedAttackMode = AttackModes.First();
         IsSoundAvailable = Creature.Sounds.Any(s => !String.IsNullOrWhiteSpace(s) && EmbeddedResourceHelper.HasEmbeddedSound(s));
 
         var method = creature.GetType().GetMethod(nameof(creature.GetNumberAppearing));
-        var throwType = method?.GetCustomAttribute<DiceThrowAttribute>()?.DiceThrowType;
-        var modifier = method?.GetCustomAttribute<DiceThrowModifierAttribute>()?.Modifier;
-
-        var rolled = creature.GetNumberAppearing();
-
-        if (throwType != null)
-        {
-            var desc = Lng.Elem(throwType.Value.GetDescription());
-            var modText = modifier.HasValue && modifier.Value != 0
-                ? (modifier.Value > 0 ? $" + {modifier.Value}" : $" - {Math.Abs(modifier.Value)}")
-                : String.Empty;
-
-            NumberAppearing = $"{desc}{modText} = {rolled.ToString(CultureInfo.InvariantCulture)}";
-        }
-        else
-        {
-            NumberAppearing = rolled.ToString(CultureInfo.InvariantCulture);
-        }
+        NumberAppearing = DiceThrowFormatter.FormatResult(method, () => creature.GetNumberAppearing());
 
         InitiateCommand = new Command(OnInitiate);
         AttackCommand = new Command(OnAttack);
@@ -66,9 +50,10 @@ internal partial class CreatureDetailsViewModel : ObservableObject
     public int AttackValue => Creature.AttackValue;
     public int DefenseValue => Creature.DefenseValue;
     public int InitiatingValue => Creature.InitiatingValue;
-    public byte? HealthPoints => Creature.HealthPoints;
-    public byte? PainTolerancePoints => Creature.PainTolerancePoints;
-    public byte? PoisonResistance => Creature.PoisonResistance;
+    public string HealthPoints => Creature.DisplayHealthPoints;
+    public string PainTolerancePoints => Creature.DisplayPainTolerancePoints;
+    public IList<Attack> AttackModes => Creature.AttackModes;
+    public int? PoisonResistance => Creature.PoisonResistance;
     public uint ExperiencePoints => Creature.ExperiencePoints;
     public double AttacksPerRound => Creature.AttacksPerRound;
     public string Image => Creature.Images.Length - 1 != 0 ? Creature.Images[RandomProvider.GetSecureRandomInt(0, Creature.Images.Length)] : Creature.Images[0];
@@ -145,12 +130,17 @@ internal partial class CreatureDetailsViewModel : ObservableObject
 
     private void OnAttack()
     {
+        if (SelectedAttackMode == null)
+        {
+            return;
+        }
+
         try
         {
             hitLocation = HitLocationSelector.Get();
             PlaceOfAttack = Lng.Elem(hitLocation.GetDescription());
-            LastActionName = Lng.Elem("Attack");
-            var (impact, value) = Creature.GetAttack();
+            LastActionName = $"{Lng.Elem(SelectedAttackMode is MeleeAttack ? "Melee attack" : "Ranged attack")} - {Lng.Elem(SelectedAttackMode.Name)}";
+            var (impact, value) = SelectedAttackMode.GetAttack();
             LastAction = impact == AttackImpact.Normal ? value.ToString() : $"{Lng.Elem(impact.ToString())} {value}";
         }
         catch (Exception ex)
@@ -164,10 +154,48 @@ internal partial class CreatureDetailsViewModel : ObservableObject
     {
         try
         {
-            var dmg = Creature.GetDamage();
-            var final = (byte)(hitLocation == M.A.G.U.S.Enums.PlaceOfAttack.Head ? dmg * 2 : dmg);
-            LastActionName = Lng.Elem("Damage");
-            LastAction = final.ToString();
+            var doubleDamage = hitLocation == M.A.G.U.S.Enums.PlaceOfAttack.Head;
+            var dmg = SelectedAttackMode.GetDamage();
+            var final = doubleDamage ? dmg * 2 : dmg;
+
+            if (AttackModes.Count == 1)
+            {
+                var method = Creature.GetType().GetMethod(nameof(Creature.GetDamage));
+                LastAction = DiceThrowFormatter.FormatResult(method, final);
+            }
+            else
+            {
+                if (SelectedAttackMode is MeleeAttack meleeAttack)
+                {
+                    if (meleeAttack.Weapon is BodyPart bodyPart)
+                    {
+                        LastAction = DiceThrowFormatter.FormatResult(final, bodyPart.ThrowType, bodyPart.Modifier);
+                    }
+                    else
+                    {
+                        var method = meleeAttack.Weapon.GetType().GetMethod(nameof(meleeAttack.Weapon.GetDamage));
+                        LastAction = DiceThrowFormatter.FormatResult(method, final);
+                    }
+                }
+                else if (SelectedAttackMode is RangeAttack rangeAttack)
+                {
+                    if (rangeAttack.Weapon is BreathWeaponcs breathWeaponcs)
+                    {
+                        LastAction = DiceThrowFormatter.FormatResult(final, breathWeaponcs.ThrowType, breathWeaponcs.Modifier);
+                    }
+                    else
+                    {
+                        var method = rangeAttack.Weapon.GetType().GetMethod(nameof(meleeAttack.Weapon.GetDamage));
+                        LastAction = DiceThrowFormatter.FormatResult(method, final);
+                    }
+                }
+                else
+                {
+                    LastAction = final.ToString();
+                }
+            }
+
+            LastActionName = doubleDamage ? $"{Lng.Elem("Double damage")} - {Lng.Elem(SelectedAttackMode.Name)}" : $"{Lng.Elem("Damage")} - {Lng.Elem(SelectedAttackMode.Name)}";
         }
         catch (Exception ex)
         {

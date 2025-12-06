@@ -4,13 +4,15 @@ namespace M.A.G.U.S.Interfaces;
 
 public interface IWeapon
 {
+    string Name { get; }
+
     double AttacksPerRound { get; }
 
-    byte InitiatingValue { get; }
+    int InitiatingValue { get; }
 
     double Weight { get; }
 
     Money Price { get; }
 
-    byte GetDamage();
+    int GetDamage();
 }

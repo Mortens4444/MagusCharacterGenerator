@@ -2,11 +2,11 @@
 
 public class Charge : IFightModifier
 {
-    public short InitiatingValue => 0;
+    public int InitiatingValue => 0;
 
-    public short AttackingValue => 20;
+    public int AttackingValue => 20;
 
-    public short DefendingValue => -25;
+    public int DefendingValue => -25;
 
-    public short AimingValue => -30;
+    public int AimingValue => -30;
 }

@@ -2,7 +2,7 @@
 
 public class Jumping : PercentQualification
 {
-    public Jumping(byte percent)
+    public Jumping(int percent)
         : base(percent)
     {
     }

@@ -120,6 +120,12 @@ internal class CharacterRepository(DatabaseContext context)
         }
     }
 
+    public async Task DeleteAllCharacterAsync()
+    {
+        var connection = await context.GetConnectionAsync().ConfigureAwait(false);
+        await connection.DeleteAllAsync<CharacterEntity>().ConfigureAwait(false);
+    }
+
     private async Task<CharacterEntity?> GetEntityByNameAsync(string name)
     {
         var connection = await context.GetConnectionAsync().ConfigureAwait(false);

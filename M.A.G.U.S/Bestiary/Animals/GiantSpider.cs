@@ -25,7 +25,7 @@ public sealed class GiantSpider : Creature
     public override string Name => "Giant spider";
 
     [DiceThrow(ThrowType._1D3)]
-    public override byte GetDamage() => (byte)DiceThrow._1D3();
+    public override int GetDamage() => DiceThrow._1D3();
 
-    public override byte GetNumberAppearing() => 1;
+    public override int GetNumberAppearing() => 1;
 }

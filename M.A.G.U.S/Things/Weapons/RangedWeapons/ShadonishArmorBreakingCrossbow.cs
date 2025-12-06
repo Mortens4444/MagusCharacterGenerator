@@ -1,4 +1,5 @@
-﻿using M.A.G.U.S.GameSystem.Valuables;
+﻿using M.A.G.U.S.GameSystem.Attributes;
+using M.A.G.U.S.GameSystem.Valuables;
 
 namespace M.A.G.U.S.Things.Weapons.RangedWeapons;
 
@@ -6,17 +7,18 @@ public class ShadonishArmorBreakingCrossbow : Weapon, IRangedWeapon
 {
     public double AttacksPerRound => 1 / 5;
 
-    public byte InitiatingValue => 0;
+    public int InitiatingValue => 0;
 
-    public byte AimingValue => 17;
+    public int AimingValue => 17;
 
-    public ushort Distance => 80;
+    public int Distance => 80;
 
     public override double Weight => 8;
 
     public override Money Price => new(40);
 
-    public byte GetDamage() => (byte)DiceThrow._2D10_RangedAttack();
+    [DiceThrow(ThrowType._2D10_Ranged)]
+    public override int GetDamage() => DiceThrow._2D10_RangedAttack();
 
     public override string Name => "Shadonian armor-piercing crossbow";
 

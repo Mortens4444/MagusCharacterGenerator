@@ -7,18 +7,18 @@ public class Garrote : Weapon, IMeleeWeapon
 {
     public double AttacksPerRound => 1;
 
-    public byte InitiatingValue => 0;
+    public int InitiatingValue => 0;
 
-    public byte AttackingValue => 5;
+    public int AttackingValue => 5;
 
-    public byte DefendingValue => 0;//-20;
+    public int DefendingValue => 0;//-20;
 
     public override double Weight => 0.1;
 
     public override Money Price => new(0, 1);
 
     [DiceThrow(ThrowType._1D10)]
-    public byte GetDamage() => (byte)DiceThrow._1D10();
+    public override int GetDamage() => DiceThrow._1D10();
 
     public override string Description => "A loop of wire or fine cord used to strangle a foe silently and quickly. The weapon of assassins and silent killers.";
 }

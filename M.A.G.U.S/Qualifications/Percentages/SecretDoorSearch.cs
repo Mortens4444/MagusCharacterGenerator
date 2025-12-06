@@ -2,7 +2,7 @@
 
 public class SecretDoorSearch : PercentQualification
 {
-    public SecretDoorSearch(byte percent)
+    public SecretDoorSearch(int percent)
         : base(percent)
     {
     }

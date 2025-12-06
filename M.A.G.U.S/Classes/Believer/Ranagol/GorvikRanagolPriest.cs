@@ -9,7 +9,7 @@ public class GorvikRanagolPriest : Priest
 {
     public GorvikRanagolPriest() : base() { }
 
-    public GorvikRanagolPriest(byte level) : base(level) { }
+    public GorvikRanagolPriest(int level) : base(level) { }
 
     public override QualificationList Qualifications
     {

@@ -1,38 +1,80 @@
 ﻿using M.A.G.U.S.Enums;
 using M.A.G.U.S.GameSystem;
+using M.A.G.U.S.GameSystem.Attributes;
 using M.A.G.U.S.GameSystem.Psi;
+using M.A.G.U.S.Things.Weapons;
+using System.Reflection;
 
 namespace M.A.G.U.S.Bestiary;
 
 public abstract class Creature
 {
+    private const string PrimaryAttack = "Primary attack";
+
     public Occurrence Occurrence { get; protected set; }
-    
+
     public Intelligence Intelligence { get; protected set; }
-    
+
     public Size Size { get; protected set; }
 
-    public byte ArmorClass { get; protected set; }
+    public int ArmorClass { get; protected set; }
 
-    public byte Speed { get; protected set; }
+    public int Speed { get; protected set; }
 
-    public byte AttackValue { get; protected set; }
+    private List<Attack>? attackModes;
 
-    public byte DefenseValue { get; protected set; }
+    public virtual List<Attack> AttackModes
+    {
+        get
+        {
+            if (attackModes == null)
+            {
+                attackModes = [];
 
-    public byte InitiatingValue { get; protected set; }
+                var method = GetType().GetMethod(nameof(GetDamage));
+                var throwAttr = method.GetCustomAttribute<DiceThrowAttribute>();
+                if (throwAttr == null)
+                {
+                    attackModes.Add(new MeleeAttack(PrimaryAttack, AttackValue, GetDamage));
+                }
+                else
+                {
+                    var modAttr = method.GetCustomAttribute<DiceThrowModifierAttribute>();
+                    var modifier = modAttr?.Modifier ?? 0;
+                    attackModes.Add(new MeleeAttack(new BodyPart(PrimaryAttack, throwAttr.DiceThrowType, modifier), AttackValue));
+                }
+            }
 
-    public byte? AimingValue { get; protected set; }
+            return attackModes;
+        }
+        protected set => attackModes = value;
+    }
 
-    public byte? AstralMagicResistance { get; protected set; }
+    public int AttackValue { get; protected set; }
 
-    public byte? MentalMagicResistance { get; protected set; }
+    public int DefenseValue { get; protected set; }
 
-    public byte? PoisonResistance { get; protected set; }
+    public int InitiatingValue { get; protected set; }
 
-    public byte? HealthPoints { get; protected set; }
+    public int? AimingValue { get; protected set; }
 
-    public byte? PainTolerancePoints { get; protected set; }
+    public int? AstralMagicResistance { get; protected set; }
+
+    public int? MentalMagicResistance { get; protected set; }
+
+    public int? PoisonResistance { get; protected set; }
+
+    public int? HealthPoints { get; protected set; }
+
+    public int? MinHealthPoints { get; protected set; }
+
+    public int? MaxHealthPoints { get; protected set; }
+
+    public int? PainTolerancePoints { get; protected set; }
+
+    public int? MinPainTolerancePoints { get; protected set; }
+
+    public int? MaxPainTolerancePoints { get; protected set; }
 
     public uint ExperiencePoints { get; protected set; }
 
@@ -48,15 +90,15 @@ public abstract class Creature
     
     public IPsi Psi { get; set; }
 
-    public byte PsiPoints { get; set; }
+    public int PsiPoints { get; set; }
 
-    public byte ManaPoints { get; set; }
+    public int ManaPoints { get; set; }
 
     protected readonly DiceThrow DiceThrow = new();
 
     protected Creature() { }
 
-    public abstract byte GetDamage();
+    public abstract int GetDamage();
 
     public int GetInitiate()
     {
@@ -64,14 +106,33 @@ public abstract class Creature
         return InitiatingValue + roll;
     }
     
-    public (AttackImpact impact, int value) GetAttack()
-    {
-        var roll = DiceThrow._1D100();
-        var impact = roll == 100 ? AttackImpact.Critical : roll == 1 ? AttackImpact.Fatal : AttackImpact.Normal;
-        return (impact, AttackValue + roll);
-    }
-
-    public abstract byte GetNumberAppearing();
+    public abstract int GetNumberAppearing();
 
     public virtual string Name => GetType().Name;
+
+    public string DisplayHealthPoints
+    {
+        get
+        {
+            if (MinHealthPoints.HasValue && MaxHealthPoints.HasValue)
+            {
+                return $"{MinHealthPoints.Value} - {MaxHealthPoints.Value}";
+            }
+
+            return HealthPoints?.ToString() ?? String.Empty;
+        }
+    }
+
+    public string DisplayPainTolerancePoints
+    {
+        get
+        {
+            if (MinPainTolerancePoints.HasValue && MaxPainTolerancePoints.HasValue)
+            {
+                return $"{MinPainTolerancePoints.Value} - {MaxPainTolerancePoints.Value}";
+            }
+
+            return PainTolerancePoints?.ToString() ?? String.Empty;
+        }
+    }
 }

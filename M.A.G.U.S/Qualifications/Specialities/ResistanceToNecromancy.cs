@@ -2,9 +2,9 @@
 
 namespace M.A.G.U.S.Qualifications.Specialities;
 
-public class ResistanceToNecromancy(sbyte resistanceToMagicModifier) : SpecialQualification
+public class ResistanceToNecromancy(int resistanceToMagicModifier) : SpecialQualification
 {
-    public sbyte ResistanceToMagicModifier { get; } = resistanceToMagicModifier;
+    public int ResistanceToMagicModifier { get; } = resistanceToMagicModifier;
 
     public override string Name => resistanceToMagicModifier < 0 ? "Weak necromantic resistance" : "Strong necromantic resistance";
 }

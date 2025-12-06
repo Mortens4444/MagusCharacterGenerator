@@ -13,11 +13,11 @@ namespace M.A.G.U.S.Races;
 /// </summary>
 public class Gnome : Race
 {
-    public override sbyte Strength => -1;
+    public override int Strength => -1;
 
-    public override sbyte Dexterity => 1;
+    public override int Dexterity => 1;
 
-    public override sbyte Intelligence => 1;
+    public override int Intelligence => 1;
 
     public override QualificationList Qualifications =>
     [

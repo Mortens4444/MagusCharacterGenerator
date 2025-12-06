@@ -2,11 +2,11 @@
 
 public class FightUnderFear : IFightModifier
 {
-    public short InitiatingValue => -10;
+    public int InitiatingValue => -10;
 
-    public short AttackingValue => -15;
+    public int AttackingValue => -15;
 
-    public short DefendingValue => +5;
+    public int DefendingValue => +5;
 
-    public short AimingValue => -20;
+    public int AimingValue => -20;
 }

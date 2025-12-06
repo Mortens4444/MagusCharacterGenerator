@@ -8,11 +8,11 @@ namespace M.A.G.U.S.Classes;
 
 public abstract class Class : IClass
 {
-    protected const string _1K6_Plus_12_Plus_SpecialTraining = "1K6 + 12 + Special training";
+    protected const string _1D6_Plus_12_Plus_SpecialTraining = "1D6 + 12 + Special training";
 
     protected readonly DiceThrow DiceThrow = new();
 
-    protected Class(byte level)
+    protected Class(int level)
     {
         Level = level;
     }
@@ -49,29 +49,29 @@ public abstract class Class : IClass
 
     public override string ToString() => Name;
 
-    public byte Level { get; set; }
+    public int Level { get; set; }
 
-    public abstract byte Gold { get; set; }
+    public abstract int Gold { get; set; }
 
-    public abstract byte InitiatingBaseValue { get; }
+    public abstract int InitiatingBaseValue { get; }
 
-    public abstract byte AttackingBaseValue { get; }
+    public abstract int AttackingBaseValue { get; }
 
-    public abstract byte DefendingBaseValue { get; }
+    public abstract int DefendingBaseValue { get; }
 
-    public abstract byte AimingBaseValue { get; }
+    public abstract int AimingBaseValue { get; }
 
-    public abstract byte FightValueModifier { get; }
+    public abstract int FightValueModifier { get; }
 
-    public abstract byte BaseQualificationPoints { get; }
+    public abstract int BaseQualificationPoints { get; }
 
-    public abstract byte QualificationPointsModifier { get; }
+    public abstract int QualificationPointsModifier { get; }
 
-    public abstract byte PercentQualificationModifier { get; }
+    public abstract int PercentQualificationModifier { get; }
 
-    public abstract byte BaseLifePoints { get; }
+    public abstract int BaseLifePoints { get; }
 
-    public abstract byte BasePainTolerancePoints { get; }
+    public abstract int BasePainTolerancePoints { get; }
 
     public abstract bool AddFightValueOnFirstLevel { get; }
 
@@ -87,37 +87,37 @@ public abstract class Class : IClass
 
     public abstract SpecialQualificationList SpecialQualifications { get; }
 
-    public abstract sbyte Strength { get; set; }
+    public abstract int Strength { get; set; }
 
-    public abstract sbyte Quickness { get; set; }
+    public abstract int Quickness { get; set; }
 
-    public abstract sbyte Dexterity { get; set; }
+    public abstract int Dexterity { get; set; }
 
-    public abstract sbyte Stamina { get; set; }
+    public abstract int Stamina { get; set; }
 
-    public abstract sbyte Health { get; set; }
+    public abstract int Health { get; set; }
 
-    public abstract sbyte Beauty { get; set; }
+    public abstract int Beauty { get; set; }
 
-    public abstract sbyte Intelligence { get; set; }
+    public abstract int Intelligence { get; set; }
 
-    public abstract sbyte Willpower { get; set; }
+    public abstract int Willpower { get; set; }
 
-    public abstract sbyte Astral { get; set; }
+    public abstract int Astral { get; set; }
 
-    public abstract sbyte Bravery { get; set; }
+    public abstract int Bravery { get; set; }
 
-    public abstract sbyte Erudition { get; set; }
+    public abstract int Erudition { get; set; }
 
-    public abstract sbyte Detection { get; set; }
+    public abstract int Detection { get; set; }
 
-    public byte AstralMagicResistance { get; }
+    public int AstralMagicResistance { get; }
 
-    public byte MentalMagicResistance { get; }
+    public int MentalMagicResistance { get; }
 
     public ulong ExperiencePoints { get; }
 
-    public abstract byte GetPainToleranceModifier();
+    public abstract int GetPainToleranceModifier();
 
     protected QualificationList BuildQualifications(IEnumerable<Qualification> qualifications)
     {

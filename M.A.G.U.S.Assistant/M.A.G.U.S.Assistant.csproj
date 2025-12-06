@@ -23,7 +23,7 @@
     <ApplicationId>com.mortens.MAGUS.Assistant</ApplicationId>
     <!-- Versions -->
     <MajorVersion>1</MajorVersion>
-    <MinorVersion>17</MinorVersion>
+    <MinorVersion>18</MinorVersion>
     <BuildNumber>0</BuildNumber>
     <PatchNumber>0</PatchNumber>
     <FileVersion>$(MajorVersion).$(MinorVersion).$(BuildNumber).$(PatchNumber)</FileVersion>
@@ -150,7 +150,6 @@
     <None Remove="Resources\Images\Bestiary\giant_spider.png" />
     <None Remove="Resources\Images\Bestiary\goblin.png" />
     <None Remove="Resources\Images\Bestiary\golem.png" />
-    <None Remove="Resources\Images\Bestiary\gray_dolpine.png" />
     <None Remove="Resources\Images\Bestiary\heavy_armored_hourse.png" />
     <None Remove="Resources\Images\Bestiary\killer_whale.png" />
     <None Remove="Resources\Images\Bestiary\light_armored_hourse.png" />
@@ -218,7 +217,7 @@
     <MauiImage Include="Resources\Images\Bestiary\golem.png" />
     <MauiImage Include="Resources\Images\Animals\heavy_war_horse.png" />
     <MauiImage Include="Resources\Images\Animals\light_war_horse.png" />
-    <MauiImage Include="Resources\Images\Bestiary\gray_dolpine.png" />
+    <MauiImage Include="Resources\Images\Bestiary\gray_dolpin.png" />
     <MauiImage Include="Resources\Images\Bestiary\killer_whale.png" />
     <MauiImage Include="Resources\Images\Bestiary\lizard_creature.png" />
     <MauiImage Include="Resources\Images\Bestiary\lizard_wizard.png" />
@@ -315,7 +314,7 @@
     <PackageReference Include="Microsoft.Maui.Graphics" Version="9.0.120" />
     <PackageReference Include="Microsoft.Maui.Graphics.Skia" Version="9.0.120" />
     <PackageReference Include="Mtf.Maui.Controls" Version="2.0.44" />
-    <PackageReference Include="Mtf.MAUI.LanguageService" Version="1.0.65" />
+    <PackageReference Include="Mtf.MAUI.LanguageService" Version="1.0.69" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.4" />
     <PackageReference Include="Plugin.Maui.Audio" Version="4.0.0" />
     <PackageReference Include="sqlite-net-pcl" Version="1.9.172" />

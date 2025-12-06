@@ -7,11 +7,11 @@ public class HeadhunterSword : Weapon, IMeleeWeapon
 {
     public double AttacksPerRound => 1;
 
-    public byte InitiatingValue => 8;
+    public int InitiatingValue => 8;
 
-    public byte AttackingValue => 16;
+    public int AttackingValue => 16;
 
-    public byte DefendingValue => 16;
+    public int DefendingValue => 16;
 
     public override double Weight => 0.8;
 
@@ -19,7 +19,7 @@ public class HeadhunterSword : Weapon, IMeleeWeapon
 
     [DiceThrow(ThrowType._1D6)]
     [DiceThrowModifier(2)]
-    public byte GetDamage() => (byte)(DiceThrow._1D6() + 2);
+    public override int GetDamage() => DiceThrow._1D6() + 2;
 
     public override string Name => "Assassin’s sword";
 

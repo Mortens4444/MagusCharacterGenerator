@@ -6,9 +6,9 @@ public interface IPsi
 {
     PsiKind PsiKind { get; }
 
-    byte BaseQualificationLevel { get; }
+    int BaseQualificationLevel { get; }
 
-    byte MasterQualificationLevel { get; }
+    int MasterQualificationLevel { get; }
 
     QualificationLevel QualificationLevel { get; }
 }

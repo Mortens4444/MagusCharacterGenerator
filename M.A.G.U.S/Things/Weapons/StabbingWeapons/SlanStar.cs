@@ -7,18 +7,18 @@ public class SlanStar : Weapon, IMeleeWeapon
 {
     public double AttacksPerRound => 3;
 
-    public byte InitiatingValue => 10;
+    public int InitiatingValue => 10;
 
-    public byte AttackingValue => 4;
+    public int AttackingValue => 4;
 
-    public byte DefendingValue => 4;
+    public int DefendingValue => 4;
 
     public override double Weight => 0.1;
 
     public override Money Price => new(0, 0, 40);
 
     [DiceThrow(ThrowType._1D3)]
-    public byte GetDamage() => (byte)DiceThrow._1D3();
+    public override int GetDamage() => DiceThrow._1D3();
 
     public override string Name => "Slan star";
 

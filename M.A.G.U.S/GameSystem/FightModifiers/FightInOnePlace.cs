@@ -2,11 +2,11 @@
 
 public class FightInOnePlace : IFightModifier
 {
-    public short InitiatingValue => -20;
+    public int InitiatingValue => -20;
 
-    public short AttackingValue => -15;
+    public int AttackingValue => -15;
 
-    public short DefendingValue => -5;
+    public int DefendingValue => -5;
 
-    public short AimingValue => 0;
+    public int AimingValue => 0;
 }

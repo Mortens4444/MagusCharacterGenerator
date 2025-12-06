@@ -8,18 +8,18 @@ public class MediumShield : Shield
 {
     public double AttacksPerRound => 1;
 
-    public byte InitiatingValue => 0;
+    public int InitiatingValue => 0;
 
-    public byte DefendingValue => 35;
+    public int DefendingValue => 35;
 
-    public byte MovementObstructiveFactor => 1;
+    public int MovementObstructiveFactor => 1;
 
     public override double Weight => 3;
 
     public override Money Price => new(1, 6);
 
     [DiceThrow(ThrowType._1D6)]
-    public byte GetDamage() => (byte)DiceThrow._1D6();
+    public override int GetDamage() => DiceThrow._1D6();
 
     public override string Name => "Medium shield";
 

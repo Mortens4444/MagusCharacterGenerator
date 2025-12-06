@@ -2,11 +2,11 @@
 
 namespace M.A.G.U.S.Qualifications.Combat;
 
-public class WeaponBreaking(QualificationLevel qualificationLevel = QualificationLevel.Base, byte level = 1) : Qualification(qualificationLevel, level)
+public class WeaponBreaking(QualificationLevel qualificationLevel = QualificationLevel.Base, int level = 1) : Qualification(qualificationLevel, level)
 {
     public override string Name => "Weapon breaking";
 
-    public override byte QpToBaseQualification => 5;
+    public override int QpToBaseQualification => 5;
 
-    public override byte QpToMasterQualification => 20;
+    public override int QpToMasterQualification => 20;
 }

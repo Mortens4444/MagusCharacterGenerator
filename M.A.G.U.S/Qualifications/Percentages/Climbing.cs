@@ -2,7 +2,7 @@
 
 public class Climbing : PercentQualification
 {
-    public Climbing(byte percent)
+    public Climbing(int percent)
         : base(percent)
     {
     }

@@ -6,17 +6,17 @@ public class Lasso : Weapon, IMeleeWeapon
 {
     public double AttacksPerRound => 1/3;
 
-    public byte InitiatingValue => 0;
+    public int InitiatingValue => 0;
 
-    public byte AttackingValue => 1;
+    public int AttackingValue => 1;
 
-    public byte DefendingValue => 0;
+    public int DefendingValue => 0;
 
     public override double Weight => 0.6;
 
     public override Money Price => new(0, 0, 80);
 
-    public byte GetDamage() => 0;
+    public override int GetDamage() => 0;
 
     public override string Description => "A long loop of rope thrown to capture or restrain a fleeing beast or man, common among herdsmen and southern riders.";
 }

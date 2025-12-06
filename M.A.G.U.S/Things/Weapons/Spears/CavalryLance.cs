@@ -7,18 +7,18 @@ public class CavalryLance : Weapon, IMeleeWeapon
 {
     public double AttacksPerRound => 1 / 2;
 
-    public byte InitiatingValue => 1;
+    public int InitiatingValue => 1;
 
-    public byte AttackingValue => 15;
+    public int AttackingValue => 15;
 
-    public byte DefendingValue => 0;
+    public int DefendingValue => 0;
 
     public override double Weight => 3.5;
 
     public override Money Price => new(1);
 
     [DiceThrow(ThrowType._1D6)]
-    public byte GetDamage() => (byte)(DiceThrow._1D6());
+    public override int GetDamage() => DiceThrow._1D6();
 
     public override string Name => "Cavalry lance";
 

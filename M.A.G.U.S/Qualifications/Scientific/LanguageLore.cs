@@ -11,12 +11,12 @@ public class LanguageLore : Qualification, ICanHaveMany
     [JsonConstructor]
     public LanguageLore() { }
 
-    public LanguageLore(byte languageLevel, byte level = 1)
+    public LanguageLore(int languageLevel, int level = 1)
             : base(languageLevel > 5 ? QualificationLevel.Master : QualificationLevel.Base, level)
     {
     }
 
-    public LanguageLore(Language language, byte languageLevel, byte level = 1)
+    public LanguageLore(Language language, int languageLevel, int level = 1)
         : base(languageLevel > 5 ? QualificationLevel.Master : QualificationLevel.Base, level)
     {
         Language = language;
@@ -24,9 +24,9 @@ public class LanguageLore : Qualification, ICanHaveMany
 
     public override string Name => "Language lore";
 
-    public override byte QpToBaseQualification => 1;
+    public override int QpToBaseQualification => 1;
 
-    public override byte? QpToMaxBaseQualification => 5;
+    public override int? QpToMaxBaseQualification => 5;
 
-    public override byte QpToMasterQualification => 20;
+    public override int QpToMasterQualification => 20;
 }

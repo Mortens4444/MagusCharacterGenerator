@@ -2,12 +2,12 @@
 
 namespace M.A.G.U.S.Qualifications.Combat;
 
-public class HeavyArmorWearing(QualificationLevel qualificationLevel = QualificationLevel.Base, byte level = 1)
+public class HeavyArmorWearing(QualificationLevel qualificationLevel = QualificationLevel.Base, int level = 1)
     : Qualification(qualificationLevel, level)
 {
     public override string Name => "Heavy armor wearing";
 
-    public override byte QpToBaseQualification => 3;
+    public override int QpToBaseQualification => 3;
 
-    public override byte QpToMasterQualification => 27;
+    public override int QpToMasterQualification => 27;
 }

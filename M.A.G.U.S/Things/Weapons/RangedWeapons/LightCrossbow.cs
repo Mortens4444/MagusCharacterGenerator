@@ -7,19 +7,19 @@ public class LightCrossbow : Weapon, IRangedWeapon
 {
     public double AttacksPerRound => 1;
 
-    public byte InitiatingValue => 2;
+    public int InitiatingValue => 2;
 
-    public byte AimingValue => 16;
+    public int AimingValue => 16;
 
-    public ushort Distance => 50;
+    public int Distance => 50;
 
     public override double Weight => 3.5;
 
     public override Money Price => new(8);
 
-    [DiceThrow(ThrowType._1D6)]
+    [DiceThrow(ThrowType._1D6_Ranged)]
     [DiceThrowModifier(1)]
-    public byte GetDamage() => (byte)(DiceThrow._1D6_RangedAttack() + 1);
+    public override int GetDamage() => DiceThrow._1D6_RangedAttack() + 1;
 
     public override string Name => "Light crossbow";
 

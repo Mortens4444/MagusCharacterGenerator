@@ -2,11 +2,11 @@
 
 public class FightAsParalyzed : IFightModifier
 {
-    public short InitiatingValue => -30;
+    public int InitiatingValue => -30;
 
-    public short AttackingValue => -40;
+    public int AttackingValue => -40;
 
-    public short DefendingValue => -35;
+    public int DefendingValue => -35;
 
-    public short AimingValue => -15;
+    public int AimingValue => -15;
 }

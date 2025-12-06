@@ -2,9 +2,9 @@
 
 namespace M.A.G.U.S.Qualifications.Specialities;
 
-public class BetterResistanceToFire(sbyte resistanceModifier) : SpecialQualification
+public class BetterResistanceToFire(int resistanceModifier) : SpecialQualification
 {
-    public sbyte ResistanceModifier { get; } = resistanceModifier;
+    public int ResistanceModifier { get; } = resistanceModifier;
 
     public override string Name => "Better resistance to fire";
 }

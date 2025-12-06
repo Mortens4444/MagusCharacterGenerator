@@ -12,9 +12,9 @@ public class ClericalMagic : Sorcery
         ManaPoints = 9;
     }
 
-    public override ushort GetManaPointsModifier()
+    public override int GetManaPointsModifier()
     {
-        return (ushort)(diceThrow._1D3() + 6);
+        return diceThrow._1D3() + 6;
     }
 
     public override string Name => "Clerical magic";

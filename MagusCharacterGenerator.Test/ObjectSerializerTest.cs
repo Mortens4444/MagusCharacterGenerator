@@ -30,7 +30,7 @@ namespace M.A.G.U.S.Test
 		{
             TestSerialization(new
 				{
-					Bytes = new byte[] { 1, 2, 3 },
+					Bytes = new int[] { 1, 2, 3 },
 					Strings = new[] { "a", "b", "c" }
 				},
 				"M.A.G.U.S.Test.ObjectSerializationResults.Arrays.json");
@@ -41,7 +41,7 @@ namespace M.A.G.U.S.Test
 		{
             TestSerialization(new
 				{
-					Bytes = new List<byte> { 1, 2, 3 },
+					Bytes = new List<int> { 1, 2, 3 },
 					Strings = new List<string> { "a", "b", "c" }
 				},
 				"M.A.G.U.S.Test.ObjectSerializationResults.Lists.json");

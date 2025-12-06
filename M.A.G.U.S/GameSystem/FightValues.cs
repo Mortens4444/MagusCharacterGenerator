@@ -19,12 +19,12 @@ public static class FightValues
         var headHunterInitiatingValueIncreasing = character.BaseClass.SpecialQualifications.GetSpeciality<HeadHunterInitiatingValueIncreasing>();
         if (headHunterInitiatingValueIncreasing != null)
         {
-            result.InitiatingValue += (short)(character.BaseClass.Level % 2);
+            result.InitiatingValue += character.BaseClass.Level % 2;
         }
         var thiefInitiatingValueIncreasing = character.BaseClass.SpecialQualifications.GetSpeciality<ThiefInitiatingValueIncreasing>();
         if (thiefInitiatingValueIncreasing != null)
         {
-            result.InitiatingValue += (short)character.BaseClass.Level;
+            result.InitiatingValue += character.BaseClass.Level;
         }
 
         result.AttackingValue = character.BaseClass.AttackingBaseValue;
@@ -60,7 +60,7 @@ public static class FightValues
         return result;
     }
 
-    private static FightModifier Calculate(ISettings? settings, IClass @class, byte attackPercentage, byte defencePercentage, byte aimingPercentage)
+    private static FightModifier Calculate(ISettings? settings, IClass @class, int attackPercentage, int defencePercentage, int aimingPercentage)
     {
         var addFightValuesOnFirstLevel = settings?.AddFightValueOnFirstLevelForAllClass ?? true;
         var fightValues = (@class.AddFightValueOnFirstLevel || addFightValuesOnFirstLevel ? @class.Level : @class.Level - 1) * @class.FightValueModifier;
@@ -70,13 +70,13 @@ public static class FightValues
         {
             return new FightModifier()
             {
-                CombatModifier = (short)fightValues
+                CombatModifier = fightValues
             };
         }
         var attackPoints = MathHelper.GetModifier(fightValues, attackPercentage);
         var defencePoints = MathHelper.GetModifier(fightValues, defencePercentage);
         var aimingPoints = MathHelper.GetModifier(fightValues, aimingPercentage);
-        var initiatorPoints = (short)(fightValues - attackPoints - defencePoints - aimingPoints);
+        var initiatorPoints = fightValues - attackPoints - defencePoints - aimingPoints;
         if (initiatorPoints < 0)
         {
             throw new InvalidOperationException($"The amount of the percentages ({nameof(attackPercentage)} + {nameof(defencePercentage)} + {nameof(aimingPercentage)}) should be under or equal to 100 percent.");

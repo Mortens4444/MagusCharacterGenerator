@@ -9,7 +9,7 @@ public class KradPaladin : Paladin
 {
     public KradPaladin() : base() { }
 
-    public KradPaladin(byte level) : base(level) { }
+    public KradPaladin(int level) : base(level) { }
 
     public override QualificationList Qualifications
     {

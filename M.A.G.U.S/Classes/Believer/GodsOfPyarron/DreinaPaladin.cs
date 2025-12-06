@@ -8,7 +8,7 @@ public class DreinaPaladin : Paladin
 {
     public DreinaPaladin() : base() { }
 
-    public DreinaPaladin(byte level) : base(level) { }
+    public DreinaPaladin(int level) : base(level) { }
 
     public override QualificationList Qualifications
     {

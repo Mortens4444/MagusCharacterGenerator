@@ -17,7 +17,7 @@ public sealed class Spider : Creature
         ExperiencePoints = 0;
     }
 
-    public override byte GetDamage() => 0;
+    public override int GetDamage() => 0;
 
-    public override byte GetNumberAppearing() => 1;
+    public override int GetNumberAppearing() => 1;
 }

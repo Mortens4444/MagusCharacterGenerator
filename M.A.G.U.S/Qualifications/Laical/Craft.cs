@@ -10,18 +10,18 @@ public class Craft : Qualification
     [JsonConstructor]
     public Craft() { }
 
-    public Craft(QualificationLevel qualificationLevel = QualificationLevel.Base, byte level = 1)
+    public Craft(QualificationLevel qualificationLevel = QualificationLevel.Base, int level = 1)
             : base(qualificationLevel, level)
     {
     }
 
-    public Craft(Profession profession, QualificationLevel qualificationLevel = QualificationLevel.Base, byte level = 1)
+    public Craft(Profession profession, QualificationLevel qualificationLevel = QualificationLevel.Base, int level = 1)
         : base(qualificationLevel, level)
     {
         Profession = profession;
     }
 
-    public override byte QpToBaseQualification => 2;
+    public override int QpToBaseQualification => 2;
 
-    public override byte QpToMasterQualification => 15;
+    public override int QpToMasterQualification => 15;
 }

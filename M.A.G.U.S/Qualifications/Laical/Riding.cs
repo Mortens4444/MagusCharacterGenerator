@@ -2,9 +2,9 @@
 
 namespace M.A.G.U.S.Qualifications.Laical;
 
-public class Riding(QualificationLevel qualificationLevel = QualificationLevel.Base, byte level = 1) : Qualification(qualificationLevel, level)
+public class Riding(QualificationLevel qualificationLevel = QualificationLevel.Base, int level = 1) : Qualification(qualificationLevel, level)
 {
-    public override byte QpToBaseQualification => 1;
+    public override int QpToBaseQualification => 1;
 
-    public override byte QpToMasterQualification => 15;
+    public override int QpToMasterQualification => 15;
 }

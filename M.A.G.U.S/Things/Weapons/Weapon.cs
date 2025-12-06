@@ -5,4 +5,6 @@ namespace M.A.G.U.S.Things.Weapons;
 public abstract class Weapon : Thing
 {
     protected readonly DiceThrow DiceThrow = new();
+
+    public abstract int GetDamage();
 }

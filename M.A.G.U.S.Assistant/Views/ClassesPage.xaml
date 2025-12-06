@@ -40,7 +40,7 @@
                                 <DataTemplate x:DataType="m:DiceStat">
                                     <Grid ColumnDefinitions="*,Auto" Padding="8">
                                         <Label Grid.Column="0" Text="{Binding Name}" />
-                                        <Label Grid.Column="1" Text="{Binding DisplayFormula}" />
+                                        <Label Grid.Column="1" Text="{Binding DisplayFormula, Converter={StaticResource TranslationConverter}}" />
                                     </Grid>
                                 </DataTemplate>
                             </CollectionView.ItemTemplate>
@@ -62,7 +62,7 @@
                     </VerticalStackLayout>
                 </Border>
 
-                <!-- Képezettségek -->
+                <!-- Képzettségek -->
                 <Border Stroke="{AppThemeBinding Light={StaticResource Gray300}, Dark={StaticResource Gray500}}"
                     StrokeThickness="1" Padding="10"
                     BackgroundColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource Gray900}}">
@@ -128,7 +128,7 @@
                     </VerticalStackLayout>
                 </Border>
 
-                <!-- Jövőbeli képezettségek -->
+                <!-- Jövőbeli képzettségek -->
                 <Border Stroke="{AppThemeBinding Light={StaticResource Gray300}, Dark={StaticResource Gray500}}"
                     StrokeThickness="1" Padding="10"
                     BackgroundColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource Gray900}}">

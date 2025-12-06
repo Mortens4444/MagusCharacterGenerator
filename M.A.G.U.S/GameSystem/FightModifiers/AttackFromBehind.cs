@@ -2,11 +2,11 @@
 
 public class AttackFromBehind : IFightModifier
 {
-    public short InitiatingValue => 5;
+    public int InitiatingValue => 5;
 
-    public short AttackingValue => 10;
+    public int AttackingValue => 10;
 
-    public short DefendingValue => 0;
+    public int DefendingValue => 0;
 
-    public short AimingValue => 0;
+    public int AimingValue => 0;
 }

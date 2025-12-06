@@ -7,11 +7,11 @@ public class KnightSword : Weapon, IMeleeWeapon
 {
     public double AttacksPerRound => 1;
 
-    public byte InitiatingValue => 2;
+    public int InitiatingValue => 2;
 
-    public byte AttackingValue => 10;
+    public int AttackingValue => 10;
 
-    public byte DefendingValue => 7;
+    public int DefendingValue => 7;
 
     public override double Weight => 3.5;
 
@@ -19,7 +19,7 @@ public class KnightSword : Weapon, IMeleeWeapon
 
     [DiceThrow(ThrowType._2D6)]
     [DiceThrowModifier(6)]
-    public byte GetDamage() => (byte)(DiceThrow._2D6() + 6);
+    public override int GetDamage() => DiceThrow._2D6() + 6;
 
     public override string Name => "Knight’s sword";
 

@@ -7,18 +7,18 @@ public class IronFist : Weapon, IMeleeWeapon
 {
     public double AttacksPerRound => 2;
 
-    public byte InitiatingValue => 9;
+    public int InitiatingValue => 9;
 
-    public byte AttackingValue => 5;
+    public int AttackingValue => 5;
 
-    public byte DefendingValue => 2;
+    public int DefendingValue => 2;
 
     public override double Weight => 0.2;
 
     public override Money Price => new(0, 1);
 
     [DiceThrow(ThrowType._1D3)]
-    public byte GetDamage() => (byte)DiceThrow._1D3();
+    public override int GetDamage() => DiceThrow._1D3();
 
     public override string Name => "Iron fist (knuckle)";
 
