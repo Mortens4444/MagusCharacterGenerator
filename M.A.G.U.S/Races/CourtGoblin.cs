@@ -1,4 +1,5 @@
-﻿using M.A.G.U.S.Qualifications;
+﻿using M.A.G.U.S.Enums;
+using M.A.G.U.S.Qualifications;
 using M.A.G.U.S.Qualifications.Specialities;
 
 namespace M.A.G.U.S.Races;
@@ -20,6 +21,8 @@ public class CourtGoblin : Race
     public override int Beauty => -2;
 
     public override int Astral => -2;
+
+    public override Alignment? Alignment => Enums.Alignment.ChaosLife;
 
     public override SpecialQualificationList SpecialQualifications =>
     [

@@ -1,4 +1,5 @@
-﻿using M.A.G.U.S.GameSystem.FightMode;
+﻿using M.A.G.U.S.Enums;
+using M.A.G.U.S.GameSystem.FightMode;
 using M.A.G.U.S.GameSystem.Qualifications;
 using M.A.G.U.S.Qualifications;
 using M.A.G.U.S.Qualifications.Laical;
@@ -20,6 +21,8 @@ public class FireElf : Race, IUseRangedWeapons
     public override int Stamina => -1;
 
     public override int Beauty => 1;
+
+    public override Alignment? Alignment => Enums.Alignment.Life;
 
     public override QualificationList Qualifications =>
     [

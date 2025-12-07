@@ -1,5 +1,8 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
+using M.A.G.U.S.Enums;
 using M.A.G.U.S.GameSystem;
+using Mtf.Extensions;
+using Mtf.LanguageService;
 using System.Collections.ObjectModel;
 
 namespace M.A.G.U.S.Assistant.ViewModels;
@@ -13,6 +16,8 @@ internal partial class CharacterViewModel : ObservableObject
     {
         selectedCombatValueModifier = AvailableCombatValueModifiers.First();
     }
+
+    public IEnumerable<Alignment> Alignments => [.. Enum.GetValues<Alignment>()];
 
     public ObservableCollection<string> AvailableCombatValueModifiers { get; } = ["Base", "With primary weapon", "With secondary weapon"];
 

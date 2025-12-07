@@ -1,4 +1,5 @@
-﻿using M.A.G.U.S.GameSystem;
+﻿using M.A.G.U.S.Enums;
+using M.A.G.U.S.GameSystem;
 using M.A.G.U.S.GameSystem.Attributes;
 using M.A.G.U.S.GameSystem.Psi;
 using M.A.G.U.S.Interfaces;
@@ -116,6 +117,8 @@ public abstract class Class : IClass
     public int MentalMagicResistance { get; }
 
     public ulong ExperiencePoints { get; }
+
+    public virtual Alignment Alignment => Alignment.Order;
 
     public abstract int GetPainToleranceModifier();
 

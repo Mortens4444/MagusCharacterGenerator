@@ -1,4 +1,5 @@
-﻿using M.A.G.U.S.GameSystem.Qualifications;
+﻿using M.A.G.U.S.Enums;
+using M.A.G.U.S.GameSystem.Qualifications;
 using M.A.G.U.S.Qualifications;
 using M.A.G.U.S.Qualifications.Laical;
 using M.A.G.U.S.Qualifications.Scientific;
@@ -18,6 +19,8 @@ public class Gnome : Race
     public override int Dexterity => 1;
 
     public override int Intelligence => 1;
+
+    public override Alignment? Alignment => Enums.Alignment.ChaosLife;
 
     public override QualificationList Qualifications =>
     [

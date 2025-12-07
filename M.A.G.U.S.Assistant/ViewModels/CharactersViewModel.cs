@@ -63,6 +63,23 @@ internal partial class CharactersViewModel(CharacterService characterService) : 
     }
 
     [RelayCommand]
+    private async Task DeleteAllCharacterAsync()
+    {
+        bool confirm = await Shell.Current.DisplayAlert(
+            Lng.Elem("Delete Character"),
+            Lng.Elem("Are you sure you want to delete all characters? This cannot be undone."),
+            Lng.Elem("Delete"),
+            Lng.Elem("Cancel")).ConfigureAwait(false);
+
+        if (confirm)
+        {
+            await characterService.DeleteAllAsync().ConfigureAwait(false);
+            Characters.Clear();
+            IsEmpty = Characters.Count == 0;
+        }
+    }
+
+    [RelayCommand]
     private async Task DeleteCharacterAsync(Character character)
     {
         if (character == null)

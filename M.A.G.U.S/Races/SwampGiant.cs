@@ -1,4 +1,5 @@
-﻿using M.A.G.U.S.GameSystem.Languages;
+﻿using M.A.G.U.S.Enums;
+using M.A.G.U.S.GameSystem.Languages;
 using M.A.G.U.S.GameSystem.Qualifications;
 using M.A.G.U.S.Qualifications;
 using M.A.G.U.S.Qualifications.Laical;
@@ -13,6 +14,8 @@ namespace M.A.G.U.S.Races;
 /// </summary>
 public class SwampGiant : HalfGiant
 {
+    public override Alignment? Alignment => Enums.Alignment.Chaos;
+
     public override QualificationList Qualifications
     {
         get

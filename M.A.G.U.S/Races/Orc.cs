@@ -1,4 +1,5 @@
-﻿using M.A.G.U.S.Qualifications;
+﻿using M.A.G.U.S.Enums;
+using M.A.G.U.S.Qualifications;
 using M.A.G.U.S.Qualifications.Specialities;
 
 namespace M.A.G.U.S.Races;
@@ -18,6 +19,8 @@ public class Orc : Race
     public override int Willpower => 2;
 
     public override int Astral => -4;
+
+    public override Alignment? Alignment => Enums.Alignment.ChaosDeath;
 
     public override SpecialQualificationList SpecialQualifications =>
     [

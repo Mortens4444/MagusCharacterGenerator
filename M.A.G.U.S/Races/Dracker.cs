@@ -1,4 +1,5 @@
-﻿using M.A.G.U.S.Qualifications;
+﻿using M.A.G.U.S.Enums;
+using M.A.G.U.S.Qualifications;
 using M.A.G.U.S.Qualifications.Laical;
 using M.A.G.U.S.Qualifications.Scientific;
 using M.A.G.U.S.Qualifications.Specialities;
@@ -17,6 +18,8 @@ public class Dracker : Race
     public override int Quickness => 1;
 
     public override int Health => -1;
+
+    public override Alignment? Alignment => Enums.Alignment.ChaosDeath;
 
     public override QualificationList Qualifications =>
     [

@@ -1,4 +1,5 @@
-﻿using M.A.G.U.S.GameSystem.Qualifications;
+﻿using M.A.G.U.S.Enums;
+using M.A.G.U.S.GameSystem.Qualifications;
 using M.A.G.U.S.Qualifications;
 using M.A.G.U.S.Qualifications.Combat;
 using M.A.G.U.S.Qualifications.Laical;
@@ -12,6 +13,8 @@ public class ArelPriest : Priest
     public ArelPriest() : base() { }
 
     public ArelPriest(int level) : base(level) { }
+
+    public override Alignment Alignment => Alignment.ChaosLife;
 
     public override QualificationList Qualifications
 	{

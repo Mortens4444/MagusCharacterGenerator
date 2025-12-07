@@ -17,6 +17,7 @@
     <ContentView.Resources>
         <ResourceDictionary>
             <conv:TranslationConverter x:Key="TranslationConverter" />
+            <conv:EnumDescriptionTranslationConverter x:Key="EnumDescriptionTranslationConverter" />
             <converters:QualificationSorterConverter x:Key="QualificationSorter" />
             <converters:EquipmentSorterConverter x:Key="EquipmentSorter" />
             <mcc:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter" />
@@ -57,12 +58,12 @@
                                        Grid.Row="1"
                                        Grid.ColumnSpan="2" />
 
-                    <!--<mc:EntryWithLabel Label="Alignment"
-                                       Text="{Binding Character.Alignment, Converter={StaticResource TranslationConverter}}"
-                                       HorizontalOptions="Center"
-                                       IsEnabled="False"
-                                       Grid.Row="1"
-                                       Grid.Column="1" />-->
+                    <Picker ItemsSource="{Binding Alignments}"
+                            ItemDisplayBinding="{Binding ., Converter={StaticResource EnumDescriptionTranslationConverter}}"
+                            SelectedItem="{Binding Character.Alignment}"
+                            WidthRequest="220"
+                            Grid.Row="1"
+                            Grid.Column="1" />
                 </Grid>
             </VerticalStackLayout>
         </Border>

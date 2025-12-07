@@ -1,4 +1,5 @@
-﻿using M.A.G.U.S.Qualifications;
+﻿using M.A.G.U.S.Enums;
+using M.A.G.U.S.Qualifications;
 
 namespace M.A.G.U.S.Races;
 
@@ -14,6 +15,8 @@ public class Dahr : Race
     public override int Quickness => 2;
 
     public override int Health => -2;
+
+    public override Alignment? Alignment => Enums.Alignment.OrderLife;
 
     public override SpecialQualificationList SpecialQualifications =>
     [

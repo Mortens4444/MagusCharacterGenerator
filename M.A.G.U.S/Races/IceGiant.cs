@@ -1,4 +1,5 @@
-﻿using M.A.G.U.S.GameSystem.Qualifications;
+﻿using M.A.G.U.S.Enums;
+using M.A.G.U.S.GameSystem.Qualifications;
 using M.A.G.U.S.Qualifications;
 using M.A.G.U.S.Qualifications.Laical;
 using M.A.G.U.S.Qualifications.Scientific;
@@ -12,6 +13,9 @@ namespace M.A.G.U.S.Races;
 /// </summary>
 public class IceGiant : HalfGiant
 {
+    public override Alignment? Alignment => Enums.Alignment.OrderLife;
+
+
     public override QualificationList Qualifications
     {
         get

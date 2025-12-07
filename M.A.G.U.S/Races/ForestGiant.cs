@@ -1,4 +1,5 @@
-﻿using M.A.G.U.S.GameSystem.Qualifications;
+﻿using M.A.G.U.S.Enums;
+using M.A.G.U.S.GameSystem.Qualifications;
 using M.A.G.U.S.Qualifications;
 using M.A.G.U.S.Qualifications.Laical;
 using M.A.G.U.S.Qualifications.Percentages;
@@ -12,6 +13,8 @@ namespace M.A.G.U.S.Races;
 /// </summary>
 public class ForestGiant : HalfGiant
 {
+    public override Alignment? Alignment => Enums.Alignment.Chaos;
+
     public override List<PercentQualification> PercentQualifications =>
     [
         new Sneaking(20),

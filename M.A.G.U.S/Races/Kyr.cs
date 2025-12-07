@@ -1,4 +1,5 @@
-﻿using M.A.G.U.S.GameSystem.Languages;
+﻿using M.A.G.U.S.Enums;
+using M.A.G.U.S.GameSystem.Languages;
 using M.A.G.U.S.GameSystem.Qualifications;
 using M.A.G.U.S.Qualifications;
 using M.A.G.U.S.Qualifications.Laical;
@@ -19,6 +20,8 @@ public class Kyr : Race
     public override int Intelligence => -2;
 
     public override int Willpower => 1;
+
+    public override Alignment? Alignment => Enums.Alignment.Order;
 
     public override SpecialQualificationList SpecialQualifications =>
     [

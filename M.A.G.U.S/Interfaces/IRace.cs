@@ -1,4 +1,5 @@
-﻿using M.A.G.U.S.Interfaces;
+﻿using M.A.G.U.S.Enums;
+using M.A.G.U.S.Interfaces;
 using M.A.G.U.S.Qualifications;
 
 namespace M.A.G.U.S.Races;
@@ -14,4 +15,6 @@ public interface IRace : IAbilities
     SpecialQualificationList SpecialQualifications { get; }
 
     string GenerateCharacterName();
+
+    Alignment? Alignment { get; }
 }

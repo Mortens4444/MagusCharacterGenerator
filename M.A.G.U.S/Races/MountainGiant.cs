@@ -1,4 +1,5 @@
-﻿using M.A.G.U.S.GameSystem.Qualifications;
+﻿using M.A.G.U.S.Enums;
+using M.A.G.U.S.GameSystem.Qualifications;
 using M.A.G.U.S.Qualifications;
 using M.A.G.U.S.Qualifications.Laical;
 using M.A.G.U.S.Qualifications.Specialities;
@@ -11,7 +12,10 @@ namespace M.A.G.U.S.Races;
 /// </summary>
 public class MountainGiant : HalfGiant
 {
-	public override QualificationList Qualifications
+    public override Alignment? Alignment => Enums.Alignment.Chaos;
+
+
+    public override QualificationList Qualifications
 	{
 		get
 		{

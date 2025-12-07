@@ -1,4 +1,5 @@
-﻿using M.A.G.U.S.Qualifications;
+﻿using M.A.G.U.S.Enums;
+using M.A.G.U.S.Qualifications;
 using M.A.G.U.S.Qualifications.Percentages;
 using M.A.G.U.S.Qualifications.Specialities;
 using System.Text;
@@ -18,6 +19,8 @@ public class Dwarf : Race
     public override int Intelligence => -1;
 
     public override int Astral => -1;
+
+    public override Alignment? Alignment => Enums.Alignment.OrderLife;
 
     public override List<PercentQualification> PercentQualifications =>
     [

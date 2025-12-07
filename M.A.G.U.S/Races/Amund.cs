@@ -1,4 +1,5 @@
-﻿using M.A.G.U.S.Qualifications;
+﻿using M.A.G.U.S.Enums;
+using M.A.G.U.S.Qualifications;
 using M.A.G.U.S.Qualifications.Specialities;
 
 namespace M.A.G.U.S.Races;
@@ -12,6 +13,8 @@ public class Amund : Race
     public override int Beauty => 3;
 
     public override int Astral => -1;
+
+    public override Alignment? Alignment => Enums.Alignment.ChaosDeath;
 
     public override SpecialQualificationList SpecialQualifications =>
     [

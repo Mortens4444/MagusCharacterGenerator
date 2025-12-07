@@ -1,4 +1,5 @@
-﻿using M.A.G.U.S.GameSystem;
+﻿using M.A.G.U.S.Enums;
+using M.A.G.U.S.GameSystem;
 using M.A.G.U.S.Qualifications;
 using Mtf.Extensions.Services;
 using System.Text;
@@ -43,6 +44,8 @@ public abstract class Race : IRace
     public int Erudition => 0;
 
     public int Detection => 0;
+
+    public virtual Alignment? Alignment => null;
 
     public virtual string GenerateCharacterName()
     {

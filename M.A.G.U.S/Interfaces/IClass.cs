@@ -1,4 +1,5 @@
-﻿using M.A.G.U.S.Qualifications;
+﻿using M.A.G.U.S.Enums;
+using M.A.G.U.S.Qualifications;
 
 namespace M.A.G.U.S.Interfaces;
 
@@ -43,4 +44,6 @@ public interface IClass : IAttacker, IAbilities
     int GetPainToleranceModifier();
 
     ulong ExperiencePoints { get; }
+
+    Alignment Alignment { get; }
 }

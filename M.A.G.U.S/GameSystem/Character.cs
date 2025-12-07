@@ -1,4 +1,5 @@
 ﻿using M.A.G.U.S.Classes.NonPlayableCharacters;
+using M.A.G.U.S.Enums;
 using M.A.G.U.S.GameSystem.FightModifiers;
 using M.A.G.U.S.GameSystem.Magic;
 using M.A.G.U.S.GameSystem.Psi;
@@ -74,6 +75,7 @@ public class Character : IFightModifier, ILiving, IAbilities, INotifyPropertyCha
         name = "Nobody";
         race = new Human();
         BaseClass = new Craftsman();
+        Alignment = Alignment.Order;
         EnsureEquipmentSubscription();
     }
 
@@ -83,6 +85,7 @@ public class Character : IFightModifier, ILiving, IAbilities, INotifyPropertyCha
         this.name = name;
         this.race = race;
         BaseClass = classes.First();
+        Alignment = race.Alignment ?? BaseClass.Alignment;
         Classes = classes;
         CreateFirstLevel();
         EnsureEquipmentSubscription();
@@ -562,7 +565,7 @@ public class Character : IFightModifier, ILiving, IAbilities, INotifyPropertyCha
 
     public string School { get; set; }
 
-    public string Alignment { get; set; }
+    public Alignment Alignment { get; set; }
 
     public Sorcery? Sorcery { get; set; }
 

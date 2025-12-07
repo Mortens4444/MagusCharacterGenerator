@@ -1,4 +1,5 @@
-﻿using M.A.G.U.S.Qualifications;
+﻿using M.A.G.U.S.Enums;
+using M.A.G.U.S.Qualifications;
 using M.A.G.U.S.Qualifications.Laical;
 using M.A.G.U.S.Qualifications.Percentages;
 using M.A.G.U.S.Qualifications.Specialities;
@@ -25,6 +26,8 @@ public class WhiteOrc : Race
     public override int Willpower => -2;
 
     public override int Astral => -3;
+
+    public override Alignment? Alignment => Enums.Alignment.OrderDeath;
 
     public override List<PercentQualification> PercentQualifications =>
     [

@@ -1,4 +1,5 @@
-﻿using M.A.G.U.S.GameSystem.Qualifications;
+﻿using M.A.G.U.S.Enums;
+using M.A.G.U.S.GameSystem.Qualifications;
 using M.A.G.U.S.Qualifications;
 using M.A.G.U.S.Qualifications.Combat;
 using M.A.G.U.S.Qualifications.Percentages;
@@ -21,6 +22,8 @@ public class Draquon : Race
     public override int Beauty => -1;
 
     public override int Astral => -2;
+
+    public override Alignment? Alignment => Enums.Alignment.OrderDeath;
 
     public override List<PercentQualification> PercentQualifications =>
     [

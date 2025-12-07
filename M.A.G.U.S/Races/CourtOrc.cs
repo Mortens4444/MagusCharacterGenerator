@@ -1,4 +1,5 @@
-﻿using M.A.G.U.S.Qualifications;
+﻿using M.A.G.U.S.Enums;
+using M.A.G.U.S.Qualifications;
 using M.A.G.U.S.Qualifications.Specialities;
 
 namespace M.A.G.U.S.Races;
@@ -16,6 +17,8 @@ public class CourtOrc : Race
     public override int Intelligence => -1;
 
     public override int Astral => -3;
+
+    public override Alignment? Alignment => Enums.Alignment.OrderDeath;
 
     public override SpecialQualificationList SpecialQualifications =>
     [
