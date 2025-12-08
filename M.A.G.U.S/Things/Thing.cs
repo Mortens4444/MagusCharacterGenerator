@@ -1,4 +1,5 @@
-﻿using M.A.G.U.S.GameSystem.Valuables;
+﻿using M.A.G.U.S.Extensions;
+using M.A.G.U.S.GameSystem.Valuables;
 
 namespace M.A.G.U.S.Things;
 
@@ -6,7 +7,7 @@ public abstract class Thing
 {
     public virtual string Name => GetType().Name;
 
-    public string ImageName => $"{Name.ToLower().Replace(" ", "_").Replace(",", String.Empty)}.png";
+    public string ImageName => $"{Name.ToImageName()}.png";
 
     public virtual Money Price => new(1);
 

@@ -27,4 +27,9 @@ public class AncientTongueLore : Qualification, ICanHaveMany
     public override int QpToBaseQualification => 10;
 
     public override int QpToMasterQualification => 60;
+
+    public override string ToString()
+    {
+        return $"{Name} - {Language}";
+    }
 }

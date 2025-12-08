@@ -14,18 +14,18 @@ internal partial class MarketViewModel : INotifyPropertyChanged
 
     public ObservableCollection<MarketItem> FilteredItems { get; } = [];
 
-    string _searchText = String.Empty;
+    string searchText = String.Empty;
     public string SearchText
     {
-        get => _searchText;
+        get => searchText;
         set
         {
-            if (_searchText == value)
+            if (searchText == value)
             {
                 return;
             }
 
-            _searchText = value ?? String.Empty;
+            searchText = value ?? String.Empty;
             OnPropertyChanged(nameof(SearchText));
             ApplyFilter();
         }

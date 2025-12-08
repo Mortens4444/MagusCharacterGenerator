@@ -23,7 +23,7 @@
     <ApplicationId>com.mortens.MAGUS.Assistant</ApplicationId>
     <!-- Versions -->
     <MajorVersion>1</MajorVersion>
-    <MinorVersion>18</MinorVersion>
+    <MinorVersion>19</MinorVersion>
     <BuildNumber>0</BuildNumber>
     <PatchNumber>0</PatchNumber>
     <FileVersion>$(MajorVersion).$(MinorVersion).$(BuildNumber).$(PatchNumber)</FileVersion>
@@ -313,8 +313,8 @@
     <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="9.0.10" />
     <PackageReference Include="Microsoft.Maui.Graphics" Version="9.0.120" />
     <PackageReference Include="Microsoft.Maui.Graphics.Skia" Version="9.0.120" />
-    <PackageReference Include="Mtf.Maui.Controls" Version="2.0.44" />
-    <PackageReference Include="Mtf.MAUI.LanguageService" Version="1.0.69" />
+    <PackageReference Include="Mtf.Maui.Controls" Version="2.0.45" />
+    <PackageReference Include="Mtf.MAUI.LanguageService" Version="1.0.70" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.4" />
     <PackageReference Include="Plugin.Maui.Audio" Version="4.0.0" />
     <PackageReference Include="sqlite-net-pcl" Version="1.9.172" />
@@ -385,6 +385,9 @@
     <MauiXaml Update="Views\PaintWizardPage.xaml">
       <Generator>MSBuild:Compile</Generator>
     </MauiXaml>
+    <MauiXaml Update="Views\QualificationDetailsPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </MauiXaml>
     <MauiXaml Update="Views\QualificationsPage.xaml">
       <Generator>MSBuild:Compile</Generator>
     </MauiXaml>
@@ -447,6 +450,6 @@
       <ImageManifestPath>$(ProjectDir)Resources\Images\images_manifest.txt</ImageManifestPath>
     </PropertyGroup>
     <!--<WriteLinesToFile File="$(ImageManifestPath)" Lines="@(AllImages->'%(RelativeDir)%(Filename)%(Extension)')" Overwrite="true" Encoding="UTF-8" />-->
-    <WriteLinesToFile File="$(ImageManifestPath)" Lines="@(AllImages->'%(Filename)%(Extension)')" Overwrite="true" Encoding="UTF-8" />
+    <WriteLinesToFile File="$(ImageManifestPath)" Lines="@(AllImages-&gt;'%(Filename)%(Extension)')" Overwrite="true" Encoding="UTF-8" />
   </Target>
 </Project>

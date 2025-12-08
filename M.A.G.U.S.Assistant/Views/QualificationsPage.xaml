@@ -29,7 +29,8 @@
             <Label Text="Master level" VerticalOptions="Center" Grid.Column="2" HorizontalOptions="End" TextColor="Gray" FontAttributes="Bold" />
         </Grid>
 
-        <CollectionView Grid.Row="2" ItemsSource="{Binding GroupedQualifications}" IsGrouped="True" SelectionMode="None" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" ItemsLayout="VerticalList">
+        <CollectionView Grid.Row="2" ItemsSource="{Binding GroupedQualifications}" IsGrouped="True" VerticalOptions="Fill" HorizontalOptions="Fill"
+                        SelectionMode="Single" SelectedItem="{Binding SelectedItem, Mode=TwoWay}" ItemsLayout="VerticalList">
 
             <CollectionView.GroupHeaderTemplate>
                 <DataTemplate x:DataType="m:GroupedQualifications">

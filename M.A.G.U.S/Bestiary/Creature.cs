@@ -1,4 +1,5 @@
 ﻿using M.A.G.U.S.Enums;
+using M.A.G.U.S.Extensions;
 using M.A.G.U.S.GameSystem;
 using M.A.G.U.S.GameSystem.Attributes;
 using M.A.G.U.S.GameSystem.Psi;
@@ -82,9 +83,9 @@ public abstract class Creature
 
     public string Description { get; protected set; }
 
-    public virtual string[] Images => [ $"{Name.Replace(" ", "_").ToLower()}.png" ];
+    public virtual string[] Images => [ $"{Name.ToImageName()}.png" ];
 
-    public virtual string[] Sounds => [ $"{Name.Replace(" ", "_").ToLower()}" ];
+    public virtual string[] Sounds => [ $"{Name.ToImageName()}" ];
 
     public Alignment? Alignment { get; set; }
     

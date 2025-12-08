@@ -297,7 +297,7 @@
   "Detection": 11,
   "Birthplace": null,
   "School": null,
-  "Alignment": null,
+  "Alignment": 0,
   "Sorcery": {
     "$id": "18",
     "$type": "M.A.G.U.S.Qualifications.Magic.Witchcraft, M.A.G.U.S.",

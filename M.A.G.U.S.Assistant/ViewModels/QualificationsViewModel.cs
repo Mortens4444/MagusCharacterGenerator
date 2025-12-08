@@ -1,6 +1,11 @@
-﻿using M.A.G.U.S.Qualifications;
+﻿using CommunityToolkit.Mvvm.Messaging;
+using M.A.G.U.S.Assistant.CustomEventArgs;
+using M.A.G.U.S.Assistant.Views;
+using M.A.G.U.S.GameSystem;
+using M.A.G.U.S.Qualifications;
 using Mtf.Extensions;
 using Mtf.LanguageService;
+using Mtf.Maui.Controls.Models;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Windows.Input;
@@ -9,8 +14,27 @@ namespace M.A.G.U.S.Assistant.ViewModels;
 
 internal partial class QualificationsViewModel : INotifyPropertyChanged
 {
+    private Character? character;
+
+    public QualificationsViewModel()
+    {
+        ApplyFilterCommand = new RelayCommand(_ => ApplyFilter());
+        ClearFilterCommand = new RelayCommand(_ => ClearFilter());
+
+        Seed();
+        ApplyFilter();
+    }
+
+    public ICommand ApplyFilterCommand { get; }
+
+    public ICommand ClearFilterCommand { get; }
+
+    public event PropertyChangedEventHandler? PropertyChanged;
+
     public ObservableCollection<Qualification> Qualifications { get; } = [];
+
     public ObservableCollection<Qualification> FilteredQualifications { get; } = [];
+
     public ObservableCollection<GroupedQualifications> GroupedQualifications
     {
         get => groupedQualifications;
@@ -44,18 +68,41 @@ internal partial class QualificationsViewModel : INotifyPropertyChanged
         }
     }
 
-    public ICommand ApplyFilterCommand { get; }
-    public ICommand ClearFilterCommand { get; }
-
-    public event PropertyChangedEventHandler? PropertyChanged;
-
-    public QualificationsViewModel()
+    public Character? Character
     {
-        ApplyFilterCommand = new RelayCommand(_ => ApplyFilter());
-        ClearFilterCommand = new RelayCommand(_ => ClearFilter());
+        get => character;
+        set
+        {
+            if (character == value)
+            {
+                return;
+            }
 
-        Seed();
-        ApplyFilter();
+            character = value;
+            OnPropertyChanged(nameof(Character));
+            ApplyFilter();
+        }
+    }
+
+    private Qualification? selectedItem;
+    public Qualification? SelectedItem
+    {
+        get => selectedItem;
+        set
+        {
+            if (selectedItem == value)
+            {
+                return;
+            }
+
+            selectedItem = value;
+            OnPropertyChanged(nameof(SelectedItem));
+
+            if (selectedItem != null)
+            {
+                _ = OpenDetailsAsync(selectedItem);
+            }
+        }
     }
 
     private void Seed()
@@ -74,6 +121,11 @@ internal partial class QualificationsViewModel : INotifyPropertyChanged
     private void ApplyFilter()
     {
         var query = Qualifications.AsEnumerable();
+        if (Character != null)
+        {
+            var ownedTypes = new HashSet<string>(Character.Qualifications.Select(q => q.ToString()));
+            query = query.Where(q => !ownedTypes.Contains(q.ToString()) && Character.CanLearn(q));
+        }
 
         var st = SearchText?.Trim();
         if (!String.IsNullOrWhiteSpace(st))
@@ -99,6 +151,40 @@ internal partial class QualificationsViewModel : INotifyPropertyChanged
     {
         SearchText = String.Empty;
         ApplyFilter();
+    }
+
+    private async Task OpenDetailsAsync(Qualification selectedItem)
+    {
+        try
+        {
+            var mainPage = Application.Current != null && Application.Current.Windows.Count > 0 ? Application.Current.Windows[0].Page : null;
+            if (mainPage?.Navigation != null)
+            {
+                var qualificationDetailsViewModel = new QualificationDetailsViewModel(Character, selectedItem);
+                qualificationDetailsViewModel.Learned += LearnHandler;
+                var page = new QualificationDetailsPage(qualificationDetailsViewModel);
+                await mainPage.Navigation.PushAsync(page).ConfigureAwait(true);
+            }
+        }
+        catch (Exception ex)
+        {
+            WeakReferenceMessenger.Default.Send(new ShowErrorMessage(ex));
+        }
+    }
+
+    private void LearnHandler(object? sender, QualificationLearnedEventArgs e)
+    {
+        try
+        {
+            Character?.Learn(e.Qualification, e.QualificationLevel);
+            ApplyFilter();
+            var mainPage = Application.Current != null && Application.Current.Windows.Count > 0 ? Application.Current.Windows[0].Page : null;
+            mainPage?.Navigation.PopAsync().ConfigureAwait(false);
+        }
+        catch (Exception ex)
+        {
+            WeakReferenceMessenger.Default.Send(new ShowErrorMessage(ex));
+        }
     }
 
     private void OnPropertyChanged(string name) =>

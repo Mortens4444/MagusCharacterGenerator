@@ -76,7 +76,7 @@ public class Character : IFightModifier, ILiving, IAbilities, INotifyPropertyCha
         race = new Human();
         BaseClass = new Craftsman();
         Alignment = Alignment.Order;
-        EnsureEquipmentSubscription();
+        EnsureSubscriptions();
     }
 
     public Character(ISettings? settings, string name, IRace race, params IClass[] classes)
@@ -88,7 +88,7 @@ public class Character : IFightModifier, ILiving, IAbilities, INotifyPropertyCha
         Alignment = race.Alignment ?? BaseClass.Alignment;
         Classes = classes;
         CreateFirstLevel();
-        EnsureEquipmentSubscription();
+        EnsureSubscriptions();
     }
 
     #region Properties
@@ -275,6 +275,8 @@ public class Character : IFightModifier, ILiving, IAbilities, INotifyPropertyCha
     }
 
     public bool CanAllocateCombatModifier => CombatModifier != 0;
+
+    public bool CanAllocateQualificationPoints => QualificationPoints != 0;
 
     public int InitiatingValueMaxLimit => InitiatingValue + CombatModifier;
 
@@ -678,9 +680,15 @@ public class Character : IFightModifier, ILiving, IAbilities, INotifyPropertyCha
         calculateChanges = true;
     }
 
-    private void EnsureEquipmentSubscription()
+    private void EnsureSubscriptions()
     {
         Equipment.CollectionChanged += EquipmentOnCollectionChanged;
+        Qualifications.CollectionChanged += Qualifications_CollectionChanged;
+    }
+
+    private void Qualifications_CollectionChanged(object? sender, NotifyCollectionChangedEventArgs e)
+    {
+        OnPropertyChanged(nameof(Qualifications));
     }
 
     private void EquipmentOnCollectionChanged(object? sender, NotifyCollectionChangedEventArgs e)
@@ -880,7 +888,12 @@ public class Character : IFightModifier, ILiving, IAbilities, INotifyPropertyCha
 
     public void Buy(Thing thing)
     {
-        Money -= thing.Price;
+        if (Money < thing.MultipliedPrice)
+        {
+            throw new InvalidOperationException("Cannot afford this item");
+        }
+
+        Money -= thing.MultipliedPrice;
         if (thing is Weapon weapon)
         {
             if (primaryWeapon == null)
@@ -894,5 +907,41 @@ public class Character : IFightModifier, ILiving, IAbilities, INotifyPropertyCha
         }
         Equipment.Add(thing);
         OnPropertyChanged(nameof(Money));
+    }
+
+    public bool CanLearn(Qualification qualification)
+    {
+        return CanLearn(qualification, QualificationLevel.Base, out _) || CanLearn(qualification, QualificationLevel.Master, out _);
+    }
+
+    public bool CanLearn(Qualification qualification, QualificationLevel qualificationLevel, out int qp)
+    {
+        var hasBase = Qualifications.Any(q => q.Name == qualification.Name && q.QualificationLevel == QualificationLevel.Base);
+        var hasMaster = Qualifications.Any(q => q.Name == qualification.Name && q.QualificationLevel == QualificationLevel.Master);
+        qp = qualificationLevel == QualificationLevel.Base ? qualification.QpToBaseQualification : qualification.QpToMasterQualification;
+        if (hasBase)
+        {
+            qp -= qualification.QpToBaseQualification;
+        }
+        if (hasMaster)
+        {
+            qp -= qualification.QpToMasterQualification;
+        }
+        if (QualificationPoints < qp)
+        {
+            return false;
+        }
+
+        return true;
+    }
+
+    public void Learn(Qualification qualification, QualificationLevel qualificationLevel)
+    {
+        if (!CanLearn(qualification, qualificationLevel, out var qp))
+        {
+            throw new InvalidOperationException("Cannot learn this qualification");
+        }
+        QualificationPoints -= qp;
+        Qualifications.Add(qualification);
     }
 }

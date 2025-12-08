@@ -12,8 +12,8 @@ public static class QualificationPoints
         if (character.MultiClassMode == MultiClassMode.Normal_Or_SwitchedClass)
         {
             qualificationPoints = character.BaseClass.BaseQualificationPoints;
-            qualificationPoints += MathHelper.GetAboveAverageValue(character.Intelligence);
-            qualificationPoints += MathHelper.GetAboveAverageValue(character.Dexterity);
+            qualificationPoints += MathHelper.GetAboveAverageValue(character.Intelligence); // Can only be spent on scientific qualifications
+            qualificationPoints += MathHelper.GetAboveAverageValue(character.Dexterity); // Can only be spent on non-scientific qualifications
             if (character.BaseClass.AddQualificationPointsOnFirstLevel || (settings?.AddQualificationPointsOnFirstLevelForAllClass ?? true))
             {
                 qualificationPoints += character.BaseClass.QualificationPointsModifier;

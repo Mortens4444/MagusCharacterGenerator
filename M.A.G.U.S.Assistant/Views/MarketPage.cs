@@ -20,5 +20,6 @@ internal partial class MarketPage : SearchListPage
             "M.A.G.U.S.Things".CreateInstancesFromNamespace<Thing>().OrderBy(r => Lng.Elem(r.Name)).Select(r => DisplayItem.FromObject(r, character)))
     {
         viewModel.Character = character;
+        viewModel.ShowOnlyAffordable = true;
     }
 }

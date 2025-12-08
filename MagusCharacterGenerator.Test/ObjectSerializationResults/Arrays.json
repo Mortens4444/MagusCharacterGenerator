@@ -1,9 +1,13 @@
 ﻿{
   "$id": "1",
-  "$type": "<>f__AnonymousType2`2[[System.Byte[], System.Private.CoreLib],[System.String[], System.Private.CoreLib]], M.A.G.U.S.Test",
+  "$type": "<>f__AnonymousType2`2[[System.Int32[], System.Private.CoreLib],[System.String[], System.Private.CoreLib]], M.A.G.U.S.Test",
   "Bytes": {
-    "$type": "System.Byte[], System.Private.CoreLib",
-    "$value": "AQID"
+    "$type": "System.Int32[], System.Private.CoreLib",
+    "$values": [
+      1,
+      2,
+      3
+    ]
   },
   "Strings": {
     "$type": "System.String[], System.Private.CoreLib",

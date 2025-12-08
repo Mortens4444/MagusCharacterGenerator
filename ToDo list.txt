@@ -1,6 +1,6 @@
 - Problem with total weight
 
-- Buy qualifications
+- Fix buying some qualifications (Language, AntientLanguage, WeaponUse, etc)
 - SFÉ
 - Buy poison
 - Keen hearing/seeing should have shown the multiplier also (ex. 2x)

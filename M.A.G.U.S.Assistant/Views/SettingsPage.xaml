@@ -26,99 +26,135 @@
 
             <Border StrokeShape="RoundRectangle 10" Padding="15" StrokeThickness="0" 
                     BackgroundColor="{AppThemeBinding Light={StaticResource Gray100}, Dark={StaticResource Gray600}}">
+                <Border.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding ToggleSettingCommand}"
+                                          CommandParameter="AddFightValueOnFirstLevelForAllClass" />
+                </Border.GestureRecognizers>
                 <Grid ColumnDefinitions="*, Auto">
                     <Label Grid.Column="0" 
                            Text="Add combat value modifiers at level 1 for all classes" 
                            VerticalOptions="Center" 
-                           LineBreakMode="WordWrap"/>
+                           LineBreakMode="WordWrap" />
                     <Switch Grid.Column="1" IsToggled="{Binding AddFightValueOnFirstLevelForAllClass}" />
                 </Grid>
             </Border>
 
             <Border StrokeShape="RoundRectangle 10" Padding="15" StrokeThickness="0"
                     BackgroundColor="{AppThemeBinding Light={StaticResource Gray100}, Dark={StaticResource Gray600}}">
+                <Border.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding ToggleSettingCommand}"
+                                          CommandParameter="AddPainToleranceOnFirstLevelForAllClass" />
+                </Border.GestureRecognizers>
                 <Grid ColumnDefinitions="*, Auto">
                     <Label Grid.Column="0" 
                            Text="Add pain tolerance point modifiers at level 1 for all classes" 
                            VerticalOptions="Center"
-                           LineBreakMode="WordWrap"/>
+                           LineBreakMode="WordWrap" />
                     <Switch Grid.Column="1" IsToggled="{Binding AddPainToleranceOnFirstLevelForAllClass}" />
                 </Grid>
             </Border>
 
             <Border StrokeShape="RoundRectangle 10" Padding="15" StrokeThickness="0"
                     BackgroundColor="{AppThemeBinding Light={StaticResource Gray100}, Dark={StaticResource Gray600}}">
+                <Border.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding ToggleSettingCommand}"
+                                          CommandParameter="AddQualificationPointsOnFirstLevelForAllClass" />
+                </Border.GestureRecognizers>
                 <Grid ColumnDefinitions="*, Auto">
                     <Label Grid.Column="0" 
                            Text="Add skill point modifiers at level 1 for all classes" 
                            VerticalOptions="Center"
-                           LineBreakMode="WordWrap"/>
+                           LineBreakMode="WordWrap" />
                     <Switch Grid.Column="1" IsToggled="{Binding AddQualificationPointsOnFirstLevelForAllClass}" />
                 </Grid>
             </Border>
 
             <Border StrokeShape="RoundRectangle 10" Padding="15" StrokeThickness="0"
                     BackgroundColor="{AppThemeBinding Light={StaticResource Gray100}, Dark={StaticResource Gray600}}">
+                <Border.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding ToggleSettingCommand}"
+                                          CommandParameter="AddManaPointsOnFirstLevelForAllClass" />
+                </Border.GestureRecognizers>
                 <Grid ColumnDefinitions="*, Auto">
                     <Label Grid.Column="0" 
                            Text="Add mana point modifiers at level 1 for all classes" 
                            VerticalOptions="Center"
-                           LineBreakMode="WordWrap"/>
+                           LineBreakMode="WordWrap" />
                     <Switch Grid.Column="1" IsToggled="{Binding AddManaPointsOnFirstLevelForAllClass}" />
                 </Grid>
             </Border>
 
             <Border StrokeShape="RoundRectangle 10" Padding="15" StrokeThickness="0"
                     BackgroundColor="{AppThemeBinding Light={StaticResource Gray100}, Dark={StaticResource Gray600}}">
+                <Border.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding ToggleSettingCommand}"
+                                          CommandParameter="AddPsiPointsOnFirstLevelForAllClass" />
+                </Border.GestureRecognizers>
                 <Grid ColumnDefinitions="*, Auto">
                     <Label Grid.Column="0" 
                            Text="Add psi point modifiers at level 1 for all classes" 
                            VerticalOptions="Center"
-                           LineBreakMode="WordWrap"/>
-                    <Switch Grid.Column="1" IsToggled="{Binding AddQualificationPointsOnFirstLevelForAllClass}" />
+                           LineBreakMode="WordWrap" />
+                    <Switch Grid.Column="1" IsToggled="{Binding AddPsiPointsOnFirstLevelForAllClass}" />
                 </Grid>
             </Border>
 
             <Border StrokeShape="RoundRectangle 10" Padding="15" StrokeThickness="0"
                     BackgroundColor="{AppThemeBinding Light={StaticResource Gray100}, Dark={StaticResource Gray600}}">
+                <Border.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding ToggleSettingCommand}"
+                                          CommandParameter="AutoGenerateSkills" />
+                </Border.GestureRecognizers>
                 <Grid ColumnDefinitions="*, Auto">
                     <Label Grid.Column="0" 
                            Text="Automatic Skill Generation" 
                            VerticalOptions="Center"
-                           LineBreakMode="WordWrap"/>
+                           LineBreakMode="WordWrap" />
                     <Switch Grid.Column="1" IsToggled="{Binding AutoGenerateSkills}" />
                 </Grid>
             </Border>
 
             <Border StrokeShape="RoundRectangle 10" Padding="15" StrokeThickness="0"
                     BackgroundColor="{AppThemeBinding Light={StaticResource Gray100}, Dark={StaticResource Gray600}}">
+                <Border.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding ToggleSettingCommand}"
+                                          CommandParameter="AutoDistributeCombatValues" />
+                </Border.GestureRecognizers>
                 <Grid ColumnDefinitions="*, Auto">
                     <Label Grid.Column="0" 
                            Text="Automatic Combat Value Distribution" 
                            VerticalOptions="Center"
-                           LineBreakMode="WordWrap"/>
+                           LineBreakMode="WordWrap" />
                     <Switch Grid.Column="1" IsToggled="{Binding AutoDistributeCombatValues}" />
                 </Grid>
             </Border>
 
             <Border StrokeShape="RoundRectangle 10" Padding="15" StrokeThickness="0"
                     BackgroundColor="{AppThemeBinding Light={StaticResource Gray100}, Dark={StaticResource Gray600}}">
+                <Border.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding ToggleSettingCommand}"
+                                          CommandParameter="AutoDistributeQualificationPoints" />
+                </Border.GestureRecognizers>
                 <Grid ColumnDefinitions="*, Auto">
                     <Label Grid.Column="0" 
                            Text="Automatic Qualification Point Distribution" 
                            VerticalOptions="Center"
-                           LineBreakMode="WordWrap"/>
+                           LineBreakMode="WordWrap" />
                     <Switch Grid.Column="1" IsToggled="{Binding AutoDistributeQualificationPoints}" />
                 </Grid>
             </Border>
 
             <Border StrokeShape="RoundRectangle 10" Padding="15" StrokeThickness="0"
                     BackgroundColor="{AppThemeBinding Light={StaticResource Gray100}, Dark={StaticResource Gray600}}">
+                <Border.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding ToggleSettingCommand}"
+                                          CommandParameter="AutoIncreasePainTolerance" />
+                </Border.GestureRecognizers>
                 <Grid ColumnDefinitions="*, Auto">
                     <Label Grid.Column="0" 
                            Text="Automatic Pain Tolerance Increase" 
                            VerticalOptions="Center"
-                           LineBreakMode="WordWrap"/>
+                           LineBreakMode="WordWrap" />
                     <Switch Grid.Column="1" IsToggled="{Binding AutoIncreasePainTolerance}" />
                 </Grid>
             </Border>

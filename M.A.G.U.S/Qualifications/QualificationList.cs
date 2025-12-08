@@ -9,7 +9,7 @@ public class QualificationList : ObservableCollection<Qualification>
     {
         // WeaponUse, WeaponThrow should be handled => Or main weapons should be listed first!
         var firstBaseQualification = this.FirstOrDefault(
-            qualification => qualification.GetType().Equals(newMasterQualification.GetType())
+            qualification => qualification.ToString().Equals(newMasterQualification.ToString())
             && qualification.QualificationLevel == QualificationLevel.Base);
         if (firstBaseQualification != null)
         {
@@ -24,7 +24,7 @@ public class QualificationList : ObservableCollection<Qualification>
             }
             else
             {
-                var sameQualification = this.FirstOrDefault(q => q.GetType() == newMasterQualification.GetType());
+                var sameQualification = this.FirstOrDefault(q => q.ToString() == newMasterQualification.ToString());
                 if (sameQualification != null)
                 {
                     if (sameQualification.QualificationLevel == QualificationLevel.Base && newMasterQualification.QualificationLevel == QualificationLevel.Master)
@@ -64,7 +64,7 @@ public class QualificationList : ObservableCollection<Qualification>
         }
     }
 
-    public new void InsertRange(int index, IEnumerable<Qualification> qualifications)
+    public void InsertRange(int index, IEnumerable<Qualification> qualifications)
     {
         foreach (var qualification in qualifications)
         {
@@ -72,7 +72,7 @@ public class QualificationList : ObservableCollection<Qualification>
         }
     }
 
-    public new void AddRange(IEnumerable<Qualification> qualifications)
+    public void AddRange(IEnumerable<Qualification> qualifications)
     {
         foreach (var qualification in qualifications)
         {
@@ -80,7 +80,7 @@ public class QualificationList : ObservableCollection<Qualification>
         }
     }
 
-    private bool Check(Qualification qualification, out Qualification existingQualification)
+    private bool Check(Qualification qualification, out Qualification? existingQualification)
     {
         if (qualification is ICanHaveMany)
         {
@@ -88,7 +88,7 @@ public class QualificationList : ObservableCollection<Qualification>
             return true;
         }
 
-        existingQualification = this.FirstOrDefault(q => q.QualificationType == qualification.QualificationType);
+        existingQualification = this.FirstOrDefault(q => q.ToString() == qualification.ToString());
         if (existingQualification == null)
         {
             return true;

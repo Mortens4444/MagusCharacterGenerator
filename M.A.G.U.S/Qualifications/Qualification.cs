@@ -23,6 +23,8 @@ public abstract class Qualification
 
     public virtual string Name => GetType().Name;
 
+    public virtual string Description => String.Empty;
+
     public QualificationLevel QualificationLevel { get; set; }
 
     public int BaseQualificationLevel { get; private set; }
@@ -37,6 +39,8 @@ public abstract class Qualification
 
     public virtual int QpToMasterQualification { get; }
 
-
-    public Type QualificationType => GetType();
+    public override string ToString()
+    {
+        return Name;
+    }
 }

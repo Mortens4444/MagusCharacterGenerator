@@ -3,6 +3,7 @@ using M.A.G.U.S.Assistant.CustomEventArgs;
 using M.A.G.U.S.Assistant.Extensions;
 using M.A.G.U.S.GameSystem;
 using M.A.G.U.S.Things;
+using Mtf.Maui.Controls.Extensions;
 using System.Windows.Input;
 
 namespace M.A.G.U.S.Assistant.ViewModels;

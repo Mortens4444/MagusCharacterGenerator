@@ -29,4 +29,9 @@ public class LanguageLore : Qualification, ICanHaveMany
     public override int? QpToMaxBaseQualification => 5;
 
     public override int QpToMasterQualification => 20;
+
+    public override string ToString()
+    {
+        return $"{Name} - {Language}";
+    }
 }

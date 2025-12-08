@@ -13,4 +13,9 @@ public class WeaponThrowing(QualificationLevel qualificationLevel = Qualificatio
     public override int QpToBaseQualification => 4;
 
     public override int QpToMasterQualification => 40;
+    
+    public override string ToString()
+    {
+        return $"{Name} - {Weapon}";
+    }
 }

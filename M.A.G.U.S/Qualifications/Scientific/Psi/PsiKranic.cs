@@ -7,5 +7,9 @@ public class PsiKranic(QualificationLevel qualificationLevel = QualificationLeve
 {
     public PsiKind PsiKind => PsiKind.Kranich;
 
+    public override int QpToBaseQualification => 10;
+
+    public override int QpToMasterQualification => 55;
+
     public override string Name => "Psi, Kranich";
 }

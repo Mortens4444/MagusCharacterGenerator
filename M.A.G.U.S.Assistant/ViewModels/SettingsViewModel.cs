@@ -1,12 +1,17 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using M.A.G.U.S.Assistant.Services;
 using Mtf.LanguageService.Enums;
+using System.Reflection;
+using System.Windows.Input;
 
 namespace M.A.G.U.S.Assistant.ViewModels;
 
 internal partial class SettingsViewModel : ObservableObject
 {
     private readonly SettingsService settingsService;
+    
+    public ICommand ToggleSettingCommand { get; }
 
     public SettingsViewModel(SettingsService settingsService)
     {
@@ -21,6 +26,7 @@ internal partial class SettingsViewModel : ObservableObject
         OnPropertyChanged(nameof(AutoDistributeQualificationPoints));
         OnPropertyChanged(nameof(AutoGenerateSkills));
         OnPropertyChanged(nameof(AutoIncreasePainTolerance));
+        ToggleSettingCommand = new RelayCommand<object?>(ToggleSetting);
     }
 
     public bool AddFightValueOnFirstLevelForAllClass
@@ -148,5 +154,38 @@ internal partial class SettingsViewModel : ObservableObject
             settingsService.SaveDefaultLanguageAsync(value);
             OnPropertyChanged();
         }
+    }
+
+    private void ToggleSetting(object? parameter)
+    {
+        var name = parameter as string;
+        if (String.IsNullOrEmpty(name))
+        {
+            return;
+        }
+
+        var prop = GetType().GetProperty(name, BindingFlags.Instance | BindingFlags.Public | BindingFlags.IgnoreCase);
+        if (prop == null)
+        {
+            return;
+        }
+
+        if (prop.PropertyType != typeof(bool))
+        {
+            return;
+        }
+
+        if (!prop.CanRead || !prop.CanWrite)
+        {
+            return;
+        }
+
+        var valueObj = prop.GetValue(this);
+        if (valueObj is not bool current)
+        {
+            return;
+        }
+
+        prop.SetValue(this, !current);
     }
 }
