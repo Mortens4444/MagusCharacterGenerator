@@ -1,4 +1,5 @@
 ﻿using M.A.G.U.S.Enums;
+using M.A.G.U.S.GameSystem.Languages;
 using M.A.G.U.S.Qualifications;
 using M.A.G.U.S.Qualifications.Laical;
 using M.A.G.U.S.Qualifications.Scientific;
@@ -25,7 +26,7 @@ public class Dracker : Race
     [
         new AnimalTraining(),
         new ForestSurvival(),
-        new LanguageLore(4),
+        new LanguageLore(Language.Pyarronian, 4),
         new LanguageLore(3),
         new LanguageLore(3),
     ];

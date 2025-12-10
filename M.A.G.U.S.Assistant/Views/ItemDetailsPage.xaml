@@ -57,6 +57,8 @@
                         </DataTrigger>
                     </Button.Triggers>
                 </Button>
+
+                <Button Text="Close" Command="{Binding CloseCommand}" CornerRadius="10" />
             </HorizontalStackLayout>
 
         </StackLayout>

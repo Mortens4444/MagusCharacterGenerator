@@ -1,4 +1,5 @@
-﻿using M.A.G.U.S.GameSystem.Qualifications;
+﻿using M.A.G.U.S.GameSystem.Languages;
+using M.A.G.U.S.GameSystem.Qualifications;
 using M.A.G.U.S.Qualifications;
 using M.A.G.U.S.Qualifications.Laical;
 using M.A.G.U.S.Qualifications.Scientific;
@@ -18,10 +19,10 @@ public class KradPaladin : Paladin
             var result = base.Qualifications;
             result.AddRange(
             [
-                new LanguageLore(3),
-                new LanguageLore(3),
-                new LanguageLore(3),
-                new LanguageLore(3),
+                new LanguageLore(Language.Erven, 3),
+                new LanguageLore(Language.Toronian, 3),
+                new LanguageLore(Language.Doranian, 3),
+                new LanguageLore(Language.Godoran, 3),
                 new Herbalism(),
                 new LegendLore(),
                 new HistoryLore(),

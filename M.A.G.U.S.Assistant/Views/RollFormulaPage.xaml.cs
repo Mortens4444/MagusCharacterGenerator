@@ -1,7 +1,11 @@
 using CommunityToolkit.Mvvm.Messaging;
+using M.A.G.U.S.Assistant.Interfaces;
+using M.A.G.U.S.Assistant.Models;
 using M.A.G.U.S.Assistant.ViewModels;
+using Mtf.LanguageService;
 using Mtf.LanguageService.MAUI;
 using Mtf.Maui.Controls.Models;
+using System.Diagnostics;
 
 namespace M.A.G.U.S.Assistant.Views;
 
@@ -12,11 +16,20 @@ internal partial class RollFormulaPage : NotifierPage
     private const double ShakeThresholdG = 2.2;
     private const int ShakeDebounceMs = 800;
 
-    public RollFormulaPage(RollFormulaViewModel viewModel)
+    public RollFormulaPage(ISoundPlayer soundPlayer, IShakeService shakeService, RollFormula rollFormula)
     {
         InitializeComponent();
-        BindingContext = viewModel ?? throw new ArgumentNullException(nameof(viewModel));
+        Title = Lng.Elem(rollFormula.Title);
+        BindingContext = new RollFormulaViewModel(soundPlayer, shakeService, rollFormula);
+        
         ViewModel.RollRequested += OnRollRequested;
+        ViewModel.RollCompleted += (s, e) =>
+        {
+            MainThread.BeginInvokeOnMainThread(() =>
+            {
+                ResultLabel.Text = e.Result.ToString();
+            });
+        };
     }
 
     protected override void OnAppearing()
@@ -26,7 +39,7 @@ internal partial class RollFormulaPage : NotifierPage
 
         try
         {
-            ViewModel.ShakeService.Start();
+            ViewModel.ShakeService?.Start();
         }
         catch (Exception ex)
         {
@@ -39,7 +52,7 @@ internal partial class RollFormulaPage : NotifierPage
         base.OnDisappearing();
         try
         {
-            ViewModel.ShakeService.Stop();
+            ViewModel.ShakeService?.Stop();
         }
         catch (Exception ex)
         {
@@ -72,7 +85,7 @@ internal partial class RollFormulaPage : NotifierPage
         }
     }
 
-    private async void OnRollRequested(object? sender, TaskCompletionSource<bool> tcs)
+    private async void OnRollRequested(object? _, TaskCompletionSource<bool> tcs)
     {
         try
         {
@@ -89,16 +102,13 @@ internal partial class RollFormulaPage : NotifierPage
     {
         try
         {
-            await Dispatcher.DispatchAsync(async () =>
-            {
-                await Task.WhenAll(
-                    this.FindByName<Image>("DiceImage").RotateTo(360, 400)
-                );
-                this.FindByName<Image>("DiceImage").Rotation = 0;
-                await this.FindByName<Image>("DiceImage").TranslateTo(-8, 0, 50);
-                await this.FindByName<Image>("DiceImage").TranslateTo(8, 0, 50);
-                await this.FindByName<Image>("DiceImage").TranslateTo(0, 0, 30);
-            });
+            await DiceImage.RotateTo(360, 500).ConfigureAwait(true);
+            DiceImage.Rotation = 0;
+            await DiceImage.TranslateTo(-10, 0, 50).ConfigureAwait(true);
+            await DiceImage.TranslateTo(10, 0, 50).ConfigureAwait(true);
+            await DiceImage.TranslateTo(-6, 0, 40).ConfigureAwait(true);
+            await DiceImage.TranslateTo(6, 0, 40).ConfigureAwait(true);
+            await DiceImage.TranslateTo(0, 0, 30).ConfigureAwait(true);
         }
         catch (Exception ex)
         {

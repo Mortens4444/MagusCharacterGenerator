@@ -1,4 +1,5 @@
-﻿using CommunityToolkit.Mvvm.Messaging;
+﻿using CommunityToolkit.Mvvm.Input;
+using CommunityToolkit.Mvvm.Messaging;
 using M.A.G.U.S.Assistant.CustomEventArgs;
 using M.A.G.U.S.Assistant.Views;
 using M.A.G.U.S.GameSystem;
@@ -18,8 +19,8 @@ internal partial class QualificationsViewModel : INotifyPropertyChanged
 
     public QualificationsViewModel()
     {
-        ApplyFilterCommand = new RelayCommand(_ => ApplyFilter());
-        ClearFilterCommand = new RelayCommand(_ => ClearFilter());
+        ApplyFilterCommand = new RelayCommand(() => ApplyFilter());
+        ClearFilterCommand = new RelayCommand(() => ClearFilter());
 
         Seed();
         ApplyFilter();

@@ -1,6 +1,7 @@
 ﻿using M.A.G.U.S.GameSystem;
 using M.A.G.U.S.GameSystem.Attributes;
 using M.A.G.U.S.GameSystem.FightMode;
+using M.A.G.U.S.GameSystem.Languages;
 using M.A.G.U.S.GameSystem.Qualifications;
 using M.A.G.U.S.Interfaces;
 using M.A.G.U.S.Qualifications;
@@ -110,11 +111,11 @@ public class Bard : Class, IClass, IJustFight
         new WeaponUse(),
         new WeaponUse(),
         new PsiPyarron(),
-        new LanguageLore(5),
-        new LanguageLore(4),
-        new LanguageLore(3),
-        new LanguageLore(2),
-        new LanguageLore(2),
+        new LanguageLore(Language.Pyarronian, 5),
+        new LanguageLore(Language.Shadonian, 4),
+        new LanguageLore(Language.Toronian, 3),
+        new LanguageLore(Language.Erven, 2),
+        new LanguageLore(Language.Doranian, 2),
         new ReadingAndWriting(),
         new LegendLore(QualificationLevel.Master),
         new Etiquette(),

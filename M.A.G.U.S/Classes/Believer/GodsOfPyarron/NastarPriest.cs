@@ -1,6 +1,7 @@
 ﻿using M.A.G.U.S.GameSystem;
 using M.A.G.U.S.GameSystem.Attributes;
 using M.A.G.U.S.GameSystem.FightMode;
+using M.A.G.U.S.GameSystem.Languages;
 using M.A.G.U.S.GameSystem.Qualifications;
 using M.A.G.U.S.Interfaces;
 using M.A.G.U.S.Qualifications;
@@ -107,9 +108,9 @@ public class NastarPriest : Class, IClass, ILikeMagic
     [
         new WeaponUse(),
         new PsiPyarron(QualificationLevel.Master),
-        new LanguageLore(5),
-        new LanguageLore(5),
-        new LanguageLore(5),
+        new LanguageLore(Language.Pyarronian, 5),
+        new LanguageLore(Language.Shadonian, 5),
+        new LanguageLore(Language.Erven, 5),
         new Etiquette(),
         new ReadingAndWriting(),
         new Herbalism(),
@@ -128,11 +129,11 @@ public class NastarPriest : Class, IClass, ILikeMagic
 
     public override QualificationList FutureQualifications => BuildQualifications(
     [
-        new LanguageLore(2, 3),
-        new LanguageLore(2, 3),
+        new LanguageLore(Language.Toronian, 2, 3),
+        new LanguageLore(Language.Doranian, 2, 3),
         new Healing(level: 3),
         new ReadingAndWriting(QualificationLevel.Master, 4),
-        new LanguageLore(6, 4),
+        new LanguageLore(Language.Pyarronian, 6, 4),
 		//new Emberismeret MF 5
 		new Healing(QualificationLevel.Master, 5),
         new LegendLore(QualificationLevel.Master, 6),

@@ -1,6 +1,8 @@
-﻿using M.A.G.U.S.Assistant.Interfaces;
+﻿using CommunityToolkit.Mvvm.Messaging;
+using M.A.G.U.S.Assistant.Interfaces;
 using M.A.G.U.S.Assistant.Models;
 using M.A.G.U.S.Assistant.Services;
+using Mtf.Maui.Controls.Models;
 using Plugin.Maui.Audio;
 using System.Reflection;
 
@@ -15,6 +17,23 @@ public class SoundPlayer : ISoundPlayer
     public Task PlayAsync(string sound)
     {
         return PlayAsync(new SoundItem { ResourceId = EmbeddedResourceHelper.GetResourceId(sound) }, 1);
+    }
+
+    public Task PlayAndVibrateAsync(string sound)
+    {
+        try
+        {
+            if (Vibration.Default.IsSupported)
+            {
+                Vibration.Default.Vibrate(TimeSpan.FromMilliseconds(200));
+            }
+            return PlayAsync(sound);
+        }
+        catch (Exception ex)
+        {
+            WeakReferenceMessenger.Default.Send(new ShowErrorMessage(ex));
+        }
+        return Task.CompletedTask;
     }
 
     public Task PlayAsync(SoundItem sound, double volume)

@@ -1,4 +1,5 @@
-﻿using M.A.G.U.S.GameSystem.Qualifications;
+﻿using M.A.G.U.S.GameSystem.Languages;
+using M.A.G.U.S.GameSystem.Qualifications;
 using M.A.G.U.S.Qualifications;
 using M.A.G.U.S.Qualifications.Combat;
 using M.A.G.U.S.Qualifications.Laical;
@@ -26,9 +27,9 @@ public class KyelPriest : Priest
                 new HeavyArmorWearing(),
                 new WeaponLore(),
                 new Leadership(),
-                new LanguageLore(3),
-                new LanguageLore(3),
-                new LanguageLore(2),
+                new LanguageLore(Language.Erven, 3),
+                new LanguageLore(Language.Toronian, 3),
+                new LanguageLore(Language.Doranian, 2),
                 new Etiquette(QualificationLevel.Master),
                 new Healing(),
                 new Herbalism(),

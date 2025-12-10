@@ -2,6 +2,7 @@
 <v:NotifierPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
                 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
                 xmlns:mc="clr-namespace:Mtf.Maui.Controls;assembly=Mtf.Maui.Controls"
+                xmlns:m="clr-namespace:M.A.G.U.S.Assistant.Models"
                 xmlns:v="clr-namespace:M.A.G.U.S.Assistant.Views"
                 x:Class="M.A.G.U.S.Assistant.Views.MainPage"
                 x:ClassModifier="internal">
@@ -46,8 +47,8 @@
                     <mc:MenuItem ImageName="settings" LabelText="Settings" PageType="{x:Type v:SettingsPage}" WidthRequest="100" HeightRequest="100" />
                     <mc:MenuItem ImageName="about" LabelText="About" PageType="{x:Type v:AboutPage}" WidthRequest="100" HeightRequest="100" />
 				</HorizontalStackLayout>
-
-			</VerticalStackLayout>
+                
+            </VerticalStackLayout>
         </VerticalStackLayout>
     </ScrollView>
 

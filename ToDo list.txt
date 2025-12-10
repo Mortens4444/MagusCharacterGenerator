@@ -1,5 +1,18 @@
 - Problem with total weight
 
+- Fix QualificationDetailsPage change level QP display
+- Fix Runesword/armor prices
+- Fix position of Alinment (CharacterView.cs)
+- LanguageLore not show, when user has 3 QP
+- GemstoneMagic Basic should not be available
+- After learning new Qualification sort not working
+- Market button should be in Money Border
+- Qualifications button next to QP
+- Primary weapon combat values are not good
+- Dice roll end with (" 2x") replace the formula with " 2_Times", special_training?
+
+- Implement creature speed, like attacks (different speed in water or in air)
+- Show language attribute, change it
 - Fix buying some qualifications (Language, AntientLanguage, WeaponUse, etc)
 - SFÉ
 - Buy poison

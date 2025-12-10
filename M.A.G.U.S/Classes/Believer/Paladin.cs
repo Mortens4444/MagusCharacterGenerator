@@ -1,6 +1,7 @@
 ﻿using M.A.G.U.S.GameSystem;
 using M.A.G.U.S.GameSystem.Attributes;
 using M.A.G.U.S.GameSystem.FightMode;
+using M.A.G.U.S.GameSystem.Languages;
 using M.A.G.U.S.GameSystem.Qualifications;
 using M.A.G.U.S.Interfaces;
 using M.A.G.U.S.Qualifications;
@@ -104,8 +105,8 @@ public abstract class Paladin : Class, IClass, IHateRangedWeapons
         new WeaponUse(),
         new WeaponUse(),
         new PsiPyarron(QualificationLevel.Master),
-        new LanguageLore(5),
-        new LanguageLore(4),
+        new LanguageLore(Language.Pyarronian, 5),
+        new LanguageLore(Language.Shadonian, 4),
         new HeavyArmorWearing(),
         new ShieldUse(),
         new Leadership(),

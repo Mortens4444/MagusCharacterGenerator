@@ -8,6 +8,7 @@ using M.A.G.U.S.GameSystem.Valuables;
 using M.A.G.U.S.Interfaces;
 using M.A.G.U.S.Qualifications;
 using M.A.G.U.S.Qualifications.Percentages;
+using M.A.G.U.S.Qualifications.Scientific;
 using M.A.G.U.S.Qualifications.Specialities;
 using M.A.G.U.S.Races;
 using M.A.G.U.S.Things;
@@ -914,25 +915,40 @@ public class Character : IFightModifier, ILiving, IAbilities, INotifyPropertyCha
         return CanLearn(qualification, QualificationLevel.Base, out _) || CanLearn(qualification, QualificationLevel.Master, out _);
     }
 
-    public bool CanLearn(Qualification qualification, QualificationLevel qualificationLevel, out int qp)
+    public bool HasQualification(Qualification qualification)
     {
-        var hasBase = Qualifications.Any(q => q.Name == qualification.Name && q.QualificationLevel == QualificationLevel.Base);
-        var hasMaster = Qualifications.Any(q => q.Name == qualification.Name && q.QualificationLevel == QualificationLevel.Master);
-        qp = qualificationLevel == QualificationLevel.Base ? qualification.QpToBaseQualification : qualification.QpToMasterQualification;
-        if (hasBase)
+        return HasQualification(qualification, QualificationLevel.Base) || HasQualification(qualification, QualificationLevel.Master);
+    }
+
+    public bool HasQualification(Qualification qualification, QualificationLevel qualificationLevel)
+    {
+        return Qualifications.Any(q => q.Name == qualification.Name && q.QualificationLevel == qualificationLevel);
+    }
+
+    public bool CanLearn(Qualification qualification, QualificationLevel qualificationLevel, out int requiredQualificationPoints)
+    {
+        var learningBase = qualificationLevel == QualificationLevel.Base;
+        if (qualification is GemstoneMagic && learningBase)
         {
-            qp -= qualification.QpToBaseQualification;
+            requiredQualificationPoints = 0;
+            return false;
         }
-        if (hasMaster)
-        {
-            qp -= qualification.QpToMasterQualification;
-        }
-        if (QualificationPoints < qp)
+
+        var hasBase = HasQualification(qualification, QualificationLevel.Base);
+        var hasMaster = HasQualification(qualification, QualificationLevel.Master);
+
+        requiredQualificationPoints = learningBase
+            ? hasMaster || hasBase ? 0 : qualification.QpToBaseQualification
+            : hasMaster ? 0 : hasBase ? qualification.QpToMasterQualification - qualification.QpToBaseQualification : qualification.QpToMasterQualification;
+
+        var alreadyLearned = learningBase ? (hasBase || hasMaster) : hasMaster;
+        if (alreadyLearned)
         {
             return false;
         }
 
-        return true;
+        var hasEnoughtQualificationPoints = QualificationPoints >= requiredQualificationPoints;
+        return hasEnoughtQualificationPoints;
     }
 
     public void Learn(Qualification qualification, QualificationLevel qualificationLevel)

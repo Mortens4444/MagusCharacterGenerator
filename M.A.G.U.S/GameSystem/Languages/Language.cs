@@ -4,42 +4,25 @@ namespace M.A.G.U.S.GameSystem.Languages;
 
 public enum Language
 {
-    [Description("Kranich")]
-    Kranich,
-    [Description("Pyarronian")]
     Pyarronian,
-    [Description("Erv")]
-    Erv,
-    [Description("Shadonian")]
     Shadonian,
-    [Description("Toronian")]
     Toronian,
-    [Description("Doranian")]
     Doranian,
-    [Description("Jad")]
-    Jad,
-    [Description("Amund")]
-    Amund,
-    [Description("Godonian")]
-    Godonian,
+    Erven,
+    Gorvikian,
+    Kranich,
 
-    [Description("Elf")]
+    Jad,
+    Amund,
+    Godonian,
     Elf,
-    [Description("Orc")]
     Orc,
-    [Description("Goblin")]
     Goblin,
-    [Description("Troll")]
     Troll,
-    [Description("Ogre")]
     Ogre,
-    [Description("Reptilian")]
     Reptilian,
-    [Description("Hobgoblin")]
     Hobgoblin,
-    [Description("Niarei")]
     Niarei,
-    [Description("Khal")]
     Khal,
 
     Tchashka,
@@ -68,5 +51,5 @@ public enum Language
     Vanir,
 
     [Description("Gredh'il adf Laj")]
-    GredhIlAdfLadzs
+    GredhIlAdfLadzs,
 }

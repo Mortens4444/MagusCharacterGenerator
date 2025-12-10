@@ -1,6 +1,7 @@
 ﻿using M.A.G.U.S.GameSystem;
 using M.A.G.U.S.GameSystem.Attributes;
 using M.A.G.U.S.GameSystem.FightMode;
+using M.A.G.U.S.GameSystem.Languages;
 using M.A.G.U.S.GameSystem.Qualifications;
 using M.A.G.U.S.Interfaces;
 using M.A.G.U.S.Qualifications;
@@ -98,8 +99,8 @@ public class Wizard : Class, IClass, ILikeMagic
     [
         new WeaponUse(),
         new PsiKyrMethod(),
-        new LanguageLore(5),
-        new LanguageLore(4),
+        new LanguageLore(Language.Pyarronian, 5),
+        new LanguageLore(Language.Doranian, 4),
         new ReadingAndWriting(),
         new Alchemy(),
         new AncientTongueLore(),

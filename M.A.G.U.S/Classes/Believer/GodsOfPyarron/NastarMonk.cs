@@ -1,6 +1,7 @@
 ﻿using M.A.G.U.S.GameSystem;
 using M.A.G.U.S.GameSystem.Attributes;
 using M.A.G.U.S.GameSystem.FightMode;
+using M.A.G.U.S.GameSystem.Languages;
 using M.A.G.U.S.GameSystem.Qualifications;
 using M.A.G.U.S.Interfaces;
 using M.A.G.U.S.Qualifications;
@@ -102,9 +103,9 @@ public class NastarMonk : Class, IClass, ILikeMagic
     [
         new WeaponUse(),
         new PsiPyarron(QualificationLevel.Master),
-        new LanguageLore(5),
-        new LanguageLore(5),
-        new LanguageLore(5),
+        new LanguageLore(Language.Pyarronian, 5),
+        new LanguageLore(Language.Shadonian, 5),
+        new LanguageLore(Language.Erven, 5),
         new Physiology(),
         new ReadingAndWriting(),
         new Healing(),

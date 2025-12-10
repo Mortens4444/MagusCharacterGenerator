@@ -1,6 +1,7 @@
 ﻿using M.A.G.U.S.GameSystem;
 using M.A.G.U.S.GameSystem.Attributes;
 using M.A.G.U.S.GameSystem.FightMode;
+using M.A.G.U.S.GameSystem.Languages;
 using M.A.G.U.S.GameSystem.Qualifications;
 using M.A.G.U.S.Interfaces;
 using M.A.G.U.S.Qualifications;
@@ -110,10 +111,10 @@ public class Knight : Class, IClass, IHateRangedWeapons
         new Leadership(),
         new Etiquette(),
         new Riding(QualificationLevel.Master),
-        new LanguageLore(4),
-        new LanguageLore(2),
-        new LanguageLore(2),
-        new LanguageLore(2),
+        new LanguageLore(Language.Pyarronian, 4),
+        new LanguageLore(Language.Shadonian, 2),
+        new LanguageLore(Language.Erven, 2),
+        new LanguageLore(Language.Toronian, 2),
         new ReadingAndWriting(),
         new Heraldry()
     ]);

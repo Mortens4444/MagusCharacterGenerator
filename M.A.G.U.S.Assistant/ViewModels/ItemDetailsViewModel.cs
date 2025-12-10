@@ -1,9 +1,9 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using M.A.G.U.S.Assistant.CustomEventArgs;
 using M.A.G.U.S.Assistant.Extensions;
 using M.A.G.U.S.GameSystem;
 using M.A.G.U.S.Things;
-using Mtf.Maui.Controls.Extensions;
 using System.Windows.Input;
 
 namespace M.A.G.U.S.Assistant.ViewModels;
@@ -23,7 +23,8 @@ internal partial class ItemDetailsViewModel : ObservableObject
         Weight = thing.Weight;
         ImageName = thing.ImageName;
 
-        BuyCommand = new RelayCommand(_ =>  OnPurchased(Thing));
+        BuyCommand = new RelayCommand(() =>  OnPurchased(Thing));
+        CloseCommand = new RelayCommand(() => OnClosed());
     }
 
     public bool IsBuyButtonVisible { get; init; }
@@ -33,7 +34,8 @@ internal partial class ItemDetailsViewModel : ObservableObject
     public string Money { get; } = String.Empty;
     public double Weight { get; }
 
-    public ICommand BuyCommand { get; } = new RelayCommand(_ => { });
+    public ICommand BuyCommand { get; }
+    public ICommand CloseCommand { get; }
 
     public event EventHandler<ThingPurchasedEventArgs>? Purchased;
     public event EventHandler? Closed;

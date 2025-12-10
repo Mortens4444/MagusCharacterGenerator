@@ -25,7 +25,7 @@ internal partial class DiceRollPage : NotifierPage
         Translator.Translate(this);
         try
         {
-            ViewModel.ShakeService.Start();
+            ViewModel.ShakeService?.Start();
         }
         catch (Exception ex)
         {
@@ -39,7 +39,7 @@ internal partial class DiceRollPage : NotifierPage
 
         try
         {
-            ViewModel.ShakeService.Stop();
+            ViewModel.ShakeService?.Stop();
         }
         catch (Exception ex)
         {

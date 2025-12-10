@@ -44,7 +44,7 @@
                         <Button Text="{Binding LearnButtonText}" Command="{Binding LearnCommand}" CornerRadius="10">
                             <Button.Triggers>
                                 <DataTrigger TargetType="Button" Binding="{Binding CanLearn}" Value="False">
-                                    <Setter Property="IsEnabled" Value="False" />
+                                    <Setter Property="IsVisible" Value="False" />
                                 </DataTrigger>
                             </Button.Triggers>
                         </Button>

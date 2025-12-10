@@ -6,6 +6,8 @@ internal interface ISoundPlayer
 {
     Task PlayAsync(string sound);
 
+    Task PlayAndVibrateAsync(string sound);
+
     Task PlayAsync(SoundItem sound, double volume);
 
     void Stop();

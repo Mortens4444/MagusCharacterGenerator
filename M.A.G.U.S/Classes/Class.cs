@@ -4,6 +4,7 @@ using M.A.G.U.S.GameSystem.Attributes;
 using M.A.G.U.S.GameSystem.Psi;
 using M.A.G.U.S.Interfaces;
 using M.A.G.U.S.Qualifications;
+using M.A.G.U.S.Qualifications.Scientific;
 
 namespace M.A.G.U.S.Classes;
 

@@ -1,4 +1,5 @@
 ﻿using M.A.G.U.S.Enums;
+using M.A.G.U.S.GameSystem.Languages;
 using M.A.G.U.S.GameSystem.Qualifications;
 using M.A.G.U.S.Qualifications;
 using M.A.G.U.S.Qualifications.Combat;
@@ -28,9 +29,9 @@ public class ArelPriest : Priest
 				new WeaponUse(),
 				new WeaponThrowing(),
 				new WeaponLore(),
-				new LanguageLore(4),
-				new LanguageLore(3),
-				new LanguageLore(2),
+				new LanguageLore(Language.Erven, 4),
+				new LanguageLore(Language.Toronian, 3),
+				new LanguageLore(Language.Doranian, 2),
 				new WeatherDivination(),
 				new Herbalism(),
 				new Healing(),

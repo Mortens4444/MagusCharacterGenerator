@@ -61,6 +61,7 @@
                     <Picker ItemsSource="{Binding Alignments}"
                             ItemDisplayBinding="{Binding ., Converter={StaticResource EnumDescriptionTranslationConverter}}"
                             SelectedItem="{Binding Character.Alignment}"
+                            VerticalOptions="Center"
                             WidthRequest="220"
                             Grid.Row="1"
                             Grid.Column="1" />
