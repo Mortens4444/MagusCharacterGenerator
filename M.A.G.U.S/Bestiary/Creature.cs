@@ -14,7 +14,11 @@ public abstract class Creature
 
     public Occurrence Occurrence { get; protected set; }
 
-    public Intelligence Intelligence { get; protected set; }
+    public Intelligence? Intelligence { get; protected set; }
+    
+    public Intelligence? MinIntelligence { get; protected set; }
+
+    public Intelligence? MaxIntelligence { get; protected set; }
 
     public Size Size { get; protected set; }
 
@@ -92,6 +96,8 @@ public abstract class Creature
     public IPsi Psi { get; set; }
 
     public int PsiPoints { get; set; }
+
+    public bool ResistantToPsi { get; set; }
 
     public int ManaPoints { get; set; }
 

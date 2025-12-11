@@ -18,7 +18,7 @@ public sealed class Zombie : LivingDead
         AstralMagicResistance = Byte.MaxValue;
         MentalMagicResistance = Byte.MaxValue;
         PoisonResistance = Byte.MaxValue;
-        Intelligence = Intelligence.None;
+        Intelligence = Enums.Intelligence.None;
         Alignment = Enums.Alignment.ChaosDeath;
         ExperiencePoints = 15;
         NecrographyDepartment = NecrographyDepartment.UnconsciousUndead;

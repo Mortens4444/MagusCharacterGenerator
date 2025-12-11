@@ -30,11 +30,12 @@ public sealed class Dragon : Creature
         MinHealthPoints = 50;
         MaxHealthPoints = 250;
         MinPainTolerancePoints = 150;
-        MinPainTolerancePoints = 650;
+        MaxPainTolerancePoints = 650;
         AstralMagicResistance = Byte.MaxValue;
         MentalMagicResistance = Byte.MaxValue;
         PoisonResistance = Byte.MaxValue;
-        Intelligence = Intelligence.High; // Average - Outstanding;
+        MinIntelligence = Enums.Intelligence.Average;
+        MaxIntelligence = Enums.Intelligence.Outstanding;
         //ManaPoints = Variable;
         Alignment = Enums.Alignment.ChaosDeath;
         ExperiencePoints = 300000;

@@ -25,7 +25,7 @@ public sealed class Bear : Creature
         HealthPoints = 38;
         PainTolerancePoints = 80;
         PoisonResistance = 8;
-        Intelligence = Intelligence.Animal;
+        Intelligence = Enums.Intelligence.Animal;
         ExperiencePoints = 50;
     }
 

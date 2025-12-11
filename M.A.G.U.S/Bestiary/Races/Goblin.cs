@@ -27,7 +27,7 @@ public sealed class Goblin : Creature
         HealthPoints = 7;
         PainTolerancePoints = 12;
         PoisonResistance = 3;
-        Intelligence = Intelligence.Low;
+        Intelligence = Enums.Intelligence.Low;
         Alignment = Enums.Alignment.Chaos;
         ExperiencePoints = 10;
     }

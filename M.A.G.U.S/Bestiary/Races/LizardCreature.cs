@@ -20,7 +20,7 @@ public sealed class LizardCreature : Creature
         AstralMagicResistance = 22;
         MentalMagicResistance = 22;
         PoisonResistance = 5;
-        Intelligence = Intelligence.Average;
+        Intelligence = Enums.Intelligence.Average;
         Alignment = Enums.Alignment.OrderDeath;
         ExperiencePoints = 180;
     }

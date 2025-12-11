@@ -17,7 +17,7 @@ public sealed class Wolf : Creature
         HealthPoints = 18;
         PainTolerancePoints = 38;
         PoisonResistance = 4;
-        Intelligence = Intelligence.Animal;
+        Intelligence = Enums.Intelligence.Animal;
         ExperiencePoints = 4;
     }
 

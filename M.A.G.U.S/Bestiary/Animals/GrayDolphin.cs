@@ -9,7 +9,7 @@ public sealed class GrayDolphin : Creature
     public GrayDolphin()
     {
         Occurrence = Occurrence.Frequent;
-        Intelligence = Intelligence.High;
+        Intelligence = Enums.Intelligence.High;
         Size = Size._1_5_meters;
         Speed = 160;
         AttackValue = 40;

@@ -44,7 +44,9 @@ internal partial class CreatureDetailsViewModel : ObservableObject
     }
 
     public Occurrence Occurrence => Creature.Occurrence;
-    public Intelligence Intelligence => Creature.Intelligence;
+    public Intelligence? Intelligence => Creature.Intelligence;
+    public Intelligence? MinIntelligence => Creature.MinIntelligence;
+    public Intelligence? MaxIntelligence => Creature.MaxIntelligence;
     public M.A.G.U.S.Enums.Size Size => Creature.Size;
     public int Speed => Creature.Speed;
     public int AttackValue => Creature.AttackValue;

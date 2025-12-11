@@ -31,7 +31,7 @@ public sealed class Vampire : LivingDead
         AstralMagicResistance = Byte.MaxValue;
         MentalMagicResistance = Byte.MaxValue;
         PoisonResistance = Byte.MaxValue;
-        Intelligence = Intelligence.High;
+        Intelligence = Enums.Intelligence.High;
         Alignment = Enums.Alignment.ChaosDeath;
         ExperiencePoints = 4000;
         NecrographyDepartment = NecrographyDepartment.BloodDrinkingUndead;

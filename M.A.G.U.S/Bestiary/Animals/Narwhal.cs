@@ -9,7 +9,7 @@ public sealed class Narwhal : Creature
     public Narwhal()
     {
         Occurrence = Occurrence.Rare;
-        Intelligence = Intelligence.Animal;
+        Intelligence = Enums.Intelligence.Animal;
         Size = Size._4_meters;
         Speed = 220;
         AttackValue = 150;

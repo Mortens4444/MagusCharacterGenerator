@@ -3,6 +3,7 @@
               xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
               xmlns:v="clr-namespace:Mtf.LanguageService.MAUI.Views;assembly=Mtf.LanguageService.MAUI"
               xmlns:m="clr-namespace:M.A.G.U.S.GameSystem;assembly=M.A.G.U.S."
+              xmlns:converters="clr-namespace:M.A.G.U.S.Assistant.Converters"
               xmlns:vm="clr-namespace:M.A.G.U.S.Assistant.ViewModels"
               xmlns:conv="clr-namespace:Mtf.LanguageService.MAUI.Converters;assembly=Mtf.LanguageService.MAUI"
               x:Class="M.A.G.U.S.Assistant.Views.CreatureDetailsPage"
@@ -13,6 +14,7 @@
         <ResourceDictionary>
             <conv:TranslationConverter x:Key="TranslationConverter" />
             <conv:EnumDescriptionTranslationConverter x:Key="EnumDescriptionTranslationConverter" />
+            <converters:MinMaxIntelligenceConverter x:Key="MinMaxIntelligenceConverter" />
         </ResourceDictionary>
     </v:NotifierPage.Resources>
 
@@ -39,8 +41,16 @@
                     <Label Text="{Binding Occurrence, Converter={StaticResource EnumDescriptionTranslationConverter}}" Grid.Row="0" Grid.Column="1" />
 
                     <Label Text="Intelligence" Grid.Row="1" Grid.Column="0" FontAttributes="Bold" />
-                    <Label Text="{Binding Intelligence, Converter={StaticResource EnumDescriptionTranslationConverter}}" Grid.Row="1" Grid.Column="1" />
-
+                    <Label Grid.Row="1" Grid.Column="1">
+                        <Label.Text>
+                            <MultiBinding Converter="{StaticResource MinMaxIntelligenceConverter}">
+                                <Binding Path="MinIntelligence" />
+                                <Binding Path="MaxIntelligence" />
+                                <Binding Path="Intelligence" />
+                            </MultiBinding>
+                        </Label.Text>
+                    </Label>
+                    
                     <Label Text="Size" Grid.Row="2" Grid.Column="0" FontAttributes="Bold" />
                     <Label Text="{Binding Size, Converter={StaticResource EnumDescriptionTranslationConverter}}" Grid.Row="2" Grid.Column="1" />
 

@@ -18,7 +18,7 @@ public sealed class Werewolf : LivingDead
         AstralMagicResistance = Byte.MaxValue;
         MentalMagicResistance = Byte.MaxValue;
         PoisonResistance = Byte.MaxValue;
-        Intelligence = Intelligence.High;
+        Intelligence = Enums.Intelligence.High;
         Alignment = Enums.Alignment.ChaosDeath;
         ExperiencePoints = 300;
         NecrographyDepartment = NecrographyDepartment.WanderingCorpse;

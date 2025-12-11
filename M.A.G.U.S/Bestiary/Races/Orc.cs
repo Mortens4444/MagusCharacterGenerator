@@ -30,7 +30,7 @@ public sealed class Orc : Creature
         HealthPoints = 10;
         PainTolerancePoints = 16;
         PoisonResistance = 3;
-        Intelligence = Intelligence.Low;
+        Intelligence = Enums.Intelligence.Low;
         Alignment = Enums.Alignment.Chaos;
         ExperiencePoints = 30;
     }

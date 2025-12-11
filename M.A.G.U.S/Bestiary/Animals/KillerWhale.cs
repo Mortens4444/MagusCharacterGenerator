@@ -9,7 +9,7 @@ public sealed class KillerWhale : Creature
     public KillerWhale()
     {
         Occurrence = Occurrence.Rare;
-        Intelligence = Intelligence.Average;
+        Intelligence = Enums.Intelligence.Average;
         Size = Size._4_meters;
         Speed = 120;
         AttackValue = 95;

@@ -17,7 +17,7 @@ public sealed class GiantSpider : Creature
         HealthPoints = 6;
         PainTolerancePoints = 13;
         PoisonResistance = 8;
-        Intelligence = Intelligence.Animal;
+        Intelligence = Enums.Intelligence.Animal;
         ArmorClass = 2;
         ExperiencePoints = 0;
     }

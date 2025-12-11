@@ -13,7 +13,7 @@ public sealed class Spider : Creature
         Speed = 5;
         HealthPoints = 1;
         PoisonResistance = 8;
-        Intelligence = Intelligence.Animal;
+        Intelligence = Enums.Intelligence.Animal;
         ExperiencePoints = 0;
     }
 

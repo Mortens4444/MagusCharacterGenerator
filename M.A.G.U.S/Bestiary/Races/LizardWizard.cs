@@ -24,7 +24,7 @@ public sealed class LizardWizard : Creature
         Psi = new PsiKyrMethod();
         PsiPoints = 80;
         ManaPoints = 100;
-        Intelligence = Intelligence.Outstanding;
+        Intelligence = Enums.Intelligence.Outstanding;
         Alignment = Enums.Alignment.OrderDeath;
         ExperiencePoints = 7000;
     }
