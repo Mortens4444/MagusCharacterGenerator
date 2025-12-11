@@ -1,6 +1,5 @@
 - Problem with total weight
 
-- Fix QualificationDetailsPage change level QP display
 - Fix Runesword/armor prices
 - Fix position of Alinment (CharacterView.cs)
 - LanguageLore not show, when user has 3 QP

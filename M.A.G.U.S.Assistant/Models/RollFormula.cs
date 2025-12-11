@@ -1,6 +1,6 @@
 ﻿using M.A.G.U.S.GameSystem.Attributes;
 using Mtf.Extensions;
-using Mtf.LanguageService;
+using Mtf.LanguageService.MAUI;
 using System.Text.RegularExpressions;
 
 namespace M.A.G.U.S.Assistant.Models;

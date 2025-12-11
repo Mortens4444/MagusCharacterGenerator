@@ -6,7 +6,8 @@ using M.A.G.U.S.Assistant.Services;
 using M.A.G.U.S.Assistant.ViewModels;
 using M.A.G.U.S.Assistant.Views;
 using Microsoft.Extensions.Logging;
-using Mtf.Maui.Controls.Models;
+using Mtf.LanguageService.MAUI.Views;
+using Mtf.Maui.Controls.Messages;
 using System.Diagnostics;
 
 namespace M.A.G.U.S.Assistant;
@@ -157,7 +158,7 @@ internal static class MauiProgram
             typeof(MagicalObjectsPage),
             typeof(MapPage),
             typeof(MarketPage),
-            typeof(NotifierPage),
+            //typeof(NotifierPage),
             typeof(ObjectObserverPage),
             typeof(PaintWizardPage),
             typeof(PoisonsPage),

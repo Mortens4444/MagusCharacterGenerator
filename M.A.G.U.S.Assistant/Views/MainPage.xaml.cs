@@ -1,22 +1,19 @@
 ﻿using M.A.G.U.S.Assistant.Services;
-using Mtf.LanguageService;
 using Mtf.LanguageService.MAUI;
+using Mtf.LanguageService.MAUI.Views;
 
 namespace M.A.G.U.S.Assistant.Views;
 
 internal partial class MainPage : NotifierPage
 {
     private readonly SettingsService settingsService;
-    private Dictionary<object, string>? originalTextElements;
+    private readonly Dictionary<object, string>? originalTextElements;
 
     public MainPage(SettingsService settingsService)
     {
         this.settingsService = settingsService;
         InitializeComponent();
-        if (originalTextElements == null)
-        {
-            originalTextElements = Translator.Translate(this);
-        }
+        originalTextElements ??= Translator.Translate(this);
     }
 
     protected override void OnAppearing()

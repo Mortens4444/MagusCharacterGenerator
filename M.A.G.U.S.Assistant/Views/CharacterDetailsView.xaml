@@ -4,7 +4,8 @@
              xmlns:conv="clr-namespace:Mtf.LanguageService.MAUI.Converters;assembly=Mtf.LanguageService.MAUI"
              xmlns:converters="clr-namespace:M.A.G.U.S.Assistant.Converters"
              xmlns:mcc="clr-namespace:Mtf.Maui.Controls.Converters;assembly=Mtf.Maui.Controls"
-             xmlns:v="clr-namespace:M.A.G.U.S.Assistant.Views"
+             xmlns:v="clr-namespace:Mtf.LanguageService.MAUI.Views;assembly=Mtf.LanguageService.MAUI"
+             xmlns:mv="clr-namespace:M.A.G.U.S.Assistant.Views"
              xmlns:vm="clr-namespace:M.A.G.U.S.Assistant.ViewModels"
              xmlns:t="clr-namespace:M.A.G.U.S.Things;assembly=M.A.G.U.S."
              xmlns:local="clr-namespace:M.A.G.U.S.Qualifications;assembly=M.A.G.U.S."
@@ -173,7 +174,7 @@
         <Border Style="{StaticResource BoxBorder}" Margin="0,10">
             <VerticalStackLayout>
                 <mc:EntryWithLabel Label="SP" Text="{Binding Character.QualificationPoints}" IsEnabled="False" />
-                <mc:MenuItem ImageName="qualifications" LabelText="Qualifications" PageType="{x:Type v:QualificationsPage}" WidthRequest="100" HeightRequest="100"
+                <mc:MenuItem ImageName="qualifications" LabelText="Qualifications" PageType="{x:Type mv:QualificationsPage}" WidthRequest="100" HeightRequest="100"
                              Parameter="{Binding Character}" IsVisible="{Binding Character.CanAllocateQualificationPoints, Converter={StaticResource BoolToVisibilityConverter}}" />
 
                 <Label Text="Qualifications" Style="{StaticResource HeaderLabel}" />
@@ -250,7 +251,7 @@
             </VerticalStackLayout>
         </Border>
 
-        <mc:MenuItem ImageName="market" LabelText="Market" PageType="{x:Type v:MarketPage}" WidthRequest="100" HeightRequest="100" Parameter="{Binding Character}" />
+        <mc:MenuItem ImageName="market" LabelText="Market" PageType="{x:Type mv:MarketPage}" WidthRequest="100" HeightRequest="100" Parameter="{Binding Character}" />
 
         <!-- Felszerelés -->
         <Border Style="{StaticResource BoxBorder}" Margin="0,10">

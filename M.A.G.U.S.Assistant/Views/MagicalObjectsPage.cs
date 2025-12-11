@@ -2,7 +2,7 @@ using M.A.G.U.S.Assistant.Models;
 using M.A.G.U.S.Assistant.ViewModels;
 using M.A.G.U.S.Things.MagicalObjects;
 using Mtf.Extensions;
-using Mtf.LanguageService;
+using Mtf.LanguageService.MAUI;
 
 namespace M.A.G.U.S.Assistant.Views;
 

@@ -10,8 +10,8 @@ using M.A.G.U.S.Things.Weapons;
 using M.A.G.U.S.Utils;
 using Mtf.Extensions;
 using Mtf.Extensions.Services;
-using Mtf.LanguageService;
-using Mtf.Maui.Controls.Models;
+using Mtf.LanguageService.MAUI;
+using Mtf.Maui.Controls.Messages;
 using System.Windows.Input;
 
 namespace M.A.G.U.S.Assistant.ViewModels;

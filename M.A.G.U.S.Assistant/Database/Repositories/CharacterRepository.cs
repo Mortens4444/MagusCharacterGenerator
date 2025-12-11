@@ -1,7 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.Messaging;
 using M.A.G.U.S.Assistant.Database.Entities;
 using M.A.G.U.S.GameSystem;
-using Mtf.Maui.Controls.Models;
+using Mtf.Maui.Controls.Messages;
 using Newtonsoft.Json;
 
 namespace M.A.G.U.S.Assistant.Database.Repositories;

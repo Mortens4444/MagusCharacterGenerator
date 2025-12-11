@@ -2,7 +2,7 @@
 using M.A.G.U.S.Assistant.Models;
 using M.A.G.U.S.Interfaces;
 using Mtf.Extensions;
-using Mtf.LanguageService;
+using Mtf.LanguageService.MAUI;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 

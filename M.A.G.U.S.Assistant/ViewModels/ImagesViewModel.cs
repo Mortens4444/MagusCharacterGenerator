@@ -1,8 +1,8 @@
 ﻿using CommunityToolkit.Mvvm.Messaging;
 using M.A.G.U.S.Assistant.Models;
 using M.A.G.U.S.Utils;
-using Mtf.LanguageService;
-using Mtf.Maui.Controls.Models;
+using Mtf.LanguageService.MAUI;
+using Mtf.Maui.Controls.Messages;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Diagnostics;

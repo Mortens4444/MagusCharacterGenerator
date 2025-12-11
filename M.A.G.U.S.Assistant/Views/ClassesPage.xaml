@@ -3,7 +3,7 @@
                 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
                 xmlns:conv="clr-namespace:Mtf.LanguageService.MAUI.Converters;assembly=Mtf.LanguageService.MAUI"
                 xmlns:converters="clr-namespace:M.A.G.U.S.Assistant.Converters"
-                xmlns:v="clr-namespace:M.A.G.U.S.Assistant.Views"
+                xmlns:v="clr-namespace:Mtf.LanguageService.MAUI.Views;assembly=Mtf.LanguageService.MAUI"
                 xmlns:m="clr-namespace:M.A.G.U.S.Assistant.Models"
                 xmlns:vm="clr-namespace:M.A.G.U.S.Assistant.ViewModels"
                 xmlns:cls="clr-namespace:M.A.G.U.S.Classes;assembly=M.A.G.U.S."

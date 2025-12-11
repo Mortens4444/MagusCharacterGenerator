@@ -1,5 +1,6 @@
 using M.A.G.U.S.Assistant.ViewModels;
 using Microsoft.Maui.Layouts;
+using Mtf.LanguageService.MAUI.Views;
 
 namespace M.A.G.U.S.Assistant.Views;
 

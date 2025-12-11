@@ -1,5 +1,5 @@
 ﻿using M.A.G.U.S.Things;
-using Mtf.LanguageService;
+using Mtf.LanguageService.MAUI;
 using System.Globalization;
 
 namespace M.A.G.U.S.Assistant.Converters;

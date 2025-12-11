@@ -5,7 +5,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:m="clr-namespace:M.A.G.U.S.Assistant.Models"
              xmlns:mc="clr-namespace:Mtf.Maui.Controls;assembly=Mtf.Maui.Controls"
-             xmlns:v="clr-namespace:M.A.G.U.S.Assistant.Views"
+             xmlns:v="clr-namespace:Mtf.LanguageService.MAUI.Views;assembly=Mtf.LanguageService.MAUI"
              xmlns:vm="clr-namespace:M.A.G.U.S.Assistant.ViewModels"
              x:Class="M.A.G.U.S.Assistant.Views.SearchListPage"
              x:ClassModifier="internal"

@@ -3,8 +3,8 @@
 using CommunityToolkit.Mvvm.Messaging;
 using M.A.G.U.S.GameSystem.Attributes;
 using Mtf.Extensions;
-using Mtf.LanguageService;
-using Mtf.Maui.Controls.Models;
+using Mtf.LanguageService.MAUI;
+using Mtf.Maui.Controls.Messages;
 using System;
 using System.Globalization;
 using System.Reflection;

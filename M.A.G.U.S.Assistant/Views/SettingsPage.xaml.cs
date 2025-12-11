@@ -1,9 +1,9 @@
 using M.A.G.U.S.Assistant.ViewModels;
 using Mtf.Extensions;
-using Mtf.LanguageService;
 using Mtf.LanguageService.Enums;
 using Mtf.LanguageService.Extensions;
 using Mtf.LanguageService.MAUI;
+using Mtf.LanguageService.MAUI.Views;
 
 namespace M.A.G.U.S.Assistant.Views;
 

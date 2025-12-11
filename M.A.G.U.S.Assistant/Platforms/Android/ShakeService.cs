@@ -1,6 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.Messaging;
 using M.A.G.U.S.Assistant.Interfaces;
-using Mtf.Maui.Controls.Models;
+using Mtf.Maui.Controls.Messages;
 
 namespace M.A.G.U.S.Assistant.Platforms.Android;
 

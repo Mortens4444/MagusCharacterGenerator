@@ -4,7 +4,7 @@ using M.A.G.U.S.Assistant.CustomEventArgs;
 using M.A.G.U.S.GameSystem;
 using M.A.G.U.S.GameSystem.Qualifications;
 using M.A.G.U.S.Qualifications;
-using Mtf.LanguageService;
+using Mtf.LanguageService.MAUI;
 using Mtf.Maui.Controls.Extensions;
 using System.Windows.Input;
 
@@ -13,6 +13,8 @@ namespace M.A.G.U.S.Assistant.ViewModels;
 internal partial class QualificationDetailsViewModel : ObservableObject
 {
     private QualificationLevel selectedLevel;
+    private bool canLearn;
+    private int requiredSp;
 
     public QualificationDetailsViewModel(Character? character, Qualification qualification)
     {
@@ -50,33 +52,13 @@ internal partial class QualificationDetailsViewModel : ObservableObject
         {
             if (SetProperty(ref selectedLevel, value))
             {
-                // Csak a SelectedLevel változásakor hívjuk meg az UpdateDerived()-t
                 UpdateDerived();
             }
         }
     }
 
-    private bool canLearn;
-    public bool CanLearn // Ez a setter csak notifikációra szolgál, NEM HÍVJA AZ UpdateDerived()-t!
-    {
-        get => canLearn;
-        set => SetProperty(ref canLearn, value);
-    }
-
-    private int requiredSp;
-    public int RequiredSp // Ez a setter csak notifikációra szolgál, NEM HÍVJA AZ UpdateDerived()-t!
-    {
-        get => requiredSp;
-        set => SetProperty(ref requiredSp, value);
-    }
-
-    private string requiredSpText;
-    public string RequiredSpText // Ez a setter csak notifikációra szolgál, NEM HÍVJA AZ UpdateDerived()-t!
-    {
-        get => requiredSpText;
-        set => SetProperty(ref requiredSpText, value);
-    }
-
+    public bool CanLearn { get => canLearn; set => SetProperty(ref canLearn, value); }
+    public int RequiredSp { get => requiredSp; set => SetProperty(ref requiredSp, value); }
     public string LearnButtonText => RequiredSp <= (Character?.QualificationPoints ?? 0) ? Lng.Elem("Learn") : Lng.Elem("Unavailable");
 
     public event EventHandler<QualificationLearnedEventArgs>? Learned;
@@ -84,42 +66,27 @@ internal partial class QualificationDetailsViewModel : ObservableObject
 
     private void UpdateDerived()
     {
-        int requiredQp;
         bool learnable;
+        int requiredQp;
 
         if (Character != null)
         {
-            // Változás 2: Kiszedjük a CanLearn kiszámítását
             learnable = Character.CanLearn(Qualification, SelectedLevel, out requiredQp);
         }
         else
         {
-            // Változás 3: Kiszedjük a szükséges SP kiszámítását, ha nincs Character
             requiredQp = SelectedLevel == QualificationLevel.Base
                 ? Qualification.QpToBaseQualification
                 : Qualification.QpToMasterQualification;
-            learnable = false; // Mivel nincs karakter, nem tanulható
+            learnable = false;
         }
-
-        // Változás 4: Most beállítjuk a tulajdonságokat az UpdateDerived()-ban.
-        // Mivel a RequiredSp, CanLearn és RequiredSpText setterei már nem hívják az UpdateDerived()-t,
-        // elkerüljük a rekurziót!
-
-        requiredSp = requiredQp;
+        RequiredSp = requiredQp;
         canLearn = learnable;
 
-        // Változás 5: A RequiredSpText-et is itt állítjuk be
-        requiredSpText = RequiredSp >= 0
-            ? $"{RequiredSp} {Lng.Elem("SP")}"
-            : Lng.Elem("Not learnable");
-        OnPropertyChanged(nameof(RequiredSp));
-        OnPropertyChanged(nameof(RequiredSpText)); // **EZ GARANTÁLJA A FRISSÜLÉST**
+        //OnPropertyChanged(nameof(RequiredSp));
         OnPropertyChanged(nameof(CanLearn));
-
-        // Változás 6: Biztosítjuk, hogy a LearnButtonText is frissüljön
         OnPropertyChanged(nameof(LearnButtonText));
 
-        // Változás 7: Frissítjük a parancsot, ami a CanLearn-től függ
         (LearnCommand as RelayCommand)?.NotifyCanExecuteChanged();
 
     }

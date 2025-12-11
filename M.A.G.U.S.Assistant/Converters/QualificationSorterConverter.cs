@@ -1,6 +1,6 @@
 ﻿using M.A.G.U.S.GameSystem.Qualifications;
 using M.A.G.U.S.Qualifications;
-using Mtf.LanguageService;
+using Mtf.LanguageService.MAUI;
 using System.Globalization;
 
 namespace M.A.G.U.S.Assistant.Converters;

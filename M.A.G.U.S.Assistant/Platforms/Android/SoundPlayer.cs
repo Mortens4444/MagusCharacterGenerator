@@ -2,7 +2,7 @@
 using M.A.G.U.S.Assistant.Interfaces;
 using M.A.G.U.S.Assistant.Models;
 using M.A.G.U.S.Assistant.Services;
-using Mtf.Maui.Controls.Models;
+using Mtf.Maui.Controls.Messages;
 using Plugin.Maui.Audio;
 using System.Reflection;
 

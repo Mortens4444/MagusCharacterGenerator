@@ -2,10 +2,9 @@ using CommunityToolkit.Mvvm.Messaging;
 using M.A.G.U.S.Assistant.Interfaces;
 using M.A.G.U.S.Assistant.Models;
 using M.A.G.U.S.Assistant.ViewModels;
-using Mtf.LanguageService;
 using Mtf.LanguageService.MAUI;
-using Mtf.Maui.Controls.Models;
-using System.Diagnostics;
+using Mtf.LanguageService.MAUI.Views;
+using Mtf.Maui.Controls.Messages;
 
 namespace M.A.G.U.S.Assistant.Views;
 

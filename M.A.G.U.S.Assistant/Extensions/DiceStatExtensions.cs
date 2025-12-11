@@ -1,6 +1,6 @@
 ﻿using M.A.G.U.S.Assistant.Models;
 using M.A.G.U.S.GameSystem.Attributes;
-using Mtf.LanguageService;
+using Mtf.LanguageService.MAUI;
 using System.Reflection;
 
 namespace M.A.G.U.S.Assistant.Extensions;

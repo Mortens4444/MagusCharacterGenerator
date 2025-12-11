@@ -7,7 +7,7 @@ using M.A.G.U.S.Things;
 using M.A.G.U.S.Things.Gemstones;
 using M.A.G.U.S.Things.MagicalObjects;
 using Mtf.Extensions;
-using Mtf.LanguageService;
+using Mtf.LanguageService.MAUI;
 using System.ComponentModel;
 
 namespace M.A.G.U.S.Assistant.Models;

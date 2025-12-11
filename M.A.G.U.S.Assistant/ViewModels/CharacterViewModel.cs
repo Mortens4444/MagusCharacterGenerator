@@ -2,7 +2,7 @@
 using M.A.G.U.S.Enums;
 using M.A.G.U.S.GameSystem;
 using Mtf.Extensions;
-using Mtf.LanguageService;
+using Mtf.LanguageService.MAUI;
 using System.Collections.ObjectModel;
 
 namespace M.A.G.U.S.Assistant.ViewModels;

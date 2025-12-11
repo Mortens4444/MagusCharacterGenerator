@@ -1,6 +1,6 @@
 ﻿using M.A.G.U.S.Races;
 using Mtf.Extensions;
-using Mtf.LanguageService;
+using Mtf.LanguageService.MAUI;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 

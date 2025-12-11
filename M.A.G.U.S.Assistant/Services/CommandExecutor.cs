@@ -1,5 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.Messaging;
-using Mtf.Maui.Controls.Models;
+using Mtf.Maui.Controls.Messages;
 using System.Windows.Input;
 
 namespace M.A.G.U.S.Assistant.Services;

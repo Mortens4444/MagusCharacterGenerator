@@ -1,6 +1,7 @@
 using M.A.G.U.S.Assistant.Services;
 using M.A.G.U.S.Assistant.ViewModels;
-using Mtf.LanguageService;
+using Mtf.LanguageService.MAUI;
+using Mtf.LanguageService.MAUI.Views;
 
 namespace M.A.G.U.S.Assistant.Views;
 
