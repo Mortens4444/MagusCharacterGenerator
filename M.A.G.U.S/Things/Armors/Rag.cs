@@ -2,13 +2,13 @@ using M.A.G.U.S.GameSystem.Valuables;
 
 namespace M.A.G.U.S.Things.Armors;
 
-public class Rag : Thing
+public class Rag : Armor
 {
 	public override Money Price => new(0, 1, 0);
 
-	public int MovementInhibitingFactor => 0;
+	public override int ArmorCheckPenalty => 0;
 
-	public int DamageSusceptiveValue => 1;
+	public override int ArmorClass => 1;
 
 	public override double Weight => 5;
 

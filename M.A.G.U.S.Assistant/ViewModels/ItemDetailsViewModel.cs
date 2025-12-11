@@ -4,26 +4,62 @@ using M.A.G.U.S.Assistant.CustomEventArgs;
 using M.A.G.U.S.Assistant.Extensions;
 using M.A.G.U.S.GameSystem;
 using M.A.G.U.S.Things;
+using M.A.G.U.S.Things.Armors;
+using M.A.G.U.S.Things.MagicalObjects;
+using M.A.G.U.S.Things.Weapons;
+using System.Collections.ObjectModel;
 using System.Windows.Input;
 
 namespace M.A.G.U.S.Assistant.ViewModels;
 
 internal partial class ItemDetailsViewModel : ObservableObject
 {
-    public Thing Thing { get; private set; }
+    private Thing? selectedRuneTarget;
 
-    public ItemDetailsViewModel(Character? character, Thing thing)
+    public ItemDetailsViewModel(Character? character, Thing thingToBuy, double priceMultiplier)
     {
-        Thing = thing;
-        IsBuyButtonVisible = character != null && character.Money >= thing.MultipliedPrice;
+        ThingToBuy = thingToBuy;
+        IsBuyButtonVisible = character != null && character.Money >= thingToBuy.MultipliedPrice;
 
-        Name = thing.Name;
-        Description = thing.Description;
-        Money = thing.MultipliedPrice.ToTranslatedString();
-        Weight = thing.Weight;
-        ImageName = thing.ImageName;
+        if (character != null)
+        {
+            Type targetType;
+            if (thingToBuy is RuneArmor)
+            {
+                targetType = typeof(Armor);
+            }
+            else if (thingToBuy is RuneSword)
+            {
+                targetType = typeof(IMeleeWeapon);
+            }
+            else
+            {
+                targetType = typeof(Thing);
+            }
 
-        BuyCommand = new RelayCommand(() =>  OnPurchased(Thing));
+            var targets = character.Equipment.Where(e => targetType.IsAssignableFrom(e.GetType())).ToList();
+
+            foreach (var item in targets)
+            {
+                item.PriceMultiplier = priceMultiplier;
+                RuneTargets.Add(item);
+            }
+
+            IsRunecraftingVisible = RuneTargets.Any();
+            SelectedRuneTarget = RuneTargets.FirstOrDefault();
+        }
+        else
+        {
+            IsRunecraftingVisible = false;
+        }
+
+        Name = thingToBuy.Name;
+        Description = thingToBuy.Description;
+        Money = (SelectedRuneTarget != null ? SelectedRuneTarget.MultipliedPrice * 2 : thingToBuy.MultipliedPrice).ToTranslatedString();
+        Weight = thingToBuy.Weight;
+        ImageName = thingToBuy.ImageName;
+
+        BuyCommand = new RelayCommand(() =>  OnPurchased(ThingToBuy));
         CloseCommand = new RelayCommand(() => OnClosed());
     }
 
@@ -31,14 +67,30 @@ internal partial class ItemDetailsViewModel : ObservableObject
     public string Name { get; } = String.Empty;
     public string Description { get; } = String.Empty;
     public string ImageName { get; } = String.Empty;
-    public string Money { get; } = String.Empty;
+    public string Money { get; set; } = String.Empty;
     public double Weight { get; }
+    public Thing ThingToBuy { get; private set; }
+    public bool IsRunecraftingVisible { get; }
 
     public ICommand BuyCommand { get; }
     public ICommand CloseCommand { get; }
 
     public event EventHandler<ThingPurchasedEventArgs>? Purchased;
     public event EventHandler? Closed;
+
+    public Thing? SelectedRuneTarget
+    {
+        get => selectedRuneTarget;
+        set
+        {
+            if (SetProperty(ref selectedRuneTarget, value))
+            {
+                OnSelectedRuneTargetChanged();
+            }
+        }
+    }
+
+    public ObservableCollection<Thing> RuneTargets { get; } = [];
 
     protected virtual void OnPurchased(Thing thing)
     {
@@ -48,5 +100,11 @@ internal partial class ItemDetailsViewModel : ObservableObject
     protected virtual void OnClosed()
     {
         Closed?.Invoke(this, EventArgs.Empty);
+    }
+
+    private void OnSelectedRuneTargetChanged()
+    {
+        Money = (SelectedRuneTarget!.MultipliedPrice * 2).ToTranslatedString();
+        OnPropertyChanged(nameof(Money));
     }
 }

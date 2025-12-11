@@ -2,15 +2,15 @@ using M.A.G.U.S.GameSystem.Valuables;
 
 namespace M.A.G.U.S.Things.Armors;
 
-public class HardenedLeatherArmor : Thing
+public class HardenedLeatherArmor : Armor
 {
 	public override string Name => "Hardened leather";
 
 	public override Money Price => new(0, 5, 0);
 
-	public int MovementInhibitingFactor => -2;
+	public override int ArmorCheckPenalty => -2;
 
-	public int DamageSusceptiveValue => 2;
+	public override int ArmorClass => 2;
 
 	public override double Weight => 7;
 

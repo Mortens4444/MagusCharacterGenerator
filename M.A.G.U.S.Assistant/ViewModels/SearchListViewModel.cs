@@ -273,7 +273,7 @@ internal partial class SearchListViewModel : INotifyPropertyChanged
                 }
                 else if (item.Source is Thing thing)
                 {
-                    var itemDetailsViewModel = new ItemDetailsViewModel(Character, thing);
+                    var itemDetailsViewModel = new ItemDetailsViewModel(Character, thing, PriceMultiplier);
                     itemDetailsViewModel.Purchased += PurchaseHandler;
                     page = new ItemDetailsPage(itemDetailsViewModel);
                 }

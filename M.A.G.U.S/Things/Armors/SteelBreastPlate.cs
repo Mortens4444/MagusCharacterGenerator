@@ -2,15 +2,15 @@ using M.A.G.U.S.GameSystem.Valuables;
 
 namespace M.A.G.U.S.Things.Armors;
 
-public class SteelBreastPlate : Thing
+public class SteelBreastPlate : Armor
 {
 	public override string Name => "Steel breastplate";
 
 	public override Money Price => new(80, 0, 0);
 
-	public int MovementInhibitingFactor => -4;
+	public override int ArmorCheckPenalty => -4;
 
-	public int DamageSusceptiveValue => 4;
+	public override int ArmorClass => 4;
 
 	public override double Weight => 18;
 

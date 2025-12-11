@@ -2,15 +2,15 @@ using M.A.G.U.S.GameSystem.Valuables;
 
 namespace M.A.G.U.S.Things.Armors;
 
-public class AbbitSteelHalfPlate : Thing
+public class AbbitSteelHalfPlate : Armor
 {
 	public override string Name => "Abbit-steel half plate";
 
 	public override Money Price => new(300, 0, 0);
 
-	public int MovementInhibitingFactor => -4;
+	public override int ArmorCheckPenalty => -4;
 
-	public int DamageSusceptiveValue => 6;
+	public override int ArmorClass => 6;
 
 	public override double Weight => 12;
 

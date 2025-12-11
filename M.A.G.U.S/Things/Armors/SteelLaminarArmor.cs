@@ -2,15 +2,15 @@ using M.A.G.U.S.GameSystem.Valuables;
 
 namespace M.A.G.U.S.Things.Armors;
 
-public class SteelLaminarArmor : Thing
+public class SteelLaminarArmor : Armor
 {
 	public override string Name => "Steel plate armor";
 
 	public override Money Price => new(40, 0, 0);
 
-	public int MovementInhibitingFactor => -3;
+	public override int ArmorCheckPenalty => -3;
 
-	public int DamageSusceptiveValue => 3;
+	public override int ArmorClass => 3;
 
 	public override double Weight => 16;
 

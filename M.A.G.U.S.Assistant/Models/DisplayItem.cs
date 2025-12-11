@@ -72,7 +72,7 @@ internal partial class DisplayItem : INotifyPropertyChanged
             return Source switch
             {
                 Gemstone gemstone => gemstone.MultipliedPrice.ToTranslatedString() ?? String.Empty,
-                Thing thing => thing.MultipliedPrice?.ToTranslatedString() ?? String.Empty,
+                Thing thing => thing is RuneObject ? Lng.Elem("Item price x2") : thing.MultipliedPrice?.ToTranslatedString() ?? String.Empty,
                 Rune rune => Lng.Elem(rune.Meaning) ?? String.Empty,
                 Creature creature => Lng.Elem(creature.Occurrence.GetDescription().ToString()),
                 _ => String.Empty

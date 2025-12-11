@@ -2,15 +2,15 @@ using M.A.G.U.S.GameSystem.Valuables;
 
 namespace M.A.G.U.S.Things.Armors;
 
-public class SteelChainmail : Thing
+public class SteelChainmail : Armor
 {
 	public override string Name => "Steel chainmail";
 
 	public override Money Price => new(12, 0, 0);
 
-	public int MovementInhibitingFactor => -1;
+	public override int ArmorCheckPenalty => -1;
 
-	public int DamageSusceptiveValue => 3;
+	public override int ArmorClass => 3;
 
 	public override double Weight => 20;
 

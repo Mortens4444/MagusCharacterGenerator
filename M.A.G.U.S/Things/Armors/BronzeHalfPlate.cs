@@ -2,15 +2,15 @@ using M.A.G.U.S.GameSystem.Valuables;
 
 namespace M.A.G.U.S.Things.Armors;
 
-public class BronzeHalfPlate : Thing
+public class BronzeHalfPlate : Armor
 {
 	public override string Name => "Bronze half plate";
 
 	public override Money Price => new(100, 0, 0);
 
-	public int MovementInhibitingFactor => -6;
+	public override int ArmorCheckPenalty => -6;
 
-	public int DamageSusceptiveValue => 4;
+	public override int ArmorClass => 4;
 
 	public override double Weight => 35;
 

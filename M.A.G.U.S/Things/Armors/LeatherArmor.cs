@@ -2,15 +2,15 @@ using M.A.G.U.S.GameSystem.Valuables;
 
 namespace M.A.G.U.S.Things.Armors;
 
-public class LeatherArmor : Thing
+public class LeatherArmor : Armor
 {
 	public override string Name => "Studded leather";
 
 	public override Money Price => new(0, 4, 0);
 
-	public int MovementInhibitingFactor => 0;
+	public override int ArmorCheckPenalty => 0;
 
-	public int DamageSusceptiveValue => 1;
+	public override int ArmorClass => 1;
 
 	public override double Weight => 8;
 

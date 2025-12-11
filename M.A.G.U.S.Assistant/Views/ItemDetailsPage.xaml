@@ -4,6 +4,7 @@
                 xmlns:v="clr-namespace:Mtf.LanguageService.MAUI.Views;assembly=Mtf.LanguageService.MAUI"
                 xmlns:vm="clr-namespace:M.A.G.U.S.Assistant.ViewModels"
                 xmlns:conv="clr-namespace:Mtf.Maui.Controls.Converters;assembly=Mtf.Maui.Controls"
+                xmlns:c="clr-namespace:Mtf.LanguageService.MAUI.Converters;assembly=Mtf.LanguageService.MAUI"
                 x:Class="M.A.G.U.S.Assistant.Views.ItemDetailsPage"
                 x:DataType="vm:ItemDetailsViewModel"
                 x:ClassModifier="internal"
@@ -12,6 +13,7 @@
     <v:NotifierPage.Resources>
         <ResourceDictionary>
             <conv:StringNotNullOrEmptyConverter x:Key="NotNullOrEmpty" />
+            <c:TranslationConverter x:Key="TranslationConverter" />
         </ResourceDictionary>
     </v:NotifierPage.Resources>
 
@@ -19,7 +21,7 @@
         <StackLayout Padding="12" Spacing="12">
 
             <Border Padding="12" Stroke="#E6E6E6">
-                <Grid ColumnDefinitions="*,Auto" RowDefinitions="Auto,Auto,Auto" ColumnSpacing="16" RowSpacing="12">
+                <Grid ColumnDefinitions="*,Auto" RowDefinitions="Auto,Auto,Auto,Auto" ColumnSpacing="16" RowSpacing="12">
 
                     <VerticalStackLayout Grid.Row="0" Grid.Column="0" Spacing="6">
                         <HorizontalStackLayout Spacing="8">
@@ -40,11 +42,20 @@
                         <Image Source="{Binding ImageName}" Aspect="AspectFit" WidthRequest="140" HeightRequest="140" />
                     </Border>
 
+                    <VerticalStackLayout Grid.Row="1" Grid.Column="0" Spacing="6" IsVisible="{Binding IsRunecraftingVisible}">
+                        <Label Text="Runecraft item" FontAttributes="Bold" />
+                        <Picker ItemsSource="{Binding RuneTargets}"
+                                SelectedItem="{Binding SelectedRuneTarget}"
+                                ItemDisplayBinding="{Binding Name, Converter={StaticResource TranslationConverter}}"
+                                Title="Select target item" />
 
-                    <Label Grid.Row="1" Grid.Column="0" Text="Description" FontAttributes="Bold"
+                        <BoxView HeightRequest="1" BackgroundColor="#E6E6E6" />
+                    </VerticalStackLayout>
+
+                    <Label Grid.Row="2" Grid.Column="0" Text="Description" FontAttributes="Bold"
                            IsVisible="{Binding Description, Converter={StaticResource NotNullOrEmpty}}" />
 
-                    <Label Grid.Row="2" Grid.Column="0" Text="{Binding Description}" LineBreakMode="WordWrap"
+                    <Label Grid.Row="3" Grid.Column="0" Text="{Binding Description}" LineBreakMode="WordWrap"
                            IsVisible="{Binding Description, Converter={StaticResource NotNullOrEmpty}}" />
                 </Grid>
             </Border>

@@ -2,7 +2,7 @@
 
 namespace M.A.G.U.S.Things.MagicalObjects;
 
-public class RuneSword153Mp : MagicalObject
+public class RuneSword153Mp : RuneSword
 {
     public Thing TargetItem { get; set; }
 

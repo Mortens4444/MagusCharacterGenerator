@@ -1,7 +1,5 @@
 - Problem with total weight
 
-- Fix Runesword/armor prices
-- Fix position of Alinment (CharacterView.cs)
 - LanguageLore not show, when user has 3 QP
 - GemstoneMagic Basic should not be available
 - After learning new Qualification sort not working
@@ -21,7 +19,6 @@
 - Add weapon to character (easily changeable way) S
 - Max. Distance for a day S
 
-- Summa of weights is wrong in release mode.
 - Should appear in equipment list?
 - Can the MapPage open PDFs also? M
 - Show Illnesses M

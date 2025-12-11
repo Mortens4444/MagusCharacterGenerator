@@ -11,7 +11,7 @@ internal partial class ItemDetailsPage : NotifierPage
     public ItemDetailsPage(ItemDetailsViewModel itemDetailsViewModel)
     {
         InitializeComponent();
-        Title = Lng.Elem(itemDetailsViewModel.Thing.Name);
+        Title = Lng.Elem(itemDetailsViewModel.ThingToBuy.Name);
         BindingContext = itemDetailsViewModel;
         itemDetailsViewModel.Closed += OnVmClosed;
     }
