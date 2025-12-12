@@ -22,6 +22,7 @@
             <converters:EquipmentSorterConverter x:Key="EquipmentSorter" />
             <converters:QualificationNameConverter x:Key="QualificationNameConverter" />
             <converters:QualificationSorter x:Key="QualificationSorter" />
+            <converters:SpecialQualificationNameConverter x:Key="SpecialQualificationNameConverter" />
             <mcc:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter" />
             <mcc:BoolToVisibilityConverter x:Key="NotBoolToVisibilityConverter" Invert="True" />
         </ResourceDictionary>
@@ -233,7 +234,7 @@
                     <CollectionView.ItemTemplate>
                         <DataTemplate x:DataType="q:ISpecialQualification">
                             <Grid Padding="6" ColumnDefinitions="*" ColumnSpacing="10">
-                                <Label Text="{Binding Name, Converter={StaticResource TranslationConverter}}" VerticalOptions="Center" HorizontalOptions="Start" />
+                                <Label Text="{Binding ., Converter={StaticResource SpecialQualificationNameConverter}}" VerticalOptions="Center" HorizontalOptions="Start" />
                             </Grid>
                         </DataTemplate>
                     </CollectionView.ItemTemplate>

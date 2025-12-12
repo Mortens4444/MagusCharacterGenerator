@@ -6,7 +6,6 @@
 - Change weapon/language attribute on qualifications
 - SFÉ
 - Buy poison
-- Keen hearing/seeing should have shown the multiplier also (ex. 2x)
 - Save on Android did not show message from success operation
 - After buying something on the market, refresh the affordable items list
 - Add weapon to character (easily changeable way) S

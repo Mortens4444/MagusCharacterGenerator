@@ -18,6 +18,7 @@
         <ResourceDictionary>
             <conv:TranslationConverter x:Key="TranslationConverter" />
             <converters:QualificationNameConverter x:Key="QualificationNameConverter" />
+            <converters:SpecialQualificationNameConverter x:Key="SpecialQualificationNameConverter" />
         </ResourceDictionary>
     </v:NotifierPage.Resources>
 
@@ -44,6 +45,7 @@
 
             <ScrollView Grid.Column="1" VerticalOptions="Fill">
                 <StackLayout Spacing="8">
+                     <!-- Képességek -->
                     <Border Stroke="{AppThemeBinding Light={StaticResource Gray300}, Dark={StaticResource Gray500}}"
                             StrokeThickness="1" Padding="10" BackgroundColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource Gray900}}">
                         <StackLayout Spacing="8">
@@ -72,6 +74,7 @@
                         </StackLayout>
                     </Border>
 
+                    <!-- Képzettségek -->
                     <Border Stroke="{AppThemeBinding Light={StaticResource Gray300}, Dark={StaticResource Gray500}}"
                             StrokeThickness="1" Padding="10" BackgroundColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource Gray900}}">
                         <VerticalStackLayout Spacing="6">
@@ -93,6 +96,7 @@
                         </VerticalStackLayout>
                     </Border>
 
+                    <!-- Százalékos képzettségek -->
                     <Border Stroke="{AppThemeBinding Light={StaticResource Gray300}, Dark={StaticResource Gray500}}"
                             StrokeThickness="1" Padding="10" BackgroundColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource Gray900}}">
                         <VerticalStackLayout Spacing="6">
@@ -114,6 +118,7 @@
                         </VerticalStackLayout>
                     </Border>
 
+                    <!-- Speciális képességek -->
                     <Border Stroke="{AppThemeBinding Light={StaticResource Gray300}, Dark={StaticResource Gray500}}"
                             StrokeThickness="1" Padding="10" BackgroundColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource Gray900}}">
                         <VerticalStackLayout Spacing="6">
@@ -125,7 +130,7 @@
                                 <CollectionView.ItemTemplate>
                                     <DataTemplate x:DataType="q:SpecialQualification">
                                         <Grid Padding="6" ColumnDefinitions="*" ColumnSpacing="10">
-                                            <Label Text="{Binding Name, Converter={StaticResource TranslationConverter}}" VerticalOptions="Center" HorizontalOptions="Start" />
+                                            <Label Text="{Binding ., Converter={StaticResource SpecialQualificationNameConverter}}" VerticalOptions="Center" HorizontalOptions="Start" />
                                         </Grid>
                                     </DataTemplate>
                                 </CollectionView.ItemTemplate>
