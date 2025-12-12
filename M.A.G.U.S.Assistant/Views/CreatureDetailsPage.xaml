@@ -101,16 +101,25 @@
             <!-- Damage area -->
             <Border Padding="10">
                 <StackLayout Spacing="8">
-                    <Grid ColumnDefinitions="4*,3*,3*" RowDefinitions="Auto, Auto">
+                    <Grid ColumnDefinitions="4*,3*,3*" RowDefinitions="Auto, Auto, Auto">
                         <Label Text="Attack mode" FontAttributes="Bold" VerticalOptions="Center" />
                         <Picker ItemsSource="{Binding AttackModes}"
                                 ItemDisplayBinding="{Binding Name, Converter={StaticResource TranslationConverter}}"
                                 SelectedItem="{Binding SelectedAttackMode}"
                                 Grid.Column="1"
                                 Grid.ColumnSpan="2"/>
-                        <Button Grid.Row="1" Text="Initiate" Command="{Binding InitiateCommand}" Margin="0,0,5,0" />
-                        <Button Grid.Row="1" Grid.Column="1" Text="Attack" Command="{Binding AttackCommand}" />
-                        <Button Grid.Row="1" Grid.Column="2" Text="Roll Damage" Command="{Binding RollDamageCommand}" Margin="5,0,0,0" />
+
+                        <Label Text="Attack direction" FontAttributes="Bold" VerticalOptions="Center" Grid.Row="1" Grid.Column="0"/>
+                        <Picker ItemsSource="{Binding AttackDirections}"
+                                SelectedItem="{Binding SelectedAttackDirection}"
+                                ItemDisplayBinding="{Binding ., Converter={StaticResource EnumDescriptionTranslationConverter}}"
+                                Grid.Row="1"
+                                Grid.Column="1"
+                                Grid.ColumnSpan="2" />
+
+                        <Button Grid.Row="2" Text="Initiate" Command="{Binding InitiateCommand}" Margin="0,0,5,0" />
+                        <Button Grid.Row="2" Grid.Column="1" Text="Attack" Command="{Binding AttackCommand}" />
+                        <Button Grid.Row="2" Grid.Column="2" Text="Roll Damage" Command="{Binding RollDamageCommand}" Margin="5,0,0,0" />
                     </Grid>
 
                     <Label Text="Place of attack" FontAttributes="Bold" Grid.Row="1" Grid.Column="0" />

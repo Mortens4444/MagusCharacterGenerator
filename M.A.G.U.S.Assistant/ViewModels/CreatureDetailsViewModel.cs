@@ -32,6 +32,7 @@ internal partial class CreatureDetailsViewModel : ObservableObject
         this.soundPlayer = soundPlayer;
         Creature = creature ?? throw new ArgumentNullException(nameof(creature));
         SelectedAttackMode = AttackModes.First();
+        SelectedAttackDirection = AttackDirections.First();
         IsSoundAvailable = Creature.Sounds.Any(s => !String.IsNullOrWhiteSpace(s) && EmbeddedResourceHelper.HasEmbeddedSound(s));
 
         var method = creature.GetType().GetMethod(nameof(creature.GetNumberAppearing));
@@ -60,6 +61,15 @@ internal partial class CreatureDetailsViewModel : ObservableObject
     public double AttacksPerRound => Creature.AttacksPerRound;
     public string Image => Creature.Images.Length - 1 != 0 ? Creature.Images[RandomProvider.GetSecureRandomInt(0, Creature.Images.Length)] : Creature.Images[0];
     public string Sound => Creature.Sounds.Length - 1 != 0 ? Creature.Sounds[RandomProvider.GetSecureRandomInt(0, Creature.Sounds.Length)] : Creature.Sounds[0];
+
+    public IList<AttackDirection> AttackDirections { get; } = Enum.GetValues(typeof(AttackDirection)).Cast<AttackDirection>().ToList();
+
+    private AttackDirection selectedAttackDirection;
+    public AttackDirection SelectedAttackDirection
+    {
+        get => selectedAttackDirection;
+        set => SetProperty(ref selectedAttackDirection, value);
+    }
 
     private string numberAppearing;
     public string NumberAppearing
@@ -140,7 +150,50 @@ internal partial class CreatureDetailsViewModel : ObservableObject
         try
         {
             hitLocation = HitLocationSelector.Get();
-            PlaceOfAttack = Lng.Elem(hitLocation.GetDescription());
+            var subLocation = String.Empty;
+            var locationDescription = Lng.Elem(hitLocation.GetDescription());
+
+            switch (hitLocation)
+            {
+                case M.A.G.U.S.Enums.PlaceOfAttack.Head:
+                    var headPart = HitLocationSelector.GetOnHead();
+                    subLocation = Lng.Elem(headPart.GetDescription());
+                    break;
+
+                case M.A.G.U.S.Enums.PlaceOfAttack.Torso:
+
+                    switch (SelectedAttackDirection)
+                    {
+                        case AttackDirection.Front:
+                            var torsoPart = HitLocationSelector.GetOnTorso();
+                            subLocation = Lng.Elem(torsoPart.GetDescription());
+                            break;
+                        case AttackDirection.Behind:
+                            var torsoPartBack = HitLocationSelector.GetOnTorsoFromBehind();
+                            subLocation = Lng.Elem(torsoPartBack.GetDescription());
+                            break;
+                        default:
+                            break;
+                    }
+                    break;
+
+                case M.A.G.U.S.Enums.PlaceOfAttack.WeaponWieldingArm:
+                case M.A.G.U.S.Enums.PlaceOfAttack.NonWeaponWieldingArm:
+                    var armPart = HitLocationSelector.GetOnArm();
+                    subLocation = Lng.Elem(armPart.GetDescription());
+                    break;
+
+                case M.A.G.U.S.Enums.PlaceOfAttack.RightLeg:
+                case M.A.G.U.S.Enums.PlaceOfAttack.LeftLeg:
+                    var legPart = HitLocationSelector.GetOnLeg();
+                    subLocation = Lng.Elem(legPart.GetDescription());
+                    break;
+
+                default:
+                    throw new NotImplementedException();
+            }
+
+            PlaceOfAttack = String.IsNullOrEmpty(subLocation) ? locationDescription : $"{locationDescription} ({subLocation})";
             LastActionName = $"{Lng.Elem(SelectedAttackMode is MeleeAttack ? "Melee attack" : "Ranged attack")} - {Lng.Elem(SelectedAttackMode.Name)}";
             var (impact, value) = SelectedAttackMode.GetAttack();
             LastAction = impact == AttackImpact.Normal ? value.ToString() : $"{Lng.Elem(impact.ToString())} {value}";
