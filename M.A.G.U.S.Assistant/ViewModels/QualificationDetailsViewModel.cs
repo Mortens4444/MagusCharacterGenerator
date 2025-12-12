@@ -59,7 +59,6 @@ internal partial class QualificationDetailsViewModel : ObservableObject
 
     public bool CanLearn { get => canLearn; set => SetProperty(ref canLearn, value); }
     public int RequiredSp { get => requiredSp; set => SetProperty(ref requiredSp, value); }
-    public string LearnButtonText => RequiredSp <= (Character?.QualificationPoints ?? 0) ? Lng.Elem("Learn") : Lng.Elem("Unavailable");
 
     public event EventHandler<QualificationLearnedEventArgs>? Learned;
     public event EventHandler? Closed;
@@ -83,12 +82,8 @@ internal partial class QualificationDetailsViewModel : ObservableObject
         RequiredSp = requiredQp;
         canLearn = learnable;
 
-        //OnPropertyChanged(nameof(RequiredSp));
         OnPropertyChanged(nameof(CanLearn));
-        OnPropertyChanged(nameof(LearnButtonText));
-
         (LearnCommand as RelayCommand)?.NotifyCanExecuteChanged();
-
     }
 
     private void Learn()

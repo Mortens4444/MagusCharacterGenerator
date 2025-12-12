@@ -18,11 +18,11 @@ namespace M.A.G.U.S.Classes.Sorcerer;
 /// <summary>
 /// https://www.kalandozok.hu/magus/kalandozok/jatszhatokasztok/magiahasznalo/boszorkanymester/kraniboszorkanymester(mg)kalandozok.pdf
 /// </summary>
-public class KranichWarlock : Class, IClass, ILikeMagic
+public class KrannishWarlock : Class, IClass, ILikeMagic
 {
-    public KranichWarlock() : base(1) { }
+    public KrannishWarlock() : base(1) { }
 
-    public KranichWarlock(int level) : base(level)
+    public KrannishWarlock(int level) : base(level)
     {
         GenerateSkills();
     }
@@ -114,10 +114,10 @@ public class KranichWarlock : Class, IClass, ILikeMagic
     //            new ReadingAndWriting(),
     //            new PoisoningAndNeutralization(),
     //            new CamouflageOrDisguise(),
-    //            new LanguageLore(Language.Kranich, 3),
+    //            new LanguageLore(Language.Krannish, 3),
     //            new Alchemy(),
     //            new AncientTongueLore(AntientLanguage.Aquir),
-    //            new Etiquette() //Kranich
+    //            new Etiquette() //Krannish
     //        };
 
     //        if (Intelligence >= 12 && Willpower >= 12 && Astral >= 12)
@@ -138,10 +138,10 @@ public class KranichWarlock : Class, IClass, ILikeMagic
         new ReadingAndWriting(),
         new PoisoningAndNeutralization(),
         new CamouflageOrDisguise(),
-        new LanguageLore(Language.Kranich, 3),
+        new LanguageLore(Language.Krannish, 3),
         new Alchemy(),
         new AncientTongueLore(AntientLanguage.Aquir),
-        new Etiquette(), //Kranich
+        new Etiquette(), //Krannish
 
 		//new Cluture(QualificationLevel.Master) // Order
 		//new Helyismeret 60%
@@ -153,7 +153,7 @@ public class KranichWarlock : Class, IClass, ILikeMagic
         new ReligionLore(level: 2),
         new Herbalism(level: 3),
         new Alchemy(QualificationLevel.Master, 3),
-        new Etiquette(QualificationLevel.Master, 4), //Kranich
+        new Etiquette(QualificationLevel.Master, 4), //Krannish
         new PoisoningAndNeutralization(QualificationLevel.Master, 4),
         new Craft(Profession.TattoMaker, QualificationLevel.Master, 5),
         new Backstab(level: 5),
@@ -178,5 +178,5 @@ public class KranichWarlock : Class, IClass, ILikeMagic
     [DiceThrowModifier(1)]
     public override int GetPainToleranceModifier() => DiceThrow._1D6() + 1;
 
-    public override string Name => "Kranich Mage";
+    public override string Name => "Krannish Mage";
 }

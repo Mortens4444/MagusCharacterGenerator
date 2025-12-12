@@ -10,7 +10,7 @@ public enum Language
     Doranian,
     Erven,
     Gorvikian,
-    Kranich,
+    Krannish,
 
     Jad,
     Amund,

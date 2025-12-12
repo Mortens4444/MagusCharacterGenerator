@@ -5,5 +5,5 @@ public enum PsiKind
     Pyarron,
     Slan,
     Kyr,
-	Kranich
+	Krannish
 }

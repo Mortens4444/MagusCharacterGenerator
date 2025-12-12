@@ -21,7 +21,7 @@ namespace M.A.G.U.S.Test
                 Date = DateTime.MaxValue,
                 Name = "Anuman",
                 Lst = new List<int> { 1, 2, 3 },
-                Lng = new LanguageLore(Language.Kranich, 3),
+                Lng = new LanguageLore(Language.Krannish, 3),
                 Class = new ArelPriest(1),
                 Race = new Orc(),
                 Character = GetCharacter("Anuman", new Amund(), typeof(ArelPriest), 1)

@@ -44,7 +44,7 @@
                            IsVisible="{Binding Description, Converter={StaticResource NotNullOrEmpty}}" />
 
                     <HorizontalStackLayout Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" HorizontalOptions="Center" Spacing="12" Margin="0,8,0,0">
-                        <Button Text="{Binding LearnButtonText}" Command="{Binding LearnCommand}" CornerRadius="10">
+                        <Button Text="Acquisition" Command="{Binding LearnCommand}" CornerRadius="10">
                             <Button.Triggers>
                                 <DataTrigger TargetType="Button" Binding="{Binding CanLearn}" Value="False">
                                     <Setter Property="IsVisible" Value="False" />

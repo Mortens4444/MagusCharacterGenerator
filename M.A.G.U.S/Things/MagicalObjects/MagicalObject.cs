@@ -7,5 +7,5 @@ public abstract class MagicalObject : Thing
 {
     public abstract int ManaPoints { get; }
 
-    public virtual IEnumerable<Class> AllowedCreators => [new Wizard(), new KranichWarlock()];
+    public virtual IEnumerable<Class> AllowedCreators => [new Wizard(), new KrannishWarlock()];
 }

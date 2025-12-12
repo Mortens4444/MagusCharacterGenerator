@@ -27,5 +27,5 @@ public class KranRanagolPriest : Priest
         }
     }
 
-    public override string Name => "Priest of Ranagol (Kran)";
+    public override string Name => "Priest of Ranagol (Krannish)";
 }

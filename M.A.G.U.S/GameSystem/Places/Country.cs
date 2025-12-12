@@ -71,7 +71,7 @@ public enum Country
 
     // --- A Sötét Dél és egyebek ---
 
-    [OfficialLanguage(Language.Kranich)]
+    [OfficialLanguage(Language.Krannish)]
     [OfficialReligion(Deity.Ranagol)]
     Kran,
 

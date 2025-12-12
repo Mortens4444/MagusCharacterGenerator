@@ -37,8 +37,8 @@ public enum AntientLanguage
     AncientGoblynTongue,
 
     // Krán és misztikus tradíciók
-    [Description("Kranich Ritual Speech")]
-    KranichRitualSpeech,
+    [Description("Krannish Ritual Speech")]
+    KrannishRitualSpeech,
 
     // Ritka / töredékes / misztikus nyelvek
     [Description("Wyrm Tongue")]

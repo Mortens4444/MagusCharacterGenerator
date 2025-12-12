@@ -39,5 +39,5 @@ public class GorvikRanagolPriest : Priest
         }
     }
 
-    public override string Name => "Priest of Ranagol (Gorvik)";
+    public override string Name => "Priest of Ranagol (Gorvikian)";
 }
