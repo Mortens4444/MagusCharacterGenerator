@@ -1,6 +1,7 @@
 ﻿using M.A.G.U.S.Enums;
 using M.A.G.U.S.GameSystem;
 using M.A.G.U.S.GameSystem.Attributes;
+using M.A.G.U.S.Models;
 using M.A.G.U.S.Qualifications.Scientific.Psi;
 
 namespace M.A.G.U.S.Bestiary.Races;
@@ -11,7 +12,6 @@ public sealed class LizardWizard : Creature
     {
         Occurrence = Occurrence.Rare;
         Size = Size.Human;
-        Speed = 70;
         AttackValue = 64;
         DefenseValue = 108;
         InitiatingValue = 35;
@@ -38,4 +38,6 @@ public sealed class LizardWizard : Creature
     public override int GetNumberAppearing() => 1;
 
     public override string[] Images => ["lizard_wizard"];
+
+    public override List<Speed> Speeds => [new Speed(TravelMode.OnLand, 70), new Speed(TravelMode.InWater, 70)];
 }

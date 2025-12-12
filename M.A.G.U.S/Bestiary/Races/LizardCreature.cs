@@ -1,6 +1,7 @@
 ﻿using M.A.G.U.S.Enums;
 using M.A.G.U.S.GameSystem;
 using M.A.G.U.S.GameSystem.Attributes;
+using M.A.G.U.S.Models;
 
 namespace M.A.G.U.S.Bestiary.Races;
 
@@ -10,7 +11,6 @@ public sealed class LizardCreature : Creature
     {
         Occurrence = Occurrence.Rare;
         Size = Size.Human;
-        Speed = 70;
         AttackValue = 60;
         DefenseValue = 100;
         InitiatingValue = 25;
@@ -35,4 +35,6 @@ public sealed class LizardCreature : Creature
     public override int GetNumberAppearing() => DiceThrow._4D10();
 
     public override string[] Images => ["lizard_creature"];
+
+    public override List<Speed> Speeds => [new Speed(TravelMode.OnLand, 70), new Speed(TravelMode.InWater, 70)];
 }

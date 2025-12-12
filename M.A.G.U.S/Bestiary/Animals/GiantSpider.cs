@@ -1,6 +1,7 @@
 ﻿using M.A.G.U.S.Enums;
 using M.A.G.U.S.GameSystem;
 using M.A.G.U.S.GameSystem.Attributes;
+using M.A.G.U.S.Models;
 
 namespace M.A.G.U.S.Bestiary.Animals;
 
@@ -10,7 +11,6 @@ public sealed class GiantSpider : Creature
     {
         Occurrence = Occurrence.VeryRare;
         Size = Size.Small;
-        Speed = 80;
         AttackValue = 30;
         DefenseValue = 60;
         InitiatingValue = 25;
@@ -28,4 +28,6 @@ public sealed class GiantSpider : Creature
     public override int GetDamage() => DiceThrow._1D3();
 
     public override int GetNumberAppearing() => 1;
+
+    public override List<Speed> Speeds => [new Speed(TravelMode.OnLand, 80)];
 }

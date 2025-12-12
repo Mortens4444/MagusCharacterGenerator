@@ -1,6 +1,7 @@
 ﻿using M.A.G.U.S.Enums;
 using M.A.G.U.S.GameSystem;
 using M.A.G.U.S.GameSystem.Attributes;
+using M.A.G.U.S.Models;
 
 namespace M.A.G.U.S.Bestiary.Animals;
 
@@ -11,7 +12,6 @@ public sealed class KillerWhale : Creature
         Occurrence = Occurrence.Rare;
         Intelligence = Enums.Intelligence.Average;
         Size = Size._4_meters;
-        Speed = 120;
         AttackValue = 95;
         DefenseValue = 70;
         HealthPoints = 30;
@@ -30,4 +30,6 @@ public sealed class KillerWhale : Creature
 
     [DiceThrow(ThrowType._1D6)]
     public override int GetNumberAppearing() => DiceThrow._1D6();
+
+    public override List<Speed> Speeds => [new Speed(TravelMode.InWater, 120)];
 }

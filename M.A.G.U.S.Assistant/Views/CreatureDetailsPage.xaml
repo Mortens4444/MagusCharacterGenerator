@@ -3,6 +3,7 @@
               xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
               xmlns:v="clr-namespace:Mtf.LanguageService.MAUI.Views;assembly=Mtf.LanguageService.MAUI"
               xmlns:m="clr-namespace:M.A.G.U.S.GameSystem;assembly=M.A.G.U.S."
+              xmlns:e="clr-namespace:M.A.G.U.S.Models;assembly=M.A.G.U.S."
               xmlns:converters="clr-namespace:M.A.G.U.S.Assistant.Converters"
               xmlns:vm="clr-namespace:M.A.G.U.S.Assistant.ViewModels"
               xmlns:conv="clr-namespace:Mtf.LanguageService.MAUI.Converters;assembly=Mtf.LanguageService.MAUI"
@@ -15,6 +16,7 @@
             <conv:TranslationConverter x:Key="TranslationConverter" />
             <conv:EnumDescriptionTranslationConverter x:Key="EnumDescriptionTranslationConverter" />
             <converters:MinMaxIntelligenceConverter x:Key="MinMaxIntelligenceConverter" />
+            <converters:SpeedConverter x:Key="SpeedConverter" />
         </ResourceDictionary>
     </v:NotifierPage.Resources>
 
@@ -55,8 +57,17 @@
                     <Label Text="{Binding Size, Converter={StaticResource EnumDescriptionTranslationConverter}}" Grid.Row="2" Grid.Column="1" />
 
                     <Label Text="Speed" Grid.Row="3" Grid.Column="0" FontAttributes="Bold" />
-                    <Label Text="{Binding Speed}" Grid.Row="3" Grid.Column="1" />
-
+                    <!--<Label Text="{Binding Speed}" Grid.Row="3" Grid.Column="1" />-->
+                    <StackLayout Grid.Row="3" Grid.Column="1" Spacing="0">
+                        <CollectionView ItemsSource="{Binding Speeds}">
+                            <CollectionView.ItemTemplate>
+                                <DataTemplate x:DataType="e:Speed">
+                                    <Label Text="{Binding ., Converter={StaticResource SpeedConverter}}" />
+                                </DataTemplate>
+                            </CollectionView.ItemTemplate>
+                        </CollectionView>
+                    </StackLayout>
+                    
                     <Label Text="Attack modes" Grid.Row="4" Grid.Column="0" FontAttributes="Bold" />
                     <StackLayout Grid.Row="4" Grid.Column="1" Spacing="0">
                         <CollectionView ItemsSource="{Binding AttackModes}">

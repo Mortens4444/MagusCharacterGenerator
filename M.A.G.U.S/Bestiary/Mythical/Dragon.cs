@@ -1,6 +1,7 @@
 ﻿using M.A.G.U.S.Enums;
 using M.A.G.U.S.GameSystem;
 using M.A.G.U.S.GameSystem.Attributes;
+using M.A.G.U.S.Models;
 using M.A.G.U.S.Things.Weapons;
 
 namespace M.A.G.U.S.Bestiary.Mythical;
@@ -11,7 +12,6 @@ public sealed class Dragon : Creature
     {
         Occurrence = Occurrence.VeryRare;
         Size = Size.Huge;
-        Speed = 300;
 
         AttackModes =
         [
@@ -45,4 +45,6 @@ public sealed class Dragon : Creature
     public override int GetDamage() => DiceThrow._1D6();
 
     public override int GetNumberAppearing() => 1;
+
+    public override List<Speed> Speeds => [new Speed(TravelMode.OnLand, 50), new Speed(TravelMode.InTheAir, 300)];
 }

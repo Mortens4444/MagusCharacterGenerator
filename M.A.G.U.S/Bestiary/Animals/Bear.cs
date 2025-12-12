@@ -1,6 +1,7 @@
 ﻿using M.A.G.U.S.Enums;
 using M.A.G.U.S.GameSystem;
 using M.A.G.U.S.GameSystem.Attributes;
+using M.A.G.U.S.Models;
 using M.A.G.U.S.Things.Weapons;
 
 namespace M.A.G.U.S.Bestiary.Animals;
@@ -11,7 +12,6 @@ public sealed class Bear : Creature
     {
         Occurrence = Occurrence.Frequent;
         Size = Size.Big;
-        Speed = 50;
         AttackValue = 70;
         DefenseValue = 60;
         InitiatingValue = 5;
@@ -35,4 +35,6 @@ public sealed class Bear : Creature
 
     [DiceThrow(ThrowType._1D2)]
     public override int GetNumberAppearing() => DiceThrow._1D2();
+
+    public override List<Speed> Speeds => [new Speed(TravelMode.OnLand, 50)];
 }

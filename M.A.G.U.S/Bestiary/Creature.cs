@@ -3,6 +3,7 @@ using M.A.G.U.S.Extensions;
 using M.A.G.U.S.GameSystem;
 using M.A.G.U.S.GameSystem.Attributes;
 using M.A.G.U.S.GameSystem.Psi;
+using M.A.G.U.S.Models;
 using M.A.G.U.S.Things.Weapons;
 using System.Reflection;
 
@@ -11,6 +12,9 @@ namespace M.A.G.U.S.Bestiary;
 public abstract class Creature
 {
     private const string PrimaryAttack = "Primary attack";
+    private List<Attack>? attackModes;
+
+    protected Creature() { }
 
     public Occurrence Occurrence { get; protected set; }
 
@@ -24,9 +28,7 @@ public abstract class Creature
 
     public int ArmorClass { get; protected set; }
 
-    public int Speed { get; protected set; }
-
-    private List<Attack>? attackModes;
+    public abstract List<Speed> Speeds { get; }
 
     public virtual List<Attack> AttackModes
     {
@@ -102,8 +104,6 @@ public abstract class Creature
     public int ManaPoints { get; set; }
 
     protected readonly DiceThrow DiceThrow = new();
-
-    protected Creature() { }
 
     public abstract int GetDamage();
 

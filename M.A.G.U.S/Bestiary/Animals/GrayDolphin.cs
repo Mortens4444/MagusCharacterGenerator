@@ -1,6 +1,7 @@
 ﻿using M.A.G.U.S.Enums;
 using M.A.G.U.S.GameSystem;
 using M.A.G.U.S.GameSystem.Attributes;
+using M.A.G.U.S.Models;
 
 namespace M.A.G.U.S.Bestiary.Animals;
 
@@ -11,7 +12,6 @@ public sealed class GrayDolphin : Creature
         Occurrence = Occurrence.Frequent;
         Intelligence = Enums.Intelligence.High;
         Size = Size._1_5_meters;
-        Speed = 160;
         AttackValue = 40;
         DefenseValue = 80;
         InitiatingValue = 20;
@@ -32,4 +32,6 @@ public sealed class GrayDolphin : Creature
 
     [DiceThrow(ThrowType._2D6)]
     public override int GetNumberAppearing() => DiceThrow._2D6();
+
+    public override List<Speed> Speeds => [new Speed(TravelMode.InWater, 160)];
 }

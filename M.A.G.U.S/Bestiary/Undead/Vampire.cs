@@ -1,6 +1,7 @@
 ﻿using M.A.G.U.S.Enums;
 using M.A.G.U.S.GameSystem;
 using M.A.G.U.S.GameSystem.Attributes;
+using M.A.G.U.S.Models;
 using M.A.G.U.S.Things.Weapons;
 using M.A.G.U.S.Things.Weapons.CrushingWeapons;
 using M.A.G.U.S.Things.Weapons.RangedWeapons;
@@ -15,7 +16,6 @@ public sealed class Vampire : LivingDead
     {
         Occurrence = Occurrence.Rare;
         Size = Size.Human;
-        Speed = 100;
         AttackValue = 80;
         DefenseValue = 120;
         InitiatingValue = 32;
@@ -41,4 +41,6 @@ public sealed class Vampire : LivingDead
     public override int GetDamage() => DiceThrow._1D6();
 
     public override int GetNumberAppearing() => 1;
+
+    public override List<Speed> Speeds => [new Speed(TravelMode.OnLand, 100)];
 }

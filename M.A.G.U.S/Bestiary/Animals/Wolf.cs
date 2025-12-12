@@ -1,6 +1,7 @@
 ﻿using M.A.G.U.S.Enums;
 using M.A.G.U.S.GameSystem;
 using M.A.G.U.S.GameSystem.Attributes;
+using M.A.G.U.S.Models;
 
 namespace M.A.G.U.S.Bestiary.Animals;
 
@@ -10,7 +11,6 @@ public sealed class Wolf : Creature
     {
         Occurrence = Occurrence.Frequent;
         Size = Size.Human;
-        Speed = 120;
         AttackValue = 35;
         DefenseValue = 60;
         InitiatingValue = 10;
@@ -26,4 +26,6 @@ public sealed class Wolf : Creature
 
     [DiceThrow(ThrowType._2D10)]
     public override int GetNumberAppearing() => DiceThrow._2D10();
+
+    public override List<Speed> Speeds => [new Speed(TravelMode.OnLand, 120)];
 }

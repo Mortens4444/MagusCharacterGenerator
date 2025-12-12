@@ -6,6 +6,7 @@ using M.A.G.U.S.Assistant.Services;
 using M.A.G.U.S.Bestiary;
 using M.A.G.U.S.Enums;
 using M.A.G.U.S.GameSystem;
+using M.A.G.U.S.Models;
 using M.A.G.U.S.Things.Weapons;
 using M.A.G.U.S.Utils;
 using Mtf.Extensions;
@@ -49,7 +50,7 @@ internal partial class CreatureDetailsViewModel : ObservableObject
     public Intelligence? MinIntelligence => Creature.MinIntelligence;
     public Intelligence? MaxIntelligence => Creature.MaxIntelligence;
     public M.A.G.U.S.Enums.Size Size => Creature.Size;
-    public int Speed => Creature.Speed;
+    public List<Speed> Speeds => Creature.Speeds;
     public int AttackValue => Creature.AttackValue;
     public int DefenseValue => Creature.DefenseValue;
     public int InitiatingValue => Creature.InitiatingValue;

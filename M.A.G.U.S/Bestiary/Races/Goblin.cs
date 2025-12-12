@@ -1,6 +1,7 @@
 ﻿using M.A.G.U.S.Enums;
 using M.A.G.U.S.GameSystem;
 using M.A.G.U.S.GameSystem.Attributes;
+using M.A.G.U.S.Models;
 using M.A.G.U.S.Things.Weapons.CrushingWeapons;
 using M.A.G.U.S.Things.Weapons.RangedWeapons;
 using M.A.G.U.S.Things.Weapons.StabbingWeapons;
@@ -13,7 +14,6 @@ public sealed class Goblin : Creature
     {
         Occurrence = Occurrence.Rare;
         Size = Size.Small;
-        Speed = 65;
         AttackValue = 25;
         DefenseValue = 60;
         InitiatingValue = 10;
@@ -37,4 +37,6 @@ public sealed class Goblin : Creature
 
     [DiceThrow(ThrowType._10D10)]
     public override int GetNumberAppearing() => DiceThrow._10D10();
+
+    public override List<Speed> Speeds => [new Speed(TravelMode.OnLand, 65)];
 }

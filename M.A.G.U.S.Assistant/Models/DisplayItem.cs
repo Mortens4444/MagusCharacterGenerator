@@ -9,6 +9,7 @@ using M.A.G.U.S.Things.MagicalObjects;
 using Mtf.Extensions;
 using Mtf.LanguageService.MAUI;
 using System.ComponentModel;
+using System.Linq;
 
 namespace M.A.G.U.S.Assistant.Models;
 
@@ -59,7 +60,15 @@ internal partial class DisplayItem : INotifyPropertyChanged
                 Gemstone gemstone => gemstone.Description ?? String.Empty,
                 Thing thing => $"{thing.Weight} {Lng.Elem("Kg")}",
                 Rune rune => rune.Equivalent ?? String.Empty,
-                Creature creature => $"{Lng.Elem("Speed")} {creature.Speed}",
+                Creature creature => $"{Lng.Elem("Speed")}:\r\n{String.Join("\r\n",
+                    creature.Speeds.Select(speed =>
+                    {
+                        var mode = Lng.Elem(speed.TravelMode.GetDescription()) ?? String.Empty;
+                        var val = speed.Value?.ToString() ?? String.Empty;
+                        return String.IsNullOrWhiteSpace(val)
+                            ? mode
+                            : $"{mode} - {val}";
+                    }))}",
                 _ => String.Empty
             };
         }

@@ -2,11 +2,8 @@
 
 - Qualifications button next to QP
 - Primary weapon combat values are not good
-- Dice roll end with (" 2x") replace the formula with " 2_Times", special_training?
 
-- Implement creature speed, like attacks (different speed in water or in air)
-- Show language attribute, change it
-- Fix buying some qualifications (Language, AntientLanguage, WeaponUse, etc)
+- Change weapon/language attribute on qualifications
 - SFÉ
 - Buy poison
 - Keen hearing/seeing should have shown the multiplier also (ex. 2x)

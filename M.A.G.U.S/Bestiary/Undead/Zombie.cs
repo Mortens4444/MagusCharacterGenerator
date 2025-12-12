@@ -1,6 +1,7 @@
 ﻿using M.A.G.U.S.Enums;
 using M.A.G.U.S.GameSystem;
 using M.A.G.U.S.GameSystem.Attributes;
+using M.A.G.U.S.Models;
 
 namespace M.A.G.U.S.Bestiary.Undead;
 
@@ -10,7 +11,6 @@ public sealed class Zombie : LivingDead
     {
         Occurrence = Occurrence.Rare;
         Size = Size.Human;
-        Speed = 20;
         AttackValue = 10;
         DefenseValue = 40;
         InitiatingValue = 0;
@@ -31,4 +31,6 @@ public sealed class Zombie : LivingDead
     public override int GetNumberAppearing() => DiceThrow._1D100(); // Should be "Variable" (change to string?)
 
     public override string[] Sounds => ["zombie", "zombie_2", "zombie_3", "zombie_4", "zombie_eating"];
+
+    public override List<Speed> Speeds => [new Speed(TravelMode.OnLand, 20)];
 }

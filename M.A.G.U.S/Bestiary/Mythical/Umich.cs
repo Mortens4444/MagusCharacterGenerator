@@ -1,6 +1,7 @@
 ﻿using M.A.G.U.S.Enums;
 using M.A.G.U.S.GameSystem;
 using M.A.G.U.S.GameSystem.Attributes;
+using M.A.G.U.S.Models;
 using M.A.G.U.S.Things.Weapons;
 
 namespace M.A.G.U.S.Bestiary.Mythical;
@@ -11,7 +12,6 @@ public sealed class Umich : Creature
     {
         Occurrence = Occurrence.Rare;
         Size = Size.Big;
-        Speed = 20;
 
         AttackModes =
         [
@@ -39,4 +39,6 @@ public sealed class Umich : Creature
     public override int GetNumberAppearing() => DiceThrow._1D2();
 
     public override string[] Sounds => ["umich", "umich_2"];
+
+    public override List<Speed> Speeds => [new Speed(TravelMode.OnLand, 20)];
 }

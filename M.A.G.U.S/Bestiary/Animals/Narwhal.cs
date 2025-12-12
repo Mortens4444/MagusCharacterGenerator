@@ -1,6 +1,7 @@
 ﻿using M.A.G.U.S.Enums;
 using M.A.G.U.S.GameSystem;
 using M.A.G.U.S.GameSystem.Attributes;
+using M.A.G.U.S.Models;
 
 namespace M.A.G.U.S.Bestiary.Animals;
 
@@ -11,7 +12,6 @@ public sealed class Narwhal : Creature
         Occurrence = Occurrence.Rare;
         Intelligence = Enums.Intelligence.Animal;
         Size = Size._4_meters;
-        Speed = 220;
         AttackValue = 150;
         DefenseValue = 170;
         HealthPoints = 24;
@@ -28,4 +28,6 @@ public sealed class Narwhal : Creature
 
     [DiceThrow(ThrowType._1D6)]
     public override int GetNumberAppearing() => DiceThrow._1D6();
+
+    public override List<Speed> Speeds => [new Speed(TravelMode.InWater, 220)];
 }

@@ -67,5 +67,8 @@ public enum Deity
     // --- Kiegészítő / Egyéb ---
 
     [AvailableSpheres(Sphere.Order, Sphere.Magic)]
-    Weila // Kyria régi főistene
+    Weila, // Kyria régi főistene
+
+    
+    Phet //Ediomadi Óisten - LizardWizard
 }
