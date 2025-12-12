@@ -5,6 +5,6 @@ public enum PlaceOfAttackOnLeg
     Thigh,
     Knee,
     Ankle,
-    Calf,
+    Shin,
     Foot
 }

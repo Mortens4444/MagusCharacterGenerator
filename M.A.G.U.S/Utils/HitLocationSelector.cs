@@ -58,7 +58,7 @@ public static class HitLocationSelector
         {
             0 or 1 or 2 or 3 or 4 => PlaceOfAttackOnLeg.Thigh,
             5 => PlaceOfAttackOnLeg.Knee,
-            6 or 7 => PlaceOfAttackOnLeg.Calf,
+            6 or 7 => PlaceOfAttackOnLeg.Shin,
             8 => PlaceOfAttackOnLeg.Ankle,
             9 => PlaceOfAttackOnLeg.Foot,
             _ => throw new NotImplementedException(),
