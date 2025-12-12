@@ -1,6 +1,5 @@
 - Problem with total weight
 
-- LanguageLore not show, when user has 3 QP
 - GemstoneMagic Basic should not be available
 - After learning new Qualification sort not working
 - Market button should be in Money Border

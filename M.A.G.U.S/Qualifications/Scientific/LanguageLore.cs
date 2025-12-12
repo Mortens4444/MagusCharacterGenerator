@@ -6,7 +6,9 @@ namespace M.A.G.U.S.Qualifications.Scientific;
 
 public class LanguageLore : Qualification, ICanHaveMany
 {
-    public Language Language { get; set; }
+    public Language? Language { get; set; }
+    
+    public int LanguageLevel { get; set; }
 
     [JsonConstructor]
     public LanguageLore() { }
@@ -14,12 +16,14 @@ public class LanguageLore : Qualification, ICanHaveMany
     public LanguageLore(int languageLevel, int level = 1)
             : base(languageLevel > 5 ? QualificationLevel.Master : QualificationLevel.Base, level)
     {
+        LanguageLevel = languageLevel;
     }
 
     public LanguageLore(Language language, int languageLevel, int level = 1)
         : base(languageLevel > 5 ? QualificationLevel.Master : QualificationLevel.Base, level)
     {
         Language = language;
+        LanguageLevel = languageLevel;
     }
 
     public override string Name => "Language lore";
@@ -32,6 +36,10 @@ public class LanguageLore : Qualification, ICanHaveMany
 
     public override string ToString()
     {
+        if (!Language.HasValue)
+        {
+            return Name;
+        }
         return $"{Name} - {Language}";
     }
 }

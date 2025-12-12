@@ -5,7 +5,7 @@ using System.Globalization;
 
 namespace M.A.G.U.S.Assistant.Converters;
 
-internal class QualificationSorterConverter : IValueConverter
+internal class QualificationSorter : IValueConverter
 {
     public object? Convert(object? value, Type targetType, object? parameter, CultureInfo culture)
     {

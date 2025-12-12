@@ -27,8 +27,8 @@ public class Dracker : Race
         new AnimalTraining(),
         new ForestSurvival(),
         new LanguageLore(Language.Pyarronian, 4),
-        new LanguageLore(3),
-        new LanguageLore(3),
+        new LanguageLore(Language.Shadonian, 3),
+        new LanguageLore(Language.Toronian, 3),
     ];
 
     public override SpecialQualificationList SpecialQualifications =>

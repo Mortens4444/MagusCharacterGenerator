@@ -18,7 +18,8 @@
     <v:NotifierPage.Resources>
         <ResourceDictionary>
             <conv:TranslationConverter x:Key="TranslationConverter" />
-            <converters:QualificationSorterConverter x:Key="QualificationSorter" />
+            <converters:QualificationNameConverter x:Key="QualificationNameConverter" />
+            <converters:QualificationSorter x:Key="QualificationSorter" />
         </ResourceDictionary>
     </v:NotifierPage.Resources>
 
@@ -77,7 +78,7 @@
                             <CollectionView.ItemTemplate>
                                 <DataTemplate x:DataType="local:Qualification">
                                     <Grid Padding="6" ColumnDefinitions="*,Auto" ColumnSpacing="10">
-                                        <Label Text="{Binding Name, Converter={StaticResource TranslationConverter}}" VerticalOptions="Center" LineBreakMode="TailTruncation" />
+                                        <Label Text="{Binding ., Converter={StaticResource QualificationNameConverter}}" VerticalOptions="Center" LineBreakMode="TailTruncation" />
                                         <Label Text="{Binding QualificationLevel, Converter={StaticResource TranslationConverter}}" VerticalOptions="Center" HorizontalTextAlignment="End" />
                                     </Grid>
                                 </DataTemplate>
@@ -144,7 +145,7 @@
                             <CollectionView.ItemTemplate>
                                 <DataTemplate x:DataType="local:Qualification">
                                     <Grid Padding="6" ColumnDefinitions="*, Auto, Auto" ColumnSpacing="10">
-                                        <Label Text="{Binding Name, Converter={StaticResource TranslationConverter}}" VerticalOptions="Center" LineBreakMode="TailTruncation" />
+                                        <Label Text="{Binding ., Converter={StaticResource QualificationNameConverter}}" VerticalOptions="Center" LineBreakMode="TailTruncation" />
                                         <Label Text="{Binding QualificationLevel, Converter={StaticResource TranslationConverter}}" VerticalOptions="Center" Grid.Column="1" />
                                         <Label Text="{Binding ActualLevel}" VerticalOptions="Center" WidthRequest="30" Grid.Column="2" />
                                     </Grid>

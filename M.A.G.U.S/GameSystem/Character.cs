@@ -7,6 +7,7 @@ using M.A.G.U.S.GameSystem.Qualifications;
 using M.A.G.U.S.GameSystem.Valuables;
 using M.A.G.U.S.Interfaces;
 using M.A.G.U.S.Qualifications;
+using M.A.G.U.S.Qualifications.Combat;
 using M.A.G.U.S.Qualifications.Percentages;
 using M.A.G.U.S.Qualifications.Scientific;
 using M.A.G.U.S.Qualifications.Specialities;
@@ -922,6 +923,18 @@ public class Character : IFightModifier, ILiving, IAbilities, INotifyPropertyCha
 
     public bool HasQualification(Qualification qualification, QualificationLevel qualificationLevel)
     {
+        if (qualification is AncientTongueLore ancientTongueLore)
+        {
+            return Qualifications.Any(q => q is AncientTongueLore atl && atl.Language == ancientTongueLore.Language && q.QualificationLevel == qualificationLevel);
+        }
+        if (qualification is LanguageLore languageLore)
+        {
+            return Qualifications.Any(q => q is LanguageLore ll && ll.Language == languageLore.Language && q.QualificationLevel == qualificationLevel);
+        }
+        if (qualification is WeaponQualification weaponQualification)
+        {
+            return Qualifications.Any(q => q is WeaponQualification wq && wq.Weapon == weaponQualification.Weapon && q.QualificationLevel == qualificationLevel);
+        }
         return Qualifications.Any(q => q.Name == qualification.Name && q.QualificationLevel == qualificationLevel);
     }
 

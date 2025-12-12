@@ -17,10 +17,11 @@
 
     <ContentView.Resources>
         <ResourceDictionary>
-            <conv:TranslationConverter x:Key="TranslationConverter" />
             <conv:EnumDescriptionTranslationConverter x:Key="EnumDescriptionTranslationConverter" />
-            <converters:QualificationSorterConverter x:Key="QualificationSorter" />
+            <conv:TranslationConverter x:Key="TranslationConverter" />
             <converters:EquipmentSorterConverter x:Key="EquipmentSorter" />
+            <converters:QualificationNameConverter x:Key="QualificationNameConverter" />
+            <converters:QualificationSorter x:Key="QualificationSorter" />
             <mcc:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter" />
             <mcc:BoolToVisibilityConverter x:Key="NotBoolToVisibilityConverter" Invert="True" />
         </ResourceDictionary>
@@ -187,7 +188,7 @@
                     <CollectionView.ItemTemplate>
                         <DataTemplate x:DataType="local:Qualification">
                             <Grid Padding="6" ColumnDefinitions="*,Auto" ColumnSpacing="10">
-                                <Label Text="{Binding Name, Converter={StaticResource TranslationConverter}}" VerticalOptions="Center" HorizontalOptions="Start" />
+                                <Label Text="{Binding ., Converter={StaticResource QualificationNameConverter}}" VerticalOptions="Center" HorizontalOptions="Start" />
                                 <Label Text="{Binding QualificationLevel, Converter={StaticResource TranslationConverter}}" VerticalOptions="Center" HorizontalTextAlignment="End" />
                             </Grid>
                         </DataTemplate>

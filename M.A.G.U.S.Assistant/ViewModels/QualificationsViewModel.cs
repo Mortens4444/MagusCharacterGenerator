@@ -3,7 +3,9 @@ using CommunityToolkit.Mvvm.Messaging;
 using M.A.G.U.S.Assistant.CustomEventArgs;
 using M.A.G.U.S.Assistant.Views;
 using M.A.G.U.S.GameSystem;
+using M.A.G.U.S.GameSystem.Languages;
 using M.A.G.U.S.Qualifications;
+using M.A.G.U.S.Qualifications.Scientific;
 using Mtf.Extensions;
 using Mtf.LanguageService.MAUI;
 using Mtf.Maui.Controls.Messages;
@@ -124,8 +126,7 @@ internal partial class QualificationsViewModel : INotifyPropertyChanged
         var query = Qualifications.AsEnumerable();
         if (Character != null)
         {
-            var ownedTypes = new HashSet<string>(Character.Qualifications.Select(q => q.ToString()));
-            query = query.Where(q => !ownedTypes.Contains(q.ToString()) && Character.CanLearn(q));
+            query = query.Where(q => Character.CanLearn(q));
         }
 
         var st = SearchText?.Trim();
