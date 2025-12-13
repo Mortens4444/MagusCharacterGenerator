@@ -6,28 +6,66 @@ using M.A.G.U.S.Utils;
 
 namespace M.A.G.U.S.GameSystem;
 
-public static class PsiPoints
+public partial class Character
 {
     public const int KyrModifier = 6;
     public const int SlanModifier = 5;
     public const int PyarronMasterModifier = 4;
     public const int PyarronBaseModifier = 3;
 
-    public static PsiAttributes Calculate(Character character, ISettings? settings)
+    private int psiPoints;
+    private int maxPsiPoints;
+
+    public IPsi? Psi { get; set; }
+
+    public int PsiPointsModifier { get; set; }
+
+    public int PsiPoints
     {
-        var cantLearnPsi = character.Race.SpecialQualifications.GetSpeciality<CantLearnPsi>();
+        get => psiPoints;
+        set
+        {
+            if (value != psiPoints)
+            {
+                psiPoints = value;
+                OnPropertyChanged();
+            }
+        }
+    }
+
+    public int MaxPsiPoints
+    {
+        get => maxPsiPoints;
+        set
+        {
+            if (value != maxPsiPoints)
+            {
+                maxPsiPoints = value;
+                OnPropertyChanged();
+            }
+        }
+    }
+
+    private void CalculatePsiPoints(ISettings? settings)
+    {
+        Psi = null;
+        PsiPoints = 0;
+        MaxPsiPoints = 0;
+        PsiPointsModifier = 0;
+
+        var cantLearnPsi = Race.SpecialQualifications.GetSpeciality<CantLearnPsi>();
         if (cantLearnPsi != null)
         {
-            return new PsiAttributes { Psi = null, PsiPoints = 0, PsiPointsModifier = 0 };
+            return;
         }
 
-        var extraPsiPointsOnLevelUp = character.Race.SpecialQualifications.GetSpeciality<ExtraPsiPointOnLevelUp>();
-        var extraPsiPoints = extraPsiPointsOnLevelUp == null ? 0 : extraPsiPointsOnLevelUp.ExtraPoints * character.BaseClass.Level;
+        var extraPsiPointsOnLevelUp = Race.SpecialQualifications.GetSpeciality<ExtraPsiPointOnLevelUp>();
+        var extraPsiPoints = extraPsiPointsOnLevelUp == null ? 0 : extraPsiPointsOnLevelUp.ExtraPoints * BaseClass.Level;
 
-        var currentLevel = character.BaseClass.Level;
+        var currentLevel = BaseClass.Level;
         int totalPsiPoints = 0;
 
-        var allPsiSources = character.Qualifications.Concat(character.BaseClass.FutureQualifications)
+        var allPsiSources = Qualifications.Concat(BaseClass.FutureQualifications)
                                                     .OfType<IPsi>();
 
         var timeline = new List<PsiEvent>();
@@ -56,12 +94,12 @@ public static class PsiPoints
 
         if (timeline.Count == 0)
         {
-            return new PsiAttributes { Psi = null, PsiPoints = 0, PsiPointsModifier = 0 };
+            return;
         }
 
-        totalPsiPoints += MathHelper.GetAboveAverageValue(character.Intelligence);
+        totalPsiPoints += MathHelper.GetAboveAverageValue(Intelligence);
 
-        var kyrLore = character.Race.SpecialQualifications.GetSpeciality<KyrLore>();
+        var kyrLore = Race.SpecialQualifications.GetSpeciality<KyrLore>();
         if (kyrLore != null)
         {
             totalPsiPoints += currentLevel;
@@ -100,12 +138,10 @@ public static class PsiPoints
             .ThenByDescending(e => e.Level)
             .FirstOrDefault();
 
-        return new PsiAttributes
-        {
-            Psi = bestEvent?.SourceSkill,
-            PsiPoints = totalPsiPoints + extraPsiPoints,
-            PsiPointsModifier = currentBestModifier
-        };
+        Psi = bestEvent?.SourceSkill;
+        PsiPoints = totalPsiPoints + extraPsiPoints;
+        MaxPsiPoints = totalPsiPoints + extraPsiPoints;
+        PsiPointsModifier = currentBestModifier;
     }
 
     private static int GetModifier(PsiKind kind, QualificationLevel level)

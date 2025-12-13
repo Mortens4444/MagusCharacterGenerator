@@ -1,16 +1,20 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using M.A.G.U.S.Enums;
 using M.A.G.U.S.GameSystem;
-using Mtf.Extensions;
-using Mtf.LanguageService.MAUI;
+using M.A.G.U.S.Interfaces;
+using M.A.G.U.S.Things.Weapons;
 using System.Collections.ObjectModel;
+using System.Collections.Specialized;
 
 namespace M.A.G.U.S.Assistant.ViewModels;
 
 internal partial class CharacterViewModel : ObservableObject
 {
-    private string selectedCombatValueModifier;
+    private CombatValueModifier selectedCombatValueModifier;
     private Character? character;
+    private INotifyCollectionChanged? subscribedEquipment;
+    private Weapon? primaryWeapon;
+    private Weapon? secondaryWeapon;
 
     public CharacterViewModel()
     {
@@ -19,14 +23,52 @@ internal partial class CharacterViewModel : ObservableObject
 
     public IEnumerable<Alignment> Alignments => [.. Enum.GetValues<Alignment>()];
 
-    public ObservableCollection<string> AvailableCombatValueModifiers { get; } = ["Base", "With primary weapon", "With secondary weapon"];
+    public ObservableCollection<CombatValueModifier> AvailableCombatValueModifiers { get; } = [.. Enum.GetValues<CombatValueModifier>()];
 
-    public string SelectedCombatValueModifier
+    public ObservableCollection<IWeapon> AvailableWeapons { get; } = [];
+
+    public CombatValueModifier SelectedCombatValueModifier
     {
         get => selectedCombatValueModifier;
         set
         {
-            SetProperty(ref selectedCombatValueModifier, value);
+            if (SetProperty(ref selectedCombatValueModifier, value))
+            {
+                if (Character != null)
+                {
+                    Character.SelectedCombatValueModifier = value;
+                }
+            }
+        }
+    }
+
+    public Weapon? PrimaryWeapon
+    {
+        get => primaryWeapon ?? Character?.PrimaryWeapon;
+        set
+        {
+            if (SetProperty(ref primaryWeapon, value))
+            {
+                if (Character != null)
+                {
+                    Character.PrimaryWeapon = value;
+                }
+            }
+        }
+    }
+
+    public Weapon? SecondaryWeapon
+    {
+        get => secondaryWeapon ?? Character?.SecondaryWeapon;
+        set
+        {
+            if (SetProperty(ref secondaryWeapon, value))
+            {
+                if (Character != null)
+                {
+                    Character.SecondaryWeapon = value;
+                }
+            }
         }
     }
 
@@ -40,7 +82,45 @@ internal partial class CharacterViewModel : ObservableObject
                 return;
             }
 
+            if (subscribedEquipment != null)
+            {
+                subscribedEquipment.CollectionChanged -= Equipment_CollectionChanged;
+                subscribedEquipment = null;
+            }
+
             SetProperty(ref character, value);
+
+            if (character?.Equipment is INotifyCollectionChanged nc)
+            {
+                subscribedEquipment = nc;
+                subscribedEquipment.CollectionChanged += Equipment_CollectionChanged;
+            }
+
+            RefillAvailableWeapons();
+
+            primaryWeapon = Character?.PrimaryWeapon;
+            secondaryWeapon = Character?.SecondaryWeapon;
+
+            OnPropertyChanged(nameof(AvailableWeapons));
+            OnPropertyChanged(nameof(PrimaryWeapon));
+            OnPropertyChanged(nameof(SecondaryWeapon));
+        }
+    }
+
+    private void Equipment_CollectionChanged(object? sender, NotifyCollectionChangedEventArgs e) => RefillAvailableWeapons();
+    
+    private void RefillAvailableWeapons()
+    {
+        AvailableWeapons.Clear();
+
+        if (Character?.Equipment == null)
+        {
+            return;
+        }
+
+        foreach (var w in Character.Equipment.OfType<IWeapon>())
+        {
+            AvailableWeapons.Add(w);
         }
     }
 }

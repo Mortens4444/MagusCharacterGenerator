@@ -484,7 +484,7 @@ namespace StoryTeller
 			var characterFile = Path.Combine(path, String.Concat("character", ExtensionProvider.CharacterSheetExtension));
 			if (File.Exists(characterFile))
 			{
-				var character = Character.Load(characterFile);
+				var character = Character.Load(characterFile, new Settings());
 				characterGenerator.LoadCharacter(character, (string)e.Node.Tag);
 			}
 		}

@@ -13,9 +13,9 @@ public class JannSaber : Weapon, IMeleeWeapon
 
     public int DefendingValue => 17;
 
-    public override double Weight => 120;
+    public override double Weight => 0.5;
 
-    public override Money Price => new(0, 5);
+    public override Money Price => new(120);
 
     [DiceThrow(ThrowType._1D6)]
     [DiceThrowModifier(3)]

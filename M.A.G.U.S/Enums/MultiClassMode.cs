@@ -1,4 +1,4 @@
-﻿namespace M.A.G.U.S.GameSystem;
+﻿namespace M.A.G.U.S.Enums;
 
 public enum MultiClassMode
 {

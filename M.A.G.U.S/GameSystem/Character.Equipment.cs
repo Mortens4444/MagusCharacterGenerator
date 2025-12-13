@@ -1,0 +1,64 @@
+﻿using M.A.G.U.S.GameSystem.Valuables;
+using M.A.G.U.S.Things;
+using System.Collections.ObjectModel;
+using System.Collections.Specialized;
+
+namespace M.A.G.U.S.GameSystem;
+
+public partial class Character
+{
+    private string totalEquipmentWeight;
+    private Money money = new(0);
+
+    public ObservableCollection<Thing> Equipment { get; init; } = [];
+
+    public Money Money
+    {
+        get => money;
+        set
+        {
+            if (money != value)
+            {
+                money = value;
+                OnPropertyChanged();
+                OnPropertyChanged(nameof(money.Summa));
+            }
+        }
+    }
+
+    public string TotalEquipmentWeight
+    {
+        get => totalEquipmentWeight;
+        set
+        {
+            if (value != totalEquipmentWeight)
+            {
+                totalEquipmentWeight = value;
+                OnPropertyChanged();
+            }
+        }
+    }
+
+    public void Buy(Thing thing)
+    {
+        if (Money < thing.MultipliedPrice)
+        {
+            throw new InvalidOperationException("Cannot afford this item");
+        }
+
+        Money -= thing.MultipliedPrice;
+        Equipment.Add(thing);
+        OnPropertyChanged(nameof(Money));
+    }
+
+    private void EquipmentOnCollectionChanged(object? sender, NotifyCollectionChangedEventArgs e)
+    {
+        TotalEquipmentWeight = (Equipment?.Sum(e => e.Weight) ?? 0).ToString("N1");
+        OnPropertyChanged(nameof(Equipment));
+    }
+
+    private void CalculateGold()
+    {
+        money.Gold += Classes.Sum(@class => @class.Gold);
+    }
+}

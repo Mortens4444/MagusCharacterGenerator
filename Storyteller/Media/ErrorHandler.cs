@@ -1,5 +1,4 @@
 ﻿using DirectShowLib;
-using System;
 
 namespace Storyteller.Media
 {
