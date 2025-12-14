@@ -98,9 +98,9 @@ internal partial class CharacterGeneratorViewModel : CharacterViewModel
     }
 
     [RelayCommand]
-    public void SaveCharacter()
+    public async Task SaveCharacter()
     {
-        characterService.SaveAsync(Character);
+        await characterService.SaveAsync(Character).ConfigureAwait(false);
         WeakReferenceMessenger.Default.Send(new ShowInfoMessage("Character saved", String.Format("Successfully saved {0}", Character.Name)));
     }
 

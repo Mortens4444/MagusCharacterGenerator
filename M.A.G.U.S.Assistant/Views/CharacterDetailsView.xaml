@@ -123,14 +123,14 @@
                     <Label Text="Combat values" Style="{StaticResource HeaderLabel}"/>
 
                     <Grid ColumnDefinitions="*, *" ColumnSpacing="10" RowDefinitions="Auto, Auto">
-                        <Label Text="Primary weapon" Grid.Row="0" Grid.Column="0" FontSize="12" TextColor="Gray"/>
+                        <Label Text="Primary weapon" Grid.Row="0" Grid.Column="0" />
                         <Picker Title="Select primary weapon"
                                 ItemsSource="{Binding AvailableWeapons}"
                                 ItemDisplayBinding="{Binding Name, Converter={StaticResource TranslationConverter}}"
                                 SelectedItem="{Binding PrimaryWeapon}"
                                 Grid.Row="1" Grid.Column="0" />
 
-                        <Label Text="Secondary weapon" Grid.Row="0" Grid.Column="1" FontSize="12" TextColor="Gray"/>
+                        <Label Text="Secondary weapon" Grid.Row="0" Grid.Column="1" />
                         <Picker Title="Select secondary weapon"
                                 ItemsSource="{Binding AvailableWeapons}"
                                 ItemDisplayBinding="{Binding Name, Converter={StaticResource TranslationConverter}}"
@@ -140,30 +140,30 @@
 
                     <Picker ItemsSource="{Binding AvailableCombatValueModifiers}"
                             ItemDisplayBinding="{Binding ., Converter={StaticResource EnumDescriptionTranslationConverter}}"
-                            SelectedItem="{Binding SelectedCombatValueModifier}"
+                            SelectedItem="{Binding SelectedCombatValueModifier, Mode=TwoWay}"
                             WidthRequest="220"/>
 
                     <Grid ColumnDefinitions="*, *" RowDefinitions="Auto, Auto, Auto">
                         <mc:NumericUpDownWithLabel Label="Initiator value" Minimum="{Binding Character.InitiatingValueOriginal}" Maximum="{Binding Character.InitiatingValueMaxLimit}" Value="{Binding Character.InitiatingValue, Mode=TwoWay}" IsVisible="{Binding Character.CanAllocateCombatModifier, Converter={StaticResource BoolToVisibilityConverter}}" />
-                        <mc:EntryWithLabel Label="Initiator value" Text="{Binding Character.InitiatingValue}" IsEnabled="False" IsVisible="{Binding Character.CanAllocateCombatModifier, Converter={StaticResource NotBoolToVisibilityConverter}}" />
-                        
+                        <mc:EntryWithLabel Label="Initiator value" Text="{Binding Character.InitiatingValue}" IsEnabled="False" IsVisible="{Binding Character.CanAllocateCombatModifierBase, Converter={StaticResource BoolToVisibilityConverter}}" />
+                        <mc:EntryWithLabel Label="Initiator value" Text="{Binding Character.InitiatingValueWithSelectedWeapon}" IsEnabled="False" IsVisible="{Binding Character.CanAllocateCombatModifierWithWeapon, Converter={StaticResource BoolToVisibilityConverter}}" />
+
                         <mc:NumericUpDownWithLabel Label="Attack value" Minimum="{Binding Character.AttackingValueOriginal}" Maximum="{Binding Character.AttackingValueMaxLimit}" Value="{Binding Character.AttackingValue, Mode=TwoWay}" IsVisible="{Binding Character.CanAllocateCombatModifier, Converter={StaticResource BoolToVisibilityConverter}}" Grid.Column="1" />
-                        <mc:EntryWithLabel Label="Attack value" Text="{Binding Character.AttackingValue}" IsEnabled="False" IsVisible="{Binding Character.CanAllocateCombatModifier, Converter={StaticResource NotBoolToVisibilityConverter}}" Grid.Column="1" />
+                        <mc:EntryWithLabel Label="Attack value" Text="{Binding Character.AttackingValue}" IsEnabled="False" IsVisible="{Binding Character.CanAllocateCombatModifierBase, Converter={StaticResource BoolToVisibilityConverter}}" Grid.Column="1" />
+                        <mc:EntryWithLabel Label="Attack value" Text="{Binding Character.AttackingValueWithSelectedWeapon}" IsEnabled="False" IsVisible="{Binding Character.CanAllocateCombatModifierWithWeapon, Converter={StaticResource BoolToVisibilityConverter}}" Grid.Column="1" />
 
                         <mc:NumericUpDownWithLabel Label="Defense value" Minimum="{Binding Character.DefendingValueOriginal}" Maximum="{Binding Character.DefendingValueMaxLimit}" Value="{Binding Character.DefendingValue, Mode=TwoWay}" IsVisible="{Binding Character.CanAllocateCombatModifier, Converter={StaticResource BoolToVisibilityConverter}}" Grid.Row="1" />
-                        <mc:EntryWithLabel Label="Defense value" Text="{Binding Character.DefendingValue}" IsEnabled="False" IsVisible="{Binding Character.CanAllocateCombatModifier, Converter={StaticResource NotBoolToVisibilityConverter}}" Grid.Row="1" />
+                        <mc:EntryWithLabel Label="Defense value" Text="{Binding Character.DefendingValue}" IsEnabled="False" IsVisible="{Binding Character.CanAllocateCombatModifierBase, Converter={StaticResource BoolToVisibilityConverter}}" Grid.Row="1" />
+                        <mc:EntryWithLabel Label="Defense value" Text="{Binding Character.DefendingValueWithSelectedWeapon}" IsEnabled="False" IsVisible="{Binding Character.CanAllocateCombatModifierWithWeapon, Converter={StaticResource BoolToVisibilityConverter}}" Grid.Row="1" />
 
                         <mc:NumericUpDownWithLabel Label="Aim value" Minimum="{Binding Character.AimingValueOriginal}" Maximum="{Binding Character.AimingValueMaxLimit}" Value="{Binding Character.AimingValue, Mode=TwoWay}" IsVisible="{Binding Character.CanAllocateCombatModifier, Converter={StaticResource BoolToVisibilityConverter}}" Grid.Row="1" Grid.Column="1" />
-                        <mc:EntryWithLabel Label="Aim value" Text="{Binding Character.AimingValue}" IsEnabled="False" IsVisible="{Binding Character.CanAllocateCombatModifier, Converter={StaticResource NotBoolToVisibilityConverter}}" Grid.Row="1" Grid.Column="1" />
-                        
+                        <mc:EntryWithLabel Label="Aim value" Text="{Binding Character.AimingValue}" IsEnabled="False" IsVisible="{Binding Character.CanAllocateCombatModifierBase, Converter={StaticResource BoolToVisibilityConverter}}" Grid.Row="1" Grid.Column="1" />
+                        <mc:EntryWithLabel Label="Aim value" Text="{Binding Character.AimingValueWithSelectedWeapon}" IsEnabled="False" IsVisible="{Binding Character.CanAllocateCombatModifierWithWeapon, Converter={StaticResource BoolToVisibilityConverter}}" Grid.Row="1" Grid.Column="1" />
+
                         <mc:EntryWithLabel Label="Combat modifier" Text="{Binding Character.CombatModifier}" IsEnabled="False" Grid.Row="2" />
                         <mc:EntryWithLabel Label="Combat modifier/level" Text="{Binding Character.FightValueModifier}" IsEnabled="False" Grid.Row="2" Grid.Column="1" />
                     </Grid>
                     <Grid ColumnDefinitions="*, *" RowDefinitions="Auto, Auto, Auto">
-                        <mc:EntryWithLabel Label="Initiator value" Text="{Binding Character.InitiatingValueWithSelectedWeapon}" IsEnabled="False" IsVisible="{Binding Character.CanAllocateCombatModifier, Converter={StaticResource NotBoolToVisibilityConverter}}" />
-                        <mc:EntryWithLabel Label="Attack value" Text="{Binding Character.AttackingValueWithSelectedWeapon}" IsEnabled="False" IsVisible="{Binding Character.CanAllocateCombatModifier, Converter={StaticResource NotBoolToVisibilityConverter}}" Grid.Column="1" />
-                        <mc:EntryWithLabel Label="Defense value" Text="{Binding Character.DefendingValueWithSelectedWeapon}" IsEnabled="False" IsVisible="{Binding Character.CanAllocateCombatModifier, Converter={StaticResource NotBoolToVisibilityConverter}}" Grid.Row="1" />
-                        <mc:EntryWithLabel Label="Aim value" Text="{Binding Character.AimingValueWithSelectedWeapon}" IsEnabled="False" IsVisible="{Binding Character.CanAllocateCombatModifier, Converter={StaticResource NotBoolToVisibilityConverter}}" Grid.Row="1" Grid.Column="1" />
                     </Grid>
                 </VerticalStackLayout>
             </Border>

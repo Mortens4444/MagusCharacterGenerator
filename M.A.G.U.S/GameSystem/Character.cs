@@ -44,6 +44,8 @@ public partial class Character : IFightModifier, ILiving, IAbilities, INotifyPro
     public void CalculateChanges()
     {
         calculateChanges = true;
+        primaryWeapon = ResolveWeaponById(PrimaryWeaponId);
+        secondaryWeapon = ResolveWeaponById(SecondaryWeaponId);
     }
 
     private void EnsureSubscriptions()

@@ -16,11 +16,6 @@ internal partial class CharacterViewModel : ObservableObject
     private Weapon? primaryWeapon;
     private Weapon? secondaryWeapon;
 
-    public CharacterViewModel()
-    {
-        selectedCombatValueModifier = AvailableCombatValueModifiers.First();
-    }
-
     public IEnumerable<Alignment> Alignments => [.. Enum.GetValues<Alignment>()];
 
     public ObservableCollection<CombatValueModifier> AvailableCombatValueModifiers { get; } = [.. Enum.GetValues<CombatValueModifier>()];
@@ -44,7 +39,7 @@ internal partial class CharacterViewModel : ObservableObject
 
     public Weapon? PrimaryWeapon
     {
-        get => primaryWeapon ?? Character?.PrimaryWeapon;
+        get => primaryWeapon;
         set
         {
             if (SetProperty(ref primaryWeapon, value))
@@ -59,7 +54,7 @@ internal partial class CharacterViewModel : ObservableObject
 
     public Weapon? SecondaryWeapon
     {
-        get => secondaryWeapon ?? Character?.SecondaryWeapon;
+        get => secondaryWeapon;
         set
         {
             if (SetProperty(ref secondaryWeapon, value))
@@ -89,6 +84,9 @@ internal partial class CharacterViewModel : ObservableObject
             }
 
             SetProperty(ref character, value);
+            SetProperty(ref selectedCombatValueModifier, value?.SelectedCombatValueModifier ?? CombatValueModifier.Base, nameof(SelectedCombatValueModifier));
+            SetProperty(ref primaryWeapon, value?.PrimaryWeapon, nameof(PrimaryWeapon));
+            SetProperty(ref secondaryWeapon, value?.SecondaryWeapon, nameof(SecondaryWeapon));
 
             if (character?.Equipment is INotifyCollectionChanged nc)
             {

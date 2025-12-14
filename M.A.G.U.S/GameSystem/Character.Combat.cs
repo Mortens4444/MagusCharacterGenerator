@@ -5,6 +5,7 @@ using M.A.G.U.S.Interfaces;
 using M.A.G.U.S.Qualifications.Specialities;
 using M.A.G.U.S.Things.Weapons;
 using M.A.G.U.S.Utils;
+using System.Text.Json.Serialization;
 
 namespace M.A.G.U.S.GameSystem;
 
@@ -15,6 +16,8 @@ public partial class Character
     private int attackingValue;
     private int defendingValue;
     private int aimingValue;
+    private string? primaryWeaponId;
+    private string? secondaryWeaponId;
     private Weapon? primaryWeapon;
     private Weapon? secondaryWeapon;
     private int totalCombatModifierPool;
@@ -41,6 +44,59 @@ public partial class Character
         }
     }
 
+    public string? PrimaryWeaponId
+    {
+        get => primaryWeaponId;
+        set
+        {
+            if (primaryWeaponId == value)
+            {
+                return;
+            }
+
+            primaryWeaponId = value;
+            OnPropertyChanged();
+            SetPrimaryWeapon();
+        }
+    }
+
+    private void SetPrimaryWeapon()
+    {
+        if (!String.IsNullOrEmpty(primaryWeaponId))
+        {
+            primaryWeapon = ResolveWeaponById(primaryWeaponId);
+            OnPropertyChanged(nameof(PrimaryWeapon));
+            RecalculateFightValues(settings);
+        }
+    }
+
+    public string? SecondaryWeaponId
+    {
+        get => secondaryWeaponId;
+        set
+        {
+            if (secondaryWeaponId == value)
+            {
+                return;
+            }
+
+            secondaryWeaponId = value;
+            OnPropertyChanged();
+            SetSecondaryWeapon();
+        }
+    }
+
+    private void SetSecondaryWeapon()
+    {
+        if (!String.IsNullOrEmpty(secondaryWeaponId))
+        {
+            secondaryWeapon = ResolveWeaponById(secondaryWeaponId);
+            OnPropertyChanged(nameof(SecondaryWeapon));
+            RecalculateFightValues(settings);
+        }
+    }
+
+    [JsonIgnore]
     public Weapon? PrimaryWeapon
     {
         get => primaryWeapon;
@@ -49,12 +105,15 @@ public partial class Character
             if (primaryWeapon != value)
             {
                 primaryWeapon = value;
+                primaryWeaponId = primaryWeapon?.Id;
                 OnPropertyChanged();
+                OnPropertyChanged(nameof(PrimaryWeaponId));
                 RecalculateFightValues(settings);
             }
         }
     }
 
+    [JsonIgnore]
     public Weapon? SecondaryWeapon
     {
         get => secondaryWeapon;
@@ -63,7 +122,9 @@ public partial class Character
             if (secondaryWeapon != value)
             {
                 secondaryWeapon = value;
+                secondaryWeaponId = secondaryWeapon?.Id;
                 OnPropertyChanged();
+                OnPropertyChanged(nameof(PrimaryWeaponId));
                 RecalculateFightValues(settings);
             }
         }
@@ -178,6 +239,10 @@ public partial class Character
 
     public bool CanAllocateCombatModifier => CombatModifier != 0;
 
+    public bool CanAllocateCombatModifierBase => CombatModifier == 0 && SelectedCombatValueModifier == CombatValueModifier.Base;
+
+    public bool CanAllocateCombatModifierWithWeapon => CombatModifier == 0 && SelectedCombatValueModifier != CombatValueModifier.Base;
+
     public int InitiatingValueMaxLimit => InitiatingValue + CombatModifier;
 
     public int AttackingValueMaxLimit => AttackingValue + CombatModifier;
@@ -267,7 +332,6 @@ public partial class Character
     public int AttackingValueWithSelectedWeapon => AttackingValue + weaponFightModifier?.AttackingValue ?? 0;
     public int DefendingValueWithSelectedWeapon => DefendingValue + weaponFightModifier?.DefendingValue ?? 0;
     public int AimingValueWithSelectedWeapon => AimingValue + weaponFightModifier?.AimingValue ?? 0;
-
 
     private void RecalculateAllocatedCombatModifiers()
     {
@@ -428,5 +492,15 @@ public partial class Character
             DefendingValue = defencePoints,
             AimingValue = aimingPoints
         };
+    }
+
+    private Weapon? ResolveWeaponById(string? id)
+    {
+        if (String.IsNullOrEmpty(id) || Equipment == null)
+        {
+            return null;
+        }
+
+        return Equipment.OfType<Weapon>().FirstOrDefault(weapon => weapon.Id == id);
     }
 }

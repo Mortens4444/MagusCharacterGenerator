@@ -5,6 +5,9 @@ namespace M.A.G.U.S.Things;
 
 public abstract class Thing
 {
+
+    public string Id { get; set; } = Guid.NewGuid().ToString();
+
     public virtual string Name => GetType().Name;
 
     public string ImageName => $"{Name.ToImageName()}.png";
