@@ -1,11 +1,10 @@
-﻿using System.Collections.ObjectModel;
+﻿using M.A.G.U.S.Assistant.Models;
+using System.Collections.ObjectModel;
 using System.Reflection;
-using CommunityToolkit.Mvvm.ComponentModel;
-using M.A.G.U.S.Assistant.Models;
 
 namespace M.A.G.U.S.Assistant.ViewModels;
 
-internal partial class ObjectObserverViewModel : ObservableObject
+internal partial class ObjectObserverViewModel : BaseViewModel
 {
     public ObservableCollection<PropertyItem> Properties { get; } = [];
 

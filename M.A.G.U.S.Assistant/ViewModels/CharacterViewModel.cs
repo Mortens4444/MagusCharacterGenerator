@@ -1,5 +1,4 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
-using M.A.G.U.S.Enums;
+﻿using M.A.G.U.S.Enums;
 using M.A.G.U.S.GameSystem;
 using M.A.G.U.S.Interfaces;
 using M.A.G.U.S.Things.Weapons;
@@ -8,7 +7,7 @@ using System.Collections.Specialized;
 
 namespace M.A.G.U.S.Assistant.ViewModels;
 
-internal partial class CharacterViewModel : ObservableObject
+internal partial class CharacterViewModel : BaseViewModel
 {
     private CombatValueModifier selectedCombatValueModifier;
     private Character? character;

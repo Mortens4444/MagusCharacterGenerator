@@ -8,7 +8,6 @@ internal partial class PaintWizardPage : NotifierPage
 {
     private readonly PaintWizardViewModel vm;
 
-    // állapot drag/paint
     private bool isPanning;
     private double lastPanX, lastPanY;
     private double startTranslationX, startTranslationY;
@@ -56,7 +55,6 @@ internal partial class PaintWizardPage : NotifierPage
 
     private void RefreshPlacedItems()
     {
-        // töröljük a gyerekeket, majd újra létrehozzuk (egyszerû)
         GridCanvas.Children.Clear();
 
         foreach (var p in vm.PlacedItems.ToList())

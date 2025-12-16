@@ -54,10 +54,7 @@ public partial class Character : IFightModifier, ILiving, IAbilities, INotifyPro
         Qualifications.CollectionChanged += Qualifications_CollectionChanged;
     }
 
-    public void OnPropertyChanged([CallerMemberName] string propertyName = "")
-    {
-        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-    }
+    private void OnPropertyChanged([CallerMemberName] string propertyName = "") => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
 
     public static Character Load(string fullPath, ISettings settings)
     {

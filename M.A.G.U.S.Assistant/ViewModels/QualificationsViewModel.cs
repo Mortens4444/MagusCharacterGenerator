@@ -3,19 +3,16 @@ using CommunityToolkit.Mvvm.Messaging;
 using M.A.G.U.S.Assistant.CustomEventArgs;
 using M.A.G.U.S.Assistant.Views;
 using M.A.G.U.S.GameSystem;
-using M.A.G.U.S.GameSystem.Languages;
 using M.A.G.U.S.Qualifications;
-using M.A.G.U.S.Qualifications.Scientific;
 using Mtf.Extensions;
 using Mtf.LanguageService.MAUI;
 using Mtf.Maui.Controls.Messages;
 using System.Collections.ObjectModel;
-using System.ComponentModel;
 using System.Windows.Input;
 
 namespace M.A.G.U.S.Assistant.ViewModels;
 
-internal partial class QualificationsViewModel : INotifyPropertyChanged
+internal partial class QualificationsViewModel : BaseViewModel
 {
     private Character? character;
 
@@ -32,8 +29,6 @@ internal partial class QualificationsViewModel : INotifyPropertyChanged
 
     public ICommand ClearFilterCommand { get; }
 
-    public event PropertyChangedEventHandler? PropertyChanged;
-
     public ObservableCollection<Qualification> Qualifications { get; } = [];
 
     public ObservableCollection<Qualification> FilteredQualifications { get; } = [];
@@ -49,7 +44,7 @@ internal partial class QualificationsViewModel : INotifyPropertyChanged
             }
 
             groupedQualifications = value;
-            OnPropertyChanged(nameof(GroupedQualifications));
+            OnPropertyChanged();
         }
     }
     string _searchText = String.Empty;
@@ -66,7 +61,7 @@ internal partial class QualificationsViewModel : INotifyPropertyChanged
             }
 
             _searchText = value ?? String.Empty;
-            OnPropertyChanged(nameof(SearchText));
+            OnPropertyChanged();
             ApplyFilter();
         }
     }
@@ -82,7 +77,7 @@ internal partial class QualificationsViewModel : INotifyPropertyChanged
             }
 
             character = value;
-            OnPropertyChanged(nameof(Character));
+            OnPropertyChanged();
             ApplyFilter();
         }
     }
@@ -99,7 +94,7 @@ internal partial class QualificationsViewModel : INotifyPropertyChanged
             }
 
             selectedItem = value;
-            OnPropertyChanged(nameof(SelectedItem));
+            OnPropertyChanged();
 
             if (selectedItem != null)
             {
@@ -188,7 +183,4 @@ internal partial class QualificationsViewModel : INotifyPropertyChanged
             WeakReferenceMessenger.Default.Send(new ShowErrorMessage(ex));
         }
     }
-
-    private void OnPropertyChanged(string name) =>
-        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
 }

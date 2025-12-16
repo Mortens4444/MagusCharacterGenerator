@@ -1,5 +1,4 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
-using CommunityToolkit.Mvvm.Input;
+﻿using CommunityToolkit.Mvvm.Input;
 using M.A.G.U.S.Assistant.CustomEventArgs;
 using M.A.G.U.S.GameSystem;
 using M.A.G.U.S.GameSystem.Qualifications;
@@ -10,7 +9,7 @@ using System.Windows.Input;
 
 namespace M.A.G.U.S.Assistant.ViewModels;
 
-internal partial class QualificationDetailsViewModel : ObservableObject
+internal partial class QualificationDetailsViewModel : BaseViewModel
 {
     private QualificationLevel selectedLevel;
     private bool canLearn;

@@ -1,5 +1,4 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
-using CommunityToolkit.Mvvm.Input;
+﻿using CommunityToolkit.Mvvm.Input;
 using M.A.G.U.S.Assistant.Services;
 using Mtf.LanguageService.Enums;
 using System.Reflection;
@@ -7,7 +6,7 @@ using System.Windows.Input;
 
 namespace M.A.G.U.S.Assistant.ViewModels;
 
-internal partial class SettingsViewModel : ObservableObject
+internal partial class SettingsViewModel : BaseViewModel
 {
     private readonly SettingsService settingsService;
     

@@ -4,10 +4,8 @@
 
 //namespace M.A.G.U.S.Assistant.ViewModels
 //{
-//    internal class PaintViewModel : INotifyPropertyChanged
+//    internal class PaintViewModel : BaseViewModel
 //    {
-//        public event PropertyChangedEventHandler PropertyChanged;
-
 //        public ObservableCollection<ItemOption> ItemOptions { get; } = new ObservableCollection<ItemOption>
 //        {
 //            new ItemOption { Name = "Chair", Icon = "chair_top.png" },
@@ -28,7 +26,7 @@
 //            {
 //                if (selectedModeIndex == value) return;
 //                selectedModeIndex = value;
-//                OnPropertyChanged(nameof(SelectedModeIndex));
+//                OnPropertyChanged();
 //            }
 //        }
 
@@ -40,7 +38,7 @@
 //            {
 //                if (selectedItemOption == value) return;
 //                selectedItemOption = value;
-//                OnPropertyChanged(nameof(SelectedItemOption));
+//                OnPropertyChanged();
 //            }
 //        }
 
@@ -52,7 +50,7 @@
 //            {
 //                if (Math.Abs(shapeSize - value) < 0.1) return;
 //                shapeSize = value;
-//                OnPropertyChanged(nameof(ShapeSize));
+//                OnPropertyChanged();
 //            }
 //        }
 
@@ -64,7 +62,7 @@
 //            {
 //                if (selectedColor == value) return;
 //                selectedColor = value;
-//                OnPropertyChanged(nameof(SelectedColor));
+//                OnPropertyChanged();
 //            }
 //        }
 
@@ -224,8 +222,6 @@
 //        {
 //            CanvasDrawable?.Invalidate();
 //        }
-
-//        private void OnPropertyChanged(string name) => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
 //    }
 
 //    public class ItemOption

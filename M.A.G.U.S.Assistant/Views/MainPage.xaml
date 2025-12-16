@@ -10,7 +10,7 @@
 
     <ScrollView>
         <VerticalStackLayout Padding="16" Spacing="12">
-			<VerticalStackLayout>
+			<!--<VerticalStackLayout>-->
 				<HorizontalStackLayout HorizontalOptions="Center">
                     <mc:MenuItem ImageName="character_generation" LabelText="Character generation" PageType="{x:Type mv:CharacterGeneratorPage}" WidthRequest="100" HeightRequest="100" />
                     <mc:MenuItem ImageName="map" LabelText="Map" PageType="{x:Type mv:MapPage}" WidthRequest="100" HeightRequest="100" />
@@ -48,8 +48,11 @@
                     <mc:MenuItem ImageName="settings" LabelText="Settings" PageType="{x:Type mv:SettingsPage}" WidthRequest="100" HeightRequest="100" />
                     <mc:MenuItem ImageName="about" LabelText="About" PageType="{x:Type mv:AboutPage}" WidthRequest="100" HeightRequest="100" />
 				</HorizontalStackLayout>
-                
-            </VerticalStackLayout>
+            
+                <HorizontalStackLayout HorizontalOptions="Center">
+                    <mc:MenuItem ImageName="encounter" LabelText="Encounter" PageType="{x:Type mv:EncounterPage}" WidthRequest="100" HeightRequest="100" />
+                </HorizontalStackLayout>
+            <!--</VerticalStackLayout>-->
         </VerticalStackLayout>
     </ScrollView>
 

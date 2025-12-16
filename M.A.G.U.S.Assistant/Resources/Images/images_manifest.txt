@@ -7,6 +7,7 @@ classes.png
 delete.png
 dice.png
 dice_roll.png
+encounter.png
 gemstone.png
 images.png
 languages.png

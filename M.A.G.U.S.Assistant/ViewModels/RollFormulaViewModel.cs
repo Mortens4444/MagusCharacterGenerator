@@ -6,14 +6,12 @@ using M.A.G.U.S.Assistant.Services;
 using M.A.G.U.S.GameSystem;
 using Mtf.LanguageService.MAUI;
 using Mtf.Maui.Controls.Messages;
-using System.ComponentModel;
 using System.Windows.Input;
 
 namespace M.A.G.U.S.Assistant.ViewModels;
 
-internal partial class RollFormulaViewModel : INotifyPropertyChanged
+internal partial class RollFormulaViewModel : BaseViewModel
 {
-    public event PropertyChangedEventHandler? PropertyChanged;
     public event EventHandler<TaskCompletionSource<bool>>? RollRequested;
     public event EventHandler<(int Result, ExecutionMode Mode)>? RollCompleted;
 
@@ -51,7 +49,7 @@ internal partial class RollFormulaViewModel : INotifyPropertyChanged
         {
             if (resultLocked == value) return;
             resultLocked = value;
-            OnPropertyChanged(nameof(IsResultLocked));
+            OnPropertyChanged();
             OnPropertyChanged(nameof(IsActionEnabled));
         }
     }
@@ -69,7 +67,7 @@ internal partial class RollFormulaViewModel : INotifyPropertyChanged
             }
 
             rollFormula = value;
-            OnPropertyChanged(nameof(RollFormula));
+            OnPropertyChanged();
             OnPropertyChanged(nameof(IsAuto));
             OnPropertyChanged(nameof(Result));
         }
@@ -88,7 +86,7 @@ internal partial class RollFormulaViewModel : INotifyPropertyChanged
             }
 
             result = value;
-            OnPropertyChanged(nameof(Result));
+            OnPropertyChanged();
         }
     }
 
@@ -103,7 +101,7 @@ internal partial class RollFormulaViewModel : INotifyPropertyChanged
             }
 
             userResultString = value;
-            OnPropertyChanged(nameof(UserResultString));
+            OnPropertyChanged();
         }
     }
 
@@ -167,6 +165,4 @@ internal partial class RollFormulaViewModel : INotifyPropertyChanged
     {
         CommandExecutor.ExecuteOnUIThread(TriggerActionFromShake);
     }
-
-    private void OnPropertyChanged(string name) => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
 }

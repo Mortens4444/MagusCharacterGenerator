@@ -4,17 +4,13 @@ using M.A.G.U.S.Utils;
 using Mtf.LanguageService.MAUI;
 using Mtf.Maui.Controls.Messages;
 using System.Collections.ObjectModel;
-using System.ComponentModel;
-using System.Diagnostics;
 using System.Reflection;
 using System.Windows.Input;
 
 namespace M.A.G.U.S.Assistant.ViewModels;
 
-internal partial class ImagesViewModel : INotifyPropertyChanged
+internal partial class ImagesViewModel : BaseViewModel
 {
-    public event PropertyChangedEventHandler? PropertyChanged;
-
     public ObservableCollection<ImageItem> AllImages { get; } = [];
     public ObservableCollection<ImageItem> FilteredImages { get; } = [];
 
@@ -30,7 +26,7 @@ internal partial class ImagesViewModel : INotifyPropertyChanged
             }
 
             searchText = value;
-            OnPropertyChanged(nameof(SearchText));
+            OnPropertyChanged();
             ApplyFilter();
         }
     }
@@ -47,7 +43,7 @@ internal partial class ImagesViewModel : INotifyPropertyChanged
             }
 
             selectedImage = value;
-            OnPropertyChanged(nameof(SelectedImage));
+            OnPropertyChanged();
             if (selectedImage != null)
             {
                 _ = PreviewAsync(selectedImage);
@@ -146,6 +142,4 @@ internal partial class ImagesViewModel : INotifyPropertyChanged
             WeakReferenceMessenger.Default.Send(new ShowErrorMessage(ex));
         }
     }
-
-    private void OnPropertyChanged(string name) => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
 }

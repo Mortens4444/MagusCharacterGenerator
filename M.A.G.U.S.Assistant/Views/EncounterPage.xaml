@@ -1,0 +1,125 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<v:NotifierPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                xmlns:mc="clr-namespace:Mtf.Maui.Controls;assembly=Mtf.Maui.Controls"
+                xmlns:m="clr-namespace:M.A.G.U.S.Assistant.Models"
+                xmlns:v="clr-namespace:Mtf.LanguageService.MAUI.Views;assembly=Mtf.LanguageService.MAUI"                
+                xmlns:vm="clr-namespace:M.A.G.U.S.Assistant.ViewModels"
+                xmlns:mv="clr-namespace:M.A.G.U.S.Assistant.Views"
+                xmlns:conv="clr-namespace:Mtf.LanguageService.MAUI.Converters;assembly=Mtf.LanguageService.MAUI"
+                xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+                x:Class="M.A.G.U.S.Assistant.Views.EncounterPage"
+                x:ClassModifier="internal"
+                x:DataType="vm:EncounterViewModel"
+                Title="Encounter">
+    
+    <v:NotifierPage.Resources>
+        <ResourceDictionary>
+            <conv:TranslationConverter x:Key="TranslationConverter" />
+        </ResourceDictionary>
+    </v:NotifierPage.Resources>
+    
+    <Grid ColumnDefinitions="*,2*,*" RowDefinitions="*,Auto" Padding="12">
+
+        <!-- Characters -->
+        <StackLayout Grid.Column="0" Spacing="8">
+            <Label Text="Characters" FontAttributes="Bold" FontSize="18" />
+
+            <Picker ItemsSource="{Binding AvailableCharacters}"
+                    SelectedItem="{Binding SelectedCharacter, Mode=TwoWay}"
+                    ItemDisplayBinding="{Binding Name}"
+                    Title="Select character" />
+
+            <Button Text="+ Add Character" Command="{Binding AddCharacterCommand}" />
+
+            <CollectionView ItemsSource="{Binding Characters}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Border Padding="8" Margin="4">
+                            <StackLayout>
+                                <Label Text="{Binding Name}" FontAttributes="Bold" />
+                                <Label Text="{Binding Speed, StringFormat='Speed: {0} m/s'}" FontSize="12" />
+                            </StackLayout>
+                        </Border>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </StackLayout>
+
+        <!-- Assignments -->
+        <StackLayout Grid.Column="1" Spacing="8">
+            <Label Text="Assignments" FontAttributes="Bold" FontSize="18" />
+
+            <CollectionView ItemsSource="{Binding Assignments}"
+                            SelectedItem="{Binding SelectedAssignment}"
+                            SelectionMode="Single">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Border Padding="8" Margin="4">
+                            <StackLayout Spacing="6">
+
+                                <Label Text="{Binding Character.Name}" FontAttributes="Bold" />
+                                <Label Text="{Binding Character.Speed, StringFormat='Speed: {0} m/s'}" FontSize="12" />
+
+                                <CollectionView ItemsSource="{Binding Enemies}">
+                                    <CollectionView.ItemTemplate>
+                                        <DataTemplate>
+                                            <Grid ColumnDefinitions="*,Auto">
+                                                <Label Text="{Binding Name}"/>
+                                                <Label Grid.Column="1" Text="{Binding Distance, StringFormat='{0} m'}" />
+                                            </Grid>
+                                        </DataTemplate>
+                                    </CollectionView.ItemTemplate>
+                                </CollectionView>
+
+                                <Label Text="{Binding EstimatedTime, StringFormat='ETA: {0:F1} s'}" FontSize="12" TextColor="Gray" />
+
+                                <Button Text="+ Assign enemy" Command="{Binding AssignEnemyCommand}" />
+                            </StackLayout>
+                        </Border>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </StackLayout>
+
+        <!-- Enemies -->
+        <StackLayout Grid.Column="2" Spacing="8">
+            <Label Text="Enemies" FontAttributes="Bold" FontSize="18"/>
+
+            <Picker ItemsSource="{Binding AvailableEnemies}"
+                    SelectedItem="{Binding SelectedEnemy}"
+                    ItemDisplayBinding="{Binding Name, Converter={StaticResource TranslationConverter}}"
+                    Title="Select enemy"/>
+
+            <Button Text="+ Add Enemy" Command="{Binding AddEnemyCommand}"/>
+
+            <CollectionView ItemsSource="{Binding Enemies}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Border Padding="8" Margin="4">
+                            <StackLayout>
+                                <Label Text="{Binding Name}" FontAttributes="Bold"/>
+
+                                <Grid ColumnDefinitions="*,Auto">
+                                    <Label Text="{Binding Health, StringFormat='HP {0}%'}"/>
+                                    <Label Grid.Column="1" Text="{Binding Status}" FontSize="12" TextColor="Gray"/>
+                                </Grid>
+                            </StackLayout>
+                        </Border>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </StackLayout>
+
+        <!-- Run turn -->
+        <Button Grid.Row="1"
+                Grid.ColumnSpan="3"
+                Text="Run One Turn"
+                FontAttributes="Bold"
+                HeightRequest="48"
+                Command="{Binding RunTurnCommand}" />
+
+    </Grid>
+
+
+</v:NotifierPage>

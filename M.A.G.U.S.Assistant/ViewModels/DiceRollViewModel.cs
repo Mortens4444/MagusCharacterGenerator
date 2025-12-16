@@ -9,9 +9,8 @@ using System.Windows.Input;
 
 namespace M.A.G.U.S.Assistant.ViewModels;
 
-internal partial class DiceRollViewModel : INotifyPropertyChanged
+internal partial class DiceRollViewModel : BaseViewModel
 {
-    public event PropertyChangedEventHandler? PropertyChanged;
     private readonly ISoundPlayer? soundPlayer;
     private readonly IShakeService? shakeService;
     private readonly Random random = new();
@@ -57,7 +56,7 @@ internal partial class DiceRollViewModel : INotifyPropertyChanged
             }
 
             diceCount = value;
-            OnPropertyChanged(nameof(DiceCount));
+            OnPropertyChanged();
         }
     }
 
@@ -73,7 +72,7 @@ internal partial class DiceRollViewModel : INotifyPropertyChanged
 
             selectedDice = value;
             IsCustomSelected = selectedDice == DiceType.Custom;
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(SelectedDice)));
+            OnPropertyChanged(nameof(SelectedDice));
         }
     }
 
@@ -88,7 +87,7 @@ internal partial class DiceRollViewModel : INotifyPropertyChanged
             }
 
             isCustomSelected = value;
-            OnPropertyChanged(nameof(IsCustomSelected));
+            OnPropertyChanged();
         }
     }
 
@@ -103,7 +102,7 @@ internal partial class DiceRollViewModel : INotifyPropertyChanged
             }
 
             customFrom = Math.Max(1, value);
-            OnPropertyChanged(nameof(CustomFrom));
+            OnPropertyChanged();
         }
     }
 
@@ -118,7 +117,7 @@ internal partial class DiceRollViewModel : INotifyPropertyChanged
             }
 
             customTo = Math.Max(1, value);
-            OnPropertyChanged(nameof(CustomTo));
+            OnPropertyChanged();
         }
     }
 
@@ -133,7 +132,7 @@ internal partial class DiceRollViewModel : INotifyPropertyChanged
             }
 
             resultSummary = value;
-            OnPropertyChanged(nameof(ResultSummary));
+            OnPropertyChanged();
         }
     }
 
@@ -148,7 +147,7 @@ internal partial class DiceRollViewModel : INotifyPropertyChanged
             }
 
             resultDetails = value;
-            OnPropertyChanged(nameof(ResultDetails));
+            OnPropertyChanged();
         }
     }
 
@@ -227,10 +226,5 @@ internal partial class DiceRollViewModel : INotifyPropertyChanged
 
         ResultSummary = total.ToString();
         ResultDetails = sbDetails.ToString();
-    }
-
-    private void OnPropertyChanged(string name)
-    {
-        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
     }
 }

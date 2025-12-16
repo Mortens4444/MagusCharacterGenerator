@@ -99,7 +99,7 @@
                 </Grid>
             </Border>
 
-            <Border StrokeShape="RoundRectangle 10" Padding="15" StrokeThickness="0"
+            <!--<Border StrokeShape="RoundRectangle 10" Padding="15" StrokeThickness="0"
                     BackgroundColor="{AppThemeBinding Light={StaticResource Gray100}, Dark={StaticResource Gray600}}">
                 <Border.GestureRecognizers>
                     <TapGestureRecognizer Command="{Binding ToggleSettingCommand}"
@@ -112,7 +112,7 @@
                            LineBreakMode="WordWrap" />
                     <Switch Grid.Column="1" IsToggled="{Binding AutoGenerateSkills}" />
                 </Grid>
-            </Border>
+            </Border>-->
 
             <Border StrokeShape="RoundRectangle 10" Padding="15" StrokeThickness="0"
                     BackgroundColor="{AppThemeBinding Light={StaticResource Gray100}, Dark={StaticResource Gray600}}">
@@ -129,7 +129,7 @@
                 </Grid>
             </Border>
 
-            <Border StrokeShape="RoundRectangle 10" Padding="15" StrokeThickness="0"
+            <!--<Border StrokeShape="RoundRectangle 10" Padding="15" StrokeThickness="0"
                     BackgroundColor="{AppThemeBinding Light={StaticResource Gray100}, Dark={StaticResource Gray600}}">
                 <Border.GestureRecognizers>
                     <TapGestureRecognizer Command="{Binding ToggleSettingCommand}"
@@ -142,9 +142,9 @@
                            LineBreakMode="WordWrap" />
                     <Switch Grid.Column="1" IsToggled="{Binding AutoDistributeQualificationPoints}" />
                 </Grid>
-            </Border>
+            </Border>-->
 
-            <Border StrokeShape="RoundRectangle 10" Padding="15" StrokeThickness="0"
+            <!--<Border StrokeShape="RoundRectangle 10" Padding="15" StrokeThickness="0"
                     BackgroundColor="{AppThemeBinding Light={StaticResource Gray100}, Dark={StaticResource Gray600}}">
                 <Border.GestureRecognizers>
                     <TapGestureRecognizer Command="{Binding ToggleSettingCommand}"
@@ -157,7 +157,7 @@
                            LineBreakMode="WordWrap" />
                     <Switch Grid.Column="1" IsToggled="{Binding AutoIncreasePainTolerance}" />
                 </Grid>
-            </Border>
+            </Border>-->
 
         </VerticalStackLayout>
     </ScrollView>

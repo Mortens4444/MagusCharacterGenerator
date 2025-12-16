@@ -5,21 +5,28 @@ using M.A.G.U.S.Utils;
 using Mtf.LanguageService.MAUI;
 using Mtf.Maui.Controls.Messages;
 using System.Collections.ObjectModel;
-using System.ComponentModel;
 using System.Reflection;
 using System.Windows.Input;
 
 namespace M.A.G.U.S.Assistant.ViewModels;
 
-internal partial class SoundViewModel : INotifyPropertyChanged
+internal partial class SoundViewModel : BaseViewModel
 {
-    public event PropertyChangedEventHandler? PropertyChanged;
+    private bool isPlaying;
+    private double volume = 1.0;
+    private string searchText = String.Empty;
+    private SoundItem? selectedSound;
 
     private readonly ISoundPlayer soundPlayer;
     private readonly ObservableCollection<SoundItem> allSounds = [];
+
+    public ICommand PlayCommand { get; }
+    public ICommand StopCommand { get; }
+
     public ObservableCollection<SoundItem> FilteredSounds { get; } = [];
 
-    private SoundItem? selectedSound;
+    public bool CanPlay => SelectedSound != null && !IsPlaying;
+
     public SoundItem? SelectedSound
     {
         get => selectedSound;
@@ -31,12 +38,11 @@ internal partial class SoundViewModel : INotifyPropertyChanged
             }
 
             selectedSound = value;
-            OnPropertyChanged(nameof(SelectedSound));
+            OnPropertyChanged();
             OnSelectedSoundChanged();
         }
     }
 
-    private bool isPlaying;
     public bool IsPlaying
     {
         get => isPlaying;
@@ -48,13 +54,11 @@ internal partial class SoundViewModel : INotifyPropertyChanged
             }
 
             isPlaying = value;
-            OnPropertyChanged(nameof(IsPlaying));
+            OnPropertyChanged();
             OnPropertyChanged(nameof(CanPlay));
         }
     }
-    public bool CanPlay => SelectedSound != null && !IsPlaying;
 
-    private double volume = 1.0;
     public double Volume
     {
         get => volume;
@@ -66,12 +70,11 @@ internal partial class SoundViewModel : INotifyPropertyChanged
             }
 
             volume = value;
-            OnPropertyChanged(nameof(Volume));
+            OnPropertyChanged();
             soundPlayer.SetVolume(volume);
         }
     }
 
-    private string searchText = String.Empty;
     public string SearchText
     {
         get => searchText;
@@ -83,13 +86,10 @@ internal partial class SoundViewModel : INotifyPropertyChanged
             }
 
             searchText = value ?? String.Empty;
-            OnPropertyChanged(nameof(SearchText));
+            OnPropertyChanged();
             ApplyFilter();
         }
     }
-
-    public ICommand PlayCommand { get; }
-    public ICommand StopCommand { get; }
 
     public SoundViewModel(ISoundPlayer soundPlayer)
     {
@@ -209,6 +209,4 @@ internal partial class SoundViewModel : INotifyPropertyChanged
             ((Command)StopCommand).ChangeCanExecute();
         }
     }
-
-    private void OnPropertyChanged(string name) => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
 }

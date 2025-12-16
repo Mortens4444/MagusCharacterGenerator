@@ -16,7 +16,7 @@ using System.Windows.Input;
 
 namespace M.A.G.U.S.Assistant.ViewModels;
 
-internal partial class SearchListViewModel : INotifyPropertyChanged
+internal partial class SearchListViewModel : BaseViewModel
 {
     private Character? character;
     private bool showOnlyAffordable = false;
@@ -27,7 +27,6 @@ internal partial class SearchListViewModel : INotifyPropertyChanged
     private DisplayItem? selectedItem;
     private CancellationTokenSource? filterCancellationTokenSource;
 
-    private void OnPropertyChanged(string name) => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
     private ISoundPlayer soundPlayer;
 
     public SearchListViewModel(ISoundPlayer soundPlayer)
@@ -52,8 +51,6 @@ internal partial class SearchListViewModel : INotifyPropertyChanged
         SetCategories();
     }
 
-    public event PropertyChangedEventHandler? PropertyChanged;
-
     public ICommand SelectCommand { get; }
     public ICommand ClearCommand { get; }
 
@@ -76,7 +73,7 @@ internal partial class SearchListViewModel : INotifyPropertyChanged
             }
 
             showAdvancedFilters = value;
-            OnPropertyChanged(nameof(ShowAdvancedFilters));
+            OnPropertyChanged();
         }
     }
 
@@ -94,7 +91,7 @@ internal partial class SearchListViewModel : INotifyPropertyChanged
             }
 
             selectedCategory = value;
-            OnPropertyChanged(nameof(SelectedCategory));
+            OnPropertyChanged();
             ApplyFilter();
         }
     }
@@ -110,7 +107,7 @@ internal partial class SearchListViewModel : INotifyPropertyChanged
             }
 
             character = value;
-            OnPropertyChanged(nameof(Character));
+            OnPropertyChanged();
             OnPropertyChanged(nameof(IsCharacterSet));
             DebounceApplyFilter();
         }
@@ -127,7 +124,7 @@ internal partial class SearchListViewModel : INotifyPropertyChanged
             }
 
             categoryFilter = value ?? String.Empty;
-            OnPropertyChanged(nameof(CategoryFilter));
+            OnPropertyChanged();
             ApplyFilter();
         }
     }
@@ -144,7 +141,7 @@ internal partial class SearchListViewModel : INotifyPropertyChanged
             }
 
             priceMultiplier = newValue;
-            OnPropertyChanged(nameof(PriceMultiplier));
+            OnPropertyChanged();
 
             RefreshAllItems();
             DebounceApplyFilter();
@@ -162,7 +159,7 @@ internal partial class SearchListViewModel : INotifyPropertyChanged
             }
 
             showOnlyAffordable = value;
-            OnPropertyChanged(nameof(ShowOnlyAffordable));
+            OnPropertyChanged();
             DebounceApplyFilter();
         }
     }
@@ -178,7 +175,7 @@ internal partial class SearchListViewModel : INotifyPropertyChanged
             }
 
             searchText = value ?? String.Empty;
-            OnPropertyChanged(nameof(SearchText));
+            OnPropertyChanged();
             DebounceApplyFilter();
         }
     }
@@ -194,7 +191,7 @@ internal partial class SearchListViewModel : INotifyPropertyChanged
             }
 
             pageTitle = value ?? String.Empty;
-            OnPropertyChanged(nameof(PageTitle));
+            OnPropertyChanged();
         }
     }
 
@@ -209,7 +206,7 @@ internal partial class SearchListViewModel : INotifyPropertyChanged
             }
 
             selectedItem = value;
-            OnPropertyChanged(nameof(SelectedItem));
+            OnPropertyChanged();
 
             if (selectedItem != null)
             {

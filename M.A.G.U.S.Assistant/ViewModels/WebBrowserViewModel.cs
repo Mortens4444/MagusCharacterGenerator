@@ -1,28 +1,28 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
-using System.Windows.Input;
+﻿using System.Windows.Input;
 
 namespace M.A.G.U.S.Assistant.ViewModels;
 
-internal class WebBrowserViewModel : ObservableObject
+internal partial class WebBrowserViewModel : BaseViewModel
 {
+    private string currentUrl;
+    private bool isLoading;
+
     public WebBrowserViewModel()
     {
         CurrentUrl = "https://kalandozok.hu/ynev/";
-        NavigateCommand = new DelegateCommand(async () => await NavigateAsync());
-        RefreshCommand = new DelegateCommand(async () => await RefreshAsync());
+        NavigateCommand = new DelegateCommand(NavigateAsync);
+        RefreshCommand = new DelegateCommand(RefreshAsync);
         OpenExternalCommand = new DelegateCommand(() => OpenExternal());
         GoBackCommand = new DelegateCommand(() => GoBack());
         GoForwardCommand = new DelegateCommand(() => GoForward());
     }
 
-    string currentUrl;
     public string CurrentUrl
     {
         get => currentUrl;
         set => SetProperty(ref currentUrl, value ?? String.Empty);
     }
 
-    bool isLoading;
     public bool IsLoading
     {
         get => isLoading;
@@ -35,16 +35,18 @@ internal class WebBrowserViewModel : ObservableObject
     public ICommand GoBackCommand { get; }
     public ICommand GoForwardCommand { get; }
 
-    async Task NavigateAsync()
+    private async Task NavigateAsync()
     {
-        if (string.IsNullOrWhiteSpace(CurrentUrl))
+        if (String.IsNullOrWhiteSpace(CurrentUrl))
+        {
             return;
+        }
 
         try
         {
             IsLoading = true;
             // a WebView.Source kötés miatt elég csak beállítani a CurrentUrl-et
-            await Task.Delay(100); // rövid jelzés a UI-nak; valós hálózati művelet a WebView kezeli
+            await Task.Delay(100).ConfigureAwait(false); // rövid jelzés a UI-nak; valós hálózati művelet a WebView kezeli
         }
         finally
         {
@@ -52,14 +54,14 @@ internal class WebBrowserViewModel : ObservableObject
         }
     }
 
-    async Task RefreshAsync()
+    private async Task RefreshAsync()
     {
         IsLoading = true;
         await Task.Delay(100);
         IsLoading = false;
     }
 
-    void OpenExternal()
+    private void OpenExternal()
     {
         try
         {
@@ -72,36 +74,41 @@ internal class WebBrowserViewModel : ObservableObject
         }
     }
 
-    void GoBack()
+    private void GoBack()
     {
         // A WebView-ot code-behind-ból érdemes vezérelni: Browser.GoBack()
         // Itt csak placeholder, ha messaging/behavior-t használsz, küldj üzenetet a nézetnek.
     }
 
-    void GoForward()
+    private void GoForward()
     {
         // placeholder, lásd GoBack megjegyzést
     }
 }
 
-// Egyszerű DelegateCommand (rövid, de használható)
 public class DelegateCommand : ICommand
 {
-    readonly Func<Task> asyncExecute;
-    readonly Action execute;
-    readonly Func<bool> canExecute;
+    private readonly Func<Task> asyncExecute;
+    private readonly Action execute;
+    private readonly Func<bool> canExecute;
 
     public DelegateCommand(Func<Task> executeAsync) { asyncExecute = executeAsync; }
     public DelegateCommand(Action execute, Func<bool> canExecute = null) { this.execute = execute; this.canExecute = canExecute; }
+    public event EventHandler CanExecuteChanged;
 
     public bool CanExecute(object parameter) => canExecute == null || canExecute();
 
     public async void Execute(object parameter)
     {
-        if (asyncExecute != null) await asyncExecute();
-        else execute?.Invoke();
+        if (asyncExecute != null)
+        {
+            await asyncExecute();
+        }
+        else
+        {
+            execute?.Invoke();
+        }
     }
 
-    public event EventHandler CanExecuteChanged;
     public void RaiseCanExecuteChanged() => CanExecuteChanged?.Invoke(this, EventArgs.Empty);
 }

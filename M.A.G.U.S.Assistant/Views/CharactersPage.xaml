@@ -33,7 +33,7 @@
                     <Label Text="Go to 'Character generation' to create one." TextColor="Gray" HorizontalOptions="Center"/>
                 </VerticalStackLayout>
 
-                <CollectionView ItemsSource="{Binding Characters}"
+                <CollectionView ItemsSource="{Binding AvailableCharacters}"
                                 SelectionMode="Single"
                                 SelectionChangedCommand="{Binding OpenDetailsCommand}"
                                 SelectionChangedCommandParameter="{Binding Source={RelativeSource Self}, Path=SelectedItem}">

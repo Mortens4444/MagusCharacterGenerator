@@ -2,11 +2,10 @@
 using Mtf.Extensions;
 using Mtf.LanguageService.MAUI;
 using System.Collections.ObjectModel;
-using System.ComponentModel;
 
 namespace M.A.G.U.S.Assistant.ViewModels;
 
-internal partial class RacesViewModel : INotifyPropertyChanged
+internal partial class RacesViewModel : BaseViewModel
 {
     public ObservableCollection<Race> Races { get; } = [];
     public ObservableCollection<Race> FilteredRaces { get; } = [];
@@ -23,7 +22,7 @@ internal partial class RacesViewModel : INotifyPropertyChanged
             }
 
             _searchText = value ?? String.Empty;
-            OnPropertyChanged(nameof(SearchText));
+            OnPropertyChanged();
             ApplyFilter();
         }
     }
@@ -40,11 +39,9 @@ internal partial class RacesViewModel : INotifyPropertyChanged
             }
 
             _selectedRace = value;
-            OnPropertyChanged(nameof(SelectedRace));
+            OnPropertyChanged();
         }
     }
-
-    public event PropertyChangedEventHandler? PropertyChanged;
 
     public RacesViewModel()
     {
@@ -79,6 +76,4 @@ internal partial class RacesViewModel : INotifyPropertyChanged
             FilteredRaces.Add(it);
         }
     }
-
-    void OnPropertyChanged(string name) => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
 }

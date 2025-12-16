@@ -1,5 +1,4 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
-using CommunityToolkit.Mvvm.Input;
+﻿using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.Messaging;
 using M.A.G.U.S.Assistant.Interfaces;
 using M.A.G.U.S.Assistant.Services;
@@ -17,9 +16,16 @@ using System.Windows.Input;
 
 namespace M.A.G.U.S.Assistant.ViewModels;
 
-internal partial class CreatureDetailsViewModel : ObservableObject
+internal partial class CreatureDetailsViewModel : BaseViewModel
 {
     private readonly ISoundPlayer soundPlayer;
+    private string lastActionName;
+    private string lastAction;
+    private bool isSoundAvailable;
+    private AttackDirection selectedAttackDirection;
+    private string numberAppearing;
+    private PlaceOfAttack hitLocation;
+    private string placeOfAttack;
 
     public Creature Creature { get; init; }
     public Attack SelectedAttackMode { get; set; }
@@ -65,43 +71,36 @@ internal partial class CreatureDetailsViewModel : ObservableObject
 
     public IList<AttackDirection> AttackDirections { get; } = Enum.GetValues(typeof(AttackDirection)).Cast<AttackDirection>().ToList();
 
-    private AttackDirection selectedAttackDirection;
     public AttackDirection SelectedAttackDirection
     {
         get => selectedAttackDirection;
         set => SetProperty(ref selectedAttackDirection, value);
     }
 
-    private string numberAppearing;
     public string NumberAppearing
     {
         get => numberAppearing;
         set => SetProperty(ref numberAppearing, value);
     }
 
-    private PlaceOfAttack hitLocation;
-    private string placeOfAttack;
     public string PlaceOfAttack
     {
         get => placeOfAttack;
         set => SetProperty(ref placeOfAttack, value);
     }
 
-    private string lastActionName;
     public string LastActionName
     {
         get => lastActionName;
         set => SetProperty(ref lastActionName, value);
     }
 
-    private string lastAction;
     public string LastAction
     {
         get => lastAction;
         set => SetProperty(ref lastAction, value);
     }
 
-    private bool isSoundAvailable;
     public bool IsSoundAvailable
     {
         get => isSoundAvailable;

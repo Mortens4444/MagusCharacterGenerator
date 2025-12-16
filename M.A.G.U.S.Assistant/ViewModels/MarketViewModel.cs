@@ -3,12 +3,11 @@ using M.A.G.U.S.Things;
 using Mtf.Extensions;
 using Mtf.LanguageService.MAUI;
 using System.Collections.ObjectModel;
-using System.ComponentModel;
 using System.Windows.Input;
 
 namespace M.A.G.U.S.Assistant.ViewModels;
 
-internal partial class MarketViewModel : INotifyPropertyChanged
+internal partial class MarketViewModel : BaseViewModel
 {
     public ObservableCollection<MarketItem> Items { get; } = [];
 
@@ -26,7 +25,7 @@ internal partial class MarketViewModel : INotifyPropertyChanged
             }
 
             searchText = value ?? String.Empty;
-            OnPropertyChanged(nameof(SearchText));
+            OnPropertyChanged();
             ApplyFilter();
         }
     }
@@ -34,8 +33,6 @@ internal partial class MarketViewModel : INotifyPropertyChanged
     public ICommand ApplyFilterCommand { get; }
     public ICommand ClearFilterCommand { get; }
     public ICommand ItemSelectedCommand { get; }
-
-    public event PropertyChangedEventHandler? PropertyChanged;
 
     public MarketViewModel()
     {
@@ -91,6 +88,4 @@ internal partial class MarketViewModel : INotifyPropertyChanged
             return;
         }
     }
-
-    private void OnPropertyChanged(string name) => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
 }

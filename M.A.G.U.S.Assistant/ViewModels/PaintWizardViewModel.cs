@@ -1,11 +1,10 @@
 ﻿using M.A.G.U.S.Assistant.Models;
 using System.Collections.ObjectModel;
-using System.ComponentModel;
 using System.Windows.Input;
 
 namespace M.A.G.U.S.Assistant.ViewModels;
 
-internal class PaintWizardViewModel : INotifyPropertyChanged
+internal class PaintWizardViewModel : BaseViewModel
 {
     // alap: 1 px = 1 cm (pixelsPerCm = 1), a Zoom megszorozza
     private const int PixelsPerCmBase = 1;
@@ -21,7 +20,7 @@ internal class PaintWizardViewModel : INotifyPropertyChanged
         {
             if (Math.Abs(zoom - value) < 0.001) return;
             zoom = value;
-            OnPropertyChanged(nameof(Zoom));
+            OnPropertyChanged();
             OnPropertyChanged(nameof(ScaleFactor));
         }
     }
@@ -36,7 +35,7 @@ internal class PaintWizardViewModel : INotifyPropertyChanged
         {
             if (widthMeters == value) return;
             widthMeters = value ?? String.Empty;
-            OnPropertyChanged(nameof(WidthMeters));
+            OnPropertyChanged();
         }
     }
 
@@ -48,7 +47,7 @@ internal class PaintWizardViewModel : INotifyPropertyChanged
         {
             if (heightMeters == value) return;
             heightMeters = value ?? String.Empty;
-            OnPropertyChanged(nameof(HeightMeters));
+            OnPropertyChanged();
         }
     }
 
@@ -61,7 +60,7 @@ internal class PaintWizardViewModel : INotifyPropertyChanged
     public string Status
     {
         get => status;
-        set { status = value; OnPropertyChanged(nameof(Status)); }
+        set { status = value; OnPropertyChanged(); }
     }
 
     public ICommand CreateGridCommand { get; }
@@ -70,8 +69,6 @@ internal class PaintWizardViewModel : INotifyPropertyChanged
     public ICommand ClearCommand { get; }
 
     public PaletteItem? SelectedPaletteItem { get; set; }
-
-    public event PropertyChangedEventHandler? PropertyChanged;
 
     // occupancy: set of occupied cells in cm coordinates (x,y)
     private readonly HashSet<(float x, float y)> occupancy = new HashSet<(float x, float y)>();
@@ -231,7 +228,6 @@ internal class PaintWizardViewModel : INotifyPropertyChanged
         }
     }
 
-    #region Helpers
     private static int MetersToCmInt(string metersText)
     {
         return (int)Math.Max(0, Math.Floor(MetersToCmDouble(metersText)));
@@ -245,7 +241,4 @@ internal class PaintWizardViewModel : INotifyPropertyChanged
         }
         return 0.0;
     }
-
-    private void OnPropertyChanged(string name) => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
-    #endregion
 }

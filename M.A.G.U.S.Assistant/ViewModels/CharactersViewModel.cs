@@ -1,65 +1,14 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
-using CommunityToolkit.Mvvm.Input;
+﻿using CommunityToolkit.Mvvm.Input;
 using M.A.G.U.S.Assistant.Services;
 using M.A.G.U.S.GameSystem;
 using Mtf.LanguageService.MAUI;
-using System.Collections.ObjectModel;
 
 namespace M.A.G.U.S.Assistant.ViewModels;
 
-internal partial class CharactersViewModel(CharacterService characterService) : ObservableObject
+internal partial class CharactersViewModel : CharacterListLoaderViewModel
 {
-    private readonly CharacterService characterService = characterService;
-    private bool isLoading;
-    private bool isEmpty;
-
-    public ObservableCollection<Character> Characters { get; } = [];
-
-    public bool IsLoading
+    public CharactersViewModel(CharacterService characterService) : base(characterService)
     {
-        get => isLoading;
-        set => SetProperty(ref isLoading, value);
-    }
-
-    public bool IsEmpty
-    {
-        get => isEmpty;
-        set => SetProperty(ref isEmpty, value);
-    }
-
-    [RelayCommand]
-    public async Task LoadCharactersAsync()
-    {
-        if (IsLoading)
-        {
-            return;
-        }
-
-        try
-        {
-            IsLoading = true;
-            var list = await characterService.GetAllAsync().ConfigureAwait(false);
-
-            await MainThread.InvokeOnMainThreadAsync(() =>
-            {
-                Characters.Clear();
-                foreach (var character in list.OrderBy(c => c.Name))
-                {
-                    Characters.Add(character);
-                }
-                IsEmpty = Characters.Count == 0;
-            }).ConfigureAwait(false);
-
-            IsEmpty = Characters.Count == 0;
-        }
-        catch (Exception ex)
-        {
-            await Shell.Current.DisplayAlert("Error", $"Failed to load characters: {ex.Message}", "OK").ConfigureAwait(false);
-        }
-        finally
-        {
-            IsLoading = false;
-        }
     }
 
     [RelayCommand]
@@ -74,8 +23,8 @@ internal partial class CharactersViewModel(CharacterService characterService) : 
         if (confirm)
         {
             await characterService.DeleteAllAsync().ConfigureAwait(false);
-            Characters.Clear();
-            IsEmpty = Characters.Count == 0;
+            AvailableCharacters.Clear();
+            IsEmpty = AvailableCharacters.Count == 0;
         }
     }
 
@@ -96,8 +45,8 @@ internal partial class CharactersViewModel(CharacterService characterService) : 
         if (confirm)
         {
             await characterService.DeleteAsync(character.Name).ConfigureAwait(false);
-            Characters.Remove(character);
-            IsEmpty = Characters.Count == 0;
+            AvailableCharacters.Remove(character);
+            IsEmpty = AvailableCharacters.Count == 0;
         }
     }
 

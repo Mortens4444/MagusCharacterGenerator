@@ -3,12 +3,11 @@ using M.A.G.U.S.GameSystem.Languages;
 using Mtf.Extensions;
 using Mtf.LanguageService.MAUI;
 using System.Collections.ObjectModel;
-using System.ComponentModel;
 using System.Windows.Input;
 
 namespace M.A.G.U.S.Assistant.ViewModels;
 
-internal partial class LanguagesViewModel : INotifyPropertyChanged
+internal partial class LanguagesViewModel : BaseViewModel
 {
     public ObservableCollection<LanguageTypes> Types { get; } =
         [LanguageTypes.Living, LanguageTypes.Ancient];
@@ -28,7 +27,7 @@ internal partial class LanguagesViewModel : INotifyPropertyChanged
             }
 
             searchText = value ?? String.Empty;
-            OnPropertyChanged(nameof(SearchText));
+            OnPropertyChanged();
             ApplyFilter();
         }
     }
@@ -45,7 +44,7 @@ internal partial class LanguagesViewModel : INotifyPropertyChanged
             }
 
             selectedType = value;
-            OnPropertyChanged(nameof(SelectedType));
+            OnPropertyChanged();
             LoadByType(selectedType);
         }
     }
@@ -62,13 +61,11 @@ internal partial class LanguagesViewModel : INotifyPropertyChanged
             }
 
             selectedLanguage = value;
-            OnPropertyChanged(nameof(SelectedLanguage));
+            OnPropertyChanged();
         }
     }
 
     public ICommand SelectCommand { get; }
-
-    public event PropertyChangedEventHandler? PropertyChanged;
 
     public LanguagesViewModel()
     {
@@ -129,6 +126,4 @@ internal partial class LanguagesViewModel : INotifyPropertyChanged
             FilteredLanguages.Add(it);
         }
     }
-
-    void OnPropertyChanged(string name) => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
 }
