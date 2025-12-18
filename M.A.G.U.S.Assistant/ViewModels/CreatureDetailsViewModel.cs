@@ -8,7 +8,6 @@ using M.A.G.U.S.GameSystem;
 using M.A.G.U.S.Models;
 using M.A.G.U.S.Things.Weapons;
 using M.A.G.U.S.Utils;
-using Mtf.Extensions;
 using Mtf.Extensions.Services;
 using Mtf.LanguageService.MAUI;
 using Mtf.Maui.Controls.Messages;
@@ -24,7 +23,7 @@ internal partial class CreatureDetailsViewModel : BaseViewModel
     private bool isSoundAvailable;
     private AttackDirection selectedAttackDirection;
     private string numberAppearing;
-    private PlaceOfAttack hitLocation;
+    private readonly PlaceOfAttack hitLocation;
     private string placeOfAttack;
 
     public Creature Creature { get; init; }
@@ -69,7 +68,7 @@ internal partial class CreatureDetailsViewModel : BaseViewModel
     public string Image => Creature.Images.Length - 1 != 0 ? Creature.Images[RandomProvider.GetSecureRandomInt(0, Creature.Images.Length)] : Creature.Images[0];
     public string Sound => Creature.Sounds.Length - 1 != 0 ? Creature.Sounds[RandomProvider.GetSecureRandomInt(0, Creature.Sounds.Length)] : Creature.Sounds[0];
 
-    public IList<AttackDirection> AttackDirections { get; } = Enum.GetValues(typeof(AttackDirection)).Cast<AttackDirection>().ToList();
+    public IList<AttackDirection> AttackDirections { get; } = [.. Enum.GetValues(typeof(AttackDirection)).Cast<AttackDirection>()];
 
     public AttackDirection SelectedAttackDirection
     {
@@ -149,51 +148,8 @@ internal partial class CreatureDetailsViewModel : BaseViewModel
 
         try
         {
-            hitLocation = HitLocationSelector.Get();
-            var subLocation = String.Empty;
-            var locationDescription = Lng.Elem(hitLocation.GetDescription());
-
-            switch (hitLocation)
-            {
-                case M.A.G.U.S.Enums.PlaceOfAttack.Head:
-                    var headPart = HitLocationSelector.GetOnHead();
-                    subLocation = Lng.Elem(headPart.GetDescription());
-                    break;
-
-                case M.A.G.U.S.Enums.PlaceOfAttack.Torso:
-
-                    switch (SelectedAttackDirection)
-                    {
-                        case AttackDirection.Front:
-                            var torsoPart = HitLocationSelector.GetOnTorso();
-                            subLocation = Lng.Elem(torsoPart.GetDescription());
-                            break;
-                        case AttackDirection.Behind:
-                            var torsoPartBack = HitLocationSelector.GetOnTorsoFromBehind();
-                            subLocation = Lng.Elem(torsoPartBack.GetDescription());
-                            break;
-                        default:
-                            break;
-                    }
-                    break;
-
-                case M.A.G.U.S.Enums.PlaceOfAttack.WeaponWieldingArm:
-                case M.A.G.U.S.Enums.PlaceOfAttack.NonWeaponWieldingArm:
-                    var armPart = HitLocationSelector.GetOnArm();
-                    subLocation = Lng.Elem(armPart.GetDescription());
-                    break;
-
-                case M.A.G.U.S.Enums.PlaceOfAttack.RightLeg:
-                case M.A.G.U.S.Enums.PlaceOfAttack.LeftLeg:
-                    var legPart = HitLocationSelector.GetOnLeg();
-                    subLocation = Lng.Elem(legPart.GetDescription());
-                    break;
-
-                default:
-                    throw new NotImplementedException();
-            }
-
-            PlaceOfAttack = String.IsNullOrEmpty(subLocation) ? locationDescription : $"{locationDescription} ({subLocation})";
+            var (locationDescription, subLocation) = HitLocationSelector.GetLocation(SelectedAttackDirection);
+            PlaceOfAttack = String.IsNullOrEmpty(subLocation) ? locationDescription : $"{Lng.Elem(locationDescription)} ({Lng.Elem(subLocation)})";
             LastActionName = $"{Lng.Elem(SelectedAttackMode is MeleeAttack ? "Melee attack" : "Ranged attack")} - {Lng.Elem(SelectedAttackMode.Name)}";
             var (impact, value) = SelectedAttackMode.GetAttack();
             LastAction = impact == AttackImpact.Normal ? value.ToString() : $"{Lng.Elem(impact.ToString())} {value}";

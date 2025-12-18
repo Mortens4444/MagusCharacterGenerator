@@ -6,5 +6,7 @@ public abstract class Weapon : Thing
 {
     protected readonly DiceThrow DiceThrow = new();
 
+    public abstract double AttacksPerRound { get; }
+
     public abstract int GetDamage();
 }

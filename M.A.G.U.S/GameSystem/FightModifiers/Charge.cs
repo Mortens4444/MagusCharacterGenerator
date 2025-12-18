@@ -4,9 +4,9 @@ public class Charge : IFightModifier
 {
     public int InitiatingValue => 0;
 
-    public int AttackingValue => 20;
+    public int AttackValue => 20;
 
-    public int DefendingValue => -25;
+    public int DefenseValue => -25;
 
-    public int AimingValue => -30;
+    public int? AimingValue => -30;
 }

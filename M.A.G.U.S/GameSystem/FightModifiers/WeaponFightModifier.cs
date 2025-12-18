@@ -4,9 +4,9 @@ public class WeaponFightModifier : IFightModifier
 {
     public int InitiatingValue { get; set; }
 
-    public int AttackingValue { get; set; }
+    public int AttackValue { get; set; }
 
-    public int DefendingValue { get; set; }
+    public int DefenseValue { get; set; }
 
-    public int AimingValue { get; set; }
+    public int? AimingValue { get; set; }
 }

@@ -7,11 +7,11 @@ public class GladiatorFightAgainstOneEnemy : SpecialQualification, IFightModifie
 {
     public int InitiatingValue => 5;
 
-    public int AttackingValue => 5;
+    public int AttackValue => 5;
 
-    public int DefendingValue => 10;
+    public int DefenseValue => 10;
 
-    public int AimingValue => 0;
+    public int? AimingValue => 0;
 
     public override string Name => "Combat modifiers against one enemy";
 }

@@ -4,9 +4,9 @@ public class FightInSemiDarkness : IFightModifier
 {
     public int InitiatingValue => -15;
 
-    public int AttackingValue => -30;
+    public int AttackValue => -30;
 
-    public int DefendingValue => -35;
+    public int DefenseValue => -35;
 
-    public int AimingValue => -70;
+    public int? AimingValue => -70;
 }

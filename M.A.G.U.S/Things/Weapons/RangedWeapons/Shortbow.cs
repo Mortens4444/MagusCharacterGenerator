@@ -5,7 +5,7 @@ namespace M.A.G.U.S.Things.Weapons.RangedWeapons;
 
 public class Shortbow : Weapon, IRangedWeapon
 {
-    public double AttacksPerRound => 2;
+    public override double AttacksPerRound => 2;
 
     public int InitiatingValue => 5;
 

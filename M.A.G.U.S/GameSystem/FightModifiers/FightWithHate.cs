@@ -4,9 +4,9 @@ public class FightWithHate : IFightModifier
 {
     public int InitiatingValue => 3;
 
-    public int AttackingValue => 10;
+    public int AttackValue => 10;
 
-    public int DefendingValue => -20;
+    public int DefenseValue => -20;
 
-    public int AimingValue => -20;
+    public int? AimingValue => -20;
 }

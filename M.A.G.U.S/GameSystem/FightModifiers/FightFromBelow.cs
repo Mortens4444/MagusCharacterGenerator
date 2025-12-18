@@ -4,9 +4,9 @@ public class FightFromBelow : IFightModifier
 {
     public int InitiatingValue => -2;
 
-    public int AttackingValue => -10;
+    public int AttackValue => -10;
 
-    public int DefendingValue => 0;
+    public int DefenseValue => 0;
 
-    public int AimingValue => -5;
+    public int? AimingValue => -5;
 }

@@ -10,6 +10,7 @@ using M.A.G.U.S.Qualifications.Percentages;
 using M.A.G.U.S.Qualifications.Scientific.Psi;
 using M.A.G.U.S.Qualifications.Specialities;
 using M.A.G.U.S.Qualifications.Underworld;
+using M.A.G.U.S.Races;
 
 namespace M.A.G.U.S.Classes.Fighter;
 
@@ -98,6 +99,8 @@ public class Headhunter : Class, IClass, IJustFight
     public override bool AddPainToleranceOnFirstLevel => false;
 
     public override bool AddQualificationPointsOnFirstLevel => true;
+
+    public override IRace[] AllowedRaces => [new Human(), new Elf(), new HalfElf(), new CourtOrc(), new Amund(), new Jann(), new Khal(), new Wier()];
 
     public override QualificationList Qualifications => BuildQualifications(
     [

@@ -61,6 +61,12 @@
                                        Grid.Row="1"
                                        Grid.ColumnSpan="2" />
 
+
+                    <!--<Grid Grid.Row="1" ColumnDefinitions="*, Auto">
+                        <Label Grid.Column="0" Text="Player character" VerticalOptions="Center" LineBreakMode="WordWrap" />
+                        <Switch Grid.Column="1" IsToggled="{Binding Character.PlayerCharacter}" />
+                    </Grid>-->
+
                     <Picker ItemsSource="{Binding Alignments}"
                             ItemDisplayBinding="{Binding ., Converter={StaticResource EnumDescriptionTranslationConverter}}"
                             SelectedItem="{Binding Character.Alignment}"
@@ -87,7 +93,7 @@
                         <mc:EntryWithLabel Label="Willpower" Text="{Binding Character.Willpower}" IsEnabled="False" Grid.Row="3" Grid.Column="0" />
                         <mc:EntryWithLabel Label="Intelligence" Text="{Binding Character.Intelligence}" IsEnabled="False" Grid.Row="3" Grid.Column="1" />
                         <mc:EntryWithLabel Label="Astral" Text="{Binding Character.Astral}" IsEnabled="False" Grid.Row="4" Grid.Column="0" />
-                        <mc:EntryWithLabel Label="Erudition" Text="{Binding Character.Erudition}" IsEnabled="False" Grid.Row="4" Grid.Column="1" />
+                        <mc:EntryWithLabel Label="Erudition" Text="{Binding Character.Erudition}" IsEnabled="False" Grid.Row="4" Grid.Column="1" IsVisible="{Binding Character.PlayerCharacter, Converter={StaticResource NotBoolToVisibilityConverter}}" />
                     </Grid>
                 </VerticalStackLayout>
             </Border>
@@ -99,8 +105,8 @@
                 <VerticalStackLayout>
                     <Label Text="Health" Style="{StaticResource HeaderLabel}"/>
                     <Grid ColumnDefinitions="*, *" RowDefinitions="Auto, Auto">
-                        <mc:EntryWithLabel Label="Max. Hp" Text="{Binding Character.MaxHealthPoints}" IsEnabled="False" WidthRequest="100" Grid.Row="0" />
-                        <mc:EntryWithLabel Label="Act. Hp" Text="{Binding Character.HealthPoints}" IsEnabled="False" WidthRequest="100" Grid.Column="1" />
+                        <mc:EntryWithLabel Label="Max. HP" Text="{Binding Character.MaxHealthPoints}" IsEnabled="False" WidthRequest="100" Grid.Row="0" />
+                        <mc:EntryWithLabel Label="Act. HP" Text="{Binding Character.HealthPoints}" IsEnabled="False" WidthRequest="100" Grid.Column="1" />
                     </Grid>
                 </VerticalStackLayout>
             </Border>
@@ -110,9 +116,9 @@
                 <VerticalStackLayout>
                     <Label Text="Pain resistance" Style="{StaticResource HeaderLabel}"/>
                     <Grid ColumnDefinitions="*, *" RowDefinitions="Auto, Auto, Auto">
-                        <mc:EntryWithLabel Label="Max. Prp" Text="{Binding Character.MaxPainTolerancePoints}" IsEnabled="False" WidthRequest="100" />
-                        <mc:EntryWithLabel Label="Act. Prp" Text="{Binding Character.PainTolerancePoints}" IsEnabled="False" WidthRequest="100" Grid.Row="1" />
-                        <mc:EntryWithLabel Label="Max. Prp/level" Text="{Binding Character.PainTolerancePoints}" IsEnabled="False" WidthRequest="100" Grid.Column="1" />
+                        <mc:EntryWithLabel Label="Max. PRP" Text="{Binding Character.MaxPainTolerancePoints}" IsEnabled="False" WidthRequest="100" />
+                        <mc:EntryWithLabel Label="Act. PRP" Text="{Binding Character.PainTolerancePoints}" IsEnabled="False" WidthRequest="100" Grid.Row="1" />
+                        <mc:EntryWithLabel Label="Max. PRP/level" Text="{Binding Character.PainTolerancePoints}" IsEnabled="False" WidthRequest="100" Grid.Column="1" />
                     </Grid>
                 </VerticalStackLayout>
             </Border>
@@ -148,12 +154,12 @@
                         <mc:EntryWithLabel Label="Initiator value" Text="{Binding Character.InitiatingValue}" IsEnabled="False" IsVisible="{Binding Character.CanAllocateCombatModifierBase, Converter={StaticResource BoolToVisibilityConverter}}" />
                         <mc:EntryWithLabel Label="Initiator value" Text="{Binding Character.InitiatingValueWithSelectedWeapon}" IsEnabled="False" IsVisible="{Binding Character.CanAllocateCombatModifierWithWeapon, Converter={StaticResource BoolToVisibilityConverter}}" />
 
-                        <mc:NumericUpDownWithLabel Label="Attack value" Minimum="{Binding Character.AttackingValueOriginal}" Maximum="{Binding Character.AttackingValueMaxLimit}" Value="{Binding Character.AttackingValue, Mode=TwoWay}" IsVisible="{Binding Character.CanAllocateCombatModifier, Converter={StaticResource BoolToVisibilityConverter}}" Grid.Column="1" />
-                        <mc:EntryWithLabel Label="Attack value" Text="{Binding Character.AttackingValue}" IsEnabled="False" IsVisible="{Binding Character.CanAllocateCombatModifierBase, Converter={StaticResource BoolToVisibilityConverter}}" Grid.Column="1" />
+                        <mc:NumericUpDownWithLabel Label="Attack value" Minimum="{Binding Character.AttackingValueOriginal}" Maximum="{Binding Character.AttackingValueMaxLimit}" Value="{Binding Character.AttackValue, Mode=TwoWay}" IsVisible="{Binding Character.CanAllocateCombatModifier, Converter={StaticResource BoolToVisibilityConverter}}" Grid.Column="1" />
+                        <mc:EntryWithLabel Label="Attack value" Text="{Binding Character.AttackValue}" IsEnabled="False" IsVisible="{Binding Character.CanAllocateCombatModifierBase, Converter={StaticResource BoolToVisibilityConverter}}" Grid.Column="1" />
                         <mc:EntryWithLabel Label="Attack value" Text="{Binding Character.AttackingValueWithSelectedWeapon}" IsEnabled="False" IsVisible="{Binding Character.CanAllocateCombatModifierWithWeapon, Converter={StaticResource BoolToVisibilityConverter}}" Grid.Column="1" />
 
-                        <mc:NumericUpDownWithLabel Label="Defense value" Minimum="{Binding Character.DefendingValueOriginal}" Maximum="{Binding Character.DefendingValueMaxLimit}" Value="{Binding Character.DefendingValue, Mode=TwoWay}" IsVisible="{Binding Character.CanAllocateCombatModifier, Converter={StaticResource BoolToVisibilityConverter}}" Grid.Row="1" />
-                        <mc:EntryWithLabel Label="Defense value" Text="{Binding Character.DefendingValue}" IsEnabled="False" IsVisible="{Binding Character.CanAllocateCombatModifierBase, Converter={StaticResource BoolToVisibilityConverter}}" Grid.Row="1" />
+                        <mc:NumericUpDownWithLabel Label="Defense value" Minimum="{Binding Character.DefendingValueOriginal}" Maximum="{Binding Character.DefendingValueMaxLimit}" Value="{Binding Character.DefenseValue, Mode=TwoWay}" IsVisible="{Binding Character.CanAllocateCombatModifier, Converter={StaticResource BoolToVisibilityConverter}}" Grid.Row="1" />
+                        <mc:EntryWithLabel Label="Defense value" Text="{Binding Character.DefenseValue}" IsEnabled="False" IsVisible="{Binding Character.CanAllocateCombatModifierBase, Converter={StaticResource BoolToVisibilityConverter}}" Grid.Row="1" />
                         <mc:EntryWithLabel Label="Defense value" Text="{Binding Character.DefendingValueWithSelectedWeapon}" IsEnabled="False" IsVisible="{Binding Character.CanAllocateCombatModifierWithWeapon, Converter={StaticResource BoolToVisibilityConverter}}" Grid.Row="1" />
 
                         <mc:NumericUpDownWithLabel Label="Aim value" Minimum="{Binding Character.AimingValueOriginal}" Maximum="{Binding Character.AimingValueMaxLimit}" Value="{Binding Character.AimingValue, Mode=TwoWay}" IsVisible="{Binding Character.CanAllocateCombatModifier, Converter={StaticResource BoolToVisibilityConverter}}" Grid.Row="1" Grid.Column="1" />

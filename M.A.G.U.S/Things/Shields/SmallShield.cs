@@ -6,7 +6,7 @@ namespace M.A.G.U.S.Things.Shields;
 
 public class SmallShield : Shield
 {
-    public double AttacksPerRound => 1;
+    public override double AttacksPerRound => 1;
 
     public int InitiatingValue => 1;
 

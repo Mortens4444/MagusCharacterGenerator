@@ -9,6 +9,7 @@ using M.A.G.U.S.Qualifications.Laical;
 using M.A.G.U.S.Qualifications.Percentages;
 using M.A.G.U.S.Qualifications.Scientific.Psi;
 using M.A.G.U.S.Qualifications.Specialities;
+using M.A.G.U.S.Races;
 
 namespace M.A.G.U.S.Classes.Slan;
 
@@ -97,6 +98,8 @@ public class Blademaster : Class, IClass, IJustFight
     public override bool AddPainToleranceOnFirstLevel => false;
 
     public override bool AddQualificationPointsOnFirstLevel => true;
+
+    public override IRace[] AllowedRaces => [new Human(), new HalfElf(), new Amund(), new Jann()];
 
     public override QualificationList Qualifications => BuildQualifications(
     [

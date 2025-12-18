@@ -6,6 +6,7 @@ using M.A.G.U.S.Qualifications;
 using M.A.G.U.S.Qualifications.Combat;
 using M.A.G.U.S.Qualifications.Percentages;
 using M.A.G.U.S.Qualifications.Scientific;
+using M.A.G.U.S.Qualifications.Scientific.Psi;
 using M.A.G.U.S.Qualifications.Specialities;
 using M.A.G.U.S.Utils;
 using Mtf.Extensions;
@@ -192,6 +193,18 @@ public partial class Character
                 {
                     Qualifications.RemoveAt(i);
                 }
+            }
+        }
+
+        if (SpecialQualifications.Any(sq => sq is CanOnlyLearnPyarronPsi))
+        {
+            var toRemove = Qualifications
+                .Where(q => q is IPsi && q is not PsiPyarron)
+                .ToList();
+
+            foreach (var q in toRemove)
+            {
+                Qualifications.Remove(q);
             }
         }
 

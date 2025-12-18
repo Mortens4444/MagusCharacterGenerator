@@ -5,7 +5,7 @@ namespace M.A.G.U.S.Things.Weapons.StabbingWeapons;
 
 public class JannSaber : Weapon, IMeleeWeapon
 {
-    public double AttacksPerRound => 1;
+    public override double AttacksPerRound => 1;
 
     public int InitiatingValue => 9;
 

@@ -5,24 +5,22 @@ using M.A.G.U.S.Interfaces;
 using M.A.G.U.S.Races;
 using M.A.G.U.S.Utils;
 using System.ComponentModel;
-using System.Runtime.CompilerServices;
 
 namespace M.A.G.U.S.GameSystem;
 
-public partial class Character : IFightModifier, ILiving, IAbilities, INotifyPropertyChanged
+public partial class Character : Attacker, IFightModifier, ILiving, IAbilities, INotifyPropertyChanged
 {
     private bool calculateChanges;
 
     private readonly ISettings? settings;
 
-    public event PropertyChangedEventHandler? PropertyChanged;
+    public bool PlayerCharacter { get; set; }
 
     public Character() : this(null) { }
 
     public Character(ISettings? settings)
     {
         this.settings = settings;
-        name = "Nobody";
         race = new Human();
         BaseClass = new Craftsman();
         Alignment = Alignment.Order;
@@ -32,8 +30,8 @@ public partial class Character : IFightModifier, ILiving, IAbilities, INotifyPro
     public Character(ISettings? settings, string name, IRace race, params IClass[] classes)
     {
         this.settings = settings;
-        this.name = name;
         this.race = race;
+        Name = name;
         BaseClass = classes.First();
         Alignment = race.Alignment ?? BaseClass.Alignment;
         Classes = classes;
@@ -53,8 +51,6 @@ public partial class Character : IFightModifier, ILiving, IAbilities, INotifyPro
         Equipment.CollectionChanged += EquipmentOnCollectionChanged;
         Qualifications.CollectionChanged += Qualifications_CollectionChanged;
     }
-
-    private void OnPropertyChanged([CallerMemberName] string propertyName = "") => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
 
     public static Character Load(string fullPath, ISettings settings)
     {

@@ -11,13 +11,16 @@ internal partial class EncounterPage : NotifierPage
         BindingContext = viewModel;
     }
 
-    protected override async void OnAppearing()
+    protected override void OnAppearing()
     {
         base.OnAppearing();
         if (BindingContext is EncounterViewModel vm)
         {
-            await vm.LoadCharactersAsync().ConfigureAwait(false);
-            await vm.LoadBestiaryAsync().ConfigureAwait(false);
+            _ = Task.Run(async () =>
+            {
+                await vm.LoadCharactersAsync().ConfigureAwait(false);
+                await vm.LoadBestiaryAsync().ConfigureAwait(false);
+            });
         }
     }
 }

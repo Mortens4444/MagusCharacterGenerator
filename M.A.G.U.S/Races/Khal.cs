@@ -40,7 +40,8 @@ public class Khal : Race
     [
         new KeenSight(2),
         new KeenHearing(2),
-        new KeenSmell(5)
+        new KeenSmell(5),
+        new CanOnlyLearnPyarronPsi()
     ];
 
     public override string GenerateCharacterName()

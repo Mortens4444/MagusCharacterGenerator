@@ -5,7 +5,7 @@ namespace M.A.G.U.S.Things.Weapons.RangedWeapons;
 
 public class ShadonishArmorBreakingCrossbow : Weapon, IRangedWeapon
 {
-    public double AttacksPerRound => 1 / 5;
+    public override double AttacksPerRound => 1 / 5;
 
     public int InitiatingValue => 0;
 

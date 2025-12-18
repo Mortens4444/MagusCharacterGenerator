@@ -18,6 +18,8 @@ public class Amund : Race
 
     public override SpecialQualificationList SpecialQualifications =>
     [
+        // FireEye
+        new Ultravision(20),
         new CantLearnPsi(),
         new ExtraMagicResistanceOnLevelUp(4),
         new MagicalResistanceRegeneration()

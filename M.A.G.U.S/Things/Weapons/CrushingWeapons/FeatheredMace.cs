@@ -5,7 +5,7 @@ namespace M.A.G.U.S.Things.Weapons.CrushingWeapons;
 
 public class FeatheredMace : Weapon, IMeleeWeapon
 {
-    public double AttacksPerRound => 1;
+    public override double AttacksPerRound => 1;
 
     public int InitiatingValue => 7;
 

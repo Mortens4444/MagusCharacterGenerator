@@ -6,7 +6,6 @@ namespace M.A.G.U.S.GameSystem;
 
 public partial class Character
 {
-    private string name;
     private IRace race;
     private readonly MultiClassMode multiClassMode = MultiClassMode.Normal_Or_SwitchedClass;
 
@@ -29,19 +28,6 @@ public partial class Character
     public int Level => BaseClass.Level;
 
     public MultiClassMode MultiClassMode => multiClassMode;
-
-    public string Name
-    {
-        get => name;
-        set
-        {
-            if (name != value)
-            {
-                name = value;
-                OnPropertyChanged();
-            }
-        }
-    }
 
     public IRace Race
     {

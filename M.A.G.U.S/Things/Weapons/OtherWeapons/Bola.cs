@@ -5,7 +5,7 @@ namespace M.A.G.U.S.Things.Weapons.OtherWeapons;
 
 public class Bola : Weapon, IMeleeWeapon
 {
-    public double AttacksPerRound => 1;
+    public override double AttacksPerRound => 1;
 
     public int InitiatingValue => 2;
 

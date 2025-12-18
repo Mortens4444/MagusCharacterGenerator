@@ -5,7 +5,7 @@ namespace M.A.G.U.S.Things.Weapons.RangedWeapons;
 
 public class KahreiCrossbow : Weapon, IRangedWeapon
 {
-    public double AttacksPerRound => 3;
+    public override double AttacksPerRound => 3;
 
     public int InitiatingValue => 9;
 

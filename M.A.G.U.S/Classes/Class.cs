@@ -4,7 +4,7 @@ using M.A.G.U.S.GameSystem.Attributes;
 using M.A.G.U.S.GameSystem.Psi;
 using M.A.G.U.S.Interfaces;
 using M.A.G.U.S.Qualifications;
-using M.A.G.U.S.Qualifications.Scientific;
+using M.A.G.U.S.Races;
 
 namespace M.A.G.U.S.Classes;
 
@@ -120,6 +120,8 @@ public abstract class Class : IClass
     public ulong ExperiencePoints { get; }
 
     public virtual Alignment Alignment => Alignment.Order;
+
+    public virtual IRace[] AllowedRaces => [];
 
     public abstract int GetPainToleranceModifier();
 

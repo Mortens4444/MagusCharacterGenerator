@@ -13,6 +13,7 @@ using M.A.G.U.S.Qualifications.Scientific;
 using M.A.G.U.S.Qualifications.Scientific.Psi;
 using M.A.G.U.S.Qualifications.Specialities;
 using M.A.G.U.S.Qualifications.Underworld;
+using M.A.G.U.S.Races;
 
 namespace M.A.G.U.S.Classes.Rogue;
 
@@ -103,6 +104,8 @@ public class Bard : Class, IClass, IJustFight
     public override bool AddPainToleranceOnFirstLevel => false;
 
     public override bool AddQualificationPointsOnFirstLevel => true;
+
+    public override IRace[] AllowedRaces => [new Human(), new Elf(), new HalfElf(), new Amund(), new Jann()];
 
     public override QualificationList Qualifications => BuildQualifications(
     [

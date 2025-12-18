@@ -5,7 +5,7 @@ namespace M.A.G.U.S.Things.Weapons.OtherWeapons;
 
 public class IronFist : Weapon, IMeleeWeapon
 {
-    public double AttacksPerRound => 2;
+    public override double AttacksPerRound => 2;
 
     public int InitiatingValue => 9;
 

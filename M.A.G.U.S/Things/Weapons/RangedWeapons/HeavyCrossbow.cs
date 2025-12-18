@@ -5,7 +5,7 @@ namespace M.A.G.U.S.Things.Weapons.RangedWeapons;
 
 public class HeavyCrossbow : Weapon, IRangedWeapon
 {
-    public double AttacksPerRound => 1 / 3;
+    public override double AttacksPerRound => 1 / 3;
 
     public int InitiatingValue => 0;
 

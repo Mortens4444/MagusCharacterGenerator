@@ -5,7 +5,7 @@ namespace M.A.G.U.S.Things.Weapons.CrushingWeapons;
 
 public class TwoHandedMace : Weapon, IMeleeWeapon
 {
-    public double AttacksPerRound => 1 / 2;
+    public override double AttacksPerRound => 1 / 2;
 
     public int InitiatingValue => 0;
 

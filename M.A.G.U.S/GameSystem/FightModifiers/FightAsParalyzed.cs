@@ -4,9 +4,9 @@ public class FightAsParalyzed : IFightModifier
 {
     public int InitiatingValue => -30;
 
-    public int AttackingValue => -40;
+    public int AttackValue => -40;
 
-    public int DefendingValue => -35;
+    public int DefenseValue => -35;
 
-    public int AimingValue => -15;
+    public int? AimingValue => -15;
 }

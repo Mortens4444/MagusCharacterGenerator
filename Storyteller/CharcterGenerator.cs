@@ -245,10 +245,10 @@ public partial class CharcterGenerator : Form
 			case nameof(character.InitiatingValue):
 				SetInitiatingValue();
 				break;
-			case nameof(character.AttackingValue):
+			case nameof(character.AttackValue):
 				SetAttackingValue();
 				break;
-			case nameof(character.DefendingValue):
+			case nameof(character.DefenseValue):
 				SetDefendingValue();
 				break;
 			case nameof(character.AimingValue):
@@ -306,7 +306,7 @@ public partial class CharcterGenerator : Form
 
 	private void SetAimingValue()
 	{
-		nudAimV.Value = character.AimingValue;
+		nudAimV.Value = character.AimingValue.Value;
 	}
 
 	private void SetPsiPoints()
@@ -316,12 +316,12 @@ public partial class CharcterGenerator : Form
 
 	private void SetDefendingValue()
 	{
-		nudDV.Value = character.DefendingValue;
+		nudDV.Value = character.DefenseValue;
 	}
 
 	private void SetAttackingValue()
 	{
-		nudAV.Value = character.AttackingValue;
+		nudAV.Value = character.AttackValue;
 	}
 
 	private void SetInitiatingValue()

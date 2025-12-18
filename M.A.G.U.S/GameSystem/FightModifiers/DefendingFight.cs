@@ -4,9 +4,9 @@ public class DefendingFight : IFightModifier
 {
     public int InitiatingValue => int.MinValue;
 
-    public int AttackingValue => 0;
+    public int AttackValue => 0;
 
-    public int DefendingValue => 40;
+    public int DefenseValue => 40;
 
-    public int AimingValue => 0;
+    public int? AimingValue => 0;
 }

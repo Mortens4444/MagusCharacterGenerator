@@ -4,9 +4,9 @@ public class FightInDarkOrBlinded : IFightModifier
 {
     public int InitiatingValue => -20;
 
-    public int AttackingValue => -60;
+    public int AttackValue => -60;
 
-    public int DefendingValue => -70;
+    public int DefenseValue => -70;
 
-    public int AimingValue => -150;
+    public int? AimingValue => -150;
 }

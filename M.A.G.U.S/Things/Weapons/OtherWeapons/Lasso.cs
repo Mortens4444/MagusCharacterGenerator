@@ -4,7 +4,7 @@ namespace M.A.G.U.S.Things.Weapons.OtherWeapons;
 
 public class Lasso : Weapon, IMeleeWeapon
 {
-    public double AttacksPerRound => 1/3;
+    public override double AttacksPerRound => 1/3;
 
     public int InitiatingValue => 0;
 

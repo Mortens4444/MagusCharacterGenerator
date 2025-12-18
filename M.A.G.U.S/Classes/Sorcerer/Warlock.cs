@@ -11,6 +11,7 @@ using M.A.G.U.S.Qualifications.Percentages;
 using M.A.G.U.S.Qualifications.Scientific;
 using M.A.G.U.S.Qualifications.Scientific.Psi;
 using M.A.G.U.S.Qualifications.Underworld;
+using M.A.G.U.S.Races;
 
 namespace M.A.G.U.S.Classes.Sorcerer;
 
@@ -97,6 +98,8 @@ public class Warlock : Class, IClass, ILikeMagic
     public override bool AddPainToleranceOnFirstLevel => false;
 
     public override bool AddQualificationPointsOnFirstLevel => true;
+
+    public override IRace[] AllowedRaces => [new Human(), new HalfElf(), new CourtOrc(), new Amund(), new Jann(), new Wier()];
 
     public override QualificationList Qualifications => BuildQualifications(
     [

@@ -6,6 +6,7 @@ using M.A.G.U.S.Qualifications;
 using M.A.G.U.S.Qualifications.Combat;
 using M.A.G.U.S.Qualifications.Laical;
 using M.A.G.U.S.Qualifications.Percentages;
+using M.A.G.U.S.Races;
 
 namespace M.A.G.U.S.Classes.Fighter;
 
@@ -95,6 +96,8 @@ public class Warrior : Class, IClass, IJustFight
     public override bool AddPainToleranceOnFirstLevel => true;
 
     public override bool AddQualificationPointsOnFirstLevel => true;
+    
+    public override IRace[] AllowedRaces => [new Human(), new Elf(), new HalfElf(), new Dwarf(), new CourtOrc(), new Amund(), new Jann(), new Khal(), new Wier()];
 
     public override QualificationList Qualifications => BuildQualifications(
     [

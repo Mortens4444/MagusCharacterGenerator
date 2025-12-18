@@ -5,7 +5,7 @@ namespace M.A.G.U.S.Things.Weapons.RangedWeapons;
 
 public class LightCrossbow : Weapon, IRangedWeapon
 {
-    public double AttacksPerRound => 1;
+    public override double AttacksPerRound => 1;
 
     public int InitiatingValue => 2;
 

@@ -1,5 +1,6 @@
 ﻿using M.A.G.U.S.Enums;
 using M.A.G.U.S.GameSystem;
+using Mtf.Extensions;
 
 namespace M.A.G.U.S.Utils;
 
@@ -7,7 +8,56 @@ public static class HitLocationSelector
 {
     private static readonly DiceThrow diceThrow = new();
 
-    public static PlaceOfAttack Get()
+    public static (string, string) GetLocation(AttackDirection attackDirection)
+    {
+        var hitLocation = Get();
+        var subLocation = String.Empty;
+        var locationDescription = hitLocation.GetDescription();
+
+        switch (hitLocation)
+        {
+            case PlaceOfAttack.Head:
+                var headPart = GetOnHead();
+                subLocation = headPart.GetDescription();
+                break;
+
+            case PlaceOfAttack.Torso:
+
+                switch (attackDirection)
+                {
+                    case AttackDirection.Front:
+                        var torsoPart = GetOnTorso();
+                        subLocation = torsoPart.GetDescription();
+                        break;
+                    case AttackDirection.Behind:
+                        var torsoPartBack = GetOnTorsoFromBehind();
+                        subLocation = torsoPartBack.GetDescription();
+                        break;
+                    default:
+                        break;
+                }
+                break;
+
+            case PlaceOfAttack.WeaponWieldingArm:
+            case PlaceOfAttack.NonWeaponWieldingArm:
+                var armPart = GetOnArm();
+                subLocation = armPart.GetDescription();
+                break;
+
+            case PlaceOfAttack.RightLeg:
+            case PlaceOfAttack.LeftLeg:
+                var legPart = GetOnLeg();
+                subLocation = legPart.GetDescription();
+                break;
+
+            default:
+                throw new NotImplementedException();
+        }
+
+        return (locationDescription, subLocation);
+    }
+
+    private static PlaceOfAttack Get()
     {
         var result = diceThrow._1D9();
         return result switch
@@ -22,7 +72,7 @@ public static class HitLocationSelector
         };
     }
 
-    public static PlaceOfAttackOnHead GetOnHead()
+    private static PlaceOfAttackOnHead GetOnHead()
     {
         var result = diceThrow._1D10() - 1;
         return result switch
@@ -36,7 +86,7 @@ public static class HitLocationSelector
         };
     }
 
-    public static PlaceOfAttackOnArm GetOnArm()
+    private static PlaceOfAttackOnArm GetOnArm()
     {
         var result = diceThrow._1D10() - 1;
         return result switch
@@ -51,7 +101,7 @@ public static class HitLocationSelector
         };
     }
 
-    public static PlaceOfAttackOnLeg GetOnLeg()
+    private static PlaceOfAttackOnLeg GetOnLeg()
     {
         var result = diceThrow._1D10() - 1;
         return result switch
@@ -65,7 +115,7 @@ public static class HitLocationSelector
         };
     }
 
-    public static PlaceOfAttackOnTorso GetOnTorso()
+    private static PlaceOfAttackOnTorso GetOnTorso()
     {
         var result = diceThrow._1D10() - 1;
         return result switch
@@ -83,7 +133,7 @@ public static class HitLocationSelector
         };
     }
 
-    public static PlaceOfAttackOnTorsoFromBehind GetOnTorsoFromBehind()
+    private static PlaceOfAttackOnTorsoFromBehind GetOnTorsoFromBehind()
     {
         var result = diceThrow._1D10() - 1;
         return result switch

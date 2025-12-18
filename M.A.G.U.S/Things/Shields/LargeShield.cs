@@ -7,7 +7,7 @@ namespace M.A.G.U.S.Things.Shields;
 
 public class LargeShield : Shield, IMeleeWeapon
 {
-	public double AttacksPerRound => 1 / 2;
+	public override double AttacksPerRound => 1 / 2;
 
     public int AttackingValue => 0;
 

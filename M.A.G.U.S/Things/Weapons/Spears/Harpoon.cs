@@ -5,7 +5,7 @@ namespace M.A.G.U.S.Things.Weapons.Spears;
 
 public class Harpoon : Weapon, IMeleeWeapon
 {
-    public double AttacksPerRound => 1;
+    public override double AttacksPerRound => 1;
 
     public int InitiatingValue => 4;
 

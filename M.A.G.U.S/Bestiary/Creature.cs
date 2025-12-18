@@ -9,7 +9,7 @@ using System.Reflection;
 
 namespace M.A.G.U.S.Bestiary;
 
-public abstract class Creature
+public abstract class Creature : Attacker
 {
     private const string PrimaryAttack = "Primary attack";
     private List<Attack>? attackModes;
@@ -30,7 +30,7 @@ public abstract class Creature
 
     public abstract List<Speed> Speeds { get; }
 
-    public virtual List<Attack> AttackModes
+    public override List<Attack> AttackModes
     {
         get
         {
@@ -57,14 +57,6 @@ public abstract class Creature
         protected set => attackModes = value;
     }
 
-    public int AttackValue { get; protected set; }
-
-    public int DefenseValue { get; protected set; }
-
-    public int InitiatingValue { get; protected set; }
-
-    public int? AimingValue { get; protected set; }
-
     public int? AstralMagicResistance { get; protected set; }
 
     public int? MentalMagicResistance { get; protected set; }
@@ -84,8 +76,6 @@ public abstract class Creature
     public int? MaxPainTolerancePoints { get; protected set; }
 
     public uint ExperiencePoints { get; protected set; }
-
-    public double AttacksPerRound { get; protected set; } = 1;
 
     public string Description { get; protected set; }
 
@@ -115,7 +105,7 @@ public abstract class Creature
     
     public abstract int GetNumberAppearing();
 
-    public virtual string Name => GetType().Name;
+    public override string Name => GetType().Name;
 
     public string DisplayHealthPoints
     {

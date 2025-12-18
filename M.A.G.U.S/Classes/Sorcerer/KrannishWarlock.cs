@@ -11,7 +11,9 @@ using M.A.G.U.S.Qualifications.Magic;
 using M.A.G.U.S.Qualifications.Percentages;
 using M.A.G.U.S.Qualifications.Scientific;
 using M.A.G.U.S.Qualifications.Scientific.Psi;
+using M.A.G.U.S.Qualifications.Specialities;
 using M.A.G.U.S.Qualifications.Underworld;
+using M.A.G.U.S.Races;
 
 namespace M.A.G.U.S.Classes.Sorcerer;
 
@@ -102,32 +104,7 @@ public class KrannishWarlock : Class, IClass, ILikeMagic
 
     public override bool AddQualificationPointsOnFirstLevel => true;
 
-    //public override QualificationList Qualifications
-    //{
-    //    get
-    //    {
-    //        var list = new QualificationList
-    //        {
-    //            new WeaponUse(),
-    //            new WeaponUse(),
-    //            new WeaponThrowing(),
-    //            new ReadingAndWriting(),
-    //            new PoisoningAndNeutralization(),
-    //            new CamouflageOrDisguise(),
-    //            new LanguageLore(Language.Krannish, 3),
-    //            new Alchemy(),
-    //            new AncientTongueLore(AntientLanguage.Aquir),
-    //            new Etiquette() //Krannish
-    //        };
-
-    //        if (Intelligence >= 12 && Willpower >= 12 && Astral >= 12)
-    //        {
-    //            list.Add(new PsiKranic(QualificationLevel.Master));
-    //        }
-
-    //        return list;
-    //    }
-    //}
+    public override IRace[] AllowedRaces => [new Human(), new Amund(), new Jann()];
 
     public override QualificationList Qualifications => BuildQualifications(
     [

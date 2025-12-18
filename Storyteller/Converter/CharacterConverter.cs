@@ -41,8 +41,8 @@ public static class CharacterConverter
 		result.AppendLine($"{Lng.Elem("Fight values")}");
 		result.AppendLine("--------------------------------------");
 		result.AppendLine($"{Lng.Elem("IV")}: {character.InitiatingValue}");
-		result.AppendLine($"{Lng.Elem("AV")}: {character.AttackingValue}");
-		result.AppendLine($"{Lng.Elem("DV")}: {character.DefendingValue}");
+		result.AppendLine($"{Lng.Elem("AV")}: {character.AttackValue}");
+		result.AppendLine($"{Lng.Elem("DV")}: {character.DefenseValue}");
 		result.AppendLine($"{Lng.Elem("AimV")}: {character.AimingValue}");
 		result.AppendLine();
 

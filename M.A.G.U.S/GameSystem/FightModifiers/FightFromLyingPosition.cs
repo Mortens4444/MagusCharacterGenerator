@@ -4,9 +4,9 @@ public class FightFromLyingPosition : IFightModifier
 {
     public int InitiatingValue => -20;
 
-    public int AttackingValue => -15;
+    public int AttackValue => -15;
 
-    public int DefendingValue => -5;
+    public int DefenseValue => -5;
 
-    public int AimingValue => 0;
+    public int? AimingValue => 0;
 }

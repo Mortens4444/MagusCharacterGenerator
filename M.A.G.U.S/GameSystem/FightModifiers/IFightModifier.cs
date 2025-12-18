@@ -4,9 +4,9 @@ public interface IFightModifier
 {
     int InitiatingValue { get; }
 
-    int AttackingValue { get; }
+    int AttackValue { get; }
 
-    int DefendingValue { get; }
+    int DefenseValue { get; }
 
-    int AimingValue { get; }
+    int? AimingValue { get; }
 }

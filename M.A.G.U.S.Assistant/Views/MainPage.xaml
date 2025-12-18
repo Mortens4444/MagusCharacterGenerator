@@ -36,21 +36,22 @@
                     <mc:MenuItem ImageName="races" LabelText="Races" PageType="{x:Type mv:RacesPage}" WidthRequest="100" HeightRequest="100" />
                     <mc:MenuItem ImageName="dice_rolL" LabelText="Dice roll" PageType="{x:Type mv:DiceRollPage}" WidthRequest="100" HeightRequest="100" />
 				</HorizontalStackLayout>
+
+				<HorizontalStackLayout HorizontalOptions="Center">
+                    <mc:MenuItem ImageName="character_list" LabelText="Characters" PageType="{x:Type mv:CharactersPage}" WidthRequest="100" HeightRequest="100" />
+                    <mc:MenuItem ImageName="encounter" LabelText="Encounter" PageType="{x:Type mv:EncounterPage}" WidthRequest="100" HeightRequest="100" />
+                    <mc:MenuItem ImageName="bestiary" LabelText="Bestiary" PageType="{x:Type mv:BestiaryPage}" WidthRequest="100" HeightRequest="100" />
+				</HorizontalStackLayout>
+            
 				<HorizontalStackLayout HorizontalOptions="Center">
                     <!--<mc:MenuItem ImageName="paint" LabelText="Room Painter" PageType="{x:Type mv:PaintPage}" WidthRequest="100" HeightRequest="100" />-->
                     <mc:MenuItem ImageName="sounds" LabelText="Sounds" PageType="{x:Type mv:SoundPage}" WidthRequest="100" HeightRequest="100" />
                     <mc:MenuItem ImageName="images" LabelText="Images" PageType="{x:Type mv:ImagesPage}" WidthRequest="100" HeightRequest="100" />
-                    <mc:MenuItem ImageName="bestiary" LabelText="Bestiary" PageType="{x:Type mv:BestiaryPage}" WidthRequest="100" HeightRequest="100" />
-				</HorizontalStackLayout>
-
-				<HorizontalStackLayout HorizontalOptions="Center">
-                    <mc:MenuItem ImageName="character_list" LabelText="Characters" PageType="{x:Type mv:CharactersPage}" WidthRequest="100" HeightRequest="100" />
                     <mc:MenuItem ImageName="settings" LabelText="Settings" PageType="{x:Type mv:SettingsPage}" WidthRequest="100" HeightRequest="100" />
-                    <mc:MenuItem ImageName="about" LabelText="About" PageType="{x:Type mv:AboutPage}" WidthRequest="100" HeightRequest="100" />
 				</HorizontalStackLayout>
             
                 <HorizontalStackLayout HorizontalOptions="Center">
-                    <mc:MenuItem ImageName="encounter" LabelText="Encounter" PageType="{x:Type mv:EncounterPage}" WidthRequest="100" HeightRequest="100" />
+                    <mc:MenuItem ImageName="about" LabelText="About" PageType="{x:Type mv:AboutPage}" WidthRequest="100" HeightRequest="100" />
                 </HorizontalStackLayout>
             <!--</VerticalStackLayout>-->
         </VerticalStackLayout>

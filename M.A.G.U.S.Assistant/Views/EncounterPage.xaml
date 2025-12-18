@@ -6,6 +6,8 @@
                 xmlns:v="clr-namespace:Mtf.LanguageService.MAUI.Views;assembly=Mtf.LanguageService.MAUI"                
                 xmlns:vm="clr-namespace:M.A.G.U.S.Assistant.ViewModels"
                 xmlns:mv="clr-namespace:M.A.G.U.S.Assistant.Views"
+                xmlns:b="clr-namespace:M.A.G.U.S.Bestiary;assembly=M.A.G.U.S."
+                xmlns:gs="clr-namespace:M.A.G.U.S.GameSystem;assembly=M.A.G.U.S."
                 xmlns:conv="clr-namespace:Mtf.LanguageService.MAUI.Converters;assembly=Mtf.LanguageService.MAUI"
                 xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
                 x:Class="M.A.G.U.S.Assistant.Views.EncounterPage"
@@ -18,8 +20,8 @@
             <conv:TranslationConverter x:Key="TranslationConverter" />
         </ResourceDictionary>
     </v:NotifierPage.Resources>
-    
-    <Grid ColumnDefinitions="*,2*,*" RowDefinitions="*,Auto" Padding="12">
+
+    <Grid ColumnDefinitions="*,2*,*" RowDefinitions="*,Auto,*" Padding="12">
 
         <!-- Characters -->
         <StackLayout Grid.Column="0" Spacing="8">
@@ -30,20 +32,7 @@
                     ItemDisplayBinding="{Binding Name}"
                     Title="Select character" />
 
-            <Button Text="+ Add Character" Command="{Binding AddCharacterCommand}" />
-
-            <CollectionView ItemsSource="{Binding Characters}">
-                <CollectionView.ItemTemplate>
-                    <DataTemplate>
-                        <Border Padding="8" Margin="4">
-                            <StackLayout>
-                                <Label Text="{Binding Name}" FontAttributes="Bold" />
-                                <Label Text="{Binding Speed, StringFormat='Speed: {0} m/s'}" FontSize="12" />
-                            </StackLayout>
-                        </Border>
-                    </DataTemplate>
-                </CollectionView.ItemTemplate>
-            </CollectionView>
+            <Button Text="Add Character" Command="{Binding AddCharacterCommand}" />
         </StackLayout>
 
         <!-- Assignments -->
@@ -54,27 +43,26 @@
                             SelectedItem="{Binding SelectedAssignment}"
                             SelectionMode="Single">
                 <CollectionView.ItemTemplate>
-                    <DataTemplate>
+                    <DataTemplate x:DataType="vm:AssignmentViewModel">
                         <Border Padding="8" Margin="4">
                             <StackLayout Spacing="6">
 
                                 <Label Text="{Binding Character.Name}" FontAttributes="Bold" />
-                                <Label Text="{Binding Character.Speed, StringFormat='Speed: {0} m/s'}" FontSize="12" />
+                                <!--<Label Text="{Binding Character.Speed, StringFormat='Speed: {0} m/s'}" FontSize="12" />-->
 
                                 <CollectionView ItemsSource="{Binding Enemies}">
                                     <CollectionView.ItemTemplate>
-                                        <DataTemplate>
+                                        <DataTemplate x:DataType="b:Creature">
                                             <Grid ColumnDefinitions="*,Auto">
-                                                <Label Text="{Binding Name}"/>
-                                                <Label Grid.Column="1" Text="{Binding Distance, StringFormat='{0} m'}" />
+                                                <Label Text="{Binding Name, Converter={StaticResource TranslationConverter}}" Margin="30,0,0,0" />
+                                                <!--<Label Grid.Column="1" Text="{Binding Distance, StringFormat='{0} m'}" />-->
+                                                <!--<Label Grid.Column="1" Text="{Binding Status}" />-->
                                             </Grid>
                                         </DataTemplate>
                                     </CollectionView.ItemTemplate>
                                 </CollectionView>
 
-                                <Label Text="{Binding EstimatedTime, StringFormat='ETA: {0:F1} s'}" FontSize="12" TextColor="Gray" />
-
-                                <Button Text="+ Assign enemy" Command="{Binding AssignEnemyCommand}" />
+                                <!--<Label Text="{Binding EstimatedTime, StringFormat='ETA: {0:F1} s'}" FontSize="12" TextColor="Gray" />-->
                             </StackLayout>
                         </Border>
                     </DataTemplate>
@@ -91,35 +79,40 @@
                     ItemDisplayBinding="{Binding Name, Converter={StaticResource TranslationConverter}}"
                     Title="Select enemy"/>
 
-            <Button Text="+ Add Enemy" Command="{Binding AddEnemyCommand}"/>
+            <Button Text="Add Enemy" Command="{Binding AddEnemyCommand}"/>
+        </StackLayout>
 
-            <CollectionView ItemsSource="{Binding Enemies}">
+        <!-- Run turn -->
+        <Button Grid.Row="1" Grid.ColumnSpan="3" FontAttributes="Bold"
+                Text="Run One Turn" Command="{Binding RunTurnCommand}" />
+
+        <!-- Turns details -->
+        <StackLayout Grid.ColumnSpan="3" Spacing="8">
+            <CollectionView ItemsSource="{Binding SelectedAssignment.TurnHistory}">
                 <CollectionView.ItemTemplate>
-                    <DataTemplate>
+                    <DataTemplate x:DataType="vm:TurnViewModel">
                         <Border Padding="8" Margin="4">
-                            <StackLayout>
-                                <Label Text="{Binding Name}" FontAttributes="Bold"/>
-
-                                <Grid ColumnDefinitions="*,Auto">
-                                    <Label Text="{Binding Health, StringFormat='HP {0}%'}"/>
-                                    <Label Grid.Column="1" Text="{Binding Status}" FontSize="12" TextColor="Gray"/>
-                                </Grid>
+                            <StackLayout Spacing="6">
+                                <Label Text="{Binding RoundIndex, StringFormat='Round {0}'}" FontAttributes="Bold" />
+                                <CollectionView ItemsSource="{Binding Attacks}">
+                                    <CollectionView.ItemTemplate>
+                                        <DataTemplate x:DataType="vm:TurnAttackViewModel">
+                                            <Grid ColumnDefinitions="Auto,*,*" RowDefinitions="Auto,Auto">
+                                                <Label Text="{Binding Initiative}" FontAttributes="Bold"/>
+                                                <Label Grid.Column="1" Text="{Binding Attacker}" />
+                                                <Label Grid.Column="2" Text="{Binding Target}" />
+                                                <Label Grid.Row="2" Grid.ColumnSpan="3" FontSize="12" Text="{Binding Result}" />
+                                                <Label Grid.Row="3" Grid.ColumnSpan="3" FontSize="12" Text="{Binding Damage}" />
+                                            </Grid>
+                                        </DataTemplate>
+                                    </CollectionView.ItemTemplate>
+                                </CollectionView>
                             </StackLayout>
                         </Border>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
         </StackLayout>
-
-        <!-- Run turn -->
-        <Button Grid.Row="1"
-                Grid.ColumnSpan="3"
-                Text="Run One Turn"
-                FontAttributes="Bold"
-                HeightRequest="48"
-                Command="{Binding RunTurnCommand}" />
-
     </Grid>
-
 
 </v:NotifierPage>
