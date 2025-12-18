@@ -20,9 +20,9 @@
     </v:NotifierPage.Resources>
     
     <Grid RowDefinitions="Auto, *">
-        <!--<ImageButton Grid.Column="1" Source="delete.png" HeightRequest="24" WidthRequest="24" VerticalOptions="Center"
+        <ImageButton Grid.Column="1" Source="delete.png" HeightRequest="24" WidthRequest="24" VerticalOptions="Center"
                         Command="{Binding Source={RelativeSource AncestorType={x:Type vm:CharactersViewModel}}, Path=DeleteAllCharacterCommand}">
-        </ImageButton>-->
+        </ImageButton>
 
         <RefreshView Grid.Row="1" IsRefreshing="{Binding IsLoading}" Command="{Binding LoadCharactersCommand}">
 

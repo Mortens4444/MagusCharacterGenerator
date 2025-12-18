@@ -2,7 +2,7 @@
 
 namespace M.A.G.U.S.Qualifications.Specialities;
 
-public class HeadHunterInitiatingValueIncreasing : SpecialQualification
+public class HeadHunterInitiateValueIncreasing : SpecialQualification
 {
-    public override string Name => "Initiating value increase / every 2 levels";
+    public override string Name => "Initiate value increase / every 2 levels";
 }

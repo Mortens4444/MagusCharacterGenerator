@@ -58,7 +58,7 @@ internal partial class CreatureDetailsViewModel : BaseViewModel
     public List<Speed> Speeds => Creature.Speeds;
     public int AttackValue => Creature.AttackValue;
     public int DefenseValue => Creature.DefenseValue;
-    public int InitiatingValue => Creature.InitiatingValue;
+    public int InitiateValue => Creature.InitiateValue;
     public string HealthPoints => Creature.DisplayHealthPoints;
     public string PainTolerancePoints => Creature.DisplayPainTolerancePoints;
     public IList<Attack> AttackModes => Creature.AttackModes;

@@ -70,15 +70,15 @@ public class Wizard : Class, IClass, ILikeMagic
     [DiceThrowModifier(6)]
     public override int Detection { get; set; }
 
-    public override int InitiatingBaseValue => 2;
+    public override int InitiateBaseValue => 2;
 
-    public override int AttackingBaseValue => 15;
+    public override int AttackBaseValue => 15;
 
-    public override int DefendingBaseValue => 70;
+    public override int DefenseBaseValue => 70;
 
-    public override int AimingBaseValue => 0;
+    public override int AimBaseValue => 0;
 
-    public override int FightValueModifier => 4;
+    public override int CombatValueModifierPerLevel => 4;
 
     public override int BaseQualificationPoints => 7;
 

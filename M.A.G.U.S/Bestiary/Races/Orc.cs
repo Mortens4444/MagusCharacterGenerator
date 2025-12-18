@@ -16,16 +16,16 @@ public sealed class Orc : Creature
         Size = Size.Human;
         AttackValue = 55;
         DefenseValue = 85;
-        InitiatingValue = 20;
-        AimingValue = 0;
+        InitiateValue = 20;
+        AimValue = 0;
         AttackModes =
         [
             new MeleeAttack(new Warhammer(), AttackValue),
             new MeleeAttack(new TwoHandedMace(), AttackValue),
             new MeleeAttack(new ShortSword(), AttackValue),
             new MeleeAttack(new Longsword(), AttackValue),
-            new RangeAttack(new Shortbow(), AimingValue.Value),
-            new RangeAttack(new Longbow(), AimingValue.Value)
+            new RangeAttack(new Shortbow(), AimValue),
+            new RangeAttack(new Longbow(), AimValue)
         ];
         HealthPoints = 10;
         PainTolerancePoints = 16;

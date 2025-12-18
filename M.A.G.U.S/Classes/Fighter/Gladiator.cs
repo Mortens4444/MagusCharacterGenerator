@@ -72,15 +72,15 @@ public class Gladiator : Class, IClass, IJustFight
     [DiceThrowModifier(6)]
     public override int Detection { get; set; }
 
-    public override int InitiatingBaseValue => 9;
+    public override int InitiateBaseValue => 9;
 
-    public override int AttackingBaseValue => 20;
+    public override int AttackBaseValue => 20;
 
-    public override int DefendingBaseValue => 75;
+    public override int DefenseBaseValue => 75;
 
-    public override int AimingBaseValue => 0;
+    public override int AimBaseValue => 0;
 
-    public override int FightValueModifier => 12;
+    public override int CombatValueModifierPerLevel => 12;
 
     public override int BaseQualificationPoints => 3;
 

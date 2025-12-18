@@ -33,9 +33,19 @@ public class ObjectSerializer
 	private static JsonSerializerSettings GetJsonSerializerSettings()
 	{
 		return new JsonSerializerSettings
-		{
-			TypeNameHandling = TypeNameHandling.All,
-			PreserveReferencesHandling = PreserveReferencesHandling.Objects
+        {
+            TypeNameHandling = TypeNameHandling.Auto,
+#if DEBUG
+            Formatting = Formatting.Indented,
+#else
+        Formatting = Formatting.None,
+#endif
+            //ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+            PreserveReferencesHandling = PreserveReferencesHandling.Objects
+
+
+            //TypeNameHandling = TypeNameHandling.All,
+			//PreserveReferencesHandling = PreserveReferencesHandling.Objects
 		};
 	}
 }

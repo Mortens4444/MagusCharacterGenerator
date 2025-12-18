@@ -7,11 +7,11 @@ public class OneHandedMace : Weapon, IMeleeWeapon
 {
     public override double AttacksPerRound => 1;
 
-    public int InitiatingValue => 7;
+    public int InitiateValue => 7;
 
-    public int AttackingValue => 11;
+    public int AttackValue => 11;
 
-    public int DefendingValue => 12;
+    public int DefenseValue => 12;
 
     public override double Weight => 2;
 

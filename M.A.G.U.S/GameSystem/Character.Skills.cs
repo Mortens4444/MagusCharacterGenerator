@@ -1,14 +1,31 @@
-﻿namespace M.A.G.U.S.GameSystem;
+﻿using System.Text.Json.Serialization;
+
+namespace M.A.G.U.S.GameSystem;
 
 public partial class Character
 {
+    [NonSerialized, JsonIgnore, Newtonsoft.Json.JsonIgnore]
     private int strength;
+
+    [NonSerialized, JsonIgnore, Newtonsoft.Json.JsonIgnore]
     private int stamina;
+
+    [NonSerialized, JsonIgnore, Newtonsoft.Json.JsonIgnore]
     private int speed;
+
+    [NonSerialized, JsonIgnore, Newtonsoft.Json.JsonIgnore]
     private int dexterity;
+
+    [NonSerialized, JsonIgnore, Newtonsoft.Json.JsonIgnore]
     private int health;
+
+    [NonSerialized, JsonIgnore, Newtonsoft.Json.JsonIgnore]
     private int willpower;
+
+    [NonSerialized, JsonIgnore, Newtonsoft.Json.JsonIgnore]
     private int intelligence;
+
+    [NonSerialized, JsonIgnore, Newtonsoft.Json.JsonIgnore]
     private int astral;
 
     public int Strength

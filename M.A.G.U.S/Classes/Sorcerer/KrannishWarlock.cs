@@ -78,15 +78,15 @@ public class KrannishWarlock : Class, IClass, ILikeMagic
     [DiceThrowModifier(6)]
     public override int Detection { get; set; }
 
-    public override int InitiatingBaseValue => 7;
+    public override int InitiateBaseValue => 7;
 
-    public override int AttackingBaseValue => 17;
+    public override int AttackBaseValue => 17;
 
-    public override int DefendingBaseValue => 72;
+    public override int DefenseBaseValue => 72;
 
-    public override int AimingBaseValue => 5;
+    public override int AimBaseValue => 5;
 
-    public override int FightValueModifier => 7;
+    public override int CombatValueModifierPerLevel => 7;
 
     public override int BaseQualificationPoints => 4;
 

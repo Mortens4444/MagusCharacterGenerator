@@ -13,7 +13,7 @@ public sealed class Wolf : Creature
         Size = Size.Human;
         AttackValue = 35;
         DefenseValue = 60;
-        InitiatingValue = 10;
+        InitiateValue = 10;
         HealthPoints = 18;
         PainTolerancePoints = 38;
         PoisonResistance = 4;

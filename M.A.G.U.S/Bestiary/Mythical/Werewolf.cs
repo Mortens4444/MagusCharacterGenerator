@@ -14,7 +14,7 @@ public sealed class Werewolf : LivingDead
         Size = Size.Human;
         AttackValue = 60;
         DefenseValue = 75;
-        InitiatingValue = 25;
+        InitiateValue = 25;
         PainTolerancePoints = 44;
         AstralMagicResistance = byte.MaxValue;
         MentalMagicResistance = byte.MaxValue;

@@ -7,11 +7,11 @@ public class Halberd : Weapon, IMeleeWeapon
 {
     public override double AttacksPerRound => 1 / 2;
 
-    public int InitiatingValue => 1;
+    public int InitiateValue => 1;
 
-    public int AttackingValue => 14;
+    public int AttackValue => 14;
 
-    public int DefendingValue => 15;
+    public int DefenseValue => 15;
 
     public override double Weight => 3;
 

@@ -73,15 +73,15 @@ public abstract class Paladin : Class, IClass, IHateRangedWeapons
     [DiceThrowModifier(8)]
     public override int Detection { get; set; }
 
-    public override int InitiatingBaseValue => 5;
+    public override int InitiateBaseValue => 5;
 
-    public override int AttackingBaseValue => 20;
+    public override int AttackBaseValue => 20;
 
-    public override int DefendingBaseValue => 75;
+    public override int DefenseBaseValue => 75;
 
-    public override int AimingBaseValue => throw new InvalidOperationException();
+    public override int AimBaseValue => throw new InvalidOperationException();
 
-    public override int FightValueModifier => 9;
+    public override int CombatValueModifierPerLevel => 9;
 
     public override int BaseQualificationPoints => 5;
 

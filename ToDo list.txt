@@ -1,3 +1,5 @@
+- Fix primary weapon selection
+- Fix encounter page issues
 - Problem with total weight
 
 - Change weapon/language attribute on qualifications

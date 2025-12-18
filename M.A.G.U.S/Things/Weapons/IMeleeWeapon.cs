@@ -4,7 +4,7 @@ namespace M.A.G.U.S.Things.Weapons;
 
 public interface IMeleeWeapon : IWeapon
 {
-    int AttackingValue { get; }
+    int AttackValue { get; }
 
-    int DefendingValue { get; }
+    int DefenseValue { get; }
 }

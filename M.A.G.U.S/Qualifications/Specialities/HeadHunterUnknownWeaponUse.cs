@@ -3,15 +3,15 @@ using M.A.G.U.S.GameSystem.Qualifications;
 
 namespace M.A.G.U.S.Qualifications.Specialities;
 
-public class HeadHunterUnknownWeaponUse : SpecialQualification, IFightModifier
+public class HeadHunterUnknownWeaponUse : SpecialQualification, ICombatModifier
 {
-    public int InitiatingValue => -5;
+    public int InitiateValue => -5;
 
     public int AttackValue => -5;
 
     public int DefenseValue => -10;
 
-    public int? AimingValue => -15;
+    public int AimValue => -15;
     
     public override string Name => "Untrained weapon penalty";
 }

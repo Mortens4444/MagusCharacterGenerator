@@ -1,12 +1,12 @@
 ﻿namespace M.A.G.U.S.GameSystem.FightModifiers;
 
-public class AttackFromAmbush : IFightModifier
+public class AttackFromAmbush : ICombatModifier
 {
-    public int InitiatingValue => Int16.MaxValue;
+    public int InitiateValue => Int16.MaxValue;
 
     public int AttackValue => 30;
 
     public int DefenseValue => 0;
 
-    public int? AimingValue => 10;
+    public int AimValue => 10;
 }

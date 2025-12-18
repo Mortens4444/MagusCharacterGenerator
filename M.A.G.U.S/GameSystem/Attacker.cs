@@ -25,13 +25,13 @@ public abstract class Attacker
         }
     }
 
-    public virtual int InitiatingValue { get; set; }
+    public virtual int InitiateValue { get; set; }
 
     public virtual int AttackValue { get; set; }
 
     public virtual int DefenseValue { get; set; }
 
-    public virtual int? AimingValue { get; set; }
+    public virtual int AimValue { get; set; }
 
     public double AttacksPerRound { get; protected set; } = 1;
 

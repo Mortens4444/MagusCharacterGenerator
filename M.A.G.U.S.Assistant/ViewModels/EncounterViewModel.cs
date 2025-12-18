@@ -150,7 +150,7 @@ internal partial class EncounterViewModel : CharacterListLoaderViewModel
                         Name = assignment.Character.Name,
                         Source = assignment.Character
                     },
-                    BaseInitiative = enemy.InitiatingValue,
+                    BaseInitiative = enemy.InitiateValue,
                     RolledValue = enemy.RollInitiative()
                 });
             }
@@ -179,7 +179,7 @@ internal partial class EncounterViewModel : CharacterListLoaderViewModel
                 Name = target.Name,
                 Source = target
             },
-            BaseInitiative = assignment.Character.InitiatingValue,
+            BaseInitiative = assignment.Character.InitiateValue,
             RolledValue = assignment.Character.RollInitiative()
         });
 

@@ -6,15 +6,15 @@ namespace M.A.G.U.S.Things.Weapons;
 
 public class BodyPart(string name, ThrowType throwType, int modifier = 0) : IMeleeWeapon
 {
-    public int AttackingValue => 0;
+    public int AttackValue => 0;
 
-    public int DefendingValue => 0;
+    public int DefenseValue => 0;
 
     public string Name => name;
 
     public virtual double AttacksPerRound => 1;
 
-    public int InitiatingValue => 0;
+    public int InitiateValue => 0;
 
     public double Weight => 0;
 

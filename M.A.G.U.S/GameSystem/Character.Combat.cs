@@ -11,21 +11,22 @@ namespace M.A.G.U.S.GameSystem;
 
 public partial class Character
 {
-    private CombatValueModifier selectedCombatValueModifier = CombatValueModifier.Base;
-    private int initiatingValue;
+    private CombatValueModifier selectedCombatValueModifier = Enums.CombatValueModifier.Base;
+    private int initiateValue;
     private int attackValue;
     private int defenseValue;
-    private int? aimingValue;
+    private int aimValue;
+    private int combatValueModifier;
     private string? primaryWeaponId;
     private string? secondaryWeaponId;
     private Weapon? primaryWeapon;
     private Weapon? secondaryWeapon;
     private int totalCombatModifierPool;
     private int totalCurrentlyAllocated;
-    private int initiatingValueOriginal;
-    private int attackingValueOriginal;
-    private int defendingValueOriginal;
-    private int? aimingValueOriginal;
+    private int originalInitiateValue;
+    private int originalAttackValue;
+    private int originalDefenseValue;
+    private int originalAimValue;
     private WeaponFightModifier weaponFightModifier;
     private List<Attack>? attackModes;
 
@@ -61,16 +62,6 @@ public partial class Character
         }
     }
 
-    private void SetPrimaryWeapon()
-    {
-        if (!String.IsNullOrEmpty(primaryWeaponId))
-        {
-            primaryWeapon = ResolveWeaponById(primaryWeaponId);
-            OnPropertyChanged(nameof(PrimaryWeapon));
-            RecalculateFightValues(settings);
-        }
-    }
-
     public string? SecondaryWeaponId
     {
         get => secondaryWeaponId;
@@ -87,17 +78,7 @@ public partial class Character
         }
     }
 
-    private void SetSecondaryWeapon()
-    {
-        if (!String.IsNullOrEmpty(secondaryWeaponId))
-        {
-            secondaryWeapon = ResolveWeaponById(secondaryWeaponId);
-            OnPropertyChanged(nameof(SecondaryWeapon));
-            RecalculateFightValues(settings);
-        }
-    }
-
-    [JsonIgnore]
+    [JsonIgnore, Newtonsoft.Json.JsonIgnore]
     public Weapon? PrimaryWeapon
     {
         get => primaryWeapon;
@@ -115,7 +96,7 @@ public partial class Character
         }
     }
 
-    [JsonIgnore]
+    [JsonIgnore, Newtonsoft.Json.JsonIgnore]
     public Weapon? SecondaryWeapon
     {
         get => secondaryWeapon;
@@ -133,6 +114,7 @@ public partial class Character
         }
     }
 
+    [JsonIgnore, Newtonsoft.Json.JsonIgnore]
     public override List<Attack> AttackModes
     {
         get
@@ -147,7 +129,7 @@ public partial class Character
                 }
                 else if (PrimaryWeapon is IRangedWeapon rangedWeapon)
                 {
-                    attackModes.Add(new RangeAttack(rangedWeapon, AimingValue.Value));
+                    attackModes.Add(new RangeAttack(rangedWeapon, AimValue));
                 }
             }
 
@@ -156,54 +138,56 @@ public partial class Character
         protected set => attackModes = value;
     }
 
-    public int FightValueModifier => BaseClass.FightValueModifier;
+    [JsonIgnore, Newtonsoft.Json.JsonIgnore]
+    public int CombatValueModifierPerLevel => BaseClass.CombatValueModifierPerLevel;
 
-    private int combatModifier;
-    public int CombatModifier
+    public int CombatValueModifier
     {
         get
         {
-            return combatModifier;
+            return combatValueModifier;
         }
         set
         {
             var newValue = Math.Max(0, value);
-            if (combatModifier == newValue)
+            if (combatValueModifier == newValue)
             {
                 return;
             }
 
-            combatModifier = newValue;
+            combatValueModifier = newValue;
             SetCombatModifierHelperVariables(newValue);
             OnPropertyChanged();
             OnMaxLimitsChanged();
         }
     }
 
-    public int InitiatingValueOriginal
+    [JsonIgnore, Newtonsoft.Json.JsonIgnore]
+    public int OriginalInitiateValue
     {
-        get => initiatingValueOriginal;
+        get => originalInitiateValue;
         private set
         {
-            if (value == 0 && initiatingValue > 0)
+            if (value == 0 && initiateValue > 0)
             {
                 return;
             }
 
-            if (initiatingValueOriginal == value)
+            if (originalInitiateValue == value)
             {
                 return;
             }
 
-            initiatingValueOriginal = value;
+            originalInitiateValue = value;
             OnPropertyChanged();
-            OnPropertyChanged(nameof(InitiatingValueMaxLimit));
+            OnPropertyChanged(nameof(MaxInitiateValue));
         }
     }
 
-    public int AttackingValueOriginal
+    [JsonIgnore, Newtonsoft.Json.JsonIgnore]
+    public int OriginalAttackValue
     {
-        get => attackingValueOriginal;
+        get => originalAttackValue;
         private set
         {
             if (value == 0 && attackValue > 0)
@@ -211,20 +195,21 @@ public partial class Character
                 return;
             }
 
-            if (attackingValueOriginal == value)
+            if (originalAttackValue == value)
             {
                 return;
             }
 
-            attackingValueOriginal = value;
+            originalAttackValue = value;
             OnPropertyChanged();
-            OnPropertyChanged(nameof(AttackingValueMaxLimit));
+            OnPropertyChanged(nameof(MaxAttackValue));
         }
     }
 
-    public int DefendingValueOriginal
+    [JsonIgnore, Newtonsoft.Json.JsonIgnore]
+    public int OriginalDefenseValue
     {
-        get => defendingValueOriginal;
+        get => originalDefenseValue;
         private set
         {
             if (value == 0 && defenseValue > 0)
@@ -232,65 +217,74 @@ public partial class Character
                 return;
             }
 
-            if (defendingValueOriginal == value)
+            if (originalDefenseValue == value)
             {
                 return;
             }
 
-            defendingValueOriginal = value;
+            originalDefenseValue = value;
             OnPropertyChanged();
-            OnPropertyChanged(nameof(DefendingValueMaxLimit));
+            OnPropertyChanged(nameof(MaxDefenseValue));
         }
     }
-    public int? AimingValueOriginal
+
+    [JsonIgnore, Newtonsoft.Json.JsonIgnore]
+    public int OriginalAimValue
     {
-        get => aimingValueOriginal;
+        get => originalAimValue;
         private set
         {
-            if (value == 0 && aimingValue > 0)
+            if (value == 0 && aimValue > 0)
             {
                 return;
             }
 
-            if (aimingValueOriginal == value)
+            if (originalAimValue == value)
             {
                 return;
             }
 
-            aimingValueOriginal = value;
+            originalAimValue = value;
             OnPropertyChanged();
-            OnPropertyChanged(nameof(AimingValueMaxLimit));
+            OnPropertyChanged(nameof(MaxAimValue));
         }
     }
 
-    public bool CanAllocateCombatModifier => CombatModifier != 0;
+    [JsonIgnore, Newtonsoft.Json.JsonIgnore]
+    public bool CanAllocateCombatModifier => CombatValueModifier != 0;
 
-    public bool CanAllocateCombatModifierBase => CombatModifier == 0 && SelectedCombatValueModifier == CombatValueModifier.Base;
+    [JsonIgnore, Newtonsoft.Json.JsonIgnore]
+    public bool CanAllocateCombatModifierBase => CombatValueModifier == 0 && SelectedCombatValueModifier == Enums.CombatValueModifier.Base;
 
-    public bool CanAllocateCombatModifierWithWeapon => CombatModifier == 0 && SelectedCombatValueModifier != CombatValueModifier.Base;
+    [JsonIgnore, Newtonsoft.Json.JsonIgnore]
+    public bool CanAllocateCombatModifierWithWeapon => CombatValueModifier == 0 && SelectedCombatValueModifier != Enums.CombatValueModifier.Base;
 
-    public int InitiatingValueMaxLimit => InitiatingValue + CombatModifier;
+    [JsonIgnore, Newtonsoft.Json.JsonIgnore]
+    public int MaxInitiateValue => InitiateValue + CombatValueModifier;
 
-    public int AttackingValueMaxLimit => AttackValue + CombatModifier;
+    [JsonIgnore, Newtonsoft.Json.JsonIgnore]
+    public int MaxAttackValue => AttackValue + CombatValueModifier;
 
-    public int DefendingValueMaxLimit => DefenseValue + CombatModifier;
+    [JsonIgnore, Newtonsoft.Json.JsonIgnore]
+    public int MaxDefenseValue => DefenseValue + CombatValueModifier;
 
-    public int? AimingValueMaxLimit => AimingValue + CombatModifier;
+    [JsonIgnore, Newtonsoft.Json.JsonIgnore]
+    public int MaxAimValue => AimValue + CombatValueModifier;
 
-    public override int InitiatingValue
+    public override int InitiateValue
     {
-        get => initiatingValue;
+        get => initiateValue;
         set
         {
-            if (value == initiatingValue)
+            if (value == initiateValue)
             {
                 return;
             }
-            if (InitiatingValueOriginal == 0)
+            if (OriginalInitiateValue == 0)
             {
-                InitiatingValueOriginal = value;
+                OriginalInitiateValue = value;
             }
-            initiatingValue = value;
+            initiateValue = value;
             OnPropertyChanged();
 
             RecalculateAllocatedCombatModifiers();
@@ -304,9 +298,9 @@ public partial class Character
         {
             if (value != attackValue)
             {
-                if (AttackingValueOriginal == 0)
+                if (OriginalAttackValue == 0)
                 {
-                    AttackingValueOriginal = value;
+                    OriginalAttackValue = value;
                 }
                 attackValue = value;
                 OnPropertyChanged();
@@ -323,9 +317,9 @@ public partial class Character
         {
             if (value != defenseValue)
             {
-                if (DefendingValueOriginal == 0)
+                if (OriginalDefenseValue == 0)
                 {
-                    DefendingValueOriginal = value;
+                    OriginalDefenseValue = value;
                 }
                 defenseValue = value;
                 OnPropertyChanged();
@@ -335,18 +329,18 @@ public partial class Character
         }
     }
 
-    public override int? AimingValue
+    public override int AimValue
     {
-        get => aimingValue;
+        get => aimValue;
         set
         {
-            if (value != aimingValue)
+            if (value != aimValue)
             {
-                if (AimingValueOriginal == 0)
+                if (OriginalAimValue == 0)
                 {
-                    AimingValueOriginal = value;
+                    OriginalAimValue = value;
                 }
-                aimingValue = value;
+                aimValue = value;
                 OnPropertyChanged();
 
                 RecalculateAllocatedCombatModifiers();
@@ -354,36 +348,68 @@ public partial class Character
         }
     }
 
-    public int InitiatingValueWithSelectedWeapon => InitiatingValue + weaponFightModifier?.InitiatingValue ?? 0;
-    public int AttackingValueWithSelectedWeapon => AttackValue + weaponFightModifier?.AttackValue ?? 0;
-    public int DefendingValueWithSelectedWeapon => DefenseValue + weaponFightModifier?.DefenseValue ?? 0;
-    public int AimingValueWithSelectedWeapon => AimingValue + weaponFightModifier?.AimingValue ?? 0;
+    [JsonIgnore, Newtonsoft.Json.JsonIgnore]
+    public int InitiateValueWithSelectedWeapon => InitiateValue + weaponFightModifier?.InitiateValue ?? 0;
+
+    [JsonIgnore, Newtonsoft.Json.JsonIgnore]
+    public int AttackValueWithSelectedWeapon => AttackValue + weaponFightModifier?.AttackValue ?? 0;
+
+    [JsonIgnore, Newtonsoft.Json.JsonIgnore]
+    public int DefenseValueWithSelectedWeapon => DefenseValue + weaponFightModifier?.DefenseValue ?? 0;
+
+    [JsonIgnore, Newtonsoft.Json.JsonIgnore]
+    public int AimValueWithSelectedWeapon => AimValue + weaponFightModifier?.AimValue ?? 0;
+
+    private void SetPrimaryWeapon()
+    {
+        if (!String.IsNullOrEmpty(primaryWeaponId))
+        {
+            primaryWeapon = ResolveWeaponById(primaryWeaponId);
+            OnPropertyChanged(nameof(PrimaryWeapon));
+            RecalculateFightValues(settings);
+        }
+    }
+
+    private void SetSecondaryWeapon()
+    {
+        if (!String.IsNullOrEmpty(secondaryWeaponId))
+        {
+            secondaryWeapon = ResolveWeaponById(secondaryWeaponId);
+            OnPropertyChanged(nameof(SecondaryWeapon));
+            RecalculateFightValues(settings);
+        }
+    }
 
     private void RecalculateAllocatedCombatModifiers()
     {
-        var initiatorAllocated = Math.Max(0, InitiatingValue - InitiatingValueOriginal);
-        var attackAllocated = Math.Max(0, AttackValue - AttackingValueOriginal);
-        var defenseAllocated = Math.Max(0, DefenseValue - DefendingValueOriginal);
-        var aimAllocated = Math.Max(0, AimingValue.Value - AimingValueOriginal.Value);
+        if (isDeserializing)
+        {
+            return;
+        }
+
+        var initiatorAllocated = Math.Max(0, InitiateValue - OriginalInitiateValue);
+        var attackAllocated = Math.Max(0, AttackValue - OriginalAttackValue);
+        var defenseAllocated = Math.Max(0, DefenseValue - OriginalDefenseValue);
+        var aimAllocated = Math.Max(0, AimValue - OriginalAimValue);
 
         totalCurrentlyAllocated = initiatorAllocated + attackAllocated + defenseAllocated + aimAllocated;
 
-        combatModifier = Math.Max(0, totalCombatModifierPool - totalCurrentlyAllocated);
+        combatValueModifier = Math.Max(0, totalCombatModifierPool - totalCurrentlyAllocated);
 
-        OnPropertyChanged(nameof(CombatModifier));
+        OnPropertyChanged(nameof(CombatValueModifier));
         OnMaxLimitsChanged();
-        OnPropertyChanged(nameof(InitiatingValueWithSelectedWeapon));
-        OnPropertyChanged(nameof(AttackingValueWithSelectedWeapon));
-        OnPropertyChanged(nameof(DefendingValueWithSelectedWeapon));
-        OnPropertyChanged(nameof(AimingValueWithSelectedWeapon));
+        OnPropertyChanged(nameof(InitiateValueWithSelectedWeapon));
+        OnPropertyChanged(nameof(AttackValueWithSelectedWeapon));
+        OnPropertyChanged(nameof(DefenseValueWithSelectedWeapon));
+        OnPropertyChanged(nameof(AimValueWithSelectedWeapon));
     }
 
     private void OnMaxLimitsChanged()
     {
-        OnPropertyChanged(nameof(InitiatingValueMaxLimit));
-        OnPropertyChanged(nameof(AttackingValueMaxLimit));
-        OnPropertyChanged(nameof(DefendingValueMaxLimit));
-        OnPropertyChanged(nameof(AimingValueMaxLimit));
+        OnPropertyChanged(nameof(MaxInitiateValue));
+        OnPropertyChanged(nameof(MaxAttackValue));
+        OnPropertyChanged(nameof(MaxDefenseValue));
+        OnPropertyChanged(nameof(MaxAimValue));
     }
 
     private void CalculateFightValues(ISettings? settings)
@@ -393,75 +419,75 @@ public partial class Character
             return;
         }
 
-        var fightModifiers = new FightModifier();
+        var combatModifiers = new CombatModifier();
         var initiatorRace = Race.SpecialQualifications.GetSpeciality<GoodInitiator>();
 
-        fightModifiers.InitiatingValue = initiatorRace != null ? initiatorRace.InitiatingBase : BaseClass.InitiatingBaseValue;
-        fightModifiers.InitiatingValue += MathHelper.GetAboveAverageValue(Quickness);
-        fightModifiers.InitiatingValue += MathHelper.GetAboveAverageValue(Dexterity);
-        var headHunterInitiatingValueIncreasing = BaseClass.SpecialQualifications.GetSpeciality<HeadHunterInitiatingValueIncreasing>();
-        if (headHunterInitiatingValueIncreasing != null)
+        combatModifiers.InitiateValue = initiatorRace != null ? initiatorRace.InitiateBase : BaseClass.InitiateBaseValue;
+        combatModifiers.InitiateValue += MathHelper.GetAboveAverageValue(Quickness);
+        combatModifiers.InitiateValue += MathHelper.GetAboveAverageValue(Dexterity);
+        var headHunterInitiateValueIncreasing = BaseClass.SpecialQualifications.GetSpeciality<HeadHunterInitiateValueIncreasing>();
+        if (headHunterInitiateValueIncreasing != null)
         {
-            fightModifiers.InitiatingValue += BaseClass.Level % 2;
+            combatModifiers.InitiateValue += BaseClass.Level % 2;
         }
-        var thiefInitiatingValueIncreasing = BaseClass.SpecialQualifications.GetSpeciality<ThiefInitiatingValueIncreasing>();
-        if (thiefInitiatingValueIncreasing != null)
+        var thiefInitiateValueIncreasing = BaseClass.SpecialQualifications.GetSpeciality<ThiefInitiateValueIncreasing>();
+        if (thiefInitiateValueIncreasing != null)
         {
-            fightModifiers.InitiatingValue += BaseClass.Level;
+            combatModifiers.InitiateValue += BaseClass.Level;
         }
 
-        fightModifiers.AttackValue = BaseClass.AttackingBaseValue;
-        fightModifiers.AttackValue += MathHelper.GetAboveAverageValue(Strength);
-        fightModifiers.AttackValue += MathHelper.GetAboveAverageValue(Quickness);
-        fightModifiers.AttackValue += MathHelper.GetAboveAverageValue(Dexterity);
+        combatModifiers.AttackValue = BaseClass.AttackBaseValue;
+        combatModifiers.AttackValue += MathHelper.GetAboveAverageValue(Strength);
+        combatModifiers.AttackValue += MathHelper.GetAboveAverageValue(Quickness);
+        combatModifiers.AttackValue += MathHelper.GetAboveAverageValue(Dexterity);
 
-        fightModifiers.DefenseValue = BaseClass.DefendingBaseValue;
-        fightModifiers.DefenseValue += MathHelper.GetAboveAverageValue(Quickness);
-        fightModifiers.DefenseValue += MathHelper.GetAboveAverageValue(Dexterity);
+        combatModifiers.DefenseValue = BaseClass.DefenseBaseValue;
+        combatModifiers.DefenseValue += MathHelper.GetAboveAverageValue(Quickness);
+        combatModifiers.DefenseValue += MathHelper.GetAboveAverageValue(Dexterity);
 
         var archerClass = BaseClass.SpecialQualifications.FirstOrDefault(specialQualification => specialQualification is GoodArcher) as GoodArcher;
         var archerRace = Race.SpecialQualifications.GetSpeciality<GoodArcher>();
 
         try
         {
-            fightModifiers.AimingValue = archerClass != null ? archerClass.AimingBase :
-                archerRace != null ? archerRace.AimingBase : BaseClass.AimingBaseValue;
-            fightModifiers.AimingValue += MathHelper.GetAboveAverageValue(Dexterity);
+            combatModifiers.AimValue = archerClass != null ? archerClass.AimBase :
+                archerRace != null ? archerRace.AimBase : BaseClass.AimBaseValue;
+            combatModifiers.AimValue += MathHelper.GetAboveAverageValue(Dexterity);
         }
         catch (InvalidOperationException)
         {
-            fightModifiers.AimingValue = 0;
+            combatModifiers.AimValue = 0;
         }
 
         var (attackPercentage, defencePercentage, aimingPercentage) = DistributionProvider.Get(BaseClass, Race);
         var levelUpFightModifier = Calculate(settings, BaseClass, attackPercentage, defencePercentage, aimingPercentage);
-        fightModifiers.InitiatingValue += levelUpFightModifier.InitiatingValue;
-        fightModifiers.AttackValue += levelUpFightModifier.AttackValue;
-        fightModifiers.DefenseValue += levelUpFightModifier.DefenseValue;
-        fightModifiers.AimingValue += levelUpFightModifier.AimingValue;
-        fightModifiers.CombatModifier += levelUpFightModifier.CombatModifier;
+        combatModifiers.InitiateValue += levelUpFightModifier.InitiateValue;
+        combatModifiers.AttackValue += levelUpFightModifier.AttackValue;
+        combatModifiers.DefenseValue += levelUpFightModifier.DefenseValue;
+        combatModifiers.AimValue += levelUpFightModifier.AimValue;
+        combatModifiers.CombatModifierPoints += levelUpFightModifier.CombatModifierPoints;
 
-        InitiatingValueOriginal = fightModifiers.InitiatingValue;
-        AttackingValueOriginal = fightModifiers.AttackValue;
-        DefendingValueOriginal = fightModifiers.DefenseValue;
-        AimingValueOriginal = fightModifiers.AimingValue;
+        OriginalInitiateValue = combatModifiers.InitiateValue;
+        OriginalAttackValue = combatModifiers.AttackValue;
+        OriginalDefenseValue = combatModifiers.DefenseValue;
+        OriginalAimValue = combatModifiers.AimValue;
 
-        CombatModifier = Math.Max(0, fightModifiers.CombatModifier);
+        CombatValueModifier = Math.Max(0, combatModifiers.CombatModifierPoints);
 
-        InitiatingValue = fightModifiers.InitiatingValue;
-        AttackValue = fightModifiers.AttackValue;
-        DefenseValue = fightModifiers.DefenseValue;
-        AimingValue = fightModifiers.AimingValue;
+        InitiateValue = combatModifiers.InitiateValue;
+        AttackValue = combatModifiers.AttackValue;
+        DefenseValue = combatModifiers.DefenseValue;
+        AimValue = combatModifiers.AimValue;
     }
 
     public void RecalculateFightValues(ISettings? settings)
     {
         CalculateFightValues(settings);
         weaponFightModifier = GetWeaponFightModifier();
-        OnPropertyChanged(nameof(InitiatingValueWithSelectedWeapon));
-        OnPropertyChanged(nameof(AttackingValueWithSelectedWeapon));
-        OnPropertyChanged(nameof(DefendingValueWithSelectedWeapon));
-        OnPropertyChanged(nameof(AimingValueWithSelectedWeapon));
+        OnPropertyChanged(nameof(InitiateValueWithSelectedWeapon));
+        OnPropertyChanged(nameof(AttackValueWithSelectedWeapon));
+        OnPropertyChanged(nameof(DefenseValueWithSelectedWeapon));
+        OnPropertyChanged(nameof(AimValueWithSelectedWeapon));
         InvalidateAttackModes();
     }
 
@@ -470,21 +496,21 @@ public partial class Character
         var result = new WeaponFightModifier();
         var weapon = selectedCombatValueModifier switch
         {
-            CombatValueModifier.PrimaryWeapon => PrimaryWeapon,
-            CombatValueModifier.SecondaryWeapon => SecondaryWeapon,
+            Enums.CombatValueModifier.PrimaryWeapon => PrimaryWeapon,
+            Enums.CombatValueModifier.SecondaryWeapon => SecondaryWeapon,
             _ => null
         };
 
         if (weapon is IMeleeWeapon melee)
         {
-            result.InitiatingValue = melee.InitiatingValue;
-            result.AttackValue = melee.AttackingValue;
-            result.DefenseValue = melee.DefendingValue;
+            result.InitiateValue = melee.InitiateValue;
+            result.AttackValue = melee.AttackValue;
+            result.DefenseValue = melee.DefenseValue;
         }
         else if (weapon is IRangedWeapon ranged)
         {
-            result.InitiatingValue = ranged.InitiatingValue;
-            result.AimingValue = ranged.AimingValue;
+            result.InitiateValue = ranged.InitiateValue;
+            result.AimValue = ranged.AimValue;
         }
         return result;
     }
@@ -495,34 +521,34 @@ public partial class Character
         totalCurrentlyAllocated = 0;
     }
 
-    private static FightModifier Calculate(ISettings? settings, IClass @class, int attackPercentage, int defencePercentage, int aimingPercentage)
+    private static CombatModifier Calculate(ISettings? settings, IClass @class, int attackPercentage, int defencePercentage, int aimingPercentage)
     {
         var addFightValuesOnFirstLevel = settings?.AddFightValueOnFirstLevelForAllClass ?? true;
-        var fightValues = (@class.AddFightValueOnFirstLevel || addFightValuesOnFirstLevel ? @class.Level : @class.Level - 1) * @class.FightValueModifier;
+        var fightValues = (@class.AddFightValueOnFirstLevel || addFightValuesOnFirstLevel ? @class.Level : @class.Level - 1) * @class.CombatValueModifierPerLevel;
 
         var autoDistributeCombatValues = settings?.AutoDistributeCombatValues ?? false;
         if (!autoDistributeCombatValues)
         {
-            return new FightModifier()
+            return new CombatModifier()
             {
-                CombatModifier = fightValues
+                CombatModifierPoints = fightValues
             };
         }
         var attackPoints = MathHelper.GetModifier(fightValues, attackPercentage);
         var defencePoints = MathHelper.GetModifier(fightValues, defencePercentage);
         var aimingPoints = MathHelper.GetModifier(fightValues, aimingPercentage);
-        var initiatorPoints = fightValues - attackPoints - defencePoints - aimingPoints;
-        if (initiatorPoints < 0)
+        var InitiatePoints = fightValues - attackPoints - defencePoints - aimingPoints;
+        if (InitiatePoints < 0)
         {
             throw new InvalidOperationException($"The amount of the percentages ({nameof(attackPercentage)} + {nameof(defencePercentage)} + {nameof(aimingPercentage)}) should be under or equal to 100 percent.");
         }
 
-        return new FightModifier()
+        return new CombatModifier()
         {
-            InitiatingValue = initiatorPoints,
+            InitiateValue = InitiatePoints,
             AttackValue = attackPoints,
             DefenseValue = defencePoints,
-            AimingValue = aimingPoints
+            AimValue = aimingPoints
         };
     }
 

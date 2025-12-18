@@ -1,14 +1,26 @@
 ﻿using M.A.G.U.S.Enums;
+using Newtonsoft.Json;
 
 namespace M.A.G.U.S.GameSystem;
 
-public abstract class Attack(string name, int value, Func<int> getDamageCallback)
+public abstract class Attack
 {
-    public string Name { get; set; } = name;
+    public string Name { get; set; }
 
-    public int Value { get; set; } = value;
+    public int Value { get; set; }
 
-    public Func<int> GetDamage { get; set; } = getDamageCallback;
+    [JsonIgnore]
+    public Func<int> GetDamage { get; set; }
+
+    [JsonConstructor]
+    protected Attack() { }
+
+    public Attack(string name, int value, Func<int> getDamageCallback)
+    {
+        Name = name;
+        Value = value;
+        GetDamage = getDamageCallback;
+    }
 
     public (AttackImpact impact, int value) GetAttack()
     {

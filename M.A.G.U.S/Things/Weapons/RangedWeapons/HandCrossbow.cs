@@ -7,9 +7,9 @@ public class HandCrossbow : Weapon, IRangedWeapon
 {
     public override double AttacksPerRound => 2;
 
-    public int InitiatingValue => 3;
+    public int InitiateValue => 3;
 
-    public int AimingValue => 14;
+    public int AimValue => 14;
 
     public int Distance => 30;
 

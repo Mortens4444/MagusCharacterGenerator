@@ -14,7 +14,7 @@ public sealed class GrayDolphin : Creature
         Size = Size._1_5_meters;
         AttackValue = 40;
         DefenseValue = 80;
-        InitiatingValue = 20;
+        InitiateValue = 20;
         HealthPoints = 15;
         PainTolerancePoints = 30;
         AstralMagicResistance = 3;

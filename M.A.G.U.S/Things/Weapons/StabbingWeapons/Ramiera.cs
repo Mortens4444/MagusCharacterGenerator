@@ -7,11 +7,11 @@ public class Ramiera : Weapon, IMeleeWeapon
 {
     public override double AttacksPerRound => 2;
 
-    public int InitiatingValue => 8;
+    public int InitiateValue => 8;
 
-    public int AttackingValue => 17;
+    public int AttackValue => 17;
 
-    public int DefendingValue => 14;
+    public int DefenseValue => 14;
 
     public override double Weight => 0.8;
 

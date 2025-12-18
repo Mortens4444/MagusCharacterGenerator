@@ -7,11 +7,11 @@ public class LongStaff : Weapon, IMeleeWeapon
 {
     public override double AttacksPerRound => 1;
 
-    public int InitiatingValue => 4;
+    public int InitiateValue => 4;
 
-    public int AttackingValue => 10;
+    public int AttackValue => 10;
 
-    public int DefendingValue => 16;
+    public int DefenseValue => 16;
 
     public override double Weight => 1.2;
 

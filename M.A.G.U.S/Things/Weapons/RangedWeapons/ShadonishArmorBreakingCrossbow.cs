@@ -7,9 +7,9 @@ public class ShadonishArmorBreakingCrossbow : Weapon, IRangedWeapon
 {
     public override double AttacksPerRound => 1 / 5;
 
-    public int InitiatingValue => 0;
+    public int InitiateValue => 0;
 
-    public int AimingValue => 17;
+    public int AimValue => 17;
 
     public int Distance => 80;
 

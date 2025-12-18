@@ -7,11 +7,11 @@ public class ElvenDagger : Weapon, IMeleeWeapon
 {
     public override double AttacksPerRound => 2;
 
-    public int InitiatingValue => 9;
+    public int InitiateValue => 9;
 
-    public int AttackingValue => 9;
+    public int AttackValue => 9;
 
-    public int DefendingValue => 2;
+    public int DefenseValue => 2;
 
     public override double Weight => 0.2;
 

@@ -7,11 +7,11 @@ public class LightLance : Weapon, IMeleeWeapon
 {
     public override double AttacksPerRound => 1;
 
-    public int InitiatingValue => 2;
+    public int InitiateValue => 2;
 
-    public int AttackingValue => 11;
+    public int AttackValue => 11;
 
-    public int DefendingValue => 12;
+    public int DefenseValue => 12;
 
     public override double Weight => 2;
 

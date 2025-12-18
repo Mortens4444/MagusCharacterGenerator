@@ -7,11 +7,11 @@ public class Fist : Weapon, IMeleeWeapon
 {
     public override double AttacksPerRound => 2;
 
-    public int InitiatingValue => 10;
+    public int InitiateValue => 10;
 
-    public int AttackingValue => 4;
+    public int AttackValue => 4;
 
-    public int DefendingValue => 1;
+    public int DefenseValue => 1;
 
     public override double Weight => 0;
 

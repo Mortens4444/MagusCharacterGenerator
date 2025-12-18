@@ -3,15 +3,35 @@ using M.A.G.U.S.GameSystem.Magic;
 using M.A.G.U.S.Interfaces;
 using M.A.G.U.S.Qualifications.Specialities;
 using M.A.G.U.S.Utils;
+using System.Text.Json.Serialization;
 
 namespace M.A.G.U.S.GameSystem;
 
 public partial class Character
 {
+    [NonSerialized, JsonIgnore, Newtonsoft.Json.JsonIgnore]
     private int manaPoints;
+
+    [NonSerialized, JsonIgnore, Newtonsoft.Json.JsonIgnore]
     private int maxManaPoints;
+
+    [NonSerialized, JsonIgnore, Newtonsoft.Json.JsonIgnore]
     private int unconsciousAstralMagicResistance;
+
+    [NonSerialized, JsonIgnore, Newtonsoft.Json.JsonIgnore]
     private int unconsciousMentalMagicResistance;
+
+    [NonSerialized, JsonIgnore, Newtonsoft.Json.JsonIgnore]
+    private int staticAstralPsiShield;
+
+    [NonSerialized, JsonIgnore, Newtonsoft.Json.JsonIgnore]
+    private int staticMentalPsiShield;
+
+    [NonSerialized, JsonIgnore, Newtonsoft.Json.JsonIgnore]
+    public int dynamicAstralPsiShield;
+
+    [NonSerialized, JsonIgnore, Newtonsoft.Json.JsonIgnore]
+    public int dynamicMentalPsiShield;
 
     public Sorcery? Sorcery { get; set; }
 
@@ -69,18 +89,70 @@ public partial class Character
         }
     }
 
+    public int StaticAstralPsiShield
+    {
+        get => staticAstralPsiShield;
+        set
+        {
+            if (value != staticAstralPsiShield)
+            {
+                staticAstralPsiShield = value;
+                OnPropertyChanged();
+            }
+        }
+    }
+
+    public int StaticMentalPsiShield
+    {
+        get => staticMentalPsiShield;
+        set
+        {
+            if (value != staticMentalPsiShield)
+            {
+                staticMentalPsiShield = value;
+                OnPropertyChanged();
+            }
+        }
+    }
+
+    public int DynamicAstralPsiShield
+    {
+        get => dynamicAstralPsiShield;
+        set
+        {
+            if (value != dynamicAstralPsiShield)
+            {
+                dynamicAstralPsiShield = value;
+                OnPropertyChanged();
+            }
+        }
+    }
+
+    public int DynamicMentalPsiShield
+    {
+        get => dynamicMentalPsiShield;
+        set
+        {
+            if (value != dynamicMentalPsiShield)
+            {
+                dynamicMentalPsiShield = value;
+                OnPropertyChanged();
+            }
+        }
+    }
+
     private void CalculateUnconsciousAstralMagicResistance()
     {
-        var doubledPainToleranceBase = Race.SpecialQualifications.GetSpeciality<ExtraMagicResistanceOnLevelUp>();
+        var extraMagicResistanceOnLevelUp = Race.SpecialQualifications.GetSpeciality<ExtraMagicResistanceOnLevelUp>();
         UnconsciousAstralMagicResistance = MathHelper.GetAboveAverageValue(Astral);
-        UnconsciousAstralMagicResistance += (BaseClass.Level - 1) * (doubledPainToleranceBase?.ExtraResistancePoints ?? 0);
+        UnconsciousAstralMagicResistance += (BaseClass.Level - 1) * (extraMagicResistanceOnLevelUp?.ExtraResistancePoints ?? 0);
     }
 
     private void CalculateUnconsciousMentalMagicResistance()
     {
-        var doubledPainToleranceBase = Race.SpecialQualifications.GetSpeciality<ExtraMagicResistanceOnLevelUp>();
+        var extraMagicResistanceOnLevelUp = Race.SpecialQualifications.GetSpeciality<ExtraMagicResistanceOnLevelUp>();
         UnconsciousMentalMagicResistance = MathHelper.GetAboveAverageValue(Willpower);
-        UnconsciousMentalMagicResistance += (BaseClass.Level - 1) * (doubledPainToleranceBase?.ExtraResistancePoints ?? 0);
+        UnconsciousMentalMagicResistance += (BaseClass.Level - 1) * (extraMagicResistanceOnLevelUp?.ExtraResistancePoints ?? 0);
     }
 
     private void CalculateManaPoints(ISettings? settings)

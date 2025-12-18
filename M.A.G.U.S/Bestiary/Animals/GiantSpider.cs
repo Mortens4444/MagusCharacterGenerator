@@ -13,7 +13,7 @@ public sealed class GiantSpider : Creature
         Size = Size.Small;
         AttackValue = 30;
         DefenseValue = 60;
-        InitiatingValue = 25;
+        InitiateValue = 25;
         HealthPoints = 6;
         PainTolerancePoints = 13;
         PoisonResistance = 8;

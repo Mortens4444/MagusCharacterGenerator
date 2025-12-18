@@ -7,11 +7,11 @@ public class ShadlekianMace : Weapon, IMeleeWeapon
 {
     public override double AttacksPerRound => 1;
 
-    public int InitiatingValue => 8;
+    public int InitiateValue => 8;
 
-    public int AttackingValue => 13;
+    public int AttackValue => 13;
 
-    public int DefendingValue => 14;
+    public int DefenseValue => 14;
 
     public override double Weight => 1.8;
 

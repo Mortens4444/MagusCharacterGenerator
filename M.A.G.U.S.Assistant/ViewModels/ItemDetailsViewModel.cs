@@ -44,7 +44,7 @@ internal partial class ItemDetailsViewModel : BaseViewModel
                 RuneTargets.Add(item);
             }
 
-            IsRunecraftingVisible = RuneTargets.Any();
+            IsRunecraftingVisible = RuneTargets.Any() && (thingToBuy is RuneArmor || thingToBuy is RuneSword);
             SelectedRuneTarget = RuneTargets.FirstOrDefault();
         }
         else

@@ -7,11 +7,11 @@ public class OneHandedHatchet : Weapon, IMeleeWeapon
 {
     public override double AttacksPerRound => 1;
 
-    public int InitiatingValue => 5;
+    public int InitiateValue => 5;
 
-    public int AttackingValue => 12;
+    public int AttackValue => 12;
 
-    public int DefendingValue => 11;
+    public int DefenseValue => 11;
 
     public override double Weight => 2;
 

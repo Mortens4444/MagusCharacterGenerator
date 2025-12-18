@@ -18,7 +18,7 @@ public sealed class Vampire : LivingDead
         Size = Size.Human;
         AttackValue = 80;
         DefenseValue = 120;
-        InitiatingValue = 32;
+        InitiateValue = 32;
         AttacksPerRound = 2;
         AttackModes =
         [

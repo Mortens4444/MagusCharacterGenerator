@@ -6,11 +6,11 @@ public class Lasso : Weapon, IMeleeWeapon
 {
     public override double AttacksPerRound => 1/3;
 
-    public int InitiatingValue => 0;
+    public int InitiateValue => 0;
 
-    public int AttackingValue => 1;
+    public int AttackValue => 1;
 
-    public int DefendingValue => 0;
+    public int DefenseValue => 0;
 
     public override double Weight => 0.6;
 

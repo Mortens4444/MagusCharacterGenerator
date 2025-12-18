@@ -8,7 +8,7 @@ public interface IWeapon
 
     double AttacksPerRound { get; }
 
-    int InitiatingValue { get; }
+    int InitiateValue { get; }
 
     double Weight { get; }
 

@@ -26,7 +26,7 @@ public sealed class Dragon : Creature
         ];
         AttackValue = 70;
         DefenseValue = 125;
-        InitiatingValue = 0;
+        InitiateValue = 0;
         MinHealthPoints = 50;
         MaxHealthPoints = 250;
         MinPainTolerancePoints = 150;

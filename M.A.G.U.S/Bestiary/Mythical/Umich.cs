@@ -21,7 +21,7 @@ public sealed class Umich : Creature
         ];
         AttackValue = 95;
         DefenseValue = 130;
-        InitiatingValue = 45;
+        InitiateValue = 45;
         HealthPoints = 50;
         HealthPoints = 110;
         AstralMagicResistance = Byte.MaxValue;

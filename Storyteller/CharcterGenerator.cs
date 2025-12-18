@@ -179,9 +179,9 @@ public partial class CharcterGenerator : Form
 
 		LoadCharacterProperties();
 
-		SetInitiatingValue();
-		SetAttackingValue();
-		SetDefendingValue();
+		SetInitiateValue();
+		SetAttackValue();
+		SetDefenseValue();
 		SetAimingValue();
 		SetHealthPoints();
 		SetPaintTolerancePoints();
@@ -242,16 +242,16 @@ public partial class CharcterGenerator : Form
 			case nameof(character.PainTolerancePoints):
 				SetPaintTolerancePoints();
 				break;
-			case nameof(character.InitiatingValue):
-				SetInitiatingValue();
+			case nameof(character.InitiateValue):
+				SetInitiateValue();
 				break;
 			case nameof(character.AttackValue):
-				SetAttackingValue();
+				SetAttackValue();
 				break;
 			case nameof(character.DefenseValue):
-				SetDefendingValue();
+				SetDefenseValue();
 				break;
-			case nameof(character.AimingValue):
+			case nameof(character.AimValue):
 				SetAimingValue();
 				break;
 			case nameof(character.UnconsciousAstralMagicResistance):
@@ -306,7 +306,7 @@ public partial class CharcterGenerator : Form
 
 	private void SetAimingValue()
 	{
-		nudAimV.Value = character.AimingValue.Value;
+		nudAimV.Value = character.AimValue;
 	}
 
 	private void SetPsiPoints()
@@ -314,19 +314,19 @@ public partial class CharcterGenerator : Form
 		nudPsiPoints.Value = character.PsiPoints;
 	}
 
-	private void SetDefendingValue()
+	private void SetDefenseValue()
 	{
 		nudDV.Value = character.DefenseValue;
 	}
 
-	private void SetAttackingValue()
+	private void SetAttackValue()
 	{
 		nudAV.Value = character.AttackValue;
 	}
 
-	private void SetInitiatingValue()
+	private void SetInitiateValue()
 	{
-		nudIV.Value = character.InitiatingValue;
+		nudIV.Value = character.InitiateValue;
 	}
 
 	#endregion

@@ -7,9 +7,9 @@ public class Shortbow : Weapon, IRangedWeapon
 {
     public override double AttacksPerRound => 2;
 
-    public int InitiatingValue => 5;
+    public int InitiateValue => 5;
 
-    public int AimingValue => 4;
+    public int AimValue => 4;
 
     public int Distance => 90;
 

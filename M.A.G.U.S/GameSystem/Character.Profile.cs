@@ -1,12 +1,16 @@
 ﻿using M.A.G.U.S.Enums;
 using M.A.G.U.S.Interfaces;
 using M.A.G.U.S.Races;
+using System.Text.Json.Serialization;
 
 namespace M.A.G.U.S.GameSystem;
 
 public partial class Character
 {
+    [NonSerialized, JsonIgnore, Newtonsoft.Json.JsonIgnore]
     private IRace race;
+
+    [NonSerialized, JsonIgnore, Newtonsoft.Json.JsonIgnore]
     private readonly MultiClassMode multiClassMode = MultiClassMode.Normal_Or_SwitchedClass;
 
     public string Birthplace { get; set; }

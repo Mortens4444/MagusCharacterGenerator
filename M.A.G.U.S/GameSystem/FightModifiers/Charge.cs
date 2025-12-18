@@ -1,12 +1,12 @@
 ﻿namespace M.A.G.U.S.GameSystem.FightModifiers;
 
-public class Charge : IFightModifier
+public class Charge : ICombatModifier
 {
-    public int InitiatingValue => 0;
+    public int InitiateValue => 0;
 
     public int AttackValue => 20;
 
     public int DefenseValue => -25;
 
-    public int? AimingValue => -30;
+    public int AimValue => -30;
 }

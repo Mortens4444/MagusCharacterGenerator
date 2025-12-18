@@ -12,11 +12,13 @@ using M.A.G.U.S.Utils;
 using Mtf.Extensions;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
+using System.Text.Json.Serialization;
 
 namespace M.A.G.U.S.GameSystem;
 
 public partial class Character
 {
+    [NonSerialized, JsonIgnore, Newtonsoft.Json.JsonIgnore]
     private int qualificationPoints;
 
     public QualificationList Qualifications { get; private set; } = [];

@@ -9,11 +9,11 @@ public class LargeShield : Shield, IMeleeWeapon
 {
 	public override double AttacksPerRound => 1 / 2;
 
-    public int AttackingValue => 0;
+    public int AttackValue => 0;
 
-    public int InitiatingValue => 0;
+    public int InitiateValue => 0;
 
-	public int DefendingValue => 50;
+	public int DefenseValue => 50;
 
 	public int MovementObstructiveFactor => 5;
 

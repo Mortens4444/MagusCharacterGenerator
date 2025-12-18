@@ -7,11 +7,11 @@ public class ShortStaff : Weapon, IMeleeWeapon
 {
     public override double AttacksPerRound => 1;
 
-    public int InitiatingValue => 9;
+    public int InitiateValue => 9;
 
-    public int AttackingValue => 9;
+    public int AttackValue => 9;
 
-    public int DefendingValue => 17;
+    public int DefenseValue => 17;
 
     public override double Weight => 0.7;
 

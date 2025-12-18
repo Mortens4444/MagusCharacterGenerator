@@ -1,12 +1,12 @@
 ﻿namespace M.A.G.U.S.GameSystem.FightModifiers;
 
-public class FightFromAbove : IFightModifier
+public class FightFromAbove : ICombatModifier
 {
-    public int InitiatingValue => 2;
+    public int InitiateValue => 2;
 
     public int AttackValue => 5;
 
     public int DefenseValue => 0;
 
-    public int? AimingValue => 5;
+    public int AimValue => 5;
 }

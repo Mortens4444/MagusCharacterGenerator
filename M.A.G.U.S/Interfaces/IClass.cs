@@ -11,7 +11,7 @@ public interface IClass : IAttacker, IAbilities
 
     int Level { get; }
 
-    int FightValueModifier { get; }
+    int CombatValueModifierPerLevel { get; }
 
     int BaseQualificationPoints { get; }
 

@@ -2,14 +2,22 @@
 using M.A.G.U.S.Interfaces;
 using M.A.G.U.S.Qualifications.Specialities;
 using M.A.G.U.S.Utils;
+using System.Text.Json.Serialization;
 
 namespace M.A.G.U.S.GameSystem;
 
 public partial class Character
 {
+    [NonSerialized, JsonIgnore, Newtonsoft.Json.JsonIgnore]
     private int healthPoints;
+
+    [NonSerialized, JsonIgnore, Newtonsoft.Json.JsonIgnore]
     private int maxHealthPoints;
+
+    [NonSerialized, JsonIgnore, Newtonsoft.Json.JsonIgnore]
     private int painTolerancePoints;
+
+    [NonSerialized, JsonIgnore, Newtonsoft.Json.JsonIgnore]
     private int maxPainTolerancePoints;
 
     public int HealthPoints

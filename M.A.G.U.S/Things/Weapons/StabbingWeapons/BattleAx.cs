@@ -7,11 +7,11 @@ public class BattleAx : Weapon, IMeleeWeapon
 {
     public override double AttacksPerRound => 1;
 
-    public int InitiatingValue => 5;
+    public int InitiateValue => 5;
 
-    public int AttackingValue => 11;
+    public int AttackValue => 11;
 
-    public int DefendingValue => 8;
+    public int DefenseValue => 8;
 
     public override double Weight => 2.5;
 

@@ -7,11 +7,11 @@ public class SlanDagger : Weapon, IMeleeWeapon
 {
     public override double AttacksPerRound => 2;
 
-    public int InitiatingValue => 9;
+    public int InitiateValue => 9;
 
-    public int AttackingValue => 14;
+    public int AttackValue => 14;
 
-    public int DefendingValue => 6;
+    public int DefenseValue => 6;
 
     public override double Weight => 0.8;
 

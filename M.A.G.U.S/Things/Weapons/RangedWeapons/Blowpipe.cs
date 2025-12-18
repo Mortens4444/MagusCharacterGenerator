@@ -7,9 +7,9 @@ public class Blowpipe : Weapon, IRangedWeapon
 {
     public override double AttacksPerRound => 3;
 
-    public int InitiatingValue => 8;
+    public int InitiateValue => 8;
 
-    public int AimingValue => 7;
+    public int AimValue => 7;
 
     public int Distance => 30;
 

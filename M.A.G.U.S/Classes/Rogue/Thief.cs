@@ -72,15 +72,15 @@ public class Thief : Class, IClass, IJustFight
     [DiceThrowModifier(12)]
     public override int Detection { get; set; }
 
-    public override int InitiatingBaseValue => 8;
+    public override int InitiateBaseValue => 8;
 
-    public override int AttackingBaseValue => 17;
+    public override int AttackBaseValue => 17;
 
-    public override int DefendingBaseValue => 72;
+    public override int DefenseBaseValue => 72;
 
-    public override int AimingBaseValue => 10;
+    public override int AimBaseValue => 10;
 
-    public override int FightValueModifier => 6;
+    public override int CombatValueModifierPerLevel => 6;
 
     public override int BaseQualificationPoints => 8;
 
@@ -137,7 +137,7 @@ public class Thief : Class, IClass, IJustFight
 
     public override SpecialQualificationList SpecialQualifications =>
     [
-        new ThiefInitiatingValueIncreasing()
+        new ThiefInitiateValueIncreasing()
     ];
 
     [DiceThrow(ThrowType._1D6)]

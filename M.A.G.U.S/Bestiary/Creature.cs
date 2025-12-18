@@ -100,7 +100,7 @@ public abstract class Creature : Attacker
     public int GetInitiate()
     {
         var roll = DiceThrow._1D10();
-        return InitiatingValue + roll;
+        return InitiateValue + roll;
     }
     
     public abstract int GetNumberAppearing();

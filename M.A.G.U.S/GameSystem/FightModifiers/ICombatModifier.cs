@@ -1,12 +1,12 @@
 ﻿namespace M.A.G.U.S.GameSystem.FightModifiers;
 
-public interface IFightModifier
+public interface ICombatModifier
 {
-    int InitiatingValue { get; }
+    int InitiateValue { get; }
 
     int AttackValue { get; }
 
     int DefenseValue { get; }
 
-    int? AimingValue { get; }
+    int AimValue { get; }
 }

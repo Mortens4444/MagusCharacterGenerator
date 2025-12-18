@@ -14,7 +14,7 @@ public sealed class Bear : Creature
         Size = Size.Big;
         AttackValue = 70;
         DefenseValue = 60;
-        InitiatingValue = 5;
+        InitiateValue = 5;
         AttacksPerRound = 3;
         AttackModes =
         [

@@ -14,7 +14,7 @@ public sealed class LizardWizard : Creature
         Size = Size.Human;
         AttackValue = 64;
         DefenseValue = 108;
-        InitiatingValue = 35;
+        InitiateValue = 35;
         AttacksPerRound = 3;
         HealthPoints = 18;
         PainTolerancePoints = 70;

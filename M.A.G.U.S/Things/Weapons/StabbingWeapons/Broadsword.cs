@@ -7,11 +7,11 @@ public class Broadsword : Weapon, IMeleeWeapon
 {
     public override double AttacksPerRound => 1 / 2;
 
-    public int InitiatingValue => 0;
+    public int InitiateValue => 0;
 
-    public int AttackingValue => 6;
+    public int AttackValue => 6;
 
-    public int DefendingValue => 2;
+    public int DefenseValue => 2;
 
     public override double Weight => 7;
 

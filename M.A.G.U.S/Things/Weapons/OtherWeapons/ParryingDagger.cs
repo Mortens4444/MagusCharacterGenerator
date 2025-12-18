@@ -7,11 +7,11 @@ public class ParryingDagger : Weapon, IMeleeWeapon
 {
     public override double AttacksPerRound => 2;
 
-    public int InitiatingValue => 8;
+    public int InitiateValue => 8;
 
-    public int AttackingValue => 4;
+    public int AttackValue => 4;
 
-    public int DefendingValue => 19;
+    public int DefenseValue => 19;
 
     public override double Weight => 0.3;
 

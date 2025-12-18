@@ -7,11 +7,11 @@ public class SlanSword : Weapon, IMeleeWeapon
 {
     public override double AttacksPerRound => 1;
 
-    public int InitiatingValue => 8;
+    public int InitiateValue => 8;
 
-    public int AttackingValue => 20;
+    public int AttackValue => 20;
 
-    public int DefendingValue => 12;
+    public int DefenseValue => 12;
 
     public override double Weight => 1.4;
 

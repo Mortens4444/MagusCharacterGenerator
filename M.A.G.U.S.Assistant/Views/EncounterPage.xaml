@@ -84,7 +84,7 @@
 
         <!-- Run turn -->
         <Button Grid.Row="1" Grid.ColumnSpan="3" FontAttributes="Bold"
-                Text="Run One Turn" Command="{Binding RunTurnCommand}" />
+                Text="Start New Round" Command="{Binding RunTurnCommand}" />
 
         <!-- Turns details -->
         <StackLayout Grid.ColumnSpan="3" Spacing="8">

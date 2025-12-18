@@ -7,11 +7,11 @@ public class JadJambiya : Weapon, IMeleeWeapon
 {
     public override double AttacksPerRound => 2;
 
-    public int InitiatingValue => 10;
+    public int InitiateValue => 10;
 
-    public int AttackingValue => 12;
+    public int AttackValue => 12;
 
-    public int DefendingValue => 15;
+    public int DefenseValue => 15;
 
     public override double Weight => 0.8;
 

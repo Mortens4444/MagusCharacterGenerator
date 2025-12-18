@@ -16,13 +16,13 @@ public sealed class Goblin : Creature
         Size = Size.Small;
         AttackValue = 25;
         DefenseValue = 60;
-        InitiatingValue = 10;
-        AimingValue = 0;
+        InitiateValue = 10;
+        AimValue = 0;
         AttackModes =
         [
             new MeleeAttack(new CarvedClub(), AttackValue),
             new MeleeAttack(new ShortSword(), AttackValue),
-            new RangeAttack(new Shortbow(), AimingValue.Value)
+            new RangeAttack(new Shortbow(), AimValue)
         ];
         HealthPoints = 7;
         PainTolerancePoints = 12;

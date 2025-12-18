@@ -79,15 +79,15 @@ public class Bard : Class, IClass, IJustFight
     [DiceThrowModifier(8)]
     public override int Detection { get; set; }
 
-    public override int InitiatingBaseValue => 10;
+    public override int InitiateBaseValue => 10;
 
-    public override int AttackingBaseValue => 20;
+    public override int AttackBaseValue => 20;
 
-    public override int DefendingBaseValue => 75;
+    public override int DefenseBaseValue => 75;
 
-    public override int AimingBaseValue => 10;
+    public override int AimBaseValue => 10;
 
-    public override int FightValueModifier => 9;
+    public override int CombatValueModifierPerLevel => 9;
 
     public override int BaseQualificationPoints => 4;
 

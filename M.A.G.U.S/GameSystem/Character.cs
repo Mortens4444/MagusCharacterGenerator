@@ -5,13 +5,20 @@ using M.A.G.U.S.Interfaces;
 using M.A.G.U.S.Races;
 using M.A.G.U.S.Utils;
 using System.ComponentModel;
+using System.Runtime.Serialization;
+using System.Text.Json.Serialization;
 
 namespace M.A.G.U.S.GameSystem;
 
-public partial class Character : Attacker, IFightModifier, ILiving, IAbilities, INotifyPropertyChanged
+public partial class Character : Attacker, ICombatModifier, ILiving, IAbilities, INotifyPropertyChanged
 {
+    [NonSerialized, JsonIgnore, Newtonsoft.Json.JsonIgnore]
+    private bool isDeserializing;
+
+    [NonSerialized, JsonIgnore, Newtonsoft.Json.JsonIgnore]
     private bool calculateChanges;
 
+    [NonSerialized, JsonIgnore, Newtonsoft.Json.JsonIgnore]
     private readonly ISettings? settings;
 
     public bool PlayerCharacter { get; set; }
@@ -46,12 +53,6 @@ public partial class Character : Attacker, IFightModifier, ILiving, IAbilities, 
         secondaryWeapon = ResolveWeaponById(SecondaryWeaponId);
     }
 
-    private void EnsureSubscriptions()
-    {
-        Equipment.CollectionChanged += EquipmentOnCollectionChanged;
-        Qualifications.CollectionChanged += Qualifications_CollectionChanged;
-    }
-
     public static Character Load(string fullPath, ISettings settings)
     {
         var result = ObjectSerializer.LoadFile<Character>(fullPath);
@@ -77,5 +78,24 @@ public partial class Character : Attacker, IFightModifier, ILiving, IAbilities, 
         CalculateUnconsciousMentalMagicResistance();
 
         CalculateGold();
+    }
+
+    private void EnsureSubscriptions()
+    {
+        Equipment.CollectionChanged += EquipmentOnCollectionChanged;
+        Qualifications.CollectionChanged += Qualifications_CollectionChanged;
+    }
+
+    [OnDeserializing]
+    private void OnDeserializing(StreamingContext context)
+    {
+        isDeserializing = true;
+    }
+
+    [OnDeserialized]
+    private void OnDeserialized(StreamingContext context)
+    {
+        isDeserializing = false;
+        RecalculateFightValues(settings);
     }
 }

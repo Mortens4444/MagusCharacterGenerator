@@ -7,11 +7,11 @@ public class HeadhunterSword : Weapon, IMeleeWeapon
 {
     public override double AttacksPerRound => 1;
 
-    public int InitiatingValue => 8;
+    public int InitiateValue => 8;
 
-    public int AttackingValue => 16;
+    public int AttackValue => 16;
 
-    public int DefendingValue => 16;
+    public int DefenseValue => 16;
 
     public override double Weight => 0.8;
 

@@ -74,11 +74,11 @@ internal partial class ClassesViewModel : BaseViewModel
         }
     }
 
-    public int InitiatingBaseValue => SelectedClass?.InitiatingBaseValue ?? 0;
-    public int AttackingBaseValue => SelectedClass?.AttackingBaseValue ?? 0;
-    public int DefendingBaseValue => SelectedClass?.DefendingBaseValue ?? 0;
-    public int AimingBaseValue => SelectedClass?.AimingBaseValue ?? 0;
-    public int FightValueModifier => SelectedClass?.FightValueModifier ?? 0;
+    public int InitiateBaseValue => SelectedClass?.InitiateBaseValue ?? 0;
+    public int AttackBaseValue => SelectedClass?.AttackBaseValue ?? 0;
+    public int DefenseBaseValue => SelectedClass?.DefenseBaseValue ?? 0;
+    public int AimBaseValue => SelectedClass?.AimBaseValue ?? 0;
+    public int CombatValueModifierPerLevel => SelectedClass?.CombatValueModifierPerLevel ?? 0;
     public QualificationList Qualifications => SelectedClass?.Qualifications ?? [];
     public List<PercentQualification> PercentQualifications => SelectedClass?.PercentQualifications ?? [];
     public SpecialQualificationList SpecialQualifications => SelectedClass?.SpecialQualifications ?? [];

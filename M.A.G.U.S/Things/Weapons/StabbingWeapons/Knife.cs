@@ -7,11 +7,11 @@ public class Knife : Weapon, IMeleeWeapon
 {
     public override double AttacksPerRound => 2;
 
-    public int InitiatingValue => 10;
+    public int InitiateValue => 10;
 
-    public int AttackingValue => 4;
+    public int AttackValue => 4;
 
-    public int DefendingValue => 0;
+    public int DefenseValue => 0;
 
     public override double Weight => 0.2;
 

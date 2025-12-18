@@ -5,7 +5,7 @@ namespace M.A.G.U.S.GameSystem.FightMode;
 
 public static class DistributionProvider
 {
-    public static (int AttackPercentage, int DefensePercentage, int AimingPercentage) Get(IClass @class, IRace race)
+    public static (int AttackPercentage, int DefensePercentage, int AimPercentage) Get(IClass @class, IRace race)
     {
         if ((@class is IUseRangedWeapons) && (race is IUseRangedWeapons))
         {

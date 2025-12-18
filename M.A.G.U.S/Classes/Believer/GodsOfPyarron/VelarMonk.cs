@@ -73,15 +73,15 @@ public class VelarMonk : Class, IClass, ILikeMagic
     [DiceThrowModifier(8)]
     public override int Detection { get; set; }
 
-    public override int InitiatingBaseValue => 6;
+    public override int InitiateBaseValue => 6;
 
-    public override int AttackingBaseValue => 15;
+    public override int AttackBaseValue => 15;
 
-    public override int DefendingBaseValue => 75;
+    public override int DefenseBaseValue => 75;
 
-    public override int AimingBaseValue => 0;
+    public override int AimBaseValue => 0;
 
-    public override int FightValueModifier => 8;
+    public override int CombatValueModifierPerLevel => 8;
 
     public override int BaseQualificationPoints => 5;
 

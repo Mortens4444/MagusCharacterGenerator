@@ -13,8 +13,8 @@ public sealed class LizardCreature : Creature
         Size = Size.Human;
         AttackValue = 60;
         DefenseValue = 100;
-        InitiatingValue = 25;
-        AimingValue = 30;
+        InitiateValue = 25;
+        AimValue = 30;
         HealthPoints = 15;
         PainTolerancePoints = 55;
         AstralMagicResistance = 22;

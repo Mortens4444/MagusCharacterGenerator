@@ -7,11 +7,11 @@ public class JannSaber : Weapon, IMeleeWeapon
 {
     public override double AttacksPerRound => 1;
 
-    public int InitiatingValue => 9;
+    public int InitiateValue => 9;
 
-    public int AttackingValue => 20;
+    public int AttackValue => 20;
 
-    public int DefendingValue => 17;
+    public int DefenseValue => 17;
 
     public override double Weight => 0.5;
 

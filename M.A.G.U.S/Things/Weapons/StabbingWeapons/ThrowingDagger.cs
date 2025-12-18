@@ -7,11 +7,11 @@ public class ThrowingDagger : Weapon, IMeleeWeapon
 {
     public override double AttacksPerRound => 2;
 
-    public int InitiatingValue => 10;
+    public int InitiateValue => 10;
 
-    public int AttackingValue => 11;
+    public int AttackValue => 11;
 
-    public int DefendingValue => 2;
+    public int DefenseValue => 2;
 
     public override double Weight => 0.5;
 

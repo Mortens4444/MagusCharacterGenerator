@@ -8,9 +8,9 @@ public class MediumShield : Shield
 {
     public override double AttacksPerRound => 1;
 
-    public int InitiatingValue => 0;
+    public int InitiateValue => 0;
 
-    public int DefendingValue => 35;
+    public int DefenseValue => 35;
 
     public int MovementObstructiveFactor => 1;
 

@@ -1,12 +1,12 @@
 ﻿namespace M.A.G.U.S.GameSystem.FightModifiers;
 
-public class FightAsDizzily : IFightModifier
+public class FightAsDizzily : ICombatModifier
 {
-    public int InitiatingValue => -15;
+    public int InitiateValue => -15;
 
     public int AttackValue => -20;
 
     public int DefenseValue => -25;
 
-    public int? AimingValue => -30;
+    public int AimValue => -30;
 }

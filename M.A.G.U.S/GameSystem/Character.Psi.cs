@@ -3,18 +3,22 @@ using M.A.G.U.S.GameSystem.Qualifications;
 using M.A.G.U.S.Interfaces;
 using M.A.G.U.S.Qualifications.Specialities;
 using M.A.G.U.S.Utils;
+using System.Text.Json.Serialization;
 
 namespace M.A.G.U.S.GameSystem;
 
 public partial class Character
 {
+    [NonSerialized, JsonIgnore, Newtonsoft.Json.JsonIgnore]
+    private int psiPoints;
+
+    [NonSerialized, JsonIgnore, Newtonsoft.Json.JsonIgnore]
+    private int maxPsiPoints;
+
     public const int KyrModifier = 6;
     public const int SlanModifier = 5;
     public const int PyarronMasterModifier = 4;
     public const int PyarronBaseModifier = 3;
-
-    private int psiPoints;
-    private int maxPsiPoints;
 
     public IPsi? Psi { get; set; }
 

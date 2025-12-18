@@ -7,9 +7,9 @@ public class LightCrossbow : Weapon, IRangedWeapon
 {
     public override double AttacksPerRound => 1;
 
-    public int InitiatingValue => 2;
+    public int InitiateValue => 2;
 
-    public int AimingValue => 16;
+    public int AimValue => 16;
 
     public int Distance => 50;
 

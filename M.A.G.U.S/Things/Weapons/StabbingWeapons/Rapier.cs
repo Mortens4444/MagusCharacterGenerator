@@ -7,11 +7,11 @@ public class Rapier : Weapon, IMeleeWeapon
 {
     public override double AttacksPerRound => 2;
 
-    public int InitiatingValue => 9;
+    public int InitiateValue => 9;
 
-    public int AttackingValue => 12;
+    public int AttackValue => 12;
 
-    public int DefendingValue => 14;
+    public int DefenseValue => 14;
 
     public override double Weight => 0.8;
 

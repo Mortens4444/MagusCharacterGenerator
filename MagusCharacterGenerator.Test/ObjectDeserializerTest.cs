@@ -15,7 +15,7 @@ namespace M.A.G.U.S.Test
 		[Test]
 		public void SeralizeAndDeserializeAnonymousClass()
         {
-            var anonymousClass = new
+            var anonymousClass = new TestDto
             {
                 Value = 1,
                 Date = DateTime.MaxValue,
@@ -27,7 +27,7 @@ namespace M.A.G.U.S.Test
                 Character = GetCharacter("Anuman", new Amund(), typeof(ArelPriest), 1)
             };
             var anonymousClassJson = ObjectSerializer.GetSerializedString(anonymousClass);
-            var deserializedAnonymousClassJson = ObjectSerializer.LoadContent<dynamic>(anonymousClassJson);
+            var deserializedAnonymousClassJson = ObjectSerializer.LoadContent<TestDto>(anonymousClassJson);
             Assert.That(anonymousClass.Value, Is.EqualTo(deserializedAnonymousClassJson.Value));
             Assert.That(anonymousClass.Date, Is.EqualTo(deserializedAnonymousClassJson.Date));
             Assert.That(anonymousClass.Name, Is.EqualTo(deserializedAnonymousClassJson.Name));

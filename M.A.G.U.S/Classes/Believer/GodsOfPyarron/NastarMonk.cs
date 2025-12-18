@@ -73,15 +73,15 @@ public class NastarMonk : Class, IClass, ILikeMagic
     [DiceThrowModifier(8)]
     public override int Detection { get; set; }
 
-    public override int InitiatingBaseValue => 4;
+    public override int InitiateBaseValue => 4;
 
-    public override int AttackingBaseValue => 14;
+    public override int AttackBaseValue => 14;
 
-    public override int DefendingBaseValue => 75;
+    public override int DefenseBaseValue => 75;
 
-    public override int AimingBaseValue => 0;
+    public override int AimBaseValue => 0;
 
-    public override int FightValueModifier => 7;
+    public override int CombatValueModifierPerLevel => 7;
 
     public override int BaseQualificationPoints => 5;
 

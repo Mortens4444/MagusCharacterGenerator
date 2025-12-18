@@ -1,12 +1,12 @@
 ﻿namespace M.A.G.U.S.GameSystem.FightModifiers;
 
-public class FightInSemiDarkness : IFightModifier
+public class FightInSemiDarkness : ICombatModifier
 {
-    public int InitiatingValue => -15;
+    public int InitiateValue => -15;
 
     public int AttackValue => -30;
 
     public int DefenseValue => -35;
 
-    public int? AimingValue => -70;
+    public int AimValue => -70;
 }

@@ -6,13 +6,13 @@ namespace M.A.G.U.S.Things.Weapons;
 
 public class BreathWeaponcs(string name, ThrowType throwType, int modifier = 0) : IRangedWeapon
 {
-    public int AimingValue => 0;
+    public int AimValue => 0;
 
     public string Name => name;
 
     public virtual double AttacksPerRound => 1;
 
-    public int InitiatingValue => 0;
+    public int InitiateValue => 0;
 
     public double Weight => 0;
 

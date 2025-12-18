@@ -8,9 +8,9 @@ public class SmallShield : Shield
 {
     public override double AttacksPerRound => 1;
 
-    public int InitiatingValue => 1;
+    public int InitiateValue => 1;
 
-    public int DefendingValue => 20;
+    public int DefenseValue => 20;
 
     public int MovementObstructiveFactor => 0;
 

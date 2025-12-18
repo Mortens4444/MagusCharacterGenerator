@@ -7,11 +7,11 @@ public class Harpoon : Weapon, IMeleeWeapon
 {
     public override double AttacksPerRound => 1;
 
-    public int InitiatingValue => 4;
+    public int InitiateValue => 4;
 
-    public int AttackingValue => 15;
+    public int AttackValue => 15;
 
-    public int DefendingValue => 10;
+    public int DefenseValue => 10;
 
     public override double Weight => 2;
 

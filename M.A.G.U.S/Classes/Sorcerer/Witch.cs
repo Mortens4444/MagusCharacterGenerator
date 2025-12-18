@@ -72,15 +72,15 @@ public class Witch : Class, IClass, ILikeMagic
     [DiceThrowModifier(6)]
     public override int Detection { get; set; }
 
-    public override int InitiatingBaseValue => 6;
+    public override int InitiateBaseValue => 6;
 
-    public override int AttackingBaseValue => 14;
+    public override int AttackBaseValue => 14;
 
-    public override int DefendingBaseValue => 69;
+    public override int DefenseBaseValue => 69;
 
-    public override int AimingBaseValue => 0;
+    public override int AimBaseValue => 0;
 
-    public override int FightValueModifier => 4;
+    public override int CombatValueModifierPerLevel => 4;
 
     public override int BaseQualificationPoints => 8;
 

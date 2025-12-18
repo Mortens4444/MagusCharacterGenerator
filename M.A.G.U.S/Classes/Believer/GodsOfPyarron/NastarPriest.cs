@@ -78,15 +78,15 @@ public class NastarPriest : Class, IClass, ILikeMagic
     [SpecialTraining]
     public override int Astral { get; set; }
 
-    public override int InitiatingBaseValue => 4;
+    public override int InitiateBaseValue => 4;
 
-    public override int AttackingBaseValue => 16;
+    public override int AttackBaseValue => 16;
 
-    public override int DefendingBaseValue => 72;
+    public override int DefenseBaseValue => 72;
 
-    public override int AimingBaseValue => 0;
+    public override int AimBaseValue => 0;
 
-    public override int FightValueModifier => 7;
+    public override int CombatValueModifierPerLevel => 7;
 
     public override int BaseQualificationPoints => 6;
 

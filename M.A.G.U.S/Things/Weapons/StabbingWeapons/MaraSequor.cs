@@ -7,11 +7,11 @@ public class MaraSequor : Weapon, IMeleeWeapon
 {
     public override double AttacksPerRound => 1;
 
-    public int InitiatingValue => 7;
+    public int InitiateValue => 7;
 
-    public int AttackingValue => 16;
+    public int AttackValue => 16;
 
-    public int DefendingValue => 14;
+    public int DefenseValue => 14;
 
     public override double Weight => 1;
 

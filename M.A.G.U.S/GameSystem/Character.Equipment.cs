@@ -2,12 +2,16 @@
 using M.A.G.U.S.Things;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
+using System.Text.Json.Serialization;
 
 namespace M.A.G.U.S.GameSystem;
 
 public partial class Character
 {
+    [NonSerialized, JsonIgnore, Newtonsoft.Json.JsonIgnore]
     private string totalEquipmentWeight;
+
+    [NonSerialized, JsonIgnore, Newtonsoft.Json.JsonIgnore]
     private Money money = new(0);
 
     public ObservableCollection<Thing> Equipment { get; init; } = [];

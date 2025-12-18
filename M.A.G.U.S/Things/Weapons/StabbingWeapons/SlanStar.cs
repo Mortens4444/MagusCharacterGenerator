@@ -7,11 +7,11 @@ public class SlanStar : Weapon, IMeleeWeapon
 {
     public override double AttacksPerRound => 3;
 
-    public int InitiatingValue => 10;
+    public int InitiateValue => 10;
 
-    public int AttackingValue => 4;
+    public int AttackValue => 4;
 
-    public int DefendingValue => 4;
+    public int DefenseValue => 4;
 
     public override double Weight => 0.1;
 

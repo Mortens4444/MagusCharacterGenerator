@@ -7,11 +7,11 @@ public class KnightSword : Weapon, IMeleeWeapon
 {
     public override double AttacksPerRound => 1;
 
-    public int InitiatingValue => 2;
+    public int InitiateValue => 2;
 
-    public int AttackingValue => 10;
+    public int AttackValue => 10;
 
-    public int DefendingValue => 7;
+    public int DefenseValue => 7;
 
     public override double Weight => 3.5;
 

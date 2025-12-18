@@ -7,11 +7,11 @@ public class Whip : Weapon, IMeleeWeapon
 {
     public override double AttacksPerRound => 2;
 
-    public int InitiatingValue => 3;
+    public int InitiateValue => 3;
 
-    public int AttackingValue => 6;
+    public int AttackValue => 6;
 
-    public int DefendingValue => 0;
+    public int DefenseValue => 0;
 
     public override double Weight => 0.6;
 

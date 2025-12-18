@@ -1,12 +1,12 @@
 ﻿namespace M.A.G.U.S.GameSystem.FightModifiers;
 
-public class FightFromMovingHorse : IFightModifier
+public class FightFromMovingHorse : ICombatModifier
 {
-    public int InitiatingValue => 5;
+    public int InitiateValue => 5;
 
     public int AttackValue => 10;
 
     public int DefenseValue => 20;
 
-    public int? AimingValue => -20;
+    public int AimValue => -20;
 }

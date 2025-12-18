@@ -55,15 +55,15 @@ public abstract class Class : IClass
 
     public abstract int Gold { get; set; }
 
-    public abstract int InitiatingBaseValue { get; }
+    public abstract int InitiateBaseValue { get; }
 
-    public abstract int AttackingBaseValue { get; }
+    public abstract int AttackBaseValue { get; }
 
-    public abstract int DefendingBaseValue { get; }
+    public abstract int DefenseBaseValue { get; }
 
-    public abstract int AimingBaseValue { get; }
+    public abstract int AimBaseValue { get; }
 
-    public abstract int FightValueModifier { get; }
+    public abstract int CombatValueModifierPerLevel { get; }
 
     public abstract int BaseQualificationPoints { get; }
 

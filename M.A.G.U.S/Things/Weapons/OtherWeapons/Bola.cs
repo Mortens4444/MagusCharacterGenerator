@@ -7,11 +7,11 @@ public class Bola : Weapon, IMeleeWeapon
 {
     public override double AttacksPerRound => 1;
 
-    public int InitiatingValue => 2;
+    public int InitiateValue => 2;
 
-    public int AttackingValue => 10;
+    public int AttackValue => 10;
 
-    public int DefendingValue => 2;
+    public int DefenseValue => 2;
 
     public override double Weight => 0.8;
 

@@ -7,11 +7,11 @@ public class Flail : Weapon, IMeleeWeapon
 {
     public override double AttacksPerRound => 1;
 
-    public int InitiatingValue => 1;
+    public int InitiateValue => 1;
 
-    public int AttackingValue => 6;
+    public int AttackValue => 6;
 
-    public int DefendingValue => 5;
+    public int DefenseValue => 5;
 
     public override double Weight => 2.5;
 

@@ -1,20 +1,13 @@
 ﻿{
   "$id": "1",
-  "$type": "<>f__AnonymousType2`2[[System.Int32[], System.Private.CoreLib],[System.String[], System.Private.CoreLib]], M.A.G.U.S.Test",
-  "Bytes": {
-    "$type": "System.Int32[], System.Private.CoreLib",
-    "$values": [
-      1,
-      2,
-      3
-    ]
-  },
-  "Strings": {
-    "$type": "System.String[], System.Private.CoreLib",
-    "$values": [
-      "a",
-      "b",
-      "c"
-    ]
-  }
+  "Bytes": [
+    1,
+    2,
+    3
+  ],
+  "Strings": [
+    "a",
+    "b",
+    "c"
+  ]
 }

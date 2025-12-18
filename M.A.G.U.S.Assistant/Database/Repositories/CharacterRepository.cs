@@ -13,8 +13,13 @@ internal class CharacterRepository(DatabaseContext context)
     private readonly JsonSerializerSettings jsonSettings = new()
     {
         TypeNameHandling = TypeNameHandling.Auto,
+#if DEBUG
+        Formatting = Formatting.Indented,
+#else
         Formatting = Formatting.None,
-        ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+#endif
+        //ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+        PreserveReferencesHandling = PreserveReferencesHandling.Objects
     };
 
     public async Task SaveCharacterAsync(Character character)

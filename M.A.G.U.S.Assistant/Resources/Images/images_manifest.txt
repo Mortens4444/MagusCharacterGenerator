@@ -105,4 +105,3 @@ hen.png
 traveler_horse.png
 pig.png
 turkey.png
-appicon.svg

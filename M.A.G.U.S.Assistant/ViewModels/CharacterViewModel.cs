@@ -101,8 +101,18 @@ internal partial class CharacterViewModel : BaseViewModel
             OnPropertyChanged(nameof(AvailableWeapons));
             OnPropertyChanged(nameof(PrimaryWeapon));
             OnPropertyChanged(nameof(SecondaryWeapon));
+
+            OnPropertyChanged(nameof(Race));
+            OnPropertyChanged(nameof(Class));
+            OnPropertyChanged(nameof(Level));
         }
     }
+
+    public string Race => Character?.RaceName ?? String.Empty;
+
+    public string Class => Character?.Class ?? String.Empty;
+
+    public int Level => Character?.Level ?? 1;
 
     private void Equipment_CollectionChanged(object? sender, NotifyCollectionChangedEventArgs e) => RefillAvailableWeapons();
     

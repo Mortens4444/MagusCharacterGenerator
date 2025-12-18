@@ -90,7 +90,7 @@
                     <Label Text="{Binding DefenseValue}" Grid.Row="5" Grid.Column="1" />
 
                     <Label Text="Initiator value" Grid.Row="6" Grid.Column="0" FontAttributes="Bold" />
-                    <Label Text="{Binding InitiatingValue}" Grid.Row="6" Grid.Column="1" />
+                    <Label Text="{Binding InitiateValue}" Grid.Row="6" Grid.Column="1" />
 
                     <Label Text="Health points" Grid.Row="7" Grid.Column="0" FontAttributes="Bold" />
                     <Label Text="{Binding HealthPoints}" Grid.Row="7" Grid.Column="1" />

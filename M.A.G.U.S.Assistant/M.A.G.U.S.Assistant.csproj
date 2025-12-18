@@ -314,7 +314,7 @@
     <PackageReference Include="Microsoft.Maui.Graphics" Version="9.0.120" />
     <PackageReference Include="Microsoft.Maui.Graphics.Skia" Version="9.0.120" />
     <PackageReference Include="Mtf.Maui.Controls" Version="3.0.46" />
-    <PackageReference Include="Mtf.MAUI.LanguageService" Version="2.0.79" />
+    <PackageReference Include="Mtf.MAUI.LanguageService" Version="2.0.82" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.4" />
     <PackageReference Include="Plugin.Maui.Audio" Version="4.0.0" />
     <PackageReference Include="sqlite-net-pcl" Version="1.9.172" />

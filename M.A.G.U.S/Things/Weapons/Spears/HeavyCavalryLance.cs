@@ -7,11 +7,11 @@ public class HeavyCavalryLance : Weapon, IMeleeWeapon
 {
     public override double AttacksPerRound => 1 / 3;
 
-    public int InitiatingValue => 0;
+    public int InitiateValue => 0;
 
-    public int AttackingValue => 16;
+    public int AttackValue => 16;
 
-    public int DefendingValue => 0;
+    public int DefenseValue => 0;
 
     public override double Weight => 5;
 

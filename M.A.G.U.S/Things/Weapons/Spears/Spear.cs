@@ -7,11 +7,11 @@ public class Spear : Weapon, IMeleeWeapon
 {
     public override double AttacksPerRound => 1;
 
-    public int InitiatingValue => 4;
+    public int InitiateValue => 4;
 
-    public int AttackingValue => 12;
+    public int AttackValue => 12;
 
-    public int DefendingValue => 12;
+    public int DefenseValue => 12;
 
     public override double Weight => 2;
 

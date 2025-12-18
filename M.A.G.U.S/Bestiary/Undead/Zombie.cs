@@ -13,7 +13,7 @@ public sealed class Zombie : LivingDead
         Size = Size.Human;
         AttackValue = 10;
         DefenseValue = 40;
-        InitiatingValue = 0;
+        InitiateValue = 0;
         HealthPoints = 15;
         AstralMagicResistance = Byte.MaxValue;
         MentalMagicResistance = Byte.MaxValue;

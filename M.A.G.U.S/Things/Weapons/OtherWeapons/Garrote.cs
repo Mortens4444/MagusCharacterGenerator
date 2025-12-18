@@ -7,11 +7,11 @@ public class Garrote : Weapon, IMeleeWeapon
 {
     public override double AttacksPerRound => 1;
 
-    public int InitiatingValue => 0;
+    public int InitiateValue => 0;
 
-    public int AttackingValue => 5;
+    public int AttackValue => 5;
 
-    public int DefendingValue => 0;//-20;
+    public int DefenseValue => 0;//-20;
 
     public override double Weight => 0.1;
 

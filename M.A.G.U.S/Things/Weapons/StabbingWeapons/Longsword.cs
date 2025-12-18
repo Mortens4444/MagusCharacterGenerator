@@ -7,11 +7,11 @@ public class Longsword : Weapon, IMeleeWeapon
 {
     public override double AttacksPerRound => 1;
 
-    public int InitiatingValue => 6;
+    public int InitiateValue => 6;
 
-    public int AttackingValue => 14;
+    public int AttackValue => 14;
 
-    public int DefendingValue => 16;
+    public int DefenseValue => 16;
 
     public override double Weight => 1.5;
 

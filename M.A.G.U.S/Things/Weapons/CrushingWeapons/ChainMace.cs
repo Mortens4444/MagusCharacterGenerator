@@ -7,11 +7,11 @@ public class ChainMace : Weapon, IMeleeWeapon
 {
     public override double AttacksPerRound => 1;
 
-    public int InitiatingValue => 4;
+    public int InitiateValue => 4;
 
-    public int AttackingValue => 13;
+    public int AttackValue => 13;
 
-    public int DefendingValue => 11;
+    public int DefenseValue => 11;
 
     public override double Weight => 2;
 

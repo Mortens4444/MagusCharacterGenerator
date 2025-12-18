@@ -7,11 +7,11 @@ public class Saber : Weapon, IMeleeWeapon
 {
     public override double AttacksPerRound => 1;
 
-    public int InitiatingValue => 7;
+    public int InitiateValue => 7;
 
-    public int AttackingValue => 15;
+    public int AttackValue => 15;
 
-    public int DefendingValue => 17;
+    public int DefenseValue => 17;
 
     public override double Weight => 1.5;
 

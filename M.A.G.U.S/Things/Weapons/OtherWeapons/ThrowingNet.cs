@@ -6,11 +6,11 @@ public class ThrowingNet : Weapon, IMeleeWeapon
 {
     public override double AttacksPerRound => 1 / 3;
 
-    public int InitiatingValue => 1;
+    public int InitiateValue => 1;
 
-    public int AttackingValue => 8;
+    public int AttackValue => 8;
 
-    public int DefendingValue => 4;
+    public int DefenseValue => 4;
 
     public override double Weight => 1;
 

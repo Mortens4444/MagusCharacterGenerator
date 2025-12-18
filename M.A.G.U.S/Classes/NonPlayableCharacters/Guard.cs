@@ -55,15 +55,15 @@ public class Guard : Class, IClass
     [DiceThrowModifier(6)]
     public override int Detection { get; set; }
 
-    public override int InitiatingBaseValue => 3;
+    public override int InitiateBaseValue => 3;
 
-    public override int AttackingBaseValue => 15;
+    public override int AttackBaseValue => 15;
 
-    public override int DefendingBaseValue => 65;
+    public override int DefenseBaseValue => 65;
 
-    public override int AimingBaseValue => 0;
+    public override int AimBaseValue => 0;
 
-    public override int FightValueModifier => 4;
+    public override int CombatValueModifierPerLevel => 4;
 
     public override int BaseQualificationPoints => 0;
 

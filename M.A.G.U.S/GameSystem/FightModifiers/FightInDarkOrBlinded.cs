@@ -1,12 +1,12 @@
 ﻿namespace M.A.G.U.S.GameSystem.FightModifiers;
 
-public class FightInDarkOrBlinded : IFightModifier
+public class FightInDarkOrBlinded : ICombatModifier
 {
-    public int InitiatingValue => -20;
+    public int InitiateValue => -20;
 
     public int AttackValue => -60;
 
     public int DefenseValue => -70;
 
-    public int? AimingValue => -150;
+    public int AimValue => -150;
 }

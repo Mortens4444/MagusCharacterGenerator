@@ -75,15 +75,15 @@ public abstract class Priest : Class, IClass, ILikeMagic
     [DiceThrowModifier(8)]
     public override int Detection { get; set; }
 
-    public override int InitiatingBaseValue => 5;
+    public override int InitiateBaseValue => 5;
 
-    public override int AttackingBaseValue => 17;
+    public override int AttackBaseValue => 17;
 
-    public override int DefendingBaseValue => 72;
+    public override int DefenseBaseValue => 72;
 
-    public override int AimingBaseValue => 0;
+    public override int AimBaseValue => 0;
 
-    public override int FightValueModifier => 8;
+    public override int CombatValueModifierPerLevel => 8;
 
     public override int BaseQualificationPoints => 6;
 

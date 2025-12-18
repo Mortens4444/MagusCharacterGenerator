@@ -7,9 +7,9 @@ public class NomadBow : Weapon, IRangedWeapon
 {
     public override double AttacksPerRound => 2;
 
-    public int InitiatingValue => 3;
+    public int InitiateValue => 3;
 
-    public int AimingValue => 8;
+    public int AimValue => 8;
 
     public int Distance => 180;
 
