@@ -20,6 +20,11 @@ internal partial class EncounterPage : NotifierPage
             {
                 await vm.LoadCharactersAsync().ConfigureAwait(false);
                 await vm.LoadBestiaryAsync().ConfigureAwait(false);
+                MainThread.BeginInvokeOnMainThread(() =>
+                {
+                    vm.SelectedCharacter = vm.AvailableCharacters.FirstOrDefault();
+                    vm.SelectedEnemy = vm.AvailableEnemies.FirstOrDefault();
+                });
             });
         }
     }

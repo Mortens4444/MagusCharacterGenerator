@@ -4,7 +4,7 @@ namespace M.A.G.U.S.Test
 {
     class Settings : ISettings
     {
-        public bool AddFightValueOnFirstLevelForAllClass => true;
+        public bool AddCombatValueOnFirstLevelForAllClass => true;
 
         public bool AddPainToleranceOnFirstLevelForAllClass => true;
 

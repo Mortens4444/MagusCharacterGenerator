@@ -98,7 +98,7 @@ public class NastarPriest : Class, IClass, ILikeMagic
 
     public override int BasePainTolerancePoints => 6;
 
-    public override bool AddFightValueOnFirstLevel => false;
+    public override bool AddCombatModifierOnFirstLevel => false;
 
     public override bool AddPainToleranceOnFirstLevel => false;
 
@@ -141,7 +141,7 @@ public class NastarPriest : Class, IClass, ILikeMagic
 		//new DrágakőMágia(QualificationLevel.Master, 12)
 	]);
 
-    public override List<PercentQualification> PercentQualifications => [];
+    public override PercentQualificationList PercentQualifications => [];
 
     public override SpecialQualificationList SpecialQualifications =>
     [

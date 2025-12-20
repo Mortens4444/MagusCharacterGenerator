@@ -25,7 +25,7 @@ public class Draquon : Race
 
     public override Alignment? Alignment => Enums.Alignment.OrderDeath;
 
-    public override List<PercentQualification> PercentQualifications =>
+    public override PercentQualificationList PercentQualifications =>
     [
         new Climbing((DiceThrow._1D6() + 4) * 10),
         new Falling((DiceThrow._1D3() + 3) * 10),

@@ -93,7 +93,7 @@ public class Warlock : Class, IClass, ILikeMagic
 
     public override int BasePainTolerancePoints => 4;
 
-    public override bool AddFightValueOnFirstLevel => false;
+    public override bool AddCombatModifierOnFirstLevel => false;
 
     public override bool AddPainToleranceOnFirstLevel => false;
 
@@ -125,7 +125,7 @@ public class Warlock : Class, IClass, ILikeMagic
         new Herbalism(QualificationLevel.Master, 6)
     ]);
 
-    public override List<PercentQualification> PercentQualifications =>
+    public override PercentQualificationList PercentQualifications =>
     [
         new Sneaking(15),
         new Hiding(15)

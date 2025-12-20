@@ -55,7 +55,7 @@
             nudQP = new NumericUpDown();
             nudPercent = new NumericUpDown();
             lblPercent = new Label();
-            gbFightValues = new GroupBox();
+            gbCombatValues = new GroupBox();
             nudAimV = new NumericUpDown();
             lblAimV = new Label();
             lblIV = new Label();
@@ -130,7 +130,7 @@
             gbModifiers.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)nudQP).BeginInit();
             ((System.ComponentModel.ISupportInitialize)nudPercent).BeginInit();
-            gbFightValues.SuspendLayout();
+            gbCombatValues.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)nudAimV).BeginInit();
             ((System.ComponentModel.ISupportInitialize)nudIV).BeginInit();
             ((System.ComponentModel.ISupportInitialize)nudDV).BeginInit();
@@ -179,7 +179,7 @@
             gbCharacter.Controls.Add(btnBrowse);
             gbCharacter.Controls.Add(pbCharacter);
             gbCharacter.Controls.Add(gbModifiers);
-            gbCharacter.Controls.Add(gbFightValues);
+            gbCharacter.Controls.Add(gbCombatValues);
             gbCharacter.Controls.Add(btnDone);
             gbCharacter.Controls.Add(gbPsiManaAndMagicResistance);
             gbCharacter.Controls.Add(lvQualifications);
@@ -481,24 +481,24 @@
             lblPercent.TabIndex = 22;
             lblPercent.Text = "%";
             // 
-            // gbFightValues
+            // gbCombatValues
             // 
-            gbFightValues.Controls.Add(nudAimV);
-            gbFightValues.Controls.Add(lblAimV);
-            gbFightValues.Controls.Add(lblIV);
-            gbFightValues.Controls.Add(nudIV);
-            gbFightValues.Controls.Add(nudDV);
-            gbFightValues.Controls.Add(lblDV);
-            gbFightValues.Controls.Add(nudAV);
-            gbFightValues.Controls.Add(lblAV);
-            gbFightValues.Location = new Point(141, 249);
-            gbFightValues.Margin = new Padding(4, 3, 4, 3);
-            gbFightValues.Name = "gbFightValues";
-            gbFightValues.Padding = new Padding(4, 3, 4, 3);
-            gbFightValues.Size = new Size(71, 232);
-            gbFightValues.TabIndex = 33;
-            gbFightValues.TabStop = false;
-            gbFightValues.Text = "Fight values";
+            gbCombatValues.Controls.Add(nudAimV);
+            gbCombatValues.Controls.Add(lblAimV);
+            gbCombatValues.Controls.Add(lblIV);
+            gbCombatValues.Controls.Add(nudIV);
+            gbCombatValues.Controls.Add(nudDV);
+            gbCombatValues.Controls.Add(lblDV);
+            gbCombatValues.Controls.Add(nudAV);
+            gbCombatValues.Controls.Add(lblAV);
+            gbCombatValues.Location = new Point(141, 249);
+            gbCombatValues.Margin = new Padding(4, 3, 4, 3);
+            gbCombatValues.Name = "gbCombatValues";
+            gbCombatValues.Padding = new Padding(4, 3, 4, 3);
+            gbCombatValues.Size = new Size(71, 232);
+            gbCombatValues.TabIndex = 33;
+            gbCombatValues.TabStop = false;
+            gbCombatValues.Text = "Fight values";
             // 
             // nudAimV
             // 
@@ -1200,8 +1200,8 @@
             gbModifiers.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)nudQP).EndInit();
             ((System.ComponentModel.ISupportInitialize)nudPercent).EndInit();
-            gbFightValues.ResumeLayout(false);
-            gbFightValues.PerformLayout();
+            gbCombatValues.ResumeLayout(false);
+            gbCombatValues.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)nudAimV).EndInit();
             ((System.ComponentModel.ISupportInitialize)nudIV).EndInit();
             ((System.ComponentModel.ISupportInitialize)nudDV).EndInit();
@@ -1280,7 +1280,7 @@
 		private System.Windows.Forms.NumericUpDown nudMentalMR;
 		private System.Windows.Forms.Label lblMentalMR;
 		private System.Windows.Forms.Button btnDone;
-		private System.Windows.Forms.GroupBox gbFightValues;
+		private System.Windows.Forms.GroupBox gbCombatValues;
 		private System.Windows.Forms.NumericUpDown nudAimV;
 		private System.Windows.Forms.Label lblAimV;
 		private System.Windows.Forms.Label lblIV;

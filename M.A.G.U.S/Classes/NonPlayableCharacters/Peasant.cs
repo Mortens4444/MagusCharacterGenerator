@@ -76,7 +76,7 @@ public class Peasant : Class, IClass
 
     public override int BasePainTolerancePoints => 10;
 
-    public override bool AddFightValueOnFirstLevel => false;
+    public override bool AddCombatModifierOnFirstLevel => false;
 
     public override bool AddPainToleranceOnFirstLevel => false;
 
@@ -92,7 +92,7 @@ public class Peasant : Class, IClass
 
     public override QualificationList FutureQualifications => BuildQualifications([]);
 
-    public override List<PercentQualification> PercentQualifications => [];
+    public override PercentQualificationList PercentQualifications => [];
 
     public override SpecialQualificationList SpecialQualifications => [];
 

@@ -74,11 +74,11 @@ public partial class Character
 
     private void CalculateLifePoints()
     {
-        var additionalLifePoints = Race.SpecialQualifications.GetSpeciality<AdditionalLifePoints>();
         HealthPoints = BaseClass.BaseLifePoints;
+        var additionalLifePoints = Race.SpecialQualifications.GetSpeciality<AdditionalLifePoints>();
         if (additionalLifePoints != null)
         {
-            HealthPoints = additionalLifePoints.ExtraLifePoints;
+            HealthPoints += additionalLifePoints.ExtraLifePoints;
         }
         HealthPoints += MathHelper.GetAboveAverageValue(Health);
         MaxHealthPoints = HealthPoints;
@@ -110,6 +110,5 @@ public partial class Character
 
         PainTolerancePoints = painTolerancePoints;
         MaxPainTolerancePoints = PainTolerancePoints;
-        OnPropertyChanged(nameof(PainTolerancePoints));
     }
 }

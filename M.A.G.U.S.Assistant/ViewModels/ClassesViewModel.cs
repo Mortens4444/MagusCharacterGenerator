@@ -80,7 +80,7 @@ internal partial class ClassesViewModel : BaseViewModel
     public int AimBaseValue => SelectedClass?.AimBaseValue ?? 0;
     public int CombatValueModifierPerLevel => SelectedClass?.CombatValueModifierPerLevel ?? 0;
     public QualificationList Qualifications => SelectedClass?.Qualifications ?? [];
-    public List<PercentQualification> PercentQualifications => SelectedClass?.PercentQualifications ?? [];
+    public PercentQualificationList PercentQualifications => SelectedClass?.PercentQualifications ?? [];
     public SpecialQualificationList SpecialQualifications => SelectedClass?.SpecialQualifications ?? [];
     public QualificationList FutureQualifications => SelectedClass?.FutureQualifications ?? [];
 

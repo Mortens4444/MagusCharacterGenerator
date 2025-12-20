@@ -153,7 +153,7 @@ public partial class CharcterGenerator : Form
 				character = (Character)Activator.CreateInstance(typeof(Character), characterName, race, @class);
 			}
 			character.PropertyChanged += Character_PropertyChanged;
-			character.CalculateChanges();
+			character.SetWeapons();
 			FillFromCharacter();
 		}
 		catch

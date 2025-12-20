@@ -95,8 +95,6 @@ public abstract class Creature : Attacker
 
     protected readonly DiceThrow DiceThrow = new();
 
-    public abstract int GetDamage();
-
     public int GetInitiate()
     {
         var roll = DiceThrow._1D10();

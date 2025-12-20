@@ -84,6 +84,10 @@ internal partial class EncounterViewModel : CharacterListLoaderViewModel
     {
         Characters.Add(SelectedCharacter!);
         Assignments.Add(new AssignmentViewModel(SelectedCharacter!));
+        if (SelectedAssignment == null)
+        {
+            SelectedAssignment = Assignments.LastOrDefault();
+        }
         AvailableCharacters.Remove(SelectedCharacter!);
         SelectedCharacter = null;
     }

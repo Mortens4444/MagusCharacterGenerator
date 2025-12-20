@@ -1,4 +1,4 @@
-﻿namespace M.A.G.U.S.GameSystem.FightModifiers;
+﻿namespace M.A.G.U.S.GameSystem.CombatModifiers;
 
 public class FightFromLyingPosition : ICombatModifier
 {

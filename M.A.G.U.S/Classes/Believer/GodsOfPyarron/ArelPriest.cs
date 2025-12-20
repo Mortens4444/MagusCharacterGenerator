@@ -4,6 +4,7 @@ using M.A.G.U.S.GameSystem.Qualifications;
 using M.A.G.U.S.Qualifications;
 using M.A.G.U.S.Qualifications.Combat;
 using M.A.G.U.S.Qualifications.Laical;
+using M.A.G.U.S.Qualifications.Percentages;
 using M.A.G.U.S.Qualifications.Scientific;
 using M.A.G.U.S.Qualifications.Underworld;
 
@@ -44,7 +45,12 @@ public class ArelPriest : Priest
 		}
 	}
 
-	public override QualificationList FutureQualifications
+	public override PercentQualificationList PercentQualifications =>
+    [
+		new FeenharFalconBetrayal(5 * Level + 5)
+    ];
+
+    public override QualificationList FutureQualifications
 	{
 		get
 		{

@@ -92,7 +92,7 @@ public class NastarPaladin : Class, IClass, IHateRangedWeapons
 
     public override int BasePainTolerancePoints => 7;
 
-    public override bool AddFightValueOnFirstLevel => false;
+    public override bool AddCombatModifierOnFirstLevel => false;
 
     public override bool AddPainToleranceOnFirstLevel => false;
 
@@ -132,7 +132,7 @@ public class NastarPaladin : Class, IClass, IHateRangedWeapons
         new WeaponUse(QualificationLevel.Master, 8)
     ]);
 
-    public override List<PercentQualification> PercentQualifications => [];
+    public override PercentQualificationList PercentQualifications => [];
 
     public override SpecialQualificationList SpecialQualifications =>
     [

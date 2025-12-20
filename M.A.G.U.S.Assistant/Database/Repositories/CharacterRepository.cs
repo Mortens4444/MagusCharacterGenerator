@@ -80,7 +80,7 @@ internal class CharacterRepository(DatabaseContext context)
         try
         {
             var character = JsonConvert.DeserializeObject<Character>(entity.JsonData, jsonSettings);
-            character?.CalculateChanges();
+            character?.SetWeapons();
             return character;
         }
         catch (Exception ex)
@@ -103,7 +103,7 @@ internal class CharacterRepository(DatabaseContext context)
                 var character = JsonConvert.DeserializeObject<Character>(entity.JsonData, jsonSettings);
                 if (character != null)
                 {
-                    character.CalculateChanges();
+                    character.SetWeapons();
                     characters.Add(character);
                 }
             }

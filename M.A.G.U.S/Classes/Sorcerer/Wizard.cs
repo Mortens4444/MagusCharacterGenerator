@@ -90,7 +90,7 @@ public class Wizard : Class, IClass, ILikeMagic
 
     public override int BasePainTolerancePoints => 2;
 
-    public override bool AddFightValueOnFirstLevel => false;
+    public override bool AddCombatModifierOnFirstLevel => false;
 
     public override bool AddPainToleranceOnFirstLevel => false;
 
@@ -123,7 +123,7 @@ public class Wizard : Class, IClass, ILikeMagic
         new HistoryLore(QualificationLevel.Master, 8)
     ]);
 
-    public override List<PercentQualification> PercentQualifications => [];
+    public override PercentQualificationList PercentQualifications => [];
 
     public override SpecialQualificationList SpecialQualifications =>
     [

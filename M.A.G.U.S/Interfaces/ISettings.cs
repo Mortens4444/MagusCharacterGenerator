@@ -2,7 +2,7 @@
 
 public interface ISettings
 {
-    bool AddFightValueOnFirstLevelForAllClass { get; }
+    bool AddCombatValueOnFirstLevelForAllClass { get; }
 
     bool AddPainToleranceOnFirstLevelForAllClass { get; }
 

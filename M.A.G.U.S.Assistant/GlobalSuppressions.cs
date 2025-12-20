@@ -6,3 +6,4 @@
 using System.Diagnostics.CodeAnalysis;
 
 [assembly: SuppressMessage("Design", "CA1031:Do not catch general exception types", Justification = "<Pending>", Scope = "namespaceanddescendants", Target = "~N:M.A.G.U.S.Assistant")]
+[assembly: SuppressMessage("Performance", "CA1822:Mark members as static", Justification = "Static member cannot be used in XAML", Scope = "member", Target = "~P:M.A.G.U.S.Assistant.ViewModels.CharacterViewModel.Alignments")]

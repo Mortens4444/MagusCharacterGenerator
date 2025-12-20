@@ -95,7 +95,7 @@ public abstract class Priest : Class, IClass, ILikeMagic
 
     public override int BasePainTolerancePoints => 6;
 
-    public override bool AddFightValueOnFirstLevel => false;
+    public override bool AddCombatModifierOnFirstLevel => false;
 
     public override bool AddPainToleranceOnFirstLevel => false;
 
@@ -117,7 +117,7 @@ public abstract class Priest : Class, IClass, ILikeMagic
 
     public override QualificationList FutureQualifications => BuildQualifications([]);
 
-    public override List<PercentQualification> PercentQualifications => [];
+    public override PercentQualificationList PercentQualifications => [];
 
     public override SpecialQualificationList SpecialQualifications =>
     [

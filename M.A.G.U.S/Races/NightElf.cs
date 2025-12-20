@@ -26,7 +26,7 @@ public class NightElf : Race, IUseRangedWeapons
         new Invisibility(),
     ];
 
-    public override List<PercentQualification> PercentQualifications =>
+    public override PercentQualificationList PercentQualifications =>
     [
         new Sneaking(10),
         new Climbing(10),

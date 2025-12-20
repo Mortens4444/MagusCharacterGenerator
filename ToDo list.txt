@@ -1,6 +1,8 @@
 - Fix primary weapon selection
-- Fix encounter page issues
+- Add damage to encounter
 - Problem with total weight
+- Refactor: Remove Calculate functions from Character class - compute all properties, and have some new properties like AllocateCombatModifiers
+- Weapon should implement IWeapon
 
 - Change weapon/language attribute on qualifications
 - SFÉ

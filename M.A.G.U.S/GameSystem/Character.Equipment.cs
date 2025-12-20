@@ -25,7 +25,7 @@ public partial class Character
             {
                 money = value;
                 OnPropertyChanged();
-                OnPropertyChanged(nameof(money.Summa));
+                OnPropertyChanged(nameof(Money.Summa));
             }
         }
     }
@@ -59,15 +59,6 @@ public partial class Character
     {
         TotalEquipmentWeight = (Equipment?.Sum(e => e.Weight) ?? 0).ToString("N1");
         OnPropertyChanged(nameof(Equipment));
-
-        if (primaryWeapon == null)
-        {
-            SetPrimaryWeapon();
-        }
-        if (secondaryWeapon == null)
-        {
-            SetSecondaryWeapon();
-        }
     }
 
     private void CalculateGold()

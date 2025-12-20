@@ -28,14 +28,14 @@
                     BackgroundColor="{AppThemeBinding Light={StaticResource Gray100}, Dark={StaticResource Gray600}}">
                 <Border.GestureRecognizers>
                     <TapGestureRecognizer Command="{Binding ToggleSettingCommand}"
-                                          CommandParameter="AddFightValueOnFirstLevelForAllClass" />
+                                          CommandParameter="AddCombatValueModifierPointsOnFirstLevelForAllClass" />
                 </Border.GestureRecognizers>
                 <Grid ColumnDefinitions="*, Auto">
                     <Label Grid.Column="0" 
                            Text="Add combat value modifiers at level 1 for all classes" 
                            VerticalOptions="Center" 
                            LineBreakMode="WordWrap" />
-                    <Switch Grid.Column="1" IsToggled="{Binding AddFightValueOnFirstLevelForAllClass}" />
+                    <Switch Grid.Column="1" IsToggled="{Binding AddCombatValueModifierPointsOnFirstLevelForAllClass}" />
                 </Grid>
             </Border>
 

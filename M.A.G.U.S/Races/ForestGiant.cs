@@ -15,7 +15,7 @@ public class ForestGiant : HalfGiant
 {
     public override Alignment? Alignment => Enums.Alignment.Chaos;
 
-    public override List<PercentQualification> PercentQualifications =>
+    public override PercentQualificationList PercentQualifications =>
     [
         new Sneaking(20),
         new Hiding(20)

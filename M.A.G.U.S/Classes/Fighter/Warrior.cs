@@ -91,13 +91,13 @@ public class Warrior : Class, IClass, IJustFight
 
     public override int BasePainTolerancePoints => 6;
 
-    public override bool AddFightValueOnFirstLevel => true;
+    public override bool AddCombatModifierOnFirstLevel => true;
 
     public override bool AddPainToleranceOnFirstLevel => true;
 
     public override bool AddQualificationPointsOnFirstLevel => true;
     
-    public override IRace[] AllowedRaces => [new Human(), new Elf(), new HalfElf(), new Dwarf(), new CourtOrc(), new Amund(), new Jann(), new Khal(), new Wier()];
+    public override IRace[] AllowedRaces => [new Human(), new Elf(), new HalfElf(), new Dwarf(), new CourtOrc(), new Amund(), new Jann(), new Khal(), new Wier(), new Feenhar()];
 
     public override QualificationList Qualifications => BuildQualifications(
     [
@@ -114,11 +114,11 @@ public class Warrior : Class, IClass, IJustFight
         new Leadership(level: 6)
     ]);
 
-    public override List<PercentQualification> PercentQualifications =>
+    public override PercentQualificationList PercentQualifications =>
     [
         new Climbing(15),
-            new Falling(20),
-            new Jumping(10)
+        new Falling(20),
+        new Jumping(10)
     ];
 
     public override SpecialQualificationList SpecialQualifications => [];

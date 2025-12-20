@@ -1,9 +1,13 @@
-﻿using M.A.G.U.S.GameSystem.Qualifications;
-using System.Collections.ObjectModel;
+﻿using M.A.G.U.S.GameSystem.Psi;
+using M.A.G.U.S.GameSystem.Qualifications;
+using M.A.G.U.S.Interfaces;
+using M.A.G.U.S.Qualifications.Scientific.Psi;
+using M.A.G.U.S.Qualifications.Specialities;
+using M.A.G.U.S.Races;
 
 namespace M.A.G.U.S.Qualifications;
 
-public class QualificationList : ObservableCollection<Qualification>
+public class QualificationList : ExtendedObservableCollection<Qualification>
 {
     public void UpgradeOrAddQualification(Qualification newMasterQualification)
     {
@@ -72,11 +76,46 @@ public class QualificationList : ObservableCollection<Qualification>
         }
     }
 
-    public void AddRange(IEnumerable<Qualification> qualifications)
+    public void AddFrom(IEnumerable<IClass> classes, IRace race)
     {
-        foreach (var qualification in qualifications)
+        AddRange(race.Qualifications);
+        foreach (var @class in classes)
         {
-            Add(qualification);
+            AddRange(@class.Qualifications);
+
+            var newQualifications = @class.FutureQualifications
+                .Where(futureQualification => futureQualification.ActualLevel <= @class.Level);
+
+            AddRange(newQualifications.Where(q => q.QualificationLevel == QualificationLevel.Base));
+            var newMasterQualifications = newQualifications.Where(q => q.QualificationLevel == QualificationLevel.Master);
+            foreach (var newMasterQualification in newMasterQualifications)
+            {
+                UpgradeOrAddQualification(newMasterQualification);
+            }
+        }
+    }
+
+    public void RemoveBy(SpecialQualificationList specialQualifications)
+    {
+        var cantLearnPsi = specialQualifications.GetSpeciality<CantLearnPsi>();
+        if (cantLearnPsi != null)
+        {
+            for (int i = Count - 1; i >= 0; i--)
+            {
+                if (this[i] is IPsi)
+                {
+                    RemoveAt(i);
+                }
+            }
+        }
+
+        if (specialQualifications.Any(sq => sq is CanOnlyLearnPyarronPsi))
+        {
+            var qualificationsToRemove = this.Where(q => q is IPsi && q is not PsiPyarron).ToList();
+            foreach (var qualification in qualificationsToRemove)
+            {
+                Remove(qualification);
+            }
         }
     }
 

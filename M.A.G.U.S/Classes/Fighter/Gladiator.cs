@@ -92,7 +92,7 @@ public class Gladiator : Class, IClass, IJustFight
 
     public override int BasePainTolerancePoints => 7;
 
-    public override bool AddFightValueOnFirstLevel => false;
+    public override bool AddCombatModifierOnFirstLevel => false;
 
     public override bool AddPainToleranceOnFirstLevel => true;
 
@@ -127,7 +127,7 @@ public class Gladiator : Class, IClass, IJustFight
         new WeaponBreaking(QualificationLevel.Master)
     ]);
 
-    public override List<PercentQualification> PercentQualifications =>
+    public override PercentQualificationList PercentQualifications =>
     [
         new Falling(30),
         new Jumping(20)

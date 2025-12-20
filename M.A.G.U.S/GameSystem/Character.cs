@@ -1,6 +1,6 @@
 ﻿using M.A.G.U.S.Classes.NonPlayableCharacters;
 using M.A.G.U.S.Enums;
-using M.A.G.U.S.GameSystem.FightModifiers;
+using M.A.G.U.S.GameSystem.CombatModifiers;
 using M.A.G.U.S.Interfaces;
 using M.A.G.U.S.Races;
 using M.A.G.U.S.Utils;
@@ -14,9 +14,6 @@ public partial class Character : Attacker, ICombatModifier, ILiving, IAbilities,
 {
     [NonSerialized, JsonIgnore, Newtonsoft.Json.JsonIgnore]
     private bool isDeserializing;
-
-    [NonSerialized, JsonIgnore, Newtonsoft.Json.JsonIgnore]
-    private bool calculateChanges;
 
     [NonSerialized, JsonIgnore, Newtonsoft.Json.JsonIgnore]
     private readonly ISettings? settings;
@@ -46,9 +43,8 @@ public partial class Character : Attacker, ICombatModifier, ILiving, IAbilities,
         EnsureSubscriptions();
     }
 
-    public void CalculateChanges()
+    public void SetWeapons()
     {
-        calculateChanges = true;
         primaryWeapon = ResolveWeaponById(PrimaryWeaponId);
         secondaryWeapon = ResolveWeaponById(SecondaryWeaponId);
     }
@@ -56,8 +52,8 @@ public partial class Character : Attacker, ICombatModifier, ILiving, IAbilities,
     public static Character Load(string fullPath, ISettings settings)
     {
         var result = ObjectSerializer.LoadFile<Character>(fullPath);
-        result.CalculateChanges();
-        result.RecalculateFightValues(settings);
+        result.SetWeapons();
+        result.RecalculateCombatValues(settings);
         return result;
     }
 
@@ -66,7 +62,7 @@ public partial class Character : Attacker, ICombatModifier, ILiving, IAbilities,
         GenerateAbilities();
         CalculateQualificationPoints(settings);
         GetQualifications();
-        CalculateFightValues(settings);
+        CalculateCombatValues(settings);
 
         CalculateLifePoints();
         CalculatePainTolerancePoints(settings);
@@ -82,8 +78,28 @@ public partial class Character : Attacker, ICombatModifier, ILiving, IAbilities,
 
     private void EnsureSubscriptions()
     {
-        Equipment.CollectionChanged += EquipmentOnCollectionChanged;
-        Qualifications.CollectionChanged += Qualifications_CollectionChanged;
+        UnsubscribeFromCollections();
+        if (Equipment != null)
+        {
+            Equipment.CollectionChanged += EquipmentOnCollectionChanged;
+        }
+
+        if (Qualifications != null)
+        {
+            Qualifications.CollectionChanged += Qualifications_CollectionChanged;
+        }
+    }
+
+    private void UnsubscribeFromCollections()
+    {
+        if (Equipment != null)
+        {
+            Equipment.CollectionChanged -= EquipmentOnCollectionChanged;
+        }
+        if (Qualifications != null)
+        {
+            Qualifications.CollectionChanged -= Qualifications_CollectionChanged;
+        }
     }
 
     [OnDeserializing]
@@ -96,6 +112,8 @@ public partial class Character : Attacker, ICombatModifier, ILiving, IAbilities,
     private void OnDeserialized(StreamingContext context)
     {
         isDeserializing = false;
-        RecalculateFightValues(settings);
+        EnsureSubscriptions();
+        SetWeapons();
+        RecalculateCombatValues(settings);
     }
 }

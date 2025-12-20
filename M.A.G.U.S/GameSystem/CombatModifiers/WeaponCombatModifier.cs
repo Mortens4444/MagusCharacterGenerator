@@ -1,6 +1,6 @@
-﻿namespace M.A.G.U.S.GameSystem.FightModifiers;
+﻿namespace M.A.G.U.S.GameSystem.CombatModifiers;
 
-public sealed class CombatModifier : ICombatModifier
+public class WeaponCombatModifier : ICombatModifier
 {
     public int InitiateValue { get; set; }
 
@@ -9,6 +9,4 @@ public sealed class CombatModifier : ICombatModifier
     public int DefenseValue { get; set; }
 
     public int AimValue { get; set; }
-
-    public int CombatModifierPoints { get; set; }
 }

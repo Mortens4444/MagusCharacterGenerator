@@ -1,4 +1,5 @@
 ﻿using M.A.G.U.S.Enums;
+using M.A.G.U.S.Models;
 using M.A.G.U.S.Qualifications;
 
 namespace M.A.G.U.S.Interfaces;
@@ -27,7 +28,7 @@ public interface IClass : IAttacker, IAbilities
 
     int BasePainTolerancePoints { get; }
 
-    bool AddFightValueOnFirstLevel { get; }
+    bool AddCombatModifierOnFirstLevel { get; }
 
     bool AddPainToleranceOnFirstLevel { get; }
 
@@ -37,11 +38,13 @@ public interface IClass : IAttacker, IAbilities
 
     QualificationList FutureQualifications { get; }
 
-    List<PercentQualification> PercentQualifications { get; }
+    PercentQualificationList PercentQualifications { get; }
 
     SpecialQualificationList SpecialQualifications { get; }
 
     int GetPainToleranceModifier();
+
+    DiceThrowFormula? GetPainToleranceModifierFormula();
 
     ulong ExperiencePoints { get; }
 

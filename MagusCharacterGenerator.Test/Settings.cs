@@ -6,7 +6,7 @@ namespace M.A.G.U.S.Test
     {
         private readonly bool addPsiPointOnFirstLevel = addPsiPointOnFirstLevel;
 
-        public bool AddFightValueOnFirstLevelForAllClass => true;
+        public bool AddCombatValueOnFirstLevelForAllClass => true;
 
         public bool AddPainToleranceOnFirstLevelForAllClass => true;
 

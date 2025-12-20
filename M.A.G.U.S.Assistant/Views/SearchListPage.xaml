@@ -24,7 +24,8 @@
         <StackLayout Orientation="Vertical" Spacing="8" Grid.Row="0">
 
             <Grid VerticalOptions="Center" RowDefinitions="Auto, Auto" ColumnDefinitions="*, Auto, Auto">
-                <Entry Grid.Column="0" Grid.ColumnSpan="2" Text="{Binding SearchText}" Placeholder="Search…" />
+
+                <SearchBar Grid.Column="0" Grid.ColumnSpan="2" Text="{Binding SearchText}" Placeholder="Search…" />
                 <Button Grid.Column="2" Text="Clear" Command="{Binding ClearCommand}" />
                 
                 <Picker Grid.Row="1" Title="Category…" ItemsSource="{Binding Categories}"

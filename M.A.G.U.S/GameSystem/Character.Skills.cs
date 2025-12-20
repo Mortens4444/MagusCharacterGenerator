@@ -36,9 +36,9 @@ public partial class Character
             if (value != strength)
             {
                 strength = value;
-                if (calculateChanges)
+                if (!isDeserializing)
                 {
-                    CalculateFightValues(settings);
+                    CalculateCombatValues(settings);
                 }
                 OnPropertyChanged();
             }
@@ -53,9 +53,9 @@ public partial class Character
             if (value != speed)
             {
                 speed = value;
-                if (calculateChanges)
+                if (!isDeserializing)
                 {
-                    CalculateFightValues(settings);
+                    CalculateCombatValues(settings);
                 }
                 OnPropertyChanged();
             }
@@ -70,9 +70,9 @@ public partial class Character
             if (value != dexterity)
             {
                 dexterity = value;
-                if (calculateChanges)
+                if (!isDeserializing)
                 {
-                    CalculateFightValues(settings);
+                    CalculateCombatValues(settings);
                     CalculateQualificationPoints(settings);
                 }
                 OnPropertyChanged();
@@ -88,12 +88,12 @@ public partial class Character
             if (value != stamina)
             {
                 stamina = value;
-                if (calculateChanges)
+                if (!isDeserializing)
                 {
                     CalculatePainTolerancePoints(settings);
                 }
+                OnPropertyChanged();
             }
-            OnPropertyChanged();
         }
     }
 
@@ -105,7 +105,7 @@ public partial class Character
             if (value != health)
             {
                 health = value;
-                if (calculateChanges)
+                if (!isDeserializing)
                 {
                     CalculateLifePoints();
                 }
@@ -124,7 +124,7 @@ public partial class Character
             if (value != intelligence)
             {
                 intelligence = value;
-                if (calculateChanges)
+                if (!isDeserializing)
                 {
                     CalculatePsiPoints(settings);
                     CalculateManaPoints(settings);
@@ -143,7 +143,7 @@ public partial class Character
             if (value != willpower)
             {
                 willpower = value;
-                if (calculateChanges)
+                if (!isDeserializing)
                 {
                     CalculatePainTolerancePoints(settings);
                     CalculateUnconsciousMentalMagicResistance();
@@ -161,7 +161,7 @@ public partial class Character
             if (value != astral)
             {
                 astral = value;
-                if (calculateChanges)
+                if (!isDeserializing)
                 {
                     CalculateUnconsciousAstralMagicResistance();
                 }

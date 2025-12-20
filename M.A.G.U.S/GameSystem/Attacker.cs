@@ -49,11 +49,13 @@ public abstract class Attacker
         return diceThrow._1D100();
     }
 
+    public abstract int GetDamage();
+
     public Attack GetRandomAttackMode()
     {
         if (AttackModes == null || AttackModes.Count == 0)
         {
-            throw new InvalidOperationException();
+            throw new InvalidOperationException("No attack modes available.");
         }
 
         int randomIndex = RandomProvider.GetSecureRandomInt(0, AttackModes.Count);

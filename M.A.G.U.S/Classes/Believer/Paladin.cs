@@ -79,7 +79,7 @@ public abstract class Paladin : Class, IClass, IHateRangedWeapons
 
     public override int DefenseBaseValue => 75;
 
-    public override int AimBaseValue => throw new InvalidOperationException();
+    public override int AimBaseValue => 0;
 
     public override int CombatValueModifierPerLevel => 9;
 
@@ -93,7 +93,7 @@ public abstract class Paladin : Class, IClass, IHateRangedWeapons
 
     public override int BasePainTolerancePoints => 7;
 
-    public override bool AddFightValueOnFirstLevel => false;
+    public override bool AddCombatModifierOnFirstLevel => false;
 
     public override bool AddPainToleranceOnFirstLevel => false;
 
@@ -124,7 +124,7 @@ public abstract class Paladin : Class, IClass, IHateRangedWeapons
 
     public override QualificationList FutureQualifications => BuildQualifications([]);
 
-    public override List<PercentQualification> PercentQualifications => [];
+    public override PercentQualificationList PercentQualifications => [];
 
     public override SpecialQualificationList SpecialQualifications =>
     [

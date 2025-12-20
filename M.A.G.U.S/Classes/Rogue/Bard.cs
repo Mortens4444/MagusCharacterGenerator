@@ -99,13 +99,13 @@ public class Bard : Class, IClass, IJustFight
 
     public override int BasePainTolerancePoints => 6;
 
-    public override bool AddFightValueOnFirstLevel => false;
+    public override bool AddCombatModifierOnFirstLevel => false;
 
     public override bool AddPainToleranceOnFirstLevel => false;
 
     public override bool AddQualificationPointsOnFirstLevel => true;
 
-    public override IRace[] AllowedRaces => [new Human(), new Elf(), new HalfElf(), new Amund(), new Jann()];
+    public override IRace[] AllowedRaces => [new Human(), new Elf(), new HalfElf(), new Amund(), new Jann(), new Feenhar()];
 
     public override QualificationList Qualifications => BuildQualifications(
     [
@@ -148,7 +148,7 @@ public class Bard : Class, IClass, IJustFight
         new Mimicry(QualificationLevel.Master, 8)
     ]);
 
-    public override List<PercentQualification> PercentQualifications =>
+    public override PercentQualificationList PercentQualifications =>
     [
         new Climbing(25),
         new Falling(5),

@@ -1,4 +1,4 @@
-﻿using M.A.G.U.S.GameSystem.FightModifiers;
+﻿using M.A.G.U.S.GameSystem.CombatModifiers;
 using M.A.G.U.S.GameSystem.Qualifications;
 
 namespace M.A.G.U.S.Qualifications.Specialities;

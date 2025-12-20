@@ -98,7 +98,7 @@ public class VelarPriest : Class, IClass, ILikeMagic
 
     public override int BasePainTolerancePoints => 6;
 
-    public override bool AddFightValueOnFirstLevel => false;
+    public override bool AddCombatModifierOnFirstLevel => false;
 
     public override bool AddPainToleranceOnFirstLevel => false;
 
@@ -135,7 +135,7 @@ public class VelarPriest : Class, IClass, ILikeMagic
 		//new Balzsamozás(QualificationLevel.Master, 6)
 	]);
 
-    public override List<PercentQualification> PercentQualifications => [];
+    public override PercentQualificationList PercentQualifications => [];
 
     public override SpecialQualificationList SpecialQualifications =>
     [

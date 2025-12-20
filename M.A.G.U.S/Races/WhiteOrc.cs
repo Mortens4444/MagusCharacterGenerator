@@ -29,7 +29,7 @@ public class WhiteOrc : Race
 
     public override Alignment? Alignment => Enums.Alignment.OrderDeath;
 
-    public override List<PercentQualification> PercentQualifications =>
+    public override PercentQualificationList PercentQualifications =>
     [
         new TrapDetection(40)
     ];

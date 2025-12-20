@@ -17,7 +17,7 @@ public abstract class Race : IRace
 
     public virtual QualificationList Qualifications => [];
 
-    public virtual List<PercentQualification> PercentQualifications => [];
+    public virtual PercentQualificationList PercentQualifications => [];
 
     public virtual SpecialQualificationList SpecialQualifications => [];
 

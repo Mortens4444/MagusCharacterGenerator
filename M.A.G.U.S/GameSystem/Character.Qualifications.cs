@@ -1,16 +1,10 @@
 ﻿using M.A.G.U.S.Enums;
-using M.A.G.U.S.GameSystem.Psi;
 using M.A.G.U.S.GameSystem.Qualifications;
 using M.A.G.U.S.Interfaces;
 using M.A.G.U.S.Qualifications;
 using M.A.G.U.S.Qualifications.Combat;
-using M.A.G.U.S.Qualifications.Percentages;
 using M.A.G.U.S.Qualifications.Scientific;
-using M.A.G.U.S.Qualifications.Scientific.Psi;
-using M.A.G.U.S.Qualifications.Specialities;
 using M.A.G.U.S.Utils;
-using Mtf.Extensions;
-using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.Text.Json.Serialization;
 
@@ -25,8 +19,9 @@ public partial class Character
 
     public SpecialQualificationList SpecialQualifications { get; private set; } = [];
 
-    public ObservableCollection<PercentQualification> PercentQualifications { get; private set; } = [];
+    public PercentQualificationList PercentQualifications { get; private set; } = [];
 
+    [JsonIgnore, Newtonsoft.Json.JsonIgnore]
     public bool CanAllocateQualificationPoints => QualificationPoints != 0;
 
     public int PercentQualificationPoints { get; set; }
@@ -144,74 +139,26 @@ public partial class Character
 
     private void GetQualifications()
     {
-        Qualifications.Clear();
-        PercentQualifications.Clear();
-        SpecialQualifications.Clear();
+        var qualifications = new QualificationList();
+        var percentQualifications = new PercentQualificationList();
+        var specialQualifications = new SpecialQualificationList();
+        
+        qualifications.AddFrom(Classes, Race);
+        percentQualifications.AddFrom(Classes, Dexterity);
+        specialQualifications.AddFrom(Classes, Race);
 
-        foreach (var @class in Classes)
-        {
-            Qualifications.AddRange(@class.Qualifications.Concat(Race.Qualifications));
-            PercentQualifications.AddRange(@class.PercentQualifications);
+        qualifications.RemoveBy(specialQualifications);
 
-            var newQualifications = @class.FutureQualifications
-                .Where(futureQualification => futureQualification.ActualLevel <= @class.Level);
+        //Qualifications.Clear();
+        //PercentQualifications.Clear();
+        //SpecialQualifications.Clear();
 
-            Qualifications.AddRange(newQualifications.Where(q => q.QualificationLevel == QualificationLevel.Base));
-            var newMasterQualifications = newQualifications.Where(q => q.QualificationLevel == QualificationLevel.Master);
-            foreach (var newMasterQualification in newMasterQualifications)
-            {
-                Qualifications.UpgradeOrAddQualification(newMasterQualification);
-            }
-        }
-        var dexterityBasedPercentages = new List<Type> { typeof(Falling), typeof(Climbing), typeof(Jumping) };
-        foreach (var percentQualification in PercentQualifications)
-        {
-            if (dexterityBasedPercentages.Contains(percentQualification.GetType()))
-            {
-                percentQualification.Percent += MathHelper.GetAboveAverageValue(Dexterity);
-            }
-        }
-        if (PercentQualifications.FirstOrDefault(pq => pq is Falling) == null)
-        {
-            PercentQualifications.Add(new Falling(0));
-        }
-        if (PercentQualifications.FirstOrDefault(pq => pq is Climbing) == null)
-        {
-            PercentQualifications.Add(new Climbing(0));
-        }
-        if (PercentQualifications.FirstOrDefault(pq => pq is Jumping) == null)
-        {
-            PercentQualifications.Add(new Jumping(0));
-        }
-
-        SpecialQualifications.AddRange(BaseClass.SpecialQualifications);
-        SpecialQualifications.AddRange(Race.SpecialQualifications);
-        var cantLearnPsi = SpecialQualifications.GetSpeciality<CantLearnPsi>();
-        if (cantLearnPsi != null)
-        {
-            for (int i = Qualifications.Count - 1; i >= 0; i--)
-            {
-                if (Qualifications[i] is IPsi)
-                {
-                    Qualifications.RemoveAt(i);
-                }
-            }
-        }
-
-        if (SpecialQualifications.Any(sq => sq is CanOnlyLearnPyarronPsi))
-        {
-            var toRemove = Qualifications
-                .Where(q => q is IPsi && q is not PsiPyarron)
-                .ToList();
-
-            foreach (var q in toRemove)
-            {
-                Qualifications.Remove(q);
-            }
-        }
+        Qualifications = qualifications;
+        PercentQualifications = percentQualifications;
+        SpecialQualifications = specialQualifications;
 
         OnPropertyChanged(nameof(Qualifications));
         OnPropertyChanged(nameof(PercentQualifications));
-        OnPropertyChanged(nameof(SpecialQualification));
+        OnPropertyChanged(nameof(SpecialQualifications));
     }
 }

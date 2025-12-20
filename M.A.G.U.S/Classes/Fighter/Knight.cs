@@ -79,7 +79,7 @@ public class Knight : Class, IClass, IHateRangedWeapons
 
     public override int DefenseBaseValue => 75;
 
-    public override int AimBaseValue => throw new InvalidOperationException();
+    public override int AimBaseValue => 0;
 
     public override int CombatValueModifierPerLevel => 12;
 
@@ -93,7 +93,7 @@ public class Knight : Class, IClass, IHateRangedWeapons
 
     public override int BasePainTolerancePoints => 6;
 
-    public override bool AddFightValueOnFirstLevel => false;
+    public override bool AddCombatModifierOnFirstLevel => false;
 
     public override bool AddPainToleranceOnFirstLevel => true;
 
@@ -134,7 +134,7 @@ public class Knight : Class, IClass, IHateRangedWeapons
         new PsiPyarron(QualificationLevel.Master, 12)
     ]);
 
-    public override List<PercentQualification> PercentQualifications => [];
+    public override PercentQualificationList PercentQualifications => [];
 
     public override SpecialQualificationList SpecialQualifications => [];
 

@@ -93,7 +93,7 @@ public class Blademaster : Class, IClass, IJustFight
 
     public override int BasePainTolerancePoints => 8;
 
-    public override bool AddFightValueOnFirstLevel => true;
+    public override bool AddCombatModifierOnFirstLevel => true;
 
     public override bool AddPainToleranceOnFirstLevel => false;
 
@@ -126,7 +126,7 @@ public class Blademaster : Class, IClass, IJustFight
         new WeaponUse(QualificationLevel.Master, 5)
     ]);
 
-    public override List<PercentQualification> PercentQualifications =>
+    public override PercentQualificationList PercentQualifications =>
     [
         new Climbing(10),
         new Falling(20),

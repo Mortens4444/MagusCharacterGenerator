@@ -98,7 +98,7 @@ public class KrannishWarlock : Class, IClass, ILikeMagic
 
     public override int BasePainTolerancePoints => 3;
 
-    public override bool AddFightValueOnFirstLevel => false;
+    public override bool AddCombatModifierOnFirstLevel => false;
 
     public override bool AddPainToleranceOnFirstLevel => false;
 
@@ -140,7 +140,7 @@ public class KrannishWarlock : Class, IClass, ILikeMagic
         new Demonology(level: 8)
     ]);
 
-    public override List<PercentQualification> PercentQualifications =>
+    public override PercentQualificationList PercentQualifications =>
     [
         new Sneaking(15),
         new Hiding(10)

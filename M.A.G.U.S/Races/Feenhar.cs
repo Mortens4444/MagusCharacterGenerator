@@ -1,5 +1,8 @@
 ﻿using M.A.G.U.S.Enums;
+using M.A.G.U.S.GameSystem.Qualifications;
 using M.A.G.U.S.Qualifications;
+using M.A.G.U.S.Qualifications.Laical;
+using M.A.G.U.S.Qualifications.Scientific;
 using M.A.G.U.S.Qualifications.Specialities;
 
 namespace M.A.G.U.S.Races;
@@ -20,6 +23,14 @@ public class Feenhar : Race
     public override int Astral => -1;
 
     public override Alignment? Alignment => Enums.Alignment.OrderDeath;
+    
+    public override QualificationList Qualifications =>
+    [
+        new HuntingAndFishing(QualificationLevel.Base),
+        new PaintingDrawing(QualificationLevel.Base),
+        new Sculptury(QualificationLevel.Base),
+        new Architecture(QualificationLevel.Base)
+    ];
 
     public override SpecialQualificationList SpecialQualifications =>
     [
@@ -28,7 +39,8 @@ public class Feenhar : Race
         new CantLearnPsi(),
         new Telepathy(),
         new GoodArcher(15),
-        new Nightvision(),
+        new Ultravision(15),
+        //new Nightvision(),
         new SummonAirElemental(),
         new PoisonResistanceEqualsHealth(),
         new ExtraMagicResistanceOnLevelUp(5),

@@ -69,8 +69,7 @@ public partial class Character
         var currentLevel = BaseClass.Level;
         int totalPsiPoints = 0;
 
-        var allPsiSources = Qualifications.Concat(BaseClass.FutureQualifications)
-                                                    .OfType<IPsi>();
+        var allPsiSources = Qualifications.Concat(BaseClass.FutureQualifications).OfType<IPsi>();
 
         var timeline = new List<PsiEvent>();
         foreach (var psi in allPsiSources)

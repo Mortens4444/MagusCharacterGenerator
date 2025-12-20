@@ -4,8 +4,8 @@ namespace M.A.G.U.S.Assistant;
 
 internal class Constants
 {
-    public const bool AddFightValueOnFirstLevelForAllClass = true;
-    public const bool AddPainToleranceOnFirstLevelForAllClass = true;
+    public const bool AddCombatValueModifierPointsOnFirstLevelForAllClass = true;
+    public const bool AddPainTolerancePointsOnFirstLevelForAllClass = true;
     public const bool AddQualificationPointsOnFirstLevelForAllClass = true;
     public const bool AddManaPointsOnFirstLevelForAllClass = false;
     public const bool AddPsiPointsOnFirstLevelForAllClass = false;

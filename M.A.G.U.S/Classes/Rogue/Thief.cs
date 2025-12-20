@@ -92,13 +92,13 @@ public class Thief : Class, IClass, IJustFight
 
     public override int BasePainTolerancePoints => 5;
 
-    public override bool AddFightValueOnFirstLevel => false;
+    public override bool AddCombatModifierOnFirstLevel => false;
 
     public override bool AddPainToleranceOnFirstLevel => false;
 
     public override bool AddQualificationPointsOnFirstLevel => true;
 
-    public override IRace[] AllowedRaces => [new Human(), new HalfElf(), new Dwarf(), new CourtOrc(), new Amund(), new Jann(), new Wier()];
+    public override IRace[] AllowedRaces => [new Human(), new HalfElf(), new Dwarf(), new CourtOrc(), new Amund(), new Jann(), new Wier(), new Feenhar()];
 
     public override QualificationList Qualifications => BuildQualifications(
     [
@@ -121,7 +121,7 @@ public class Thief : Class, IClass, IJustFight
         new WeaponThrowing(QualificationLevel.Master, 5)
     ]);
 
-    public override List<PercentQualification> PercentQualifications =>
+    public override PercentQualificationList PercentQualifications =>
     [
         new Climbing(45),
         new Falling(15),

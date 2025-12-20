@@ -22,7 +22,7 @@ public class Dwarf : Race
 
     public override Alignment? Alignment => Enums.Alignment.OrderLife;
 
-    public override List<PercentQualification> PercentQualifications =>
+    public override PercentQualificationList PercentQualifications =>
     [
         new TrapDetection(35),
         new SecretDoorSearch(30)

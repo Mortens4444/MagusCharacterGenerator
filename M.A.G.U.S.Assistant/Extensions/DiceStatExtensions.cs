@@ -1,6 +1,5 @@
 ﻿using M.A.G.U.S.Assistant.Models;
-using M.A.G.U.S.GameSystem.Attributes;
-using Mtf.LanguageService.MAUI;
+using M.A.G.U.S.Extensions;
 using System.Reflection;
 
 namespace M.A.G.U.S.Assistant.Extensions;
@@ -19,40 +18,19 @@ internal static class DiceStatExtensions
 
         foreach (var prop in props)
         {
-            var throwAttr = prop.GetCustomAttributes(false)
-                                .OfType<DiceThrowAttribute>()
-                                .FirstOrDefault();
-            if (throwAttr == null)
+            var customAttributes = prop.GetCustomAttributes(false);
+            var diceThrowFormula = customAttributes.GetDiceThrowFormula();
+            if (diceThrowFormula != null)
             {
-                continue;
+                yield return new DiceStat
+                {
+                    Formula = diceThrowFormula.Formula,
+                    Modifier = diceThrowFormula.Modifier,
+                    HasSpecialTraining = diceThrowFormula.HasSpecialTraining,
+                    Name = prop.Name,
+                    Value = prop.GetValue(instance) ?? String.Empty
+                };
             }
-
-            var modAttr = prop.GetCustomAttributes(false)
-                              .OfType<DiceThrowModifierAttribute>()
-                              .FirstOrDefault();
-
-            var special = prop.GetCustomAttributes(false)
-                              .OfType<SpecialTrainingAttribute>()
-                              .Any();
-
-            var value = prop.GetValue(instance);
-
-            var formula = throwAttr.DiceThrowType.ToString();
-            if (formula.StartsWith("_"))
-            {
-                formula = formula.TrimStart('_');
-            }
-
-            var stat = new DiceStat
-            {
-                Name = Lng.Elem(prop.Name),
-                Formula = formula,
-                Modifier = modAttr != null ? modAttr.Modifier : 0,
-                HasSpecialTraining = special,
-                Value = value ?? String.Empty
-            };
-
-            yield return stat;
         }
     }
 }

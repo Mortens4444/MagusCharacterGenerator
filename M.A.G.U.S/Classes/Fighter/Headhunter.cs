@@ -94,13 +94,13 @@ public class Headhunter : Class, IClass, IJustFight
 
     public override int BasePainTolerancePoints => 7;
 
-    public override bool AddFightValueOnFirstLevel => false;
+    public override bool AddCombatModifierOnFirstLevel => false;
 
     public override bool AddPainToleranceOnFirstLevel => false;
 
     public override bool AddQualificationPointsOnFirstLevel => true;
 
-    public override IRace[] AllowedRaces => [new Human(), new Elf(), new HalfElf(), new CourtOrc(), new Amund(), new Jann(), new Khal(), new Wier()];
+    public override IRace[] AllowedRaces => [new Human(), new Elf(), new HalfElf(), new CourtOrc(), new Amund(), new Jann(), new Khal(), new Wier(), new Feenhar()];
 
     public override QualificationList Qualifications => BuildQualifications(
     [
@@ -137,7 +137,7 @@ public class Headhunter : Class, IClass, IJustFight
         new TrackingConcealment(QualificationLevel.Master, 9)
     ]);
 
-    public override List<PercentQualification> PercentQualifications =>
+    public override PercentQualificationList PercentQualifications =>
     [
         new Climbing(30),
         new Falling(15),

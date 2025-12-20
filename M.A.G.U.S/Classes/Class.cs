@@ -1,8 +1,10 @@
 ﻿using M.A.G.U.S.Enums;
+using M.A.G.U.S.Extensions;
 using M.A.G.U.S.GameSystem;
 using M.A.G.U.S.GameSystem.Attributes;
 using M.A.G.U.S.GameSystem.Psi;
 using M.A.G.U.S.Interfaces;
+using M.A.G.U.S.Models;
 using M.A.G.U.S.Qualifications;
 using M.A.G.U.S.Races;
 
@@ -75,7 +77,7 @@ public abstract class Class : IClass
 
     public abstract int BasePainTolerancePoints { get; }
 
-    public abstract bool AddFightValueOnFirstLevel { get; }
+    public abstract bool AddCombatModifierOnFirstLevel { get; }
 
     public abstract bool AddPainToleranceOnFirstLevel { get; }
 
@@ -85,7 +87,7 @@ public abstract class Class : IClass
 
     public abstract QualificationList FutureQualifications { get; }
 
-    public abstract List<PercentQualification> PercentQualifications { get; }
+    public abstract PercentQualificationList PercentQualifications { get; }
 
     public abstract SpecialQualificationList SpecialQualifications { get; }
 
@@ -124,6 +126,12 @@ public abstract class Class : IClass
     public virtual IRace[] AllowedRaces => [];
 
     public abstract int GetPainToleranceModifier();
+
+    public DiceThrowFormula? GetPainToleranceModifierFormula()
+    {
+        var customAttributes = GetType().GetMethod(nameof(GetPainToleranceModifier))?.GetCustomAttributes(false);
+        return customAttributes.GetDiceThrowFormula();
+    }
 
     protected QualificationList BuildQualifications(IEnumerable<Qualification> qualifications)
     {

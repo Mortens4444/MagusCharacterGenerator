@@ -92,7 +92,7 @@ public class Witch : Class, IClass, ILikeMagic
 
     public override int BasePainTolerancePoints => 1;
 
-    public override bool AddFightValueOnFirstLevel => false;
+    public override bool AddCombatModifierOnFirstLevel => false;
 
     public override bool AddPainToleranceOnFirstLevel => false;
 
@@ -120,7 +120,7 @@ public class Witch : Class, IClass, ILikeMagic
         new Herbalism(QualificationLevel.Master, 5)
     ]);
 
-    public override List<PercentQualification> PercentQualifications => [];
+    public override PercentQualificationList PercentQualifications => [];
 
     public override SpecialQualificationList SpecialQualifications =>
     [

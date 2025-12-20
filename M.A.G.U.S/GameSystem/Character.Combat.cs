@@ -1,9 +1,11 @@
 ﻿using M.A.G.U.S.Enums;
+using M.A.G.U.S.GameSystem.Attributes;
+using M.A.G.U.S.GameSystem.CombatModifiers;
 using M.A.G.U.S.GameSystem.FightMode;
-using M.A.G.U.S.GameSystem.FightModifiers;
 using M.A.G.U.S.Interfaces;
 using M.A.G.U.S.Qualifications.Specialities;
 using M.A.G.U.S.Things.Weapons;
+using M.A.G.U.S.Things.Weapons.OtherWeapons;
 using M.A.G.U.S.Utils;
 using System.Text.Json.Serialization;
 
@@ -27,7 +29,7 @@ public partial class Character
     private int originalAttackValue;
     private int originalDefenseValue;
     private int originalAimValue;
-    private WeaponFightModifier weaponFightModifier;
+    private WeaponCombatModifier? weaponCombatModifier;
     private List<Attack>? attackModes;
 
     public CombatValueModifier SelectedCombatValueModifier
@@ -42,7 +44,7 @@ public partial class Character
 
             selectedCombatValueModifier = value;
             OnPropertyChanged();
-            RecalculateFightValues(settings);
+            RecalculateCombatValues(settings);
         }
     }
 
@@ -91,7 +93,7 @@ public partial class Character
                 OnPropertyChanged();
                 OnPropertyChanged(nameof(PrimaryWeaponId));
                 InvalidateAttackModes();
-                RecalculateFightValues(settings);
+                RecalculateCombatValues(settings);
             }
         }
     }
@@ -107,9 +109,9 @@ public partial class Character
                 secondaryWeapon = value;
                 secondaryWeaponId = secondaryWeapon?.Id;
                 OnPropertyChanged();
-                OnPropertyChanged(nameof(PrimaryWeaponId));
+                OnPropertyChanged(nameof(SecondaryWeaponId));
                 InvalidateAttackModes();
-                RecalculateFightValues(settings);
+                RecalculateCombatValues(settings);
             }
         }
     }
@@ -130,6 +132,10 @@ public partial class Character
                 else if (PrimaryWeapon is IRangedWeapon rangedWeapon)
                 {
                     attackModes.Add(new RangeAttack(rangedWeapon, AimValue));
+                }
+                else
+                {
+                    attackModes.Add(new MeleeAttack(new Fist(), AttackValue));
                 }
             }
 
@@ -349,16 +355,16 @@ public partial class Character
     }
 
     [JsonIgnore, Newtonsoft.Json.JsonIgnore]
-    public int InitiateValueWithSelectedWeapon => InitiateValue + weaponFightModifier?.InitiateValue ?? 0;
+    public int InitiateValueWithSelectedWeapon => InitiateValue + weaponCombatModifier?.InitiateValue ?? 0;
 
     [JsonIgnore, Newtonsoft.Json.JsonIgnore]
-    public int AttackValueWithSelectedWeapon => AttackValue + weaponFightModifier?.AttackValue ?? 0;
+    public int AttackValueWithSelectedWeapon => AttackValue + weaponCombatModifier?.AttackValue ?? 0;
 
     [JsonIgnore, Newtonsoft.Json.JsonIgnore]
-    public int DefenseValueWithSelectedWeapon => DefenseValue + weaponFightModifier?.DefenseValue ?? 0;
+    public int DefenseValueWithSelectedWeapon => DefenseValue + weaponCombatModifier?.DefenseValue ?? 0;
 
     [JsonIgnore, Newtonsoft.Json.JsonIgnore]
-    public int AimValueWithSelectedWeapon => AimValue + weaponFightModifier?.AimValue ?? 0;
+    public int AimValueWithSelectedWeapon => AimValue + weaponCombatModifier?.AimValue ?? 0;
 
     private void SetPrimaryWeapon()
     {
@@ -366,7 +372,7 @@ public partial class Character
         {
             primaryWeapon = ResolveWeaponById(primaryWeaponId);
             OnPropertyChanged(nameof(PrimaryWeapon));
-            RecalculateFightValues(settings);
+            RecalculateCombatValues(settings);
         }
     }
 
@@ -376,7 +382,7 @@ public partial class Character
         {
             secondaryWeapon = ResolveWeaponById(secondaryWeaponId);
             OnPropertyChanged(nameof(SecondaryWeapon));
-            RecalculateFightValues(settings);
+            RecalculateCombatValues(settings);
         }
     }
 
@@ -412,7 +418,7 @@ public partial class Character
         OnPropertyChanged(nameof(MaxAimValue));
     }
 
-    private void CalculateFightValues(ISettings? settings)
+    private void CalculateCombatValues(ISettings? settings)
     {
         if (BaseClass == null || Race == null)
         {
@@ -460,12 +466,12 @@ public partial class Character
         }
 
         var (attackPercentage, defencePercentage, aimingPercentage) = DistributionProvider.Get(BaseClass, Race);
-        var levelUpFightModifier = Calculate(settings, BaseClass, attackPercentage, defencePercentage, aimingPercentage);
-        combatModifiers.InitiateValue += levelUpFightModifier.InitiateValue;
-        combatModifiers.AttackValue += levelUpFightModifier.AttackValue;
-        combatModifiers.DefenseValue += levelUpFightModifier.DefenseValue;
-        combatModifiers.AimValue += levelUpFightModifier.AimValue;
-        combatModifiers.CombatModifierPoints += levelUpFightModifier.CombatModifierPoints;
+        var levelUpCombatModifier = Calculate(settings, BaseClass, attackPercentage, defencePercentage, aimingPercentage);
+        combatModifiers.InitiateValue += levelUpCombatModifier.InitiateValue;
+        combatModifiers.AttackValue += levelUpCombatModifier.AttackValue;
+        combatModifiers.DefenseValue += levelUpCombatModifier.DefenseValue;
+        combatModifiers.AimValue += levelUpCombatModifier.AimValue;
+        combatModifiers.CombatModifierPoints += levelUpCombatModifier.CombatModifierPoints;
 
         OriginalInitiateValue = combatModifiers.InitiateValue;
         OriginalAttackValue = combatModifiers.AttackValue;
@@ -480,10 +486,10 @@ public partial class Character
         AimValue = combatModifiers.AimValue;
     }
 
-    public void RecalculateFightValues(ISettings? settings)
+    public void RecalculateCombatValues(ISettings? settings)
     {
-        CalculateFightValues(settings);
-        weaponFightModifier = GetWeaponFightModifier();
+        CalculateCombatValues(settings);
+        weaponCombatModifier = GetWeaponCombatModifier();
         OnPropertyChanged(nameof(InitiateValueWithSelectedWeapon));
         OnPropertyChanged(nameof(AttackValueWithSelectedWeapon));
         OnPropertyChanged(nameof(DefenseValueWithSelectedWeapon));
@@ -491,9 +497,15 @@ public partial class Character
         InvalidateAttackModes();
     }
 
-    private WeaponFightModifier GetWeaponFightModifier()
+    [DiceThrow(ThrowType._1D2)]
+    public override int GetDamage()
     {
-        var result = new WeaponFightModifier();
+        return new Fist().GetDamage();
+    }
+
+    private WeaponCombatModifier GetWeaponCombatModifier()
+    {
+        var result = new WeaponCombatModifier();
         var weapon = selectedCombatValueModifier switch
         {
             Enums.CombatValueModifier.PrimaryWeapon => PrimaryWeapon,
@@ -523,21 +535,21 @@ public partial class Character
 
     private static CombatModifier Calculate(ISettings? settings, IClass @class, int attackPercentage, int defencePercentage, int aimingPercentage)
     {
-        var addFightValuesOnFirstLevel = settings?.AddFightValueOnFirstLevelForAllClass ?? true;
-        var fightValues = (@class.AddFightValueOnFirstLevel || addFightValuesOnFirstLevel ? @class.Level : @class.Level - 1) * @class.CombatValueModifierPerLevel;
+        var addCombatValuesOnFirstLevel = settings?.AddCombatValueOnFirstLevelForAllClass ?? true;
+        var combatValues = (@class.AddCombatModifierOnFirstLevel || addCombatValuesOnFirstLevel ? @class.Level : @class.Level - 1) * @class.CombatValueModifierPerLevel;
 
         var autoDistributeCombatValues = settings?.AutoDistributeCombatValues ?? false;
         if (!autoDistributeCombatValues)
         {
             return new CombatModifier()
             {
-                CombatModifierPoints = fightValues
+                CombatModifierPoints = combatValues
             };
         }
-        var attackPoints = MathHelper.GetModifier(fightValues, attackPercentage);
-        var defencePoints = MathHelper.GetModifier(fightValues, defencePercentage);
-        var aimingPoints = MathHelper.GetModifier(fightValues, aimingPercentage);
-        var InitiatePoints = fightValues - attackPoints - defencePoints - aimingPoints;
+        var attackPoints = MathHelper.GetModifier(combatValues, attackPercentage);
+        var defencePoints = MathHelper.GetModifier(combatValues, defencePercentage);
+        var aimingPoints = MathHelper.GetModifier(combatValues, aimingPercentage);
+        var InitiatePoints = combatValues - attackPoints - defencePoints - aimingPoints;
         if (InitiatePoints < 0)
         {
             throw new InvalidOperationException($"The amount of the percentages ({nameof(attackPercentage)} + {nameof(defencePercentage)} + {nameof(aimingPercentage)}) should be under or equal to 100 percent.");

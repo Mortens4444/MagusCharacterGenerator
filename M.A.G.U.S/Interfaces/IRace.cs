@@ -10,7 +10,7 @@ public interface IRace : IAbilities
 
     QualificationList Qualifications { get; }
 
-    List<PercentQualification> PercentQualifications { get; }
+    PercentQualificationList PercentQualifications { get; }
 
     SpecialQualificationList SpecialQualifications { get; }
 

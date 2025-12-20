@@ -7,12 +7,10 @@ internal sealed class TurnViewModel
     public TurnViewModel(TurnData turn)
     {
         Turn = turn;
-        Attacks = [.. turn.Initiatives.Select(initiative => initiative.AttackResolution).Select(attack => new TurnAttackViewModel(attack))];
+        Attacks = [.. turn.Initiatives.Select(initiative => new TurnAttackViewModel(Turn.Round, initiative))];
     }
 
     public TurnData Turn { get; }
-
-    public int RoundIndex => Turn.Round;
 
     public IReadOnlyList<TurnAttackViewModel> Attacks { get; }
 }

@@ -15,7 +15,7 @@ internal partial class SettingsViewModel : BaseViewModel
     public SettingsViewModel(SettingsService settingsService)
     {
         this.settingsService = settingsService;
-        OnPropertyChanged(nameof(AddFightValueOnFirstLevelForAllClass));
+        OnPropertyChanged(nameof(AddCombatValueModifierPointsOnFirstLevelForAllClass));
         OnPropertyChanged(nameof(AddPainToleranceOnFirstLevelForAllClass));
         OnPropertyChanged(nameof(AddQualificationPointsOnFirstLevelForAllClass));
         OnPropertyChanged(nameof(AddManaPointsOnFirstLevelForAllClass));
@@ -28,14 +28,14 @@ internal partial class SettingsViewModel : BaseViewModel
         ToggleSettingCommand = new RelayCommand<object?>(ToggleSetting);
     }
 
-    public bool AddFightValueOnFirstLevelForAllClass
+    public bool AddCombatValueModifierPointsOnFirstLevelForAllClass
     {
-        get => settingsService.AddFightValueOnFirstLevelForAllClass;
+        get => settingsService.AddCombatValueOnFirstLevelForAllClass;
         set
         {
-            if (settingsService.AddFightValueOnFirstLevelForAllClass != value)
+            if (settingsService.AddCombatValueOnFirstLevelForAllClass != value)
             {
-                settingsService.SaveAddFightValueAsync(value);
+                settingsService.SaveAddCombatValueAsync(value);
                 OnPropertyChanged();
             }
         }
