@@ -203,7 +203,7 @@
       ]
     },
     "PercentQualifications": {
-      "$type": "System.Collections.Generic.List`1[[M.A.G.U.S.Qualifications.PercentQualification, M.A.G.U.S.]], System.Private.CoreLib",
+      "$type": "M.A.G.U.S.Qualifications.PercentQualificationList, M.A.G.U.S.",
       "$values": []
     },
     "SpecialQualifications": {
@@ -240,7 +240,7 @@
       "$values": []
     },
     "PercentQualifications": {
-      "$type": "System.Collections.Generic.List`1[[M.A.G.U.S.Qualifications.PercentQualification, M.A.G.U.S.]], System.Private.CoreLib",
+      "$type": "M.A.G.U.S.Qualifications.PercentQualificationList, M.A.G.U.S.",
       "$values": []
     },
     "SpecialQualifications": {
@@ -459,7 +459,7 @@
     "$values": []
   },
   "PercentQualifications": {
-    "$type": "System.Collections.ObjectModel.ObservableCollection`1[[M.A.G.U.S.Qualifications.PercentQualification, M.A.G.U.S.]], System.ObjectModel",
+    "$type": "M.A.G.U.S.Qualifications.PercentQualificationList, M.A.G.U.S.",
     "$values": [
       {
         "$id": "29",

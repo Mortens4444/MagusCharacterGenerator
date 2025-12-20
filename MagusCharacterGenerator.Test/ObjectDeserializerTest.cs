@@ -2,7 +2,6 @@
 using M.A.G.U.S.Classes.Sorcerer;
 using M.A.G.U.S.GameSystem;
 using M.A.G.U.S.GameSystem.Languages;
-using M.A.G.U.S.Interfaces;
 using M.A.G.U.S.Qualifications.Scientific;
 using M.A.G.U.S.Races;
 using M.A.G.U.S.Utils;
@@ -24,7 +23,7 @@ namespace M.A.G.U.S.Test
                 Lng = new LanguageLore(Language.Krannish, 3),
                 Class = new ArelPriest(1),
                 Race = new Orc(),
-                Character = GetCharacter("Anuman", new Amund(), typeof(ArelPriest), 1)
+                Character = new Character(new Settings(false), "Anuman", new Amund(), ClassCreator.GetClass(typeof(ArelPriest), 1))
             };
             var anonymousClassJson = ObjectSerializer.GetSerializedString(anonymousClass);
             var deserializedAnonymousClassJson = ObjectSerializer.LoadContent<TestDto>(anonymousClassJson);
@@ -41,7 +40,7 @@ namespace M.A.G.U.S.Test
         [Test]
 		public void SerializeAndDeserializeCharacter()
 		{
-			var character = GetCharacter("Mirena", new Human(), typeof(Witch), 5);
+			var character = new Character(new Settings(false), "Mirena", new Human(), ClassCreator.GetClass(typeof(Witch), 5));
 			var characterJson = ObjectSerializer.GetSerializedString(character);
 			var deserializedCharacter = ObjectSerializer.LoadContent<Character>(characterJson);
 			Assert.That(character.Race.ToString(), Is.EqualTo(deserializedCharacter.Race.ToString()));
@@ -54,21 +53,5 @@ namespace M.A.G.U.S.Test
 			var character = ObjectSerializer.LoadContent<Character>(savedCharacterJson);
 			Assert.That(character.Classes, Is.Not.Null);
 		}
-
-        private static Character GetCharacter(string name, IRace race, Type classType, int level)
-        {
-            Character? character = null;
-            do
-            {
-                try
-                {
-                    var @class = (IClass)Activator.CreateInstance(classType, level);
-                    character = new Character(new Settings(false), name, race, @class);
-                }
-                catch { }
-            }
-            while (character == null);
-            return character;
-        }
     }
 }
