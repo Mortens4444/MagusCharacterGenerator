@@ -17,6 +17,7 @@ internal sealed class SettingsService : ISettings
     public bool AutoDistributeQualificationPoints { get; private set; }
     public bool AutoIncreasePainTolerance { get; private set; }
     public bool AutoGenerateSkills { get; private set; }
+    public bool AssignmentTurnHistoryNewestOnTop { get; private set; }
 
     private const string KeyLanguage = "Setting_Language";
 
@@ -30,6 +31,8 @@ internal sealed class SettingsService : ISettings
     private const string KeyAutoQualificationPointsDistribution = "Setting_AutoQualificationPointsDistribution";
     private const string KeyAutoPainToleranceIncrease = "Setting_AutoPainToleranceIncrease";
     private const string KeyAutoSkillGeneration = "Setting_AutoSkillGeneration";
+
+    private const string KeyAssignmentTurnHistoryNewestOnTop = "Setting_AssignmentTurnHistoryNewestOnTop";
 
     public SettingsService(SettingsRepository settingsRepository)
     {
@@ -49,6 +52,8 @@ internal sealed class SettingsService : ISettings
         AutoDistributeQualificationPoints = await settingsRepository.GetBoolSettingAsync(KeyAutoQualificationPointsDistribution, Constants.AutoDistributeQualificationPoints).ConfigureAwait(false);
         AutoIncreasePainTolerance = await settingsRepository.GetBoolSettingAsync(KeyAutoPainToleranceIncrease, Constants.AutoIncreasePainTolerance).ConfigureAwait(false);
         AutoGenerateSkills = await settingsRepository.GetBoolSettingAsync(KeyAutoSkillGeneration, Constants.AutoGenerateSkills).ConfigureAwait(false);
+
+        AssignmentTurnHistoryNewestOnTop = await settingsRepository.GetBoolSettingAsync(KeyAssignmentTurnHistoryNewestOnTop, Constants.AssignmentTurnHistoryNewestOnTop).ConfigureAwait(false);
     }
 
     public Task SaveAddCombatValueAsync(bool value)
@@ -103,6 +108,12 @@ internal sealed class SettingsService : ISettings
     {
         AutoGenerateSkills = value;
         return settingsRepository.SaveBoolSettingAsync(KeyAutoSkillGeneration, value);
+    }
+
+    public Task SaveAssignmentTurnHistoryNewestOnTop(bool value)
+    {
+        AssignmentTurnHistoryNewestOnTop = value;
+        return settingsRepository.SaveBoolSettingAsync(KeyAssignmentTurnHistoryNewestOnTop, value);
     }
 
     public async Task<Language> GetCurrentLanguageAsync()

@@ -1,14 +1,18 @@
 ﻿using M.A.G.U.S.Bestiary;
 using M.A.G.U.S.GameSystem;
 using M.A.G.U.S.GameSystem.Turn;
+using M.A.G.U.S.Interfaces;
 using System.Collections.ObjectModel;
 
 namespace M.A.G.U.S.Assistant.ViewModels;
 
 internal class AssignmentViewModel : BaseViewModel
 {
-    public AssignmentViewModel(Character character)
+    private readonly ISettings settings;
+
+    public AssignmentViewModel(ISettings settings, Character character)
     {
+        this.settings = settings;
         Character = character;
     }
 
@@ -25,6 +29,14 @@ internal class AssignmentViewModel : BaseViewModel
 
     public void AddTurn(TurnData turn)
     {
-        TurnHistory.Add(new TurnViewModel(turn));
+        var turnViewModel = new TurnViewModel(turn);
+        if (settings.AssignmentTurnHistoryNewestOnTop)
+        {
+            TurnHistory.Insert(0, turnViewModel);
+        }
+        else
+        {
+            TurnHistory.Add(turnViewModel);
+        }
     }
 }

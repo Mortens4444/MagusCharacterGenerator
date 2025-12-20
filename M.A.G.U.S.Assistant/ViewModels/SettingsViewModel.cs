@@ -145,6 +145,19 @@ internal partial class SettingsViewModel : BaseViewModel
         }
     }
 
+    public bool AssignmentTurnHistoryNewestOnTop
+    {
+        get => settingsService.AssignmentTurnHistoryNewestOnTop;
+        set
+        {
+            if (settingsService.AssignmentTurnHistoryNewestOnTop != value)
+            {
+                settingsService.SaveAssignmentTurnHistoryNewestOnTop(value);
+                OnPropertyChanged();
+            }
+        }
+    }
+
     public Language CurrentLanguage
     {
         get => settingsService.GetCurrentLanguageAsync().GetAwaiter().GetResult();

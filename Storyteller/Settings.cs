@@ -21,5 +21,7 @@ namespace StoryTeller
         public bool AutoIncreasePainTolerance => true;
 
         public bool AutoGenerateSkills => true;
+
+        public bool AssignmentTurnHistoryNewestOnTop => true;
     }
 }

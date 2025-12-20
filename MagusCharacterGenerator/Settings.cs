@@ -21,5 +21,7 @@ namespace M.A.G.U.S.Test
         public bool AutoIncreasePainTolerance => true;
 
         public bool AutoGenerateSkills => true;
+
+        public bool AssignmentTurnHistoryNewestOnTop => true;
     }
 }

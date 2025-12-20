@@ -13,5 +13,7 @@ internal class Constants
     public const bool AutoDistributeQualificationPoints = false;
     public const bool AutoIncreasePainTolerance = false;
     public const bool AutoGenerateSkills = false;
+    public const bool AssignmentTurnHistoryNewestOnTop = true;
+    
     public const Language DefaultLanguage = Language.Hungarian;
 }

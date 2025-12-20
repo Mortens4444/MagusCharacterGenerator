@@ -4,6 +4,7 @@ using M.A.G.U.S.Bestiary;
 using M.A.G.U.S.Enums;
 using M.A.G.U.S.GameSystem;
 using M.A.G.U.S.GameSystem.Turn;
+using M.A.G.U.S.Interfaces;
 using M.A.G.U.S.Utils;
 using Mtf.Extensions;
 using Mtf.Extensions.Services;
@@ -17,9 +18,11 @@ internal partial class EncounterViewModel : CharacterListLoaderViewModel
     private Character? selectedCharacter;
     private Creature? selectedEnemy;
     private AssignmentViewModel? selectedAssignment;
+    private readonly ISettings settings;
 
-    public EncounterViewModel(CharacterService characterService) : base(characterService)
+    public EncounterViewModel(ISettings settings, CharacterService characterService) : base(characterService)
     {
+        this.settings = settings;
     }
 
     public ObservableCollection<Character> Characters { get; } = [];
@@ -83,7 +86,7 @@ internal partial class EncounterViewModel : CharacterListLoaderViewModel
     private void AddCharacter()
     {
         Characters.Add(SelectedCharacter!);
-        Assignments.Add(new AssignmentViewModel(SelectedCharacter!));
+        Assignments.Add(new AssignmentViewModel(settings, SelectedCharacter!));
         if (SelectedAssignment == null)
         {
             SelectedAssignment = Assignments.LastOrDefault();

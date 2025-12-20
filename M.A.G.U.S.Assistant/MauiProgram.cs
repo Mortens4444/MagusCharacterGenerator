@@ -5,8 +5,8 @@ using M.A.G.U.S.Assistant.Interfaces;
 using M.A.G.U.S.Assistant.Services;
 using M.A.G.U.S.Assistant.ViewModels;
 using M.A.G.U.S.Assistant.Views;
+using M.A.G.U.S.Interfaces;
 using Microsoft.Extensions.Logging;
-using Mtf.LanguageService.MAUI.Views;
 using Mtf.Maui.Controls.Messages;
 using System.Diagnostics;
 
@@ -76,6 +76,7 @@ internal static class MauiProgram
         {
             builder.Services.AddTransient(serviceType);
         }
+        builder.Services.AddTransient<ISettings, SettingsService>();
     }
 
     private static void RegisterSingletonServices(MauiAppBuilder builder)

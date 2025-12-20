@@ -19,4 +19,6 @@ public interface ISettings
     bool AutoIncreasePainTolerance { get; }
     
     bool AutoGenerateSkills { get; }
+
+    bool AssignmentTurnHistoryNewestOnTop { get; }
 }
