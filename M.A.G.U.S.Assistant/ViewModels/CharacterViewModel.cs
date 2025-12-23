@@ -1,4 +1,5 @@
-﻿using M.A.G.U.S.Assistant.Extensions;
+﻿using CommunityToolkit.Mvvm.Input;
+using M.A.G.U.S.Assistant.Extensions;
 using M.A.G.U.S.Enums;
 using M.A.G.U.S.GameSystem;
 using M.A.G.U.S.Interfaces;
@@ -7,12 +8,13 @@ using M.A.G.U.S.Things;
 using M.A.G.U.S.Things.Weapons;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
+using System.ComponentModel;
 using System.Runtime.Versioning;
 
 namespace M.A.G.U.S.Assistant.ViewModels;
 
 [SupportedOSPlatform("windows10.0.17763")]
-internal partial class CharacterViewModel : BaseViewModel
+internal partial class CharacterViewModel : BaseViewModel, IDisposable
 {
     private CombatValueModifier selectedCombatValueModifier;
     private Character? character;
@@ -88,7 +90,18 @@ internal partial class CharacterViewModel : BaseViewModel
                 subscribedEquipment = null;
             }
 
+            if (character != null)
+            {
+                character.PropertyChanged -= Character_PropertyChanged;
+            }
+
             SetProperty(ref character, value);
+
+            if (character != null)
+            {
+                character.PropertyChanged += Character_PropertyChanged;
+            }
+
             SetProperty(ref selectedCombatValueModifier, value?.SelectedCombatValueModifier ?? M.A.G.U.S.Enums.CombatValueModifier.Base, nameof(SelectedCombatValueModifier));
             SetProperty(ref primaryWeapon, value?.PrimaryWeapon, nameof(PrimaryWeapon));
             SetProperty(ref secondaryWeapon, value?.SecondaryWeapon, nameof(SecondaryWeapon));
@@ -100,9 +113,6 @@ internal partial class CharacterViewModel : BaseViewModel
             }
 
             RefillAvailableWeapons();
-
-            primaryWeapon = Character?.PrimaryWeapon;
-            secondaryWeapon = Character?.SecondaryWeapon;
 
             OnPropertyChanged(nameof(AvailableWeapons));
             OnPropertyChanged(nameof(PrimaryWeapon));
@@ -131,28 +141,18 @@ internal partial class CharacterViewModel : BaseViewModel
             OnPropertyChanged(nameof(PainTolerancePoints));
             OnPropertyChanged(nameof(PainToleranceModifierFormula));
 
-            OnPropertyChanged(nameof(CanAllocateCombatModifierBase));
-            OnPropertyChanged(nameof(CanAllocateCombatModifierWithWeapon));
             OnPropertyChanged(nameof(CanAllocateCombatModifier));
-            OnPropertyChanged(nameof(OriginalInitiateValue));
             OnPropertyChanged(nameof(MaxInitiateValue));
             OnPropertyChanged(nameof(InitiateValue));
-            OnPropertyChanged(nameof(InitiateValueWithSelectedWeapon));
 
-            OnPropertyChanged(nameof(OriginalAttackValue));
             OnPropertyChanged(nameof(MaxAttackValue));
             OnPropertyChanged(nameof(AttackValue));
-            OnPropertyChanged(nameof(AttackValueWithSelectedWeapon));
 
-            OnPropertyChanged(nameof(OriginalDefenseValue));
             OnPropertyChanged(nameof(MaxDefenseValue));
             OnPropertyChanged(nameof(DefenseValue));
-            OnPropertyChanged(nameof(DefenseValueWithSelectedWeapon));
 
-            OnPropertyChanged(nameof(OriginalAimValue));
             OnPropertyChanged(nameof(MaxAimValue));
             OnPropertyChanged(nameof(AimValue));
-            OnPropertyChanged(nameof(AimValueWithSelectedWeapon));
             
             OnPropertyChanged(nameof(CombatValueModifier));
             OnPropertyChanged(nameof(CombatValueModifierPerLevel));
@@ -185,6 +185,88 @@ internal partial class CharacterViewModel : BaseViewModel
 
             OnPropertyChanged(nameof(Equipment));
             OnPropertyChanged(nameof(TotalEquipmentWeight));
+        }
+    }
+
+    private void Character_PropertyChanged(object? sender, PropertyChangedEventArgs e)
+    {
+        switch (e.PropertyName)
+        {
+            case nameof(Character.CanAllocateCombatModifier):
+                OnPropertyChanged(nameof(CanAllocateCombatModifier));
+                IncrementInitiatorCommand.NotifyCanExecuteChanged();
+                DecrementInitiatorCommand.NotifyCanExecuteChanged();
+                IncrementAttackCommand.NotifyCanExecuteChanged();
+                DecrementAttackCommand.NotifyCanExecuteChanged();
+                IncrementDefenseCommand.NotifyCanExecuteChanged();
+                DecrementDefenseCommand.NotifyCanExecuteChanged();
+                IncrementAimCommand.NotifyCanExecuteChanged();
+                DecrementAimCommand.NotifyCanExecuteChanged();
+                break;
+
+            case nameof(Character.CombatValueModifier):
+                OnPropertyChanged(nameof(CombatValueModifier));
+                OnPropertyChanged(nameof(CanAllocateCombatModifier));
+                break;
+
+            case nameof(Character.InitiateValue):
+                OnPropertyChanged(nameof(InitiateValue));
+                break;
+
+            case nameof(Character.MinInitiateValue):
+                OnPropertyChanged(nameof(MinInitiateValue));
+                break;
+
+            case nameof(Character.MaxInitiateValue):
+                OnPropertyChanged(nameof(MaxInitiateValue));
+                break;
+
+            case nameof(Character.AttackValue):
+                OnPropertyChanged(nameof(AttackValue));
+                OnPropertyChanged(nameof(MaxAttackValue));
+                break;
+
+            case nameof(Character.MinAttackValue):
+                OnPropertyChanged(nameof(MinAttackValue));
+                break;
+
+            case nameof(Character.MaxAttackValue):
+                OnPropertyChanged(nameof(MaxAttackValue));
+                break;
+
+            case nameof(Character.DefenseValue):
+                OnPropertyChanged(nameof(DefenseValue));
+                OnPropertyChanged(nameof(MaxDefenseValue));
+                break;
+
+            case nameof(Character.MinDefenseValue):
+                OnPropertyChanged(nameof(MinDefenseValue));
+                break;
+
+            case nameof(Character.MaxDefenseValue):
+                OnPropertyChanged(nameof(MaxDefenseValue));
+                break;
+
+            case nameof(Character.AimValue):
+                OnPropertyChanged(nameof(AimValue));
+                OnPropertyChanged(nameof(MaxAimValue));
+                break;
+
+            case nameof(Character.MinAimValue):
+                OnPropertyChanged(nameof(MinAimValue));
+                break;
+
+            case nameof(Character.MaxAimValue):
+                OnPropertyChanged(nameof(MaxAimValue));
+                break;
+
+            case nameof(Character.Qualifications):
+                OnPropertyChanged(nameof(Qualifications));
+                break;
+
+            case nameof(Character.TotalEquipmentWeight):
+                OnPropertyChanged(nameof(TotalEquipmentWeight));
+                break;
         }
     }
 
@@ -230,24 +312,22 @@ internal partial class CharacterViewModel : BaseViewModel
     public int CombatValueModifier => Character?.CombatValueModifier ?? 0;
     public int CombatValueModifierPerLevel => Character?.CombatValueModifierPerLevel ?? 0;
     public bool CanAllocateCombatModifier => Character?.CanAllocateCombatModifier ?? false;
-    public bool CanAllocateCombatModifierBase => Character?.CanAllocateCombatModifierBase ?? false;
-    public bool CanAllocateCombatModifierWithWeapon => Character?.CanAllocateCombatModifierWithWeapon ?? false;
-    public int OriginalInitiateValue => Character?.OriginalInitiateValue ?? 0;
+    
+    public int MinInitiateValue => Character?.MinInitiateValue ?? 0;
     public int MaxInitiateValue => Character?.MaxInitiateValue ?? 0;
     public int InitiateValue => Character?.InitiateValue ?? 0;
-    public int InitiateValueWithSelectedWeapon => Character?.InitiateValueWithSelectedWeapon ?? 0;
-    public int OriginalAttackValue => Character?.OriginalAttackValue ?? 0;
+    
+    public int MinAttackValue => Character?.MinAttackValue ?? 0;
     public int MaxAttackValue => Character?.MaxAttackValue ?? 0;
     public int AttackValue => Character?.AttackValue ?? 0;
-    public int AttackValueWithSelectedWeapon => Character?.AttackValueWithSelectedWeapon ?? 0;
-    public int OriginalDefenseValue => Character?.OriginalDefenseValue ?? 0;
+    
+    public int MinDefenseValue => Character?.MinDefenseValue ?? 0;
     public int MaxDefenseValue => Character?.MaxDefenseValue ?? 0;
     public int DefenseValue => Character?.DefenseValue ?? 0;
-    public int DefenseValueWithSelectedWeapon => Character?.DefenseValueWithSelectedWeapon ?? 0;
-    public int OriginalAimValue => Character?.OriginalAimValue ?? 0;
+    
+    public int MinAimValue => Character?.MinAimValue ?? 0;
     public int MaxAimValue => Character?.MaxAimValue ?? 0;
     public int AimValue => Character?.AimValue ?? 0;
-    public int AimValueWithSelectedWeapon => Character?.AimValueWithSelectedWeapon ?? 0;
 
     public int MaxPsiPoints => Character?.MaxPsiPoints ?? 0;
     public int PsiPoints => Character?.PsiPoints ?? 0;
@@ -287,14 +367,74 @@ internal partial class CharacterViewModel : BaseViewModel
         }
     }
 
-    private void Equipment_CollectionChanged(object? sender, NotifyCollectionChangedEventArgs e) => RefillAvailableWeapons();
-    
+    [RelayCommand(CanExecute = nameof(CanAllocateCombatModifier))]
+    public void IncrementInitiator() => Character?.ChangeInitiator(1);
+
+    [RelayCommand(CanExecute = nameof(CanAllocateCombatModifier))]
+    public void DecrementInitiator() => Character?.ChangeInitiator(-1);
+
+    [RelayCommand(CanExecute = nameof(CanAllocateCombatModifier))]
+    public void IncrementAttack() => Character?.ChangeAttack(1);
+
+    [RelayCommand(CanExecute = nameof(CanAllocateCombatModifier))]
+    public void DecrementAttack() => Character?.ChangeAttack(-1);
+
+    [RelayCommand(CanExecute = nameof(CanAllocateCombatModifier))]
+    public void IncrementDefense() => Character?.ChangeDefense(1);
+
+    [RelayCommand(CanExecute = nameof(CanAllocateCombatModifier))]
+    public void DecrementDefense() => Character?.ChangeDefense(-1);
+
+    [RelayCommand(CanExecute = nameof(CanAllocateCombatModifier))]
+    public void IncrementAim() => Character?.ChangeAim(1);
+
+    [RelayCommand(CanExecute = nameof(CanAllocateCombatModifier))]
+    public void DecrementAim() => Character?.ChangeAim(-1);
+
+    private void Equipment_CollectionChanged(object? sender, NotifyCollectionChangedEventArgs e)
+    {
+        switch (e.Action)
+        {
+            case NotifyCollectionChangedAction.Add:
+                foreach (IWeapon weapon in e.NewItems?.OfType<IWeapon>() ?? [])
+                {
+                    AvailableWeapons.Add(weapon);
+                }
+                break;
+
+            case NotifyCollectionChangedAction.Remove:
+                foreach (IWeapon weapon in e.OldItems?.OfType<IWeapon>() ?? [])
+                {
+                    AvailableWeapons.Remove(weapon);
+                }
+                break;
+
+            case NotifyCollectionChangedAction.Reset:
+            case NotifyCollectionChangedAction.Replace:
+                RefillAvailableWeapons();
+                break;
+        }
+    }
+
     private void RefillAvailableWeapons()
     {
         AvailableWeapons.Clear();
         foreach (var weapon in Character?.Equipment?.OfType<IWeapon>() ?? [])
         {
             AvailableWeapons.Add(weapon);
+        }
+    }
+
+    public void Dispose()
+    {
+        if (subscribedEquipment != null)
+        {
+            subscribedEquipment.CollectionChanged -= Equipment_CollectionChanged;
+        }
+
+        if (character != null)
+        {
+            character.PropertyChanged -= Character_PropertyChanged;
         }
     }
 }

@@ -314,7 +314,7 @@
     <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="10.0.1" />
     <PackageReference Include="Microsoft.Maui.Graphics" Version="10.0.20" />
     <PackageReference Include="Microsoft.Maui.Graphics.Skia" Version="10.0.20" />
-    <PackageReference Include="Mtf.Maui.Controls" Version="3.0.46" />
+    <PackageReference Include="Mtf.Maui.Controls" Version="3.0.50" />
     <PackageReference Include="Mtf.MAUI.LanguageService" Version="2.0.84" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.4" />
     <PackageReference Include="Plugin.Maui.Audio" Version="4.0.0" />

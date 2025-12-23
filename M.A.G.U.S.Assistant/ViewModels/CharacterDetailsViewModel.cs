@@ -2,11 +2,11 @@
 
 namespace M.A.G.U.S.Assistant.ViewModels;
 
-[QueryProperty(nameof(CharacterName), "name")]
+[QueryProperty(nameof(Name), nameof(name))]
 internal partial class CharacterDetailsViewModel : CharacterViewModel
 {
     private readonly CharacterService characterService;
-    private string characterName = String.Empty;
+    private string name = String.Empty;
 
     public CharacterDetailsViewModel(CharacterService characterService)
     {
@@ -14,12 +14,12 @@ internal partial class CharacterDetailsViewModel : CharacterViewModel
         SelectedCombatValueModifier = AvailableCombatValueModifiers.FirstOrDefault();
     }
 
-    public string CharacterName
+    public string Name
     {
-        get => characterName;
+        get => name;
         set
         {
-            if (SetProperty(ref characterName, value))
+            if (SetProperty(ref name, value))
             {
                 _ = LoadCharacterAsync(value);
             }

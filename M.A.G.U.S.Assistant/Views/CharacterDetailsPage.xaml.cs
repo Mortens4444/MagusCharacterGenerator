@@ -14,7 +14,7 @@ internal partial class CharacterDetailsPage : NotifierPage
         this.characterService = characterService;
         InitializeComponent();
         BindingContext = characterDetailsViewModel;
-        Title = Lng.Elem(characterDetailsViewModel.CharacterName);
+        Title = characterDetailsViewModel.Name;
     }
 
     protected override void OnDisappearing()

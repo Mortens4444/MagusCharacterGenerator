@@ -36,11 +36,8 @@ public partial class Character
             if (value != strength)
             {
                 strength = value;
-                if (!isDeserializing)
-                {
-                    CalculateCombatValues(settings);
-                }
                 OnPropertyChanged();
+                OnPropertyChanged(nameof(AttackValue));
             }
         }
     }
@@ -53,10 +50,9 @@ public partial class Character
             if (value != speed)
             {
                 speed = value;
-                if (!isDeserializing)
-                {
-                    CalculateCombatValues(settings);
-                }
+                OnPropertyChanged(nameof(InitiateValue));
+                OnPropertyChanged(nameof(AttackValue));
+                OnPropertyChanged(nameof(DefenseValue));
                 OnPropertyChanged();
             }
         }
@@ -72,10 +68,12 @@ public partial class Character
                 dexterity = value;
                 if (!isDeserializing)
                 {
-                    CalculateCombatValues(settings);
                     CalculateQualificationPoints(settings);
                 }
                 OnPropertyChanged();
+                OnPropertyChanged(nameof(InitiateValue));
+                OnPropertyChanged(nameof(AimValue));
+                OnPropertyChanged(nameof(DefenseValue));
             }
         }
     }

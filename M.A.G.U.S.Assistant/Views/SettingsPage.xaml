@@ -167,7 +167,7 @@
                 </Border.GestureRecognizers>
                 <Grid ColumnDefinitions="*, Auto">
                     <Label Grid.Column="0"
-                           Text="Show newest turns at the top on assignment page"
+                           Text="Show newest turns at the top on encounter page"
                            VerticalOptions="Center"
                            LineBreakMode="WordWrap" />
                     <Switch Grid.Column="1" IsToggled="{Binding AssignmentTurnHistoryNewestOnTop}" />

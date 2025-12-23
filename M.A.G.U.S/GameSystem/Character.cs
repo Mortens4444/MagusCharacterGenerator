@@ -39,7 +39,7 @@ public partial class Character : Attacker, ICombatModifier, ILiving, IAbilities,
         BaseClass = classes.First();
         Alignment = race.Alignment ?? BaseClass.Alignment;
         Classes = classes;
-        CreateFirstLevel();
+        CreateSpecifiedLevel();
         EnsureSubscriptions();
     }
 
@@ -53,16 +53,15 @@ public partial class Character : Attacker, ICombatModifier, ILiving, IAbilities,
     {
         var result = ObjectSerializer.LoadFile<Character>(fullPath);
         result.SetWeapons();
-        result.RecalculateCombatValues(settings);
         return result;
     }
 
-    private void CreateFirstLevel()
+    private void CreateSpecifiedLevel()
     {
         GenerateAbilities();
         CalculateQualificationPoints(settings);
         GetQualifications();
-        CalculateCombatValues(settings);
+        CalculateCombatValueModifier(settings);
 
         CalculateLifePoints();
         CalculatePainTolerancePoints(settings);
@@ -114,6 +113,6 @@ public partial class Character : Attacker, ICombatModifier, ILiving, IAbilities,
         isDeserializing = false;
         EnsureSubscriptions();
         SetWeapons();
-        RecalculateCombatValues(settings);
+        SetOriginalCombatValues();
     }
 }

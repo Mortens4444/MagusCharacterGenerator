@@ -9,9 +9,6 @@ namespace M.A.G.U.S.GameSystem;
 public partial class Character
 {
     [NonSerialized, JsonIgnore, Newtonsoft.Json.JsonIgnore]
-    private string totalEquipmentWeight;
-
-    [NonSerialized, JsonIgnore, Newtonsoft.Json.JsonIgnore]
     private Money money = new(0);
 
     public ObservableCollection<Thing> Equipment { get; init; } = [];
@@ -30,18 +27,7 @@ public partial class Character
         }
     }
 
-    public string TotalEquipmentWeight
-    {
-        get => totalEquipmentWeight;
-        set
-        {
-            if (value != totalEquipmentWeight)
-            {
-                totalEquipmentWeight = value;
-                OnPropertyChanged();
-            }
-        }
-    }
+    public string TotalEquipmentWeight => (Equipment?.Sum(e => e.Weight) ?? 0).ToString("N1");
 
     public void Buy(Thing thing)
     {
@@ -57,8 +43,8 @@ public partial class Character
 
     private void EquipmentOnCollectionChanged(object? sender, NotifyCollectionChangedEventArgs e)
     {
-        TotalEquipmentWeight = (Equipment?.Sum(e => e.Weight) ?? 0).ToString("N1");
         OnPropertyChanged(nameof(Equipment));
+        OnPropertyChanged(nameof(TotalEquipmentWeight));
     }
 
     private void CalculateGold()
