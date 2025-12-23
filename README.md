@@ -39,10 +39,10 @@ dotnet restore
 dotnet build -f net10.0-windows10.0.19041.0
 
 # run locally (Windows)
-dotnet run -f net9.0-windows10.0.19041.0 --project M.A.G.U.S.Assistant
+dotnet run -f net10.0-windows10.0.19041.0 --project M.A.G.U.S.Assistant
 
 # run for Android (emulator) - adjust TFM and project as needed
-dotnet build -f net9.0-android
+dotnet build -f net10.0-android
 # then deploy using Visual Studio or your preferred tooling
 ```
 
