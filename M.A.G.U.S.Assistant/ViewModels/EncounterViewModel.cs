@@ -119,78 +119,116 @@ internal partial class EncounterViewModel : CharacterListLoaderViewModel
             {
                 var attackDirection = AttackDirection.Front;
                 var (locationDescription, subLocation) = HitLocationSelector.GetLocation(attackDirection);
-                var roll = initiative.Attacker.Source.RollAttack();
-                var attackMode = initiative.Attacker.Source.GetRandomAttackMode();
-                initiative.AttackResolution = new AttackResolution
+                if (initiative.SelectedAttack != null)
                 {
-                    Attack = attackMode,
-                    AttackRoll = roll,
-                    Direction = attackDirection,
-                    HitLocation = locationDescription,
-                    HitSubLocation = subLocation,
-                    IsSuccessful = initiative.Target.Source.DefenseValue < initiative.Attacker.Source.AttackValue + roll
-                };
+                    initiative.AttackResolution = new AttackResolution(initiative)
+                    {
+                        Attack = initiative.SelectedAttack,
+                        Direction = attackDirection,
+                        HitLocation = locationDescription,
+                        HitSubLocation = subLocation
+                    };
+                    if (initiative.AttackResolution.IsSuccessful)
+                    {
+                        var damage = initiative.AttackResolution.Attack.GetDamage();
+                        if (initiative.Target.Source is Creature creature)
+                        {
+                            if (initiative.AttackResolution.IsHpDamage || creature.PainTolerancePoints.Value <= 0) // Need to fix for dragons, dragon has min and max only (I wnat a page, where you can set the actual values)
+                            {
+                                creature.HealthPoints -= damage;
+                                if (creature.HealthPoints <= 0)
+                                {
+                                    RemoveEnemy(creature);
+                                }
+                            }
+                            else
+                            {
+                                creature.PainTolerancePoints -= damage;
+                            }
+                        }
+                        else if (initiative.Target.Source is Character character)
+                        {
+                            if (initiative.AttackResolution.IsHpDamage || character.ActualPainTolerancePoints <= 0)
+                            {
+                                character.ActualHealthPoints -= damage;
+                                if (character.ActualHealthPoints <= 0)
+                                {
+                                    RemoveCharacter(character);
+                                }
+                            }
+                            else
+                            {
+                                character.ActualPainTolerancePoints -= damage;
+                            }
+                        }
+                    }
+                }
+            }
+            if (orderedInitiatives.Any())
+            {
+                assignment.AddTurn(turn);
             }
 
-            assignment.AddTurn(turn);
+            CleanupDead();
         }
-
-        CleanupDead();
     }
 
     private static IOrderedEnumerable<InitiativeEntry> GetInitiatives(AssignmentViewModel assignment, TurnData turn)
     {
-        var initiatives = new List<InitiativeEntry>();
-        foreach (var enemy in assignment.Enemies.ToList())
+        var result = new List<InitiativeEntry>();
+        if (assignment.Enemies.Any())
         {
-            for (var i = 0; i < enemy.AttacksPerRound; i++) // need to handle 0.5 or 0.33 attacks per round!
+            foreach (var enemy in assignment.Enemies.ToList())
             {
-                initiatives.Add(new InitiativeEntry
+                int dist = assignment.GetDistance(enemy);
+                var intendedAttack = enemy.GetRandomAttackMode();
+                int range = Attacker.GetAttackRange(intendedAttack);
+                if (dist > range)
                 {
-                    Attacker = new CombatantRef
-                    {
-                        Name = enemy.Name,
-                        Source = enemy
-                    },
-                    Target = new CombatantRef
-                    {
-                        Name = assignment.Character.Name,
-                        Source = assignment.Character
-                    },
-                    BaseInitiative = enemy.InitiateValue,
-                    RolledValue = enemy.RollInitiative()
-                });
+                    int speed = enemy.GetMaxMovementSpeed();
+                    assignment.DecreaseDistance(enemy, speed);
+                    AddInitiative(new CombatantRef(enemy), new CombatantRef(assignment.Character), null, result);
+                    continue;
+                }
+
+                int attackCount = enemy.GetAttackCountForRound(turn.Round);
+                for (var i = 0; i < attackCount; i++)
+                {
+                    AddInitiative(new CombatantRef(enemy), new CombatantRef(assignment.Character), intendedAttack, result);
+                }
+            }
+
+            var target = (Attacker)(assignment.Character.AttackStrategy switch
+            {
+                AttackStrategy.AttackFirst => assignment.Enemies.First(),
+                AttackStrategy.AttackRandom => assignment.Enemies[RandomProvider.GetSecureRandomInt(0, assignment.Enemies.Count)],
+                AttackStrategy.AttackWeakest => assignment.Enemies.OrderBy(enemy => enemy.ActualHealthPoints).First(),
+                AttackStrategy.AttackStrongest => assignment.Enemies.OrderBy(enemy => enemy.AttackValue).First(),
+                _ => throw new NotImplementedException()
+            });
+
+            int characterAttackCount = assignment.Character.GetAttackCountForRound(turn.Round);
+            int charDist = assignment.GetDistance(target);
+
+            var charIntendedAttack = assignment.Character.AttackModes.FirstOrDefault();
+            for (var i = 0; i < characterAttackCount; i++)
+            {
+                AddInitiative(new CombatantRef(assignment.Character), new CombatantRef(target), charIntendedAttack, result);
             }
         }
-        var weapon = assignment.Character.PrimaryWeapon ?? assignment.Character.SecondaryWeapon;
-        var attacksPerRound = weapon?.AttacksPerRound ?? assignment.Character.AttacksPerRound; // need to handle 0.5 or 0.33 attacks per round!
+        return result.OrderByDescending(initiative => initiative.FinalInitiative);
+    }
 
-        var target = (Attacker)(assignment.Character.AttackStrategy switch
+    private static void AddInitiative(CombatantRef attacker, CombatantRef target, Attack? attack, List<InitiativeEntry> result)
+    {
+        result.Add(new InitiativeEntry
         {
-            AttackStrategy.AttackFirst => assignment.Enemies.First(),
-            AttackStrategy.AttackRandom => assignment.Enemies[RandomProvider.GetSecureRandomInt(0, assignment.Enemies.Count)],
-            AttackStrategy.AttackWeakest => assignment.Enemies.OrderBy(enemy => enemy.HealthPoints).First(),
-            AttackStrategy.AttackStrongest => assignment.Enemies.OrderBy(enemy => enemy.AttackValue).First(),
-            _ => throw new NotImplementedException()
+            Attacker = attacker,
+            Target = target,
+            SelectedAttack = attack,
+            BaseInitiative = attacker.Source.InitiateValue,
+            RolledValue = attacker.Source.RollInitiative()
         });
-
-        initiatives.Add(new InitiativeEntry
-        {
-            Attacker = new CombatantRef
-            {
-                Name = assignment.Character.Name,
-                Source = assignment.Character
-            },
-            Target = new CombatantRef
-            {
-                Name = target.Name,
-                Source = target
-            },
-            BaseInitiative = assignment.Character.InitiateValue,
-            RolledValue = assignment.Character.RollInitiative()
-        });
-
-        return initiatives.OrderByDescending(initiative => initiative.FinalInitiative);
     }
 
     private bool CanAddEnemy() => SelectedEnemy != null && SelectedAssignment != null;
@@ -199,12 +237,12 @@ internal partial class EncounterViewModel : CharacterListLoaderViewModel
 
     private bool CanRunTurn() => Assignments.Count > 0;
 
-    private void ResolveAttack(Character character, Creature enemy, TurnData turn)
+    private void RemoveCharacter(Character character)
     {
-        //enemy.HealthPoints -= character.PrimaryWeapon?.GetDamage() ?? character.GetDamage();
-        if (enemy.HealthPoints <= 0)
+        foreach (var assignment in Assignments)
         {
-            RemoveEnemy(enemy);
+            // assignment.Enemies attack another character
+            //assignment.Remove();
         }
     }
 
@@ -218,7 +256,7 @@ internal partial class EncounterViewModel : CharacterListLoaderViewModel
 
     private void CleanupDead()
     {
-        var deadCharacters = Assignments.Where(a => a.Character.HealthPoints <= 0).ToList();
+        var deadCharacters = Assignments.Where(a => a.Character.ActualHealthPoints <= 0).ToList();
 
         foreach (var dead in deadCharacters)
         {

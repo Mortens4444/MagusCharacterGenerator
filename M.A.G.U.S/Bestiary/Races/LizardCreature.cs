@@ -34,7 +34,7 @@ public sealed class LizardCreature : Creature
     [DiceThrow(ThrowType._4D10)]
     public override int GetNumberAppearing() => DiceThrow._4D10();
 
-    public override string[] Images => ["lizard_creature"];
+    public override string[] Images => ["lizard_creature.png"];
 
     public override List<Speed> Speeds => [new Speed(TravelMode.OnLand, 70), new Speed(TravelMode.InWater, 70)];
 }

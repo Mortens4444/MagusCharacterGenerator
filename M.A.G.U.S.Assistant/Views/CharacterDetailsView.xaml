@@ -70,8 +70,7 @@
                     <Picker ItemsSource="{Binding Alignments}"
                             ItemDisplayBinding="{Binding ., Converter={StaticResource EnumDescriptionTranslationConverter}}"
                             SelectedItem="{Binding Alignment}"
-                            VerticalOptions="Center"
-                            WidthRequest="220"
+                            VerticalOptions="End"
                             Grid.Row="1"
                             Grid.Column="1" />
                 </Grid>
@@ -100,25 +99,14 @@
         </VerticalStackLayout>
 
         <VerticalStackLayout Spacing="10">
-            <!-- Életerő -->
+            <!-- Életerő & Fájdalomtűrés -->
             <Border Style="{StaticResource BoxBorder}">
                 <VerticalStackLayout>
-                    <Label Text="Health" Style="{StaticResource HeaderLabel}"/>
-                    <Grid ColumnDefinitions="*, *" RowDefinitions="Auto, Auto">
-                        <mc:EntryWithLabel Label="Max. HP" Text="{Binding MaxHealthPoints}" IsEnabled="False" WidthRequest="100" Grid.Row="0" />
-                        <mc:EntryWithLabel Label="Act. HP" Text="{Binding HealthPoints}" IsEnabled="False" WidthRequest="100" Grid.Column="1" />
-                    </Grid>
-                </VerticalStackLayout>
-            </Border>
-
-            <!-- Fájdalomtűrés -->
-            <Border Style="{StaticResource BoxBorder}">
-                <VerticalStackLayout>
-                    <Label Text="Pain resistance" Style="{StaticResource HeaderLabel}"/>
-                    <Grid ColumnDefinitions="*, *" RowDefinitions="Auto, Auto, Auto">
-                        <mc:EntryWithLabel Label="Max. PRP" Text="{Binding MaxPainTolerancePoints}" IsEnabled="False" WidthRequest="100" />
-                        <mc:EntryWithLabel Label="Act. PRP" Text="{Binding PainTolerancePoints}" IsEnabled="False" WidthRequest="100" Grid.Row="1" />
-                        <mc:EntryWithLabel Label="Max. PRP/level" Text="{Binding PainToleranceModifierFormula}" IsEnabled="False" WidthRequest="100" Grid.Column="1" />
+                    <Label Text="Health &amp; Pain Resistance" Style="{StaticResource HeaderLabel}"/>
+                    <Grid ColumnDefinitions="*, *, *" RowDefinitions="Auto">
+                        <mc:EntryWithLabel Label="Max. HP" Text="{Binding MaxHealthPoints}" IsEnabled="False" WidthRequest="100" />
+                        <mc:EntryWithLabel Label="Max. PRP" Text="{Binding MaxPainTolerancePoints}" IsEnabled="False" WidthRequest="100" Grid.Column="1" />
+                        <mc:EntryWithLabel Label="Max. PRP/level" Text="{Binding PainToleranceModifierFormula}" IsEnabled="False" WidthRequest="100" Grid.Column="2" />
                     </Grid>
                 </VerticalStackLayout>
             </Border>

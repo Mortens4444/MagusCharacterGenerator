@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFrameworks>net10.0-android;net10.0-ios;net10.0-maccatalyst</TargetFrameworks>
     <TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('windows'))">$(TargetFrameworks);net10.0-windows10.0.19041.0</TargetFrameworks>
@@ -23,7 +23,7 @@
     <ApplicationId>com.mortens.MAGUS.Assistant</ApplicationId>
     <!-- Versions -->
     <MajorVersion>1</MajorVersion>
-    <MinorVersion>19</MinorVersion>
+    <MinorVersion>21</MinorVersion>
     <BuildNumber>0</BuildNumber>
     <PatchNumber>0</PatchNumber>
     <FileVersion>$(MajorVersion).$(MinorVersion).$(BuildNumber).$(PatchNumber)</FileVersion>
@@ -178,7 +178,6 @@
     <None Remove="Resources\Images\Characters\dwarf_2.png" />
     <None Remove="Resources\Images\Characters\elf.png" />
     <None Remove="Resources\Images\Characters\fire_wizard.png" />
-    <None Remove="Resources\Images\Characters\freenhar.png" />
     <None Remove="Resources\Images\Characters\gladiator.png" />
     <None Remove="Resources\Images\Characters\gladiator_2.png" />
     <None Remove="Resources\Images\Characters\guard.png" />
@@ -244,7 +243,7 @@
     <MauiImage Include="Resources\Images\Characters\dwarf_2.png" />
     <MauiImage Include="Resources\Images\Characters\elf.png" />
     <MauiImage Include="Resources\Images\Characters\fire_wizard.png" />
-    <MauiImage Include="Resources\Images\Characters\freenhar.png" />
+    <MauiImage Include="Resources\Images\Characters\feenhar.png" />
     <MauiImage Include="Resources\Images\Characters\gladiator.png" />
     <MauiImage Include="Resources\Images\Characters\gladiator_2.png" />
     <MauiImage Include="Resources\Images\Characters\guard.png" />
@@ -314,8 +313,8 @@
     <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="10.0.1" />
     <PackageReference Include="Microsoft.Maui.Graphics" Version="10.0.20" />
     <PackageReference Include="Microsoft.Maui.Graphics.Skia" Version="10.0.20" />
-    <PackageReference Include="Mtf.Maui.Controls" Version="3.0.50" />
-    <PackageReference Include="Mtf.MAUI.LanguageService" Version="2.0.84" />
+    <PackageReference Include="Mtf.Maui.Controls" Version="3.0.52" />
+    <PackageReference Include="Mtf.MAUI.LanguageService" Version="2.0.86" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.4" />
     <PackageReference Include="Plugin.Maui.Audio" Version="4.0.0" />
     <PackageReference Include="sqlite-net-pcl" Version="1.9.172" />
@@ -457,6 +456,6 @@
       <ImageManifestPath>$(ProjectDir)Resources\Images\images_manifest.txt</ImageManifestPath>
     </PropertyGroup>
     <!--<WriteLinesToFile File="$(ImageManifestPath)" Lines="@(AllImages->'%(RelativeDir)%(Filename)%(Extension)')" Overwrite="true" Encoding="UTF-8" />-->
-    <WriteLinesToFile File="$(ImageManifestPath)" Lines="@(AllImages->'%(Filename)%(Extension)')" Overwrite="true" Encoding="UTF-8" />
+    <WriteLinesToFile File="$(ImageManifestPath)" Lines="@(AllImages-&gt;'%(Filename)%(Extension)')" Overwrite="true" Encoding="UTF-8" />
   </Target>
 </Project>

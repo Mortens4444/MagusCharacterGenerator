@@ -3,7 +3,6 @@ using M.A.G.U.S.Extensions;
 using M.A.G.U.S.GameSystem;
 using M.A.G.U.S.GameSystem.Attributes;
 using M.A.G.U.S.GameSystem.Psi;
-using M.A.G.U.S.Models;
 using M.A.G.U.S.Things.Weapons;
 using System.Reflection;
 
@@ -13,6 +12,8 @@ public abstract class Creature : Attacker
 {
     private const string PrimaryAttack = "Primary attack";
     private List<Attack>? attackModes;
+    private int? painTolerancePoints;
+    private int? healthPoints;
 
     protected Creature() { }
 
@@ -28,8 +29,6 @@ public abstract class Creature : Attacker
 
     public int ArmorClass { get; protected set; }
 
-    public abstract List<Speed> Speeds { get; }
-
     public override List<Attack> AttackModes
     {
         get
@@ -39,14 +38,14 @@ public abstract class Creature : Attacker
                 attackModes = [];
 
                 var method = GetType().GetMethod(nameof(GetDamage));
-                var throwAttr = method.GetCustomAttribute<DiceThrowAttribute>();
+                var throwAttr = method?.GetCustomAttribute<DiceThrowAttribute>();
                 if (throwAttr == null)
                 {
                     attackModes.Add(new MeleeAttack(PrimaryAttack, AttackValue, GetDamage));
                 }
                 else
                 {
-                    var modAttr = method.GetCustomAttribute<DiceThrowModifierAttribute>();
+                    var modAttr = method?.GetCustomAttribute<DiceThrowModifierAttribute>();
                     var modifier = modAttr?.Modifier ?? 0;
                     attackModes.Add(new MeleeAttack(new BodyPart(PrimaryAttack, throwAttr.DiceThrowType, modifier), AttackValue));
                 }
@@ -63,13 +62,39 @@ public abstract class Creature : Attacker
 
     public int? PoisonResistance { get; protected set; }
 
-    public int? HealthPoints { get; protected set; }
+    public int? HealthPoints
+    {
+        get => healthPoints;
+        set
+        {
+            if (value.HasValue)
+            {
+                ActualHealthPoints = value.Value;
+            }
+            healthPoints = value;
+        }
+    }
 
     public int? MinHealthPoints { get; protected set; }
 
     public int? MaxHealthPoints { get; protected set; }
 
-    public int? PainTolerancePoints { get; protected set; }
+    public override int ActualHealthPoints { get; set; }
+
+    public override int ActualPainTolerancePoints { get; set; }
+
+    public int? PainTolerancePoints
+    {
+        get => painTolerancePoints;
+        set
+        {
+            if (value.HasValue)
+            {
+                ActualPainTolerancePoints = value.Value;
+            }
+            painTolerancePoints = value;
+        }
+    }
 
     public int? MinPainTolerancePoints { get; protected set; }
 

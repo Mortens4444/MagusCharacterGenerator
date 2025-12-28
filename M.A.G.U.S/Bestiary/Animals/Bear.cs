@@ -15,7 +15,6 @@ public sealed class Bear : Creature
         AttackValue = 70;
         DefenseValue = 60;
         InitiateValue = 5;
-        AttacksPerRound = 3;
         AttackModes =
         [
             new MeleeAttack(new BodyPart("Left paw strike", ThrowType._1D10, 2), AttackValue),
@@ -35,6 +34,8 @@ public sealed class Bear : Creature
 
     [DiceThrow(ThrowType._1D2)]
     public override int GetNumberAppearing() => DiceThrow._1D2();
+
+    public override double AttacksPerRound => 3;
 
     public override List<Speed> Speeds => [new Speed(TravelMode.OnLand, 50)];
 }

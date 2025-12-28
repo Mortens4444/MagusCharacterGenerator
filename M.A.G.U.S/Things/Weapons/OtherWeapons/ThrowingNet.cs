@@ -1,4 +1,5 @@
 ﻿using M.A.G.U.S.GameSystem.Valuables;
+using M.A.G.U.S.Interfaces;
 
 namespace M.A.G.U.S.Things.Weapons.OtherWeapons;
 

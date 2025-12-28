@@ -35,8 +35,19 @@ internal static class MauiProgram
 #elif WINDOWS
         builder.Services.AddSingleton<ISoundPlayer, Platforms.Windows.SoundPlayer>();
         builder.Services.AddSingleton<IShakeService, Platforms.Windows.ShakeService>();
+#elif IOS
+        builder.Services.AddSingleton<ISoundPlayer, Platforms.iOS.SoundPlayer>();
+        builder.Services.AddSingleton<IShakeService, Platforms.iOS.ShakeService>();
+#elif MACCATALYST
+        builder.Services.AddSingleton<ISoundPlayer, Platforms.MacCatalyst.SoundPlayer>();
+        builder.Services.AddSingleton<IShakeService, Platforms.MacCatalyst.ShakeService>();
+#elif TIZEN
+        builder.Services.AddSingleton<ISoundPlayer, Platforms.Tizen.SoundPlayer>();
+        builder.Services.AddSingleton<IShakeService, Platforms.Tizen.ShakeService>();
+#else
+        builder.Services.AddSingleton<ISoundPlayer, StubSoundPlayer>();
+        builder.Services.AddSingleton<IShakeService, StubShakeService>();
 #endif
-
         RegisterPages(builder);
         RegisterViewModels(builder);
         RegisterRepositories(builder);
@@ -59,6 +70,7 @@ internal static class MauiProgram
             Console.Error.WriteLine($"{args.Exception}");
             Debug.WriteLine($"Task error: {args.Exception}");
             WeakReferenceMessenger.Default.Send(new ShowErrorMessage(args.Exception));
+            args.SetObserved();
         };
 
         return builder.Build();
@@ -161,7 +173,6 @@ internal static class MauiProgram
             typeof(MagicalObjectsPage),
             typeof(MapPage),
             typeof(MarketPage),
-            //typeof(NotifierPage),
             typeof(ObjectObserverPage),
             typeof(PaintWizardPage),
             typeof(PoisonsPage),

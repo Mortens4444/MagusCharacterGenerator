@@ -1,10 +1,9 @@
-﻿using M.A.G.U.S.Bestiary.Undead;
-using M.A.G.U.S.Enums;
+﻿using M.A.G.U.S.Enums;
 using M.A.G.U.S.GameSystem;
 using M.A.G.U.S.GameSystem.Attributes;
 using M.A.G.U.S.Models;
 
-namespace M.A.G.U.S.Bestiary.Mythical;
+namespace M.A.G.U.S.Bestiary.Undead;
 
 public sealed class Werewolf : LivingDead
 {

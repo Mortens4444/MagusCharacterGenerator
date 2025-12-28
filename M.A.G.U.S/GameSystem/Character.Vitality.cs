@@ -9,29 +9,14 @@ namespace M.A.G.U.S.GameSystem;
 public partial class Character
 {
     [NonSerialized, JsonIgnore, Newtonsoft.Json.JsonIgnore]
-    private int healthPoints;
-
-    [NonSerialized, JsonIgnore, Newtonsoft.Json.JsonIgnore]
     private int maxHealthPoints;
-
-    [NonSerialized, JsonIgnore, Newtonsoft.Json.JsonIgnore]
-    private int painTolerancePoints;
 
     [NonSerialized, JsonIgnore, Newtonsoft.Json.JsonIgnore]
     private int maxPainTolerancePoints;
 
-    public int HealthPoints
-    {
-        get => healthPoints;
-        set
-        {
-            if (value != healthPoints)
-            {
-                healthPoints = value;
-                OnPropertyChanged();
-            }
-        }
-    }
+    public override int ActualHealthPoints { get; set; }
+
+    public override int ActualPainTolerancePoints { get; set; }
 
     public int MaxHealthPoints
     {
@@ -41,19 +26,7 @@ public partial class Character
             if (value != maxHealthPoints)
             {
                 maxHealthPoints = value;
-                OnPropertyChanged();
-            }
-        }
-    }
-
-    public int PainTolerancePoints
-    {
-        get => painTolerancePoints;
-        set
-        {
-            if (value != painTolerancePoints)
-            {
-                painTolerancePoints = value;
+                ActualHealthPoints = value;
                 OnPropertyChanged();
             }
         }
@@ -67,6 +40,7 @@ public partial class Character
             if (value != maxPainTolerancePoints)
             {
                 maxPainTolerancePoints = value;
+                ActualPainTolerancePoints = value;
                 OnPropertyChanged();
             }
         }
@@ -74,14 +48,14 @@ public partial class Character
 
     private void CalculateLifePoints()
     {
-        HealthPoints = BaseClass.BaseLifePoints;
+        ActualHealthPoints = BaseClass.BaseLifePoints;
         var additionalLifePoints = Race.SpecialQualifications.GetSpeciality<AdditionalLifePoints>();
         if (additionalLifePoints != null)
         {
-            HealthPoints += additionalLifePoints.ExtraLifePoints;
+            ActualHealthPoints += additionalLifePoints.ExtraLifePoints;
         }
-        HealthPoints += MathHelper.GetAboveAverageValue(Health);
-        MaxHealthPoints = HealthPoints;
+        ActualHealthPoints += MathHelper.GetAboveAverageValue(Health);
+        MaxHealthPoints = ActualHealthPoints;
     }
 
     private void CalculatePainTolerancePoints(ISettings? settings)
@@ -108,7 +82,6 @@ public partial class Character
             throw new NotImplementedException();
         }
 
-        PainTolerancePoints = painTolerancePoints;
-        MaxPainTolerancePoints = PainTolerancePoints;
+        MaxPainTolerancePoints = painTolerancePoints;
     }
 }

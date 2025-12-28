@@ -136,9 +136,7 @@ internal partial class CharacterViewModel : BaseViewModel, IDisposable
             OnPropertyChanged(nameof(Erudition));
 
             OnPropertyChanged(nameof(MaxHealthPoints));
-            OnPropertyChanged(nameof(HealthPoints));
             OnPropertyChanged(nameof(MaxPainTolerancePoints));
-            OnPropertyChanged(nameof(PainTolerancePoints));
             OnPropertyChanged(nameof(PainToleranceModifierFormula));
 
             OnPropertyChanged(nameof(CanAllocateCombatModifier));
@@ -305,9 +303,7 @@ internal partial class CharacterViewModel : BaseViewModel, IDisposable
     public int Astral => Character?.Astral ?? 0;
     public int Erudition => Character?.Erudition ?? 0;
     public int MaxHealthPoints => Character?.MaxHealthPoints ?? 0;
-    public int HealthPoints => Character?.HealthPoints ?? 0;
     public int MaxPainTolerancePoints => Character?.MaxPainTolerancePoints ?? 0;
-    public int PainTolerancePoints => Character?.PainTolerancePoints ?? 0;
     
     public int CombatValueModifier => Character?.CombatValueModifier ?? 0;
     public int CombatValueModifierPerLevel => Character?.CombatValueModifierPerLevel ?? 0;

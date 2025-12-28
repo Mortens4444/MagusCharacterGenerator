@@ -25,14 +25,23 @@ internal sealed class TurnAttackViewModel
 
     public string Attacker => initiativeEntry?.Attacker?.Source is Character character ? character.Name : Lng.Elem(initiativeEntry?.Attacker?.Source?.Name ?? String.Empty);
 
-    public string Direction => Lng.Elem(attack.Direction.GetDescription());
+    public string Direction => attack != null ? Lng.Elem(attack.Direction.GetDescription()) : String.Empty; // Should be in InitiateEntry?
 
-    public string HitLocation => String.IsNullOrEmpty(attack.HitSubLocation) ? Lng.Elem(attack.HitLocation) : $"{Lng.Elem(attack.HitLocation)} ({Lng.Elem(attack.HitSubLocation)})";
+    public int ActualHealthPoints => initiativeEntry?.Attacker.Source.ActualHealthPoints ?? 0;
+
+    public int ActualPainTolerancePoints => initiativeEntry?.Attacker.Source.ActualPainTolerancePoints?? 0;
+
+    public string HitLocation => attack != null ? String.IsNullOrEmpty(attack.HitSubLocation) ? Lng.Elem(attack.HitLocation) : $"{Lng.Elem(attack.HitLocation)} ({Lng.Elem(attack.HitSubLocation)})" : String.Empty;
 
     public string Result
     {
         get
         {
+            if (attack == null)
+            {
+                return Lng.Elem("Moving closer");
+            }
+
             var attackText = $"{Lng.Elem("Hit")} ({attack.AttackRoll} + {attack.Attack.Value} = {attack.AttackRoll + attack.Attack.Value})";
             return attack.IsSuccessful ?
                 attack.Impact == M.A.G.U.S.Enums.AttackImpact.Normal ? attackText : $"{Lng.Elem(attack.Impact.ToString())} {attackText.ToLower(CultureInfo.CurrentCulture)}" :

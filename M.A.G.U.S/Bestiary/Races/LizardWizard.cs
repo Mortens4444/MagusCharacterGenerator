@@ -15,7 +15,6 @@ public sealed class LizardWizard : Creature
         AttackValue = 64;
         DefenseValue = 108;
         InitiateValue = 35;
-        AttacksPerRound = 3;
         HealthPoints = 18;
         PainTolerancePoints = 70;
         AstralMagicResistance = 42;
@@ -37,7 +36,9 @@ public sealed class LizardWizard : Creature
 
     public override int GetNumberAppearing() => 1;
 
-    public override string[] Images => ["lizard_wizard"];
+    public override string[] Images => ["lizard_wizard.png"];
+
+    public override double AttacksPerRound => 3;
 
     public override List<Speed> Speeds => [new Speed(TravelMode.OnLand, 70), new Speed(TravelMode.InWater, 70)];
 }

@@ -65,8 +65,8 @@ internal partial class CreatureDetailsViewModel : BaseViewModel
     public int? PoisonResistance => Creature.PoisonResistance;
     public uint ExperiencePoints => Creature.ExperiencePoints;
     public double AttacksPerRound => Creature.AttacksPerRound;
-    public string Image => Creature.Images.Length - 1 != 0 ? Creature.Images[RandomProvider.GetSecureRandomInt(0, Creature.Images.Length)] : Creature.Images[0];
-    public string Sound => Creature.Sounds.Length - 1 != 0 ? Creature.Sounds[RandomProvider.GetSecureRandomInt(0, Creature.Sounds.Length)] : Creature.Sounds[0];
+    public string Image => Creature.Images.Length > 1 ? Creature.Images[RandomProvider.GetSecureRandomInt(0, Creature.Images.Length)] : Creature.Images[0];
+    public string Sound => Creature.Sounds.Length > 1 ? Creature.Sounds[RandomProvider.GetSecureRandomInt(0, Creature.Sounds.Length)] : Creature.Sounds[0];
 
     public IList<AttackDirection> AttackDirections { get; } = [.. Enum.GetValues(typeof(AttackDirection)).Cast<AttackDirection>()];
 

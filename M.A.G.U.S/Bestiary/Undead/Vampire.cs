@@ -3,10 +3,7 @@ using M.A.G.U.S.GameSystem;
 using M.A.G.U.S.GameSystem.Attributes;
 using M.A.G.U.S.Models;
 using M.A.G.U.S.Things.Weapons;
-using M.A.G.U.S.Things.Weapons.CrushingWeapons;
-using M.A.G.U.S.Things.Weapons.RangedWeapons;
 using M.A.G.U.S.Things.Weapons.StabbingWeapons;
-using System.ComponentModel;
 
 namespace M.A.G.U.S.Bestiary.Undead;
 
@@ -19,7 +16,6 @@ public sealed class Vampire : LivingDead
         AttackValue = 80;
         DefenseValue = 120;
         InitiateValue = 32;
-        AttacksPerRound = 2;
         AttackModes =
         [
             //new MeleeAttack(new BodyPart("Tooth1", GetDamage), AttackValue),
@@ -41,6 +37,8 @@ public sealed class Vampire : LivingDead
     public override int GetDamage() => DiceThrow._1D6();
 
     public override int GetNumberAppearing() => 1;
+
+    public override double AttacksPerRound => 2;
 
     public override List<Speed> Speeds => [new Speed(TravelMode.OnLand, 100)];
 }

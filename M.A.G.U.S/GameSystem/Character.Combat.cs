@@ -29,6 +29,8 @@ public partial class Character
 
     private int allocatedToAim;
 
+    public override double AttacksPerRound => (PrimaryWeapon ?? SecondaryWeapon)?.AttacksPerRound ?? fist.AttacksPerRound;
+
     [JsonInclude, Newtonsoft.Json.JsonProperty]
     public CombatValueModifier SelectedCombatValueModifier
     {

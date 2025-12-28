@@ -48,8 +48,8 @@ public static class CharacterConverter
 
 		result.AppendLine($"{Lng.Elem("Vitality")}");
 		result.AppendLine("--------------------------------------");
-		result.AppendLine($"{Lng.Elem("Health points")}: {character.HealthPoints}");
-		result.AppendLine($"{Lng.Elem("Pain tolerance points")}: {character.PainTolerancePoints}");
+		result.AppendLine($"{Lng.Elem("Health points")}: {character.MaxHealthPoints}");
+		result.AppendLine($"{Lng.Elem("Pain tolerance points")}: {character.MaxPainTolerancePoints}");
 		result.AppendLine();
 
 		result.AppendLine($"{Lng.Elem("Psi")}");

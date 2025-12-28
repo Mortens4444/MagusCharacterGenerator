@@ -1,10 +1,10 @@
 ﻿namespace M.A.G.U.S.GameSystem.Turn;
 
-public sealed class CombatantRef
+public sealed class CombatantRef(Attacker source, string? name = null)
 {
     public Guid Id { get; init; } = Guid.NewGuid();
 
-    public required string Name { get; init; }
+    public string Name { get; private set; } = name ?? source.Name;
 
-    public required Attacker Source { get; init; }
+    public Attacker Source { get; private set; } = source;
 }

@@ -60,7 +60,7 @@ dwarf.png
 dwarf_2.png
 elf.png
 fire_wizard.png
-freenhar.png
+feenhar.png
 gladiator.png
 gladiator_2.png
 guard.png
@@ -105,4 +105,3 @@ hen.png
 traveler_horse.png
 pig.png
 turkey.png
-appicon.svg

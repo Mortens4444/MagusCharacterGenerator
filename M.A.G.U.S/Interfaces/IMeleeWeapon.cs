@@ -1,6 +1,4 @@
-﻿using M.A.G.U.S.Interfaces;
-
-namespace M.A.G.U.S.Things.Weapons;
+﻿namespace M.A.G.U.S.Interfaces;
 
 public interface IMeleeWeapon : IWeapon
 {

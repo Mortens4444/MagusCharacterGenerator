@@ -1,4 +1,4 @@
-﻿using M.A.G.U.S.Things.Weapons;
+﻿using M.A.G.U.S.Interfaces;
 using Newtonsoft.Json;
 
 namespace M.A.G.U.S.GameSystem;

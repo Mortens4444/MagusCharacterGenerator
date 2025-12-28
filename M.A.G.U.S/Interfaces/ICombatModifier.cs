@@ -1,4 +1,4 @@
-﻿namespace M.A.G.U.S.GameSystem.CombatModifiers;
+﻿namespace M.A.G.U.S.Interfaces;
 
 public interface ICombatModifier
 {

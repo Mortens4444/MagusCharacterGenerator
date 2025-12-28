@@ -1,5 +1,5 @@
-﻿using M.A.G.U.S.GameSystem.CombatModifiers;
-using M.A.G.U.S.GameSystem.Qualifications;
+﻿using M.A.G.U.S.GameSystem.Qualifications;
+using M.A.G.U.S.Interfaces;
 
 namespace M.A.G.U.S.Qualifications.Specialities;
 

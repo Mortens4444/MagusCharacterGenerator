@@ -236,10 +236,10 @@ public partial class CharcterGenerator : Form
 	{
 		switch (e.PropertyName)
 		{
-			case nameof(character.HealthPoints):
+			case nameof(character.MaxHealthPoints):
 				SetHealthPoints();
 				break;
-			case nameof(character.PainTolerancePoints):
+			case nameof(character.MaxPainTolerancePoints):
 				SetPaintTolerancePoints();
 				break;
 			case nameof(character.InitiateValue):
@@ -296,12 +296,12 @@ public partial class CharcterGenerator : Form
 
 	private void SetHealthPoints()
 	{
-		nudLifePoints.Value = character.HealthPoints;
+		nudLifePoints.Value = character.MaxHealthPoints;
 	}
 
 	private void SetPaintTolerancePoints()
 	{
-		nudPainTolerancePoints.Value = character.PainTolerancePoints;
+		nudPainTolerancePoints.Value = character.MaxPainTolerancePoints;
 	}
 
 	private void SetAimingValue()
