@@ -2,6 +2,7 @@
 using M.A.G.U.S.Assistant.Extensions;
 using M.A.G.U.S.Enums;
 using M.A.G.U.S.GameSystem;
+using M.A.G.U.S.GameSystem.Valuables;
 using M.A.G.U.S.Interfaces;
 using M.A.G.U.S.Qualifications;
 using M.A.G.U.S.Things;
@@ -260,6 +261,17 @@ internal partial class CharacterViewModel : BaseViewModel, IDisposable
 
             case nameof(Character.Qualifications):
                 OnPropertyChanged(nameof(Qualifications));
+                break;
+
+            case nameof(Character.Money):
+                OnPropertyChanged(nameof(Mithril));
+                OnPropertyChanged(nameof(Gold));
+                OnPropertyChanged(nameof(Silver));
+                OnPropertyChanged(nameof(Copper));
+                break;
+
+            case nameof(Character.Equipment):
+                OnPropertyChanged(nameof(Equipment));
                 break;
 
             case nameof(Character.TotalEquipmentWeight):

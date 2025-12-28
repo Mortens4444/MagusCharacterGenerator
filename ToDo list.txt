@@ -1,5 +1,3 @@
-- Money and equipment should be updated after buying an item
-- Fix primary weapon selection
 - Add damage to encounter
 - Problem with total weight
 - Refactor: Remove Calculate functions from Character class - compute all properties, and have some new properties like AllocateCombatModifiers
