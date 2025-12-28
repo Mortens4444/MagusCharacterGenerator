@@ -8,7 +8,7 @@ public class KahreiCrossbow : Weapon, IRangedWeapon
 {
     public override double AttacksPerRound => 3;
 
-    public int InitiateValue => 9;
+    public override int InitiateValue => 9;
 
     public int AimValue => 13;
 

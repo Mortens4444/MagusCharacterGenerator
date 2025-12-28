@@ -7,7 +7,7 @@ public class ThrowingNet : Weapon, IMeleeWeapon
 {
     public override double AttacksPerRound => 1 / 3;
 
-    public int InitiateValue => 1;
+    public override int InitiateValue => 1;
 
     public int AttackValue => 8;
 

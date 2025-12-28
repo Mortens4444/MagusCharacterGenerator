@@ -8,7 +8,7 @@ public class CarvedClub : Weapon, IMeleeWeapon
 {
     public override double AttacksPerRound => 1;
 
-    public int InitiateValue => 2;
+    public override int InitiateValue => 2;
 
     public int AttackValue => 7;
 

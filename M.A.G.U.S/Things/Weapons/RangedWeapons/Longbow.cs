@@ -8,7 +8,7 @@ public class Longbow : Weapon, IRangedWeapon
 {
     public override double AttacksPerRound => 2;
 
-    public int InitiateValue => 4;
+    public override int InitiateValue => 4;
 
     public int AimValue => 6;
 

@@ -8,7 +8,7 @@ public class FeatheredMace : Weapon, IMeleeWeapon
 {
     public override double AttacksPerRound => 1;
 
-    public int InitiateValue => 7;
+    public override int InitiateValue => 7;
 
     public int AttackValue => 12;
 

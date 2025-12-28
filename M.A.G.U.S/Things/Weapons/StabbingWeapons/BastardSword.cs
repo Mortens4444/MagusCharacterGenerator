@@ -8,7 +8,7 @@ public class BastardSword : Weapon, IMeleeWeapon
 {
     public override double AttacksPerRound => 1;
 
-    public int InitiateValue => 4;
+    public override int InitiateValue => 4;
 
     public int AttackValue => 13;
 

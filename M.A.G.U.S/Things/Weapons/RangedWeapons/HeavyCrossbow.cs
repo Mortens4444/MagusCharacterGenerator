@@ -8,7 +8,7 @@ public class HeavyCrossbow : Weapon, IRangedWeapon
 {
     public override double AttacksPerRound => 1 / 3;
 
-    public int InitiateValue => 0;
+    public override int InitiateValue => 0;
 
     public int AimValue => 15;
 

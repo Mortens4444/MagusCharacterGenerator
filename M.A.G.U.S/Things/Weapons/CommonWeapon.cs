@@ -5,21 +5,21 @@ using M.A.G.U.S.Interfaces;
 
 namespace M.A.G.U.S.Things.Weapons;
 
-public class CommonWeapon(string name, int initiateValue, int attackValue, int defenseValue, ThrowType throwType, int modifier = 0, bool isMagical = false) : IMeleeWeapon
+public class CommonWeapon(string name, int initiateValue, int attackValue, int defenseValue, ThrowType throwType, int modifier = 0, bool isMagical = false) : Weapon, IMeleeWeapon
 {
     public int AttackValue => attackValue;
 
     public int DefenseValue => defenseValue;
 
-    public string Name => name;
+    public override string Name => name;
 
-    public virtual double AttacksPerRound => 1;
+    public override double AttacksPerRound => 1;
 
-    public int InitiateValue => initiateValue;
+    public override int InitiateValue => initiateValue;
 
-    public double Weight => 0;
+    public override double Weight => 0;
 
-    public Money Price => Money.Free;
+    public override Money Price => Money.Free;
 
     public bool IsMagical => isMagical;
 
@@ -27,7 +27,7 @@ public class CommonWeapon(string name, int initiateValue, int attackValue, int d
 
     public int Modifier => modifier;
 
-    public int GetDamage()
+    public override int GetDamage()
     {
         var diceThrow = new DiceThrow();
         return diceThrow.Throw(throwType, modifier);

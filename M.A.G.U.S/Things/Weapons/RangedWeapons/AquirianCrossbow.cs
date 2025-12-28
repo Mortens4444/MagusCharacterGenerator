@@ -8,7 +8,7 @@ public class AquirianCrossbow : Weapon, IRangedWeapon
 {
     public override double AttacksPerRound => 2;
 
-    public int InitiateValue => 5;
+    public override int InitiateValue => 5;
 
     public int AimValue => 18;
 

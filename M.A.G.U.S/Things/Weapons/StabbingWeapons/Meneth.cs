@@ -8,7 +8,7 @@ public class Meneth : Weapon, IMeleeWeapon
 {
     public override double AttacksPerRound => 1;
 
-    public int InitiateValue => 1;
+    public override int InitiateValue => 1;
 
     public int AttackValue => 4;
 

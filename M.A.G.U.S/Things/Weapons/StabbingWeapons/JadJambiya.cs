@@ -8,7 +8,7 @@ public class JadJambiya : Weapon, IMeleeWeapon
 {
     public override double AttacksPerRound => 2;
 
-    public int InitiateValue => 10;
+    public override int InitiateValue => 10;
 
     public int AttackValue => 12;
 

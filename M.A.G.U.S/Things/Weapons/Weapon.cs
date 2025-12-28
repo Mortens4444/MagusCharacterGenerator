@@ -1,12 +1,15 @@
 ﻿using M.A.G.U.S.GameSystem;
+using M.A.G.U.S.Interfaces;
 
 namespace M.A.G.U.S.Things.Weapons;
 
-public abstract class Weapon : Thing
+public abstract class Weapon : Thing, IWeapon
 {
     protected readonly DiceThrow DiceThrow = new();
 
     public abstract double AttacksPerRound { get; }
+
+    public abstract int InitiateValue { get; }
 
     public abstract int GetDamage();
 }

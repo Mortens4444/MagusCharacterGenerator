@@ -8,7 +8,7 @@ public class Sling : Weapon, IRangedWeapon
 {
     public override double AttacksPerRound => 2;
 
-    public int InitiateValue => 2;
+    public override int InitiateValue => 2;
 
     public int AimValue => 1;
 

@@ -8,7 +8,7 @@ public class Whip : Weapon, IMeleeWeapon
 {
     public override double AttacksPerRound => 2;
 
-    public int InitiateValue => 3;
+    public override int InitiateValue => 3;
 
     public int AttackValue => 6;
 

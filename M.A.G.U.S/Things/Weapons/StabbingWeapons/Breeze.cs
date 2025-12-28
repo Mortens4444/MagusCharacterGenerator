@@ -8,7 +8,7 @@ public class Breeze : Weapon, IMeleeWeapon
 {
     public override double AttacksPerRound => 2;
 
-    public int InitiateValue => 17;
+    public override int InitiateValue => 17;
 
     public int AttackValue => 20;
 

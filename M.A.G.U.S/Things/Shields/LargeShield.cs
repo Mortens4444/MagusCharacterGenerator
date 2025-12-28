@@ -11,7 +11,7 @@ public class LargeShield : Shield, IMeleeWeapon
 
     public int AttackValue => 0;
 
-    public int InitiateValue => 0;
+    public override int InitiateValue => 0;
 
 	public int DefenseValue => 50;
 

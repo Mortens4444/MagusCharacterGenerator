@@ -8,7 +8,7 @@ public class Scimitar : Weapon, IMeleeWeapon
 {
     public override double AttacksPerRound => 1;
 
-    public int InitiateValue => 6;
+    public override int InitiateValue => 6;
 
     public int AttackValue => 14;
 

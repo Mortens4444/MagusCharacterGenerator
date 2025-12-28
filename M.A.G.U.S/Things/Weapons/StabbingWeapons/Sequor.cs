@@ -8,7 +8,7 @@ public class Sequor : Weapon, IMeleeWeapon
 {
     public override double AttacksPerRound => 2;
 
-    public int InitiateValue => 8;
+    public override int InitiateValue => 8;
 
     public int AttackValue => 13;
 

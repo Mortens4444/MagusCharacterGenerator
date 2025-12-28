@@ -8,7 +8,7 @@ public class ShortSword : Weapon, IMeleeWeapon
 {
     public override double AttacksPerRound => 1;
 
-    public int InitiateValue => 9;
+    public override int InitiateValue => 9;
 
     public int AttackValue => 12;
 

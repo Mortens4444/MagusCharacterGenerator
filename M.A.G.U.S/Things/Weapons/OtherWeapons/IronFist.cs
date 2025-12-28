@@ -8,7 +8,7 @@ public class IronFist : Weapon, IMeleeWeapon
 {
     public override double AttacksPerRound => 2;
 
-    public int InitiateValue => 9;
+    public override int InitiateValue => 9;
 
     public int AttackValue => 5;
 

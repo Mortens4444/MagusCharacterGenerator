@@ -8,7 +8,7 @@ public class ElvenBow : Weapon, IRangedWeapon
 {
     public override double AttacksPerRound => 2;
 
-    public int InitiateValue => 6;
+    public override int InitiateValue => 6;
 
     public int AimValue => 10;
 
