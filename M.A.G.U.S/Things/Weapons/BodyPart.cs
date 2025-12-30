@@ -5,7 +5,7 @@ using M.A.G.U.S.Interfaces;
 
 namespace M.A.G.U.S.Things.Weapons;
 
-public class BodyPart(string name, ThrowType throwType, int modifier = 0) : Weapon, IMeleeWeapon
+public class BodyPart(string name, ThrowType throwType, int modifier = 0, double attacksPerRound = 1) : Weapon, IMeleeWeapon
 {
     public int AttackValue => 0;
 
@@ -13,7 +13,7 @@ public class BodyPart(string name, ThrowType throwType, int modifier = 0) : Weap
 
     public override string Name => name;
 
-    public override double AttacksPerRound => 1;
+    public override double AttacksPerRound => attacksPerRound;
 
     public override int InitiateValue => 0;
 

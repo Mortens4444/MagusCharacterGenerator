@@ -47,5 +47,7 @@ public enum Alignment
 
     [Description("Death, order")]
     [Display(Name = "Kraken")]
-    DeathOrder
+    DeathOrder,
+
+    Various
 }

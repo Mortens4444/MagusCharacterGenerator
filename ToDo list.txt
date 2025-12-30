@@ -1,6 +1,5 @@
 - Refactor: Remove Calculate functions from Character class - compute all properties, and have some new properties like AllocateCombatModifiers
 - // Speeds shoud be filled from races
-- Createure HealtHPoints and Character HealtHPoints should be in Attacker (EncounterViewModel should use that on successful attack)
 
 - Change weapon/language attribute on qualifications
 - SFÉ

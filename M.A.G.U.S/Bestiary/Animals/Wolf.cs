@@ -21,6 +21,8 @@ public sealed class Wolf : Creature
         ExperiencePoints = 4;
     }
 
+    public override string[] Images => ["wolf.png", "wolf_2.png", "wolves.png"];
+
     [DiceThrow(ThrowType._1D6)]
     public override int GetDamage() => DiceThrow._1D6();
 

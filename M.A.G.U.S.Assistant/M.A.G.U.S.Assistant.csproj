@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFrameworks>net10.0-android;net10.0-ios;net10.0-maccatalyst</TargetFrameworks>
     <TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('windows'))">$(TargetFrameworks);net10.0-windows10.0.19041.0</TargetFrameworks>
@@ -142,12 +142,19 @@
     <None Remove="Resources\Images\Animals\hen.png" />
     <None Remove="Resources\Images\Animals\pig.png" />
     <None Remove="Resources\Images\Animals\turkey.png" />
+    <None Remove="Resources\Images\Bestiary\adachnoa.png" />
+    <None Remove="Resources\Images\Bestiary\barracuda.png" />
     <None Remove="Resources\Images\Bestiary\bat.png" />
     <None Remove="Resources\Images\Bestiary\bear.png" />
+    <None Remove="Resources\Images\Bestiary\black_shark.png" />
+    <None Remove="Resources\Images\Bestiary\byson.png" />
     <None Remove="Resources\Images\Bestiary\crocodile.png" />
+    <None Remove="Resources\Images\Bestiary\demon_shark.png" />
     <None Remove="Resources\Images\Bestiary\dragon.png" />
+    <None Remove="Resources\Images\Bestiary\dream_crystal.png" />
     <None Remove="Resources\Images\Bestiary\eagle.png" />
     <None Remove="Resources\Images\Bestiary\falcon.png" />
+    <None Remove="Resources\Images\Bestiary\giant_crocodile.png" />
     <None Remove="Resources\Images\Bestiary\giant_spider.png" />
     <None Remove="Resources\Images\Bestiary\goblin.png" />
     <None Remove="Resources\Images\Bestiary\golem.png" />
@@ -159,15 +166,23 @@
     <None Remove="Resources\Images\Bestiary\mummy.png" />
     <None Remove="Resources\Images\Bestiary\narwhal.png" />
     <None Remove="Resources\Images\Bestiary\orc.png" />
-    <None Remove="Resources\Images\Bestiary\orc_2.png" />
     <None Remove="Resources\Images\Bestiary\panther.png" />
+    <None Remove="Resources\Images\Bestiary\red_shark.png" />
     <None Remove="Resources\Images\Bestiary\rhyno.png" />
-    <None Remove="Resources\Images\Bestiary\shark.png" />
+    <None Remove="Resources\Images\Bestiary\snow_leopard.png" />
     <None Remove="Resources\Images\Bestiary\spider.png" />
+    <None Remove="Resources\Images\Bestiary\umich.png" />
+    <None Remove="Resources\Images\Bestiary\umich_2.png" />
     <None Remove="Resources\Images\Bestiary\vampire.png" />
+    <None Remove="Resources\Images\Bestiary\vampire_lord.png" />
     <None Remove="Resources\Images\Bestiary\war_dog.png" />
     <None Remove="Resources\Images\Bestiary\werewolf.png" />
+    <None Remove="Resources\Images\Bestiary\white_eagle.png" />
+    <None Remove="Resources\Images\Bestiary\white_tiger.png" />
+    <None Remove="Resources\Images\Bestiary\white_wolf.png" />
     <None Remove="Resources\Images\Bestiary\wolf.png" />
+    <None Remove="Resources\Images\Bestiary\wolf_2.png" />
+    <None Remove="Resources\Images\Bestiary\wolves.png" />
     <None Remove="Resources\Images\Bestiary\zombie.png" />
     <None Remove="Resources\Images\Characters\arel_priest.png" />
     <None Remove="Resources\Images\Characters\bard.png" />
@@ -206,33 +221,48 @@
     <None Remove="Resources\Images\Characters\wizard.png" />
   </ItemGroup>
   <ItemGroup>
+    <MauiImage Include="Resources\Images\Bestiary\adachnoa.png" />
+    <MauiImage Include="Resources\Images\Bestiary\barracuda.png" />
     <MauiImage Include="Resources\Images\Bestiary\bat.png" />
     <MauiImage Include="Resources\Images\Bestiary\bear.png" />
+    <MauiImage Include="Resources\Images\Bestiary\black_shark.png" />
+    <MauiImage Include="Resources\Images\Bestiary\byson.png" />
     <MauiImage Include="Resources\Images\Bestiary\crocodile.png" />
+    <MauiImage Include="Resources\Images\Bestiary\demon_shark.png" />
     <MauiImage Include="Resources\Images\Bestiary\dragon.png" />
+    <MauiImage Include="Resources\Images\Bestiary\dream_crystal.png" />
     <MauiImage Include="Resources\Images\Bestiary\eagle.png" />
     <MauiImage Include="Resources\Images\Bestiary\falcon.png" />
+    <MauiImage Include="Resources\Images\Bestiary\giant_crocodile.png" />
     <MauiImage Include="Resources\Images\Bestiary\giant_spider.png" />
     <MauiImage Include="Resources\Images\Bestiary\goblin.png" />
     <MauiImage Include="Resources\Images\Bestiary\golem.png" />
     <MauiImage Include="Resources\Images\Animals\heavy_war_horse.png" />
     <MauiImage Include="Resources\Images\Animals\light_war_horse.png" />
-    <MauiImage Include="Resources\Images\Bestiary\gray_dolpin.png" />
+    <MauiImage Include="Resources\Images\Bestiary\gray_dolphin.png" />
     <MauiImage Include="Resources\Images\Bestiary\killer_whale.png" />
     <MauiImage Include="Resources\Images\Bestiary\lizard_creature.png" />
     <MauiImage Include="Resources\Images\Bestiary\lizard_wizard.png" />
     <MauiImage Include="Resources\Images\Bestiary\mummy.png" />
     <MauiImage Include="Resources\Images\Bestiary\narwhal.png" />
     <MauiImage Include="Resources\Images\Bestiary\orc.png" />
-    <MauiImage Include="Resources\Images\Bestiary\orc_2.png" />
     <MauiImage Include="Resources\Images\Bestiary\panther.png" />
+    <MauiImage Include="Resources\Images\Bestiary\red_shark.png" />
     <MauiImage Include="Resources\Images\Bestiary\rhyno.png" />
-    <MauiImage Include="Resources\Images\Bestiary\shark.png" />
+    <MauiImage Include="Resources\Images\Bestiary\snow_leopard.png" />
     <MauiImage Include="Resources\Images\Bestiary\spider.png" />
+    <MauiImage Include="Resources\Images\Bestiary\umich.png" />
+    <MauiImage Include="Resources\Images\Bestiary\umich_2.png" />
     <MauiImage Include="Resources\Images\Bestiary\vampire.png" />
     <MauiImage Include="Resources\Images\Animals\war_dog.png" />
+    <MauiImage Include="Resources\Images\Bestiary\vampire_lord.png" />
     <MauiImage Include="Resources\Images\Bestiary\werewolf.png" />
+    <MauiImage Include="Resources\Images\Bestiary\white_eagle.png" />
+    <MauiImage Include="Resources\Images\Bestiary\white_tiger.png" />
+    <MauiImage Include="Resources\Images\Bestiary\white_wolf.png" />
     <MauiImage Include="Resources\Images\Bestiary\wolf.png" />
+    <MauiImage Include="Resources\Images\Bestiary\wolf_2.png" />
+    <MauiImage Include="Resources\Images\Bestiary\wolves.png" />
     <MauiImage Include="Resources\Images\Bestiary\zombie.png" />
     <MauiImage Include="Resources\Images\Characters\arel_priest.png" />
     <MauiImage Include="Resources\Images\Characters\bard.png" />
@@ -456,6 +486,6 @@
       <ImageManifestPath>$(ProjectDir)Resources\Images\images_manifest.txt</ImageManifestPath>
     </PropertyGroup>
     <!--<WriteLinesToFile File="$(ImageManifestPath)" Lines="@(AllImages->'%(RelativeDir)%(Filename)%(Extension)')" Overwrite="true" Encoding="UTF-8" />-->
-    <WriteLinesToFile File="$(ImageManifestPath)" Lines="@(AllImages-&gt;'%(Filename)%(Extension)')" Overwrite="true" Encoding="UTF-8" />
+    <WriteLinesToFile File="$(ImageManifestPath)" Lines="@(AllImages->'%(Filename)%(Extension)')" Overwrite="true" Encoding="UTF-8" />
   </Target>
 </Project>

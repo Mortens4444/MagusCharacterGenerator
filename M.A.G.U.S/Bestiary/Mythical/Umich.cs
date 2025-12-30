@@ -24,8 +24,8 @@ public sealed class Umich : Creature
         InitiateValue = 45;
         HealthPoints = 50;
         HealthPoints = 110;
-        AstralMagicResistance = Byte.MaxValue;
-        MentalMagicResistance = Byte.MaxValue;
+        AstralMagicResistance = Int32.MaxValue;
+        MentalMagicResistance = Int32.MaxValue;
         PoisonResistance = 11;
         ResistantToPsi = true;
         Intelligence = Enums.Intelligence.High;

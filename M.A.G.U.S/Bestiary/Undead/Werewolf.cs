@@ -15,9 +15,9 @@ public sealed class Werewolf : LivingDead
         DefenseValue = 75;
         InitiateValue = 25;
         PainTolerancePoints = 44;
-        AstralMagicResistance = byte.MaxValue;
-        MentalMagicResistance = byte.MaxValue;
-        PoisonResistance = byte.MaxValue;
+        AstralMagicResistance = Int32.MaxValue;
+        MentalMagicResistance = Int32.MaxValue;
+        PoisonResistance = Int32.MaxValue;
         Intelligence = Enums.Intelligence.High;
         Alignment = Enums.Alignment.ChaosDeath;
         ExperiencePoints = 300;

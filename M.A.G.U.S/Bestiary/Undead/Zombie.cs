@@ -15,9 +15,9 @@ public sealed class Zombie : LivingDead
         DefenseValue = 40;
         InitiateValue = 0;
         HealthPoints = 15;
-        AstralMagicResistance = Byte.MaxValue;
-        MentalMagicResistance = Byte.MaxValue;
-        PoisonResistance = Byte.MaxValue;
+        AstralMagicResistance = Int32.MaxValue;
+        MentalMagicResistance = Int32.MaxValue;
+        PoisonResistance = Int32.MaxValue;
         Intelligence = Enums.Intelligence.None;
         Alignment = Enums.Alignment.ChaosDeath;
         ExperiencePoints = 15;

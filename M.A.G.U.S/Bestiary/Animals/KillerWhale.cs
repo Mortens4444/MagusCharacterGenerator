@@ -12,6 +12,7 @@ public sealed class KillerWhale : Creature
         Occurrence = Occurrence.Rare;
         Intelligence = Enums.Intelligence.Average;
         Size = Size._4_meters;
+        InitiateValue = 5;
         AttackValue = 95;
         DefenseValue = 70;
         HealthPoints = 30;

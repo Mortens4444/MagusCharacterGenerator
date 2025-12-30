@@ -12,6 +12,7 @@ public sealed class Narwhal : Creature
         Occurrence = Occurrence.Rare;
         Intelligence = Enums.Intelligence.Animal;
         Size = Size._4_meters;
+        InitiateValue = 5;
         AttackValue = 150;
         DefenseValue = 170;
         HealthPoints = 24;
