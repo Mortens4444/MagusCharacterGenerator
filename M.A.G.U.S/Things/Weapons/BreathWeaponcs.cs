@@ -5,7 +5,7 @@ using M.A.G.U.S.Interfaces;
 
 namespace M.A.G.U.S.Things.Weapons;
 
-public class BreathWeaponcs(string name, ThrowType throwType, int modifier = 0) : Weapon, IRangedWeapon
+public class BreathWeaponcs(string name, ThrowType throwType, int modifier = 0) : Weapon, IRangedWeapon, INotForSale
 {
     public int AimValue => 0;
 

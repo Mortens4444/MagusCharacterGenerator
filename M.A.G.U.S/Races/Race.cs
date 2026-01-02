@@ -1,4 +1,5 @@
 ﻿using M.A.G.U.S.Enums;
+using M.A.G.U.S.Extensions;
 using M.A.G.U.S.GameSystem;
 using M.A.G.U.S.Qualifications;
 using Mtf.Extensions.Services;
@@ -20,6 +21,8 @@ public abstract class Race : IRace
     public virtual PercentQualificationList PercentQualifications => [];
 
     public virtual SpecialQualificationList SpecialQualifications => [];
+
+    public virtual string Image => $"{Name.ToImageName()}.png";
 
     public virtual int Strength => 0;
 

@@ -160,6 +160,7 @@ internal partial class QualificationsViewModel : BaseViewModel
                 var qualificationDetailsViewModel = new QualificationDetailsViewModel(Character, selectedItem);
                 qualificationDetailsViewModel.Learned += LearnHandler;
                 var page = new QualificationDetailsPage(qualificationDetailsViewModel);
+                SelectedItem = null;
                 await mainPage.Navigation.PushAsync(page).ConfigureAwait(true);
             }
         }

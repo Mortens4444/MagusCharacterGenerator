@@ -5,7 +5,7 @@ using M.A.G.U.S.Interfaces;
 
 namespace M.A.G.U.S.Things.Weapons;
 
-public class BodyPart(string name, ThrowType throwType, int modifier = 0, double attacksPerRound = 1) : Weapon, IMeleeWeapon
+public class BodyPart(string name, ThrowType throwType, int modifier = 0, double attacksPerRound = 1) : Weapon, IMeleeWeapon, INotForSale
 {
     public int AttackValue => 0;
 

@@ -98,14 +98,20 @@
                     <Label Text="Pain tolerance points" Grid.Row="8" Grid.Column="0" FontAttributes="Bold" />
                     <Label Text="{Binding PainTolerancePoints}" Grid.Row="8" Grid.Column="1" />
 
-                    <Label Text="Poison resistance" Grid.Row="9" Grid.Column="0" FontAttributes="Bold" />
-                    <Label Text="{Binding PoisonResistance}" Grid.Row="9" Grid.Column="1" />
+                    <Label Text="Astral Magic Resistance" Grid.Row="9" Grid.Column="0" FontAttributes="Bold" />
+                    <Label Text="{Binding AstralMagicResistance}" Grid.Row="9" Grid.Column="1" />
 
-                    <Label Text="Experience points" Grid.Row="10" Grid.Column="0" FontAttributes="Bold" />
-                    <Label Text="{Binding ExperiencePoints}" Grid.Row="10" Grid.Column="1" />
+                    <Label Text="Mental Magic Resistance" Grid.Row="10" Grid.Column="0" FontAttributes="Bold" />
+                    <Label Text="{Binding MentalMagicResistance}" Grid.Row="10" Grid.Column="1" />
 
-                    <Label Text="Attacks per round" Grid.Row="11" Grid.Column="0" FontAttributes="Bold" />
-                    <Label Text="{Binding AttacksPerRound}" Grid.Row="11" Grid.Column="1" />
+                    <Label Text="Poison resistance" Grid.Row="11" Grid.Column="0" FontAttributes="Bold" />
+                    <Label Text="{Binding PoisonResistance}" Grid.Row="11" Grid.Column="1" />
+
+                    <Label Text="Experience points" Grid.Row="12" Grid.Column="0" FontAttributes="Bold" />
+                    <Label Text="{Binding ExperiencePoints}" Grid.Row="12" Grid.Column="1" />
+
+                    <Label Text="Attacks per round" Grid.Row="13" Grid.Column="0" FontAttributes="Bold" />
+                    <Label Text="{Binding AttacksPerRound}" Grid.Row="13" Grid.Column="1" />
                 </Grid>
             </Border>
 

@@ -19,8 +19,8 @@ public sealed class Dragon : Creature
             new MeleeAttack(new BodyPart("Powerful paw strike", ThrowType._7D6), 145),
             new MeleeAttack(new BodyPart("Weak tail strike", ThrowType._10D6), 70),
             new MeleeAttack(new BodyPart("Powerful tail strike", ThrowType._14D6), 125),
-            new MeleeAttack(new BodyPart("Weak bite strike", ThrowType._4D6), 100),
-            new MeleeAttack(new BodyPart("Powerful bite strike", ThrowType._8D6), 175),
+            new MeleeAttack(new BodyPart("Weak bite", ThrowType._4D6), 100),
+            new MeleeAttack(new BodyPart("Powerful bite", ThrowType._8D6), 175),
             new RangeAttack(new BreathWeaponcs("Weak fire breath", ThrowType._1D6_Ranged), 40),
             new RangeAttack(new BreathWeaponcs("Powerful fire breath", ThrowType._15D6_Ranged), 60)
         ];
@@ -47,4 +47,6 @@ public sealed class Dragon : Creature
     public override int GetNumberAppearing() => 1;
 
     public override List<Speed> Speeds => [new Speed(TravelMode.OnLand, 50), new Speed(TravelMode.InTheAir, 300)];
+
+    public override string[] Sounds => ["dragon_growl"];
 }

@@ -91,10 +91,10 @@ public static class Scale
         // (Ezek valószínűleg csak a vételárat jelölik, nem a hordozható súlyt, de itt vannak a reális, átlagos felnőtt súlyok)
         // ==============================================================================
         { typeof(Cat), 4.0 },
-        { typeof(DogHousekeeper), 30.0 },
-        { typeof(DogHunter), 25.0 },
-        { typeof(DogSledge), 35.0 },
-        { typeof(FightingDog), 40.0 },
+        { typeof(DogGuard), 30.0 },
+        { typeof(DogHunting), 25.0 },
+        { typeof(DogSled), 35.0 },
+        { typeof(DogWar), 40.0 },
 
         { typeof(Hen), 2.0 },
         { typeof(Chicken), 1.5 },
@@ -113,12 +113,12 @@ public static class Scale
         { typeof(Camel), 600.0 },
 
         { typeof(HorsePony), 250.0 },
-        { typeof(HorseYoke), 400.0 },
+        { typeof(HorseDraft), 400.0 },
         { typeof(HorseTraveler), 500.0 },
-        { typeof(HorseLightCombat), 600.0 },
-        { typeof(HorseHeavyCombat), 800.0 },
+        { typeof(HorseLightWar), 600.0 },
+        { typeof(HorseHeavyWar), 800.0 },
 
-        { typeof(HawkHunter), 1.5 }, // Sólyom
+        { typeof(FalconHunting), 1.5 }, // Sólyom
 
 
         // ==============================================================================

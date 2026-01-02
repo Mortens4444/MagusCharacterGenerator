@@ -38,4 +38,6 @@ public sealed class Bear : Creature
     public override double AttacksPerRound => 3;
 
     public override List<Speed> Speeds => [new Speed(TravelMode.OnLand, 50)];
+
+    public override string[] Sounds => ["bear_growl"];
 }

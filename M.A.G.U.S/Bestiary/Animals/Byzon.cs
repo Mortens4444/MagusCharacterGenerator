@@ -18,7 +18,7 @@ public sealed class Byzon : Creature
         InitiateValue = 7;
         AttackModes =
         [
-            new MeleeAttack(new BodyPart("Horn", ThrowType._1D6, 2), AttackValue),
+            new MeleeAttack(new BodyPart("Horn​", ThrowType._1D6, 2), AttackValue),
             new MeleeAttack(new BodyPart("Hoof", ThrowType._1D6, 4), AttackValue),
         ];
         HealthPoints = 42;

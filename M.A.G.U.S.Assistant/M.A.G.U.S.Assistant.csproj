@@ -23,7 +23,7 @@
     <ApplicationId>com.mortens.MAGUS.Assistant</ApplicationId>
     <!-- Versions -->
     <MajorVersion>1</MajorVersion>
-    <MinorVersion>21</MinorVersion>
+    <MinorVersion>22</MinorVersion>
     <BuildNumber>0</BuildNumber>
     <PatchNumber>0</PatchNumber>
     <FileVersion>$(MajorVersion).$(MinorVersion).$(BuildNumber).$(PatchNumber)</FileVersion>
@@ -137,6 +137,10 @@
     <None Remove="Resources\Images\Animals\camel.png" />
     <None Remove="Resources\Images\Animals\cat.png" />
     <None Remove="Resources\Images\Animals\cow.png" />
+    <None Remove="Resources\Images\Animals\dog_hunting.png" />
+    <None Remove="Resources\Images\Animals\dog_sled.png" />
+    <None Remove="Resources\Images\Animals\donkey.png" />
+    <None Remove="Resources\Images\Animals\falcon_hunting.png" />
     <None Remove="Resources\Images\Animals\goat.png" />
     <None Remove="Resources\Images\Animals\goose.png" />
     <None Remove="Resources\Images\Animals\hen.png" />
@@ -147,7 +151,6 @@
     <None Remove="Resources\Images\Bestiary\bat.png" />
     <None Remove="Resources\Images\Bestiary\bear.png" />
     <None Remove="Resources\Images\Bestiary\black_shark.png" />
-    <None Remove="Resources\Images\Bestiary\byson.png" />
     <None Remove="Resources\Images\Bestiary\crocodile.png" />
     <None Remove="Resources\Images\Bestiary\demon_shark.png" />
     <None Remove="Resources\Images\Bestiary\dragon.png" />
@@ -184,7 +187,6 @@
     <None Remove="Resources\Images\Bestiary\wolf_2.png" />
     <None Remove="Resources\Images\Bestiary\wolves.png" />
     <None Remove="Resources\Images\Bestiary\zombie.png" />
-    <None Remove="Resources\Images\Characters\arel_priest.png" />
     <None Remove="Resources\Images\Characters\bard.png" />
     <None Remove="Resources\Images\Characters\court_goblin.png" />
     <None Remove="Resources\Images\Characters\court_orc.png" />
@@ -192,13 +194,11 @@
     <None Remove="Resources\Images\Characters\dwarf.png" />
     <None Remove="Resources\Images\Characters\dwarf_2.png" />
     <None Remove="Resources\Images\Characters\elf.png" />
-    <None Remove="Resources\Images\Characters\fire_wizard.png" />
     <None Remove="Resources\Images\Characters\gladiator.png" />
     <None Remove="Resources\Images\Characters\gladiator_2.png" />
     <None Remove="Resources\Images\Characters\guard.png" />
     <None Remove="Resources\Images\Characters\half_elf.png" />
     <None Remove="Resources\Images\Characters\half_elf_2.png" />
-    <None Remove="Resources\Images\Characters\headhunter.png" />
     <None Remove="Resources\Images\Characters\healer.png" />
     <None Remove="Resources\Images\Characters\khal.png" />
     <None Remove="Resources\Images\Characters\khal_2.png" />
@@ -207,10 +207,7 @@
     <None Remove="Resources\Images\Characters\nobel.png" />
     <None Remove="Resources\Images\Characters\peasant.png" />
     <None Remove="Resources\Images\Characters\priest.png" />
-    <None Remove="Resources\Images\Characters\ranagol_paladin.png" />
     <None Remove="Resources\Images\Characters\reptilian.png" />
-    <None Remove="Resources\Images\Characters\slan.png" />
-    <None Remove="Resources\Images\Characters\slan_2.png" />
     <None Remove="Resources\Images\Characters\soldier.png" />
     <None Remove="Resources\Images\Characters\thief.png" />
     <None Remove="Resources\Images\Characters\warlock.png" />
@@ -219,14 +216,59 @@
     <None Remove="Resources\Images\Characters\witch.png" />
     <None Remove="Resources\Images\Characters\witch_2.png" />
     <None Remove="Resources\Images\Characters\wizard.png" />
+    <None Remove="Resources\Images\Gemstones\agate.png" />
+    <None Remove="Resources\Images\Gemstones\alexandrite.png" />
+    <None Remove="Resources\Images\Gemstones\amber.png" />
+    <None Remove="Resources\Images\Gemstones\amethyst.png" />
+    <None Remove="Resources\Images\Gemstones\aquamarine.png" />
+    <None Remove="Resources\Images\Gemstones\azurite.png" />
+    <None Remove="Resources\Images\Gemstones\black_sonioni_opal.png" />
+    <None Remove="Resources\Images\Gemstones\carnelian.png" />
+    <None Remove="Resources\Images\Gemstones\chalcedony.png" />
+    <None Remove="Resources\Images\Gemstones\chrysoberyl.png" />
+    <None Remove="Resources\Images\Gemstones\chrysoprase.png" />
+    <None Remove="Resources\Images\Gemstones\coral.png" />
+    <None Remove="Resources\Images\Gemstones\diamond.png" />
+    <None Remove="Resources\Images\Gemstones\emerald.png" />
+    <None Remove="Resources\Images\Gemstones\garnet.png" />
+    <None Remove="Resources\Images\Gemstones\hematite.png" />
+    <None Remove="Resources\Images\Gemstones\jade.png" />
+    <None Remove="Resources\Images\Gemstones\jasper.png" />
+    <None Remove="Resources\Images\Gemstones\jet.png" />
+    <None Remove="Resources\Images\Gemstones\lapis_lazuli.png" />
+    <None Remove="Resources\Images\Gemstones\malachite.png" />
+    <None Remove="Resources\Images\Gemstones\moonstone.png" />
+    <None Remove="Resources\Images\Gemstones\nephrite.png" />
+    <None Remove="Resources\Images\Gemstones\obsidian.png" />
+    <None Remove="Resources\Images\Gemstones\onyx.png" />
+    <None Remove="Resources\Images\Gemstones\opal.png" />
+    <None Remove="Resources\Images\Gemstones\pearl.png" />
+    <None Remove="Resources\Images\Gemstones\peridot.png" />
+    <None Remove="Resources\Images\Gemstones\rose_crystal.png" />
+    <None Remove="Resources\Images\Gemstones\rose_quartz.png" />
+    <None Remove="Resources\Images\Gemstones\rubin.png" />
+    <None Remove="Resources\Images\Gemstones\ruby.png" />
+    <None Remove="Resources\Images\Gemstones\sapphire.png" />
+    <None Remove="Resources\Images\Gemstones\serpentine.png" />
+    <None Remove="Resources\Images\Gemstones\smaragd.png" />
+    <None Remove="Resources\Images\Gemstones\smoky_quartz.png" />
+    <None Remove="Resources\Images\Gemstones\spinel.png" />
+    <None Remove="Resources\Images\Gemstones\topaz.png" />
+    <None Remove="Resources\Images\Gemstones\tourmaline.png" />
+    <None Remove="Resources\Images\Gemstones\turquoise.png" />
+    <None Remove="Resources\Images\Gemstones\zircon.png" />
   </ItemGroup>
   <ItemGroup>
+    <MauiImage Include="Resources\Images\Animals\dog_hunting.png" />
+    <MauiImage Include="Resources\Images\Animals\dog_sled.png" />
+    <MauiImage Include="Resources\Images\Animals\donkey.png" />
+    <MauiImage Include="Resources\Images\Animals\falcon_hunting.png" />
     <MauiImage Include="Resources\Images\Bestiary\adachnoa.png" />
     <MauiImage Include="Resources\Images\Bestiary\barracuda.png" />
     <MauiImage Include="Resources\Images\Bestiary\bat.png" />
     <MauiImage Include="Resources\Images\Bestiary\bear.png" />
     <MauiImage Include="Resources\Images\Bestiary\black_shark.png" />
-    <MauiImage Include="Resources\Images\Bestiary\byson.png" />
+    <MauiImage Include="Resources\Images\Bestiary\byzon.png" />
     <MauiImage Include="Resources\Images\Bestiary\crocodile.png" />
     <MauiImage Include="Resources\Images\Bestiary\demon_shark.png" />
     <MauiImage Include="Resources\Images\Bestiary\dragon.png" />
@@ -237,8 +279,8 @@
     <MauiImage Include="Resources\Images\Bestiary\giant_spider.png" />
     <MauiImage Include="Resources\Images\Bestiary\goblin.png" />
     <MauiImage Include="Resources\Images\Bestiary\golem.png" />
-    <MauiImage Include="Resources\Images\Animals\heavy_war_horse.png" />
-    <MauiImage Include="Resources\Images\Animals\light_war_horse.png" />
+    <MauiImage Include="Resources\Images\Animals\horse_heavy_war.png" />
+    <MauiImage Include="Resources\Images\Animals\horse_light_war.png" />
     <MauiImage Include="Resources\Images\Bestiary\gray_dolphin.png" />
     <MauiImage Include="Resources\Images\Bestiary\killer_whale.png" />
     <MauiImage Include="Resources\Images\Bestiary\lizard_creature.png" />
@@ -254,7 +296,7 @@
     <MauiImage Include="Resources\Images\Bestiary\umich.png" />
     <MauiImage Include="Resources\Images\Bestiary\umich_2.png" />
     <MauiImage Include="Resources\Images\Bestiary\vampire.png" />
-    <MauiImage Include="Resources\Images\Animals\war_dog.png" />
+    <MauiImage Include="Resources\Images\Animals\dog_war.png" />
     <MauiImage Include="Resources\Images\Bestiary\vampire_lord.png" />
     <MauiImage Include="Resources\Images\Bestiary\werewolf.png" />
     <MauiImage Include="Resources\Images\Bestiary\white_eagle.png" />
@@ -264,7 +306,7 @@
     <MauiImage Include="Resources\Images\Bestiary\wolf_2.png" />
     <MauiImage Include="Resources\Images\Bestiary\wolves.png" />
     <MauiImage Include="Resources\Images\Bestiary\zombie.png" />
-    <MauiImage Include="Resources\Images\Characters\arel_priest.png" />
+    <MauiImage Include="Resources\Images\Characters\priest_of_arel.png" />
     <MauiImage Include="Resources\Images\Characters\bard.png" />
     <MauiImage Include="Resources\Images\Characters\court_goblin.png" />
     <MauiImage Include="Resources\Images\Characters\court_orc.png" />
@@ -272,14 +314,14 @@
     <MauiImage Include="Resources\Images\Characters\dwarf.png" />
     <MauiImage Include="Resources\Images\Characters\dwarf_2.png" />
     <MauiImage Include="Resources\Images\Characters\elf.png" />
-    <MauiImage Include="Resources\Images\Characters\fire_wizard.png" />
+    <MauiImage Include="Resources\Images\Characters\fire_mage.png" />
     <MauiImage Include="Resources\Images\Characters\feenhar.png" />
     <MauiImage Include="Resources\Images\Characters\gladiator.png" />
     <MauiImage Include="Resources\Images\Characters\gladiator_2.png" />
     <MauiImage Include="Resources\Images\Characters\guard.png" />
     <MauiImage Include="Resources\Images\Characters\half_elf.png" />
     <MauiImage Include="Resources\Images\Characters\half_elf_2.png" />
-    <MauiImage Include="Resources\Images\Characters\headhunter.png" />
+    <MauiImage Include="Resources\Images\Characters\assassin.png" />
     <MauiImage Include="Resources\Images\Characters\healer.png" />
     <MauiImage Include="Resources\Images\Characters\khal.png" />
     <MauiImage Include="Resources\Images\Characters\khal_2.png" />
@@ -288,10 +330,10 @@
     <MauiImage Include="Resources\Images\Characters\nobel.png" />
     <MauiImage Include="Resources\Images\Characters\peasant.png" />
     <MauiImage Include="Resources\Images\Characters\priest.png" />
-    <MauiImage Include="Resources\Images\Characters\ranagol_paladin.png" />
+    <MauiImage Include="Resources\Images\Characters\paladin_of_ranagol.png" />
     <MauiImage Include="Resources\Images\Characters\reptilian.png" />
-    <MauiImage Include="Resources\Images\Characters\slan.png" />
-    <MauiImage Include="Resources\Images\Characters\slan_2.png" />
+    <MauiImage Include="Resources\Images\Characters\martial_artist.png" />
+    <MauiImage Include="Resources\Images\Characters\blademaster.png" />
     <MauiImage Include="Resources\Images\Characters\soldier.png" />
     <MauiImage Include="Resources\Images\Characters\thief.png" />
     <MauiImage Include="Resources\Images\Characters\warlock.png" />
@@ -344,7 +386,7 @@
     <PackageReference Include="Microsoft.Maui.Graphics" Version="10.0.20" />
     <PackageReference Include="Microsoft.Maui.Graphics.Skia" Version="10.0.20" />
     <PackageReference Include="Mtf.Maui.Controls" Version="3.0.52" />
-    <PackageReference Include="Mtf.MAUI.LanguageService" Version="2.0.86" />
+    <PackageReference Include="Mtf.MAUI.LanguageService" Version="2.0.91" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.4" />
     <PackageReference Include="Plugin.Maui.Audio" Version="4.0.0" />
     <PackageReference Include="sqlite-net-pcl" Version="1.9.172" />
@@ -444,7 +486,6 @@
     </MauiXaml>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Resources\Images\Gemstones\" />
     <Folder Include="Resources\Images\Armors\" />
     <Folder Include="Resources\Images\Clothes\" />
     <Folder Include="Resources\Images\Debauchery\" />
@@ -470,13 +511,53 @@
     <MauiImage Include="Resources\Images\Animals\camel.png" />
     <MauiImage Include="Resources\Images\Animals\cat.png" />
     <MauiImage Include="Resources\Images\Animals\cow.png" />
-    <MauiImage Include="Resources\Images\Animals\guard_dog.png" />
+    <MauiImage Include="Resources\Images\Animals\dog_guard.png" />
     <MauiImage Include="Resources\Images\Animals\goat.png" />
     <MauiImage Include="Resources\Images\Animals\goose.png" />
     <MauiImage Include="Resources\Images\Animals\hen.png" />
-    <MauiImage Include="Resources\Images\Animals\traveler_horse.png" />
+    <MauiImage Include="Resources\Images\Animals\horse_traveler.png" />
     <MauiImage Include="Resources\Images\Animals\pig.png" />
     <MauiImage Include="Resources\Images\Animals\turkey.png" />
+    <MauiImage Include="Resources\Images\Gemstones\agate.png" />
+    <MauiImage Include="Resources\Images\Gemstones\alexandrite.png" />
+    <MauiImage Include="Resources\Images\Gemstones\amber.png" />
+    <MauiImage Include="Resources\Images\Gemstones\amethyst.png" />
+    <MauiImage Include="Resources\Images\Gemstones\aquamarine.png" />
+    <MauiImage Include="Resources\Images\Gemstones\azurite.png" />
+    <MauiImage Include="Resources\Images\Gemstones\black_sonioni_opal.png" />
+    <MauiImage Include="Resources\Images\Gemstones\carnelian.png" />
+    <MauiImage Include="Resources\Images\Gemstones\chalcedony.png" />
+    <MauiImage Include="Resources\Images\Gemstones\chrysoberyl.png" />
+    <MauiImage Include="Resources\Images\Gemstones\chrysoprase.png" />
+    <MauiImage Include="Resources\Images\Gemstones\coral.png" />
+    <MauiImage Include="Resources\Images\Gemstones\diamond.png" />
+    <MauiImage Include="Resources\Images\Gemstones\emerald.png" />
+    <MauiImage Include="Resources\Images\Gemstones\garnet.png" />
+    <MauiImage Include="Resources\Images\Gemstones\hematite.png" />
+    <MauiImage Include="Resources\Images\Gemstones\jade.png" />
+    <MauiImage Include="Resources\Images\Gemstones\jasper.png" />
+    <MauiImage Include="Resources\Images\Gemstones\jet.png" />
+    <MauiImage Include="Resources\Images\Gemstones\lapis_lazuli.png" />
+    <MauiImage Include="Resources\Images\Gemstones\malachite.png" />
+    <MauiImage Include="Resources\Images\Gemstones\moonstone.png" />
+    <MauiImage Include="Resources\Images\Gemstones\nephrite.png" />
+    <MauiImage Include="Resources\Images\Gemstones\obsidian.png" />
+    <MauiImage Include="Resources\Images\Gemstones\onyx.png" />
+    <MauiImage Include="Resources\Images\Gemstones\opal.png" />
+    <MauiImage Include="Resources\Images\Gemstones\pearl.png" />
+    <MauiImage Include="Resources\Images\Gemstones\peridot.png" />
+    <MauiImage Include="Resources\Images\Gemstones\rose_crystal.png" />
+    <MauiImage Include="Resources\Images\Gemstones\rose_quartz.png" />
+    <MauiImage Include="Resources\Images\Gemstones\ruby.png" />
+    <MauiImage Include="Resources\Images\Gemstones\sapphire.png" />
+    <MauiImage Include="Resources\Images\Gemstones\serpentine.png" />
+    <MauiImage Include="Resources\Images\Gemstones\smoky_quartz.png" />
+    <MauiImage Include="Resources\Images\Gemstones\spinel.png" />
+    <MauiImage Include="Resources\Images\Gemstones\tiger_s_eye.png" />
+    <MauiImage Include="Resources\Images\Gemstones\topaz.png" />
+    <MauiImage Include="Resources\Images\Gemstones\tourmaline.png" />
+    <MauiImage Include="Resources\Images\Gemstones\turquoise.png" />
+    <MauiImage Include="Resources\Images\Gemstones\zircon.png" />
   </ItemGroup>
   <Target Name="GenerateImageManifest" BeforeTargets="BeforeBuild">
     <ItemGroup>

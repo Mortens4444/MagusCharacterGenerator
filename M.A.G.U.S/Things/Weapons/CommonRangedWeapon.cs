@@ -5,7 +5,7 @@ using M.A.G.U.S.Interfaces;
 
 namespace M.A.G.U.S.Things.Weapons;
 
-public class CommonRangedWeapon(string name, int initiateValue, int aimValue, int distance, ThrowType throwType, int modifier = 0, bool isMagical = false, double attacksPerRound = 1) : Weapon, IRangedWeapon
+public class CommonRangedWeapon(string name, int initiateValue, int aimValue, int distance, ThrowType throwType, int modifier = 0, bool isMagical = false, double attacksPerRound = 1) : Weapon, IRangedWeapon, INotForSale
 {
     public int AimValue => aimValue;
 

@@ -70,5 +70,11 @@ public enum Deity
     Weila, // Kyria régi főistene
 
     
-    Phet //Ediomadi Óisten - LizardWizard
+    Phet, //Ediomadi Óisten - LizardWizard
+
+
+    // Dzsadok istenei
+    Galradzsa,
+    Doldzsah,
+    Dzsah
 }

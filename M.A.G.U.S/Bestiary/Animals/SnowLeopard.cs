@@ -17,8 +17,8 @@ public sealed class SnowLeopard : Creature
         InitiateValue = 65;
         AttackModes =
         [
-            new MeleeAttack(new BodyPart("Weak paw strike", ThrowType._1D6, 3), AttackValue),
-            new MeleeAttack(new BodyPart("Powerful paw strike", ThrowType._1D6, 3), AttackValue),
+            new MeleeAttack(new BodyPart("Left paw strike", ThrowType._1D6, 3), AttackValue),
+            new MeleeAttack(new BodyPart("Right paw strike", ThrowType._1D6, 3), AttackValue),
             new MeleeAttack(new BodyPart("Bite", ThrowType._1D10, 2), AttackValue),
             new MeleeAttack(new BodyPart("Run past and slash with claws", ThrowType._2D10, 1), AttackValue) // Only 1 attack is allowed with this method
         ];

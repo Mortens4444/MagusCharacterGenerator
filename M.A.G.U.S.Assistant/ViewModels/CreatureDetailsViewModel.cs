@@ -62,7 +62,9 @@ internal partial class CreatureDetailsViewModel : BaseViewModel
     public string HealthPoints => Creature.DisplayHealthPoints;
     public string PainTolerancePoints => Creature.DisplayPainTolerancePoints;
     public IList<Attack> AttackModes => Creature.AttackModes;
-    public int? PoisonResistance => Creature.PoisonResistance;
+    public string AstralMagicResistance => Creature.AstralMagicResistance == null ? "-" : Creature.AstralMagicResistance == Int32.MaxValue ? Lng.Elem("Immune") : Creature.AstralMagicResistance.ToString();
+    public string MentalMagicResistance => Creature.MentalMagicResistance == null ? "-" : Creature.MentalMagicResistance == Int32.MaxValue ? Lng.Elem("Immune") : Creature.MentalMagicResistance.ToString();
+    public string PoisonResistance => Creature.PoisonResistance == null ? "-" : Creature.PoisonResistance == Int32.MaxValue ? Lng.Elem("Immune") : Creature.PoisonResistance.ToString();
     public uint ExperiencePoints => Creature.ExperiencePoints;
     public double AttacksPerRound => Creature.AttacksPerRound;
     public string Image => Creature.Images.Length > 1 ? Creature.Images[RandomProvider.GetSecureRandomInt(0, Creature.Images.Length)] : Creature.Images[0];

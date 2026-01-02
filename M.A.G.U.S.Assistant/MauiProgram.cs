@@ -133,7 +133,6 @@ internal static class MauiProgram
             typeof(ImagesViewModel),
             typeof(ItemDetailsViewModel),
             typeof(LanguagesViewModel),
-            typeof(MarketViewModel),
             typeof(ObjectObserverViewModel),
             //typeof(PaintViewModel),
             typeof(PaintWizardViewModel),

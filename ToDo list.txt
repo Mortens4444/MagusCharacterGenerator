@@ -8,7 +8,7 @@
 - After buying something on the market, refresh the affordable items list
 - Max. Distance for a day S
 
-- Should appear in equipment list?
+- Should appear in equipment list? For example Rune sword?
 - Can the MapPage open PDFs also? M
 - Show Illnesses M
 - Other modifier tables M

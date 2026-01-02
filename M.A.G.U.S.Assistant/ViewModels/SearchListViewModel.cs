@@ -278,7 +278,7 @@ internal partial class SearchListViewModel : BaseViewModel
                 {
                     page = new ObjectObserverPage(new ObjectObserverViewModel(), item);
                 }
-
+                SelectedItem = null;
                 await mainPage.Navigation.PushAsync(page).ConfigureAwait(true);
             }
         }
@@ -293,7 +293,7 @@ internal partial class SearchListViewModel : BaseViewModel
         try
         {
             Character?.Buy(args.Thing);
-            RefreshAffordability();
+            ApplyFilter();
             var mainPage = Application.Current != null && Application.Current.Windows.Count > 0 ? Application.Current.Windows[0].Page : null;
             mainPage?.Navigation.PopAsync().ConfigureAwait(false);
         }
@@ -339,19 +339,6 @@ internal partial class SearchListViewModel : BaseViewModel
                 item.OnPropertyChanged(nameof(DisplayItem.RightText));
                 item.OnPropertyChanged(nameof(DisplayItem.Enabled));
             }
-        }
-    }
-
-    private void RefreshAffordability()
-    {
-        if (Items == null)
-        {
-            return;
-        }
-
-        foreach (var item in Items.OfType<DisplayItem>())
-        {
-            item.OnPropertyChanged(nameof(DisplayItem.Enabled));
         }
     }
 

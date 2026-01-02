@@ -17,10 +17,10 @@ namespace MagusCharacterGenerator
             var witch = new Character(new Settings(), "Mirena", new Human(), new Witch(level));
             Console.WriteLine(witch);
 
-            var fireWizard = new Character(new Settings(), "Siron", new Human(), new FireWizard(level));
+            var fireWizard = new Character(new Settings(), "Siron", new Human(), new FireMage(level));
             Console.WriteLine(fireWizard);
 
-            var headHunter = new Character(new Settings(), "Vesryn", new Elf(), new Headhunter(level));
+            var headHunter = new Character(new Settings(), "Vesryn", new Elf(), new Assassin(level));
             Console.WriteLine(headHunter);
 
             var slan = new Character(new Settings(), "Toll", new Elf(), new MartialArtist(level));

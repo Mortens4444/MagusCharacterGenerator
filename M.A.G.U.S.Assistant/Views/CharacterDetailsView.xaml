@@ -38,29 +38,25 @@
                 </Grid>
 
                 <BoxView HeightRequest="1" Color="{AppThemeBinding Light={StaticResource Gray200}, Dark={StaticResource Gray600}}" Margin="0,5"/>
-                <Grid ColumnDefinitions="*, *"
-                        RowDefinitions="Auto, Auto, Auto"
-                        MinimumWidthRequest="100"
-                        RowSpacing="5">
+                <Grid ColumnDefinitions="*, *" RowDefinitions="Auto, Auto, Auto" MinimumWidthRequest="100" RowSpacing="5">
 
                     <mc:EntryWithLabel Label="Race"
                                        Text="{Binding Race, Converter={StaticResource TranslationConverter}}"
                                        HorizontalOptions="Center"
-                                       IsEnabled="False" />
+                                       IsReadOnly="True" />
 
                     <mc:EntryWithLabel Label="Class"
                                        Text="{Binding Class, Converter={StaticResource TranslationConverter}}"
                                        HorizontalOptions="Center"
-                                       IsEnabled="False"
+                                       IsReadOnly="True"
                                        Grid.Column="1" />
 
                     <mc:EntryWithLabel Label="Experience level"
                                        Text="{Binding Level}"
                                        HorizontalOptions="Center"
-                                       IsEnabled="False"
+                                       IsReadOnly="True"
                                        Grid.Row="1"
                                        Grid.ColumnSpan="2" />
-
 
                     <!--<Grid Grid.Row="1" ColumnDefinitions="*, Auto">
                         <Label Grid.Column="0" Text="Player character" VerticalOptions="Center" LineBreakMode="WordWrap" />
@@ -70,8 +66,8 @@
                     <Picker ItemsSource="{Binding Alignments}"
                             ItemDisplayBinding="{Binding ., Converter={StaticResource EnumDescriptionTranslationConverter}}"
                             SelectedItem="{Binding Alignment}"
-                            VerticalOptions="End"
-                            Grid.Row="1"
+                            WidthRequest="200"
+                            Grid.Row="2"
                             Grid.Column="1" />
                 </Grid>
             </VerticalStackLayout>
@@ -160,9 +156,8 @@
             <Border Style="{StaticResource BoxBorder}">
                 <VerticalStackLayout>
                     <Label Text="ᛉ-points" Style="{StaticResource HeaderLabel}"/>
-                    <Grid ColumnDefinitions="*, *" RowSpacing="5" RowDefinitions="Auto, Auto">
+                    <Grid ColumnDefinitions="*, *" RowSpacing="5" RowDefinitions="Auto">
                         <mc:EntryWithLabel Label="Max. ᛉp" Text="{Binding MaxPsiPoints}" IsEnabled="False" />
-                        <mc:EntryWithLabel Label="Act. ᛉp" Text="{Binding PsiPoints}" IsEnabled="False" Grid.Row="1" />
                         <mc:EntryWithLabel Label="Max. ᛉp/level" Text="{Binding PsiPointsModifier}" IsEnabled="False" Grid.Column="1" />
                     </Grid>
                 </VerticalStackLayout>
@@ -172,9 +167,8 @@
             <Border Style="{StaticResource BoxBorder}">
                 <VerticalStackLayout>
                     <Label Text="Mana-points" Style="{StaticResource HeaderLabel}"/>
-                    <Grid ColumnDefinitions="*, *" RowSpacing="5" RowDefinitions="Auto, Auto">
+                    <Grid ColumnDefinitions="*, *" RowSpacing="5" RowDefinitions="Auto">
                         <mc:EntryWithLabel Label="Max. Mp" Text="{Binding MaxManaPoints}" IsEnabled="False" />
-                        <mc:EntryWithLabel Label="Akt. Mp" Text="{Binding ManaPoints}" IsEnabled="False" Grid.Row="1" />
                         <mc:EntryWithLabel Label="Max. Mp/level" Text="{Binding MaxManaPointsPerLevel}" IsEnabled="False" Grid.Column="1" />
                     </Grid>
                 </VerticalStackLayout>

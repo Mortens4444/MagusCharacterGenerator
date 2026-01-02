@@ -125,6 +125,8 @@ public abstract class Class : IClass
 
     public virtual IRace[] AllowedRaces => [];
 
+    public virtual string Image => $"{Name.ToImageName()}.png";
+
     public abstract int GetPainToleranceModifier();
 
     public DiceThrowFormula? GetPainToleranceModifierFormula()
