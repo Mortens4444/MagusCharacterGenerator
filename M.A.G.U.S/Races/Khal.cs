@@ -2,6 +2,7 @@
 using M.A.G.U.S.GameSystem.Qualifications;
 using M.A.G.U.S.Qualifications;
 using M.A.G.U.S.Qualifications.Laical;
+using M.A.G.U.S.Qualifications.Percentages;
 using M.A.G.U.S.Qualifications.Scientific;
 using M.A.G.U.S.Qualifications.Specialities;
 using System.Text;
@@ -42,6 +43,12 @@ public class Khal : Race
         new KeenHearing(2),
         new KeenSmell(5),
         new CanOnlyLearnPyarronPsi()
+    ];
+
+    public override PercentQualificationList PercentQualifications =>
+    [
+        new SenseOfDanger(20),
+        new SenseOfMortalPeril(40),
     ];
 
     public override string GenerateCharacterName()

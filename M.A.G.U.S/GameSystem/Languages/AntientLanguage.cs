@@ -25,6 +25,9 @@ public enum AntientLanguage
 
     [Description("Old Doranian")]
     OldDoranian,
+    
+    [Description("Old Godonian")]
+    OldGodonian,
 
     // Faji ősi nyelvek
     [Description("Ancient Elven")]
