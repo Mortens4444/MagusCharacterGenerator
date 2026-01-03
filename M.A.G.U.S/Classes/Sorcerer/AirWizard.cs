@@ -1,9 +1,14 @@
 ﻿using M.A.G.U.S.GameSystem;
 using M.A.G.U.S.GameSystem.Attributes;
 using M.A.G.U.S.GameSystem.FightMode;
+using M.A.G.U.S.GameSystem.Languages;
+using M.A.G.U.S.GameSystem.Qualifications;
 using M.A.G.U.S.Interfaces;
 using M.A.G.U.S.Qualifications;
+using M.A.G.U.S.Qualifications.Combat;
+using M.A.G.U.S.Qualifications.Laical;
 using M.A.G.U.S.Qualifications.Magic;
+using M.A.G.U.S.Qualifications.Scientific;
 using M.A.G.U.S.Races;
 
 namespace M.A.G.U.S.Classes.Sorcerer;
@@ -18,7 +23,9 @@ public class AirWizard : Class, IClass, ILikeMagic
     }
 
     [DiceThrow(ThrowType._2D6)]
-    [DiceThrowModifier(6)]
+    [DiceThrowModifier(2)]
+    [SpecialTraining]
+
     public override int Strength { get; set; }
 
     [DiceThrow(ThrowType._3D6_2_Times)]
@@ -27,19 +34,20 @@ public class AirWizard : Class, IClass, ILikeMagic
     [DiceThrow(ThrowType._3D6_2_Times)]
     public override int Dexterity { get; set; }
 
-    [DiceThrow(ThrowType._2D6)]
-    [DiceThrowModifier(6)]
+    [DiceThrow(ThrowType._1D10)]
+    [DiceThrowModifier(8)]
     public override int Stamina { get; set; }
 
-    [DiceThrow(ThrowType._2D6)]
-    [DiceThrowModifier(6)]
+    [DiceThrow(ThrowType._1D10)]
+    [DiceThrowModifier(8)]
     public override int Health { get; set; }
 
     [DiceThrow(ThrowType._3D6)]
     public override int Beauty { get; set; }
 
-    [DiceThrow(ThrowType._2D6)]
-    [DiceThrowModifier(6)]
+    [DiceThrow(ThrowType._1D10)]
+    [DiceThrowModifier(8)]
+    [SpecialTraining]
     public override int Intelligence { get; set; }
 
     [DiceThrow(ThrowType._2D6)]
@@ -65,25 +73,25 @@ public class AirWizard : Class, IClass, ILikeMagic
     [DiceThrowModifier(6)]
     public override int Detection { get; set; }
 
-    public override int InitiateBaseValue => 6;
+    public override int InitiateBaseValue => 7;
 
-    public override int AttackBaseValue => 17;
+    public override int AttackBaseValue => 18;
 
-    public override int DefenseBaseValue => 72;
+    public override int DefenseBaseValue => 73;
 
-    public override int AimBaseValue => 0;
+    public override int AimBaseValue => 15;
 
-    public override int CombatValueModifierPerLevel => 8;
+    public override int CombatValueModifierPerLevel => 9;
 
-    public override int BaseQualificationPoints => 3;
+    public override int BaseQualificationPoints => 6;
 
-    public override int QualificationPointsModifier => 5;
+    public override int QualificationPointsModifier => 8;
 
     public override int PercentQualificationModifier => 0;
 
     public override int BaseLifePoints => 5;
 
-    public override int BasePainTolerancePoints => 4;
+    public override int BasePainTolerancePoints => 5;
 
     public override bool AddCombatModifierOnFirstLevel => false;
 
@@ -91,15 +99,28 @@ public class AirWizard : Class, IClass, ILikeMagic
 
     public override bool AddQualificationPointsOnFirstLevel => true;
 
-    public override IRace[] AllowedRaces => [new Human(), new Amund(), new Jann()];
+    public override IRace[] AllowedRaces => [new Feenhar()];
 
     public override QualificationList Qualifications => BuildQualifications(
     [
-        //new WeaponUse(),
-        //new LanguageLore(Language.Pyarronian, 4),
+        new WeaponUse(),
+        new WeaponThrowing(),
+        new ReadingAndWriting(),
+        new Fistfight(),
+        new ForestSurvival(),
+        new Cartography(),
+        new HuntingAndFishing(),
+        new LanguageLore(Language.Pyarronian, 5),
+        new LanguageLore(Language.Shadonian, 4),
     ]);
 
-    public override QualificationList FutureQualifications => BuildQualifications([]);
+    public override QualificationList FutureQualifications => BuildQualifications(
+    [
+        new WeaponUse(level: 2),
+        new Healing(level: 3),
+        new Cartography(QualificationLevel.Master, 4),
+        new WeaponUse(QualificationLevel.Master, 5)
+    ]);
 
     public override PercentQualificationList PercentQualifications => [];
 
