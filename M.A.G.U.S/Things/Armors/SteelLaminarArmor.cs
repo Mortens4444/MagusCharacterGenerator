@@ -2,7 +2,7 @@ using M.A.G.U.S.GameSystem.Valuables;
 
 namespace M.A.G.U.S.Things.Armors;
 
-public class SteelLaminarArmor : Armor
+public class SteelLaminarArmor : LaminarArmor
 {
 	public override string Name => "Steel plate armor";
 

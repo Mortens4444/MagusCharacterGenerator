@@ -46,35 +46,35 @@
             <ScrollView Grid.Column="1" VerticalOptions="Fill">
                 <StackLayout Spacing="8">
                      <!-- Képességek -->
+                    <Label Text="{Binding SelectedRace.Name, Converter={StaticResource TranslationConverter}}" FontSize="20" FontAttributes="Bold"/>
+
+                    <Border Stroke="{AppThemeBinding Light={StaticResource Gray300}, Dark={StaticResource Gray500}}"
+                            StrokeThickness="1" Padding="10" BackgroundColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource Gray900}}">
+                        <Image Source="{Binding SelectedRace.Image}" Aspect="AspectFit" WidthRequest="250" HeightRequest="220" HorizontalOptions="Center" VerticalOptions="Center" />
+                    </Border>
+                    
                     <Border Stroke="{AppThemeBinding Light={StaticResource Gray300}, Dark={StaticResource Gray500}}"
                             StrokeThickness="1" Padding="10" BackgroundColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource Gray900}}">
                         <StackLayout Spacing="8">
-                            <Label Text="{Binding SelectedRace.Name, Converter={StaticResource TranslationConverter}}" FontSize="20" FontAttributes="Bold"/>
-
-                            <Grid ColumnDefinitions="*, Auto" ColumnSpacing="20">
-                                <Grid Grid.Column="0" RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto" ColumnDefinitions="Auto,Auto" RowSpacing="6" ColumnSpacing="12">
-                                    <Label Text="Strength" Grid.Row="0" Grid.Column="0"/>
-                                    <Label Text="{Binding SelectedRace.Strength}" Grid.Row="0" Grid.Column="1"/>
-                                    <Label Text="Quickness" Grid.Row="1" Grid.Column="0"/>
-                                    <Label Text="{Binding SelectedRace.Quickness}" Grid.Row="1" Grid.Column="1"/>
-                                    <Label Text="Dexterity" Grid.Row="2" Grid.Column="0"/>
-                                    <Label Text="{Binding SelectedRace.Dexterity}" Grid.Row="2" Grid.Column="1"/>
-                                    <Label Text="Stamina" Grid.Row="3" Grid.Column="0"/>
-                                    <Label Text="{Binding SelectedRace.Stamina}" Grid.Row="3" Grid.Column="1"/>
-                                    <Label Text="Health" Grid.Row="4" Grid.Column="0"/>
-                                    <Label Text="{Binding SelectedRace.Health}" Grid.Row="4" Grid.Column="1"/>
-                                    <Label Text="Beauty" Grid.Row="5" Grid.Column="0"/>
-                                    <Label Text="{Binding SelectedRace.Beauty}" Grid.Row="5" Grid.Column="1"/>
-                                    <Label Text="Intelligence" Grid.Row="6" Grid.Column="0"/>
-                                    <Label Text="{Binding SelectedRace.Intelligence}" Grid.Row="6" Grid.Column="1"/>
-                                    <Label Text="Willpower" Grid.Row="7" Grid.Column="0"/>
-                                    <Label Text="{Binding SelectedRace.Willpower}" Grid.Row="7" Grid.Column="1"/>
-                                    <Label Text="Astral" Grid.Row="8" Grid.Column="0"/>
-                                    <Label Text="{Binding SelectedRace.Astral}" Grid.Row="8" Grid.Column="1"/>
-                                </Grid>
-
-                                <BoxView Grid.Column="1" Color="Transparent" WidthRequest="250" />
-                                <Image Grid.Column="1" Source="{Binding SelectedRace.Image}" Aspect="AspectFit" WidthRequest="250" HeightRequest="220" HorizontalOptions="Center" VerticalOptions="Center" />
+                            <Grid Grid.Column="0" RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto" ColumnDefinitions="Auto,Auto" RowSpacing="6" ColumnSpacing="12">
+                                <Label Text="Strength" Grid.Row="0" Grid.Column="0"/>
+                                <Label Text="{Binding SelectedRace.Strength}" Grid.Row="0" Grid.Column="1"/>
+                                <Label Text="Quickness" Grid.Row="1" Grid.Column="0"/>
+                                <Label Text="{Binding SelectedRace.Quickness}" Grid.Row="1" Grid.Column="1"/>
+                                <Label Text="Dexterity" Grid.Row="2" Grid.Column="0"/>
+                                <Label Text="{Binding SelectedRace.Dexterity}" Grid.Row="2" Grid.Column="1"/>
+                                <Label Text="Stamina" Grid.Row="3" Grid.Column="0"/>
+                                <Label Text="{Binding SelectedRace.Stamina}" Grid.Row="3" Grid.Column="1"/>
+                                <Label Text="Health" Grid.Row="4" Grid.Column="0"/>
+                                <Label Text="{Binding SelectedRace.Health}" Grid.Row="4" Grid.Column="1"/>
+                                <Label Text="Beauty" Grid.Row="5" Grid.Column="0"/>
+                                <Label Text="{Binding SelectedRace.Beauty}" Grid.Row="5" Grid.Column="1"/>
+                                <Label Text="Intelligence" Grid.Row="6" Grid.Column="0"/>
+                                <Label Text="{Binding SelectedRace.Intelligence}" Grid.Row="6" Grid.Column="1"/>
+                                <Label Text="Willpower" Grid.Row="7" Grid.Column="0"/>
+                                <Label Text="{Binding SelectedRace.Willpower}" Grid.Row="7" Grid.Column="1"/>
+                                <Label Text="Astral" Grid.Row="8" Grid.Column="0"/>
+                                <Label Text="{Binding SelectedRace.Astral}" Grid.Row="8" Grid.Column="1"/>
                             </Grid>
                         </StackLayout>
                     </Border>

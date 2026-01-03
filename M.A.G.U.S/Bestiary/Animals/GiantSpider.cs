@@ -2,6 +2,7 @@
 using M.A.G.U.S.GameSystem;
 using M.A.G.U.S.GameSystem.Attributes;
 using M.A.G.U.S.Models;
+using M.A.G.U.S.Things.Armors;
 
 namespace M.A.G.U.S.Bestiary.Animals;
 
@@ -9,6 +10,7 @@ public sealed class GiantSpider : Creature
 {
     public GiantSpider()
     {
+        Armor = new NaturalArmor(2);
         Occurrence = Occurrence.VeryRare;
         Size = Size.Small;
         AttackValue = 30;
@@ -18,7 +20,6 @@ public sealed class GiantSpider : Creature
         PainTolerancePoints = 13;
         PoisonResistance = 8;
         Intelligence = Enums.Intelligence.Animal;
-        ArmorClass = 2;
         ExperiencePoints = 0;
     }
 

@@ -1,3 +1,4 @@
+using M.A.G.U.S.Enums;
 using M.A.G.U.S.GameSystem.Valuables;
 
 namespace M.A.G.U.S.Things.Armors;
@@ -15,4 +16,10 @@ public class BrigandineArmor : Armor
 	public override double Weight => 15;
 
     public override string Description => "A flexible cuirass of heavy cloth or canvas, inside of which are riveted many small metal plates. It offers respectable defense while appearing deceptively simple and granting stealthier movement than full plate.";
+
+    public override PlaceOfAttack ProtectedMainPlaces => PlaceOfAttack.Torso;
+
+    public override PlaceOfAttackOnTorso ProtectedTorsoFrontParts => PlaceOfAttackOnTorso.EveryWhere;
+
+    public override PlaceOfAttackOnTorsoFromBehind ProtectedTorsoBackParts => PlaceOfAttackOnTorsoFromBehind.EveryWhere;
 }

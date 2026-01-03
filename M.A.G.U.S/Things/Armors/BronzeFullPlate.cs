@@ -2,7 +2,7 @@ using M.A.G.U.S.GameSystem.Valuables;
 
 namespace M.A.G.U.S.Things.Armors;
 
-public class BronzeFullPlate : Armor
+public class BronzeFullPlate : FullPlate
 {
 	public override string Name => "Bronze full plate";
 

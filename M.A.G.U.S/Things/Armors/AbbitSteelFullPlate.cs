@@ -2,7 +2,7 @@ using M.A.G.U.S.GameSystem.Valuables;
 
 namespace M.A.G.U.S.Things.Armors;
 
-public class AbbitSteelFullPlate : Armor
+public class AbbitSteelFullPlate : FullPlate
 {
 	public override string Name => "Abbit-steel full plate";
 

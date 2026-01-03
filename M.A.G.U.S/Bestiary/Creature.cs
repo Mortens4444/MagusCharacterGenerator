@@ -27,8 +27,6 @@ public abstract class Creature : Attacker
 
     public Size Size { get; protected set; }
 
-    public int ArmorClass { get; protected set; }
-
     public override List<Attack> AttackModes
     {
         get

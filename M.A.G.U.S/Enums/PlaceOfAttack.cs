@@ -2,18 +2,22 @@
 
 namespace M.A.G.U.S.Enums;
 
+[Flags]
 public enum PlaceOfAttack
 {
+    None = 0,
     [Description("Weapon-wielding arm")]
-    WeaponWieldingArm,
+    WeaponWieldingArm = 1 << 0,
     [Description("Non weapon-wielding arm")]
-    NonWeaponWieldingArm,
+    NonWeaponWieldingArm = 1 << 1,
     [Description("Right leg")]
-    RightLeg,
+    RightLeg = 1 << 2,
     [Description("Left leg")]
-    LeftLeg,
+    LeftLeg = 1 << 3,
     [Description("Head")]
-    Head,
+    Head = 1 << 4,
     [Description("Torso")]
-    Torso,
+    Torso = 1 << 5,
+
+    EveryWhere = WeaponWieldingArm | NonWeaponWieldingArm | RightLeg | LeftLeg | Head | Torso
 }

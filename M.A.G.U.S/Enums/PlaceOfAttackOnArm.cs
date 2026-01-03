@@ -2,15 +2,18 @@
 
 namespace M.A.G.U.S.Enums;
 
+[Flags]
 public enum PlaceOfAttackOnArm
 {
-    Shoulder,
-    Wrist,    
+    None = 0,
+    Shoulder = 1 << 0,
+    Wrist = 1 << 1,
     [Description("Back of hand")]
-    BackOfHand,
-    Elbow,
-    Forearm,
+    BackOfHand = 1 << 2,
+    Elbow = 1 << 3,
+    Forearm = 1 << 4,
     [Description("Upper arm")]
-    UpperArm,
+    UpperArm = 1 << 5,
 
+    EveryWhere = Shoulder | Wrist | BackOfHand | Elbow | Forearm | UpperArm
 }

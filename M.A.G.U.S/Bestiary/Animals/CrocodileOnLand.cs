@@ -2,6 +2,7 @@
 using M.A.G.U.S.GameSystem;
 using M.A.G.U.S.GameSystem.Attributes;
 using M.A.G.U.S.Models;
+using M.A.G.U.S.Things.Armors;
 
 namespace M.A.G.U.S.Bestiary.Animals;
 
@@ -9,7 +10,7 @@ public sealed class CrocodileOnLand : Creature
 {
     public CrocodileOnLand()
     {
-        ArmorClass = 5;
+        Armor = new NaturalArmor(5);
         Occurrence = Occurrence.Rare;
         Size = Size._6_to_8_meters;
         AttackValue = 55;

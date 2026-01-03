@@ -2,7 +2,7 @@ using M.A.G.U.S.GameSystem.Valuables;
 
 namespace M.A.G.U.S.Things.Armors;
 
-public class BronzeLaminarArmor : Armor
+public class BronzeLaminarArmor : LaminarArmor
 {
 	public override string Name => "Bronze lamellar armor";
 

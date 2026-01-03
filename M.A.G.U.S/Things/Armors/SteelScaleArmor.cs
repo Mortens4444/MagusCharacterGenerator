@@ -2,7 +2,7 @@ using M.A.G.U.S.GameSystem.Valuables;
 
 namespace M.A.G.U.S.Things.Armors;
 
-public class SteelScaleArmor : Armor
+public class SteelScaleArmor : ScaleArmor
 {
 	public override string Name => "Steel scale armor";
 

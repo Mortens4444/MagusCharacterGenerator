@@ -2,7 +2,7 @@ using M.A.G.U.S.GameSystem.Valuables;
 
 namespace M.A.G.U.S.Things.Armors;
 
-public class AbbitSteelScaleArmor : Armor
+public class AbbitSteelScaleArmor : ScaleArmor
 {
 	public override string Name => "Abbit-steel scale armor";
 

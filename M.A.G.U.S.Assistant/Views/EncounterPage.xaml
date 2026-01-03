@@ -32,7 +32,7 @@
                     ItemDisplayBinding="{Binding Name}"
                     Title="Select character" />
 
-            <Button Text="Add Character" Command="{Binding AddCharacterCommand}" />
+            <Button Text="-&gt;" Command="{Binding AddCharacterCommand}" />
         </StackLayout>
 
         <!-- Assignments -->
@@ -79,7 +79,7 @@
                     ItemDisplayBinding="{Binding Name, Converter={StaticResource TranslationConverter}}"
                     Title="Select enemy"/>
 
-            <Button Text="Add Enemy" Command="{Binding AddEnemyCommand}"/>
+            <Button Text="&lt;-" Command="{Binding AddEnemyCommand}"/>
         </StackLayout>
 
         <!-- Run turn -->

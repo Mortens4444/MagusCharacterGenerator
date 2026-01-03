@@ -2,7 +2,7 @@ using M.A.G.U.S.GameSystem.Valuables;
 
 namespace M.A.G.U.S.Things.Armors;
 
-public class AbbitSteelChainMail : Armor
+public class AbbitSteelChainMail : Chainmail
 {
 	public override string Name => "Abbit-steel chainmail";
 

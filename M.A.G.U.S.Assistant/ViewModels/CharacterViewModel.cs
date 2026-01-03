@@ -2,10 +2,10 @@
 using M.A.G.U.S.Assistant.Extensions;
 using M.A.G.U.S.Enums;
 using M.A.G.U.S.GameSystem;
-using M.A.G.U.S.GameSystem.Valuables;
 using M.A.G.U.S.Interfaces;
 using M.A.G.U.S.Qualifications;
 using M.A.G.U.S.Things;
+using M.A.G.U.S.Things.Armors;
 using M.A.G.U.S.Things.Weapons;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
@@ -22,6 +22,7 @@ internal partial class CharacterViewModel : BaseViewModel, IDisposable
     private INotifyCollectionChanged? subscribedEquipment;
     private Weapon? primaryWeapon;
     private Weapon? secondaryWeapon;
+    private Armor? selectedArmor;
     private static readonly IEnumerable<Alignment> alignments = [.. Enum.GetValues<Alignment>()];
 
     public IEnumerable<Alignment> Alignments => alignments;
@@ -30,6 +31,8 @@ internal partial class CharacterViewModel : BaseViewModel, IDisposable
 
     public ObservableCollection<IWeapon> AvailableWeapons { get; } = [];
 
+    public ObservableCollection<Armor> AvailableArmors { get; } = [];
+
     public CombatValueModifier SelectedCombatValueModifier
     {
         get => selectedCombatValueModifier;
@@ -37,10 +40,7 @@ internal partial class CharacterViewModel : BaseViewModel, IDisposable
         {
             if (SetProperty(ref selectedCombatValueModifier, value))
             {
-                if (Character != null)
-                {
-                    Character.SelectedCombatValueModifier = value;
-                }
+                Character?.SelectedCombatValueModifier = value;
             }
         }
     }
@@ -52,10 +52,7 @@ internal partial class CharacterViewModel : BaseViewModel, IDisposable
         {
             if (SetProperty(ref primaryWeapon, value))
             {
-                if (Character != null)
-                {
-                    Character.PrimaryWeapon = value;
-                }
+                Character?.PrimaryWeapon = value;
             }
         }
     }
@@ -67,10 +64,19 @@ internal partial class CharacterViewModel : BaseViewModel, IDisposable
         {
             if (SetProperty(ref secondaryWeapon, value))
             {
-                if (Character != null)
-                {
-                    Character.SecondaryWeapon = value;
-                }
+                Character?.SecondaryWeapon = value;
+            }
+        }
+    }
+
+    public Armor? SelectedArmor
+    {
+        get => selectedArmor;
+        set
+        {
+            if (SetProperty(ref selectedArmor, value))
+            {
+                Character?.Armor = value;
             }
         }
     }
@@ -106,6 +112,7 @@ internal partial class CharacterViewModel : BaseViewModel, IDisposable
             SetProperty(ref selectedCombatValueModifier, value?.SelectedCombatValueModifier ?? M.A.G.U.S.Enums.CombatValueModifier.Base, nameof(SelectedCombatValueModifier));
             SetProperty(ref primaryWeapon, value?.PrimaryWeapon, nameof(PrimaryWeapon));
             SetProperty(ref secondaryWeapon, value?.SecondaryWeapon, nameof(SecondaryWeapon));
+            SetProperty(ref selectedArmor, value?.Armor, nameof(SelectedArmor));
 
             if (character?.Equipment is INotifyCollectionChanged nc)
             {
@@ -114,6 +121,7 @@ internal partial class CharacterViewModel : BaseViewModel, IDisposable
             }
 
             RefillAvailableWeapons();
+            RefillAvailableArmors();
 
             OnPropertyChanged(nameof(AvailableWeapons));
             OnPropertyChanged(nameof(PrimaryWeapon));
@@ -181,6 +189,9 @@ internal partial class CharacterViewModel : BaseViewModel, IDisposable
             OnPropertyChanged(nameof(Gold));
             OnPropertyChanged(nameof(Silver));
             OnPropertyChanged(nameof(Copper));
+
+            OnPropertyChanged(nameof(ArmorClass));
+            OnPropertyChanged(nameof(ArmorCheckPenalty));
 
             OnPropertyChanged(nameof(Equipment));
             OnPropertyChanged(nameof(TotalEquipmentWeight));
@@ -270,6 +281,11 @@ internal partial class CharacterViewModel : BaseViewModel, IDisposable
                 OnPropertyChanged(nameof(Copper));
                 break;
 
+            case nameof(Character.Armor):
+                OnPropertyChanged(nameof(ArmorClass));
+                OnPropertyChanged(nameof(ArmorCheckPenalty));
+                break;
+
             case nameof(Character.Equipment):
                 OnPropertyChanged(nameof(Equipment));
                 break;
@@ -316,7 +332,10 @@ internal partial class CharacterViewModel : BaseViewModel, IDisposable
     public int Erudition => Character?.Erudition ?? 0;
     public int MaxHealthPoints => Character?.MaxHealthPoints ?? 0;
     public int MaxPainTolerancePoints => Character?.MaxPainTolerancePoints ?? 0;
-    
+
+    public int ArmorClass => Character?.Armor?.ArmorClass ?? 0;
+    public int ArmorCheckPenalty => Character?.Armor?.ArmorCheckPenalty ?? 0;
+
     public int CombatValueModifier => Character?.CombatValueModifier ?? 0;
     public int CombatValueModifierPerLevel => Character?.CombatValueModifierPerLevel ?? 0;
     public bool CanAllocateCombatModifier => Character?.CanAllocateCombatModifier ?? false;
@@ -420,6 +439,7 @@ internal partial class CharacterViewModel : BaseViewModel, IDisposable
             case NotifyCollectionChangedAction.Reset:
             case NotifyCollectionChangedAction.Replace:
                 RefillAvailableWeapons();
+                RefillAvailableArmors();
                 break;
         }
     }
@@ -430,6 +450,21 @@ internal partial class CharacterViewModel : BaseViewModel, IDisposable
         foreach (var weapon in Character?.Equipment?.OfType<IWeapon>() ?? [])
         {
             AvailableWeapons.Add(weapon);
+        }
+    }
+
+    private void RefillAvailableArmors()
+    {
+        AvailableArmors.Clear();
+        if (Character?.Equipment != null)
+        {
+            foreach (var item in Character.Equipment)
+            {
+                if (item is Armor armor)
+                {
+                    AvailableArmors.Add(armor);
+                }
+            }
         }
     }
 

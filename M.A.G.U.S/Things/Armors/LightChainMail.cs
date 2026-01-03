@@ -2,7 +2,7 @@ using M.A.G.U.S.GameSystem.Valuables;
 
 namespace M.A.G.U.S.Things.Armors;
 
-public class LightChainMail : Armor
+public class LightChainmail : Chainmail
 {
 	public override string Name => "Light chainmail";
 

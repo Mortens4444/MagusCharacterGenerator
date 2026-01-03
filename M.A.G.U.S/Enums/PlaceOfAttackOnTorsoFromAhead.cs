@@ -2,20 +2,24 @@
 
 namespace M.A.G.U.S.Enums;
 
+[Flags]
 public enum PlaceOfAttackOnTorsoFromBehind
 {
+    None = 0,
     [Description("Right shoulder blade")]
-    RightShoulderBlade,
+    RightShoulderBlade = 1 << 0,
     [Description("Left shoulder blade")]
-    LeftShoulderBlade,
+    LeftShoulderBlade = 1 << 1,
     [Description("Right side of back")]
-    RightSideOfBack,
+    RightSideOfBack = 1 << 2,
     [Description("Left side of back")]
-    LeftSideOfBack,
+    LeftSideOfBack = 1 << 3,
     [Description("Right side of waist")]
-    RightSideOfWaist,
+    RightSideOfWaist = 1 << 4,
     [Description("Left side of waist")]
-    LeftSideOfWaist,
-    Buttocks,
-    Spine
+    LeftSideOfWaist = 1 << 5,
+    Buttocks = 1 << 6,
+    Spine = 1 << 7,
+
+    EveryWhere = RightShoulderBlade | LeftShoulderBlade | RightSideOfBack | LeftSideOfBack | RightSideOfWaist | LeftSideOfWaist | Buttocks | Spine
 }

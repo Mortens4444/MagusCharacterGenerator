@@ -2,7 +2,7 @@ using M.A.G.U.S.GameSystem.Valuables;
 
 namespace M.A.G.U.S.Things.Armors;
 
-public class AbbitSteelLaminarArmor : Armor
+public class AbbitSteelLaminarArmor : LaminarArmor
 {
 	public override string Name => "Abbit-steel plate armor";
 

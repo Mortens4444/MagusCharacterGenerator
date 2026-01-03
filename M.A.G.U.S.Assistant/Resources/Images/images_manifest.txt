@@ -164,4 +164,3 @@ topaz.png
 tourmaline.png
 turquoise.png
 zircon.png
-appicon.svg

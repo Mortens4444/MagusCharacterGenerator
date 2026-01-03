@@ -100,9 +100,9 @@
                 <VerticalStackLayout>
                     <Label Text="Health &amp; Pain Resistance" Style="{StaticResource HeaderLabel}"/>
                     <Grid ColumnDefinitions="*, *, *" RowDefinitions="Auto">
-                        <mc:EntryWithLabel Label="Max. HP" Text="{Binding MaxHealthPoints}" IsEnabled="False" WidthRequest="100" />
-                        <mc:EntryWithLabel Label="Max. PRP" Text="{Binding MaxPainTolerancePoints}" IsEnabled="False" WidthRequest="100" Grid.Column="1" />
-                        <mc:EntryWithLabel Label="Max. PRP/level" Text="{Binding PainToleranceModifierFormula}" IsEnabled="False" WidthRequest="100" Grid.Column="2" />
+                        <mc:EntryWithLabel Label="Max. HP" Text="{Binding MaxHealthPoints}" IsReadOnly="True" WidthRequest="100" />
+                        <mc:EntryWithLabel Label="Max. PRP" Text="{Binding MaxPainTolerancePoints}" IsReadOnly="True" WidthRequest="100" Grid.Column="1" />
+                        <mc:EntryWithLabel Label="Max. PRP/level" Text="{Binding PainToleranceModifierFormula}" IsReadOnly="True" WidthRequest="100" Grid.Column="2" />
                     </Grid>
                 </VerticalStackLayout>
             </Border>
@@ -113,20 +113,32 @@
                     <Label Text="Combat values" Style="{StaticResource HeaderLabel}"/>
 
                     <Grid ColumnDefinitions="*, *" ColumnSpacing="10" RowDefinitions="Auto, Auto">
-                        <Label Text="Primary weapon" Grid.Row="0" Grid.Column="0" />
+                        <Label Text="Primary weapon" />
                         <Picker Title="Select primary weapon"
                                 ItemsSource="{Binding AvailableWeapons}"
                                 ItemDisplayBinding="{Binding Name, Converter={StaticResource TranslationConverter}}"
                                 SelectedItem="{Binding PrimaryWeapon}"
-                                Grid.Row="1" Grid.Column="0" />
+                                Grid.Row="1" />
 
-                        <Label Text="Secondary weapon" Grid.Row="0" Grid.Column="1" />
+                        <Label Text="Secondary weapon" Grid.Column="1" />
                         <Picker Title="Select secondary weapon"
                                 ItemsSource="{Binding AvailableWeapons}"
                                 ItemDisplayBinding="{Binding Name, Converter={StaticResource TranslationConverter}}"
                                 SelectedItem="{Binding SecondaryWeapon}"
                                 Grid.Row="1" Grid.Column="1" />
                     </Grid>
+
+                    <Grid ColumnDefinitions="*, *, *, *" ColumnSpacing="10" RowDefinitions="Auto">
+                        <Label Text="Armor" />
+                        <Picker Title="Select armor"
+                                ItemsSource="{Binding AvailableArmors}"
+                                ItemDisplayBinding="{Binding Name, Converter={StaticResource TranslationConverter}}"
+                                SelectedItem="{Binding SelectedArmor}"
+                                Grid.Column="1" />
+
+                        <mc:EntryWithLabel Grid.Column="2" Label="AC" Text="{Binding ArmorClass}" IsReadOnly="True" WidthRequest="100" />
+                        <mc:EntryWithLabel Grid.Column="3" Label="ACP" Text="{Binding ArmorCheckPenalty}" IsReadOnly="True" WidthRequest="100" />
+                    </Grid>                    
 
                     <Picker ItemsSource="{Binding AvailableCombatValueModifiers}"
                             ItemDisplayBinding="{Binding ., Converter={StaticResource EnumDescriptionTranslationConverter}}"
@@ -135,19 +147,19 @@
 
                     <Grid ColumnDefinitions="*, *" RowDefinitions="Auto, Auto, Auto">
                         <mc:NumericUpDownWithLabel Label="Initiator value" Minimum="{Binding MinInitiateValue}" Maximum="{Binding MaxInitiateValue}" Value="{Binding InitiateValue, Mode=OneWay}" IsVisible="{Binding CanAllocateCombatModifier, Converter={StaticResource BoolToVisibilityConverter}}" IncrementCommand="{Binding IncrementInitiatorCommand}" DecrementCommand="{Binding DecrementInitiatorCommand}" />
-                        <mc:EntryWithLabel Label="Initiator value" Text="{Binding InitiateValue}" IsEnabled="False" IsVisible="{Binding CanAllocateCombatModifier, Converter={StaticResource NotBoolToVisibilityConverter}}" />
+                        <mc:EntryWithLabel Label="Initiator value" Text="{Binding InitiateValue}" IsReadOnly="True" IsVisible="{Binding CanAllocateCombatModifier, Converter={StaticResource NotBoolToVisibilityConverter}}" />
 
                         <mc:NumericUpDownWithLabel Label="Attack value" Minimum="{Binding MinAttackValue}" Maximum="{Binding MaxAttackValue}" Value="{Binding AttackValue, Mode=OneWay}" IsVisible="{Binding CanAllocateCombatModifier, Converter={StaticResource BoolToVisibilityConverter}}" Grid.Column="1" IncrementCommand="{Binding IncrementAttackCommand}" DecrementCommand="{Binding DecrementAttackCommand}" />
-                        <mc:EntryWithLabel Label="Attack value" Text="{Binding AttackValue}" IsEnabled="False" IsVisible="{Binding CanAllocateCombatModifier, Converter={StaticResource NotBoolToVisibilityConverter}}" Grid.Column="1" />
+                        <mc:EntryWithLabel Label="Attack value" Text="{Binding AttackValue}" IsReadOnly="True" IsVisible="{Binding CanAllocateCombatModifier, Converter={StaticResource NotBoolToVisibilityConverter}}" Grid.Column="1" />
 
                         <mc:NumericUpDownWithLabel Label="Defense value" Minimum="{Binding MinDefenseValue}" Maximum="{Binding MaxDefenseValue}" Value="{Binding DefenseValue, Mode=OneWay}" IsVisible="{Binding CanAllocateCombatModifier, Converter={StaticResource BoolToVisibilityConverter}}" Grid.Row="1" IncrementCommand="{Binding IncrementDefenseCommand}" DecrementCommand="{Binding DecrementDefenseCommand}" />
-                        <mc:EntryWithLabel Label="Defense value" Text="{Binding DefenseValue}" IsEnabled="False" IsVisible="{Binding CanAllocateCombatModifier, Converter={StaticResource NotBoolToVisibilityConverter}}" Grid.Row="1" />
+                        <mc:EntryWithLabel Label="Defense value" Text="{Binding DefenseValue}" IsReadOnly="True" IsVisible="{Binding CanAllocateCombatModifier, Converter={StaticResource NotBoolToVisibilityConverter}}" Grid.Row="1" />
 
                         <mc:NumericUpDownWithLabel Label="Aim value" Minimum="{Binding MinAimValue}" Maximum="{Binding MaxAimValue}" Value="{Binding AimValue, Mode=OneWay}" IsVisible="{Binding CanAllocateCombatModifier, Converter={StaticResource BoolToVisibilityConverter}}" Grid.Row="1" Grid.Column="1" IncrementCommand="{Binding IncrementAimCommand}" DecrementCommand="{Binding DecrementAimCommand}" />
-                        <mc:EntryWithLabel Label="Aim value" Text="{Binding AimValue}" IsEnabled="False" IsVisible="{Binding CanAllocateCombatModifier, Converter={StaticResource NotBoolToVisibilityConverter}}" Grid.Row="1" Grid.Column="1" />
+                        <mc:EntryWithLabel Label="Aim value" Text="{Binding AimValue}" IsReadOnly="True" IsVisible="{Binding CanAllocateCombatModifier, Converter={StaticResource NotBoolToVisibilityConverter}}" Grid.Row="1" Grid.Column="1" />
 
-                        <mc:EntryWithLabel Label="Combat modifier" Text="{Binding CombatValueModifier}" IsEnabled="False" Grid.Row="2" />
-                        <mc:EntryWithLabel Label="Combat modifier/level" Text="{Binding CombatValueModifierPerLevel}" IsEnabled="False" Grid.Row="2" Grid.Column="1" />
+                        <mc:EntryWithLabel Label="Combat modifier" Text="{Binding CombatValueModifier}" IsReadOnly="True" Grid.Row="2" />
+                        <mc:EntryWithLabel Label="Combat modifier/level" Text="{Binding CombatValueModifierPerLevel}" IsReadOnly="True" Grid.Row="2" Grid.Column="1" />
                     </Grid>
                 </VerticalStackLayout>
             </Border>
@@ -157,8 +169,8 @@
                 <VerticalStackLayout>
                     <Label Text="ᛉ-points" Style="{StaticResource HeaderLabel}"/>
                     <Grid ColumnDefinitions="*, *" RowSpacing="5" RowDefinitions="Auto">
-                        <mc:EntryWithLabel Label="Max. ᛉp" Text="{Binding MaxPsiPoints}" IsEnabled="False" />
-                        <mc:EntryWithLabel Label="Max. ᛉp/level" Text="{Binding PsiPointsModifier}" IsEnabled="False" Grid.Column="1" />
+                        <mc:EntryWithLabel Label="Max. ᛉp" Text="{Binding MaxPsiPoints}" IsReadOnly="True" />
+                        <mc:EntryWithLabel Label="Max. ᛉp/level" Text="{Binding PsiPointsModifier}" IsReadOnly="True" Grid.Column="1" />
                     </Grid>
                 </VerticalStackLayout>
             </Border>
@@ -168,8 +180,8 @@
                 <VerticalStackLayout>
                     <Label Text="Mana-points" Style="{StaticResource HeaderLabel}"/>
                     <Grid ColumnDefinitions="*, *" RowSpacing="5" RowDefinitions="Auto">
-                        <mc:EntryWithLabel Label="Max. Mp" Text="{Binding MaxManaPoints}" IsEnabled="False" />
-                        <mc:EntryWithLabel Label="Max. Mp/level" Text="{Binding MaxManaPointsPerLevel}" IsEnabled="False" Grid.Column="1" />
+                        <mc:EntryWithLabel Label="Max. Mp" Text="{Binding MaxManaPoints}" IsReadOnly="True" />
+                        <mc:EntryWithLabel Label="Max. Mp/level" Text="{Binding MaxManaPointsPerLevel}" IsReadOnly="True" Grid.Column="1" />
                     </Grid>
                 </VerticalStackLayout>
             </Border>
@@ -179,12 +191,12 @@
                 <VerticalStackLayout>
                     <Label Text="Magic Resistance" Style="{StaticResource HeaderLabel}"/>
                     <Grid ColumnDefinitions="*, *" RowSpacing="5" RowDefinitions="Auto, Auto, Auto">
-                        <mc:EntryWithLabel Label="Unconscious Astral Magic Resistance" Text="{Binding UnconsciousAstralMagicResistance}" IsEnabled="False" />
-                        <mc:EntryWithLabel Label="Unconscious Mental Magic Resistance" Text="{Binding UnconsciousMentalMagicResistance}" IsEnabled="False" Grid.Column="1" />
-                        <mc:EntryWithLabel Label="Static Astral ᛉ-Shield" Text="{Binding StaticAstralPsiShield}" IsEnabled="False" Grid.Row="1" />
-                        <mc:EntryWithLabel Label="Static Mental ᛉ-Shield" Text="{Binding StaticMentalPsiShield}" IsEnabled="False" Grid.Row="1" Grid.Column="1" />
-                        <mc:EntryWithLabel Label="Dynamic Astral ᛉ-Shield" Text="{Binding DynamicAstralPsiShield}" IsEnabled="False" Grid.Row="2" />
-                        <mc:EntryWithLabel Label="Dynamic Mental ᛉ-Shield" Text="{Binding DynamicMentalPsiShield}" IsEnabled="False" Grid.Row="2" Grid.Column="1" />
+                        <mc:EntryWithLabel Label="Unconscious Astral Magic Resistance" Text="{Binding UnconsciousAstralMagicResistance}" IsReadOnly="True" />
+                        <mc:EntryWithLabel Label="Unconscious Mental Magic Resistance" Text="{Binding UnconsciousMentalMagicResistance}" IsReadOnly="True" Grid.Column="1" />
+                        <mc:EntryWithLabel Label="Static Astral ᛉ-Shield" Text="{Binding StaticAstralPsiShield}" IsReadOnly="True" Grid.Row="1" />
+                        <mc:EntryWithLabel Label="Static Mental ᛉ-Shield" Text="{Binding StaticMentalPsiShield}" IsReadOnly="True" Grid.Row="1" Grid.Column="1" />
+                        <mc:EntryWithLabel Label="Dynamic Astral ᛉ-Shield" Text="{Binding DynamicAstralPsiShield}" IsReadOnly="True" Grid.Row="2" />
+                        <mc:EntryWithLabel Label="Dynamic Mental ᛉ-Shield" Text="{Binding DynamicMentalPsiShield}" IsReadOnly="True" Grid.Row="2" Grid.Column="1" />
                     </Grid>
                 </VerticalStackLayout>
             </Border>
@@ -195,7 +207,7 @@
         <Border Style="{StaticResource BoxBorder}" Margin="0,10">
             <VerticalStackLayout>
                 <Grid ColumnDefinitions="*,*">
-                    <mc:EntryWithLabel Label="SP" Text="{Binding QualificationPoints}" IsEnabled="False" />
+                    <mc:EntryWithLabel Label="SP" Text="{Binding QualificationPoints}" IsReadOnly="True" />
                     <mc:MenuItem ImageName="qualifications" LabelText="Qualifications" PageType="{x:Type mv:QualificationsPage}" WidthRequest="100" HeightRequest="100" Grid.Column="1"
                                  Parameter="{Binding Character}" IsVisible="{Binding CanAllocateQualificationPoints, Converter={StaticResource BoolToVisibilityConverter}}" />
                 </Grid>
@@ -267,10 +279,10 @@
                 <VerticalStackLayout>
                     <Label Text="Money" Style="{StaticResource HeaderLabel}"/>
                     <Grid ColumnDefinitions="*, *" RowDefinitions="Auto, Auto">
-                        <mc:EntryWithLabel Label="Copper" Text="{Binding Copper}" IsEnabled="False" />
-                        <mc:EntryWithLabel Label="Silver" Text="{Binding Silver}" IsEnabled="False" Grid.Row="1" />
-                        <mc:EntryWithLabel Label="Gold" Text="{Binding Gold}" IsEnabled="False" Grid.Column="1" />
-                        <mc:EntryWithLabel Label="Mithril" Text="{Binding Mithril}" IsEnabled="False" Grid.Row="1" Grid.Column="1" />
+                        <mc:EntryWithLabel Label="Copper" Text="{Binding Copper}" IsReadOnly="True" />
+                        <mc:EntryWithLabel Label="Silver" Text="{Binding Silver}" IsReadOnly="True" Grid.Row="1" />
+                        <mc:EntryWithLabel Label="Gold" Text="{Binding Gold}" IsReadOnly="True" Grid.Column="1" />
+                        <mc:EntryWithLabel Label="Mithril" Text="{Binding Mithril}" IsReadOnly="True" Grid.Row="1" Grid.Column="1" />
                     </Grid>
                 </VerticalStackLayout>
             </Border>

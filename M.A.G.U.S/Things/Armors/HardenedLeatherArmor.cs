@@ -1,3 +1,4 @@
+using M.A.G.U.S.Enums;
 using M.A.G.U.S.GameSystem.Valuables;
 
 namespace M.A.G.U.S.Things.Armors;
@@ -15,4 +16,27 @@ public class HardenedLeatherArmor : Armor
 	public override double Weight => 7;
 
     public override string Description => "Thick leather that has been boiled or treated with wax and oil to make it nearly as tough as wood. Offers good defense against bludgeons and slashes, yet remains relatively light and supple.";
+
+    public override PlaceOfAttack ProtectedMainPlaces => PlaceOfAttack.Torso;
+
+    public override PlaceOfAttackOnTorso ProtectedTorsoFrontParts =>
+        PlaceOfAttackOnTorso.RightCollarbone |
+        PlaceOfAttackOnTorso.LeftCollarbone |
+        PlaceOfAttackOnTorso.Sternum |
+        PlaceOfAttackOnTorso.LeftSideOfChest |
+        PlaceOfAttackOnTorso.RightSideOfChest |
+        PlaceOfAttackOnTorso.SolarPlexus |
+        PlaceOfAttackOnTorso.RightSideOfAbdomen |
+        PlaceOfAttackOnTorso.LeftSideOfAbdomen |
+        PlaceOfAttackOnTorso.Groin;
+
+    public override PlaceOfAttackOnTorsoFromBehind ProtectedTorsoBackParts =>
+        PlaceOfAttackOnTorsoFromBehind.RightShoulderBlade |
+        PlaceOfAttackOnTorsoFromBehind.LeftShoulderBlade |
+        PlaceOfAttackOnTorsoFromBehind.RightSideOfBack |
+        PlaceOfAttackOnTorsoFromBehind.LeftSideOfBack |
+        PlaceOfAttackOnTorsoFromBehind.RightSideOfWaist |
+        PlaceOfAttackOnTorsoFromBehind.LeftSideOfWaist |
+        PlaceOfAttackOnTorsoFromBehind.Spine |
+        PlaceOfAttackOnTorsoFromBehind.Buttocks;
 }

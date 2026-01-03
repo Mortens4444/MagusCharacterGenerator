@@ -1,8 +1,10 @@
 ﻿using M.A.G.U.S.Enums;
 using M.A.G.U.S.Models;
+using M.A.G.U.S.Things.Armors;
 using Mtf.Extensions.Services;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using System.Text.Json.Serialization;
 
 namespace M.A.G.U.S.GameSystem;
 
@@ -10,10 +12,29 @@ public abstract class Attacker
 {
     public const int MeleeDistance = 2;
     private readonly DiceThrow diceThrow = new();
+
+    [NonSerialized, JsonIgnore, Newtonsoft.Json.JsonIgnore]
     private string name = String.Empty;
+
+    [NonSerialized, JsonIgnore, Newtonsoft.Json.JsonIgnore]
+    private Armor? armor;
+
     public Guid Id { get; init; } = Guid.NewGuid();
 
     public event PropertyChangedEventHandler? PropertyChanged;
+    
+    public virtual Armor? Armor
+    {
+        get => armor;
+        set
+        {
+            if (armor != value)
+            {
+                armor = value;
+                OnPropertyChanged();
+            }
+        }
+    }
 
     public virtual string Name
     {

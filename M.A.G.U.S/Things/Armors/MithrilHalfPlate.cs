@@ -2,7 +2,7 @@ using M.A.G.U.S.GameSystem.Valuables;
 
 namespace M.A.G.U.S.Things.Armors;
 
-public class MithrilHalfPlate : Armor
+public class MithrilHalfPlate : HalfPlate
 {
 	public override string Name => "Mithril half plate";
 

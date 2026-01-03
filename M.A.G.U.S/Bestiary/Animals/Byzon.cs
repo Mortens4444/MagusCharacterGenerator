@@ -2,6 +2,7 @@
 using M.A.G.U.S.GameSystem;
 using M.A.G.U.S.GameSystem.Attributes;
 using M.A.G.U.S.Models;
+using M.A.G.U.S.Things.Armors;
 using M.A.G.U.S.Things.Weapons;
 
 namespace M.A.G.U.S.Bestiary.Animals;
@@ -10,7 +11,7 @@ public sealed class Byzon : Creature
 {
     public Byzon()
     {
-        ArmorClass = 1;
+        Armor = new NaturalArmor(1);
         Occurrence = Occurrence.Frequent;
         Size = Size.Big;
         AttackValue = 60;

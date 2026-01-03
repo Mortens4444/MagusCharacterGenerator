@@ -131,6 +131,7 @@
     <MauiImage Remove="Resources\Images\images_manifest.txt" />
   </ItemGroup>
   <ItemGroup>
+    <None Remove="Platforms\Android\Resources\values\styles.xml" />
     <None Remove="Resources\Images\Accomodation\bath.png" />
     <None Remove="Resources\Images\Accomodation\stables.png" />
     <None Remove="Resources\Images\Animals\calf.png" />
@@ -567,6 +568,6 @@
       <ImageManifestPath>$(ProjectDir)Resources\Images\images_manifest.txt</ImageManifestPath>
     </PropertyGroup>
     <!--<WriteLinesToFile File="$(ImageManifestPath)" Lines="@(AllImages->'%(RelativeDir)%(Filename)%(Extension)')" Overwrite="true" Encoding="UTF-8" />-->
-    <WriteLinesToFile File="$(ImageManifestPath)" Lines="@(AllImages-&gt;'%(Filename)%(Extension)')" Overwrite="true" Encoding="UTF-8" />
+    <WriteLinesToFile File="$(ImageManifestPath)" Lines="@(AllImages->'%(Filename)%(Extension)')" Overwrite="true" Encoding="UTF-8" />
   </Target>
 </Project>
