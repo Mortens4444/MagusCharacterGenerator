@@ -1,4 +1,5 @@
-﻿using System.Text.Json.Serialization;
+﻿using M.A.G.U.S.Races;
+using System.Text.Json.Serialization;
 
 namespace M.A.G.U.S.GameSystem;
 
@@ -124,7 +125,7 @@ public partial class Character
                 intelligence = value;
                 if (!isDeserializing)
                 {
-                    CalculatePsiPoints(settings);
+                    CalculatePsiPoints(Race is Jann, settings);
                     CalculateManaPoints(settings);
                     CalculateQualificationPoints(settings);
                 }

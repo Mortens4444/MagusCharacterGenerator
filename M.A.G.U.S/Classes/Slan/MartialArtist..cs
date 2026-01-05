@@ -1,5 +1,6 @@
 ﻿using M.A.G.U.S.GameSystem;
 using M.A.G.U.S.GameSystem.Attributes;
+using M.A.G.U.S.GameSystem.Experience;
 using M.A.G.U.S.GameSystem.FightMode;
 using M.A.G.U.S.GameSystem.Qualifications;
 using M.A.G.U.S.Interfaces;
@@ -98,7 +99,25 @@ public class MartialArtist : Class, IClass, IJustFight
 
     public override bool AddQualificationPointsOnFirstLevel => true;
 
-    public override IRace[] AllowedRaces => [new Human(), new HalfElf(), new Amund(), new Jann()];
+    public override IRace[] AllowedRaces => [new Human(), new HalfElf(), new Amund(), new Jann(), new Dahr()];
+
+    public override List<LevelRequirement> ExperienceLevels =>
+    [
+        new() { Level = 1,  MinExperience = 0,      MaxExperience = 220 },
+        new() { Level = 2,  MinExperience = 221,    MaxExperience = 442 },
+        new() { Level = 3,  MinExperience = 443,    MaxExperience = 950 },
+        new() { Level = 4,  MinExperience = 951,    MaxExperience = 2000 },
+        new() { Level = 5,  MinExperience = 2001,   MaxExperience = 4500 },
+        new() { Level = 6,  MinExperience = 4501,   MaxExperience = 9000 },
+        new() { Level = 7,  MinExperience = 9001,   MaxExperience = 16000 },
+        new() { Level = 8,  MinExperience = 16001,  MaxExperience = 32000 },
+        new() { Level = 9,  MinExperience = 32001,  MaxExperience = 65000 },
+        new() { Level = 10, MinExperience = 65001,  MaxExperience = 120000 },
+        new() { Level = 11, MinExperience = 120001, MaxExperience = 170000 },
+        new() { Level = 12, MinExperience = 170001, MaxExperience = 240000 }
+    ];
+
+    public override int ExpPerLevelAfter12 => 65000;
 
     public override QualificationList Qualifications => BuildQualifications(
     [

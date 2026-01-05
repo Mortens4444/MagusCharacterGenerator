@@ -1,4 +1,5 @@
-﻿using M.A.G.U.S.Classes.NonPlayableCharacters;
+﻿using M.A.G.U.S.Bestiary.Mythical;
+using M.A.G.U.S.Classes.NonPlayableCharacters;
 using M.A.G.U.S.Enums;
 using M.A.G.U.S.Interfaces;
 using M.A.G.U.S.Models;
@@ -21,7 +22,7 @@ public partial class Character : Attacker, ICombatModifier, ILiving, IAbilities,
     public bool PlayerCharacter { get; set; }
 
     public override List<Speed> Speeds { get; } = [
-        new Speed(TravelMode.OnLand, 12, speedLevel: SpeedLevel.Slowest),   // Séta ~1.2 m/s
+        new Speed(TravelMode.OnLand, 6, speedLevel: SpeedLevel.Slowest),   // Séta ~1.2 m/s
         new Speed(TravelMode.OnLand, 17, speedLevel: SpeedLevel.Slow),      // Gyors gyaloglás ~1.7 m/s
         new Speed(TravelMode.OnLand, 30, speedLevel: SpeedLevel.Normal),    // Kocogás ~3.0 m/s
         new Speed(TravelMode.OnLand, 45, speedLevel: SpeedLevel.Fast),      // Futás ~4.5 m/s
@@ -53,7 +54,7 @@ public partial class Character : Attacker, ICombatModifier, ILiving, IAbilities,
         CreateSpecifiedLevel();
         EnsureSubscriptions();
 
-        if (race is Feenhar) // Speeds shoud be filled from races
+        if (race is Feenhar || race is Draquon) // Speeds shoud be filled from races
         {
             Speeds.Add(new Speed(TravelMode.InTheAir, 60));
         }
@@ -83,12 +84,14 @@ public partial class Character : Attacker, ICombatModifier, ILiving, IAbilities,
         CalculatePainTolerancePoints(settings);
 
         CalculateManaPoints(settings);
-        CalculatePsiPoints(settings);
+        CalculatePsiPoints(Race is Jann, settings);
 
         CalculateUnconsciousAstralMagicResistance();
         CalculateUnconsciousMentalMagicResistance();
 
         CalculateGold();
+
+        BaseClass.ExperiencePoints = BaseClass.GetExperiencePointsForLevel(BaseClass.Level);
     }
 
     private void EnsureSubscriptions()

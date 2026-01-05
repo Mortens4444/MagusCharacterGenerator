@@ -4,14 +4,13 @@ using M.A.G.U.S.Qualifications;
 using M.A.G.U.S.Qualifications.Laical;
 using M.A.G.U.S.Qualifications.Scientific;
 using M.A.G.U.S.Qualifications.Specialities;
-using Mtf.Extensions;
 
 namespace M.A.G.U.S.Races;
 
 /// <summary>
 /// https://kalandozok.hu/cikkgyujtemeny/kieg%C3%A9sz%C3%ADt%C5%91k/fajok/j%C3%A1tszhat%C3%B3-fajok/fajok-k%C3%B6nyve-r62/
 /// </summary>
-public class IceGiant : HalfGiant
+public class FrostGiant : HalfGiant
 {
     public override Alignment? Alignment => Enums.Alignment.OrderLife;
 
@@ -46,4 +45,6 @@ public class IceGiant : HalfGiant
     }
 
     public override string Name => "Half-giant (frost giant)";
+
+    public override string Image => "frost_giant.png";
 }

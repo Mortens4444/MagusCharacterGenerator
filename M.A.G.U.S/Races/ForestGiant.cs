@@ -4,7 +4,6 @@ using M.A.G.U.S.Qualifications;
 using M.A.G.U.S.Qualifications.Laical;
 using M.A.G.U.S.Qualifications.Percentages;
 using M.A.G.U.S.Qualifications.Specialities;
-using Mtf.Extensions;
 
 namespace M.A.G.U.S.Races;
 
@@ -50,4 +49,6 @@ public class ForestGiant : HalfGiant
     }
 
     public override string Name => "Half-giant (forest giant)";
+
+    public override string Image => "forest_giant.png";
 }

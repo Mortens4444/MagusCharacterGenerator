@@ -131,34 +131,32 @@ internal partial class EncounterViewModel : CharacterListLoaderViewModel
                     if (initiative.AttackResolution.IsSuccessful)
                     {
                         var damage = initiative.AttackResolution.Attack.GetDamage();
-                        if (initiative.Target.Source is Creature creature)
+                        if (initiative.Target.Source is Attacker attacker)
                         {
-                            if (initiative.AttackResolution.IsHpDamage || creature.PainTolerancePoints.Value <= 0) // Need to fix for dragons, dragon has min and max only (I wnat a page, where you can set the actual values)
+                            if (initiative.AttackResolution.IsHpDamage || attacker.ActualPainTolerancePoints <= 0) // Need to fix for dragons, dragon has min and max only (I want a page, where you can set the actual values)
                             {
-                                creature.HealthPoints -= damage;
-                                if (creature.HealthPoints <= 0)
+                                if (initiative.AttackResolution.Impact == AttackImpact.Fatal)
                                 {
-                                    RemoveEnemy(creature);
+                                    initiative.Attacker.Source.ActualHealthPoints -= damage;
+                                }
+                                else
+                                {
+                                    if (initiative.AttackResolution.Impact != AttackImpact.Critical)
+                                    {
+                                        damage -= attacker.Armor?.ArmorClass ?? 0;
+                                    }
+                                    attacker.ActualHealthPoints -= damage;
+                                    attacker.ActualPainTolerancePoints -= 2 * damage;
+                                    if (attacker.ActualHealthPoints <= 0)
+                                    {
+                                        RemoveCharacter(attacker as Character);
+                                        RemoveEnemy(attacker as Creature);
+                                    }
                                 }
                             }
                             else
                             {
-                                creature.PainTolerancePoints -= damage;
-                            }
-                        }
-                        else if (initiative.Target.Source is Character character)
-                        {
-                            if (initiative.AttackResolution.IsHpDamage || character.ActualPainTolerancePoints <= 0)
-                            {
-                                character.ActualHealthPoints -= damage;
-                                if (character.ActualHealthPoints <= 0)
-                                {
-                                    RemoveCharacter(character);
-                                }
-                            }
-                            else
-                            {
-                                character.ActualPainTolerancePoints -= damage;
+                                attacker.ActualPainTolerancePoints -= damage;
                             }
                         }
                     }
@@ -237,20 +235,26 @@ internal partial class EncounterViewModel : CharacterListLoaderViewModel
 
     private bool CanRunTurn() => Assignments.Count > 0;
 
-    private void RemoveCharacter(Character character)
+    private void RemoveCharacter(Character? character)
     {
-        foreach (var assignment in Assignments)
+        if (character != null)
         {
-            // assignment.Enemies attack another character
-            //assignment.Remove();
+            foreach (var assignment in Assignments)
+            {
+                // assignment.Enemies attack another character
+                //assignment.Remove();
+            }
         }
     }
 
-    private void RemoveEnemy(Creature enemy)
+    private void RemoveEnemy(Creature? enemy)
     {
-        foreach (var assignment in Assignments)
+        if (enemy != null)
         {
-            assignment.Enemies.Remove(enemy);
+            foreach (var assignment in Assignments)
+            {
+                assignment.Enemies.Remove(enemy);
+            }
         }
     }
 

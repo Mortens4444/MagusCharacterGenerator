@@ -20,7 +20,7 @@ public class Dracker : Race
 
     public override int Health => -1;
 
-    public override Alignment? Alignment => Enums.Alignment.ChaosDeath;
+    public override Alignment? Alignment => Enums.Alignment.Order;
 
     public override QualificationList Qualifications =>
     [

@@ -1,5 +1,6 @@
 ﻿using M.A.G.U.S.GameSystem;
 using M.A.G.U.S.GameSystem.Attributes;
+using M.A.G.U.S.GameSystem.Experience;
 using M.A.G.U.S.GameSystem.FightMode;
 using M.A.G.U.S.GameSystem.Languages;
 using M.A.G.U.S.GameSystem.Qualifications;
@@ -97,8 +98,26 @@ public class FireMage : Class, IClass, ILikeMagic
 
     public override bool AddQualificationPointsOnFirstLevel => true;
 
-    public override IRace[] AllowedRaces => [new Human(), new Amund(), new Jann()];
+    public override IRace[] AllowedRaces => [new Human(), new Amund(), new Jann(), new Dracker()];
 
+    public override List<LevelRequirement> ExperienceLevels =>
+    [
+        new() { Level = 1,  MinExperience = 0,      MaxExperience = 170 },
+        new() { Level = 2,  MinExperience = 171,    MaxExperience = 350 },
+        new() { Level = 3,  MinExperience = 351,    MaxExperience = 700 },
+        new() { Level = 4,  MinExperience = 701,    MaxExperience = 1500 },
+        new() { Level = 5,  MinExperience = 1501,   MaxExperience = 3000 },
+        new() { Level = 6,  MinExperience = 3001,   MaxExperience = 7000 },
+        new() { Level = 7,  MinExperience = 7001,   MaxExperience = 12000 },
+        new() { Level = 8,  MinExperience = 12001,  MaxExperience = 22000 },
+        new() { Level = 9,  MinExperience = 22001,  MaxExperience = 52500 },
+        new() { Level = 10, MinExperience = 52501,  MaxExperience = 85500 },
+        new() { Level = 11, MinExperience = 85501,  MaxExperience = 135000 },
+        new() { Level = 12, MinExperience = 135001, MaxExperience = 175500 }
+    ];
+
+    public override int ExpPerLevelAfter12 => 58500;
+    
     public override QualificationList Qualifications => BuildQualifications(
     [
         new WeaponUse(),

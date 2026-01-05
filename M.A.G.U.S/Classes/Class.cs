@@ -2,6 +2,7 @@
 using M.A.G.U.S.Extensions;
 using M.A.G.U.S.GameSystem;
 using M.A.G.U.S.GameSystem.Attributes;
+using M.A.G.U.S.GameSystem.Experience;
 using M.A.G.U.S.GameSystem.Psi;
 using M.A.G.U.S.Interfaces;
 using M.A.G.U.S.Models;
@@ -119,12 +120,30 @@ public abstract class Class : IClass
 
     public int MentalMagicResistance { get; }
 
-    public ulong ExperiencePoints { get; }
+    public int ExperiencePoints { get; set; }
 
     public virtual Alignment Alignment => Alignment.Order;
 
     public virtual IRace[] AllowedRaces => [];
 
+    public virtual List<LevelRequirement> ExperienceLevels =>
+    [
+        new() { Level = 1,  MinExperience = 0,      MaxExperience = 190 },
+            new() { Level = 2,  MinExperience = 191,    MaxExperience = 400 },
+            new() { Level = 3,  MinExperience = 401,    MaxExperience = 900 },
+            new() { Level = 4,  MinExperience = 901,    MaxExperience = 1800 },
+            new() { Level = 5,  MinExperience = 1801,   MaxExperience = 3500 },
+            new() { Level = 6,  MinExperience = 3501,   MaxExperience = 7500 },
+            new() { Level = 7,  MinExperience = 7501,   MaxExperience = 15000 },
+            new() { Level = 8,  MinExperience = 15001,  MaxExperience = 30000 },
+            new() { Level = 9,  MinExperience = 30001,  MaxExperience = 60000 },
+            new() { Level = 10, MinExperience = 60001,  MaxExperience = 110000 },
+            new() { Level = 11, MinExperience = 110001, MaxExperience = 160000 },
+            new() { Level = 12, MinExperience = 160001, MaxExperience = 220000 }
+    ];
+
+    public virtual int ExpPerLevelAfter12 => 60000;
+    
     public virtual string Image => $"{Name.ToImageName()}.png";
 
     public abstract int GetPainToleranceModifier();
@@ -155,5 +174,39 @@ public abstract class Class : IClass
         }
 
         return result;
+    }
+
+    public int GetExperiencePointsForLevel(int level)
+    {
+        var requirement = ExperienceLevels.FirstOrDefault(l => l.Level == level);
+        if (requirement != null)
+        {
+            return requirement.MinExperience;
+        }
+        var level12Max = ExperienceLevels.Last().MaxExperience;
+        if (level > 12)
+        {
+            int extraLevels = level - 12;
+            return level12Max + (extraLevels * ExpPerLevelAfter12);
+        }
+        return 0;
+    }
+
+    public int GetLevelByExperiencePoints(int experiencePoints)
+    {
+        var requirement = ExperienceLevels.FirstOrDefault(l => experiencePoints >= l.MinExperience && experiencePoints <= l.MaxExperience);
+        if (requirement != null)
+        {
+            return requirement.Level;
+        }
+
+        var level12Max = ExperienceLevels.Last().MaxExperience;
+        if (experiencePoints > level12Max)
+        {
+            int extraExp = experiencePoints - level12Max;
+            return 12 + (extraExp / ExpPerLevelAfter12);
+        }
+
+        return 1;
     }
 }

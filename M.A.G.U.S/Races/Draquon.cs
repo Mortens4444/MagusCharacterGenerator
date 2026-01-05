@@ -39,15 +39,30 @@ public class Draquon : Race
     ];
 
     public override SpecialQualificationList SpecialQualifications =>
-        [
-            new Flight(),
+    [
+        new Flight(),
         new KeenSight(1.5),
         new Ultravision(50),
         new CantLearnPsi(),
         new ExtraMagicResistanceOnLevelUp(5),
         new Telepathy(),
-		//new LockPicking(-30)
-		//new PickPocketing(-30)
-		new NotTolerateStrongLight(12, -20)
+		//new LockPicking(-30) // Max 30%
+		//new PickPocketing(-30)// Max 30%
+        //new CantLearnMechanics(),
+        new NotTolerateStrongLight(12, -20)
     ];
+
+    //public override List<Speed> Speeds { get; } = [
+    //    new Speed(TravelMode.OnLand, 6, speedLevel: SpeedLevel.Slowest),
+    //    new Speed(TravelMode.OnLand, 17, speedLevel: SpeedLevel.Slow),
+    //    new Speed(TravelMode.OnLand, 15, speedLevel: SpeedLevel.Normal),
+    //    new Speed(TravelMode.OnLand, 80, speedLevel: SpeedLevel.Fast),
+    //    new Speed(TravelMode.OnLand, 120, speedLevel: SpeedLevel.Fastest),
+        
+    //    new Speed(TravelMode.InTheAir, 16, speedLevel: SpeedLevel.Slowest),
+    //    new Speed(TravelMode.InTheAir, 45, speedLevel: SpeedLevel.Slow),
+    //    new Speed(TravelMode.InTheAir, 130, speedLevel: SpeedLevel.Normal),
+    //    new Speed(TravelMode.InTheAir, 180, speedLevel: SpeedLevel.Fast),
+    //    new Speed(TravelMode.InTheAir, 220, speedLevel: SpeedLevel.Fastest)
+    //];
 }

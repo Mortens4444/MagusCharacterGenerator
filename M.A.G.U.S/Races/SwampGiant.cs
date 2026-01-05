@@ -5,7 +5,6 @@ using M.A.G.U.S.Qualifications;
 using M.A.G.U.S.Qualifications.Laical;
 using M.A.G.U.S.Qualifications.Scientific;
 using M.A.G.U.S.Qualifications.Specialities;
-using Mtf.Extensions;
 
 namespace M.A.G.U.S.Races;
 
@@ -24,8 +23,8 @@ public class SwampGiant : HalfGiant
             result.AddRange(
             [
                 new AncientTongueLore(AntientLanguage.Voul),
-				//new Mocsárjárás(QualificationLevel.Master),
-				new Craft(Profession.Carpenter, QualificationLevel.Master),
+				new SwampSurvival(QualificationLevel.Master),
+				new Craft(Profession.Jeweler, QualificationLevel.Master),
                 new Appraisal()
             ]);
             return result;
@@ -47,4 +46,6 @@ public class SwampGiant : HalfGiant
     }
 
     public override string Name => "Half-giant (swamp giant)";
+
+    public override string Image => "swamp_giant.png";
 }

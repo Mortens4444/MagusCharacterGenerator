@@ -1,5 +1,6 @@
 ﻿using M.A.G.U.S.GameSystem;
 using M.A.G.U.S.GameSystem.Attributes;
+using M.A.G.U.S.GameSystem.Experience;
 using M.A.G.U.S.GameSystem.FightMode;
 using M.A.G.U.S.GameSystem.Languages;
 using M.A.G.U.S.GameSystem.Qualifications;
@@ -100,6 +101,24 @@ public class Thief : Class, IClass, IJustFight
 
     public override IRace[] AllowedRaces => [new Human(), new HalfElf(), new Dwarf(), new CourtOrc(), new Amund(), new Jann(), new Wier(), new Feenhar()];
 
+    public override List<LevelRequirement> ExperienceLevels =>
+    [
+        new() { Level = 1,  MinExperience = 0,     MaxExperience = 100 },
+        new() { Level = 2,  MinExperience = 101,   MaxExperience = 202 },
+        new() { Level = 3,  MinExperience = 203,   MaxExperience = 400 },
+        new() { Level = 4,  MinExperience = 401,   MaxExperience = 802 },
+        new() { Level = 5,  MinExperience = 803,   MaxExperience = 1700 },
+        new() { Level = 6,  MinExperience = 1701,  MaxExperience = 4500 },
+        new() { Level = 7,  MinExperience = 4501,  MaxExperience = 9000 },
+        new() { Level = 8,  MinExperience = 9001,  MaxExperience = 22000 },
+        new() { Level = 9,  MinExperience = 22001, MaxExperience = 46500 },
+        new() { Level = 10, MinExperience = 46501, MaxExperience = 68500 },
+        new() { Level = 11, MinExperience = 68501, MaxExperience = 88000 },
+        new() { Level = 12, MinExperience = 98001, MaxExperience = 131500 }
+    ];
+
+    public override int ExpPerLevelAfter12 => 33500;
+    
     public override QualificationList Qualifications => BuildQualifications(
     [
         new WeaponUse(),

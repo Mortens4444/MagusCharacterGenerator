@@ -1,5 +1,6 @@
 ﻿using M.A.G.U.S.GameSystem;
 using M.A.G.U.S.GameSystem.Attributes;
+using M.A.G.U.S.GameSystem.Experience;
 using M.A.G.U.S.GameSystem.FightMode;
 using M.A.G.U.S.Interfaces;
 using M.A.G.U.S.Qualifications;
@@ -96,8 +97,27 @@ public class Warrior : Class, IClass, IJustFight
     public override bool AddPainToleranceOnFirstLevel => true;
 
     public override bool AddQualificationPointsOnFirstLevel => true;
-    
-    public override IRace[] AllowedRaces => [new Human(), new Elf(), new HalfElf(), new Dwarf(), new CourtOrc(), new Amund(), new Jann(), new Khal(), new Wier(), new Feenhar()];
+
+    public override List<LevelRequirement> ExperienceLevels =>
+    [
+        new() { Level = 1,  MinExperience = 0,     MaxExperience = 160 },
+        new() { Level = 2,  MinExperience = 161,   MaxExperience = 320 },
+        new() { Level = 3,  MinExperience = 321,   MaxExperience = 640 },
+        new() { Level = 4,  MinExperience = 641,   MaxExperience = 1440 },
+        new() { Level = 5,  MinExperience = 1441,  MaxExperience = 2800 },
+        new() { Level = 6,  MinExperience = 2801,  MaxExperience = 5600 },
+        new() { Level = 7,  MinExperience = 5601,  MaxExperience = 10000 },
+        new() { Level = 8,  MinExperience = 10001, MaxExperience = 20000 },
+        new() { Level = 9,  MinExperience = 20001, MaxExperience = 40000 },
+        new() { Level = 10, MinExperience = 40001, MaxExperience = 60000 },
+        new() { Level = 11, MinExperience = 60001, MaxExperience = 80000 },
+        new() { Level = 12, MinExperience = 80001, MaxExperience = 112000 }
+    ];
+
+    public override int ExpPerLevelAfter12 => 31200;
+
+    public override IRace[] AllowedRaces => [new Human(), new Elf(), new HalfElf(), new Dwarf(), new CourtOrc(), new Amund(), new Jann(), new Khal(), new Wier(), new Feenhar(), new Dahr(), new Dracker(), new Draquon(),
+        new ForestGiant(), new FrostGiant(), new MountainGiant(), new SwampGiant()];
 
     public override QualificationList Qualifications => BuildQualifications(
     [

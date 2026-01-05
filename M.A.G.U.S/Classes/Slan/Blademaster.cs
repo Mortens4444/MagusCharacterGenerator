@@ -1,5 +1,6 @@
 ﻿using M.A.G.U.S.GameSystem;
 using M.A.G.U.S.GameSystem.Attributes;
+using M.A.G.U.S.GameSystem.Experience;
 using M.A.G.U.S.GameSystem.FightMode;
 using M.A.G.U.S.GameSystem.Qualifications;
 using M.A.G.U.S.Interfaces;
@@ -99,8 +100,26 @@ public class Blademaster : Class, IClass, IJustFight
 
     public override bool AddQualificationPointsOnFirstLevel => true;
 
-    public override IRace[] AllowedRaces => [new Human(), new HalfElf(), new Amund(), new Jann()];
+    public override IRace[] AllowedRaces => [new Human(), new HalfElf(), new Amund(), new Jann(), new Dahr(), new Dracker()];
 
+    public override List<LevelRequirement> ExperienceLevels =>
+    [
+        new() { Level = 1,  MinExperience = 0,      MaxExperience = 200 },
+        new() { Level = 2,  MinExperience = 201,    MaxExperience = 400 },
+        new() { Level = 3,  MinExperience = 401,    MaxExperience = 925 },
+        new() { Level = 4,  MinExperience = 926,    MaxExperience = 1900 },
+        new() { Level = 5,  MinExperience = 1901,   MaxExperience = 4000 },
+        new() { Level = 6,  MinExperience = 4001,   MaxExperience = 8250 },
+        new() { Level = 7,  MinExperience = 8251,   MaxExperience = 15500 },
+        new() { Level = 8,  MinExperience = 15501,  MaxExperience = 31000 },
+        new() { Level = 9,  MinExperience = 31001,  MaxExperience = 62500 },
+        new() { Level = 10, MinExperience = 62501,  MaxExperience = 115000 },
+        new() { Level = 11, MinExperience = 115001, MaxExperience = 165000 },
+        new() { Level = 12, MinExperience = 165001, MaxExperience = 230000 }
+    ];
+
+    public override int ExpPerLevelAfter12 => 62000;
+    
     public override QualificationList Qualifications => BuildQualifications(
     [
         new PsiSlanWay(),

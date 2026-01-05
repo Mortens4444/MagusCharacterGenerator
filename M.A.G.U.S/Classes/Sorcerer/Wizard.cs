@@ -1,5 +1,6 @@
 ﻿using M.A.G.U.S.GameSystem;
 using M.A.G.U.S.GameSystem.Attributes;
+using M.A.G.U.S.GameSystem.Experience;
 using M.A.G.U.S.GameSystem.FightMode;
 using M.A.G.U.S.GameSystem.Languages;
 using M.A.G.U.S.GameSystem.Qualifications;
@@ -96,8 +97,26 @@ public class Wizard : Class, IClass, ILikeMagic
 
     public override bool AddQualificationPointsOnFirstLevel => true;
 
-    public override IRace[] AllowedRaces => [new Human(), new Elf(), new HalfElf(), new Dwarf(), new Amund(), new Jann(), new Wier()];
+    public override IRace[] AllowedRaces => [new Human(), new Elf(), new HalfElf(), new Dwarf(), new Amund(), new Jann(), new Wier(), new Dahr()];
 
+    public override List<LevelRequirement> ExperienceLevels =>
+    [
+        new() { Level = 1,  MinExperience = 0,      MaxExperience = 230 },
+        new() { Level = 2,  MinExperience = 231,    MaxExperience = 500 },
+        new() { Level = 3,  MinExperience = 501,    MaxExperience = 1000 },
+        new() { Level = 4,  MinExperience = 1001,   MaxExperience = 2200 },
+        new() { Level = 5,  MinExperience = 2201,   MaxExperience = 5000 },
+        new() { Level = 6,  MinExperience = 5001,   MaxExperience = 10000 },
+        new() { Level = 7,  MinExperience = 10001,  MaxExperience = 18000 },
+        new() { Level = 8,  MinExperience = 18001,  MaxExperience = 35000 },
+        new() { Level = 9,  MinExperience = 35001,  MaxExperience = 70000 },
+        new() { Level = 10, MinExperience = 70001,  MaxExperience = 150000 },
+        new() { Level = 11, MinExperience = 150001, MaxExperience = 200000 },
+        new() { Level = 12, MinExperience = 200001, MaxExperience = 300000 }
+    ];
+
+    public override int ExpPerLevelAfter12 => 80000;
+    
     public override QualificationList Qualifications => BuildQualifications(
     [
         new WeaponUse(),

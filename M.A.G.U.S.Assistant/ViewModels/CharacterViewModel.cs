@@ -130,6 +130,7 @@ internal partial class CharacterViewModel : BaseViewModel, IDisposable
             OnPropertyChanged(nameof(Race));
             OnPropertyChanged(nameof(Class));
             OnPropertyChanged(nameof(Level));
+            OnPropertyChanged(nameof(ExperiencePoints));
             OnPropertyChanged(nameof(PlayerCharacter));
             OnPropertyChanged(nameof(Alignment));
 
@@ -303,6 +304,8 @@ internal partial class CharacterViewModel : BaseViewModel, IDisposable
     public int Level => Character?.Level ?? 1;
 
     public bool PlayerCharacter => Character?.PlayerCharacter ?? false;
+
+    public int ExperiencePoints => Character?.BaseClass?.ExperiencePoints ?? 0;
 
     public Alignment Alignment
     {

@@ -2,7 +2,7 @@
 
 namespace M.A.G.U.S.Qualifications.Laical;
 
-public class Mimicry(QualificationLevel qualificationLevel = QualificationLevel.Base, int level = 1) : Qualification(qualificationLevel, level)
+public class Onomatopoeia(QualificationLevel qualificationLevel = QualificationLevel.Base, int level = 1) : Qualification(qualificationLevel, level)
 {
     public override int QpToBaseQualification => 3;
 

@@ -1,5 +1,6 @@
 ﻿using M.A.G.U.S.GameSystem;
 using M.A.G.U.S.GameSystem.Attributes;
+using M.A.G.U.S.GameSystem.Experience;
 using M.A.G.U.S.GameSystem.FightMode;
 using M.A.G.U.S.GameSystem.Languages;
 using M.A.G.U.S.GameSystem.Qualifications;
@@ -105,8 +106,26 @@ public class Bard : Class, IClass, IJustFight
 
     public override bool AddQualificationPointsOnFirstLevel => true;
 
-    public override IRace[] AllowedRaces => [new Human(), new Elf(), new HalfElf(), new Amund(), new Jann(), new Feenhar()];
+    public override IRace[] AllowedRaces => [new Human(), new Elf(), new HalfElf(), new Amund(), new Jann(), new Feenhar(), new Dahr()];
 
+    public override List<LevelRequirement> ExperienceLevels =>
+    [
+        new() { Level = 1,  MinExperience = 0,     MaxExperience = 170 },
+        new() { Level = 2,  MinExperience = 171,   MaxExperience = 350 },
+        new() { Level = 3,  MinExperience = 351,   MaxExperience = 1000 },
+        new() { Level = 4,  MinExperience = 1001,  MaxExperience = 2200 },
+        new() { Level = 5,  MinExperience = 2201,  MaxExperience = 4400 },
+        new() { Level = 6,  MinExperience = 4401,  MaxExperience = 7500 },
+        new() { Level = 7,  MinExperience = 7501,  MaxExperience = 15000 },
+        new() { Level = 8,  MinExperience = 15001, MaxExperience = 30000 },
+        new() { Level = 9,  MinExperience = 30001, MaxExperience = 55000 },
+        new() { Level = 10, MinExperience = 55001, MaxExperience = 75000 },
+        new() { Level = 11, MinExperience = 75001, MaxExperience = 95000 },
+        new() { Level = 12, MinExperience = 95001, MaxExperience = 145000 }
+    ];
+
+    public override int ExpPerLevelAfter12 => 40000;
+    
     public override QualificationList Qualifications => BuildQualifications(
     [
         new WeaponUse(),
@@ -125,7 +144,7 @@ public class Bard : Class, IClass, IJustFight
         new Riding(),
         new SexualCulture(),
         new SingingAndMakingMusic(),
-        new Mimicry(),
+        new Onomatopoeia(),
         new CardSharping()
     ]);
 
@@ -145,7 +164,7 @@ public class Bard : Class, IClass, IJustFight
         new PsiPyarron(QualificationLevel.Master, 5),
         new Backstab(level: 6),
         new SexualCulture(QualificationLevel.Master, 7),
-        new Mimicry(QualificationLevel.Master, 8)
+        new Onomatopoeia(QualificationLevel.Master, 8)
     ]);
 
     public override PercentQualificationList PercentQualifications =>

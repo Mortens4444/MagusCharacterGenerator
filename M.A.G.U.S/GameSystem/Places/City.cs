@@ -1,5 +1,6 @@
 ﻿using M.A.G.U.S.GameSystem.Attributes;
 using M.A.G.U.S.GameSystem.Languages;
+using System.ComponentModel;
 
 namespace M.A.G.U.S.GameSystem.Places;
 
@@ -52,4 +53,10 @@ public enum City
     // Egyéb ikonikus helyek
     Riegoy,
     //KranKozpont,  // óvatosan kezelendő
+
+    [Description("Thon-nion")] // A Nap Első Titkos városa (amund) - elpusztult
+    Sonnion,
+    
+    [Description("Thalatheia")] // Refis városa (amund) - elpusztult
+    Talasea
 }

@@ -1,5 +1,6 @@
 ﻿using M.A.G.U.S.GameSystem;
 using M.A.G.U.S.GameSystem.Attributes;
+using M.A.G.U.S.GameSystem.Experience;
 using M.A.G.U.S.GameSystem.FightMode;
 using M.A.G.U.S.GameSystem.Languages;
 using M.A.G.U.S.GameSystem.Qualifications;
@@ -101,6 +102,24 @@ public abstract class Paladin : Class, IClass, IHateRangedWeapons
 
     public override IRace[] AllowedRaces => [new Human(), new Amund(), new Jann(), new Wier()];
 
+    public override List<LevelRequirement> ExperienceLevels =>
+    [
+        new() { Level = 1,  MinExperience = 0,      MaxExperience = 175 },
+        new() { Level = 2,  MinExperience = 176,    MaxExperience = 352 },
+        new() { Level = 3,  MinExperience = 353,    MaxExperience = 720 },
+        new() { Level = 4,  MinExperience = 721,    MaxExperience = 1500 },
+        new() { Level = 5,  MinExperience = 1501,   MaxExperience = 3500 },
+        new() { Level = 6,  MinExperience = 3501,   MaxExperience = 7000 },
+        new() { Level = 7,  MinExperience = 7001,   MaxExperience = 10500 },
+        new() { Level = 8,  MinExperience = 10501,  MaxExperience = 21000 },
+        new() { Level = 9,  MinExperience = 21001,  MaxExperience = 48000 },
+        new() { Level = 10, MinExperience = 48001,  MaxExperience = 78000 },
+        new() { Level = 11, MinExperience = 78001,  MaxExperience = 108000 },
+        new() { Level = 12, MinExperience = 108001, MaxExperience = 138000 }
+    ];
+
+    public override int ExpPerLevelAfter12 => 38000;
+    
     public override QualificationList Qualifications => BuildQualifications(
     [
         new WeaponUse(),

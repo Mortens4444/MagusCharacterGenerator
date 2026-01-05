@@ -1,5 +1,6 @@
 ﻿using M.A.G.U.S.GameSystem;
 using M.A.G.U.S.GameSystem.Attributes;
+using M.A.G.U.S.GameSystem.Experience;
 using M.A.G.U.S.GameSystem.FightMode;
 using M.A.G.U.S.GameSystem.Languages;
 using M.A.G.U.S.GameSystem.Qualifications;
@@ -99,8 +100,26 @@ public class Warlock : Class, IClass, ILikeMagic
 
     public override bool AddQualificationPointsOnFirstLevel => true;
 
-    public override IRace[] AllowedRaces => [new Human(), new HalfElf(), new CourtOrc(), new Amund(), new Jann(), new Wier()];
+    public override IRace[] AllowedRaces => [new Human(), new HalfElf(), new CourtOrc(), new Amund(), new Jann(), new Wier(), new Draquon()];
 
+    public override List<LevelRequirement> ExperienceLevels =>
+    [
+        new() { Level = 1,  MinExperience = 0,      MaxExperience = 200 },
+        new() { Level = 2,  MinExperience = 201,    MaxExperience = 400 },
+        new() { Level = 3,  MinExperience = 401,    MaxExperience = 800 },
+        new() { Level = 4,  MinExperience = 801,    MaxExperience = 1600 },
+        new() { Level = 5,  MinExperience = 1601,   MaxExperience = 4000 },
+        new() { Level = 6,  MinExperience = 4001,   MaxExperience = 8000 },
+        new() { Level = 7,  MinExperience = 8001,   MaxExperience = 16000 },
+        new() { Level = 8,  MinExperience = 16001,  MaxExperience = 32000 },
+        new() { Level = 9,  MinExperience = 32001,  MaxExperience = 59000 },
+        new() { Level = 10, MinExperience = 59001,  MaxExperience = 90500 },
+        new() { Level = 11, MinExperience = 90501,  MaxExperience = 140000 },
+        new() { Level = 12, MinExperience = 140001, MaxExperience = 190000 }
+    ];
+
+    public override int ExpPerLevelAfter12 => 55000;
+    
     public override QualificationList Qualifications => BuildQualifications(
     [
         new WeaponUse(),

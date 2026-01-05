@@ -3,7 +3,6 @@ using M.A.G.U.S.GameSystem.Qualifications;
 using M.A.G.U.S.Qualifications;
 using M.A.G.U.S.Qualifications.Laical;
 using M.A.G.U.S.Qualifications.Specialities;
-using Mtf.Extensions;
 
 namespace M.A.G.U.S.Races;
 
@@ -23,8 +22,8 @@ public class MountainGiant : HalfGiant
 			result.AddRange(
 			[
 				new AnimalTraining(),
-				new Craft(Profession.Smith, QualificationLevel.Master)
-				//new Hegyjárás(QualificationLevel.Master)
+				new Craft(Profession.Smith, QualificationLevel.Master),
+				new MountainSurvival(QualificationLevel.Master)
 			]);
 			return result;
 		}
@@ -45,4 +44,6 @@ public class MountainGiant : HalfGiant
 	}
 
     public override string Name => "Half-giant (mountain giant)";
+
+    public override string Image => "mountain_giant.png";
 }

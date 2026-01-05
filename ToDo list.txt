@@ -2,7 +2,6 @@
 - // Speeds shoud be filled from races
 
 - Change weapon/language attribute on qualifications
-- SFÉ
 - Buy poison
 - Save on Android did not show message from success operation
 - After buying something on the market, refresh the affordable items list
@@ -16,7 +15,6 @@
 - Fix RoomPainterPage L
 - ClassesPage, show more info, like in RacesPage L
 - Character.cs pain resistance, mana, magic resistance L
-- Buy Qualifications for character L
 
 - Add more animations, images, and sounds XL
 - Psi XXL (Pszi diszciplínák)

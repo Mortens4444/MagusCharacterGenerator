@@ -1,7 +1,10 @@
-﻿using M.A.G.U.S.GameSystem.Qualifications;
+﻿using M.A.G.U.S.Enums;
+using M.A.G.U.S.GameSystem.Qualifications;
 using M.A.G.U.S.Qualifications;
+using M.A.G.U.S.Qualifications.Combat;
 using M.A.G.U.S.Qualifications.Scientific.Psi;
 using M.A.G.U.S.Qualifications.Specialities;
+using M.A.G.U.S.Things.Weapons.StabbingWeapons;
 using Mtf.Extensions.Services;
 using System.Text;
 
@@ -11,9 +14,12 @@ public class Jann : Race
 {
     public override int Intelligence => 2;
 
+    public override Alignment? Alignment => Enums.Alignment.Order;
+
     public override QualificationList Qualifications =>
     [
-        new PsiPyarron(QualificationLevel.Master)
+        new PsiPyarron(QualificationLevel.Master),
+        new TwoHandedCombat(QualificationLevel.Master) { Weapon = new JadJambiya() },
     ];
 
     public override SpecialQualificationList SpecialQualifications =>

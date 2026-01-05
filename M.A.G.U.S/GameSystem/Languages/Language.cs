@@ -12,7 +12,7 @@ public enum Language
     Gorvikian,
     Krannish,
 
-    Jad,
+    Jad, // Fayumi
     Amund,
     Godonian,
     Elf,

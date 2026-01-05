@@ -1,4 +1,5 @@
 ﻿using M.A.G.U.S.GameSystem.Attributes;
+using System.ComponentModel;
 
 namespace M.A.G.U.S.Enums;
 
@@ -72,9 +73,26 @@ public enum Deity
     
     Phet, //Ediomadi Óisten - LizardWizard
 
-
     // Dzsadok istenei
+    [AvailableSpheres(Sphere.Life, Sphere.Soul, Sphere.Nature)]
     Galradzsa,
     Doldzsah,
-    Dzsah
+    [AvailableSpheres(Sphere.Life, Sphere.Soul)]
+    Dzsah,
+
+    // Amundok istenei
+    [Description("Theemeth")] // Napisten
+    Themes,
+    [Description("R-eefith")] // Földanya
+    Refis,
+    [Description("Nethiree")] // A Vörös Hold, a szerelem és a szépség istennője
+    Nesire,
+    [Description("Amhe-Ramun")] // A Kékarcú, a háború és az egység istene
+    AmheRamun,
+
+    // Elf istenek
+    Urria,
+
+    // Sámán hitvilág
+    Zherlig // Zherlig Démonkán
 }

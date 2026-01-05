@@ -1,5 +1,6 @@
 ﻿using M.A.G.U.S.GameSystem;
 using M.A.G.U.S.GameSystem.Attributes;
+using M.A.G.U.S.GameSystem.Experience;
 using M.A.G.U.S.GameSystem.FightMode;
 using M.A.G.U.S.GameSystem.Qualifications;
 using M.A.G.U.S.Interfaces;
@@ -100,8 +101,26 @@ public class Assassin : Class, IClass, IJustFight
 
     public override bool AddQualificationPointsOnFirstLevel => true;
 
-    public override IRace[] AllowedRaces => [new Human(), new Elf(), new HalfElf(), new CourtOrc(), new Amund(), new Jann(), new Khal(), new Wier(), new Feenhar()];
+    public override IRace[] AllowedRaces => [new Human(), new Elf(), new HalfElf(), new CourtOrc(), new Amund(), new Jann(), new Khal(), new Wier(), new Feenhar(), new Draquon()];
 
+    public override List<LevelRequirement> ExperienceLevels =>
+    [
+        new() { Level = 1,  MinExperience = 0,      MaxExperience = 190 },
+        new() { Level = 2,  MinExperience = 191,    MaxExperience = 400 },
+        new() { Level = 3,  MinExperience = 401,    MaxExperience = 900 },
+        new() { Level = 4,  MinExperience = 901,    MaxExperience = 1800 },
+        new() { Level = 5,  MinExperience = 1801,   MaxExperience = 3500 },
+        new() { Level = 6,  MinExperience = 3501,   MaxExperience = 7500 },
+        new() { Level = 7,  MinExperience = 7501,   MaxExperience = 15000 },
+        new() { Level = 8,  MinExperience = 15001,  MaxExperience = 30000 },
+        new() { Level = 9,  MinExperience = 30001,  MaxExperience = 60000 },
+        new() { Level = 10, MinExperience = 60001,  MaxExperience = 110000 },
+        new() { Level = 11, MinExperience = 110001, MaxExperience = 160000 },
+        new() { Level = 12, MinExperience = 160001, MaxExperience = 220000 }
+    ];
+
+    public override int ExpPerLevelAfter12 => 60000;
+    
     public override QualificationList Qualifications => BuildQualifications(
     [
         new WeaponUse(),

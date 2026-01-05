@@ -2,6 +2,8 @@
 
 public enum PsiKind
 {
+    Monk,
+    Jann, // Same as Pyarron Master Degree
     Pyarron,
     Slan,
     Kyr,

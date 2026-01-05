@@ -63,6 +63,12 @@
                         <Switch Grid.Column="1" IsToggled="{Binding PlayerCharacter}" />
                     </Grid>-->
 
+                    <mc:EntryWithLabel Label="Experience points"
+                                       Text="{Binding ExperiencePoints}"
+                                       HorizontalOptions="Center"
+                                       IsReadOnly="True"
+                                       Grid.Row="2" />
+
                     <Picker ItemsSource="{Binding Alignments}"
                             ItemDisplayBinding="{Binding ., Converter={StaticResource EnumDescriptionTranslationConverter}}"
                             SelectedItem="{Binding Alignment}"

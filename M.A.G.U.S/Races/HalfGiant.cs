@@ -56,6 +56,4 @@ public abstract class HalfGiant : Race
         var name = result.ToString();
         return Char.ToUpperInvariant(name[0]) + name[1..];
     }
-
-    public override string Name => "Half-giant";
 }

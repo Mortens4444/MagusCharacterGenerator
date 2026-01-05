@@ -1,5 +1,6 @@
 ﻿using M.A.G.U.S.GameSystem;
 using M.A.G.U.S.GameSystem.Attributes;
+using M.A.G.U.S.GameSystem.Experience;
 using M.A.G.U.S.GameSystem.FightMode;
 using M.A.G.U.S.GameSystem.Qualifications;
 using M.A.G.U.S.Interfaces;
@@ -98,7 +99,26 @@ public class Gladiator : Class, IClass, IJustFight
 
     public override bool AddQualificationPointsOnFirstLevel => true;
 
-    public override IRace[] AllowedRaces => [new Human(), new Elf(), new HalfElf(), new Dwarf(), new CourtOrc(), new Amund(), new Jann(), new Khal()];
+    public override IRace[] AllowedRaces => [new Human(), new Elf(), new HalfElf(), new Dwarf(), new CourtOrc(), new Amund(), new Jann(), new Khal(), new Draquon(),
+        new ForestGiant(), new MountainGiant(), new SwampGiant()];
+
+    public override List<LevelRequirement> ExperienceLevels =>
+    [
+        new() { Level = 1,  MinExperience = 0,     MaxExperience = 188 },
+        new() { Level = 2,  MinExperience = 189,   MaxExperience = 376 },
+        new() { Level = 3,  MinExperience = 377,   MaxExperience = 825 },
+        new() { Level = 4,  MinExperience = 826,   MaxExperience = 1650 },
+        new() { Level = 5,  MinExperience = 1651,  MaxExperience = 3300 },
+        new() { Level = 6,  MinExperience = 3301,  MaxExperience = 7250 },
+        new() { Level = 7,  MinExperience = 7251,  MaxExperience = 12050 },
+        new() { Level = 8,  MinExperience = 12051, MaxExperience = 24000 },
+        new() { Level = 9,  MinExperience = 24001, MaxExperience = 48000 },
+        new() { Level = 10, MinExperience = 48001, MaxExperience = 68000 },
+        new() { Level = 11, MinExperience = 68001, MaxExperience = 93000 },
+        new() { Level = 12, MinExperience = 93001, MaxExperience = 130000 }
+    ];
+
+    public override int ExpPerLevelAfter12 => 40000;
 
     public override QualificationList Qualifications => BuildQualifications(
     [

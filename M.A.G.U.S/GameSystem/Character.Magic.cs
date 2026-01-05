@@ -1,4 +1,5 @@
 ﻿using M.A.G.U.S.Classes.Rogue;
+using M.A.G.U.S.Classes.Sorcerer;
 using M.A.G.U.S.GameSystem.Magic;
 using M.A.G.U.S.Interfaces;
 using M.A.G.U.S.Qualifications.Specialities;
@@ -144,14 +145,14 @@ public partial class Character
     private void CalculateUnconsciousAstralMagicResistance()
     {
         var extraMagicResistanceOnLevelUp = Race.SpecialQualifications.GetSpeciality<ExtraMagicResistanceOnLevelUp>();
-        UnconsciousAstralMagicResistance = MathHelper.GetAboveAverageValue(Astral);
+        UnconsciousAstralMagicResistance = BaseClass is Shaman ? Astral + Level * 4 :  MathHelper.GetAboveAverageValue(Astral);
         UnconsciousAstralMagicResistance += (BaseClass.Level - 1) * (extraMagicResistanceOnLevelUp?.ExtraResistancePoints ?? 0);
     }
 
     private void CalculateUnconsciousMentalMagicResistance()
     {
         var extraMagicResistanceOnLevelUp = Race.SpecialQualifications.GetSpeciality<ExtraMagicResistanceOnLevelUp>();
-        UnconsciousMentalMagicResistance = MathHelper.GetAboveAverageValue(Willpower);
+        UnconsciousMentalMagicResistance = BaseClass is Shaman ? Willpower + Level * 4 : MathHelper.GetAboveAverageValue(Willpower);
         UnconsciousMentalMagicResistance += (BaseClass.Level - 1) * (extraMagicResistanceOnLevelUp?.ExtraResistancePoints ?? 0);
     }
 

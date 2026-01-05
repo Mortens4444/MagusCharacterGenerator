@@ -50,7 +50,7 @@ public partial class Character
         }
     }
 
-    private void CalculatePsiPoints(ISettings? settings)
+    private void CalculatePsiPoints(bool isJann, ISettings? settings)
     {
         Psi = null;
         PsiPoints = 0;
@@ -76,22 +76,32 @@ public partial class Character
         {
             if (psi.BaseQualificationLevel > 0 && psi.BaseQualificationLevel <= currentLevel)
             {
-                timeline.Add(new PsiEvent
+                var psiEvent = new PsiEvent
                 {
                     Level = psi.BaseQualificationLevel,
                     Modifier = GetModifier(psi.PsiKind, QualificationLevel.Base),
                     SourceSkill = psi
-                });
+                };
+                if (isJann)
+                {
+                    psiEvent.Modifier += 1;
+                }
+                timeline.Add(psiEvent);
             }
 
             if (psi.MasterQualificationLevel > 0 && psi.MasterQualificationLevel <= currentLevel)
             {
-                timeline.Add(new PsiEvent
+                var psiEvent = new PsiEvent
                 {
                     Level = psi.MasterQualificationLevel,
                     Modifier = GetModifier(psi.PsiKind, QualificationLevel.Master),
                     SourceSkill = psi
-                });
+                };
+                if (isJann)
+                {
+                    psiEvent.Modifier += 1;
+                }
+                timeline.Add(psiEvent);
             }
         }
 
@@ -149,7 +159,7 @@ public partial class Character
 
     private static int GetModifier(PsiKind kind, QualificationLevel level)
     {
-        if (kind == PsiKind.Kyr)
+        if (kind == PsiKind.Kyr || kind == PsiKind.Monk)
         {
             return KyrModifier;
         }

@@ -1,5 +1,6 @@
 ﻿using M.A.G.U.S.GameSystem;
 using M.A.G.U.S.GameSystem.Attributes;
+using M.A.G.U.S.GameSystem.Experience;
 using M.A.G.U.S.GameSystem.FightMode;
 using M.A.G.U.S.GameSystem.Languages;
 using M.A.G.U.S.GameSystem.Qualifications;
@@ -99,8 +100,26 @@ public class Knight : Class, IClass, IHateRangedWeapons
 
     public override bool AddQualificationPointsOnFirstLevel => true;
 
-    public override IRace[] AllowedRaces => [new Human(), new HalfElf(), new Amund(), new Jann(), new Khal(), new Wier()];
+    public override IRace[] AllowedRaces => [new Human(), new HalfElf(), new Amund(), new Jann(), new Khal(), new Wier(), new Dracker()];
 
+    public override List<LevelRequirement> ExperienceLevels =>
+    [
+        new() { Level = 1,  MinExperience = 0,     MaxExperience = 180 },
+        new() { Level = 2,  MinExperience = 181,   MaxExperience = 370 },
+        new() { Level = 3,  MinExperience = 371,   MaxExperience = 800 },
+        new() { Level = 4,  MinExperience = 801,   MaxExperience = 1650 },
+        new() { Level = 5,  MinExperience = 1651,  MaxExperience = 3200 },
+        new() { Level = 6,  MinExperience = 3201,  MaxExperience = 6400 },
+        new() { Level = 7,  MinExperience = 6401,  MaxExperience = 12000 },
+        new() { Level = 8,  MinExperience = 12001, MaxExperience = 25000 },
+        new() { Level = 9,  MinExperience = 25001, MaxExperience = 45000 },
+        new() { Level = 10, MinExperience = 45001, MaxExperience = 65000 },
+        new() { Level = 11, MinExperience = 65001, MaxExperience = 90000 },
+        new() { Level = 12, MinExperience = 90001, MaxExperience = 110000 }
+    ];
+
+    public override int ExpPerLevelAfter12 => 35000;
+    
     public override QualificationList Qualifications => BuildQualifications(
     [
         new HeavyArmorWearing(),

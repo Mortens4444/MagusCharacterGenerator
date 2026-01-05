@@ -2,7 +2,7 @@
 
 namespace M.A.G.U.S.Qualifications.Combat;
 
-public class TwoHandedCombat(QualificationLevel qualificationLevel = QualificationLevel.Base, int level = 1) : Qualification(qualificationLevel,  level)
+public class TwoHandedCombat(QualificationLevel qualificationLevel = QualificationLevel.Base, int level = 1) : WeaponQualification(qualificationLevel,  level)
 {
     public override string Name => "Two-handed combat";
 

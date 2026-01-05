@@ -1,5 +1,6 @@
 ﻿using M.A.G.U.S.GameSystem;
 using M.A.G.U.S.GameSystem.Attributes;
+using M.A.G.U.S.GameSystem.Experience;
 using M.A.G.U.S.GameSystem.FightMode;
 using M.A.G.U.S.GameSystem.Languages;
 using M.A.G.U.S.GameSystem.Qualifications;
@@ -101,7 +102,26 @@ public abstract class Priest : Class, IClass, ILikeMagic
 
     public override bool AddQualificationPointsOnFirstLevel => true;
 
-    public override IRace[] AllowedRaces => [new Human(), new Dwarf(), new CourtOrc(), new Amund(), new Jann(), new Wier()];
+    public override IRace[] AllowedRaces => [new Human(), new Dwarf(), new CourtOrc(), new Amund(), new Jann(), new Wier(), new Dahr(), new Dracker(),
+        new ForestGiant(), new FrostGiant(), new MountainGiant(), new SwampGiant()];
+
+    public override List<LevelRequirement> ExperienceLevels =>
+    [
+        new() { Level = 1,  MinExperience = 0,      MaxExperience = 160 },
+        new() { Level = 2,  MinExperience = 161,    MaxExperience = 330 },
+        new() { Level = 3,  MinExperience = 331,    MaxExperience = 660 },
+        new() { Level = 4,  MinExperience = 661,    MaxExperience = 1300 },
+        new() { Level = 5,  MinExperience = 1301,   MaxExperience = 2600 },
+        new() { Level = 6,  MinExperience = 2601,   MaxExperience = 5000 },
+        new() { Level = 7,  MinExperience = 5001,   MaxExperience = 9000 },
+        new() { Level = 8,  MinExperience = 9001,   MaxExperience = 23000 },
+        new() { Level = 9,  MinExperience = 23001,  MaxExperience = 50000 },
+        new() { Level = 10, MinExperience = 50001,  MaxExperience = 90000 },
+        new() { Level = 11, MinExperience = 90001,  MaxExperience = 130000 },
+        new() { Level = 12, MinExperience = 130001, MaxExperience = 165000 }
+    ];
+
+    public override int ExpPerLevelAfter12 => 50000;
 
     public override QualificationList Qualifications => BuildQualifications(
     [
