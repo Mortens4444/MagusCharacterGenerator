@@ -17,12 +17,9 @@ namespace M.A.G.U.S.Classes.Believer;
 
 public abstract class Paladin : Class, IClass, IHateRangedWeapons
 {
-    public Paladin() : base(1) { }
+    public Paladin() : base(1, false) { }
 
-    public Paladin(int level) : base(level)
-    {
-        GenerateSkills();
-    }
+    public Paladin(int level, bool autoGenerateSkills) : base(level, autoGenerateSkills) { }
 
     [DiceThrow(ThrowType._1D10)]
     [DiceThrowModifier(8)]

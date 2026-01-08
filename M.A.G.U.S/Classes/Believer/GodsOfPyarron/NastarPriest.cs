@@ -20,12 +20,9 @@ namespace M.A.G.U.S.Classes.Believer.GodsOfPyarron;
 /// </summary>
 public class NastarPriest : Class, IClass, ILikeMagic
 {
-    public NastarPriest() : base(1) { }
+    public NastarPriest() : base(1, false) { }
 
-    public NastarPriest(int level) : base(level)
-    {
-        GenerateSkills();
-    }
+    public NastarPriest(int level, bool autoGenerateSkills) : base(level, autoGenerateSkills) { }
 
     [DiceThrow(ThrowType._2D6)]
     [DiceThrowModifier(6)]

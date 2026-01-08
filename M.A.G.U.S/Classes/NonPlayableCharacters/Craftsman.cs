@@ -9,12 +9,9 @@ namespace M.A.G.U.S.Classes.NonPlayableCharacters;
 
 public class Craftsman : Class, IClass
 {
-    public Craftsman() : base(1) { }
+    public Craftsman() : base(1, false) { }
 
-    public Craftsman(int level) : base(level)
-    {
-        GenerateSkills();
-    }
+    public Craftsman(int level, bool autoGenerateSkills) : base(level, autoGenerateSkills) { }
 
     [DiceThrow(ThrowType._2D6)]
     public override int Strength { get; set; }

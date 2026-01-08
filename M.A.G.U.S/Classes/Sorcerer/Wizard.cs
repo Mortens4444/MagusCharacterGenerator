@@ -16,12 +16,9 @@ namespace M.A.G.U.S.Classes.Sorcerer;
 
 public class Wizard : Class, IClass, ILikeMagic
 {
-    public Wizard() : base(1) { }
+    public Wizard() : base(1, false) { }
 
-    public Wizard(int level) : base(level)
-    {
-        GenerateSkills();
-    }
+    public Wizard(int level, bool autoGenerateSkills) : base(level, autoGenerateSkills) { }
 
     [DiceThrow(ThrowType._3D6)]
     public override int Strength { get; set; }

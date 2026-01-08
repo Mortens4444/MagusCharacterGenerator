@@ -15,15 +15,13 @@ namespace M.A.G.U.S.Classes.Believer.GodsOfPyarron;
 
 public class NastarMonk : Class, IClass, ILikeMagic
 {
-    public NastarMonk() : base(1) { }
+    public NastarMonk() : base(1, false) { }
 
-    public NastarMonk(int level) : base(level)
-    {
-        GenerateSkills();
-    }
+    public NastarMonk(int level, bool autoGenerateSkills) : base(level, autoGenerateSkills) { }
 
     [DiceThrow(ThrowType._2D6)]
     [DiceThrowModifier(6)]
+    [SpecialTraining]
     public override int Strength { get; set; }
 
     [DiceThrow(ThrowType._3D6_2_Times)]

@@ -11,7 +11,7 @@ public class DartonPaladin : Paladin
 {
     public DartonPaladin() : base() { }
 
-    public DartonPaladin(int level) : base(level) { }
+    public DartonPaladin(int level, bool autoGenerateSkills) : base(level, autoGenerateSkills) { }
 
     public override QualificationList Qualifications
     {

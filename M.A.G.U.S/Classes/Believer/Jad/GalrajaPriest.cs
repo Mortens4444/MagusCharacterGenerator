@@ -16,7 +16,7 @@ public class GalrajaPriest : Priest
 {
     public GalrajaPriest() : base() { }
 
-    public GalrajaPriest(int level) : base(level) { }
+    public GalrajaPriest(int level, bool autoGenerateSkills) : base(level, autoGenerateSkills) { }
 
     public override QualificationList Qualifications => BuildQualifications(
     [

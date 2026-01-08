@@ -18,12 +18,9 @@ namespace M.A.G.U.S.Classes.Sorcerer;
 
 public class Warlock : Class, IClass, ILikeMagic
 {
-    public Warlock() : base(1) { }
+    public Warlock() : base(1, false) { }
 
-    public Warlock(int level) : base(level)
-    {
-        GenerateSkills();
-    }
+    public Warlock(int level, bool autoGenerateSkills) : base(level, autoGenerateSkills) { }
 
     [DiceThrow(ThrowType._3D6_2_Times)]
     public override int Strength { get; set; }

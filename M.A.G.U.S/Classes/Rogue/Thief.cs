@@ -18,12 +18,9 @@ namespace M.A.G.U.S.Classes.Rogue;
 
 public class Thief : Class, IClass, IJustFight
 {
-    public Thief() : base(1) { }
+    public Thief() : base(1, false) { }
 
-    public Thief(int level) : base(level)
-    {
-        GenerateSkills();
-    }
+    public Thief(int level, bool autoGenerateSkills) : base(level, autoGenerateSkills) { }
 
     [DiceThrow(ThrowType._3D6_2_Times)]
     public override int Strength { get; set; }

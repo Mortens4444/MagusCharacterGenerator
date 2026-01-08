@@ -9,7 +9,7 @@ public class DomvikPaladin : Paladin
 {
     public DomvikPaladin() : base() { }
 
-    public DomvikPaladin(int level) : base(level) { }
+    public DomvikPaladin(int level, bool autoGenerateSkills) : base(level, autoGenerateSkills) { }
 
     public override QualificationList Qualifications
     {

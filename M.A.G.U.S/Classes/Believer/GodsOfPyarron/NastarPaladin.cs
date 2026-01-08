@@ -15,12 +15,9 @@ namespace M.A.G.U.S.Classes.Believer.GodsOfPyarron;
 
 public class NastarPaladin : Class, IClass, IHateRangedWeapons
 {
-    public NastarPaladin() : base(1) { }
+    public NastarPaladin() : base(1, false) { }
 
-    public NastarPaladin(int level) : base(level)
-    {
-        GenerateSkills();
-    }
+    public NastarPaladin(int level, bool autoGenerateSkills) : base(level, autoGenerateSkills) { }
 
     [DiceThrow(ThrowType._1D10)]
     [DiceThrowModifier(8)]

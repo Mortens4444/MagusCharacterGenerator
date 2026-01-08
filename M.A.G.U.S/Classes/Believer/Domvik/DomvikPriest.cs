@@ -11,7 +11,7 @@ public class DomvikPriest : Priest
 {
     public DomvikPriest() : base() { }
 
-    public DomvikPriest(int level) : base(level) { }
+    public DomvikPriest(int level, bool autoGenerateSkills) : base(level, autoGenerateSkills) { }
 
     public override QualificationList Qualifications
 	{

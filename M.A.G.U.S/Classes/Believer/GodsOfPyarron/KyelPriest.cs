@@ -11,7 +11,7 @@ public class KyelPriest : Priest
 {
     public KyelPriest() : base() { }
 
-    public KyelPriest(int level) : base(level) { }
+    public KyelPriest(int level, bool autoGenerateSkills) : base(level, autoGenerateSkills) { }
 
     public override QualificationList Qualifications
     {

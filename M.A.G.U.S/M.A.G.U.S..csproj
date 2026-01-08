@@ -12,7 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Mtf.Extensions" Version="1.0.25" />
+    <PackageReference Include="Mtf.Extensions" Version="1.0.26" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.4" />
   </ItemGroup>
 

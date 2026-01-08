@@ -15,12 +15,9 @@ namespace M.A.G.U.S.Classes.Believer.GodsOfPyarron;
 
 public class VelarMonk : Class, IClass, ILikeMagic
 {
-    public VelarMonk() : base(1) { }
+    public VelarMonk() : base(1, false) { }
 
-    public VelarMonk(int level) : base(level)
-    {
-        GenerateSkills();
-    }
+    public VelarMonk(int level, bool autoGenerateSkills) : base(level, autoGenerateSkills) { }
 
     [DiceThrow(ThrowType._2D6)]
     [DiceThrowModifier(6)]

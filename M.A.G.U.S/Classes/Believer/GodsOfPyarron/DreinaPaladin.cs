@@ -8,7 +8,7 @@ public class DreinaPaladin : Paladin
 {
     public DreinaPaladin() : base() { }
 
-    public DreinaPaladin(int level) : base(level) { }
+    public DreinaPaladin(int level, bool autoGenerateSkills) : base(level, autoGenerateSkills) { }
 
     public override QualificationList Qualifications
     {

@@ -10,10 +10,7 @@ public class UwelPaladin : Paladin
 {
     public UwelPaladin() : base() { }
 
-    public UwelPaladin(int level) : base(level)
-    {
-        GenerateSkills();
-    }
+    public UwelPaladin(int level, bool autoGenerateSkills) : base(level, autoGenerateSkills) { }
 
     public override QualificationList Qualifications
     {

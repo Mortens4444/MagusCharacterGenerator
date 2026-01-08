@@ -10,7 +10,7 @@ public class RanagolPaladin : Paladin
 {
     public RanagolPaladin() : base() { }
 
-    public RanagolPaladin(int level) : base(level) { }
+    public RanagolPaladin(int level, bool autoGenerateSkills) : base(level, autoGenerateSkills) { }
 
     public override QualificationList Qualifications
     {

@@ -11,12 +11,9 @@ namespace M.A.G.U.S.Classes.NonPlayableCharacters;
 
 public class JahPriest : Class, IClass
 {
-    public JahPriest() : base(1) { }
+    public JahPriest() : base(1, false) { }
 
-    public JahPriest(int level) : base(level)
-    {
-        GenerateSkills();
-    }
+    public JahPriest(int level, bool autoGenerateSkills) : base(level, autoGenerateSkills) { }
 
     [DiceThrow(ThrowType._3D6)]
     public override int Strength { get; set; }

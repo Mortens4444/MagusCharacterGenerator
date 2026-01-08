@@ -9,12 +9,9 @@ namespace M.A.G.U.S.Classes.NonPlayableCharacters;
 
 public class Peasant : Class, IClass
 {
-    public Peasant() : base(1) { }
+    public Peasant() : base(1, false) { }
 
-    public Peasant(int level) : base(level)
-    {
-        GenerateSkills();
-    }
+    public Peasant(int level, bool autoGenerateSkills) : base(level, autoGenerateSkills) { }
 
     [DiceThrow(ThrowType._3D6)]
     public override int Strength { get; set; }

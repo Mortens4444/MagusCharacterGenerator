@@ -1,6 +1,7 @@
-using CommunityToolkit.Mvvm.Messaging;
+﻿using CommunityToolkit.Mvvm.Messaging;
 using M.A.G.U.S.Assistant.Interfaces;
 using M.A.G.U.S.Assistant.Models;
+using M.A.G.U.S.Assistant.Services;
 using M.A.G.U.S.Assistant.ViewModels;
 using Mtf.LanguageService.MAUI;
 using Mtf.LanguageService.MAUI.Views;
@@ -10,26 +11,24 @@ namespace M.A.G.U.S.Assistant.Views;
 
 internal partial class RollFormulaPage : NotifierPage
 {
-    private RollFormulaViewModel ViewModel => BindingContext as RollFormulaViewModel;
+    private bool isClosing;
     private DateTime lastShake = DateTime.MinValue;
     private const double ShakeThresholdG = 2.2;
     private const int ShakeDebounceMs = 800;
+    private readonly TaskCompletionSource<int> tcs = new();
 
     public RollFormulaPage(ISoundPlayer soundPlayer, IShakeService shakeService, RollFormula rollFormula)
     {
         InitializeComponent();
         Title = Lng.Elem(rollFormula.Title);
         BindingContext = new RollFormulaViewModel(soundPlayer, shakeService, rollFormula);
-        
         ViewModel.RollRequested += OnRollRequested;
-        ViewModel.RollCompleted += (s, e) =>
-        {
-            MainThread.BeginInvokeOnMainThread(() =>
-            {
-                ResultLabel.Text = e.Result.ToString();
-            });
-        };
+        ViewModel.CloseRequested += async (_, _) => await CloseAsync();
     }
+
+    public Task<int> ResultTask => tcs.Task;
+
+    public RollFormulaViewModel ViewModel => BindingContext as RollFormulaViewModel ?? throw new ArgumentNullException(nameof(BindingContext), $"{nameof(BindingContext)} should be convertable to {nameof(RollFormulaViewModel)}");
 
     protected override void OnAppearing()
     {
@@ -56,6 +55,16 @@ internal partial class RollFormulaPage : NotifierPage
         catch (Exception ex)
         {
             WeakReferenceMessenger.Default.Send(new ShowErrorMessage(ex));
+        }
+    }
+
+    private async Task CloseAsync()
+    {
+        if (!isClosing)
+        {
+            isClosing = true;
+            await ShellNavigationService.ClosePage();
+            tcs.TrySetResult(ViewModel.Result);
         }
     }
 
@@ -88,7 +97,7 @@ internal partial class RollFormulaPage : NotifierPage
     {
         try
         {
-            await PlayDiceAnimationAsync();
+            await PlayDiceAnimationAsync().ConfigureAwait(true);
             tcs.SetResult(true);
         }
         catch (Exception ex)
@@ -101,13 +110,13 @@ internal partial class RollFormulaPage : NotifierPage
     {
         try
         {
-            await DiceImage.RotateTo(360, 500).ConfigureAwait(true);
+            await DiceImage.RotateToAsync(360, 500).ConfigureAwait(true);
             DiceImage.Rotation = 0;
-            await DiceImage.TranslateTo(-10, 0, 50).ConfigureAwait(true);
-            await DiceImage.TranslateTo(10, 0, 50).ConfigureAwait(true);
-            await DiceImage.TranslateTo(-6, 0, 40).ConfigureAwait(true);
-            await DiceImage.TranslateTo(6, 0, 40).ConfigureAwait(true);
-            await DiceImage.TranslateTo(0, 0, 30).ConfigureAwait(true);
+            await DiceImage.TranslateToAsync(-10, 0, 50).ConfigureAwait(true);
+            await DiceImage.TranslateToAsync(10, 0, 50).ConfigureAwait(true);
+            await DiceImage.TranslateToAsync(-6, 0, 40).ConfigureAwait(true);
+            await DiceImage.TranslateToAsync(6, 0, 40).ConfigureAwait(true);
+            await DiceImage.TranslateToAsync(0, 0, 30).ConfigureAwait(true);
         }
         catch (Exception ex)
         {

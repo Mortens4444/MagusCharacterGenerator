@@ -18,12 +18,9 @@ namespace M.A.G.U.S.Classes.NonPlayableCharacters.Jad;
 
 public class DoljahPriest : Class, IClass, IJustFight
 {
-    public DoljahPriest() : base(1) { }
+    public DoljahPriest() : base(1, false) { }
 
-    public DoljahPriest(int level) : base(level)
-    {
-        GenerateSkills();
-    }
+    public DoljahPriest(int level, bool autoGenerateSkills) : base(level, autoGenerateSkills) { }
 
     [DiceThrow(ThrowType._3D6_2_Times)]
     public override int Strength { get; set; }

@@ -14,7 +14,7 @@ public class ArelPriest : Priest
 {
     public ArelPriest() : base() { }
 
-    public ArelPriest(int level) : base(level) { }
+    public ArelPriest(int level, bool autoGenerateSkills) : base(level, autoGenerateSkills) { }
 
     public override Alignment Alignment => Alignment.ChaosLife;
 

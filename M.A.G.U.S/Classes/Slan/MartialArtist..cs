@@ -17,12 +17,9 @@ namespace M.A.G.U.S.Classes.Slan;
 
 public class MartialArtist : Class, IClass, IJustFight
 {
-    public MartialArtist() : base(1) { }
+    public MartialArtist() : base(1, false) { }
 
-    public MartialArtist(int level) : base(level)
-    {
-        GenerateSkills();
-    }
+    public MartialArtist(int level, bool autoGenerateSkills) : base(level, autoGenerateSkills) { }
 
     [DiceThrow(ThrowType._1D10)]
     [DiceThrowModifier(8)]

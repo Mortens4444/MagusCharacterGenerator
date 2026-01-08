@@ -16,12 +16,9 @@ namespace M.A.G.U.S.Classes.Believer.GodsOfPyarron;
 
 public class VelarPaladin : Class, IClass, ILikeMagic
 {
-    public VelarPaladin() : base(1) { }
+    public VelarPaladin() : base(1, false) { }
 
-    public VelarPaladin(int level) : base(level)
-    {
-        GenerateSkills();
-    }
+    public VelarPaladin(int level, bool autoGenerateSkills) : base(level, autoGenerateSkills) { }
 
     [DiceThrow(ThrowType._2D6)]
     [DiceThrowModifier(6)]

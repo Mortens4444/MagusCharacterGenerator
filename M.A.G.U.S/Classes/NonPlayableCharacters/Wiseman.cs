@@ -10,12 +10,9 @@ namespace M.A.G.U.S.Classes.NonPlayableCharacters;
 
 public class Wiseman : Class, IClass
 {
-    public Wiseman() : base(1) { }
+    public Wiseman() : base(1, false) { }
 
-    public Wiseman(int level) : base(level)
-    {
-        GenerateSkills();
-    }
+    public Wiseman(int level, bool autoGenerateSkills) : base(level, autoGenerateSkills) { }
 
     [DiceThrow(ThrowType._1D10)]
     public override int Strength { get; set; }

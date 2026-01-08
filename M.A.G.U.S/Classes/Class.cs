@@ -17,12 +17,16 @@ public abstract class Class : IClass
 
     protected readonly DiceThrow DiceThrow = new();
 
-    protected Class(int level)
+    protected Class(int level, bool autoGenerateSkills)
     {
         Level = level;
+        if (autoGenerateSkills)
+        {
+            GenerateSkills();
+        }
     }
 
-    protected void GenerateSkills()
+    private void GenerateSkills()
     {
         string[] skillNames = [ nameof(Strength), nameof(Quickness), nameof(Dexterity), nameof(Stamina), nameof(Health), nameof(Beauty),
             nameof(Intelligence), nameof(Willpower), nameof(Astral), nameof(Bravery), nameof(Erudition), nameof(Detection), nameof(Gold) ];
@@ -55,8 +59,6 @@ public abstract class Class : IClass
     public override string ToString() => Name;
 
     public int Level { get; set; }
-
-    public abstract int Gold { get; set; }
 
     public abstract int InitiateBaseValue { get; }
 
@@ -92,29 +94,44 @@ public abstract class Class : IClass
 
     public abstract SpecialQualificationList SpecialQualifications { get; }
 
+    [OrderAttibute(1)]
     public abstract int Strength { get; set; }
 
-    public abstract int Quickness { get; set; }
-
-    public abstract int Dexterity { get; set; }
-
+    [OrderAttibute(2)]
     public abstract int Stamina { get; set; }
 
+    [OrderAttibute(3)]
+    public abstract int Quickness { get; set; }
+
+    [OrderAttibute(4)]
+    public abstract int Dexterity { get; set; }
+
+    [OrderAttibute(5)]
     public abstract int Health { get; set; }
 
+    [OrderAttibute(6)]
     public abstract int Beauty { get; set; }
 
+    [OrderAttibute(7)]
     public abstract int Intelligence { get; set; }
 
+    [OrderAttibute(8)]
     public abstract int Willpower { get; set; }
 
+    [OrderAttibute(9)]
     public abstract int Astral { get; set; }
 
+    [OrderAttibute(10)]
     public abstract int Bravery { get; set; }
 
+    [OrderAttibute(10)]
     public abstract int Erudition { get; set; }
 
+    [OrderAttibute(11)]
     public abstract int Detection { get; set; }
+
+    [OrderAttibute(12)]
+    public abstract int Gold { get; set; }
 
     public int AstralMagicResistance { get; }
 

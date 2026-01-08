@@ -65,13 +65,13 @@ internal partial class DiceRollPage : NotifierPage
     {
         try
         {
-            await DiceImage.RotateTo(360, 500).ConfigureAwait(true);
+            await DiceImage.RotateToAsync(360, 500).ConfigureAwait(true);
             DiceImage.Rotation = 0;
-            await DiceImage.TranslateTo(-10, 0, 50).ConfigureAwait(true);
-            await DiceImage.TranslateTo(10, 0, 50).ConfigureAwait(true);
-            await DiceImage.TranslateTo(-6, 0, 40).ConfigureAwait(true);
-            await DiceImage.TranslateTo(6, 0, 40).ConfigureAwait(true);
-            await DiceImage.TranslateTo(0, 0, 30).ConfigureAwait(true);
+            await DiceImage.TranslateToAsync(-10, 0, 50).ConfigureAwait(true);
+            await DiceImage.TranslateToAsync(10, 0, 50).ConfigureAwait(true);
+            await DiceImage.TranslateToAsync(-6, 0, 40).ConfigureAwait(true);
+            await DiceImage.TranslateToAsync(6, 0, 40).ConfigureAwait(true);
+            await DiceImage.TranslateToAsync(0, 0, 30).ConfigureAwait(true);
         }
         catch (Exception ex)
         {

@@ -18,12 +18,9 @@ namespace M.A.G.U.S.Classes.Believer;
 
 public class Monk : Class, IClass, ILikeMagic
 {
-    public Monk() : base(1) { }
+    public Monk() : base(1, false) { }
 
-    public Monk(int level) : base(level)
-    {
-        GenerateSkills();
-    }
+    public Monk(int level, bool autoGenerateSkills) : base(level, autoGenerateSkills) { }
 
     [DiceThrow(ThrowType._2D6)]
     [DiceThrowModifier(6)]

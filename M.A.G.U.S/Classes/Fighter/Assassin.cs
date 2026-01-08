@@ -17,12 +17,9 @@ namespace M.A.G.U.S.Classes.Fighter;
 
 public class Assassin : Class, IClass, IJustFight
 {
-    public Assassin() : base(1) { }
+    public Assassin() : base(1, false) { }
 
-    public Assassin(int level) : base(level)
-    {
-        GenerateSkills();
-    }
+    public Assassin(int level, bool autoGenerateSkills) : base(level, autoGenerateSkills) { }
 
     [DiceThrow(ThrowType._2D6)]
     [DiceThrowModifier(6)]

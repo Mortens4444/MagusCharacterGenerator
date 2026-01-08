@@ -18,12 +18,9 @@ namespace M.A.G.U.S.Classes.Believer;
 
 public abstract class Priest : Class, IClass, ILikeMagic
 {
-    public Priest() : base(1) { }
+    public Priest() : base(1, false) { }
 
-    public Priest(int level) : base(level)
-    {
-        GenerateSkills();
-    }
+    public Priest(int level, bool autoGenerateSkills) : base(level, autoGenerateSkills) { }
 
     [DiceThrow(ThrowType._2D6)]
     [DiceThrowModifier(6)]

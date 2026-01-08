@@ -19,12 +19,9 @@ namespace M.A.G.U.S.Classes.Sorcerer;
 /// </summary>
 public class AirWizard : Class, IClass, ILikeMagic
 {
-    public AirWizard() : base(1) { }
+    public AirWizard() : base(1, false) { }
 
-    public AirWizard(int level) : base(level)
-    {
-        GenerateSkills();
-    }
+    public AirWizard(int level, bool autoGenerateSkills) : base(level, autoGenerateSkills) { }
 
     [DiceThrow(ThrowType._2D6)]
     [DiceThrowModifier(2)]

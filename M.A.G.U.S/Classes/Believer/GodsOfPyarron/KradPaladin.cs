@@ -10,7 +10,7 @@ public class KradPaladin : Paladin
 {
     public KradPaladin() : base() { }
 
-    public KradPaladin(int level) : base(level) { }
+    public KradPaladin(int level, bool autoGenerateSkills) : base(level, autoGenerateSkills) { }
 
     public override QualificationList Qualifications
     {

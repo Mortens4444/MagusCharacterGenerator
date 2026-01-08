@@ -9,12 +9,9 @@ namespace M.A.G.U.S.Classes.NonPlayableCharacters;
 
 public class Noble : Class, IClass
 {
-    public Noble() : base(1) { }
+    public Noble() : base(1, false) { }
 
-    public Noble(int level) : base(level)
-    {
-        GenerateSkills();
-    }
+    public Noble(int level, bool autoGenerateSkills) : base(level, autoGenerateSkills) { }
 
     [DiceThrow(ThrowType._1D10)]
     public override int Strength { get; set; }

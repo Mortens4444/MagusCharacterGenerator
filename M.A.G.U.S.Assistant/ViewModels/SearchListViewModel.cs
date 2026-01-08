@@ -2,6 +2,7 @@
 using M.A.G.U.S.Assistant.CustomEventArgs;
 using M.A.G.U.S.Assistant.Interfaces;
 using M.A.G.U.S.Assistant.Models;
+using M.A.G.U.S.Assistant.Services;
 using M.A.G.U.S.Assistant.Views;
 using M.A.G.U.S.Bestiary;
 using M.A.G.U.S.Enums;
@@ -256,36 +257,25 @@ internal partial class SearchListViewModel : BaseViewModel
         }
     }
 
-    private async Task OpenDetailsAsync(DisplayItem item)
+    private Task OpenDetailsAsync(DisplayItem item)
     {
-        try
+        Page page;
+        if (item.Source is Creature creature)
         {
-            var mainPage = Application.Current != null && Application.Current.Windows.Count > 0 ? Application.Current.Windows[0].Page : null;
-            if (mainPage?.Navigation != null)
-            {
-                Page page;
-                if (item.Source is Creature creature)
-                {
-                    page = new CreatureDetailsPage(new CreatureDetailsViewModel(soundPlayer, creature));
-                }
-                else if (item.Source is Thing thing)
-                {
-                    var itemDetailsViewModel = new ItemDetailsViewModel(Character, thing, PriceMultiplier);
-                    itemDetailsViewModel.Purchased += PurchaseHandler;
-                    page = new ItemDetailsPage(itemDetailsViewModel);
-                }
-                else
-                {
-                    page = new ObjectObserverPage(new ObjectObserverViewModel(), item);
-                }
-                SelectedItem = null;
-                await mainPage.Navigation.PushAsync(page).ConfigureAwait(true);
-            }
+            page = new CreatureDetailsPage(new CreatureDetailsViewModel(soundPlayer, creature));
         }
-        catch (Exception ex)
+        else if (item.Source is Thing thing)
         {
-            WeakReferenceMessenger.Default.Send(new ShowErrorMessage(ex));
+            var itemDetailsViewModel = new ItemDetailsViewModel(Character, thing, PriceMultiplier);
+            itemDetailsViewModel.Purchased += PurchaseHandler;
+            page = new ItemDetailsPage(itemDetailsViewModel);
         }
+        else
+        {
+            page = new ObjectObserverPage(new ObjectObserverViewModel(), item);
+        }
+        SelectedItem = null;
+        return ShellNavigationService.ShowPage(page);
     }
 
     private void PurchaseHandler(object? s, ThingPurchasedEventArgs args)

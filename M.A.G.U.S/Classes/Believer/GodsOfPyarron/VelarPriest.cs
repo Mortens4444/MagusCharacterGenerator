@@ -20,12 +20,9 @@ namespace M.A.G.U.S.Classes.Believer.GodsOfPyarron;
 /// </summary>
 public class VelarPriest : Class, IClass, ILikeMagic
 {
-    public VelarPriest() : base(1) { }
+    public VelarPriest() : base(1, false) { }
 
-    public VelarPriest(int level) : base(level)
-    {
-        GenerateSkills();
-    }
+    public VelarPriest(int level, bool autoGenerateSkills) : base(level, autoGenerateSkills) { }
 
     [DiceThrow(ThrowType._2D6)]
     [DiceThrowModifier(6)]

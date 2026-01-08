@@ -1,7 +1,10 @@
 ﻿using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.Messaging;
+using M.A.G.U.S.Assistant.Interfaces;
 using M.A.G.U.S.Assistant.Services;
+using M.A.G.U.S.Assistant.Views;
 using M.A.G.U.S.GameSystem;
+using M.A.G.U.S.GameSystem.Attributes;
 using M.A.G.U.S.Interfaces;
 using M.A.G.U.S.Races;
 using M.A.G.U.S.Utils;
@@ -18,13 +21,17 @@ internal partial class CharacterGeneratorViewModel : CharacterViewModel
 {
     private readonly SettingsService settingsService;
     private readonly CharacterService characterService;
+    private readonly ISoundPlayer soundPlayer;
+    private readonly IShakeService shakeService;
 
     private int baseClassLevel = 1;
 
-    public CharacterGeneratorViewModel(SettingsService settingsService, CharacterService characterService)
+    public CharacterGeneratorViewModel(SettingsService settingsService, CharacterService characterService, ISoundPlayer soundPlayer, IShakeService shakeService)
     {
         this.settingsService = settingsService;
         this.characterService = characterService;
+        this.soundPlayer = soundPlayer;
+        this.shakeService = shakeService;
         Character = new Character(settingsService);
 
         LoadAvailableTypes();
@@ -66,7 +73,7 @@ internal partial class CharacterGeneratorViewModel : CharacterViewModel
     }
 
     [RelayCommand]
-    public void GenerateCharacter()
+    public async Task GenerateCharacter()
     {
         if (selectedRace == null)
         {
@@ -82,11 +89,30 @@ internal partial class CharacterGeneratorViewModel : CharacterViewModel
 
         try
         {
-            var instanceClass = InstanceClass(selectedClass.GetType(), baseClassLevel);
+            var classType = selectedClass.GetType();
+            var instanceClass = InstanceClass(classType, BaseClassLevel, settingsService.AutoGenerateSkills);
             if (instanceClass == null)
             {
-                WeakReferenceMessenger.Default.Send(new ShowErrorMessage("Class cannot be instantiated!"));
+                //WeakReferenceMessenger.Default.Send(new ShowErrorMessage("Class cannot be instantiated!"));
                 return;
+            }
+    
+            if (!settingsService.AutoGenerateSkills)
+            {
+                string[] skillNames = [ nameof(instanceClass.Strength), nameof(instanceClass.Stamina), nameof(instanceClass.Quickness), nameof(instanceClass.Dexterity), nameof(instanceClass.Health), nameof(instanceClass.Beauty),
+                    nameof(instanceClass.Intelligence), nameof(instanceClass.Willpower), nameof(instanceClass.Astral), nameof(instanceClass.Bravery), nameof(instanceClass.Erudition), nameof(instanceClass.Detection), nameof(instanceClass.Gold) ];
+
+                var skillProperties = skillNames.Select(n => classType.GetProperty(n))
+                    .OrderBy(pi => pi?.GetCustomAttribute<OrderAttibute>()?.Number ?? 0).ToList();
+
+                foreach (var propertyInfo in skillProperties)
+                {
+                    var rollFormula = new Models.RollFormula(propertyInfo, $"{Lng.Elem("Create character")} - {propertyInfo?.Name}");
+                    var page = new RollFormulaPage(soundPlayer, shakeService, rollFormula);
+                    await ShellNavigationService.ShowPage(page).ConfigureAwait(true);
+                    var result = await page.ResultTask.ConfigureAwait(true);
+                    propertyInfo!.SetValue(instanceClass, result);
+                }
             }
 
             Character = new Character(settingsService, NameGenerator.Get(selectedRace), selectedRace, instanceClass);
@@ -202,11 +228,11 @@ internal partial class CharacterGeneratorViewModel : CharacterViewModel
         return null;
     }
 
-    private static IClass? InstanceClass(Type classType, int level)
+    private static IClass? InstanceClass(Type classType, int level, bool autoGenerateSkills)
     {
         try
         {
-            if (Activator.CreateInstance(classType, level) is IClass instanceClass)
+            if (Activator.CreateInstance(classType, level, autoGenerateSkills) is IClass instanceClass)
             {
                 return instanceClass;
             }

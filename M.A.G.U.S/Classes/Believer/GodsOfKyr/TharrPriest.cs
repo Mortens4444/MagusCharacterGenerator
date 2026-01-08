@@ -10,7 +10,7 @@ public class TharrPriest : Priest
 {
     public TharrPriest() : base() { }
 
-    public TharrPriest(int level) : base(level) { }
+    public TharrPriest(int level, bool autoGenerateSkills) : base(level, autoGenerateSkills) { }
 
     public override QualificationList Qualifications
 	{

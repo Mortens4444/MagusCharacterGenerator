@@ -14,19 +14,19 @@ namespace MagusCharacterGenerator
             //Lng.ChangeToLanguage(Language.English);
 
             var level = 6;
-            var witch = new Character(new Settings(), "Mirena", new Human(), new Witch(level));
+            var witch = new Character(new Settings(), "Mirena", new Human(), new Witch(level, true));
             Console.WriteLine(witch);
 
-            var fireWizard = new Character(new Settings(), "Siron", new Human(), new FireMage(level));
+            var fireWizard = new Character(new Settings(), "Siron", new Human(), new FireMage(level, true));
             Console.WriteLine(fireWizard);
 
-            var headHunter = new Character(new Settings(), "Vesryn", new Elf(), new Assassin(level));
+            var headHunter = new Character(new Settings(), "Vesryn", new Elf(), new Assassin(level, true));
             Console.WriteLine(headHunter);
 
-            var slan = new Character(new Settings(), "Toll", new Elf(), new MartialArtist(level));
+            var slan = new Character(new Settings(), "Toll", new Elf(), new MartialArtist(level, true));
             Console.WriteLine(slan);
 
-            var wizard = new Character(new Settings(), "Maron", new Elf(), new Wizard(level));
+            var wizard = new Character(new Settings(), "Maron", new Elf(), new Wizard(level, true));
             Console.WriteLine(wizard);
 
             Console.ReadKey();

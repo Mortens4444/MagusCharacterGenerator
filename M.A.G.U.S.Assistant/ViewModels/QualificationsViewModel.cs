@@ -1,6 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.Messaging;
 using M.A.G.U.S.Assistant.CustomEventArgs;
+using M.A.G.U.S.Assistant.Services;
 using M.A.G.U.S.Assistant.Views;
 using M.A.G.U.S.GameSystem;
 using M.A.G.U.S.Qualifications;
@@ -150,24 +151,13 @@ internal partial class QualificationsViewModel : BaseViewModel
         ApplyFilter();
     }
 
-    private async Task OpenDetailsAsync(Qualification selectedItem)
+    private Task OpenDetailsAsync(Qualification selectedItem)
     {
-        try
-        {
-            var mainPage = Application.Current != null && Application.Current.Windows.Count > 0 ? Application.Current.Windows[0].Page : null;
-            if (mainPage?.Navigation != null)
-            {
-                var qualificationDetailsViewModel = new QualificationDetailsViewModel(Character, selectedItem);
-                qualificationDetailsViewModel.Learned += LearnHandler;
-                var page = new QualificationDetailsPage(qualificationDetailsViewModel);
-                SelectedItem = null;
-                await mainPage.Navigation.PushAsync(page).ConfigureAwait(true);
-            }
-        }
-        catch (Exception ex)
-        {
-            WeakReferenceMessenger.Default.Send(new ShowErrorMessage(ex));
-        }
+        var qualificationDetailsViewModel = new QualificationDetailsViewModel(Character, selectedItem);
+        qualificationDetailsViewModel.Learned += LearnHandler;
+        var page = new QualificationDetailsPage(qualificationDetailsViewModel);
+        SelectedItem = null;
+        return ShellNavigationService.ShowPage(page);
     }
 
     private void LearnHandler(object? sender, QualificationLearnedEventArgs e)

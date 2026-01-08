@@ -9,7 +9,7 @@ public class KranRanagolPriest : Priest
 {
     public KranRanagolPriest() : base() { }
 
-    public KranRanagolPriest(int level) : base(level) { }
+    public KranRanagolPriest(int level, bool autoGenerateSkills) : base(level, autoGenerateSkills) { }
 
     public override QualificationList FutureQualifications
     {

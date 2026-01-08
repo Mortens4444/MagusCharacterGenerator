@@ -13,7 +13,7 @@ namespace M.A.G.U.S.Assistant.ViewModels;
 internal partial class RollFormulaViewModel : BaseViewModel
 {
     public event EventHandler<TaskCompletionSource<bool>>? RollRequested;
-    public event EventHandler<(int Result, ExecutionMode Mode)>? RollCompleted;
+    public event EventHandler? CloseRequested;
 
     private readonly ISoundPlayer? soundPlayer;
     private readonly IShakeService? shakeService;
@@ -34,12 +34,36 @@ internal partial class RollFormulaViewModel : BaseViewModel
             shakeService.ShakeDetected += OnShakeDetected;
         }
 
-        ActionCommand = new Command(async () => ExecuteActionAsync().ConfigureAwait(false));
-        ActionButtonText = rollFormula.DefaultToAuto ? Lng.Elem("Execute") : Lng.Elem("Submit");
+        ExecutionMode = rollFormula.DefaultToAuto ? ExecutionMode.Auto : ExecutionMode.UserInput;
+        UpdateActionText();
+    }
+
+    private void UpdateActionText()
+    {
+        ActionButtonText = IsAuto ? Lng.Elem("Execute") : Lng.Elem("Submit");
+        OnPropertyChanged(nameof(ActionButtonText));
     }
 
     public IShakeService? ShakeService => shakeService;
-    public ICommand ActionCommand { get; }
+
+    public ICommand ActionCommand => new Command(async () => await ExecuteActionAsync());
+
+    public ICommand SetAutoCommand => new Command(() => ExecutionMode = ExecutionMode.Auto);
+
+    public ICommand SetManualCommand => new Command(() => ExecutionMode = ExecutionMode.UserInput);
+    
+    public ICommand CloseCommand => new Command(() =>
+    {
+        if (!IsResultLocked)
+        {
+            WeakReferenceMessenger.Default.Send(
+                new ShowErrorMessage("Please roll or enter a result first."));
+            return;
+        }
+
+        CloseRequested?.Invoke(this, EventArgs.Empty);
+    });
+
     public string ActionButtonText { get; private set; }
 
     public bool IsResultLocked
@@ -73,7 +97,22 @@ internal partial class RollFormulaViewModel : BaseViewModel
         }
     }
 
-    public bool IsAuto => RollFormula?.DefaultToAuto ?? true;
+    private ExecutionMode executionMode;
+
+    public ExecutionMode ExecutionMode
+    {
+        get => executionMode;
+        set
+        {
+            if (executionMode == value) return;
+            executionMode = value;
+            OnPropertyChanged();
+            OnPropertyChanged(nameof(IsAuto));
+            UpdateActionText();
+        }
+    }
+
+    public bool IsAuto => ExecutionMode == ExecutionMode.Auto;
 
     public int Result
     {
@@ -123,8 +162,8 @@ internal partial class RollFormulaViewModel : BaseViewModel
             await soundPlayer.PlayAndVibrateAsync("dice_roll").ConfigureAwait(false);
         }
         
-        await tcs.Task.ConfigureAwait(false);
-        
+        await tcs.Task.ConfigureAwait(true);
+
         if (IsResultLocked)
         {
             return;
@@ -138,7 +177,6 @@ internal partial class RollFormulaViewModel : BaseViewModel
             {
                 Result = thrown;
                 IsResultLocked = true;
-                RollCompleted?.Invoke(this, (Result, ExecutionMode.Auto));
             });
         }
         else
@@ -155,7 +193,6 @@ internal partial class RollFormulaViewModel : BaseViewModel
                 {
                     Result = parsed;
                     IsResultLocked = true;
-                    RollCompleted?.Invoke(this, (Result, ExecutionMode.UserInput));
                 });
             }
         }

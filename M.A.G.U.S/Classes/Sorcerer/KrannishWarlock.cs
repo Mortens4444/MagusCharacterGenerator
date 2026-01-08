@@ -22,12 +22,9 @@ namespace M.A.G.U.S.Classes.Sorcerer;
 /// </summary>
 public class KrannishWarlock : Class, IClass, ILikeMagic
 {
-    public KrannishWarlock() : base(1) { }
+    public KrannishWarlock() : base(1, false) { }
 
-    public KrannishWarlock(int level) : base(level)
-    {
-        GenerateSkills();
-    }
+    public KrannishWarlock(int level, bool autoGenerateSkills) : base(level, autoGenerateSkills) { }
 
     [DiceThrow(ThrowType._3D6_2_Times)]
     public override int Strength { get; set; }

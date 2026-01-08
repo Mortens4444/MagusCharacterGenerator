@@ -8,12 +8,9 @@ namespace M.A.G.U.S.Classes.NonPlayableCharacters;
 
 public class GuardOfficer : Class, IClass
 {
-    public GuardOfficer() : base(1) { }
+    public GuardOfficer() : base(1, false) { }
 
-    public GuardOfficer(int level) : base(level)
-    {
-        GenerateSkills();
-    }
+    public GuardOfficer(int level, bool autoGenerateSkills) : base(level, autoGenerateSkills) { }
 
     [DiceThrow(ThrowType._3D6)]
     public override int Strength { get; set; }

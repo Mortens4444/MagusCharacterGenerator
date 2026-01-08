@@ -14,12 +14,9 @@ namespace M.A.G.U.S.Classes.Fighter;
 
 public class Gladiator : Class, IClass, IJustFight
 {
-    public Gladiator() : base(1) { }
+    public Gladiator() : base(1, false) { }
 
-    public Gladiator(int level) : base(level)
-    {
-        GenerateSkills();
-    }
+    public Gladiator(int level, bool autoGenerateSkills) : base(level, autoGenerateSkills) { }
 
     [DiceThrow(ThrowType._1D6)]
     [DiceThrowModifier(12)]

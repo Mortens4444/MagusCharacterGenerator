@@ -17,12 +17,9 @@ namespace M.A.G.U.S.Classes.Sorcerer;
 
 public class FireMage : Class, IClass, ILikeMagic
 {
-    public FireMage() : base(1) { }
+    public FireMage() : base(1, false) { }
 
-    public FireMage(int level) : base(level)
-    {
-        GenerateSkills();
-    }
+    public FireMage(int level, bool autoGenerateSkills) : base(level, autoGenerateSkills) { }
 
     [DiceThrow(ThrowType._2D6)]
     [DiceThrowModifier(6)]

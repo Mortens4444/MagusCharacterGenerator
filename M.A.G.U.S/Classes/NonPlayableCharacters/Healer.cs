@@ -8,12 +8,9 @@ namespace M.A.G.U.S.Classes.NonPlayableCharacters;
 
 public class Healer : Class, IClass
 {
-    public Healer() : base(1) { }
+    public Healer() : base(1, false) { }
 
-    public Healer(int level) : base(level)
-    {
-        GenerateSkills();
-    }
+    public Healer(int level, bool autoGenerateSkills) : base(level, autoGenerateSkills) { }
 
     [DiceThrow(ThrowType._1D10)]
     public override int Strength { get; set; }

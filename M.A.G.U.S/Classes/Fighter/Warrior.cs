@@ -13,12 +13,9 @@ namespace M.A.G.U.S.Classes.Fighter;
 
 public class Warrior : Class, IClass, IJustFight
 {
-    public Warrior() : base(1) { }
+    public Warrior() : base(1, false) { }
 
-    public Warrior(int level) : base(level)
-    {
-        GenerateSkills();
-    }
+    public Warrior(int level, bool autoGenerateSkills) : base(level, autoGenerateSkills) { }
 
     [DiceThrow(ThrowType._1D6)]
     [DiceThrowModifier(12)]

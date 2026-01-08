@@ -9,12 +9,9 @@ namespace M.A.G.U.S.Classes.NonPlayableCharacters;
 
 public class Merchant : Class, IClass
 {
-    public Merchant() : base(1) { }
+    public Merchant() : base(1, false) { }
 
-    public Merchant(int level) : base(level)
-    {
-        GenerateSkills();
-    }
+    public Merchant(int level, bool autoGenerateSkills) : base(level, autoGenerateSkills) { }
 
     [DiceThrow(ThrowType._2D6)]
     public override int Strength { get; set; }

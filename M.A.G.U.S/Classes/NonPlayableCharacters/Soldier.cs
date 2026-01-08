@@ -9,12 +9,9 @@ namespace M.A.G.U.S.Classes.NonPlayableCharacters;
 
 public class Soldier : Class, IClass
 {
-    public Soldier() : base(1) { }
+    public Soldier() : base(1, false) { }
 
-    public Soldier(int level) : base(level)
-    {
-        GenerateSkills();
-    }
+    public Soldier(int level, bool autoGenerateSkills) : base(level, autoGenerateSkills) { }
 
     [DiceThrow(ThrowType._2D6)]
     [DiceThrowModifier(6)]

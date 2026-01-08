@@ -30,7 +30,7 @@
                 
                 <VerticalStackLayout VerticalOptions="Center" HorizontalOptions="Center" IsVisible="{Binding IsEmpty}" Spacing="10">
                     <Label Text="No characters found." HorizontalOptions="Center" FontSize="18" />
-                    <Label Text="Go to 'Character generation' to create one." TextColor="Gray" HorizontalOptions="Center"/>
+                    <Label Text="Go to 'Create character' to create one." TextColor="Gray" HorizontalOptions="Center"/>
                 </VerticalStackLayout>
 
                 <CollectionView ItemsSource="{Binding AvailableCharacters}"

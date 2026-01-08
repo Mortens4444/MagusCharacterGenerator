@@ -17,12 +17,9 @@ namespace M.A.G.U.S.Classes.Sorcerer;
 
 public class Shaman : Class, IClass, ILikeMagic
 {
-    public Shaman() : base(1) { }
+    public Shaman() : base(1, false) { }
 
-    public Shaman(int level) : base(level)
-    {
-        GenerateSkills();
-    }
+    public Shaman(int level, bool autoGenerateSkills) : base(level, autoGenerateSkills) { }
 
     [DiceThrow(ThrowType._3D6_2_Times)]
     public override int Strength { get; set; }

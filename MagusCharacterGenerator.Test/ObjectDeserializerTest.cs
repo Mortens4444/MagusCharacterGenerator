@@ -21,7 +21,7 @@ namespace M.A.G.U.S.Test
                 Name = "Anuman",
                 Lst = new List<int> { 1, 2, 3 },
                 Lng = new LanguageLore(Language.Krannish, 3),
-                Class = new ArelPriest(1),
+                Class = new ArelPriest(1, true),
                 Race = new Orc(),
                 Character = new Character(new Settings(false), "Anuman", new Amund(), ClassCreator.GetClass(typeof(ArelPriest), 1))
             };

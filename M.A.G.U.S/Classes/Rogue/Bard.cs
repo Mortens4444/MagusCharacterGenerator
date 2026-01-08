@@ -20,12 +20,9 @@ namespace M.A.G.U.S.Classes.Rogue;
 
 public class Bard : Class, IClass, IJustFight
 {
-    public Bard() : base(1) { }
+    public Bard() : base(1, false) { }
 
-    public Bard(int level) : base(level)
-    {
-        GenerateSkills();
-    }
+    public Bard(int level, bool autoGenerateSkills) : base(level, autoGenerateSkills) { }
 
     [DiceThrow(ThrowType._1D10)]
     [DiceThrowModifier(8)]

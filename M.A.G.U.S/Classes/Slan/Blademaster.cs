@@ -16,12 +16,9 @@ namespace M.A.G.U.S.Classes.Slan;
 
 public class Blademaster : Class, IClass, IJustFight
 {
-    public Blademaster() : base(1) { }
+    public Blademaster() : base(1, false) { }
 
-    public Blademaster(int level) : base(level)
-    {
-        GenerateSkills();
-    }
+    public Blademaster(int level, bool autoGenerateSkills) : base(level, autoGenerateSkills) { }
 
     [DiceThrow(ThrowType._1D10)]
     [DiceThrowModifier(8)]

@@ -16,12 +16,9 @@ namespace M.A.G.U.S.Classes.Fighter;
 
 public class Knight : Class, IClass, IHateRangedWeapons
 {
-    public Knight() : base(1) { }
+    public Knight() : base(1, false) { }
 
-    public Knight(int level) : base(level)
-    {
-        GenerateSkills();
-    }
+    public Knight(int level, bool autoGenerateSkills) : base(level, autoGenerateSkills) { }
 
     [DiceThrow(ThrowType._1D6)]
     [DiceThrowModifier(12)]
