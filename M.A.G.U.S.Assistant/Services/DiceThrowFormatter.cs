@@ -1,13 +1,12 @@
-﻿namespace M.A.G.U.S.Assistant.Services;
-
-using CommunityToolkit.Mvvm.Messaging;
+﻿using CommunityToolkit.Mvvm.Messaging;
 using M.A.G.U.S.GameSystem.Attributes;
 using Mtf.Extensions;
 using Mtf.LanguageService.MAUI;
 using Mtf.Maui.Controls.Messages;
-using System;
 using System.Globalization;
 using System.Reflection;
+
+namespace M.A.G.U.S.Assistant.Services;
 
 internal static class DiceThrowFormatter
 {

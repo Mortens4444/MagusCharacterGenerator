@@ -1,9 +1,11 @@
 ﻿using M.A.G.U.S.Enums;
+using M.A.G.U.S.GameSystem.Psi;
 using M.A.G.U.S.GameSystem.Qualifications;
 using M.A.G.U.S.Interfaces;
 using M.A.G.U.S.Qualifications;
 using M.A.G.U.S.Qualifications.Combat;
 using M.A.G.U.S.Qualifications.Scientific;
+using M.A.G.U.S.Qualifications.Specialities;
 using M.A.G.U.S.Utils;
 using System.Collections.Specialized;
 using System.Text.Json.Serialization;
@@ -49,6 +51,11 @@ public partial class Character
         return HasQualification(qualification, QualificationLevel.Base) || HasQualification(qualification, QualificationLevel.Master);
     }
 
+    public bool HasPsi()
+    {
+        return Qualifications.Any(q => q is IPsi);
+    }
+
     public bool HasQualification(Qualification qualification, QualificationLevel qualificationLevel)
     {
         if (qualification is AncientTongueLore ancientTongueLore)
@@ -66,10 +73,22 @@ public partial class Character
         return Qualifications.Any(q => q.Name == qualification.Name && q.QualificationLevel == qualificationLevel);
     }
 
+    public bool CanLearn(Qualification qualification, QualificationLevel qualificationLevel)
+    {
+        return CanLearn(qualification, qualificationLevel, out _);
+    }
+
     public bool CanLearn(Qualification qualification, QualificationLevel qualificationLevel, out int requiredQualificationPoints)
     {
         var learningBase = qualificationLevel == QualificationLevel.Base;
         if (qualification is GemstoneMagic && learningBase)
+        {
+            requiredQualificationPoints = 0;
+            return false;
+        }
+
+        var cantLearnPsi = Race.SpecialQualifications.GetSpeciality<CantLearnPsi>();
+        if (cantLearnPsi != null && qualification is IPsi)
         {
             requiredQualificationPoints = 0;
             return false;

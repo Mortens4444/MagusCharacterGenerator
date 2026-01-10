@@ -6,7 +6,11 @@ using M.A.G.U.S.Assistant.Services;
 using M.A.G.U.S.Assistant.Views;
 using M.A.G.U.S.GameSystem;
 using M.A.G.U.S.GameSystem.Attributes;
+using M.A.G.U.S.GameSystem.Psi;
+using M.A.G.U.S.GameSystem.Qualifications;
 using M.A.G.U.S.Interfaces;
+using M.A.G.U.S.Qualifications;
+using M.A.G.U.S.Qualifications.Scientific.Psi;
 using M.A.G.U.S.Races;
 using M.A.G.U.S.Utils;
 using Mtf.LanguageService.MAUI;
@@ -127,7 +131,23 @@ internal partial class CharacterGeneratorViewModel : CharacterViewModel
                     Character.MaxPainTolerancePoints += result;
                 }
             }
-
+            if (settingsService.AutoDistributeQualificationPoints)
+            {
+                var qualifications = QualificationLearner.Get();
+                if (!Character.HasPsi() && Character.CanLearn(new PsiPyarron()))
+                {
+                    Character.Learn(new PsiPyarron(), QualificationLevel.Base);
+                }
+                foreach (var qualification in qualifications)
+                {
+                    if (!Character.HasQualification(qualification) && Character.CanLearn(qualification, qualification.QualificationLevel))
+                    {
+                        Character.Learn(qualification, qualification.QualificationLevel);
+                    }
+                }
+                OnPropertyChanged(nameof(QualificationPoints));
+                OnPropertyChanged(nameof(Qualifications));
+            }
         }
         catch (Exception ex)
         {

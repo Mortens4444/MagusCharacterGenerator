@@ -33,8 +33,8 @@
 					-->
 				<HorizontalStackLayout HorizontalOptions="Center">
                     <mc:MenuItem ImageName="classes" LabelText="Classes" PageType="{x:Type mv:ClassesPage}" WidthRequest="100" HeightRequest="100" />
-                    <mc:MenuItem ImageName="races" LabelText="Races" PageType="{x:Type mv:RacesPage}" WidthRequest="100" HeightRequest="100" />
                     <mc:MenuItem ImageName="dice_rolL" LabelText="Dice roll" PageType="{x:Type mv:DiceRollPage}" WidthRequest="100" HeightRequest="100" />
+                    <mc:MenuItem ImageName="races" LabelText="Races" PageType="{x:Type mv:RacesPage}" WidthRequest="100" HeightRequest="100" />
 				</HorizontalStackLayout>
 
 				<HorizontalStackLayout HorizontalOptions="Center">
