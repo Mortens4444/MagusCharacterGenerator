@@ -3,6 +3,7 @@ using M.A.G.U.S.Assistant.Interfaces;
 using M.A.G.U.S.Assistant.Models;
 using M.A.G.U.S.Assistant.Services;
 using M.A.G.U.S.Assistant.ViewModels;
+using M.A.G.U.S.Models;
 using Mtf.LanguageService.MAUI;
 using Mtf.LanguageService.MAUI.Views;
 using Mtf.Maui.Controls.Messages;
@@ -16,6 +17,11 @@ internal partial class RollFormulaPage : NotifierPage
     private const double ShakeThresholdG = 2.2;
     private const int ShakeDebounceMs = 800;
     private readonly TaskCompletionSource<int> tcs = new();
+
+    public RollFormulaPage(ISoundPlayer soundPlayer, IShakeService shakeService, DiceThrowFormula rollFormula, string title)
+        : this(soundPlayer, shakeService, new RollFormula(rollFormula, title))
+    {
+    }
 
     public RollFormulaPage(ISoundPlayer soundPlayer, IShakeService shakeService, RollFormula rollFormula)
     {

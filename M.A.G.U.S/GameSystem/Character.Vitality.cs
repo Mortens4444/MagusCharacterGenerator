@@ -67,14 +67,14 @@ public partial class Character
             painTolerancePoints = doubledPainToleranceBase != null ? 2 * BaseClass.BasePainTolerancePoints : BaseClass.BasePainTolerancePoints;
             painTolerancePoints += MathHelper.GetAboveAverageValue(Stamina);
             painTolerancePoints += MathHelper.GetAboveAverageValue(Willpower);
-            if (BaseClass.AddPainToleranceOnFirstLevel || (settings?.AddPainToleranceOnFirstLevelForAllClass ?? true))
-            {
-                painTolerancePoints += BaseClass.GetPainToleranceModifier();
-            }
 
-            for (int i = 1; i < BaseClass.Level; i++)
+            var startLevel = BaseClass.AddPainToleranceOnFirstLevel || (settings?.AddPainToleranceOnFirstLevelForAllClass ?? true) ? 1 : 2;
+            if (settings?.AutoIncreasePainTolerance ?? true)
             {
-                painTolerancePoints += BaseClass.GetPainToleranceModifier();
+                for (var level = startLevel; level <= BaseClass.Level; level++)
+                {
+                    painTolerancePoints += BaseClass.GetPainToleranceModifier();
+                }
             }
         }
         else

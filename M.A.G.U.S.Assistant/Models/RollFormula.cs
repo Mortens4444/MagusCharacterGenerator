@@ -1,4 +1,5 @@
 ﻿using M.A.G.U.S.GameSystem.Attributes;
+using M.A.G.U.S.Models;
 using Mtf.Extensions;
 using Mtf.LanguageService.MAUI;
 using System.Reflection;
@@ -12,8 +13,8 @@ internal class RollFormula
     {
         Title = title;
         formula = Regex.Replace(formula, @" \((2x)\)$", "_2_Times", RegexOptions.IgnoreCase);
-        Formula = Regex.IsMatch(formula, @"^(1?D)", RegexOptions.IgnoreCase) ? $"_1{formula}" : formula.StartsWith('_') ? formula : $"_{formula}";
-        ThrowType = Enum.Parse<ThrowType>(formula);
+        Formula = formula.StartsWith('_') ? formula : $"_{formula}";
+        ThrowType = Enum.Parse<ThrowType>(Formula);
         Modifier = modifier;
         SpecialTraining = specialTraining;
     }
@@ -25,6 +26,17 @@ internal class RollFormula
         ThrowType = throwType;
         Modifier = modifier;
         SpecialTraining = specialTraining;
+    }
+
+    public RollFormula(DiceThrowFormula diceThrowFormula, string title = "Roll")
+    {
+        Title = title;
+        var formula = diceThrowFormula.Formula;
+        Formula = formula.StartsWith('_') ? formula : $"_{formula}";
+        ThrowType = Enum.Parse<ThrowType>(Formula);
+        Formula = ThrowType.GetDescription();
+        Modifier = diceThrowFormula.Modifier;
+        SpecialTraining = diceThrowFormula.HasSpecialTraining;
     }
 
     public RollFormula(PropertyInfo? propertyInfo, string title = "Roll")
@@ -54,5 +66,13 @@ internal class RollFormula
 
     public bool DefaultToAuto { get; set; } = true;
 
-    public string FullFormula => $"{Lng.Elem(ThrowType.GetDescription())} + {Modifier}";
+    public string FullFormula
+    {
+        get
+        {
+            var modPart = Modifier != 0 ? $" + {Modifier}" : String.Empty;
+            var specialPart = SpecialTraining ? $" + {Lng.Elem("Special Training")}" : String.Empty;
+            return $"{Lng.Elem(ThrowType.GetDescription())}{modPart}{specialPart}";
+        }
+    }
 }

@@ -1,6 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.Messaging;
 using M.A.G.U.S.Assistant.Interfaces;
+using M.A.G.U.S.Assistant.Models;
 using M.A.G.U.S.Assistant.Services;
 using M.A.G.U.S.Assistant.Views;
 using M.A.G.U.S.GameSystem;
@@ -107,15 +108,26 @@ internal partial class CharacterGeneratorViewModel : CharacterViewModel
 
                 foreach (var propertyInfo in skillProperties)
                 {
-                    var rollFormula = new Models.RollFormula(propertyInfo, $"{Lng.Elem("Create character")} - {propertyInfo?.Name}");
+                    var rollFormula = new RollFormula(propertyInfo, $"{Lng.Elem("Create character")} - {Lng.Elem(propertyInfo!.Name)}");
                     var page = new RollFormulaPage(soundPlayer, shakeService, rollFormula);
                     await ShellNavigationService.ShowPage(page).ConfigureAwait(true);
                     var result = await page.ResultTask.ConfigureAwait(true);
                     propertyInfo!.SetValue(instanceClass, result);
                 }
             }
-
             Character = new Character(settingsService, NameGenerator.Get(selectedRace), selectedRace, instanceClass);
+            if (!settingsService.AutoIncreasePainTolerance)
+            {
+                var formula = Character?.BaseClass.GetPainToleranceModifierFormula();
+                for (var level = Level; level <= Level; level++)
+                {
+                    var page = new RollFormulaPage(soundPlayer, shakeService, formula, $"{Lng.Elem("Create character")} - {Lng.Elem("PTP")} ({level}. {Lng.Elem("Level")})");
+                    await ShellNavigationService.ShowPage(page).ConfigureAwait(true);
+                    var result = await page.ResultTask.ConfigureAwait(true);
+                    Character.MaxPainTolerancePoints += result;
+                }
+            }
+
         }
         catch (Exception ex)
         {

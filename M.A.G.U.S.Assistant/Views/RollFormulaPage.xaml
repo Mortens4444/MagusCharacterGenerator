@@ -21,8 +21,8 @@
         <!-- MODE + CLOSE -->
         <Grid Grid.Row="0" ColumnDefinitions="*,Auto">
             <HorizontalStackLayout Spacing="12" HorizontalOptions="Center">
-                <Button Text="Auto" Command="{Binding SetAutoCommand}" IsEnabled="{Binding IsAuto, Converter={StaticResource InverseBooleanConverter}}" />
                 <Button Text="Manual" Command="{Binding SetManualCommand}" IsEnabled="{Binding IsAuto}" />
+                <Button Text="Auto" Command="{Binding SetAutoCommand}" IsEnabled="{Binding IsAuto, Converter={StaticResource InverseBooleanConverter}}" />
             </HorizontalStackLayout>
 
             <Button Grid.Column="1" Text="Close" Command="{Binding CloseCommand}" />
