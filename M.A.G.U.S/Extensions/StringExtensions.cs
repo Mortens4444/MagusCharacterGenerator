@@ -14,6 +14,6 @@ public static partial class StringExtensions
     [GeneratedRegex("[,]")]
     private static partial Regex FindCommas();
 
-    [GeneratedRegex(@"[\s\-,()']+")]
+    [GeneratedRegex(@"[\s\-,()'/]+")]
     private static partial Regex FindSpecialChars();
 }

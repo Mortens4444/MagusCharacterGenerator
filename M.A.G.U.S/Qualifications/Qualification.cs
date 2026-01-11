@@ -1,4 +1,5 @@
-﻿using M.A.G.U.S.GameSystem.Qualifications;
+﻿using M.A.G.U.S.Extensions;
+using M.A.G.U.S.GameSystem.Qualifications;
 
 namespace M.A.G.U.S.Qualifications;
 
@@ -24,6 +25,8 @@ public abstract class Qualification
     public virtual string Name => GetType().Name;
 
     public virtual string Description => String.Empty;
+
+    public virtual string ImageName => String.Concat(Name.ToImageName(), ".png");
 
     public QualificationLevel QualificationLevel { get; set; }
 

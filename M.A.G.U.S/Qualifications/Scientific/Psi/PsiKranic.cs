@@ -12,4 +12,6 @@ public class PsiKranic(QualificationLevel qualificationLevel = QualificationLeve
     public override int QpToMasterQualification => 55;
 
     public override string Name => "Psi, Krannish";
+
+    public override string ImageName => "psi.png";
 }

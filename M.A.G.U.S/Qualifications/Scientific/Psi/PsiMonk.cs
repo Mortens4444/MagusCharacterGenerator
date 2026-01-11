@@ -12,4 +12,6 @@ public class PsiMonk() : Qualification(QualificationLevel.Master, 1), IPsi
     public override int QpToBaseQualification => 10;
 
     public override int QpToMasterQualification => 55;
+
+    public override string ImageName => "psi.png";
 }

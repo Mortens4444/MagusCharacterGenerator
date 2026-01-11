@@ -26,7 +26,7 @@ internal partial class QualificationDetailsViewModel : BaseViewModel
         Name = Lng.Elem(Qualification.Name);
         Category = qualification.Category;
         Description = Qualification.Description;
-        ImageName = qualification.Name.ToImageName();
+        ImageName = Qualification.ImageName;
 
         LearnCommand = new RelayCommand(Learn, () => CanLearn);
         CloseCommand = new RelayCommand(OnClosed);

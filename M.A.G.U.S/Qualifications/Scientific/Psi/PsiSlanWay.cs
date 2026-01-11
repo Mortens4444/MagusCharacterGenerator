@@ -17,4 +17,6 @@ public class PsiSlanWay : Qualification, IPsi
     public override int QpToMasterQualification => 55;
 
     public override string Name => "Psi, Slan way";
+
+    public override string ImageName => "psi.png";
 }
