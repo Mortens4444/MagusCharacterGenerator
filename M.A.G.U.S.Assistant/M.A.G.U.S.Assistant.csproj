@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFrameworks>net10.0-android;net10.0-ios;net10.0-maccatalyst</TargetFrameworks>
     <TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('windows'))">$(TargetFrameworks);net10.0-windows10.0.19041.0</TargetFrameworks>
@@ -282,9 +282,7 @@
     <None Remove="Resources\Images\Qualifications\close_combat.png" />
     <None Remove="Resources\Images\Qualifications\coinage.png" />
     <None Remove="Resources\Images\Qualifications\courier_herald.png" />
-    <None Remove="Resources\Images\Qualifications\crafting.png" />
     <None Remove="Resources\Images\Qualifications\dancing.png" />
-    <None Remove="Resources\Images\Qualifications\deflection.png" />
     <None Remove="Resources\Images\Qualifications\demonology.png" />
     <None Remove="Resources\Images\Qualifications\disarmament.png" />
     <None Remove="Resources\Images\Qualifications\divination.png" />
@@ -298,13 +296,13 @@
     <None Remove="Resources\Images\Qualifications\forgery.png" />
     <None Remove="Resources\Images\Qualifications\gemstone_magic.png" />
     <None Remove="Resources\Images\Qualifications\ground_combat.png" />
+    <None Remove="Resources\Images\Qualifications\healing.png" />
     <None Remove="Resources\Images\Qualifications\heavy_armor_wearing.png" />
     <None Remove="Resources\Images\Qualifications\heraldry.png" />
     <None Remove="Resources\Images\Qualifications\herbalism.png" />
     <None Remove="Resources\Images\Qualifications\hiding.png" />
     <None Remove="Resources\Images\Qualifications\history_lore.png" />
     <None Remove="Resources\Images\Qualifications\human_insight.png" />
-    <None Remove="Resources\Images\Qualifications\hunting.png" />
     <None Remove="Resources\Images\Qualifications\juggling.png" />
     <None Remove="Resources\Images\Qualifications\jumping.png" />
     <None Remove="Resources\Images\Qualifications\knotting.png" />
@@ -315,14 +313,13 @@
     <None Remove="Resources\Images\Qualifications\local_knowledge.png" />
     <None Remove="Resources\Images\Qualifications\magic_lore.png" />
     <None Remove="Resources\Images\Qualifications\mechanics.png" />
+    <None Remove="Resources\Images\Qualifications\mountain_survival.png" />
     <None Remove="Resources\Images\Qualifications\onomatopoeia.png" />
-    <None Remove="Resources\Images\Qualifications\painting.png" />
     <None Remove="Resources\Images\Qualifications\phisiology.png" />
+    <None Remove="Resources\Images\Qualifications\physiology.png" />
     <None Remove="Resources\Images\Qualifications\pick_pocketing.png" />
     <None Remove="Resources\Images\Qualifications\plant_growing.png" />
-    <None Remove="Resources\Images\Qualifications\poisoning_and_neutralization.png" />
     <None Remove="Resources\Images\Qualifications\pottery.png" />
-    <None Remove="Resources\Images\Qualifications\reading_and_writing.png" />
     <None Remove="Resources\Images\Qualifications\religion_lore.png" />
     <None Remove="Resources\Images\Qualifications\riding.png" />
     <None Remove="Resources\Images\Qualifications\rope_making.png" />
@@ -336,7 +333,6 @@
     <None Remove="Resources\Images\Qualifications\sexual_culture.png" />
     <None Remove="Resources\Images\Qualifications\shield_use.png" />
     <None Remove="Resources\Images\Qualifications\singing.png" />
-    <None Remove="Resources\Images\Qualifications\singing_and_making_music.png" />
     <None Remove="Resources\Images\Qualifications\smithing.png" />
     <None Remove="Resources\Images\Qualifications\sneaking.png" />
     <None Remove="Resources\Images\Qualifications\spellcasting.png" />
@@ -353,6 +349,7 @@
     <None Remove="Resources\Images\Qualifications\tracking_concealment.png" />
     <None Remove="Resources\Images\Qualifications\tracking_evasion.png" />
     <None Remove="Resources\Images\Qualifications\trap_detection.png" />
+    <None Remove="Resources\Images\Qualifications\trap_setting.png" />
     <None Remove="Resources\Images\Qualifications\twin_combat.png" />
     <None Remove="Resources\Images\Qualifications\two_handed_combat.png" />
     <None Remove="Resources\Images\Qualifications\use_of_parrying_weapon.png" />
@@ -370,16 +367,13 @@
     <None Remove="Resources\Images\Races\dracker_2.png" />
     <None Remove="Resources\Images\Races\draquon.png" />
     <None Remove="Resources\Images\Races\dwarf.png" />
-    <None Remove="Resources\Images\Races\dwarf_2.png" />
     <None Remove="Resources\Images\Races\elf.png" />
     <None Remove="Resources\Images\Races\faun.png" />
     <None Remove="Resources\Images\Races\feenhar.png" />
     <None Remove="Resources\Images\Races\fire_elf.png" />
     <None Remove="Resources\Images\Races\half_elf.png" />
-    <None Remove="Resources\Images\Races\half_elf_2.png" />
     <None Remove="Resources\Images\Races\jann.png" />
     <None Remove="Resources\Images\Races\khal.png" />
-    <None Remove="Resources\Images\Races\khal_2.png" />
     <None Remove="Resources\Images\Races\reptilian.png" />
     <None Remove="Resources\Images\Races\wier.png" />
   </ItemGroup>
@@ -589,6 +583,11 @@
     <Folder Include="Resources\Images\Weapons\OtherWeapons\" />
   </ItemGroup>
   <ItemGroup>
+    <MauiImage Include="Resources\Images\Qualifications\healing.png" />
+    <MauiImage Include="Resources\Images\Qualifications\mountain_survival.png" />
+    <MauiImage Include="Resources\Images\Qualifications\physiology.png" />
+  </ItemGroup>
+  <ItemGroup>
     <MauiImage Include="Resources\Images\Accomodation\bath.png" />
     <MauiImage Include="Resources\Images\Accomodation\common_dormitory_room.png" />
     <MauiImage Include="Resources\Images\Accomodation\ornate_room.png" />
@@ -714,9 +713,9 @@
     <MauiImage Include="Resources\Images\Qualifications\close_combat.png" />
     <MauiImage Include="Resources\Images\Qualifications\coinage.png" />
     <MauiImage Include="Resources\Images\Qualifications\courier_herald.png" />
-    <MauiImage Include="Resources\Images\Qualifications\crafting.png" />
+    <MauiImage Include="Resources\Images\Qualifications\craft.png" />
     <MauiImage Include="Resources\Images\Qualifications\dancing.png" />
-    <MauiImage Include="Resources\Images\Qualifications\deflection.png" />
+    <MauiImage Include="Resources\Images\Qualifications\deflection_evasive_talk.png" />
     <MauiImage Include="Resources\Images\Qualifications\demonology.png" />
     <MauiImage Include="Resources\Images\Qualifications\disarmament.png" />
     <MauiImage Include="Resources\Images\Qualifications\divination.png" />
@@ -736,7 +735,7 @@
     <MauiImage Include="Resources\Images\Qualifications\hiding.png" />
     <MauiImage Include="Resources\Images\Qualifications\history_lore.png" />
     <MauiImage Include="Resources\Images\Qualifications\human_insight.png" />
-    <MauiImage Include="Resources\Images\Qualifications\hunting.png" />
+    <MauiImage Include="Resources\Images\Qualifications\hunting_fishing.png" />
     <MauiImage Include="Resources\Images\Qualifications\juggling.png" />
     <MauiImage Include="Resources\Images\Qualifications\jumping.png" />
     <MauiImage Include="Resources\Images\Qualifications\knotting.png" />
@@ -748,13 +747,12 @@
     <MauiImage Include="Resources\Images\Qualifications\magic_lore.png" />
     <MauiImage Include="Resources\Images\Qualifications\mechanics.png" />
     <MauiImage Include="Resources\Images\Qualifications\onomatopoeia.png" />
-    <MauiImage Include="Resources\Images\Qualifications\painting.png" />
-    <MauiImage Include="Resources\Images\Qualifications\phisiology.png" />
+    <MauiImage Include="Resources\Images\Qualifications\painting_drawing.png" />
     <MauiImage Include="Resources\Images\Qualifications\pick_pocketing.png" />
     <MauiImage Include="Resources\Images\Qualifications\plant_growing.png" />
-    <MauiImage Include="Resources\Images\Qualifications\poisoning_and_neutralization.png" />
+    <MauiImage Include="Resources\Images\Qualifications\poisoning_neutralization.png" />
     <MauiImage Include="Resources\Images\Qualifications\pottery.png" />
-    <MauiImage Include="Resources\Images\Qualifications\reading_and_writing.png" />
+    <MauiImage Include="Resources\Images\Qualifications\reading_writing.png" />
     <MauiImage Include="Resources\Images\Qualifications\religion_lore.png" />
     <MauiImage Include="Resources\Images\Qualifications\riding.png" />
     <MauiImage Include="Resources\Images\Qualifications\rope_making.png" />
@@ -768,7 +766,7 @@
     <MauiImage Include="Resources\Images\Qualifications\sexual_culture.png" />
     <MauiImage Include="Resources\Images\Qualifications\shield_use.png" />
     <MauiImage Include="Resources\Images\Qualifications\singing.png" />
-    <MauiImage Include="Resources\Images\Qualifications\singing_and_making_music.png" />
+    <MauiImage Include="Resources\Images\Qualifications\singing_making_music.png" />
     <MauiImage Include="Resources\Images\Qualifications\smithing.png" />
     <MauiImage Include="Resources\Images\Qualifications\sneaking.png" />
     <MauiImage Include="Resources\Images\Qualifications\spellcasting.png" />
@@ -785,6 +783,7 @@
     <MauiImage Include="Resources\Images\Qualifications\tracking_concealment.png" />
     <MauiImage Include="Resources\Images\Qualifications\tracking_evasion.png" />
     <MauiImage Include="Resources\Images\Qualifications\trap_detection.png" />
+    <MauiImage Include="Resources\Images\Qualifications\trap_setting.png" />
     <MauiImage Include="Resources\Images\Qualifications\twin_combat.png" />
     <MauiImage Include="Resources\Images\Qualifications\two_handed_combat.png" />
     <MauiImage Include="Resources\Images\Qualifications\use_of_parrying_weapon.png" />
@@ -802,16 +801,13 @@
     <MauiImage Include="Resources\Images\Races\dracker_2.png" />
     <MauiImage Include="Resources\Images\Races\draquon.png" />
     <MauiImage Include="Resources\Images\Races\dwarf.png" />
-    <MauiImage Include="Resources\Images\Races\dwarf_2.png" />
     <MauiImage Include="Resources\Images\Races\elf.png" />
     <MauiImage Include="Resources\Images\Races\faun.png" />
     <MauiImage Include="Resources\Images\Races\feenhar.png" />
     <MauiImage Include="Resources\Images\Races\fire_elf.png" />
     <MauiImage Include="Resources\Images\Races\half_elf.png" />
-    <MauiImage Include="Resources\Images\Races\half_elf_2.png" />
     <MauiImage Include="Resources\Images\Races\jann.png" />
     <MauiImage Include="Resources\Images\Races\khal.png" />
-    <MauiImage Include="Resources\Images\Races\khal_2.png" />
     <MauiImage Include="Resources\Images\Races\reptilian.png" />
     <MauiImage Include="Resources\Images\Races\wier.png" />
   </ItemGroup>
