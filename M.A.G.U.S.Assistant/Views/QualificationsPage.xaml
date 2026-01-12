@@ -41,13 +41,15 @@
             <CollectionView.ItemTemplate>
                 <DataTemplate x:DataType="m:Qualification">
                     <Border Stroke="Gray" StrokeThickness="1" Padding="8" Margin="0,4">
-                        <Grid ColumnDefinitions="*,Auto,Auto" ColumnSpacing="8" VerticalOptions="Center">
-                            <StackLayout Grid.Column="0" Spacing="2">
-                                <Label Text="{Binding Name, Converter={StaticResource TranslationConverter}}" FontAttributes="Bold"/>
+                        <Grid ColumnDefinitions="Auto,*,Auto,Auto" ColumnSpacing="8" VerticalOptions="Center">
+                            
+                            <Image Source="{Binding ImageName}" WidthRequest="40" HeightRequest="40" Aspect="AspectFill" Grid.Column="0" />
+                            <StackLayout Grid.Column="1" Spacing="2" VerticalOptions="Center">
+                                <Label Text="{Binding Name, Converter={StaticResource TranslationConverter}}" FontAttributes="Bold" />
                             </StackLayout>
 
-                            <Label Text="{Binding QpToBaseQualification}" Grid.Column="1" VerticalOptions="Center" FontAttributes="Bold"/>
-                            <Label Text="{Binding QpToMasterQualification}" Grid.Column="2" VerticalOptions="Center" HorizontalTextAlignment="End" MinimumWidthRequest="75" FontAttributes="Bold"/>
+                            <Label Text="{Binding QpToBaseQualification}" Grid.Column="2" VerticalOptions="Center" FontAttributes="Bold" />
+                            <Label Text="{Binding QpToMasterQualification}" Grid.Column="3" VerticalOptions="Center" HorizontalTextAlignment="End" MinimumWidthRequest="75" FontAttributes="Bold" />
                         </Grid>
                     </Border>
                 </DataTemplate>

@@ -228,8 +228,7 @@ sense_of_danger.png
 sense_of_mortal_peril.png
 sexual_culture.png
 shield_use.png
-singing.png
-singing_making_music.png
+singing_music_making.png
 smithing.png
 sneaking.png
 spellcasting.png
@@ -261,7 +260,6 @@ court_goblin.png
 court_orc.png
 dahr.png
 dracker.png
-dracker_2.png
 draquon.png
 dwarf.png
 elf.png

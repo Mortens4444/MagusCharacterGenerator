@@ -78,9 +78,9 @@
   </PropertyGroup>
   <ItemGroup>
     <!-- App Icon -->
-    <MauiIcon Include="Resources\AppIcon\appicon.svg" ForegroundFile="Resources\AppIcon\appiconfg.svg" Color="#000000" />
+    <MauiIcon Include="Resources\AppIcon\appicon.png" ForegroundFile="Resources\AppIcon\appicon.png" Color="#000000" />
     <!-- Splash Screen -->
-    <MauiSplashScreen Include="Resources\Splash\splash.svg" Color="#000000" />
+    <MauiSplashScreen Include="Resources\Splash\splash2.png" Color="#000000" />
     <!-- Images -->
     <MauiImage Include="Resources\Images\*" />
     <!-- Custom Fonts -->
@@ -332,7 +332,7 @@
     <None Remove="Resources\Images\Qualifications\sense_of_mortal_peril.png" />
     <None Remove="Resources\Images\Qualifications\sexual_culture.png" />
     <None Remove="Resources\Images\Qualifications\shield_use.png" />
-    <None Remove="Resources\Images\Qualifications\singing.png" />
+    <None Remove="Resources\Images\Qualifications\singing_music_making.png" />
     <None Remove="Resources\Images\Qualifications\smithing.png" />
     <None Remove="Resources\Images\Qualifications\sneaking.png" />
     <None Remove="Resources\Images\Qualifications\spellcasting.png" />
@@ -364,7 +364,6 @@
     <None Remove="Resources\Images\Races\court_orc.png" />
     <None Remove="Resources\Images\Races\dahr.png" />
     <None Remove="Resources\Images\Races\dracker.png" />
-    <None Remove="Resources\Images\Races\dracker_2.png" />
     <None Remove="Resources\Images\Races\draquon.png" />
     <None Remove="Resources\Images\Races\dwarf.png" />
     <None Remove="Resources\Images\Races\elf.png" />
@@ -765,8 +764,7 @@
     <MauiImage Include="Resources\Images\Qualifications\sense_of_mortal_peril.png" />
     <MauiImage Include="Resources\Images\Qualifications\sexual_culture.png" />
     <MauiImage Include="Resources\Images\Qualifications\shield_use.png" />
-    <MauiImage Include="Resources\Images\Qualifications\singing.png" />
-    <MauiImage Include="Resources\Images\Qualifications\singing_making_music.png" />
+    <MauiImage Include="Resources\Images\Qualifications\singing_music_making.png" />
     <MauiImage Include="Resources\Images\Qualifications\smithing.png" />
     <MauiImage Include="Resources\Images\Qualifications\sneaking.png" />
     <MauiImage Include="Resources\Images\Qualifications\spellcasting.png" />
@@ -798,7 +796,6 @@
     <MauiImage Include="Resources\Images\Races\court_orc.png" />
     <MauiImage Include="Resources\Images\Races\dahr.png" />
     <MauiImage Include="Resources\Images\Races\dracker.png" />
-    <MauiImage Include="Resources\Images\Races\dracker_2.png" />
     <MauiImage Include="Resources\Images\Races\draquon.png" />
     <MauiImage Include="Resources\Images\Races\dwarf.png" />
     <MauiImage Include="Resources\Images\Races\elf.png" />
