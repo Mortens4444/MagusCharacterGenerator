@@ -271,3 +271,4 @@ jann.png
 khal.png
 reptilian.png
 wier.png
+appicon.png

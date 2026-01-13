@@ -6,45 +6,36 @@ namespace M.A.G.U.S.Assistant.Services;
 
 internal class ShellNavigationService : INavigationService
 {
-    public static async Task ShowPage(Page page)
+    public static Task ShowAlert() => Shell.Current.DisplayAlertAsync("Title", "Message", "OK");
+
+    public static Task ShowPage(Page page)
     {
-        try
+        return MainThread.InvokeOnMainThreadAsync(async () =>
         {
-            var mainPage = Application.Current != null && Application.Current.Windows.Count > 0 ? Application.Current.Windows[0].Page : null;
-            if (mainPage?.Navigation != null)
+            try
             {
-                await mainPage.Navigation.PushAsync(page).ConfigureAwait(true);
+                await Shell.Current.Navigation.PushAsync(page).ConfigureAwait(true);
             }
-            else
+            catch (Exception ex)
             {
-                throw new InvalidOperationException("Main page or navigation is not available");
+                WeakReferenceMessenger.Default.Send(new ShowErrorMessage(ex));
             }
-        }
-        catch (Exception ex)
-        {
-            WeakReferenceMessenger.Default.Send(new ShowErrorMessage(ex));
-        }
+        });
     }
 
-    public static async Task ClosePage()
+    public static Task ClosePage()
     {
-        try
+        return MainThread.InvokeOnMainThreadAsync(async () =>
         {
-            var mainPage = Application.Current != null && Application.Current.Windows.Count > 0 ? Application.Current.Windows[0].Page : null;
-            if (mainPage?.Navigation != null)
+            try
             {
-                await mainPage.Navigation.PopAsync().ConfigureAwait(true);
+                await Shell.Current.Navigation.PopAsync().ConfigureAwait(true);
             }
-            else
+            catch (Exception ex)
             {
-                throw new InvalidOperationException("Main page or navigation is not available");
+                WeakReferenceMessenger.Default.Send(new ShowErrorMessage(ex));
             }
-        }
-        catch (Exception ex)
-        {
-            WeakReferenceMessenger.Default.Send(new ShowErrorMessage(ex));
-        }
-
+        });
     }
 
     public async Task NavigateToAsync(string route, object? parameter = null, bool animate = true)
@@ -56,13 +47,13 @@ internal class ShellNavigationService : INavigationService
 
         if (parameter == null)
         {
-            await Shell.Current.GoToAsync(route, animate: animate).ConfigureAwait(false);
+            await Shell.Current.GoToAsync(route, animate: animate).ConfigureAwait(true);
             return;
         }
 
         var id = NavigationParameterStore.Put(parameter);
         var routed = $"{route}?paramId={Uri.EscapeDataString(id)}";
-        await Shell.Current.GoToAsync(routed, animate: animate).ConfigureAwait(false);
+        await Shell.Current.GoToAsync(routed, animate: animate).ConfigureAwait(true);
     }
 
     public Task GoBackAsync(bool animate = true)

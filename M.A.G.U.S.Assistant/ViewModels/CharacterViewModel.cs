@@ -1,5 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.Input;
 using M.A.G.U.S.Assistant.Extensions;
+using M.A.G.U.S.Assistant.Interfaces;
+using M.A.G.U.S.Assistant.Services;
 using M.A.G.U.S.Enums;
 using M.A.G.U.S.GameSystem;
 using M.A.G.U.S.Interfaces;
@@ -7,6 +9,7 @@ using M.A.G.U.S.Qualifications;
 using M.A.G.U.S.Things;
 using M.A.G.U.S.Things.Armors;
 using M.A.G.U.S.Things.Weapons;
+using Mtf.LanguageService.MAUI;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.ComponentModel;
@@ -23,7 +26,13 @@ internal partial class CharacterViewModel : BaseViewModel, IDisposable
     private Weapon? primaryWeapon;
     private Weapon? secondaryWeapon;
     private Armor? selectedArmor;
+    private readonly IPrintService printService;
     private static readonly IEnumerable<Alignment> alignments = [.. Enum.GetValues<Alignment>()];
+
+    public CharacterViewModel(IPrintService printService)
+    {
+        this.printService = printService;
+    }
 
     public IEnumerable<Alignment> Alignments => alignments;
 
@@ -273,6 +282,7 @@ internal partial class CharacterViewModel : BaseViewModel, IDisposable
 
             case nameof(Character.Qualifications):
                 OnPropertyChanged(nameof(Qualifications));
+                OnPropertyChanged(nameof(QualificationPoints));
                 break;
 
             case nameof(Character.Money):
@@ -420,6 +430,23 @@ internal partial class CharacterViewModel : BaseViewModel, IDisposable
 
     [RelayCommand(CanExecute = nameof(CanAllocateCombatModifier))]
     public void DecrementAim() => Character?.ChangeAim(-1);
+
+    [RelayCommand]
+    public async Task Print()
+    {
+        if (Character == null)
+        {
+            return;
+        }
+
+        var answer = await Shell.Current.DisplayAlertAsync(Lng.Elem("Print"), Lng.Elem("Do you want to print character sheet?"), Lng.Elem("Yes"), Lng.Elem("No")).ConfigureAwait(false);
+        if (answer)
+        {
+            var htmlService = new CharacterHtmlService();
+            var htmlContent = htmlService.GenerateCharacterHtml(Character);
+            await printService.PrintHtmlAsync(htmlContent, $"M.A.G.U.S. - {Character.Name}").ConfigureAwait(false);
+        }
+    }
 
     private void Equipment_CollectionChanged(object? sender, NotifyCollectionChangedEventArgs e)
     {

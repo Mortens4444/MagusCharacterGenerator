@@ -166,8 +166,7 @@ internal partial class QualificationsViewModel : BaseViewModel
         {
             Character?.Learn(e.Qualification, e.QualificationLevel);
             ApplyFilter();
-            var mainPage = Application.Current != null && Application.Current.Windows.Count > 0 ? Application.Current.Windows[0].Page : null;
-            mainPage?.Navigation.PopAsync().ConfigureAwait(false);
+            ShellNavigationService.ClosePage();
         }
         catch (Exception ex)
         {

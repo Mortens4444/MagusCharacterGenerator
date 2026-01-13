@@ -10,7 +10,7 @@ using System.Text.Json.Serialization;
 
 namespace M.A.G.U.S.GameSystem;
 
-public partial class Character
+public partial class Character : ICharacter
 {
     private static readonly Fist fist = new();
     private CombatValueModifier selectedCombatValueModifier = Enums.CombatValueModifier.Base;

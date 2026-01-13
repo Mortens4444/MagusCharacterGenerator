@@ -14,7 +14,7 @@ internal partial class CharactersViewModel : CharacterListLoaderViewModel
     [RelayCommand]
     private async Task DeleteAllCharacterAsync()
     {
-        bool confirm = await Shell.Current.DisplayAlert(
+        bool confirm = await Shell.Current.DisplayAlertAsync(
             Lng.Elem("Delete Character"),
             Lng.Elem("Are you sure you want to delete all characters? This cannot be undone."),
             Lng.Elem("Delete"),
@@ -36,7 +36,7 @@ internal partial class CharactersViewModel : CharacterListLoaderViewModel
             return;
         }
 
-        bool confirm = await Shell.Current.DisplayAlert(
+        bool confirm = await Shell.Current.DisplayAlertAsync(
             Lng.Elem("Delete Character"),
             String.Format(Lng.Elem("Are you sure you want to delete '{0}'? This cannot be undone."), character.Name),
             Lng.Elem("Delete"),
@@ -59,8 +59,5 @@ internal partial class CharactersViewModel : CharacterListLoaderViewModel
         }
 
         await Shell.Current.GoToAsync($"CharacterDetailsPage?name={character.Name}").ConfigureAwait(false);
-
-        // Alternatively, for now, just show an alert if the page doesn't exist yet:
-        // await Shell.Current.DisplayAlert("Info", $"Selected: {character.Name}", "OK");
     }
 }

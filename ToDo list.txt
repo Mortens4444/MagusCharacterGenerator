@@ -1,30 +1,29 @@
-- Refactor: Remove Calculate functions from Character class - compute all properties, and have some new properties like AllocateCombatModifiers
+- Refactor: Remove Calculate functions from Character class - compute all properties
 - // Speeds shoud be filled from races
 
+- Combat simulator: L Semi-auto (current implementation), need Full-auto, and manual with RollFormulaPage
+- Add images to items (weapons, armors, etc.)
 - Change weapon/language attribute on qualifications
 - Buy poison
-- Save on Android did not show message from success operation
+- Save on Android did not show message from success operation sometimes (focused element?)
 - After buying something on the market, refresh the affordable items list
 - Max. Distance for a day S
 
-- Should appear in equipment list? For example Rune sword?
+- Should appear in equipment list? For example Rune sword? Changes the speed (horse or ship)?
 - Can the MapPage open PDFs also? M
-- Show Illnesses M
+- Show illnesses M
 - Other modifier tables M
 
-- Fix RoomPainterPage L
-- ClassesPage, show more info, like in RacesPage L
-- Character.cs pain resistance, mana, magic resistance L
+- Fix PaintWizardPage L
+- Character.cs mana, magic resistance L
 
 - Add more animations, images, and sounds XL
 - Psi XXL (Pszi diszciplínák)
 - Add more beasts to Bestiary XXXL (Bestiárium)
-- Combat simulator XXXL (Harcrendszer)
 - Show stories and paint a digital map, for them (map, and sounds), store story descriptions XXXL
 - Create a story for every qualification XXXL
 - Magic XXXL (Mágiarendszer)
 
-- Print Character sheet (Karakterlap nyomtatása)
 - Add new classes (Warriors, etc.) - Új kasztok (harcosok, stb...)
 - Ynev fõbb helyei
 - Karakter származás

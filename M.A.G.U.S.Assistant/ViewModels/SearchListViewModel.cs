@@ -284,8 +284,7 @@ internal partial class SearchListViewModel : BaseViewModel
         {
             Character?.Buy(args.Thing);
             ApplyFilter();
-            var mainPage = Application.Current != null && Application.Current.Windows.Count > 0 ? Application.Current.Windows[0].Page : null;
-            mainPage?.Navigation.PopAsync().ConfigureAwait(false);
+            ShellNavigationService.ClosePage();
         }
         catch (Exception ex)
         {

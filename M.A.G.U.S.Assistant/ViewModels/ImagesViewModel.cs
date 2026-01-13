@@ -1,5 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.Messaging;
 using M.A.G.U.S.Assistant.Models;
+using M.A.G.U.S.Assistant.Services;
 using M.A.G.U.S.Utils;
 using Mtf.LanguageService.MAUI;
 using Mtf.Maui.Controls.Messages;
@@ -130,12 +131,7 @@ internal partial class ImagesViewModel : BaseViewModel
         try
         {
             var page = new Views.ImagePreviewPage(item);
-            var windows = Application.Current?.Windows;
-            var mainPage = (windows != null && windows.Count > 0) ? windows[0].Page : null;
-            if (mainPage?.Navigation != null)
-            {
-                await mainPage.Navigation.PushModalAsync(page).ConfigureAwait(true);
-            }
+            await ShellNavigationService.ShowPage(page).ConfigureAwait(true);
         }
         catch (Exception ex)
         {

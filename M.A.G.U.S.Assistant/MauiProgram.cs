@@ -30,21 +30,27 @@ internal static class MauiProgram
 #endif
 
 #if ANDROID
+        builder.Services.AddSingleton<IPrintService, Platforms.Android.PrintService>();
         builder.Services.AddSingleton<ISoundPlayer, Platforms.Android.SoundPlayer>();
         builder.Services.AddSingleton<IShakeService, Platforms.Android.ShakeService>();
 #elif WINDOWS
+        builder.Services.AddSingleton<IPrintService, Platforms.Windows.PrintService>();
         builder.Services.AddSingleton<ISoundPlayer, Platforms.Windows.SoundPlayer>();
         builder.Services.AddSingleton<IShakeService, Platforms.Windows.ShakeService>();
 #elif IOS
+        builder.Services.AddSingleton<IPrintService, Platforms.iOS.PrintService>();
         builder.Services.AddSingleton<ISoundPlayer, Platforms.iOS.SoundPlayer>();
         builder.Services.AddSingleton<IShakeService, Platforms.iOS.ShakeService>();
 #elif MACCATALYST
+        builder.Services.AddSingleton<IPrintService, Platforms.MacCatalyst.PrintService>();
         builder.Services.AddSingleton<ISoundPlayer, Platforms.MacCatalyst.SoundPlayer>();
         builder.Services.AddSingleton<IShakeService, Platforms.MacCatalyst.ShakeService>();
 #elif TIZEN
+        builder.Services.AddSingleton<IPrintService, Platforms.Tizen.PrintService>();
         builder.Services.AddSingleton<ISoundPlayer, Platforms.Tizen.SoundPlayer>();
         builder.Services.AddSingleton<IShakeService, Platforms.Tizen.ShakeService>();
 #else
+        builder.Services.AddSingleton<IPrintService, StubPrintService>();
         builder.Services.AddSingleton<ISoundPlayer, StubSoundPlayer>();
         builder.Services.AddSingleton<IShakeService, StubShakeService>();
 #endif

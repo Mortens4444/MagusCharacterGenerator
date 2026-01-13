@@ -6,7 +6,6 @@ using M.A.G.U.S.Assistant.Services;
 using M.A.G.U.S.Assistant.Views;
 using M.A.G.U.S.GameSystem;
 using M.A.G.U.S.GameSystem.Attributes;
-using M.A.G.U.S.GameSystem.Psi;
 using M.A.G.U.S.GameSystem.Qualifications;
 using M.A.G.U.S.Interfaces;
 using M.A.G.U.S.Qualifications;
@@ -28,10 +27,12 @@ internal partial class CharacterGeneratorViewModel : CharacterViewModel
     private readonly CharacterService characterService;
     private readonly ISoundPlayer soundPlayer;
     private readonly IShakeService shakeService;
+    protected readonly IPrintService printService;
 
     private int baseClassLevel = 1;
 
-    public CharacterGeneratorViewModel(SettingsService settingsService, CharacterService characterService, ISoundPlayer soundPlayer, IShakeService shakeService)
+    public CharacterGeneratorViewModel(SettingsService settingsService, CharacterService characterService, ISoundPlayer soundPlayer, IShakeService shakeService, IPrintService printService)
+         : base(printService)
     {
         this.settingsService = settingsService;
         this.characterService = characterService;

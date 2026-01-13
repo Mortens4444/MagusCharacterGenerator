@@ -117,10 +117,10 @@
 //                    catch
 //                    {
 //                    }
-//                    Application.Current.MainPage.Navigation.PopModalAsync();
+//                    Shell.Current.Navigation.PopModalAsync();
 //                };
 //                page.Content = new StackLayout { Padding = 12, Children = { entry, ok } };
-//                await Application.Current.MainPage.Navigation.PushModalAsync(page);
+//                await Shell.Current.Navigation.PushModalAsync(page);
 //            });
 
 //            UndoCommand = new Command(() =>
