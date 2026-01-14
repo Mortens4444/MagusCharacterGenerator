@@ -62,8 +62,7 @@ internal static class MauiProgram
 
         AppDomain.CurrentDomain.UnhandledException += (sender, args) =>
         {
-            var exception = args.ExceptionObject as Exception;
-            if (exception != null)
+            if (args.ExceptionObject is Exception exception)
             {
                 Console.Error.WriteLine($"{exception}");
                 Debug.WriteLine($"Global error: {exception}");
@@ -127,7 +126,7 @@ internal static class MauiProgram
         var viewModelTypes = new List<Type>
         {
             typeof(AboutPageViewModel),
-            typeof(CanvasDrawable),
+            //typeof(CanvasDrawable),
             typeof(CharacterDetailsViewModel),
             typeof(CharacterGeneratorViewModel),
             typeof(CharactersViewModel),
@@ -135,7 +134,7 @@ internal static class MauiProgram
             typeof(CreatureDetailsViewModel),
             typeof(DiceRollViewModel),
             typeof(EncounterViewModel),
-            typeof(GraphicsCanvasDrawable),
+            //typeof(GraphicsCanvasDrawable),
             typeof(ImagesViewModel),
             typeof(ItemDetailsViewModel),
             typeof(LanguagesViewModel),

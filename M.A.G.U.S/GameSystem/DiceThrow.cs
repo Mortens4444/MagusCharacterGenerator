@@ -240,6 +240,8 @@ public class DiceThrow
             ThrowType._2D10 => _2D10(),
             ThrowType._3D10 => _3D10(),
             ThrowType._4D10 => _4D10(),
+            ThrowType._5D10 => _5D10(),
+            ThrowType._6D10 => _6D10(),
             ThrowType._10D10 => _10D10(),
             ThrowType._1D100 => _1D100(),
             ThrowType._3D100 => _3D100(),
@@ -295,6 +297,8 @@ public class DiceThrow
             ThrowType._2D10 => new Range { Min = 2, Max = 20 },
             ThrowType._3D10 => new Range { Min = 3, Max = 30 },
             ThrowType._4D10 => new Range { Min = 4, Max = 40 },
+            ThrowType._5D10 => new Range { Min = 5, Max = 50 },
+            ThrowType._6D10 => new Range { Min = 6, Max = 60 },
             ThrowType._10D10 => new Range { Min = 10, Max = 100 },
             ThrowType._1D100 => new Range { Max = 100 },
             ThrowType._3D100 => new Range { Min = 3, Max = 300 },
@@ -373,6 +377,16 @@ public class DiceThrow
     public int _4D10()
     {
         return RandomProvider.GetSecureRandomByte(4, 41);
+    }
+
+    public int _5D10()
+    {
+        return RandomProvider.GetSecureRandomByte(5, 51);
+    }
+
+    public int _6D10()
+    {
+        return RandomProvider.GetSecureRandomByte(6, 61);
     }
 
     public int _10D10()

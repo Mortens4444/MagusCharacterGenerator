@@ -3,6 +3,7 @@ using M.A.G.U.S.Interfaces;
 using Mtf.Extensions;
 using Mtf.LanguageService.MAUI;
 using System.Globalization;
+using System.Linq;
 using System.Text;
 
 namespace M.A.G.U.S.Assistant.Services;
@@ -176,7 +177,7 @@ internal class CharacterHtmlService
 
             .Append("<div class='section'><div class='section-title'>" + Lng.Elem("Equipment") + "</div>")
             .Append("<div style='padding: 5px;'>")
-            .Append(String.Join(", ", character.Equipment.Select(e => e.Name)))
+            .Append(String.Join(Environment.NewLine, character.Equipment.Select(e => Lng.Elem(e.Name))))
             .Append($"<br/><br/><b>{Lng.Elem("Total weight (kg)")}:</b> {character.TotalEquipmentWeight}")
             .Append("</div></div>")
 

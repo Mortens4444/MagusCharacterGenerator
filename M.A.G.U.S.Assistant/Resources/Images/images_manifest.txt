@@ -266,9 +266,15 @@ elf.png
 faun.png
 feenhar.png
 fire_elf.png
+forest_giant.png
+frost_giant.png
 half_elf.png
+human.png
 jann.png
 khal.png
+mountain_giant.png
 reptilian.png
+see_giant.png
+swamp_giant.png
+white_orc.png
 wier.png
-appicon.png

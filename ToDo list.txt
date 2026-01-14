@@ -1,6 +1,7 @@
 - Refactor: Remove Calculate functions from Character class - compute all properties
 - // Speeds shoud be filled from races
 
+- MaxDieNumber setting & property in Charatrer class + DieCounter on UI - Resetable? If DieCount == MaxDieCount => Status = Alive->Dead S
 - Combat simulator: L Semi-auto (current implementation), need Full-auto, and manual with RollFormulaPage
 - Add images to items (weapons, armors, etc.)
 - Change weapon/language attribute on qualifications

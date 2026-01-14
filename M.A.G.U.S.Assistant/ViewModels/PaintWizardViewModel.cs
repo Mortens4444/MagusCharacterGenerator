@@ -1,244 +1,62 @@
-﻿using M.A.G.U.S.Assistant.Models;
+﻿using CommunityToolkit.Mvvm.Input;
+using M.A.G.U.S.Assistant.Enums;
+using M.A.G.U.S.Assistant.Interfaces;
 using System.Collections.ObjectModel;
-using System.Windows.Input;
 
 namespace M.A.G.U.S.Assistant.ViewModels;
 
-internal class PaintWizardViewModel : BaseViewModel
+internal partial class PaintWizardViewModel : BaseViewModel
 {
-    // alap: 1 px = 1 cm (pixelsPerCm = 1), a Zoom megszorozza
-    private const int PixelsPerCmBase = 1;
-
-    public ObservableCollection<PaletteItem> PaletteItems { get; } = [];
-    public ObservableCollection<PlacedItem> PlacedItems { get; } = [];
-
-    private double zoom = 1.0;
-    public double Zoom
-    {
-        get => zoom;
-        set
-        {
-            if (Math.Abs(zoom - value) < 0.001) return;
-            zoom = value;
-            OnPropertyChanged();
-            OnPropertyChanged(nameof(ScaleFactor));
-        }
-    }
-
-    public double ScaleFactor => PixelsPerCmBase * Zoom;
-
-    private string widthMeters = "5";
-    public string WidthMeters
-    {
-        get => widthMeters;
-        set
-        {
-            if (widthMeters == value) return;
-            widthMeters = value ?? String.Empty;
-            OnPropertyChanged();
-        }
-    }
-
-    private string heightMeters = "3";
-    public string HeightMeters
-    {
-        get => heightMeters;
-        set
-        {
-            if (heightMeters == value) return;
-            heightMeters = value ?? String.Empty;
-            OnPropertyChanged();
-        }
-    }
-
-    public double CanvasWidth => Math.Max(1, MetersToCmDouble(WidthMeters)) * ScaleFactor;
-    public double CanvasHeight => Math.Max(1, MetersToCmDouble(HeightMeters)) * ScaleFactor;
-
-    public string GridInfo => $"{MetersToCmInt(WidthMeters)}×{MetersToCmInt(HeightMeters)} cm";
-
-    private string status = String.Empty;
-    public string Status
-    {
-        get => status;
-        set { status = value; OnPropertyChanged(); }
-    }
-
-    public ICommand CreateGridCommand { get; }
-    public ICommand ToggleDrawModeCommand { get; }
-    public ICommand UndoCommand { get; }
-    public ICommand ClearCommand { get; }
-
-    public PaletteItem? SelectedPaletteItem { get; set; }
-
-    // occupancy: set of occupied cells in cm coordinates (x,y)
-    private readonly HashSet<(float x, float y)> occupancy = new HashSet<(float x, float y)>();
-
-    private readonly Stack<Action> undoStack = new Stack<Action>();
+    private IRelayCommand? selectToolCommand;
+    private IRelayCommand? selectColorCommand;
+    private IDrawableElement? currentElement;
+    private PaintTool activeTool = PaintTool.Pencil;
+    private Color selectedColor = GetDefaultColor();
+    private string defaultText = "M.A.G.U.S.";
 
     public PaintWizardViewModel()
     {
-        Zoom = 1.0;
-        CreateGridCommand = new RelayCommand(_ => OnCreateGrid());
-        ToggleDrawModeCommand = new RelayCommand(_ => ToggleDrawMode());
-        UndoCommand = new RelayCommand(_ => Undo());
-        ClearCommand = new RelayCommand(_ => Clear());
-
-        SeedPalette();
+        DrawingLogic = new PaintCanvasDrawable { ViewModel = this };
     }
 
-    private void SeedPalette()
+    public IDrawableElement? CurrentElement
     {
-        PaletteItems.Add(new PaletteItem { Id = "plant1", Name = "Paradicsom", Image = "tomato.png", WidthCm = 30, HeightCm = 30 });
-        PaletteItems.Add(new PaletteItem { Id = "plant2", Name = "Paprika", Image = "pepper.png", WidthCm = 30, HeightCm = 30 });
-        PaletteItems.Add(new PaletteItem { Id = "bench", Name = "Pad", Image = "bench.png", WidthCm = 100, HeightCm = 40 });
-        PaletteItems.Add(new PaletteItem { Id = "wall", Name = "Fal (ceruza)", Image = String.Empty, WidthCm = 10, HeightCm = 10 });
+        get => currentElement;
+        set => SetProperty(ref currentElement, value);
     }
 
-    private bool isDrawingWalls;
-    public bool IsDrawingWalls
+    public PaintCanvasDrawable DrawingLogic { get; }
+
+    public ObservableCollection<IDrawableElement> Elements { get; } = [];
+
+    public PaintTool ActiveTool
     {
-        get => isDrawingWalls;
-        set { isDrawingWalls = value; OnPropertyChanged(nameof(IsDrawingWalls)); }
+        get => activeTool;
+        set => SetProperty(ref activeTool, value);
     }
 
-    private void ToggleDrawMode() => IsDrawingWalls = !IsDrawingWalls;
-
-    private void OnCreateGrid()
+    public Color SelectedColor
     {
-        occupancy.Clear();
-        PlacedItems.Clear();
-        undoStack.Clear();
-        OnPropertyChanged(nameof(CanvasWidth));
-        OnPropertyChanged(nameof(CanvasHeight));
-        OnPropertyChanged(nameof(GridInfo));
-        Status = $"Tábla: {GridInfo}";
+        get => selectedColor;
+        set => SetProperty(ref selectedColor, value);
     }
 
-    private void Undo()
+    public string DefaultText
     {
-        if (!undoStack.Any())
-        {
-            return;
-        }
-
-        var action = undoStack.Pop();
-        action?.Invoke();
+        get => defaultText;
+        set => SetProperty(ref defaultText, value);
     }
 
-    private void Clear()
-    {
-        PlacedItems.Clear();
-        occupancy.Clear();
-        undoStack.Clear();
-    }
+    public List<Color> Palette { get; } = [ Colors.Black, Colors.White, Colors.Red, Colors.Green, Colors.Blue, Colors.Yellow, Colors.Purple, Colors.Orange,
+        Colors.Gray, Colors.Brown, Colors.Cyan, Colors.Magenta, Colors.Lime, Colors.Maroon, Colors.Navy, Colors.Olive ];
 
-    public bool TryPlaceFromPalette(PaletteItem item, int xCm, int yCm)
-    {
-        if (item == null) return false;
-        if (!CanPlace(item.WidthCm, item.HeightCm, xCm, yCm)) return false;
+    private static Color GetDefaultColor() => Colors.Black;
 
-        var placed = new PlacedItem
-        {
-            PaletteItemId = item.Id,
-            Width = item.WidthCm,
-            Height = item.HeightCm,
-            X = xCm,
-            Y = yCm,
-            //Image = item.Image
-        };
+    public IRelayCommand SelectToolCommand => selectToolCommand ??= new RelayCommand<PaintTool>(SelectTool);
 
-        PlacedItems.Add(placed);
-        MarkOccupied(placed, true);
+    public IRelayCommand SelectColorCommand => selectColorCommand ??= new RelayCommand<Color>(SelectColor);
 
-        // undo
-        undoStack.Push(() =>
-        {
-            PlacedItems.Remove(placed);
-            MarkOccupied(placed, false);
-        });
+    private void SelectTool(PaintTool tool) => ActiveTool = tool;
 
-        Status = $"Elhelyezve: {item.Name} @ {xCm}cm × {yCm}cm";
-        return true;
-    }
-
-    public bool CanPlace(int widthCm, int heightCm, int xCm, int yCm)
-    {
-        var w = Math.Max(0, widthCm);
-        var h = Math.Max(0, heightCm);
-        for (var xx = xCm; xx < xCm + w; xx++)
-            for (var yy = yCm; yy < yCm + h; yy++)
-            {
-                if (xx < 0 || yy < 0) return false;
-                if (xx >= MetersToCmInt(WidthMeters) || yy >= MetersToCmInt(HeightMeters)) return false;
-                if (occupancy.Contains((xx, yy))) return false;
-            }
-
-        return true;
-    }
-
-    private void MarkOccupied(PlacedItem placed, bool occupy)
-    {
-        for (var xx = placed.X; xx < placed.X + placed.Width; xx++)
-        {
-            for (var yy = placed.Y; yy < placed.Y + placed.Height; yy++)
-            {
-                var key = (xx, yy);
-                if (occupy)
-                {
-                    occupancy.Add(key);
-                }
-                else
-                {
-                    occupancy.Remove(key);
-                }
-            }
-        }
-    }
-
-    // Wall drawing: toggle cell occupancy as wall cell
-    public void ToggleWallCell(int xCm, int yCm)
-    {
-        if (xCm < 0 || yCm < 0) return;
-        if (xCm >= MetersToCmInt(WidthMeters) || yCm >= MetersToCmInt(HeightMeters)) return;
-        var key = (xCm, yCm);
-        if (occupancy.Contains(key))
-        {
-            occupancy.Remove(key);
-            // remove any placed item that fully covers cell? for simplicity skip
-        }
-        else
-        {
-            occupancy.Add(key);
-            // represent as PlacedItem of type "wall"
-            var p = new PlacedItem
-            {
-                PaletteItemId = "wall",
-                X = xCm,
-                Y = yCm,
-                Width = 1,
-                Height = 1,
-                //Image = String.Empty
-            };
-            PlacedItems.Add(p);
-            undoStack.Push(() =>
-            {
-                PlacedItems.Remove(p);
-                occupancy.Remove(key);
-            });
-        }
-    }
-
-    private static int MetersToCmInt(string metersText)
-    {
-        return (int)Math.Max(0, Math.Floor(MetersToCmDouble(metersText)));
-    }
-
-    private static double MetersToCmDouble(string metersText)
-    {
-        if (double.TryParse(metersText, out var val))
-        {
-            return val * 100.0;
-        }
-        return 0.0;
-    }
+    private void SelectColor(Color? color) => SelectedColor = color ?? GetDefaultColor();
 }

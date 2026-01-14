@@ -1,193 +1,163 @@
+using M.A.G.U.S.Assistant.Enums;
+using M.A.G.U.S.Assistant.Interfaces;
+using M.A.G.U.S.Assistant.Models.Drawing;
 using M.A.G.U.S.Assistant.ViewModels;
-using Microsoft.Maui.Layouts;
 using Mtf.LanguageService.MAUI.Views;
 
 namespace M.A.G.U.S.Assistant.Views;
 
 internal partial class PaintWizardPage : NotifierPage
 {
-    private readonly PaintWizardViewModel vm;
-
-    private bool isPanning;
-    private double lastPanX, lastPanY;
-    private double startTranslationX, startTranslationY;
+    private readonly PaintWizardViewModel viewModel;
+    private PointF startPoint;
 
     public PaintWizardPage(PaintWizardViewModel viewModel)
     {
         InitializeComponent();
         BindingContext = viewModel;
-        vm = viewModel;
-        
-        // alap grid létrehozás (vagy felhasználó hozza létre)
-        vm.CreateGridCommand.Execute(null);
-
-        // események
-        //GridCanvas.PointerPressed += GridCanvas_PointerPressed;
-        //GridCanvas.PointerMoved += GridCanvas_PointerMoved;
-        //GridCanvas.PointerReleased += GridCanvas_PointerReleased;
-
-        // Zoom: a Slider a VM.Zoom-ot állítja — hallgatunk változásra
-        vm.PropertyChanged += Vm_PropertyChanged;
-
-        // canvas méretének frissítése
-        UpdateCanvasSize();
+        this.viewModel = viewModel;
     }
 
-    private void Vm_PropertyChanged(object? sender, System.ComponentModel.PropertyChangedEventArgs e)
+    public override bool Equals(object? obj)
     {
-        if (e.PropertyName == nameof(PaintWizardViewModel.CanvasWidth) ||
-            e.PropertyName == nameof(PaintWizardViewModel.CanvasHeight) ||
-            e.PropertyName == nameof(PaintWizardViewModel.Zoom))
+        return obj is PaintWizardPage page && EqualityComparer<PointF>.Default.Equals(startPoint, page.startPoint);
+    }
+
+    public override int GetHashCode()
+    {
+        return startPoint.GetHashCode();
+    }
+
+    private void OnTouchStart(object sender, TouchEventArgs e)
+    {
+        startPoint = e.Touches[0];
+
+        switch (viewModel.ActiveTool)
         {
-            UpdateCanvasSize();
-            RefreshPlacedItems();
+            case PaintTool.Picker:
+                viewModel.Elements.Add(new TextElement
+                {
+                    Text = viewModel.DefaultText,
+                    Position = startPoint,
+                    Color = viewModel.SelectedColor
+                });
+                CanvasView.Invalidate();
+                break;
+            case PaintTool.Pencil:
+                var line = new LineElement { Color = viewModel.SelectedColor, Thickness = 2f };
+                line.Points.Add(startPoint);
+                viewModel.CurrentElement = line;
+                break;
+            case PaintTool.Rect:
+                viewModel.CurrentElement = new RectangleElement { Color = viewModel.SelectedColor, Rect = new RectF(startPoint, SizeF.Zero) };
+                break;
+            case PaintTool.Circle:
+                viewModel.CurrentElement = new CircleElement { Color = viewModel.SelectedColor, Center = startPoint, Radius = 0 };
+                break;
+            case PaintTool.Line:
+                viewModel.CurrentElement = new LineElement { Color = viewModel.SelectedColor, Points = { startPoint, startPoint } };
+                break;
+
+            case PaintTool.Fill:
+                var hit = viewModel.Elements.LastOrDefault(el => IsHit(el, startPoint));
+                if (hit != null)
+                {
+                    switch (hit)
+                    {
+                        case RectangleElement rect:
+                            rect.IsFilled = true;
+                            rect.FillColor = viewModel.SelectedColor;
+                            break;
+                        case CircleElement circle:
+                            circle.IsFilled = true;
+                            circle.FillColor = viewModel.SelectedColor;
+                            break;
+                    }
+                    CanvasView.Invalidate();
+                }
+                break;
         }
     }
 
-    private void UpdateCanvasSize()
+    private void OnTouchDrag(object sender, TouchEventArgs e)
     {
-        GridCanvas.WidthRequest = vm.CanvasWidth;
-        GridCanvas.HeightRequest = vm.CanvasHeight;
+        var currentPoint = e.Touches[0];
 
-        // ZoomContainer skálázása: egyszerûen a Scale tulajdonságot használjuk
-        ZoomContainer.Scale = (float)vm.Zoom;
-    }
-
-    private void RefreshPlacedItems()
-    {
-        GridCanvas.Children.Clear();
-
-        foreach (var p in vm.PlacedItems.ToList())
+        if (viewModel.ActiveTool == PaintTool.Eraser)
         {
-            var left = p.X * vm.ScaleFactor;
-            var top = p.Y * vm.ScaleFactor;
-            var w = p.Width * vm.ScaleFactor;
-            var h = p.Height * vm.ScaleFactor;
-
-            // ha van kép, készítünk Image-et, különben BoxView-et
-            if (!String.IsNullOrEmpty(p.Image))
+            // Megkeressük az elsõ olyan elemet, ami közel van az ujjunkhoz és töröljük
+            var hit = viewModel.Elements.FirstOrDefault(el => IsHit(el, currentPoint));
+            if (hit != null)
             {
-                // ha fájl: ImageSource.FromFile; ha embedded resource: FromResource(...)
-                var source = ImageSource.FromFile(p.Image);
-                var img = new Image { Source = source, Aspect = Aspect.Fill };
-                AbsoluteLayout.SetLayoutBounds(img, new Rect(left, top, w, h));
-                AbsoluteLayout.SetLayoutFlags(img, AbsoluteLayoutFlags.None);
-                GridCanvas.Children.Add(img);
+                viewModel.Elements.Remove(hit);
+                CanvasView.Invalidate();
             }
-            else
-            {
-                var box = new BoxView { Color = Colors.SaddleBrown, Opacity = 0.8 };
-                AbsoluteLayout.SetLayoutBounds(box, new Rect(left, top, w, h));
-                AbsoluteLayout.SetLayoutFlags(box, AbsoluteLayoutFlags.None);
-                GridCanvas.Children.Add(box);
-            }
-
-            //if (!String.IsNullOrEmpty(p.Image))
-            //{
-            //    var img = new Image { Source = p.Image, Aspect = Aspect.Fill };
-            //    AbsoluteLayout.SetLayoutBounds(img, new Rect(left, top, w, h));
-            //    AbsoluteLayout.SetLayoutFlags(img, AbsoluteLayoutFlags.None);
-            //    GridCanvas.Children.Add(img);
-            //}
-            //else
-            //{
-            //    var box = new BoxView { Color = Colors.SaddleBrown, Opacity = 0.8 };
-            //    AbsoluteLayout.SetLayoutBounds(box, new Rect(left, top, w, h));
-            //    AbsoluteLayout.SetLayoutFlags(box, AbsoluteLayoutFlags.None);
-            //    GridCanvas.Children.Add(box);
-            //}
+            return;
         }
 
-        // opcionálisan: rajzold meg a rácsot (gridline-okat)
-        DrawGridLines();
+        if (viewModel.CurrentElement == null)
+        {
+            return;
+        }
+
+        switch (viewModel.CurrentElement)
+        {
+            case LineElement line:
+                if (viewModel.ActiveTool == PaintTool.Pencil)
+                {
+                    line.Points.Add(currentPoint);
+                }
+                else
+                {
+                    line.Points[1] = currentPoint;
+                }
+
+                break;
+
+            case RectangleElement rect:
+                float x = Math.Min(this.startPoint.X, currentPoint.X);
+                float y = Math.Min(this.startPoint.Y, currentPoint.Y);
+                float w = Math.Abs(this.startPoint.X - currentPoint.X);
+                float h = Math.Abs(this.startPoint.Y - currentPoint.Y);
+                rect.Rect = new RectF(x, y, w, h);
+                break;
+
+            case CircleElement circle:
+                circle.Radius = (float)Math.Sqrt(Math.Pow(currentPoint.X - this.startPoint.X, 2) + Math.Pow(currentPoint.Y - this.startPoint.Y, 2));
+                break;
+        }
+        CanvasView.Invalidate();
     }
 
-    private void DrawGridLines()
+    private void OnTouchEnd(object sender, TouchEventArgs e)
     {
-        // egyszerû grid: minden 10 cm nagyobb vonalas
-        // Ehhez lehetne GraphicsView, de most egyszerû vizuális segédvonalak nem kötelezõek.
-        // (Ha kell, beépíthetjük Microsoft.Maui.Graphics GraphicsView-t)
+        if (viewModel.CurrentElement != null)
+        {
+            viewModel.Elements.Add(viewModel.CurrentElement);
+            viewModel.CurrentElement = null;
+            CanvasView.Invalidate();
+        }
     }
 
-    #region Pointer (kattintás, ceruza)
-    //private void GridCanvas_PointerPressed(object sender, Microsoft.Maui.Controls.PointerEventArgs e)
-    //{
-    //    var pt = e.GetPosition(GridCanvas);
-    //    // átváltás: pont (px) -> cm (logikai) (figyelj a Scale-re: GridCanvas már skálázva a ZoomContainer-on)
-    //    var xCm = (int)Math.Floor(pt.Value.X / vm.ScaleFactor);
-    //    var yCm = (int)Math.Floor(pt.Value.Y / vm.ScaleFactor);
-
-    //    if (vm.IsDrawingWalls)
-    //    {
-    //        vm.ToggleWallCell(xCm, yCm);
-    //        RefreshPlacedItems();
-    //        return;
-    //    }
-
-    //    // Ha van kiválasztott paletta elem, elhelyezzük (snap az adott cellre)
-    //    var selected = vm.SelectedPaletteItem;
-    //    if (selected != null)
-    //    {
-    //        var ok = vm.TryPlaceFromPalette(selected, xCm, yCm);
-    //        if (ok) RefreshPlacedItems();
-    //    }
-
-    //    // panning esetén (késõbb)
-    //    isPanning = true;
-    //    lastPanX = pt.Value.X;
-    //    lastPanY = pt.Value.Y;
-    //    startTranslationX = ZoomContainer.TranslationX;
-    //    startTranslationY = ZoomContainer.TranslationY;
-    //}
-
-    private void GridCanvas_Tapped(object sender, TappedEventArgs e)
+    private static bool IsHit(IDrawableElement el, PointF p)
     {
-        // Megjegyzés: TapGestureRecognizer maga nem adja vissza az abszolút X/Y pozíciót.
-        // Ha pozíció kell, lásd alábbi "precíz pozíció" rész.
-        var selected = vm.SelectedPaletteItem;
-        if (selected != null)
+        switch (el)
         {
-            // ide még csak egyszerûbb elhelyezést tehetsz (pl. center vagy elõre számolt koordináta)
-            var centerX = (int)(vm.CanvasWidth / (2 * vm.ScaleFactor));
-            var centerY = (int)(vm.CanvasHeight / (2 * vm.ScaleFactor));
-            if (vm.TryPlaceFromPalette(selected, centerX, centerY))
-                RefreshPlacedItems();
+            case CircleElement c:
+                return Math.Sqrt(Math.Pow(p.X - c.Center.X, 2) + Math.Pow(p.Y - c.Center.Y, 2)) <= c.Radius + 5;
+
+            case RectangleElement r:
+                return r.Rect.Contains(p);
+
+            case LineElement l:
+                return l.Points.Any(pt => Math.Abs(pt.X - p.X) < 10 && Math.Abs(pt.Y - p.Y) < 10);
+
+            case TextElement t:
+                var textRect = new RectF(t.Position.X, t.Position.Y - 20, 100, 20);
+                return textRect.Contains(p);
+
+            default:
+                return false;
         }
     }
-
-    private void GridCanvas_PanUpdated(object sender, PanUpdatedEventArgs e)
-    {
-        // PanUpdatedEventArgs: e.StatusType, e.TotalX, e.TotalY
-        // Ezt használhatod panning-re (nézet mozgatás), illetve rajzolásra ha megfelelõ logikát építesz.
-        if (e.StatusType == GestureStatus.Started)
-        {
-            // kezdõ pozíció mentése, stb.
-        }
-        else if (e.StatusType == GestureStatus.Running)
-        {
-            // panning: forgasd / translate a ZoomContainer-t az e.TotalX/e.TotalY alapján
-            ZoomContainer.TranslationX = startTranslationX + (float)e.TotalX;
-            ZoomContainer.TranslationY = startTranslationY + (float)e.TotalY;
-        }
-        else if (e.StatusType == GestureStatus.Completed || e.StatusType == GestureStatus.Canceled)
-        {
-            // befejezés
-        }
-    }
-
-    //private void GridCanvas_PointerMoved(object sender, Microsoft.Maui.Controls.PointerEventArgs e)
-    //{
-    //    if (!isPanning) return;
-    //    var pt = e.GetPosition(GridCanvas);
-    //    var dx = pt.Value.X - lastPanX;
-    //    var dy = pt.Value.Y - lastPanY;
-    //    ZoomContainer.TranslationX = (float)(startTranslationX + dx);
-    //    ZoomContainer.TranslationY = (float)(startTranslationY + dy);
-    //}
-
-    //private void GridCanvas_PointerReleased(object sender, Microsoft.Maui.Controls.PointerEventArgs e)
-    //{
-    //    isPanning = false;
-    //}
-    #endregion
 }
