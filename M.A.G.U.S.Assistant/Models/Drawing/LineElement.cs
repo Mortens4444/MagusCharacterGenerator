@@ -12,7 +12,10 @@ internal class LineElement : IDrawableElement
 
     public bool Contains(PointF point)
     {
-        if (Points == null || Points.Count < 2) return false;
+        if (Points == null || Points.Count < 2)
+        {
+            return false;
+        }
 
         // A tolerancia határozza meg, milyen pontosan kell rákattintani (pixelben)
         // Érdemes legalább a Thickness felét + pár pixelt ráhagyni

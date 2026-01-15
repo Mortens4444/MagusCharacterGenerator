@@ -4,52 +4,102 @@
                  xmlns:v="clr-namespace:Mtf.LanguageService.MAUI.Views;assembly=Mtf.LanguageService.MAUI"
                  xmlns:vm="clr-namespace:M.A.G.U.S.Assistant.ViewModels"
                  xmlns:m="clr-namespace:M.A.G.U.S.Assistant.Models"
+                 xmlns:conv="clr-namespace:M.A.G.U.S.Assistant.Converters"
                  xmlns:local="clr-namespace:M.A.G.U.S.Assistant.Enums"
                  x:Class="M.A.G.U.S.Assistant.Views.PaintWizardPage"
                  x:ClassModifier="internal"
                  x:DataType="vm:PaintWizardViewModel"
                  Title="Paint">
-    <Grid RowDefinitions="*, 100" ColumnDefinitions="100, *, 100" BackgroundColor="Black">
+
+    <v:NotifierPage.Resources>
+        <ResourceDictionary>
+            <conv:ToolToThicknessConverter x:Key="ToolToThicknessConverter" />
+            <conv:ColorComparisonConverter x:Key="ColorComparisonConverter" />
+        </ResourceDictionary>
+    </v:NotifierPage.Resources>
+    
+    <Grid RowDefinitions="*, 120" ColumnDefinitions="80, *, 80" BackgroundColor="Black">
 
         <VerticalStackLayout Grid.Column="0" Spacing="10" Padding="10" BackgroundColor="#222">
-            <Button Text="✎" Command="{Binding SelectToolCommand}" CommandParameter="{x:Static local:PaintTool.Pencil}"/>
-            <Button Text="Fill" FontSize="12" Command="{Binding SelectToolCommand}" CommandParameter="{x:Static local:PaintTool.Fill}"/>
-            <Button Text="Pick" FontSize="12" Command="{Binding SelectToolCommand}" CommandParameter="{x:Static local:PaintTool.Picker}"/>
-            <Entry Text="{Binding DefaultText}" Placeholder="M.A.G.U.S." TextColor="White" BackgroundColor="#333" />
-            <Button Text="Era" FontSize="12" Command="{Binding SelectToolCommand}" CommandParameter="{x:Static local:PaintTool.Eraser}"/>
+            <Button Text="⟲" Clicked="OnNewPageClicked" BackgroundColor="Orange" ToolTipProperties.Text="Clear all"/>
+
+            <BoxView HeightRequest="1" BackgroundColor="#444" HorizontalOptions="Fill" Margin="0,5" />
+            
+            <Button Text="⛋" FontSize="12" Command="{Binding SelectToolCommand}" CommandParameter="{x:Static local:PaintTool.Fill}"
+                    BorderWidth="{Binding ActiveTool, Converter={StaticResource ToolToThicknessConverter}, ConverterParameter={x:Static local:PaintTool.Fill}}" BorderColor="White" />
+            <Button Text="Æ" FontSize="12" Command="{Binding SelectToolCommand}" CommandParameter="{x:Static local:PaintTool.Text}"
+                    BorderWidth="{Binding ActiveTool, Converter={StaticResource ToolToThicknessConverter}, ConverterParameter={x:Static local:PaintTool.Text}}" BorderColor="White" />
+            <Button Text="×" FontSize="12" Command="{Binding SelectToolCommand}" CommandParameter="{x:Static local:PaintTool.Eraser}"
+                    BorderWidth="{Binding ActiveTool, Converter={StaticResource ToolToThicknessConverter}, ConverterParameter={x:Static local:PaintTool.Eraser}}" BorderColor="White" />
+
+            <Label Text="BG" FontSize="10" HorizontalOptions="Center"/>
+            <Border WidthRequest="40" HeightRequest="40" BackgroundColor="{Binding BackgroundColor}">
+                <Border.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding SetBackgroundCommand}"/>
+                </Border.GestureRecognizers>
+            </Border>
         </VerticalStackLayout>
 
-        <Border Grid.Column="1" Margin="5" StrokeThickness="0" BackgroundColor="White" VerticalOptions="Fill" HorizontalOptions="Fill">
+        <Border Grid.Column="1" Margin="5" StrokeThickness="0" BackgroundColor="{Binding BackgroundColor}" VerticalOptions="Fill" HorizontalOptions="Fill">
             <GraphicsView x:Name="CanvasView"
                           Drawable="{Binding DrawingLogic}"
-                          BackgroundColor="White"
+                          BackgroundColor="Transparent"
                           StartInteraction="OnTouchStart"
                           DragInteraction="OnTouchDrag"
                           EndInteraction="OnTouchEnd" />
         </Border>
 
         <VerticalStackLayout Grid.Column="2" Spacing="10" Padding="10" BackgroundColor="#222">
-            <Button Text="—" Command="{Binding SelectToolCommand}" CommandParameter="{x:Static local:PaintTool.Line}"/>
-            <Button Text="⬜" Command="{Binding SelectToolCommand}" CommandParameter="{x:Static local:PaintTool.Rect}"/>
-            <Button Text="◯" Command="{Binding SelectToolCommand}" CommandParameter="{x:Static local:PaintTool.Circle}"/>
+            <Button Text="✎" Command="{Binding SelectToolCommand}" CommandParameter="{x:Static local:PaintTool.Pencil}"
+                    BorderWidth="{Binding ActiveTool, Converter={StaticResource ToolToThicknessConverter}, ConverterParameter={x:Static local:PaintTool.Pencil}}" BorderColor="White" />
+            <Button Text="—" Command="{Binding SelectToolCommand}" CommandParameter="{x:Static local:PaintTool.Line}"
+                    BorderWidth="{Binding ActiveTool, Converter={StaticResource ToolToThicknessConverter}, ConverterParameter={x:Static local:PaintTool.Line}}" BorderColor="White" />
+            <Button Text="⬜" Command="{Binding SelectToolCommand}" CommandParameter="{x:Static local:PaintTool.Rect}"
+                    BorderWidth="{Binding ActiveTool, Converter={StaticResource ToolToThicknessConverter}, ConverterParameter={x:Static local:PaintTool.Rect}}" BorderColor="White" />
+            <Button Text="◯" Command="{Binding SelectToolCommand}" CommandParameter="{x:Static local:PaintTool.Circle}"
+                    BorderWidth="{Binding ActiveTool, Converter={StaticResource ToolToThicknessConverter}, ConverterParameter={x:Static local:PaintTool.Circle}}" BorderColor="White" />
+
+            <BoxView HeightRequest="1" BackgroundColor="#444" HorizontalOptions="Fill" Margin="0,5" />
+
+            <Label Text="Fill" FontSize="10" HorizontalOptions="Center" TextColor="Gray"/>
+            <CheckBox IsChecked="{Binding AutoFill}" HorizontalOptions="Center" Color="Orange"/>
+
+            <Label Text="Oval" FontSize="10" HorizontalOptions="Center" TextColor="Gray"/>
+            <CheckBox IsChecked="{Binding IsCircleRectMode}" HorizontalOptions="Center" Color="Cyan"/>
         </VerticalStackLayout>
 
-        <FlexLayout Grid.Row="1" Grid.ColumnSpan="3" Wrap="Wrap" JustifyContent="Center" AlignItems="Center" BackgroundColor="#111">
-            <BindableLayout.ItemsSource>
-                <Binding Path="Palette" />
-            </BindableLayout.ItemsSource>
-            <BindableLayout.ItemTemplate>
-                <DataTemplate x:DataType="Color">
-                    <Border WidthRequest="35" HeightRequest="35" Margin="3" BackgroundColor="{Binding .}">
-                        <Border.StrokeShape>
-                            <RoundRectangle CornerRadius="5"/>
-                        </Border.StrokeShape>
-                        <Border.GestureRecognizers>
-                            <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type vm:PaintWizardViewModel}}, Path=SelectColorCommand}" CommandParameter="{Binding .}"/>
-                        </Border.GestureRecognizers>
-                    </Border>
-                </DataTemplate>
-            </BindableLayout.ItemTemplate>
-        </FlexLayout>
+        <VerticalStackLayout Grid.Row="1" Grid.ColumnSpan="3" BackgroundColor="#111">
+            <Entry Text="{Binding DefaultText}" Placeholder="𝕸.𝕬.𝕲.𝖀.𝕾. - Ҝ.Ա.Ψ.Ᵽ.⅃." TextColor="White" BackgroundColor="#333" />
+            <FlexLayout Wrap="Wrap" JustifyContent="Center" Padding="5">
+                <BindableLayout.ItemsSource>
+                    <Binding Path="Palette" />
+                </BindableLayout.ItemsSource>
+                <BindableLayout.ItemTemplate>
+                    <DataTemplate x:DataType="Color">
+                        <Border WidthRequest="40" HeightRequest="40" Margin="5" BackgroundColor="{Binding .}">
+                            <Border.Stroke>
+                                <MultiBinding Converter="{StaticResource ColorComparisonConverter}" ConverterParameter="Stroke">
+                                    <Binding Source="{RelativeSource AncestorType={x:Type vm:PaintWizardViewModel}}" Path="SelectedColor" />
+                                    <Binding Path="." />
+                                </MultiBinding>
+                            </Border.Stroke>
+                            <Border.StrokeThickness>
+                                <MultiBinding Converter="{StaticResource ColorComparisonConverter}" ConverterParameter="Thickness">
+                                    <Binding Source="{RelativeSource AncestorType={x:Type vm:PaintWizardViewModel}}" Path="SelectedColor" />
+                                    <Binding Path="." />
+                                </MultiBinding>
+                            </Border.StrokeThickness>
+                            <Border.StrokeShape>
+                                <RoundRectangle CornerRadius="8"/>
+                            </Border.StrokeShape>
+                            <Border.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type vm:PaintWizardViewModel}}, Path=SelectColorCommand}" CommandParameter="{Binding .}"/>
+                            </Border.GestureRecognizers>
+                            <BoxView Color="Transparent" />
+                        </Border>
+                    </DataTemplate>
+                </BindableLayout.ItemTemplate>
+            </FlexLayout>
+        </VerticalStackLayout>
     </Grid>
 </v:NotifierPage>

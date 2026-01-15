@@ -1,7 +1,7 @@
 using M.A.G.U.S.Assistant.Enums;
-using M.A.G.U.S.Assistant.Interfaces;
 using M.A.G.U.S.Assistant.Models.Drawing;
 using M.A.G.U.S.Assistant.ViewModels;
+using Mtf.LanguageService.MAUI;
 using Mtf.LanguageService.MAUI.Views;
 
 namespace M.A.G.U.S.Assistant.Views;
@@ -16,6 +16,15 @@ internal partial class PaintWizardPage : NotifierPage
         InitializeComponent();
         BindingContext = viewModel;
         this.viewModel = viewModel;
+
+        viewModel.PropertyChanged += (s, e) => {
+            if (e.PropertyName == nameof(viewModel.BackgroundColor))
+            {
+                MainThread.BeginInvokeOnMainThread(() => {
+                    CanvasView?.Invalidate();
+                });
+            }
+        };
     }
 
     public override bool Equals(object? obj)
@@ -31,10 +40,15 @@ internal partial class PaintWizardPage : NotifierPage
     private void OnTouchStart(object sender, TouchEventArgs e)
     {
         startPoint = e.Touches[0];
+        if (PerformEraser(startPoint))
+        {
+            return;
+        }
 
+        var currentFillColor = viewModel.AutoFill ? viewModel.SelectedColor : Colors.Transparent;
         switch (viewModel.ActiveTool)
         {
-            case PaintTool.Picker:
+            case PaintTool.Text:
                 viewModel.Elements.Add(new TextElement
                 {
                     Text = viewModel.DefaultText,
@@ -49,17 +63,17 @@ internal partial class PaintWizardPage : NotifierPage
                 viewModel.CurrentElement = line;
                 break;
             case PaintTool.Rect:
-                viewModel.CurrentElement = new RectangleElement { Color = viewModel.SelectedColor, Rect = new RectF(startPoint, SizeF.Zero) };
+                viewModel.CurrentElement = new RectangleElement { Color = viewModel.SelectedColor, Rect = new RectF(startPoint, SizeF.Zero), FillColor = currentFillColor };
                 break;
             case PaintTool.Circle:
-                viewModel.CurrentElement = new CircleElement { Color = viewModel.SelectedColor, Center = startPoint, Radius = 0 };
+                viewModel.CurrentElement = new CircleElement { Color = viewModel.SelectedColor, Center = startPoint, Radius = 0, FillColor = currentFillColor };
                 break;
             case PaintTool.Line:
                 viewModel.CurrentElement = new LineElement { Color = viewModel.SelectedColor, Points = { startPoint, startPoint } };
                 break;
 
             case PaintTool.Fill:
-                var hit = viewModel.Elements.LastOrDefault(el => IsHit(el, startPoint));
+                var hit = viewModel.Elements.LastOrDefault(el => el.Contains(startPoint));
                 if (hit != null)
                 {
                     switch (hit)
@@ -81,15 +95,8 @@ internal partial class PaintWizardPage : NotifierPage
     {
         var currentPoint = e.Touches[0];
 
-        if (viewModel.ActiveTool == PaintTool.Eraser)
+        if (PerformEraser(currentPoint))
         {
-            // Megkeressük az elsõ olyan elemet, ami közel van az ujjunkhoz és töröljük
-            var hit = viewModel.Elements.FirstOrDefault(el => IsHit(el, currentPoint));
-            if (hit != null)
-            {
-                viewModel.Elements.Remove(hit);
-                CanvasView.Invalidate();
-            }
             return;
         }
 
@@ -121,10 +128,42 @@ internal partial class PaintWizardPage : NotifierPage
                 break;
 
             case CircleElement circle:
-                circle.Radius = (float)Math.Sqrt(Math.Pow(currentPoint.X - this.startPoint.X, 2) + Math.Pow(currentPoint.Y - this.startPoint.Y, 2));
+                if (viewModel.IsCircleRectMode) // Ez a checkboxod értéke
+                {
+                    circle.IsBoundedByRect = true;
+                    float x1 = Math.Min(startPoint.X, currentPoint.X);
+                    float y1 = Math.Min(startPoint.Y, currentPoint.Y);
+                    float w1 = Math.Abs(startPoint.X - currentPoint.X);
+                    float h1 = Math.Abs(startPoint.Y - currentPoint.Y);
+                    circle.BoundingRect = new RectF(x1, y1, w1, h1);
+                }
+                else
+                {
+                    circle.IsBoundedByRect = false;
+                    circle.Center = startPoint;
+                    circle.Radius = startPoint.Distance(currentPoint);
+                }
+                //circle.Radius = (float)Math.Sqrt(Math.Pow(currentPoint.X - this.startPoint.X, 2) + Math.Pow(currentPoint.Y - this.startPoint.Y, 2));
                 break;
         }
         CanvasView.Invalidate();
+    }
+
+    private bool PerformEraser(PointF currentPoint)
+    {
+        if (viewModel.ActiveTool == PaintTool.Eraser)
+        {
+            // Megkeressük az elsõ olyan elemet, ami közel van az ujjunkhoz és töröljük
+            var hit = viewModel.Elements.FirstOrDefault(el => el.Contains(currentPoint));
+            if (hit != null)
+            {
+                viewModel.Elements.Remove(hit);
+                CanvasView.Invalidate();
+                return true;
+            }
+        }
+
+        return false;
     }
 
     private void OnTouchEnd(object sender, TouchEventArgs e)
@@ -137,25 +176,13 @@ internal partial class PaintWizardPage : NotifierPage
         }
     }
 
-    private static bool IsHit(IDrawableElement el, PointF p)
+    private async void OnNewPageClicked(object sender, EventArgs e)
     {
-        switch (el)
+        bool answer = await DisplayAlertAsync(Lng.Elem("Clear all"), Lng.Elem("Are you sure you want to clear the board?"), Lng.Elem("Yes"), Lng.Elem("No")).ConfigureAwait(true);
+        if (answer)
         {
-            case CircleElement c:
-                return c.Contains(p);
-
-            case RectangleElement r:
-                return r.Contains(p);
-
-            case LineElement l:
-                return l.Points.Any(pt => Math.Abs(pt.X - p.X) < 10 && Math.Abs(pt.Y - p.Y) < 10);
-
-            case TextElement t:
-                var textRect = new RectF(t.Position.X, t.Position.Y - 20, 100, 20);
-                return textRect.Contains(p);
-
-            default:
-                return false;
+            viewModel.Elements.Clear();
+            CanvasView.Invalidate();
         }
     }
 }

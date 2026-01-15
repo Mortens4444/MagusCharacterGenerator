@@ -12,7 +12,10 @@ internal partial class PaintWizardViewModel : BaseViewModel
     private IDrawableElement? currentElement;
     private PaintTool activeTool = PaintTool.Pencil;
     private Color selectedColor = GetDefaultColor();
-    private string defaultText = "M.A.G.U.S.";
+    private string defaultText = "𝕸.𝕬.𝕲.𝖀.𝕾. - Ҝ.Ա.Ψ.Ᵽ.⅃.";
+    private bool autoFill;
+    private bool isCircleRectMode;
+    private Color backgroundColor = Colors.White;
 
     public PaintWizardViewModel()
     {
@@ -41,10 +44,28 @@ internal partial class PaintWizardViewModel : BaseViewModel
         set => SetProperty(ref selectedColor, value);
     }
 
+    public Color BackgroundColor
+    {
+        get => backgroundColor;
+        set => SetProperty(ref backgroundColor, value);
+    }
+
     public string DefaultText
     {
         get => defaultText;
         set => SetProperty(ref defaultText, value);
+    }
+
+    public bool AutoFill
+    {
+        get => autoFill;
+        set => SetProperty(ref autoFill, value);
+    }
+
+    public bool IsCircleRectMode
+    {
+        get => isCircleRectMode;
+        set => SetProperty(ref isCircleRectMode, value);
     }
 
     public List<Color> Palette { get; } = [ Colors.Black, Colors.White, Colors.Red, Colors.Green, Colors.Blue, Colors.Yellow, Colors.Purple, Colors.Orange,
@@ -55,6 +76,12 @@ internal partial class PaintWizardViewModel : BaseViewModel
     public IRelayCommand SelectToolCommand => selectToolCommand ??= new RelayCommand<PaintTool>(SelectTool);
 
     public IRelayCommand SelectColorCommand => selectColorCommand ??= new RelayCommand<Color>(SelectColor);
+
+    [RelayCommand]
+    private void SetBackground()
+    {
+        BackgroundColor = SelectedColor;
+    }
 
     private void SelectTool(PaintTool tool) => ActiveTool = tool;
 

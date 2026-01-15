@@ -1,6 +1,7 @@
 - Refactor: Remove Calculate functions from Character class - compute all properties
 - // Speeds shoud be filled from races
 
+- Add circle drawing setting on PaintWizardPage -> Paint component should be in Mtf.MAUI.Controls
 - New race: https://kalandozok.hu/cikkgyujtemeny/kieg%C3%A9sz%C3%ADt%C5%91k/fajok/j%C3%A1tszhat%C3%B3-fajok/fajok-k%C3%B6nyve-r62/
 - Need loot system (taking the night elf weapon after defeting him, and equipment list)
 - MaxDieNumber setting & property in Charatrer class + DieCounter on UI - Resetable? If DieCount == MaxDieCount => Status = Alive->Dead S

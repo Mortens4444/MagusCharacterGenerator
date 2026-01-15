@@ -14,7 +14,10 @@ internal class TextElement : IDrawableElement
 
     public bool Contains(PointF point)
     {
-        if (string.IsNullOrEmpty(Text)) return false;
+        if (String.IsNullOrEmpty(Text))
+        {
+            return false;
+        }
 
         // Becsült szélesség: a karakterek száma szorozva a betűméret egy részével.
         // A 0.6f egy átlagos szorzó a legtöbb betűtípushoz (monospace-nél pontosabb, arányosnál biztonsági ráhagyás).
