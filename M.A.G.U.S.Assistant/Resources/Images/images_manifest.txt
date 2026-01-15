@@ -11,6 +11,18 @@ abbit_steel_full_plate.png
 abbit_steel_half_plate.png
 abbit_steel_plate_armor.png
 abbit_steel_scale_armor.png
+bronze_breastplate.png
+bronze_full_plate.png
+bronze_scale_armor.png
+mithril_breastplate.png
+mithril_full_plate.png
+mithril_half_plate.png
+mithril_plate_armor.png
+mithril_scale_armor.png
+steel_breastplate.png
+steel_full_plate.png
+steel_half_plate.png
+steel_scale_armor.png
 adachnoa.png
 barracuda.png
 bat.png
@@ -54,6 +66,8 @@ wolf.png
 wolf_2.png
 wolves.png
 zombie.png
+boots.png
+riding_boots.png
 healing.png
 mountain_survival.png
 physiology.png

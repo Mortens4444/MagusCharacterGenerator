@@ -161,6 +161,18 @@
     <None Remove="Resources\Images\Armors\abbit_steel_full_plate.png" />
     <None Remove="Resources\Images\Armors\abbit_steel_half_plate.png" />
     <None Remove="Resources\Images\Armors\abbit_steel_scale_armor.png" />
+    <None Remove="Resources\Images\Armors\bronze_breastplate.png" />
+    <None Remove="Resources\Images\Armors\bronze_full_plate.png" />
+    <None Remove="Resources\Images\Armors\bronze_scale_armor.png" />
+    <None Remove="Resources\Images\Armors\mithril_breastplate.png" />
+    <None Remove="Resources\Images\Armors\mithril_full_plate.png" />
+    <None Remove="Resources\Images\Armors\mithril_half_plate.png" />
+    <None Remove="Resources\Images\Armors\mithril_plate_armor.png" />
+    <None Remove="Resources\Images\Armors\mithril_scale_armor.png" />
+    <None Remove="Resources\Images\Armors\steel_breastplate.png" />
+    <None Remove="Resources\Images\Armors\steel_full_plate.png" />
+    <None Remove="Resources\Images\Armors\steel_half_plate.png" />
+    <None Remove="Resources\Images\Armors\steel_scale_armor.png" />
     <None Remove="Resources\Images\Bestiary\adachnoa.png" />
     <None Remove="Resources\Images\Bestiary\barracuda.png" />
     <None Remove="Resources\Images\Bestiary\bat.png" />
@@ -226,6 +238,8 @@
     <None Remove="Resources\Images\Classes\witch.png" />
     <None Remove="Resources\Images\Classes\witch_2.png" />
     <None Remove="Resources\Images\Classes\wizard.png" />
+    <None Remove="Resources\Images\Clothes\boots.png" />
+    <None Remove="Resources\Images\Clothes\riding_boots.png" />
     <None Remove="Resources\Images\Gemstones\agate.png" />
     <None Remove="Resources\Images\Gemstones\alexandrite.png" />
     <None Remove="Resources\Images\Gemstones\amber.png" />
@@ -402,6 +416,18 @@
     <MauiImage Include="Resources\Images\Armors\abbit_steel_half_plate.png" />
     <MauiImage Include="Resources\Images\Armors\abbit_steel_plate_armor.png" />
     <MauiImage Include="Resources\Images\Armors\abbit_steel_scale_armor.png" />
+    <MauiImage Include="Resources\Images\Armors\bronze_breastplate.png" />
+    <MauiImage Include="Resources\Images\Armors\bronze_full_plate.png" />
+    <MauiImage Include="Resources\Images\Armors\bronze_scale_armor.png" />
+    <MauiImage Include="Resources\Images\Armors\mithril_breastplate.png" />
+    <MauiImage Include="Resources\Images\Armors\mithril_full_plate.png" />
+    <MauiImage Include="Resources\Images\Armors\mithril_half_plate.png" />
+    <MauiImage Include="Resources\Images\Armors\mithril_plate_armor.png" />
+    <MauiImage Include="Resources\Images\Armors\mithril_scale_armor.png" />
+    <MauiImage Include="Resources\Images\Armors\steel_breastplate.png" />
+    <MauiImage Include="Resources\Images\Armors\steel_full_plate.png" />
+    <MauiImage Include="Resources\Images\Armors\steel_half_plate.png" />
+    <MauiImage Include="Resources\Images\Armors\steel_scale_armor.png" />
     <MauiImage Include="Resources\Images\Bestiary\adachnoa.png" />
     <MauiImage Include="Resources\Images\Bestiary\barracuda.png" />
     <MauiImage Include="Resources\Images\Bestiary\bat.png" />
@@ -589,7 +615,6 @@
     </MauiXaml>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Resources\Images\Clothes\" />
     <Folder Include="Resources\Images\Debauchery\" />
     <Folder Include="Resources\Images\Travelling\" />
     <Folder Include="Resources\Images\Trappings\" />
@@ -602,6 +627,8 @@
     <Folder Include="Resources\Images\Weapons\OtherWeapons\" />
   </ItemGroup>
   <ItemGroup>
+    <MauiImage Include="Resources\Images\Clothes\boots.png" />
+    <MauiImage Include="Resources\Images\Clothes\riding_boots.png" />
     <MauiImage Include="Resources\Images\Qualifications\healing.png" />
     <MauiImage Include="Resources\Images\Qualifications\mountain_survival.png" />
     <MauiImage Include="Resources\Images\Qualifications\physiology.png" />

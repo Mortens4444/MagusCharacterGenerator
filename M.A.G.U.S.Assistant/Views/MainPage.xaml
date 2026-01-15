@@ -44,12 +44,12 @@
             
 			<HorizontalStackLayout HorizontalOptions="Center">
                 <mc:MenuItem ImageName="sounds" LabelText="Sounds" PageType="{x:Type mv:SoundPage}" WidthRequest="100" HeightRequest="100" />
+                <mc:MenuItem ImageName="paint" LabelText="Paint" PageType="{x:Type mv:PaintWizardPage}" WidthRequest="100" HeightRequest="100" />
                 <mc:MenuItem ImageName="images" LabelText="Images" PageType="{x:Type mv:ImagesPage}" WidthRequest="100" HeightRequest="100" />
-                <mc:MenuItem ImageName="settings" LabelText="Settings" PageType="{x:Type mv:SettingsPage}" WidthRequest="100" HeightRequest="100" />
 			</HorizontalStackLayout>
 
             <HorizontalStackLayout HorizontalOptions="Center">
-                <mc:MenuItem ImageName="paint" LabelText="Paint" PageType="{x:Type mv:PaintWizardPage}" WidthRequest="100" HeightRequest="100" />
+                <mc:MenuItem ImageName="settings" LabelText="Settings" PageType="{x:Type mv:SettingsPage}" WidthRequest="100" HeightRequest="100" />
                 <mc:MenuItem ImageName="about" LabelText="About" PageType="{x:Type mv:AboutPage}" WidthRequest="100" HeightRequest="100" />
             </HorizontalStackLayout>
         </VerticalStackLayout>
