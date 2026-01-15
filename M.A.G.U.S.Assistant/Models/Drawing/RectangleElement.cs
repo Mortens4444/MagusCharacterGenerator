@@ -8,19 +8,19 @@ public class RectangleElement : IDrawableElement
 
     public RectF Rect { get; set; }
 
-    public bool IsFilled { get; set; }
-
-    public Color FillColor { get; set; }
+    public Color FillColor { get; set; } = Colors.Transparent;
 
     public void Draw(ICanvas canvas)
     {
         canvas.StrokeColor = Color;
         canvas.StrokeSize = 2;
-        if (IsFilled)
+        if (FillColor != Colors.Transparent)
         {
             canvas.FillColor = FillColor;
             canvas.FillRectangle(Rect.X, Rect.Y, Rect.Width, Rect.Height);
         }
         canvas.DrawRectangle(Rect.X, Rect.Y, Rect.Width, Rect.Height);
     }
+
+    public bool Contains(PointF p) => Rect.Contains(p);
 }

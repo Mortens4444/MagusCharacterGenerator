@@ -373,10 +373,13 @@
     <None Remove="Resources\Images\Races\forest_giant.png" />
     <None Remove="Resources\Images\Races\frost_giant.png" />
     <None Remove="Resources\Images\Races\half_elf.png" />
+    <None Remove="Resources\Images\Races\half_orc.png" />
     <None Remove="Resources\Images\Races\human.png" />
     <None Remove="Resources\Images\Races\jann.png" />
     <None Remove="Resources\Images\Races\khal.png" />
+    <None Remove="Resources\Images\Races\kyr.png" />
     <None Remove="Resources\Images\Races\mountain_giant.png" />
+    <None Remove="Resources\Images\Races\night_elf.png" />
     <None Remove="Resources\Images\Races\reptilian.png" />
     <None Remove="Resources\Images\Races\see_giant.png" />
     <None Remove="Resources\Images\Races\swamp_giant.png" />
@@ -812,10 +815,13 @@
     <MauiImage Include="Resources\Images\Races\forest_giant.png" />
     <MauiImage Include="Resources\Images\Races\frost_giant.png" />
     <MauiImage Include="Resources\Images\Races\half_elf.png" />
+    <MauiImage Include="Resources\Images\Races\half_orc.png" />
     <MauiImage Include="Resources\Images\Races\human.png" />
     <MauiImage Include="Resources\Images\Races\jann.png" />
     <MauiImage Include="Resources\Images\Races\khal.png" />
+    <MauiImage Include="Resources\Images\Races\kyr.png" />
     <MauiImage Include="Resources\Images\Races\mountain_giant.png" />
+    <MauiImage Include="Resources\Images\Races\night_elf.png" />
     <MauiImage Include="Resources\Images\Races\reptilian.png" />
     <MauiImage Include="Resources\Images\Races\see_giant.png" />
     <MauiImage Include="Resources\Images\Races\swamp_giant.png" />

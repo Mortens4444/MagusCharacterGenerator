@@ -65,11 +65,9 @@ internal partial class PaintWizardPage : NotifierPage
                     switch (hit)
                     {
                         case RectangleElement rect:
-                            rect.IsFilled = true;
                             rect.FillColor = viewModel.SelectedColor;
                             break;
                         case CircleElement circle:
-                            circle.IsFilled = true;
                             circle.FillColor = viewModel.SelectedColor;
                             break;
                     }
@@ -144,10 +142,10 @@ internal partial class PaintWizardPage : NotifierPage
         switch (el)
         {
             case CircleElement c:
-                return Math.Sqrt(Math.Pow(p.X - c.Center.X, 2) + Math.Pow(p.Y - c.Center.Y, 2)) <= c.Radius + 5;
+                return c.Contains(p);
 
             case RectangleElement r:
-                return r.Rect.Contains(p);
+                return r.Contains(p);
 
             case LineElement l:
                 return l.Points.Any(pt => Math.Abs(pt.X - p.X) < 10 && Math.Abs(pt.Y - p.Y) < 10);

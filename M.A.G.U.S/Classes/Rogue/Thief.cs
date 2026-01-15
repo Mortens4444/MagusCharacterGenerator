@@ -96,7 +96,7 @@ public class Thief : Class, IClass, IJustFight
 
     public override bool AddQualificationPointsOnFirstLevel => true;
 
-    public override IRace[] AllowedRaces => [new Human(), new HalfElf(), new Dwarf(), new CourtOrc(), new Amund(), new Jann(), new Wier(), new Feenhar()];
+    public override IRace[] AllowedRaces => [new Human(), new HalfElf(), new Dwarf(), new CourtOrc(), new Amund(), new Jann(), new Wier(), new Feenhar(), new Gnome(), new CourtGoblin()];
 
     public override List<LevelRequirement> ExperienceLevels =>
     [

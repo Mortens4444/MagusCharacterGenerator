@@ -97,7 +97,7 @@ public class Gladiator : Class, IClass, IJustFight
     public override bool AddQualificationPointsOnFirstLevel => true;
 
     public override IRace[] AllowedRaces => [new Human(), new Elf(), new HalfElf(), new Dwarf(), new CourtOrc(), new Amund(), new Jann(), new Khal(), new Draquon(),
-        new ForestGiant(), new MountainGiant(), new SwampGiant()];
+        new ForestGiant(), new MountainGiant(), new SwampGiant(), new CourtGoblin()];
 
     public override List<LevelRequirement> ExperienceLevels =>
     [

@@ -12,6 +12,32 @@ internal class TextElement : IDrawableElement
 
     public float FontSize { get; set; } = 18;
 
+    public bool Contains(PointF point)
+    {
+        if (string.IsNullOrEmpty(Text)) return false;
+
+        // Becsült szélesség: a karakterek száma szorozva a betűméret egy részével.
+        // A 0.6f egy átlagos szorzó a legtöbb betűtípushoz (monospace-nél pontosabb, arányosnál biztonsági ráhagyás).
+        float estimatedWidth = Text.Length * (FontSize * 0.6f);
+
+        // A magasság maga a FontSize. 
+        // Mivel a DrawString alapértelmezett horgonypontja (VerticalAlignment) változhat, 
+        // érdemes a pozíció köré egy kis függőleges puffert is tenni.
+        float height = FontSize;
+
+        // A szöveg téglalapja:
+        // X: A kezdőponttól a becsült szélességig
+        // Y: A pozíciótól felfelé eltolva (mivel a szöveget általában a 'baseline'-ra rajzoljuk)
+        var textBounds = new RectF(
+            Position.X,
+            Position.Y - (height * 0.8f), // Felfelé eltoljuk, hogy a betűk "testét" fedje
+            estimatedWidth,
+            height * 1.2f // 20% ráhagyás alul-felül a könnyebb kijelöléshez
+        );
+
+        return textBounds.Contains(point);
+    }
+
     public void Draw(ICanvas canvas)
     {
         canvas.FontColor = Color;

@@ -94,7 +94,7 @@ public class Wizard : Class, IClass, ILikeMagic
 
     public override bool AddQualificationPointsOnFirstLevel => true;
 
-    public override IRace[] AllowedRaces => [new Human(), new Elf(), new HalfElf(), new Dwarf(), new Amund(), new Jann(), new Wier(), new Dahr()];
+    public override IRace[] AllowedRaces => [new Human(), new Elf(), new HalfElf(), new Dwarf(), new Amund(), new Jann(), new Wier(), new Dahr(), new Gnome()];
 
     public override List<LevelRequirement> ExperienceLevels =>
     [

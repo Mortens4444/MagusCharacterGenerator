@@ -114,7 +114,7 @@ public class Warrior : Class, IClass, IJustFight
     public override int ExpPerLevelAfter12 => 31200;
 
     public override IRace[] AllowedRaces => [new Human(), new Elf(), new HalfElf(), new Dwarf(), new CourtOrc(), new Amund(), new Jann(), new Khal(), new Wier(), new Feenhar(), new Dahr(), new Dracker(), new Draquon(),
-        new ForestGiant(), new FrostGiant(), new MountainGiant(), new SwampGiant()];
+        new ForestGiant(), new FrostGiant(), new MountainGiant(), new SwampGiant(), new Gnome(), new CourtGoblin()];
 
     public override QualificationList Qualifications => BuildQualifications(
     [

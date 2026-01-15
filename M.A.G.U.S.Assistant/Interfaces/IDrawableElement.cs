@@ -5,4 +5,6 @@ internal interface IDrawableElement
     Color Color { get; set; }
 
     void Draw(ICanvas canvas);
+
+    bool Contains(PointF point);
 }
