@@ -5,6 +5,12 @@ dog_hunting.png
 dog_sled.png
 donkey.png
 falcon_hunting.png
+abbit_steel_breastplate.png
+abbit_steel_chainmail.png
+abbit_steel_full_plate.png
+abbit_steel_half_plate.png
+abbit_steel_plate_armor.png
+abbit_steel_scale_armor.png
 adachnoa.png
 barracuda.png
 bat.png

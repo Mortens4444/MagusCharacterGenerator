@@ -156,6 +156,11 @@
     <None Remove="Resources\Images\Animals\hen.png" />
     <None Remove="Resources\Images\Animals\pig.png" />
     <None Remove="Resources\Images\Animals\turkey.png" />
+    <None Remove="Resources\Images\Armors\abbit_steel_breastplate.png" />
+    <None Remove="Resources\Images\Armors\abbit_steel_chainmail.png" />
+    <None Remove="Resources\Images\Armors\abbit_steel_full_plate.png" />
+    <None Remove="Resources\Images\Armors\abbit_steel_half_plate.png" />
+    <None Remove="Resources\Images\Armors\abbit_steel_scale_armor.png" />
     <None Remove="Resources\Images\Bestiary\adachnoa.png" />
     <None Remove="Resources\Images\Bestiary\barracuda.png" />
     <None Remove="Resources\Images\Bestiary\bat.png" />
@@ -391,6 +396,12 @@
     <MauiImage Include="Resources\Images\Animals\dog_sled.png" />
     <MauiImage Include="Resources\Images\Animals\donkey.png" />
     <MauiImage Include="Resources\Images\Animals\falcon_hunting.png" />
+    <MauiImage Include="Resources\Images\Armors\abbit_steel_breastplate.png" />
+    <MauiImage Include="Resources\Images\Armors\abbit_steel_chainmail.png" />
+    <MauiImage Include="Resources\Images\Armors\abbit_steel_full_plate.png" />
+    <MauiImage Include="Resources\Images\Armors\abbit_steel_half_plate.png" />
+    <MauiImage Include="Resources\Images\Armors\abbit_steel_plate_armor.png" />
+    <MauiImage Include="Resources\Images\Armors\abbit_steel_scale_armor.png" />
     <MauiImage Include="Resources\Images\Bestiary\adachnoa.png" />
     <MauiImage Include="Resources\Images\Bestiary\barracuda.png" />
     <MauiImage Include="Resources\Images\Bestiary\bat.png" />
@@ -578,7 +589,6 @@
     </MauiXaml>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Resources\Images\Armors\" />
     <Folder Include="Resources\Images\Clothes\" />
     <Folder Include="Resources\Images\Debauchery\" />
     <Folder Include="Resources\Images\Travelling\" />
