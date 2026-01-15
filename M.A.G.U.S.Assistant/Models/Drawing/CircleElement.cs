@@ -74,4 +74,16 @@ public class CircleElement : IDrawableElement
         Radius = (float)Math.Sqrt(Math.Pow(dx, 2) + Math.Pow(dy, 2));
         Center = new PointF(Math.Min(p1.X, p2.X) + dx, Math.Min(p1.Y, p2.Y) + dy);
     }
+
+    public void Move(float dx, float dy)
+    {
+        if (IsBoundedByRect)
+        {
+            BoundingRect = new RectF(BoundingRect.X + dx, BoundingRect.Y + dy, BoundingRect.Width, BoundingRect.Height);
+        }
+        else
+        {
+            Center = new PointF(Center.X + dx, Center.Y + dy);
+        }
+    }
 }

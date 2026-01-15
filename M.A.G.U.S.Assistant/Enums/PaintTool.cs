@@ -8,5 +8,6 @@ internal enum PaintTool
     Eraser,
     Line,
     Rect,
-    Circle
+    Circle,
+    Move
 }

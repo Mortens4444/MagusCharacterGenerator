@@ -13,6 +13,7 @@ abbit_steel_plate_armor.png
 abbit_steel_scale_armor.png
 bronze_breastplate.png
 bronze_full_plate.png
+bronze_plate_armor.png
 bronze_scale_armor.png
 mithril_breastplate.png
 mithril_full_plate.png

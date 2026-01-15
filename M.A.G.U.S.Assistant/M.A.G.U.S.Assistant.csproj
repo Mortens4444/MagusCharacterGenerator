@@ -163,6 +163,7 @@
     <None Remove="Resources\Images\Armors\abbit_steel_scale_armor.png" />
     <None Remove="Resources\Images\Armors\bronze_breastplate.png" />
     <None Remove="Resources\Images\Armors\bronze_full_plate.png" />
+    <None Remove="Resources\Images\Armors\bronze_plate_armor.png" />
     <None Remove="Resources\Images\Armors\bronze_scale_armor.png" />
     <None Remove="Resources\Images\Armors\mithril_breastplate.png" />
     <None Remove="Resources\Images\Armors\mithril_full_plate.png" />
@@ -418,6 +419,7 @@
     <MauiImage Include="Resources\Images\Armors\abbit_steel_scale_armor.png" />
     <MauiImage Include="Resources\Images\Armors\bronze_breastplate.png" />
     <MauiImage Include="Resources\Images\Armors\bronze_full_plate.png" />
+    <MauiImage Include="Resources\Images\Armors\bronze_plate_armor.png" />
     <MauiImage Include="Resources\Images\Armors\bronze_scale_armor.png" />
     <MauiImage Include="Resources\Images\Armors\mithril_breastplate.png" />
     <MauiImage Include="Resources\Images\Armors\mithril_full_plate.png" />

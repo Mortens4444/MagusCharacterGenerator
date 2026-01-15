@@ -1,4 +1,5 @@
 using M.A.G.U.S.Assistant.Enums;
+using M.A.G.U.S.Assistant.Interfaces;
 using M.A.G.U.S.Assistant.Models.Drawing;
 using M.A.G.U.S.Assistant.ViewModels;
 using Mtf.LanguageService.MAUI;
@@ -10,6 +11,8 @@ internal partial class PaintWizardPage : NotifierPage
 {
     private readonly PaintWizardViewModel viewModel;
     private PointF startPoint;
+    private PointF lastPoint;
+    private IDrawableElement movingElement;
 
     public PaintWizardPage(PaintWizardViewModel viewModel)
     {
@@ -40,6 +43,14 @@ internal partial class PaintWizardPage : NotifierPage
     private void OnTouchStart(object sender, TouchEventArgs e)
     {
         startPoint = e.Touches[0];
+        lastPoint = startPoint;
+
+        if (viewModel.ActiveTool == PaintTool.Move)
+        {
+            movingElement = viewModel.Elements.LastOrDefault(el => el.Contains(startPoint));
+            return;
+        }
+
         if (PerformEraser(startPoint))
         {
             return;
@@ -95,6 +106,20 @@ internal partial class PaintWizardPage : NotifierPage
     {
         var currentPoint = e.Touches[0];
 
+        if (viewModel.ActiveTool == PaintTool.Move && movingElement != null)
+        {
+            // Kiszámoljuk a különbséget az elõzõ pont óta
+            float dx = currentPoint.X - lastPoint.X;
+            float dy = currentPoint.Y - lastPoint.Y;
+
+            // Elmozgatjuk az elemet
+            movingElement.Move(dx, dy);
+
+            lastPoint = currentPoint;
+            CanvasView.Invalidate();
+            return;
+        }
+
         if (PerformEraser(currentPoint))
         {
             return;
@@ -147,6 +172,8 @@ internal partial class PaintWizardPage : NotifierPage
                 break;
         }
         CanvasView.Invalidate();
+
+        lastPoint = currentPoint;
     }
 
     private bool PerformEraser(PointF currentPoint)
@@ -168,6 +195,8 @@ internal partial class PaintWizardPage : NotifierPage
 
     private void OnTouchEnd(object sender, TouchEventArgs e)
     {
+        movingElement = null;
+
         if (viewModel.CurrentElement != null)
         {
             viewModel.Elements.Add(viewModel.CurrentElement);

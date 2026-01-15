@@ -10,6 +10,14 @@ internal class LineElement : IDrawableElement
 
     public float Thickness { get; set; } = 2f;
 
+    public void Move(float dx, float dy)
+    {
+        for (int i = 0; i < Points.Count; i++)
+        {
+            Points[i] = new PointF(Points[i].X + dx, Points[i].Y + dy);
+        }
+    }
+
     public bool Contains(PointF point)
     {
         if (Points == null || Points.Count < 2)

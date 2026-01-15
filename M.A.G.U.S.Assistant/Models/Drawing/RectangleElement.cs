@@ -22,5 +22,10 @@ public class RectangleElement : IDrawableElement
         canvas.DrawRectangle(Rect.X, Rect.Y, Rect.Width, Rect.Height);
     }
 
+    public void Move(float dx, float dy)
+    {
+        Rect = new RectF(Rect.X + dx, Rect.Y + dy, Rect.Width, Rect.Height);
+    }
+
     public bool Contains(PointF p) => Rect.Contains(p);
 }

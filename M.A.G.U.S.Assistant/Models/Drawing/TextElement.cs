@@ -47,4 +47,9 @@ internal class TextElement : IDrawableElement
         canvas.FontSize = FontSize;
         canvas.DrawString(Text, Position.X, Position.Y, HorizontalAlignment.Left);
     }
+
+    public void Move(float dx, float dy)
+    {
+        Position = new PointF(Position.X + dx, Position.Y + dy);
+    }
 }

@@ -7,4 +7,6 @@ internal interface IDrawableElement
     void Draw(ICanvas canvas);
 
     bool Contains(PointF point);
+
+    void Move(float dx, float dy);
 }
