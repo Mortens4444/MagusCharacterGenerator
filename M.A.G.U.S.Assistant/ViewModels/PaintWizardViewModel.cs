@@ -1,6 +1,10 @@
-﻿using CommunityToolkit.Mvvm.Input;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
+using M.A.G.U.S.Assistant.Database.Entities;
+using M.A.G.U.S.Assistant.Database.Repositories;
 using M.A.G.U.S.Assistant.Enums;
 using M.A.G.U.S.Assistant.Interfaces;
+using Mtf.LanguageService.MAUI;
 using System.Collections.ObjectModel;
 
 namespace M.A.G.U.S.Assistant.ViewModels;
@@ -16,10 +20,15 @@ internal partial class PaintWizardViewModel : BaseViewModel
     private bool autoFill;
     private bool isCircleRectMode;
     private Color backgroundColor = Colors.White;
+    private readonly DrawingRepository drawingRepository;
+    private bool isSidebarVisible = true;
 
-    public PaintWizardViewModel()
+    public PaintWizardViewModel(DrawingRepository drawingRepository)
     {
+        this.drawingRepository = drawingRepository;
         DrawingLogic = new PaintCanvasDrawable { ViewModel = this };
+
+        //Task.Run(async () => await RefreshSavedDrawings());
     }
 
     public IDrawableElement? CurrentElement
@@ -31,6 +40,8 @@ internal partial class PaintWizardViewModel : BaseViewModel
     public PaintCanvasDrawable DrawingLogic { get; }
 
     public ObservableCollection<IDrawableElement> Elements { get; } = [];
+
+    public ObservableCollection<DrawingEntity> SavedDrawings { get; } = [];
 
     public PaintTool ActiveTool
     {
@@ -68,10 +79,82 @@ internal partial class PaintWizardViewModel : BaseViewModel
         set => SetProperty(ref isCircleRectMode, value);
     }
 
-    public List<Color> Palette { get; } = [ Colors.Black, Colors.White, Colors.Red, Colors.Green, Colors.Blue, Colors.Yellow, Colors.Purple, Colors.Orange,
-        Colors.Gray, Colors.Brown, Colors.Cyan, Colors.Magenta, Colors.Lime, Colors.Maroon, Colors.Navy, Colors.Olive ];
+    public bool IsSidebarVisible
+    {
+        get => isSidebarVisible;
+        set => SetProperty(ref isSidebarVisible, value);
+    }
 
-    private static Color GetDefaultColor() => Colors.Black;
+    public List<Color> Palette { get; } = [ Colors.Black, Colors.White, Colors.Red, Colors.Green, Colors.Blue, Colors.Yellow, Colors.Purple, Colors.Orange,
+        Colors.Gray, Colors.Brown, Colors.Cyan, Colors.Magenta, Colors.Lime, Colors.Maroon, Colors.Navy, Colors.Olive, Colors.Brown, Colors.Orchid,
+        Colors.Salmon, Colors.Crimson ];
+
+    [RelayCommand]
+    public async Task RefreshSavedDrawings()
+    {
+        var drawings = await drawingRepository.GetAllDrawingsAsync().ConfigureAwait(false);
+        MainThread.BeginInvokeOnMainThread(() =>
+        {
+            SavedDrawings.Clear();
+            foreach (var drawing in drawings)
+            {
+                SavedDrawings.Add(drawing);
+            }
+        });
+    }
+
+    [RelayCommand]
+    public async Task SaveDrawing()
+    {
+        var name = await Shell.Current.DisplayPromptAsync(Lng.Elem("Save"), Lng.Elem("Enter drawing name:"), Lng.Elem("Save"), Lng.Elem("Cancel"), initialValue: $"{Lng.Elem("Drawing")}_{DateTime.Now:yyyyMMdd_HHmm}");
+
+        if (String.IsNullOrWhiteSpace(name))
+        {
+            return;
+        }
+
+        await drawingRepository.SaveDrawingAsync(name, Elements.ToList()).ConfigureAwait(true);
+        await RefreshSavedDrawings();
+        await Shell.Current.DisplayAlertAsync(Lng.Elem("Save"), Lng.Elem("Painting succesfully saved!"), "OK").ConfigureAwait(true);
+    }
+
+    [RelayCommand]
+    public async Task DeleteDrawing(DrawingEntity drawing)
+    {
+        if (drawing == null)
+        {
+            return;
+        }
+
+        bool confirm = await Shell.Current.DisplayAlertAsync(Lng.Elem("Delete"), $"{Lng.Elem("Delete")} {drawing.Name}?", Lng.Elem("Yes"), Lng.Elem("No"));
+        if (confirm)
+        {
+            await drawingRepository.DeleteDrawingAsync(drawing.Name).ConfigureAwait(false);
+            await RefreshSavedDrawings();
+        }
+    }
+
+    [RelayCommand]
+    public async Task LoadDrawing(DrawingEntity drawing)
+    {
+        if (drawing == null)
+        {
+            return;
+        }
+
+        var loadedElements = await drawingRepository.GetDrawingByNameAsync(drawing.Name).ConfigureAwait(false);
+        if (loadedElements != null)
+        {
+            MainThread.BeginInvokeOnMainThread(() =>
+            {
+                Elements.Clear();
+                foreach (var el in loadedElements)
+                {
+                    Elements.Add(el);
+                }
+            });
+        }
+    }
 
     public IRelayCommand SelectToolCommand => selectToolCommand ??= new RelayCommand<PaintTool>(SelectTool);
 
@@ -82,6 +165,14 @@ internal partial class PaintWizardViewModel : BaseViewModel
     {
         BackgroundColor = SelectedColor;
     }
+
+    [RelayCommand]
+    private void ToggleSidebar()
+    {
+        IsSidebarVisible = !IsSidebarVisible;
+    }
+
+    private static Color GetDefaultColor() => Colors.Black;
 
     private void SelectTool(PaintTool tool) => ActiveTool = tool;
 

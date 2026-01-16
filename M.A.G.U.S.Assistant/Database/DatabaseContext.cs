@@ -17,6 +17,7 @@ internal class DatabaseContext
 
             await connection.CreateTableAsync<SettingsEntity>().ConfigureAwait(false);
             await connection.CreateTableAsync<CharacterEntity>().ConfigureAwait(false);
+            await connection.CreateTableAsync<DrawingEntity>().ConfigureAwait(false);
         }
         return connection;
     }

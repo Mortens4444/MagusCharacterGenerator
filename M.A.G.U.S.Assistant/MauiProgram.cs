@@ -113,7 +113,8 @@ internal static class MauiProgram
         var repositoryTypes = new List<Type>
         {
             typeof(CharacterRepository),
-            typeof(SettingsRepository)
+            typeof(SettingsRepository),
+            typeof(DrawingRepository)
         };
         foreach (var repositoryType in repositoryTypes)
         {

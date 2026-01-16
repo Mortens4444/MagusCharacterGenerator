@@ -28,6 +28,12 @@ internal partial class PaintWizardPage : NotifierPage
                 });
             }
         };
+        
+        viewModel.Elements.CollectionChanged += (s, e) => {
+            MainThread.BeginInvokeOnMainThread(() => {
+                CanvasView?.Invalidate();
+            });
+        };
     }
 
     public override bool Equals(object? obj)
@@ -38,6 +44,12 @@ internal partial class PaintWizardPage : NotifierPage
     public override int GetHashCode()
     {
         return startPoint.GetHashCode();
+    }
+
+    protected override async void OnAppearing()
+    {
+        base.OnAppearing();
+        await viewModel.RefreshSavedDrawingsCommand.ExecuteAsync(null);
     }
 
     private void OnTouchStart(object sender, TouchEventArgs e)

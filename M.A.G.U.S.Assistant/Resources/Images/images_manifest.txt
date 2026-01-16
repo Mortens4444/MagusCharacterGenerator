@@ -289,6 +289,7 @@ feenhar.png
 fire_elf.png
 forest_giant.png
 frost_giant.png
+gnome.png
 half_elf.png
 half_orc.png
 human.png

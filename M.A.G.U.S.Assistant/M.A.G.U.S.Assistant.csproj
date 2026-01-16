@@ -392,6 +392,7 @@
     <None Remove="Resources\Images\Races\fire_elf.png" />
     <None Remove="Resources\Images\Races\forest_giant.png" />
     <None Remove="Resources\Images\Races\frost_giant.png" />
+    <None Remove="Resources\Images\Races\gnome.png" />
     <None Remove="Resources\Images\Races\half_elf.png" />
     <None Remove="Resources\Images\Races\half_orc.png" />
     <None Remove="Resources\Images\Races\human.png" />
@@ -512,12 +513,12 @@
     <EmbeddedResource Include="Resources\Raw\zombie_eating.mp3" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Microsoft.Maui.Controls" Version="10.0.20" />
-    <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="10.0.1" />
-    <PackageReference Include="Microsoft.Maui.Graphics" Version="10.0.20" />
-    <PackageReference Include="Microsoft.Maui.Graphics.Skia" Version="10.0.20" />
+    <PackageReference Include="Microsoft.Maui.Controls" Version="10.0.30" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="10.0.2" />
+    <PackageReference Include="Microsoft.Maui.Graphics" Version="10.0.30" />
+    <PackageReference Include="Microsoft.Maui.Graphics.Skia" Version="10.0.30" />
     <PackageReference Include="Mtf.Maui.Controls" Version="3.0.52" />
-    <PackageReference Include="Mtf.MAUI.LanguageService" Version="2.0.94" />
+    <PackageReference Include="Mtf.MAUI.LanguageService" Version="2.0.96" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.4" />
     <PackageReference Include="Plugin.Maui.Audio" Version="4.0.0" />
     <PackageReference Include="sqlite-net-pcl" Version="1.9.172" />
@@ -853,6 +854,7 @@
     <MauiImage Include="Resources\Images\Races\fire_elf.png" />
     <MauiImage Include="Resources\Images\Races\forest_giant.png" />
     <MauiImage Include="Resources\Images\Races\frost_giant.png" />
+    <MauiImage Include="Resources\Images\Races\gnome.png" />
     <MauiImage Include="Resources\Images\Races\half_elf.png" />
     <MauiImage Include="Resources\Images\Races\half_orc.png" />
     <MauiImage Include="Resources\Images\Races\human.png" />
