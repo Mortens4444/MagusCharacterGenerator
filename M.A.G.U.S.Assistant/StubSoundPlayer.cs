@@ -28,5 +28,6 @@ internal class StubSoundPlayer : ISoundPlayer
 
     public void Stop()
     {
+        PlaybackEnded?.Invoke(this, EventArgs.Empty);
     }
 }

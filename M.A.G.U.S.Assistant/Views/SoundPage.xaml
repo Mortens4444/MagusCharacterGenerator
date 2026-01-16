@@ -2,11 +2,13 @@
 <v:NotifierPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:v="clr-namespace:Mtf.LanguageService.MAUI.Views;assembly=Mtf.LanguageService.MAUI"
              xmlns:vm="clr-namespace:M.A.G.U.S.Assistant.ViewModels"
+             xmlns:m="clr-namespace:M.A.G.U.S.Assistant.Models"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:mc="clr-namespace:Mtf.Maui.Controls;assembly=Mtf.Maui.Controls"
              x:Class="M.A.G.U.S.Assistant.Views.SoundPage"
              x:ClassModifier="internal"
-             Title="Sounds">
+             Title="Sounds"
+             x:DataType="vm:SoundViewModel">
 
     <Grid Padding="12" RowDefinitions="Auto,*,Auto" RowSpacing="8">
 
@@ -19,7 +21,7 @@
                         SelectionMode="Single"
                         SelectedItem="{Binding SelectedSound}">
             <CollectionView.ItemTemplate>
-                <DataTemplate>
+                <DataTemplate x:DataType="m:SoundItem">
                     <Grid Padding="8">
                         <Label Text="{Binding DisplayName}" />
                     </Grid>

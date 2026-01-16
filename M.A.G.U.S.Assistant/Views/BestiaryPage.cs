@@ -6,11 +6,7 @@ using Mtf.LanguageService.MAUI;
 
 namespace M.A.G.U.S.Assistant.Views;
 
-internal partial class BestiaryPage : SearchListPage
+internal partial class BestiaryPage(SearchListViewModel viewModel) : SearchListPage(viewModel, false, "Bestiary",
+        "M.A.G.U.S.Bestiary".CreateInstancesFromNamespace<Creature>().OrderBy(r => Lng.Elem(r.Name)).Select(DisplayItem.FromObject))
 {
-    public BestiaryPage(SearchListViewModel viewModel)
-        : base(viewModel, false, "Bestiary",
-            "M.A.G.U.S.Bestiary".CreateInstancesFromNamespace<Creature>().OrderBy(r => Lng.Elem(r.Name)).Select(DisplayItem.FromObject))
-    {
-    }
 }

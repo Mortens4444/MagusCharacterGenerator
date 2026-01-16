@@ -12,6 +12,7 @@ using M.A.G.U.S.Utils;
 using Mtf.Extensions.Services;
 using Mtf.LanguageService.MAUI;
 using Mtf.Maui.Controls.Messages;
+using System.Globalization;
 using System.Windows.Input;
 
 namespace M.A.G.U.S.Assistant.ViewModels;
@@ -64,15 +65,15 @@ internal partial class CreatureDetailsViewModel : BaseViewModel
     public string HealthPoints => Creature.DisplayHealthPoints;
     public string PainTolerancePoints => Creature.DisplayPainTolerancePoints;
     public IList<Attack> AttackModes => Creature.AttackModes;
-    public string AstralMagicResistance => Creature.AstralMagicResistance == null ? "-" : Creature.AstralMagicResistance == Int32.MaxValue ? Lng.Elem("Immune") : Creature.AstralMagicResistance.ToString();
-    public string MentalMagicResistance => Creature.MentalMagicResistance == null ? "-" : Creature.MentalMagicResistance == Int32.MaxValue ? Lng.Elem("Immune") : Creature.MentalMagicResistance.ToString();
-    public string PoisonResistance => Creature.PoisonResistance == null ? "-" : Creature.PoisonResistance == Int32.MaxValue ? Lng.Elem("Immune") : Creature.PoisonResistance.ToString();
+    public string AstralMagicResistance => !Creature.AstralMagicResistance.HasValue ? "-" : Creature.AstralMagicResistance.Value == Int32.MaxValue ? Lng.Elem("Immune") : Creature.AstralMagicResistance.Value.ToString(CultureInfo.InvariantCulture);
+    public string MentalMagicResistance => !Creature.MentalMagicResistance.HasValue ? "-" : Creature.MentalMagicResistance == Int32.MaxValue ? Lng.Elem("Immune") : Creature.MentalMagicResistance.Value.ToString(CultureInfo.InvariantCulture);
+    public string PoisonResistance => !Creature.PoisonResistance.HasValue ? "-" : Creature.PoisonResistance == Int32.MaxValue ? Lng.Elem("Immune") : Creature.PoisonResistance.Value.ToString(CultureInfo.InvariantCulture);
     public uint ExperiencePoints => Creature.ExperiencePoints;
     public double AttacksPerRound => Creature.AttacksPerRound;
     public string Image => Creature.Images.Length > 1 ? Creature.Images[RandomProvider.GetSecureRandomInt(0, Creature.Images.Length)] : Creature.Images[0];
     public string Sound => Creature.Sounds.Length > 1 ? Creature.Sounds[RandomProvider.GetSecureRandomInt(0, Creature.Sounds.Length)] : Creature.Sounds[0];
 
-    public IList<AttackDirection> AttackDirections { get; } = [.. Enum.GetValues(typeof(AttackDirection)).Cast<AttackDirection>()];
+    public IList<AttackDirection> AttackDirections { get; } = [.. Enum.GetValues<AttackDirection>()];
 
     public AttackDirection SelectedAttackDirection
     {
@@ -134,7 +135,7 @@ internal partial class CreatureDetailsViewModel : BaseViewModel
         {
             PlaceOfAttack = String.Empty;
             LastActionName = Lng.Elem("Initiate");
-            LastAction = Creature.GetInitiate().ToString();
+            LastAction = Creature.GetInitiate().ToString(CultureInfo.InvariantCulture);
         }
         catch (Exception ex)
         {
@@ -156,7 +157,7 @@ internal partial class CreatureDetailsViewModel : BaseViewModel
             PlaceOfAttack = String.IsNullOrEmpty(subLocation) ? locationDescription : $"{Lng.Elem(locationDescription)} ({Lng.Elem(subLocation)})";
             LastActionName = $"{Lng.Elem(SelectedAttackMode is MeleeAttack ? "Melee attack" : "Ranged attack")} - {Lng.Elem(SelectedAttackMode.Name)}";
             var (impact, value) = SelectedAttackMode.GetAttack();
-            LastAction = impact == AttackImpact.Normal ? value.ToString() : $"{Lng.Elem(impact.ToString())} {value}";
+            LastAction = impact == AttackImpact.Normal ? value.ToString(CultureInfo.InvariantCulture) : $"{Lng.Elem(impact.ToString())} {value}";
         }
         catch (Exception ex)
         {
@@ -188,7 +189,7 @@ internal partial class CreatureDetailsViewModel : BaseViewModel
                     }
                     else
                     {
-                        var method = meleeAttack.Weapon.GetType().GetMethod(nameof(meleeAttack.Weapon.GetDamage));
+                        var method = meleeAttack.Weapon?.GetType().GetMethod(nameof(meleeAttack.Weapon.GetDamage));
                         LastAction = DiceThrowFormatter.FormatResult(method, final);
                     }
                 }
@@ -206,7 +207,7 @@ internal partial class CreatureDetailsViewModel : BaseViewModel
                 }
                 else
                 {
-                    LastAction = final.ToString();
+                    LastAction = final.ToString(CultureInfo.InvariantCulture);
                 }
             }
 

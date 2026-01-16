@@ -2,6 +2,8 @@
 # git update-index --assume-unchanged 4_UploadToFtpServer.ps1
 # git update-index --no-assume-unchanged 4_UploadToFtpServer.ps1
 
+. "$PSScriptRoot\Config.ps1"
+
 Param([string] $apkPath)
 
 $ftpServer = "server.us/web/mortens"
@@ -39,5 +41,5 @@ $credentials = New-Object System.Net.NetworkCredential($ftpUsername, $ftpPasswor
 
 UploadFilesToDestinationDirectory @($apkPath) "$($ftpServer)" $credentials
 
-$images = @() # Get-ChildItem -Path ".\H4ckW1thM3\Resources\Images"
+$images = @() # Get-ChildItem -Path ".\$Project\Resources\Images"
 UploadFilesToDestinationDirectory $images "$($ftpServer)/Images" $credentials

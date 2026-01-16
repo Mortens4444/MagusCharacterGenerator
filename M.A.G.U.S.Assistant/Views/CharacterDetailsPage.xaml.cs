@@ -1,6 +1,5 @@
 using M.A.G.U.S.Assistant.Services;
 using M.A.G.U.S.Assistant.ViewModels;
-using Mtf.LanguageService.MAUI;
 using Mtf.LanguageService.MAUI.Views;
 
 namespace M.A.G.U.S.Assistant.Views;
@@ -19,9 +18,9 @@ internal partial class CharacterDetailsPage : NotifierPage
 
     protected override void OnDisappearing()
     {
-        if (BindingContext is CharacterDetailsViewModel characterDetailsViewModel && characterDetailsViewModel.Character != null)
+        if (BindingContext is CharacterViewModel characterViewModel && characterViewModel.Character != null)
         {
-            characterService.SaveAsync(characterDetailsViewModel.Character);
+            characterService.SaveAsync(characterViewModel.Character);
         }
 
         base.OnDisappearing();

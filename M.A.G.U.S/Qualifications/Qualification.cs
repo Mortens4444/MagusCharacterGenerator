@@ -20,7 +20,7 @@ public abstract class Qualification
         }
     }
 
-    public virtual string Category => GetType().Namespace?[(GetType().Namespace.LastIndexOf('.') + 1)..] ?? String.Empty;
+    public virtual string Category => GetType().Namespace?[(GetType().Namespace?.LastIndexOf('.') ?? -1 + 1)..] ?? String.Empty;
 
     public virtual string Name => GetType().Name;
 

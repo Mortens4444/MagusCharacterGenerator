@@ -1,6 +1,7 @@
-. "F:\Work\MagusCharacterGenerator\Deploy\Utils.ps1"
+. "$PSScriptRoot\Config.ps1"
+. "$PSScriptRoot\Utils.ps1"
 
-Set-Location "F:\Work\MagusCharacterGenerator"
+Set-Location $SolutionRoot
 #InstallDotnetToolIfNeeded -toolName "dotnet-sonarscanner"
 
 ### Start Sonar ###
@@ -9,20 +10,22 @@ Set-Location "F:\Work\MagusCharacterGenerator"
 
 ### Sonar scan start ###
 Write-Host "Starting Sonar Scan...";
-dotnet sonarscanner begin /k:"MagusCharacterGenerator" /d:sonar.host.url="http://localhost:9000" /d:sonar.token="sqp_GENERATE_ONE" /d:"sonar.cs.vscoveragexml.reportsPaths=**/coverage.xml" /d:sonar.sonarQubeAnalysisConfigPath="C:\Work\MagusCharacterGenerator\.sonarqube\conf\SonarQubeAnalysisConfig.xml" /d:sonar.scanner.scanAll=false
+dotnet sonarscanner begin /k:"$Project" /d:sonar.host.url="$SonarHost" /d:sonar.token="$SonarToken" /d:"sonar.cs.vscoveragexml.reportsPaths=**/coverage.xml" /d:sonar.sonarQubeAnalysisConfigPath="$SolutionRoot\.sonarqube\conf\SonarQubeAnalysisConfig.xml" /d:sonar.scanner.scanAll=false
 ### Build ###
 #dotnet build
-#$apkPath = "F:\Work\MagusCharacterGenerator\Deploy\BuildAndGenerateApk.ps1"
-dotnet publish "F:\Work\MagusCharacterGenerator\MagusCharacterGenerator.sln" -c Release -f net8.0-android /p:BundleLocalization=en-GB /p:LocalizationCulture=en-GB
+#$apkPath = "$PSScriptRoot\BuildAndGenerateApk.ps1"
+dotnet publish $SolutionFull -c Release -f $framework /p:BundleLocalization=en-GB /p:LocalizationCulture=en-GB
 
-#F:\Work\MagusCharacterGenerator\Deploy\GenerateTestReport.ps1
+#$PSScriptRoot\GenerateTestReport.ps1
 
 ### Sonar scan end ###
-dotnet sonarscanner end /d:sonar.token="sqp_GENERATE_ONE"
+dotnet sonarscanner end /d:sonar.token="$SonarToken"
 
 #.\SpellCheck.ps1
 
-start http://localhost:9000/dashboard?id=MagusCharacterGenerator
+#start http://localhost:9000/dashboard?id=JUHI_Pulse
+start "$SonarHost/dashboard?id=$SonarProjectKey"
+
 # login: admin
 # password: admin
 

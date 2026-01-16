@@ -113,7 +113,7 @@ internal partial class PaintWizardViewModel : BaseViewModel
             return;
         }
 
-        await drawingRepository.SaveDrawingAsync(name, Elements.ToList()).ConfigureAwait(true);
+        await drawingRepository.SaveDrawingAsync(name, [.. Elements]).ConfigureAwait(true);
         await RefreshSavedDrawings();
         await Shell.Current.DisplayAlertAsync(Lng.Elem("Save"), Lng.Elem("Painting succesfully saved!"), "OK").ConfigureAwait(true);
     }

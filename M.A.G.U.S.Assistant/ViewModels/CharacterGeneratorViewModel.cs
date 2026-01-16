@@ -166,10 +166,7 @@ internal partial class CharacterGeneratorViewModel : CharacterViewModel
     [RelayCommand]
     public void GenerateNewName()
     {
-        if (Character != null)
-        {
-            Character.Name = NameGenerator.Get(Character.Race).ToName();
-        }
+        Character?.Name = NameGenerator.Get(Character.Race).ToName();
     }
 
     private void LoadAvailableTypes()

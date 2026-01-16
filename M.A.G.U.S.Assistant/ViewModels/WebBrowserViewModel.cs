@@ -1,4 +1,5 @@
-﻿using System.Windows.Input;
+﻿using CommunityToolkit.Mvvm.Input;
+using System.Windows.Input;
 
 namespace M.A.G.U.S.Assistant.ViewModels;
 
@@ -10,11 +11,11 @@ internal partial class WebBrowserViewModel : BaseViewModel
     public WebBrowserViewModel()
     {
         CurrentUrl = "https://kalandozok.hu/ynev/";
-        NavigateCommand = new DelegateCommand(NavigateAsync);
-        RefreshCommand = new DelegateCommand(RefreshAsync);
-        OpenExternalCommand = new DelegateCommand(() => OpenExternal());
-        GoBackCommand = new DelegateCommand(() => GoBack());
-        GoForwardCommand = new DelegateCommand(() => GoForward());
+        NavigateCommand = new AsyncRelayCommand(NavigateAsync);
+        RefreshCommand = new AsyncRelayCommand(RefreshAsync);
+        OpenExternalCommand = new RelayCommand(OpenExternal);
+        GoBackCommand = new RelayCommand(GoBack);
+        GoForwardCommand = new RelayCommand(GoForward);
     }
 
     public string CurrentUrl
@@ -57,7 +58,7 @@ internal partial class WebBrowserViewModel : BaseViewModel
     private async Task RefreshAsync()
     {
         IsLoading = true;
-        await Task.Delay(100);
+        await Task.Delay(100).ConfigureAwait(false);
         IsLoading = false;
     }
 
@@ -74,41 +75,41 @@ internal partial class WebBrowserViewModel : BaseViewModel
         }
     }
 
-    private void GoBack()
+    private static void GoBack()
     {
         // A WebView-ot code-behind-ból érdemes vezérelni: Browser.GoBack()
         // Itt csak placeholder, ha messaging/behavior-t használsz, küldj üzenetet a nézetnek.
     }
 
-    private void GoForward()
+    private static void GoForward()
     {
         // placeholder, lásd GoBack megjegyzést
     }
 }
 
-public class DelegateCommand : ICommand
-{
-    private readonly Func<Task> asyncExecute;
-    private readonly Action execute;
-    private readonly Func<bool> canExecute;
+//public class DelegateCommand : ICommand
+//{
+//    private readonly Func<Task> asyncExecute;
+//    private readonly Action execute;
+//    private readonly Func<bool> canExecute;
 
-    public DelegateCommand(Func<Task> executeAsync) { asyncExecute = executeAsync; }
-    public DelegateCommand(Action execute, Func<bool> canExecute = null) { this.execute = execute; this.canExecute = canExecute; }
-    public event EventHandler CanExecuteChanged;
+//    public DelegateCommand(Func<Task> executeAsync) { asyncExecute = executeAsync; }
+//    public DelegateCommand(Action execute, Func<bool> canExecute = null) { this.execute = execute; this.canExecute = canExecute; }
+//    public event EventHandler CanExecuteChanged;
 
-    public bool CanExecute(object parameter) => canExecute == null || canExecute();
+//    public bool CanExecute(object parameter) => canExecute == null || canExecute();
 
-    public async void Execute(object parameter)
-    {
-        if (asyncExecute != null)
-        {
-            await asyncExecute();
-        }
-        else
-        {
-            execute?.Invoke();
-        }
-    }
+//    public async void Execute(object parameter)
+//    {
+//        if (asyncExecute != null)
+//        {
+//            await asyncExecute();
+//        }
+//        else
+//        {
+//            execute?.Invoke();
+//        }
+//    }
 
-    public void RaiseCanExecuteChanged() => CanExecuteChanged?.Invoke(this, EventArgs.Empty);
-}
+//    public void RaiseCanExecuteChanged() => CanExecuteChanged?.Invoke(this, EventArgs.Empty);
+//}

@@ -1,6 +1,7 @@
-. "F:\Work\MagusCharacterGenerator\Deploy\Utils.ps1"
+. "$PSScriptRoot\Config.ps1"
+. "$PSScriptRoot\Utils.ps1"
 
-Set-Location "F:\Work\MagusCharacterGenerator\"
+Set-Location $SolutionRoot
 
 ### Install dependencies ###
 InstallDotnetToolIfNeeded -toolName "dotnet-coverage"
@@ -15,4 +16,4 @@ dotnet test --collect:"XPlat Code Coverage" -- DataCollectionRunSettings.DataCol
 reportgenerator "-reports:**\coverage.opencover.xml" "-targetdir:.\TestReport" -reporttypes:Html_Dark "-title:Unit tests"
 
 ### Open test coverage report ###
-Start-Process -FilePath "F:\Work\MagusCharacterGenerator\TestReport\index.html" -Verb open
+Start-Process -FilePath "$SolutionRoot\TestReport\index.html" -Verb open

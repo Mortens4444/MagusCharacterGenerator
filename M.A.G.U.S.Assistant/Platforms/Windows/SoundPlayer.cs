@@ -90,11 +90,8 @@ internal partial class SoundPlayer : ISoundPlayer, IDisposable
     
     private void OnPlaybackEnded(MediaPlayer sender, object e)
     {
-        if (currentStream != null)
-        {
-            currentStream.Dispose();
-            currentStream = null;
-        }
+        currentStream?.Dispose();
+        currentStream = null;
         if (windowsPlayer != null)
         {
             OnPlaybackEndedInternal();
@@ -104,10 +101,7 @@ internal partial class SoundPlayer : ISoundPlayer, IDisposable
 
     public void SetVolume(double volume)
     {
-        if (windowsPlayer != null)
-        {
-            windowsPlayer.Volume = volume;
-        }
+        windowsPlayer?.Volume = volume;
     }
 
     private void OnPlaybackEndedInternal()
@@ -118,11 +112,8 @@ internal partial class SoundPlayer : ISoundPlayer, IDisposable
     public void Dispose()
     {
         Stop();
-        if (currentStream != null)
-        {
-            currentStream.Dispose();
-            currentStream = null;
-        }
+        currentStream?.Dispose();
+        currentStream = null;
         GC.SuppressFinalize(this);
     }
 }

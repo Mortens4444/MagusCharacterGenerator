@@ -13,12 +13,10 @@ using Mtf.LanguageService.MAUI;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.ComponentModel;
-using System.Runtime.Versioning;
 
 namespace M.A.G.U.S.Assistant.ViewModels;
 
-[SupportedOSPlatform("windows10.0.17763")]
-internal partial class CharacterViewModel : BaseViewModel, IDisposable
+internal partial class CharacterViewModel(IPrintService printService) : BaseViewModel, IDisposable
 {
     private CombatValueModifier selectedCombatValueModifier;
     private Character? character;
@@ -26,13 +24,8 @@ internal partial class CharacterViewModel : BaseViewModel, IDisposable
     private Weapon? primaryWeapon;
     private Weapon? secondaryWeapon;
     private Armor? selectedArmor;
-    private readonly IPrintService printService;
+    private readonly IPrintService printService = printService;
     private static readonly IEnumerable<Alignment> alignments = [.. Enum.GetValues<Alignment>()];
-
-    public CharacterViewModel(IPrintService printService)
-    {
-        this.printService = printService;
-    }
 
     public IEnumerable<Alignment> Alignments => alignments;
 

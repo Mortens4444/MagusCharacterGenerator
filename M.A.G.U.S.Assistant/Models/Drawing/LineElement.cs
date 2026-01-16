@@ -57,7 +57,7 @@ internal class LineElement : IDrawableElement
         t = Math.Max(0, Math.Min(1, t));
 
         // A legközelebbi pont koordinátái a szakaszon
-        PointF projection = new PointF(
+        PointF projection = new(
             p1.X + t * (p2.X - p1.X),
             p1.Y + t * (p2.Y - p1.Y)
         );

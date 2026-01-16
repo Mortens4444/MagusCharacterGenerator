@@ -13,17 +13,12 @@ using System.Collections.ObjectModel;
 
 namespace M.A.G.U.S.Assistant.ViewModels;
 
-internal partial class EncounterViewModel : CharacterListLoaderViewModel
+internal partial class EncounterViewModel(ISettings settings, CharacterService characterService) : CharacterListLoaderViewModel(characterService)
 {
     private Character? selectedCharacter;
     private Creature? selectedEnemy;
     private AssignmentViewModel? selectedAssignment;
-    private readonly ISettings settings;
-
-    public EncounterViewModel(ISettings settings, CharacterService characterService) : base(characterService)
-    {
-        this.settings = settings;
-    }
+    private readonly ISettings settings = settings;
 
     public ObservableCollection<Character> Characters { get; } = [];
     public ObservableCollection<Creature> Enemies { get; } = [];
@@ -87,10 +82,7 @@ internal partial class EncounterViewModel : CharacterListLoaderViewModel
     {
         Characters.Add(SelectedCharacter!);
         Assignments.Add(new AssignmentViewModel(settings, SelectedCharacter!));
-        if (SelectedAssignment == null)
-        {
-            SelectedAssignment = Assignments.LastOrDefault();
-        }
+        SelectedAssignment ??= Assignments.LastOrDefault();
         AvailableCharacters.Remove(SelectedCharacter!);
         SelectedCharacter = null;
     }

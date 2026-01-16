@@ -1,10 +1,6 @@
-param(
-    [string]$CsprojPath = "..\M.A.G.U.S.Assistant\M.A.G.U.S.Assistant.csproj"
-)
+. "$PSScriptRoot\Config.ps1"
 
-$currentDirectory = Get-Location
-$csprojFullPath = [System.IO.Path]::Combine($currentDirectory, $CsprojPath)
-$xml = [xml](Get-Content $csprojFullPath)
+$xml = [xml](Get-Content $CsprojFull)
 $fileVersionPropertyGroup = $xml.Project.PropertyGroup | Where-Object { $_.FileVersion }
 
 git add .

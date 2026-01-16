@@ -12,7 +12,7 @@ internal partial class PaintWizardPage : NotifierPage
     private readonly PaintWizardViewModel viewModel;
     private PointF startPoint;
     private PointF lastPoint;
-    private IDrawableElement movingElement;
+    private IDrawableElement? movingElement;
     private double currentScale = 1;
     private double startScale = 1;
     private const double MinScale = 1;
@@ -53,7 +53,7 @@ internal partial class PaintWizardPage : NotifierPage
     protected override async void OnAppearing()
     {
         base.OnAppearing();
-        await viewModel.RefreshSavedDrawingsCommand.ExecuteAsync(null);
+        await viewModel.RefreshSavedDrawingsCommand.ExecuteAsync(null).ConfigureAwait(true);
     }
 
     private void OnPinchUpdated(object sender, PinchGestureUpdatedEventArgs e)
