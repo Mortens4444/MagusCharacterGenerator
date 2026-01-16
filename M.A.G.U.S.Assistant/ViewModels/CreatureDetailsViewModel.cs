@@ -6,6 +6,7 @@ using M.A.G.U.S.Bestiary;
 using M.A.G.U.S.Enums;
 using M.A.G.U.S.GameSystem;
 using M.A.G.U.S.Models;
+using M.A.G.U.S.Qualifications;
 using M.A.G.U.S.Things.Weapons;
 using M.A.G.U.S.Utils;
 using Mtf.Extensions.Services;
@@ -25,6 +26,7 @@ internal partial class CreatureDetailsViewModel : BaseViewModel
     private string numberAppearing;
     private readonly PlaceOfAttack hitLocation;
     private string placeOfAttack;
+    private AsyncRelayCommand? previewImageCommand;
 
     public Creature Creature { get; init; }
     public Attack SelectedAttackMode { get; set; }
@@ -215,5 +217,12 @@ internal partial class CreatureDetailsViewModel : BaseViewModel
             LastActionName = Lng.Elem("Error");
             LastAction = ex.Message;
         }
+    }
+
+    public IAsyncRelayCommand PreviewImageCommand => previewImageCommand ??= new AsyncRelayCommand(PreviewImage);
+
+    private Task PreviewImage()
+    {
+        return ImagePreviewService.ShowAsync(Image);
     }
 }

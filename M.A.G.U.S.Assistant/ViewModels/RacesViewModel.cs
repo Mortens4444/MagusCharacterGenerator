@@ -1,4 +1,6 @@
-﻿using M.A.G.U.S.Races;
+﻿using CommunityToolkit.Mvvm.Input;
+using M.A.G.U.S.Assistant.Services;
+using M.A.G.U.S.Races;
 using Mtf.Extensions;
 using Mtf.LanguageService.MAUI;
 using System.Collections.ObjectModel;
@@ -10,18 +12,20 @@ internal partial class RacesViewModel : BaseViewModel
     public ObservableCollection<Race> Races { get; } = [];
     public ObservableCollection<Race> FilteredRaces { get; } = [];
 
-    string _searchText = String.Empty;
+    private string searchText = String.Empty;
+    private AsyncRelayCommand? previewImageCommand;
+
     public string SearchText
     {
-        get => _searchText;
+        get => searchText;
         set
         {
-            if (_searchText == value)
+            if (searchText == value)
             {
                 return;
             }
 
-            _searchText = value ?? String.Empty;
+            searchText = value ?? String.Empty;
             OnPropertyChanged();
             ApplyFilter();
         }
@@ -75,5 +79,12 @@ internal partial class RacesViewModel : BaseViewModel
         {
             FilteredRaces.Add(it);
         }
+    }
+
+    public IAsyncRelayCommand PreviewImageCommand => previewImageCommand ??= new AsyncRelayCommand(PreviewImage);
+
+    private Task PreviewImage()
+    {
+        return ImagePreviewService.ShowAsync(SelectedRace?.Image);
     }
 }

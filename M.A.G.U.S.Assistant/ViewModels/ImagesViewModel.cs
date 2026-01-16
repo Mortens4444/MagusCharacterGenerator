@@ -121,21 +121,8 @@ internal partial class ImagesViewModel : BaseViewModel
         OnPropertyChanged(nameof(FilteredImages));
     }
 
-    private static async Task PreviewAsync(ImageItem item)
+    private static Task PreviewAsync(ImageItem item)
     {
-        if (item == null)
-        {
-            return;
-        }
-
-        try
-        {
-            var page = new Views.ImagePreviewPage(item);
-            await ShellNavigationService.ShowPage(page).ConfigureAwait(true);
-        }
-        catch (Exception ex)
-        {
-            WeakReferenceMessenger.Default.Send(new ShowErrorMessage(ex));
-        }
+        return ImagePreviewService.ShowAsync(item);
     }
 }

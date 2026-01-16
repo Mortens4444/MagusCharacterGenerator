@@ -16,7 +16,7 @@ internal partial class PaintWizardViewModel : BaseViewModel
     private IDrawableElement? currentElement;
     private PaintTool activeTool = PaintTool.Pencil;
     private Color selectedColor = GetDefaultColor();
-    private string defaultText = "𝕸.𝕬.𝕲.𝖀.𝕾. - Ҝ.Ա.Ψ.Ᵽ.⅃.";
+    private string defaultText = "𝕸.𝕬.𝕲.𝖀.𝕾. - Ҝ.Ա.ᚠ.Ᵽ.⅃.";
     private bool autoFill;
     private bool isCircleRectMode;
     private Color backgroundColor = Colors.White;
@@ -86,7 +86,7 @@ internal partial class PaintWizardViewModel : BaseViewModel
     }
 
     public List<Color> Palette { get; } = [ Colors.Black, Colors.White, Colors.Red, Colors.Green, Colors.Blue, Colors.Yellow, Colors.Purple, Colors.Orange,
-        Colors.Gray, Colors.Brown, Colors.Cyan, Colors.Magenta, Colors.Lime, Colors.Maroon, Colors.Navy, Colors.Olive, Colors.Brown, Colors.Orchid,
+        Colors.Gray, Colors.Brown, Colors.Cyan, Colors.Magenta, Colors.Lime, Colors.Maroon, Colors.Navy, Colors.Olive, Colors.SaddleBrown, Colors.Orchid,
         Colors.Salmon, Colors.Crimson ];
 
     [RelayCommand]
@@ -106,7 +106,7 @@ internal partial class PaintWizardViewModel : BaseViewModel
     [RelayCommand]
     public async Task SaveDrawing()
     {
-        var name = await Shell.Current.DisplayPromptAsync(Lng.Elem("Save"), Lng.Elem("Enter drawing name:"), Lng.Elem("Save"), Lng.Elem("Cancel"), initialValue: $"{Lng.Elem("Drawing")}_{DateTime.Now:yyyyMMdd_HHmm}");
+        var name = await Shell.Current.DisplayPromptAsync(Lng.Elem("Save"), Lng.Elem("Drawing name"), Lng.Elem("Save"), Lng.Elem("Cancel"), initialValue: $"{Lng.Elem("Drawing")}_{DateTime.Now:yyyyMMdd_HHmm}").ConfigureAwait(true);
 
         if (String.IsNullOrWhiteSpace(name))
         {
@@ -126,11 +126,12 @@ internal partial class PaintWizardViewModel : BaseViewModel
             return;
         }
 
-        bool confirm = await Shell.Current.DisplayAlertAsync(Lng.Elem("Delete"), $"{Lng.Elem("Delete")} {drawing.Name}?", Lng.Elem("Yes"), Lng.Elem("No"));
+        var confirmText = String.Format(Lng.Elem("Are you sure you want to delete '{0}'?"), drawing.Name);
+        bool confirm = await Shell.Current.DisplayAlertAsync(Lng.Elem("Delete"), confirmText, Lng.Elem("Yes"), Lng.Elem("No")).ConfigureAwait(true);
         if (confirm)
         {
             await drawingRepository.DeleteDrawingAsync(drawing.Name).ConfigureAwait(false);
-            await RefreshSavedDrawings();
+            await RefreshSavedDrawings().ConfigureAwait(true);
         }
     }
 
@@ -142,17 +143,22 @@ internal partial class PaintWizardViewModel : BaseViewModel
             return;
         }
 
-        var loadedElements = await drawingRepository.GetDrawingByNameAsync(drawing.Name).ConfigureAwait(false);
-        if (loadedElements != null)
+        var confirmText = String.Format(Lng.Elem("Are you sure you want to load '{0}'?"), drawing.Name);
+        bool confirm = await Shell.Current.DisplayAlertAsync(Lng.Elem("Load"), confirmText, Lng.Elem("Yes"), Lng.Elem("No")).ConfigureAwait(true);
+        if (confirm)
         {
-            MainThread.BeginInvokeOnMainThread(() =>
+            var loadedElements = await drawingRepository.GetDrawingByNameAsync(drawing.Name).ConfigureAwait(false);
+            if (loadedElements != null)
             {
-                Elements.Clear();
-                foreach (var el in loadedElements)
+                MainThread.BeginInvokeOnMainThread(() =>
                 {
-                    Elements.Add(el);
-                }
-            });
+                    Elements.Clear();
+                    foreach (var el in loadedElements)
+                    {
+                        Elements.Add(el);
+                    }
+                });
+            }
         }
     }
 

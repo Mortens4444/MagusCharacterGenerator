@@ -69,13 +69,8 @@
                               DragInteraction="OnTouchDrag"
                               EndInteraction="OnTouchEnd" />
 
-                <Button Command="{Binding ToggleSidebarCommand}"
-                        HorizontalOptions="End"
-                        VerticalOptions="Start"
-                        Margin="10"
-                        Opacity="0.6"
-                        BackgroundColor="Gray"
-                        WidthRequest="40">
+                <Button Command="{Binding ToggleSidebarCommand}" HorizontalOptions="End" VerticalOptions="Start"
+                        Margin="10" Opacity="0.4" BackgroundColor="Gray" WidthRequest="40">
                     <Button.Triggers>
                         <DataTrigger TargetType="Button" Binding="{Binding IsSidebarVisible}" Value="True">
                             <Setter Property="Text" Value="▶" />
@@ -93,7 +88,7 @@
                     IsVisible="{Binding IsSidebarVisible}">
             <VerticalStackLayout Spacing="10" Padding="10" BackgroundColor="#222">
 
-                <Label Text="Saved Drawings" FontSize="12" HorizontalOptions="Center" TextColor="Gray" Margin="0,10,0,5"/>
+                <Label Text="Saved drawings" FontSize="12" HorizontalOptions="Center" TextColor="Gray" Margin="0,10,0,5"/>
                 <CollectionView ItemsSource="{Binding SavedDrawings}" BackgroundColor="Transparent" SelectionMode="None">
                     <CollectionView.ItemTemplate>
                         <DataTemplate x:DataType="e:DrawingEntity">

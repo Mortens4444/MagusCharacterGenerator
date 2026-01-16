@@ -51,12 +51,15 @@
                 <DataTemplate x:DataType="m:DisplayItem">
                     <Border Stroke="Gray" StrokeThickness="1" Padding="8" Margin="0,4">
                         <Grid ColumnDefinitions="*,Auto" ColumnSpacing="8" VerticalOptions="Center">
-                            <StackLayout>
-                                <Label Text="{Binding Title, Converter={StaticResource TranslationConverter}}" FontAttributes="Bold"
-                                       TextColor="{Binding Enabled, Converter={StaticResource BoolToColorConverter}}" />
+                            <VerticalStackLayout>
+                                <HorizontalStackLayout>
+                                    <Image Source="{Binding Image}" WidthRequest="20" HeightRequest="20" Aspect="AspectFill" HorizontalOptions="Start" Margin="0,0,10,0" />
+                                    <Label Text="{Binding Title, Converter={StaticResource TranslationConverter}}" FontAttributes="Bold"
+                                           TextColor="{Binding Enabled, Converter={StaticResource BoolToColorConverter}}" />
+                                </HorizontalStackLayout>
                                 <Label Text="{Binding Subtitle, Converter={StaticResource TranslationConverter}}" FontSize="12" LineBreakMode="TailTruncation"
                                        TextColor="{Binding Enabled, Converter={StaticResource BoolToColorConverter}}" />
-                            </StackLayout>
+                            </VerticalStackLayout>
                             <Label Text="{Binding RightText}" VerticalOptions="Center" Grid.Column="1" FontAttributes="Bold"
                                    TextColor="{Binding Enabled, Converter={StaticResource BoolToColorConverter}}" />
                         </Grid>

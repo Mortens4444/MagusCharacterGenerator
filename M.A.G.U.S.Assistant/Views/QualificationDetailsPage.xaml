@@ -34,7 +34,11 @@
 
                     <Border Grid.Row="0" Grid.Column="1" Padding="6" Stroke="#E6E6E6"
                             StrokeShape="RoundRectangle 10" VerticalOptions="Start" HorizontalOptions="End">
-                        <Image Source="{Binding ImageName}" Aspect="AspectFit" WidthRequest="120" HeightRequest="120" />
+                        <Image Source="{Binding ImageName}" Aspect="AspectFit" WidthRequest="120" HeightRequest="120">
+                            <Image.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding PreviewImageCommand}" />
+                            </Image.GestureRecognizers>
+                        </Image>
                     </Border>
 
                     <Picker Title="Level" Grid.Row="1" ItemsSource="{Binding AvailableLevels}" SelectedItem="{Binding SelectedLevel, Mode=TwoWay}"

@@ -1,10 +1,13 @@
-﻿using M.A.G.U.S.Assistant.Extensions;
+﻿using CommunityToolkit.Mvvm.Input;
+using M.A.G.U.S.Assistant.Extensions;
 using M.A.G.U.S.Assistant.Models;
+using M.A.G.U.S.Assistant.Services;
 using M.A.G.U.S.Interfaces;
 using M.A.G.U.S.Qualifications;
 using Mtf.Extensions;
 using Mtf.LanguageService.MAUI;
 using System.Collections.ObjectModel;
+using System.Windows.Input;
 
 namespace M.A.G.U.S.Assistant.ViewModels;
 
@@ -14,6 +17,7 @@ internal partial class ClassesViewModel : BaseViewModel
     private IClass? selectedClass;
     private ObservableCollection<IClass> filteredClasses = [];
     private ObservableCollection<DiceStat> diceStats = [];
+    private AsyncRelayCommand? previewImageCommand;
 
     public ClassesViewModel()
     {
@@ -97,5 +101,12 @@ internal partial class ClassesViewModel : BaseViewModel
         {
             FilteredClasses = new ObservableCollection<IClass>(Classes);
         }
+    }
+
+    public IAsyncRelayCommand PreviewImageCommand => previewImageCommand ??= new AsyncRelayCommand(PreviewImage);
+
+    private Task PreviewImage()
+    {
+        return ImagePreviewService.ShowAsync(SelectedClass?.Image);
     }
 }

@@ -1,6 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.Input;
 using M.A.G.U.S.Assistant.CustomEventArgs;
 using M.A.G.U.S.Assistant.Extensions;
+using M.A.G.U.S.Assistant.Services;
 using M.A.G.U.S.GameSystem;
 using M.A.G.U.S.Interfaces;
 using M.A.G.U.S.Things;
@@ -8,12 +9,14 @@ using M.A.G.U.S.Things.Armors;
 using M.A.G.U.S.Things.MagicalObjects;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
+using RelayCommand = CommunityToolkit.Mvvm.Input.RelayCommand;
 
 namespace M.A.G.U.S.Assistant.ViewModels;
 
 internal partial class ItemDetailsViewModel : BaseViewModel
 {
     private Thing? selectedRuneTarget;
+    private AsyncRelayCommand? previewImageCommand;
 
     public ItemDetailsViewModel(Character? character, Thing thingToBuy, double priceMultiplier)
     {
@@ -105,5 +108,12 @@ internal partial class ItemDetailsViewModel : BaseViewModel
     {
         Money = (SelectedRuneTarget!.MultipliedPrice * 2).ToTranslatedString();
         OnPropertyChanged(nameof(Money));
+    }
+
+    public IAsyncRelayCommand PreviewImageCommand => previewImageCommand ??= new AsyncRelayCommand(PreviewImage);
+
+    private Task PreviewImage()
+    {
+        return ImagePreviewService.ShowAsync(ImageName);
     }
 }

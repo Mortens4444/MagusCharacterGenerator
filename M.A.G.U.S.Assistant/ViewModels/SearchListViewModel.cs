@@ -20,7 +20,7 @@ namespace M.A.G.U.S.Assistant.ViewModels;
 internal partial class SearchListViewModel : BaseViewModel
 {
     private Character? character;
-    private bool showOnlyAffordable = false;
+    private bool showOnlyAffordable;
     private string searchText = String.Empty;
     private double priceMultiplier = 1.0;
     private string categoryFilter = String.Empty;
@@ -28,7 +28,7 @@ internal partial class SearchListViewModel : BaseViewModel
     private DisplayItem? selectedItem;
     private CancellationTokenSource? filterCancellationTokenSource;
 
-    private ISoundPlayer soundPlayer;
+    private readonly ISoundPlayer soundPlayer;
 
     public SearchListViewModel(ISoundPlayer soundPlayer)
     {
@@ -292,13 +292,16 @@ internal partial class SearchListViewModel : BaseViewModel
         }
     }
 
-    private Task DebounceApplyFilter()
+    private async Task DebounceApplyFilter()
     {
-        filterCancellationTokenSource?.Cancel();
+        if (filterCancellationTokenSource != null)
+        {
+            await filterCancellationTokenSource.CancelAsync().ConfigureAwait(false);
+        }
         filterCancellationTokenSource = new CancellationTokenSource();
         var token = filterCancellationTokenSource.Token;
 
-        return Task.Delay(300, token)
+        await Task.Delay(300, token)
             .ContinueWith(t =>
             {
                 if (t.IsCanceled)
@@ -310,7 +313,8 @@ internal partial class SearchListViewModel : BaseViewModel
                 {
                     ApplyFilter();
                 });
-            }, token, TaskContinuationOptions.None, TaskScheduler.FromCurrentSynchronizationContext());
+            }, token, TaskContinuationOptions.None, TaskScheduler.FromCurrentSynchronizationContext())
+            .ConfigureAwait(true);
     }
 
     private void RefreshAllItems()

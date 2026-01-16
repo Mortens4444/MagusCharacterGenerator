@@ -53,4 +53,6 @@ public interface IClass : IAttacker, IAbilities
     int GetExperiencePointsForLevel(int level);
 
     int GetLevelByExperiencePoints(int experiencePoints);
+
+    string Image { get; }
 }

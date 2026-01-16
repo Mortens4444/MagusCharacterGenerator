@@ -9,7 +9,6 @@ using M.A.G.U.S.Things.MagicalObjects;
 using Mtf.Extensions;
 using Mtf.LanguageService.MAUI;
 using System.ComponentModel;
-using System.Linq;
 
 namespace M.A.G.U.S.Assistant.Models;
 
@@ -45,6 +44,24 @@ internal partial class DisplayItem : INotifyPropertyChanged
                 Thing thing => thing.Name ?? String.Empty,
                 _ => String.Empty
             };
+        }
+    }
+
+    public string Image
+    {
+        get
+        {
+            if (Source is Thing thing)
+            {
+                return thing.ImageName;
+            }
+
+            if (Source is Creature creature)
+            {
+                return creature.Images.First();
+            }
+
+            return String.Empty;
         }
     }
 

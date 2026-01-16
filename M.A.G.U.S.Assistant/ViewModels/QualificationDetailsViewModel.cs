@@ -1,10 +1,10 @@
 ﻿using CommunityToolkit.Mvvm.Input;
 using M.A.G.U.S.Assistant.CustomEventArgs;
+using M.A.G.U.S.Assistant.Services;
 using M.A.G.U.S.GameSystem;
 using M.A.G.U.S.GameSystem.Qualifications;
 using M.A.G.U.S.Qualifications;
 using Mtf.LanguageService.MAUI;
-using Mtf.Maui.Controls.Extensions;
 using System.Windows.Input;
 
 namespace M.A.G.U.S.Assistant.ViewModels;
@@ -14,6 +14,7 @@ internal partial class QualificationDetailsViewModel : BaseViewModel
     private QualificationLevel selectedLevel;
     private bool canLearn;
     private int requiredSp;
+    private AsyncRelayCommand? previewImageCommand;
 
     public QualificationDetailsViewModel(Character? character, Qualification qualification)
     {
@@ -97,5 +98,12 @@ internal partial class QualificationDetailsViewModel : BaseViewModel
     protected virtual void OnClosed()
     {
         Closed?.Invoke(this, EventArgs.Empty);
+    }
+
+    public IAsyncRelayCommand PreviewImageCommand => previewImageCommand ??= new AsyncRelayCommand(PreviewImage);
+
+    private Task PreviewImage()
+    {
+        return ImagePreviewService.ShowAsync(Qualification?.ImageName);
     }
 }
