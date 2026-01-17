@@ -4,7 +4,7 @@
     <IsFirstTimeProjectOpen>False</IsFirstTimeProjectOpen>
     <ActiveDebugProfile>Windows Machine</ActiveDebugProfile>
     <ActiveDebugFramework>net10.0-windows10.0.19041.0</ActiveDebugFramework>
-    <SelectedPlatformGroup>Simulator</SelectedPlatformGroup>
+    <SelectedPlatformGroup>Emulator</SelectedPlatformGroup>
     <DefaultDevice>pixel_5_-_api_33</DefaultDevice>
     <SelectedDevice>pixel_5_-_api_33</SelectedDevice>
   </PropertyGroup>

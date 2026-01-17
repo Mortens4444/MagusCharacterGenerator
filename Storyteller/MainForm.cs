@@ -13,7 +13,7 @@ using Storyteller.Converter;
 using Storyteller.Media;
 using System.Runtime.InteropServices;
 
-namespace StoryTeller
+namespace Storyteller
 {
 	public partial class MainForm : Form
     {

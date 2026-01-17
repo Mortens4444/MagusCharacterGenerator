@@ -13,10 +13,6 @@ internal partial class PaintWizardPage : NotifierPage
     private PointF startPoint;
     private PointF lastPoint;
     private IDrawableElement? movingElement;
-    private double currentScale = 1;
-    private double startScale = 1;
-    private const double MinScale = 1;
-    private const double MaxScale = 4;
 
     public PaintWizardPage(PaintWizardViewModel viewModel)
     {
@@ -54,46 +50,6 @@ internal partial class PaintWizardPage : NotifierPage
     {
         base.OnAppearing();
         await viewModel.RefreshSavedDrawingsCommand.ExecuteAsync(null).ConfigureAwait(true);
-    }
-
-    private void OnPinchUpdated(object sender, PinchGestureUpdatedEventArgs e)
-    {
-        if (sender is not Image image)
-        {
-            return;
-        }
-
-        if (e.Status == GestureStatus.Started)
-        {
-            startScale = currentScale;
-            return;
-        }
-
-        if (e.Status == GestureStatus.Running)
-        {
-            var newScale = startScale * e.Scale;
-            currentScale = Math.Clamp(newScale, MinScale, MaxScale);
-            image.Scale = currentScale;
-            return;
-        }
-
-        if (e.Status == GestureStatus.Completed)
-        {
-            startScale = currentScale;
-        }
-    }
-
-    private async void OnDoubleTapped(object sender, EventArgs e)
-    {
-        if (sender is not Image image)
-        {
-            return;
-        }
-
-        currentScale = 1;
-        startScale = 1;
-
-        await image.ScaleToAsync(1, 120, Easing.CubicOut).ConfigureAwait(true);
     }
 
     private void OnTouchStart(object sender, TouchEventArgs e)

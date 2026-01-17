@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFrameworks>net10.0-android;net10.0-ios;net10.0-maccatalyst</TargetFrameworks>
     <TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('windows'))">$(TargetFrameworks);net10.0-windows10.0.19041.0</TargetFrameworks>
@@ -71,6 +71,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net10.0-android|AnyCPU'">
     <JavaMaximumHeapSize>2G</JavaMaximumHeapSize>
     <AndroidEnableMultiDex>True</AndroidEnableMultiDex>
+    <EmbedAssembliesIntoApk>True</EmbedAssembliesIntoApk>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net10.0-android|AnyCPU'">
     <JavaMaximumHeapSize>2G</JavaMaximumHeapSize>
@@ -80,7 +81,7 @@
     <!-- App Icon -->
     <MauiIcon Include="Resources\AppIcon\appicon.png" ForegroundFile="Resources\AppIcon\appicon.png" Color="#000000" />
     <!-- Splash Screen -->
-    <MauiSplashScreen Include="Resources\Splash\splash2.png" Color="#000000" />
+    <MauiSplashScreen Include="Resources\Splash\splash.png" Color="#000000" BaseSize="128,128" />
     <!-- Images -->
     <MauiImage Include="Resources\Images\*" />
     <!-- Custom Fonts -->
@@ -877,6 +878,6 @@
       <ImageManifestPath>$(ProjectDir)Resources\Images\images_manifest.txt</ImageManifestPath>
     </PropertyGroup>
     <!--<WriteLinesToFile File="$(ImageManifestPath)" Lines="@(AllImages->'%(RelativeDir)%(Filename)%(Extension)')" Overwrite="true" Encoding="UTF-8" />-->
-    <WriteLinesToFile File="$(ImageManifestPath)" Lines="@(AllImages-&gt;'%(Filename)%(Extension)')" Overwrite="true" Encoding="UTF-8" />
+    <WriteLinesToFile File="$(ImageManifestPath)" Lines="@(AllImages->'%(Filename)%(Extension)')" Overwrite="true" Encoding="UTF-8" />
   </Target>
 </Project>

@@ -1,10 +1,14 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <resources>
   <style name="Maui.SplashTheme" parent="Theme.MaterialComponents.DayNight.NoActionBar">
-
-    <item name="android:windowIsTranslucent">true</item>
+    
+    <item name="android:windowBackground">@drawable/maui_splash</item>
+    <item name="android:windowIsTranslucent">false</item>
+    <item name="android:windowFullscreen">true</item>
     <item name="android:windowBackground">@android:color/transparent</item>
-
+    <!--<item name="android:windowSplashScreenAnimatedIcon">@Resources/Splash/splash.png</item>-->
+    <item name="android:windowSplashScreenBackground">#000000</item>
+    
     <item name="colorPrimary">#512BD4</item>
     <item name="colorPrimaryDark">#2B0B98</item>
     <item name="colorAccent">#2B0B98</item>

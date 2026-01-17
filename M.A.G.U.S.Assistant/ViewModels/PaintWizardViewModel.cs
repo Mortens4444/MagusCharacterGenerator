@@ -20,8 +20,10 @@ internal partial class PaintWizardViewModel : BaseViewModel
     private bool autoFill;
     private bool isCircleRectMode;
     private Color backgroundColor = Colors.White;
-    private readonly DrawingRepository drawingRepository;
+    private bool isColorPickerVisible = true;
+    private bool isLeftSidebarVisible = true;
     private bool isSidebarVisible = true;
+    private readonly DrawingRepository drawingRepository;
 
     public PaintWizardViewModel(DrawingRepository drawingRepository)
     {
@@ -77,6 +79,18 @@ internal partial class PaintWizardViewModel : BaseViewModel
     {
         get => isCircleRectMode;
         set => SetProperty(ref isCircleRectMode, value);
+    }
+
+    public bool IsColorPickerVisible
+    {
+        get => isColorPickerVisible;
+        set => SetProperty(ref isColorPickerVisible, value);
+    }
+
+    public bool IsLeftSidebarVisible
+    {
+        get => isLeftSidebarVisible;
+        set => SetProperty(ref isLeftSidebarVisible, value);
     }
 
     public bool IsSidebarVisible
@@ -170,6 +184,18 @@ internal partial class PaintWizardViewModel : BaseViewModel
     private void SetBackground()
     {
         BackgroundColor = SelectedColor;
+    }
+
+    [RelayCommand]
+    private void ToggleColorPicker()
+    {
+        IsColorPickerVisible = !IsColorPickerVisible;
+    }
+
+    [RelayCommand]
+    private void ToggleLeftSidebar()
+    {
+        IsLeftSidebarVisible = !IsLeftSidebarVisible;
     }
 
     [RelayCommand]

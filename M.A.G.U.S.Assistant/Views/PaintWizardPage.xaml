@@ -20,97 +20,122 @@
         </ResourceDictionary>
     </v:NotifierPage.Resources>
 
-    <Grid RowDefinitions="*, 120" ColumnDefinitions="120, *, Auto" BackgroundColor="Black">
+    <Grid RowDefinitions="*, Auto" BackgroundColor="Black">
+        <Grid ColumnDefinitions="Auto, *, Auto"
+              BackgroundColor="Black" VerticalOptions="Fill">
 
-        <ScrollView Grid.Column="0">
-            <VerticalStackLayout Spacing="10" Padding="10" BackgroundColor="#222">
-                <Button Text="⟲" Clicked="OnNewPageClicked" BackgroundColor="Orange" ToolTipProperties.Text="Clear all"/>
-                <Button Text="💾" Command="{Binding SaveDrawingCommand}" TextColor="White" />
+            <ScrollView Grid.Column="0" IsVisible="{Binding IsLeftSidebarVisible}">
+                <VerticalStackLayout Spacing="10" Padding="10" BackgroundColor="#222">
+                    <Button Text="⟲" FontSize="Medium" Clicked="OnNewPageClicked" BackgroundColor="Orange" ToolTipProperties.Text="Clear all"/>
+                    <Button Text="💾" FontSize="Medium" Command="{Binding SaveDrawingCommand}" TextColor="White" />
 
-                <BoxView HeightRequest="1" BackgroundColor="#444" HorizontalOptions="Fill" Margin="0,5" />
+                    <BoxView HeightRequest="1" BackgroundColor="#444" HorizontalOptions="Fill" Margin="0,5" />
 
-                <Button Text="✎" Command="{Binding SelectToolCommand}" CommandParameter="{x:Static local:PaintTool.Pencil}"
-                    BorderWidth="{Binding ActiveTool, Converter={StaticResource ToolToThicknessConverter}, ConverterParameter={x:Static local:PaintTool.Pencil}}" BorderColor="White" />
-                <Button Text="—" Command="{Binding SelectToolCommand}" CommandParameter="{x:Static local:PaintTool.Line}"
-                    BorderWidth="{Binding ActiveTool, Converter={StaticResource ToolToThicknessConverter}, ConverterParameter={x:Static local:PaintTool.Line}}" BorderColor="White" />
-                <Button Text="⬜" Command="{Binding SelectToolCommand}" CommandParameter="{x:Static local:PaintTool.Rect}"
-                    BorderWidth="{Binding ActiveTool, Converter={StaticResource ToolToThicknessConverter}, ConverterParameter={x:Static local:PaintTool.Rect}}" BorderColor="White" />
-                <Button Text="◯" Command="{Binding SelectToolCommand}" CommandParameter="{x:Static local:PaintTool.Circle}"
-                    BorderWidth="{Binding ActiveTool, Converter={StaticResource ToolToThicknessConverter}, ConverterParameter={x:Static local:PaintTool.Circle}}" BorderColor="White" />
-                <Button Text="Æ" FontSize="12" Command="{Binding SelectToolCommand}" CommandParameter="{x:Static local:PaintTool.Text}"
-                    BorderWidth="{Binding ActiveTool, Converter={StaticResource ToolToThicknessConverter}, ConverterParameter={x:Static local:PaintTool.Text}}" BorderColor="White" />
+                    <Button Text="✎" FontSize="Medium" Command="{Binding SelectToolCommand}" CommandParameter="{x:Static local:PaintTool.Pencil}"
+                        BorderWidth="{Binding ActiveTool, Converter={StaticResource ToolToThicknessConverter}, ConverterParameter={x:Static local:PaintTool.Pencil}}" BorderColor="White" />
+                    <Button Text="—" FontSize="Medium" Command="{Binding SelectToolCommand}" CommandParameter="{x:Static local:PaintTool.Line}"
+                        BorderWidth="{Binding ActiveTool, Converter={StaticResource ToolToThicknessConverter}, ConverterParameter={x:Static local:PaintTool.Line}}" BorderColor="White" />
+                    <Button Text="⬜" FontSize="Medium" Command="{Binding SelectToolCommand}" CommandParameter="{x:Static local:PaintTool.Rect}"
+                        BorderWidth="{Binding ActiveTool, Converter={StaticResource ToolToThicknessConverter}, ConverterParameter={x:Static local:PaintTool.Rect}}" BorderColor="White" />
+                    <Button Text="◯" FontSize="Medium" Command="{Binding SelectToolCommand}" CommandParameter="{x:Static local:PaintTool.Circle}"
+                        BorderWidth="{Binding ActiveTool, Converter={StaticResource ToolToThicknessConverter}, ConverterParameter={x:Static local:PaintTool.Circle}}" BorderColor="White" />
+                    <Button Text="Æ" FontSize="Medium" Command="{Binding SelectToolCommand}" CommandParameter="{x:Static local:PaintTool.Text}"
+                        BorderWidth="{Binding ActiveTool, Converter={StaticResource ToolToThicknessConverter}, ConverterParameter={x:Static local:PaintTool.Text}}" BorderColor="White" />
 
-                <BoxView HeightRequest="1" BackgroundColor="#444" HorizontalOptions="Fill" Margin="0,5" />
-                <mc:CheckBoxWithLabel Label="Oval" IsChecked="{Binding IsCircleRectMode}" />
-                <mc:CheckBoxWithLabel Label="Fill" IsChecked="{Binding AutoFill}" />
+                    <BoxView HeightRequest="1" BackgroundColor="#444" HorizontalOptions="Fill" Margin="0,5" />
+                    <mc:CheckBoxWithLabel Label="Oval" IsChecked="{Binding IsCircleRectMode}" />
+                    <mc:CheckBoxWithLabel Label="Fill" IsChecked="{Binding AutoFill}" />
 
-                <Button Text="⛋" FontSize="12" Command="{Binding SelectToolCommand}" CommandParameter="{x:Static local:PaintTool.Fill}"
-                    BorderWidth="{Binding ActiveTool, Converter={StaticResource ToolToThicknessConverter}, ConverterParameter={x:Static local:PaintTool.Fill}}" BorderColor="White" />
-                <Button Text="X" FontSize="12" Command="{Binding SelectToolCommand}" CommandParameter="{x:Static local:PaintTool.Eraser}"
-                    BorderWidth="{Binding ActiveTool, Converter={StaticResource ToolToThicknessConverter}, ConverterParameter={x:Static local:PaintTool.Eraser}}" BorderColor="White" />
-                <Button Text="☩" FontSize="12" Command="{Binding SelectToolCommand}" CommandParameter="{x:Static local:PaintTool.Move}"
-                    BorderWidth="{Binding ActiveTool, Converter={StaticResource ToolToThicknessConverter}, ConverterParameter={x:Static local:PaintTool.Move}}" BorderColor="White" />
+                    <Button Text="⛋" FontSize="Medium" Command="{Binding SelectToolCommand}" CommandParameter="{x:Static local:PaintTool.Fill}"
+                        BorderWidth="{Binding ActiveTool, Converter={StaticResource ToolToThicknessConverter}, ConverterParameter={x:Static local:PaintTool.Fill}}" BorderColor="White" />
+                    <Button Text="X" FontSize="Medium" Command="{Binding SelectToolCommand}" CommandParameter="{x:Static local:PaintTool.Eraser}"
+                        BorderWidth="{Binding ActiveTool, Converter={StaticResource ToolToThicknessConverter}, ConverterParameter={x:Static local:PaintTool.Eraser}}" BorderColor="White" />
+                    <Button Text="✥" FontSize="Medium" Command="{Binding SelectToolCommand}" CommandParameter="{x:Static local:PaintTool.Move}"
+                        BorderWidth="{Binding ActiveTool, Converter={StaticResource ToolToThicknessConverter}, ConverterParameter={x:Static local:PaintTool.Move}}" BorderColor="White" />
 
-                <Label Text="Background" FontSize="10" HorizontalOptions="Center"/>
-                <Border WidthRequest="40" HeightRequest="40" BackgroundColor="{Binding BackgroundColor}">
-                    <Border.GestureRecognizers>
-                        <TapGestureRecognizer Command="{Binding SetBackgroundCommand}"/>
-                    </Border.GestureRecognizers>
-                </Border>
-            </VerticalStackLayout>
-        </ScrollView>
+                    <Label Text="Background" FontSize="10" HorizontalOptions="Center"/>
+                    <Border WidthRequest="40" HeightRequest="40" BackgroundColor="{Binding BackgroundColor}">
+                        <Border.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding SetBackgroundCommand}"/>
+                        </Border.GestureRecognizers>
+                    </Border>
+                </VerticalStackLayout>
+            </ScrollView>
             
-        <Border Grid.Column="1" Margin="5" StrokeThickness="0" BackgroundColor="{Binding BackgroundColor}" VerticalOptions="Fill" HorizontalOptions="Fill">
-            <Grid>
-                <GraphicsView x:Name="CanvasView"
-                              Drawable="{Binding DrawingLogic}"
-                              BackgroundColor="Transparent"
-                              StartInteraction="OnTouchStart"
-                              DragInteraction="OnTouchDrag"
-                              EndInteraction="OnTouchEnd" />
+            <Border Grid.Column="1" Margin="5" StrokeThickness="0" BackgroundColor="{Binding BackgroundColor}" VerticalOptions="Fill" HorizontalOptions="Fill">
+                <Grid>
+                    <GraphicsView x:Name="CanvasView"
+                                  Drawable="{Binding DrawingLogic}"
+                                  BackgroundColor="Transparent"
+                                  StartInteraction="OnTouchStart"
+                                  DragInteraction="OnTouchDrag"
+                                  EndInteraction="OnTouchEnd" />
 
-                <Button Command="{Binding ToggleSidebarCommand}" HorizontalOptions="End" VerticalOptions="Start"
+                    <Button Command="{Binding ToggleLeftSidebarCommand}" HorizontalOptions="Start" VerticalOptions="Start"
                         Margin="10" Opacity="0.4" BackgroundColor="Gray" WidthRequest="40">
-                    <Button.Triggers>
-                        <DataTrigger TargetType="Button" Binding="{Binding IsSidebarVisible}" Value="True">
-                            <Setter Property="Text" Value="▶" />
-                        </DataTrigger>
-                        <DataTrigger TargetType="Button" Binding="{Binding IsSidebarVisible}" Value="False">
-                            <Setter Property="Text" Value="◀" />
-                        </DataTrigger>
-                    </Button.Triggers>
-                </Button>
-            </Grid>
-        </Border>
+                        <Button.Triggers>
+                            <DataTrigger TargetType="Button" Binding="{Binding IsLeftSidebarVisible}" Value="True">
+                                <Setter Property="Text" Value="◀" />
+                            </DataTrigger>
+                            <DataTrigger TargetType="Button" Binding="{Binding IsLeftSidebarVisible}" Value="False">
+                                <Setter Property="Text" Value="▶" />
+                            </DataTrigger>
+                        </Button.Triggers>
+                    </Button>
+                
+                    <Button Command="{Binding ToggleSidebarCommand}" HorizontalOptions="End" VerticalOptions="Start"
+                            Margin="10" Opacity="0.4" BackgroundColor="Gray" WidthRequest="40">
+                        <Button.Triggers>
+                            <DataTrigger TargetType="Button" Binding="{Binding IsSidebarVisible}" Value="True">
+                                <Setter Property="Text" Value="▶" />
+                            </DataTrigger>
+                            <DataTrigger TargetType="Button" Binding="{Binding IsSidebarVisible}" Value="False">
+                                <Setter Property="Text" Value="◀" />
+                            </DataTrigger>
+                        </Button.Triggers>
+                    </Button>
 
-        <ScrollView Grid.Column="2"
-                    WidthRequest="160"
-                    IsVisible="{Binding IsSidebarVisible}">
-            <VerticalStackLayout Spacing="10" Padding="10" BackgroundColor="#222">
+                    <Button Command="{Binding ToggleColorPickerCommand}" HorizontalOptions="Center" VerticalOptions="End"
+                        Margin="10" Opacity="0.4" BackgroundColor="Gray" WidthRequest="40">
+                        <Button.Triggers>
+                            <DataTrigger TargetType="Button" Binding="{Binding IsColorPickerVisible}" Value="True">
+                                <Setter Property="Text" Value="▼" />
+                            </DataTrigger>
+                            <DataTrigger TargetType="Button" Binding="{Binding IsColorPickerVisible}" Value="False">
+                                <Setter Property="Text" Value="▲" />
+                            </DataTrigger>
+                        </Button.Triggers>
+                    </Button>
+                </Grid>
+            </Border>
 
-                <Label Text="Saved drawings" FontSize="12" HorizontalOptions="Center" TextColor="Gray" Margin="0,10,0,5"/>
-                <CollectionView ItemsSource="{Binding SavedDrawings}" BackgroundColor="Transparent" SelectionMode="None">
-                    <CollectionView.ItemTemplate>
-                        <DataTemplate x:DataType="e:DrawingEntity">
-                            <Grid ColumnDefinitions="*, Auto" Padding="5">
-                                <Label Text="{Binding Name}" VerticalOptions="Center" TextColor="White" FontSize="12">
-                                    <Label.GestureRecognizers>
-                                        <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type vm:PaintWizardViewModel}}, Path=LoadDrawingCommand}" CommandParameter="{Binding .}"/>
-                                    </Label.GestureRecognizers>
-                                </Label>
-                                <Button Grid.Column="1" Text="🗑" 
-                                        FontSize="10" Padding="0" HeightRequest="30" WidthRequest="30"
-                                        BackgroundColor="Transparent" TextColor="Red"
-                                        Command="{Binding Source={RelativeSource AncestorType={x:Type vm:PaintWizardViewModel}}, Path=DeleteDrawingCommand}" 
-                                        CommandParameter="{Binding .}"/>
-                            </Grid>
-                        </DataTemplate>
-                    </CollectionView.ItemTemplate>
-                </CollectionView>
-            </VerticalStackLayout>
-        </ScrollView>
+            <ScrollView Grid.Column="2" WidthRequest="160" IsVisible="{Binding IsSidebarVisible}">
+                <VerticalStackLayout Spacing="10" Padding="10" BackgroundColor="#222">
 
-        <ScrollView Grid.Row="1" Grid.ColumnSpan="3" >
+                    <Label Text="Saved drawings" FontSize="12" HorizontalOptions="Center" TextColor="Gray" Margin="0,10,0,5"/>
+                    <CollectionView ItemsSource="{Binding SavedDrawings}" BackgroundColor="Transparent" SelectionMode="None">
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate x:DataType="e:DrawingEntity">
+                                <Grid ColumnDefinitions="*, Auto" Padding="5">
+                                    <Label Text="{Binding Name}" VerticalOptions="Center" TextColor="White" FontSize="12">
+                                        <Label.GestureRecognizers>
+                                            <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type vm:PaintWizardViewModel}}, Path=LoadDrawingCommand}" CommandParameter="{Binding .}"/>
+                                        </Label.GestureRecognizers>
+                                    </Label>
+                                    <Button Grid.Column="1" Text="🗑" 
+                                            FontSize="10" Padding="0" HeightRequest="30" WidthRequest="30"
+                                            BackgroundColor="Transparent" TextColor="Red"
+                                            Command="{Binding Source={RelativeSource AncestorType={x:Type vm:PaintWizardViewModel}}, Path=DeleteDrawingCommand}" 
+                                            CommandParameter="{Binding .}"/>
+                                </Grid>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                </VerticalStackLayout>
+            </ScrollView>
+        </Grid>
+
+        <ScrollView Grid.Row="1" IsVisible="{Binding IsColorPickerVisible}" BackgroundColor="#111" MaximumHeightRequest="120">
             <VerticalStackLayout BackgroundColor="#111">
                 <Entry Text="{Binding DefaultText}" Placeholder="𝕸.𝕬.𝕲.𝖀.𝕾. - Ҝ.Ա.Ψ.Ᵽ.⅃." TextColor="White" BackgroundColor="#333" />
                 <FlexLayout Wrap="Wrap" JustifyContent="Center" Padding="5">
@@ -119,7 +144,7 @@
                     </BindableLayout.ItemsSource>
                     <BindableLayout.ItemTemplate>
                         <DataTemplate x:DataType="Color">
-                            <Border WidthRequest="40" HeightRequest="40" Margin="5" BackgroundColor="{Binding .}">
+                            <Border WidthRequest="40" HeightRequest="40" Margin="5" BackgroundColor="Transparent">
                                 <Border.Stroke>
                                     <MultiBinding Converter="{StaticResource ColorComparisonConverter}" ConverterParameter="Stroke">
                                         <Binding Source="{RelativeSource AncestorType={x:Type vm:PaintWizardViewModel}}" Path="SelectedColor" />
@@ -138,7 +163,8 @@
                                 <Border.GestureRecognizers>
                                     <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type vm:PaintWizardViewModel}}, Path=SelectColorCommand}" CommandParameter="{Binding .}"/>
                                 </Border.GestureRecognizers>
-                                <BoxView Color="Transparent" />
+
+                                <BoxView Color="{Binding .}" HorizontalOptions="Fill" VerticalOptions="Fill" />
                             </Border>
                         </DataTemplate>
                     </BindableLayout.ItemTemplate>

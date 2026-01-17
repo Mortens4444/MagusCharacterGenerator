@@ -1,4 +1,4 @@
-﻿namespace StoryTeller;
+﻿namespace Storyteller;
 
 static class Program
 {

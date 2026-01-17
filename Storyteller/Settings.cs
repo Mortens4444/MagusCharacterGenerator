@@ -1,6 +1,6 @@
 ﻿using M.A.G.U.S.Interfaces;
 
-namespace StoryTeller
+namespace Storyteller
 {
     class Settings : ISettings
     {
