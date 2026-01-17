@@ -10,4 +10,11 @@ internal partial class RacesPage : NotifierPage
         InitializeComponent();
         BindingContext = viewModel;
     }
+
+    protected override void OnAppearing()
+    {
+        base.OnAppearing();
+        var vm = BindingContext as RacesViewModel;
+        vm.SelectedRace = vm.FilteredRaces.First();
+    }
 }
