@@ -1,5 +1,5 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
-using CommunityToolkit.Mvvm.Input;
+﻿using CommunityToolkit.Mvvm.Input;
+using M.A.G.U.S.Assistant.Actions;
 using M.A.G.U.S.Assistant.Database.Entities;
 using M.A.G.U.S.Assistant.Database.Repositories;
 using M.A.G.U.S.Assistant.Enums;
@@ -24,13 +24,18 @@ internal partial class PaintWizardViewModel : BaseViewModel
     private bool isLeftSidebarVisible = true;
     private bool isSidebarVisible = true;
     private readonly DrawingRepository drawingRepository;
+    private readonly Stack<IPaintAction> undoStack = new();
+    private readonly Stack<IPaintAction> redoStack = new();
+
+    public event EventHandler? RequestInvalidate;
 
     public PaintWizardViewModel(DrawingRepository drawingRepository)
     {
         this.drawingRepository = drawingRepository;
         DrawingLogic = new PaintCanvasDrawable { ViewModel = this };
 
-        //Task.Run(async () => await RefreshSavedDrawings());
+        UndoCommand.NotifyCanExecuteChanged();
+        RedoCommand.NotifyCanExecuteChanged();
     }
 
     public IDrawableElement? CurrentElement
@@ -167,6 +172,10 @@ internal partial class PaintWizardViewModel : BaseViewModel
                 MainThread.BeginInvokeOnMainThread(() =>
                 {
                     Elements.Clear();
+                    undoStack.Clear();
+                    redoStack.Clear();
+                    UndoCommand.NotifyCanExecuteChanged();
+                    RedoCommand.NotifyCanExecuteChanged();
                     foreach (var el in loadedElements)
                     {
                         Elements.Add(el);
@@ -179,6 +188,22 @@ internal partial class PaintWizardViewModel : BaseViewModel
     public IRelayCommand SelectToolCommand => selectToolCommand ??= new RelayCommand<PaintTool>(SelectTool);
 
     public IRelayCommand SelectColorCommand => selectColorCommand ??= new RelayCommand<Color>(SelectColor);
+
+    public bool CanUndo => undoStack.Count > 0;
+
+    public bool CanRedo => redoStack.Count > 0;
+
+    [RelayCommand]
+    public void ClearBoard()
+    {
+        Elements.Clear();
+        undoStack.Clear();
+        redoStack.Clear();
+
+        UndoCommand.NotifyCanExecuteChanged();
+        RedoCommand.NotifyCanExecuteChanged();
+        RequestInvalidate?.Invoke(this, EventArgs.Empty);
+    }
 
     [RelayCommand]
     private void SetBackground()
@@ -202,6 +227,51 @@ internal partial class PaintWizardViewModel : BaseViewModel
     private void ToggleSidebar()
     {
         IsSidebarVisible = !IsSidebarVisible;
+    }
+
+    [RelayCommand(CanExecute = nameof(CanUndo))]
+    public void Undo()
+    {
+        if (undoStack.Count > 0)
+        {
+            var action = undoStack.Pop();
+            action.Undo(Elements); // Végrehajtjuk a visszavonást az elemeken
+            redoStack.Push(action); // Átrakjuk a Redo verembe
+
+            UndoCommand.NotifyCanExecuteChanged();
+            RedoCommand.NotifyCanExecuteChanged();
+
+            // Szólunk a View-nak, hogy frissítsen
+            RequestInvalidate?.Invoke(this, EventArgs.Empty);
+        }
+    }
+
+    [RelayCommand(CanExecute = nameof(CanRedo))]
+    public void Redo()
+    {
+        if (redoStack.Count > 0)
+        {
+            var action = redoStack.Pop();
+            action.Redo(Elements); // Újra végrehajtjuk
+            undoStack.Push(action); // Visszarakjuk az Undo verembe
+
+            UndoCommand.NotifyCanExecuteChanged();
+            RedoCommand.NotifyCanExecuteChanged();
+
+            RequestInvalidate?.Invoke(this, EventArgs.Empty);
+        }
+    }
+
+    public void RegisterAction(IPaintAction action)
+    {
+        undoStack.Push(action);
+        redoStack.Clear(); // Ha újat csinálunk, a "jövő" (Redo) törlődik
+
+        OnPropertyChanged(nameof(CanUndo));
+        OnPropertyChanged(nameof(CanRedo));
+        
+        UndoCommand.NotifyCanExecuteChanged();
+        RedoCommand.NotifyCanExecuteChanged();
     }
 
     private static Color GetDefaultColor() => Colors.Black;

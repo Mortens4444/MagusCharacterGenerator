@@ -1,5 +1,4 @@
 - Fix Images names (translation)
-- Undo for Paint
 - Error with a Task not awaited
 - When background is set on Paint, it should insert a filled rectangle instead of setting a controls background
 - Need popup from encounter result

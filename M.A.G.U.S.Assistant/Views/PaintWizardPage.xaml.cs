@@ -1,3 +1,4 @@
+using M.A.G.U.S.Assistant.Actions;
 using M.A.G.U.S.Assistant.Enums;
 using M.A.G.U.S.Assistant.Interfaces;
 using M.A.G.U.S.Assistant.Models.Drawing;
@@ -13,6 +14,8 @@ internal partial class PaintWizardPage : NotifierPage
     private PointF startPoint;
     private PointF lastPoint;
     private IDrawableElement? movingElement;
+    private float totalDeltaX; // Összes elmozdulás az X tengelyen
+    private float totalDeltaY; // Összes elmozdulás az Y tengelyen
 
     public PaintWizardPage(PaintWizardViewModel viewModel)
     {
@@ -56,6 +59,8 @@ internal partial class PaintWizardPage : NotifierPage
     {
         startPoint = e.Touches[0];
         lastPoint = startPoint;
+        totalDeltaX = 0; // ÚJ: nullázás
+        totalDeltaY = 0; // ÚJ: nullázás
 
         if (viewModel.ActiveTool == PaintTool.Move)
         {
@@ -127,6 +132,9 @@ internal partial class PaintWizardPage : NotifierPage
             // Elmozgatjuk az elemet
             movingElement.Move(dx, dy);
 
+            totalDeltaX += dx;
+            totalDeltaY += dy;
+
             lastPoint = currentPoint;
             CanvasView.Invalidate();
             return;
@@ -197,6 +205,7 @@ internal partial class PaintWizardPage : NotifierPage
             if (hit != null)
             {
                 viewModel.Elements.Remove(hit);
+                viewModel.RegisterAction(new RemoveAction(hit));
                 CanvasView.Invalidate();
                 return true;
             }
@@ -207,14 +216,62 @@ internal partial class PaintWizardPage : NotifierPage
 
     private void OnTouchEnd(object sender, TouchEventArgs e)
     {
-        movingElement = null;
-
-        if (viewModel.CurrentElement != null)
+        switch (viewModel.ActiveTool)
         {
-            viewModel.Elements.Add(viewModel.CurrentElement);
-            viewModel.CurrentElement = null;
-            CanvasView.Invalidate();
+            case PaintTool.Pencil:
+            case PaintTool.Line:
+            case PaintTool.Rect:
+            case PaintTool.Circle:
+            case PaintTool.Text:
+                // Rajzoló eszközök esetén: hozzáadás
+                if (viewModel.CurrentElement != null)
+                {
+                    viewModel.Elements.Add(viewModel.CurrentElement);
+                    viewModel.RegisterAction(new AddAction(viewModel.CurrentElement));
+                    viewModel.CurrentElement = null;
+                }
+                break;
+
+            case PaintTool.Move:
+                // Mozgatás esetén: ha volt mit mozgatni és tényleg elmozdult
+                if (movingElement != null && (totalDeltaX != 0 || totalDeltaY != 0))
+                {
+                    // Itt regisztráljuk a mozgást az Undo-hoz
+                    viewModel.RegisterAction(new MoveAction(movingElement, totalDeltaX, totalDeltaY));
+                }
+                movingElement = null;
+                totalDeltaX = 0;
+                totalDeltaY = 0;
+                break;
+
+            case PaintTool.Eraser:
+                // A radír általában már az OnTouchStart-ban vagy Drag-ben töröl, 
+                // ott kell meghívni a RegisterAction(new RemoveAction(...))-t!
+                break;
+
+            case PaintTool.Fill:
+                var hit = viewModel.Elements.LastOrDefault(el => el.Contains(startPoint));
+                if (hit != null)
+                {
+                    Color oldColor = Colors.Transparent; // Alapértelmezett
+
+                    // Kiolvassuk a régi színt a típus alapján
+                    if (hit is RectangleElement r) oldColor = r.FillColor;
+                    else if (hit is CircleElement c) oldColor = c.FillColor;
+
+                    // ÚJ: Akció regisztrálása
+                    viewModel.RegisterAction(new FillAction(hit, oldColor, viewModel.SelectedColor));
+
+                    // Maga a színezés
+                    if (hit is RectangleElement rect) rect.FillColor = viewModel.SelectedColor;
+                    else if (hit is CircleElement circle) circle.FillColor = viewModel.SelectedColor;
+
+                    CanvasView.Invalidate();
+                }
+                break;
         }
+
+        CanvasView.Invalidate();
     }
 
     private async void OnNewPageClicked(object sender, EventArgs e)
@@ -222,7 +279,7 @@ internal partial class PaintWizardPage : NotifierPage
         bool answer = await DisplayAlertAsync(Lng.Elem("Clear all"), Lng.Elem("Are you sure you want to clear the board?"), Lng.Elem("Yes"), Lng.Elem("No")).ConfigureAwait(true);
         if (answer)
         {
-            viewModel.Elements.Clear();
+            viewModel.ClearBoardCommand.Execute(null);
             CanvasView.Invalidate();
         }
     }

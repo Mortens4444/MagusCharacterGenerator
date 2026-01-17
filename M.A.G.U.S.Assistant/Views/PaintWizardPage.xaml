@@ -26,9 +26,16 @@
 
             <ScrollView Grid.Column="0" IsVisible="{Binding IsLeftSidebarVisible}">
                 <VerticalStackLayout Spacing="10" Padding="10" BackgroundColor="#222">
-                    <Button Text="⟲" FontSize="Medium" Clicked="OnNewPageClicked" BackgroundColor="Orange" ToolTipProperties.Text="Clear all"/>
+                    <Button Text="⟲" FontSize="Medium" Clicked="OnNewPageClicked" ToolTipProperties.Text="Clear all"/>
                     <Button Text="💾" FontSize="Medium" Command="{Binding SaveDrawingCommand}" TextColor="White" />
 
+                    <BoxView HeightRequest="1" BackgroundColor="#444" HorizontalOptions="Fill" Margin="0,5" />
+
+                    <Grid ColumnDefinitions="*, *" ColumnSpacing="5">
+                        <Button Grid.Column="0" Text="↩" FontSize="Medium" Command="{Binding UndoCommand}" BackgroundColor="#333" TextColor="White" ToolTipProperties.Text="Undo" />
+                        <Button Grid.Column="1" Text="↪" FontSize="Medium" Command="{Binding RedoCommand}" BackgroundColor="#333" TextColor="White" ToolTipProperties.Text="Redo" />
+                    </Grid>
+                    
                     <BoxView HeightRequest="1" BackgroundColor="#444" HorizontalOptions="Fill" Margin="0,5" />
 
                     <Button Text="✎" FontSize="Medium" Command="{Binding SelectToolCommand}" CommandParameter="{x:Static local:PaintTool.Pencil}"
