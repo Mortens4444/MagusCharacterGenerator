@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFrameworks>net10.0-android;net10.0-ios;net10.0-maccatalyst</TargetFrameworks>
     <TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('windows'))">$(TargetFrameworks);net10.0-windows10.0.19041.0</TargetFrameworks>
@@ -349,6 +349,7 @@
     <None Remove="Resources\Images\Qualifications\sailing.png" />
     <None Remove="Resources\Images\Qualifications\sculptury.png" />
     <None Remove="Resources\Images\Qualifications\secret_door_search.png" />
+    <None Remove="Resources\Images\Qualifications\see_survival.png" />
     <None Remove="Resources\Images\Qualifications\sense_of_danger.png" />
     <None Remove="Resources\Images\Qualifications\sense_of_mortal_peril.png" />
     <None Remove="Resources\Images\Qualifications\sexual_culture.png" />
@@ -811,6 +812,7 @@
     <MauiImage Include="Resources\Images\Qualifications\sailing.png" />
     <MauiImage Include="Resources\Images\Qualifications\sculptury.png" />
     <MauiImage Include="Resources\Images\Qualifications\secret_door_search.png" />
+    <MauiImage Include="Resources\Images\Qualifications\see_survival.png" />
     <MauiImage Include="Resources\Images\Qualifications\sense_of_danger.png" />
     <MauiImage Include="Resources\Images\Qualifications\sense_of_mortal_peril.png" />
     <MauiImage Include="Resources\Images\Qualifications\sexual_culture.png" />

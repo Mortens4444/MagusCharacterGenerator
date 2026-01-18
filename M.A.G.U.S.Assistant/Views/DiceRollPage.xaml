@@ -17,7 +17,7 @@
         </ResourceDictionary>
     </v:NotifierPage.Resources>
 
-    <Grid RowDefinitions="Auto,*,Auto" Padding="16" RowSpacing="12">
+    <Grid RowDefinitions="Auto,Auto,*" Padding="16" RowSpacing="12">
 
         <Grid Grid.Row="0" 
               RowDefinitions="Auto, Auto" 
@@ -65,8 +65,8 @@
             </HorizontalStackLayout>
         </Grid>
 
-        <ScrollView Grid.Row="1" Margin="50, 10">
-            <StackLayout Spacing="8">
+        <ScrollView Grid.Row="1" Margin="20, 5">
+            <StackLayout Spacing="4">
                 <Label Text="Summary"
                        FontAttributes="Bold"
                        HorizontalOptions="Center"
@@ -84,8 +84,8 @@
             </StackLayout>
         </ScrollView>
 
-        <Grid Grid.Row="2" VerticalOptions="End" HeightRequest="200">
-            <Image x:Name="DiceImage" Source="dice.png" Aspect="AspectFit" HorizontalOptions="Fill" VerticalOptions="Fill" />
+        <Grid Grid.Row="2" VerticalOptions="End" HeightRequest="190">
+            <Image x:Name="DiceImage" Source="dice.png" Aspect="AspectFit" />
         </Grid>
     </Grid>
 </v:NotifierPage>

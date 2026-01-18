@@ -245,6 +245,7 @@ running.png
 sailing.png
 sculptury.png
 secret_door_search.png
+see_survival.png
 sense_of_danger.png
 sense_of_mortal_peril.png
 sexual_culture.png

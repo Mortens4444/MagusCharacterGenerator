@@ -294,27 +294,27 @@ internal partial class SearchListViewModel : BaseViewModel
 
     private async Task DebounceApplyFilter()
     {
-        if (filterCancellationTokenSource != null)
-        {
-            await filterCancellationTokenSource.CancelAsync().ConfigureAwait(false);
-        }
+        filterCancellationTokenSource?.Cancel();
+        filterCancellationTokenSource?.Dispose();
+
         filterCancellationTokenSource = new CancellationTokenSource();
         var token = filterCancellationTokenSource.Token;
 
-        await Task.Delay(300, token)
-            .ContinueWith(t =>
-            {
-                if (t.IsCanceled)
-                {
-                    return;
-                }
-
-                MainThread.BeginInvokeOnMainThread(() =>
-                {
-                    ApplyFilter();
-                });
-            }, token, TaskContinuationOptions.None, TaskScheduler.FromCurrentSynchronizationContext())
-            .ConfigureAwait(true);
+        try
+        {
+            await Task.Delay(300, token).ConfigureAwait(false);
+            ApplyFilter();
+        }
+        catch (TaskCanceledException)
+        {
+        }
+        catch (OperationCanceledException)
+        {
+        }
+        catch (Exception ex)
+        {
+            WeakReferenceMessenger.Default.Send(new ShowErrorMessage(ex));
+        }
     }
 
     private void RefreshAllItems()

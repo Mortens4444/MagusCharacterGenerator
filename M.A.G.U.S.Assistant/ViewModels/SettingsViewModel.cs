@@ -25,6 +25,8 @@ internal partial class SettingsViewModel : BaseViewModel
         OnPropertyChanged(nameof(AutoDistributeQualificationPoints));
         OnPropertyChanged(nameof(AutoGenerateSkills));
         OnPropertyChanged(nameof(AutoIncreasePainTolerance));
+        OnPropertyChanged(nameof(AutoIncreaseManaPoints));
+        OnPropertyChanged(nameof(MaxDiesCount));
         ToggleSettingCommand = new RelayCommand<object?>(ToggleSetting);
     }
 
@@ -140,6 +142,32 @@ internal partial class SettingsViewModel : BaseViewModel
             if (settingsService.AutoIncreasePainTolerance != value)
             {
                 settingsService.SaveAutoPainToleranceIncreaseAsync(value);
+                OnPropertyChanged();
+            }
+        }
+    }
+
+    public bool AutoIncreaseManaPoints
+    {
+        get => settingsService.AutoIncreaseManaPoints;
+        set
+        {
+            if (settingsService.AutoIncreaseManaPoints != value)
+            {
+                settingsService.SaveAutoManaIncreaseAsync(value);
+                OnPropertyChanged();
+            }
+        }
+    }
+
+    public int MaxDiesCount
+    {
+        get => settingsService.MaxDiesCount;
+        set
+        {
+            if (settingsService.MaxDiesCount != value)
+            {
+                settingsService.SaveMaxDiesCountAsync(value);
                 OnPropertyChanged();
             }
         }

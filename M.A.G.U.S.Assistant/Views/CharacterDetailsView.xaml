@@ -137,16 +137,17 @@
                                 Grid.Row="1" Grid.Column="1" />
                     </Grid>
 
-                    <Grid ColumnDefinitions="*, *, *, *" ColumnSpacing="10" RowDefinitions="Auto">
-                        <Label Text="Armor" />
-                        <Picker Title="Select armor"
-                                ItemsSource="{Binding AvailableArmors}"
-                                ItemDisplayBinding="{Binding Name, Converter={StaticResource TranslationConverter}}"
-                                SelectedItem="{Binding SelectedArmor}"
-                                Grid.Column="1" />
+                    <Grid ColumnDefinitions="2*, *, *" ColumnSpacing="10" RowDefinitions="Auto">
+                        <VerticalStackLayout>
+                            <Label Text="Armor" />
+                            <Picker Title="Select armor"
+                                    ItemsSource="{Binding AvailableArmors}"
+                                    ItemDisplayBinding="{Binding Name, Converter={StaticResource TranslationConverter}}"
+                                    SelectedItem="{Binding SelectedArmor}" />
+                        </VerticalStackLayout>
 
-                        <mc:EntryWithLabel Grid.Column="2" Label="AC" Text="{Binding ArmorClass}" IsReadOnly="True" WidthRequest="100" />
-                        <mc:EntryWithLabel Grid.Column="3" Label="ACP" Text="{Binding ArmorCheckPenalty}" IsReadOnly="True" WidthRequest="100" />
+                        <mc:EntryWithLabel Grid.Column="1" Label="AC" Text="{Binding ArmorClass}" IsReadOnly="True" WidthRequest="100" VerticalOptions="Center" />
+                        <mc:EntryWithLabel Grid.Column="2" Label="ACP" Text="{Binding ArmorCheckPenalty}" IsReadOnly="True" WidthRequest="100" VerticalOptions="Center" />
                     </Grid>                    
 
                     <Picker ItemsSource="{Binding AvailableCombatValueModifiers}"

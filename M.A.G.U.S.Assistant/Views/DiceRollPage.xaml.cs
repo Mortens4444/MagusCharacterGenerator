@@ -78,4 +78,10 @@ internal partial class DiceRollPage : NotifierPage
             WeakReferenceMessenger.Default.Send(new ShowErrorMessage(ex));
         }
     }
+
+    protected override void OnSizeAllocated(double width, double height)
+    {
+        base.OnSizeAllocated(width, height);
+        DiceImage.HorizontalOptions = width > height ? LayoutOptions.End : LayoutOptions.Center;
+    }
 }

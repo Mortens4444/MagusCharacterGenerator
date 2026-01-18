@@ -3,9 +3,13 @@ using M.A.G.U.S.Assistant.Extensions;
 using M.A.G.U.S.Assistant.Interfaces;
 using M.A.G.U.S.Assistant.Services;
 using M.A.G.U.S.Enums;
+using M.A.G.U.S.Extensions;
 using M.A.G.U.S.GameSystem;
+using M.A.G.U.S.GameSystem.Magic;
 using M.A.G.U.S.Interfaces;
+using M.A.G.U.S.Models;
 using M.A.G.U.S.Qualifications;
+using M.A.G.U.S.Qualifications.Specialities;
 using M.A.G.U.S.Things;
 using M.A.G.U.S.Things.Armors;
 using M.A.G.U.S.Things.Weapons;
@@ -368,7 +372,25 @@ internal partial class CharacterViewModel(IPrintService printService) : BaseView
 
     public int MaxManaPoints => Character?.MaxManaPoints ?? 0;
     public int ManaPoints => Character?.ManaPoints ?? 0;
-    public int MaxManaPointsPerLevel => Character?.MaxManaPointsPerLevel ?? 0;
+
+    public string MaxManaPointsPerLevel
+    {
+        get
+        {
+            var sorcery = Character?.BaseClass?.SpecialQualifications.GetSpeciality<Sorcery>();
+            if (sorcery != null)
+            {
+                
+                var customAttributes = sorcery.GetType().GetMethod(nameof(sorcery.GetManaPointsModifier))?.GetCustomAttributes(false);
+                var formula = customAttributes.GetDiceThrowFormula();
+                if (formula != null)
+                {
+                    return formula.GetDisplayFormula();
+                }
+            }
+            return (Character?.MaxManaPointsPerLevel ?? 0).ToString();
+        }
+    }
 
     public int UnconsciousAstralMagicResistance => Character?.UnconsciousAstralMagicResistance ?? 0;
     public int UnconsciousMentalMagicResistance => Character?.UnconsciousMentalMagicResistance ?? 0;

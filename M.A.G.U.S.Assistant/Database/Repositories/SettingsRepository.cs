@@ -1,4 +1,5 @@
 ﻿using M.A.G.U.S.Assistant.Database.Entities;
+using System.Globalization;
 
 namespace M.A.G.U.S.Assistant.Database.Repositories;
 
@@ -8,10 +9,18 @@ internal class SettingsRepository(DatabaseContext context)
 
     public Task SaveBoolSettingAsync(string key, bool value) => SaveSettingAsync(key, value.ToString());
 
+    public Task SaveInt32SettingAsync(string key, int value) => SaveSettingAsync(key, value.ToString(CultureInfo.InvariantCulture));
+
     public async Task<bool> GetBoolSettingAsync(string key, bool defaultValue = true)
     {
         var val = await GetSettingAsync(key).ConfigureAwait(false);
-        return string.IsNullOrEmpty(val) ? defaultValue : bool.Parse(val);
+        return String.IsNullOrEmpty(val) ? defaultValue : Boolean.Parse(val);
+    }
+
+    public async Task<int> GetInt32SettingAsync(string key, int defaultValue = 0)
+    {
+        var val = await GetSettingAsync(key).ConfigureAwait(false);
+        return String.IsNullOrEmpty(val) ? defaultValue : Int32.Parse(val, CultureInfo.InvariantCulture);
     }
 
     public async Task SaveSettingAsync(string key, string value)
