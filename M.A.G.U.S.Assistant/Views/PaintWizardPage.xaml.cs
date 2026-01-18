@@ -14,29 +14,32 @@ internal partial class PaintWizardPage : NotifierPage
     private PointF startPoint;
     private PointF lastPoint;
     private IDrawableElement? movingElement;
-    private float totalDeltaX; // Összes elmozdulás az X tengelyen
-    private float totalDeltaY; // Összes elmozdulás az Y tengelyen
+    private float totalDeltaX;
+    private float totalDeltaY;
 
     public PaintWizardPage(PaintWizardViewModel viewModel)
     {
         InitializeComponent();
         BindingContext = viewModel;
         this.viewModel = viewModel;
-
-        viewModel.PropertyChanged += (s, e) => {
-            if (e.PropertyName == nameof(viewModel.BackgroundColor))
-            {
-                MainThread.BeginInvokeOnMainThread(() => {
-                    CanvasView?.Invalidate();
-                });
-            }
-        };
         
-        viewModel.Elements.CollectionChanged += (s, e) => {
-            MainThread.BeginInvokeOnMainThread(() => {
-                CanvasView?.Invalidate();
-            });
+        viewModel.Elements.CollectionChanged += (s, e) =>
+        {
+            Invalidate();
         };
+
+        viewModel.RequestInvalidate += (s, e) =>
+        {
+            Invalidate();
+        };
+    }
+
+    private void Invalidate()
+    {
+        MainThread.BeginInvokeOnMainThread(() =>
+        {
+            CanvasView?.Invalidate();
+        });
     }
 
     public override bool Equals(object? obj)
@@ -59,8 +62,8 @@ internal partial class PaintWizardPage : NotifierPage
     {
         startPoint = e.Touches[0];
         lastPoint = startPoint;
-        totalDeltaX = 0; // ÚJ: nullázás
-        totalDeltaY = 0; // ÚJ: nullázás
+        totalDeltaX = 0;
+        totalDeltaY = 0;
 
         if (viewModel.ActiveTool == PaintTool.Move)
         {
@@ -104,6 +107,19 @@ internal partial class PaintWizardPage : NotifierPage
                 var hit = viewModel.Elements.LastOrDefault(el => el.Contains(startPoint));
                 if (hit != null)
                 {
+                    Color oldColor = Colors.Transparent;
+
+                    if (hit is RectangleElement r)
+                    {
+                        oldColor = r.FillColor;
+                    }
+                    else if (hit is CircleElement c)
+                    {
+                        oldColor = c.FillColor;
+                    }
+
+                    viewModel.RegisterAction(new FillAction(hit, oldColor, viewModel.SelectedColor));
+
                     switch (hit)
                     {
                         case RectangleElement rect:
@@ -125,11 +141,9 @@ internal partial class PaintWizardPage : NotifierPage
 
         if (viewModel.ActiveTool == PaintTool.Move && movingElement != null)
         {
-            // Kiszámoljuk a különbséget az elõzõ pont óta
             float dx = currentPoint.X - lastPoint.X;
             float dy = currentPoint.Y - lastPoint.Y;
 
-            // Elmozgatjuk az elemet
             movingElement.Move(dx, dy);
 
             totalDeltaX += dx;
@@ -200,7 +214,6 @@ internal partial class PaintWizardPage : NotifierPage
     {
         if (viewModel.ActiveTool == PaintTool.Eraser)
         {
-            // Megkeressük az elsõ olyan elemet, ami közel van az ujjunkhoz és töröljük
             var hit = viewModel.Elements.FirstOrDefault(el => el.Contains(currentPoint));
             if (hit != null)
             {
@@ -223,7 +236,6 @@ internal partial class PaintWizardPage : NotifierPage
             case PaintTool.Rect:
             case PaintTool.Circle:
             case PaintTool.Text:
-                // Rajzoló eszközök esetén: hozzáadás
                 if (viewModel.CurrentElement != null)
                 {
                     viewModel.Elements.Add(viewModel.CurrentElement);
@@ -233,10 +245,8 @@ internal partial class PaintWizardPage : NotifierPage
                 break;
 
             case PaintTool.Move:
-                // Mozgatás esetén: ha volt mit mozgatni és tényleg elmozdult
                 if (movingElement != null && (totalDeltaX != 0 || totalDeltaY != 0))
                 {
-                    // Itt regisztráljuk a mozgást az Undo-hoz
                     viewModel.RegisterAction(new MoveAction(movingElement, totalDeltaX, totalDeltaY));
                 }
                 movingElement = null;
@@ -245,29 +255,7 @@ internal partial class PaintWizardPage : NotifierPage
                 break;
 
             case PaintTool.Eraser:
-                // A radír általában már az OnTouchStart-ban vagy Drag-ben töröl, 
-                // ott kell meghívni a RegisterAction(new RemoveAction(...))-t!
-                break;
-
             case PaintTool.Fill:
-                var hit = viewModel.Elements.LastOrDefault(el => el.Contains(startPoint));
-                if (hit != null)
-                {
-                    Color oldColor = Colors.Transparent; // Alapértelmezett
-
-                    // Kiolvassuk a régi színt a típus alapján
-                    if (hit is RectangleElement r) oldColor = r.FillColor;
-                    else if (hit is CircleElement c) oldColor = c.FillColor;
-
-                    // ÚJ: Akció regisztrálása
-                    viewModel.RegisterAction(new FillAction(hit, oldColor, viewModel.SelectedColor));
-
-                    // Maga a színezés
-                    if (hit is RectangleElement rect) rect.FillColor = viewModel.SelectedColor;
-                    else if (hit is CircleElement circle) circle.FillColor = viewModel.SelectedColor;
-
-                    CanvasView.Invalidate();
-                }
                 break;
         }
 

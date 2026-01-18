@@ -69,7 +69,7 @@
                 </VerticalStackLayout>
             </ScrollView>
             
-            <Border Grid.Column="1" Margin="5" StrokeThickness="0" BackgroundColor="{Binding BackgroundColor}" VerticalOptions="Fill" HorizontalOptions="Fill">
+            <Border Grid.Column="1" Margin="5" StrokeThickness="0" VerticalOptions="Fill" HorizontalOptions="Fill">
                 <Grid>
                     <GraphicsView x:Name="CanvasView"
                                   Drawable="{Binding DrawingLogic}"

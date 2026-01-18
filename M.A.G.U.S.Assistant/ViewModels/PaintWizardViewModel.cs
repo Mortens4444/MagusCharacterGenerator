@@ -4,6 +4,7 @@ using M.A.G.U.S.Assistant.Database.Entities;
 using M.A.G.U.S.Assistant.Database.Repositories;
 using M.A.G.U.S.Assistant.Enums;
 using M.A.G.U.S.Assistant.Interfaces;
+using M.A.G.U.S.Assistant.Models.Drawing;
 using Mtf.LanguageService.MAUI;
 using System.Collections.ObjectModel;
 
@@ -19,7 +20,7 @@ internal partial class PaintWizardViewModel : BaseViewModel
     private string defaultText = "𝕸.𝕬.𝕲.𝖀.𝕾. - Ҝ.Ա.ᚠ.Ᵽ.⅃.";
     private bool autoFill;
     private bool isCircleRectMode;
-    private Color backgroundColor = Colors.White;
+    private Color backgroundColor;
     private bool isColorPickerVisible = true;
     private bool isLeftSidebarVisible = true;
     private bool isSidebarVisible = true;
@@ -36,6 +37,7 @@ internal partial class PaintWizardViewModel : BaseViewModel
 
         UndoCommand.NotifyCanExecuteChanged();
         RedoCommand.NotifyCanExecuteChanged();
+        SetBackground();
     }
 
     public IDrawableElement? CurrentElement
@@ -209,6 +211,16 @@ internal partial class PaintWizardViewModel : BaseViewModel
     private void SetBackground()
     {
         BackgroundColor = SelectedColor;
+        var bgRect = new RectangleElement
+        {
+            Color = SelectedColor,
+            FillColor = SelectedColor,
+            Rect = new RectF(0, 0, 10000, 10000)
+        };
+
+        Elements.Add(bgRect);
+        RegisterAction(new AddAction(bgRect));
+        RequestInvalidate?.Invoke(this, EventArgs.Empty);
     }
 
     [RelayCommand]

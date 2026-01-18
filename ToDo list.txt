@@ -1,6 +1,5 @@
 - Fix Images names (translation)
 - Error with a Task not awaited
-- When background is set on Paint, it should insert a filled rectangle instead of setting a controls background
 - Need popup from encounter result
 - Fix zoom image preview
 - MaxDieNumber setting & property in Charatrer class + DieCounter on UI - Resetable? If DieCount == MaxDieCount => Status = Alive->Dead S
