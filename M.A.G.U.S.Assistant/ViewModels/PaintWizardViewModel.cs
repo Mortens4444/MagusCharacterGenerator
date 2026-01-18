@@ -247,13 +247,12 @@ internal partial class PaintWizardViewModel : BaseViewModel
         if (undoStack.Count > 0)
         {
             var action = undoStack.Pop();
-            action.Undo(Elements); // Végrehajtjuk a visszavonást az elemeken
-            redoStack.Push(action); // Átrakjuk a Redo verembe
+            action.Undo(Elements);
+            redoStack.Push(action);
 
             UndoCommand.NotifyCanExecuteChanged();
             RedoCommand.NotifyCanExecuteChanged();
 
-            // Szólunk a View-nak, hogy frissítsen
             RequestInvalidate?.Invoke(this, EventArgs.Empty);
         }
     }
@@ -264,8 +263,8 @@ internal partial class PaintWizardViewModel : BaseViewModel
         if (redoStack.Count > 0)
         {
             var action = redoStack.Pop();
-            action.Redo(Elements); // Újra végrehajtjuk
-            undoStack.Push(action); // Visszarakjuk az Undo verembe
+            action.Redo(Elements);
+            undoStack.Push(action);
 
             UndoCommand.NotifyCanExecuteChanged();
             RedoCommand.NotifyCanExecuteChanged();
@@ -277,7 +276,7 @@ internal partial class PaintWizardViewModel : BaseViewModel
     public void RegisterAction(IPaintAction action)
     {
         undoStack.Push(action);
-        redoStack.Clear(); // Ha újat csinálunk, a "jövő" (Redo) törlődik
+        redoStack.Clear();
 
         OnPropertyChanged(nameof(CanUndo));
         OnPropertyChanged(nameof(CanRedo));

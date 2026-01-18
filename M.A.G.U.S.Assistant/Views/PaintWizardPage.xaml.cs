@@ -80,12 +80,14 @@ internal partial class PaintWizardPage : NotifierPage
         switch (viewModel.ActiveTool)
         {
             case PaintTool.Text:
-                viewModel.Elements.Add(new TextElement
+                var textElement = new TextElement
                 {
-                    Text = viewModel.DefaultText,
+                    Color = viewModel.SelectedColor,
                     Position = startPoint,
-                    Color = viewModel.SelectedColor
-                });
+                    Text = viewModel.DefaultText
+                };
+                viewModel.Elements.Add(textElement);
+                viewModel.RegisterAction(new AddAction(textElement));
                 CanvasView.Invalidate();
                 break;
             case PaintTool.Pencil:
@@ -235,7 +237,6 @@ internal partial class PaintWizardPage : NotifierPage
             case PaintTool.Line:
             case PaintTool.Rect:
             case PaintTool.Circle:
-            case PaintTool.Text:
                 if (viewModel.CurrentElement != null)
                 {
                     viewModel.Elements.Add(viewModel.CurrentElement);
@@ -256,6 +257,7 @@ internal partial class PaintWizardPage : NotifierPage
 
             case PaintTool.Eraser:
             case PaintTool.Fill:
+            case PaintTool.Text:
                 break;
         }
 
