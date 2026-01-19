@@ -57,7 +57,7 @@ internal sealed class SettingsService : ISettings
         AutoIncreasePainTolerance = await settingsRepository.GetBoolSettingAsync(KeyAutoPainToleranceIncrease, Constants.AutoIncreasePainTolerance).ConfigureAwait(false);
         AutoIncreaseManaPoints = await settingsRepository.GetBoolSettingAsync(KeyAutoManaPointsIncrease, Constants.AutoIncreaseMana).ConfigureAwait(false);
         AutoGenerateSkills = await settingsRepository.GetBoolSettingAsync(KeyAutoSkillGeneration, Constants.AutoGenerateSkills).ConfigureAwait(false);
-        MaxDiesCount = await settingsRepository.GetInt32SettingAsync(KeyAutoSkillGeneration, Constants.MaxDiesCount).ConfigureAwait(false);
+        MaxDiesCount = await settingsRepository.GetInt32SettingAsync(KeyMaxDiesCount, Constants.MaxDiesCount).ConfigureAwait(false);
 
         AssignmentTurnHistoryNewestOnTop = await settingsRepository.GetBoolSettingAsync(KeyAssignmentTurnHistoryNewestOnTop, Constants.AssignmentTurnHistoryNewestOnTop).ConfigureAwait(false);
     }

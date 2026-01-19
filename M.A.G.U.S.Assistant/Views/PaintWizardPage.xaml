@@ -59,6 +59,10 @@
                         BorderWidth="{Binding ActiveTool, Converter={StaticResource ToolToThicknessConverter}, ConverterParameter={x:Static local:PaintTool.Eraser}}" BorderColor="White" />
                     <Button Text="✥" FontSize="Medium" Command="{Binding SelectToolCommand}" CommandParameter="{x:Static local:PaintTool.Move}"
                         BorderWidth="{Binding ActiveTool, Converter={StaticResource ToolToThicknessConverter}, ConverterParameter={x:Static local:PaintTool.Move}}" BorderColor="White" />
+                    <Button Text="🔄" FontSize="Medium" Command="{Binding SelectToolCommand}" CommandParameter="{x:Static local:PaintTool.Rotate}"
+                        BorderWidth="{Binding ActiveTool, Converter={StaticResource ToolToThicknessConverter}, ConverterParameter={x:Static local:PaintTool.Rotate}}" BorderColor="White" />
+                    <Button Text="⤡" FontSize="Medium" Command="{Binding SelectToolCommand}" CommandParameter="{x:Static local:PaintTool.Resize}"
+                        BorderWidth="{Binding ActiveTool, Converter={StaticResource ToolToThicknessConverter}, ConverterParameter={x:Static local:PaintTool.Resize}}" BorderColor="White" />
 
                     <Label Text="Background" FontSize="10" HorizontalOptions="Center"/>
                     <Border WidthRequest="40" HeightRequest="40" BackgroundColor="{Binding BackgroundColor}">

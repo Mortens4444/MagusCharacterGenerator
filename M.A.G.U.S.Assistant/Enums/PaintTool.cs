@@ -9,5 +9,7 @@ internal enum PaintTool
     Line,
     Rect,
     Circle,
-    Move
+    Move,
+    Rotate,
+    Resize
 }

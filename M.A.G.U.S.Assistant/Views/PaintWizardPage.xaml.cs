@@ -16,6 +16,10 @@ internal partial class PaintWizardPage : NotifierPage
     private IDrawableElement? movingElement;
     private float totalDeltaX;
     private float totalDeltaY;
+    private float totalDeltaRotation;
+    private double lastDistance;
+    private double initialDistance;
+    private float totalScale;
 
     public PaintWizardPage(PaintWizardViewModel viewModel)
     {
@@ -64,8 +68,21 @@ internal partial class PaintWizardPage : NotifierPage
         lastPoint = startPoint;
         totalDeltaX = 0;
         totalDeltaY = 0;
+        totalDeltaRotation = 0;
+        totalScale = 1.0f;
 
-        if (viewModel.ActiveTool == PaintTool.Move)
+        if (viewModel.ActiveTool == PaintTool.Resize)
+        {
+            movingElement = viewModel.Elements.LastOrDefault(el => el.Contains(startPoint));
+            if (movingElement != null)
+            {
+                var center = movingElement.GetCenter();
+                initialDistance = Math.Sqrt(Math.Pow(startPoint.X - center.X, 2) + Math.Pow(startPoint.Y - center.Y, 2));
+            }
+            return;
+        }
+
+        if (viewModel.ActiveTool == PaintTool.Move || viewModel.ActiveTool == PaintTool.Rotate)
         {
             movingElement = viewModel.Elements.LastOrDefault(el => el.Contains(startPoint));
             return;
@@ -140,7 +157,39 @@ internal partial class PaintWizardPage : NotifierPage
     private void OnTouchDrag(object sender, TouchEventArgs e)
     {
         var currentPoint = e.Touches[0];
+        
+        if (viewModel.ActiveTool == PaintTool.Resize && movingElement != null)
+        {
+            var center = movingElement.GetCenter();
+            double currentDistance = Math.Sqrt(Math.Pow(currentPoint.X - center.X, 2) + Math.Pow(currentPoint.Y - center.Y, 2));
 
+            if (initialDistance > 5)
+            {
+                float scale = (float)(currentDistance / initialDistance);
+                movingElement.Resize(scale);
+                totalScale *= scale;
+                initialDistance = currentDistance;
+                CanvasView.Invalidate();
+            }
+            return;
+        }
+
+        if (viewModel.ActiveTool == PaintTool.Rotate && movingElement != null)
+        {
+            var center = movingElement.GetCenter();
+
+            double startAngle = Math.Atan2(lastPoint.Y - center.Y, lastPoint.X - center.X);
+            double currentAngle = Math.Atan2(currentPoint.Y - center.Y, currentPoint.X - center.X);
+
+            float deltaAngle = (float)((currentAngle - startAngle) * (180 / Math.PI));
+
+            movingElement.Rotate(deltaAngle);
+            totalDeltaRotation += deltaAngle;
+
+            lastPoint = currentPoint;
+            CanvasView.Invalidate();
+            return;
+        }
         if (viewModel.ActiveTool == PaintTool.Move && movingElement != null)
         {
             float dx = currentPoint.X - lastPoint.X;
@@ -233,6 +282,21 @@ internal partial class PaintWizardPage : NotifierPage
     {
         switch (viewModel.ActiveTool)
         {
+            case PaintTool.Resize:
+                if (movingElement != null && Math.Abs(totalScale - 1.0f) > 0.001f)
+                {
+                    viewModel.RegisterAction(new ResizeAction(movingElement, totalScale));
+                }
+                movingElement = null;
+                totalScale = 1.0f;
+                break;
+            case PaintTool.Rotate:
+                if (movingElement != null && totalDeltaRotation != 0)
+                {
+                    viewModel.RegisterAction(new RotateAction(movingElement, totalDeltaRotation));
+                }
+                movingElement = null;
+                break;
             case PaintTool.Pencil:
             case PaintTool.Line:
             case PaintTool.Rect:

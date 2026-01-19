@@ -14,13 +14,31 @@ internal class SettingsRepository(DatabaseContext context)
     public async Task<bool> GetBoolSettingAsync(string key, bool defaultValue = true)
     {
         var val = await GetSettingAsync(key).ConfigureAwait(false);
-        return String.IsNullOrEmpty(val) ? defaultValue : Boolean.Parse(val);
+        if (String.IsNullOrEmpty(val))
+        {
+            return defaultValue;
+        }
+        if (Boolean.TryParse(val, out bool result))
+        {
+            return result;
+        }
+        return defaultValue;
     }
 
     public async Task<int> GetInt32SettingAsync(string key, int defaultValue = 0)
     {
         var val = await GetSettingAsync(key).ConfigureAwait(false);
-        return String.IsNullOrEmpty(val) ? defaultValue : Int32.Parse(val, CultureInfo.InvariantCulture);
+        if (String.IsNullOrEmpty(val))
+        {
+            return defaultValue;
+        }
+
+        if (Int32.TryParse(val, NumberStyles.Any, CultureInfo.InvariantCulture, out int result))
+        {
+            return result;
+        }
+
+        return defaultValue;
     }
 
     public async Task SaveSettingAsync(string key, string value)

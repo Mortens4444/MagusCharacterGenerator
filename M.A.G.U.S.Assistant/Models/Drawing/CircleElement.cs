@@ -18,6 +18,8 @@ public class CircleElement : IDrawableElement
 
     public RectF BoundingRect { get; set; }
 
+    public float Rotation { get; set; }
+
     public void Draw(ICanvas canvas)
     {
         if (IsBoundedByRect)
@@ -84,6 +86,41 @@ public class CircleElement : IDrawableElement
         else
         {
             Center = new PointF(Center.X + dx, Center.Y + dy);
+        }
+    }
+
+    public PointF GetCenter()
+    {
+        if (IsBoundedByRect)
+        {
+            return new PointF(BoundingRect.X + BoundingRect.Width / 2f, BoundingRect.Y + BoundingRect.Height / 2f);
+        }
+        return Center;
+    }
+
+    public void Rotate(float angleDegrees)
+    {
+        Rotation += angleDegrees;
+    }
+
+    public void Resize(float scale)
+    {
+        if (scale <= 0) return;
+
+        if (IsBoundedByRect)
+        {
+            // Ugyanaz a logika, mint a téglalapnál
+            var center = GetCenter();
+            float newWidth = BoundingRect.Width * scale;
+            float newHeight = BoundingRect.Height * scale;
+            float newX = center.X - (newWidth / 2f);
+            float newY = center.Y - (newHeight / 2f);
+            BoundingRect = new RectF(newX, newY, newWidth, newHeight);
+        }
+        else
+        {
+            // Egyszerű kör esetén csak a sugarat növeljük
+            Radius *= scale;
         }
     }
 }

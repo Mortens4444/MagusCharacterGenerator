@@ -11,6 +11,8 @@ internal class TextElement : IDrawableElement
     public PointF Position { get; set; }
 
     public float FontSize { get; set; } = 18;
+    
+    public float Rotation { get; set; }
 
     public bool Contains(PointF point)
     {
@@ -51,5 +53,27 @@ internal class TextElement : IDrawableElement
     public void Move(float dx, float dy)
     {
         Position = new PointF(Position.X + dx, Position.Y + dy);
+    }
+
+    public PointF GetCenter()
+    {
+        return Position;
+    }
+
+    public void Rotate(float angleDegrees)
+    {
+        Rotation += angleDegrees;
+    }
+
+    public void Resize(float scale)
+    {
+        if (scale <= 0) return;
+
+        // A betűméretet skálázzuk
+        FontSize *= scale;
+
+        // Opcionális: limitálhatjuk a méretet, hogy ne lehessen olvashatatlanul kicsi vagy óriási
+        if (FontSize < 8) FontSize = 8;
+        if (FontSize > 200) FontSize = 200;
     }
 }

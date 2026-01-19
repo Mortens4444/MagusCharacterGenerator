@@ -27,7 +27,6 @@ internal partial class PaintWizardViewModel : BaseViewModel
     private readonly DrawingRepository drawingRepository;
     private readonly Stack<IPaintAction> undoStack = new();
     private readonly Stack<IPaintAction> redoStack = new();
-
     public event EventHandler? RequestInvalidate;
 
     public PaintWizardViewModel(DrawingRepository drawingRepository)

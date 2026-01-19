@@ -10,6 +10,8 @@ public class RectangleElement : IDrawableElement
 
     public Color FillColor { get; set; } = Colors.Transparent;
 
+    public float Rotation { get; set; }
+
     public void Draw(ICanvas canvas)
     {
         canvas.StrokeColor = Color;
@@ -27,5 +29,33 @@ public class RectangleElement : IDrawableElement
         Rect = new RectF(Rect.X + dx, Rect.Y + dy, Rect.Width, Rect.Height);
     }
 
+    public PointF GetCenter()
+    {
+        return new PointF(Rect.X + Rect.Width / 2f, Rect.Y + Rect.Height / 2f);
+    }
+
     public bool Contains(PointF p) => Rect.Contains(p);
+
+    public void Rotate(float angleDegrees)
+    {
+        Rotation += angleDegrees;
+    }
+
+    public void Resize(float scale)
+    {
+        if (scale <= 0) return; // Biztonsági ellenőrzés
+
+        // Jelenlegi középpont mentése
+        var center = GetCenter();
+
+        // Új méretek
+        float newWidth = Rect.Width * scale;
+        float newHeight = Rect.Height * scale;
+
+        // Új pozíció (bal felső sarok) kiszámolása a középont alapján
+        float newX = center.X - (newWidth / 2f);
+        float newY = center.Y - (newHeight / 2f);
+
+        Rect = new RectF(newX, newY, newWidth, newHeight);
+    }
 }

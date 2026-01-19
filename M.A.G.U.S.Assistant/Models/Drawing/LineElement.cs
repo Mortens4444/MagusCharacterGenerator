@@ -10,6 +10,8 @@ internal class LineElement : IDrawableElement
 
     public float Thickness { get; set; } = 2f;
 
+    public float Rotation { get; set; }
+
     public void Move(float dx, float dy)
     {
         for (int i = 0; i < Points.Count; i++)
@@ -79,5 +81,45 @@ internal class LineElement : IDrawableElement
         {
             canvas.DrawLine(Points[i], Points[i + 1]);
         }
+    }
+
+    public PointF GetCenter()
+    {
+        if (Points == null || Points.Count == 0) return PointF.Zero;
+
+        float minX = Points.Min(p => p.X);
+        float maxX = Points.Max(p => p.X);
+        float minY = Points.Min(p => p.Y);
+        float maxY = Points.Max(p => p.Y);
+
+        return new PointF(minX + (maxX - minX) / 2f, minY + (maxY - minY) / 2f);
+    }
+
+    public void Rotate(float angleDegrees)
+    {
+        Rotation += angleDegrees;
+    }
+
+    public void Resize(float scale)
+    {
+        if (scale <= 0 || Points.Count == 0) return;
+
+        var center = GetCenter();
+        var newPoints = new List<PointF>();
+
+        foreach (var p in Points)
+        {
+            // Vektor a középponttól a pontig
+            float dx = p.X - center.X;
+            float dy = p.Y - center.Y;
+
+            // A vektort megszorozzuk a skálával és hozzáadjuk a középponthoz
+            newPoints.Add(new PointF(center.X + dx * scale, center.Y + dy * scale));
+        }
+
+        Points = newPoints;
+
+        // Opcionális: A vonal vastagságát is növelheted
+        // Thickness *= scale; 
     }
 }

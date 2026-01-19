@@ -16,4 +16,12 @@ internal interface IDrawableElement
     bool Contains(PointF point);
 
     void Move(float dx, float dy);
+
+    float Rotation { get; set; }
+
+    void Rotate(float angleDegrees);
+
+    PointF GetCenter();
+
+    void Resize(float scale);
 }

@@ -23,7 +23,7 @@
     <ApplicationId>com.mortens.MAGUS.Assistant</ApplicationId>
     <!-- Versions -->
     <MajorVersion>1</MajorVersion>
-    <MinorVersion>26</MinorVersion>
+    <MinorVersion>27</MinorVersion>
     <BuildNumber>0</BuildNumber>
     <PatchNumber>0</PatchNumber>
     <FileVersion>$(MajorVersion).$(MinorVersion).$(BuildNumber).$(PatchNumber)</FileVersion>
@@ -880,6 +880,6 @@
       <ImageManifestPath>$(ProjectDir)Resources\Images\images_manifest.txt</ImageManifestPath>
     </PropertyGroup>
     <!--<WriteLinesToFile File="$(ImageManifestPath)" Lines="@(AllImages->'%(RelativeDir)%(Filename)%(Extension)')" Overwrite="true" Encoding="UTF-8" />-->
-    <WriteLinesToFile File="$(ImageManifestPath)" Lines="@(AllImages->'%(Filename)%(Extension)')" Overwrite="true" Encoding="UTF-8" />
+    <WriteLinesToFile File="$(ImageManifestPath)" Lines="@(AllImages-&gt;'%(Filename)%(Extension)')" Overwrite="true" Encoding="UTF-8" />
   </Target>
 </Project>
