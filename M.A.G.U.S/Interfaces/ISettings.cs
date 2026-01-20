@@ -21,4 +21,10 @@ public interface ISettings
     bool AutoGenerateSkills { get; }
 
     bool AssignmentTurnHistoryNewestOnTop { get; }
+
+    bool AutoIncreaseManaPoints { get; }
+    
+    int MaxDiesCount { get; }
+
+    bool UseRaceClassRestrictions { get; }
 }

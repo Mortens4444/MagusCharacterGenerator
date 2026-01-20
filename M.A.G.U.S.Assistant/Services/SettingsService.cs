@@ -19,6 +19,7 @@ internal sealed class SettingsService : ISettings
     public bool AutoIncreaseManaPoints { get; private set; }
     public bool AutoGenerateSkills { get; private set; }
     public int MaxDiesCount { get; private set; }
+    public bool UseRaceClassRestrictions { get; private set; }
     public bool AssignmentTurnHistoryNewestOnTop { get; private set; }
 
     private const string KeyLanguage = "Setting_Language";
@@ -35,7 +36,8 @@ internal sealed class SettingsService : ISettings
     private const string KeyAutoManaPointsIncrease = "Setting_AutoManaPointsIncrease";
     private const string KeyAutoSkillGeneration = "Setting_AutoSkillGeneration";
     private const string KeyMaxDiesCount = "Setting_MaxDiesCount";
-
+    private const string KeyUseRaceClassRestrictions = "Setting_UseRaceClassRestrictions";
+    
     private const string KeyAssignmentTurnHistoryNewestOnTop = "Setting_AssignmentTurnHistoryNewestOnTop";
 
     public SettingsService(SettingsRepository settingsRepository)
@@ -58,6 +60,7 @@ internal sealed class SettingsService : ISettings
         AutoIncreaseManaPoints = await settingsRepository.GetBoolSettingAsync(KeyAutoManaPointsIncrease, Constants.AutoIncreaseMana).ConfigureAwait(false);
         AutoGenerateSkills = await settingsRepository.GetBoolSettingAsync(KeyAutoSkillGeneration, Constants.AutoGenerateSkills).ConfigureAwait(false);
         MaxDiesCount = await settingsRepository.GetInt32SettingAsync(KeyMaxDiesCount, Constants.MaxDiesCount).ConfigureAwait(false);
+        UseRaceClassRestrictions = await settingsRepository.GetBoolSettingAsync(KeyUseRaceClassRestrictions, Constants.UseRaceClassRestrictions).ConfigureAwait(false);
 
         AssignmentTurnHistoryNewestOnTop = await settingsRepository.GetBoolSettingAsync(KeyAssignmentTurnHistoryNewestOnTop, Constants.AssignmentTurnHistoryNewestOnTop).ConfigureAwait(false);
     }
@@ -120,6 +123,12 @@ internal sealed class SettingsService : ISettings
     {
         MaxDiesCount = value;
         return settingsRepository.SaveInt32SettingAsync(KeyMaxDiesCount, value);
+    }
+
+    public Task SaveUseRaceClassRestrictionsAsync(bool value)
+    {
+        UseRaceClassRestrictions = value;
+        return settingsRepository.SaveBoolSettingAsync(KeyUseRaceClassRestrictions, value);
     }
 
     public Task SaveAutoGenerateSkillsAsync(bool value)

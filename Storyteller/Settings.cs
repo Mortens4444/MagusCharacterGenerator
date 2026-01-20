@@ -23,5 +23,11 @@ namespace Storyteller
         public bool AutoGenerateSkills => true;
 
         public bool AssignmentTurnHistoryNewestOnTop => true;
+
+        public bool AutoIncreaseManaPoints => true;
+
+        public int MaxDiesCount => 1;
+
+        public bool UseRaceClassRestrictions => true;
     }
 }

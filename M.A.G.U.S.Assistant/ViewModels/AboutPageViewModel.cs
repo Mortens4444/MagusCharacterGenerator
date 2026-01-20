@@ -1,5 +1,4 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 using System.Reflection;
 using AppInfo = M.A.G.U.S.Assistant.Models.AppInfo;
 
@@ -24,16 +23,13 @@ internal partial class AboutPageViewModel : BaseViewModel
     public static AppInfo AppInfo => AppInfo.GetAppInfo(mainAssembly!);
 
     [ReadOnly(true)]
-    [ObservableProperty]
-    public string appName = AppInfo.AppName;
+    public string AppName => AppInfo.AppName;
 
     [ReadOnly(true)]
-    [ObservableProperty]
-    public string appVersion = AppInfo.AppVersion;
+    public string AppVersion => AppInfo.AppVersion;
 
     [ReadOnly(true)]
-    [ObservableProperty]
-    public string appEmail = AppInfo.AppEmail;
+    public string AppEmail => AppInfo.AppEmail;
 
     public static Task SendEmailAsync()
     {
