@@ -114,7 +114,7 @@ public class DoljahPriest : Class, IClass, IJustFight
         new() { Level = 12, MinExperience = 130001, MaxExperience = 165000 }
     ];
 
-    public override int ExpPerLevelAfter12 => 50000;
+    public override ulong ExpPerLevelAfter12 => 50000;
 
     public override QualificationList Qualifications => BuildQualifications(
     [

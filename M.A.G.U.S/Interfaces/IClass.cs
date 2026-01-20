@@ -46,13 +46,13 @@ public interface IClass : IAttacker, IAbilities
 
     DiceThrowFormula? GetPainToleranceModifierFormula();
 
-    int ExperiencePoints { get; set; }
+    ulong ExperiencePoints { get; set; }
 
     Alignment Alignment { get; }
 
-    int GetExperiencePointsForLevel(int level);
+    ulong GetExperiencePointsForLevel(int level);
 
-    int GetLevelByExperiencePoints(int experiencePoints);
+    int GetLevelByExperiencePoints(ulong experiencePoints);
 
     string Image { get; }
 }

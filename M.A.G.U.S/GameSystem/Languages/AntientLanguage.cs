@@ -14,8 +14,8 @@ public enum AntientLanguage
 	Voul,
 
     // Ősi birodalmi/archaikus nyelvek
-    [Description("Classical Shadoni")]
-    ClassicalShadoni,
+    [Description("Classical Shadonian")]
+    ClassicalShadonian,
 
     [Description("Archaic Jad")]
     ArchaicJad,
@@ -33,7 +33,7 @@ public enum AntientLanguage
     [Description("Ancient Elven")]
     AncientElven,
 
-    [Description("Dragon Speech")]
+    [Description("Dragon Speech (Wyrm Tongue)")]
     DragonSpeech,
 
     [Description("Ancient Goblyn Tongue")]

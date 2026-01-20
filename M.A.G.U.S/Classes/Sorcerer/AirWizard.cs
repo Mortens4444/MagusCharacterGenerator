@@ -118,7 +118,7 @@ public class AirWizard : Class, IClass, ILikeMagic
         new() { Level = 12, MinExperience = 135001, MaxExperience = 175500 }
     ];
 
-    public override int ExpPerLevelAfter12 => 58500;
+    public override ulong ExpPerLevelAfter12 => 58500;
 
     public override QualificationList Qualifications => BuildQualifications(
     [

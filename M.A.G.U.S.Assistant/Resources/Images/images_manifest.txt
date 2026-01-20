@@ -304,3 +304,4 @@ see_giant.png
 swamp_giant.png
 white_orc.png
 wier.png
+appicon.png

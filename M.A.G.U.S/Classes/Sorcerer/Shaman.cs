@@ -114,7 +114,7 @@ public class Shaman : Class, IClass, ILikeMagic
         new() { Level = 12, MinExperience = 147001, MaxExperience = 192000 }
     ];
 
-    public override int ExpPerLevelAfter12 => 55000;
+    public override ulong ExpPerLevelAfter12 => 55000;
     
     public override QualificationList Qualifications => BuildQualifications(
     [

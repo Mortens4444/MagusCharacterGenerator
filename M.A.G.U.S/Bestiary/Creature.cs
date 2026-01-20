@@ -98,7 +98,7 @@ public abstract class Creature : Attacker
 
     public int? MaxPainTolerancePoints { get; protected set; }
 
-    public uint ExperiencePoints { get; protected set; }
+    public ulong ExperiencePoints { get; protected set; }
 
     public string Description { get; protected set; }
 

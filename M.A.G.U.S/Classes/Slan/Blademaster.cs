@@ -115,7 +115,7 @@ public class Blademaster : Class, IClass, IJustFight
         new() { Level = 12, MinExperience = 165001, MaxExperience = 230000 }
     ];
 
-    public override int ExpPerLevelAfter12 => 62000;
+    public override ulong ExpPerLevelAfter12 => 62000;
     
     public override QualificationList Qualifications => BuildQualifications(
     [

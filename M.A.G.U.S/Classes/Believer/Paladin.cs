@@ -115,7 +115,7 @@ public abstract class Paladin : Class, IClass, IHateRangedWeapons
         new() { Level = 12, MinExperience = 108001, MaxExperience = 138000 }
     ];
 
-    public override int ExpPerLevelAfter12 => 38000;
+    public override ulong ExpPerLevelAfter12 => 38000;
     
     public override QualificationList Qualifications => BuildQualifications(
     [

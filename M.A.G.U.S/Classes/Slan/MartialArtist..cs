@@ -114,7 +114,7 @@ public class MartialArtist : Class, IClass, IJustFight
         new() { Level = 12, MinExperience = 170001, MaxExperience = 240000 }
     ];
 
-    public override int ExpPerLevelAfter12 => 65000;
+    public override ulong ExpPerLevelAfter12 => 65000;
 
     public override QualificationList Qualifications => BuildQualifications(
     [

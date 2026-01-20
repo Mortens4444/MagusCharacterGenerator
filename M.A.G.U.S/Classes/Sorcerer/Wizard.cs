@@ -112,7 +112,7 @@ public class Wizard : Class, IClass, ILikeMagic
         new() { Level = 12, MinExperience = 200001, MaxExperience = 300000 }
     ];
 
-    public override int ExpPerLevelAfter12 => 80000;
+    public override ulong ExpPerLevelAfter12 => 80000;
     
     public override QualificationList Qualifications => BuildQualifications(
     [

@@ -1,4 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.Input;
+using CommunityToolkit.Mvvm.Messaging;
 using M.A.G.U.S.Assistant.Services;
 using M.A.G.U.S.Bestiary;
 using M.A.G.U.S.Enums;
@@ -9,6 +10,7 @@ using M.A.G.U.S.Utils;
 using Mtf.Extensions;
 using Mtf.Extensions.Services;
 using Mtf.LanguageService.MAUI;
+using Mtf.Maui.Controls.Messages;
 using System.Collections.ObjectModel;
 
 namespace M.A.G.U.S.Assistant.ViewModels;
@@ -123,9 +125,10 @@ internal partial class EncounterViewModel(ISettings settings, CharacterService c
                     if (initiative.AttackResolution.IsSuccessful)
                     {
                         var damage = initiative.AttackResolution.Attack.GetDamage();
-                        if (initiative.Target.Source is Attacker attacker)
+                        if (initiative.Target.Source is Attacker targetEntity)
                         {
-                            if (initiative.AttackResolution.IsHpDamage || attacker.ActualPainTolerancePoints <= 0) // Need to fix for dragons, dragon has min and max only (I want a page, where you can set the actual values)
+                            bool wasConscious = targetEntity.ActualPainTolerancePoints > 0;
+                            if (initiative.AttackResolution.IsHpDamage || targetEntity.ActualPainTolerancePoints <= 0) // Need to fix for dragons, dragon has min and max only (I want a page, where you can set the actual values)
                             {
                                 if (initiative.AttackResolution.Impact == AttackImpact.Fatal)
                                 {
@@ -135,20 +138,37 @@ internal partial class EncounterViewModel(ISettings settings, CharacterService c
                                 {
                                     if (initiative.AttackResolution.Impact != AttackImpact.Critical)
                                     {
-                                        damage -= attacker.Armor?.ArmorClass ?? 0;
+                                        damage -= targetEntity.Armor?.ArmorClass ?? 0;
                                     }
-                                    attacker.ActualHealthPoints -= damage;
-                                    attacker.ActualPainTolerancePoints -= 2 * damage;
-                                    if (attacker.ActualHealthPoints <= 0)
+                                    targetEntity.ActualHealthPoints -= damage;
+                                    targetEntity.ActualPainTolerancePoints -= 2 * damage;
+                                    if (targetEntity.ActualHealthPoints <= 0)
                                     {
-                                        RemoveCharacter(attacker as Character);
-                                        RemoveEnemy(attacker as Creature);
+                                        RemoveCharacter(targetEntity as Character);
+                                        RemoveEnemy(targetEntity as Creature);
                                     }
                                 }
                             }
                             else
                             {
-                                attacker.ActualPainTolerancePoints -= damage;
+                                targetEntity.ActualPainTolerancePoints -= damage;
+                            }
+
+                            string targetName = EncounterViewModel.GetName(targetEntity);
+
+                            if (targetEntity.ActualHealthPoints <= 0)
+                            {
+                                var character = initiative.Attacker.Source as Character;
+                                var creature = targetEntity as Creature;
+                                character?.BaseClass?.ExperiencePoints += creature?.ExperiencePoints ?? 0;
+                                WeakReferenceMessenger.Default.Send(new ShowInfoMessage(Lng.Elem("Die"), String.Format(Lng.Elem("'{0}' died."), targetName)));
+
+                                RemoveCharacter(targetEntity as Character);
+                                RemoveEnemy(creature);
+                            }
+                            else if (targetEntity.ActualPainTolerancePoints <= 0 && wasConscious)
+                            {
+                                WeakReferenceMessenger.Default.Send(new ShowInfoMessage(Lng.Elem("Loss of consciousness"), String.Format(Lng.Elem("'{0}' has lost consciousness."), targetName)));
                             }
                         }
                     }
@@ -161,6 +181,21 @@ internal partial class EncounterViewModel(ISettings settings, CharacterService c
 
             CleanupDead();
         }
+    }
+
+    private static string GetName(Attacker attacker)
+    {
+        if (attacker is Character character)
+        {
+            return character.Name;
+        }
+
+        if (attacker is Creature creature)
+        {
+            return creature.Name;
+        }
+
+        return Lng.Elem("Unknown target");
     }
 
     private static IOrderedEnumerable<InitiativeEntry> GetInitiatives(AssignmentViewModel assignment, TurnData turn)

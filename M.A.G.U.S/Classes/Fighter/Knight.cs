@@ -115,7 +115,7 @@ public class Knight : Class, IClass, IHateRangedWeapons
         new() { Level = 12, MinExperience = 90001, MaxExperience = 110000 }
     ];
 
-    public override int ExpPerLevelAfter12 => 35000;
+    public override ulong ExpPerLevelAfter12 => 35000;
     
     public override QualificationList Qualifications => BuildQualifications(
     [

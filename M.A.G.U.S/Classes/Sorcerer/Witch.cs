@@ -114,7 +114,7 @@ public class Witch : Class, IClass, ILikeMagic
         new() { Level = 12, MinExperience = 78501, MaxExperience = 108500 }
     ];
 
-    public override int ExpPerLevelAfter12 => 31500;
+    public override ulong ExpPerLevelAfter12 => 31500;
     
     public override QualificationList Qualifications => BuildQualifications(
     [

@@ -116,7 +116,7 @@ public class Assassin : Class, IClass, IJustFight
         new() { Level = 12, MinExperience = 160001, MaxExperience = 220000 }
     ];
 
-    public override int ExpPerLevelAfter12 => 60000;
+    public override ulong ExpPerLevelAfter12 => 60000;
     
     public override QualificationList Qualifications => BuildQualifications(
     [

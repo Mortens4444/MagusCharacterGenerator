@@ -137,7 +137,7 @@ public abstract class Class : IClass
 
     public int MentalMagicResistance { get; }
 
-    public int ExperiencePoints { get; set; }
+    public ulong ExperiencePoints { get; set; }
 
     public virtual Alignment Alignment => Alignment.Order;
 
@@ -159,7 +159,7 @@ public abstract class Class : IClass
             new() { Level = 12, MinExperience = 160001, MaxExperience = 220000 }
     ];
 
-    public virtual int ExpPerLevelAfter12 => 60000;
+    public virtual ulong ExpPerLevelAfter12 => 60000;
     
     public virtual string Image => $"{Name.ToImageName()}.png";
 
@@ -193,7 +193,7 @@ public abstract class Class : IClass
         return result;
     }
 
-    public int GetExperiencePointsForLevel(int level)
+    public ulong GetExperiencePointsForLevel(int level)
     {
         var requirement = ExperienceLevels.FirstOrDefault(l => l.Level == level);
         if (requirement != null)
@@ -203,13 +203,13 @@ public abstract class Class : IClass
         var level12Max = ExperienceLevels.Last().MaxExperience;
         if (level > 12)
         {
-            int extraLevels = level - 12;
+            var extraLevels = (ulong)(level - 12);
             return level12Max + (extraLevels * ExpPerLevelAfter12);
         }
         return 0;
     }
 
-    public int GetLevelByExperiencePoints(int experiencePoints)
+    public int GetLevelByExperiencePoints(ulong experiencePoints)
     {
         var requirement = ExperienceLevels.FirstOrDefault(l => experiencePoints >= l.MinExperience && experiencePoints <= l.MaxExperience);
         if (requirement != null)
@@ -220,8 +220,8 @@ public abstract class Class : IClass
         var level12Max = ExperienceLevels.Last().MaxExperience;
         if (experiencePoints > level12Max)
         {
-            int extraExp = experiencePoints - level12Max;
-            return 12 + (extraExp / ExpPerLevelAfter12);
+            var extraExp = experiencePoints - level12Max;
+            return 12 + (int)(extraExp / ExpPerLevelAfter12);
         }
 
         return 1;

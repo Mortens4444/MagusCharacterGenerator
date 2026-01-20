@@ -312,7 +312,7 @@ internal partial class CharacterViewModel(IPrintService printService) : BaseView
 
     public bool PlayerCharacter => Character?.PlayerCharacter ?? false;
 
-    public int ExperiencePoints => Character?.BaseClass?.ExperiencePoints ?? 0;
+    public ulong ExperiencePoints => Character?.BaseClass?.ExperiencePoints ?? 0;
 
     public Alignment Alignment
     {

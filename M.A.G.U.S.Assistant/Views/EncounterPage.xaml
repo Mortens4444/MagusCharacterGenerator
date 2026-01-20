@@ -114,8 +114,8 @@
                                                 <Label Grid.Column="0" Text="{Binding RoundNumber}" />
                                                 <Label Grid.Column="1" Text="{Binding Attacker}" />
                                                 <Label Grid.Column="2" Text="{Binding Initiative}" />
-                                                <Label Grid.Column="3" Text="{Binding HitLocation}" />
-                                                <Label Grid.Column="4" Text="{Binding Result}" />
+                                                <Label Grid.Column="3" Text="{Binding Result}" />
+                                                <Label Grid.Column="4" Text="{Binding HitLocation}" />
                                                 <Label Grid.Column="5" Text="{Binding Direction}" />
                                                 <Label Grid.Column="6" Text="{Binding ActualHealthPoints}" />
                                                 <Label Grid.Column="7" Text="{Binding ActualPainTolerancePoints}" />

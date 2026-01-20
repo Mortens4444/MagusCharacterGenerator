@@ -115,7 +115,7 @@ public class Gladiator : Class, IClass, IJustFight
         new() { Level = 12, MinExperience = 93001, MaxExperience = 130000 }
     ];
 
-    public override int ExpPerLevelAfter12 => 40000;
+    public override ulong ExpPerLevelAfter12 => 40000;
 
     public override QualificationList Qualifications => BuildQualifications(
     [

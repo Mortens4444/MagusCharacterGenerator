@@ -1,6 +1,5 @@
 - Fix Images names (translation)
 - Priest Mana points per level should use RollFormulaPage + setting
-- Need popup from encounter result
 - Fix zoom image preview
 - Fix search and price multiplier change on market
 - MaxDieNumber setting & property in Charatrer class + DieCounter on UI - Resetable? If DieCount == MaxDieCount => Status = Alive->Dead S

@@ -119,7 +119,7 @@ public class KrannishWarlock : Class, IClass, ILikeMagic
         new() { Level = 12, MinExperience = 140001, MaxExperience = 190000 }
     ];
 
-    public override int ExpPerLevelAfter12 => 55000;
+    public override ulong ExpPerLevelAfter12 => 55000;
 
     public override QualificationList Qualifications => BuildQualifications(
     [

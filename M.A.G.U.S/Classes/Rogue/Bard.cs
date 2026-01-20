@@ -121,7 +121,7 @@ public class Bard : Class, IClass, IJustFight
         new() { Level = 12, MinExperience = 95001, MaxExperience = 145000 }
     ];
 
-    public override int ExpPerLevelAfter12 => 40000;
+    public override ulong ExpPerLevelAfter12 => 40000;
     
     public override QualificationList Qualifications => BuildQualifications(
     [

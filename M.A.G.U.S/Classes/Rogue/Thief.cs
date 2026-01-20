@@ -114,7 +114,7 @@ public class Thief : Class, IClass, IJustFight
         new() { Level = 12, MinExperience = 98001, MaxExperience = 131500 }
     ];
 
-    public override int ExpPerLevelAfter12 => 33500;
+    public override ulong ExpPerLevelAfter12 => 33500;
     
     public override QualificationList Qualifications => BuildQualifications(
     [
