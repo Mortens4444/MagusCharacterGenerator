@@ -1,7 +1,9 @@
 ﻿using M.A.G.U.S.Enums;
+using M.A.G.U.S.Extensions;
 using M.A.G.U.S.GameSystem.Attributes;
 using M.A.G.U.S.GameSystem.FightMode;
 using M.A.G.U.S.Interfaces;
+using M.A.G.U.S.Models;
 using M.A.G.U.S.Qualifications.Specialities;
 using M.A.G.U.S.Things.Weapons;
 using M.A.G.U.S.Things.Weapons.OtherWeapons;

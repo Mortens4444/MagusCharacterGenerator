@@ -155,7 +155,7 @@
                             SelectedItem="{Binding SelectedCombatValueModifier, Mode=TwoWay}"
                             WidthRequest="220"/>
 
-                    <Grid ColumnDefinitions="*, *" RowDefinitions="Auto, Auto, Auto">
+                    <Grid ColumnDefinitions="*, *" RowDefinitions="Auto, Auto, Auto, Auto">
                         <mc:NumericUpDownWithLabel Label="Initiator value" Minimum="{Binding MinInitiateValue}" Maximum="{Binding MaxInitiateValue}" Value="{Binding InitiateValue, Mode=OneWay}" IsVisible="{Binding CanAllocateCombatModifier, Converter={StaticResource BoolToVisibilityConverter}}" IncrementCommand="{Binding IncrementInitiatorCommand}" DecrementCommand="{Binding DecrementInitiatorCommand}" />
                         <mc:EntryWithLabel Label="Initiator value" Text="{Binding InitiateValue}" IsReadOnly="True" IsVisible="{Binding CanAllocateCombatModifier, Converter={StaticResource NotBoolToVisibilityConverter}}" />
 
@@ -170,6 +170,8 @@
 
                         <mc:EntryWithLabel Label="Combat modifier" Text="{Binding CombatValueModifier}" IsReadOnly="True" Grid.Row="2" />
                         <mc:EntryWithLabel Label="Combat modifier/level" Text="{Binding CombatValueModifierPerLevel}" IsReadOnly="True" Grid.Row="2" Grid.Column="1" />
+
+                        <mc:EntryWithLabel Label="Damage" Text="{Binding Damage}" IsReadOnly="True" Grid.Row="3" Grid.ColumnSpan="2" />
                     </Grid>
                 </VerticalStackLayout>
             </Border>

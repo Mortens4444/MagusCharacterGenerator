@@ -9,7 +9,6 @@ using M.A.G.U.S.GameSystem.Magic;
 using M.A.G.U.S.Interfaces;
 using M.A.G.U.S.Models;
 using M.A.G.U.S.Qualifications;
-using M.A.G.U.S.Qualifications.Specialities;
 using M.A.G.U.S.Things;
 using M.A.G.U.S.Things.Armors;
 using M.A.G.U.S.Things.Weapons;
@@ -47,6 +46,7 @@ internal partial class CharacterViewModel(IPrintService printService) : BaseView
             if (SetProperty(ref selectedCombatValueModifier, value))
             {
                 Character?.SelectedCombatValueModifier = value;
+                OnPropertyChanged(nameof(Damage));
             }
         }
     }
@@ -197,6 +197,7 @@ internal partial class CharacterViewModel(IPrintService printService) : BaseView
             OnPropertyChanged(nameof(Silver));
             OnPropertyChanged(nameof(Copper));
 
+            OnPropertyChanged(nameof(Damage));
             OnPropertyChanged(nameof(ArmorClass));
             OnPropertyChanged(nameof(ArmorCheckPenalty));
 
@@ -347,6 +348,38 @@ internal partial class CharacterViewModel(IPrintService printService) : BaseView
     public int ArmorCheckPenalty => Character?.Armor?.ArmorCheckPenalty ?? 0;
 
     public int CombatValueModifier => Character?.CombatValueModifier ?? 0;
+
+    public string Damage
+    {
+        get
+        {
+            object[]? customAttributes;
+            DiceThrowFormula? formula;
+            if (Character?.PrimaryWeapon != null && Character.SelectedCombatValueModifier == M.A.G.U.S.Enums.CombatValueModifier.PrimaryWeapon)
+            {
+                customAttributes = Character.PrimaryWeapon.GetType().GetMethod(nameof(Character.PrimaryWeapon.GetDamage))?.GetCustomAttributes(false);
+                formula = customAttributes.GetDiceThrowFormula();
+                return formula?.GetDisplayFormula() ?? String.Empty;
+            }
+            if (Character?.SecondaryWeapon != null && Character.SelectedCombatValueModifier == M.A.G.U.S.Enums.CombatValueModifier.SecondaryWeapon)
+            {
+                customAttributes = Character.SecondaryWeapon.GetType().GetMethod(nameof(Character.SecondaryWeapon.GetDamage))?.GetCustomAttributes(false);
+                formula = customAttributes.GetDiceThrowFormula();
+                return formula?.GetDisplayFormula() ?? String.Empty;
+            }
+
+            customAttributes = Character?.GetType().GetMethod(nameof(Character.GetDamage))?.GetCustomAttributes(false);
+            formula = customAttributes.GetDiceThrowFormula();
+            return formula?.GetDisplayFormula() ?? String.Empty;
+
+            //return Character?.GetDamageFormula();
+            //return formula?.GetDisplayFormula() ?? String.Empty;
+            ////var getDamageCallback =  ? Character.PrimaryWeapon.GetDamage :
+            //    Character?.SecondaryWeapon != null ? Character.SecondaryWeapon.GetDamage : Character?.GetDamage;
+            //return getDamageCallback?.GetDisplayFormula() ?? String.Empty;
+        }
+    }
+    
     public int CombatValueModifierPerLevel => Character?.CombatValueModifierPerLevel ?? 0;
     public bool CanAllocateCombatModifier => Character?.CanAllocateCombatModifier ?? false;
     

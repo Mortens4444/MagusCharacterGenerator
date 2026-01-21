@@ -226,34 +226,50 @@ internal partial class SearchListViewModel : BaseViewModel
 
         ApplyFilter();
     }
-
+    private bool isFiltering;
     public void ApplyFilter()
     {
-        var q = Items.AsEnumerable();
-        var st = SearchText?.Trim();
+        if (isFiltering) return;
 
-        if (!String.IsNullOrWhiteSpace(st))
+        if (!MainThread.IsMainThread)
         {
-            q = q.Where(i =>
-                (Lng.Elem(i.Title)?.IndexOf(st, StringComparison.InvariantCultureIgnoreCase) >= 0) ||
-                (Lng.Elem(i.Subtitle)?.IndexOf(st, StringComparison.InvariantCultureIgnoreCase) >= 0) ||
-                (Lng.Elem(i.Key)?.IndexOf(st, StringComparison.InvariantCultureIgnoreCase) >= 0));
+            MainThread.BeginInvokeOnMainThread(ApplyFilter);
+            return;
         }
 
-        if (SelectedCategory is ThingCategory thingCategory && thingCategory != ThingCategory.All)
+        try
         {
-            q = q.Where(i => i.Source?.GetType().Namespace?.IndexOf(thingCategory.ToString(), StringComparison.InvariantCultureIgnoreCase) >= 0);
-        }
+            isFiltering = true;
+            var q = Items.AsEnumerable();
+            var st = SearchText?.Trim();
 
-        if (ShowOnlyAffordable && Character != null)
-        {
-            q = q.Where(i => i.Enabled);
-        }
+            if (!String.IsNullOrWhiteSpace(st))
+            {
+                q = q.Where(i =>
+                    (Lng.Elem(i.Title)?.IndexOf(st, StringComparison.InvariantCultureIgnoreCase) >= 0) ||
+                    (Lng.Elem(i.Subtitle)?.IndexOf(st, StringComparison.InvariantCultureIgnoreCase) >= 0) ||
+                    (Lng.Elem(i.Key)?.IndexOf(st, StringComparison.InvariantCultureIgnoreCase) >= 0));
+            }
 
-        FilteredItems.Clear();
-        foreach (var it in q)
+            if (SelectedCategory is ThingCategory thingCategory && thingCategory != ThingCategory.All)
+            {
+                q = q.Where(i => i.Source?.GetType().Namespace?.IndexOf(thingCategory.ToString(), StringComparison.InvariantCultureIgnoreCase) >= 0);
+            }
+
+            if (ShowOnlyAffordable && Character != null)
+            {
+                q = q.Where(i => i.Enabled);
+            }
+
+            FilteredItems.Clear();
+            foreach (var it in q)
+            {
+                FilteredItems.Add(it);
+            }
+        }
+        finally
         {
-            FilteredItems.Add(it);
+            isFiltering = false;
         }
     }
 
@@ -302,7 +318,7 @@ internal partial class SearchListViewModel : BaseViewModel
 
         try
         {
-            await Task.Delay(300, token).ConfigureAwait(false);
+            await Task.Delay(300, token).ConfigureAwait(true);
             ApplyFilter();
         }
         catch (TaskCanceledException)

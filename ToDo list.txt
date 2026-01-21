@@ -1,3 +1,4 @@
+- Add custom attributes to runeswords (each one is a rune)
 - Fix Images names (translation)
 - Priest Mana points per level should use RollFormulaPage + setting
 - Fix zoom image preview

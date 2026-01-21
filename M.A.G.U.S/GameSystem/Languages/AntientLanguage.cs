@@ -43,10 +43,6 @@ public enum AntientLanguage
     [Description("Krannish Ritual Speech")]
     KrannishRitualSpeech,
 
-    // Ritka / töredékes / misztikus nyelvek
-    [Description("Wyrm Tongue")]
-    WyrmTongue,
-
     [Description("Pre-Shadonian")]
     PreShadonian,
 
