@@ -2,11 +2,14 @@
 using M.A.G.U.S.Assistant.CustomEventArgs;
 using M.A.G.U.S.Assistant.Extensions;
 using M.A.G.U.S.Assistant.Services;
+using M.A.G.U.S.Extensions;
 using M.A.G.U.S.GameSystem;
 using M.A.G.U.S.Interfaces;
 using M.A.G.U.S.Things;
 using M.A.G.U.S.Things.Armors;
 using M.A.G.U.S.Things.MagicalObjects;
+using M.A.G.U.S.Things.Shields;
+using M.A.G.U.S.Things.Weapons;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
 using RelayCommand = CommunityToolkit.Mvvm.Input.RelayCommand;
@@ -65,6 +68,17 @@ internal partial class ItemDetailsViewModel : BaseViewModel
         CloseCommand = new RelayCommand(() => OnClosed());
     }
 
+    public Shield? Shield => ThingToBuy as Shield;
+    public Armor? Armor => ThingToBuy as Armor;
+    public string ProtectedMainPlacesText => Armor?.ProtectedMainPlaces.ToLocalizedString() ?? String.Empty;
+    public IWeapon? Weapon => ThingToBuy as IWeapon;
+    public IMeleeWeapon? MeleeWeapon => ThingToBuy as IMeleeWeapon;
+    public IRangedWeapon? RangedWeapon => ThingToBuy as IRangedWeapon;
+    public bool IsShield => Shield != null;
+    public bool IsArmor => Armor != null;
+    public bool IsWeapon => Weapon != null && !IsShield;
+    public bool IsMelee => MeleeWeapon != null;
+    public bool IsRanged => RangedWeapon != null;
     public bool IsBuyButtonVisible { get; init; }
     public string Name { get; } = String.Empty;
     public string Description { get; } = String.Empty;
@@ -79,6 +93,8 @@ internal partial class ItemDetailsViewModel : BaseViewModel
 
     public event EventHandler<ThingPurchasedEventArgs>? Purchased;
     public event EventHandler? Closed;
+
+    public string WeaponDamage => Weapon?.DamageFormula?.GetDisplayFormula() ?? String.Empty;
 
     public Thing? SelectedRuneTarget
     {

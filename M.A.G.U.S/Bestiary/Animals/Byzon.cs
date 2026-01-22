@@ -29,7 +29,7 @@ public sealed class Byzon : Creature
         ExperiencePoints = 6;
     }
 
-    public override double AttacksPerRound => 1 / 3;
+    public override double AttacksPerRound => 1.0 / 3;
 
     public override string Name => "Byzon-buffalo";
 

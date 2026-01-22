@@ -6,7 +6,7 @@ namespace M.A.G.U.S.Things.Weapons.Spears;
 
 public class CavalryLance : Weapon, IMeleeWeapon
 {
-    public override double AttacksPerRound => 1 / 2;
+    public override double AttacksPerRound => 1.0 / 2;
 
     public override int InitiateValue => 1;
 

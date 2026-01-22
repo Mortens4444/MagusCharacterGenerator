@@ -64,7 +64,7 @@ white_eagle.png
 white_tiger.png
 white_wolf.png
 wolf.png
-wolf_2.png
+wolf_pack_leader.png
 wolves.png
 zombie.png
 boots.png
@@ -304,3 +304,6 @@ see_giant.png
 swamp_giant.png
 white_orc.png
 wier.png
+large_shield.png
+medium_shield.png
+small_shield.png

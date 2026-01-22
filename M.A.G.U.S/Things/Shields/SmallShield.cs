@@ -10,9 +10,9 @@ public class SmallShield : Shield
 
     public override int InitiateValue => 1;
 
-    public int DefenseValue => 20;
+    public override int DefenseValue => 20;
 
-    public int MovementObstructiveFactor => 0;
+    public override int MovementObstructiveFactor => 0;
 
     public override double Weight => 1;
 

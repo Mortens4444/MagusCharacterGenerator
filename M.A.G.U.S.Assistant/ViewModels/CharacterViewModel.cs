@@ -371,12 +371,6 @@ internal partial class CharacterViewModel(IPrintService printService) : BaseView
             customAttributes = Character?.GetType().GetMethod(nameof(Character.GetDamage))?.GetCustomAttributes(false);
             formula = customAttributes.GetDiceThrowFormula();
             return formula?.GetDisplayFormula() ?? String.Empty;
-
-            //return Character?.GetDamageFormula();
-            //return formula?.GetDisplayFormula() ?? String.Empty;
-            ////var getDamageCallback =  ? Character.PrimaryWeapon.GetDamage :
-            //    Character?.SecondaryWeapon != null ? Character.SecondaryWeapon.GetDamage : Character?.GetDamage;
-            //return getDamageCallback?.GetDisplayFormula() ?? String.Empty;
         }
     }
     

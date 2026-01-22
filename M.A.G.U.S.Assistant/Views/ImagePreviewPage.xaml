@@ -7,7 +7,7 @@
               Title="Preview">
 
     <Grid Padding="12">
-        <Image x:Name="PreviewImage" Aspect="AspectFill">
+        <Image x:Name="PreviewImage" Aspect="AspectFit">
             <Image.GestureRecognizers>
                 <PinchGestureRecognizer PinchUpdated="OnPinchUpdated" />
                 <PanGestureRecognizer PanUpdated="OnPanUpdated" />

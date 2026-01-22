@@ -5,17 +5,15 @@ using M.A.G.U.S.Interfaces;
 
 namespace M.A.G.U.S.Things.Shields;
 
-public class LargeShield : Shield, IMeleeWeapon
+public class LargeShield : Shield
 {
-	public override double AttacksPerRound => 1 / 2;
-
-    public int AttackValue => 0;
+	public override double AttacksPerRound => 1.0 / 2;
 
     public override int InitiateValue => 0;
 
-	public int DefenseValue => 50;
+	public override int DefenseValue => 50;
 
-	public int MovementObstructiveFactor => 5;
+	public override int MovementObstructiveFactor => 5;
 
 	public override double Weight => 6;
 

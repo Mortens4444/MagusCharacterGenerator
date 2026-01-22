@@ -27,7 +27,6 @@ internal partial class CharacterGeneratorViewModel : CharacterViewModel
     private readonly CharacterService characterService;
     private readonly ISoundPlayer soundPlayer;
     private readonly IShakeService shakeService;
-    protected readonly IPrintService printService;
 
     private int baseClassLevel = 1;
 

@@ -1,5 +1,6 @@
 ﻿using M.A.G.U.S.GameSystem.Attributes;
 using M.A.G.U.S.Models;
+using Mtf.Extensions;
 
 namespace M.A.G.U.S.Extensions;
 
@@ -16,7 +17,7 @@ public static class ObjectArrayExtensions
         var modifierAttribute = customAttributes?.OfType<DiceThrowModifierAttribute>().FirstOrDefault();
         var hasSpecialTraining = customAttributes?.OfType<SpecialTrainingAttribute>().Any() ?? false;
 
-        var formula = throwAttr.DiceThrowType.ToString();
+        var formula = throwAttr.DiceThrowType.GetDescription();
         if (formula.StartsWith('_'))
         {
             formula = formula.TrimStart('_');

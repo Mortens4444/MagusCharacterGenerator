@@ -213,7 +213,6 @@
     <None Remove="Resources\Images\Bestiary\white_tiger.png" />
     <None Remove="Resources\Images\Bestiary\white_wolf.png" />
     <None Remove="Resources\Images\Bestiary\wolf.png" />
-    <None Remove="Resources\Images\Bestiary\wolf_2.png" />
     <None Remove="Resources\Images\Bestiary\wolves.png" />
     <None Remove="Resources\Images\Bestiary\zombie.png" />
     <None Remove="Resources\Images\Classes\assassin.png" />
@@ -408,6 +407,9 @@
     <None Remove="Resources\Images\Races\swamp_giant.png" />
     <None Remove="Resources\Images\Races\white_orc.png" />
     <None Remove="Resources\Images\Races\wier.png" />
+    <None Remove="Resources\Images\Shields\large_shield.png" />
+    <None Remove="Resources\Images\Shields\medium_shield.png" />
+    <None Remove="Resources\Images\Shields\small_shield.png" />
   </ItemGroup>
   <ItemGroup>
     <MauiImage Include="Resources\Images\Animals\dog_hunting.png" />
@@ -473,7 +475,7 @@
     <MauiImage Include="Resources\Images\Bestiary\white_tiger.png" />
     <MauiImage Include="Resources\Images\Bestiary\white_wolf.png" />
     <MauiImage Include="Resources\Images\Bestiary\wolf.png" />
-    <MauiImage Include="Resources\Images\Bestiary\wolf_2.png" />
+    <MauiImage Include="Resources\Images\Bestiary\wolf_pack_leader.png" />
     <MauiImage Include="Resources\Images\Bestiary\wolves.png" />
     <MauiImage Include="Resources\Images\Bestiary\zombie.png" />
     <EmbeddedResource Include="Resources\Images\images_manifest.txt" />
@@ -623,7 +625,6 @@
     <Folder Include="Resources\Images\Debauchery\" />
     <Folder Include="Resources\Images\Travelling\" />
     <Folder Include="Resources\Images\Trappings\" />
-    <Folder Include="Resources\Images\Shields\" />
     <Folder Include="Resources\Images\Other\" />
     <Folder Include="Resources\Images\Weapons\CrushingWeapons\" />
     <Folder Include="Resources\Images\Weapons\StabbingWeapons\" />
@@ -871,6 +872,9 @@
     <MauiImage Include="Resources\Images\Races\swamp_giant.png" />
     <MauiImage Include="Resources\Images\Races\white_orc.png" />
     <MauiImage Include="Resources\Images\Races\wier.png" />
+    <MauiImage Include="Resources\Images\Shields\large_shield.png" />
+    <MauiImage Include="Resources\Images\Shields\medium_shield.png" />
+    <MauiImage Include="Resources\Images\Shields\small_shield.png" />
   </ItemGroup>
   <Target Name="GenerateImageManifest" BeforeTargets="BeforeBuild">
     <ItemGroup>
@@ -880,6 +884,6 @@
       <ImageManifestPath>$(ProjectDir)Resources\Images\images_manifest.txt</ImageManifestPath>
     </PropertyGroup>
     <!--<WriteLinesToFile File="$(ImageManifestPath)" Lines="@(AllImages->'%(RelativeDir)%(Filename)%(Extension)')" Overwrite="true" Encoding="UTF-8" />-->
-    <WriteLinesToFile File="$(ImageManifestPath)" Lines="@(AllImages-&gt;'%(Filename)%(Extension)')" Overwrite="true" Encoding="UTF-8" />
+    <WriteLinesToFile File="$(ImageManifestPath)" Lines="@(AllImages->'%(Filename)%(Extension)')" Overwrite="true" Encoding="UTF-8" />
   </Target>
 </Project>

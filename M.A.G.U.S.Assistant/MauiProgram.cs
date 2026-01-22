@@ -14,6 +14,8 @@ namespace M.A.G.U.S.Assistant;
 
 internal static class MauiProgram
 {
+    public static IServiceProvider Services { get; private set; } = null!;
+
     public static MauiApp CreateMauiApp()
     {
         var builder = MauiApp.CreateBuilder();
@@ -37,6 +39,7 @@ internal static class MauiProgram
         builder.Services.AddSingleton<IPrintService, Platforms.Windows.PrintService>();
         builder.Services.AddSingleton<ISoundPlayer, Platforms.Windows.SoundPlayer>();
         builder.Services.AddSingleton<IShakeService, Platforms.Windows.ShakeService>();
+        builder.Services.AddSingleton<IWindowStateService, Platforms.Windows.WindowsWindowStateService>();
 #elif IOS
         builder.Services.AddSingleton<IPrintService, Platforms.iOS.PrintService>();
         builder.Services.AddSingleton<ISoundPlayer, Platforms.iOS.SoundPlayer>();
@@ -77,8 +80,9 @@ internal static class MauiProgram
             WeakReferenceMessenger.Default.Send(new ShowErrorMessage(args.Exception));
             args.SetObserved();
         };
-
-        return builder.Build();
+        var app = builder.Build();
+        Services = app.Services;
+        return app;
     }
 
     private static void RegisterServices(MauiAppBuilder builder)

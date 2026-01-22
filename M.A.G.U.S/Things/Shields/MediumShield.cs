@@ -10,9 +10,9 @@ public class MediumShield : Shield
 
     public override int InitiateValue => 0;
 
-    public int DefenseValue => 35;
+    public override int DefenseValue => 35;
 
-    public int MovementObstructiveFactor => 1;
+    public override int MovementObstructiveFactor => 1;
 
     public override double Weight => 3;
 
