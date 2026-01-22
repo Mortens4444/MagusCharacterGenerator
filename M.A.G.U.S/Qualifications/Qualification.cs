@@ -1,9 +1,12 @@
 ﻿using M.A.G.U.S.Extensions;
 using M.A.G.U.S.GameSystem.Qualifications;
+using M.A.G.U.S.Interfaces;
+using Mtf.Extensions.Services;
+using System.Text.Json.Serialization;
 
 namespace M.A.G.U.S.Qualifications;
 
-public abstract class Qualification
+public abstract class Qualification : IHaveImage
 {
     public Qualification(QualificationLevel qualificationLevel = QualificationLevel.Base, int level = 1)
     {
@@ -26,7 +29,13 @@ public abstract class Qualification
 
     public virtual string Description => String.Empty;
 
-    public virtual string ImageName => String.Concat(Name.ToImageName(), ".png");
+    public virtual string[] Images => [$"{Name.ToImageName()}.png"];
+
+    [JsonIgnore, Newtonsoft.Json.JsonIgnore]
+    public virtual string DefaultImage => Images.Length > 0 ? Images[0] : String.Empty;
+
+    [JsonIgnore, Newtonsoft.Json.JsonIgnore]
+    public virtual string RandomImage => Images.Length > 1 ? Images[RandomProvider.GetSecureRandomInt(0, Images.Length)] : DefaultImage;
 
     public QualificationLevel QualificationLevel { get; set; }
 

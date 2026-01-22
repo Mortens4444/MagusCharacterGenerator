@@ -47,5 +47,5 @@ public class SwampGiant : HalfGiant
 
     public override string Name => "Half-giant (swamp giant)";
 
-    public override string Image => "swamp_giant.png";
+    public override string[] Images => ["swamp_giant.png"];
 }

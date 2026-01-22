@@ -27,7 +27,7 @@ internal partial class QualificationDetailsViewModel : BaseViewModel
         Name = Lng.Elem(Qualification.Name);
         Category = qualification.Category;
         Description = Qualification.Description;
-        ImageName = Qualification.ImageName;
+        DefaultImage = Qualification.DefaultImage;
 
         LearnCommand = new RelayCommand(Learn, () => CanLearn);
         CloseCommand = new RelayCommand(OnClosed);
@@ -40,7 +40,7 @@ internal partial class QualificationDetailsViewModel : BaseViewModel
     public string Name { get; } = String.Empty;
     public string Category { get; } = String.Empty;
     public string Description { get; } = String.Empty;
-    public string ImageName { get; } = String.Empty;
+    public string DefaultImage { get; } = String.Empty;
     public QualificationLevel[] AvailableLevels { get; }
     public ICommand LearnCommand { get; }
     public ICommand CloseCommand { get; }
@@ -104,6 +104,6 @@ internal partial class QualificationDetailsViewModel : BaseViewModel
 
     private Task PreviewImage()
     {
-        return ImagePreviewService.ShowAsync(Qualification?.ImageName);
+        return ImagePreviewService.ShowAsync(Qualification?.DefaultImage);
     }
 }

@@ -24,7 +24,7 @@
         <StackLayout Padding="12" Spacing="8">
 
             <!-- Image & sound -->
-            <Image Source="{Binding Image}" HeightRequest="200" Aspect="AspectFit">
+            <Image Source="{Binding RandomImage}" HeightRequest="200" Aspect="AspectFit">
                 <Image.GestureRecognizers>
                     <TapGestureRecognizer Command="{Binding PreviewImageCommand}" />
                 </Image.GestureRecognizers>

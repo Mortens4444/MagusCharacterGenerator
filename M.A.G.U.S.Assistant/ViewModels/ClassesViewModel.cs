@@ -107,6 +107,6 @@ internal partial class ClassesViewModel : BaseViewModel
 
     private Task PreviewImage()
     {
-        return ImagePreviewService.ShowAsync(SelectedClass?.Image);
+        return ImagePreviewService.ShowAsync(SelectedClass?.DefaultImage);
     }
 }

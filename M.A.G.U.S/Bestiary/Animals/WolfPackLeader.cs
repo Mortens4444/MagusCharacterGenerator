@@ -23,7 +23,7 @@ public sealed class WolfPackLeader : Creature
 
     public override string Name => "Wolf pack leader";
 
-    public override string[] Images => ["wolf_pack_leader.png"];
+    //public override string[] Images => ["wolf_pack_leader.png"];
 
     [DiceThrow(ThrowType._1D6)]
     public override int GetDamage() => DiceThrow._1D6();

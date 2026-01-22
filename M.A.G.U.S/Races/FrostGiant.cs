@@ -46,5 +46,5 @@ public class FrostGiant : HalfGiant
 
     public override string Name => "Half-giant (frost giant)";
 
-    public override string Image => "frost_giant.png";
+    public override string[] Images => ["frost_giant.png"];
 }

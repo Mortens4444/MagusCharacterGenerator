@@ -18,5 +18,5 @@ public class PsiKyrMethod : Qualification, IPsi
 
     public override string Name => "Psi, Kyr method";
 
-    public override string ImageName => "psi.png";
+    public override string[] Images => ["psi.png"];
 }

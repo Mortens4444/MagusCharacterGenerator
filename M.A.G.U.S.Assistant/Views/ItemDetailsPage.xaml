@@ -40,7 +40,7 @@
 
                         <Border Grid.Row="0" Grid.Column="1" Grid.RowSpan="3" Padding="6" Stroke="#E6E6E6"
                                 StrokeShape="RoundRectangle 10" VerticalOptions="Start" HorizontalOptions="End">
-                            <Image Source="{Binding ImageName}" Aspect="AspectFit" WidthRequest="140" HeightRequest="140">
+                            <Image Source="{Binding DefaultImage}" Aspect="AspectFit" WidthRequest="140" HeightRequest="140">
                                 <Image.GestureRecognizers>
                                     <TapGestureRecognizer Command="{Binding PreviewImageCommand}" />
                                 </Image.GestureRecognizers>

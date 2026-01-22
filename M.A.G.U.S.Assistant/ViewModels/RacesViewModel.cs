@@ -85,6 +85,6 @@ internal partial class RacesViewModel : BaseViewModel
 
     private Task PreviewImage()
     {
-        return ImagePreviewService.ShowAsync(SelectedRace?.Image);
+        return ImagePreviewService.ShowAsync(SelectedRace?.DefaultImage);
     }
 }

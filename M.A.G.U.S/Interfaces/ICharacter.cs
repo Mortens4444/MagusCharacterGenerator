@@ -53,8 +53,6 @@ public interface ICharacter
 
     Alignment Alignment { get; set; }
 
-    //IEnumerable<Image> Images { get; set; }
-
     IClass BaseClass { get; set; }
 
     IClass[] Classes { get; set; }

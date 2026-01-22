@@ -8,10 +8,11 @@ using M.A.G.U.S.Interfaces;
 using M.A.G.U.S.Models;
 using M.A.G.U.S.Qualifications;
 using M.A.G.U.S.Races;
+using Mtf.Extensions.Services;
 
 namespace M.A.G.U.S.Classes;
 
-public abstract class Class : IClass
+public abstract class Class : IClass, IHaveImage
 {
     protected const string _1D6_Plus_12_Plus_SpecialTraining = "1D6 + 12 + Special training";
 
@@ -160,8 +161,12 @@ public abstract class Class : IClass
     ];
 
     public virtual ulong ExpPerLevelAfter12 => 60000;
-    
-    public virtual string Image => $"{Name.ToImageName()}.png";
+
+    public virtual string[] Images => [$"{Name.ToImageName()}.png"];
+
+    public virtual string DefaultImage => Images.Length > 0 ? Images[0] : String.Empty;
+
+    public virtual string RandomImage => Images.Length > 1 ? Images[RandomProvider.GetSecureRandomInt(0, Images.Length)] : DefaultImage;
 
     public abstract int GetPainToleranceModifier();
 

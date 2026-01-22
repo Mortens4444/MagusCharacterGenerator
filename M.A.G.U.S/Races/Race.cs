@@ -1,13 +1,14 @@
 ﻿using M.A.G.U.S.Enums;
 using M.A.G.U.S.Extensions;
 using M.A.G.U.S.GameSystem;
+using M.A.G.U.S.Interfaces;
 using M.A.G.U.S.Qualifications;
 using Mtf.Extensions.Services;
 using System.Text;
 
 namespace M.A.G.U.S.Races;
 
-public abstract class Race : IRace
+public abstract class Race : IRace, IHaveImage
 {
     protected readonly DiceThrow DiceThrow = new();
     protected static readonly Random random = new();
@@ -22,7 +23,11 @@ public abstract class Race : IRace
 
     public virtual SpecialQualificationList SpecialQualifications => [];
 
-    public virtual string Image => $"{Name.ToImageName()}.png";
+    public virtual string[] Images => [$"{Name.ToImageName()}.png"];
+
+    public virtual string DefaultImage => Images.Length > 0 ? Images[0] : String.Empty;
+
+    public virtual string RandomImage => Images.Length > 1 ? Images[RandomProvider.GetSecureRandomInt(0, Images.Length)] : DefaultImage;
 
     public virtual int Strength => 0;
 

@@ -47,5 +47,5 @@ public class SeeGiant : HalfGiant
 
     public override string Name => "Half-giant (see giant)";
 
-    public override string Image => "see_giant.png";
+    public override string[] Images => ["see_giant.png"];
 }

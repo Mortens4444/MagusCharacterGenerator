@@ -53,7 +53,7 @@
                         <Grid ColumnDefinitions="*,Auto" ColumnSpacing="8" VerticalOptions="Center">
                             <VerticalStackLayout>
                                 <HorizontalStackLayout>
-                                    <Image Source="{Binding Image}" WidthRequest="20" HeightRequest="20" Aspect="AspectFill" HorizontalOptions="Start" Margin="0,0,10,0" />
+                                    <Image Source="{Binding DefaultImage}" WidthRequest="20" HeightRequest="20" Aspect="AspectFill" HorizontalOptions="Start" Margin="0,0,10,0" />
                                     <Label Text="{Binding Title, Converter={StaticResource TranslationConverter}}" FontAttributes="Bold"
                                            TextColor="{Binding Enabled, Converter={StaticResource BoolToColorConverter}}" />
                                 </HorizontalStackLayout>

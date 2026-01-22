@@ -62,7 +62,7 @@ internal partial class ItemDetailsViewModel : BaseViewModel
         Description = thingToBuy.Description;
         Money = (SelectedRuneTarget != null ? SelectedRuneTarget.MultipliedPrice * 2 : thingToBuy.MultipliedPrice).ToTranslatedString();
         Weight = thingToBuy.Weight;
-        ImageName = thingToBuy.ImageName;
+        DefaultImage = thingToBuy.DefaultImage;
 
         BuyCommand = new RelayCommand(() =>  OnPurchased(ThingToBuy));
         CloseCommand = new RelayCommand(() => OnClosed());
@@ -82,7 +82,7 @@ internal partial class ItemDetailsViewModel : BaseViewModel
     public bool IsBuyButtonVisible { get; init; }
     public string Name { get; } = String.Empty;
     public string Description { get; } = String.Empty;
-    public string ImageName { get; } = String.Empty;
+    public string DefaultImage { get; } = String.Empty;
     public string Money { get; set; } = String.Empty;
     public double Weight { get; }
     public Thing ThingToBuy { get; private set; }
@@ -130,6 +130,6 @@ internal partial class ItemDetailsViewModel : BaseViewModel
 
     private Task PreviewImage()
     {
-        return ImagePreviewService.ShowAsync(ImageName);
+        return ImagePreviewService.ShowAsync(DefaultImage);
     }
 }

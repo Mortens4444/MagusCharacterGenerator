@@ -3,6 +3,7 @@ using M.A.G.U.S.Bestiary;
 using M.A.G.U.S.GameSystem;
 using M.A.G.U.S.GameSystem.PoisonsAndIllnesses;
 using M.A.G.U.S.GameSystem.Runes;
+using M.A.G.U.S.Interfaces;
 using M.A.G.U.S.Things;
 using M.A.G.U.S.Things.Gemstones;
 using M.A.G.U.S.Things.MagicalObjects;
@@ -47,23 +48,7 @@ internal partial class DisplayItem : INotifyPropertyChanged
         }
     }
 
-    public string Image
-    {
-        get
-        {
-            if (Source is Thing thing)
-            {
-                return thing.ImageName;
-            }
-
-            if (Source is Creature creature)
-            {
-                return creature.Images.First();
-            }
-
-            return String.Empty;
-        }
-    }
+    public string DefaultImage => Source is IHaveImage imageOwner ? imageOwner.DefaultImage : String.Empty;
 
     public string Subtitle
     {

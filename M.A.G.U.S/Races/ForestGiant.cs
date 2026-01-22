@@ -50,5 +50,5 @@ public class ForestGiant : HalfGiant
 
     public override string Name => "Half-giant (forest giant)";
 
-    public override string Image => "forest_giant.png";
+    public override string[] Images => ["forest_giant.png"];
 }

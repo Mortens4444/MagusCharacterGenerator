@@ -3,12 +3,14 @@ using M.A.G.U.S.Extensions;
 using M.A.G.U.S.GameSystem;
 using M.A.G.U.S.GameSystem.Attributes;
 using M.A.G.U.S.GameSystem.Psi;
+using M.A.G.U.S.Interfaces;
 using M.A.G.U.S.Things.Weapons;
+using Mtf.Extensions.Services;
 using System.Reflection;
 
 namespace M.A.G.U.S.Bestiary;
 
-public abstract class Creature : Attacker
+public abstract class Creature : Attacker, IHaveImage
 {
     private const string PrimaryAttack = "Primary attack";
     private List<Attack>? attackModes;
@@ -103,6 +105,10 @@ public abstract class Creature : Attacker
     public string Description { get; protected set; }
 
     public virtual string[] Images => [ $"{Name.ToImageName()}.png" ];
+
+    public virtual string DefaultImage => Images.Length > 0 ? Images[0] : String.Empty;
+    
+    public virtual string RandomImage => Images.Length > 1 ? Images[RandomProvider.GetSecureRandomInt(0, Images.Length)] : DefaultImage;
 
     public virtual string[] Sounds => [ $"{Name.ToImageName()}" ];
 

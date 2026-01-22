@@ -70,7 +70,7 @@ internal partial class CreatureDetailsViewModel : BaseViewModel
     public string PoisonResistance => !Creature.PoisonResistance.HasValue ? "-" : Creature.PoisonResistance == Int32.MaxValue ? Lng.Elem("Immune") : Creature.PoisonResistance.Value.ToString(CultureInfo.InvariantCulture);
     public ulong ExperiencePoints => Creature.ExperiencePoints;
     public double AttacksPerRound => Creature.AttacksPerRound;
-    public string Image => Creature.Images.Length > 1 ? Creature.Images[RandomProvider.GetSecureRandomInt(0, Creature.Images.Length)] : Creature.Images[0];
+    public string RandomImage => Creature.RandomImage;
     public string Sound => Creature.Sounds.Length > 1 ? Creature.Sounds[RandomProvider.GetSecureRandomInt(0, Creature.Sounds.Length)] : Creature.Sounds[0];
 
     public IList<AttackDirection> AttackDirections { get; } = [.. Enum.GetValues<AttackDirection>()];
@@ -224,6 +224,6 @@ internal partial class CreatureDetailsViewModel : BaseViewModel
 
     private Task PreviewImage()
     {
-        return ImagePreviewService.ShowAsync(Image);
+        return ImagePreviewService.ShowAsync(RandomImage);
     }
 }

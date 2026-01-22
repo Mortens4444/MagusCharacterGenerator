@@ -45,5 +45,5 @@ public class MountainGiant : HalfGiant
 
     public override string Name => "Half-giant (mountain giant)";
 
-    public override string Image => "mountain_giant.png";
+    public override string[] Images => ["mountain_giant.png"];
 }

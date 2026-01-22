@@ -38,7 +38,7 @@
             <VerticalStackLayout>
 
                 <!-- Kép -->
-                <Image Grid.Column="1" Source="{Binding SelectedClass.Image}" Aspect="AspectFit" WidthRequest="250" HeightRequest="280" HorizontalOptions="Center" VerticalOptions="Center">
+                <Image Grid.Column="1" Source="{Binding SelectedClass.DefaultImage}" Aspect="AspectFit" WidthRequest="250" HeightRequest="280" HorizontalOptions="Center" VerticalOptions="Center">
                     <Image.GestureRecognizers>
                         <TapGestureRecognizer Command="{Binding PreviewImageCommand}" />
                     </Image.GestureRecognizers>
