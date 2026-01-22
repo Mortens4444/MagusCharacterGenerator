@@ -16,6 +16,7 @@ using Mtf.LanguageService.MAUI;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.ComponentModel;
+using System.Globalization;
 
 namespace M.A.G.U.S.Assistant.ViewModels;
 
@@ -129,6 +130,7 @@ internal partial class CharacterViewModel(IPrintService printService) : BaseView
             RefillAvailableWeapons();
             RefillAvailableArmors();
 
+            OnPropertyChanged(nameof(AvailableArmors));
             OnPropertyChanged(nameof(AvailableWeapons));
             OnPropertyChanged(nameof(PrimaryWeapon));
             OnPropertyChanged(nameof(SecondaryWeapon));
@@ -407,7 +409,6 @@ internal partial class CharacterViewModel(IPrintService printService) : BaseView
             var sorcery = Character?.BaseClass?.SpecialQualifications.GetSpeciality<Sorcery>();
             if (sorcery != null)
             {
-                
                 var customAttributes = sorcery.GetType().GetMethod(nameof(sorcery.GetManaPointsModifier))?.GetCustomAttributes(false);
                 var formula = customAttributes.GetDiceThrowFormula();
                 if (formula != null)
@@ -415,7 +416,7 @@ internal partial class CharacterViewModel(IPrintService printService) : BaseView
                     return formula.GetDisplayFormula();
                 }
             }
-            return (Character?.MaxManaPointsPerLevel ?? 0).ToString();
+            return (Character?.MaxManaPointsPerLevel ?? 0).ToString(CultureInfo.InvariantCulture);
         }
     }
 
@@ -499,12 +500,20 @@ internal partial class CharacterViewModel(IPrintService printService) : BaseView
                 {
                     AvailableWeapons.Add(weapon);
                 }
+                foreach (Armor armor in e.NewItems?.OfType<Armor>() ?? [])
+                {
+                    AvailableArmors.Add(armor);
+                }
                 break;
 
             case NotifyCollectionChangedAction.Remove:
                 foreach (IWeapon weapon in e.OldItems?.OfType<IWeapon>() ?? [])
                 {
                     AvailableWeapons.Remove(weapon);
+                }
+                foreach (Armor armor in e.OldItems?.OfType<Armor>() ?? [])
+                {
+                    AvailableArmors.Remove(armor);
                 }
                 break;
 
@@ -528,15 +537,9 @@ internal partial class CharacterViewModel(IPrintService printService) : BaseView
     private void RefillAvailableArmors()
     {
         AvailableArmors.Clear();
-        if (Character?.Equipment != null)
+        foreach (var armor in Character?.Equipment?.OfType<Armor>() ?? [])
         {
-            foreach (var item in Character.Equipment)
-            {
-                if (item is Armor armor)
-                {
-                    AvailableArmors.Add(armor);
-                }
-            }
+            AvailableArmors.Add(armor);
         }
     }
 

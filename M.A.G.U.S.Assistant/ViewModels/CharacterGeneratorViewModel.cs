@@ -268,7 +268,7 @@ internal partial class CharacterGeneratorViewModel : CharacterViewModel
         }
         catch (TargetInvocationException ex)
         {
-            WeakReferenceMessenger.Default.Send(new ShowErrorMessage(ex.InnerException ?? ex));
+            WeakReferenceMessenger.Default.Send(new ShowErrorMessage(ex));
         }
 
         return null;

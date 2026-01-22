@@ -303,6 +303,12 @@ public partial class Character : ICharacter
         }
     }
 
+    public void SetWeapons()
+    {
+        primaryWeapon = ResolveWeaponById(PrimaryWeaponId);
+        secondaryWeapon = ResolveWeaponById(SecondaryWeaponId);
+    }
+
     public void ChangeInitiator(int delta) => ChangeAllocation(ref allocatedToInitiate, delta);
 
     public void ChangeAttack(int delta) => ChangeAllocation(ref allocatedToAttack, delta);

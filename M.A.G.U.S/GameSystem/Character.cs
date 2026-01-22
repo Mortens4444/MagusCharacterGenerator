@@ -60,12 +60,6 @@ public partial class Character : Attacker, ICombatModifier, ILiving, IAbilities,
         }
     }
 
-    public void SetWeapons()
-    {
-        primaryWeapon = ResolveWeaponById(PrimaryWeaponId);
-        secondaryWeapon = ResolveWeaponById(SecondaryWeaponId);
-    }
-
     public static Character Load(string fullPath, ISettings settings)
     {
         var result = ObjectSerializer.LoadFile<Character>(fullPath);
