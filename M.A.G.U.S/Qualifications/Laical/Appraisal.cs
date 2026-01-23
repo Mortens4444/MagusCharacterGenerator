@@ -7,4 +7,6 @@ public class Appraisal(QualificationLevel qualificationLevel = QualificationLeve
     public override int QpToBaseQualification => 5;
 
     public override int QpToMasterQualification => 11;
+
+    public Appraisal() : this(QualificationLevel.Base) { }
 }

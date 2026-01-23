@@ -9,4 +9,6 @@ public class AnimalTraining(QualificationLevel qualificationLevel = Qualificatio
     public override int QpToBaseQualification => 8;
 
     public override int QpToMasterQualification => 20;
+
+    public AnimalTraining() : this(QualificationLevel.Base) { }
 }

@@ -7,4 +7,6 @@ public class Spellcasting(QualificationLevel qualificationLevel = QualificationL
     public override int QpToBaseQualification => 15;
 
     public override int QpToMasterQualification => 45;
+
+    public Spellcasting() : this(QualificationLevel.Base) { }
 }

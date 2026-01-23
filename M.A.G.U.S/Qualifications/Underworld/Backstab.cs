@@ -7,4 +7,6 @@ public class Backstab(QualificationLevel qualificationLevel = QualificationLevel
     public override int QpToBaseQualification => 10;
 
     public override int QpToMasterQualification => 25;
+
+    public Backstab() : this(QualificationLevel.Base) { }
 }

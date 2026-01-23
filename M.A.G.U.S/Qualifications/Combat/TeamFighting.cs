@@ -9,4 +9,6 @@ public class TeamFighting(QualificationLevel qualificationLevel = QualificationL
     public override int QpToBaseQualification => 7;
 
     public override int QpToMasterQualification => 30;
+
+    public TeamFighting() : this(QualificationLevel.Base) { }
 }

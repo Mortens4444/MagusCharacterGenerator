@@ -9,4 +9,6 @@ public class MagicLore(QualificationLevel qualificationLevel = QualificationLeve
     public override int QpToBaseQualification => 5;
 
     public override int QpToMasterQualification => 25;
+
+    public MagicLore() : this(QualificationLevel.Base) { }
 }

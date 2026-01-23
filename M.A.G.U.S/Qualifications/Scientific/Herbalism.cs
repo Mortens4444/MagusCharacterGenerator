@@ -7,4 +7,6 @@ public class Herbalism(QualificationLevel qualificationLevel = QualificationLeve
     public override int QpToBaseQualification => 5;
 
     public override int QpToMasterQualification => 35;
+
+    public Herbalism() : this(QualificationLevel.Base) { }
 }

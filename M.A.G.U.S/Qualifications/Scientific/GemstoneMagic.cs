@@ -9,4 +9,6 @@ public class GemstoneMagic(QualificationLevel qualificationLevel = Qualification
     public override int QpToBaseQualification => 0;
 
     public override int QpToMasterQualification => 52;
+
+    public GemstoneMagic() : this(QualificationLevel.Base) { }
 }

@@ -19,4 +19,6 @@ public class WeaponUse(QualificationLevel qualificationLevel = QualificationLeve
         }
         return $"{Name} - {Weapon}";
     }
+
+    public WeaponUse() : this(QualificationLevel.Base) { }
 }

@@ -1,11 +1,8 @@
 ﻿namespace M.A.G.U.S.Qualifications.Percentages;
 
-public class LockPicking : PercentQualification
+public class LockPicking(int percent) : PercentQualification(percent)
 {
-    public LockPicking(int percent)
-        : base(percent)
-    {
-    }
-
     public override string Name => "Lock picking";
+
+    public LockPicking() : this(0) { }
 }

@@ -7,4 +7,6 @@ public class Riding(QualificationLevel qualificationLevel = QualificationLevel.B
     public override int QpToBaseQualification => 1;
 
     public override int QpToMasterQualification => 15;
+
+    public Riding() : this(QualificationLevel.Base) { }
 }

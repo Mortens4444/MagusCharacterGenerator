@@ -7,4 +7,6 @@ public class Architecture(QualificationLevel qualificationLevel = QualificationL
     public override int QpToBaseQualification => 5;
 
     public override int QpToMasterQualification => 20;
+
+    public Architecture() : this(QualificationLevel.Base) { }
 }

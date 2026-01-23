@@ -2,4 +2,5 @@
 
 public class Hiding(int percent) : PercentQualification(percent)
 {
+    public Hiding() : this(0) { }
 }

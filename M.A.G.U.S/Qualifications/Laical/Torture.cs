@@ -7,4 +7,6 @@ public class Torture(QualificationLevel qualificationLevel = QualificationLevel.
     public override int QpToBaseQualification => 2;
 
     public override int QpToMasterQualification => 15;
+
+    public Torture() : this(QualificationLevel.Base) { }
 }

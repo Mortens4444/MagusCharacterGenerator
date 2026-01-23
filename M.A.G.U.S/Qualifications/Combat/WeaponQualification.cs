@@ -3,11 +3,9 @@ using M.A.G.U.S.Things.Weapons;
 
 namespace M.A.G.U.S.Qualifications.Combat;
 
-public abstract class WeaponQualification : Qualification
+public abstract class WeaponQualification(QualificationLevel qualificationLevel = QualificationLevel.Base, int level = 1) : Qualification(qualificationLevel, level)
 {
-    public WeaponQualification(QualificationLevel qualificationLevel = QualificationLevel.Base, int level = 1) : base(qualificationLevel, level)
-    {
-    }
-
     public Weapon? Weapon { get; set; }
+
+    public WeaponQualification() : this(QualificationLevel.Base) { }
 }

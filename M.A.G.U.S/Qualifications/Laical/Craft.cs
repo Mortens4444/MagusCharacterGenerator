@@ -7,7 +7,7 @@ public class Craft : Qualification
 {
     public Profession Profession { get; set; }
 
-    [JsonConstructor]
+    [System.Text.Json.Serialization.JsonConstructor, JsonConstructor]
     public Craft() { }
 
     public Craft(QualificationLevel qualificationLevel = QualificationLevel.Base, int level = 1)

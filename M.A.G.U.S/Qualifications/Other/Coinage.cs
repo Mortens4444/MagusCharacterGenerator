@@ -4,4 +4,5 @@ namespace M.A.G.U.S.Qualifications.Other;
 
 public class Coinage(QualificationLevel qualificationLevel = QualificationLevel.Base, int level = 1) : Qualification(qualificationLevel, level)
 {
+    public Coinage() : this(QualificationLevel.Base) { }
 }

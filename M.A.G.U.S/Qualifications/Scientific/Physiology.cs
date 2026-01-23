@@ -7,4 +7,6 @@ public class Physiology(QualificationLevel qualificationLevel = QualificationLev
     public override int QpToBaseQualification => 15;
 
     public override int QpToMasterQualification => 45;
+
+    public Physiology() : this(QualificationLevel.Base) { }
 }

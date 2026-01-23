@@ -9,4 +9,6 @@ public class LegendLore(QualificationLevel qualificationLevel = QualificationLev
     public override int QpToBaseQualification => 10;
 
     public override int QpToMasterQualification => 50;
+
+    public LegendLore() : this(QualificationLevel.Base) { }
 }

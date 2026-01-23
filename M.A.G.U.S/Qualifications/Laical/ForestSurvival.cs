@@ -9,4 +9,6 @@ public class ForestSurvival(QualificationLevel qualificationLevel = Qualificatio
     public override int QpToBaseQualification => 5;
 
     public override int QpToMasterQualification => 14;
+
+    public ForestSurvival() : this(QualificationLevel.Base) { }
 }

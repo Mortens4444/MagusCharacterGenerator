@@ -9,4 +9,6 @@ public class SwampSurvival(QualificationLevel qualificationLevel = Qualification
     public override int QpToBaseQualification => 5;
 
     public override int QpToMasterQualification => 14;
+
+    public SwampSurvival() : this(QualificationLevel.Base) { }
 }

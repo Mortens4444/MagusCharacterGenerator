@@ -2,4 +2,5 @@
 
 public class Divination(int percent) : PercentQualification(percent)
 {
+    public Divination() : this(0) { }
 }

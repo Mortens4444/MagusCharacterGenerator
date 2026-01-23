@@ -7,4 +7,6 @@ public class Leadership(QualificationLevel qualificationLevel = QualificationLev
     public override int QpToBaseQualification => 5;
 
     public override int QpToMasterQualification => 20;
+
+    public Leadership() : this(QualificationLevel.Base) { }
 }

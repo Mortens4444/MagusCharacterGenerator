@@ -9,4 +9,6 @@ public class GroundCombat(QualificationLevel qualificationLevel = QualificationL
     public override int QpToBaseQualification => 5;
 
     public override int QpToMasterQualification => 12;
+
+    public GroundCombat() : this(QualificationLevel.Base) { }
 }

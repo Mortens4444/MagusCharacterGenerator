@@ -7,4 +7,6 @@ public class Etiquette(QualificationLevel qualificationLevel = QualificationLeve
     public override int QpToBaseQualification => 8;
 
     public override int QpToMasterQualification => 15;
+
+    public Etiquette() : this(QualificationLevel.Base) { }
 }

@@ -7,4 +7,6 @@ public class Dancing(QualificationLevel qualificationLevel = QualificationLevel.
     public override int QpToBaseQualification => 5;
 
     public override int QpToMasterQualification => 30;
+
+    public Dancing() : this(QualificationLevel.Base) { }
 }

@@ -7,4 +7,6 @@ public class Heraldry(QualificationLevel qualificationLevel = QualificationLevel
     public override int QpToBaseQualification => 5;
 
     public override int QpToMasterQualification => 15;
+
+    public Heraldry() : this(QualificationLevel.Base) { }
 }

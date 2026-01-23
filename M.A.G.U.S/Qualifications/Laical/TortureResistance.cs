@@ -9,4 +9,6 @@ public class TortureResistance(QualificationLevel qualificationLevel = Qualifica
     public override int QpToBaseQualification => 5;
 
     public override int QpToMasterQualification => 12;
+
+    public TortureResistance() : this(QualificationLevel.Base) { }
 }

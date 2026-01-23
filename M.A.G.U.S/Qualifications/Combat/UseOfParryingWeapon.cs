@@ -9,4 +9,6 @@ public class UseOfParryingWeapon(QualificationLevel qualificationLevel = Qualifi
     public override int QpToBaseQualification => 3;
 
     public override int QpToMasterQualification => 10;
+
+    public UseOfParryingWeapon() : this(QualificationLevel.Base) { }
 }

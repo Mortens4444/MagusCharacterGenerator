@@ -9,4 +9,6 @@ public class WeatherDivination(QualificationLevel qualificationLevel = Qualifica
     public override int QpToBaseQualification => 3;
 
     public override int QpToMasterQualification => 15;
+
+    public WeatherDivination() : this(QualificationLevel.Base) { }
 }

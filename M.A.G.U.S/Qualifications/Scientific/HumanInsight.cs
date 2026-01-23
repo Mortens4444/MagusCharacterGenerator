@@ -9,4 +9,6 @@ public class HumanInsight(QualificationLevel qualificationLevel = QualificationL
     public override int QpToBaseQualification => 7;
 
     public override int QpToMasterQualification => 22;
+
+    public HumanInsight() : this(QualificationLevel.Base) { }
 }

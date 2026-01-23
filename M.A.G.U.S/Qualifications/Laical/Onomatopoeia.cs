@@ -7,4 +7,6 @@ public class Onomatopoeia(QualificationLevel qualificationLevel = QualificationL
     public override int QpToBaseQualification => 3;
 
     public override int QpToMasterQualification => 16;
+
+    public Onomatopoeia() : this(QualificationLevel.Base) { }
 }

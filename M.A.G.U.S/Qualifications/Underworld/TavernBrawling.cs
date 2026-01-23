@@ -9,4 +9,6 @@ public class TavernBrawling(QualificationLevel qualificationLevel = Qualificatio
     public override int QpToBaseQualification => 3;
 
     public override int QpToMasterQualification => 15;
+
+    public TavernBrawling() : this(QualificationLevel.Base) { }
 }

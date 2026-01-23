@@ -9,4 +9,6 @@ public class Deflection(QualificationLevel qualificationLevel = QualificationLev
     public override int QpToBaseQualification => 3;
 
     public override int QpToMasterQualification => 9;
+
+    public Deflection() : this(QualificationLevel.Base) { }
 }

@@ -9,4 +9,6 @@ public class RunicMagic(QualificationLevel qualificationLevel = QualificationLev
     public override int QpToBaseQualification => 18;
 
     public override int QpToMasterQualification => 45;
+
+    public RunicMagic() : this(QualificationLevel.Base) { }
 }

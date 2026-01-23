@@ -7,4 +7,6 @@ public class Disarmament(QualificationLevel qualificationLevel = QualificationLe
     public override int QpToBaseQualification => 7;
 
     public override int QpToMasterQualification => 18;
+
+    public Disarmament() : this(QualificationLevel.Base) { }
 }

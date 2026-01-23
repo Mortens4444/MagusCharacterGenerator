@@ -9,4 +9,6 @@ public class PoisoningAndNeutralization(QualificationLevel qualificationLevel = 
     public override int QpToBaseQualification => 15;
 
     public override int QpToMasterQualification => 60;
+
+    public PoisoningAndNeutralization() : this(QualificationLevel.Base) { }
 }

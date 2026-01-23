@@ -9,4 +9,6 @@ public class ReadingAndWriting(QualificationLevel qualificationLevel = Qualifica
     public override int QpToBaseQualification => 5;
 
     public override int QpToMasterQualification => 25;
+
+    public ReadingAndWriting() : this(QualificationLevel.Base) { }
 }

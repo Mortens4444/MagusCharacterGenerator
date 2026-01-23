@@ -9,4 +9,6 @@ public class MountainSurvival(QualificationLevel qualificationLevel = Qualificat
     public override int QpToBaseQualification => 5;
 
     public override int QpToMasterQualification => 14;
+
+    public MountainSurvival() : this(QualificationLevel.Base) { }
 }

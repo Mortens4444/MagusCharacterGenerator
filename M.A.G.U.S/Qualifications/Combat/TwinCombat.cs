@@ -9,4 +9,6 @@ public class TwinCombat(QualificationLevel qualificationLevel = QualificationLev
     public override int QpToBaseQualification => 12;
 
     public override int QpToMasterQualification => 45;
+
+    public TwinCombat() : this(QualificationLevel.Base) { }
 }

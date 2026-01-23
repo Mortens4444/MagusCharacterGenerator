@@ -9,4 +9,6 @@ public class SexualCulture(QualificationLevel qualificationLevel = Qualification
     public override int QpToBaseQualification => 5;
 
     public override int QpToMasterQualification => 30;
+
+    public SexualCulture() : this(QualificationLevel.Base) { }
 }

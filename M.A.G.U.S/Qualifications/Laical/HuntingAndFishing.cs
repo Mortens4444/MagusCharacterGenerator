@@ -9,4 +9,6 @@ public class HuntingAndFishing(QualificationLevel qualificationLevel = Qualifica
     public override int QpToBaseQualification => 8;
 
     public override int QpToMasterQualification => 15;
+
+    public HuntingAndFishing() : this(QualificationLevel.Base) { }
 }

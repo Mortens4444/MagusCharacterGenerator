@@ -1,11 +1,8 @@
 ﻿namespace M.A.G.U.S.Qualifications.Percentages;
 
-public class TrackingEvasion : PercentQualification
+public class TrackingEvasion(int percent) : PercentQualification(percent)
 {
-    public TrackingEvasion(int percent)
-        : base(percent)
-    {
-    }
-
     public override string Name => "Tracking / evasion";
+
+    public TrackingEvasion() : this(0) { }
 }

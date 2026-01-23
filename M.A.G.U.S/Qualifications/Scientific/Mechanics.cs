@@ -7,4 +7,6 @@ public class Mechanics(QualificationLevel qualificationLevel = QualificationLeve
     public override int QpToBaseQualification => 8;
 
     public override int QpToMasterQualification => 25;
+
+    public Mechanics() : this(QualificationLevel.Base) { }
 }

@@ -9,4 +9,6 @@ public class CardSharping(QualificationLevel qualificationLevel = QualificationL
     public override int QpToBaseQualification => 10;
 
     public override int QpToMasterQualification => 20;
+
+    public CardSharping() : this(QualificationLevel.Base) { }
 }

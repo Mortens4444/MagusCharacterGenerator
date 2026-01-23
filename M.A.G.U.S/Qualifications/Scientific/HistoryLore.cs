@@ -9,4 +9,6 @@ public class HistoryLore(QualificationLevel qualificationLevel = QualificationLe
     public override int QpToBaseQualification => 5;
 
     public override int QpToMasterQualification => 20;
+
+    public HistoryLore() : this(QualificationLevel.Base) { }
 }

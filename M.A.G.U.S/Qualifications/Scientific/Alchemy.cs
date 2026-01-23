@@ -7,4 +7,6 @@ public class Alchemy(QualificationLevel qualificationLevel = QualificationLevel.
     public override int QpToBaseQualification => 10;
 
     public override int QpToMasterQualification => 40;
+
+    public Alchemy() : this(QualificationLevel.Base) { }
 }

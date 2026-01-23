@@ -5,8 +5,21 @@ using M.A.G.U.S.Interfaces;
 
 namespace M.A.G.U.S.Things.Weapons;
 
-public class BreathWeaponcs(string name, ThrowType throwType, int modifier = 0) : Weapon, IRangedWeapon, INotForSale
+public class BreathWeaponcs : Weapon, IRangedWeapon, INotForSale
 {
+    private readonly string name;
+    private readonly ThrowType throwType;
+    private readonly int modifier;
+
+    public BreathWeaponcs() { }
+
+    public BreathWeaponcs(string name, ThrowType throwType, int modifier = 0)
+    {
+        this.name = name;
+        this.throwType = throwType;
+        this.modifier = modifier;
+    }
+
     public int AimValue => 0;
 
     public override string Name => name;

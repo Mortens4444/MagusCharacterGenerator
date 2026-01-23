@@ -7,4 +7,6 @@ public class Juggling(QualificationLevel qualificationLevel = QualificationLevel
     public override int QpToBaseQualification => 3;
 
     public override int QpToMasterQualification => 10;
+
+    public Juggling() : this(QualificationLevel.Base) { }
 }

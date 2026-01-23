@@ -7,4 +7,6 @@ public class Sculptury(QualificationLevel qualificationLevel = QualificationLeve
     public override int QpToBaseQualification => 3;
 
     public override int QpToMasterQualification => 18;
+
+    public Sculptury() : this(QualificationLevel.Base) { }
 }

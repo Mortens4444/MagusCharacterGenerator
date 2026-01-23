@@ -14,4 +14,6 @@ public class PsiPyarron(QualificationLevel qualificationLevel = QualificationLev
     public override int QpToMasterQualification => 55;
 
     public override string[] Images => ["psi.png"];
+
+    public PsiPyarron() : this(QualificationLevel.Base) { }
 }

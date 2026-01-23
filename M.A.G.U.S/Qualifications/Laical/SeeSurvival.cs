@@ -9,4 +9,6 @@ public class SeeSurvival(QualificationLevel qualificationLevel = QualificationLe
     public override int QpToBaseQualification => 5;
 
     public override int QpToMasterQualification => 14;
+
+    public SeeSurvival() : this(QualificationLevel.Base) { }
 }

@@ -9,4 +9,6 @@ public class CloseCombat(QualificationLevel qualificationLevel = QualificationLe
     public override int QpToBaseQualification => 3;
 
     public override int QpToMasterQualification => 10;
+
+    public CloseCombat() : this(QualificationLevel.Base) { }
 }

@@ -9,4 +9,6 @@ public class WeaponBreaking(QualificationLevel qualificationLevel = Qualificatio
     public override int QpToBaseQualification => 5;
 
     public override int QpToMasterQualification => 20;
+
+    public WeaponBreaking() : this(QualificationLevel.Base) { }
 }

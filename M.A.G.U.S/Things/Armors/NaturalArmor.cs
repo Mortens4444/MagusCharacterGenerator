@@ -9,6 +9,8 @@ public class NaturalArmor : Armor, INotForSale
     private readonly int armorClass;
     private readonly int armorCheckPenalty;
 
+    public NaturalArmor() : this(1, 0) { }
+    
     public NaturalArmor(int armorClass, int armorCheckPenalty = 0)
     {
         this.armorClass = armorClass;

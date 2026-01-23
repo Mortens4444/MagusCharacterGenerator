@@ -2,18 +2,17 @@
 using M.A.G.U.S.Extensions;
 using M.A.G.U.S.GameSystem;
 using M.A.G.U.S.Interfaces;
+using M.A.G.U.S.Models;
 using M.A.G.U.S.Qualifications;
 using Mtf.Extensions.Services;
 using System.Text;
 
 namespace M.A.G.U.S.Races;
 
-public abstract class Race : IRace, IHaveImage
+public abstract class Race : ImageOwner, IRace
 {
     protected readonly DiceThrow DiceThrow = new();
     protected static readonly Random random = new();
-
-    public virtual string Name => GetType().Name;
 
     public override string ToString() => Name;
 
@@ -22,12 +21,6 @@ public abstract class Race : IRace, IHaveImage
     public virtual PercentQualificationList PercentQualifications => [];
 
     public virtual SpecialQualificationList SpecialQualifications => [];
-
-    public virtual string[] Images => [$"{Name.ToImageName()}.png"];
-
-    public virtual string DefaultImage => Images.Length > 0 ? Images[0] : String.Empty;
-
-    public virtual string RandomImage => Images.Length > 1 ? Images[RandomProvider.GetSecureRandomInt(0, Images.Length)] : DefaultImage;
 
     public virtual int Strength => 0;
 

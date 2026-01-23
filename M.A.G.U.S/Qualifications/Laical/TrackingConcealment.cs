@@ -9,4 +9,6 @@ public class TrackingConcealment(QualificationLevel qualificationLevel = Qualifi
     public override int QpToBaseQualification => 10;
 
     public override int QpToMasterQualification => 45;
+
+    public TrackingConcealment() : this(QualificationLevel.Base) { }
 }

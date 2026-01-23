@@ -9,4 +9,6 @@ public class BlindFighting(QualificationLevel qualificationLevel = Qualification
     public override int QpToBaseQualification => 10;
 
     public override int QpToMasterQualification => 30;
+
+    public BlindFighting() : this(QualificationLevel.Base) { }
 }

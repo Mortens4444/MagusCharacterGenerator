@@ -9,4 +9,6 @@ public class TrapSetting(QualificationLevel qualificationLevel = QualificationLe
     public override int QpToBaseQualification => 10;
 
     public override int QpToMasterQualification => 20;
+
+    public TrapSetting() : this(QualificationLevel.Base) { }
 }

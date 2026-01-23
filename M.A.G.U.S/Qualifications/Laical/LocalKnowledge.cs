@@ -9,4 +9,6 @@ public class LocalKnowledge(QualificationLevel qualificationLevel = Qualificatio
     public override int QpToBaseQualification => 1;
 
     public override int QpToMasterQualification => 8;
+
+    public LocalKnowledge() : this(QualificationLevel.Base) { }
 }

@@ -7,4 +7,6 @@ public class Demonology(QualificationLevel qualificationLevel = QualificationLev
     public override int QpToBaseQualification => 20;
 
     public override int QpToMasterQualification => 55;
+
+    public Demonology() : this(QualificationLevel.Base) { }
 }

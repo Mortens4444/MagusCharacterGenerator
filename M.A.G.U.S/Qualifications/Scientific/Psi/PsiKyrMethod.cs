@@ -3,12 +3,8 @@ using M.A.G.U.S.GameSystem.Qualifications;
 
 namespace M.A.G.U.S.Qualifications.Scientific.Psi;
 
-public class PsiKyrMethod : Qualification, IPsi
+public class PsiKyrMethod() : Qualification(QualificationLevel.Master, 1), IPsi
 {
-    public PsiKyrMethod()
-        : base(QualificationLevel.Master, 1)
-    {
-    }
 
     public PsiKind PsiKind => PsiKind.Kyr;
 

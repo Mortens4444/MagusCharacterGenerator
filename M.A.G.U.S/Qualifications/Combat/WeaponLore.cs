@@ -9,4 +9,6 @@ public class WeaponLore(QualificationLevel qualificationLevel = QualificationLev
     public override int QpToBaseQualification => 10;
 
     public override int QpToMasterQualification => 20;
+
+    public WeaponLore() : this(QualificationLevel.Base) { }
 }

@@ -9,4 +9,6 @@ public class SingingAndMakingMusic(QualificationLevel qualificationLevel = Quali
     public override int QpToBaseQualification => 5;
 
     public override int QpToMasterQualification => 30;
+
+    public SingingAndMakingMusic() : this(QualificationLevel.Base) { }
 }

@@ -5,4 +5,6 @@ namespace M.A.G.U.S.Qualifications.Other;
 public class BootMaking(QualificationLevel qualificationLevel = QualificationLevel.Base, int level = 1) : Qualification(qualificationLevel, level)
 {
     public override string Name => "Boot making";
+
+    public BootMaking() : this(QualificationLevel.Base) { }
 }

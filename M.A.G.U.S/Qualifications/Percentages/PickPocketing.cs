@@ -1,11 +1,8 @@
 ﻿namespace M.A.G.U.S.Qualifications.Percentages;
 
-public class PickPocketing : PercentQualification
+public class PickPocketing(int percent) : PercentQualification(percent)
 {
-    public PickPocketing(int percent)
-        : base(percent)
-    {
-    }
-
     public override string Name => "Pick pocketing";
+
+    public PickPocketing() : this(0) { }
 }

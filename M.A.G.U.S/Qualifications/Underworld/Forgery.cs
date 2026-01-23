@@ -12,4 +12,6 @@ public class Forgery : Qualification
     public override int QpToBaseQualification => 11;
 
     public override int QpToMasterQualification => 24;
+
+    public Forgery() : this(QualificationLevel.Base) { }
 }

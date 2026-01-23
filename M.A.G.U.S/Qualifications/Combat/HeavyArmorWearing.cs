@@ -10,4 +10,6 @@ public class HeavyArmorWearing(QualificationLevel qualificationLevel = Qualifica
     public override int QpToBaseQualification => 3;
 
     public override int QpToMasterQualification => 27;
+
+    public HeavyArmorWearing() : this(QualificationLevel.Base) { }
 }

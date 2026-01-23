@@ -8,4 +8,6 @@ public class Wrestling(QualificationLevel qualificationLevel = QualificationLeve
     public override int QpToBaseQualification => 8;
 
     public override int QpToMasterQualification => 15;
+
+    public Wrestling() : this(QualificationLevel.Base) { }
 }

@@ -9,4 +9,6 @@ public class PaintingDrawing(QualificationLevel qualificationLevel = Qualificati
     public override int QpToBaseQualification => 3;
 
     public override int QpToMasterQualification => 18;
+
+    public PaintingDrawing() : this(QualificationLevel.Base) { }
 }

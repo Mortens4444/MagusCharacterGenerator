@@ -7,4 +7,6 @@ public class Cartography(QualificationLevel qualificationLevel = QualificationLe
     public override int QpToBaseQualification => 10;
 
     public override int QpToMasterQualification => 17;
+
+    public Cartography() : this(QualificationLevel.Base) { }
 }

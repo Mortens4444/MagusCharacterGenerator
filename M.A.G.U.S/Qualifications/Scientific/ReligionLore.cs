@@ -9,4 +9,6 @@ public class ReligionLore(QualificationLevel qualificationLevel = QualificationL
     public override int QpToBaseQualification => 5;
 
     public override int QpToMasterQualification => 25;
+
+    public ReligionLore() : this(QualificationLevel.Base) { }
 }

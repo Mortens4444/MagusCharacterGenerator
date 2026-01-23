@@ -7,4 +7,6 @@ public class Running(QualificationLevel qualificationLevel = QualificationLevel.
     public override int QpToBaseQualification => 9;
 
     public override int QpToMasterQualification => 24;
+
+    public Running() : this(QualificationLevel.Base) { }
 }

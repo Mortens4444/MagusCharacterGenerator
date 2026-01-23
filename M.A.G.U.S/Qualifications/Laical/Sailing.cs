@@ -7,4 +7,6 @@ public class Sailing(QualificationLevel qualificationLevel = QualificationLevel.
     public override int QpToBaseQualification => 15;
 
     public override int QpToMasterQualification => 40;
+
+    public Sailing() : this(QualificationLevel.Base) { }
 }

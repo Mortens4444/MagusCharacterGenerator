@@ -1,22 +1,11 @@
-﻿using M.A.G.U.S.Extensions;
-using M.A.G.U.S.GameSystem.Valuables;
-using M.A.G.U.S.Interfaces;
-using Mtf.Extensions.Services;
+﻿using M.A.G.U.S.GameSystem.Valuables;
+using M.A.G.U.S.Models;
 
 namespace M.A.G.U.S.Things;
 
-public abstract class Thing : IHaveImage
+public abstract class Thing : ImageOwner
 {
-
     public string Id { get; set; } = Guid.NewGuid().ToString();
-
-    public virtual string Name => GetType().Name;
-
-    public virtual string[] Images => [$"{Name.ToImageName()}.png"];
-
-    public virtual string DefaultImage => Images.Length > 0 ? Images[0] : String.Empty;
-
-    public virtual string RandomImage => Images.Length > 1 ? Images[RandomProvider.GetSecureRandomInt(0, Images.Length)] : DefaultImage;
 
     public virtual Money Price => new(1);
 

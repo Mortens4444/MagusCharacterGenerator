@@ -1,9 +1,6 @@
 ﻿namespace M.A.G.U.S.Qualifications.Percentages;
 
-public class Falling : PercentQualification
+public class Falling(int percent) : PercentQualification(percent)
 {
-    public Falling(int percent)
-        : base(percent)
-    {
-    }
+    public Falling() : this(0) { }
 }

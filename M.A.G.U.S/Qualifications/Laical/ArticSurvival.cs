@@ -9,4 +9,6 @@ public class ArticSurvival(QualificationLevel qualificationLevel = Qualification
     public override int QpToBaseQualification => 5;
 
     public override int QpToMasterQualification => 14;
+
+    public ArticSurvival() : this(QualificationLevel.Base) { }
 }

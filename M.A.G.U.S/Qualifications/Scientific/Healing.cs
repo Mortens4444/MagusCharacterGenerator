@@ -7,4 +7,6 @@ public class Healing(QualificationLevel qualificationLevel = QualificationLevel.
     public override int QpToBaseQualification => 15;
 
     public override int QpToMasterQualification => 30;
+
+    public Healing() : this(QualificationLevel.Base) { }
 }

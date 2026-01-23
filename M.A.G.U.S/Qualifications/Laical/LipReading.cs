@@ -9,4 +9,6 @@ public class LipReading(QualificationLevel qualificationLevel = QualificationLev
     public override int QpToBaseQualification => 7;
 
     public override int QpToMasterQualification => 10;
+
+    public LipReading() : this(QualificationLevel.Base) { }
 }

@@ -9,4 +9,6 @@ public class TwoHandedCombat(QualificationLevel qualificationLevel = Qualificati
     public override int QpToBaseQualification => 15;
 
     public override int QpToMasterQualification => 25;
+
+    public TwoHandedCombat() : this(QualificationLevel.Base) { }
 }

@@ -5,8 +5,23 @@ using M.A.G.U.S.Interfaces;
 
 namespace M.A.G.U.S.Things.Weapons;
 
-public class BodyPart(string name, ThrowType throwType, int modifier = 0, double attacksPerRound = 1) : Weapon, IMeleeWeapon, INotForSale
+public class BodyPart : Weapon, IMeleeWeapon, INotForSale
 {
+    private readonly string name;
+    private readonly ThrowType throwType;
+    private readonly int modifier;
+    private readonly double attacksPerRound;
+
+    public BodyPart() { }
+
+    public BodyPart(string name, ThrowType throwType, int modifier = 0, double attacksPerRound = 1)
+    {
+        this.name = name;
+        this.throwType = throwType;
+        this.modifier = modifier;
+        this.attacksPerRound = attacksPerRound;
+    }
+
     public int AttackValue => 0;
 
     public int DefenseValue => 0;

@@ -91,15 +91,17 @@
             <CollectionView ItemsSource="{Binding SelectedAssignment.TurnHistory}">
                 <CollectionView.Header>
                     <Border Padding="8">
-                        <Grid Padding="6" ColumnDefinitions="*,4*,*,2*,2*,2*,*,*">
-                            <Label Grid.Column="0" Text="Round" FontAttributes="Bold" />
-                            <Label Grid.Column="1" Text="Attacker" FontAttributes="Bold" />
-                            <Label Grid.Column="2" Text="Init" FontAttributes="Bold" />
-                            <Label Grid.Column="3" Text="Attack location" FontAttributes="Bold" />
-                            <Label Grid.Column="4" Text="Attack result" FontAttributes="Bold" />
-                            <Label Grid.Column="5" Text="Attack direction" FontAttributes="Bold" />
-                            <Label Grid.Column="6" Text="HP" FontAttributes="Bold" />
-                            <Label Grid.Column="7" Text="PRP" FontAttributes="Bold" />
+                        <Grid Padding="6" ColumnDefinitions="*,4*,*,2*,2*,2*" RowDefinitions="Auto,Auto">
+                        <!--<Grid Padding="6" ColumnDefinitions="*,4*,*,2*,2*,2*,*,*" RowDefinitions="Auto,Auto">-->
+                            <Label Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" Text="Round" FontAttributes="Bold" />
+                            <Label Grid.Row="0" Grid.Column="1" Grid.RowSpan="2" Text="Attacker" FontAttributes="Bold" />
+                            <Label Grid.Row="0" Grid.Column="2" Grid.RowSpan="2" Text="Init" FontAttributes="Bold" />
+                            <Label Grid.Row="0" Grid.Column="3" Grid.ColumnSpan="3" Text="Attack" HorizontalTextAlignment="Center" FontAttributes="Bold" />
+                            <Label Grid.Row="1" Grid.Column="3" Text="Location" FontAttributes="Bold" />
+                            <Label Grid.Row="1" Grid.Column="4" Text="Result" FontAttributes="Bold" />
+                            <Label Grid.Row="1" Grid.Column="5" Text="Direction" FontAttributes="Bold" />
+                            <!--<Label Grid.Row="0" Grid.Column="6" Grid.RowSpan="2" Text="HP" FontAttributes="Bold" />
+                            <Label Grid.Row="0" Grid.Column="7" Grid.RowSpan="2" Text="PRP" FontAttributes="Bold" />-->
                         </Grid>
                     </Border>
                 </CollectionView.Header>
@@ -110,15 +112,16 @@
                                 <CollectionView ItemsSource="{Binding Attacks}">
                                     <CollectionView.ItemTemplate>
                                         <DataTemplate x:DataType="vm:TurnAttackViewModel">
-                                            <Grid Padding="6" ColumnDefinitions="*,4*,*,2*,2*,2*,*,*">
+                                            <Grid Padding="6" ColumnDefinitions="*,4*,*,2*,2*,2*">
+                                            <!--<Grid Padding="6" ColumnDefinitions="*,4*,*,2*,2*,2*,*,*">-->
                                                 <Label Grid.Column="0" Text="{Binding RoundNumber}" />
                                                 <Label Grid.Column="1" Text="{Binding Attacker}" />
                                                 <Label Grid.Column="2" Text="{Binding Initiative}" />
                                                 <Label Grid.Column="3" Text="{Binding Result}" />
                                                 <Label Grid.Column="4" Text="{Binding HitLocation}" />
                                                 <Label Grid.Column="5" Text="{Binding Direction}" />
-                                                <Label Grid.Column="6" Text="{Binding ActualHealthPoints}" />
-                                                <Label Grid.Column="7" Text="{Binding ActualPainTolerancePoints}" />
+                                                <!--<Label Grid.Column="6" Text="{Binding ActualHealthPoints}" />
+                                                <Label Grid.Column="7" Text="{Binding ActualPainTolerancePoints}" />-->
                                             </Grid>
                                         </DataTemplate>
                                     </CollectionView.ItemTemplate>

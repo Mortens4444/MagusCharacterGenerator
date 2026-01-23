@@ -2,4 +2,5 @@
 
 public class Sneaking(int percent) : PercentQualification(percent)
 {
+    public Sneaking() : this(0) { }
 }

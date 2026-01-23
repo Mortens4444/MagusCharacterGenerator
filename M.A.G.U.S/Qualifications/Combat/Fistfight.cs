@@ -7,4 +7,6 @@ public class Fistfight(QualificationLevel qualificationLevel = QualificationLeve
     public override int QpToBaseQualification => 3;
 
     public override int QpToMasterQualification => 15;
+
+    public Fistfight() : this(QualificationLevel.Base) { }
 }

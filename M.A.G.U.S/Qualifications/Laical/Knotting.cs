@@ -7,4 +7,6 @@ public class Knotting(QualificationLevel qualificationLevel = QualificationLevel
     public override int QpToBaseQualification => 7;
 
     public override int QpToMasterQualification => 24;
+
+    public Knotting() : this(QualificationLevel.Base) { }
 }
