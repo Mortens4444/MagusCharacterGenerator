@@ -33,6 +33,10 @@
                 SelectedItem="{Binding SelectedClass}" />
         
         <ScrollView Grid.Row="2">
+            <ScrollView.GestureRecognizers>
+                <SwipeGestureRecognizer Direction="Left" Command="{Binding SelectNextClassCommand}" />
+                <SwipeGestureRecognizer Direction="Right" Command="{Binding SelectPreviousClassCommand}" />
+            </ScrollView.GestureRecognizers>
             <VerticalStackLayout>
 
                 <!-- Kép -->

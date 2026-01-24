@@ -74,10 +74,20 @@
         <StackLayout Grid.Column="2" Spacing="8">
             <Label Text="Enemies" FontAttributes="Bold" FontSize="18"/>
 
-            <Picker ItemsSource="{Binding AvailableEnemies}"
-                    SelectedItem="{Binding SelectedEnemy}"
-                    ItemDisplayBinding="{Binding Name, Converter={StaticResource TranslationConverter}}"
-                    Title="Select enemy"/>
+            <Grid ColumnDefinitions="*, Auto" ColumnSpacing="5">
+                <Picker Grid.Column="0"
+                ItemsSource="{Binding AvailableEnemies}"
+                SelectedItem="{Binding SelectedEnemy}"
+                ItemDisplayBinding="{Binding Name, Converter={StaticResource TranslationConverter}}"
+                Title="Select enemy"/>
+
+                <Button Grid.Column="1" 
+                Text="🎲" 
+                FontSize="18"
+                Padding="10,0"
+                Command="{Binding PickRandomEnemyCommand}"
+                ToolTipProperties.Text="Pick random enemy" />
+            </Grid>
 
             <Button Text="&lt;-" Command="{Binding AddEnemyCommand}"/>
         </StackLayout>

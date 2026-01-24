@@ -7,7 +7,6 @@ using M.A.G.U.S.Qualifications;
 using Mtf.Extensions;
 using Mtf.LanguageService.MAUI;
 using System.Collections.ObjectModel;
-using System.Windows.Input;
 
 namespace M.A.G.U.S.Assistant.ViewModels;
 
@@ -108,5 +107,35 @@ internal partial class ClassesViewModel : BaseViewModel
     private Task PreviewImage()
     {
         return ImagePreviewService.ShowAsync(SelectedClass?.DefaultImage);
+    }
+
+    [RelayCommand]
+    private void SelectNextClass()
+    {
+        if (SelectedClass == null || FilteredClasses.Count <= 1)
+        {
+            return;
+        }
+
+        int currentIndex = FilteredClasses.IndexOf(SelectedClass);
+        if (currentIndex < FilteredClasses.Count - 1)
+        {
+            SelectedClass = FilteredClasses[currentIndex + 1];
+        }
+    }
+
+    [RelayCommand]
+    private void SelectPreviousClass()
+    {
+        if (SelectedClass == null || FilteredClasses.Count <= 1)
+        {
+            return;
+        }
+
+        int currentIndex = FilteredClasses.IndexOf(SelectedClass);
+        if (currentIndex > 0)
+        {
+            SelectedClass = FilteredClasses[currentIndex - 1];
+        }
     }
 }

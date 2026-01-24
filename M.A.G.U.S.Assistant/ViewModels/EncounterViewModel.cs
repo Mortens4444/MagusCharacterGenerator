@@ -89,6 +89,16 @@ internal partial class EncounterViewModel(ISettings settings, CharacterService c
         SelectedCharacter = null;
     }
 
+    [RelayCommand]
+    private void PickRandomEnemy()
+    {
+        if (AvailableEnemies.Count > 0)
+        {
+            int randomIndex = RandomProvider.GetSecureRandomInt(0, AvailableEnemies.Count);
+            SelectedEnemy = AvailableEnemies[randomIndex];
+        }
+    }
+
     [RelayCommand(CanExecute = nameof(CanAddEnemy))]
     private void AddEnemy()
     {

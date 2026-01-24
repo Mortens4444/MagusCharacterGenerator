@@ -12,157 +12,139 @@ internal class ZoomImageHandler : ImageHandler, IDisposable
     private GestureDetector? gestureDetector;
     private bool disposed;
 
-    private float scale = 1f;
-    private const float MaxScale = 4f;
-    private const float MinScale = 1f;
+    // Change defaults to match standard Matrix behavior
+    public float currentScale = 1f;
+    public float minScale = 1f;
+    public float maxScale = 5f;
 
-    private float translateX;
-    private float translateY;
-    private float lastFocusX;
-    private float lastFocusY;
+    public float translateX = 0f;
+    public float translateY = 0f;
 
     protected override void ConnectHandler(ImageView platformView)
     {
         base.ConnectHandler(platformView);
 
+        // Matrix mode is essential for custom zoom
         platformView.SetScaleType(ImageView.ScaleType.Matrix);
+
         scaleDetector = new ScaleGestureDetector(platformView.Context, new ScaleListener(this));
         gestureDetector = new GestureDetector(platformView.Context, new GestureListener(this));
 
         platformView.Touch += OnTouch;
-        platformView.Clickable = true;
-        platformView.Focusable = true;
-        platformView.FocusableInTouchMode = true;
-        //platformView.ViewTreeObserver?.AddOnGlobalLayoutListener(new LayoutListener(platformView, this));
+
+        // Listen for the layout to be ready to calculate initial AspectFit
+        platformView.ViewTreeObserver?.AddOnGlobalLayoutListener(new LayoutListener(platformView, this));
     }
 
     protected override void DisconnectHandler(ImageView platformView)
     {
-        if (platformView != null)
-        {
-            platformView.Touch -= OnTouch;
-        }
+        platformView.Touch -= OnTouch;
         base.DisconnectHandler(platformView);
         Dispose(true);
     }
 
-    // Replace the OnTouch method signature to match EventHandler<View.TouchEventArgs>
     private void OnTouch(object? sender, View.TouchEventArgs e)
     {
-        if (e.Event == null)
-        {
-            e.Handled = false;
-            return;
-        }
+        var scaleResult = scaleDetector?.OnTouchEvent(e.Event) ?? false;
+        var gestureResult = gestureDetector?.OnTouchEvent(e.Event) ?? false;
 
-        bool handled = false;
-
-        if (scaleDetector != null)
-        {
-            handled = scaleDetector.OnTouchEvent(e.Event);
-        }
-
-        if (gestureDetector != null)
-        {
-            handled |= gestureDetector.OnTouchEvent(e.Event);
-        }
-
-        e.Handled = handled;
+        // Mark handled if either detector processed it
+        e.Handled = scaleResult || gestureResult || true;
     }
 
     public void ApplyTransform(ImageView view)
     {
-        if (view == null) return;
         var matrix = new Matrix();
-        matrix.PostScale(scale, scale);
+
+        // Order is CRITICAL: Scale first, then Translate
+        matrix.PostScale(currentScale, currentScale);
         matrix.PostTranslate(translateX, translateY);
+
         view.ImageMatrix = matrix;
         view.Invalidate();
     }
 
-    private class ScaleListener : ScaleGestureDetector.SimpleOnScaleGestureListener
+    // --- LOGIC TO RESET IMAGE TO ASPECT FIT ---
+    public void ResetToAspectFit(ImageView view)
     {
-        private readonly ZoomImageHandler handler;
+        if (view.Drawable == null || view.Width == 0 || view.Height == 0) return;
 
-        public ScaleListener(ZoomImageHandler handler)
-        {
-            this.handler = handler;
-        }
+        var drawable = view.Drawable;
+        float viewW = view.Width;
+        float viewH = view.Height;
+        float imageW = drawable.IntrinsicWidth;
+        float imageH = drawable.IntrinsicHeight;
 
-        public override bool OnScaleBegin(ScaleGestureDetector detector)
-        {
-            handler.lastFocusX = detector.FocusX;
-            handler.lastFocusY = detector.FocusY;
-            return true;
-        }
+        // Calculate the scale needed to fit the image inside the view
+        float scaleX = viewW / imageW;
+        float scaleY = viewH / imageH;
+        float fitScale = Math.Min(scaleX, scaleY);
 
+        // Update state
+        currentScale = fitScale;
+        minScale = fitScale;         // Don't let user zoom out smaller than fit
+        maxScale = fitScale * 4.0f;  // Max zoom is 4x the starting size
+
+        // Calculate translation to center the image
+        float redundantX = viewW - (fitScale * imageW);
+        float redundantY = viewH - (fitScale * imageH);
+
+        translateX = redundantX / 2f;
+        translateY = redundantY / 2f;
+
+        ApplyTransform(view);
+    }
+
+    // --- LISTENERS ---
+
+    private class ScaleListener(ZoomImageHandler handler) : ScaleGestureDetector.SimpleOnScaleGestureListener
+    {
         public override bool OnScale(ScaleGestureDetector detector)
         {
-            if (handler.PlatformView == null)
-            {
-                return false;
-            }
+            float scaleFactor = detector.ScaleFactor;
+            float prevScale = handler.currentScale;
 
-            float oldScale = handler.scale;
-            handler.scale *= detector.ScaleFactor;
-            handler.scale = Math.Clamp(handler.scale, MinScale, MaxScale);
+            // Calculate new scale
+            handler.currentScale *= scaleFactor;
+            // Clamp
+            handler.currentScale = Math.Clamp(handler.currentScale, handler.minScale, handler.maxScale);
 
-            if (Math.Abs(oldScale - handler.scale) < 0.001f)
-            {
-                return true; // Nem változott, nincs mit csinálni
-            }
+            // Re-calculate factor based on clamped value to keep math sync
+            float effectiveFactor = handler.currentScale / prevScale;
 
-            // Az érintési pont körüli nagyítás
+            // Adjust Translation to zoom towards the finger (FocusX/Y)
+            // Formula: NewPos = Focus + (OldPos - Focus) * ScaleFactor
+            // We rearrange to modify TranslateX directly:
+
             float focusX = detector.FocusX;
             float focusY = detector.FocusY;
 
-            // Kompenzáljuk az eltolást, hogy a focus pont helyben maradjon
-            float scaleFactor = handler.scale / oldScale;
-            handler.translateX = focusX + (handler.translateX - focusX) * scaleFactor;
-            handler.translateY = focusY + (handler.translateY - focusY) * scaleFactor;
+            handler.translateX = (handler.translateX - focusX) * effectiveFactor + focusX;
+            handler.translateY = (handler.translateY - focusY) * effectiveFactor + focusY;
 
             handler.ApplyTransform(handler.PlatformView);
             return true;
         }
     }
 
-    private class GestureListener : GestureDetector.SimpleOnGestureListener
+    private class GestureListener(ZoomImageHandler handler) : GestureDetector.SimpleOnGestureListener
     {
-        private readonly ZoomImageHandler handler;
-
-        public GestureListener(ZoomImageHandler handler)
-        {
-            this.handler = handler;
-        }
-
         public override bool OnScroll(MotionEvent? e1, MotionEvent? e2, float distanceX, float distanceY)
         {
-            if (handler.PlatformView == null || handler.scale <= 1f)
-            {
-                return false;
-            }
-
-            // distanceX/Y már helyes irányú, csak ki kell vonni
+            // Simple panning
             handler.translateX -= distanceX;
             handler.translateY -= distanceY;
+
+            // Optional: You could add logic here to prevent panning the image off-screen
 
             handler.ApplyTransform(handler.PlatformView);
             return true;
         }
 
-        public override bool OnDoubleTap(MotionEvent? e)
+        public override bool OnDoubleTap(MotionEvent e)
         {
-            if (handler.PlatformView == null)
-            {
-                return false;
-            }
-
-            // Reset
-            handler.scale = 1f;
-            handler.translateX = 0f;
-            handler.translateY = 0f;
-
-            handler.ApplyTransform(handler.PlatformView);
+            // Reset on double tap
+            handler.ResetToAspectFit(handler.PlatformView);
             return true;
         }
     }
@@ -175,9 +157,7 @@ internal class ZoomImageHandler : ImageHandler, IDisposable
 
     protected virtual void Dispose(bool disposing)
     {
-        if (disposed)
-            return;
-
+        if (disposed) return;
         if (disposing)
         {
             scaleDetector?.Dispose();
@@ -185,7 +165,31 @@ internal class ZoomImageHandler : ImageHandler, IDisposable
             scaleDetector = null;
             gestureDetector = null;
         }
-
         disposed = true;
+    }
+}
+
+internal sealed class LayoutListener : Java.Lang.Object, ViewTreeObserver.IOnGlobalLayoutListener
+{
+    private readonly ImageView view;
+    private readonly ZoomImageHandler handler;
+
+    public LayoutListener(ImageView view, ZoomImageHandler handler)
+    {
+        this.view = view;
+        this.handler = handler;
+    }
+
+    public void OnGlobalLayout()
+    {
+        // Ensure we have dimensions and an image
+        if (view.Width > 0 && view.Height > 0 && view.Drawable != null)
+        {
+            // Remove listener so this only runs once per layout change
+            view.ViewTreeObserver?.RemoveOnGlobalLayoutListener(this);
+
+            // Calculate the correct startup Position
+            handler.ResetToAspectFit(view);
+        }
     }
 }

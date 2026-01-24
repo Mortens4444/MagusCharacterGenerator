@@ -1,4 +1,5 @@
 ﻿using M.A.G.U.S.Assistant.Models;
+using M.A.G.U.S.Assistant.Services;
 using Mtf.LanguageService.MAUI;
 using Mtf.LanguageService.MAUI.Views;
 
@@ -29,6 +30,11 @@ internal partial class ImagePreviewPage : NotifierPage
 
         PreviewImage.AnchorX = 0.5;
         PreviewImage.AnchorY = 0.5;
+    }
+
+    private async void CloseClicked(object sender, EventArgs e)
+    {
+        await ShellNavigationService.ClosePage().ConfigureAwait(true);
     }
 
     private void LoadImage()

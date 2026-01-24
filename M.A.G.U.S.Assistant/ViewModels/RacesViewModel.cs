@@ -87,4 +87,34 @@ internal partial class RacesViewModel : BaseViewModel
     {
         return ImagePreviewService.ShowAsync(SelectedRace?.DefaultImage);
     }
+
+    [RelayCommand]
+    private void SelectNextRace()
+    {
+        if (SelectedRace == null || FilteredRaces.Count <= 1)
+        {
+            return;
+        }
+
+        var currentIndex = FilteredRaces.IndexOf(SelectedRace);
+        if (currentIndex < FilteredRaces.Count - 1)
+        {
+            SelectedRace = FilteredRaces[currentIndex + 1];
+        }
+    }
+
+    [RelayCommand]
+    private void SelectPreviousRace()
+    {
+        if (SelectedRace == null || FilteredRaces.Count <= 1)
+        {
+            return;
+        }
+
+        var currentIndex = FilteredRaces.IndexOf(SelectedRace);
+        if (currentIndex > 0)
+        {
+            SelectedRace = FilteredRaces[currentIndex - 1];
+        }
+    }
 }

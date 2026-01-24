@@ -138,6 +138,7 @@ internal static class MauiProgram
         var viewModelTypes = new List<Type>
         {
             typeof(AboutPageViewModel),
+            typeof(BestiaryViewModel),
             //typeof(CanvasDrawable),
             typeof(CharacterDetailsViewModel),
             typeof(CharacterGeneratorViewModel),

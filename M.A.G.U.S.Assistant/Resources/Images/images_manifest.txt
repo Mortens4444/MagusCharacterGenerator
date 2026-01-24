@@ -364,4 +364,3 @@ carriage.png
 dog_sledge.png
 wagon_wheel.png
 wheelbarrow.png
-appicon.png

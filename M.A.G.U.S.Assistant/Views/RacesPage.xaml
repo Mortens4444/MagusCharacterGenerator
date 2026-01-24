@@ -32,6 +32,10 @@
             ItemDisplayBinding="{Binding Name, Converter={StaticResource TranslationConverter}}" />
 
         <ScrollView VerticalOptions="Fill" Grid.Row="2">
+            <ScrollView.GestureRecognizers>
+                <SwipeGestureRecognizer Direction="Left" Command="{Binding SelectNextRaceCommand}" />
+                <SwipeGestureRecognizer Direction="Right" Command="{Binding SelectPreviousRaceCommand}" />
+            </ScrollView.GestureRecognizers>
             <StackLayout Spacing="8">
                 <!-- Képességek -->
                 <Label Text="{Binding SelectedRace.Name, Converter={StaticResource TranslationConverter}}" FontSize="20" FontAttributes="Bold"/>
