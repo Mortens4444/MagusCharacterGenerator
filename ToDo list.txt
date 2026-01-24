@@ -1,7 +1,6 @@
+- távolsági harc
 - karakter törlése nem sikerül?
 - Generálás gomb beragad, ha visszalép Erő dobásról?
-- Dobás shake-re nem működik
-- biztos megszakítod a kar gen folyamatát?
 - MinHp + MaxHp sárkánynál, sárkány azonnal meghal
 - halál után tud támadni a karakter
 - explicit jelezni kell, hogy hm-eket szeretném lezárni

@@ -6,20 +6,27 @@ namespace M.A.G.U.S.Assistant.Platforms.Android;
 
 internal class ShakeService : IShakeService
 {
-    private double thresholdG = 2.2;
-    private int debounceMs = 800;
+    private const double ThresholdG = 2.2;
+    private const int DebounceMs = 800;
+
+    private double thresholdG = ThresholdG;
+    private int debounceMs = DebounceMs;
+
     private DateTime lastShake = DateTime.MinValue;
 
-    public bool IsMonitoring => throw new NotImplementedException();
+    public bool IsMonitoring => Accelerometer.IsMonitoring;
 
     public event EventHandler? ShakeDetected;
 
-    public void Start(double thresholdG = 2.2, int debounceMs = 800)
+    public void Start(double thresholdG = ThresholdG, int debounceMs = DebounceMs)
     {
+        this.thresholdG = thresholdG;
+        this.debounceMs = debounceMs;
+
         try
         {
             Accelerometer.ReadingChanged += OnAccelerometerReadingChanged;
-            if (!Accelerometer.IsMonitoring)
+            if (!IsMonitoring)
             {
                 Accelerometer.Start(SensorSpeed.UI);
             }
@@ -35,7 +42,7 @@ internal class ShakeService : IShakeService
         try
         {
             Accelerometer.ReadingChanged -= OnAccelerometerReadingChanged;
-            if (Accelerometer.IsMonitoring)
+            if (IsMonitoring)
             {
                 Accelerometer.Stop();
             }

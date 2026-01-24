@@ -6,15 +6,18 @@ namespace M.A.G.U.S.Assistant.Platforms.iOS;
 
 internal class ShakeService : IShakeService
 {
-    private double thresholdG = 2.2;
-    private int debounceMs = 800;
+    public const double ThresholdG = 2.2;
+    public const int DebounceMs = 800;
+
+    private double thresholdG = ThresholdG;
+    private int debounceMs = DebounceMs;
     private DateTime lastShake = DateTime.MinValue;
 
     public bool IsMonitoring => Accelerometer.IsMonitoring;
 
     public event EventHandler? ShakeDetected;
 
-    public void Start(double thresholdG = 2.2, int debounceMs = 800)
+    public void Start(double thresholdG = ThresholdG, int debounceMs = DebounceMs)
     {
         this.thresholdG = thresholdG;
         this.debounceMs = debounceMs;
@@ -23,7 +26,7 @@ internal class ShakeService : IShakeService
         {
             Accelerometer.ReadingChanged += OnAccelerometerReadingChanged;
 
-            if (!Accelerometer.IsMonitoring)
+            if (!IsMonitoring)
             {
                 Accelerometer.Start(SensorSpeed.UI);
             }
@@ -40,7 +43,7 @@ internal class ShakeService : IShakeService
         {
             Accelerometer.ReadingChanged -= OnAccelerometerReadingChanged;
 
-            if (Accelerometer.IsMonitoring)
+            if (IsMonitoring)
             {
                 Accelerometer.Stop();
             }

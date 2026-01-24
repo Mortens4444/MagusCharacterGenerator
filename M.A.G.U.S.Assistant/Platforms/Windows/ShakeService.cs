@@ -4,7 +4,7 @@ namespace M.A.G.U.S.Assistant.Platforms.Windows;
 
 internal partial class ShakeService : IShakeService
 {
-    public bool IsMonitoring => throw new NotImplementedException();
+    public bool IsMonitoring => false;
 
     public event EventHandler? ShakeDetected;
 

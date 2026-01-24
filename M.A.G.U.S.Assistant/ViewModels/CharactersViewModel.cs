@@ -14,11 +14,11 @@ internal partial class CharactersViewModel : CharacterListLoaderViewModel
     [RelayCommand]
     private async Task DeleteAllCharacterAsync()
     {
-        bool confirm = await Shell.Current.DisplayAlertAsync(
+        var confirm = await Shell.Current.DisplayAlertAsync(
             Lng.Elem("Delete Character"),
             Lng.Elem("Are you sure you want to delete all characters? This cannot be undone."),
             Lng.Elem("Delete"),
-            Lng.Elem("Cancel")).ConfigureAwait(false);
+            Lng.Elem("Cancel")).ConfigureAwait(true);
 
         if (confirm)
         {
