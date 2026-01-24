@@ -3,7 +3,7 @@ using M.A.G.U.S.GameSystem.Qualifications;
 
 namespace M.A.G.U.S.Qualifications.Scientific.Psi;
 
-public class PsiKranic(QualificationLevel qualificationLevel = QualificationLevel.Base, int level = 1) : Qualification(qualificationLevel, level), IPsi
+public class PsiKrannish(QualificationLevel qualificationLevel = QualificationLevel.Base, int level = 1) : Qualification(qualificationLevel, level), IPsi
 {
     public PsiKind PsiKind => PsiKind.Krannish;
 
@@ -15,5 +15,5 @@ public class PsiKranic(QualificationLevel qualificationLevel = QualificationLeve
 
     public override string[] Images => ["psi.png"];
 
-    public PsiKranic() :this(QualificationLevel.Base) { }
+    public PsiKrannish() :this(QualificationLevel.Base) { }
 }

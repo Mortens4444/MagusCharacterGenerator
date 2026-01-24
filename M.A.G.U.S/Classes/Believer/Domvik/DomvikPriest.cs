@@ -1,4 +1,5 @@
-﻿using M.A.G.U.S.GameSystem.Languages;
+﻿using M.A.G.U.S.Enums;
+using M.A.G.U.S.GameSystem.Languages;
 using M.A.G.U.S.GameSystem.Qualifications;
 using M.A.G.U.S.Qualifications;
 using M.A.G.U.S.Qualifications.Combat;
@@ -48,4 +49,6 @@ public class DomvikPriest : Priest
 	}
 
     public override string Name => "Priest of Domvik";
+
+    public override Deity Deity { get; set; } = Deity.Domvik;
 }

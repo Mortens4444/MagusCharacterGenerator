@@ -1,5 +1,4 @@
-using M.A.G.U.S.Assistant.Models;
-using M.A.G.U.S.Assistant.Services;
+ï»¿using M.A.G.U.S.Assistant.Models;
 using Mtf.LanguageService.MAUI;
 using Mtf.LanguageService.MAUI.Views;
 
@@ -8,18 +7,28 @@ namespace M.A.G.U.S.Assistant.Views;
 internal partial class ImagePreviewPage : NotifierPage
 {
     private readonly ImageItem item;
-    private double currentScale = 1;
-    private double startScale = 1;
+
+    private double scale = 1;
+    private double lastScale = 1;
+
+    private double xOffset;
+    private double yOffset;
+
     private const double MinScale = 1;
     private const double MaxScale = 4;
-    private double totalX, totalY;
+
+    private bool isGestureRunning;
 
     public ImagePreviewPage(ImageItem image)
     {
         InitializeComponent();
         Translator.Translate(this);
+
         item = image;
         LoadImage();
+
+        PreviewImage.AnchorX = 0.5;
+        PreviewImage.AnchorY = 0.5;
     }
 
     private void LoadImage()
@@ -30,88 +39,77 @@ internal partial class ImagePreviewPage : NotifierPage
         }
         catch
         {
-            // fallback empty
         }
-    }
-
-    private async void CloseClicked(object sender, EventArgs e)
-    {
-        await ShellNavigationService.ClosePage().ConfigureAwait(true);
     }
 
     private void OnPanUpdated(object sender, PanUpdatedEventArgs e)
     {
-        if (sender is not Image image || currentScale <= 1) return;
-
-        if (e.StatusType == GestureStatus.Started)
+        if (isGestureRunning || scale <= 1 || sender is not Image image)
         {
-            totalX = image.TranslationX;
-            totalY = image.TranslationY;
+            return;
         }
-        else if (e.StatusType == GestureStatus.Running)
+
+        if (e.StatusType == GestureStatus.Running)
         {
-            image.TranslationX = totalX + e.TotalX;
-            image.TranslationY = totalY + e.TotalY;
+            image.TranslationX = xOffset + e.TotalX;
+            image.TranslationY = yOffset + e.TotalY;
+        }
+        else if (e.StatusType == GestureStatus.Completed)
+        {
+            xOffset = image.TranslationX;
+            yOffset = image.TranslationY;
         }
     }
 
     private void OnPinchUpdated(object sender, PinchGestureUpdatedEventArgs e)
     {
-        if (sender is not Image image) return;
+        if (sender is not Image image)
+        {
+            return;
+        }
 
         if (e.Status == GestureStatus.Started)
         {
-            startScale = image.Scale;
-
-            // Kiszámoljuk az érintési pontot a kép aktuális koordináta-rendszerében
-            // Fontos: Csak egyszer, a mûvelet elején fixáljuk az horgonyt!
-            double originX = e.ScaleOrigin.X;
-            double originY = e.ScaleOrigin.Y;
-
-            double oldAnchorX = image.AnchorX;
-            double oldAnchorY = image.AnchorY;
-
-            // Az új horgonypont beállítása
-            image.AnchorX = originX;
-            image.AnchorY = originY;
-
-            // Korrekció, hogy az Anchor váltás miatt ne ugorjon el a kép
-            // (Az aktuális méretarány és az eltolás különbségét kompenzáljuk)
-            double width = image.Width;
-            double height = image.Height;
-
-            image.TranslationX += (originX - oldAnchorX) * width * (image.Scale - 1);
-            image.TranslationY += (originY - oldAnchorY) * height * (image.Scale - 1);
+            isGestureRunning = true;
+            lastScale = scale;
         }
         else if (e.Status == GestureStatus.Running)
         {
-            // Csak a Scale-t módosítjuk. 
-            // Ha itt módosítanánk az Anchor-t, az okozná a vibrálást.
-            double newScale = startScale * e.Scale;
-            currentScale = Math.Clamp(newScale, MinScale, MaxScale);
+            var newScale = Math.Clamp(lastScale * e.Scale, MinScale, MaxScale);
 
-            image.Scale = currentScale;
+            // ðŸ”’ Android fix: csak akkor frissÃ­tÃ¼nk, ha tÃ©nyleg vÃ¡ltozott
+            if (Math.Abs(newScale - scale) < 0.001)
+            {
+                return;
+            }
+
+            scale = newScale;
+            image.Scale = scale;
         }
-        else if (e.Status == GestureStatus.Completed || e.Status == GestureStatus.Canceled)
+        else if (e.Status is GestureStatus.Completed or GestureStatus.Canceled)
         {
-            // Opcionálisan itt elmenthetjük a végsõ állapotot
-            startScale = currentScale;
+            lastScale = scale;
+            xOffset = image.TranslationX;
+            yOffset = image.TranslationY;
+            isGestureRunning = false;
         }
     }
 
     private async void OnDoubleTapped(object sender, EventArgs e)
     {
-        if (sender is not Image image) return;
+        if (sender is not Image image)
+        {
+            return;
+        }
 
-        currentScale = 1;
-        startScale = 1;
+        scale = 1;
+        lastScale = 1;
+        xOffset = 0;
+        yOffset = 0;
 
         await Task.WhenAll(
-            image.ScaleToAsync(1, 150, Easing.CubicOut),
-            image.TranslateToAsync(0, 0, 150, Easing.CubicOut)
+            image.ScaleToAsync(1, 160, Easing.CubicOut),
+            image.TranslateToAsync(0, 0, 160, Easing.CubicOut)
         ).ConfigureAwait(true);
-
-        image.AnchorX = 0.5;
-        image.AnchorY = 0.5;
     }
 }

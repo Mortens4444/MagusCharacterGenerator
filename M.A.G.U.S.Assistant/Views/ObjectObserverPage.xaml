@@ -20,6 +20,20 @@
         <CollectionView.ItemTemplate>
             <DataTemplate x:DataType="m:PropertyItem">
                 <Grid ColumnDefinitions="*, 2*" Padding="4" RowSpacing="4" ColumnSpacing="8">
+                    <!--<Grid.Triggers>
+                        <DataTrigger TargetType="Grid" Binding="{Binding Name}" Value="Source">
+                            <Setter Property="IsVisible" Value="False" />
+                        </DataTrigger>
+                        <DataTrigger TargetType="Grid" Binding="{Binding Name}" Value="Character">
+                            <Setter Property="IsVisible" Value="False" />
+                        </DataTrigger>
+                        <DataTrigger TargetType="Grid" Binding="{Binding Name}" Value="DefaultImage">
+                            <Setter Property="IsVisible" Value="False" />
+                        </DataTrigger>
+                        <DataTrigger TargetType="Grid" Binding="{Binding Name}" Value="Enabled">
+                            <Setter Property="IsVisible" Value="False" />
+                        </DataTrigger>
+                    </Grid.Triggers>-->
                     <Label Text="{Binding Name, Converter={StaticResource TranslationConverter}}" FontAttributes="Bold" />
                     <Label Text="{Binding Value, Converter={StaticResource TranslationConverter}}" Grid.Column="1" LineBreakMode="WordWrap" />
                 </Grid>

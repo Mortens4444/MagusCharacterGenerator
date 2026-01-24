@@ -37,6 +37,7 @@ internal partial class PaintWizardViewModel : BaseViewModel
         UndoCommand.NotifyCanExecuteChanged();
         RedoCommand.NotifyCanExecuteChanged();
         SetBackground();
+        SelectColor(Colors.White);
     }
 
     public IDrawableElement? CurrentElement

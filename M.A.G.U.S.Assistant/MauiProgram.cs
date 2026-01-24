@@ -1,4 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.Messaging;
+using M.A.G.U.S.Assistant.Controls;
 using M.A.G.U.S.Assistant.Database;
 using M.A.G.U.S.Assistant.Database.Repositories;
 using M.A.G.U.S.Assistant.Interfaces;
@@ -35,6 +36,11 @@ internal static class MauiProgram
         builder.Services.AddSingleton<IPrintService, Platforms.Android.PrintService>();
         builder.Services.AddSingleton<ISoundPlayer, Platforms.Android.SoundPlayer>();
         builder.Services.AddSingleton<IShakeService, Platforms.Android.ShakeService>();
+
+        builder.ConfigureMauiHandlers(handlers =>
+        {
+            handlers.AddHandler<ZoomImage, Platforms.Android.Handlers.ZoomImageHandler>();
+        });
 #elif WINDOWS
         builder.Services.AddSingleton<IPrintService, Platforms.Windows.PrintService>();
         builder.Services.AddSingleton<ISoundPlayer, Platforms.Windows.SoundPlayer>();
@@ -80,6 +86,7 @@ internal static class MauiProgram
             WeakReferenceMessenger.Default.Send(new ShowErrorMessage(args.Exception));
             args.SetObserved();
         };
+        
         var app = builder.Build();
         Services = app.Services;
         return app;

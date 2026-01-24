@@ -46,7 +46,7 @@
                                        HorizontalOptions="Center"
                                        IsReadOnly="True" />
 
-                    <mc:EntryWithLabel Label="Class"
+                    <mc:EntryWithLabel Label="Caste"
                                        Text="{Binding Class, Converter={StaticResource TranslationConverter}}"
                                        HorizontalOptions="Center"
                                        IsReadOnly="True"

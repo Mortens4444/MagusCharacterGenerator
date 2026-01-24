@@ -1,4 +1,5 @@
-﻿using M.A.G.U.S.GameSystem.Qualifications;
+﻿using M.A.G.U.S.Enums;
+using M.A.G.U.S.GameSystem.Qualifications;
 using M.A.G.U.S.Qualifications;
 using M.A.G.U.S.Qualifications.Scientific;
 using M.A.G.U.S.Qualifications.Underworld;
@@ -40,4 +41,6 @@ public class GorvikRanagolPriest : Priest
     }
 
     public override string Name => "Priest of Ranagol (Gorvikian)";
+
+    public override Deity Deity { get; set; } = Deity.Ranagol;
 }

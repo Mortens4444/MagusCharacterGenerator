@@ -1,4 +1,5 @@
 ﻿using M.A.G.U.S.Assistant.Extensions;
+using M.A.G.U.S.GameSystem;
 using M.A.G.U.S.Interfaces;
 using Mtf.Extensions;
 using Mtf.LanguageService.MAUI;
@@ -18,6 +19,8 @@ internal class CharacterHtmlService
         var cultureInfo = CultureInfo.InvariantCulture;
         var formula = character.BaseClass?.GetPainToleranceModifierFormula();
         var prpPerLevel = formula?.GetDisplayFormula() ?? String.Empty;
+        var manaPerLevelFormula = character?.MaxManaPointsPerLevelFormula;
+        var manaPerLevel = manaPerLevelFormula != null ? manaPerLevelFormula.GetDisplayFormula() : (character?.MaxManaPointsPerLevel ?? 0).ToString(CultureInfo.InvariantCulture);
 
         sb.Append("<html><head>")
             .Append(@"
@@ -107,7 +110,7 @@ internal class CharacterHtmlService
             .Append(CreateCell("Max. ᛉp/level", character.PsiPointsModifier.ToString(cultureInfo)))
             .Append(CreateCell(Lng.Elem("Max. Mp"), character.MaxManaPoints.ToString(cultureInfo)))
             .Append(CreateCell(Lng.Elem("Act. Mp"), String.Empty, editable: true))
-            .Append(CreateCell("Max. Mp/level", character.MaxManaPointsPerLevel.ToString(cultureInfo)))
+            .Append(CreateCell("Max. Mp/level", manaPerLevel))
             .Append("</div></div></div>")
 
             // Magic Resistance

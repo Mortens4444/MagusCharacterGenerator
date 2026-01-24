@@ -1,5 +1,6 @@
 ﻿using M.A.G.U.S.Enums;
 using M.A.G.U.S.GameSystem.Valuables;
+using M.A.G.U.S.Models;
 using M.A.G.U.S.Qualifications;
 using M.A.G.U.S.Races;
 using M.A.G.U.S.Things;
@@ -30,6 +31,8 @@ public interface ICharacter
     string TotalEquipmentWeight { get; }
 
     int MaxManaPointsPerLevel { get; }
+
+    DiceThrowFormula? MaxManaPointsPerLevelFormula { get; }
 
     int ManaPoints { get; }
 

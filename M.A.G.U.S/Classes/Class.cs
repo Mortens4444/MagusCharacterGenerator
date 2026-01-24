@@ -54,7 +54,7 @@ public abstract class Class : ImageOwner, IClass
         }
     }
 
-    public virtual string Name => GetType().Name;
+    public virtual Deity Deity { get; set; } = Deity.Unbeliever;
 
     public override string ToString() => Name;
 

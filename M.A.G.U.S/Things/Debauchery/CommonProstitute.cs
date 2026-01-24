@@ -2,7 +2,7 @@ using M.A.G.U.S.GameSystem.Valuables;
 
 namespace M.A.G.U.S.Things.Debauchery;
 
-public class OrdinaryProstitute : Thing
+public class CommonProstitute : Thing
 {
 	public override string Name => "Common prostitute";
 

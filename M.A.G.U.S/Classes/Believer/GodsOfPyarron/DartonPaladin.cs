@@ -1,4 +1,5 @@
-﻿using M.A.G.U.S.GameSystem.Qualifications;
+﻿using M.A.G.U.S.Enums;
+using M.A.G.U.S.GameSystem.Qualifications;
 using M.A.G.U.S.Qualifications;
 using M.A.G.U.S.Qualifications.Combat;
 using M.A.G.U.S.Qualifications.Laical;
@@ -49,4 +50,6 @@ public class DartonPaladin : Paladin
     }
 
     public override string Name => "Paladin of Darton";
+
+    public override Deity Deity { get; set; } = Deity.Darton;
 }

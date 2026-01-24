@@ -9,4 +9,6 @@ public class OldWineFromPredoc4Clusters : Thing
 	public override Money Price => new(1, 0, 0);
 
     public override string Description => "A legendary and near-priceless vintage of Predoc wine. Drinking it is a luxury few mortals can afford, possessing a history and flavour unmatched by younger brews.";
+
+    public override string[] Images => ["wine.png"];
 }

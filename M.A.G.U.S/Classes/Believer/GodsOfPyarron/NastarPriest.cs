@@ -1,4 +1,5 @@
-﻿using M.A.G.U.S.GameSystem;
+﻿using M.A.G.U.S.Enums;
+using M.A.G.U.S.GameSystem;
 using M.A.G.U.S.GameSystem.Attributes;
 using M.A.G.U.S.GameSystem.FightMode;
 using M.A.G.U.S.GameSystem.Languages;
@@ -151,4 +152,6 @@ public class NastarPriest : Class, IClass, ILikeMagic
     public override int GetPainToleranceModifier() => DiceThrow._1D6() + 2;
 
     public override string Name => "Priest of Nastar";
+    
+    public override Deity Deity { get; set; } = Deity.Nastar;
 }

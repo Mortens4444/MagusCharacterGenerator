@@ -1,4 +1,5 @@
-﻿using M.A.G.U.S.GameSystem;
+﻿using M.A.G.U.S.Enums;
+using M.A.G.U.S.GameSystem;
 using M.A.G.U.S.GameSystem.Attributes;
 using M.A.G.U.S.GameSystem.Experience;
 using M.A.G.U.S.Interfaces;
@@ -119,4 +120,6 @@ public class JahPriest : Class, IClass
 
     [DiceThrow(ThrowType._1D2)]
     public override int GetPainToleranceModifier() => DiceThrow._1D2();
+
+    public override Deity Deity { get; set; } = Deity.Jah;
 }

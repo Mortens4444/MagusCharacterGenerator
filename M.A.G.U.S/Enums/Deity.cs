@@ -5,6 +5,8 @@ namespace M.A.G.U.S.Enums;
 
 public enum Deity
 {
+    Unbeliever,
+
     // --- Pyarroni Panteon ---
 
     [AvailableSpheres(Sphere.Life, Sphere.Magic)]
@@ -16,8 +18,10 @@ public enum Deity
     [AvailableSpheres(Sphere.Nature, Sphere.Life)] // A tengerek ura
     Antoh,
 
-    [AvailableSpheres(Sphere.Nature, Sphere.Life)] // A harc és természet úrnője
+    [AvailableSpheres(Sphere.Nature, Sphere.Life, Sphere.Death, Sphere.Soul)] // A harc és természet úrnője
     Arel,
+    [AvailableSpheres(Sphere.Nature, Sphere.Life, Sphere.Soul)] // A harc és természet úrnője
+    Ville, //az Úrnő Arel É, L, T
 
     [AvailableSpheres(Sphere.Death, Sphere.Soul)] // A halál és tréfa istene
     Darton,
@@ -36,9 +40,13 @@ public enum Deity
 
     [AvailableSpheres(Sphere.Life, Sphere.Soul)] // A tudás ura
     Krad,
+    [AvailableSpheres(Sphere.Life, Sphere.Soul, Sphere.Nature)] // A tudás ura
+    Nastar, // a Tanító Krad É, L, T
 
     [AvailableSpheres(Sphere.Order, Sphere.Destruction)] // A végzet és törvény ura
     Kyel,
+    [AvailableSpheres(Sphere.Life, Sphere.Soul, Sphere.Nature)]
+    Velar, // az Úr Pyarr megfelelő Kyel Szférái É, H, L
 
     [AvailableSpheres(Sphere.Soul, Sphere.Order)] // A szerencse és tolvajok istene (kétarcú)
     Noir,
@@ -70,15 +78,14 @@ public enum Deity
     [AvailableSpheres(Sphere.Order, Sphere.Magic)]
     Weila, // Kyria régi főistene
 
-    
     Phet, //Ediomadi Óisten - LizardWizard
 
     // Dzsadok istenei
     [AvailableSpheres(Sphere.Life, Sphere.Soul, Sphere.Nature)]
-    Galradzsa,
-    Doldzsah,
+    Galraja,
+    Doljah,
     [AvailableSpheres(Sphere.Life, Sphere.Soul)]
-    Dzsah,
+    Jah,
 
     // Amundok istenei
     [Description("Theemeth")] // Napisten

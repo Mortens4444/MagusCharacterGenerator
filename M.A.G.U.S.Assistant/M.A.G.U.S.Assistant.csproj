@@ -227,7 +227,6 @@
     <None Remove="Resources\Images\Classes\knight.png" />
     <None Remove="Resources\Images\Classes\martial_artist.png" />
     <None Remove="Resources\Images\Classes\merchant.png" />
-    <None Remove="Resources\Images\Classes\nobel.png" />
     <None Remove="Resources\Images\Classes\paladin_of_ranagol.png" />
     <None Remove="Resources\Images\Classes\peasant.png" />
     <None Remove="Resources\Images\Classes\priest.png" />
@@ -241,6 +240,25 @@
     <None Remove="Resources\Images\Classes\wizard.png" />
     <None Remove="Resources\Images\Clothes\boots.png" />
     <None Remove="Resources\Images\Clothes\riding_boots.png" />
+    <None Remove="Resources\Images\Debauchery\alidari_woman.png" />
+    <None Remove="Resources\Images\Debauchery\common_prostitute.png" />
+    <None Remove="Resources\Images\Debauchery\daughters_of_the_lotus.png" />
+    <None Remove="Resources\Images\Debauchery\male_prostitute.png" />
+    <None Remove="Resources\Images\Food\beer_mug.png" />
+    <None Remove="Resources\Images\Food\brandy_glass.png" />
+    <None Remove="Resources\Images\Food\butter_kilo.png" />
+    <None Remove="Resources\Images\Food\cheese.png" />
+    <None Remove="Resources\Images\Food\fish_portion.png" />
+    <None Remove="Resources\Images\Food\game_meat_portion.png" />
+    <None Remove="Resources\Images\Food\liqueur.png" />
+    <None Remove="Resources\Images\Food\loree.png" />
+    <None Remove="Resources\Images\Food\lunch_dinner.png" />
+    <None Remove="Resources\Images\Food\milk_jug.png" />
+    <None Remove="Resources\Images\Food\salt_block.png" />
+    <None Remove="Resources\Images\Food\sugar_glass.png" />
+    <None Remove="Resources\Images\Food\vegetables.png" />
+    <None Remove="Resources\Images\Food\wine.png" />
+    <None Remove="Resources\Images\Food\wine_cup.png" />
     <None Remove="Resources\Images\Gemstones\agate.png" />
     <None Remove="Resources\Images\Gemstones\alexandrite.png" />
     <None Remove="Resources\Images\Gemstones\amber.png" />
@@ -282,6 +300,37 @@
     <None Remove="Resources\Images\Gemstones\tourmaline.png" />
     <None Remove="Resources\Images\Gemstones\turquoise.png" />
     <None Remove="Resources\Images\Gemstones\zircon.png" />
+    <None Remove="Resources\Images\MagicalItems\amulet_against_poisons.png" />
+    <None Remove="Resources\Images\MagicalItems\amulet_of_invisibility.png" />
+    <None Remove="Resources\Images\MagicalItems\amulet_of_luck.png" />
+    <None Remove="Resources\Images\MagicalItems\amulet_of_mind_protection.png" />
+    <None Remove="Resources\Images\MagicalItems\amulet_of_power.png" />
+    <None Remove="Resources\Images\MagicalItems\amulet_of_truth.png" />
+    <None Remove="Resources\Images\MagicalItems\banner_of_heroes.png" />
+    <None Remove="Resources\Images\MagicalItems\boots_of_leaping.png" />
+    <None Remove="Resources\Images\MagicalItems\boots_of_rushing.png" />
+    <None Remove="Resources\Images\MagicalItems\bottomless_jug.png" />
+    <None Remove="Resources\Images\MagicalItems\climbing_gloves.png" />
+    <None Remove="Resources\Images\MagicalItems\cloak_of_invisibility.png" />
+    <None Remove="Resources\Images\MagicalItems\deep_pouch.png" />
+    <None Remove="Resources\Images\MagicalItems\drink_of_the_gods.png" />
+    <None Remove="Resources\Images\MagicalItems\flying_carpet.png" />
+    <None Remove="Resources\Images\MagicalItems\fodder_daily.png" />
+    <None Remove="Resources\Images\MagicalItems\gloves_of_nimble_fingers.png" />
+    <None Remove="Resources\Images\MagicalItems\healing_potion.png" />
+    <None Remove="Resources\Images\MagicalItems\healing_potion_prp.png" />
+    <None Remove="Resources\Images\MagicalItems\helmet_of_tongues.png" />
+    <None Remove="Resources\Images\MagicalItems\magical_object.png" />
+    <None Remove="Resources\Images\MagicalItems\magic_scroll.png" />
+    <None Remove="Resources\Images\MagicalItems\medallion_of_steely_will.png" />
+    <None Remove="Resources\Images\MagicalItems\potion_of_courage.png" />
+    <None Remove="Resources\Images\MagicalItems\potion_of_dragon_s_breath.png" />
+    <None Remove="Resources\Images\MagicalItems\potion_of_flight.png" />
+    <None Remove="Resources\Images\MagicalItems\potion_of_invulnerability.png" />
+    <None Remove="Resources\Images\MagicalItems\potion_of_mental_freshness.png" />
+    <None Remove="Resources\Images\MagicalItems\potion_of_power.png" />
+    <None Remove="Resources\Images\MagicalItems\potion_of_shrinking.png" />
+    <None Remove="Resources\Images\MagicalItems\protective_cloak.png" />
     <None Remove="Resources\Images\Qualifications\agriculture.png" />
     <None Remove="Resources\Images\Qualifications\aiming.png" />
     <None Remove="Resources\Images\Qualifications\alchemy.png" />
@@ -410,6 +459,11 @@
     <None Remove="Resources\Images\Shields\large_shield.png" />
     <None Remove="Resources\Images\Shields\medium_shield.png" />
     <None Remove="Resources\Images\Shields\small_shield.png" />
+    <None Remove="Resources\Images\Travelling\canoe.png" />
+    <None Remove="Resources\Images\Travelling\carriage.png" />
+    <None Remove="Resources\Images\Travelling\dog_sledge.png" />
+    <None Remove="Resources\Images\Travelling\wagon_wheel.png" />
+    <None Remove="Resources\Images\Travelling\wheelbarrow.png" />
   </ItemGroup>
   <ItemGroup>
     <MauiImage Include="Resources\Images\Animals\dog_hunting.png" />
@@ -622,8 +676,6 @@
     </MauiXaml>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Resources\Images\Debauchery\" />
-    <Folder Include="Resources\Images\Travelling\" />
     <Folder Include="Resources\Images\Trappings\" />
     <Folder Include="Resources\Images\Other\" />
     <Folder Include="Resources\Images\Weapons\CrushingWeapons\" />
@@ -635,6 +687,58 @@
   <ItemGroup>
     <MauiImage Include="Resources\Images\Clothes\boots.png" />
     <MauiImage Include="Resources\Images\Clothes\riding_boots.png" />
+    <MauiImage Include="Resources\Images\Debauchery\alidari_woman.png" />
+    <MauiImage Include="Resources\Images\Debauchery\common_prostitute.png" />
+    <MauiImage Include="Resources\Images\Debauchery\daughters_of_the_lotus.png" />
+    <MauiImage Include="Resources\Images\Debauchery\male_prostitute.png" />
+    <MauiImage Include="Resources\Images\Food\beer_mug.png" />
+    <MauiImage Include="Resources\Images\Food\brandy_glass.png" />
+    <MauiImage Include="Resources\Images\Food\butter_kilo.png" />
+    <MauiImage Include="Resources\Images\Food\cheese.png" />
+    <MauiImage Include="Resources\Images\Food\eggs_dozen.png" />
+    <MauiImage Include="Resources\Images\Food\fish_portion.png" />
+    <MauiImage Include="Resources\Images\Food\game_meat_portion.png" />
+    <MauiImage Include="Resources\Images\Food\liqueur.png" />
+    <MauiImage Include="Resources\Images\Food\loree.png" />
+    <MauiImage Include="Resources\Images\Food\lunch_dinner.png" />
+    <MauiImage Include="Resources\Images\Food\milk_jug.png" />
+    <MauiImage Include="Resources\Images\Food\salt_block.png" />
+    <MauiImage Include="Resources\Images\Food\rare_spice.png" />
+    <MauiImage Include="Resources\Images\Food\sugar_glass.png" />
+    <MauiImage Include="Resources\Images\Food\vegetables.png" />
+    <MauiImage Include="Resources\Images\Food\wine.png" />
+    <MauiImage Include="Resources\Images\Food\wine_cup.png" />
+    <MauiImage Include="Resources\Images\MagicalItems\amulet_against_poisons.png" />
+    <MauiImage Include="Resources\Images\MagicalItems\amulet_of_invisibility.png" />
+    <MauiImage Include="Resources\Images\MagicalItems\amulet_of_luck.png" />
+    <MauiImage Include="Resources\Images\MagicalItems\amulet_of_mind_protection.png" />
+    <MauiImage Include="Resources\Images\MagicalItems\amulet_of_power.png" />
+    <MauiImage Include="Resources\Images\MagicalItems\amulet_of_truth.png" />
+    <MauiImage Include="Resources\Images\MagicalItems\banner_of_heroes.png" />
+    <MauiImage Include="Resources\Images\MagicalItems\boots_of_leaping.png" />
+    <MauiImage Include="Resources\Images\MagicalItems\boots_of_rushing.png" />
+    <MauiImage Include="Resources\Images\MagicalItems\bottomless_jug.png" />
+    <MauiImage Include="Resources\Images\MagicalItems\climbing_gloves.png" />
+    <MauiImage Include="Resources\Images\MagicalItems\cloak_of_invisibility.png" />
+    <MauiImage Include="Resources\Images\MagicalItems\deep_pouch.png" />
+    <MauiImage Include="Resources\Images\MagicalItems\drink_of_the_gods.png" />
+    <MauiImage Include="Resources\Images\MagicalItems\flying_carpet.png" />
+    <MauiImage Include="Resources\Images\MagicalItems\fodder_daily.png" />
+    <MauiImage Include="Resources\Images\MagicalItems\gloves_of_nimble_fingers.png" />
+    <MauiImage Include="Resources\Images\MagicalItems\healing_potion.png" />
+    <MauiImage Include="Resources\Images\MagicalItems\healing_potion_prp.png" />
+    <MauiImage Include="Resources\Images\MagicalItems\helmet_of_tongues.png" />
+    <MauiImage Include="Resources\Images\MagicalItems\magical_object.png" />
+    <MauiImage Include="Resources\Images\MagicalItems\magic_scroll.png" />
+    <MauiImage Include="Resources\Images\MagicalItems\medallion_of_steely_will.png" />
+    <MauiImage Include="Resources\Images\MagicalItems\potion_of_courage.png" />
+    <MauiImage Include="Resources\Images\MagicalItems\potion_of_dragon_s_breath.png" />
+    <MauiImage Include="Resources\Images\MagicalItems\potion_of_flight.png" />
+    <MauiImage Include="Resources\Images\MagicalItems\potion_of_invulnerability.png" />
+    <MauiImage Include="Resources\Images\MagicalItems\potion_of_mental_freshness.png" />
+    <MauiImage Include="Resources\Images\MagicalItems\potion_of_power.png" />
+    <MauiImage Include="Resources\Images\MagicalItems\potion_of_shrinking.png" />
+    <MauiImage Include="Resources\Images\MagicalItems\protective_cloak.png" />
     <MauiImage Include="Resources\Images\Qualifications\healing.png" />
     <MauiImage Include="Resources\Images\Qualifications\mountain_survival.png" />
     <MauiImage Include="Resources\Images\Qualifications\physiology.png" />
@@ -670,7 +774,7 @@
     <MauiImage Include="Resources\Images\Classes\knight.png" />
     <MauiImage Include="Resources\Images\Classes\martial_artist.png" />
     <MauiImage Include="Resources\Images\Classes\merchant.png" />
-    <MauiImage Include="Resources\Images\Classes\nobel.png" />
+    <MauiImage Include="Resources\Images\Classes\noble.png" />
     <MauiImage Include="Resources\Images\Classes\paladin_of_ranagol.png" />
     <MauiImage Include="Resources\Images\Classes\peasant.png" />
     <MauiImage Include="Resources\Images\Classes\priest.png" />
@@ -875,6 +979,11 @@
     <MauiImage Include="Resources\Images\Shields\large_shield.png" />
     <MauiImage Include="Resources\Images\Shields\medium_shield.png" />
     <MauiImage Include="Resources\Images\Shields\small_shield.png" />
+    <MauiImage Include="Resources\Images\Travelling\canoe.png" />
+    <MauiImage Include="Resources\Images\Travelling\carriage.png" />
+    <MauiImage Include="Resources\Images\Travelling\dog_sledge.png" />
+    <MauiImage Include="Resources\Images\Travelling\wagon_wheel.png" />
+    <MauiImage Include="Resources\Images\Travelling\wheelbarrow.png" />
   </ItemGroup>
   <Target Name="GenerateImageManifest" BeforeTargets="BeforeBuild">
     <ItemGroup>
@@ -884,6 +993,6 @@
       <ImageManifestPath>$(ProjectDir)Resources\Images\images_manifest.txt</ImageManifestPath>
     </PropertyGroup>
     <!--<WriteLinesToFile File="$(ImageManifestPath)" Lines="@(AllImages->'%(RelativeDir)%(Filename)%(Extension)')" Overwrite="true" Encoding="UTF-8" />-->
-    <WriteLinesToFile File="$(ImageManifestPath)" Lines="@(AllImages-&gt;'%(Filename)%(Extension)')" Overwrite="true" Encoding="UTF-8" />
+    <WriteLinesToFile File="$(ImageManifestPath)" Lines="@(AllImages->'%(Filename)%(Extension)')" Overwrite="true" Encoding="UTF-8" />
   </Target>
 </Project>

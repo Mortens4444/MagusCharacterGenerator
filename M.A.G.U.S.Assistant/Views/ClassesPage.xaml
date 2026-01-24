@@ -27,13 +27,11 @@
     <Grid Padding="10" RowSpacing="8" ColumnSpacing="8" RowDefinitions="Auto,Auto, *">
         <mc:EntryWithLabel Grid.Row="0" Label="Search" Text="{Binding SearchText}" />
 
-        <HorizontalStackLayout Grid.Row="1">
-            <Picker ItemsSource="{Binding FilteredClasses}"
-                    ItemDisplayBinding="{Binding Name, Converter={StaticResource TranslationConverter}}"
-                    SelectedItem="{Binding SelectedClass}"
-                    WidthRequest="200" />
-        </HorizontalStackLayout>
-
+        <Picker Grid.Row="1"
+                ItemsSource="{Binding FilteredClasses}"
+                ItemDisplayBinding="{Binding Name, Converter={StaticResource TranslationConverter}}"
+                SelectedItem="{Binding SelectedClass}" />
+        
         <ScrollView Grid.Row="2">
             <VerticalStackLayout>
 

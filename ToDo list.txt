@@ -1,3 +1,15 @@
+- Bestiary or encounter choose random enemy
+- felszerelés törlése
+- karakter törlése nem sikerül?
+- Generálás gomb beragad, ha visszalép Erő dobásról?
+- Dobás shake-re nem működik
+- biztos megszakítod a kar gen folyamatát?
+- White tiger elvesztette az eszméletét
+- MinHp + MaxHp sárkánynál, sárkány azonnal meghal
+- halál után tud támadni a karakter
+- 3. szintű elf boszorkány 53 arany
+- explicit jelezni kell, hogy hm-eket szeretném lezárni
+- Swipe at ClassesPage and RacesPage to change selection
 - Add custom attributes to runeswords (each one is a rune)
 - Priest Mana points per level should use RollFormulaPage + setting
 - Fix zoom image preview
@@ -5,6 +17,7 @@
 - MaxDieNumber setting & property in Charatrer class + DieCounter on UI - Resetable? If DieCount == MaxDieCount => Status = Alive->Dead S
 - Refactor: Remove Calculate functions from Character class - compute all properties
 - // Speeds shoud be filled from races
+- Add predefined objects to PaintWizardPage (trees, rocks, table, chair) // Need save and load into json format? load two json into one background!
 
 - Add circle drawing setting on PaintWizardPage -> Paint component should be in Mtf.MAUI.Controls
 - New race: https://kalandozok.hu/cikkgyujtemeny/kieg%C3%A9sz%C3%ADt%C5%91k/fajok/j%C3%A1tszhat%C3%B3-fajok/fajok-k%C3%B6nyve-r62/

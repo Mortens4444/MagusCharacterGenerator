@@ -1,4 +1,5 @@
-﻿using M.A.G.U.S.GameSystem;
+﻿using M.A.G.U.S.Enums;
+using M.A.G.U.S.GameSystem;
 using M.A.G.U.S.GameSystem.Attributes;
 using M.A.G.U.S.GameSystem.Experience;
 using M.A.G.U.S.GameSystem.FightMode;
@@ -141,4 +142,6 @@ public class FireMage : Class, IClass, ILikeMagic
     public override int GetPainToleranceModifier() => DiceThrow._1D6() + 1;
 
     public override string Name => "Fire Mage";
+
+    public override Deity Deity { get; set; } = Deity.Sogron;
 }

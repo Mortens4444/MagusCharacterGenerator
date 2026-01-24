@@ -1,4 +1,5 @@
-﻿using M.A.G.U.S.GameSystem.Languages;
+﻿using M.A.G.U.S.Enums;
+using M.A.G.U.S.GameSystem.Languages;
 using M.A.G.U.S.GameSystem.Qualifications;
 using M.A.G.U.S.Qualifications;
 using M.A.G.U.S.Qualifications.Combat;
@@ -57,4 +58,6 @@ public class KyelPriest : Priest
     }
 
     public override string Name => "Priest of Kyel";
+
+    public override Deity Deity { get; set; } = Deity.Kyel;
 }

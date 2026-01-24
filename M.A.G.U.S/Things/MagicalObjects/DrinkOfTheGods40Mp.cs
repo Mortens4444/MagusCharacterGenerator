@@ -16,5 +16,7 @@ public class DrinkOfTheGods40Mp : MagicalObject
 
     public override int ManaPoints => 40;
 
-    public override IEnumerable<Class> AllowedCreators => [new ArelPriest(), new TharrPriest(), new KyelPriest(), new NastarPriest(), new VelarPriest(), new DomvikPriest(), new GorvikRanagolPriest(), new KranRanagolPriest(), new Witch()];
+    public override IEnumerable<Class> AllowedCreators => [new ArelPriest(), new TharrPriest(), new KyelPriest(), new NastarPriest(), new VelarPriest(), new DomvikPriest(), new GorvikRanagolPriest(), new KrannishRanagolPriest(), new Witch()];
+
+    public override string[] Images => ["drink_of_the_gods.png"];
 }

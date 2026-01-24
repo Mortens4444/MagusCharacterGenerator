@@ -161,14 +161,14 @@ internal partial class EncounterViewModel(ISettings settings, CharacterService c
                                 var character = initiative.Attacker.Source as Character;
                                 var creature = targetEntity as Creature;
                                 character?.BaseClass?.ExperiencePoints += creature?.ExperiencePoints ?? 0;
-                                WeakReferenceMessenger.Default.Send(new ShowInfoMessage(Lng.Elem("Die"), String.Format(Lng.Elem("'{0}' died."), targetName)));
+                                WeakReferenceMessenger.Default.Send(new ShowInfoMessage(Lng.Elem("Die"), String.Format(Lng.Elem("'{0}' died."), Lng.Elem(targetName))));
 
                                 RemoveCharacter(targetEntity as Character);
                                 RemoveEnemy(creature);
                             }
                             else if (targetEntity.ActualPainTolerancePoints <= 0 && wasConscious)
                             {
-                                WeakReferenceMessenger.Default.Send(new ShowInfoMessage(Lng.Elem("Loss of consciousness"), String.Format(Lng.Elem("'{0}' has lost consciousness."), targetName)));
+                                WeakReferenceMessenger.Default.Send(new ShowInfoMessage(Lng.Elem("Loss of consciousness"), String.Format(Lng.Elem("'{0}' has lost consciousness."), Lng.Elem(targetName))));
                             }
                         }
                     }

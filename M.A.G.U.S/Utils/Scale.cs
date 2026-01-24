@@ -61,7 +61,7 @@ public static class Scale
         { typeof(Cheese), 0.8 },
         { typeof(ButterKilo), 1.0 }, // Feltételezve, hogy 1 kg
         { typeof(SaltBlock), 1.0 },
-        { typeof(HoneyBark), 0.5 },
+        { typeof(HoneyJar), 0.5 },
         { typeof(EggsDozen), 0.7 }, // 12 tojás
         
         { typeof(CommonSpice), 0.1 },

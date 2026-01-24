@@ -1,7 +1,9 @@
 ﻿using M.A.G.U.S.Classes.Rogue;
 using M.A.G.U.S.Classes.Sorcerer;
+using M.A.G.U.S.Extensions;
 using M.A.G.U.S.GameSystem.Magic;
 using M.A.G.U.S.Interfaces;
+using M.A.G.U.S.Models;
 using M.A.G.U.S.Qualifications.Specialities;
 using M.A.G.U.S.Utils;
 using System.Text.Json.Serialization;
@@ -48,6 +50,20 @@ public partial class Character
                 manaPoints = value;
                 OnPropertyChanged();
             }
+        }
+    }
+
+    public DiceThrowFormula? MaxManaPointsPerLevelFormula
+    {
+        get
+        {
+            var sorcery = BaseClass?.SpecialQualifications.GetSpeciality<Sorcery>();
+            if (sorcery != null)
+            {
+                var customAttributes = sorcery.GetType().GetMethod(nameof(sorcery.GetManaPointsModifier))?.GetCustomAttributes(false);
+                return customAttributes.GetDiceThrowFormula();
+            }
+            return null;
         }
     }
 

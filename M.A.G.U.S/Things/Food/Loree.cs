@@ -9,4 +9,6 @@ public class Loree : Thing
     public override string Name => "Cheap wine";
 
     public override string Description => "A type of highly intoxicating, rare spirit or potent spiced wine, often associated with dark magic or secretive cults. Not a common drink, and best consumed with caution.";
+
+    public override string[] Images => ["loree.png"];
 }

@@ -1,10 +1,13 @@
-﻿using M.A.G.U.S.Enums;
+﻿using M.A.G.U.S.Classes.Believer.Ranagol;
+using M.A.G.U.S.Classes.Sorcerer;
+using M.A.G.U.S.Enums;
 using M.A.G.U.S.GameSystem.Psi;
 using M.A.G.U.S.GameSystem.Qualifications;
 using M.A.G.U.S.Interfaces;
 using M.A.G.U.S.Qualifications;
 using M.A.G.U.S.Qualifications.Combat;
 using M.A.G.U.S.Qualifications.Scientific;
+using M.A.G.U.S.Qualifications.Scientific.Psi;
 using M.A.G.U.S.Qualifications.Specialities;
 using M.A.G.U.S.Utils;
 using System.Collections.Specialized;
@@ -80,6 +83,19 @@ public partial class Character
 
     public bool CanLearn(Qualification qualification, QualificationLevel qualificationLevel, out int requiredQualificationPoints)
     {
+        var krannishClasses = new List<Type>() { typeof(KrannishWarlock), typeof(KrannishRanagolPriest) };
+        if (qualification is PsiKrannish && !krannishClasses.Contains(BaseClass.GetType()))
+        {
+            requiredQualificationPoints = 0;
+            return false;
+        }
+
+        if (qualification is INotForLearn)
+        {
+            requiredQualificationPoints = 0;
+            return false;
+        }
+
         var learningBase = qualificationLevel == QualificationLevel.Base;
         if (qualification is GemstoneMagic && learningBase)
         {

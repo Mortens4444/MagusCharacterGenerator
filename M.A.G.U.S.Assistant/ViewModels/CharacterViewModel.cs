@@ -406,17 +406,8 @@ internal partial class CharacterViewModel(IPrintService printService) : BaseView
     {
         get
         {
-            var sorcery = Character?.BaseClass?.SpecialQualifications.GetSpeciality<Sorcery>();
-            if (sorcery != null)
-            {
-                var customAttributes = sorcery.GetType().GetMethod(nameof(sorcery.GetManaPointsModifier))?.GetCustomAttributes(false);
-                var formula = customAttributes.GetDiceThrowFormula();
-                if (formula != null)
-                {
-                    return formula.GetDisplayFormula();
-                }
-            }
-            return (Character?.MaxManaPointsPerLevel ?? 0).ToString(CultureInfo.InvariantCulture);
+            var formula = Character?.MaxManaPointsPerLevelFormula;
+            return formula != null ? formula.GetDisplayFormula() : (Character?.MaxManaPointsPerLevel ?? 0).ToString(CultureInfo.InvariantCulture);
         }
     }
 

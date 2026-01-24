@@ -1,4 +1,5 @@
-﻿using M.A.G.U.S.Qualifications;
+﻿using M.A.G.U.S.Enums;
+using M.A.G.U.S.Qualifications;
 using M.A.G.U.S.Qualifications.Combat;
 using M.A.G.U.S.Qualifications.Scientific;
 
@@ -40,4 +41,6 @@ public class DreinaPaladin : Paladin
     }
 
     public override string Name => "Paladin of Dreina";
+
+    public override Deity Deity { get; set; } = Deity.Dreina;
 }

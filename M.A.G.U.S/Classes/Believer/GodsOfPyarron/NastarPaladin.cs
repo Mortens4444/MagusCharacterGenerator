@@ -1,4 +1,5 @@
-﻿using M.A.G.U.S.GameSystem;
+﻿using M.A.G.U.S.Enums;
+using M.A.G.U.S.GameSystem;
 using M.A.G.U.S.GameSystem.Attributes;
 using M.A.G.U.S.GameSystem.FightMode;
 using M.A.G.U.S.GameSystem.Languages;
@@ -13,6 +14,10 @@ using M.A.G.U.S.Qualifications.Scientific.Psi;
 
 namespace M.A.G.U.S.Classes.Believer.GodsOfPyarron;
 
+/// <summary>
+/// Nastar = Krad
+/// https://nemaakos.files.wordpress.com/2014/10/nastar2.pdf
+/// </summary>
 public class NastarPaladin : Class, IClass, IHateRangedWeapons
 {
     public NastarPaladin() : base(1, false) { }
@@ -141,4 +146,6 @@ public class NastarPaladin : Class, IClass, IHateRangedWeapons
     public override int GetPainToleranceModifier() => DiceThrow._1D6() + 5;
 
     public override string Name => "Paladin of Nastar";
+    
+    public override Deity Deity { get; set; } = Deity.Nastar;
 }

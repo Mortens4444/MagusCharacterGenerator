@@ -126,16 +126,15 @@ public class KrannishWarlock : Class, IClass, ILikeMagic
         new WeaponUse(),
         new WeaponUse(),
         new WeaponThrowing(),
-        new PsiKranic(QualificationLevel.Master),
+        new PsiKrannish(QualificationLevel.Master),
         new ReadingAndWriting(),
         new PoisoningAndNeutralization(),
         new CamouflageOrDisguise(),
         new LanguageLore(Language.Krannish, 3),
         new Alchemy(),
         new AncientTongueLore(AntientLanguage.Aquir),
-        new Etiquette(), //Krannish
-
-		//new Cluture(QualificationLevel.Master) // Order
+        new Etiquette(), // Krannish
+        //new Cluture(QualificationLevel.Master) // Order
 		//new Helyismeret 60%
     ]);
 

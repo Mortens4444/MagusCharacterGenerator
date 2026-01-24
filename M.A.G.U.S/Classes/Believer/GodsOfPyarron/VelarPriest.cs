@@ -1,4 +1,5 @@
-﻿using M.A.G.U.S.GameSystem;
+﻿using M.A.G.U.S.Enums;
+using M.A.G.U.S.GameSystem;
 using M.A.G.U.S.GameSystem.Attributes;
 using M.A.G.U.S.GameSystem.FightMode;
 using M.A.G.U.S.GameSystem.Languages;
@@ -145,4 +146,6 @@ public class VelarPriest : Class, IClass, ILikeMagic
     public override int GetPainToleranceModifier() => DiceThrow._1D6() + 3;
 
     public override string Name => "Priest of Velar";
+
+    public override Deity Deity { get; set; } = Deity.Velar;
 }

@@ -68,4 +68,6 @@ public class ArelPriest : Priest
 	}
 
     public override string Name => "Priest of Arel";
+
+    public override Deity Deity { get; set; } = Deity.Arel;
 }

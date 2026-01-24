@@ -2,18 +2,21 @@
 <v:NotifierPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
               xmlns:v="clr-namespace:Mtf.LanguageService.MAUI.Views;assembly=Mtf.LanguageService.MAUI"
               xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+              xmlns:controls="clr-namespace:M.A.G.U.S.Assistant.Controls"
               x:Class="M.A.G.U.S.Assistant.Views.ImagePreviewPage"
               x:ClassModifier="internal"
               Title="Preview">
 
     <Grid Padding="12">
-        <Image x:Name="PreviewImage" Aspect="AspectFit">
+        <controls:ZoomImage x:Name="PreviewImage" Aspect="AspectFit" />
+
+        <!--<Image x:Name="PreviewImage" Aspect="AspectFit">
             <Image.GestureRecognizers>
                 <PinchGestureRecognizer PinchUpdated="OnPinchUpdated" />
                 <PanGestureRecognizer PanUpdated="OnPanUpdated" />
                 <TapGestureRecognizer NumberOfTapsRequired="2" Tapped="OnDoubleTapped" />
             </Image.GestureRecognizers>
-        </Image>
+        </Image>-->
         <Button Text="Close" VerticalOptions="End" HorizontalOptions="Center" Clicked="CloseClicked" />
     </Grid>
 </v:NotifierPage>

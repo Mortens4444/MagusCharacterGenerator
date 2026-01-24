@@ -13,4 +13,6 @@ public class PotionOfDragonsBreath120Mp : MagicalObject
     public override int ManaPoints => 120;
 
     public override IEnumerable<Class> AllowedCreators => [new Witch(), new Warlock()];
+
+    public override string[] Images => ["potion_of_dragon_s_breath.png"];
 }

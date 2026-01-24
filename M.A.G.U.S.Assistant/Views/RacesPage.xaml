@@ -22,132 +22,119 @@
         </ResourceDictionary>
     </v:NotifierPage.Resources>
 
-    <Grid Padding="10" RowSpacing="8" ColumnSpacing="8" RowDefinitions="Auto,*">
+    <Grid Padding="10" RowSpacing="8" ColumnSpacing="8" RowDefinitions="Auto,Auto,*">
         <mc:EntryWithLabel Grid.Row="0" Label="Search" Text="{Binding SearchText}" />
 
-        <Grid Grid.Row="1" ColumnDefinitions="*,2*" ColumnSpacing="8">
-            <CollectionView Grid.Column="0"
-                            ItemsSource="{Binding FilteredRaces}"
-                            SelectionMode="Single"
-                            SelectedItem="{Binding SelectedRace, Mode=TwoWay}"
-                            VerticalOptions="Fill"
-                            ItemsLayout="VerticalList">
-                <CollectionView.ItemTemplate>
-                    <DataTemplate x:DataType="r:Race">
-                        <Border Stroke="Gray" StrokeThickness="1" Padding="8" Margin="0,4">
-                            <Grid ColumnDefinitions="*,Auto" RowDefinitions="Auto,Auto" ColumnSpacing="8">
-                                <Label Text="{Binding Name, Converter={StaticResource TranslationConverter}}" FontAttributes="Bold" Grid.Column="0" Grid.Row="0"/>
-                            </Grid>
-                        </Border>
-                    </DataTemplate>
-                </CollectionView.ItemTemplate>
-            </CollectionView>
+        <Picker Grid.Row="1"
+            Title="Select race"
+            ItemsSource="{Binding FilteredRaces}"
+            SelectedItem="{Binding SelectedRace, Mode=TwoWay}"
+            ItemDisplayBinding="{Binding Name, Converter={StaticResource TranslationConverter}}" />
 
-            <ScrollView Grid.Column="1" VerticalOptions="Fill">
-                <StackLayout Spacing="8">
-                     <!-- Képességek -->
-                    <Label Text="{Binding SelectedRace.Name, Converter={StaticResource TranslationConverter}}" FontSize="20" FontAttributes="Bold"/>
+        <ScrollView VerticalOptions="Fill" Grid.Row="2">
+            <StackLayout Spacing="8">
+                <!-- Képességek -->
+                <Label Text="{Binding SelectedRace.Name, Converter={StaticResource TranslationConverter}}" FontSize="20" FontAttributes="Bold"/>
 
-                    <Border Stroke="{AppThemeBinding Light={StaticResource Gray300}, Dark={StaticResource Gray500}}"
-                            StrokeThickness="1" Padding="10" BackgroundColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource Gray900}}">
-                        <Image Source="{Binding SelectedRace.DefaultImage}" Aspect="AspectFit" WidthRequest="250" HeightRequest="220" HorizontalOptions="Center" VerticalOptions="Center">
-                            <Image.GestureRecognizers>
-                                <TapGestureRecognizer Command="{Binding PreviewImageCommand}" />
-                            </Image.GestureRecognizers>
-                        </Image>
-                    </Border>
-                    
-                    <Border Stroke="{AppThemeBinding Light={StaticResource Gray300}, Dark={StaticResource Gray500}}"
-                            StrokeThickness="1" Padding="10" BackgroundColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource Gray900}}">
-                        <StackLayout Spacing="8">
-                            <Grid Grid.Column="0" RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto" ColumnDefinitions="Auto,Auto" RowSpacing="6" ColumnSpacing="12">
-                                <Label Text="Strength" Grid.Row="0" Grid.Column="0"/>
-                                <Label Text="{Binding SelectedRace.Strength}" Grid.Row="0" Grid.Column="1"/>
-                                <Label Text="Quickness" Grid.Row="1" Grid.Column="0"/>
-                                <Label Text="{Binding SelectedRace.Quickness}" Grid.Row="1" Grid.Column="1"/>
-                                <Label Text="Dexterity" Grid.Row="2" Grid.Column="0"/>
-                                <Label Text="{Binding SelectedRace.Dexterity}" Grid.Row="2" Grid.Column="1"/>
-                                <Label Text="Stamina" Grid.Row="3" Grid.Column="0"/>
-                                <Label Text="{Binding SelectedRace.Stamina}" Grid.Row="3" Grid.Column="1"/>
-                                <Label Text="Health" Grid.Row="4" Grid.Column="0"/>
-                                <Label Text="{Binding SelectedRace.Health}" Grid.Row="4" Grid.Column="1"/>
-                                <Label Text="Beauty" Grid.Row="5" Grid.Column="0"/>
-                                <Label Text="{Binding SelectedRace.Beauty}" Grid.Row="5" Grid.Column="1"/>
-                                <Label Text="Intelligence" Grid.Row="6" Grid.Column="0"/>
-                                <Label Text="{Binding SelectedRace.Intelligence}" Grid.Row="6" Grid.Column="1"/>
-                                <Label Text="Willpower" Grid.Row="7" Grid.Column="0"/>
-                                <Label Text="{Binding SelectedRace.Willpower}" Grid.Row="7" Grid.Column="1"/>
-                                <Label Text="Astral" Grid.Row="8" Grid.Column="0"/>
-                                <Label Text="{Binding SelectedRace.Astral}" Grid.Row="8" Grid.Column="1"/>
-                            </Grid>
-                        </StackLayout>
-                    </Border>
+                <Border Stroke="{AppThemeBinding Light={StaticResource Gray300}, Dark={StaticResource Gray500}}"
+                        StrokeThickness="1" Padding="10" BackgroundColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource Gray900}}">
+                    <Image Source="{Binding SelectedRace.DefaultImage}" Aspect="AspectFit" WidthRequest="250" HeightRequest="220" HorizontalOptions="Center" VerticalOptions="Center">
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding PreviewImageCommand}" />
+                        </Image.GestureRecognizers>
+                    </Image>
+                </Border>
 
-                    <!-- Képzettségek -->
-                    <Border Stroke="{AppThemeBinding Light={StaticResource Gray300}, Dark={StaticResource Gray500}}"
-                            StrokeThickness="1" Padding="10" BackgroundColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource Gray900}}">
-                        <VerticalStackLayout Spacing="6">
-                            <Label Text="Qualifications" FontAttributes="Bold"/>
-                            <Grid ColumnDefinitions="*, Auto" ColumnSpacing="10" Padding="6">
-                                <Label Text="Name" VerticalOptions="Center" TextColor="Gray" FontAttributes="Bold"/>
-                                <Label Text="Level" VerticalOptions="Center" Grid.Column="1" HorizontalOptions="End" TextColor="Gray" FontAttributes="Bold"/>
-                            </Grid>
-                            <CollectionView ItemsSource="{Binding SelectedRace.Qualifications}" SelectionMode="None">
-                                <CollectionView.ItemTemplate>
-                                    <DataTemplate x:DataType="local:Qualification">
-                                        <Grid Padding="6" ColumnDefinitions="*,Auto" ColumnSpacing="10">
-                                            <Label Text="{Binding ., Converter={StaticResource QualificationNameConverter}}" VerticalOptions="Center" HorizontalOptions="Start" />
-                                            <Label Text="{Binding QualificationLevel, Converter={StaticResource TranslationConverter}}" VerticalOptions="Center" Grid.Column="1" HorizontalTextAlignment="End" />
-                                        </Grid>
-                                    </DataTemplate>
-                                </CollectionView.ItemTemplate>
-                            </CollectionView>
-                        </VerticalStackLayout>
-                    </Border>
+                <Border Stroke="{AppThemeBinding Light={StaticResource Gray300}, Dark={StaticResource Gray500}}"
+                        StrokeThickness="1" Padding="10" BackgroundColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource Gray900}}">
+                    <StackLayout Spacing="8">
+                        <Grid Grid.Column="0" RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto" ColumnDefinitions="Auto,Auto" RowSpacing="6" ColumnSpacing="12">
+                            <Label Text="Strength" Grid.Row="0" Grid.Column="0"/>
+                            <Label Text="{Binding SelectedRace.Strength}" Grid.Row="0" Grid.Column="1"/>
+                            <Label Text="Quickness" Grid.Row="1" Grid.Column="0"/>
+                            <Label Text="{Binding SelectedRace.Quickness}" Grid.Row="1" Grid.Column="1"/>
+                            <Label Text="Dexterity" Grid.Row="2" Grid.Column="0"/>
+                            <Label Text="{Binding SelectedRace.Dexterity}" Grid.Row="2" Grid.Column="1"/>
+                            <Label Text="Stamina" Grid.Row="3" Grid.Column="0"/>
+                            <Label Text="{Binding SelectedRace.Stamina}" Grid.Row="3" Grid.Column="1"/>
+                            <Label Text="Health" Grid.Row="4" Grid.Column="0"/>
+                            <Label Text="{Binding SelectedRace.Health}" Grid.Row="4" Grid.Column="1"/>
+                            <Label Text="Beauty" Grid.Row="5" Grid.Column="0"/>
+                            <Label Text="{Binding SelectedRace.Beauty}" Grid.Row="5" Grid.Column="1"/>
+                            <Label Text="Intelligence" Grid.Row="6" Grid.Column="0"/>
+                            <Label Text="{Binding SelectedRace.Intelligence}" Grid.Row="6" Grid.Column="1"/>
+                            <Label Text="Willpower" Grid.Row="7" Grid.Column="0"/>
+                            <Label Text="{Binding SelectedRace.Willpower}" Grid.Row="7" Grid.Column="1"/>
+                            <Label Text="Astral" Grid.Row="8" Grid.Column="0"/>
+                            <Label Text="{Binding SelectedRace.Astral}" Grid.Row="8" Grid.Column="1"/>
+                        </Grid>
+                    </StackLayout>
+                </Border>
 
-                    <!-- Százalékos képzettségek -->
-                    <Border Stroke="{AppThemeBinding Light={StaticResource Gray300}, Dark={StaticResource Gray500}}"
-                            StrokeThickness="1" Padding="10" BackgroundColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource Gray900}}">
-                        <VerticalStackLayout Spacing="6">
-                            <Label Text="Percent qualifications" FontAttributes="Bold"/>
-                            <Grid Padding="6" ColumnDefinitions="*, Auto" ColumnSpacing="10">
-                                <Label Text="Name" VerticalOptions="Center" TextColor="Gray" FontAttributes="Bold"/>
-                                <Label Text="%" VerticalOptions="Center" Grid.Column="1" HorizontalOptions="End" TextColor="Gray" FontAttributes="Bold"/>
-                            </Grid>
-                            <CollectionView ItemsSource="{Binding SelectedRace.PercentQualifications}" SelectionMode="None">
-                                <CollectionView.ItemTemplate>
-                                    <DataTemplate x:DataType="local:PercentQualification">
-                                        <Grid Padding="6" ColumnDefinitions="*,Auto" ColumnSpacing="10">
-                                            <Label Text="{Binding Name, Converter={StaticResource TranslationConverter}}" VerticalOptions="Center" HorizontalOptions="Start" />
-                                            <Label Text="{Binding Percent}" VerticalOptions="Center" Grid.Column="1" HorizontalTextAlignment="End" />
-                                        </Grid>
-                                    </DataTemplate>
-                                </CollectionView.ItemTemplate>
-                            </CollectionView>
-                        </VerticalStackLayout>
-                    </Border>
+                <!-- Képzettségek -->
+                <Border Stroke="{AppThemeBinding Light={StaticResource Gray300}, Dark={StaticResource Gray500}}"
+                        StrokeThickness="1" Padding="10" BackgroundColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource Gray900}}">
+                    <VerticalStackLayout Spacing="6">
+                        <Label Text="Qualifications" FontAttributes="Bold"/>
+                        <Grid ColumnDefinitions="*, Auto" ColumnSpacing="10" Padding="6">
+                            <Label Text="Name" VerticalOptions="Center" TextColor="Gray" FontAttributes="Bold"/>
+                            <Label Text="Level" VerticalOptions="Center" Grid.Column="1" HorizontalOptions="End" TextColor="Gray" FontAttributes="Bold"/>
+                        </Grid>
+                        <CollectionView ItemsSource="{Binding SelectedRace.Qualifications}" SelectionMode="None">
+                            <CollectionView.ItemTemplate>
+                                <DataTemplate x:DataType="local:Qualification">
+                                    <Grid Padding="6" ColumnDefinitions="*,Auto" ColumnSpacing="10">
+                                        <Label Text="{Binding ., Converter={StaticResource QualificationNameConverter}}" VerticalOptions="Center" HorizontalOptions="Start" />
+                                        <Label Text="{Binding QualificationLevel, Converter={StaticResource TranslationConverter}}" VerticalOptions="Center" Grid.Column="1" HorizontalTextAlignment="End" />
+                                    </Grid>
+                                </DataTemplate>
+                            </CollectionView.ItemTemplate>
+                        </CollectionView>
+                    </VerticalStackLayout>
+                </Border>
 
-                    <!-- Speciális képességek -->
-                    <Border Stroke="{AppThemeBinding Light={StaticResource Gray300}, Dark={StaticResource Gray500}}"
-                            StrokeThickness="1" Padding="10" BackgroundColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource Gray900}}">
-                        <VerticalStackLayout Spacing="6">
-                            <Label Text="Special qualifications" FontAttributes="Bold"/>
-                            <Grid Padding="6" ColumnDefinitions="*" ColumnSpacing="10">
-                                <Label Text="Name" VerticalOptions="Center" TextColor="Gray" FontAttributes="Bold"/>
-                            </Grid>
-                            <CollectionView ItemsSource="{Binding SelectedRace.SpecialQualifications}" SelectionMode="None">
-                                <CollectionView.ItemTemplate>
-                                    <DataTemplate x:DataType="q:SpecialQualification">
-                                        <Grid Padding="6" ColumnDefinitions="*" ColumnSpacing="10">
-                                            <Label Text="{Binding ., Converter={StaticResource SpecialQualificationNameConverter}}" VerticalOptions="Center" HorizontalOptions="Start" />
-                                        </Grid>
-                                    </DataTemplate>
-                                </CollectionView.ItemTemplate>
-                            </CollectionView>
-                        </VerticalStackLayout>
-                    </Border>
-                </StackLayout>
-            </ScrollView>
-        </Grid>
+                <!-- Százalékos képzettségek -->
+                <Border Stroke="{AppThemeBinding Light={StaticResource Gray300}, Dark={StaticResource Gray500}}"
+                        StrokeThickness="1" Padding="10" BackgroundColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource Gray900}}">
+                    <VerticalStackLayout Spacing="6">
+                        <Label Text="Percent qualifications" FontAttributes="Bold"/>
+                        <Grid Padding="6" ColumnDefinitions="*, Auto" ColumnSpacing="10">
+                            <Label Text="Name" VerticalOptions="Center" TextColor="Gray" FontAttributes="Bold"/>
+                            <Label Text="%" VerticalOptions="Center" Grid.Column="1" HorizontalOptions="End" TextColor="Gray" FontAttributes="Bold"/>
+                        </Grid>
+                        <CollectionView ItemsSource="{Binding SelectedRace.PercentQualifications}" SelectionMode="None">
+                            <CollectionView.ItemTemplate>
+                                <DataTemplate x:DataType="local:PercentQualification">
+                                    <Grid Padding="6" ColumnDefinitions="*,Auto" ColumnSpacing="10">
+                                        <Label Text="{Binding Name, Converter={StaticResource TranslationConverter}}" VerticalOptions="Center" HorizontalOptions="Start" />
+                                        <Label Text="{Binding Percent}" VerticalOptions="Center" Grid.Column="1" HorizontalTextAlignment="End" />
+                                    </Grid>
+                                </DataTemplate>
+                            </CollectionView.ItemTemplate>
+                        </CollectionView>
+                    </VerticalStackLayout>
+                </Border>
+
+                <!-- Speciális képességek -->
+                <Border Stroke="{AppThemeBinding Light={StaticResource Gray300}, Dark={StaticResource Gray500}}"
+                        StrokeThickness="1" Padding="10" BackgroundColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource Gray900}}">
+                    <VerticalStackLayout Spacing="6">
+                        <Label Text="Special qualifications" FontAttributes="Bold"/>
+                        <Grid Padding="6" ColumnDefinitions="*" ColumnSpacing="10">
+                            <Label Text="Name" VerticalOptions="Center" TextColor="Gray" FontAttributes="Bold"/>
+                        </Grid>
+                        <CollectionView ItemsSource="{Binding SelectedRace.SpecialQualifications}" SelectionMode="None">
+                            <CollectionView.ItemTemplate>
+                                <DataTemplate x:DataType="q:SpecialQualification">
+                                    <Grid Padding="6" ColumnDefinitions="*" ColumnSpacing="10">
+                                        <Label Text="{Binding ., Converter={StaticResource SpecialQualificationNameConverter}}" VerticalOptions="Center" HorizontalOptions="Start" />
+                                    </Grid>
+                                </DataTemplate>
+                            </CollectionView.ItemTemplate>
+                        </CollectionView>
+                    </VerticalStackLayout>
+                </Border>
+            </StackLayout>
+        </ScrollView>
     </Grid>
 </v:NotifierPage>

@@ -1,4 +1,5 @@
-﻿using M.A.G.U.S.GameSystem.Qualifications;
+﻿using M.A.G.U.S.Enums;
+using M.A.G.U.S.GameSystem.Qualifications;
 using M.A.G.U.S.Qualifications;
 using M.A.G.U.S.Qualifications.Combat;
 using M.A.G.U.S.Qualifications.Scientific;
@@ -49,4 +50,6 @@ public class TharrPriest : Priest
 	}
 
     public override string Name => "Priest of Tharr";
+
+    public override Deity Deity { get; set; } = Deity.Tharr;
 }

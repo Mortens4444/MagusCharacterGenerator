@@ -1,15 +1,16 @@
-﻿using M.A.G.U.S.GameSystem.Languages;
+﻿using M.A.G.U.S.Enums;
+using M.A.G.U.S.GameSystem.Languages;
 using M.A.G.U.S.GameSystem.Qualifications;
 using M.A.G.U.S.Qualifications;
 using M.A.G.U.S.Qualifications.Scientific;
 
 namespace M.A.G.U.S.Classes.Believer.Ranagol;
 
-public class KranRanagolPriest : Priest
+public class KrannishRanagolPriest : Priest
 {
-    public KranRanagolPriest() : base() { }
+    public KrannishRanagolPriest() : base() { }
 
-    public KranRanagolPriest(int level, bool autoGenerateSkills) : base(level, autoGenerateSkills) { }
+    public KrannishRanagolPriest(int level, bool autoGenerateSkills) : base(level, autoGenerateSkills) { }
 
     public override QualificationList FutureQualifications
     {
@@ -28,4 +29,6 @@ public class KranRanagolPriest : Priest
     }
 
     public override string Name => "Priest of Ranagol (Krannish)";
+
+    public override Deity Deity { get; set; } = Deity.Ranagol;
 }

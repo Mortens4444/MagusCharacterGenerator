@@ -1,4 +1,5 @@
-﻿using M.A.G.U.S.GameSystem;
+﻿using M.A.G.U.S.Enums;
+using M.A.G.U.S.GameSystem;
 using M.A.G.U.S.GameSystem.Attributes;
 using M.A.G.U.S.GameSystem.FightMode;
 using M.A.G.U.S.GameSystem.Languages;
@@ -14,6 +15,10 @@ using M.A.G.U.S.Qualifications.Specialities;
 
 namespace M.A.G.U.S.Classes.Believer.GodsOfPyarron;
 
+/// <summary>
+/// Velar = Kyel
+/// https://nemaakos.files.wordpress.com/2015/12/velar.pdf
+/// </summary>
 public class VelarPaladin : Class, IClass, ILikeMagic
 {
     public VelarPaladin() : base(1, false) { }
@@ -145,4 +150,6 @@ public class VelarPaladin : Class, IClass, ILikeMagic
     public override int GetPainToleranceModifier() => DiceThrow._1D6() + 3;
 
     public override string Name => "Paladin of Velar";
+
+    public override Deity Deity { get; set; } = Deity.Velar;
 }

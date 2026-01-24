@@ -1,4 +1,5 @@
-﻿using M.A.G.U.S.GameSystem.Attributes;
+﻿using M.A.G.U.S.Enums;
+using M.A.G.U.S.GameSystem.Attributes;
 using M.A.G.U.S.GameSystem.Languages;
 using M.A.G.U.S.GameSystem.Qualifications;
 using M.A.G.U.S.Qualifications;
@@ -85,5 +86,7 @@ public class GalrajaPriest : Priest
     [DiceThrow(ThrowType._1D6)]
     [DiceThrowModifier(5)]
     public override int GetPainToleranceModifier() => DiceThrow._1D6() + 5;
+
+    public override Deity Deity { get; set; } = Deity.Galraja;
 
 }

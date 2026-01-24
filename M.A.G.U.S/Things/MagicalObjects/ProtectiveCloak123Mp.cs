@@ -9,4 +9,6 @@ public class ProtectiveCloak123Mp : MagicalObject
     public override Money Price => new(4);
 
     public override int ManaPoints => 123;
+
+    public override string[] Images => ["protective_cloak.png"];
 }
