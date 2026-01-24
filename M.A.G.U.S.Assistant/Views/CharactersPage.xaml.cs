@@ -1,11 +1,12 @@
 using M.A.G.U.S.Assistant.ViewModels;
+using Mtf.LanguageService.MAUI;
 using Mtf.LanguageService.MAUI.Views;
 
 namespace M.A.G.U.S.Assistant.Views;
 
 internal partial class CharactersPage : NotifierPage
 {
-	public CharactersPage(CharactersViewModel viewModel)
+    public CharactersPage(CharactersViewModel viewModel)
 	{
 		InitializeComponent();
 		BindingContext = viewModel;

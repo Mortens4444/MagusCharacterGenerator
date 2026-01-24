@@ -168,6 +168,12 @@ internal partial class CharacterGeneratorViewModel : CharacterViewModel
         Character?.Name = NameGenerator.Get(Character.Race).ToName();
     }
 
+    [RelayCommand()]
+    public Task BackAsync()
+    {
+        return Shell.Current.GoToAsync("..");
+    }
+
     private void LoadAvailableTypes()
     {
         var raceNamespacePrefix = "M.A.G.U.S.Races";

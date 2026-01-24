@@ -16,7 +16,11 @@
             <conv:TranslationConverter x:Key="TranslationConverter" />
         </ResourceDictionary>
     </v:NotifierPage.Resources>
-
+    
+    <Shell.BackButtonBehavior>
+        <BackButtonBehavior Command="{Binding BackCommand}" />
+    </Shell.BackButtonBehavior>
+    
     <ScrollView>
         <VerticalStackLayout Spacing="15" Padding="15">
 
