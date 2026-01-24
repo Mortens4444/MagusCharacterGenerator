@@ -441,6 +441,50 @@ internal partial class CharacterViewModel(IPrintService printService) : BaseView
         }
     }
 
+    [RelayCommand]
+    public async Task DeleteEquipmentAsync(Thing thing)
+    {
+        if (thing == null || Character == null)
+        {
+            return;
+        }
+
+        var answer = await Shell.Current.DisplayAlertAsync(
+                Lng.Elem("Confirm delete"),
+                String.Format(Lng.Elem("Are you sure you want to delete '{0}'?"), Lng.Elem(thing.Name)),
+                Lng.Elem("Delete"),
+                Lng.Elem("Cancel")).ConfigureAwait(true);
+
+        if (answer)
+        {
+            Character.RemoveEquipment(thing);
+        }
+    }
+
+    [RelayCommand]
+    public async Task SellItemAsync(Thing thing)
+    {
+        if (thing == null || Character == null)
+        {
+            return;
+        }
+
+        var price = thing.MultipliedPrice;
+        var answer = await Shell.Current.DisplayAlertAsync(
+            Lng.Elem("Confirm sell"),
+            String.Concat(
+                String.Format(Lng.Elem("Are you sure you want to sell '{0}'?"), Lng.Elem(thing.Name)),
+                Environment.NewLine,
+                $"{Lng.Elem("Selling price")}: {price.ToTranslatedString()}"
+            ),
+            Lng.Elem("Sell"),
+            Lng.Elem("Cancel")).ConfigureAwait(true);
+
+        if (answer)
+        {
+            Character.Sell(thing);
+        }
+    }
     [RelayCommand(CanExecute = nameof(CanAllocateCombatModifier))]
     public void IncrementInitiator() => Character?.ChangeInitiator(1);
 

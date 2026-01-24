@@ -41,6 +41,25 @@ public partial class Character
         OnPropertyChanged(nameof(Money));
     }
 
+    public void RemoveEquipment(Thing thing)
+    {
+        if (Equipment.Remove(thing))
+        {
+            OnPropertyChanged(nameof(TotalEquipmentWeight));
+        }
+    }
+
+    public void Sell(Thing thing)
+    {
+        if (Equipment.Contains(thing))
+        {
+            Money += thing.MultipliedPrice;
+            Equipment.Remove(thing);
+            OnPropertyChanged(nameof(Money));
+            OnPropertyChanged(nameof(TotalEquipmentWeight));
+        }
+    }
+
     private void EquipmentOnCollectionChanged(object? sender, NotifyCollectionChangedEventArgs e)
     {
         OnPropertyChanged(nameof(Equipment));

@@ -314,9 +314,32 @@
                 <CollectionView ItemsSource="{Binding Equipment, Converter={StaticResource EquipmentSorter}}" SelectionMode="None" HeightRequest="280">
                     <CollectionView.ItemTemplate>
                         <DataTemplate x:DataType="t:Thing">
-                            <Grid Padding="6" ColumnDefinitions="*,Auto" ColumnSpacing="10">
-                                <Label Text="{Binding Name, Converter={StaticResource TranslationConverter}}" VerticalOptions="Center" HorizontalOptions="Start" />
-                                <Label Text="{Binding Weight, Converter={StaticResource TranslationConverter}}" VerticalOptions="Center" HorizontalTextAlignment="End" />
+                            <Grid Padding="6" ColumnDefinitions="*, Auto, Auto, Auto" ColumnSpacing="10">
+                                <Label Text="{Binding Name, Converter={StaticResource TranslationConverter}}" 
+                                       VerticalOptions="Center" 
+                                       HorizontalOptions="Start" />
+
+                                <Label Grid.Column="1" 
+                                       Text="{Binding Weight, Converter={StaticResource TranslationConverter}}" 
+                                       VerticalOptions="Center" 
+                                       HorizontalTextAlignment="End" />
+
+                                <Button Grid.Column="2"
+                                        Text="💰"
+                                        FontSize="12"
+                                        BackgroundColor="Transparent"
+                                        Command="{Binding Source={RelativeSource AncestorType={x:Type vm:CharacterViewModel}}, Path=SellItemCommand}"
+                                        CommandParameter="{Binding .}"
+                                        ToolTipProperties.Text="Sell" />
+
+                                <Button Grid.Column="3"
+                                        Text="🗑️"
+                                        FontSize="12"
+                                        BackgroundColor="Transparent"
+                                        TextColor="Red"
+                                        Command="{Binding Source={RelativeSource AncestorType={x:Type vm:CharacterViewModel}}, Path=DeleteEquipmentCommand}"
+                                        CommandParameter="{Binding .}"
+                                        ToolTipProperties.Text="Discard item" />
                             </Grid>
                         </DataTemplate>
                     </CollectionView.ItemTemplate>

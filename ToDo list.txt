@@ -1,5 +1,3 @@
-- Bestiary or encounter choose random enemy
-- felszerelés törlése
 - karakter törlése nem sikerül?
 - Generálás gomb beragad, ha visszalép Erő dobásról?
 - Dobás shake-re nem működik
