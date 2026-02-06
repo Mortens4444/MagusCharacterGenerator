@@ -30,5 +30,7 @@ public class KrannishRanagolPriest : Priest
 
     public override string Name => "Priest of Ranagol (Krannish)";
 
+    public override string[] Images => ["priest_of_ranagol_krannish.png"];
+
     public override Deity Deity { get; set; } = Deity.Ranagol;
 }

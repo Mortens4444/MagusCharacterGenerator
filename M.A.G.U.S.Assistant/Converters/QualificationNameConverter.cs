@@ -36,7 +36,7 @@ internal class QualificationNameConverter : IValueConverter
         {
             if (wq.Weapon != null)
             {
-                return $"{Lng.Elem(wq.Name)} - {Lng.Elem(wq.Weapon.ToString())}";
+                return $"{Lng.Elem(wq.Name)} - {Lng.Elem(wq.Weapon.Name)}";
             }
             return Lng.Elem(wq.Name);
         }

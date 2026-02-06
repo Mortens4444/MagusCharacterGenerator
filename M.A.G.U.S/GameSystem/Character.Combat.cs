@@ -1,9 +1,7 @@
 ﻿using M.A.G.U.S.Enums;
-using M.A.G.U.S.Extensions;
 using M.A.G.U.S.GameSystem.Attributes;
 using M.A.G.U.S.GameSystem.FightMode;
 using M.A.G.U.S.Interfaces;
-using M.A.G.U.S.Models;
 using M.A.G.U.S.Qualifications.Specialities;
 using M.A.G.U.S.Things.Weapons;
 using M.A.G.U.S.Things.Weapons.OtherWeapons;
@@ -15,8 +13,7 @@ namespace M.A.G.U.S.GameSystem;
 public partial class Character : ICharacter
 {
     private static readonly Fist fist = new();
-    private CombatValueModifier selectedCombatValueModifier = Enums.CombatValueModifier.Base;
-    private int combatValueModifier;
+    private CombatValueModifier selectedCombatValueModifier = CombatValueModifier.Base;
     private string? primaryWeaponId;
     private string? secondaryWeaponId;
     private Weapon? primaryWeapon;
@@ -30,6 +27,14 @@ public partial class Character : ICharacter
     private int allocatedToDefense;
 
     private int allocatedToAim;
+    private int minInitiateValue;
+    private int minAttackValue;
+    private int minDefenseValue;
+    private int minAimValue;
+    private int lockedAllocatedToInitiate;
+    private int lockedAllocatedToAttack;
+    private int lockedAllocatedToDefense;
+    private int lockedAllocatedToAim;
 
     public override double AttacksPerRound => (PrimaryWeapon ?? SecondaryWeapon)?.AttacksPerRound ?? fist.AttacksPerRound;
 
@@ -142,30 +147,23 @@ public partial class Character : ICharacter
         protected set => attackModes = value;
     }
 
+    [JsonInclude, Newtonsoft.Json.JsonProperty]
+    public int LockedAllocatedToInitiate { get => lockedAllocatedToInitiate; private set => lockedAllocatedToInitiate = value; }
+
+    [JsonInclude, Newtonsoft.Json.JsonProperty]
+    public int LockedAllocatedToAttack { get => lockedAllocatedToAttack; private set => lockedAllocatedToAttack = value; }
+
+    [JsonInclude, Newtonsoft.Json.JsonProperty]
+    public int LockedAllocatedToDefense { get => lockedAllocatedToDefense; private set => lockedAllocatedToDefense = value; }
+
+    [JsonInclude, Newtonsoft.Json.JsonProperty]
+    public int LockedAllocatedToAim { get => lockedAllocatedToAim; private set => lockedAllocatedToAim = value; }
+
     [JsonIgnore, Newtonsoft.Json.JsonIgnore]
     public int CombatValueModifierPerLevel => BaseClass.CombatValueModifierPerLevel;
 
-    [JsonInclude, Newtonsoft.Json.JsonProperty]
-    public int CombatValueModifier
-    {
-        get
-        {
-            return combatValueModifier;
-        }
-        set
-        {
-            if (combatValueModifier == value)
-            {
-                return;
-            }
-
-            combatValueModifier = value;
-            OnPropertyChanged();
-            OnMaxLimitsChanged();
-            OnCombatValuesChanged();
-            OnPropertyChanged(nameof(CanAllocateCombatModifier));
-        }
-    }
+    [JsonIgnore, Newtonsoft.Json.JsonIgnore]
+    public int RemainingCombatValueModifier => TotalCombatValueModifier - AllocatedToInitiate - AllocatedToAttack - AllocatedToDefense - AllocatedToAim;
 
     [JsonInclude, Newtonsoft.Json.JsonProperty]
     public int TotalCombatValueModifier { get; set; }
@@ -183,31 +181,87 @@ public partial class Character : ICharacter
     public int AllocatedToAim { get => allocatedToAim; private set => allocatedToAim = value; }
 
     [JsonInclude, Newtonsoft.Json.JsonProperty]
-    public int MinInitiateValue { get; private set; }
+    public int MinInitiateValue
+    {
+        get => minInitiateValue;
+        private set
+        {
+            if (minInitiateValue != value)
+            {
+                minInitiateValue = value;
+                OnPropertyChanged();
+            }
+        }
+    }
 
     [JsonInclude, Newtonsoft.Json.JsonProperty]
-    public int MinAttackValue { get; private set; }
+    public int MinAttackValue
+    {
+        get => minAttackValue;
+        private set
+        {
+            if (minAttackValue != value)
+            {
+                minAttackValue = value;
+                OnPropertyChanged();
+            }
+        }
+    }
 
     [JsonInclude, Newtonsoft.Json.JsonProperty]
-    public int MinDefenseValue { get; private set; }
+    public int MinDefenseValue
+    {
+        get => minDefenseValue;
+        private set
+        {
+            if (minDefenseValue != value)
+            {
+                minDefenseValue = value;
+                OnPropertyChanged();
+            }
+        }
+    }
 
     [JsonInclude, Newtonsoft.Json.JsonProperty]
-    public int MinAimValue { get; private set; }
+    public int MinAimValue
+    {
+        get => minAimValue;
+        private set
+        {
+            if (minAimValue != value)
+            {
+                minAimValue = value;
+                OnPropertyChanged();
+            }
+        }
+    }
 
     [JsonIgnore, Newtonsoft.Json.JsonIgnore]
-    public bool CanAllocateCombatModifier => CombatValueModifier > 0;
+    public int AllocatedToInitiateMax => AllocatedToInitiate + RemainingCombatValueModifier;
 
     [JsonIgnore, Newtonsoft.Json.JsonIgnore]
-    public int MaxInitiateValue => InitiateValue + CombatValueModifier;
+    public int AllocatedToAttackMax => AllocatedToAttack + RemainingCombatValueModifier;
 
     [JsonIgnore, Newtonsoft.Json.JsonIgnore]
-    public int MaxAttackValue => AttackValue + CombatValueModifier;
+    public int AllocatedToDefenseMax => AllocatedToDefense + RemainingCombatValueModifier;
 
     [JsonIgnore, Newtonsoft.Json.JsonIgnore]
-    public int MaxDefenseValue => DefenseValue + CombatValueModifier;
+    public int AllocatedToAimMax => AllocatedToAim + RemainingCombatValueModifier;
 
     [JsonIgnore, Newtonsoft.Json.JsonIgnore]
-    public int MaxAimValue => AimValue + CombatValueModifier;
+    public bool CanAllocateCombatModifier => TotalCombatValueModifier > 0;
+
+    [JsonIgnore, Newtonsoft.Json.JsonIgnore]
+    public int MaxInitiateValue => MinInitiateValue + AllocatedToInitiate + RemainingCombatValueModifier;
+
+    [JsonIgnore, Newtonsoft.Json.JsonIgnore]
+    public int MaxAttackValue => MinAttackValue + AllocatedToAttack + RemainingCombatValueModifier;
+
+    [JsonIgnore, Newtonsoft.Json.JsonIgnore]
+    public int MaxDefenseValue => MinDefenseValue + AllocatedToDefense + RemainingCombatValueModifier;
+
+    [JsonIgnore, Newtonsoft.Json.JsonIgnore]
+    public int MaxAimValue => MinAimValue + AllocatedToAim + RemainingCombatValueModifier;
 
     [JsonIgnore, Newtonsoft.Json.JsonIgnore]
     public override int InitiateValue
@@ -232,8 +286,8 @@ public partial class Character : ICharacter
 
             var weaponBonus = selectedCombatValueModifier switch
             {
-                Enums.CombatValueModifier.PrimaryWeapon when PrimaryWeapon is IWeapon weapon => weapon.InitiateValue,
-                Enums.CombatValueModifier.SecondaryWeapon when SecondaryWeapon is IWeapon secondaryWeapon => secondaryWeapon.InitiateValue,
+                CombatValueModifier.PrimaryWeapon when PrimaryWeapon is IWeapon weapon => weapon.InitiateValue,
+                CombatValueModifier.SecondaryWeapon when SecondaryWeapon is IWeapon secondaryWeapon => secondaryWeapon.InitiateValue,
                 _ => fist.InitiateValue,
             };
 
@@ -253,8 +307,8 @@ public partial class Character : ICharacter
             
             var weaponBonus = selectedCombatValueModifier switch
             {
-                Enums.CombatValueModifier.PrimaryWeapon when PrimaryWeapon is IMeleeWeapon meleeWeapon => meleeWeapon.AttackValue,
-                Enums.CombatValueModifier.SecondaryWeapon when SecondaryWeapon is IMeleeWeapon secondaryMeleeWeapon => secondaryMeleeWeapon.AttackValue,
+                CombatValueModifier.PrimaryWeapon when PrimaryWeapon is IMeleeWeapon meleeWeapon => meleeWeapon.AttackValue,
+                CombatValueModifier.SecondaryWeapon when SecondaryWeapon is IMeleeWeapon secondaryMeleeWeapon => secondaryMeleeWeapon.AttackValue,
                 _ => fist.AttackValue,
             };
 
@@ -273,8 +327,8 @@ public partial class Character : ICharacter
 
             var weaponBonus = selectedCombatValueModifier switch
             {
-                Enums.CombatValueModifier.PrimaryWeapon when PrimaryWeapon is IMeleeWeapon meleeWeapon => meleeWeapon.DefenseValue,
-                Enums.CombatValueModifier.SecondaryWeapon when SecondaryWeapon is IMeleeWeapon secondaryMeleeWeapon => secondaryMeleeWeapon.DefenseValue,
+                CombatValueModifier.PrimaryWeapon when PrimaryWeapon is IMeleeWeapon meleeWeapon => meleeWeapon.DefenseValue,
+                CombatValueModifier.SecondaryWeapon when SecondaryWeapon is IMeleeWeapon secondaryMeleeWeapon => secondaryMeleeWeapon.DefenseValue,
                 _ => fist.DefenseValue,
             };
 
@@ -294,8 +348,8 @@ public partial class Character : ICharacter
             
             var weaponBonus = selectedCombatValueModifier switch
             {
-                Enums.CombatValueModifier.PrimaryWeapon when PrimaryWeapon is IRangedWeapon rangedWeapon => rangedWeapon.AimValue,
-                Enums.CombatValueModifier.SecondaryWeapon when SecondaryWeapon is IRangedWeapon secondaryRangedWeapon => secondaryRangedWeapon.AimValue,
+                CombatValueModifier.PrimaryWeapon when PrimaryWeapon is IRangedWeapon rangedWeapon => rangedWeapon.AimValue,
+                CombatValueModifier.SecondaryWeapon when SecondaryWeapon is IRangedWeapon secondaryRangedWeapon => secondaryRangedWeapon.AimValue,
                 _ => 0,
             };
 
@@ -309,33 +363,88 @@ public partial class Character : ICharacter
         secondaryWeapon = ResolveWeaponById(SecondaryWeaponId);
     }
 
-    public void ChangeInitiator(int delta) => ChangeAllocation(ref allocatedToInitiate, delta);
+    public void ChangeInitiator(int delta) => ChangeAllocation(ref allocatedToInitiate, delta, AllocationTarget.Initiate);
+    public void ChangeAttack(int delta) => ChangeAllocation(ref allocatedToAttack, delta, AllocationTarget.Attack);
+    public void ChangeDefense(int delta) => ChangeAllocation(ref allocatedToDefense, delta, AllocationTarget.Defense);
+    public void ChangeAim(int delta) => ChangeAllocation(ref allocatedToAim, delta, AllocationTarget.Aim);
 
-    public void ChangeAttack(int delta) => ChangeAllocation(ref allocatedToAttack, delta);
+    public void CommitAllocations()
+    {
+        LockedAllocatedToInitiate = AllocatedToInitiate;
+        LockedAllocatedToAttack = AllocatedToAttack;
+        LockedAllocatedToDefense = AllocatedToDefense;
+        LockedAllocatedToAim = AllocatedToAim;
+    }
 
-    public void ChangeDefense(int delta) => ChangeAllocation(ref allocatedToDefense, delta);
-
-    public void ChangeAim(int delta) => ChangeAllocation(ref allocatedToAim, delta);
-
-    private void ChangeAllocation(ref int allocated, int delta)
+    private void ChangeAllocation(ref int allocated, int delta, AllocationTarget target)
     {
         if (delta == 0)
         {
             return;
         }
 
-        if (delta > 0 && CombatValueModifier < delta)
+        if (delta > 0 && RemainingCombatValueModifier < delta)
         {
+            NotifyAllocationChanged(target);
             return;
         }
 
-        if (delta < 0 && allocated + delta < 0)
+        int lockedValue = GetLockedValueForTarget(target);
+
+        if (delta < 0 && allocated + delta < lockedValue)
         {
             return;
         }
 
         allocated += delta;
-        CombatValueModifier -= delta;
+
+        NotifyAllocationChanged(target);
+    }
+
+    private int GetLockedValueForTarget(AllocationTarget target)
+    {
+        return target switch
+        {
+            AllocationTarget.Initiate => LockedAllocatedToInitiate,
+            AllocationTarget.Attack => LockedAllocatedToAttack,
+            AllocationTarget.Defense => LockedAllocatedToDefense,
+            AllocationTarget.Aim => LockedAllocatedToAim,
+            _ => 0
+        };
+    }
+
+    private void NotifyAllocationChanged(AllocationTarget target)
+    {
+        OnPropertyChanged(nameof(RemainingCombatValueModifier));
+        OnPropertyChanged(nameof(CanAllocateCombatModifier));
+
+        switch (target)
+        {
+            case AllocationTarget.Initiate:
+                OnPropertyChanged(nameof(AllocatedToInitiate));
+                OnPropertyChanged(nameof(AllocatedToInitiateMax));
+                OnPropertyChanged(nameof(InitiateValue));
+                OnMaxLimitsChanged();
+                break;
+            case AllocationTarget.Attack:
+                OnPropertyChanged(nameof(AllocatedToAttack));
+                OnPropertyChanged(nameof(AllocatedToAttackMax));
+                OnPropertyChanged(nameof(AttackValue));
+                OnMaxLimitsChanged();
+                break;
+            case AllocationTarget.Defense:
+                OnPropertyChanged(nameof(AllocatedToDefense));
+                OnPropertyChanged(nameof(AllocatedToDefenseMax));
+                OnPropertyChanged(nameof(DefenseValue));
+                OnMaxLimitsChanged();
+                break;
+            case AllocationTarget.Aim:
+                OnPropertyChanged(nameof(AllocatedToAim));
+                OnPropertyChanged(nameof(AllocatedToAimMax));
+                OnPropertyChanged(nameof(AimValue));
+                OnMaxLimitsChanged();
+                break;
+        }
     }
 
     private void SetPrimaryWeapon()
@@ -381,10 +490,21 @@ public partial class Character : ICharacter
         var autoDistributeCombatValues = settings?.AutoDistributeCombatValues ?? false;
         if (autoDistributeCombatValues)
         {
-            AllocatedToAttack = MathHelper.GetModifier(combatValueModifier, attackPercentage);
-            AllocatedToDefense = MathHelper.GetModifier(combatValueModifier, defencePercentage);
-            AllocatedToAim = MathHelper.GetModifier(combatValueModifier, aimingPercentage);
-            AllocatedToInitiate = combatValueModifier - allocatedToAttack - allocatedToDefense - allocatedToAim;
+            int attack = MathHelper.GetModifier(combatValueModifier, attackPercentage); // Használj Floor-t belül
+            int defense = MathHelper.GetModifier(combatValueModifier, defencePercentage);
+            int aim = MathHelper.GetModifier(combatValueModifier, aimingPercentage);
+
+            int used = attack + defense + aim;
+            if (used > combatValueModifier)
+            {
+                aim -= (used - combatValueModifier);
+            }
+
+            AllocatedToAttack = attack;
+            AllocatedToDefense = defense;
+            AllocatedToAim = aim;
+
+            AllocatedToInitiate = Math.Max(0, combatValueModifier - AllocatedToAttack - AllocatedToDefense - AllocatedToAim);
             if (AllocatedToInitiate < 0)
             {
                 throw new InvalidOperationException($"The amount of the percentages ({nameof(attackPercentage)} + {nameof(defencePercentage)} + {nameof(aimingPercentage)}) should be under or equal to 100 percent.");
@@ -393,8 +513,6 @@ public partial class Character : ICharacter
         else
         {
             TotalCombatValueModifier = combatValueModifier;
-            int alreadyAllocated = AllocatedToAttack + AllocatedToDefense + AllocatedToAim + AllocatedToInitiate;
-            CombatValueModifier = combatValueModifier - alreadyAllocated;
         }
         SetOriginalCombatValues();
     }
@@ -405,10 +523,6 @@ public partial class Character : ICharacter
         MinAttackValue = AttackValue;
         MinDefenseValue = DefenseValue;
         MinAimValue = AimValue;
-        OnPropertyChanged(nameof(MinInitiateValue));
-        OnPropertyChanged(nameof(MinAttackValue));
-        OnPropertyChanged(nameof(MinDefenseValue));
-        OnPropertyChanged(nameof(MinAimValue));
     }
 
     [DiceThrow(ThrowType._1D2)]

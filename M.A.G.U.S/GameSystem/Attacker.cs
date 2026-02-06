@@ -59,11 +59,11 @@ public abstract class Attacker
 
     public virtual int ActualHealthPoints { get; set; }
 
-    public virtual int ActualPainTolerancePoints { get; set; }
+    public virtual int? ActualPainTolerancePoints { get; set; }
 
     public virtual double AttacksPerRound { get; protected set; } = 1;
 
-    public AttackStrategy AttackStrategy { get; } = AttackStrategy.AttackFirst;
+    public AttackStrategy AttackStrategy { get; set; } = AttackStrategy.AttackFirst;
 
     public abstract List<Attack> AttackModes { get; protected set; }
 
@@ -139,6 +139,12 @@ public abstract class Attacker
                 .Select(s => s.Value ?? 0)
                 .FirstOrDefault();
     }
+
+    public bool IsDead => ActualHealthPoints <= 0;
+
+    public virtual bool IsUndead { get; set; } = false;
+
+    public bool IsConscious => ActualPainTolerancePoints > 0 && (!IsDead || IsUndead);
 
     protected void OnPropertyChanged([CallerMemberName] string propertyName = "") => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
 }

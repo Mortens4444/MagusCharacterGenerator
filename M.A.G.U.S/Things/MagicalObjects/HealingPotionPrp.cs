@@ -9,4 +9,6 @@ public class HealingPotionPrp : MagicalObject
     public override Money Price => new(0, 5);
 
     public override int ManaPoints => 2;
+
+    public override string[] Images => ["healing_potion_prp.png"];
 }

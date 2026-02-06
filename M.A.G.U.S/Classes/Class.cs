@@ -8,6 +8,7 @@ using M.A.G.U.S.Interfaces;
 using M.A.G.U.S.Models;
 using M.A.G.U.S.Qualifications;
 using M.A.G.U.S.Races;
+using System.Text.Json.Serialization;
 
 namespace M.A.G.U.S.Classes;
 
@@ -16,6 +17,8 @@ public abstract class Class : ImageOwner, IClass
     protected const string _1D6_Plus_12_Plus_SpecialTraining = "1D6 + 12 + Special training";
 
     protected readonly DiceThrow DiceThrow = new();
+    private ulong experiencePoints;
+    private int level;
 
     protected Class(int level, bool autoGenerateSkills)
     {
@@ -58,7 +61,18 @@ public abstract class Class : ImageOwner, IClass
 
     public override string ToString() => Name;
 
-    public int Level { get; set; }
+    public int Level
+    {
+        get => level;
+        set
+        {
+            level = value;
+            if (level == GetLevelByExperiencePoints(ExperiencePoints))
+            {
+                CanUpgrade = false;
+            }
+        }
+    }
 
     public abstract int InitiateBaseValue { get; }
 
@@ -137,7 +151,22 @@ public abstract class Class : ImageOwner, IClass
 
     public int MentalMagicResistance { get; }
 
-    public ulong ExperiencePoints { get; set; }
+    [JsonIgnore, Newtonsoft.Json.JsonIgnore]
+    public bool CanUpgrade { get; private set; }
+
+    public ulong ExperiencePoints
+    {
+        get => experiencePoints;
+        set
+        {
+            experiencePoints = value;
+            var newLevel = GetLevelByExperiencePoints(value);
+            if (newLevel > Level)
+            {
+                CanUpgrade = true;
+            }
+        }
+    }
 
     public virtual Alignment Alignment => Alignment.Order;
 
@@ -146,17 +175,17 @@ public abstract class Class : ImageOwner, IClass
     public virtual List<LevelRequirement> ExperienceLevels =>
     [
         new() { Level = 1,  MinExperience = 0,      MaxExperience = 190 },
-            new() { Level = 2,  MinExperience = 191,    MaxExperience = 400 },
-            new() { Level = 3,  MinExperience = 401,    MaxExperience = 900 },
-            new() { Level = 4,  MinExperience = 901,    MaxExperience = 1800 },
-            new() { Level = 5,  MinExperience = 1801,   MaxExperience = 3500 },
-            new() { Level = 6,  MinExperience = 3501,   MaxExperience = 7500 },
-            new() { Level = 7,  MinExperience = 7501,   MaxExperience = 15000 },
-            new() { Level = 8,  MinExperience = 15001,  MaxExperience = 30000 },
-            new() { Level = 9,  MinExperience = 30001,  MaxExperience = 60000 },
-            new() { Level = 10, MinExperience = 60001,  MaxExperience = 110000 },
-            new() { Level = 11, MinExperience = 110001, MaxExperience = 160000 },
-            new() { Level = 12, MinExperience = 160001, MaxExperience = 220000 }
+        new() { Level = 2,  MinExperience = 191,    MaxExperience = 400 },
+        new() { Level = 3,  MinExperience = 401,    MaxExperience = 900 },
+        new() { Level = 4,  MinExperience = 901,    MaxExperience = 1800 },
+        new() { Level = 5,  MinExperience = 1801,   MaxExperience = 3500 },
+        new() { Level = 6,  MinExperience = 3501,   MaxExperience = 7500 },
+        new() { Level = 7,  MinExperience = 7501,   MaxExperience = 15000 },
+        new() { Level = 8,  MinExperience = 15001,  MaxExperience = 30000 },
+        new() { Level = 9,  MinExperience = 30001,  MaxExperience = 60000 },
+        new() { Level = 10, MinExperience = 60001,  MaxExperience = 110000 },
+        new() { Level = 11, MinExperience = 110001, MaxExperience = 160000 },
+        new() { Level = 12, MinExperience = 160001, MaxExperience = 220000 }
     ];
 
     public virtual ulong ExpPerLevelAfter12 => 60000;

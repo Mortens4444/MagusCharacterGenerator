@@ -26,10 +26,10 @@ internal partial class RollFormulaPage : NotifierPage
     public RollFormulaPage(ISoundPlayer soundPlayer, IShakeService shakeService, RollFormula rollFormula)
     {
         InitializeComponent();
-        Title = Lng.Elem(rollFormula.Title);
+        RollFormulaTitle.Text = Lng.Elem(rollFormula.Title);
         BindingContext = new RollFormulaViewModel(soundPlayer, shakeService, rollFormula);
         ViewModel.RollRequested += OnRollRequested;
-        ViewModel.CloseRequested += async (_, _) => await CloseAsync();
+        ViewModel.CloseRequested += async (_, _) => await CloseAsync().ConfigureAwait(true);
     }
 
     public Task<int> ResultTask => tcs.Task;
@@ -109,6 +109,7 @@ internal partial class RollFormulaPage : NotifierPage
         catch (Exception ex)
         {
             tcs.SetException(ex);
+            WeakReferenceMessenger.Default.Send(new ShowErrorMessage(ex));
         }
     }
 

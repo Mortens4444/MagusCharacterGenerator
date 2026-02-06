@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFrameworks>net10.0-android;net10.0-ios;net10.0-maccatalyst</TargetFrameworks>
     <TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('windows'))">$(TargetFrameworks);net10.0-windows10.0.19041.0</TargetFrameworks>
@@ -16,6 +16,7 @@
     <SingleProject>true</SingleProject>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    <!--<AndroidSupportedAbis>arm64-v8a</AndroidSupportedAbis>-->
     <!--<AndroidSupportedAbis>arm64-v8a;armeabi-v7a;x86;x86_64</AndroidSupportedAbis>-->
     <!-- Display name -->
     <ApplicationTitle>M.A.G.U.S. Assistant</ApplicationTitle>
@@ -23,7 +24,7 @@
     <ApplicationId>com.mortens.MAGUS.Assistant</ApplicationId>
     <!-- Versions -->
     <MajorVersion>1</MajorVersion>
-    <MinorVersion>31</MinorVersion>
+    <MinorVersion>34</MinorVersion>
     <BuildNumber>0</BuildNumber>
     <PatchNumber>0</PatchNumber>
     <FileVersion>$(MajorVersion).$(MinorVersion).$(BuildNumber).$(PatchNumber)</FileVersion>
@@ -43,6 +44,7 @@
     <RunAOTCompilation>false</RunAOTCompilation>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <JavaMaxHeapSize>1G</JavaMaxHeapSize>
+    <AndroidLinkMode>None</AndroidLinkMode>
     <AndroidEnableMultiDex>true</AndroidEnableMultiDex>
     <SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios'">16.1</SupportedOSPlatformVersion>
     <SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'maccatalyst'">15.0</SupportedOSPlatformVersion>
@@ -53,10 +55,16 @@
     <DefaultLanguage>en-US</DefaultLanguage>
     <LangVersion>preview</LangVersion>
   </PropertyGroup>
+  <!--<PropertyGroup>
+    <RuntimeIdentifiers>
+      android-x64;android-arm64
+    </RuntimeIdentifiers>
+  </PropertyGroup>-->
   <PropertyGroup Condition="'$(Configuration)'=='Release' AND '$(TargetFramework)'=='net10.0-android'">
     <PublishTrimmed>false</PublishTrimmed>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)' == 'Release'">
+    <AndroidCreatePackagePerAbi>false</AndroidCreatePackagePerAbi>
     <AndroidKeyStore>True</AndroidKeyStore>
     <AndroidSigningKeyAlias>h4ckw1thm3</AndroidSigningKeyAlias>
     <AndroidSigningKeyStore>C:\Work\KeyStore\H4ckW1thM3\keystore.jks</AndroidSigningKeyStore>
@@ -66,16 +74,19 @@
     <AndroidSigningKeyStore>C:\Work\KeyStore\MAGUS_Assistant\keystore.jks</AndroidSigningKeyStore>
     <AndroidSigningKeyPass>file:C:\Work\KeyStore\MAGUS_Assistant\AndroidSigningKeyPass.txt</AndroidSigningKeyPass>
     <AndroidSigningStorePass>file:C:\Work\KeyStore\MAGUS_Assistant\AndroidSigningStorePass.txt</AndroidSigningStorePass>-->
-    <AndroidPackageFormats>aab;apk</AndroidPackageFormats>
+    <AndroidPackageFormats>apk</AndroidPackageFormats>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net10.0-android|AnyCPU'">
     <JavaMaximumHeapSize>2G</JavaMaximumHeapSize>
     <AndroidEnableMultiDex>True</AndroidEnableMultiDex>
     <EmbedAssembliesIntoApk>True</EmbedAssembliesIntoApk>
+    <PublishTrimmed>false</PublishTrimmed>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net10.0-android|AnyCPU'">
     <JavaMaximumHeapSize>2G</JavaMaximumHeapSize>
     <AndroidEnableMultiDex>True</AndroidEnableMultiDex>
+    <EmbedAssembliesIntoApk>True</EmbedAssembliesIntoApk>
+    <PublishTrimmed>false</PublishTrimmed>
   </PropertyGroup>
   <ItemGroup>
     <!-- App Icon -->
@@ -83,500 +94,53 @@
     <!-- Splash Screen -->
     <MauiSplashScreen Include="Resources\Splash\splash.png" Color="#000000" BaseSize="128,128" />
     <!-- Images -->
-    <MauiImage Include="Resources\Images\*" />
+    <!--<MauiImage Include="Resources\Images\**\*" />-->
+    <MauiImage Include="Resources\Images\*.png" />
+    <MauiImage Include="Resources\Images\Accomodation\*.png" />
+    <MauiImage Include="Resources\Images\Animals\*.png" />
+    <MauiImage Include="Resources\Images\Armors\*.png" />
+    <MauiImage Include="Resources\Images\Bestiary\*.png" />
+    <MauiImage Include="Resources\Images\Classes\*.png" />
+    <MauiImage Include="Resources\Images\Clothes\*.png" />
+    <MauiImage Include="Resources\Images\Debauchery\*.png" />
+    <MauiImage Include="Resources\Images\Food\*.png" />
+    <MauiImage Include="Resources\Images\Gemstones\*.png" />
+    <MauiImage Include="Resources\Images\MagicalItems\*.png" />
+    <MauiImage Include="Resources\Images\Menu\*.png" />
+    <MauiImage Include="Resources\Images\Other\*.png" />
+    <MauiImage Include="Resources\Images\Poisons\*.png" />
+    <MauiImage Include="Resources\Images\Qualifications\*.png" />
+    <MauiImage Include="Resources\Images\Races\*.png" />
+    <MauiImage Include="Resources\Images\Shields\*.png" />
+    <MauiImage Include="Resources\Images\Trappings\*.png" />
+    <MauiImage Include="Resources\Images\Travelling\*.png" />
+    <MauiImage Include="Resources\Images\Weapons\CrushingWeapons\*.png" />
+    <MauiImage Include="Resources\Images\Weapons\OtherWeapons\*.png" />
+    <MauiImage Include="Resources\Images\Weapons\RangedWeapons\*.png" />
+    <MauiImage Include="Resources\Images\Weapons\Spears\*.png" />
+    <MauiImage Include="Resources\Images\Weapons\StabbingWeapons\*.png" />
+    <!-- Sounds -->
+    <EmbeddedResource Include="Resources\Raw\**" />
     <!-- Custom Fonts -->
     <MauiFont Include="Resources\Fonts\*" />
     <!-- Raw Assets (also remove the "Resources\Raw" prefix) -->
-    <MauiAsset Include="Resources\Raw\**" LogicalName="%(RecursiveDir)%(Filename)%(Extension)" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Remove="Resources\Images\Characters\**" />
-    <Compile Remove="Resources\Images\Characters\**" />
-    <EmbeddedResource Remove="Resources\Images\Characters\**" />
-    <MauiCss Remove="Resources\Images\Characters\**" />
-    <MauiImage Remove="Resources\Images\Characters\**" />
-    <MauiXaml Remove="Resources\Images\Characters\**" />
-    <None Remove="Resources\Images\Characters\**" />
-  </ItemGroup>
-  <ItemGroup>
-    <MauiAsset Remove="Resources\Raw\bear_growl.mp3" />
-    <MauiAsset Remove="Resources\Raw\beast.mp3" />
-    <MauiAsset Remove="Resources\Raw\bird_chirping.mp3" />
-    <MauiAsset Remove="Resources\Raw\church_bell.mp3" />
-    <MauiAsset Remove="Resources\Raw\Credits.txt" />
-    <MauiAsset Remove="Resources\Raw\dark_cave.mp3" />
-    <MauiAsset Remove="Resources\Raw\dark_magic_spell_cast.mp3" />
-    <MauiAsset Remove="Resources\Raw\demon.mp3" />
-    <MauiAsset Remove="Resources\Raw\dice_roll.mp3" />
-    <MauiAsset Remove="Resources\Raw\dragon_growl.mp3" />
-    <MauiAsset Remove="Resources\Raw\drain_music.mp3" />
-    <MauiAsset Remove="Resources\Raw\fireball_cast.mp3" />
-    <MauiAsset Remove="Resources\Raw\fireball_cast_2.mp3" />
-    <MauiAsset Remove="Resources\Raw\horn.aiff" />
-    <MauiAsset Remove="Resources\Raw\horn.mp3" />
-    <MauiAsset Remove="Resources\Raw\horn_2.mp3" />
-    <MauiAsset Remove="Resources\Raw\horse.mp3" />
-    <MauiAsset Remove="Resources\Raw\man_ouch.mp3" />
-    <MauiAsset Remove="Resources\Raw\orc_ouch.mp3" />
-    <MauiAsset Remove="Resources\Raw\roar.mp3" />
-    <MauiAsset Remove="Resources\Raw\roar_2.mp3" />
-    <MauiAsset Remove="Resources\Raw\roar_3.mp3" />
-    <MauiAsset Remove="Resources\Raw\rubbing-metal.mp3" />
-    <MauiAsset Remove="Resources\Raw\scream.mp3" />
-    <MauiAsset Remove="Resources\Raw\scream_2.mp3" />
-    <MauiAsset Remove="Resources\Raw\scream_3.mp3" />
-    <MauiAsset Remove="Resources\Raw\spell_cast.mp3" />
-    <MauiAsset Remove="Resources\Raw\spell_cast_2.mp3" />
-    <MauiAsset Remove="Resources\Raw\sword_fight.mp3" />
-    <MauiAsset Remove="Resources\Raw\werewolf_howl.mp3" />
-    <MauiAsset Remove="Resources\Raw\wolf.mp3" />
-    <MauiAsset Remove="Resources\Raw\yeti-roar.mp3" />
-    <MauiAsset Remove="Resources\Raw\zombie.mp3" />
-    <MauiAsset Remove="Resources\Raw\zombie_2.mp3" />
-    <MauiAsset Remove="Resources\Raw\zombie_3.mp3" />
-    <MauiAsset Remove="Resources\Raw\zombie_4.mp3" />
-    <MauiAsset Remove="Resources\Raw\zombie_eating.mp3" />
+    <!--<MauiAsset Include="Resources\Raw\**" LogicalName="%(RecursiveDir)%(Filename)%(Extension)" />-->
   </ItemGroup>
   <ItemGroup>
     <MauiImage Remove="Resources\Images\images_manifest.txt" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Remove="Platforms\Android\Resources\values\styles.xml" />
-    <None Remove="Resources\Images\Accomodation\bath.png" />
-    <None Remove="Resources\Images\Accomodation\stables.png" />
-    <None Remove="Resources\Images\Animals\calf.png" />
-    <None Remove="Resources\Images\Animals\camel.png" />
-    <None Remove="Resources\Images\Animals\cat.png" />
-    <None Remove="Resources\Images\Animals\cow.png" />
-    <None Remove="Resources\Images\Animals\dog_hunting.png" />
-    <None Remove="Resources\Images\Animals\dog_sled.png" />
-    <None Remove="Resources\Images\Animals\donkey.png" />
-    <None Remove="Resources\Images\Animals\falcon_hunting.png" />
-    <None Remove="Resources\Images\Animals\goat.png" />
-    <None Remove="Resources\Images\Animals\goose.png" />
-    <None Remove="Resources\Images\Animals\hen.png" />
-    <None Remove="Resources\Images\Animals\pig.png" />
-    <None Remove="Resources\Images\Animals\turkey.png" />
-    <None Remove="Resources\Images\Armors\abbit_steel_breastplate.png" />
-    <None Remove="Resources\Images\Armors\abbit_steel_chainmail.png" />
-    <None Remove="Resources\Images\Armors\abbit_steel_full_plate.png" />
-    <None Remove="Resources\Images\Armors\abbit_steel_half_plate.png" />
-    <None Remove="Resources\Images\Armors\abbit_steel_scale_armor.png" />
-    <None Remove="Resources\Images\Armors\bronze_breastplate.png" />
-    <None Remove="Resources\Images\Armors\bronze_full_plate.png" />
-    <None Remove="Resources\Images\Armors\bronze_plate_armor.png" />
-    <None Remove="Resources\Images\Armors\bronze_scale_armor.png" />
-    <None Remove="Resources\Images\Armors\mithril_breastplate.png" />
-    <None Remove="Resources\Images\Armors\mithril_full_plate.png" />
-    <None Remove="Resources\Images\Armors\mithril_half_plate.png" />
-    <None Remove="Resources\Images\Armors\mithril_plate_armor.png" />
-    <None Remove="Resources\Images\Armors\mithril_scale_armor.png" />
-    <None Remove="Resources\Images\Armors\steel_breastplate.png" />
-    <None Remove="Resources\Images\Armors\steel_full_plate.png" />
-    <None Remove="Resources\Images\Armors\steel_half_plate.png" />
-    <None Remove="Resources\Images\Armors\steel_scale_armor.png" />
-    <None Remove="Resources\Images\Bestiary\adachnoa.png" />
-    <None Remove="Resources\Images\Bestiary\barracuda.png" />
-    <None Remove="Resources\Images\Bestiary\bat.png" />
-    <None Remove="Resources\Images\Bestiary\bear.png" />
-    <None Remove="Resources\Images\Bestiary\black_shark.png" />
-    <None Remove="Resources\Images\Bestiary\crocodile.png" />
-    <None Remove="Resources\Images\Bestiary\demon_shark.png" />
-    <None Remove="Resources\Images\Bestiary\dragon.png" />
-    <None Remove="Resources\Images\Bestiary\dream_crystal.png" />
-    <None Remove="Resources\Images\Bestiary\eagle.png" />
-    <None Remove="Resources\Images\Bestiary\falcon.png" />
-    <None Remove="Resources\Images\Bestiary\giant_crocodile.png" />
-    <None Remove="Resources\Images\Bestiary\giant_spider.png" />
-    <None Remove="Resources\Images\Bestiary\goblin.png" />
-    <None Remove="Resources\Images\Bestiary\golem.png" />
-    <None Remove="Resources\Images\Bestiary\heavy_armored_hourse.png" />
-    <None Remove="Resources\Images\Bestiary\killer_whale.png" />
-    <None Remove="Resources\Images\Bestiary\light_armored_hourse.png" />
-    <None Remove="Resources\Images\Bestiary\lizard_creature.png" />
-    <None Remove="Resources\Images\Bestiary\lizard_wizard.png" />
-    <None Remove="Resources\Images\Bestiary\mummy.png" />
-    <None Remove="Resources\Images\Bestiary\narwhal.png" />
-    <None Remove="Resources\Images\Bestiary\orc.png" />
-    <None Remove="Resources\Images\Bestiary\panther.png" />
-    <None Remove="Resources\Images\Bestiary\red_shark.png" />
-    <None Remove="Resources\Images\Bestiary\rhyno.png" />
-    <None Remove="Resources\Images\Bestiary\snow_leopard.png" />
-    <None Remove="Resources\Images\Bestiary\spider.png" />
-    <None Remove="Resources\Images\Bestiary\umich.png" />
-    <None Remove="Resources\Images\Bestiary\umich_2.png" />
-    <None Remove="Resources\Images\Bestiary\vampire.png" />
-    <None Remove="Resources\Images\Bestiary\vampire_lord.png" />
-    <None Remove="Resources\Images\Bestiary\war_dog.png" />
-    <None Remove="Resources\Images\Bestiary\werewolf.png" />
-    <None Remove="Resources\Images\Bestiary\white_eagle.png" />
-    <None Remove="Resources\Images\Bestiary\white_tiger.png" />
-    <None Remove="Resources\Images\Bestiary\white_wolf.png" />
-    <None Remove="Resources\Images\Bestiary\wolf.png" />
-    <None Remove="Resources\Images\Bestiary\wolves.png" />
-    <None Remove="Resources\Images\Bestiary\zombie.png" />
-    <None Remove="Resources\Images\Classes\assassin.png" />
-    <None Remove="Resources\Images\Classes\bard.png" />
-    <None Remove="Resources\Images\Classes\blademaster.png" />
-    <None Remove="Resources\Images\Classes\craftsman.png" />
-    <None Remove="Resources\Images\Classes\fire_mage.png" />
-    <None Remove="Resources\Images\Classes\gladiator.png" />
-    <None Remove="Resources\Images\Classes\gladiator_2.png" />
-    <None Remove="Resources\Images\Classes\guard.png" />
-    <None Remove="Resources\Images\Classes\healer.png" />
-    <None Remove="Resources\Images\Classes\knight.png" />
-    <None Remove="Resources\Images\Classes\martial_artist.png" />
-    <None Remove="Resources\Images\Classes\merchant.png" />
-    <None Remove="Resources\Images\Classes\paladin_of_ranagol.png" />
-    <None Remove="Resources\Images\Classes\peasant.png" />
-    <None Remove="Resources\Images\Classes\priest.png" />
-    <None Remove="Resources\Images\Classes\priest_of_arel.png" />
-    <None Remove="Resources\Images\Classes\soldier.png" />
-    <None Remove="Resources\Images\Classes\thief.png" />
-    <None Remove="Resources\Images\Classes\warlock.png" />
-    <None Remove="Resources\Images\Classes\wiseman.png" />
-    <None Remove="Resources\Images\Classes\witch.png" />
-    <None Remove="Resources\Images\Classes\witch_2.png" />
-    <None Remove="Resources\Images\Classes\wizard.png" />
-    <None Remove="Resources\Images\Clothes\boots.png" />
-    <None Remove="Resources\Images\Clothes\riding_boots.png" />
-    <None Remove="Resources\Images\Debauchery\alidari_woman.png" />
-    <None Remove="Resources\Images\Debauchery\common_prostitute.png" />
-    <None Remove="Resources\Images\Debauchery\daughters_of_the_lotus.png" />
-    <None Remove="Resources\Images\Debauchery\male_prostitute.png" />
-    <None Remove="Resources\Images\Food\beer_mug.png" />
-    <None Remove="Resources\Images\Food\brandy_glass.png" />
-    <None Remove="Resources\Images\Food\butter_kilo.png" />
-    <None Remove="Resources\Images\Food\cheese.png" />
-    <None Remove="Resources\Images\Food\fish_portion.png" />
-    <None Remove="Resources\Images\Food\game_meat_portion.png" />
-    <None Remove="Resources\Images\Food\liqueur.png" />
-    <None Remove="Resources\Images\Food\loree.png" />
-    <None Remove="Resources\Images\Food\lunch_dinner.png" />
-    <None Remove="Resources\Images\Food\milk_jug.png" />
-    <None Remove="Resources\Images\Food\salt_block.png" />
-    <None Remove="Resources\Images\Food\sugar_glass.png" />
-    <None Remove="Resources\Images\Food\vegetables.png" />
-    <None Remove="Resources\Images\Food\wine.png" />
-    <None Remove="Resources\Images\Food\wine_cup.png" />
-    <None Remove="Resources\Images\Gemstones\agate.png" />
-    <None Remove="Resources\Images\Gemstones\alexandrite.png" />
-    <None Remove="Resources\Images\Gemstones\amber.png" />
-    <None Remove="Resources\Images\Gemstones\amethyst.png" />
-    <None Remove="Resources\Images\Gemstones\aquamarine.png" />
-    <None Remove="Resources\Images\Gemstones\azurite.png" />
-    <None Remove="Resources\Images\Gemstones\black_sonioni_opal.png" />
-    <None Remove="Resources\Images\Gemstones\carnelian.png" />
-    <None Remove="Resources\Images\Gemstones\chalcedony.png" />
-    <None Remove="Resources\Images\Gemstones\chrysoberyl.png" />
-    <None Remove="Resources\Images\Gemstones\chrysoprase.png" />
-    <None Remove="Resources\Images\Gemstones\coral.png" />
-    <None Remove="Resources\Images\Gemstones\diamond.png" />
-    <None Remove="Resources\Images\Gemstones\emerald.png" />
-    <None Remove="Resources\Images\Gemstones\garnet.png" />
-    <None Remove="Resources\Images\Gemstones\hematite.png" />
-    <None Remove="Resources\Images\Gemstones\jade.png" />
-    <None Remove="Resources\Images\Gemstones\jasper.png" />
-    <None Remove="Resources\Images\Gemstones\jet.png" />
-    <None Remove="Resources\Images\Gemstones\lapis_lazuli.png" />
-    <None Remove="Resources\Images\Gemstones\malachite.png" />
-    <None Remove="Resources\Images\Gemstones\moonstone.png" />
-    <None Remove="Resources\Images\Gemstones\nephrite.png" />
-    <None Remove="Resources\Images\Gemstones\obsidian.png" />
-    <None Remove="Resources\Images\Gemstones\onyx.png" />
-    <None Remove="Resources\Images\Gemstones\opal.png" />
-    <None Remove="Resources\Images\Gemstones\pearl.png" />
-    <None Remove="Resources\Images\Gemstones\peridot.png" />
-    <None Remove="Resources\Images\Gemstones\rose_crystal.png" />
-    <None Remove="Resources\Images\Gemstones\rose_quartz.png" />
-    <None Remove="Resources\Images\Gemstones\rubin.png" />
-    <None Remove="Resources\Images\Gemstones\ruby.png" />
-    <None Remove="Resources\Images\Gemstones\sapphire.png" />
-    <None Remove="Resources\Images\Gemstones\serpentine.png" />
-    <None Remove="Resources\Images\Gemstones\smaragd.png" />
-    <None Remove="Resources\Images\Gemstones\smoky_quartz.png" />
-    <None Remove="Resources\Images\Gemstones\spinel.png" />
-    <None Remove="Resources\Images\Gemstones\topaz.png" />
-    <None Remove="Resources\Images\Gemstones\tourmaline.png" />
-    <None Remove="Resources\Images\Gemstones\turquoise.png" />
-    <None Remove="Resources\Images\Gemstones\zircon.png" />
-    <None Remove="Resources\Images\MagicalItems\amulet_against_poisons.png" />
-    <None Remove="Resources\Images\MagicalItems\amulet_of_invisibility.png" />
-    <None Remove="Resources\Images\MagicalItems\amulet_of_luck.png" />
-    <None Remove="Resources\Images\MagicalItems\amulet_of_mind_protection.png" />
-    <None Remove="Resources\Images\MagicalItems\amulet_of_power.png" />
-    <None Remove="Resources\Images\MagicalItems\amulet_of_truth.png" />
-    <None Remove="Resources\Images\MagicalItems\banner_of_heroes.png" />
-    <None Remove="Resources\Images\MagicalItems\boots_of_leaping.png" />
-    <None Remove="Resources\Images\MagicalItems\boots_of_rushing.png" />
-    <None Remove="Resources\Images\MagicalItems\bottomless_jug.png" />
-    <None Remove="Resources\Images\MagicalItems\climbing_gloves.png" />
-    <None Remove="Resources\Images\MagicalItems\cloak_of_invisibility.png" />
-    <None Remove="Resources\Images\MagicalItems\deep_pouch.png" />
-    <None Remove="Resources\Images\MagicalItems\drink_of_the_gods.png" />
-    <None Remove="Resources\Images\MagicalItems\flying_carpet.png" />
-    <None Remove="Resources\Images\MagicalItems\fodder_daily.png" />
-    <None Remove="Resources\Images\MagicalItems\gloves_of_nimble_fingers.png" />
-    <None Remove="Resources\Images\MagicalItems\healing_potion.png" />
-    <None Remove="Resources\Images\MagicalItems\healing_potion_prp.png" />
-    <None Remove="Resources\Images\MagicalItems\helmet_of_tongues.png" />
-    <None Remove="Resources\Images\MagicalItems\magical_object.png" />
-    <None Remove="Resources\Images\MagicalItems\magic_scroll.png" />
-    <None Remove="Resources\Images\MagicalItems\medallion_of_steely_will.png" />
-    <None Remove="Resources\Images\MagicalItems\potion_of_courage.png" />
-    <None Remove="Resources\Images\MagicalItems\potion_of_dragon_s_breath.png" />
-    <None Remove="Resources\Images\MagicalItems\potion_of_flight.png" />
-    <None Remove="Resources\Images\MagicalItems\potion_of_invulnerability.png" />
-    <None Remove="Resources\Images\MagicalItems\potion_of_mental_freshness.png" />
-    <None Remove="Resources\Images\MagicalItems\potion_of_power.png" />
-    <None Remove="Resources\Images\MagicalItems\potion_of_shrinking.png" />
-    <None Remove="Resources\Images\MagicalItems\protective_cloak.png" />
-    <None Remove="Resources\Images\Qualifications\agriculture.png" />
-    <None Remove="Resources\Images\Qualifications\aiming.png" />
-    <None Remove="Resources\Images\Qualifications\alchemy.png" />
-    <None Remove="Resources\Images\Qualifications\alertness_perception.png" />
-    <None Remove="Resources\Images\Qualifications\ancient_tongue_lore.png" />
-    <None Remove="Resources\Images\Qualifications\animal_breeding.png" />
-    <None Remove="Resources\Images\Qualifications\animal_training.png" />
-    <None Remove="Resources\Images\Qualifications\appraisal.png" />
-    <None Remove="Resources\Images\Qualifications\architecture.png" />
-    <None Remove="Resources\Images\Qualifications\artic_survival.png" />
-    <None Remove="Resources\Images\Qualifications\backstab.png" />
-    <None Remove="Resources\Images\Qualifications\blind_fighting.png" />
-    <None Remove="Resources\Images\Qualifications\boot_making.png" />
-    <None Remove="Resources\Images\Qualifications\card_sharping.png" />
-    <None Remove="Resources\Images\Qualifications\carpentry.png" />
-    <None Remove="Resources\Images\Qualifications\cartography.png" />
-    <None Remove="Resources\Images\Qualifications\climbing.png" />
-    <None Remove="Resources\Images\Qualifications\close_combat.png" />
-    <None Remove="Resources\Images\Qualifications\coinage.png" />
-    <None Remove="Resources\Images\Qualifications\courier_herald.png" />
-    <None Remove="Resources\Images\Qualifications\dancing.png" />
-    <None Remove="Resources\Images\Qualifications\demonology.png" />
-    <None Remove="Resources\Images\Qualifications\disarmament.png" />
-    <None Remove="Resources\Images\Qualifications\divination.png" />
-    <None Remove="Resources\Images\Qualifications\empty.png" />
-    <None Remove="Resources\Images\Qualifications\escape_bonds.png" />
-    <None Remove="Resources\Images\Qualifications\etiquette.png" />
-    <None Remove="Resources\Images\Qualifications\falling.png" />
-    <None Remove="Resources\Images\Qualifications\feenhar_falcon_betrayal.png" />
-    <None Remove="Resources\Images\Qualifications\fistfight.png" />
-    <None Remove="Resources\Images\Qualifications\forest_survival.png" />
-    <None Remove="Resources\Images\Qualifications\forgery.png" />
-    <None Remove="Resources\Images\Qualifications\gemstone_magic.png" />
-    <None Remove="Resources\Images\Qualifications\ground_combat.png" />
-    <None Remove="Resources\Images\Qualifications\healing.png" />
-    <None Remove="Resources\Images\Qualifications\heavy_armor_wearing.png" />
-    <None Remove="Resources\Images\Qualifications\heraldry.png" />
-    <None Remove="Resources\Images\Qualifications\herbalism.png" />
-    <None Remove="Resources\Images\Qualifications\hiding.png" />
-    <None Remove="Resources\Images\Qualifications\history_lore.png" />
-    <None Remove="Resources\Images\Qualifications\human_insight.png" />
-    <None Remove="Resources\Images\Qualifications\juggling.png" />
-    <None Remove="Resources\Images\Qualifications\jumping.png" />
-    <None Remove="Resources\Images\Qualifications\knotting.png" />
-    <None Remove="Resources\Images\Qualifications\language_lore.png" />
-    <None Remove="Resources\Images\Qualifications\leadership.png" />
-    <None Remove="Resources\Images\Qualifications\legend_lore.png" />
-    <None Remove="Resources\Images\Qualifications\lip_reading.png" />
-    <None Remove="Resources\Images\Qualifications\local_knowledge.png" />
-    <None Remove="Resources\Images\Qualifications\magic_lore.png" />
-    <None Remove="Resources\Images\Qualifications\mechanics.png" />
-    <None Remove="Resources\Images\Qualifications\mountain_survival.png" />
-    <None Remove="Resources\Images\Qualifications\onomatopoeia.png" />
-    <None Remove="Resources\Images\Qualifications\phisiology.png" />
-    <None Remove="Resources\Images\Qualifications\physiology.png" />
-    <None Remove="Resources\Images\Qualifications\pick_pocketing.png" />
-    <None Remove="Resources\Images\Qualifications\plant_growing.png" />
-    <None Remove="Resources\Images\Qualifications\pottery.png" />
-    <None Remove="Resources\Images\Qualifications\religion_lore.png" />
-    <None Remove="Resources\Images\Qualifications\riding.png" />
-    <None Remove="Resources\Images\Qualifications\rope_making.png" />
-    <None Remove="Resources\Images\Qualifications\runic_magic.png" />
-    <None Remove="Resources\Images\Qualifications\running.png" />
-    <None Remove="Resources\Images\Qualifications\sailing.png" />
-    <None Remove="Resources\Images\Qualifications\sculptury.png" />
-    <None Remove="Resources\Images\Qualifications\secret_door_search.png" />
-    <None Remove="Resources\Images\Qualifications\see_survival.png" />
-    <None Remove="Resources\Images\Qualifications\sense_of_danger.png" />
-    <None Remove="Resources\Images\Qualifications\sense_of_mortal_peril.png" />
-    <None Remove="Resources\Images\Qualifications\sexual_culture.png" />
-    <None Remove="Resources\Images\Qualifications\shield_use.png" />
-    <None Remove="Resources\Images\Qualifications\singing_music_making.png" />
-    <None Remove="Resources\Images\Qualifications\smithing.png" />
-    <None Remove="Resources\Images\Qualifications\sneaking.png" />
-    <None Remove="Resources\Images\Qualifications\spellcasting.png" />
-    <None Remove="Resources\Images\Qualifications\steppe_survival.png" />
-    <None Remove="Resources\Images\Qualifications\swamp_survival.png" />
-    <None Remove="Resources\Images\Qualifications\swimming.png" />
-    <None Remove="Resources\Images\Qualifications\tailoring.png" />
-    <None Remove="Resources\Images\Qualifications\tavern_brawling.png" />
-    <None Remove="Resources\Images\Qualifications\teaching.png" />
-    <None Remove="Resources\Images\Qualifications\team_fighting.png" />
-    <None Remove="Resources\Images\Qualifications\tightrope_walking.png" />
-    <None Remove="Resources\Images\Qualifications\torture.png" />
-    <None Remove="Resources\Images\Qualifications\torture_resistance.png" />
-    <None Remove="Resources\Images\Qualifications\tracking_concealment.png" />
-    <None Remove="Resources\Images\Qualifications\tracking_evasion.png" />
-    <None Remove="Resources\Images\Qualifications\trap_detection.png" />
-    <None Remove="Resources\Images\Qualifications\trap_setting.png" />
-    <None Remove="Resources\Images\Qualifications\twin_combat.png" />
-    <None Remove="Resources\Images\Qualifications\two_handed_combat.png" />
-    <None Remove="Resources\Images\Qualifications\use_of_parrying_weapon.png" />
-    <None Remove="Resources\Images\Qualifications\weapon_breaking.png" />
-    <None Remove="Resources\Images\Qualifications\weapon_lore.png" />
-    <None Remove="Resources\Images\Qualifications\weapon_throwing.png" />
-    <None Remove="Resources\Images\Qualifications\weapon_use.png" />
-    <None Remove="Resources\Images\Qualifications\weather_divination.png" />
-    <None Remove="Resources\Images\Qualifications\wrestling.png" />
-    <None Remove="Resources\Images\Races\amund.png" />
-    <None Remove="Resources\Images\Races\court_goblin.png" />
-    <None Remove="Resources\Images\Races\court_orc.png" />
-    <None Remove="Resources\Images\Races\dahr.png" />
-    <None Remove="Resources\Images\Races\dracker.png" />
-    <None Remove="Resources\Images\Races\draquon.png" />
-    <None Remove="Resources\Images\Races\dwarf.png" />
-    <None Remove="Resources\Images\Races\elf.png" />
-    <None Remove="Resources\Images\Races\faun.png" />
-    <None Remove="Resources\Images\Races\feenhar.png" />
-    <None Remove="Resources\Images\Races\fire_elf.png" />
-    <None Remove="Resources\Images\Races\forest_giant.png" />
-    <None Remove="Resources\Images\Races\frost_giant.png" />
-    <None Remove="Resources\Images\Races\gnome.png" />
-    <None Remove="Resources\Images\Races\half_elf.png" />
-    <None Remove="Resources\Images\Races\half_orc.png" />
-    <None Remove="Resources\Images\Races\human.png" />
-    <None Remove="Resources\Images\Races\jann.png" />
-    <None Remove="Resources\Images\Races\khal.png" />
-    <None Remove="Resources\Images\Races\kyr.png" />
-    <None Remove="Resources\Images\Races\mountain_giant.png" />
-    <None Remove="Resources\Images\Races\night_elf.png" />
-    <None Remove="Resources\Images\Races\reptilian.png" />
-    <None Remove="Resources\Images\Races\see_giant.png" />
-    <None Remove="Resources\Images\Races\swamp_giant.png" />
-    <None Remove="Resources\Images\Races\white_orc.png" />
-    <None Remove="Resources\Images\Races\wier.png" />
-    <None Remove="Resources\Images\Shields\large_shield.png" />
-    <None Remove="Resources\Images\Shields\medium_shield.png" />
-    <None Remove="Resources\Images\Shields\small_shield.png" />
-    <None Remove="Resources\Images\Travelling\canoe.png" />
-    <None Remove="Resources\Images\Travelling\carriage.png" />
-    <None Remove="Resources\Images\Travelling\dog_sledge.png" />
-    <None Remove="Resources\Images\Travelling\wagon_wheel.png" />
-    <None Remove="Resources\Images\Travelling\wheelbarrow.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <MauiImage Include="Resources\Images\Animals\dog_hunting.png" />
-    <MauiImage Include="Resources\Images\Animals\dog_sled.png" />
-    <MauiImage Include="Resources\Images\Animals\donkey.png" />
-    <MauiImage Include="Resources\Images\Animals\falcon_hunting.png" />
-    <MauiImage Include="Resources\Images\Armors\abbit_steel_breastplate.png" />
-    <MauiImage Include="Resources\Images\Armors\abbit_steel_chainmail.png" />
-    <MauiImage Include="Resources\Images\Armors\abbit_steel_full_plate.png" />
-    <MauiImage Include="Resources\Images\Armors\abbit_steel_half_plate.png" />
-    <MauiImage Include="Resources\Images\Armors\abbit_steel_plate_armor.png" />
-    <MauiImage Include="Resources\Images\Armors\abbit_steel_scale_armor.png" />
-    <MauiImage Include="Resources\Images\Armors\bronze_breastplate.png" />
-    <MauiImage Include="Resources\Images\Armors\bronze_full_plate.png" />
-    <MauiImage Include="Resources\Images\Armors\bronze_plate_armor.png" />
-    <MauiImage Include="Resources\Images\Armors\bronze_scale_armor.png" />
-    <MauiImage Include="Resources\Images\Armors\mithril_breastplate.png" />
-    <MauiImage Include="Resources\Images\Armors\mithril_full_plate.png" />
-    <MauiImage Include="Resources\Images\Armors\mithril_half_plate.png" />
-    <MauiImage Include="Resources\Images\Armors\mithril_plate_armor.png" />
-    <MauiImage Include="Resources\Images\Armors\mithril_scale_armor.png" />
-    <MauiImage Include="Resources\Images\Armors\steel_breastplate.png" />
-    <MauiImage Include="Resources\Images\Armors\steel_full_plate.png" />
-    <MauiImage Include="Resources\Images\Armors\steel_half_plate.png" />
-    <MauiImage Include="Resources\Images\Armors\steel_scale_armor.png" />
-    <MauiImage Include="Resources\Images\Bestiary\adachnoa.png" />
-    <MauiImage Include="Resources\Images\Bestiary\barracuda.png" />
-    <MauiImage Include="Resources\Images\Bestiary\bat.png" />
-    <MauiImage Include="Resources\Images\Bestiary\bear.png" />
-    <MauiImage Include="Resources\Images\Bestiary\black_shark.png" />
-    <MauiImage Include="Resources\Images\Bestiary\byzon.png" />
-    <MauiImage Include="Resources\Images\Bestiary\crocodile.png" />
-    <MauiImage Include="Resources\Images\Bestiary\demon_shark.png" />
-    <MauiImage Include="Resources\Images\Bestiary\dragon.png" />
-    <MauiImage Include="Resources\Images\Bestiary\dream_crystal.png" />
-    <MauiImage Include="Resources\Images\Bestiary\eagle.png" />
-    <MauiImage Include="Resources\Images\Bestiary\falcon.png" />
-    <MauiImage Include="Resources\Images\Bestiary\giant_crocodile.png" />
-    <MauiImage Include="Resources\Images\Bestiary\giant_spider.png" />
-    <MauiImage Include="Resources\Images\Bestiary\goblin.png" />
-    <MauiImage Include="Resources\Images\Bestiary\golem.png" />
-    <MauiImage Include="Resources\Images\Animals\horse_heavy_war.png" />
-    <MauiImage Include="Resources\Images\Animals\horse_light_war.png" />
-    <MauiImage Include="Resources\Images\Bestiary\gray_dolphin.png" />
-    <MauiImage Include="Resources\Images\Bestiary\killer_whale.png" />
-    <MauiImage Include="Resources\Images\Bestiary\lizard_creature.png" />
-    <MauiImage Include="Resources\Images\Bestiary\lizard_wizard.png" />
-    <MauiImage Include="Resources\Images\Bestiary\mummy.png" />
-    <MauiImage Include="Resources\Images\Bestiary\narwhal.png" />
-    <MauiImage Include="Resources\Images\Bestiary\orc.png" />
-    <MauiImage Include="Resources\Images\Bestiary\panther.png" />
-    <MauiImage Include="Resources\Images\Bestiary\red_shark.png" />
-    <MauiImage Include="Resources\Images\Bestiary\rhyno.png" />
-    <MauiImage Include="Resources\Images\Bestiary\snow_leopard.png" />
-    <MauiImage Include="Resources\Images\Bestiary\spider.png" />
-    <MauiImage Include="Resources\Images\Bestiary\umich.png" />
-    <MauiImage Include="Resources\Images\Bestiary\umich_2.png" />
-    <MauiImage Include="Resources\Images\Bestiary\vampire.png" />
-    <MauiImage Include="Resources\Images\Animals\dog_war.png" />
-    <MauiImage Include="Resources\Images\Bestiary\vampire_lord.png" />
-    <MauiImage Include="Resources\Images\Bestiary\werewolf.png" />
-    <MauiImage Include="Resources\Images\Bestiary\white_eagle.png" />
-    <MauiImage Include="Resources\Images\Bestiary\white_tiger.png" />
-    <MauiImage Include="Resources\Images\Bestiary\white_wolf.png" />
-    <MauiImage Include="Resources\Images\Bestiary\wolf.png" />
-    <MauiImage Include="Resources\Images\Bestiary\wolf_pack_leader.png" />
-    <MauiImage Include="Resources\Images\Bestiary\wolves.png" />
-    <MauiImage Include="Resources\Images\Bestiary\zombie.png" />
     <EmbeddedResource Include="Resources\Images\images_manifest.txt" />
-    <EmbeddedResource Include="Resources\Raw\bear_growl.mp3" />
-    <EmbeddedResource Include="Resources\Raw\beast.mp3" />
-    <EmbeddedResource Include="Resources\Raw\bird_chirping.mp3" />
-    <EmbeddedResource Include="Resources\Raw\church_bell.mp3" />
-    <EmbeddedResource Include="Resources\Raw\Credits.txt" />
-    <EmbeddedResource Include="Resources\Raw\dark_cave.mp3" />
-    <EmbeddedResource Include="Resources\Raw\dark_magic_spell_cast.mp3" />
-    <EmbeddedResource Include="Resources\Raw\demon.mp3" />
-    <EmbeddedResource Include="Resources\Raw\dice_roll.mp3" />
-    <EmbeddedResource Include="Resources\Raw\dragon_growl.mp3" />
-    <EmbeddedResource Include="Resources\Raw\drain_music.mp3" />
-    <EmbeddedResource Include="Resources\Raw\fireball_cast.mp3" />
-    <EmbeddedResource Include="Resources\Raw\fireball_cast_2.mp3" />
-    <EmbeddedResource Include="Resources\Raw\horn.mp3" />
-    <EmbeddedResource Include="Resources\Raw\horn_2.mp3" />
-    <EmbeddedResource Include="Resources\Raw\horse.mp3" />
-    <EmbeddedResource Include="Resources\Raw\man_ouch.mp3" />
-    <EmbeddedResource Include="Resources\Raw\orc_ouch.mp3" />
-    <EmbeddedResource Include="Resources\Raw\roar.mp3" />
-    <EmbeddedResource Include="Resources\Raw\roar_2.mp3" />
-    <EmbeddedResource Include="Resources\Raw\roar_3.mp3" />
-    <EmbeddedResource Include="Resources\Raw\rubbing-metal.mp3" />
-    <EmbeddedResource Include="Resources\Raw\scream.mp3" />
-    <EmbeddedResource Include="Resources\Raw\scream_2.mp3" />
-    <EmbeddedResource Include="Resources\Raw\scream_3.mp3" />
-    <EmbeddedResource Include="Resources\Raw\spell_cast.mp3" />
-    <EmbeddedResource Include="Resources\Raw\spell_cast_2.mp3" />
-    <EmbeddedResource Include="Resources\Raw\sword_fight.mp3" />
-    <EmbeddedResource Include="Resources\Raw\werewolf_howl.mp3" />
-    <EmbeddedResource Include="Resources\Raw\wolf.mp3" />
-    <EmbeddedResource Include="Resources\Raw\yeti-roar.mp3" />
-    <EmbeddedResource Include="Resources\Raw\zombie.mp3" />
-    <EmbeddedResource Include="Resources\Raw\zombie_2.mp3" />
-    <EmbeddedResource Include="Resources\Raw\zombie_3.mp3" />
-    <EmbeddedResource Include="Resources\Raw\zombie_4.mp3" />
-    <EmbeddedResource Include="Resources\Raw\zombie_eating.mp3" />
+    <None Remove="Platforms\Android\Resources\values\styles.xml" />
+  </ItemGroup>
+  <ItemGroup Condition="'$(TargetFramework)' == 'net10.0-android'">
+    <AndroidProguardConfig Include="proguard.cfg" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.Maui.Controls" Version="10.0.30" />
     <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="10.0.2" />
     <PackageReference Include="Microsoft.Maui.Graphics" Version="10.0.30" />
     <PackageReference Include="Microsoft.Maui.Graphics.Skia" Version="10.0.30" />
-    <PackageReference Include="Mtf.Maui.Controls" Version="4.0.56" />
-    <PackageReference Include="Mtf.MAUI.LanguageService" Version="3.0.3" />
+    <PackageReference Include="Mtf.Maui.Controls" Version="4.0.63" />
+    <PackageReference Include="Mtf.MAUI.LanguageService" Version="3.0.9" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.4" />
     <PackageReference Include="Plugin.Maui.Audio" Version="4.0.0" />
     <PackageReference Include="sqlite-net-pcl" Version="1.9.172" />
@@ -621,6 +185,9 @@
       <Generator>MSBuild:Compile</Generator>
     </MauiXaml>
     <MauiXaml Update="Views\CharacterDetailsPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </MauiXaml>
+    <MauiXaml Update="Views\EnemySetupPage.xaml">
       <Generator>MSBuild:Compile</Generator>
     </MauiXaml>
     <MauiXaml Update="Views\ItemDetailsPage.xaml">
@@ -675,316 +242,6 @@
       <Generator>MSBuild:Compile</Generator>
     </MauiXaml>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Resources\Images\Trappings\" />
-    <Folder Include="Resources\Images\Other\" />
-    <Folder Include="Resources\Images\Weapons\CrushingWeapons\" />
-    <Folder Include="Resources\Images\Weapons\StabbingWeapons\" />
-    <Folder Include="Resources\Images\Weapons\Spears\" />
-    <Folder Include="Resources\Images\Weapons\RangedWeapons\" />
-    <Folder Include="Resources\Images\Weapons\OtherWeapons\" />
-  </ItemGroup>
-  <ItemGroup>
-    <MauiImage Include="Resources\Images\Clothes\boots.png" />
-    <MauiImage Include="Resources\Images\Clothes\riding_boots.png" />
-    <MauiImage Include="Resources\Images\Debauchery\alidari_woman.png" />
-    <MauiImage Include="Resources\Images\Debauchery\common_prostitute.png" />
-    <MauiImage Include="Resources\Images\Debauchery\daughters_of_the_lotus.png" />
-    <MauiImage Include="Resources\Images\Debauchery\male_prostitute.png" />
-    <MauiImage Include="Resources\Images\Food\beer_mug.png" />
-    <MauiImage Include="Resources\Images\Food\brandy_glass.png" />
-    <MauiImage Include="Resources\Images\Food\butter_kilo.png" />
-    <MauiImage Include="Resources\Images\Food\cheese.png" />
-    <MauiImage Include="Resources\Images\Food\eggs_dozen.png" />
-    <MauiImage Include="Resources\Images\Food\fish_portion.png" />
-    <MauiImage Include="Resources\Images\Food\game_meat_portion.png" />
-    <MauiImage Include="Resources\Images\Food\liqueur.png" />
-    <MauiImage Include="Resources\Images\Food\loree.png" />
-    <MauiImage Include="Resources\Images\Food\lunch_dinner.png" />
-    <MauiImage Include="Resources\Images\Food\milk_jug.png" />
-    <MauiImage Include="Resources\Images\Food\salt_block.png" />
-    <MauiImage Include="Resources\Images\Food\rare_spice.png" />
-    <MauiImage Include="Resources\Images\Food\sugar_glass.png" />
-    <MauiImage Include="Resources\Images\Food\vegetables.png" />
-    <MauiImage Include="Resources\Images\Food\wine.png" />
-    <MauiImage Include="Resources\Images\Food\wine_cup.png" />
-    <MauiImage Include="Resources\Images\MagicalItems\amulet_against_poisons.png" />
-    <MauiImage Include="Resources\Images\MagicalItems\amulet_of_invisibility.png" />
-    <MauiImage Include="Resources\Images\MagicalItems\amulet_of_luck.png" />
-    <MauiImage Include="Resources\Images\MagicalItems\amulet_of_mind_protection.png" />
-    <MauiImage Include="Resources\Images\MagicalItems\amulet_of_power.png" />
-    <MauiImage Include="Resources\Images\MagicalItems\amulet_of_truth.png" />
-    <MauiImage Include="Resources\Images\MagicalItems\banner_of_heroes.png" />
-    <MauiImage Include="Resources\Images\MagicalItems\boots_of_leaping.png" />
-    <MauiImage Include="Resources\Images\MagicalItems\boots_of_rushing.png" />
-    <MauiImage Include="Resources\Images\MagicalItems\bottomless_jug.png" />
-    <MauiImage Include="Resources\Images\MagicalItems\climbing_gloves.png" />
-    <MauiImage Include="Resources\Images\MagicalItems\cloak_of_invisibility.png" />
-    <MauiImage Include="Resources\Images\MagicalItems\deep_pouch.png" />
-    <MauiImage Include="Resources\Images\MagicalItems\drink_of_the_gods.png" />
-    <MauiImage Include="Resources\Images\MagicalItems\flying_carpet.png" />
-    <MauiImage Include="Resources\Images\MagicalItems\fodder_daily.png" />
-    <MauiImage Include="Resources\Images\MagicalItems\gloves_of_nimble_fingers.png" />
-    <MauiImage Include="Resources\Images\MagicalItems\healing_potion.png" />
-    <MauiImage Include="Resources\Images\MagicalItems\healing_potion_prp.png" />
-    <MauiImage Include="Resources\Images\MagicalItems\helmet_of_tongues.png" />
-    <MauiImage Include="Resources\Images\MagicalItems\magical_object.png" />
-    <MauiImage Include="Resources\Images\MagicalItems\magic_scroll.png" />
-    <MauiImage Include="Resources\Images\MagicalItems\medallion_of_steely_will.png" />
-    <MauiImage Include="Resources\Images\MagicalItems\potion_of_courage.png" />
-    <MauiImage Include="Resources\Images\MagicalItems\potion_of_dragon_s_breath.png" />
-    <MauiImage Include="Resources\Images\MagicalItems\potion_of_flight.png" />
-    <MauiImage Include="Resources\Images\MagicalItems\potion_of_invulnerability.png" />
-    <MauiImage Include="Resources\Images\MagicalItems\potion_of_mental_freshness.png" />
-    <MauiImage Include="Resources\Images\MagicalItems\potion_of_power.png" />
-    <MauiImage Include="Resources\Images\MagicalItems\potion_of_shrinking.png" />
-    <MauiImage Include="Resources\Images\MagicalItems\protective_cloak.png" />
-    <MauiImage Include="Resources\Images\Qualifications\healing.png" />
-    <MauiImage Include="Resources\Images\Qualifications\mountain_survival.png" />
-    <MauiImage Include="Resources\Images\Qualifications\physiology.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <MauiImage Include="Resources\Images\Accomodation\bath.png" />
-    <MauiImage Include="Resources\Images\Accomodation\common_dormitory_room.png" />
-    <MauiImage Include="Resources\Images\Accomodation\ornate_room.png" />
-    <MauiImage Include="Resources\Images\Accomodation\room_with_separate_bed.png" />
-    <MauiImage Include="Resources\Images\Accomodation\single_room.png" />
-    <MauiImage Include="Resources\Images\Accomodation\suite_room.png" />
-    <MauiImage Include="Resources\Images\Accomodation\stables.png" />
-    <MauiImage Include="Resources\Images\Animals\calf.png" />
-    <MauiImage Include="Resources\Images\Animals\camel.png" />
-    <MauiImage Include="Resources\Images\Animals\cat.png" />
-    <MauiImage Include="Resources\Images\Animals\cow.png" />
-    <MauiImage Include="Resources\Images\Animals\dog_guard.png" />
-    <MauiImage Include="Resources\Images\Animals\goat.png" />
-    <MauiImage Include="Resources\Images\Animals\goose.png" />
-    <MauiImage Include="Resources\Images\Animals\hen.png" />
-    <MauiImage Include="Resources\Images\Animals\horse_traveler.png" />
-    <MauiImage Include="Resources\Images\Animals\pig.png" />
-    <MauiImage Include="Resources\Images\Animals\turkey.png" />
-    <MauiImage Include="Resources\Images\Classes\assassin.png" />
-    <MauiImage Include="Resources\Images\Classes\bard.png" />
-    <MauiImage Include="Resources\Images\Classes\blademaster.png" />
-    <MauiImage Include="Resources\Images\Classes\craftsman.png" />
-    <MauiImage Include="Resources\Images\Classes\fire_mage.png" />
-    <MauiImage Include="Resources\Images\Classes\gladiator.png" />
-    <MauiImage Include="Resources\Images\Classes\gladiator_2.png" />
-    <MauiImage Include="Resources\Images\Classes\guard.png" />
-    <MauiImage Include="Resources\Images\Classes\healer.png" />
-    <MauiImage Include="Resources\Images\Classes\knight.png" />
-    <MauiImage Include="Resources\Images\Classes\martial_artist.png" />
-    <MauiImage Include="Resources\Images\Classes\merchant.png" />
-    <MauiImage Include="Resources\Images\Classes\noble.png" />
-    <MauiImage Include="Resources\Images\Classes\paladin_of_ranagol.png" />
-    <MauiImage Include="Resources\Images\Classes\peasant.png" />
-    <MauiImage Include="Resources\Images\Classes\priest.png" />
-    <MauiImage Include="Resources\Images\Classes\priest_of_arel.png" />
-    <MauiImage Include="Resources\Images\Classes\soldier.png" />
-    <MauiImage Include="Resources\Images\Classes\thief.png" />
-    <MauiImage Include="Resources\Images\Classes\warlock.png" />
-    <MauiImage Include="Resources\Images\Classes\wiseman.png" />
-    <MauiImage Include="Resources\Images\Classes\witch.png" />
-    <MauiImage Include="Resources\Images\Classes\witch_2.png" />
-    <MauiImage Include="Resources\Images\Classes\wizard.png" />
-    <MauiImage Include="Resources\Images\Gemstones\agate.png" />
-    <MauiImage Include="Resources\Images\Gemstones\alexandrite.png" />
-    <MauiImage Include="Resources\Images\Gemstones\amber.png" />
-    <MauiImage Include="Resources\Images\Gemstones\amethyst.png" />
-    <MauiImage Include="Resources\Images\Gemstones\aquamarine.png" />
-    <MauiImage Include="Resources\Images\Gemstones\azurite.png" />
-    <MauiImage Include="Resources\Images\Gemstones\black_sonioni_opal.png" />
-    <MauiImage Include="Resources\Images\Gemstones\carnelian.png" />
-    <MauiImage Include="Resources\Images\Gemstones\chalcedony.png" />
-    <MauiImage Include="Resources\Images\Gemstones\chrysoberyl.png" />
-    <MauiImage Include="Resources\Images\Gemstones\chrysoprase.png" />
-    <MauiImage Include="Resources\Images\Gemstones\coral.png" />
-    <MauiImage Include="Resources\Images\Gemstones\diamond.png" />
-    <MauiImage Include="Resources\Images\Gemstones\emerald.png" />
-    <MauiImage Include="Resources\Images\Gemstones\garnet.png" />
-    <MauiImage Include="Resources\Images\Gemstones\hematite.png" />
-    <MauiImage Include="Resources\Images\Gemstones\jade.png" />
-    <MauiImage Include="Resources\Images\Gemstones\jasper.png" />
-    <MauiImage Include="Resources\Images\Gemstones\jet.png" />
-    <MauiImage Include="Resources\Images\Gemstones\lapis_lazuli.png" />
-    <MauiImage Include="Resources\Images\Gemstones\malachite.png" />
-    <MauiImage Include="Resources\Images\Gemstones\moonstone.png" />
-    <MauiImage Include="Resources\Images\Gemstones\nephrite.png" />
-    <MauiImage Include="Resources\Images\Gemstones\obsidian.png" />
-    <MauiImage Include="Resources\Images\Gemstones\onyx.png" />
-    <MauiImage Include="Resources\Images\Gemstones\opal.png" />
-    <MauiImage Include="Resources\Images\Gemstones\pearl.png" />
-    <MauiImage Include="Resources\Images\Gemstones\peridot.png" />
-    <MauiImage Include="Resources\Images\Gemstones\rose_crystal.png" />
-    <MauiImage Include="Resources\Images\Gemstones\rose_quartz.png" />
-    <MauiImage Include="Resources\Images\Gemstones\ruby.png" />
-    <MauiImage Include="Resources\Images\Gemstones\sapphire.png" />
-    <MauiImage Include="Resources\Images\Gemstones\serpentine.png" />
-    <MauiImage Include="Resources\Images\Gemstones\smoky_quartz.png" />
-    <MauiImage Include="Resources\Images\Gemstones\spinel.png" />
-    <MauiImage Include="Resources\Images\Gemstones\tiger_s_eye.png" />
-    <MauiImage Include="Resources\Images\Gemstones\topaz.png" />
-    <MauiImage Include="Resources\Images\Gemstones\tourmaline.png" />
-    <MauiImage Include="Resources\Images\Gemstones\turquoise.png" />
-    <MauiImage Include="Resources\Images\Gemstones\zircon.png" />
-    <MauiImage Include="Resources\Images\Menu\about.png" />
-    <MauiImage Include="Resources\Images\Menu\adventure_module.png" />
-    <MauiImage Include="Resources\Images\Menu\bestiary.png" />
-    <MauiImage Include="Resources\Images\Menu\character_generation.png" />
-    <MauiImage Include="Resources\Images\Menu\character_list.png" />
-    <MauiImage Include="Resources\Images\Menu\classes.png" />
-    <MauiImage Include="Resources\Images\Menu\encounter.png" />
-    <MauiImage Include="Resources\Images\Menu\gemstone.png" />
-    <MauiImage Include="Resources\Images\Menu\images.png" />
-    <MauiImage Include="Resources\Images\Menu\languages.png" />
-    <MauiImage Include="Resources\Images\Menu\magic.png" />
-    <MauiImage Include="Resources\Images\Menu\magical_items.png" />
-    <MauiImage Include="Resources\Images\Menu\map.png" />
-    <MauiImage Include="Resources\Images\Menu\market.png" />
-    <MauiImage Include="Resources\Images\Menu\paint.png" />
-    <MauiImage Include="Resources\Images\Menu\poisons.png" />
-    <MauiImage Include="Resources\Images\Menu\psi.png" />
-    <MauiImage Include="Resources\Images\Menu\qualifications.png" />
-    <MauiImage Include="Resources\Images\Menu\races.png" />
-    <MauiImage Include="Resources\Images\Menu\runes.png" />
-    <MauiImage Include="Resources\Images\Menu\settings.png" />
-    <MauiImage Include="Resources\Images\Menu\sounds.png" />
-    <MauiImage Include="Resources\Images\Qualifications\agriculture.png" />
-    <MauiImage Include="Resources\Images\Qualifications\aiming.png" />
-    <MauiImage Include="Resources\Images\Qualifications\alchemy.png" />
-    <MauiImage Include="Resources\Images\Qualifications\alertness_perception.png" />
-    <MauiImage Include="Resources\Images\Qualifications\ancient_tongue_lore.png" />
-    <MauiImage Include="Resources\Images\Qualifications\animal_breeding.png" />
-    <MauiImage Include="Resources\Images\Qualifications\animal_training.png" />
-    <MauiImage Include="Resources\Images\Qualifications\appraisal.png" />
-    <MauiImage Include="Resources\Images\Qualifications\architecture.png" />
-    <MauiImage Include="Resources\Images\Qualifications\artic_survival.png" />
-    <MauiImage Include="Resources\Images\Qualifications\backstab.png" />
-    <MauiImage Include="Resources\Images\Qualifications\blind_fighting.png" />
-    <MauiImage Include="Resources\Images\Qualifications\boot_making.png" />
-    <MauiImage Include="Resources\Images\Qualifications\camouflage_disguise.png" />
-    <MauiImage Include="Resources\Images\Qualifications\card_sharping.png" />
-    <MauiImage Include="Resources\Images\Qualifications\carpentry.png" />
-    <MauiImage Include="Resources\Images\Qualifications\cartography.png" />
-    <MauiImage Include="Resources\Images\Qualifications\climbing.png" />
-    <MauiImage Include="Resources\Images\Qualifications\close_combat.png" />
-    <MauiImage Include="Resources\Images\Qualifications\coinage.png" />
-    <MauiImage Include="Resources\Images\Qualifications\courier_herald.png" />
-    <MauiImage Include="Resources\Images\Qualifications\craft.png" />
-    <MauiImage Include="Resources\Images\Qualifications\dancing.png" />
-    <MauiImage Include="Resources\Images\Qualifications\deflection_evasive_talk.png" />
-    <MauiImage Include="Resources\Images\Qualifications\demonology.png" />
-    <MauiImage Include="Resources\Images\Qualifications\disarmament.png" />
-    <MauiImage Include="Resources\Images\Qualifications\divination.png" />
-    <MauiImage Include="Resources\Images\Qualifications\empty.png" />
-    <MauiImage Include="Resources\Images\Qualifications\escape_bonds.png" />
-    <MauiImage Include="Resources\Images\Qualifications\etiquette.png" />
-    <MauiImage Include="Resources\Images\Qualifications\falling.png" />
-    <MauiImage Include="Resources\Images\Qualifications\feenhar_falcon_betrayal.png" />
-    <MauiImage Include="Resources\Images\Qualifications\fistfight.png" />
-    <MauiImage Include="Resources\Images\Qualifications\forest_survival.png" />
-    <MauiImage Include="Resources\Images\Qualifications\forgery.png" />
-    <MauiImage Include="Resources\Images\Qualifications\gemstone_magic.png" />
-    <MauiImage Include="Resources\Images\Qualifications\ground_combat.png" />
-    <MauiImage Include="Resources\Images\Qualifications\heavy_armor_wearing.png" />
-    <MauiImage Include="Resources\Images\Qualifications\heraldry.png" />
-    <MauiImage Include="Resources\Images\Qualifications\herbalism.png" />
-    <MauiImage Include="Resources\Images\Qualifications\hiding.png" />
-    <MauiImage Include="Resources\Images\Qualifications\history_lore.png" />
-    <MauiImage Include="Resources\Images\Qualifications\human_insight.png" />
-    <MauiImage Include="Resources\Images\Qualifications\hunting_fishing.png" />
-    <MauiImage Include="Resources\Images\Qualifications\juggling.png" />
-    <MauiImage Include="Resources\Images\Qualifications\jumping.png" />
-    <MauiImage Include="Resources\Images\Qualifications\knotting.png" />
-    <MauiImage Include="Resources\Images\Qualifications\language_lore.png" />
-    <MauiImage Include="Resources\Images\Qualifications\leadership.png" />
-    <MauiImage Include="Resources\Images\Qualifications\legend_lore.png" />
-    <MauiImage Include="Resources\Images\Qualifications\lip_reading.png" />
-    <MauiImage Include="Resources\Images\Qualifications\local_knowledge.png" />
-    <MauiImage Include="Resources\Images\Qualifications\magic_lore.png" />
-    <MauiImage Include="Resources\Images\Qualifications\mechanics.png" />
-    <MauiImage Include="Resources\Images\Qualifications\onomatopoeia.png" />
-    <MauiImage Include="Resources\Images\Qualifications\painting_drawing.png" />
-    <MauiImage Include="Resources\Images\Qualifications\pick_pocketing.png" />
-    <MauiImage Include="Resources\Images\Qualifications\plant_growing.png" />
-    <MauiImage Include="Resources\Images\Qualifications\poisoning_neutralization.png" />
-    <MauiImage Include="Resources\Images\Qualifications\pottery.png" />
-    <MauiImage Include="Resources\Images\Qualifications\reading_writing.png" />
-    <MauiImage Include="Resources\Images\Qualifications\religion_lore.png" />
-    <MauiImage Include="Resources\Images\Qualifications\riding.png" />
-    <MauiImage Include="Resources\Images\Qualifications\rope_making.png" />
-    <MauiImage Include="Resources\Images\Qualifications\runic_magic.png" />
-    <MauiImage Include="Resources\Images\Qualifications\running.png" />
-    <MauiImage Include="Resources\Images\Qualifications\sailing.png" />
-    <MauiImage Include="Resources\Images\Qualifications\sculptury.png" />
-    <MauiImage Include="Resources\Images\Qualifications\secret_door_search.png" />
-    <MauiImage Include="Resources\Images\Qualifications\see_survival.png" />
-    <MauiImage Include="Resources\Images\Qualifications\sense_of_danger.png" />
-    <MauiImage Include="Resources\Images\Qualifications\sense_of_mortal_peril.png" />
-    <MauiImage Include="Resources\Images\Qualifications\sexual_culture.png" />
-    <MauiImage Include="Resources\Images\Qualifications\shield_use.png" />
-    <MauiImage Include="Resources\Images\Qualifications\singing_music_making.png" />
-    <MauiImage Include="Resources\Images\Qualifications\smithing.png" />
-    <MauiImage Include="Resources\Images\Qualifications\sneaking.png" />
-    <MauiImage Include="Resources\Images\Qualifications\spellcasting.png" />
-    <MauiImage Include="Resources\Images\Qualifications\steppe_survival.png" />
-    <MauiImage Include="Resources\Images\Qualifications\swamp_survival.png" />
-    <MauiImage Include="Resources\Images\Qualifications\swimming.png" />
-    <MauiImage Include="Resources\Images\Qualifications\tailoring.png" />
-    <MauiImage Include="Resources\Images\Qualifications\tavern_brawling.png" />
-    <MauiImage Include="Resources\Images\Qualifications\teaching.png" />
-    <MauiImage Include="Resources\Images\Qualifications\team_fighting.png" />
-    <MauiImage Include="Resources\Images\Qualifications\tightrope_walking.png" />
-    <MauiImage Include="Resources\Images\Qualifications\torture.png" />
-    <MauiImage Include="Resources\Images\Qualifications\torture_resistance.png" />
-    <MauiImage Include="Resources\Images\Qualifications\tracking_concealment.png" />
-    <MauiImage Include="Resources\Images\Qualifications\tracking_evasion.png" />
-    <MauiImage Include="Resources\Images\Qualifications\trap_detection.png" />
-    <MauiImage Include="Resources\Images\Qualifications\trap_setting.png" />
-    <MauiImage Include="Resources\Images\Qualifications\twin_combat.png" />
-    <MauiImage Include="Resources\Images\Qualifications\two_handed_combat.png" />
-    <MauiImage Include="Resources\Images\Qualifications\use_of_parrying_weapon.png" />
-    <MauiImage Include="Resources\Images\Qualifications\weapon_breaking.png" />
-    <MauiImage Include="Resources\Images\Qualifications\weapon_lore.png" />
-    <MauiImage Include="Resources\Images\Qualifications\weapon_throwing.png" />
-    <MauiImage Include="Resources\Images\Qualifications\weapon_use.png" />
-    <MauiImage Include="Resources\Images\Qualifications\weather_divination.png" />
-    <MauiImage Include="Resources\Images\Qualifications\wrestling.png" />
-    <MauiImage Include="Resources\Images\Races\amund.png" />
-    <MauiImage Include="Resources\Images\Races\court_goblin.png" />
-    <MauiImage Include="Resources\Images\Races\court_orc.png" />
-    <MauiImage Include="Resources\Images\Races\dahr.png" />
-    <MauiImage Include="Resources\Images\Races\dracker.png" />
-    <MauiImage Include="Resources\Images\Races\draquon.png" />
-    <MauiImage Include="Resources\Images\Races\dwarf.png" />
-    <MauiImage Include="Resources\Images\Races\elf.png" />
-    <MauiImage Include="Resources\Images\Races\faun.png" />
-    <MauiImage Include="Resources\Images\Races\feenhar.png" />
-    <MauiImage Include="Resources\Images\Races\fire_elf.png" />
-    <MauiImage Include="Resources\Images\Races\forest_giant.png" />
-    <MauiImage Include="Resources\Images\Races\frost_giant.png" />
-    <MauiImage Include="Resources\Images\Races\gnome.png" />
-    <MauiImage Include="Resources\Images\Races\half_elf.png" />
-    <MauiImage Include="Resources\Images\Races\half_orc.png" />
-    <MauiImage Include="Resources\Images\Races\human.png" />
-    <MauiImage Include="Resources\Images\Races\jann.png" />
-    <MauiImage Include="Resources\Images\Races\khal.png" />
-    <MauiImage Include="Resources\Images\Races\kyr.png" />
-    <MauiImage Include="Resources\Images\Races\mountain_giant.png" />
-    <MauiImage Include="Resources\Images\Races\night_elf.png" />
-    <MauiImage Include="Resources\Images\Races\reptilian.png" />
-    <MauiImage Include="Resources\Images\Races\see_giant.png" />
-    <MauiImage Include="Resources\Images\Races\swamp_giant.png" />
-    <MauiImage Include="Resources\Images\Races\white_orc.png" />
-    <MauiImage Include="Resources\Images\Races\wier.png" />
-    <MauiImage Include="Resources\Images\Shields\large_shield.png" />
-    <MauiImage Include="Resources\Images\Shields\medium_shield.png" />
-    <MauiImage Include="Resources\Images\Shields\small_shield.png" />
-    <MauiImage Include="Resources\Images\Travelling\canoe.png" />
-    <MauiImage Include="Resources\Images\Travelling\carriage.png" />
-    <MauiImage Include="Resources\Images\Travelling\dog_sledge.png" />
-    <MauiImage Include="Resources\Images\Travelling\wagon_wheel.png" />
-    <MauiImage Include="Resources\Images\Travelling\wheelbarrow.png" />
-  </ItemGroup>
   <Target Name="GenerateImageManifest" BeforeTargets="BeforeBuild">
     <ItemGroup>
       <AllImages Include="@(MauiImage)" />
@@ -993,6 +250,6 @@
       <ImageManifestPath>$(ProjectDir)Resources\Images\images_manifest.txt</ImageManifestPath>
     </PropertyGroup>
     <!--<WriteLinesToFile File="$(ImageManifestPath)" Lines="@(AllImages->'%(RelativeDir)%(Filename)%(Extension)')" Overwrite="true" Encoding="UTF-8" />-->
-    <WriteLinesToFile File="$(ImageManifestPath)" Lines="@(AllImages-&gt;'%(Filename)%(Extension)')" Overwrite="true" Encoding="UTF-8" />
+    <WriteLinesToFile File="$(ImageManifestPath)" Lines="@(AllImages->'%(Filename)%(Extension)')" Overwrite="true" Encoding="UTF-8" />
   </Target>
 </Project>

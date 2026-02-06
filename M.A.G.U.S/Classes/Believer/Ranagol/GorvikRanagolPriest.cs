@@ -42,5 +42,7 @@ public class GorvikRanagolPriest : Priest
 
     public override string Name => "Priest of Ranagol (Gorvikian)";
 
+    public override string[] Images => ["priest_of_ranagol_gorvikian.png"];
+
     public override Deity Deity { get; set; } = Deity.Ranagol;
 }

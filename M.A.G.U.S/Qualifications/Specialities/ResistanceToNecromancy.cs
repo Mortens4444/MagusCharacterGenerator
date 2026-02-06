@@ -6,5 +6,5 @@ public class ResistanceToNecromancy(int resistanceToMagicModifier) : SpecialQual
 {
     public int ResistanceToMagicModifier { get; } = resistanceToMagicModifier;
 
-    public override string Name => resistanceToMagicModifier < 0 ? "Weak necromantic resistance" : "Strong necromantic resistance";
+    public override string Name => ResistanceToMagicModifier < 0 ? "Weak necromantic resistance" : "Strong necromantic resistance";
 }

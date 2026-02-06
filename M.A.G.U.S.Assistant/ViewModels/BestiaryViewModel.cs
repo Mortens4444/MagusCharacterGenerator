@@ -1,6 +1,8 @@
 ﻿using M.A.G.U.S.Assistant.Interfaces;
 using M.A.G.U.S.Assistant.Models;
-using Mtf.Extensions.Services;
+using M.A.G.U.S.Assistant.Services;
+using M.A.G.U.S.Bestiary;
+using M.A.G.U.S.Extensions;
 using System.Windows.Input;
 
 namespace M.A.G.U.S.Assistant.ViewModels;
@@ -16,13 +18,7 @@ internal partial class BestiaryViewModel : SearchListViewModel
 
     private void PickRandomCreature()
     {
-        if (FilteredItems.Count == 0)
-        {
-            return;
-        }
-
-        var randomIndex = RandomProvider.GetSecureRandomInt(0, FilteredItems.Count);
-        var randomCreature = FilteredItems[randomIndex];
-        SelectedItem = randomCreature;
+        SelectedItem = EnemyProvider.PickWeightedRandom(FilteredItems,
+            c => (c.Source as Creature)?.Occurrence.GetWeight() ?? 0);
     }
 }

@@ -14,8 +14,8 @@ public sealed class Crocodile : Creature
         Occurrence = Occurrence.Rare;
         Size = Size._6_to_8_meters;
         AttackValue = 55;
-        DefenseValue = 60;
-        InitiateValue = 35;
+        DefenseValue = 100;
+        InitiateValue = 50;
         HealthPoints = 45;
         PainTolerancePoints = 90;
         PoisonResistance = 5;
@@ -29,5 +29,5 @@ public sealed class Crocodile : Creature
     [DiceThrow(ThrowType._1D5)]
     public override int GetNumberAppearing() => DiceThrow._1D5();
 
-    public override List<Speed> Speeds => [new Speed(TravelMode.OnLand, 35), new Speed(TravelMode.InWater, 120)];
+    public override List<Speed> Speeds => [new Speed(TravelMode.InWater, 120), new Speed(TravelMode.OnLand, 35)];
 }

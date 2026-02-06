@@ -14,7 +14,7 @@ public interface ICharacter
 
     int CombatValueModifierPerLevel { get; }
 
-    int CombatValueModifier { get; }
+    int RemainingCombatValueModifier { get; }
 
     int InitiateValue { get; }
 
@@ -108,9 +108,9 @@ public interface ICharacter
 
     int ActualHealthPoints { get; set; }
 
-    int ActualPainTolerancePoints { get; set; }
+    int? ActualPainTolerancePoints { get; set; }
 
     int MaxHealthPoints { get; set; }
 
-    int MaxPainTolerancePoints { get; set; }
+    int? MaxPainTolerancePoints { get; set; }
 }

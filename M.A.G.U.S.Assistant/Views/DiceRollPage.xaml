@@ -43,7 +43,7 @@
                     VerticalTextAlignment="Center"
                     VerticalOptions="End" />
 
-            <Button Text="Throw"
+            <Button Text="🎲"
                     Grid.Row="0"
                     Grid.Column="2"
                     Command="{Binding RollCommand}"

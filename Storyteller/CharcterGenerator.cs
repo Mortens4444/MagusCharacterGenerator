@@ -301,7 +301,7 @@ public partial class CharcterGenerator : Form
 
 	private void SetPaintTolerancePoints()
 	{
-		nudPainTolerancePoints.Value = character.MaxPainTolerancePoints;
+		nudPainTolerancePoints.Value = character.MaxPainTolerancePoints ?? 0;
 	}
 
 	private void SetAimingValue()

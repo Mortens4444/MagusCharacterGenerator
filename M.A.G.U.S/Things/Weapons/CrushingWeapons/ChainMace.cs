@@ -24,5 +24,7 @@ public class ChainMace : Weapon, IMeleeWeapon
 
     public override string Name => "Flail with chain";
 
+    public override string[] Images => ["chain_mace.png"];
+
     public override string Description => "A formidable weapon where a heavy, spiked metal head is affixed to the handle by a length of sturdy chain. It strikes with great, unpredictable force, capable of crushing plate armour.";
 }

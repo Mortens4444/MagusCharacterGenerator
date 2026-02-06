@@ -15,6 +15,9 @@ internal partial class RacesPage : NotifierPage
     {
         base.OnAppearing();
         var vm = BindingContext as RacesViewModel;
-        vm.SelectedRace = vm.FilteredRaces.First();
+        if (vm.SelectedRace == null)
+        {
+            vm.SelectedRace = vm.FilteredRaces.First();
+        }
     }
 }

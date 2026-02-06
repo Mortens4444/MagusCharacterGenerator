@@ -14,8 +14,8 @@ public sealed class CrocodileOnLand : Creature
         Occurrence = Occurrence.Rare;
         Size = Size._6_to_8_meters;
         AttackValue = 55;
-        DefenseValue = 100;
-        InitiateValue = 50;
+        DefenseValue = 60;
+        InitiateValue = 35;
         HealthPoints = 45;
         PainTolerancePoints = 90;
         PoisonResistance = 5;

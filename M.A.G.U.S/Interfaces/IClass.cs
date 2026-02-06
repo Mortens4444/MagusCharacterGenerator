@@ -55,4 +55,6 @@ public interface IClass : IAttacker, IAbilities
     int GetLevelByExperiencePoints(ulong experiencePoints);
 
     string DefaultImage { get; }
+
+    bool CanUpgrade { get; }
 }

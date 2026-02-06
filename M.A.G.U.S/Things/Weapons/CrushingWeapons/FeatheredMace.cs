@@ -22,7 +22,7 @@ public class FeatheredMace : Weapon, IMeleeWeapon
     [DiceThrowModifier(1)]
     public override int GetDamage() => DiceThrow._1D6() + 1;
 
-    public override string Name => "Flail (thresher)";
+    public override string Name => "Mace with flanges";
 
     public override string Description => "A heavy, headed weapon bearing several flat, sharp flanges radiating from the centre. Designed to pierce and rend heavy plate armour with repeated blows.";
 }

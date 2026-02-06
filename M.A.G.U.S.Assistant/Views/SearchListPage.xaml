@@ -31,6 +31,7 @@
                 <Picker Grid.Row="1" Title="Category…" ItemsSource="{Binding Categories}"
                         SelectedItem="{Binding SelectedCategory}" HorizontalOptions="Fill"
                         ItemDisplayBinding="{Binding ., Converter={StaticResource EnumDescriptionTranslationConverter}}"
+                        VerticalTextAlignment="End" HorizontalTextAlignment="Center"
                         IsVisible="{Binding ShowAdvancedFilters}" />
 
                 <Label Grid.Row="1" Grid.Column="1" Text="Affordable" FontSize="12" HorizontalOptions="Center" VerticalOptions="Start" IsVisible="{Binding IsCharacterSet}" />

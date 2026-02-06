@@ -74,7 +74,7 @@ internal partial class ImagesViewModel : BaseViewModel
 
         // A UI kollekció feltöltése a cache-ből
         AllImages.Clear();
-        foreach (var item in cachedImageItems)
+        foreach (var item in cachedImageItems.DistinctBy(i => i.ResourceId))
         {
             AllImages.Add(item);
         }

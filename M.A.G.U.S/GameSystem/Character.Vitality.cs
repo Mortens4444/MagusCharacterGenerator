@@ -12,11 +12,11 @@ public partial class Character
     private int maxHealthPoints;
 
     [NonSerialized, JsonIgnore, Newtonsoft.Json.JsonIgnore]
-    private int maxPainTolerancePoints;
+    private int? maxPainTolerancePoints;
 
     public override int ActualHealthPoints { get; set; }
 
-    public override int ActualPainTolerancePoints { get; set; }
+    public override int? ActualPainTolerancePoints { get; set; }
 
     public int MaxHealthPoints
     {
@@ -32,7 +32,7 @@ public partial class Character
         }
     }
 
-    public int MaxPainTolerancePoints
+    public int? MaxPainTolerancePoints
     {
         get => maxPainTolerancePoints;
         set

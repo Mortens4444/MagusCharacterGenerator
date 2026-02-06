@@ -2,14 +2,12 @@
 using M.A.G.U.S.Assistant.CustomEventArgs;
 using M.A.G.U.S.Assistant.Extensions;
 using M.A.G.U.S.Assistant.Services;
-using M.A.G.U.S.Extensions;
 using M.A.G.U.S.GameSystem;
 using M.A.G.U.S.Interfaces;
 using M.A.G.U.S.Things;
 using M.A.G.U.S.Things.Armors;
 using M.A.G.U.S.Things.MagicalObjects;
 using M.A.G.U.S.Things.Shields;
-using M.A.G.U.S.Things.Weapons;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
 using RelayCommand = CommunityToolkit.Mvvm.Input.RelayCommand;

@@ -42,7 +42,7 @@ internal sealed class TurnAttackViewModel
                 return Lng.Elem("Moving closer");
             }
 
-            var attackText = $"{Lng.Elem("Hit")} ({attack.AttackRoll} + {attack.Attack.Value} = {attack.AttackRoll + attack.Attack.Value})";
+            var attackText = $"{Lng.Elem("Hit")} (🎲{attack.AttackRoll} + {attack.Attack.Value} = {attack.AttackRoll + attack.Attack.Value})";
             return attack.IsSuccessful ?
                 attack.Impact == M.A.G.U.S.Enums.AttackImpact.Normal ? attackText : $"{Lng.Elem(attack.Impact.ToString())} {attackText.ToLower(CultureInfo.CurrentCulture)}" :
                 Lng.Elem("Unsuccessful attack");

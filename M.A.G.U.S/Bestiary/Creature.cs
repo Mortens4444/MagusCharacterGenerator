@@ -4,7 +4,9 @@ using M.A.G.U.S.GameSystem;
 using M.A.G.U.S.GameSystem.Attributes;
 using M.A.G.U.S.GameSystem.Psi;
 using M.A.G.U.S.Interfaces;
+using M.A.G.U.S.Models;
 using M.A.G.U.S.Things.Weapons;
+using M.A.G.U.S.Utils;
 using Mtf.Extensions.Services;
 using System.Reflection;
 
@@ -81,7 +83,7 @@ public abstract class Creature : Attacker, IHaveImage
 
     public override int ActualHealthPoints { get; set; }
 
-    public override int ActualPainTolerancePoints { get; set; }
+    public override int? ActualPainTolerancePoints { get; set; }
 
     public int? PainTolerancePoints
     {
@@ -158,5 +160,25 @@ public abstract class Creature : Attacker, IHaveImage
 
             return PainTolerancePoints?.ToString() ?? String.Empty;
         }
+    }
+
+    public Attack? PreferredAttackMode { get; set; }
+
+    public DiceRange? GetNumberAppearingRange()
+    {
+        var method = GetType().GetMethod(nameof(Creature.GetNumberAppearing), BindingFlags.Instance | BindingFlags.Public);
+        if (method == null)
+        {
+            return null;
+        }
+
+        var throwAttr = method.GetCustomAttribute<DiceThrowAttribute>();
+        if (throwAttr == null)
+        {
+            return null;
+        }
+
+        var modAttr = method.GetCustomAttribute<DiceThrowModifierAttribute>();
+        return DiceThrowRangeCalculator.GetRange(throwAttr.DiceThrowType, modAttr?.Modifier ?? 0);
     }
 }

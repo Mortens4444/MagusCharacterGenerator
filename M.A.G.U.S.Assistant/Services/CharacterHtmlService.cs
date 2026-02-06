@@ -96,7 +96,7 @@ internal class CharacterHtmlService
             .Append("<div class='row'>")
             .Append(CreateCell(Lng.Elem("Max. HP"), character.MaxHealthPoints.ToString(cultureInfo)))
             .Append(CreateCell(Lng.Elem("Act. HP"), String.Empty, editable: true))
-            .Append(CreateCell(Lng.Elem("Max. PRP"), character.MaxPainTolerancePoints.ToString(cultureInfo)))
+            .Append(CreateCell(Lng.Elem("Max. PRP"), character.MaxPainTolerancePoints.HasValue ? character.MaxPainTolerancePoints.Value.ToString(cultureInfo) : "-"))
             .Append(CreateCell(Lng.Elem("Act. PRP"), String.Empty, editable: true))
             .Append(CreateCell(Lng.Elem("Max. PRP/level"), prpPerLevel))
             .Append("</div></div>")

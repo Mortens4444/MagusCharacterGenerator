@@ -1,13 +1,31 @@
 ﻿using CommunityToolkit.Mvvm.Messaging;
 using M.A.G.U.S.Assistant.Interfaces;
+using Mtf.LanguageService.MAUI;
 using Mtf.Maui.Controls.Messages;
 
 namespace M.A.G.U.S.Assistant.Services;
 
 internal class ShellNavigationService : INavigationService
 {
-    public static Task ShowAlert() => Shell.Current.DisplayAlertAsync("Title", "Message", "OK");
+    public static Task ShowAlert(string message)
+    {
+        return ShowAlert(Lng.Elem("Alert"), message, Lng.Elem("OK"));
+    }
 
+    public static Task ShowAlert(string title, string message, string? ok = null)
+    {
+        return MainThread.InvokeOnMainThreadAsync(async () =>
+        {
+            try
+            {
+                await Shell.Current.DisplayAlertAsync(title, message, ok ?? Lng.Elem("OK")).ConfigureAwait(true);
+            }
+            catch (Exception ex)
+            {
+                WeakReferenceMessenger.Default.Send(new ShowErrorMessage(ex));
+            }
+        });
+    }
     public static Task ShowPage(Page page)
     {
         return MainThread.InvokeOnMainThreadAsync(async () =>

@@ -14,7 +14,7 @@ namespace M.A.G.U.S.Utils;
 
 public static class Scale
 {
-    private static readonly Dictionary<Type, double> Weights = new Dictionary<Type, double>
+    private static readonly Dictionary<Type, double> Weights = new()
     {
         // ==============================================================================
         // --- Clothes (kg) ---
@@ -274,10 +274,10 @@ public static class Scale
         { typeof(Chalk), 0.01 },
         { typeof(ChestSmall), 8.0 }, // Üresen
         { typeof(ChestLarge), 25.0 }, // Üresen
-        { typeof(Climbingirons), 1.0 },
+        { typeof(ClimbingSpikes), 1.0 },
         { typeof(DaggerSleeve), 0.1 },
         { typeof(Deadboltpadlock), 0.5 },
-        { typeof(Earthenware), 0.5 },
+        { typeof(ClayPot), 0.5 },
         { typeof(FabricEll), 0.1 }, // Egy rőf szövet
         { typeof(FireSteel), 0.1 },
         { typeof(FishHook), 0.01 },
@@ -291,7 +291,7 @@ public static class Scale
         { typeof(Ladder), 8.0 }, // Létra (pl. 3-4 méter)
         { typeof(Lampion), 0.5 },
         { typeof(Lantern), 0.8 },
-        { typeof(MirrorMetal), 0.5 },
+        { typeof(MetalMirror), 0.5 },
         { typeof(NailDozen), 0.2 },
         { typeof(Oilcloth), 0.5 },
         { typeof(OilForLamps), 1.0 }, // Liternyi olaj

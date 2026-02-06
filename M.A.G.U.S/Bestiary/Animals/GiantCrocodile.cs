@@ -14,8 +14,8 @@ public sealed class GiantCrocodile : Creature
         Occurrence = Occurrence.Rare;
         Size = Size.Up_to_15_meters;
         AttackValue = 65;
-        DefenseValue = 80;
-        InitiateValue = 30;
+        DefenseValue = 120;
+        InitiateValue = 65;
         HealthPoints = 55;
         PainTolerancePoints = 110;
         PoisonResistance = 8;
@@ -31,5 +31,5 @@ public sealed class GiantCrocodile : Creature
     [DiceThrow(ThrowType._1D3)]
     public override int GetNumberAppearing() => DiceThrow._1D3();
 
-    public override List<Speed> Speeds => [new Speed(TravelMode.OnLand, 30), new Speed(TravelMode.InWater, 120)];
+    public override List<Speed> Speeds => [new Speed(TravelMode.InWater, 120), new Speed(TravelMode.OnLand, 30)];
 }

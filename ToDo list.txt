@@ -1,9 +1,9 @@
+- zoom image not works
+- fix leave character generation (with manual throws question should not appear, no modification => no confirm)
 - távolsági harc
+- loot
 - karakter törlése nem sikerül?
 - Generálás gomb beragad, ha visszalép Erő dobásról?
-- MinHp + MaxHp sárkánynál, sárkány azonnal meghal
-- halál után tud támadni a karakter
-- explicit jelezni kell, hogy hm-eket szeretném lezárni
 - Add custom attributes to runeswords (each one is a rune)
 - Priest Mana points per level should use RollFormulaPage + setting
 - Fix zoom image preview
@@ -13,7 +13,7 @@
 - // Speeds shoud be filled from races
 - Add predefined objects to PaintWizardPage (trees, rocks, table, chair) // Need save and load into json format? load two json into one background!
 
-- Add circle drawing setting on PaintWizardPage -> Paint component should be in Mtf.MAUI.Controls
+- Paint component should be in Mtf.MAUI.Controls
 - New race: https://kalandozok.hu/cikkgyujtemeny/kieg%C3%A9sz%C3%ADt%C5%91k/fajok/j%C3%A1tszhat%C3%B3-fajok/fajok-k%C3%B6nyve-r62/
 - Need loot system (taking the night elf weapon after defeting him, and equipment list)
 - Combat simulator: L Semi-auto (current implementation), need Full-auto, and manual with RollFormulaPage

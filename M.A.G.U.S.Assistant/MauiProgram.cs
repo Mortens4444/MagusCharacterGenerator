@@ -181,6 +181,7 @@ internal static class MauiProgram
             typeof(CreatureDetailsPage),
             typeof(DiceRollPage),
             typeof(EncounterPage),
+            typeof(EnemySetupPage),
             // typeof(GardenEditorPage),
             typeof(GemstonesPage),
             typeof(ImagePreviewPage),

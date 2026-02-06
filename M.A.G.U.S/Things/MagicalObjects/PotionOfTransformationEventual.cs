@@ -11,6 +11,8 @@ public class PotionOfTransformationEventual : MagicalObject
     public override Money Price => new(28);
 
     public override int ManaPoints => 240;
+    
+    public override string[] Images => ["potion_of_transformation.png"];
 
     public override IEnumerable<Class> AllowedCreators => [new Witch(), new Warlock()];
 }

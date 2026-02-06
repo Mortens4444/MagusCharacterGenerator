@@ -4,5 +4,5 @@ public interface ILiving
 {
     int ActualHealthPoints { get; }
 
-    int ActualPainTolerancePoints { get; }
+    int? ActualPainTolerancePoints { get; }
 }

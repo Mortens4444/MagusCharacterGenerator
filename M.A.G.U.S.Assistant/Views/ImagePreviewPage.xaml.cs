@@ -30,6 +30,19 @@ internal partial class ImagePreviewPage : NotifierPage
 
         PreviewImage.AnchorX = 0.5;
         PreviewImage.AnchorY = 0.5;
+
+        // Register gesture recognizers programmatically so sender is the Image instance we expect.
+        //var pinch = new PinchGestureRecognizer();
+        //pinch.PinchUpdated += (s, e) => OnPinchUpdated(PreviewImage, e);
+        //PreviewImage.GestureRecognizers.Add(pinch);
+
+        //var pan = new PanGestureRecognizer { TouchPoints = 1 };
+        //pan.PanUpdated += (s, e) => OnPanUpdated(PreviewImage, e);
+        //PreviewImage.GestureRecognizers.Add(pan);
+
+        //var doubleTap = new TapGestureRecognizer { NumberOfTapsRequired = 2 };
+        //doubleTap.Tapped += (s, e) => OnDoubleTapped(PreviewImage, EventArgs.Empty);
+        //PreviewImage.GestureRecognizers.Add(doubleTap);
     }
 
     private async void CloseClicked(object sender, EventArgs e)

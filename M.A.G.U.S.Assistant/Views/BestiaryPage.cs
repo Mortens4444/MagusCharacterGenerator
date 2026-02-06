@@ -1,4 +1,4 @@
-using M.A.G.U.S.Assistant.Models;
+﻿using M.A.G.U.S.Assistant.Models;
 using M.A.G.U.S.Assistant.ViewModels;
 using M.A.G.U.S.Bestiary;
 using Mtf.Extensions;
@@ -17,7 +17,7 @@ internal partial class BestiaryPage : SearchListPage
         var randomToolbarItem = new ToolbarItem
         {
             //IconImageSource = "beast.png",
-            Text = Lng.Elem("Random"),
+            Text = "🎲", //Lng.Elem("Random"),
             Order = ToolbarItemOrder.Primary,
             Priority = 0
         };

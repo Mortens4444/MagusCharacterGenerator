@@ -11,7 +11,11 @@ internal class CharacterService(CharacterRepository characterRepository)
 
     public Task<Character?> GetByNameAsync(string name) => characterRepository.GetByNameAsync(name);
 
-    public Task SaveAsync(Character character) => characterRepository.SaveCharacterAsync(character);
+    public Task SaveAsync(Character character)
+    {
+        character.CommitAllocations();
+        return characterRepository.SaveCharacterAsync(character);
+    }
 
     public Task AddAsync(Character character) => characterRepository.InsertCharacterAsync(character);
 

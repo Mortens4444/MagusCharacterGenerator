@@ -1,9 +1,12 @@
 ﻿using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.Messaging;
 using M.A.G.U.S.Assistant.Services;
+using M.A.G.U.S.Assistant.Views;
 using M.A.G.U.S.Bestiary;
 using M.A.G.U.S.Enums;
+using M.A.G.U.S.Extensions;
 using M.A.G.U.S.GameSystem;
+using M.A.G.U.S.GameSystem.CombatModifiers;
 using M.A.G.U.S.GameSystem.Turn;
 using M.A.G.U.S.Interfaces;
 using M.A.G.U.S.Utils;
@@ -63,9 +66,9 @@ internal partial class EncounterViewModel(ISettings settings, CharacterService c
         }
     }
 
-    public Task LoadBestiaryAsync()
+    public async Task LoadBestiaryAsync()
     {
-        return Task.Run(() =>
+        try
         {
             var creatures = "M.A.G.U.S.Bestiary".CreateInstancesFromNamespace<Creature>().OrderBy(c => Lng.Elem(c.Name));
             MainThread.BeginInvokeOnMainThread(() =>
@@ -76,136 +79,251 @@ internal partial class EncounterViewModel(ISettings settings, CharacterService c
                     AvailableEnemies.Add(creature);
                 }
             });
-        });
+        }
+        catch (Exception ex)
+        {
+            WeakReferenceMessenger.Default.Send(new ShowErrorMessage(ex));
+        }
+    }
+
+    public async Task AddSingleCharacterToAssignments()
+    {
+        try
+        {
+            MainThread.BeginInvokeOnMainThread(() =>
+            {
+                if (AvailableCharacters.Count == 1)
+                {
+                    SelectedCharacter = AvailableCharacters[0];
+                    AddCharacter();
+                }
+            });
+        }
+        catch (Exception ex)
+        {
+            WeakReferenceMessenger.Default.Send(new ShowErrorMessage(ex));
+        }
     }
 
     [RelayCommand(CanExecute = nameof(CanAddCharacter))]
     private void AddCharacter()
     {
-        Characters.Add(SelectedCharacter!);
-        Assignments.Add(new AssignmentViewModel(settings, SelectedCharacter!));
+        if (SelectedCharacter == null)
+        {
+            return;
+        }
+
+        Characters.Add(SelectedCharacter);
+        Assignments.Add(new AssignmentViewModel(settings, SelectedCharacter));
         SelectedAssignment ??= Assignments.LastOrDefault();
-        AvailableCharacters.Remove(SelectedCharacter!);
+        AvailableCharacters.Remove(SelectedCharacter);
         SelectedCharacter = null;
     }
 
     [RelayCommand]
     private void PickRandomEnemy()
     {
-        if (AvailableEnemies.Count > 0)
-        {
-            int randomIndex = RandomProvider.GetSecureRandomInt(0, AvailableEnemies.Count);
-            SelectedEnemy = AvailableEnemies[randomIndex];
-        }
+        SelectedEnemy = EnemyProvider.PickWeightedRandom(AvailableEnemies, e => e.Occurrence.GetWeight());
     }
 
     [RelayCommand(CanExecute = nameof(CanAddEnemy))]
-    private void AddEnemy()
+    private async Task AddEnemyAsync()
     {
-        SelectedAssignment!.Enemies.Add(SelectedEnemy!);
-        SelectedEnemy = null;
-        RunTurnCommand.NotifyCanExecuteChanged();
+        if (SelectedAssignment == null || SelectedEnemy == null)
+        {
+            return;
+        }
+        // 1. Létrehozzuk a Setup VM-et
+        var setupVm = new EnemySetupViewModel(SelectedEnemy);
+
+        // 2. Megjelenítjük az oldalt (Feltételezve, hogy van egy NavigationService-ed vagy Shell)
+        // Ez itt egy egyszerűsített navigációs hívás példa:
+        var setupPage = new EnemySetupPage(setupVm);
+        setupVm.OnEnemiesConfirmed += (configs) =>
+        {
+            ProcessConfirmedEnemies(configs);
+            ShellNavigationService.ClosePage();
+        };
+        setupVm.OnCancel += () =>
+        {
+            ShellNavigationService.ClosePage();
+        };
+        await ShellNavigationService.ShowPage(setupPage).ConfigureAwait(true);
     }
 
     [RelayCommand(CanExecute = nameof(CanRunTurn))]
-    private void RunTurn()
+    private Task RunTurnAsync()
     {
-        foreach (var assignment in Assignments.ToList())
+        var assignmentsSnapshot = Assignments.ToList();
+        var assignmentsToRemove = new HashSet<AssignmentViewModel>();
+        var enemiesToRemove = new HashSet<Creature>();
+        return Task.Run(() =>
         {
-            var turn = new TurnData
+            foreach (var assignment in assignmentsSnapshot)
             {
-                Round = assignment.TurnHistory.Count + 1
-            };
-
-            var orderedInitiatives = GetInitiatives(assignment, turn);
-            turn.Initiatives.AddRange(orderedInitiatives);
-            foreach (var initiative in turn.Initiatives)
-            {
-                var attackDirection = AttackDirection.Front;
-                var (locationDescription, subLocation) = HitLocationSelector.GetLocation(attackDirection);
-                if (initiative.SelectedAttack != null)
+                var turn = new TurnData
                 {
-                    initiative.AttackResolution = new AttackResolution(initiative)
+                    Round = assignment.TurnHistory.Count + 1
+                };
+
+                var orderedInitiatives = GetInitiatives(assignment, turn);
+                turn.Initiatives.AddRange(orderedInitiatives);
+                foreach (var initiative in turn.Initiatives)
+                {
+                    var attackDirection = AttackDirection.Front;
+                    //var attackDirection = (initiative.Attacker.Source as Creature)?.AttackDirection ?? AttackDirection.Front;
+                    if (attackDirection == AttackDirection.Behind)
                     {
-                        Attack = initiative.SelectedAttack,
-                        Direction = attackDirection,
-                        HitLocation = locationDescription,
-                        HitSubLocation = subLocation
-                    };
-                    if (initiative.AttackResolution.IsSuccessful)
+                        var ambushMod = new AttackFromAmbush();
+                        // A combat logikának figyelembe kell vennie ezt a modifiert
+                        // initiative.Attacker.AddTemporaryModifier(ambushMod); 
+                    }
+
+                    var (locationDescription, subLocation) = HitLocationSelector.GetLocation(attackDirection);
+                    if (initiative.SelectedAttack != null && initiative.Attacker.Source.IsConscious)
                     {
-                        var damage = initiative.AttackResolution.Attack.GetDamage();
-                        if (initiative.Target.Source is Attacker targetEntity)
+                        initiative.AttackResolution = new AttackResolution(initiative)
                         {
-                            bool wasConscious = targetEntity.ActualPainTolerancePoints > 0;
-                            if (initiative.AttackResolution.IsHpDamage || targetEntity.ActualPainTolerancePoints <= 0) // Need to fix for dragons, dragon has min and max only (I want a page, where you can set the actual values)
+                            Attack = initiative.SelectedAttack,
+                            Direction = attackDirection,
+                            HitLocation = locationDescription,
+                            HitSubLocation = subLocation
+                        };
+                        if (initiative.AttackResolution.IsSuccessful)
+                        {
+                            var damage = Math.Max(0, initiative.AttackResolution.Attack.GetDamage());
+                            if (initiative.Target.Source is Attacker targetEntity)
                             {
-                                if (initiative.AttackResolution.Impact == AttackImpact.Fatal)
+                                var wasConscious = targetEntity.IsConscious;
+                                if (initiative.AttackResolution.IsHpDamage || !targetEntity.IsConscious)
                                 {
-                                    initiative.Attacker.Source.ActualHealthPoints -= damage;
-                                }
-                                else
-                                {
-                                    if (initiative.AttackResolution.Impact != AttackImpact.Critical)
+                                    var impact = initiative.AttackResolution.Impact;
+                                    switch (impact)
                                     {
-                                        damage -= targetEntity.Armor?.ArmorClass ?? 0;
+                                        case AttackImpact.Fatal:
+                                            targetEntity = initiative.Attacker.Source;
+                                            break;
+                                        case AttackImpact.Critical:
+                                            targetEntity.Armor?.DecreaseArmorClass();
+                                            break;
+                                        default:
+                                            damage -= Math.Max(0, targetEntity.Armor?.ArmorClass ?? 0);
+                                            break;
                                     }
+
                                     targetEntity.ActualHealthPoints -= damage;
                                     targetEntity.ActualPainTolerancePoints -= 2 * damage;
-                                    if (targetEntity.ActualHealthPoints <= 0)
+                                    if (targetEntity.IsDead)
                                     {
                                         RemoveCharacter(targetEntity as Character);
                                         RemoveEnemy(targetEntity as Creature);
                                     }
                                 }
-                            }
-                            else
-                            {
-                                targetEntity.ActualPainTolerancePoints -= damage;
-                            }
+                                else
+                                {
+                                    targetEntity.ActualPainTolerancePoints -= damage;
+                                }
 
-                            string targetName = EncounterViewModel.GetName(targetEntity);
+                                var targetName = GetName(targetEntity);
+                                if (!targetEntity.IsConscious)
+                                {
+                                    var attacker = initiative.Attacker.Source as Character;
+                                    var target = targetEntity as Creature;
 
-                            if (targetEntity.ActualHealthPoints <= 0)
-                            {
-                                var character = initiative.Attacker.Source as Character;
-                                var creature = targetEntity as Creature;
-                                character?.BaseClass?.ExperiencePoints += creature?.ExperiencePoints ?? 0;
-                                WeakReferenceMessenger.Default.Send(new ShowInfoMessage(Lng.Elem("Die"), String.Format(Lng.Elem("'{0}' died."), Lng.Elem(targetName))));
+                                    if (wasConscious)
+                                    {
+                                        MainThread.BeginInvokeOnMainThread(() =>
+                                            WeakReferenceMessenger.Default.Send(
+                                                new ShowInfoMessage(
+                                                    Lng.Elem("Loss of consciousness"),
+                                                    String.Format(System.Globalization.CultureInfo.InvariantCulture, Lng.Elem("'{0}' has lost consciousness."), Lng.Elem(targetName))
+                                                )
+                                            )
+                                        );
 
-                                RemoveCharacter(targetEntity as Character);
-                                RemoveEnemy(creature);
-                            }
-                            else if (targetEntity.ActualPainTolerancePoints <= 0 && wasConscious)
-                            {
-                                WeakReferenceMessenger.Default.Send(new ShowInfoMessage(Lng.Elem("Loss of consciousness"), String.Format(Lng.Elem("'{0}' has lost consciousness."), Lng.Elem(targetName))));
+                                        attacker?.BaseClass?.ExperiencePoints += target?.ExperiencePoints ?? 0;
+                                    }
+
+                                    if (targetEntity.IsDead)
+                                    {
+                                        if (targetEntity.IsUndead)
+                                        {
+                                            attacker?.BaseClass?.ExperiencePoints += target?.ExperiencePoints ?? 0;
+                                        }
+                                        MainThread.BeginInvokeOnMainThread(() =>
+                                            WeakReferenceMessenger.Default.Send(new ShowInfoMessage(Lng.Elem("Die"), String.Format(System.Globalization.CultureInfo.InvariantCulture, Lng.Elem("'{0}' died."), Lng.Elem(targetName))))
+                                        );
+                                        var assignmentsForChar = RemoveCharacter(targetEntity as Character);
+                                        foreach (var a in assignmentsForChar)
+                                        {
+                                            assignmentsToRemove.Add(a);
+                                        }
+                                        RemoveEnemy(target);
+                                    }
+                                }
                             }
                         }
                     }
                 }
+                if (orderedInitiatives.Any())
+                {
+                    assignment.AddTurn(turn);
+                }
+
+                CleanupDead();
             }
-            if (orderedInitiatives.Any())
+        });
+    }
+
+    private void ProcessConfirmedEnemies(List<EnemyConfigurationItem> configs)
+    {
+        foreach (var config in configs)
+        {
+            // 1. Lény példányosítása
+            var newEnemy = config.CreateInstance();
+
+            // 2. Speciális beállítások kezelése (amik nincsenek a Creature osztályban)
+            // A te logikádban az AssignmentViewModel tárolja az enemy-t.
+            // Mivel a Creature osztály lehet, hogy nem tartalmazza a 'Distance' vagy 'Direction' mezőt,
+            // lehet, hogy egy Wrapper osztályba kell csomagolnod az Assignmenten belül,
+            // VAGY az EncounterViewModel-ben kezeled ezeket egy Dictionary-ben.
+
+            // Példa: Ambush modifier hozzáadása
+            if (config.Direction == AttackDirection.Behind)
             {
-                assignment.AddTurn(turn);
+                // Itt adod hozzá a modifiert. 
+                // Feltételezve, hogy a Creature implementálja az ICombatModifierProvider-t vagy van Modifiers listája
+                // newEnemy.ActiveModifiers.Add(new AttackFromAmbush());
             }
 
-            CleanupDead();
+            // Támadási stratégia beállítása (ha a creature támogatja)
+            newEnemy.AttackStrategy = config.Strategy;
+
+            // Attack Mode
+            if (config.SelectedAttackMode != null)
+            {
+                newEnemy.PreferredAttackMode = config.SelectedAttackMode;
+            }
+
+            // Hozzáadás a listához
+            SelectedAssignment!.Enemies.Add(newEnemy);
+
+            // Távolság beállítása az assignmentben (ha ott van tárolva)
+            SelectedAssignment.SetDistance(newEnemy, config.Distance);
         }
+
+        SelectedEnemy = null;
+        RunTurnCommand.NotifyCanExecuteChanged();
     }
 
     private static string GetName(Attacker attacker)
     {
-        if (attacker is Character character)
+        return attacker switch
         {
-            return character.Name;
-        }
-
-        if (attacker is Creature creature)
-        {
-            return creature.Name;
-        }
-
-        return Lng.Elem("Unknown target");
+            Character c => c.Name ?? String.Empty,
+            Creature cr => cr.Name ?? String.Empty,
+            _ => Lng.Elem("Unknown target")
+        };
     }
 
     private static IOrderedEnumerable<InitiativeEntry> GetInitiatives(AssignmentViewModel assignment, TurnData turn)
@@ -243,9 +361,9 @@ internal partial class EncounterViewModel(ISettings settings, CharacterService c
             });
 
             int characterAttackCount = assignment.Character.GetAttackCountForRound(turn.Round);
+            var charIntendedAttack = assignment.Character.AttackModes.FirstOrDefault();
             int charDist = assignment.GetDistance(target);
 
-            var charIntendedAttack = assignment.Character.AttackModes.FirstOrDefault();
             for (var i = 0; i < characterAttackCount; i++)
             {
                 AddInitiative(new CombatantRef(assignment.Character), new CombatantRef(target), charIntendedAttack, result);
@@ -272,27 +390,33 @@ internal partial class EncounterViewModel(ISettings settings, CharacterService c
 
     private bool CanRunTurn() => Assignments.Count > 0;
 
-    private void RemoveCharacter(Character? character)
+    private List<AssignmentViewModel> RemoveCharacter(Character? character)
     {
+        var result = new List<AssignmentViewModel>();
         if (character != null)
         {
             foreach (var assignment in Assignments)
             {
-                // assignment.Enemies attack another character
-                //assignment.Remove();
+                if (assignment.Character == character)
+                {
+                    result.Add(assignment);
+                }
             }
         }
+        return result;
     }
 
-    private void RemoveEnemy(Creature? enemy)
+    private bool RemoveEnemy(Attacker? enemy)
     {
+        var result = false;
         if (enemy != null)
         {
             foreach (var assignment in Assignments)
             {
-                assignment.Enemies.Remove(enemy);
+                result |= assignment.Enemies.Remove(enemy);
             }
         }
+        return result;
     }
 
     private void CleanupDead()
@@ -309,7 +433,7 @@ internal partial class EncounterViewModel(ISettings settings, CharacterService c
         }
     }
 
-    private void RedistributeEnemies(IEnumerable<Creature> enemies)
+    private void RedistributeEnemies(IEnumerable<Attacker> enemies)
     {
         if (Assignments.Count == 0)
         {

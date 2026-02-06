@@ -2,7 +2,7 @@ using M.A.G.U.S.GameSystem.Valuables;
 
 namespace M.A.G.U.S.Things.Other;
 
-public class Climbingirons : Thing
+public class ClimbingSpikes : Thing
 {
 	public override string Name => "Climbing spikes";
 

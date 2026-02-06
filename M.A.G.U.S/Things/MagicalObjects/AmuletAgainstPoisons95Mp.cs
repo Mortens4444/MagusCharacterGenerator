@@ -8,6 +8,8 @@ public class AmuletAgainstPoisons95Mp : MagicalObject
 {
     public override string Name => "Amulet Against Poisons (95 MP)";
 
+    public override string[] Images => ["amulet_against_poisons.png"];
+
     public override Money Price => new(0, 2);
 
     public override int ManaPoints => 95;

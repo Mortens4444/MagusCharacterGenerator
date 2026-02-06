@@ -30,7 +30,7 @@
     
     <VerticalStackLayout Spacing="15" Padding="15">
 
-        <!-- Név, faj, kaszt, jellem, TSZ -->
+        <!-- Name, race, class, alinment, experience level -->
         <Border Style="{StaticResource BoxBorder}">
             <VerticalStackLayout>
                 <Grid ColumnDefinitions="*,Auto">
@@ -82,7 +82,7 @@
             </VerticalStackLayout>
         </Border>
 
-        <!-- Képességek -->
+        <!-- Abilities -->
         <VerticalStackLayout Spacing="10">
             <Border Style="{StaticResource BoxBorder}">
                 <VerticalStackLayout>
@@ -104,7 +104,7 @@
         </VerticalStackLayout>
 
         <VerticalStackLayout Spacing="10">
-            <!-- Életerő & Fájdalomtűrés -->
+            <!-- Health & Pain Resistance -->
             <Border Style="{StaticResource BoxBorder}">
                 <VerticalStackLayout>
                     <Label Text="Health &amp; Pain Resistance" Style="{StaticResource HeaderLabel}"/>
@@ -116,7 +116,7 @@
                 </VerticalStackLayout>
             </Border>
 
-            <!-- Harcértékek -->
+            <!-- Combat values -->
             <Border Style="{StaticResource BoxBorder}">
                 <VerticalStackLayout>
                     <Label Text="Combat values" Style="{StaticResource HeaderLabel}"/>
@@ -155,23 +155,27 @@
                             SelectedItem="{Binding SelectedCombatValueModifier, Mode=TwoWay}"
                             WidthRequest="220"/>
 
-                    <Grid ColumnDefinitions="*, *" RowDefinitions="Auto, Auto, Auto, Auto">
-                        <mc:NumericUpDownWithLabel Label="Initiator value" Minimum="{Binding MinInitiateValue}" Maximum="{Binding MaxInitiateValue}" Value="{Binding InitiateValue, Mode=OneWay}" IsVisible="{Binding CanAllocateCombatModifier, Converter={StaticResource BoolToVisibilityConverter}}" IncrementCommand="{Binding IncrementInitiatorCommand}" DecrementCommand="{Binding DecrementInitiatorCommand}" />
-                        <mc:EntryWithLabel Label="Initiator value" Text="{Binding InitiateValue}" IsReadOnly="True" IsVisible="{Binding CanAllocateCombatModifier, Converter={StaticResource NotBoolToVisibilityConverter}}" />
+                    <Grid RowDefinitions="Auto, Auto, Auto, Auto, Auto, Auto" ColumnDefinitions="Auto, Auto">
+                        <!-- Initiator -->
+                        <mc:NumericUpDownWithLabel x:Name="NudInitiatorValue" Label="Initiator value" Minimum="{Binding MinInitiateValue}" Maximum="{Binding MaxInitiateValue}" Value="{Binding InitiateValue, Mode=TwoWay}" IsVisible="{Binding CanAllocateCombatModifier, Converter={StaticResource BoolToVisibilityConverter}}" IncrementCommand="{Binding IncrementInitiatorCommand}" DecrementCommand="{Binding DecrementInitiatorCommand}" Grid.ColumnSpan="2" />
+                        <mc:EntryWithLabel Label="Initiator value" Text="{Binding InitiateValue}" IsReadOnly="True" IsVisible="{Binding CanAllocateCombatModifier, Converter={StaticResource NotBoolToVisibilityConverter}}" Grid.ColumnSpan="2" />
 
-                        <mc:NumericUpDownWithLabel Label="Attack value" Minimum="{Binding MinAttackValue}" Maximum="{Binding MaxAttackValue}" Value="{Binding AttackValue, Mode=OneWay}" IsVisible="{Binding CanAllocateCombatModifier, Converter={StaticResource BoolToVisibilityConverter}}" Grid.Column="1" IncrementCommand="{Binding IncrementAttackCommand}" DecrementCommand="{Binding DecrementAttackCommand}" />
-                        <mc:EntryWithLabel Label="Attack value" Text="{Binding AttackValue}" IsReadOnly="True" IsVisible="{Binding CanAllocateCombatModifier, Converter={StaticResource NotBoolToVisibilityConverter}}" Grid.Column="1" />
+                        <!-- Attack -->
+                        <mc:NumericUpDownWithLabel x:Name="NudAttackValue" Label="Attack value" Minimum="{Binding MinAttackValue}" Maximum="{Binding MaxAttackValue}" Value="{Binding AttackValue, Mode=TwoWay}" IsVisible="{Binding CanAllocateCombatModifier, Converter={StaticResource BoolToVisibilityConverter}}" IncrementCommand="{Binding IncrementAttackCommand}" DecrementCommand="{Binding DecrementAttackCommand}" Grid.Row="1" Grid.ColumnSpan="2" />
+                        <mc:EntryWithLabel Label="Attack value" Text="{Binding AttackValue}" IsReadOnly="True" IsVisible="{Binding CanAllocateCombatModifier, Converter={StaticResource NotBoolToVisibilityConverter}}" Grid.Row="1" Grid.ColumnSpan="2" />
 
-                        <mc:NumericUpDownWithLabel Label="Defense value" Minimum="{Binding MinDefenseValue}" Maximum="{Binding MaxDefenseValue}" Value="{Binding DefenseValue, Mode=OneWay}" IsVisible="{Binding CanAllocateCombatModifier, Converter={StaticResource BoolToVisibilityConverter}}" Grid.Row="1" IncrementCommand="{Binding IncrementDefenseCommand}" DecrementCommand="{Binding DecrementDefenseCommand}" />
-                        <mc:EntryWithLabel Label="Defense value" Text="{Binding DefenseValue}" IsReadOnly="True" IsVisible="{Binding CanAllocateCombatModifier, Converter={StaticResource NotBoolToVisibilityConverter}}" Grid.Row="1" />
+                        <!-- Defense -->
+                        <mc:NumericUpDownWithLabel x:Name="NudDefenseValue" Label="Defense value" Minimum="{Binding MinDefenseValue}" Maximum="{Binding MaxDefenseValue}" Value="{Binding DefenseValue, Mode=TwoWay}" IsVisible="{Binding CanAllocateCombatModifier, Converter={StaticResource BoolToVisibilityConverter}}" IncrementCommand="{Binding IncrementDefenseCommand}" DecrementCommand="{Binding DecrementDefenseCommand}" Grid.Row="2" Grid.ColumnSpan="2" />
+                        <mc:EntryWithLabel Label="Defense value" Text="{Binding DefenseValue}" IsReadOnly="True" IsVisible="{Binding CanAllocateCombatModifier, Converter={StaticResource NotBoolToVisibilityConverter}}" Grid.Row="2" Grid.ColumnSpan="2" />
 
-                        <mc:NumericUpDownWithLabel Label="Aim value" Minimum="{Binding MinAimValue}" Maximum="{Binding MaxAimValue}" Value="{Binding AimValue, Mode=OneWay}" IsVisible="{Binding CanAllocateCombatModifier, Converter={StaticResource BoolToVisibilityConverter}}" Grid.Row="1" Grid.Column="1" IncrementCommand="{Binding IncrementAimCommand}" DecrementCommand="{Binding DecrementAimCommand}" />
-                        <mc:EntryWithLabel Label="Aim value" Text="{Binding AimValue}" IsReadOnly="True" IsVisible="{Binding CanAllocateCombatModifier, Converter={StaticResource NotBoolToVisibilityConverter}}" Grid.Row="1" Grid.Column="1" />
+                        <!-- Aim -->
+                        <mc:NumericUpDownWithLabel x:Name="NudAimValue" Label="Aim value" Minimum="{Binding MinAimValue}" Maximum="{Binding MaxAimValue}" Value="{Binding AimValue, Mode=TwoWay}" IsVisible="{Binding CanAllocateCombatModifier, Converter={StaticResource BoolToVisibilityConverter}}" IncrementCommand="{Binding IncrementAimCommand}" DecrementCommand="{Binding DecrementAimCommand}" Grid.Row="3" Grid.ColumnSpan="2" />
+                        <mc:EntryWithLabel Label="Aim value" Text="{Binding AimValue}" IsReadOnly="True" IsVisible="{Binding CanAllocateCombatModifier, Converter={StaticResource NotBoolToVisibilityConverter}}" Grid.Row="3" Grid.ColumnSpan="2" />
+                        
+                        <mc:EntryWithLabel Label="Combat modifier" Text="{Binding RemainingCombatValueModifier}" IsReadOnly="True" Grid.Row="4" Grid.Column="0" />
+                        <mc:EntryWithLabel Label="Combat modifier/level" Text="{Binding CombatValueModifierPerLevel}" IsReadOnly="True" Grid.Row="4" Grid.Column="1" />
 
-                        <mc:EntryWithLabel Label="Combat modifier" Text="{Binding CombatValueModifier}" IsReadOnly="True" Grid.Row="2" />
-                        <mc:EntryWithLabel Label="Combat modifier/level" Text="{Binding CombatValueModifierPerLevel}" IsReadOnly="True" Grid.Row="2" Grid.Column="1" />
-
-                        <mc:EntryWithLabel Label="Damage" Text="{Binding Damage}" IsReadOnly="True" Grid.Row="3" Grid.ColumnSpan="2" />
+                        <mc:EntryWithLabel Label="Damage" Text="{Binding Damage}" IsReadOnly="True" Grid.Row="5" Grid.ColumnSpan="2" />
                     </Grid>
                 </VerticalStackLayout>
             </Border>
@@ -215,7 +219,7 @@
             
         </VerticalStackLayout>
 
-        <!-- Képzettségek -->
+        <!-- Qualifications -->
         <Border Style="{StaticResource BoxBorder}" Margin="0,10">
             <VerticalStackLayout>
                 <Grid ColumnDefinitions="*,*">
@@ -243,7 +247,7 @@
             </VerticalStackLayout>
         </Border>
 
-        <!-- Százalékos képzettségek -->
+        <!-- Percent qualifications -->
         <Border Style="{StaticResource BoxBorder}" Margin="0,10">
             <VerticalStackLayout>
                 <Label Text="Percent qualifications" Style="{StaticResource HeaderLabel}" />
@@ -265,7 +269,7 @@
             </VerticalStackLayout>
         </Border>
 
-        <!-- Speciális képességek -->
+        <!-- Special Abilities -->
         <Border Style="{StaticResource BoxBorder}" Margin="0,10">
             <VerticalStackLayout>
                 <Label Text="Special Abilities" Style="{StaticResource HeaderLabel}" />
@@ -285,7 +289,7 @@
             </VerticalStackLayout>
         </Border>
 
-        <!-- Pénz -->
+        <!-- Money -->
         <Grid ColumnDefinitions="*,*">
             <Border Style="{StaticResource BoxBorder}">
                 <VerticalStackLayout>
@@ -302,7 +306,7 @@
             <mc:MenuItem ImageName="market" LabelText="Market" PageType="{x:Type mv:MarketPage}" WidthRequest="100" HeightRequest="100" Parameter="{Binding Character}" Grid.Column="1" />
         </Grid>
 
-        <!-- Felszerelés -->
+        <!-- Equipment -->
         <Border Style="{StaticResource BoxBorder}" Margin="0,10">
             <VerticalStackLayout>
                 <Label Text="Equipment" Style="{StaticResource HeaderLabel}" />

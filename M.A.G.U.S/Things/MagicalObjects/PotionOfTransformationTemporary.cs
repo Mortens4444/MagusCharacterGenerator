@@ -12,5 +12,7 @@ public class PotionOfTransformationTemporary : MagicalObject
 
     public override int ManaPoints => 120;
 
+    public override string[] Images => ["potion_of_transformation.png"];
+
     public override IEnumerable<Class> AllowedCreators => [new Witch(), new Warlock()];
 }

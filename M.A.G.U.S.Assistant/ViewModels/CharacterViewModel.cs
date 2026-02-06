@@ -5,7 +5,6 @@ using M.A.G.U.S.Assistant.Services;
 using M.A.G.U.S.Enums;
 using M.A.G.U.S.Extensions;
 using M.A.G.U.S.GameSystem;
-using M.A.G.U.S.GameSystem.Magic;
 using M.A.G.U.S.Interfaces;
 using M.A.G.U.S.Models;
 using M.A.G.U.S.Qualifications;
@@ -51,6 +50,22 @@ internal partial class CharacterViewModel(IPrintService printService) : BaseView
             }
         }
     }
+
+    public int AllocatedToInitiate => Character?.AllocatedToInitiate ?? 0;
+
+    public int AllocatedToAttack => Character?.AllocatedToAttack ?? 0;
+
+    public int AllocatedToDefense => Character?.AllocatedToDefense ?? 0;
+
+    public int AllocatedToAim => Character?.AllocatedToAim ?? 0;
+
+    public int AllocatedToInitiateMax => Character?.AllocatedToInitiateMax ?? 0;
+
+    public int AllocatedToAttackMax => Character?.AllocatedToAttackMax ?? 0;
+
+    public int AllocatedToDefenseMax => Character?.AllocatedToDefenseMax ?? 0;
+
+    public int AllocatedToAimMax => Character?.AllocatedToAimMax ?? 0;
 
     public Weapon? PrimaryWeapon
     {
@@ -170,7 +185,7 @@ internal partial class CharacterViewModel(IPrintService printService) : BaseView
             OnPropertyChanged(nameof(MaxAimValue));
             OnPropertyChanged(nameof(AimValue));
             
-            OnPropertyChanged(nameof(CombatValueModifier));
+            OnPropertyChanged(nameof(RemainingCombatValueModifier));
             OnPropertyChanged(nameof(CombatValueModifierPerLevel));
 
             OnPropertyChanged(nameof(MaxPsiPoints));
@@ -214,18 +229,10 @@ internal partial class CharacterViewModel(IPrintService printService) : BaseView
         {
             case nameof(Character.CanAllocateCombatModifier):
                 OnPropertyChanged(nameof(CanAllocateCombatModifier));
-                IncrementInitiatorCommand.NotifyCanExecuteChanged();
-                DecrementInitiatorCommand.NotifyCanExecuteChanged();
-                IncrementAttackCommand.NotifyCanExecuteChanged();
-                DecrementAttackCommand.NotifyCanExecuteChanged();
-                IncrementDefenseCommand.NotifyCanExecuteChanged();
-                DecrementDefenseCommand.NotifyCanExecuteChanged();
-                IncrementAimCommand.NotifyCanExecuteChanged();
-                DecrementAimCommand.NotifyCanExecuteChanged();
                 break;
 
-            case nameof(Character.CombatValueModifier):
-                OnPropertyChanged(nameof(CombatValueModifier));
+            case nameof(Character.RemainingCombatValueModifier):
+                OnPropertyChanged(nameof(RemainingCombatValueModifier));
                 OnPropertyChanged(nameof(CanAllocateCombatModifier));
                 break;
 
@@ -349,7 +356,7 @@ internal partial class CharacterViewModel(IPrintService printService) : BaseView
     public int ArmorClass => Character?.Armor?.ArmorClass ?? 0;
     public int ArmorCheckPenalty => Character?.Armor?.ArmorCheckPenalty ?? 0;
 
-    public int CombatValueModifier => Character?.CombatValueModifier ?? 0;
+    public int RemainingCombatValueModifier => Character?.RemainingCombatValueModifier ?? 0;
 
     public string Damage
     {
@@ -485,29 +492,79 @@ internal partial class CharacterViewModel(IPrintService printService) : BaseView
             Character.Sell(thing);
         }
     }
-    [RelayCommand(CanExecute = nameof(CanAllocateCombatModifier))]
-    public void IncrementInitiator() => Character?.ChangeInitiator(1);
 
     [RelayCommand(CanExecute = nameof(CanAllocateCombatModifier))]
-    public void DecrementInitiator() => Character?.ChangeInitiator(-1);
+    public void IncrementInitiator()
+    {
+        Character?.ChangeInitiator(1);
+        ChangeCombatValueModifierButtonStates();
+    }
 
     [RelayCommand(CanExecute = nameof(CanAllocateCombatModifier))]
-    public void IncrementAttack() => Character?.ChangeAttack(1);
+    public void DecrementInitiator()
+    {
+        Character?.ChangeInitiator(-1);
+        ChangeCombatValueModifierButtonStates();
+    }
 
     [RelayCommand(CanExecute = nameof(CanAllocateCombatModifier))]
-    public void DecrementAttack() => Character?.ChangeAttack(-1);
+    public void IncrementAttack()
+    {
+        Character?.ChangeAttack(1);
+        ChangeCombatValueModifierButtonStates();
+    }
 
     [RelayCommand(CanExecute = nameof(CanAllocateCombatModifier))]
-    public void IncrementDefense() => Character?.ChangeDefense(1);
+    public void DecrementAttack()
+    {
+        Character?.ChangeAttack(-1);
+        ChangeCombatValueModifierButtonStates();
+    }
 
     [RelayCommand(CanExecute = nameof(CanAllocateCombatModifier))]
-    public void DecrementDefense() => Character?.ChangeDefense(-1);
+    public void IncrementDefense()
+    {
+        Character?.ChangeDefense(1);
+        ChangeCombatValueModifierButtonStates();
+    }
 
     [RelayCommand(CanExecute = nameof(CanAllocateCombatModifier))]
-    public void IncrementAim() => Character?.ChangeAim(1);
+    public void DecrementDefense()
+    {
+        Character?.ChangeDefense(-1);
+        ChangeCombatValueModifierButtonStates();
+    }
 
     [RelayCommand(CanExecute = nameof(CanAllocateCombatModifier))]
-    public void DecrementAim() => Character?.ChangeAim(-1);
+    public void IncrementAim()
+    {
+        Character?.ChangeAim(1);
+        ChangeCombatValueModifierButtonStates();
+    }
+
+    [RelayCommand(CanExecute = nameof(CanAllocateCombatModifier))]
+    public void DecrementAim()
+    {
+        Character?.ChangeAim(-1);
+        ChangeCombatValueModifierButtonStates();
+    }
+
+    private void ChangeCombatValueModifierButtonStates()
+    {
+        OnPropertyChanged(nameof(MaxInitiateValue));
+        OnPropertyChanged(nameof(MaxAttackValue));
+        OnPropertyChanged(nameof(MaxDefenseValue));
+        OnPropertyChanged(nameof(MaxAimValue));
+        OnPropertyChanged(nameof(CanAllocateCombatModifier));
+        IncrementInitiatorCommand.NotifyCanExecuteChanged();
+        DecrementInitiatorCommand.NotifyCanExecuteChanged();
+        IncrementAttackCommand.NotifyCanExecuteChanged();
+        DecrementAttackCommand.NotifyCanExecuteChanged();
+        IncrementDefenseCommand.NotifyCanExecuteChanged();
+        DecrementDefenseCommand.NotifyCanExecuteChanged();
+        IncrementAimCommand.NotifyCanExecuteChanged();
+        DecrementAimCommand.NotifyCanExecuteChanged();
+    }
 
     [RelayCommand]
     public async Task Print()

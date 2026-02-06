@@ -14,6 +14,10 @@ internal class AssignmentViewModel : BaseViewModel
     private readonly ISettings settings;
     private readonly Dictionary<Guid, int> enemyDistances = [];
 
+    public bool IsCharacterConscious => Character.IsConscious;
+
+    public bool HasActiveOpponents => Enemies.Any(o => o.ActualHealthPoints > 0);
+
     public AssignmentViewModel(ISettings settings, Character character)
     {
         this.settings = settings;
@@ -26,7 +30,7 @@ internal class AssignmentViewModel : BaseViewModel
 
     public ObservableCollection<TurnViewModel> TurnHistory { get; } = [];
 
-    public ObservableCollection<Creature> Enemies { get; } = [];
+    public ObservableCollection<Attacker> Enemies { get; } = [];
 
     public double EstimatedTime => 0;
     //Enemies.Count == 0
@@ -35,6 +39,11 @@ internal class AssignmentViewModel : BaseViewModel
 
     public void AddTurn(TurnData turn)
     {
+        if (Character.IsDead)
+        {
+            return;
+        }
+
         var turnViewModel = new TurnViewModel(turn);
         if (settings.AssignmentTurnHistoryNewestOnTop)
         {
@@ -56,7 +65,15 @@ internal class AssignmentViewModel : BaseViewModel
         return value;
     }
 
-    public void DecreaseDistance(Creature enemy, int amount)
+    public void SetDistance(Attacker enemy, int distance)
+    {
+        if (!enemyDistances.TryAdd(enemy.Id, distance))
+        {
+            enemyDistances[enemy.Id] = distance;
+        }
+    }
+
+    public void DecreaseDistance(Attacker enemy, int amount)
     {
         int current = GetDistance(enemy);
         enemyDistances[enemy.Id] = Math.Max(0, current - amount);
@@ -97,5 +114,10 @@ internal class AssignmentViewModel : BaseViewModel
         //     baseDistance -= 10;
         // }
         return Math.Max(Attacker.MeleeDistance, baseDistance);
+    }
+
+    public bool CanContinueCombat()
+    {
+        return IsCharacterConscious && Enemies.Any(enemy => enemy.IsConscious);
     }
 }
