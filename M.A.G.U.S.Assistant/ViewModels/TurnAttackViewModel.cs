@@ -1,22 +1,16 @@
-﻿using M.A.G.U.S.GameSystem;
+﻿using M.A.G.U.S.Enums;
+using M.A.G.U.S.GameSystem;
 using M.A.G.U.S.GameSystem.Turn;
 using Mtf.Extensions;
 using Mtf.LanguageService.MAUI;
 
 namespace M.A.G.U.S.Assistant.ViewModels;
 
-internal sealed class TurnAttackViewModel
+internal sealed class TurnAttackViewModel(int roundNumber, InitiativeEntry initiativeEntry)
 {
-    private readonly InitiativeEntry initiativeEntry;
-    private readonly ResolutionBase attack;
-    private readonly int roundNumber;
-
-    public TurnAttackViewModel(int roundNumber, InitiativeEntry initiativeEntry)
-    {
-        this.roundNumber = roundNumber;
-        this.initiativeEntry = initiativeEntry;
-        attack = initiativeEntry.AttackOrAimResolution!;
-    }
+    private readonly InitiativeEntry initiativeEntry = initiativeEntry;
+    private readonly ResolutionBase attack = initiativeEntry.AttackOrAimResolution!;
+    private readonly int roundNumber = roundNumber;
 
     public int RoundNumber => roundNumber;
 
@@ -47,13 +41,14 @@ internal sealed class TurnAttackViewModel
                 return isRanged ? "🏹❌" : "🗡❌";
             }
 
-            var impact = attack.Impact == M.A.G.U.S.Enums.AttackImpact.Normal ? String.Empty :
-                attack.Impact == M.A.G.U.S.Enums.AttackImpact.Critical ? "⚝" : "☠️";
+            var impact = attack.Impact == AttackImpact.Normal ? String.Empty :
+                attack.Impact == AttackImpact.CriticalDamage ? "⚝" : "☠️";
             var attackMode = isRanged ? "🏹" : "🗡";
             var isHpAttack = attack.IsHpDamage ? "🩸" : String.Empty;
+            string damageKind = attack.IsHpDamage ? Lng.Elem("HP") : Lng.Elem("PTP");
             var target = isRanged ? "🎯" : "💥";
 
-            return $"{attackMode}{isHpAttack}{impact} {attack.RollValue + attack.Attack.Value}{(attack.IsSuccessful ? $"{target}{attack.Damage}" : String.Empty)}";
+            return $"{attackMode}{isHpAttack}{impact} {attack.RollValue + attack.Attack.Value}{(attack.IsSuccessful ? $"{target}{attack.Damage}{damageKind}" : String.Empty)}";
         }
     }
 }

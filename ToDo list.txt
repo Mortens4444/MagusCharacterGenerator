@@ -1,7 +1,6 @@
-- save xp after encounter
-- fix character generation combat value modifier error (when auto, it can be negativ, why? stop it!)
-- encouter page errors
-- add range attack mode
+- EnemySetupPage should have an option for how many enemies can atack maximum at a time
+- xp set after ancounter ends, or get a logic, which sets automatically the earned xp from max xp and combat style
+- when a character kills all of it's enemies in encounter, redistribute enemies should be called with a UI
 - paintwizardpage needs a navigation confirm
 - zoom image not works
 - fix leave character generation (with manual throws question should not appear, no modification => no confirm)

@@ -2,13 +2,9 @@
 
 namespace M.A.G.U.S.Qualifications.Specialities;
 
-public class DetectHighIntelligence : SpecialQualification
+public class DetectHighIntelligence(int distance) : SpecialQualification
 {
-    public int Distance { get; init; }
-    public DetectHighIntelligence(int distance)
-    {
-        Distance = distance;
-    }
+    public int Distance { get; init; } = distance;
 
     public override string Name => "Detect high intelligence";
 }

@@ -1,11 +1,10 @@
 ﻿using CommunityToolkit.Mvvm.Messaging;
-using M.A.G.U.S.Assistant.Interfaces;
 using Mtf.LanguageService.MAUI;
 using Mtf.Maui.Controls.Messages;
 
 namespace M.A.G.U.S.Assistant.Services;
 
-internal class ShellNavigationService //: INavigationService
+internal static class ShellNavigationService
 {
     public static Task DisplayAlertAsync(string message)
     {

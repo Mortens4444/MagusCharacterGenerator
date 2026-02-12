@@ -1,5 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.Messaging;
+using M.A.G.U.S.Assistant.Enums;
 using M.A.G.U.S.Assistant.Services;
 using M.A.G.U.S.Assistant.Views;
 using M.A.G.U.S.Bestiary;
@@ -16,7 +17,7 @@ namespace M.A.G.U.S.Assistant.ViewModels;
 internal partial class EncounterViewModel : CharacterListLoaderViewModel, IDisposable
 {
     private Character? selectedCharacter;
-    private Creature? selectedEnemy;
+    private Attacker? selectedEnemy;
     private AssignmentViewModel? selectedAssignment;
     private readonly ISettings settings;
     private readonly CombatEngine combatEngine;
@@ -28,8 +29,8 @@ internal partial class EncounterViewModel : CharacterListLoaderViewModel, IDispo
     }
 
     public ObservableCollection<Character> Characters { get; } = [];
-    public ObservableCollection<Creature> Enemies { get; } = [];
-    public ObservableCollection<Creature> AvailableEnemies { get; } = [];
+    public ObservableCollection<Attacker> Enemies { get; } = [];
+    public ObservableCollection<Attacker> AvailableEnemies { get; } = [];
     public ObservableCollection<AssignmentViewModel> Assignments { get; } = [];
 
     public Character? SelectedCharacter
@@ -44,7 +45,7 @@ internal partial class EncounterViewModel : CharacterListLoaderViewModel, IDispo
         }
     }
 
-    public Creature? SelectedEnemy
+    public Attacker? SelectedEnemy
     {
         get => selectedEnemy;
         set
@@ -67,6 +68,8 @@ internal partial class EncounterViewModel : CharacterListLoaderViewModel, IDispo
             }
         }
     }
+
+    public EncounterState EncounterState { get; private set; }
 
     public async Task LoadBestiaryAsync()
     {
@@ -139,29 +142,59 @@ internal partial class EncounterViewModel : CharacterListLoaderViewModel, IDispo
             return;
         }
 
-        var setupVm = new EnemySetupViewModel(SelectedEnemy);
-        var setupPage = new EnemySetupPage(setupVm);
-        setupVm.OnEnemiesConfirmed += (configs) =>
+        if (SelectedEnemy is Creature creature)
         {
-            ProcessConfirmedEnemies(configs);
-            ShellNavigationService.ClosePageAsync();
-        };
-        setupVm.OnCancel += () =>
+            var setupVm = new EnemySetupViewModel(creature);
+            var setupPage = new EnemySetupPage(setupVm);
+            setupVm.OnEnemiesConfirmed += (configs) =>
+            {
+                ProcessConfirmedEnemies(configs);
+                ShellNavigationService.ClosePageAsync();
+            };
+            setupVm.OnCancel += () =>
+            {
+                ShellNavigationService.ClosePageAsync();
+            };
+            await ShellNavigationService.ShowPageAsync(setupPage).ConfigureAwait(true);
+        }
+        else
         {
-            ShellNavigationService.ClosePageAsync();
-        };
-        await ShellNavigationService.ShowPageAsync(setupPage).ConfigureAwait(true);
+            SelectedEnemy.LostConsciousness += LostConsciousnessHandler;
+            SelectedEnemy.Died += DieHandler;
+
+            SelectedAssignment!.Enemies.Add(SelectedEnemy);
+            SelectedAssignment.SetDistance(SelectedEnemy, GameSystem.Constants.DefaultEncounterDistance);
+
+            SelectedEnemy = null;
+            RunTurnCommand.NotifyCanExecuteChanged();
+        }
     }
 
     [RelayCommand(CanExecute = nameof(CanRunTurn))]
     private void RunTurn()
     {
+        if (IsEncounterOver())
+        {
+            NewEncounter();
+        }
+        if (EncounterState == EncounterState.NotStarted)
+        {
+            EncounterState = EncounterState.InProgress;
+        }
         var assignmentsSnapshot = Assignments.ToList();
         foreach (var assignment in assignmentsSnapshot)
         {
             var round = assignment.TurnHistory.Count + 1;
             combatEngine.ProcessAssignmentTurn(assignment, round);
         }
+    }
+
+    private Task NewEncounter()
+    {
+        Dispose();
+        Assignments.Clear();
+        Characters.Clear();
+        return LoadCharactersAsync();
     }
 
     private void DieHandler(object? sender, EventArgs e)
@@ -171,14 +204,14 @@ internal partial class EncounterViewModel : CharacterListLoaderViewModel, IDispo
             return;
         }
 
+        diedEntity.Died -= DieHandler;
+        diedEntity.LostConsciousness -= LostConsciousnessHandler;
+
         var assignment = Assignments.FirstOrDefault(a => a.Enemies.Contains(diedEntity));
         if (assignment != null)
         {
             AddXpForUndeads(assignment.Character, diedEntity);
         }
-
-        diedEntity.LostConsciousness -= LostConsciousnessHandler;
-        diedEntity.Died -= DieHandler;
 
         MainThread.BeginInvokeOnMainThread(() =>
         {
@@ -189,7 +222,8 @@ internal partial class EncounterViewModel : CharacterListLoaderViewModel, IDispo
                 {
                     var enemiesToRedistribute = charAssignment.Enemies.ToList();
                     charAssignment.Enemies.Clear();
-                    Assignments.Remove(charAssignment);
+                    charAssignment.IsFinished = true;
+                    //Assignments.Remove(charAssignment);
                     RedistributeEnemies(enemiesToRedistribute);
                 }
                 else
@@ -204,12 +238,53 @@ internal partial class EncounterViewModel : CharacterListLoaderViewModel, IDispo
 
                 RunTurnCommand.NotifyCanExecuteChanged();
                 ShowDiedMessage(diedEntity);
+
+                if (IsEncounterOver())
+                {
+                    EndEncounter();
+                }
             }
             catch (Exception ex)
             {
                 WeakReferenceMessenger.Default.Send(new ShowErrorMessage(ex));
             }
         });
+    }
+    private bool IsEncounterOver()
+    {
+        var activeAssignments = Assignments.Where(a => !a.IsFinished).ToList();
+        if (!activeAssignments.Any())
+        {
+            return true;
+        }
+
+        var anyAliveCharacter = activeAssignments.Any(a => !a.Character.IsDead);
+        if (!anyAliveCharacter)
+        {
+            return true;
+        }
+
+        var anyAliveEnemy = activeAssignments.SelectMany(a => a.Enemies).Any(e => !e.IsDead);
+        if (!anyAliveEnemy)
+        {
+            return true;
+        }
+
+        return false;
+    }
+
+    private void EndEncounter()
+    {
+        foreach (var assignment in Assignments)
+        {
+            assignment.Character.LostConsciousness -= LostConsciousnessHandler;
+            assignment.Character.Died -= DieHandler;
+            RemoveEnemyHandlers(assignment.Enemies);
+        }
+
+        EncounterState = EncounterState.Finished;
+        RunTurnCommand.NotifyCanExecuteChanged();
+        // tovább: UI értesítés, scoreboard, stb.
     }
 
     private static void ShowDiedMessage(Attacker diedEntity)
@@ -268,7 +343,7 @@ internal partial class EncounterViewModel : CharacterListLoaderViewModel, IDispo
 
     private bool CanAddEnemy() => SelectedEnemy != null && SelectedAssignment != null;
 
-    private bool CanAddCharacter() => SelectedCharacter != null && !Characters.Contains(SelectedCharacter);
+    private bool CanAddCharacter() => SelectedCharacter != null && !Characters.Any(c => c.Id == SelectedCharacter.Id);
 
     private bool CanRunTurn() => Assignments.Count > 0;
 

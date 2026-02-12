@@ -23,11 +23,8 @@ internal partial class EnemyConfigurationItem : ObservableObject
         this.template = template;
         name = $"{Lng.Elem(template.Name)} #{index + 1}";
         Strategy = AttackStrategy.AttackRandom;
-        Direction = AttackDirection.Front;
         Distance = 10;
-        //direction = AttackDirection.Front;
-        //strategy = AttackStrategy.AttackRandom;
-        // HP határok beállítása
+
         MinHp = template.MinHealthPoints ?? template.HealthPoints ?? 1;
         MaxHp = template.MaxHealthPoints ?? template.HealthPoints ?? 100;
         if (MinHp > MaxHp)
@@ -37,7 +34,6 @@ internal partial class EnemyConfigurationItem : ObservableObject
 
         ActualHealthPoints = RandomProvider.GetSecureRandomInt(MinHp, MaxHp + 1);
 
-        // PTP határok beállítása
         if (template.PainTolerancePoints == null &&
             template.MinPainTolerancePoints == null &&
             template.MaxPainTolerancePoints == null)
@@ -138,7 +134,6 @@ internal partial class EnemyConfigurationItem : ObservableObject
         var instance = (Creature)Activator.CreateInstance(template.GetType())!;
         instance.Name = Name;
         instance.ActualHealthPoints = ActualHealthPoints;
-        // Beállítjuk a max értéket is az aktuálisan választottra
         instance.HealthPoints = ActualHealthPoints;
         instance.ActualPainTolerancePoints = ActualPainTolerancePoints;
         instance.PainTolerancePoints = ActualPainTolerancePoints;

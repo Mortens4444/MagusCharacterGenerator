@@ -13,6 +13,8 @@ internal class AssignmentViewModel : BaseViewModel
     private readonly ISettings settings;
     private readonly Dictionary<Guid, int> enemyDistances = [];
 
+    public bool IsFinished { get; set; }
+
     public bool IsCharacterConscious => Character.IsConscious;
 
     public bool HasActiveOpponents => Enemies.Any(o => o.ActualHealthPoints > 0);

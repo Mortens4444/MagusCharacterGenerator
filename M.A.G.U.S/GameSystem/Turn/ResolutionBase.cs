@@ -45,5 +45,5 @@ public abstract class ResolutionBase
 
     public string? HitSubLocation { get; init; }
 
-    public AttackImpact Impact => RollValue == 100 ? AttackImpact.Critical : RollValue == 1 ? AttackImpact.Fatal : AttackImpact.Normal;
+    public AttackImpact Impact => RollValue == 100 ? AttackImpact.CriticalDamage : RollValue == 1 ? AttackImpact.FatalMistake : AttackImpact.Normal;
 }

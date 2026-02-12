@@ -55,6 +55,8 @@ public abstract class Attacker
         }
     }
 
+    public Occurrence Occurrence { get; protected set; }
+
     public virtual Size Size { get; protected set; }
 
     public virtual int InitiateValue { get; set; }

@@ -26,7 +26,7 @@ public abstract class Attack
     {
         var diceThrow = new DiceThrow();
         var roll = diceThrow._1D100();
-        var impact = roll == 100 ? AttackImpact.Critical : roll == 1 ? AttackImpact.Fatal : AttackImpact.Normal;
+        var impact = roll == 100 ? AttackImpact.CriticalDamage : roll == 1 ? AttackImpact.FatalMistake : AttackImpact.Normal;
         return (impact, Value + roll);
     }
 }

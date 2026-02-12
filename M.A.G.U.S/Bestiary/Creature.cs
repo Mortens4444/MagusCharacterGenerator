@@ -21,8 +21,6 @@ public abstract class Creature : Attacker, IHaveImage
 
     protected Creature() { }
 
-    public Occurrence Occurrence { get; protected set; }
-
     public Intelligence? Intelligence { get; protected set; }
     
     public Intelligence? MinIntelligence { get; protected set; }

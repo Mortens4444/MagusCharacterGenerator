@@ -108,10 +108,10 @@ internal class CombatEngine
             var impact = resolution.Impact;
             switch (impact)
             {
-                case AttackImpact.Fatal:
+                case AttackImpact.FatalMistake:
                     attacker.ActualHealthPoints -= resolution.Damage;
                     break;
-                case AttackImpact.Critical:
+                case AttackImpact.CriticalDamage:
                     target.Armor?.DecreaseArmorClass();
                     target.ActualHealthPoints -= resolution.Damage + 3;
                     break;
@@ -126,10 +126,10 @@ internal class CombatEngine
             var impact = resolution.Impact;
             switch (impact)
             {
-                case AttackImpact.Fatal:
+                case AttackImpact.FatalMistake:
                     attacker.ActualPainTolerancePoints -= resolution.Damage;
                     break;
-                case AttackImpact.Critical:
+                case AttackImpact.CriticalDamage:
                     target.Armor?.DecreaseArmorClass();
                     target.ActualHealthPoints -= 3;
                     target.ActualPainTolerancePoints -= resolution.Damage;
