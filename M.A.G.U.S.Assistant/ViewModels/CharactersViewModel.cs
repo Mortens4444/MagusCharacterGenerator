@@ -5,20 +5,16 @@ using Mtf.LanguageService.MAUI;
 
 namespace M.A.G.U.S.Assistant.ViewModels;
 
-internal partial class CharactersViewModel : CharacterListLoaderViewModel
+internal partial class CharactersViewModel(CharacterService characterService) : CharacterListLoaderViewModel(characterService)
 {
-    public CharactersViewModel(CharacterService characterService) : base(characterService)
-    {
-    }
-
     [RelayCommand]
     private async Task DeleteAllCharacterAsync()
     {
-        var confirm = await Shell.Current.DisplayAlertAsync(
-            Lng.Elem("Delete Character"),
-            Lng.Elem("Are you sure you want to delete all characters? This cannot be undone."),
-            Lng.Elem("Delete"),
-            Lng.Elem("Cancel")).ConfigureAwait(true);
+        var confirm = await ShellNavigationService.DisplayAlertAsync(
+            "Delete Character",
+            "Are you sure you want to delete all characters? This cannot be undone.",
+            "Delete",
+            "Cancel").ConfigureAwait(true);
 
         if (confirm)
         {
@@ -36,11 +32,11 @@ internal partial class CharactersViewModel : CharacterListLoaderViewModel
             return;
         }
 
-        bool confirm = await Shell.Current.DisplayAlertAsync(
-            Lng.Elem("Delete Character"),
+        bool confirm = await ShellNavigationService.DisplayAlertAsync(
+            "Delete Character",
             String.Format(Lng.Elem("Are you sure you want to delete '{0}'? This cannot be undone."), character.Name),
-            Lng.Elem("Delete"),
-            Lng.Elem("Cancel")).ConfigureAwait(false);
+            "Delete",
+            "Cancel").ConfigureAwait(false);
 
         if (confirm)
         {
@@ -58,6 +54,6 @@ internal partial class CharactersViewModel : CharacterListLoaderViewModel
             return;
         }
 
-        await Shell.Current.GoToAsync($"CharacterDetailsPage?name={character.Name}").ConfigureAwait(false);
+        await ShellNavigationService.NavigateToAsync($"CharacterDetailsPage?name={character.Name}").ConfigureAwait(false);
     }
 }

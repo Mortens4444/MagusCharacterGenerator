@@ -1,14 +1,18 @@
+- save xp after encounter
+- fix character generation combat value modifier error (when auto, it can be negativ, why? stop it!)
+- encouter page errors
+- add range attack mode
+- paintwizardpage needs a navigation confirm
 - zoom image not works
 - fix leave character generation (with manual throws question should not appear, no modification => no confirm)
-- távolsági harc
-- loot
-- karakter törlése nem sikerül?
-- Generálás gomb beragad, ha visszalép Erő dobásról?
+- charactter delete not successful?
+- after rotating an item on PaintWizardPage, use rotated points to move the object, not the original ones
+- generate button not available, after canceling strength probe?
 - Add custom attributes to runeswords (each one is a rune)
 - Priest Mana points per level should use RollFormulaPage + setting
 - Fix zoom image preview
 - Fix search and price multiplier change on market
-- MaxDieNumber setting & property in Charatrer class + DieCounter on UI - Resetable? If DieCount == MaxDieCount => Status = Alive->Dead S
+- MaxDieNumber setting & property in Character class + DieCounter on UI - Resetable? If DieCount == MaxDieCount => Status = Alive->Dead S
 - Refactor: Remove Calculate functions from Character class - compute all properties
 - // Speeds shoud be filled from races
 - Add predefined objects to PaintWizardPage (trees, rocks, table, chair) // Need save and load into json format? load two json into one background!

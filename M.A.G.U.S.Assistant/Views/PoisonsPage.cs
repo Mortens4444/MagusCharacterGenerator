@@ -1,16 +1,10 @@
 using M.A.G.U.S.Assistant.Models;
+using M.A.G.U.S.Assistant.Services;
 using M.A.G.U.S.Assistant.ViewModels;
-using M.A.G.U.S.GameSystem.PoisonsAndIllnesses;
-using Mtf.Extensions;
-using Mtf.LanguageService.MAUI;
 
 namespace M.A.G.U.S.Assistant.Views;
 
-internal partial class PoisonsPage : SearchListPage
+internal partial class PoisonsPage(SearchListViewModel viewModel)
+    : SearchListPage(viewModel, false, "Poisons", PreloadService.Instance.Poisons.Select(DisplayItem.FromObject))
 {
-    public PoisonsPage(SearchListViewModel viewModel)
-        : base(viewModel, false, "Poisons",
-            "M.A.G.U.S.GameSystem.Poisons".CreateInstancesFromNamespace<Poison>().OrderBy(r => Lng.Elem(r.Name)).Select(DisplayItem.FromObject))
-    {
-    }
 }

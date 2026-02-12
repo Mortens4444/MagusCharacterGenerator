@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel;
 
-namespace M.A.G.U.S.GameSystem.Attributes;
+namespace M.A.G.U.S.Enums;
 
 // New ThrowTypes should be implemented in DiceThrow.Throw method also and the description should be present in LanguageElements.ods.
 public enum ThrowType

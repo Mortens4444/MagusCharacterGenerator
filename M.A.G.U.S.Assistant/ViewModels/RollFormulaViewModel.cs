@@ -1,4 +1,5 @@
-﻿using CommunityToolkit.Mvvm.Messaging;
+﻿using CommunityToolkit.Mvvm.Input;
+using CommunityToolkit.Mvvm.Messaging;
 using M.A.G.U.S.Assistant.Enums;
 using M.A.G.U.S.Assistant.Interfaces;
 using M.A.G.U.S.Assistant.Models;
@@ -10,7 +11,7 @@ using System.Windows.Input;
 
 namespace M.A.G.U.S.Assistant.ViewModels;
 
-internal partial class RollFormulaViewModel : BaseViewModel
+internal partial class RollFormulaViewModel : BaseViewModel, IDisposable
 {
     public event EventHandler<TaskCompletionSource<bool>>? RollRequested;
     public event EventHandler? CloseRequested;
@@ -46,7 +47,7 @@ internal partial class RollFormulaViewModel : BaseViewModel
 
     public IShakeService? ShakeService => shakeService;
 
-    public ICommand ActionCommand => new Command(async () => await ExecuteActionAsync());
+    public ICommand ActionCommand => new AsyncRelayCommand(ExecuteActionAsync);
 
     public ICommand SetAutoCommand => new Command(() => ExecutionMode = ExecutionMode.Auto);
 
@@ -185,7 +186,7 @@ internal partial class RollFormulaViewModel : BaseViewModel
             var ok = Int32.TryParse(UserResultString, out var parsed);
             if (!ok || (parsed < range.Min) || (parsed > range.Max))
             {
-                WeakReferenceMessenger.Default.Send(new ShowErrorMessage(String.Format("Roll result should be between: {0} - {1}", range.Min, range.Max)));
+                WeakReferenceMessenger.Default.Send(new ShowErrorMessage(String.Format(Lng.Elem("Roll result should be between: {0} - {1}"), range.Min, range.Max)));
             }
             else
             {
@@ -201,5 +202,13 @@ internal partial class RollFormulaViewModel : BaseViewModel
     private void OnShakeDetected(object? sender, EventArgs e)
     {
         CommandExecutor.ExecuteOnUIThread(TriggerActionFromShake);
+    }
+
+    public void Dispose()
+    {
+        if (shakeService != null)
+        {
+            shakeService.ShakeDetected -= OnShakeDetected;
+        }
     }
 }

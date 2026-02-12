@@ -8,7 +8,7 @@ public sealed class InitiativeEntry
 
     public required Attack? SelectedAttack { get; init; }
 
-    public AttackResolution? AttackResolution { get; set; }
+    public ResolutionBase? AttackOrAimResolution { get; set; }
 
     public int BaseInitiative { get; init; }
 

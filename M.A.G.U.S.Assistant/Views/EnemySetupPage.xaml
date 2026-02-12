@@ -24,7 +24,11 @@
 
         <Grid ColumnDefinitions="*,Auto" ColumnSpacing="10">
             <VerticalStackLayout Grid.Row="0" Spacing="5" BackgroundColor="#20000000" Padding="10">
-                <Label Text="{Binding EnemyCount, StringFormat='Number of Enemies: {0}'}" FontAttributes="Bold" FontSize="16"/>
+                <HorizontalStackLayout>
+                    <Label Text="Number of Enemies" FontSize="16" FontAttributes="Bold" />
+                    <Label Text=":" FontSize="16" FontAttributes="Bold" Margin="0,0,3,0" />
+                    <Label Text="{Binding EnemyCount}" FontSize="16" FontAttributes="Bold" />
+                </HorizontalStackLayout>
                 <Slider Minimum="{Binding EnemyCountMin}" Maximum="{Binding EnemyCountMax}" Value="{Binding EnemyCount}" />
             </VerticalStackLayout>
 
@@ -42,19 +46,25 @@
             <Grid ColumnDefinitions="*, Auto">
                 <Picker Title="Direction" 
                         ItemsSource="{Binding GlobalAttackDirections}"
-                        SelectedItem="{Binding GlobalDirection}" />
+                        SelectedItem="{Binding GlobalDirection}"
+                        ItemDisplayBinding="{Binding ., Converter={StaticResource EnumDescriptionTranslationConverter}}" />
                 <Button Grid.Column="1" Text="Apply" Command="{Binding ApplyDirectionToAllCommand}" />
             </Grid>
 
             <Grid ColumnDefinitions="*, Auto">
                 <Picker Title="Strategy"
                         ItemsSource="{Binding GlobalAttackStrategies}"
-                        SelectedItem="{Binding GlobalStrategy}" />
+                        SelectedItem="{Binding GlobalStrategy}"
+                        ItemDisplayBinding="{Binding ., Converter={StaticResource EnumDescriptionTranslationConverter}}" />
                 <Button Grid.Column="1" Text="Apply" Command="{Binding ApplyStrategyToAllCommand}" />
             </Grid>
 
             <VerticalStackLayout Spacing="5">
-                <Label Text="{Binding GlobalHealthPoints, StringFormat='Global HP: {0}'}" FontSize="12"/>
+                <HorizontalStackLayout>
+                    <Label Text="Global HP" FontSize="12" />
+                    <Label Text=":" FontSize="12" FontAttributes="Bold" Margin="0,0,3,0" />
+                    <Label Text="{Binding GlobalHealthPoints}" FontSize="12" />
+                </HorizontalStackLayout>
 
                 <Grid ColumnDefinitions="*,Auto">
                     <Slider Minimum="{Binding GlobalHpMin}" Maximum="{Binding GlobalHpMax}" Value="{Binding GlobalHealthPoints}" IsVisible="{Binding HasGlobalHpRange}" />
@@ -64,7 +74,11 @@
             </VerticalStackLayout>
 
             <VerticalStackLayout Spacing="5" IsVisible="{Binding ConfigItems[0].HasPainTolerance}">
-                <Label Text="{Binding GlobalPainTolerancePoints, StringFormat='Global PTP: {0}'}" FontSize="12"/>
+                <HorizontalStackLayout>
+                    <Label Text="Global PTP" FontSize="12" />
+                    <Label Text=":" FontSize="12" FontAttributes="Bold" Margin="0,0,3,0" />
+                    <Label Text="{Binding GlobalPainTolerancePoints}" FontSize="12" />
+                </HorizontalStackLayout>
 
                 <Grid ColumnDefinitions="*,Auto">
                     <Slider Minimum="{Binding GlobalPtpMin}" Maximum="{Binding GlobalPtpMax}" Value="{Binding GlobalPainTolerancePoints}" IsVisible="{Binding HasGlobalPtpRange}" />
@@ -83,13 +97,22 @@
                             <Label Text="{Binding Name}" FontAttributes="Bold" TextColor="{StaticResource Primary}"/>
 
                             <VerticalStackLayout>
-                                <Label Text="{Binding ActualHealthPoints, StringFormat='Health Points: {0}'}" FontSize="12"/>
+                                <HorizontalStackLayout>
+                                    <Label Text="Health Points" FontSize="12" />
+                                    <Label Text=":" FontSize="12" FontAttributes="Bold" Margin="0,0,3,0" />
+                                    <Label Text="{Binding ActualHealthPoints}" FontSize="12" />
+                                </HorizontalStackLayout>
+
                                 <Slider Minimum="{Binding MinHp}" Maximum="{Binding MaxHp}" Value="{Binding ActualHealthPoints}" IsVisible="{Binding HasHpRange}" />
                                 <Entry Text="{Binding ActualHealthPoints}"  Keyboard="Numeric" IsVisible="{Binding HasHpRange, Converter={StaticResource InverseBooleanConverter}}" />
                             </VerticalStackLayout>
 
                             <VerticalStackLayout IsVisible="{Binding HasPainTolerance}">
-                                <Label Text="{Binding ActualPainTolerancePoints, StringFormat='Pain Tolerance: {0}'}" FontSize="12"/>
+                                <HorizontalStackLayout>
+                                    <Label Text="Pain Tolerance" FontSize="12" />
+                                    <Label Text=":" FontSize="12" FontAttributes="Bold" Margin="0,0,3,0" />
+                                    <Label Text="{Binding ActualPainTolerancePoints}" FontSize="12" />
+                                </HorizontalStackLayout>
                                 <Slider Minimum="{Binding MinPtp}" Maximum="{Binding MaxPtp}" Value="{Binding ActualPainTolerancePoints}" IsVisible="{Binding HasPtpRange}" />
 
                                 <Entry Text="{Binding ActualPainTolerancePoints}" Keyboard="Numeric"
@@ -97,7 +120,7 @@
                             </VerticalStackLayout>
 
                             <Grid ColumnDefinitions="*, *, *" ColumnSpacing="10">
-                                <mc:NumericUpDownWithLabel Label="Dist." Value="{Binding Distance}" />
+                                <mc:NumericUpDownWithLabel Label="Distance" Value="{Binding Distance}" />
 
                                 <VerticalStackLayout Grid.Column="1">
                                     <Label Text="Strategy" FontSize="10"/>
@@ -120,8 +143,7 @@
         </CollectionView>
 
         <Grid Grid.Row="3" ColumnDefinitions="*,*" ColumnSpacing="20">
-            <Button Text="Cancel" Command="{Binding CancelCommand}" BackgroundColor="Gray"/>
-            <Button Text="Add Enemies" Grid.Column="1" Command="{Binding AddEnemiesCommand}"/>
+            <Button Text="Add Enemies" Grid.Column="1" Command="{Binding AddEnemiesCommand}" />
         </Grid>
     </Grid>
 </v:NotifierPage>

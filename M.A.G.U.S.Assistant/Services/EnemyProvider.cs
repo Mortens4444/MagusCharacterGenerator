@@ -10,8 +10,10 @@ internal static class EnemyProvider
         {
             return default;
         }
+        
+        var snapshot = items.ToList();
 
-        var weightedItems = items
+        var weightedItems = snapshot
             .Select(i => new { Item = i, Weight = weightSelector(i) })
             .Where(x => x.Weight > 0)
             .ToList();

@@ -17,7 +17,7 @@ internal static class ImagePreviewService
         try
         {
             var page = new ImagePreviewPage(item);
-            await ShellNavigationService.ShowPage(page).ConfigureAwait(true);
+            await ShellNavigationService.ShowPageAsync(page).ConfigureAwait(true);
         }
         catch (Exception ex)
         {

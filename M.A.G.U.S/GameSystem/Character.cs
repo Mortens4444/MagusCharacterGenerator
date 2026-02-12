@@ -1,5 +1,4 @@
-﻿using M.A.G.U.S.Bestiary.Mythical;
-using M.A.G.U.S.Classes.NonPlayableCharacters;
+﻿using M.A.G.U.S.Classes.NonPlayableCharacters;
 using M.A.G.U.S.Enums;
 using M.A.G.U.S.Interfaces;
 using M.A.G.U.S.Models;
@@ -40,8 +39,11 @@ public partial class Character : Attacker, ICombatModifier, ILiving, IAbilities,
         race = new Human();
         BaseClass = new Craftsman();
         Alignment = Alignment.Order;
+        Size = race.Size;
         EnsureSubscriptions();
     }
+
+    public override Size Size { get; protected set; }
 
     public Character(ISettings? settings, string name, IRace race, params IClass[] classes)
     {

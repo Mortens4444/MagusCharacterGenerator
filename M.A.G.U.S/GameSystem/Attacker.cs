@@ -1,4 +1,5 @@
 ﻿using M.A.G.U.S.Enums;
+using M.A.G.U.S.Interfaces;
 using M.A.G.U.S.Models;
 using M.A.G.U.S.Things.Armors;
 using Mtf.Extensions.Services;
@@ -14,15 +15,20 @@ public abstract class Attacker
     private readonly DiceThrow diceThrow = new();
 
     [NonSerialized, JsonIgnore, Newtonsoft.Json.JsonIgnore]
+    private int actualHealthPoints;
+    [NonSerialized, JsonIgnore, Newtonsoft.Json.JsonIgnore]
+    private int? actualPainTolerancePoints;
+    [NonSerialized, JsonIgnore, Newtonsoft.Json.JsonIgnore]
     private string name = String.Empty;
-
     [NonSerialized, JsonIgnore, Newtonsoft.Json.JsonIgnore]
     private Armor? armor;
 
     public Guid Id { get; init; } = Guid.NewGuid();
 
     public event PropertyChangedEventHandler? PropertyChanged;
-    
+    public event EventHandler? Died;
+    public event EventHandler? LostConsciousness;
+
     public virtual Armor? Armor
     {
         get => armor;
@@ -49,6 +55,8 @@ public abstract class Attacker
         }
     }
 
+    public virtual Size Size { get; protected set; }
+
     public virtual int InitiateValue { get; set; }
 
     public virtual int AttackValue { get; set; }
@@ -57,13 +65,58 @@ public abstract class Attacker
 
     public virtual int AimValue { get; set; }
 
-    public virtual int ActualHealthPoints { get; set; }
+    public int ActualHealthPoints
+    {
+        get => actualHealthPoints;
+        set
+        {
+            if (actualHealthPoints != value)
+            {
+                var wasAlive = actualHealthPoints > 0;
+                if (value < actualHealthPoints)
+                {
+                    var damage = actualHealthPoints - value;
+                    if (actualPainTolerancePoints.HasValue)
+                    {
+                        ActualPainTolerancePoints = actualPainTolerancePoints - (2 * damage);
+                    }
+                }
 
-    public virtual int? ActualPainTolerancePoints { get; set; }
+                actualHealthPoints = value;
+                OnPropertyChanged();
+
+                if (wasAlive && actualHealthPoints <= 0)
+                {
+                    Died?.Invoke(this, EventArgs.Empty);
+                }
+            }
+        }
+    }
+
+    public int? ActualPainTolerancePoints
+    {
+        get => actualPainTolerancePoints;
+        set
+        {
+            if (actualPainTolerancePoints != value)
+            {
+                var wasConscious = (actualPainTolerancePoints ?? 1) > 0;
+                actualPainTolerancePoints = value;
+                OnPropertyChanged();
+
+                if (wasConscious && (actualPainTolerancePoints ?? 1) <= 0)
+                {
+                    LostConsciousness?.Invoke(this, EventArgs.Empty);
+                }
+            }
+        }
+    }
 
     public virtual double AttacksPerRound { get; protected set; } = 1;
 
     public AttackStrategy AttackStrategy { get; set; } = AttackStrategy.AttackFirst;
+
+    public List<ICombatModifier> TemporaryModifiers { get; } = [];
 
     public abstract List<Attack> AttackModes { get; protected set; }
 
@@ -86,9 +139,9 @@ public abstract class Attacker
         return AttackModes[randomIndex];
     }
 
-    public static int GetAttackRange(Attack attack)
+    public static int GetAttackRangeInMeters(Attack attack)
     {
-        if (attack is RangeAttack rangeAttack)
+        if (attack is RangedAttack rangeAttack)
         {
             return rangeAttack.Weapon.Distance;
         }
@@ -142,9 +195,21 @@ public abstract class Attacker
 
     public bool IsDead => ActualHealthPoints <= 0;
 
+    public AttackDirection AttackDirection { get; set; }
+
     public virtual bool IsUndead { get; set; } = false;
 
-    public bool IsConscious => ActualPainTolerancePoints > 0 && (!IsDead || IsUndead);
+    public bool IsConscious => ActualPainTolerancePoints == null || ActualPainTolerancePoints > 0 && (!IsDead || IsUndead);
+
+    public void AddTemporaryModifier(ICombatModifier combatModifier)
+    {
+        TemporaryModifiers.Add(combatModifier);
+    }
+
+    public void RemoveTemporaryModifiers()
+    {
+        TemporaryModifiers.Clear();
+    }
 
     protected void OnPropertyChanged([CallerMemberName] string propertyName = "") => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
 }

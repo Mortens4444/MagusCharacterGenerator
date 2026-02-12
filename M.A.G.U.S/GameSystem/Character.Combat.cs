@@ -130,7 +130,7 @@ public partial class Character : ICharacter
         {
             if (attackModes == null)
             {
-                attackModes = [new MeleeAttack(fist, AttackValue)];
+                attackModes = [];
 
                 if (PrimaryWeapon is IMeleeWeapon meleeWeapon)
                 {
@@ -138,8 +138,18 @@ public partial class Character : ICharacter
                 }
                 else if (PrimaryWeapon is IRangedWeapon rangedWeapon)
                 {
-                    attackModes.Add(new RangeAttack(rangedWeapon, AimValue));
+                    attackModes.Add(new RangedAttack(rangedWeapon, AimValue));
                 }
+
+                if (SecondaryWeapon is IMeleeWeapon meleeWeapon2)
+                {
+                    attackModes.Add(new MeleeAttack(meleeWeapon2, AttackValue));
+                }
+                else if (SecondaryWeapon is IRangedWeapon rangedWeapon2)
+                {
+                    attackModes.Add(new RangedAttack(rangedWeapon2, AimValue));
+                }
+                attackModes.Add(new MeleeAttack(fist, AttackValue));
             }
 
             return attackModes;
@@ -487,10 +497,11 @@ public partial class Character : ICharacter
         var addCombatValuesOnFirstLevel = settings?.AddCombatValueOnFirstLevelForAllClass ?? true;
         var combatValueModifier = (BaseClass.AddCombatModifierOnFirstLevel || addCombatValuesOnFirstLevel ? BaseClass.Level : BaseClass.Level - 1) * BaseClass.CombatValueModifierPerLevel;
 
+        TotalCombatValueModifier = combatValueModifier;
         var autoDistributeCombatValues = settings?.AutoDistributeCombatValues ?? false;
         if (autoDistributeCombatValues)
         {
-            int attack = MathHelper.GetModifier(combatValueModifier, attackPercentage); // Használj Floor-t belül
+            int attack = MathHelper.GetModifier(combatValueModifier, attackPercentage);
             int defense = MathHelper.GetModifier(combatValueModifier, defencePercentage);
             int aim = MathHelper.GetModifier(combatValueModifier, aimingPercentage);
 
@@ -510,10 +521,7 @@ public partial class Character : ICharacter
                 throw new InvalidOperationException($"The amount of the percentages ({nameof(attackPercentage)} + {nameof(defencePercentage)} + {nameof(aimingPercentage)}) should be under or equal to 100 percent.");
             }
         }
-        else
-        {
-            TotalCombatValueModifier = combatValueModifier;
-        }
+
         SetOriginalCombatValues();
     }
 

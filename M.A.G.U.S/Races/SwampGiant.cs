@@ -15,6 +15,8 @@ public class SwampGiant : HalfGiant
 {
     public override Alignment? Alignment => Enums.Alignment.Chaos;
 
+    public override Size Size => Size.About_6_meters;
+
     public override QualificationList Qualifications
     {
         get

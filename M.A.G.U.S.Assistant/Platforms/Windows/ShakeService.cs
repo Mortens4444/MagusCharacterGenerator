@@ -14,7 +14,6 @@ internal partial class ShakeService : IShakeService
 
     public void Start(double thresholdG = 2.2, int debounceMs = 800)
     {
-        ShakeDetected?.Invoke(this, EventArgs.Empty);
     }
 
     public void Stop()

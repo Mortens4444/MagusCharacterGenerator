@@ -456,11 +456,11 @@ internal partial class CharacterViewModel(IPrintService printService) : BaseView
             return;
         }
 
-        var answer = await Shell.Current.DisplayAlertAsync(
-                Lng.Elem("Confirm delete"),
+        var answer = await ShellNavigationService.DisplayAlertAsync(
+                "Confirm delete",
                 String.Format(Lng.Elem("Are you sure you want to delete '{0}'?"), Lng.Elem(thing.Name)),
-                Lng.Elem("Delete"),
-                Lng.Elem("Cancel")).ConfigureAwait(true);
+                "Delete",
+                "Cancel").ConfigureAwait(true);
 
         if (answer)
         {
@@ -477,15 +477,15 @@ internal partial class CharacterViewModel(IPrintService printService) : BaseView
         }
 
         var price = thing.MultipliedPrice;
-        var answer = await Shell.Current.DisplayAlertAsync(
-            Lng.Elem("Confirm sell"),
+        var answer = await ShellNavigationService.DisplayAlertAsync(
+            "Confirm sell",
             String.Concat(
                 String.Format(Lng.Elem("Are you sure you want to sell '{0}'?"), Lng.Elem(thing.Name)),
                 Environment.NewLine,
                 $"{Lng.Elem("Selling price")}: {price.ToTranslatedString()}"
             ),
-            Lng.Elem("Sell"),
-            Lng.Elem("Cancel")).ConfigureAwait(true);
+            "Sell",
+            "Cancel").ConfigureAwait(true);
 
         if (answer)
         {
@@ -574,7 +574,7 @@ internal partial class CharacterViewModel(IPrintService printService) : BaseView
             return;
         }
 
-        var answer = await Shell.Current.DisplayAlertAsync(Lng.Elem("Print"), Lng.Elem("Do you want to print character sheet?"), Lng.Elem("Yes"), Lng.Elem("No")).ConfigureAwait(false);
+        var answer = await ShellNavigationService.DisplayAlertAsync("Print", "Do you want to print character sheet?", "Yes", "No").ConfigureAwait(false);
         if (answer)
         {
             var htmlService = new CharacterHtmlService();

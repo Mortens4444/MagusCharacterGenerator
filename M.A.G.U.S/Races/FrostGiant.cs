@@ -14,6 +14,7 @@ public class FrostGiant : HalfGiant
 {
     public override Alignment? Alignment => Enums.Alignment.OrderLife;
 
+    public override Size Size => Size._4_to_5_5_meters;
 
     public override QualificationList Qualifications
     {

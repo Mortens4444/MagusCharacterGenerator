@@ -6,7 +6,7 @@ namespace M.A.G.U.S.Things.MagicalObjects;
 
 public class PotionOfDragonsBreath90Mp : MagicalObject
 {
-    public override string Name => "Potion of Dragon’s Breath (90 MP)";
+    public override string Name => "Potion of Dragon's Breath (90 MP)";
 
     public override Money Price => new(3);
 

@@ -21,10 +21,10 @@
         </ResourceDictionary>
     </v:NotifierPage.Resources>
 
-    <Grid ColumnDefinitions="*,2*,*" RowDefinitions="200,Auto,*" Padding="12">
+    <Grid ColumnDefinitions="*,*" RowDefinitions="Auto,Auto,Auto,Auto,*" Padding="12">
 
         <!-- Characters -->
-        <StackLayout Grid.Column="0" Spacing="8">
+        <VerticalStackLayout Spacing="8" Margin="0,0,0,15">
             <Label Text="Characters" FontAttributes="Bold" FontSize="18" />
 
             <Picker ItemsSource="{Binding AvailableCharacters}"
@@ -32,46 +32,11 @@
                     ItemDisplayBinding="{Binding Name}"
                     Title="Select character" />
 
-            <Button Text="-&gt;" Command="{Binding AddCharacterCommand}" />
-        </StackLayout>
-
-        <!-- Assignments -->
-        <StackLayout Grid.Column="1" Spacing="8">
-            <Label Text="Assignments" FontAttributes="Bold" FontSize="18" />
-
-            <CollectionView ItemsSource="{Binding Assignments}"
-                            SelectedItem="{Binding SelectedAssignment}"
-                            SelectionMode="Single" MaximumHeightRequest="110">
-                <CollectionView.ItemTemplate>
-                    <DataTemplate x:DataType="vm:AssignmentViewModel">
-                        <Border Padding="8" Margin="4">
-                            <StackLayout Spacing="6">
-
-                                <Label Text="{Binding Character.Name}" FontAttributes="Bold" />
-                                <!--<Label Text="{Binding Character.Speed, StringFormat='Speed: {0} m/s'}" FontSize="12" />-->
-
-                                <CollectionView ItemsSource="{Binding Enemies}">
-                                    <CollectionView.ItemTemplate>
-                                        <DataTemplate x:DataType="b:Creature">
-                                            <Grid ColumnDefinitions="*,Auto">
-                                                <Label Text="{Binding Name, Converter={StaticResource TranslationConverter}}" Margin="30,0,0,0" />
-                                                <!--<Label Grid.Column="1" Text="{Binding Distance, StringFormat='{0} m'}" />-->
-                                                <!--<Label Grid.Column="1" Text="{Binding Status}" />-->
-                                            </Grid>
-                                        </DataTemplate>
-                                    </CollectionView.ItemTemplate>
-                                </CollectionView>
-
-                                <!--<Label Text="{Binding EstimatedTime, StringFormat='ETA: {0:F1} s'}" FontSize="12" TextColor="Gray" />-->
-                            </StackLayout>
-                        </Border>
-                    </DataTemplate>
-                </CollectionView.ItemTemplate>
-            </CollectionView>
-        </StackLayout>
+            <Button Text="&#x2B07;" Command="{Binding AddCharacterCommand}" />
+        </VerticalStackLayout>
 
         <!-- Enemies -->
-        <StackLayout Grid.Column="2" Spacing="8">
+        <VerticalStackLayout Grid.Column="1" Spacing="8" Margin="0,0,0,15">
             <Label Text="Enemies" FontAttributes="Bold" FontSize="18"/>
 
             <Grid ColumnDefinitions="*, Auto" ColumnSpacing="5">
@@ -86,59 +51,141 @@
                         ToolTipProperties.Text="Pick random enemy" />
             </Grid>
 
-            <Button Text="&lt;-" Command="{Binding AddEnemyCommand}"/>
-        </StackLayout>
+            <Button Text="&#x2B07;" Command="{Binding AddEnemyCommand}"/>
+        </VerticalStackLayout>
 
-        <!-- Run turn -->
-        <Button Grid.Row="1" Grid.ColumnSpan="3" FontAttributes="Bold"
-                Text="Start New Round" Command="{Binding RunTurnCommand}" />
+        <!-- Assignments -->
+        <VerticalStackLayout Grid.Row="1" Grid.ColumnSpan="2" Spacing="8" Margin="0,0,0,15">
+            <Label Text="Assignments" FontAttributes="Bold" FontSize="18" />
 
-        <!-- Turns details -->
-        <Grid Grid.Row="2" Grid.ColumnSpan="3">
-            <CollectionView ItemsSource="{Binding SelectedAssignment.TurnHistory}">
-                <CollectionView.Header>
-                    <Border Padding="8">
-                        <Grid Padding="6" ColumnDefinitions="2*,8*,2*,6*,3*,3*" RowDefinitions="Auto,Auto">
-                        <!--<Grid Padding="6" ColumnDefinitions="2*,8*,2*,6*,3*,3*",2*,2*" RowDefinitions="Auto,Auto">-->
-                            <Label Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" Text="Round" FontAttributes="Bold" />
-                            <Label Grid.Row="0" Grid.Column="1" Grid.RowSpan="2" Text="Attacker" FontAttributes="Bold" />
-                            <Label Grid.Row="0" Grid.Column="2" Grid.RowSpan="2" Text="Init" FontAttributes="Bold" />
-                            <Label Grid.Row="0" Grid.Column="3" Grid.ColumnSpan="3" Text="Attack" HorizontalTextAlignment="Center" FontAttributes="Bold" />
-                            <Label Grid.Row="1" Grid.Column="3" Text="Result" FontAttributes="Bold" />
-                            <Label Grid.Row="1" Grid.Column="4" Text="Direction" FontAttributes="Bold" />
-                            <Label Grid.Row="1" Grid.Column="5" Text="Location" FontAttributes="Bold" />
-                            <!--<Label Grid.Row="0" Grid.Column="6" Grid.RowSpan="2" Text="HP" FontAttributes="Bold" />
-                            <Label Grid.Row="0" Grid.Column="7" Grid.RowSpan="2" Text="PRP" FontAttributes="Bold" />-->
-                        </Grid>
-                    </Border>
-                </CollectionView.Header>
+            <CollectionView ItemsSource="{Binding Assignments}"
+                            SelectedItem="{Binding SelectedAssignment}"
+                            SelectionMode="Single">
                 <CollectionView.ItemTemplate>
-                    <DataTemplate x:DataType="vm:TurnViewModel">
+                    <DataTemplate x:DataType="vm:AssignmentViewModel">
                         <Border Padding="8" Margin="4">
                             <StackLayout Spacing="6">
-                                <CollectionView ItemsSource="{Binding Attacks}">
+
+                                <Label Text="{Binding Character.Name}" FontAttributes="Bold" />
+                                <!--<Label Text="{Binding Character.Speed, StringFormat='Speed: {0} m/s'}" FontSize="12" />-->
+
+                                <CollectionView ItemsSource="{Binding Enemies}" MaximumHeightRequest="100">
                                     <CollectionView.ItemTemplate>
-                                        <DataTemplate x:DataType="vm:TurnAttackViewModel">
-                                            <Grid Padding="6" ColumnDefinitions="2*,8*,2*,6*,3*,3*">
-                                                <!--<Grid Padding="6" ColumnDefinitions="2*,8*,2*,6*,3*,3*,2*,2*">-->
-                                                <Label Grid.Column="0" Text="{Binding RoundNumber}" />
-                                                <Label Grid.Column="1" Text="{Binding Attacker}" />
-                                                <Label Grid.Column="2" Text="{Binding Initiative}" />
-                                                <Label Grid.Column="3" Text="{Binding Result}" />
-                                                <Label Grid.Column="4" Text="{Binding Direction}" />
-                                                <Label Grid.Column="5" Text="{Binding HitLocation}" />
-                                                <!--<Label Grid.Column="6" Text="{Binding ActualHealthPoints}" />
-                                                <Label Grid.Column="7" Text="{Binding ActualPainTolerancePoints}" />-->
+                                        <DataTemplate x:DataType="b:Creature">
+                                            <Grid ColumnDefinitions="*,Auto">
+                                                <Label Text="{Binding Name, Converter={StaticResource TranslationConverter}}" Margin="30,0,0,0" />
+                                                <!--<Button MaximumHeightRequest="10" MaximumWidthRequest="10" Text="X" />--> <!--Need Delete Enemy from assignment function with nicer delte buttons, nice text UTF-8 delete char-->
+                                                <!--<Label Grid.Column="1" Text="{Binding Distance, StringFormat='{0} m'}" />-->
+                                                <!--<Label Grid.Column="1" Text="{Binding Status}" />-->
                                             </Grid>
                                         </DataTemplate>
                                     </CollectionView.ItemTemplate>
                                 </CollectionView>
+
+                                <!--<Label Text="{Binding EstimatedTime, StringFormat='ETA: {0:F1} s'}" FontSize="12" TextColor="Gray" />-->
                             </StackLayout>
                         </Border>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
+        </VerticalStackLayout>
+
+        <!-- Run turn -->
+        <Button Grid.Row="2" Grid.ColumnSpan="2" FontAttributes="Bold"
+                Text="Start New Round" Command="{Binding RunTurnCommand}" />
+
+        <!-- Turns details -->
+        <Grid Grid.Row="3" Grid.ColumnSpan="2" RowDefinitions="Auto, *">
+
+            <Border Grid.Row="0" Padding="8" BackgroundColor="{AppThemeBinding Light=#F0F0F0, Dark=#333333}">
+                <Grid Padding="6" ColumnDefinitions="8*,6*,3*,3*" RowDefinitions="Auto,Auto">
+                    <Label Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" Text="Attacker" FontAttributes="Bold" VerticalOptions="Center" />
+                    <Label Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="3" Text="Attack" HorizontalTextAlignment="Center" FontAttributes="Bold" />
+                    <Label Grid.Row="1" Grid.Column="1" Text="Result" FontAttributes="Bold" />
+                    <Label Grid.Row="1" Grid.Column="2" Text="Direction" FontAttributes="Bold" />
+                    <Label Grid.Row="1" Grid.Column="3" Text="Location" FontAttributes="Bold" />
+                </Grid>
+            </Border>
+
+            <CollectionView Grid.Row="1" 
+                    ItemsSource="{Binding SelectedAssignment.TurnHistory}"
+                    MaximumHeightRequest="400">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="vm:TurnViewModel">
+                        <VerticalStackLayout Spacing="6">
+                            <HorizontalStackLayout BackgroundColor="{StaticResource Tertiary}">
+                                <Label Text="Round" FontAttributes="Bold" Padding="10,5" />
+                                <Label Text="{Binding Turn.Round}" FontAttributes="Bold" Padding="10,5" />
+                            </HorizontalStackLayout>
+
+                            <Border Padding="8" Margin="4">
+                                <CollectionView ItemsSource="{Binding Attacks}">
+                                    <CollectionView.ItemTemplate>
+                                        <DataTemplate x:DataType="vm:TurnAttackViewModel">
+                                            <Grid Padding="6" ColumnDefinitions="8*,6*,3*,3*">
+                                                <Label Grid.Column="0" Text="{Binding Attacker}" />
+                                                <Label Grid.Column="1" Text="{Binding Result}" />
+                                                <Label Grid.Column="2" Text="{Binding Direction}" />
+                                                <Label Grid.Column="3" Text="{Binding HitLocation}" />
+                                            </Grid>
+                                        </DataTemplate>
+                                    </CollectionView.ItemTemplate>
+                                </CollectionView>
+                            </Border>
+                        </VerticalStackLayout>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
         </Grid>
+        
+        <!--<Grid Grid.Row="3" Grid.ColumnSpan="2">
+            <CollectionView ItemsSource="{Binding SelectedAssignment.TurnHistory}"
+                            MaximumHeightRequest="400">
+                <CollectionView.Header>
+                    <Border Padding="8" BackgroundColor="{AppThemeBinding Light=#F0F0F0, Dark=#333333}">
+                        <Grid Padding="6" ColumnDefinitions="8*,6*,3*,3*" RowDefinitions="Auto,Auto">
+                        --><!--<Grid Padding="6" ColumnDefinitions="8*,6*,3*,3*",2*,2*" RowDefinitions="Auto,Auto">--><!--
+                            <Label Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" Text="Attacker" FontAttributes="Bold" />
+                            <Label Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="3" Text="Attack" HorizontalTextAlignment="Center" FontAttributes="Bold" />
+                            <Label Grid.Row="1" Grid.Column="1" Text="Result" FontAttributes="Bold" />
+                            <Label Grid.Row="1" Grid.Column="2" Text="Direction" FontAttributes="Bold" />
+                            <Label Grid.Row="1" Grid.Column="3" Text="Location" FontAttributes="Bold" />
+                            --><!--<Label Grid.Row="0" Grid.Column="4" Grid.RowSpan="2" Text="HP" FontAttributes="Bold" />
+                            <Label Grid.Row="0" Grid.Column="5" Grid.RowSpan="2" Text="PRP" FontAttributes="Bold" />--><!--
+                        </Grid>
+                    </Border>
+                </CollectionView.Header>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="vm:TurnViewModel">
+                        <VerticalStackLayout Spacing="6">
+
+                            <HorizontalStackLayout>
+                                <Label Text="Round" FontAttributes="Bold" TextColor="{StaticResource Primary}" Padding="10,5" />
+                                <Label Text="{Binding Turn.Round}" FontAttributes="Bold" TextColor="{StaticResource Primary}" Padding="10,5" />
+                            </HorizontalStackLayout>
+                            
+                            <Border Padding="8" Margin="4">
+                                <CollectionView ItemsSource="{Binding Attacks}">
+                                    <CollectionView.ItemTemplate>
+                                        <DataTemplate x:DataType="vm:TurnAttackViewModel">
+                                            <Grid Padding="6" ColumnDefinitions="8*,6*,3*,3*">
+                                                --><!--<Grid Padding="6" ColumnDefinitions="8*,6*,3*,3*,2*,2*">--><!--
+                                                <Label Grid.Column="0" Text="{Binding Attacker}" />
+                                                <Label Grid.Column="1" Text="{Binding Result}" />
+                                                <Label Grid.Column="2" Text="{Binding Direction}" />
+                                                <Label Grid.Column="3" Text="{Binding HitLocation}" />
+                                                --><!--<Label Grid.Column="4" Text="{Binding ActualHealthPoints}" />
+                                                <Label Grid.Column="5" Text="{Binding ActualPainTolerancePoints}" />--><!--
+                                            </Grid>
+                                        </DataTemplate>
+                                    </CollectionView.ItemTemplate>
+                                </CollectionView>
+                            </Border>
+                        </VerticalStackLayout>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </Grid>-->
     </Grid>
 
 </v:NotifierPage>

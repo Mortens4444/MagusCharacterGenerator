@@ -50,7 +50,7 @@ internal partial class CharacterListLoaderViewModel(CharacterService characterSe
         }
         catch (Exception ex)
         {
-            await Shell.Current.DisplayAlert("Error", $"Failed to load characters: {ex.Message}", "OK").ConfigureAwait(false);
+            await ShellNavigationService.DisplayAlertAsync("Error", $"Failed to load characters: {ex.Message}", "OK").ConfigureAwait(false);
         }
         finally
         {

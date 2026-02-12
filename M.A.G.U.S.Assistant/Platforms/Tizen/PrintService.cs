@@ -8,7 +8,7 @@ internal sealed class PrintService : IPrintService
     {
         return MainThread.InvokeOnMainThreadAsync(async () =>
         {
-            await Shell.Current.DisplayAlert(Lng.Elem("Print"), Lng.Elem("Printing is not supported currently on this platform."), "OK");
+            await ShellNavigationService.DisplayAlert(Lng.Elem("Print"), Lng.Elem("Printing is not supported currently on this platform."), "OK");
         });
     }
 }

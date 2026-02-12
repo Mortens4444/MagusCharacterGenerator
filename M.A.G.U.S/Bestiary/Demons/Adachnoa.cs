@@ -16,7 +16,7 @@ public sealed class Adachnoa : Creature
         AttackModes =
         [
             new MeleeAttack(new CommonWeapon("Sword", 0, 0, 0, throwType: ThrowType._2D6, attacksPerRound: 2), AttackValue),
-            new RangeAttack(new CommonRangedWeapon("Crossbow", 0, 0, 50, throwType: ThrowType._1D6_Ranged, attacksPerRound: 2), AimValue)
+            new RangedAttack(new CommonRangedWeapon("Crossbow", 0, 0, 50, throwType: ThrowType._1D6_Ranged, attacksPerRound: 2), AimValue)
         ];
         AttackValue = 95;
         DefenseValue = 175;

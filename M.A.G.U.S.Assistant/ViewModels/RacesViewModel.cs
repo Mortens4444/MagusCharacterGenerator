@@ -55,9 +55,7 @@ internal partial class RacesViewModel : BaseViewModel
 
     private void Seed()
     {
-        var races = "M.A.G.U.S.Races".CreateInstancesFromNamespace<Race>()
-            .OrderBy(r => Lng.Elem(r.Name));
-
+        var races = PreloadService.Instance.Races;
         Races.Clear();
         foreach (var race in races)
         {

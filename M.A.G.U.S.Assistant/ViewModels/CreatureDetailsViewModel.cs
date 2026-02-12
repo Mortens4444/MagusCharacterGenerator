@@ -192,7 +192,7 @@ internal partial class CreatureDetailsViewModel : BaseViewModel
                         LastAction = DiceThrowFormatter.FormatResult(method, final);
                     }
                 }
-                else if (SelectedAttackMode is RangeAttack rangeAttack)
+                else if (SelectedAttackMode is RangedAttack rangeAttack)
                 {
                     if (rangeAttack.Weapon is BreathWeaponcs breathWeaponcs)
                     {

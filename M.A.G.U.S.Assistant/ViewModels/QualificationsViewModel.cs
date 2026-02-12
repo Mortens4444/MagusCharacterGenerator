@@ -106,10 +106,7 @@ internal partial class QualificationsViewModel : BaseViewModel
 
     private void Seed()
     {
-        var qualifications = "M.A.G.U.S.Qualifications".CreateInstancesFromNamespace<Qualification>()
-            .OrderBy(c => c.Category.Equals("Other", StringComparison.OrdinalIgnoreCase))
-            .ThenBy(q => Lng.Elem(q.Name));
-
+        var qualifications = PreloadService.Instance.Qualifications;
         Qualifications.Clear();
         foreach (var q in qualifications)
         {
@@ -157,7 +154,7 @@ internal partial class QualificationsViewModel : BaseViewModel
         qualificationDetailsViewModel.Learned += LearnHandler;
         var page = new QualificationDetailsPage(qualificationDetailsViewModel);
         SelectedItem = null;
-        return ShellNavigationService.ShowPage(page);
+        return ShellNavigationService.ShowPageAsync(page);
     }
 
     private void LearnHandler(object? sender, QualificationLearnedEventArgs e)
@@ -166,7 +163,7 @@ internal partial class QualificationsViewModel : BaseViewModel
         {
             Character?.Learn(e.Qualification, e.QualificationLevel);
             ApplyFilter();
-            ShellNavigationService.ClosePage();
+            ShellNavigationService.ClosePageAsync();
         }
         catch (Exception ex)
         {

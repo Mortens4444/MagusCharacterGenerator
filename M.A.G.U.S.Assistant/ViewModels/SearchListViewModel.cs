@@ -291,7 +291,7 @@ internal partial class SearchListViewModel : BaseViewModel
             page = new ObjectObserverPage(new ObjectObserverViewModel(), item);
         }
         SelectedItem = null;
-        return ShellNavigationService.ShowPage(page);
+        return ShellNavigationService.ShowPageAsync(page);
     }
 
     private void PurchaseHandler(object? s, ThingPurchasedEventArgs args)
@@ -300,7 +300,7 @@ internal partial class SearchListViewModel : BaseViewModel
         {
             Character?.Buy(args.Thing);
             ApplyFilter();
-            ShellNavigationService.ClosePage();
+            ShellNavigationService.ClosePageAsync();
         }
         catch (Exception ex)
         {

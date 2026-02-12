@@ -29,8 +29,6 @@ public abstract class Creature : Attacker, IHaveImage
 
     public Intelligence? MaxIntelligence { get; protected set; }
 
-    public Size Size { get; protected set; }
-
     public override List<Attack> AttackModes
     {
         get
@@ -80,10 +78,6 @@ public abstract class Creature : Attacker, IHaveImage
     public int? MinHealthPoints { get; protected set; }
 
     public int? MaxHealthPoints { get; protected set; }
-
-    public override int ActualHealthPoints { get; set; }
-
-    public override int? ActualPainTolerancePoints { get; set; }
 
     public int? PainTolerancePoints
     {

@@ -98,7 +98,8 @@ internal static class MauiProgram
         {
             typeof(DatabaseContext),
             typeof(SettingsService),
-            typeof(CharacterService)
+            typeof(CharacterService),
+            typeof(CombatEngine)
         };
         foreach (var serviceType in serviceTypes)
         {

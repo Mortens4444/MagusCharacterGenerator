@@ -10,7 +10,7 @@ public sealed class WolfPackLeader : Creature
     public WolfPackLeader()
     {
         Occurrence = Occurrence.Frequent;
-        Size = Size.Human;
+        Size = Size.Small;
         AttackValue = 40;
         DefenseValue = 65;
         InitiateValue = 10;

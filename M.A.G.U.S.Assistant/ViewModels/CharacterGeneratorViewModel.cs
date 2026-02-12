@@ -16,11 +16,8 @@ using Mtf.LanguageService.MAUI;
 using Mtf.Maui.Controls.Messages;
 using System.Collections.ObjectModel;
 using System.Reflection;
-using System.Runtime.Versioning;
-
 namespace M.A.G.U.S.Assistant.ViewModels;
 
-[SupportedOSPlatform("windows10.0.17763.0")]
 internal partial class CharacterGeneratorViewModel : CharacterViewModel
 {
     private readonly SettingsService settingsService;
@@ -48,34 +45,22 @@ internal partial class CharacterGeneratorViewModel : CharacterViewModel
 
     public ObservableCollection<IClass?> AvailableClasses { get; } = [];
 
-    public int BaseClassLevel
-    {
-        get => baseClassLevel;
-        set
-        {
-            SetProperty(ref baseClassLevel, value);
-        }
-    }
+    public int BaseClassLevel { get => baseClassLevel; set => SetProperty(ref baseClassLevel, value); }
 
     private IRace? selectedRace;
-    public IRace? SelectedRace
-    {
-        get => selectedRace;
-        set
-        {
-            SetProperty(ref selectedRace, value);
-        }
-    }
+    public IRace? SelectedRace { get => selectedRace; set => SetProperty(ref selectedRace, value); }
 
     private IClass? selectedClass;
-    public IClass? SelectedClass
+    public IClass? SelectedClass { get => selectedClass; set => SetProperty(ref selectedClass, value); }
+
+    private bool isDirty;
+
+    public bool IsDirty
     {
-        get => selectedClass;
-        set
-        {
-            SetProperty(ref selectedClass, value);
-        }
+        get => isDirty;
+        private set => SetProperty(ref isDirty, value);
     }
+
 
     [RelayCommand]
     public async Task GenerateCharacter()
@@ -86,7 +71,7 @@ internal partial class CharacterGeneratorViewModel : CharacterViewModel
             return;
         }
 
-        if (selectedClass == null)
+        if (SelectedClass == null)
         {
             WeakReferenceMessenger.Default.Send(new ShowErrorMessage("No class selected!"));
             return;
@@ -94,7 +79,7 @@ internal partial class CharacterGeneratorViewModel : CharacterViewModel
 
         try
         {
-            var classType = selectedClass.GetType();
+            var classType = SelectedClass.GetType();
             var instanceClass = InstanceClass(classType, BaseClassLevel, settingsService.AutoGenerateSkills);
             if (instanceClass == null)
             {
@@ -114,19 +99,20 @@ internal partial class CharacterGeneratorViewModel : CharacterViewModel
                 {
                     var rollFormula = new RollFormula(propertyInfo, $"{Lng.Elem("Create character")} - {Lng.Elem(propertyInfo!.Name)}");
                     var page = new RollFormulaPage(soundPlayer, shakeService, rollFormula);
-                    await ShellNavigationService.ShowPage(page).ConfigureAwait(true);
+                    await ShellNavigationService.ShowPageAsync(page).ConfigureAwait(true);
                     var result = await page.ResultTask.ConfigureAwait(true);
                     propertyInfo!.SetValue(instanceClass, result);
                 }
             }
             Character = new Character(settingsService, NameGenerator.Get(selectedRace), selectedRace, instanceClass);
+            MarkDirty();
             if (!settingsService.AutoIncreasePainTolerance)
             {
                 var formula = Character?.BaseClass.GetPainToleranceModifierFormula();
                 for (var level = Level; level <= Level; level++)
                 {
                     var page = new RollFormulaPage(soundPlayer, shakeService, formula, $"{Lng.Elem("Create character")} - {Lng.Elem("PTP")} ({level}. {Lng.Elem("Level")})");
-                    await ShellNavigationService.ShowPage(page).ConfigureAwait(true);
+                    await ShellNavigationService.ShowPageAsync(page).ConfigureAwait(true);
                     var result = await page.ResultTask.ConfigureAwait(true);
                     Character.MaxPainTolerancePoints += result;
                 }
@@ -159,6 +145,7 @@ internal partial class CharacterGeneratorViewModel : CharacterViewModel
     public async Task SaveCharacter()
     {
         await characterService.SaveAsync(Character).ConfigureAwait(false);
+        MarkClean();
         WeakReferenceMessenger.Default.Send(new ShowInfoMessage("Character saved", String.Format("Successfully saved {0}", Character.Name)));
     }
 
@@ -166,101 +153,42 @@ internal partial class CharacterGeneratorViewModel : CharacterViewModel
     public void GenerateNewName()
     {
         Character?.Name = NameGenerator.Get(Character.Race).ToName();
+        MarkDirty();
     }
 
     [RelayCommand()]
     public Task BackAsync()
     {
-        return Shell.Current.GoToAsync("..");
+        return ShellNavigationService.GoBackAsync();
+    }
+
+    public void MarkDirty()
+    {
+        if (!IsDirty)
+        {
+            IsDirty = true;
+        }
+    }
+
+    public void MarkClean()
+    {
+        IsDirty = false;
     }
 
     private void LoadAvailableTypes()
     {
-        var raceNamespacePrefix = "M.A.G.U.S.Races";
-        var classNamespacePrefix = "M.A.G.U.S.Classes";
-
-        var assemblies = AppDomain.CurrentDomain.GetAssemblies();
-
-        foreach (var asm in assemblies)
-        {
-            foreach (var t in GetLoadableTypes(asm))
-            {
-                if (t == null || !t.IsClass || t.IsAbstract)
-                {
-                    continue;
-                }
-
-                // Races
-                if (!String.IsNullOrEmpty(t.Namespace) && t.Namespace.StartsWith(raceNamespacePrefix, StringComparison.Ordinal))
-                {
-                    if (typeof(IRace).IsAssignableFrom(t))
-                    {
-                        try
-                        {
-                            if (Activator.CreateInstance(t) is IRace instRace)
-                            {
-                                AvailableRaces.Add(instRace);
-                            }
-                        }
-                        catch (Exception ex)
-                        {
-                            WeakReferenceMessenger.Default.Send(new ShowErrorMessage(ex));
-                        }
-                    }
-                }
-
-                // Classes
-                if (!String.IsNullOrEmpty(t.Namespace) && t.Namespace.StartsWith(classNamespacePrefix, StringComparison.Ordinal))
-                {
-                    if (typeof(IClass).IsAssignableFrom(t))
-                    {
-                        try
-                        {
-                            var instanceClass = InstanceClass(t);
-                            if (instanceClass != null)
-                            {
-                                AvailableClasses.Add(instanceClass);
-                            }
-                        }
-                        catch (Exception ex)
-                        {
-                            WeakReferenceMessenger.Default.Send(new ShowErrorMessage(ex));
-                        }
-                    }
-                }
-            }
-        }
-
-        var sortedRaces = AvailableRaces.OrderBy(r => Lng.Elem(r.Name)).ToArray();
         AvailableRaces.Clear();
-        foreach (var r in sortedRaces)
-        {
-            AvailableRaces.Add(r);
-        }
-
-        var sortedClasses = AvailableClasses.OrderBy(c => Lng.Elem(c.Name)).ToArray();
         AvailableClasses.Clear();
-        foreach (var c in sortedClasses)
-        {
-            AvailableClasses.Add(c);
-        }
-    }
 
-    private static IClass? InstanceClass(Type classType)
-    {
-        try
+        foreach (var race in PreloadService.Instance.Races)
         {
-            if (Activator.CreateInstance(classType) is IClass instanceClass)
-            {
-                return instanceClass;
-            }
-        }
-        catch (TargetInvocationException ex)
-        {
-            WeakReferenceMessenger.Default.Send(new ShowErrorMessage(ex.InnerException ?? ex));
+            AvailableRaces.Add(race);
         }
 
-        return null;
+        foreach (var cls in PreloadService.Instance.Classes)
+        {
+            AvailableClasses.Add(cls);
+        }
     }
 
     private static IClass? InstanceClass(Type classType, int level, bool autoGenerateSkills)
@@ -278,21 +206,5 @@ internal partial class CharacterGeneratorViewModel : CharacterViewModel
         }
 
         return null;
-    }
-
-    private static Type[] GetLoadableTypes(Assembly assembly)
-    {
-        try
-        {
-            return assembly.GetTypes();
-        }
-        catch (ReflectionTypeLoadException e)
-        {
-            return [.. e.Types.Where(static t => t != null)];
-        }
-        catch
-        {
-            return [];
-        }
     }
 }

@@ -47,7 +47,7 @@ internal partial class ImagePreviewPage : NotifierPage
 
     private async void CloseClicked(object sender, EventArgs e)
     {
-        await ShellNavigationService.ClosePage().ConfigureAwait(true);
+        await ShellNavigationService.ClosePageAsync().ConfigureAwait(true);
     }
 
     private void LoadImage()

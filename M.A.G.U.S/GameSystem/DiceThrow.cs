@@ -1,4 +1,5 @@
-﻿using M.A.G.U.S.GameSystem.Attributes;
+﻿using M.A.G.U.S.Enums;
+using M.A.G.U.S.GameSystem.Attributes;
 using Mtf.Extensions.Services;
 using Range = M.A.G.U.S.Models.Range;
 

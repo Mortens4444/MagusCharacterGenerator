@@ -24,8 +24,8 @@ public sealed class DreamCrystal : Creature
             new MeleeAttack(new TwoHandedMace(), AttackValue),
             new MeleeAttack(new ShortSword(), AttackValue),
             new MeleeAttack(new Longsword(), AttackValue),
-            new RangeAttack(new Shortbow(), AimValue),
-            new RangeAttack(new Longbow(), AimValue)
+            new RangedAttack(new Shortbow(), AimValue),
+            new RangedAttack(new Longbow(), AimValue)
 
         ];
         AttackValue = 35;

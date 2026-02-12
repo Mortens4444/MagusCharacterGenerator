@@ -1,4 +1,5 @@
-﻿using M.A.G.U.S.GameSystem.Attributes;
+﻿using M.A.G.U.S.Enums;
+using M.A.G.U.S.GameSystem.Attributes;
 using M.A.G.U.S.GameSystem.Valuables;
 using M.A.G.U.S.Interfaces;
 
@@ -22,7 +23,7 @@ public class KnightSword : Weapon, IMeleeWeapon
     [DiceThrowModifier(6)]
     public override int GetDamage() => DiceThrow._2D6() + 6;
 
-    public override string Name => "Knight’s sword";
+    public override string Name => "Knight's sword";
 
     public override string Description => "A classic, straight-bladed sword of exceptional quality and balance, fit for a mounted or foot knight. Its guard is often adorned with noble insignia.";
 }

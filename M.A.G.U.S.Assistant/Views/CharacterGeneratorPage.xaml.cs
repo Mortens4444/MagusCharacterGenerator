@@ -1,12 +1,12 @@
+using M.A.G.U.S.Assistant.Services;
 using M.A.G.U.S.Assistant.ViewModels;
-using Mtf.LanguageService.MAUI;
 using Mtf.LanguageService.MAUI.Views;
 
 namespace M.A.G.U.S.Assistant.Views;
 
 internal partial class CharacterGeneratorPage : NotifierPage
 {
-    private bool canNavigate;
+    private CharacterGeneratorViewModel ViewModel => (CharacterGeneratorViewModel)BindingContext;
 
     public CharacterGeneratorPage(CharacterGeneratorViewModel viewModel)
     {
@@ -28,7 +28,7 @@ internal partial class CharacterGeneratorPage : NotifierPage
 
     private async void Shell_Navigating(object? sender, ShellNavigatingEventArgs e)
     {
-        if (canNavigate || e.Current == null)
+        if (!ViewModel.IsDirty || e.Current == null)
         {
             return;
         }
@@ -37,37 +37,39 @@ internal partial class CharacterGeneratorPage : NotifierPage
         var answer = await ConfirmNavigationAsync().ConfigureAwait(true);
         if (answer)
         {
-            canNavigate = true;
-            await Shell.Current.GoToAsync(e.Target.Location).ConfigureAwait(true);
+            ViewModel.MarkClean();
+            await ShellNavigationService.GoToAsync(e.Target.Location).ConfigureAwait(true);
         }
     }
 
     private static Task<bool> ConfirmNavigationAsync()
     {
-        return Shell.Current.DisplayAlertAsync(
-            Lng.Elem("Confirm navigation"),
-            Lng.Elem("Are you sure you want to leave this page? Unsaved changes will be lost."),
-            Lng.Elem("Leave"),
-            Lng.Elem("Stay"));
+        return ShellNavigationService.DisplayAlertAsync(
+            "Confirm navigation",
+            "Are you sure you want to leave this page? Unsaved changes will be lost.",
+            "Leave",
+            "Stay");
     }
 
     protected override bool OnBackButtonPressed()
     {
-        if (canNavigate)
+        if (!ViewModel.IsDirty)
         {
             return false;
         }
 
-        _ = Dispatcher.Dispatch(async () =>
-        {
-            var answer = await ConfirmNavigationAsync().ConfigureAwait(true);
-            if (answer)
-            {
-                canNavigate = true;
-                await Shell.Current.GoToAsync("..");
-            }
-        });
+        _ = HandleBackButtonAsync();
 
         return true;
+    }
+
+    private async Task HandleBackButtonAsync()
+    {
+        var answer = await ConfirmNavigationAsync().ConfigureAwait(true);
+        if (answer)
+        {
+            ViewModel.MarkClean();
+            await ShellNavigationService.GoBackAsync().ConfigureAwait(true);
+        }
     }
 }

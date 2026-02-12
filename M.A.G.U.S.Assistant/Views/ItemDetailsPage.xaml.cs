@@ -1,4 +1,5 @@
 using CommunityToolkit.Mvvm.Messaging;
+using M.A.G.U.S.Assistant.Services;
 using M.A.G.U.S.Assistant.ViewModels;
 using Mtf.LanguageService.MAUI;
 using Mtf.LanguageService.MAUI.Views;
@@ -20,7 +21,7 @@ internal partial class ItemDetailsPage : NotifierPage
     {
         try
         {
-            await Shell.Current.GoToAsync("..").ConfigureAwait(false);
+            await ShellNavigationService.GoBackAsync().ConfigureAwait(false);
         }
         catch (Exception ex)
         {

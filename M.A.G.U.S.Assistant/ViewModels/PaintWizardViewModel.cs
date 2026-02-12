@@ -5,6 +5,7 @@ using M.A.G.U.S.Assistant.Database.Repositories;
 using M.A.G.U.S.Assistant.Enums;
 using M.A.G.U.S.Assistant.Interfaces;
 using M.A.G.U.S.Assistant.Models.Drawing;
+using M.A.G.U.S.Assistant.Services;
 using Mtf.LanguageService.MAUI;
 using System.Collections.ObjectModel;
 
@@ -36,6 +37,8 @@ internal partial class PaintWizardViewModel : BaseViewModel
 
         UndoCommand.NotifyCanExecuteChanged();
         RedoCommand.NotifyCanExecuteChanged();
+
+        backgroundColor = SelectedColor;
         SetBackground();
         SelectColor(Colors.White);
     }
@@ -127,7 +130,7 @@ internal partial class PaintWizardViewModel : BaseViewModel
     [RelayCommand]
     public async Task SaveDrawing()
     {
-        var name = await Shell.Current.DisplayPromptAsync(Lng.Elem("Save"), Lng.Elem("Drawing name"), Lng.Elem("Save"), Lng.Elem("Cancel"), initialValue: $"{Lng.Elem("Drawing")}_{DateTime.Now:yyyyMMdd_HHmm}").ConfigureAwait(true);
+        var name = await ShellNavigationService.DisplayPromptAsync("Save", "Drawing name", "Save", "Cancel", initialValue: $"{Lng.Elem("Drawing")}_{DateTime.Now:yyyyMMdd_HHmm}").ConfigureAwait(true);
 
         if (String.IsNullOrWhiteSpace(name))
         {
@@ -135,8 +138,8 @@ internal partial class PaintWizardViewModel : BaseViewModel
         }
 
         await drawingRepository.SaveDrawingAsync(name, [.. Elements]).ConfigureAwait(true);
-        await RefreshSavedDrawings();
-        await Shell.Current.DisplayAlertAsync(Lng.Elem("Save"), Lng.Elem("Painting succesfully saved!"), "OK").ConfigureAwait(true);
+        await RefreshSavedDrawings().ConfigureAwait(false);
+        await ShellNavigationService.DisplayAlertAsync("Save", "Painting succesfully saved!").ConfigureAwait(true);
     }
 
     [RelayCommand]
@@ -148,7 +151,7 @@ internal partial class PaintWizardViewModel : BaseViewModel
         }
 
         var confirmText = String.Format(Lng.Elem("Are you sure you want to delete '{0}'?"), drawing.Name);
-        bool confirm = await Shell.Current.DisplayAlertAsync(Lng.Elem("Delete"), confirmText, Lng.Elem("Yes"), Lng.Elem("No")).ConfigureAwait(true);
+        bool confirm = await ShellNavigationService.DisplayAlertAsync("Delete", confirmText, "Yes", "No").ConfigureAwait(true);
         if (confirm)
         {
             await drawingRepository.DeleteDrawingAsync(drawing.Name).ConfigureAwait(false);
@@ -165,7 +168,7 @@ internal partial class PaintWizardViewModel : BaseViewModel
         }
 
         var confirmText = String.Format(Lng.Elem("Are you sure you want to load '{0}'?"), drawing.Name);
-        bool confirm = await Shell.Current.DisplayAlertAsync(Lng.Elem("Load"), confirmText, Lng.Elem("Yes"), Lng.Elem("No")).ConfigureAwait(true);
+        bool confirm = await ShellNavigationService.DisplayAlertAsync("Load", confirmText, "Yes", "No").ConfigureAwait(true);
         if (confirm)
         {
             var loadedElements = await drawingRepository.GetDrawingByNameAsync(drawing.Name).ConfigureAwait(false);
@@ -210,7 +213,6 @@ internal partial class PaintWizardViewModel : BaseViewModel
     [RelayCommand]
     private void SetBackground()
     {
-        BackgroundColor = SelectedColor;
         var bgRect = new RectangleElement
         {
             Color = SelectedColor,

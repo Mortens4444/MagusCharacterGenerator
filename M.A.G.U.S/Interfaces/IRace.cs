@@ -17,4 +17,6 @@ public interface IRace : IAbilities
     string GenerateCharacterName();
 
     Alignment? Alignment { get; }
+
+    Size Size { get; }
 }

@@ -13,6 +13,7 @@ public class MountainGiant : HalfGiant
 {
     public override Alignment? Alignment => Enums.Alignment.Chaos;
 
+    public override Size Size => Size.About_8_5_meters;
 
     public override QualificationList Qualifications
 	{

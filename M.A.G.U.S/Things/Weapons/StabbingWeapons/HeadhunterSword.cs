@@ -1,4 +1,5 @@
-﻿using M.A.G.U.S.GameSystem.Attributes;
+﻿using M.A.G.U.S.Enums;
+using M.A.G.U.S.GameSystem.Attributes;
 using M.A.G.U.S.GameSystem.Valuables;
 using M.A.G.U.S.Interfaces;
 
@@ -22,7 +23,7 @@ public class HeadhunterSword : Weapon, IMeleeWeapon
     [DiceThrowModifier(2)]
     public override int GetDamage() => DiceThrow._1D6() + 2;
 
-    public override string Name => "Assassin’s sword";
+    public override string Name => "Assassin's sword";
 
     public override string Description => "A heavy, curved blade with a distinctive, often jagged edge, favoured by tribal warriors for its ability to decapitate foes cleanly.";
 }

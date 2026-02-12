@@ -47,7 +47,7 @@ internal partial class SettingsPage : NotifierPage
                 _ = Translator.Translate(this);
             }
 
-            AppShell.Current.Title = Lng.Elem("M.A.G.U.S. Assistant");
+            Shell.Current.Title = Lng.Elem("M.A.G.U.S. Assistant");
         };
 
         LanguagePicker.SelectedIndex = languages.IndexOf(Lng.DefaultLanguage.ToImplementedLanguage());

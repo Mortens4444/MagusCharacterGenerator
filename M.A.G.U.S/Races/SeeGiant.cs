@@ -15,6 +15,8 @@ public class SeeGiant : HalfGiant
 {
     public override Alignment? Alignment => Enums.Alignment.DeathChaos;
 
+    public override Size Size => Size.About_8_meters;
+
     public override QualificationList Qualifications
     {
         get

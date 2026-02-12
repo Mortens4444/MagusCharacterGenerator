@@ -1,4 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.Messaging;
+using M.A.G.U.S.Enums;
 using M.A.G.U.S.GameSystem.Attributes;
 using Mtf.Extensions;
 using Mtf.LanguageService.MAUI;

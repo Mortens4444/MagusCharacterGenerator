@@ -1,7 +1,5 @@
 ﻿using M.A.G.U.S.Enums;
-using M.A.G.U.S.Extensions;
 using M.A.G.U.S.GameSystem;
-using M.A.G.U.S.Interfaces;
 using M.A.G.U.S.Models;
 using M.A.G.U.S.Qualifications;
 using Mtf.Extensions.Services;
@@ -39,6 +37,8 @@ public abstract class Race : ImageOwner, IRace
     public virtual int Willpower => 0;
 
     public virtual int Astral => 0;
+
+    public virtual Size Size => Size.Human;
 
     public int Bravery => 0;
 

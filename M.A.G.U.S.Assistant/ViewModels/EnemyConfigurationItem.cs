@@ -3,6 +3,7 @@ using M.A.G.U.S.Bestiary;
 using M.A.G.U.S.Enums;
 using M.A.G.U.S.GameSystem;
 using Mtf.Extensions.Services;
+using Mtf.LanguageService.MAUI;
 
 namespace M.A.G.U.S.Assistant.ViewModels;
 
@@ -20,7 +21,7 @@ internal partial class EnemyConfigurationItem : ObservableObject
     public EnemyConfigurationItem(Creature template, int index)
     {
         this.template = template;
-        name = $"{template.Name} #{index + 1}";
+        name = $"{Lng.Elem(template.Name)} #{index + 1}";
         Strategy = AttackStrategy.AttackRandom;
         Direction = AttackDirection.Front;
         Distance = 10;

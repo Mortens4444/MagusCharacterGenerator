@@ -5,20 +5,20 @@ using Mtf.Maui.Controls.Messages;
 
 namespace M.A.G.U.S.Assistant.Services;
 
-internal class ShellNavigationService : INavigationService
+internal class ShellNavigationService //: INavigationService
 {
-    public static Task ShowAlert(string message)
+    public static Task DisplayAlertAsync(string message)
     {
-        return ShowAlert(Lng.Elem("Alert"), message, Lng.Elem("OK"));
+        return DisplayAlertAsync("Alert", message);
     }
 
-    public static Task ShowAlert(string title, string message, string? ok = null)
+    public static Task DisplayAlertAsync(string title, string message, string? ok = null)
     {
         return MainThread.InvokeOnMainThreadAsync(async () =>
         {
             try
             {
-                await Shell.Current.DisplayAlertAsync(title, message, ok ?? Lng.Elem("OK")).ConfigureAwait(true);
+                await Shell.Current.DisplayAlertAsync(Lng.Elem(title), Lng.Elem(message), Lng.Elem(ok ?? "OK")).ConfigureAwait(true);
             }
             catch (Exception ex)
             {
@@ -26,9 +26,24 @@ internal class ShellNavigationService : INavigationService
             }
         });
     }
-    public static Task ShowPage(Page page)
+
+    public static Task<bool> DisplayAlertAsync(string title, string message, string accept, string cancel)
     {
         return MainThread.InvokeOnMainThreadAsync(async () =>
+        {
+            try
+            {
+                return await Shell.Current.DisplayAlertAsync(Lng.Elem(title), Lng.Elem(message), Lng.Elem(accept), Lng.Elem(cancel)).ConfigureAwait(true);
+            }
+            catch (Exception ex)
+            {
+                WeakReferenceMessenger.Default.Send(new ShowErrorMessage(ex));
+                return false;
+            }
+        });
+    }
+
+    public static Task ShowPageAsync(Page page) => MainThread.InvokeOnMainThreadAsync(async () =>
         {
             try
             {
@@ -39,11 +54,8 @@ internal class ShellNavigationService : INavigationService
                 WeakReferenceMessenger.Default.Send(new ShowErrorMessage(ex));
             }
         });
-    }
 
-    public static Task ClosePage()
-    {
-        return MainThread.InvokeOnMainThreadAsync(async () =>
+    public static Task ClosePageAsync() => MainThread.InvokeOnMainThreadAsync(async () =>
         {
             try
             {
@@ -54,28 +66,36 @@ internal class ShellNavigationService : INavigationService
                 WeakReferenceMessenger.Default.Send(new ShowErrorMessage(ex));
             }
         });
-    }
 
-    public async Task NavigateToAsync(string route, object? parameter = null, bool animate = true)
+    public static Task NavigateToAsync(string route, object? parameter = null, bool animate = true)
     {
-        if (String.IsNullOrWhiteSpace(route))
-        {
-            throw new ArgumentNullException(nameof(route));
-        }
+        ArgumentException.ThrowIfNullOrWhiteSpace(route, nameof(route));
 
         if (parameter == null)
         {
-            await Shell.Current.GoToAsync(route, animate: animate).ConfigureAwait(true);
-            return;
+            return Shell.Current.GoToAsync(route, animate: animate);
         }
 
         var id = NavigationParameterStore.Put(parameter);
         var routed = $"{route}?paramId={Uri.EscapeDataString(id)}";
-        await Shell.Current.GoToAsync(routed, animate: animate).ConfigureAwait(true);
+        return Shell.Current.GoToAsync(routed, animate: animate);
     }
 
-    public Task GoBackAsync(bool animate = true)
-    {
-        return Shell.Current.GoToAsync("..", animate: animate);
-    }
+    public static Task GoBackAsync(bool animate = true) => Shell.Current.GoToAsync("..", animate: animate);
+
+    public static Task<string?> DisplayPromptAsync(
+        string title,
+        string message,
+        string accept = "OK",
+        string cancel = "Cancel",
+        string initialValue = "")
+        => MainThread.InvokeOnMainThreadAsync(() =>
+            Shell.Current.DisplayPromptAsync(
+                Lng.Elem(title),
+                Lng.Elem(message),
+                Lng.Elem(accept),
+                Lng.Elem(cancel),
+                Lng.Elem(initialValue)));
+
+    public static Task GoToAsync(Uri uri, bool animate = true) => Shell.Current.GoToAsync(uri, animate: animate);
 }

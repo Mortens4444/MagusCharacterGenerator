@@ -25,11 +25,11 @@
             <mc:MenuItem ImageName="map" LabelText="Map" PageType="{x:Type mv:MapPage}" />
             <mc:MenuItem ImageName="market" LabelText="Market" PageType="{x:Type mv:MarketPage}" />
             <mc:MenuItem ImageName="qualifications" LabelText="Qualifications" PageType="{x:Type mv:QualificationsPage}" />
-            <mc:MenuItem ImageName="runes" LabelText="Runes" PageType="{x:Type mv:RunesPage}" />
             <mc:MenuItem ImageName="languages" LabelText="Languages" PageType="{x:Type mv:LanguagesPage}" />
+            <mc:MenuItem ImageName="poisons" LabelText="Poisons" PageType="{x:Type mv:PoisonsPage}" />
             <mc:MenuItem ImageName="gemstone" LabelText="Gemstones" PageType="{x:Type mv:GemstonesPage}" />
             <mc:MenuItem ImageName="magical_items" LabelText="Magic items" PageType="{x:Type mv:MagicalObjectsPage}" />
-            <mc:MenuItem ImageName="poisons" LabelText="Poisons" PageType="{x:Type mv:PoisonsPage}" />
+            <mc:MenuItem ImageName="runes" LabelText="Runes" PageType="{x:Type mv:RunesPage}" />
             <mc:MenuItem ImageName="classes" LabelText="Classes" PageType="{x:Type mv:ClassesPage}" />
             <mc:MenuItem ImageName="dice_roll" LabelText="Dice roll" PageType="{x:Type mv:DiceRollPage}" />
             <mc:MenuItem ImageName="races" LabelText="Races" PageType="{x:Type mv:RacesPage}" />

@@ -20,7 +20,7 @@ internal partial class ClassesViewModel : BaseViewModel
 
     public ClassesViewModel()
     {
-        Classes = [.. "M.A.G.U.S.Classes".CreateInstancesFromNamespace<IClass>().OrderBy(c => Lng.Elem(c.Name))];
+        Classes = [.. PreloadService.Instance.Classes];
         ApplyFilter();
         SelectedClass = Classes.First();
     }

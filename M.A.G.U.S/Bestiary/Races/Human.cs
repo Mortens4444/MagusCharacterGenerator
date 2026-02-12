@@ -24,8 +24,8 @@ public sealed class Human : Creature
             new MeleeAttack(new Longsword(), AttackValue),
             new MeleeAttack(new Warhammer(), AttackValue),
             new MeleeAttack(new TwoHandedMace(), AttackValue),
-            new RangeAttack(new Shortbow(), AimValue),
-            new RangeAttack(new Longbow(), AimValue)
+            new RangedAttack(new Shortbow(), AimValue),
+            new RangedAttack(new Longbow(), AimValue)
         ];
         HealthPoints = 8;
         PainTolerancePoints = 12;

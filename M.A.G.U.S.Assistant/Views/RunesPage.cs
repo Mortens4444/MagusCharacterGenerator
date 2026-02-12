@@ -1,12 +1,10 @@
 using M.A.G.U.S.Assistant.Models;
+using M.A.G.U.S.Assistant.Services;
 using M.A.G.U.S.Assistant.ViewModels;
-using M.A.G.U.S.GameSystem.Runes;
-using Mtf.Extensions;
 
 namespace M.A.G.U.S.Assistant.Views;
 
 internal partial class RunesPage(SearchListViewModel viewModel) :
-    SearchListPage(viewModel, false, "Runes",
-        "M.A.G.U.S.GameSystem.Runes".CreateInstancesFromNamespace<Rune>().OrderBy(r => r.Name).Select(DisplayItem.FromObject))
+    SearchListPage(viewModel, false, "Runes", PreloadService.Instance.Runes.Select(DisplayItem.FromObject))
 {
 }

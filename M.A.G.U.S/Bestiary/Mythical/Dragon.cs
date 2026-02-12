@@ -21,8 +21,8 @@ public sealed class Dragon : Creature
             new MeleeAttack(new BodyPart("Powerful tail strike", ThrowType._14D6), 125),
             new MeleeAttack(new BodyPart("Weak bite", ThrowType._4D6), 100),
             new MeleeAttack(new BodyPart("Powerful bite", ThrowType._8D6), 175),
-            new RangeAttack(new BreathWeaponcs("Weak fire breath", ThrowType._1D6_Ranged), 40),
-            new RangeAttack(new BreathWeaponcs("Powerful fire breath", ThrowType._15D6_Ranged), 60)
+            new RangedAttack(new BreathWeaponcs("Weak fire breath", ThrowType._1D6_Ranged), 40),
+            new RangedAttack(new BreathWeaponcs("Powerful fire breath", ThrowType._15D6_Ranged), 60)
         ];
         AttackValue = 70;
         DefenseValue = 125;

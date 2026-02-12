@@ -1,4 +1,5 @@
-﻿using M.A.G.U.S.GameSystem.Attributes;
+﻿using M.A.G.U.S.Enums;
+using M.A.G.U.S.GameSystem.Attributes;
 using M.A.G.U.S.GameSystem.Valuables;
 using M.A.G.U.S.Interfaces;
 
@@ -23,5 +24,5 @@ public class SlanStar : Weapon, IMeleeWeapon
 
     public override string Name => "Slan star";
 
-    public override string Description => "A traditional throwing weapon used by Slan warriors. Forged for accuracy and silent strikes, the Slan star is designed to be launched in fluid motion, complementing the Slan’s disciplined combat style. It serves both as a distraction tool and a lethal ranged option.";
+    public override string Description => "A traditional throwing weapon used by Slan warriors. Forged for accuracy and silent strikes, the Slan star is designed to be launched in fluid motion, complementing the Slan's disciplined combat style. It serves both as a distraction tool and a lethal ranged option.";
 }

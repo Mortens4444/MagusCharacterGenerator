@@ -19,11 +19,13 @@ internal partial class MainPage : NotifierPage
     protected override void OnAppearing()
     {
         base.OnAppearing();
+
         if (originalTextElements != null)
         {
             Translator.SetOriginalTexts(originalTextElements);
         }
         Lng.DefaultLanguage = settingsService.GetCurrentLanguageAsync().GetAwaiter().GetResult();
+        _ = PreloadService.Instance.InitializeAsync();
         _ = Translator.Translate(this);
     }
 }

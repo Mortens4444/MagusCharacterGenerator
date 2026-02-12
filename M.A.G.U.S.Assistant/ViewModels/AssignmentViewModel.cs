@@ -1,8 +1,8 @@
-﻿using M.A.G.U.S.Bestiary;
-using M.A.G.U.S.GameSystem;
+﻿using M.A.G.U.S.GameSystem;
 using M.A.G.U.S.GameSystem.Turn;
 using M.A.G.U.S.Interfaces;
 using M.A.G.U.S.Qualifications.Specialities;
+using M.A.G.U.S.Utils;
 using System.Collections.ObjectModel;
 
 namespace M.A.G.U.S.Assistant.ViewModels;
@@ -10,7 +10,6 @@ namespace M.A.G.U.S.Assistant.ViewModels;
 internal class AssignmentViewModel : BaseViewModel
 {
     private const int RoomDistance = 5;
-    private const int DefaultEncounterDistance = 20;
     private readonly ISettings settings;
     private readonly Dictionary<Guid, int> enemyDistances = [];
 
@@ -55,7 +54,7 @@ internal class AssignmentViewModel : BaseViewModel
         }
     }
 
-    public int GetDistance(Attacker enemy)
+    public int GetDistanceInMeters(Attacker enemy)
     {
         if (!enemyDistances.TryGetValue(enemy.Id, out int value))
         {
@@ -75,11 +74,11 @@ internal class AssignmentViewModel : BaseViewModel
 
     public void DecreaseDistance(Attacker enemy, int amount)
     {
-        int current = GetDistance(enemy);
+        int current = GetDistanceInMeters(enemy);
         enemyDistances[enemy.Id] = Math.Max(0, current - amount);
     }
 
-    public void RemoveEnemyDistance(Creature enemy) // Call it when am enemy is defeated or removed
+    public void RemoveEnemyDistance(Attacker enemy) // Call it when an enemy is defeated or removed
     {
         if (enemyDistances.ContainsKey(enemy.Id))
         {
@@ -94,7 +93,7 @@ internal class AssignmentViewModel : BaseViewModel
             return RoomDistance;
         }
 
-        int baseDistance = DefaultEncounterDistance;
+        int baseDistance = GameSystem.Constants.DefaultEncounterDistance;
 
         var keenSight = Character.Race?.SpecialQualifications?.GetSpeciality<KeenSight>();
         if (keenSight != null)
@@ -108,11 +107,7 @@ internal class AssignmentViewModel : BaseViewModel
         //     baseDistance /= 2;
         // }
 
-        // VAGY: Méret alapú módosítás (pl. egy apró lényt nehezebb észrevenni messziről)
-        // if (enemy.Size == Size.Tiny)
-        // {
-        //     baseDistance -= 10;
-        // }
+        baseDistance += DistanceModifierHelper.Get(enemy.Size);
         return Math.Max(Attacker.MeleeDistance, baseDistance);
     }
 
