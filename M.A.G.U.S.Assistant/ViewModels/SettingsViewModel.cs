@@ -200,6 +200,19 @@ internal partial class SettingsViewModel : BaseViewModel
         }
     }
 
+    public bool ShowRandomBeastWhenBestiaryPageOpened
+    {
+        get => settingsService.ShowRandomBeastWhenBestiaryPageOpened;
+        set
+        {
+            if (settingsService.ShowRandomBeastWhenBestiaryPageOpened != value)
+            {
+                settingsService.SaveShowRandomBeastWhenBestiaryPageOpened(value);
+                OnPropertyChanged();
+            }
+        }
+    }
+
     public Language CurrentLanguage
     {
         get => settingsService.GetCurrentLanguageAsync().GetAwaiter().GetResult();

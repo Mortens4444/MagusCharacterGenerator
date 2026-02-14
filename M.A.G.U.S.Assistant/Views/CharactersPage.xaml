@@ -34,9 +34,7 @@
                 </VerticalStackLayout>
 
                 <CollectionView ItemsSource="{Binding AvailableCharacters}"
-                                SelectionMode="Single"
-                                SelectionChangedCommand="{Binding OpenDetailsCommand}"
-                                SelectionChangedCommandParameter="{Binding Source={RelativeSource Self}, Path=SelectedItem}">
+                                SelectionMode="Single">
 
                     <CollectionView.ItemsLayout>
                         <LinearItemsLayout Orientation="Vertical" ItemSpacing="10" />

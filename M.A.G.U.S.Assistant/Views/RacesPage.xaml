@@ -26,17 +26,17 @@
         <mc:EntryWithLabel Grid.Row="0" Label="Search" Text="{Binding SearchText}" />
 
         <Picker Grid.Row="1"
-            Title="Select race"
-            ItemsSource="{Binding FilteredRaces}"
-            SelectedItem="{Binding SelectedRace, Mode=TwoWay}"
-            ItemDisplayBinding="{Binding Name, Converter={StaticResource TranslationConverter}}" />
+                Title="Select race"
+                ItemsSource="{Binding FilteredRaces}"
+                SelectedItem="{Binding SelectedRace, Mode=TwoWay}"
+                ItemDisplayBinding="{Binding Name, Converter={StaticResource TranslationConverter}}" />
 
         <ScrollView VerticalOptions="Fill" Grid.Row="2">
-            <ScrollView.GestureRecognizers>
-                <SwipeGestureRecognizer Direction="Left" Command="{Binding SelectNextRaceCommand}" />
-                <SwipeGestureRecognizer Direction="Right" Command="{Binding SelectPreviousRaceCommand}" />
-            </ScrollView.GestureRecognizers>
             <StackLayout Spacing="8">
+                <StackLayout.GestureRecognizers>
+                    <SwipeGestureRecognizer Direction="Left" Command="{Binding SelectNextRaceCommand}" />
+                    <SwipeGestureRecognizer Direction="Right" Command="{Binding SelectPreviousRaceCommand}" />
+                </StackLayout.GestureRecognizers>
                 <!-- Képességek -->
                 <Label Text="{Binding SelectedRace.Name, Converter={StaticResource TranslationConverter}}" FontSize="20" FontAttributes="Bold"/>
 
@@ -84,7 +84,7 @@
                             <Label Text="Name" VerticalOptions="Center" TextColor="Gray" FontAttributes="Bold"/>
                             <Label Text="Level" VerticalOptions="Center" Grid.Column="1" HorizontalOptions="End" TextColor="Gray" FontAttributes="Bold"/>
                         </Grid>
-                        <CollectionView ItemsSource="{Binding SelectedRace.Qualifications}" SelectionMode="None">
+                        <CollectionView ItemsSource="{Binding SelectedRace.Qualifications}" SelectionMode="None" HeightRequest="200">
                             <CollectionView.ItemTemplate>
                                 <DataTemplate x:DataType="local:Qualification">
                                     <Grid Padding="6" ColumnDefinitions="*,Auto" ColumnSpacing="10">
@@ -106,7 +106,7 @@
                             <Label Text="Name" VerticalOptions="Center" TextColor="Gray" FontAttributes="Bold"/>
                             <Label Text="%" VerticalOptions="Center" Grid.Column="1" HorizontalOptions="End" TextColor="Gray" FontAttributes="Bold"/>
                         </Grid>
-                        <CollectionView ItemsSource="{Binding SelectedRace.PercentQualifications}" SelectionMode="None">
+                        <CollectionView ItemsSource="{Binding SelectedRace.PercentQualifications}" SelectionMode="None" HeightRequest="200">
                             <CollectionView.ItemTemplate>
                                 <DataTemplate x:DataType="local:PercentQualification">
                                     <Grid Padding="6" ColumnDefinitions="*,Auto" ColumnSpacing="10">
@@ -127,7 +127,7 @@
                         <Grid Padding="6" ColumnDefinitions="*" ColumnSpacing="10">
                             <Label Text="Name" VerticalOptions="Center" TextColor="Gray" FontAttributes="Bold"/>
                         </Grid>
-                        <CollectionView ItemsSource="{Binding SelectedRace.SpecialQualifications}" SelectionMode="None">
+                        <CollectionView ItemsSource="{Binding SelectedRace.SpecialQualifications}" SelectionMode="None" HeightRequest="200">
                             <CollectionView.ItemTemplate>
                                 <DataTemplate x:DataType="q:SpecialQualification">
                                     <Grid Padding="6" ColumnDefinitions="*" ColumnSpacing="10">

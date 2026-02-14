@@ -9,7 +9,7 @@ namespace M.A.G.U.S.Assistant.Services;
 
 internal class CombatEngine
 {
-    public void ProcessAssignmentTurn(AssignmentViewModel assignment, int round)
+    public static void ProcessAssignmentTurn(AssignmentViewModel assignment, int round)
     {
         var turn = new TurnData { Round = round };
         var initiatives = EncounterHelpers.GetInitiatives(assignment, turn).ToList();
@@ -26,7 +26,7 @@ internal class CombatEngine
         }
     }
 
-    private void ProcessInitiative(InitiativeEntry initiative, AssignmentViewModel assignment)
+    private static void ProcessInitiative(InitiativeEntry initiative, AssignmentViewModel assignment)
     {
         Attacker attacker = initiative.Attacker.Source;
         Attacker target = initiative.Target.Source;

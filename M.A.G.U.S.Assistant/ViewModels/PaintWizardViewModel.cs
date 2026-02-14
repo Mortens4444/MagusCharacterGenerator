@@ -139,7 +139,7 @@ internal partial class PaintWizardViewModel : BaseViewModel
 
         await drawingRepository.SaveDrawingAsync(name, [.. Elements]).ConfigureAwait(true);
         await RefreshSavedDrawings().ConfigureAwait(false);
-        await ShellNavigationService.DisplayAlertAsync("Save", "Painting succesfully saved!").ConfigureAwait(true);
+        await ShellNavigationService.DisplayAlertAsync("Save", "Painting successfully saved!").ConfigureAwait(true);
     }
 
     [RelayCommand]

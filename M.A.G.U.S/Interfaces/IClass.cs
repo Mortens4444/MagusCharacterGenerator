@@ -1,4 +1,5 @@
 ﻿using M.A.G.U.S.Enums;
+using M.A.G.U.S.GameSystem.Experience;
 using M.A.G.U.S.Models;
 using M.A.G.U.S.Qualifications;
 
@@ -57,4 +58,8 @@ public interface IClass : IAttacker, IAbilities
     string DefaultImage { get; }
 
     bool CanUpgrade { get; }
+
+    List<LevelRequirement> ExperienceLevels { get; }
+
+    ulong ExpPerLevelAfter12 { get; }
 }

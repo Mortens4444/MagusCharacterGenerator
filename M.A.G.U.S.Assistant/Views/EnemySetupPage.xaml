@@ -19,11 +19,11 @@
             <converters:InverseBooleanConverter x:Key="InverseBooleanConverter" />
         </ResourceDictionary>
     </v:NotifierPage.Resources>
-    
-    <Grid RowDefinitions="Auto, Auto, *, Auto" Padding="10" RowSpacing="10">
+
+    <Grid RowDefinitions="Auto, Auto, Auto, *, Auto" Padding="10" RowSpacing="10">
 
         <Grid ColumnDefinitions="*,Auto" ColumnSpacing="10">
-            <VerticalStackLayout Grid.Row="0" Spacing="5" BackgroundColor="#20000000" Padding="10">
+            <VerticalStackLayout Grid.Row="0" Spacing="5" >
                 <HorizontalStackLayout>
                     <Label Text="Number of Enemies" FontSize="16" FontAttributes="Bold" />
                     <Label Text=":" FontSize="16" FontAttributes="Bold" Margin="0,0,3,0" />
@@ -34,8 +34,17 @@
 
             <Button Grid.Column="1" Text="🎲" FontSize="20" WidthRequest="44" HeightRequest="44" Command="{Binding RandomizeEnemyCountCommand}" />
         </Grid>
+        
+        <VerticalStackLayout Grid.Row="1" Spacing="5">
+            <HorizontalStackLayout>
+                <Label Text="Max simultaneous attackers" FontSize="16" />
+                <Label Text=":" FontSize="16" FontAttributes="Bold" Margin="0,0,3,0" />
+                <Label Text="{Binding MaxSimultaneousAttacks}" FontSize="16" />
+            </HorizontalStackLayout>
+            <Slider Minimum="1" Maximum="{Binding EnemyCount}" Value="{Binding MaxSimultaneousAttacks}" />
+        </VerticalStackLayout>
 
-        <VerticalStackLayout Grid.Row="1" Spacing="10" BackgroundColor="#20000000" Padding="10">
+        <VerticalStackLayout Grid.Row="2" Spacing="10" BackgroundColor="#20000000" Padding="10">
             <Label Text="Global Settings (Apply to All)" FontAttributes="Bold"/>
 
             <Grid ColumnDefinitions="*, Auto">
@@ -89,7 +98,7 @@
 
         </VerticalStackLayout>
 
-        <CollectionView Grid.Row="2" ItemsSource="{Binding ConfigItems}">
+        <CollectionView Grid.Row="3" ItemsSource="{Binding ConfigItems}">
             <CollectionView.ItemTemplate>
                 <DataTemplate x:DataType="vm:EnemyConfigurationItem">
                     <Border Stroke="Gray" StrokeThickness="1" Padding="10" Margin="0,0,0,10" StrokeShape="RoundRectangle 5">
@@ -142,7 +151,7 @@
             </CollectionView.ItemTemplate>
         </CollectionView>
 
-        <Grid Grid.Row="3" ColumnDefinitions="*,*" ColumnSpacing="20">
+        <Grid Grid.Row="4" ColumnDefinitions="*,*" ColumnSpacing="20">
             <Button Text="Add Enemies" Grid.Column="1" Command="{Binding AddEnemiesCommand}" />
         </Grid>
     </Grid>

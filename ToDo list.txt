@@ -1,4 +1,3 @@
-- EnemySetupPage should have an option for how many enemies can atack maximum at a time
 - xp set after ancounter ends, or get a logic, which sets automatically the earned xp from max xp and combat style
 - when a character kills all of it's enemies in encounter, redistribute enemies should be called with a UI
 - paintwizardpage needs a navigation confirm

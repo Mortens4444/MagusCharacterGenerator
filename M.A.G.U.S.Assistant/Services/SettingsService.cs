@@ -21,6 +21,7 @@ internal sealed class SettingsService : ISettings
     public int MaxDiesCount { get; private set; }
     public bool UseRaceClassRestrictions { get; private set; }
     public bool AssignmentTurnHistoryNewestOnTop { get; private set; }
+    public bool ShowRandomBeastWhenBestiaryPageOpened { get; private set; }    
 
     private const string KeyLanguage = "Setting_Language";
 
@@ -39,6 +40,7 @@ internal sealed class SettingsService : ISettings
     private const string KeyUseRaceClassRestrictions = "Setting_UseRaceClassRestrictions";
     
     private const string KeyAssignmentTurnHistoryNewestOnTop = "Setting_AssignmentTurnHistoryNewestOnTop";
+    private const string KeyShowRandomBeastWhenBestiaryPageOpened = "Setting_ShowRandomBeastWhenBestiaryPageOpened";
 
     public SettingsService(SettingsRepository settingsRepository)
     {
@@ -63,6 +65,7 @@ internal sealed class SettingsService : ISettings
         UseRaceClassRestrictions = await settingsRepository.GetBoolSettingAsync(KeyUseRaceClassRestrictions, Constants.UseRaceClassRestrictions).ConfigureAwait(false);
 
         AssignmentTurnHistoryNewestOnTop = await settingsRepository.GetBoolSettingAsync(KeyAssignmentTurnHistoryNewestOnTop, Constants.AssignmentTurnHistoryNewestOnTop).ConfigureAwait(false);
+        ShowRandomBeastWhenBestiaryPageOpened = await settingsRepository.GetBoolSettingAsync(KeyShowRandomBeastWhenBestiaryPageOpened, Constants.ShowRandomBeastWhenBestiaryPageOpened).ConfigureAwait(false);
     }
 
     public Task SaveAddCombatValueAsync(bool value)
@@ -141,6 +144,12 @@ internal sealed class SettingsService : ISettings
     {
         AssignmentTurnHistoryNewestOnTop = value;
         return settingsRepository.SaveBoolSettingAsync(KeyAssignmentTurnHistoryNewestOnTop, value);
+    }
+
+    public Task SaveShowRandomBeastWhenBestiaryPageOpened(bool value)
+    {
+        ShowRandomBeastWhenBestiaryPageOpened = value;
+        return settingsRepository.SaveBoolSettingAsync(KeyShowRandomBeastWhenBestiaryPageOpened, value);
     }
 
     public async Task<Language> GetCurrentLanguageAsync()

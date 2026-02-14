@@ -323,27 +323,28 @@
                                        VerticalOptions="Center" 
                                        HorizontalOptions="Start" />
 
-                                <Label Grid.Column="1" 
-                                       Text="{Binding Weight, Converter={StaticResource TranslationConverter}}" 
-                                       VerticalOptions="Center" 
-                                       HorizontalTextAlignment="End" />
-
-                                <Button Grid.Column="2"
+                                <Button Grid.Column="1"
                                         Text="💰"
                                         FontSize="12"
                                         BackgroundColor="Transparent"
                                         Command="{Binding Source={RelativeSource AncestorType={x:Type vm:CharacterViewModel}}, Path=SellItemCommand}"
                                         CommandParameter="{Binding .}"
-                                        ToolTipProperties.Text="Sell" />
+                                        ToolTipProperties.Text="{Binding Source='Sell', Converter={StaticResource TranslationConverter}}" />
 
-                                <Button Grid.Column="3"
+                                <Button Grid.Column="2"
                                         Text="🗑️"
                                         FontSize="12"
                                         BackgroundColor="Transparent"
                                         TextColor="Red"
                                         Command="{Binding Source={RelativeSource AncestorType={x:Type vm:CharacterViewModel}}, Path=DeleteEquipmentCommand}"
                                         CommandParameter="{Binding .}"
-                                        ToolTipProperties.Text="Discard item" />
+                                        ToolTipProperties.Text="{Binding Source='Discard item', Converter={StaticResource TranslationConverter}}" />
+
+                                <Label Grid.Column="3" 
+                                       Text="{Binding Weight, Converter={StaticResource TranslationConverter}}" 
+                                       VerticalOptions="Center" 
+                                       HorizontalTextAlignment="End" />
+
                             </Grid>
                         </DataTemplate>
                     </CollectionView.ItemTemplate>

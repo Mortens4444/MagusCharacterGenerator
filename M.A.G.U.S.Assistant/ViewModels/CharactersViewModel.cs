@@ -36,7 +36,7 @@ internal partial class CharactersViewModel(CharacterService characterService) : 
             "Delete Character",
             String.Format(Lng.Elem("Are you sure you want to delete '{0}'? This cannot be undone."), character.Name),
             "Delete",
-            "Cancel").ConfigureAwait(false);
+            "Cancel").ConfigureAwait(true);
 
         if (confirm)
         {
@@ -54,6 +54,6 @@ internal partial class CharactersViewModel(CharacterService characterService) : 
             return;
         }
 
-        await ShellNavigationService.NavigateToAsync($"CharacterDetailsPage?name={character.Name}").ConfigureAwait(false);
+        await ShellNavigationService.NavigateToAsync($"CharacterDetailsPage?name={character.Name}").ConfigureAwait(true);
     }
 }

@@ -116,8 +116,7 @@ internal partial class LanguagesViewModel : BaseViewModel
         if (!String.IsNullOrWhiteSpace(st))
         {
             query = query.Where(l =>
-                (Lng.Elem(l.Name)?.IndexOf(st, StringComparison.InvariantCultureIgnoreCase) >= 0) ||
-                (Lng.Elem(l.EnumKey)?.IndexOf(st, StringComparison.InvariantCultureIgnoreCase) >= 0));
+                (Lng.Elem(l.Description)?.IndexOf(st, StringComparison.InvariantCultureIgnoreCase) >= 0));
         }
 
         FilteredLanguages.Clear();

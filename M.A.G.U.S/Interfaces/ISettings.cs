@@ -27,4 +27,6 @@ public interface ISettings
     int MaxDiesCount { get; }
 
     bool UseRaceClassRestrictions { get; }
+
+    bool ShowRandomBeastWhenBestiaryPageOpened { get; }
 }

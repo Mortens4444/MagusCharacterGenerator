@@ -25,15 +25,15 @@ internal partial class CharacterGeneratorPage : NotifierPage
         base.OnDisappearing();
         Shell.Current.Navigating -= Shell_Navigating;
     }
-
     private async void Shell_Navigating(object? sender, ShellNavigatingEventArgs e)
     {
-        if (!ViewModel.IsDirty || e.Current == null)
+        if (!ViewModel.IsDirty || e.Current == null || e.Source == ShellNavigationSource.Push)
         {
             return;
         }
 
         e.Cancel();
+
         var answer = await ConfirmNavigationAsync().ConfigureAwait(true);
         if (answer)
         {

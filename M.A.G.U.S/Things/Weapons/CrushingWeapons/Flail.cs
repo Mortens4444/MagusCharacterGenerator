@@ -25,5 +25,7 @@ public class Flail : Weapon, IMeleeWeapon
 
     public override string Name => "Flail (thresher)";
 
+    public override string[] Images => ["flail_thresher.png"];
+
     public override string Description => "A weapon originally derived from the thresher, featuring a studded or spiked ball linked by a short chain to a wooden handle. Its flexible nature makes it difficult to parry.";
 }

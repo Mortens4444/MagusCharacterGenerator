@@ -17,6 +17,7 @@ internal class Constants
     public const int MaxDiesCount = 1;
     public const bool UseRaceClassRestrictions = true;
     public const bool AssignmentTurnHistoryNewestOnTop = true;
-    
+    public const bool ShowRandomBeastWhenBestiaryPageOpened = true;
+
     public const Language DefaultLanguage = Language.Hungarian;
 }

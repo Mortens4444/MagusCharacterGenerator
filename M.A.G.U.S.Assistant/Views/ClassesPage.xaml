@@ -167,7 +167,31 @@
                         </CollectionView>
                     </VerticalStackLayout>
                 </Border>
-                
+
+                <Border Style="{StaticResource BoxBorder}" Margin="0,10">
+                    <VerticalStackLayout>
+                        <Label Text="Experience levels" Style="{StaticResource HeaderLabel}" />
+
+                        <Grid Padding="6" ColumnDefinitions="100, *" ColumnSpacing="10">
+                            <Label Text="Level" FontAttributes="Bold" TextColor="Gray"/>
+                            <Label Text="Experience range" Grid.Column="1" FontAttributes="Bold" TextColor="Gray"/>
+                        </Grid>
+
+                        <CollectionView ItemsSource="{Binding ExperienceLevels}" SelectionMode="Single" HeightRequest="220">
+                            <CollectionView.ItemTemplate>
+                                <DataTemplate x:DataType="m:ExperienceLevelDisplay">
+                                    <Grid Padding="6" ColumnDefinitions="100, *" ColumnSpacing="10">
+                                        <Label Text="{Binding Level}" />
+                                        <Label Text="{Binding Range}" Grid.Column="1" />
+                                    </Grid>
+                                </DataTemplate>
+                            </CollectionView.ItemTemplate>
+                        </CollectionView>
+
+                        <Label Text="{Binding ExperienceAfter12}" FontAttributes="Italic" TextColor="Gray" />
+                    </VerticalStackLayout>
+                </Border>
+
             </VerticalStackLayout>
         </ScrollView>
     </Grid>

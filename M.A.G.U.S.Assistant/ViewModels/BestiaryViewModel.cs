@@ -11,6 +11,8 @@ internal partial class BestiaryViewModel : SearchListViewModel, IDisposable
 {
     private readonly IShakeService? shakeService;
 
+    public IShakeService? ShakeService => shakeService;
+
     public ICommand PickRandomCommand { get; }
 
     public BestiaryViewModel(ISoundPlayer soundPlayer, IShakeService shakeService) : base(soundPlayer)

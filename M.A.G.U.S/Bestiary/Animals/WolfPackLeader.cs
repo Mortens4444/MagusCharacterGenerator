@@ -1,4 +1,5 @@
 ﻿using M.A.G.U.S.Enums;
+using M.A.G.U.S.Extensions;
 using M.A.G.U.S.GameSystem;
 using M.A.G.U.S.GameSystem.Attributes;
 using M.A.G.U.S.Models;
@@ -31,4 +32,6 @@ public sealed class WolfPackLeader : Creature
     public override int GetNumberAppearing() => 1;
 
     public override List<Speed> Speeds => [new Speed(TravelMode.OnLand, 120)];
+
+    public override string[] Sounds => ["wolf"];
 }

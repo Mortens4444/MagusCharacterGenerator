@@ -42,4 +42,6 @@ public sealed class Orc : Creature
     public override int GetNumberAppearing() => DiceThrow._10D10();
 
     public override List<Speed> Speeds => [new Speed(TravelMode.OnLand, 100)];
+
+    public override string[] Sounds => ["orc_ouch"];
 }

@@ -71,9 +71,12 @@
                             </CollectionView.ItemTemplate>
                         </CollectionView>
                     </StackLayout>
-                    
-                    <Label Text="Attack modes" Grid.Row="4" Grid.Column="0" FontAttributes="Bold" />
-                    <StackLayout Grid.Row="4" Grid.Column="1" Spacing="0">
+
+                    <Label Text="Initiator value" Grid.Row="4" Grid.Column="0" FontAttributes="Bold" />
+                    <Label Text="{Binding InitiateValue}" Grid.Row="4" Grid.Column="1" />
+
+                    <Label Text="Attack modes" Grid.Row="5" Grid.Column="0" FontAttributes="Bold" />
+                    <StackLayout Grid.Row="5" Grid.Column="1" Spacing="0">
                         <CollectionView ItemsSource="{Binding AttackModes}">
                             <CollectionView.ItemTemplate>
                                 <DataTemplate x:DataType="m:Attack">
@@ -90,11 +93,8 @@
                         </CollectionView>
                     </StackLayout>
                     
-                    <Label Text="Defense value" Grid.Row="5" Grid.Column="0" FontAttributes="Bold" />
-                    <Label Text="{Binding DefenseValue}" Grid.Row="5" Grid.Column="1" />
-
-                    <Label Text="Initiator value" Grid.Row="6" Grid.Column="0" FontAttributes="Bold" />
-                    <Label Text="{Binding InitiateValue}" Grid.Row="6" Grid.Column="1" />
+                    <Label Text="Defense value" Grid.Row="6" Grid.Column="0" FontAttributes="Bold" />
+                    <Label Text="{Binding DefenseValue}" Grid.Row="6" Grid.Column="1" />
 
                     <Label Text="Health points" Grid.Row="7" Grid.Column="0" FontAttributes="Bold" />
                     <Label Text="{Binding HealthPoints}" Grid.Row="7" Grid.Column="1" />

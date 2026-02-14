@@ -517,6 +517,7 @@ wagon.png
 wagon_wheel.png
 carved_club.png
 chain_mace.png
+flail_thresher.png
 one_handed_mace.png
 short_staff.png
 spiked_mace.png
@@ -571,3 +572,4 @@ sword_scimitar.png
 sword_yataghan.png
 throwing_ax.png
 throwing_dagger.png
+appicon.png

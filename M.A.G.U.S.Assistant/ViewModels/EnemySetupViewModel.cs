@@ -25,6 +25,7 @@ internal partial class EnemySetupViewModel : ObservableObject
     private int globalPtpMin;
     private int globalPtpMax;
     private bool hasGlobalPtpRange;
+    private int maxSimultaneousAttacks = 6;
 
     public event Action<List<EnemyConfigurationItem>>? OnEnemiesConfirmed;
     public event Action? OnCancel;
@@ -119,6 +120,12 @@ internal partial class EnemySetupViewModel : ObservableObject
         set => SetProperty(ref hasGlobalPtpRange, value);
     }
 
+    public int MaxSimultaneousAttacks
+    {
+        get => maxSimultaneousAttacks;
+        set => SetProperty(ref maxSimultaneousAttacks, value);
+    }
+
     public ObservableCollection<EnemyConfigurationItem> ConfigItems { get; } = [];
     public IList<AttackDirection> GlobalAttackDirections { get; } = [.. Enum.GetValues<AttackDirection>()];
     public IList<AttackStrategy> GlobalAttackStrategies { get; } = [.. Enum.GetValues<AttackStrategy>()];
@@ -172,18 +179,17 @@ internal partial class EnemySetupViewModel : ObservableObject
 
     private void UpdateConfigs()
     {
-        // Ha növeljük a számot
         while (ConfigItems.Count < EnemyCount)
         {
-            var newItem = new EnemyConfigurationItem(templateEnemy, ConfigItems.Count);
-            // Alkalmazzuk a jelenlegi globális beállításokat az újra is
-            newItem.Distance = GlobalDistance;
-            newItem.Direction = GlobalDirection;
-            newItem.Strategy = GlobalStrategy;
+            var newItem = new EnemyConfigurationItem(templateEnemy, ConfigItems.Count)
+            {
+                Distance = GlobalDistance,
+                Direction = GlobalDirection,
+                Strategy = GlobalStrategy
+            };
             ConfigItems.Add(newItem);
         }
 
-        // Ha csökkentjük a számot
         while (ConfigItems.Count > EnemyCount)
         {
             ConfigItems.RemoveAt(ConfigItems.Count - 1);

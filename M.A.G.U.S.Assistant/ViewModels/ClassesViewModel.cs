@@ -4,7 +4,6 @@ using M.A.G.U.S.Assistant.Models;
 using M.A.G.U.S.Assistant.Services;
 using M.A.G.U.S.Interfaces;
 using M.A.G.U.S.Qualifications;
-using Mtf.Extensions;
 using Mtf.LanguageService.MAUI;
 using System.Collections.ObjectModel;
 
@@ -16,6 +15,7 @@ internal partial class ClassesViewModel : BaseViewModel
     private IClass? selectedClass;
     private ObservableCollection<IClass> filteredClasses = [];
     private ObservableCollection<DiceStat> diceStats = [];
+    private ObservableCollection<ExperienceLevelDisplay> experienceLevels = [];
     private AsyncRelayCommand? previewImageCommand;
 
     public ClassesViewModel()
@@ -26,6 +26,16 @@ internal partial class ClassesViewModel : BaseViewModel
     }
 
     public IList<IClass> Classes { get; private set; }
+
+    public IEnumerable<ExperienceLevelDisplay> ExperienceLevels =>
+        SelectedClass?.ExperienceLevels.Select(x => new ExperienceLevelDisplay
+        {
+            Level = x.Level,
+            Min = x.MinExperience,
+            Max = x.MaxExperience
+        }) ?? [];
+
+    public string ExperienceAfter12 => SelectedClass is null ? String.Empty : $"+{SelectedClass.ExpPerLevelAfter12:N0} {Lng.Elem("XP / level (12+)")}";
 
     public ObservableCollection<DiceStat> DiceStats
     {
@@ -72,7 +82,9 @@ internal partial class ClassesViewModel : BaseViewModel
             if (SetProperty(ref selectedClass, value))
             {
                 DiceStats = new ObservableCollection<DiceStat>(selectedClass?.GetDiceStats() ?? []);
+
                 OnPropertyChanged();
+                OnPropertyChanged(nameof(ExperienceLevels));
             }
         }
     }

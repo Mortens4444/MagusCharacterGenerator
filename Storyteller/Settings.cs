@@ -29,5 +29,7 @@ namespace Storyteller
         public int MaxDiesCount => 1;
 
         public bool UseRaceClassRestrictions => true;
+
+        public bool ShowRandomBeastWhenBestiaryPageOpened => true;
     }
 }

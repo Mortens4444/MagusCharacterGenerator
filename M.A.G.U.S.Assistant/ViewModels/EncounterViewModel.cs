@@ -148,7 +148,7 @@ internal partial class EncounterViewModel : CharacterListLoaderViewModel, IDispo
             var setupPage = new EnemySetupPage(setupVm);
             setupVm.OnEnemiesConfirmed += (configs) =>
             {
-                ProcessConfirmedEnemies(configs);
+                ProcessConfirmedEnemies(configs, setupVm.MaxSimultaneousAttacks);
                 ShellNavigationService.ClosePageAsync();
             };
             setupVm.OnCancel += () =>
@@ -185,7 +185,7 @@ internal partial class EncounterViewModel : CharacterListLoaderViewModel, IDispo
         foreach (var assignment in assignmentsSnapshot)
         {
             var round = assignment.TurnHistory.Count + 1;
-            combatEngine.ProcessAssignmentTurn(assignment, round);
+            CombatEngine.ProcessAssignmentTurn(assignment, round);
         }
     }
 
@@ -318,7 +318,7 @@ internal partial class EncounterViewModel : CharacterListLoaderViewModel, IDispo
         );
     }
 
-    private void ProcessConfirmedEnemies(List<EnemyConfigurationItem> configs)
+    private void ProcessConfirmedEnemies(List<EnemyConfigurationItem> configs, int maxSimultaneousAttacks)
     {
         foreach (var config in configs)
         {
@@ -335,6 +335,7 @@ internal partial class EncounterViewModel : CharacterListLoaderViewModel, IDispo
 
             SelectedAssignment!.Enemies.Add(newEnemy);
             SelectedAssignment.SetDistance(newEnemy, config.Distance);
+            SelectedAssignment.MaxSimultaneousAttacks = maxSimultaneousAttacks;
         }
 
         SelectedEnemy = null;

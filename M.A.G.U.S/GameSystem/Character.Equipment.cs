@@ -41,6 +41,11 @@ public partial class Character
         OnPropertyChanged(nameof(Money));
     }
 
+    public bool HasItem<T>()
+    {
+        return Equipment.Any(i => i is T);
+    }
+
     public void RemoveEquipment(Thing thing)
     {
         if (Equipment.Remove(thing))

@@ -18,6 +18,10 @@ internal static class EncounterHelpers
 
         foreach (var enemy in assignment.Enemies.ToList())
         {
+            if (!enemy.IsConscious)
+            {
+                continue;
+            }
             int dist = assignment.GetDistanceInMeters(enemy);
             var intendedAttack = enemy.GetRandomAttackMode();
             int range = Attacker.GetAttackRangeInMeters(intendedAttack);
@@ -29,11 +33,19 @@ internal static class EncounterHelpers
                 continue;
             }
 
-            int attackCount = enemy.GetAttackCountForRound(turn.Round);
-            for (var i = 0; i < attackCount; i++)
+            if (result.Count < assignment.MaxSimultaneousAttacks)
             {
-                AddInitiative(new CombatantRef(enemy), new CombatantRef(assignment.Character), intendedAttack, result);
+                int attackCount = enemy.GetAttackCountForRound(turn.Round);
+                for (var i = 0; i < attackCount; i++)
+                {
+                    AddInitiative(new CombatantRef(enemy), new CombatantRef(assignment.Character), intendedAttack, result);
+                }
             }
+        }
+
+        if (!assignment.Character.IsConscious)
+        {
+            return result.OrderByDescending(initiative => initiative.FinalInitiative);
         }
 
         var target = (Attacker)(assignment.Character.AttackStrategy switch

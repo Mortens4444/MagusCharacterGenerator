@@ -31,5 +31,7 @@ namespace M.A.G.U.S.Test
         public int MaxDiesCount => 1;
 
         public bool UseRaceClassRestrictions => true;
+
+        public bool ShowRandomBeastWhenBestiaryPageOpened => true;
     }
 }

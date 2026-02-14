@@ -2,6 +2,7 @@ using M.A.G.U.S.Assistant.Actions;
 using M.A.G.U.S.Assistant.Enums;
 using M.A.G.U.S.Assistant.Interfaces;
 using M.A.G.U.S.Assistant.Models.Drawing;
+using M.A.G.U.S.Assistant.Services;
 using M.A.G.U.S.Assistant.ViewModels;
 using Mtf.LanguageService.MAUI;
 using Mtf.LanguageService.MAUI.Views;
@@ -17,7 +18,6 @@ internal partial class PaintWizardPage : NotifierPage
     private float totalDeltaX;
     private float totalDeltaY;
     private float totalDeltaRotation;
-    private double lastDistance;
     private double initialDistance;
     private float totalScale;
 
@@ -337,4 +337,54 @@ internal partial class PaintWizardPage : NotifierPage
             CanvasView.Invalidate();
         }
     }
+
+    protected override bool OnBackButtonPressed()
+    {
+        _ = ConfirmAndNavigateAsync();
+        return true;
+    }
+
+    private static async Task ConfirmAndNavigateAsync()
+    {
+        var answer = await ShellNavigationService.DisplayAlertAsync(
+            "Unsaved changes",
+            "Are you sure you want to leave?",
+            "Yes",
+            "No").ConfigureAwait(true);
+
+        if (answer)
+        {
+            await ShellNavigationService.GoBackAsync().ConfigureAwait(true);
+        }
+    }
+
+    //private static Task<bool> ConfirmAsync()
+    //{
+    //    return ShellNavigationService.DisplayAlertAsync(
+    //        "Unsaved changes",
+    //        "Are you sure you want to leave?",
+    //        "Yes",
+    //        "No");
+    //}
+
+    //protected override async void OnNavigatingFrom(NavigatingFromEventArgs args)
+    //{
+    //    base.OnNavigatingFrom(args);
+
+    //    if (viewModel.Elements.Count == 0)
+    //    {
+    //        return;
+    //    }
+
+    //    var answer = await ShellNavigationService.DisplayAlertAsync(
+    //        "Unsaved changes",
+    //        "Are you sure you want to leave?",
+    //        "Yes",
+    //        "No").ConfigureAwait(true);
+
+    //    if (!answer)
+    //    {
+    //        args.Cancel = true;
+    //    }
+    //}
 }

@@ -94,7 +94,7 @@ internal static class ShellNavigationService
                 Lng.Elem(message),
                 Lng.Elem(accept),
                 Lng.Elem(cancel),
-                Lng.Elem(initialValue)));
+                initialValue: Lng.Elem(initialValue)));
 
-    public static Task GoToAsync(Uri uri, bool animate = true) => Shell.Current.GoToAsync(uri, animate: animate);
+    public static Task GoToAsync(Uri uri, bool animate = true) => MainThread.InvokeOnMainThreadAsync(() => Shell.Current.GoToAsync(uri, animate: animate));
 }

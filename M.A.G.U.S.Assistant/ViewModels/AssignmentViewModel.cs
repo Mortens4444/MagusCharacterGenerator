@@ -12,6 +12,8 @@ internal class AssignmentViewModel : BaseViewModel
     private const int RoomDistance = 5;
     private readonly ISettings settings;
     private readonly Dictionary<Guid, int> enemyDistances = [];
+    
+    public int MaxSimultaneousAttacks { get; set; }
 
     public bool IsFinished { get; set; }
 
