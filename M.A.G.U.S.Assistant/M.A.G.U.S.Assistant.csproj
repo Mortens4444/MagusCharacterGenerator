@@ -24,7 +24,7 @@
     <ApplicationId>com.mortens.MAGUS.Assistant</ApplicationId>
     <!-- Versions -->
     <MajorVersion>1</MajorVersion>
-    <MinorVersion>40</MinorVersion>
+    <MinorVersion>42</MinorVersion>
     <BuildNumber>0</BuildNumber>
     <PatchNumber>0</PatchNumber>
     <FileVersion>$(MajorVersion).$(MinorVersion).$(BuildNumber).$(PatchNumber)</FileVersion>
@@ -140,7 +140,7 @@
     <PackageReference Include="Microsoft.Maui.Graphics" Version="10.0.40" />
     <PackageReference Include="Microsoft.Maui.Graphics.Skia" Version="10.0.40" />
     <PackageReference Include="Mtf.Maui.Controls" Version="4.0.63" />
-    <PackageReference Include="Mtf.MAUI.LanguageService" Version="3.0.17" />
+    <PackageReference Include="Mtf.MAUI.LanguageService" Version="3.0.18" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.4" />
     <PackageReference Include="Plugin.Maui.Audio" Version="4.0.0" />
     <PackageReference Include="sqlite-net-pcl" Version="1.9.172" />
@@ -250,6 +250,6 @@
       <ImageManifestPath>$(ProjectDir)Resources\Images\images_manifest.txt</ImageManifestPath>
     </PropertyGroup>
     <!--<WriteLinesToFile File="$(ImageManifestPath)" Lines="@(AllImages->'%(RelativeDir)%(Filename)%(Extension)')" Overwrite="true" Encoding="UTF-8" />-->
-    <WriteLinesToFile File="$(ImageManifestPath)" Lines="@(AllImages->'%(Filename)%(Extension)')" Overwrite="true" Encoding="UTF-8" />
+    <WriteLinesToFile File="$(ImageManifestPath)" Lines="@(AllImages-&gt;'%(Filename)%(Extension)')" Overwrite="true" Encoding="UTF-8" />
   </Target>
 </Project>

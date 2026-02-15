@@ -15,7 +15,6 @@ internal partial class ClassesViewModel : BaseViewModel
     private IClass? selectedClass;
     private ObservableCollection<IClass> filteredClasses = [];
     private ObservableCollection<DiceStat> diceStats = [];
-    private ObservableCollection<ExperienceLevelDisplay> experienceLevels = [];
     private AsyncRelayCommand? previewImageCommand;
 
     public ClassesViewModel()
@@ -84,7 +83,20 @@ internal partial class ClassesViewModel : BaseViewModel
                 DiceStats = new ObservableCollection<DiceStat>(selectedClass?.GetDiceStats() ?? []);
 
                 OnPropertyChanged();
+
+                OnPropertyChanged(nameof(InitiateBaseValue));
+                OnPropertyChanged(nameof(AttackBaseValue));
+                OnPropertyChanged(nameof(DefenseBaseValue));
+                OnPropertyChanged(nameof(AimBaseValue));
+                OnPropertyChanged(nameof(CombatValueModifierPerLevel));
+
+                OnPropertyChanged(nameof(Qualifications));
+                OnPropertyChanged(nameof(PercentQualifications));
+                OnPropertyChanged(nameof(SpecialQualifications));
+                OnPropertyChanged(nameof(FutureQualifications));
+
                 OnPropertyChanged(nameof(ExperienceLevels));
+                OnPropertyChanged(nameof(ExperienceAfter12));
             }
         }
     }

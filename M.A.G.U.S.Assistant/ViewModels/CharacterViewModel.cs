@@ -2,12 +2,15 @@
 using M.A.G.U.S.Assistant.Extensions;
 using M.A.G.U.S.Assistant.Interfaces;
 using M.A.G.U.S.Assistant.Services;
+using M.A.G.U.S.Assistant.Views;
 using M.A.G.U.S.Enums;
 using M.A.G.U.S.Extensions;
 using M.A.G.U.S.GameSystem;
+using M.A.G.U.S.GameSystem.Magic;
 using M.A.G.U.S.Interfaces;
 using M.A.G.U.S.Models;
 using M.A.G.U.S.Qualifications;
+using M.A.G.U.S.Qualifications.Magic;
 using M.A.G.U.S.Things;
 using M.A.G.U.S.Things.Armors;
 using M.A.G.U.S.Things.Weapons;
@@ -19,7 +22,7 @@ using System.Globalization;
 
 namespace M.A.G.U.S.Assistant.ViewModels;
 
-internal partial class CharacterViewModel(IPrintService printService) : BaseViewModel, IDisposable
+internal partial class CharacterViewModel(IPrintService printService, ISoundPlayer soundPlayer, IShakeService shakeService, ISettings settings) : BaseViewModel, IDisposable
 {
     private CombatValueModifier selectedCombatValueModifier;
     private Character? character;
@@ -28,6 +31,9 @@ internal partial class CharacterViewModel(IPrintService printService) : BaseView
     private Weapon? secondaryWeapon;
     private Armor? selectedArmor;
     private readonly IPrintService printService = printService;
+    private readonly ISettings settings = settings;
+    private readonly IShakeService shakeService = shakeService;
+    private readonly ISoundPlayer soundPlayer = soundPlayer;
     private static readonly IEnumerable<Alignment> alignments = [.. Enum.GetValues<Alignment>()];
 
     public IEnumerable<Alignment> Alignments => alignments;
@@ -227,6 +233,17 @@ internal partial class CharacterViewModel(IPrintService printService) : BaseView
     {
         switch (e.PropertyName)
         {
+            case nameof(Character.ExperiencePoints):
+                OnPropertyChanged(nameof(ExperiencePoints));
+                OnPropertyChanged(nameof(CanLevelUp));
+                LevelUpCommand.NotifyCanExecuteChanged();
+                break;
+
+            case nameof(Character.Level):
+                OnPropertyChanged(nameof(Level));
+                LevelUpCommand.NotifyCanExecuteChanged();
+                break;
+
             case nameof(Character.CanAllocateCombatModifier):
                 OnPropertyChanged(nameof(CanAllocateCombatModifier));
                 break;
@@ -385,7 +402,9 @@ internal partial class CharacterViewModel(IPrintService printService) : BaseView
     
     public int CombatValueModifierPerLevel => Character?.CombatValueModifierPerLevel ?? 0;
     public bool CanAllocateCombatModifier => Character?.CanAllocateCombatModifier ?? false;
-    
+
+    public bool CanLevelUp => Character?.PendingLevelUps > 0;
+
     public int MinInitiateValue => Character?.MinInitiateValue ?? 0;
     public int MaxInitiateValue => Character?.MaxInitiateValue ?? 0;
     public int InitiateValue => Character?.InitiateValue ?? 0;
@@ -547,6 +566,63 @@ internal partial class CharacterViewModel(IPrintService printService) : BaseView
     {
         Character?.ChangeAim(-1);
         ChangeCombatValueModifierButtonStates();
+    }
+
+    [RelayCommand(CanExecute = nameof(CanLevelUp))]
+    public async Task LevelUpAsync()
+    {
+        if (Character == null)
+        {
+            return;
+        }
+        
+        try
+        {
+            int painIncrease;
+            if (settings.AutoIncreasePainTolerance)
+            {
+                painIncrease = Character.BaseClass.GetPainToleranceModifier();
+            }
+            else
+            {
+                var painToleranceModifierFormula = Character.BaseClass.GetPainToleranceModifierFormula();
+                var page = new RollFormulaPage(soundPlayer, shakeService, painToleranceModifierFormula, $"{Lng.Elem("Level up")} - {Lng.Elem("PTP")} ({Character.Level + 1}. {Lng.Elem("Level")})");
+                await ShellNavigationService.ShowPageAsync(page).ConfigureAwait(true);
+                painIncrease = await page.ResultTask.ConfigureAwait(true);
+            }
+
+            int manaIncrease = 0;
+
+            if (Character.Sorcery != null)
+            {
+                var manaFormula = Character.MaxManaPointsPerLevelFormula;
+                if (settings.AutoIncreaseManaPoints)
+                {
+                    var magic = Character.BaseClass.SpecialQualifications.GetSpeciality<Sorcery>();
+                    manaIncrease = magic != null ? magic.GetManaPointsModifier() : 0;
+                }
+                else
+                {
+                    var page = new RollFormulaPage(soundPlayer, shakeService, manaFormula, $"{Lng.Elem("Level up")} - {Lng.Elem("PTP")} ({Character.Level + 1}. {Lng.Elem("Level")})");
+                    await ShellNavigationService.ShowPageAsync(page).ConfigureAwait(true);
+                    manaIncrease = await page.ResultTask.ConfigureAwait(true);
+                }
+            }
+
+            Character.ApplyLevelUp(painIncrease, manaIncrease);
+            OnPropertyChanged(String.Empty);
+
+            OnPropertyChanged(nameof(Level));
+            OnPropertyChanged(nameof(ExperiencePoints));
+            OnPropertyChanged(nameof(CanLevelUp));
+
+            LevelUpCommand.NotifyCanExecuteChanged();
+        }
+        catch (Exception ex)
+        {
+            System.Diagnostics.Debug.WriteLine(ex);
+            await ShellNavigationService.DisplayAlertAsync(ex.Message).ConfigureAwait(true);
+        }
     }
 
     private void ChangeCombatValueModifierButtonStates()

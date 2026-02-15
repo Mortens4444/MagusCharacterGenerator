@@ -1,14 +1,17 @@
 ﻿using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.Messaging;
+using M.A.G.U.S.Assistant.Extensions;
 using M.A.G.U.S.Assistant.Interfaces;
 using M.A.G.U.S.Assistant.Models;
 using M.A.G.U.S.Assistant.Services;
 using M.A.G.U.S.Assistant.Views;
 using M.A.G.U.S.GameSystem;
 using M.A.G.U.S.GameSystem.Attributes;
+using M.A.G.U.S.GameSystem.Magic;
 using M.A.G.U.S.GameSystem.Qualifications;
 using M.A.G.U.S.Interfaces;
 using M.A.G.U.S.Qualifications;
+using M.A.G.U.S.Qualifications.Magic;
 using M.A.G.U.S.Qualifications.Scientific.Psi;
 using M.A.G.U.S.Races;
 using M.A.G.U.S.Utils;
@@ -20,21 +23,21 @@ namespace M.A.G.U.S.Assistant.ViewModels;
 
 internal partial class CharacterGeneratorViewModel : CharacterViewModel
 {
-    private readonly SettingsService settingsService;
+    private readonly ISettings settings;
     private readonly CharacterService characterService;
     private readonly ISoundPlayer soundPlayer;
     private readonly IShakeService shakeService;
 
     private int baseClassLevel = 1;
 
-    public CharacterGeneratorViewModel(SettingsService settingsService, CharacterService characterService, ISoundPlayer soundPlayer, IShakeService shakeService, IPrintService printService)
-         : base(printService)
+    public CharacterGeneratorViewModel(CharacterService characterService, ISoundPlayer soundPlayer, IShakeService shakeService, ISettings settings, IPrintService printService)
+         : base(printService, soundPlayer, shakeService, settings)
     {
-        this.settingsService = settingsService;
+        this.settings = settings;
         this.characterService = characterService;
         this.soundPlayer = soundPlayer;
         this.shakeService = shakeService;
-        Character = new Character(settingsService);
+        Character = new Character(settings);
 
         LoadAvailableTypes();
         SelectedRace = AvailableRaces.FirstOrDefault();
@@ -80,14 +83,14 @@ internal partial class CharacterGeneratorViewModel : CharacterViewModel
         try
         {
             var classType = SelectedClass.GetType();
-            var instanceClass = InstanceClass(classType, BaseClassLevel, settingsService.AutoGenerateSkills);
+            var instanceClass = InstanceClass(classType, BaseClassLevel, settings.AutoGenerateSkills);
             if (instanceClass == null)
             {
                 //WeakReferenceMessenger.Default.Send(new ShowErrorMessage("Class cannot be instantiated!"));
                 return;
             }
     
-            if (!settingsService.AutoGenerateSkills)
+            if (!settings.AutoGenerateSkills)
             {
                 string[] skillNames = [ nameof(instanceClass.Strength), nameof(instanceClass.Stamina), nameof(instanceClass.Quickness), nameof(instanceClass.Dexterity), nameof(instanceClass.Health), nameof(instanceClass.Beauty),
                     nameof(instanceClass.Intelligence), nameof(instanceClass.Willpower), nameof(instanceClass.Astral), nameof(instanceClass.Bravery), nameof(instanceClass.Erudition), nameof(instanceClass.Detection), nameof(instanceClass.Gold) ];
@@ -104,9 +107,9 @@ internal partial class CharacterGeneratorViewModel : CharacterViewModel
                     propertyInfo!.SetValue(instanceClass, result);
                 }
             }
-            Character = new Character(settingsService, NameGenerator.Get(selectedRace), selectedRace, instanceClass);
+            Character = new Character(settings, NameGenerator.Get(selectedRace), selectedRace, instanceClass);
             MarkDirty();
-            if (!settingsService.AutoIncreasePainTolerance)
+            if (!settings.AutoIncreasePainTolerance)
             {
                 var formula = Character?.BaseClass.GetPainToleranceModifierFormula();
                 for (var level = Level; level <= Level; level++)
@@ -117,7 +120,7 @@ internal partial class CharacterGeneratorViewModel : CharacterViewModel
                     Character.MaxPainTolerancePoints += result;
                 }
             }
-            if (settingsService.AutoDistributeQualificationPoints)
+            if (settings.AutoDistributeQualificationPoints)
             {
                 var qualifications = QualificationLearner.Get();
                 if (!Character.HasPsi() && Character.CanLearn(new PsiPyarron()))

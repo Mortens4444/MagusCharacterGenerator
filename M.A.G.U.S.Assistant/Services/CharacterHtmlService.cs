@@ -1,10 +1,8 @@
 ﻿using M.A.G.U.S.Assistant.Extensions;
-using M.A.G.U.S.GameSystem;
 using M.A.G.U.S.Interfaces;
 using Mtf.Extensions;
 using Mtf.LanguageService.MAUI;
 using System.Globalization;
-using System.Linq;
 using System.Text;
 
 namespace M.A.G.U.S.Assistant.Services;

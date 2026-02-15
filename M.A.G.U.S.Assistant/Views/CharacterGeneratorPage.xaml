@@ -33,7 +33,7 @@
             </HorizontalStackLayout>
 
             <HorizontalStackLayout Spacing="8" VerticalOptions="Center" HorizontalOptions="Center">
-                <Label Text="Class" VerticalOptions="Center"/>
+                <Label Text="Caste" VerticalOptions="Center"/>
                 <Picker ItemsSource="{Binding AvailableClasses}"
                         ItemDisplayBinding="{Binding Name, Converter={StaticResource TranslationConverter}}"
                         SelectedItem="{Binding SelectedClass}"

@@ -11,7 +11,7 @@ public interface IClass : IAttacker, IAbilities
 
     int Gold { get; }
 
-    int Level { get; }
+    int Level { get; set; }
 
     int CombatValueModifierPerLevel { get; }
 

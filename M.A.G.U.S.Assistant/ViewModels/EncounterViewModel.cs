@@ -118,8 +118,18 @@ internal partial class EncounterViewModel : CharacterListLoaderViewModel, IDispo
             return;
         }
 
+        if (Characters.Any(c => c.Id == SelectedCharacter.Id))
+        {
+            SelectedCharacter = null;
+            return;
+        }
+
         SelectedCharacter.LostConsciousness += LostConsciousnessHandler;
         SelectedCharacter.Died += DieHandler;
+        SelectedCharacter.ActualHealthPoints = SelectedCharacter.MaxHealthPoints;
+        SelectedCharacter.ActualPainTolerancePoints = SelectedCharacter.MaxPainTolerancePoints;
+        SelectedCharacter.ManaPoints = SelectedCharacter.MaxManaPoints;
+        SelectedCharacter.PsiPoints = SelectedCharacter.MaxPsiPoints;
 
         Characters.Add(SelectedCharacter);
         Assignments.Add(new AssignmentViewModel(settings, SelectedCharacter));
@@ -176,6 +186,7 @@ internal partial class EncounterViewModel : CharacterListLoaderViewModel, IDispo
         if (IsEncounterOver())
         {
             NewEncounter();
+            AddSingleCharacterToAssignments();
         }
         if (EncounterState == EncounterState.NotStarted)
         {

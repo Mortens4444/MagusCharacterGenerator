@@ -30,8 +30,6 @@ public partial class Character : IHaveImage
 
     public string Class => BaseClass.Name ?? String.Empty;
 
-    public int Level => BaseClass.Level;
-
     public MultiClassMode MultiClassMode => multiClassMode;
 
     public IRace Race

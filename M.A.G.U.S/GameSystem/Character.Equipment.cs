@@ -43,7 +43,7 @@ public partial class Character
 
     public bool HasItem<T>()
     {
-        return Equipment.Any(i => i is T);
+        return Equipment.OfType<T>().Any();
     }
 
     public void RemoveEquipment(Thing thing)

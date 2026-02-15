@@ -152,7 +152,7 @@
         </CollectionView>
 
         <Grid Grid.Row="4" ColumnDefinitions="*,*" ColumnSpacing="20">
-            <Button Text="Add Enemies" Grid.Column="1" Command="{Binding AddEnemiesCommand}" />
+            <Button Text="Assign" Grid.Column="1" Command="{Binding AddEnemiesCommand}" />
         </Grid>
     </Grid>
 </v:NotifierPage>
