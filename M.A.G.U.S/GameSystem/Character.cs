@@ -130,4 +130,13 @@ public partial class Character : Attacker, ICombatModifier, ILiving, IAbilities,
         SetWeapons();
         SetOriginalCombatValues();
     }
+
+    public void SetMaxValues()
+    {
+        ActualHealthPoints = MaxHealthPoints;
+        ActualPainTolerancePoints = MaxPainTolerancePoints;
+        ManaPoints = MaxManaPoints;
+        PsiPoints = MaxPsiPoints;
+    }
+
 }

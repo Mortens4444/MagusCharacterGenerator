@@ -9,22 +9,24 @@
                 xmlns:b="clr-namespace:M.A.G.U.S.Bestiary;assembly=M.A.G.U.S."
                 xmlns:gs="clr-namespace:M.A.G.U.S.GameSystem;assembly=M.A.G.U.S."
                 xmlns:conv="clr-namespace:Mtf.LanguageService.MAUI.Converters;assembly=Mtf.LanguageService.MAUI"
+                xmlns:c="clr-namespace:M.A.G.U.S.Assistant.Converters"
                 xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
                 x:Class="M.A.G.U.S.Assistant.Views.EncounterPage"
                 x:ClassModifier="internal"
                 x:DataType="vm:EncounterViewModel"
-                Title="Encounter">
+                Title="Clash">
     
     <v:NotifierPage.Resources>
         <ResourceDictionary>
+            <c:BoolToTextConverter x:Key="BoolToTextConverter" />
             <conv:TranslationConverter x:Key="TranslationConverter" />
         </ResourceDictionary>
     </v:NotifierPage.Resources>
 
-    <Grid ColumnDefinitions="*,*" RowDefinitions="Auto,Auto,Auto,Auto,*" Padding="12">
+    <Grid ColumnDefinitions="*,*" RowDefinitions="Auto,Auto,Auto,*" Padding="12">
 
         <!-- Characters -->
-        <VerticalStackLayout Spacing="8" Margin="0,0,0,15">
+        <VerticalStackLayout Spacing="8" Margin="0,0,0,15" IsVisible="{Binding ShowControls}">
             <Label Text="Characters" FontAttributes="Bold" FontSize="18" />
 
             <Picker ItemsSource="{Binding AvailableCharacters}"
@@ -36,7 +38,7 @@
         </VerticalStackLayout>
 
         <!-- Enemies -->
-        <VerticalStackLayout Grid.Column="1" Spacing="8" Margin="0,0,0,15">
+        <VerticalStackLayout Grid.Column="1" Spacing="8" Margin="0,0,0,15" IsVisible="{Binding ShowControls}">
             <Label Text="Enemies" FontAttributes="Bold" FontSize="18"/>
 
             <Grid ColumnDefinitions="*, Auto" ColumnSpacing="5">
@@ -55,8 +57,8 @@
         </VerticalStackLayout>
 
         <!-- Assignments -->
-        <VerticalStackLayout Grid.Row="1" Grid.ColumnSpan="2" Spacing="8" Margin="0,0,0,15">
-            <Label Text="Assignments" FontAttributes="Bold" FontSize="18" />
+        <VerticalStackLayout Grid.Row="1" Grid.ColumnSpan="2" Spacing="8" Margin="0,0,0,15" IsVisible="{Binding ShowControls}">
+            <Label Text="Pairing" FontAttributes="Bold" FontSize="18" />
 
             <CollectionView ItemsSource="{Binding Assignments}"
                             SelectedItem="{Binding SelectedAssignment}"
@@ -90,9 +92,12 @@
             </CollectionView>
         </VerticalStackLayout>
 
-        <!-- Run turn -->
-        <Button Grid.Row="2" Grid.ColumnSpan="2" FontAttributes="Bold"
-                Text="Start New Round" Command="{Binding RunTurnCommand}" />
+        <!-- Run turn + toggle -->
+        <HorizontalStackLayout Grid.Row="2" Grid.ColumnSpan="2" Spacing="8">
+            <Button Text="Start New Round" Command="{Binding RunTurnCommand}" FontAttributes="Bold" />
+            <Button Text="{Binding ShowControls, Converter={StaticResource BoolToTextConverter}, ConverterParameter='Hide pairing|Pairing'}"
+                    Command="{Binding ToggleShowControlsCommand}" />
+        </HorizontalStackLayout>
 
         <!-- Turns details -->
         <Grid Grid.Row="3" Grid.ColumnSpan="2" RowDefinitions="Auto, *">
@@ -107,9 +112,10 @@
                 </Grid>
             </Border>
 
-            <CollectionView Grid.Row="1" 
-                    ItemsSource="{Binding SelectedAssignment.TurnHistory}"
-                    MaximumHeightRequest="400">
+                            <!--MaximumHeightRequest="400"-->
+            <CollectionView Grid.Row="1"
+                            ItemsSource="{Binding SelectedTurnHistory}"
+                            x:Name="TurnHistoryView">
                 <CollectionView.ItemTemplate>
                     <DataTemplate x:DataType="vm:TurnViewModel">
                         <VerticalStackLayout Spacing="6">

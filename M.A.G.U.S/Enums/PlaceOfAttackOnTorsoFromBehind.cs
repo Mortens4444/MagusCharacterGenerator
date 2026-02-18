@@ -25,5 +25,5 @@ public enum PlaceOfAttackOnTorso
     [Description("Left side of abdomen")]
     LeftSideOfAbdomen = 1 << 8,
 
-    EveryWhere = RightCollarbone | LeftCollarbone | Sternum | LeftSideOfChest | RightSideOfChest | SolarPlexus | Groin | RightSideOfAbdomen | LeftSideOfAbdomen
+    Everywhere = RightCollarbone | LeftCollarbone | Sternum | LeftSideOfChest | RightSideOfChest | SolarPlexus | Groin | RightSideOfAbdomen | LeftSideOfAbdomen
 }

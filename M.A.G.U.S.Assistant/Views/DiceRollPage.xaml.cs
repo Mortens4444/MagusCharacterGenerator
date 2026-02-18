@@ -8,6 +8,7 @@ namespace M.A.G.U.S.Assistant.Views;
 
 internal partial class DiceRollPage : NotifierPage
 {
+    private bool firstRun = true;
     private DiceRollViewModel ViewModel => BindingContext as DiceRollViewModel;
 
     public DiceRollPage(DiceRollViewModel viewModel)
@@ -23,14 +24,18 @@ internal partial class DiceRollPage : NotifierPage
     protected override void OnAppearing()
     {
         base.OnAppearing();
-        Translator.Translate(this);
-        try
+        if (firstRun)
         {
-            ViewModel.ShakeService?.Start();
-        }
-        catch (Exception ex)
-        {
-            WeakReferenceMessenger.Default.Send(new ShowErrorMessage(ex));
+            firstRun = false;
+
+            try
+            {
+                ViewModel.ShakeService?.Start();
+            }
+            catch (Exception ex)
+            {
+                WeakReferenceMessenger.Default.Send(new ShowErrorMessage(ex));
+            }
         }
     }
 

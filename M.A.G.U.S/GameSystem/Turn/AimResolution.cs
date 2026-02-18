@@ -6,6 +6,8 @@ namespace M.A.G.U.S.GameSystem.Turn;
 
 public sealed class AimResolution : ResolutionBase
 {
+    public const int BaseAimDefense = 30;
+
     public AimResolution(InitiativeEntry initiative, int targetDistanceMeters, MovementType movement, WeatherCondition weather)
     {
         RollValue = initiative.Attacker.Source.RollAttack();
@@ -18,9 +20,9 @@ public sealed class AimResolution : ResolutionBase
         var defenseValue = sizeModifier + targetDistanceMeters + weatherDefense;
         
         defenseValue += initiative.Target.Source is Character character && character.SpecialQualifications.GetSpeciality<SlanDodgeAgainstRangedAttacks>() != null
-            ? initiative.Target.Source.DefenseValue : 30 + movementDefense;
+            ? initiative.Target.Source.DefenseValue : BaseAimDefense + movementDefense;
 
         IsSuccessful = aimTotal > defenseValue;
-        IsHpDamage = aimTotal > defenseValue + 50;
+        IsHpDamage = aimTotal > defenseValue + OverHitValue;
     }
 }

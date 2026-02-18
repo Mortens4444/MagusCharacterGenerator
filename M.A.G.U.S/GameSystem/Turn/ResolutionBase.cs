@@ -4,6 +4,8 @@ namespace M.A.G.U.S.GameSystem.Turn;
 
 public abstract class ResolutionBase
 {
+    public const int OverHitValue = 50;
+
     protected int? damage;
 
     public required Attack Attack { get; init; }

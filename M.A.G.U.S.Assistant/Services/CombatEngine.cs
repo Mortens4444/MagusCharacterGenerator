@@ -4,6 +4,7 @@ using M.A.G.U.S.GameSystem;
 using M.A.G.U.S.GameSystem.CombatModifiers;
 using M.A.G.U.S.GameSystem.Turn;
 using M.A.G.U.S.Utils;
+using Mtf.Extensions;
 
 namespace M.A.G.U.S.Assistant.Services;
 
@@ -40,7 +41,8 @@ internal class CombatEngine
             initiative.Attacker.AddTemporaryModifier(ambushMod);
         }
 
-        var (locationDescription, subLocation) = HitLocationSelector.GetLocation(attackDirection);
+        var (hitLocation, subLocation) = HitLocationSelector.GetLocation(attackDirection);
+        var locationDescription = hitLocation.GetDescription();
         if (initiative.SelectedAttack == null)
         {
             var speed = attacker.GetMaxMovementSpeed();

@@ -10,5 +10,5 @@ public enum PlaceOfAttackOnLeg
     Shin = 1 << 3,
     Foot = 1 << 4,
 
-    EveryWhere = Thigh | Knee | Shin | Ankle | Foot
+    Everywhere = Thigh | Knee | Shin | Ankle | Foot
 }

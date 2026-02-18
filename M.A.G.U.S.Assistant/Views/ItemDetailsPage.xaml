@@ -60,13 +60,13 @@
                         <Label Grid.Row="2" Grid.Column="0" Text="Description" FontAttributes="Bold"
                                IsVisible="{Binding Description, Converter={StaticResource NotNullOrEmpty}}" />
 
-                        <Label Grid.Row="3" Grid.Column="0" Text="{Binding Description}" LineBreakMode="WordWrap"
+                        <Label Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" Text="{Binding Description}" LineBreakMode="WordWrap"
                                IsVisible="{Binding Description, Converter={StaticResource NotNullOrEmpty}}" />
                     </Grid>
 
                     <BoxView Grid.Row="1" HeightRequest="1" BackgroundColor="#404040" Margin="0,8" />
                     
-                    <Grid ColumnDefinitions="*,*,*,*,*" RowDefinitions="Auto" ColumnSpacing="10" IsVisible="{Binding IsWeapon}">
+                    <Grid ColumnDefinitions="*,*,Auto,*,*" RowDefinitions="Auto" ColumnSpacing="10" IsVisible="{Binding IsWeapon}">
                         <VerticalStackLayout Grid.Column="0">
                             <Label Text="Attacks per round" FontSize="Caption" />
                             <Label Text="{Binding Weapon.AttacksPerRound}" FontAttributes="Bold" />
@@ -134,7 +134,7 @@
                             <Label Text="{Binding Shield.MovementObstructiveFactor}" FontAttributes="Bold" />
                         </VerticalStackLayout>
                     </Grid>
-                    <Grid ColumnDefinitions="*,*,*,*" RowDefinitions="Auto" ColumnSpacing="10" IsVisible="{Binding IsArmor}">
+                    <Grid ColumnDefinitions="*,*,6*,*" RowDefinitions="Auto" ColumnSpacing="10" IsVisible="{Binding IsArmor}">
                         <VerticalStackLayout Grid.Column="0">
                             <Label Text="AC" FontSize="Caption" />
                             <Label Text="{Binding Armor.ArmorClass}" FontAttributes="Bold" />

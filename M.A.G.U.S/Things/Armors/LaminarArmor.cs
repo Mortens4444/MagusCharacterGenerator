@@ -18,7 +18,7 @@ public abstract class LaminarArmor : Armor
     public override PlaceOfAttackOnLeg ProtectedLegParts =>
         PlaceOfAttackOnLeg.Thigh;
 
-    public override PlaceOfAttackOnTorso ProtectedTorsoFrontParts => PlaceOfAttackOnTorso.EveryWhere;
+    public override PlaceOfAttackOnTorso ProtectedTorsoFrontParts => PlaceOfAttackOnTorso.Everywhere;
 
-    public override PlaceOfAttackOnTorsoFromBehind ProtectedTorsoBackParts => PlaceOfAttackOnTorsoFromBehind.EveryWhere;
+    public override PlaceOfAttackOnTorsoFromBehind ProtectedTorsoBackParts => PlaceOfAttackOnTorsoFromBehind.Everywhere;
 }

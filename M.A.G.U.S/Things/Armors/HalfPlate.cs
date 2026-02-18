@@ -8,7 +8,7 @@ public abstract class HalfPlate : Armor
         PlaceOfAttack.Torso | PlaceOfAttack.Head | PlaceOfAttack.WeaponWieldingArm |
         PlaceOfAttack.NonWeaponWieldingArm | PlaceOfAttack.LeftLeg | PlaceOfAttack.RightLeg;
 
-    public override PlaceOfAttackOnArm ProtectedArmParts => PlaceOfAttackOnArm.EveryWhere;
+    public override PlaceOfAttackOnArm ProtectedArmParts => PlaceOfAttackOnArm.Everywhere;
 
     public override PlaceOfAttackOnHead ProtectedHeadParts => PlaceOfAttackOnHead.Skull | PlaceOfAttackOnHead.Forehead | PlaceOfAttackOnHead.Temple | PlaceOfAttackOnHead.NeckOrNape;
 

@@ -13,6 +13,7 @@
     <v:NotifierPage.Resources>
         <ResourceDictionary>
             <c:TranslationConverter x:Key="TranslationConverter" />
+            <c:EnumDescriptionTranslationConverter x:Key="EnumDescriptionTranslationConverter" />
             <conv:StringNotNullOrEmptyConverter x:Key="NotNullOrEmpty" />
         </ResourceDictionary>
     </v:NotifierPage.Resources>
@@ -21,7 +22,7 @@
         <StackLayout Padding="12" Spacing="12">
 
             <Border Padding="12" Stroke="#E6E6E6">
-                <Grid ColumnDefinitions="*,Auto" RowDefinitions="Auto,Auto,Auto,Auto" ColumnSpacing="16" RowSpacing="8">
+                <Grid ColumnDefinitions="*,Auto" RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto" ColumnSpacing="16" RowSpacing="8">
 
                     <VerticalStackLayout Grid.Row="0" Grid.Column="0" Spacing="6">
                         <Label Text="{Binding Category}" FontAttributes="Bold" />
@@ -43,11 +44,42 @@
 
                     <Picker Title="Level" Grid.Row="1" ItemsSource="{Binding AvailableLevels}" SelectedItem="{Binding SelectedLevel, Mode=TwoWay}"
                             ItemDisplayBinding="{Binding ., Converter={StaticResource TranslationConverter}}" WidthRequest="220" HorizontalOptions="Start" />
+
+                    <!-- Weapon selector (csak ha WeaponQualification) -->
+                    <StackLayout IsVisible="{Binding IsWeaponQualification}" Grid.Row="2" HorizontalOptions="Start">
+                        <Label Text="Weapon" FontAttributes="Bold" />
+                        <Picker ItemsSource="{Binding AvailableWeapons}"
+                                SelectedItem="{Binding SelectedWeapon}"
+                                ItemDisplayBinding="{Binding Name, Converter={StaticResource TranslationConverter}}"
+                                Title="Select weapon" WidthRequest="220" />
+                    </StackLayout>
+
+                    <!-- Language (common languages) -->
+                    <StackLayout IsVisible="{Binding IsLanguageLore}" Grid.Row="3" HorizontalOptions="Start" Spacing="6">
+                        <Label Text="Language" FontAttributes="Bold" />
+                        <Picker ItemsSource="{Binding AvailableLanguages}"
+                                SelectedItem="{Binding SelectedLanguage}"
+                                ItemDisplayBinding="{Binding ., Converter={StaticResource EnumDescriptionTranslationConverter}}"
+                                Title="Select language" WidthRequest="220" />
+                        <Label Text="Language level (1-5)" />
+                        <Picker ItemsSource="{Binding AvailableLanguageLevels}"
+                                SelectedItem="{Binding SelectedLanguageLevel}"
+                                Title="Level" WidthRequest="120" />
+                    </StackLayout>
+
+                    <!-- Ancient tongue (different enum) -->
+                    <StackLayout IsVisible="{Binding IsAncientTongueLore}" Grid.Row="4" HorizontalOptions="Start" Spacing="6">
+                        <Label Text="Ancient language" FontAttributes="Bold" />
+                        <Picker ItemsSource="{Binding AvailableAntientLanguages}"
+                                SelectedItem="{Binding SelectedAntientLanguage}"
+                                ItemDisplayBinding="{Binding ., Converter={StaticResource EnumDescriptionTranslationConverter}}"
+                                Title="Select ancient tongue" WidthRequest="220" />
+                    </StackLayout>
                     
-                    <Label Grid.Row="2" Grid.Column="0" Text="{Binding Description}" LineBreakMode="WordWrap"
+                    <Label Grid.Row="5" Grid.Column="0" Text="{Binding Description}" LineBreakMode="WordWrap"
                            IsVisible="{Binding Description, Converter={StaticResource NotNullOrEmpty}}" />
 
-                    <HorizontalStackLayout Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" HorizontalOptions="Center" Spacing="12" Margin="0,8,0,0">
+                    <HorizontalStackLayout Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="2" HorizontalOptions="Center" Spacing="12" Margin="0,8,0,0">
                         <Button Text="Acquisition" Command="{Binding LearnCommand}" CornerRadius="10">
                             <Button.Triggers>
                                 <DataTrigger TargetType="Button" Binding="{Binding CanLearn}" Value="False">

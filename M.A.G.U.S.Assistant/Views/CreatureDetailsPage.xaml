@@ -15,6 +15,7 @@
         <ResourceDictionary>
             <conv:TranslationConverter x:Key="TranslationConverter" />
             <conv:EnumDescriptionTranslationConverter x:Key="EnumDescriptionTranslationConverter" />
+            <converters:FractionConverter x:Key="FractionConverter" />
             <converters:MinMaxIntelligenceConverter x:Key="MinMaxIntelligenceConverter" />
             <converters:SpeedConverter x:Key="SpeedConverter" />
         </ResourceDictionary>
@@ -32,15 +33,43 @@
             <Button Text="🔈" BackgroundColor="Transparent" Command="{Binding PlaySoundCommand}" IsVisible="{Binding IsSoundAvailable}" />
             
             <!-- Top summary -->
-            <Border Padding="10">
+            <Border Padding="5">
                 <Grid ColumnDefinitions="Auto, *" RowDefinitions="Auto,Auto" ColumnSpacing="12" RowSpacing="6">
                     <Label Text="Number appearing" FontAttributes="Bold" Grid.Row="0" Grid.Column="0" />
-                    <Label Text="{Binding NumberAppearing}" Grid.Row="0" Grid.Column="1" />
+                   <Label Text="{Binding NumberAppearing}" Grid.Row="0" Grid.Column="1" />
                 </Grid>
+            </Border>
+            
+            <!-- Damage area -->
+            <Border Padding="5">
+                <VerticalStackLayout Spacing="8">
+                    <Grid ColumnDefinitions="4*,3*,3*" RowDefinitions="Auto, Auto, Auto">
+                        
+                        <Label Text="Attack mode" FontAttributes="Bold" VerticalOptions="Center" />
+                        <Picker ItemsSource="{Binding AttackModes}"
+                                ItemDisplayBinding="{Binding Name, Converter={StaticResource TranslationConverter}}"
+                                SelectedItem="{Binding SelectedAttackMode}"
+                                Grid.Column="1"
+                                Grid.ColumnSpan="2"/>
+
+                        <Label Text="Attack direction" FontAttributes="Bold" VerticalOptions="Center" Grid.Row="1" Grid.Column="0"/>
+                        <Picker ItemsSource="{Binding AttackDirections}"
+                                SelectedItem="{Binding SelectedAttackDirection}"
+                                ItemDisplayBinding="{Binding ., Converter={StaticResource EnumDescriptionTranslationConverter}}"
+                                Grid.Row="1"
+                                Grid.Column="1"
+                                Grid.ColumnSpan="2" />
+
+                        <Button Grid.Row="2" Grid.ColumnSpan="3" Text="Attack" Command="{Binding RollRoundCommand}" Margin="0,0,5,0" />
+                    </Grid>
+
+                    <Label Text="{Binding PlaceOfAttack}" Grid.Row="1" Grid.Column="1" />
+                    <Label Text="{Binding LastAction}" FontSize="12" />
+                </VerticalStackLayout>
             </Border>
 
             <!-- Properties two-column -->
-            <Border Padding="8">
+            <Border Padding="5">
                 <Grid ColumnDefinitions="2*,3*" RowSpacing="6" ColumnSpacing="12" RowDefinitions="*,*,*,*,*,*,*,*,*,*,*,*,*,*">
                     <!-- Static list of properties you mentioned on the screenshot -->
                     <Label Text="Occurrence" Grid.Row="0" Grid.Column="0" FontAttributes="Bold" />
@@ -56,7 +85,7 @@
                             </MultiBinding>
                         </Label.Text>
                     </Label>
-                    
+
                     <Label Text="Size" Grid.Row="2" Grid.Column="0" FontAttributes="Bold" />
                     <Label Text="{Binding Size, Converter={StaticResource EnumDescriptionTranslationConverter}}" Grid.Row="2" Grid.Column="1" />
 
@@ -92,7 +121,7 @@
                             </CollectionView.ItemTemplate>
                         </CollectionView>
                     </StackLayout>
-                    
+
                     <Label Text="Defense value" Grid.Row="6" Grid.Column="0" FontAttributes="Bold" />
                     <Label Text="{Binding DefenseValue}" Grid.Row="6" Grid.Column="1" />
 
@@ -115,40 +144,8 @@
                     <Label Text="{Binding ExperiencePoints}" Grid.Row="12" Grid.Column="1" />
 
                     <Label Text="Attacks per round" Grid.Row="13" Grid.Column="0" FontAttributes="Bold" />
-                    <Label Text="{Binding AttacksPerRound}" Grid.Row="13" Grid.Column="1" />
+                    <Label Text="{Binding AttacksPerRound, Converter={StaticResource FractionConverter}}" Grid.Row="13" Grid.Column="1" />
                 </Grid>
-            </Border>
-
-            <!-- Damage area -->
-            <Border Padding="10">
-                <StackLayout Spacing="8">
-                    <Grid ColumnDefinitions="4*,3*,3*" RowDefinitions="Auto, Auto, Auto">
-                        <Label Text="Attack mode" FontAttributes="Bold" VerticalOptions="Center" />
-                        <Picker ItemsSource="{Binding AttackModes}"
-                                ItemDisplayBinding="{Binding Name, Converter={StaticResource TranslationConverter}}"
-                                SelectedItem="{Binding SelectedAttackMode}"
-                                Grid.Column="1"
-                                Grid.ColumnSpan="2"/>
-
-                        <Label Text="Attack direction" FontAttributes="Bold" VerticalOptions="Center" Grid.Row="1" Grid.Column="0"/>
-                        <Picker ItemsSource="{Binding AttackDirections}"
-                                SelectedItem="{Binding SelectedAttackDirection}"
-                                ItemDisplayBinding="{Binding ., Converter={StaticResource EnumDescriptionTranslationConverter}}"
-                                Grid.Row="1"
-                                Grid.Column="1"
-                                Grid.ColumnSpan="2" />
-
-                        <Button Grid.Row="2" Text="Initiate" Command="{Binding InitiateCommand}" Margin="0,0,5,0" />
-                        <Button Grid.Row="2" Grid.Column="1" Text="Attack" Command="{Binding AttackCommand}" />
-                        <Button Grid.Row="2" Grid.Column="2" Text="Roll Damage" Command="{Binding RollDamageCommand}" Margin="5,0,0,0" />
-                    </Grid>
-
-                    <Label Text="Place of attack" FontAttributes="Bold" Grid.Row="1" Grid.Column="0" />
-                    <Label Text="{Binding PlaceOfAttack}" Grid.Row="1" Grid.Column="1" />
-
-                    <Label Text="{Binding LastActionName}" FontSize="16" FontAttributes="Bold" />
-                    <Label Text="{Binding LastAction}" FontSize="12" Opacity="0.8" />
-                </StackLayout>
             </Border>
         </StackLayout>
     </ScrollView>

@@ -21,5 +21,5 @@ public enum PlaceOfAttackOnTorsoFromBehind
     Buttocks = 1 << 6,
     Spine = 1 << 7,
 
-    EveryWhere = RightShoulderBlade | LeftShoulderBlade | RightSideOfBack | LeftSideOfBack | RightSideOfWaist | LeftSideOfWaist | Buttocks | Spine
+    Everywhere = RightShoulderBlade | LeftShoulderBlade | RightSideOfBack | LeftSideOfBack | RightSideOfWaist | LeftSideOfWaist | Buttocks | Spine
 }

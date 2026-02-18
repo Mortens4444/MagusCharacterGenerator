@@ -10,7 +10,6 @@ using M.A.G.U.S.GameSystem.Magic;
 using M.A.G.U.S.Interfaces;
 using M.A.G.U.S.Models;
 using M.A.G.U.S.Qualifications;
-using M.A.G.U.S.Qualifications.Magic;
 using M.A.G.U.S.Things;
 using M.A.G.U.S.Things.Armors;
 using M.A.G.U.S.Things.Weapons;
@@ -160,6 +159,7 @@ internal partial class CharacterViewModel(IPrintService printService, ISoundPlay
             OnPropertyChanged(nameof(Class));
             OnPropertyChanged(nameof(Level));
             OnPropertyChanged(nameof(ExperiencePoints));
+            OnPropertyChanged(nameof(CanLevelUp));
             OnPropertyChanged(nameof(PlayerCharacter));
             OnPropertyChanged(nameof(Alignment));
 
@@ -239,8 +239,14 @@ internal partial class CharacterViewModel(IPrintService printService, ISoundPlay
                 LevelUpCommand.NotifyCanExecuteChanged();
                 break;
 
+            case nameof(Character.PendingLevelUps):
+                OnPropertyChanged(nameof(CanLevelUp));
+                LevelUpCommand.NotifyCanExecuteChanged();
+                break;
+
             case nameof(Character.Level):
                 OnPropertyChanged(nameof(Level));
+                OnPropertyChanged(nameof(CanLevelUp));
                 LevelUpCommand.NotifyCanExecuteChanged();
                 break;
 
@@ -403,7 +409,7 @@ internal partial class CharacterViewModel(IPrintService printService, ISoundPlay
     public int CombatValueModifierPerLevel => Character?.CombatValueModifierPerLevel ?? 0;
     public bool CanAllocateCombatModifier => Character?.CanAllocateCombatModifier ?? false;
 
-    public bool CanLevelUp => Character?.PendingLevelUps > 0;
+    public bool CanLevelUp => Character?.CanUpgrade ?? false; //Character?.PendingLevelUps > 0;
 
     public int MinInitiateValue => Character?.MinInitiateValue ?? 0;
     public int MaxInitiateValue => Character?.MaxInitiateValue ?? 0;
@@ -596,16 +602,23 @@ internal partial class CharacterViewModel(IPrintService printService, ISoundPlay
             if (Character.Sorcery != null)
             {
                 var manaFormula = Character.MaxManaPointsPerLevelFormula;
-                if (settings.AutoIncreaseManaPoints)
+                if (String.IsNullOrEmpty(manaFormula?.Formula))
                 {
-                    var magic = Character.BaseClass.SpecialQualifications.GetSpeciality<Sorcery>();
-                    manaIncrease = magic != null ? magic.GetManaPointsModifier() : 0;
+                    manaIncrease = Character.MaxManaPointsPerLevel;
                 }
                 else
                 {
-                    var page = new RollFormulaPage(soundPlayer, shakeService, manaFormula, $"{Lng.Elem("Level up")} - {Lng.Elem("PTP")} ({Character.Level + 1}. {Lng.Elem("Level")})");
-                    await ShellNavigationService.ShowPageAsync(page).ConfigureAwait(true);
-                    manaIncrease = await page.ResultTask.ConfigureAwait(true);
+                    if (settings.AutoIncreaseManaPoints)
+                    {
+                        var magic = Character.BaseClass.SpecialQualifications.GetSpeciality<Sorcery>();
+                        manaIncrease = magic != null ? magic.GetManaPointsModifier() : 0;
+                    }
+                    else
+                    {
+                        var page = new RollFormulaPage(soundPlayer, shakeService, manaFormula, $"{Lng.Elem("Level up")} - {Lng.Elem("Mana-points")} ({Character.Level + 1}. {Lng.Elem("Level")})");
+                        await ShellNavigationService.ShowPageAsync(page).ConfigureAwait(true);
+                        manaIncrease = await page.ResultTask.ConfigureAwait(true);
+                    }
                 }
             }
 

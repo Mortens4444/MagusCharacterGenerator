@@ -18,6 +18,6 @@ internal static class DiceThrowFormulaExtensions
             Modifier = formula.Modifier,
             HasSpecialTraining = formula.HasSpecialTraining
         };
-        return diceStat.DisplayFormula;
+        return String.IsNullOrEmpty(formula.Formula) ? diceStat.Modifier.ToString() : diceStat.DisplayFormula;
     }
 }

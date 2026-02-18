@@ -6,10 +6,11 @@ namespace M.A.G.U.S.Assistant.Views;
 
 internal partial class MainPage : NotifierPage
 {
+    private bool firstRun = true;
     private readonly SettingsService settingsService;
     private readonly Dictionary<object, string>? originalTextElements;
 
-    public MainPage(SettingsService settingsService)
+    public MainPage(SettingsService settingsService) : base(false)
     {
         this.settingsService = settingsService;
         InitializeComponent();
@@ -20,12 +21,17 @@ internal partial class MainPage : NotifierPage
     {
         base.OnAppearing();
 
-        if (originalTextElements != null)
+        if (firstRun)
         {
-            Translator.SetOriginalTexts(originalTextElements);
+            firstRun = false;
+
+            if (originalTextElements != null)
+            {
+                Translator.SetOriginalTexts(originalTextElements);
+            }
+            Lng.DefaultLanguage = settingsService.GetCurrentLanguageAsync().GetAwaiter().GetResult();
+            _ = PreloadService.Instance.InitializeAsync();
+            _ = Translator.Translate(this);
         }
-        Lng.DefaultLanguage = settingsService.GetCurrentLanguageAsync().GetAwaiter().GetResult();
-        _ = PreloadService.Instance.InitializeAsync();
-        _ = Translator.Translate(this);
     }
 }

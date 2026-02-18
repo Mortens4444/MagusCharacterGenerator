@@ -13,6 +13,7 @@ namespace M.A.G.U.S.Assistant.Views;
 internal partial class RollFormulaPage : NotifierPage
 {
     private bool isClosing;
+    private bool firstRun = true;
     private DateTime lastShake = DateTime.MinValue;
     private const double ShakeThresholdG = 2.2;
     private const int ShakeDebounceMs = 800;
@@ -54,13 +55,19 @@ internal partial class RollFormulaPage : NotifierPage
     protected override void OnDisappearing()
     {
         base.OnDisappearing();
-        try
+
+        if (firstRun)
         {
-            ViewModel.ShakeService?.Stop();
-        }
-        catch (Exception ex)
-        {
-            WeakReferenceMessenger.Default.Send(new ShowErrorMessage(ex));
+            firstRun = false;
+
+            try
+            {
+                ViewModel.ShakeService?.Stop();
+            }
+            catch (Exception ex)
+            {
+                WeakReferenceMessenger.Default.Send(new ShowErrorMessage(ex));
+            }
         }
     }
 

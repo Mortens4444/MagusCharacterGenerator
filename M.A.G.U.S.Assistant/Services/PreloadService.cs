@@ -9,6 +9,7 @@ using M.A.G.U.S.Races;
 using M.A.G.U.S.Things;
 using M.A.G.U.S.Things.Gemstones;
 using M.A.G.U.S.Things.MagicalObjects;
+using M.A.G.U.S.Things.Weapons;
 using M.A.G.U.S.Utils;
 using Mtf.Extensions;
 using Mtf.LanguageService.MAUI;
@@ -29,6 +30,7 @@ internal sealed class PreloadService
     public IReadOnlyList<Race> Races { get; private set; } = [];
     public IReadOnlyList<Creature> Creatures { get; private set; } = [];
     public IReadOnlyList<Thing> Things { get; private set; } = [];
+    public IReadOnlyList<Weapon> Weapons { get; private set; } = [];
     public IReadOnlyList<Gemstone> Gemstones { get; private set; } = [];
     public IReadOnlyList<Rune> Runes { get; private set; } = [];
     public IReadOnlyList<Poison> Poisons { get; private set; } = [];
@@ -141,6 +143,10 @@ internal sealed class PreloadService
                     .ToArray();
 
                 Things = items;
+
+                Weapons = [.. items
+                    .OfType<Weapon>()
+                    .OrderBy(w => Lng.Elem(w.Name))];
             }
             catch (Exception ex)
             {

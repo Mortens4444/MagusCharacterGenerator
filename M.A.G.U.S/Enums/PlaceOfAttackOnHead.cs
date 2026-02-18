@@ -13,5 +13,5 @@ public enum PlaceOfAttackOnHead
     [Description("Neck / nape")]
     NeckOrNape = 1 << 4,
     
-    EveryWhere = Skull | Forehead | Temple | NeckOrNape | Face
+    Everywhere = Skull | Forehead | Temple | NeckOrNape | Face
 }

@@ -19,5 +19,5 @@ public enum PlaceOfAttack
     [Description("Torso")]
     Torso = 1 << 5,
 
-    EveryWhere = WeaponWieldingArm | NonWeaponWieldingArm | RightLeg | LeftLeg | Head | Torso
+    Everywhere = WeaponWieldingArm | NonWeaponWieldingArm | RightLeg | LeftLeg | Head | Torso
 }

@@ -34,7 +34,7 @@
             <mc:MenuItem ImageName="dice_roll" LabelText="Dice roll" PageType="{x:Type mv:DiceRollPage}" />
             <mc:MenuItem ImageName="races" LabelText="Races" PageType="{x:Type mv:RacesPage}" />
             <mc:MenuItem ImageName="character_list" LabelText="Characters" PageType="{x:Type mv:CharactersPage}" />
-            <mc:MenuItem ImageName="encounter" LabelText="Encounter" PageType="{x:Type mv:EncounterPage}" />
+            <mc:MenuItem ImageName="encounter" LabelText="Clash" PageType="{x:Type mv:EncounterPage}" />
             <mc:MenuItem ImageName="bestiary" LabelText="Bestiary" PageType="{x:Type mv:BestiaryPage}" />
             <mc:MenuItem ImageName="sounds" LabelText="Sounds" PageType="{x:Type mv:SoundPage}" />
             <mc:MenuItem ImageName="paint" LabelText="Paint" PageType="{x:Type mv:PaintWizardPage}" />

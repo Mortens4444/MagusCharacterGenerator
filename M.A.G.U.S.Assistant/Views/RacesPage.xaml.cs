@@ -14,10 +14,7 @@ internal partial class RacesPage : NotifierPage
     protected override void OnAppearing()
     {
         base.OnAppearing();
-        var vm = BindingContext as RacesViewModel;
-        if (vm.SelectedRace == null)
-        {
-            vm.SelectedRace = vm.FilteredRaces.First();
-        }
+        var vm = BindingContext as RacesViewModel ?? throw new ArgumentNullException(nameof(BindingContext));
+        vm.SelectedRace ??= vm.FilteredRaces.First();
     }
 }

@@ -8,11 +8,10 @@ public static class HitLocationSelector
 {
     private static readonly DiceThrow diceThrow = new();
 
-    public static (string, string) GetLocation(AttackDirection attackDirection)
+    public static (PlaceOfAttack, string) GetLocation(AttackDirection attackDirection)
     {
         var hitLocation = Get();
         var subLocation = String.Empty;
-        var locationDescription = hitLocation.GetDescription();
 
         switch (hitLocation)
         {
@@ -54,7 +53,7 @@ public static class HitLocationSelector
                 throw new NotImplementedException();
         }
 
-        return (locationDescription, subLocation);
+        return (hitLocation, subLocation);
     }
 
     private static PlaceOfAttack Get()

@@ -16,9 +16,9 @@ public abstract class Armor : Thing
 
     public virtual PlaceOfAttackOnHead ProtectedHeadParts => PlaceOfAttackOnHead.None;
 
-    public virtual PlaceOfAttackOnTorso ProtectedTorsoFrontParts => PlaceOfAttackOnTorso.EveryWhere;
+    public virtual PlaceOfAttackOnTorso ProtectedTorsoFrontParts => PlaceOfAttackOnTorso.Everywhere;
 
-    public virtual PlaceOfAttackOnTorsoFromBehind ProtectedTorsoBackParts => PlaceOfAttackOnTorsoFromBehind.EveryWhere;
+    public virtual PlaceOfAttackOnTorsoFromBehind ProtectedTorsoBackParts => PlaceOfAttackOnTorsoFromBehind.Everywhere;
 
     public void DecreaseArmorClass()
     {

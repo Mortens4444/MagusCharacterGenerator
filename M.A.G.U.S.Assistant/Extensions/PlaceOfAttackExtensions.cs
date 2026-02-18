@@ -14,6 +14,11 @@ internal static class PlaceOfAttackExtensions
             return String.Empty;
         }
 
+        if (value == PlaceOfAttack.Everywhere)
+        {
+            return Lng.Elem(PlaceOfAttack.Everywhere.GetDescription());
+        }
+
         var parts = Enum.GetValues<PlaceOfAttack>()
             .Where(v => v != PlaceOfAttack.None && value.HasFlag(v))
             .Select(v => Lng.Elem(v.GetDescription()))

@@ -1,17 +1,14 @@
 ﻿using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.Messaging;
-using M.A.G.U.S.Assistant.Extensions;
 using M.A.G.U.S.Assistant.Interfaces;
 using M.A.G.U.S.Assistant.Models;
 using M.A.G.U.S.Assistant.Services;
 using M.A.G.U.S.Assistant.Views;
 using M.A.G.U.S.GameSystem;
 using M.A.G.U.S.GameSystem.Attributes;
-using M.A.G.U.S.GameSystem.Magic;
 using M.A.G.U.S.GameSystem.Qualifications;
 using M.A.G.U.S.Interfaces;
 using M.A.G.U.S.Qualifications;
-using M.A.G.U.S.Qualifications.Magic;
 using M.A.G.U.S.Qualifications.Scientific.Psi;
 using M.A.G.U.S.Races;
 using M.A.G.U.S.Utils;

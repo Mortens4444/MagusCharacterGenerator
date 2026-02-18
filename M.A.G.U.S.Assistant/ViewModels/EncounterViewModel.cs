@@ -10,6 +10,7 @@ using M.A.G.U.S.Interfaces;
 using Mtf.LanguageService.MAUI;
 using Mtf.Maui.Controls.Messages;
 using System.Collections.ObjectModel;
+using System.Collections.Specialized;
 using System.Globalization;
 
 namespace M.A.G.U.S.Assistant.ViewModels;
@@ -20,11 +21,14 @@ internal partial class EncounterViewModel : CharacterListLoaderViewModel, IDispo
     private Attacker? selectedEnemy;
     private AssignmentViewModel? selectedAssignment;
     private readonly ISettings settings;
-    private readonly CombatEngine combatEngine;
+    private bool showControls = true;
+    private bool isRunningTurns;
+    private AssignmentViewModel? previousSelectedAssignment;
 
-    public EncounterViewModel(ISettings settings, CharacterService characterService, CombatEngine combatEngine) : base(characterService)
+    public ObservableCollection<TurnViewModel> SelectedTurnHistory { get; } = [];
+
+    public EncounterViewModel(ISettings settings, CharacterService characterService) : base(characterService)
     {
-        this.combatEngine = combatEngine;
         this.settings = settings;
     }
 
@@ -32,6 +36,29 @@ internal partial class EncounterViewModel : CharacterListLoaderViewModel, IDispo
     public ObservableCollection<Attacker> Enemies { get; } = [];
     public ObservableCollection<Attacker> AvailableEnemies { get; } = [];
     public ObservableCollection<AssignmentViewModel> Assignments { get; } = [];
+    
+    public ISettings Settings
+    {
+        get => settings;
+    }
+
+    public bool ShowControls
+    {
+        get => showControls;
+        set => SetProperty(ref showControls, value);
+    }
+
+    public bool IsRunningTurns
+    {
+        get => isRunningTurns;
+        set
+        {
+            if (SetProperty(ref isRunningTurns, value))
+            {
+                RunTurnCommand.NotifyCanExecuteChanged();
+            }
+        }
+    }
 
     public Character? SelectedCharacter
     {
@@ -64,6 +91,22 @@ internal partial class EncounterViewModel : CharacterListLoaderViewModel, IDispo
         {
             if (SetProperty(ref selectedAssignment, value))
             {
+                if (previousSelectedAssignment != null)
+                {
+                    if (previousSelectedAssignment.TurnHistory is INotifyCollectionChanged oldColl)
+                    {
+                        oldColl.CollectionChanged -= TurnHistory_CollectionChanged;
+                    }
+                }
+
+                previousSelectedAssignment = selectedAssignment;
+                RebuildSelectedTurnHistory();
+
+                if (selectedAssignment?.TurnHistory is INotifyCollectionChanged coll)
+                {
+                    coll.CollectionChanged += TurnHistory_CollectionChanged;
+                }
+
                 AddEnemyCommand.NotifyCanExecuteChanged();
             }
         }
@@ -101,6 +144,7 @@ internal partial class EncounterViewModel : CharacterListLoaderViewModel, IDispo
                 {
                     SelectedCharacter = AvailableCharacters[0];
                     AddCharacter();
+                    PickRandomEnemy();
                 }
             }
             catch (Exception ex)
@@ -108,6 +152,12 @@ internal partial class EncounterViewModel : CharacterListLoaderViewModel, IDispo
                 WeakReferenceMessenger.Default.Send(new ShowErrorMessage(ex));
             }
         });
+    }
+
+    [RelayCommand]
+    private void ToggleShowControls()
+    {
+        ShowControls = !ShowControls;
     }
 
     [RelayCommand(CanExecute = nameof(CanAddCharacter))]
@@ -126,10 +176,7 @@ internal partial class EncounterViewModel : CharacterListLoaderViewModel, IDispo
 
         SelectedCharacter.LostConsciousness += LostConsciousnessHandler;
         SelectedCharacter.Died += DieHandler;
-        SelectedCharacter.ActualHealthPoints = SelectedCharacter.MaxHealthPoints;
-        SelectedCharacter.ActualPainTolerancePoints = SelectedCharacter.MaxPainTolerancePoints;
-        SelectedCharacter.ManaPoints = SelectedCharacter.MaxManaPoints;
-        SelectedCharacter.PsiPoints = SelectedCharacter.MaxPsiPoints;
+        SelectedCharacter.SetMaxValues();
 
         Characters.Add(SelectedCharacter);
         Assignments.Add(new AssignmentViewModel(settings, SelectedCharacter));
@@ -181,23 +228,91 @@ internal partial class EncounterViewModel : CharacterListLoaderViewModel, IDispo
     }
 
     [RelayCommand(CanExecute = nameof(CanRunTurn))]
-    private void RunTurn()
+    private async Task RunTurnAsync()
     {
+        var hasEnemies = Assignments.Any(a => a.Enemies?.Count > 0);
+        if (!hasEnemies && SelectedEnemy is Creature autoCreature)
+        {
+            var setupVm = new EnemySetupViewModel(autoCreature);
+            var configs = setupVm.ConfigItems.ToList();
+            ProcessConfirmedEnemies(configs, setupVm.MaxSimultaneousAttacks);
+            SelectedEnemy = null;
+            RunTurnCommand.NotifyCanExecuteChanged();
+            return;
+        }
+
         if (IsEncounterOver())
         {
-            NewEncounter();
+            await NewEncounter().ConfigureAwait(false);
             AddSingleCharacterToAssignments();
+            return;
         }
-        if (EncounterState == EncounterState.NotStarted)
-        {
-            EncounterState = EncounterState.InProgress;
-        }
+
+        IsRunningTurns = true;
+        ShowControls = false;
+        RunTurnCommand.NotifyCanExecuteChanged();
+
         var assignmentsSnapshot = Assignments.ToList();
-        foreach (var assignment in assignmentsSnapshot)
+        await Task.Run(() =>
         {
-            var round = assignment.TurnHistory.Count + 1;
-            CombatEngine.ProcessAssignmentTurn(assignment, round);
+            foreach (var assignment in assignmentsSnapshot)
+            {
+                var round = assignment.TurnHistory.Count + 1;
+                CombatEngine.ProcessAssignmentTurn(assignment, round);
+            }
+        }).ConfigureAwait(false);
+
+        await MainThread.InvokeOnMainThreadAsync(() =>
+        {
+            IsRunningTurns = false;
+            RunTurnCommand.NotifyCanExecuteChanged();
+
+            if (IsEncounterOver())
+            {
+                EndEncounter();
+            }
+        }).ConfigureAwait(false);
+    }
+
+    private void RebuildSelectedTurnHistory()
+    {
+        SelectedTurnHistory.Clear();
+        if (SelectedAssignment == null)
+        {
+            return;
         }
+
+        var src = SelectedAssignment.TurnHistory;
+        IEnumerable<TurnViewModel> items = settings.AssignmentTurnHistoryNewestOnTop ? src.Reverse() : src;
+        foreach (var t in items)
+        {
+            SelectedTurnHistory.Add(t);
+        }
+    }
+
+    private void TurnHistory_CollectionChanged(object? sender, NotifyCollectionChangedEventArgs e)
+    {
+        MainThread.BeginInvokeOnMainThread(() =>
+        {
+            if (e.Action == NotifyCollectionChangedAction.Add && e.NewItems != null)
+            {
+                foreach (TurnViewModel newTurn in e.NewItems)
+                {
+                    if (settings.AssignmentTurnHistoryNewestOnTop)
+                    {
+                        SelectedTurnHistory.Insert(0, newTurn);
+                    }
+                    else
+                    {
+                        SelectedTurnHistory.Add(newTurn);
+                    }
+                }
+            }
+            else
+            {
+                RebuildSelectedTurnHistory();
+            }
+        });
     }
 
     private Task NewEncounter()
@@ -221,7 +336,7 @@ internal partial class EncounterViewModel : CharacterListLoaderViewModel, IDispo
         var assignment = Assignments.FirstOrDefault(a => a.Enemies.Contains(diedEntity));
         if (assignment != null)
         {
-            AddXpForUndeads(assignment.Character, diedEntity);
+            AddXp(assignment.Character, diedEntity);
         }
 
         MainThread.BeginInvokeOnMainThread(() =>
@@ -264,7 +379,7 @@ internal partial class EncounterViewModel : CharacterListLoaderViewModel, IDispo
     private bool IsEncounterOver()
     {
         var activeAssignments = Assignments.Where(a => !a.IsFinished).ToList();
-        if (!activeAssignments.Any())
+        if (activeAssignments.Count == 0)
         {
             return true;
         }
@@ -292,10 +407,9 @@ internal partial class EncounterViewModel : CharacterListLoaderViewModel, IDispo
             assignment.Character.Died -= DieHandler;
             RemoveEnemyHandlers(assignment.Enemies);
         }
-
+        ShowControls = true;
         EncounterState = EncounterState.Finished;
         RunTurnCommand.NotifyCanExecuteChanged();
-        // tovább: UI értesítés, scoreboard, stb.
     }
 
     private static void ShowDiedMessage(Attacker diedEntity)
@@ -310,15 +424,6 @@ internal partial class EncounterViewModel : CharacterListLoaderViewModel, IDispo
 
     private void LostConsciousnessHandler(object? sender, EventArgs e)
     {
-        if (sender is Attacker target)
-        {
-            var assignment = Assignments.FirstOrDefault(a => a.Enemies.Contains(target));
-            if (assignment != null)
-            {
-                AddXp(assignment.Character, target);
-            }
-        }
-
         MainThread.BeginInvokeOnMainThread(() =>
             WeakReferenceMessenger.Default.Send(
                 new ShowInfoMessage(
@@ -398,14 +503,6 @@ internal partial class EncounterViewModel : CharacterListLoaderViewModel, IDispo
                 character.BaseClass!.ExperiencePoints += targetCharacter.BaseClass.ExperiencePoints;
             }
             _ = characterService.SaveAsync(character);
-        }
-    }
-
-    private void AddXpForUndeads(Attacker attacker, Attacker target)
-    {
-        if (target.IsDead && target.IsUndead)
-        {
-            AddXp(attacker, target);
         }
     }
 

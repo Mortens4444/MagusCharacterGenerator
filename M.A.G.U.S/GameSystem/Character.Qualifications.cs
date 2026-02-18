@@ -110,6 +110,12 @@ public partial class Character
             return false;
         }
 
+        if (qualification is ICanHaveMany)
+        {
+            requiredQualificationPoints = qualification.QpToBaseQualification;
+            return true;
+        }
+
         var hasBase = HasQualification(qualification, QualificationLevel.Base);
         var hasMaster = HasQualification(qualification, QualificationLevel.Master);
 

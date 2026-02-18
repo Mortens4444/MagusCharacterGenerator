@@ -31,6 +31,7 @@ internal class RollFormula
 
     public RollFormula(DiceThrowFormula diceThrowFormula, string title = "Roll")
     {
+        ArgumentNullException.ThrowIfNull(diceThrowFormula);
         Title = title;
         var formula = diceThrowFormula.Formula;
         Formula = formula.StartsWith('_') ? formula : $"_{formula}";

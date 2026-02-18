@@ -34,13 +34,13 @@ public class NaturalArmor : Armor, INotForSale
         PlaceOfAttack.WeaponWieldingArm | PlaceOfAttack.NonWeaponWieldingArm |
         PlaceOfAttack.LeftLeg | PlaceOfAttack.RightLeg;
 
-    public override PlaceOfAttackOnArm ProtectedArmParts => PlaceOfAttackOnArm.EveryWhere;
+    public override PlaceOfAttackOnArm ProtectedArmParts => PlaceOfAttackOnArm.Everywhere;
 
-    public override PlaceOfAttackOnLeg ProtectedLegParts => PlaceOfAttackOnLeg.EveryWhere;
+    public override PlaceOfAttackOnLeg ProtectedLegParts => PlaceOfAttackOnLeg.Everywhere;
 
     public override PlaceOfAttackOnHead ProtectedHeadParts => (PlaceOfAttackOnHead)0x1F;
 
-    public override PlaceOfAttackOnTorso ProtectedTorsoFrontParts => PlaceOfAttackOnTorso.EveryWhere;
+    public override PlaceOfAttackOnTorso ProtectedTorsoFrontParts => PlaceOfAttackOnTorso.Everywhere;
 
-    public override PlaceOfAttackOnTorsoFromBehind ProtectedTorsoBackParts => PlaceOfAttackOnTorsoFromBehind.EveryWhere;
+    public override PlaceOfAttackOnTorsoFromBehind ProtectedTorsoBackParts => PlaceOfAttackOnTorsoFromBehind.Everywhere;
 }

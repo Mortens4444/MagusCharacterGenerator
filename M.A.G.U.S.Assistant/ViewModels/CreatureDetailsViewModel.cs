@@ -8,6 +8,7 @@ using M.A.G.U.S.GameSystem;
 using M.A.G.U.S.Models;
 using M.A.G.U.S.Things.Weapons;
 using M.A.G.U.S.Utils;
+using Mtf.Extensions;
 using Mtf.Extensions.Services;
 using Mtf.LanguageService.MAUI;
 using Mtf.Maui.Controls.Messages;
@@ -19,21 +20,19 @@ namespace M.A.G.U.S.Assistant.ViewModels;
 internal partial class CreatureDetailsViewModel : BaseViewModel
 {
     private readonly ISoundPlayer soundPlayer;
-    private string lastActionName;
     private string lastAction;
     private bool isSoundAvailable;
     private AttackDirection selectedAttackDirection;
     private string numberAppearing;
-    private readonly PlaceOfAttack hitLocation;
     private string placeOfAttack;
     private AsyncRelayCommand? previewImageCommand;
 
     public Creature Creature { get; init; }
     public Attack SelectedAttackMode { get; set; }
 
-    public ICommand InitiateCommand { get; }
-    public ICommand AttackCommand { get; }
-    public ICommand RollDamageCommand { get; }
+    public ICommand RollRoundCommand { get; }
+
+    public IAsyncRelayCommand PreviewImageCommand => previewImageCommand ??= new AsyncRelayCommand(PreviewImage);
 
     public CreatureDetailsViewModel(ISoundPlayer soundPlayer, Creature creature)
     {
@@ -46,9 +45,7 @@ internal partial class CreatureDetailsViewModel : BaseViewModel
         var method = creature.GetType().GetMethod(nameof(creature.GetNumberAppearing));
         NumberAppearing = DiceThrowFormatter.FormatResult(method, () => creature.GetNumberAppearing());
 
-        InitiateCommand = new Command(OnInitiate);
-        AttackCommand = new Command(OnAttack);
-        RollDamageCommand = new Command(OnRollDamage);
+        RollRoundCommand = new Command(OnRollRound);
         LastAction = String.Empty;
     }
 
@@ -92,12 +89,6 @@ internal partial class CreatureDetailsViewModel : BaseViewModel
         set => SetProperty(ref placeOfAttack, value);
     }
 
-    public string LastActionName
-    {
-        get => lastActionName;
-        set => SetProperty(ref lastActionName, value);
-    }
-
     public string LastAction
     {
         get => lastAction;
@@ -128,98 +119,91 @@ internal partial class CreatureDetailsViewModel : BaseViewModel
         }
     }
 
-    private void OnInitiate()
+    private void OnRollRound()
     {
         try
         {
-            PlaceOfAttack = String.Empty;
-            LastActionName = Lng.Elem("Initiate");
-            LastAction = Creature.GetInitiate().ToString(CultureInfo.InvariantCulture);
-        }
-        catch (Exception ex)
-        {
-            LastActionName = Lng.Elem("Error");
-            LastAction = ex.Message;
-        }
-    }
-
-    private void OnAttack()
-    {
-        if (SelectedAttackMode == null)
-        {
-            return;
-        }
-
-        try
-        {
-            var (locationDescription, subLocation) = HitLocationSelector.GetLocation(SelectedAttackDirection);
-            PlaceOfAttack = String.IsNullOrEmpty(subLocation) ? locationDescription : $"{Lng.Elem(locationDescription)} ({Lng.Elem(subLocation)})";
-            LastActionName = $"{Lng.Elem(SelectedAttackMode is MeleeAttack ? "Melee attack" : "Ranged attack")} - {Lng.Elem(SelectedAttackMode.Name)}";
-            var (impact, value) = SelectedAttackMode.GetAttack();
-            LastAction = impact == AttackImpact.Normal ? value.ToString(CultureInfo.InvariantCulture) : $"{Lng.Elem(impact.ToString())} {value}";
-        }
-        catch (Exception ex)
-        {
-            LastActionName = Lng.Elem("Error");
-            LastAction = ex.Message;
-        }
-    }
-
-    private void OnRollDamage()
-    {
-        try
-        {
-            var doubleDamage = hitLocation == M.A.G.U.S.Enums.PlaceOfAttack.Head;
-            var dmg = SelectedAttackMode.GetDamage();
-            var final = doubleDamage ? dmg * 2 : dmg;
-
-            if (AttackModes.Count == 1)
+            if (SelectedAttackMode == null)
             {
-                var method = Creature.GetType().GetMethod(nameof(Creature.GetDamage));
-                LastAction = DiceThrowFormatter.FormatResult(method, final);
+                SelectedAttackMode = AttackModes.First();
+                return;
             }
-            else
+
+            var (hitLocation, subLocation) = HitLocationSelector.GetLocation(SelectedAttackDirection);
+            var locationDescription = hitLocation.GetDescription();
+            PlaceOfAttack = String.IsNullOrEmpty(subLocation) ? locationDescription : $"{Lng.Elem(locationDescription)} ({Lng.Elem(subLocation)})";
+
+            var (impact, value) = SelectedAttackMode.GetAttack();
+            var impactText = impact switch
             {
-                if (SelectedAttackMode is MeleeAttack meleeAttack)
+                AttackImpact.CriticalDamage => $"⚝ {Lng.Elem(impact.GetDescription())} ",
+                AttackImpact.FatalMistake => $"☠ {Lng.Elem(impact.GetDescription())} ",
+                _ => String.Empty
+            };
+
+            var attack = $"{impactText}{value}";
+            var attckType = SelectedAttackMode is MeleeAttack ? $"🗡 {Lng.Elem("Melee attack")}" : $"🏹 {Lng.Elem("Ranged attack")}";
+
+            var damage = GetDamage(Creature, hitLocation, SelectedAttackMode);
+
+            LastAction = $"⚡ {Lng.Elem("Initiate")}: {Creature.GetInitiate().ToString(CultureInfo.InvariantCulture)}{Environment.NewLine}" +
+                $"{attckType} - {Lng.Elem(SelectedAttackMode.Name)}: {attack}{Environment.NewLine}" +
+                $"{damage}";
+        }
+        catch (Exception ex)
+        {
+            LastAction = ex.Message;
+        }
+    }
+
+    private static string GetDamage(Creature creature, PlaceOfAttack hitLocation, Attack attack)
+    {
+        var doubleDamage = hitLocation == M.A.G.U.S.Enums.PlaceOfAttack.Head;
+        var dmg = attack.GetDamage();
+        var final = doubleDamage ? dmg * 2 : dmg;
+
+        string result;
+        if (creature.AttackModes.Count == 1)
+        {
+            var method = creature.GetType().GetMethod(nameof(Creature.GetDamage));
+            result = DiceThrowFormatter.FormatResult(method, final);
+        }
+        else
+        {
+            if (attack is MeleeAttack meleeAttack)
+            {
+                if (meleeAttack.Weapon is BodyPart bodyPart)
                 {
-                    if (meleeAttack.Weapon is BodyPart bodyPart)
-                    {
-                        LastAction = DiceThrowFormatter.FormatResult(final, bodyPart.ThrowType, bodyPart.Modifier);
-                    }
-                    else
-                    {
-                        var method = meleeAttack.Weapon?.GetType().GetMethod(nameof(meleeAttack.Weapon.GetDamage));
-                        LastAction = DiceThrowFormatter.FormatResult(method, final);
-                    }
-                }
-                else if (SelectedAttackMode is RangedAttack rangeAttack)
-                {
-                    if (rangeAttack.Weapon is BreathWeaponcs breathWeaponcs)
-                    {
-                        LastAction = DiceThrowFormatter.FormatResult(final, breathWeaponcs.ThrowType, breathWeaponcs.Modifier);
-                    }
-                    else
-                    {
-                        var method = rangeAttack.Weapon.GetType().GetMethod(nameof(meleeAttack.Weapon.GetDamage));
-                        LastAction = DiceThrowFormatter.FormatResult(method, final);
-                    }
+                    result = DiceThrowFormatter.FormatResult(final, bodyPart.ThrowType, bodyPart.Modifier);
                 }
                 else
                 {
-                    LastAction = final.ToString(CultureInfo.InvariantCulture);
+                    var method = meleeAttack.Weapon?.GetType().GetMethod(nameof(meleeAttack.Weapon.GetDamage));
+                    result = DiceThrowFormatter.FormatResult(method, final);
                 }
             }
-
-            LastActionName = doubleDamage ? $"{Lng.Elem("Double damage")} - {Lng.Elem(SelectedAttackMode.Name)}" : $"{Lng.Elem("Damage")} - {Lng.Elem(SelectedAttackMode.Name)}";
+            else if (attack is RangedAttack rangeAttack)
+            {
+                if (rangeAttack.Weapon is BreathWeapon breathWeaponcs)
+                {
+                    result = DiceThrowFormatter.FormatResult(final, breathWeaponcs.ThrowType, breathWeaponcs.Modifier);
+                }
+                else
+                {
+                    var method = rangeAttack.Weapon.GetType().GetMethod(nameof(meleeAttack.Weapon.GetDamage));
+                    result = DiceThrowFormatter.FormatResult(method, final);
+                }
+            }
+            else
+            {
+                result = final.ToString(CultureInfo.InvariantCulture);
+            }
         }
-        catch (Exception ex)
-        {
-            LastActionName = Lng.Elem("Error");
-            LastAction = ex.Message;
-        }
+        
+        var damageText = doubleDamage ? $"{Lng.Elem("Double damage")} - {Lng.Elem(attack.Name)}" : $"{Lng.Elem("Damage")} - {Lng.Elem(attack.Name)}";
+        var damageChar = attack is RangedAttack ? "🎯" : "💥";
+        return $"{damageChar} {damageText}: {result}";
     }
-
-    public IAsyncRelayCommand PreviewImageCommand => previewImageCommand ??= new AsyncRelayCommand(PreviewImage);
 
     private Task PreviewImage()
     {

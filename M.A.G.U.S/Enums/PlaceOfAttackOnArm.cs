@@ -15,5 +15,5 @@ public enum PlaceOfAttackOnArm
     [Description("Upper arm")]
     UpperArm = 1 << 5,
 
-    EveryWhere = Shoulder | Wrist | BackOfHand | Elbow | Forearm | UpperArm
+    Everywhere = Shoulder | Wrist | BackOfHand | Elbow | Forearm | UpperArm
 }

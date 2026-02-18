@@ -8,6 +8,6 @@ public sealed class AttackResolution : ResolutionBase
         var attack = initiative.Attacker.Source.AttackValue + RollValue;
 
         IsSuccessful = attack > initiative.Target.Source.DefenseValue;
-        IsHpDamage = attack > initiative.Target.Source.DefenseValue + 50;
+        IsHpDamage = attack > initiative.Target.Source.DefenseValue + OverHitValue;
     }
 }

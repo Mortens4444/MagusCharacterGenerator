@@ -34,27 +34,30 @@ internal partial class BestiaryPage : SearchListPage
     protected override void OnAppearing()
     {
         base.OnAppearing();
-        //Translator.Translate(this);
-        try
+        if (firstLoad)
         {
-            viewModel.ShakeService?.Start();
-        }
-        catch (Exception ex)
-        {
-            WeakReferenceMessenger.Default.Send(new ShowErrorMessage(ex));
-        }
-        if (BindingContext is BestiaryViewModel vm)
-        {
-            if (firstLoad && settings.ShowRandomBeastWhenBestiaryPageOpened)
+            firstLoad = false;
+
+            try
             {
-                firstLoad = false;
-                _ = Task.Run(async () =>
+                viewModel.ShakeService?.Start();
+            }
+            catch (Exception ex)
+            {
+                WeakReferenceMessenger.Default.Send(new ShowErrorMessage(ex));
+            }
+            if (BindingContext is BestiaryViewModel vm)
+            {
+                if (settings.ShowRandomBeastWhenBestiaryPageOpened)
                 {
-                    MainThread.BeginInvokeOnMainThread(() =>
+                    _ = Task.Run(async () =>
                     {
-                        vm.PickRandomCommand.Execute(null);
+                        MainThread.BeginInvokeOnMainThread(() =>
+                        {
+                            vm.PickRandomCommand.Execute(null);
+                        });
                     });
-                });
+                }
             }
         }
     }

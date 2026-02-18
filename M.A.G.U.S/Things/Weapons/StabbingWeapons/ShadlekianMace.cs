@@ -23,7 +23,7 @@ public class ShadlekianMace : Weapon, IMeleeWeapon
     [DiceThrowModifier(1)]
     public override int GetDamage() => DiceThrow._1D6() + 1;
 
-    public override string Name => "Shadleki mace";
+    public override string Name => "Shadlekian mace";
 
     public override string Description => "A unique, heavy mace originating from Shadlekia, often having an unusually large, multi-flanged head that concentrates force for deep impact.";
 }

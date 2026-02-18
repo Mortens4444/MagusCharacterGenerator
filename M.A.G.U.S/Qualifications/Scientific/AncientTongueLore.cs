@@ -1,11 +1,10 @@
 ﻿using M.A.G.U.S.GameSystem.Languages;
 using M.A.G.U.S.GameSystem.Qualifications;
-using M.A.G.U.S.Qualifications.Combat;
 using Newtonsoft.Json;
 
 namespace M.A.G.U.S.Qualifications.Scientific;
 
-public class AncientTongueLore : WeaponQualification, ICanHaveMany
+public class AncientTongueLore : Qualification, ICanHaveMany
 {
     public AntientLanguage? Language { get; set; }
 

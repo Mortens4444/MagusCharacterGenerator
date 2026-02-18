@@ -42,10 +42,10 @@ internal class AssignmentViewModel : BaseViewModel
 
     public void AddTurn(TurnData turn)
     {
-        if (Character.IsDead)
-        {
-            return;
-        }
+        //if (Character.IsDead)
+        //{
+        //    return;
+        //}
 
         var turnViewModel = new TurnViewModel(turn);
         if (settings.AssignmentTurnHistoryNewestOnTop)
