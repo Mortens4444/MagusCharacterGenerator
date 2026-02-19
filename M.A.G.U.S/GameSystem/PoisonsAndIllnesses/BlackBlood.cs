@@ -9,7 +9,7 @@ public class BlackBlood : Poison
 
     public override Money Price => new(20);
 
-    public override string Description => "Level 6 nerve poison of Gorviki origin. A thick, black, bitter liquid, most often administered via food. It affects the nervous system, causing stupor or, in more severe cases, death. It is fast-acting and lasts for a short duration if the victim survives.";
+    public override string Description => "Level 6 nerve poison of Gorvikian origin. A thick, black, bitter liquid, most often administered via food. It affects the nervous system, causing stupor or, in more severe cases, death. It is fast-acting and lasts for a short duration if the victim survives.";
 
     public override PoisonDuration PoisonDuration => PoisonDuration.ShortDuration;
 
