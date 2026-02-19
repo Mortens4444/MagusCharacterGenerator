@@ -4,7 +4,7 @@ namespace M.A.G.U.S.Things.Gemstones;
 
 public class Zircon : Gemstone
 {
-    public Zircon() : base("time, time magic") { }
-
     public override Money Price => new(5);
+
+    public override string Description => "time, time magic";
 }

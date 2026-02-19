@@ -4,7 +4,7 @@ namespace M.A.G.U.S.Things.Gemstones;
 
 public class Jasper : Gemstone
 {
-    public Jasper() : base("poisons") { }
-
     public override Money Price => new(6);
+
+    public override string Description => "poisons";
 }

@@ -4,7 +4,7 @@ namespace M.A.G.U.S.Things.Gemstones;
 
 public class Moonstone : Gemstone
 {
-    public Moonstone() : base("shapeshifters, roaming beasts, night terrors") { }
-
     public override Money Price => new(7);
+
+    public override string Description => "shapeshifters, roaming beasts, night terrors";
 }

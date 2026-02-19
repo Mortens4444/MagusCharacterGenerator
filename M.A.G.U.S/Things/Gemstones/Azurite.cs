@@ -4,7 +4,7 @@ namespace M.A.G.U.S.Things.Gemstones;
 
 public class Azurite : Gemstone
 {
-    public Azurite() : base("astrology, celestial bodies") { }
-
     public override Money Price => new(1);
+
+    public override string Description => "astrology, celestial bodies";
 }

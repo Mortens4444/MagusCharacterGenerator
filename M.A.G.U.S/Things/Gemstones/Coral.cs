@@ -4,7 +4,7 @@ namespace M.A.G.U.S.Things.Gemstones;
 
 public class Coral : Gemstone
 {
-    public Coral() : base("seas, sailing, swimming") { }
-
     public override Money Price => new(13);
+
+    public override string Description => "seas, sailing, swimming";
 }

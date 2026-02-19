@@ -4,7 +4,7 @@ namespace M.A.G.U.S.Things.Gemstones;
 
 public class Peridot : Gemstone
 {
-    public Peridot() : base("astral") { }
-
     public override Money Price => new(60);
+
+    public override string Description => "astral";
 }

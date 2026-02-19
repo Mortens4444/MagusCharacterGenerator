@@ -4,7 +4,7 @@ namespace M.A.G.U.S.Things.Gemstones;
 
 public class Hematite : Gemstone
 {
-    public Hematite() : base("combat, attack") { }
-
     public override Money Price => new(6);
+
+    public override string Description => "combat, attack";
 }

@@ -4,7 +4,7 @@ namespace M.A.G.U.S.Things.Gemstones;
 
 public class Serpentine : Gemstone
 {
-    public Serpentine() : base("mental") { }
-
     public override Money Price => new(6);
+
+    public override string Description => "mental";
 }

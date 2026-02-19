@@ -158,6 +158,28 @@
                 </VerticalStackLayout>
             </Border>
 
+            <Grid ColumnDefinitions="*,*,*,*" RowDefinitions="Auto" ColumnSpacing="10" IsVisible="{Binding IsPoison}">
+                <VerticalStackLayout Grid.Column="0">
+                    <Label Text="Level" FontSize="Caption" />
+                    <Label Text="{Binding PoisonLevel}" FontAttributes="Bold" />
+                </VerticalStackLayout>
+
+                <VerticalStackLayout Grid.Column="1">
+                    <Label Text="Type" FontSize="Caption" />
+                    <Label Text="{Binding PoisonTypeText}" FontAttributes="Bold" />
+                </VerticalStackLayout>
+
+                <VerticalStackLayout Grid.Column="2">
+                    <Label Text="Onset time" FontSize="Caption" />
+                    <Label Text="{Binding PoisonOnsetTimeText}" FontAttributes="Bold" />
+                </VerticalStackLayout>
+
+                <VerticalStackLayout Grid.Column="3">
+                    <Label Text="Duration" FontSize="Caption" />
+                    <Label Text="{Binding PoisonDurationText}" FontAttributes="Bold" />
+                </VerticalStackLayout>
+            </Grid>
+
             <HorizontalStackLayout Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" HorizontalOptions="Center" Spacing="12" Margin="0,8,0,0">
                 <Button Text="Buy" Command="{Binding BuyCommand}" CornerRadius="10" >
                     <Button.Triggers>

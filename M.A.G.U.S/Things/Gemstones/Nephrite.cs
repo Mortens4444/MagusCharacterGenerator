@@ -4,7 +4,7 @@ namespace M.A.G.U.S.Things.Gemstones;
 
 public class Nephrite : Gemstone
 {
-    public Nephrite() : base("elementals (elemental force)") { }
-
     public override Money Price => new(9);
+
+    public override string Description => "elementals (elemental force)";
 }

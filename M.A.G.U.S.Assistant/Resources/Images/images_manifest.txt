@@ -296,6 +296,7 @@ serpent_staff.png
 staff_of_friendship.png
 staff_of_light.png
 staff_of_necromancers.png
+staff_of_spellbreaking.png
 staff_of_telekinesis.png
 staff_of_terror.png
 staff_of_transformation.png

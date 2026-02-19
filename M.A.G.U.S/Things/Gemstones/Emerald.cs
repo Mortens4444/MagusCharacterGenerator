@@ -4,7 +4,7 @@ namespace M.A.G.U.S.Things.Gemstones;
 
 public class Emerald : Gemstone
 {
-    public Emerald() : base("general magical stone") { }
-
     public override Money Price => new(300);
+
+    public override string Description => "general magical stone";
 }

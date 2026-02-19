@@ -4,7 +4,7 @@ namespace M.A.G.U.S.Things.Gemstones;
 
 public class Chalcedony : Gemstone
 {
-    public Chalcedony() : base("undeads") { }
-
     public override Money Price => new(4);
+
+    public override string Description => "undeads";
 }

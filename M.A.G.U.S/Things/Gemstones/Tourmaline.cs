@@ -4,7 +4,7 @@ namespace M.A.G.U.S.Things.Gemstones;
 
 public class Tourmaline : Gemstone
 {
-    public Tourmaline() : base("combat, protection") { }
-
     public override Money Price => new(10);
+
+    public override string Description => "combat, protection";
 }

@@ -4,7 +4,7 @@ namespace M.A.G.U.S.Things.Gemstones;
 
 public class Ruby : Gemstone
 {
-    public Ruby() : base("general magical stone") { }
-
     public override Money Price => new(500);
+
+    public override string Description => "general magical stone";
 }

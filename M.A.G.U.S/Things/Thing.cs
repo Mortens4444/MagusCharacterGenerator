@@ -13,7 +13,7 @@ public abstract class Thing : ImageOwner
 
     public virtual Money MultipliedPrice => Price * PriceMultiplier;
 
-    public virtual string Description { get; protected set; } = "";
+    public virtual string Description => "";
 
     /// <summary>
     /// Weight in kilograms.

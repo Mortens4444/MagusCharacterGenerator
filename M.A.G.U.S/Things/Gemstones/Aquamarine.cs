@@ -4,7 +4,7 @@ namespace M.A.G.U.S.Things.Gemstones;
 
 public class Aquamarine : Gemstone
 {
-    public Aquamarine() : base("elementals (primordial water)") { }
-
     public override Money Price => new(50);
+
+    public override string Description => "elementals (primordial water)";
 }
