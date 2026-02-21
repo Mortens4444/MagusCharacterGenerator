@@ -60,7 +60,13 @@ internal partial class QualificationDetailsViewModel : BaseViewModel
     public int SelectedLanguageLevel
     {
         get => selectedLanguageLevel;
-        set => SetProperty(ref selectedLanguageLevel, value);
+        set
+        {
+            if (SetProperty(ref selectedLanguageLevel, value))
+            {
+                UpdateDerived();
+            }
+        }
     }
 
     public bool IsWeaponQualification => Qualification is WeaponQualification;
@@ -137,6 +143,11 @@ internal partial class QualificationDetailsViewModel : BaseViewModel
         bool learnable;
         int requiredQp;
 
+        if (IsLanguageLore && Qualification is LanguageLore ll)
+        {
+            ll.LanguageLevel = SelectedLanguageLevel;
+        }
+
         if (Character != null)
         {
             learnable = Character.CanLearn(Qualification, SelectedLevel, out requiredQp);
@@ -151,6 +162,7 @@ internal partial class QualificationDetailsViewModel : BaseViewModel
         RequiredSp = requiredQp;
         canLearn = learnable;
 
+        OnPropertyChanged(nameof(RequiredSp));
         OnPropertyChanged(nameof(CanLearn));
         (LearnCommand as RelayCommand)?.NotifyCanExecuteChanged();
     }

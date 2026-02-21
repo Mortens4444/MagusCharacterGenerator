@@ -61,10 +61,20 @@
                                 SelectedItem="{Binding SelectedLanguage}"
                                 ItemDisplayBinding="{Binding ., Converter={StaticResource EnumDescriptionTranslationConverter}}"
                                 Title="Select language" WidthRequest="220" />
-                        <Label Text="Language level (1-5)" />
-                        <Picker ItemsSource="{Binding AvailableLanguageLevels}"
-                                SelectedItem="{Binding SelectedLanguageLevel}"
-                                Title="Level" WidthRequest="120" />
+
+                        <VerticalStackLayout Spacing="6">
+                            <VerticalStackLayout.Triggers>
+                                <DataTrigger TargetType="VerticalStackLayout" Binding="{Binding SelectedLevel}" Value="Master">
+                                    <Setter Property="IsVisible" Value="False" />
+                                </DataTrigger>
+                            </VerticalStackLayout.Triggers>
+
+                            <Label Text="Language level (1-5)" />
+                            <Picker ItemsSource="{Binding AvailableLanguageLevels}"
+                                    SelectedItem="{Binding SelectedLanguageLevel}"
+                                    Title="Level" WidthRequest="120" />
+                        </VerticalStackLayout>
+                        
                     </StackLayout>
 
                     <!-- Ancient tongue (different enum) -->

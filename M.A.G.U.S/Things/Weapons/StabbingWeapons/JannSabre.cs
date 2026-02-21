@@ -5,7 +5,7 @@ using M.A.G.U.S.Interfaces;
 
 namespace M.A.G.U.S.Things.Weapons.StabbingWeapons;
 
-public class JannSaber : Weapon, IMeleeWeapon // Csak Dzsenn veheti meg
+public class JannSabre : Weapon, IMeleeWeapon // Csak Dzsenn veheti meg
 {
     public override double AttacksPerRound => 1;
 

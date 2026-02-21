@@ -97,7 +97,7 @@ public class Shaman : Class, IClass, ILikeMagic
 
     public override bool AddQualificationPointsOnFirstLevel => true;
 
-    public override IRace[] AllowedRaces => [new Human(), new CourtOrc(), new Wier(), new CourtGoblin()];
+    public override IRace[] AllowedRaces => [new Human(), new CourtOrc(), new Wier(), new CourtGoblin(), new MutantOrc()];
 
     public override List<LevelRequirement> ExperienceLevels =>
     [

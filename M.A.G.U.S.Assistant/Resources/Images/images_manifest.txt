@@ -83,6 +83,7 @@ killer_whale.png
 lizard_creature.png
 lizard_wizard.png
 mummy.png
+nalreth.png
 narwhal.png
 orc.png
 panther.png
@@ -160,6 +161,7 @@ boots_riding.png
 boots_walking.png
 caftan.png
 cap.png
+cloak_cloth.png
 cloak_fur.png
 cloak_silk.png
 coat.png
@@ -521,6 +523,8 @@ jann.png
 khal.png
 kyr.png
 mountain_giant.png
+mutant_orc.png
+nardael.png
 night_elf.png
 reptilian.png
 see_giant.png
@@ -599,6 +603,7 @@ heavy_crossbow.png
 kahrei_crossbow.png
 light_crossbow.png
 longbow.png
+recurve_bow.png
 shadonian_armor_piercing_crossbow.png
 shortbow.png
 sling.png
@@ -619,7 +624,6 @@ dagger.png
 elven_dagger.png
 jad_jambia.png
 jad_jambiya.png
-jann_sabre.png
 knife.png
 knight_s_sword.png
 longsword.png
@@ -636,6 +640,7 @@ slan_star.png
 slan_sword.png
 snake_sword.png
 sword_greatsword.png
+sword_jann_sabre.png
 sword_sabre.png
 sword_scimitar.png
 sword_yataghan.png

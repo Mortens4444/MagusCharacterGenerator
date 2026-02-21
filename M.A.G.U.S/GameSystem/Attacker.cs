@@ -1,4 +1,5 @@
-﻿using M.A.G.U.S.Enums;
+﻿using M.A.G.U.S.Bestiary;
+using M.A.G.U.S.Enums;
 using M.A.G.U.S.Interfaces;
 using M.A.G.U.S.Models;
 using M.A.G.U.S.Things.Armors;
@@ -28,6 +29,34 @@ public abstract class Attacker
     public event PropertyChangedEventHandler? PropertyChanged;
     public event EventHandler? Died;
     public event EventHandler? LostConsciousness;
+
+    public int NaturalArmorClass
+    {
+        get
+        {
+            if (this is Character character)
+            {
+                var naturalArmor = character.Race.SpecialQualifications.GetSpeciality<NaturalArmor>();
+                if (naturalArmor != null)
+                {
+                    return naturalArmor.ArmorClass;
+                }
+
+                var naturalArmor2 = character.BaseClass.SpecialQualifications.GetSpeciality<NaturalArmor>();
+                if (naturalArmor2 != null)
+                {
+                    return naturalArmor2.ArmorClass;
+                }
+            }
+
+            if (this is Creature creature)
+            {
+                return creature.Armor?.ArmorClass ?? 0;
+            }
+
+            return 0;
+        }
+    }
 
     public virtual Armor? Armor
     {

@@ -87,6 +87,11 @@ public enum Size
     [DistanceModifier(GameSystem.Constants.DefaultEncounterDistance * 3.25)]
     About_8_5_meters,
 
+    [DefenseHelper(-70)]
+    [Description("7 to 11 meters")]
+    [DistanceModifier(GameSystem.Constants.DefaultEncounterDistance * 5)]
+    _7_to_11_meters,
+
     [DefenseHelper(-85)]
     [Description("Up to 15 meters")]
     [DistanceModifier(GameSystem.Constants.DefaultEncounterDistance * 6.5)]
@@ -94,5 +99,5 @@ public enum Size
 
     [DefenseHelper(-100)]
     [DistanceModifier(GameSystem.Constants.DefaultEncounterDistance * 10)]
-    Huge
+    Huge,
 }
