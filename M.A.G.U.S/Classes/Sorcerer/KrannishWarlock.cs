@@ -133,7 +133,7 @@ public class KrannishWarlock : Class, IClass, ILikeMagic
         new CamouflageOrDisguise(),
         new LanguageLore(Language.Krannish, 3),
         new Alchemy(),
-        new AncientTongueLore(AntientLanguage.Aquir),
+        new AncientTongueLore(AntientLanguage.Aquirian),
         new Etiquette(), // Krannish
         //new Cluture(QualificationLevel.Master) // Order
 		//new Helyismeret 60%
@@ -150,7 +150,7 @@ public class KrannishWarlock : Class, IClass, ILikeMagic
         new Craft(Profession.TattoMaker, QualificationLevel.Master, 5),
         new Backstab(level: 5),
         new Herbalism(QualificationLevel.Master, 6),
-        new AncientTongueLore(AntientLanguage.Aquir, QualificationLevel.Master, 6),
+        new AncientTongueLore(AntientLanguage.Aquirian, QualificationLevel.Master, 6),
         new RunicMagic(level: 7),
         new Demonology(level: 8)
     ]);

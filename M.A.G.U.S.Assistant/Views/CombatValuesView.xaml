@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:M.A.G.U.S.Assistant.ViewModels"
+             xmlns:conv="clr-namespace:Mtf.LanguageService.MAUI.Converters;assembly=Mtf.LanguageService.MAUI"
+             xmlns:mcc="clr-namespace:Mtf.Maui.Controls.Converters;assembly=Mtf.Maui.Controls"
+             xmlns:mc="clr-namespace:Mtf.Maui.Controls;assembly=Mtf.Maui.Controls"
+             x:Class="M.A.G.U.S.Assistant.Views.CombatValuesView"
+             x:ClassModifier="internal"
+             x:DataType="vm:CharacterViewModel">
+    
+    <ContentView.Resources>
+        <ResourceDictionary>
+            <conv:EnumDescriptionTranslationConverter x:Key="EnumDescriptionTranslationConverter" />
+            <conv:TranslationConverter x:Key="TranslationConverter" />
+            <mcc:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter" />
+            <mcc:BoolToVisibilityConverter x:Key="NotBoolToVisibilityConverter" Invert="True" />
+        </ResourceDictionary>
+    </ContentView.Resources>
+
+    <ScrollView>
+        <VerticalStackLayout Spacing="16" Padding="16">
+
+            <Border Style="{StaticResource BoxBorder}">
+                <VerticalStackLayout>
+                    <Label Text="Combat values" Style="{StaticResource HeaderLabel}"/>
+
+                    <Grid ColumnDefinitions="*, *" ColumnSpacing="10" RowDefinitions="Auto, Auto">
+                        <Label Text="Primary weapon" />
+                        <Picker Title="Select primary weapon"
+                                ItemsSource="{Binding AvailableWeapons}"
+                                ItemDisplayBinding="{Binding Name, Converter={StaticResource TranslationConverter}}"
+                                SelectedItem="{Binding PrimaryWeapon}"
+                                Grid.Row="1" />
+
+                        <Label Text="Secondary weapon" Grid.Column="1" />
+                        <Picker Title="Select secondary weapon"
+                                ItemsSource="{Binding AvailableWeapons}"
+                                ItemDisplayBinding="{Binding Name, Converter={StaticResource TranslationConverter}}"
+                                SelectedItem="{Binding SecondaryWeapon}"
+                                Grid.Row="1" Grid.Column="1" />
+                    </Grid>
+
+                    <Grid ColumnDefinitions="2*, *, *" ColumnSpacing="10" RowDefinitions="Auto">
+                        <VerticalStackLayout>
+                            <Label Text="Armor" />
+                            <Picker Title="Select armor"
+                                    ItemsSource="{Binding AvailableArmors}"
+                                    ItemDisplayBinding="{Binding Name, Converter={StaticResource TranslationConverter}}"
+                                    SelectedItem="{Binding SelectedArmor}" />
+                        </VerticalStackLayout>
+
+                        <mc:EntryWithLabel Grid.Column="1" Label="AC" Text="{Binding ArmorClass}" IsReadOnly="True" WidthRequest="100" VerticalOptions="Center" />
+                        <mc:EntryWithLabel Grid.Column="2" Label="ACP" Text="{Binding ArmorCheckPenalty}" IsReadOnly="True" WidthRequest="100" VerticalOptions="Center" />
+                    </Grid>
+
+                    <Picker ItemsSource="{Binding AvailableCombatValueModifiers}"
+                            ItemDisplayBinding="{Binding ., Converter={StaticResource EnumDescriptionTranslationConverter}}"
+                            SelectedItem="{Binding SelectedCombatValueModifier, Mode=TwoWay}"
+                            WidthRequest="220"/>
+
+                    <Grid RowDefinitions="Auto, Auto, Auto, Auto, Auto, Auto" ColumnDefinitions="Auto, Auto">
+                        <!-- Initiator -->
+                        <mc:NumericUpDownWithLabel x:Name="NudInitiatorValue" Label="Initiator value" Minimum="{Binding MinInitiateValue}" Maximum="{Binding MaxInitiateValue}" Value="{Binding InitiateValue, Mode=TwoWay}" IsVisible="{Binding CanAllocateCombatModifier, Converter={StaticResource BoolToVisibilityConverter}}" IncrementCommand="{Binding IncrementInitiatorCommand}" DecrementCommand="{Binding DecrementInitiatorCommand}" Grid.ColumnSpan="2" />
+                        <mc:EntryWithLabel Label="Initiator value" Text="{Binding InitiateValue}" IsReadOnly="True" IsVisible="{Binding CanAllocateCombatModifier, Converter={StaticResource NotBoolToVisibilityConverter}}" Grid.ColumnSpan="2" />
+
+                        <!-- Attack -->
+                        <mc:NumericUpDownWithLabel x:Name="NudAttackValue" Label="Attack value" Minimum="{Binding MinAttackValue}" Maximum="{Binding MaxAttackValue}" Value="{Binding AttackValue, Mode=TwoWay}" IsVisible="{Binding CanAllocateCombatModifier, Converter={StaticResource BoolToVisibilityConverter}}" IncrementCommand="{Binding IncrementAttackCommand}" DecrementCommand="{Binding DecrementAttackCommand}" Grid.Row="1" Grid.ColumnSpan="2" />
+                        <mc:EntryWithLabel Label="Attack value" Text="{Binding AttackValue}" IsReadOnly="True" IsVisible="{Binding CanAllocateCombatModifier, Converter={StaticResource NotBoolToVisibilityConverter}}" Grid.Row="1" Grid.ColumnSpan="2" />
+
+                        <!-- Defense -->
+                        <mc:NumericUpDownWithLabel x:Name="NudDefenseValue" Label="Defense value" Minimum="{Binding MinDefenseValue}" Maximum="{Binding MaxDefenseValue}" Value="{Binding DefenseValue, Mode=TwoWay}" IsVisible="{Binding CanAllocateCombatModifier, Converter={StaticResource BoolToVisibilityConverter}}" IncrementCommand="{Binding IncrementDefenseCommand}" DecrementCommand="{Binding DecrementDefenseCommand}" Grid.Row="2" Grid.ColumnSpan="2" />
+                        <mc:EntryWithLabel Label="Defense value" Text="{Binding DefenseValue}" IsReadOnly="True" IsVisible="{Binding CanAllocateCombatModifier, Converter={StaticResource NotBoolToVisibilityConverter}}" Grid.Row="2" Grid.ColumnSpan="2" />
+
+                        <!-- Aim -->
+                        <mc:NumericUpDownWithLabel x:Name="NudAimValue" Label="Aim value" Minimum="{Binding MinAimValue}" Maximum="{Binding MaxAimValue}" Value="{Binding AimValue, Mode=TwoWay}" IsVisible="{Binding CanAllocateCombatModifier, Converter={StaticResource BoolToVisibilityConverter}}" IncrementCommand="{Binding IncrementAimCommand}" DecrementCommand="{Binding DecrementAimCommand}" Grid.Row="3" Grid.ColumnSpan="2" />
+                        <mc:EntryWithLabel Label="Aim value" Text="{Binding AimValue}" IsReadOnly="True" IsVisible="{Binding CanAllocateCombatModifier, Converter={StaticResource NotBoolToVisibilityConverter}}" Grid.Row="3" Grid.ColumnSpan="2" />
+
+                        <mc:EntryWithLabel Label="Combat modifier" Text="{Binding RemainingCombatValueModifier}" IsReadOnly="True" Grid.Row="4" Grid.Column="0" />
+                        <mc:EntryWithLabel Label="Combat modifier/level" Text="{Binding CombatValueModifierPerLevel}" IsReadOnly="True" Grid.Row="4" Grid.Column="1" />
+
+                        <mc:EntryWithLabel Label="Damage" Text="{Binding Damage}" IsReadOnly="True" Grid.Row="5" Grid.ColumnSpan="2" />
+                    </Grid>
+                </VerticalStackLayout>
+            </Border>
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentView>

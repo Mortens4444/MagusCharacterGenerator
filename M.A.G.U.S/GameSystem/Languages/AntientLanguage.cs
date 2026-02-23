@@ -9,7 +9,7 @@ public enum AntientLanguage
 	[Description("Lingua Domini")]
 	LinguaDomini,
 
-	Aquir,
+	Aquirian,
 
 	Voul,
 

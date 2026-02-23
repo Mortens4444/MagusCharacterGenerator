@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:M.A.G.U.S.Assistant.ViewModels"
+             xmlns:mc="clr-namespace:Mtf.Maui.Controls;assembly=Mtf.Maui.Controls"
+             xmlns:mv="clr-namespace:M.A.G.U.S.Assistant.Views"
+             xmlns:conv="clr-namespace:Mtf.LanguageService.MAUI.Converters;assembly=Mtf.LanguageService.MAUI"
+             xmlns:converters="clr-namespace:M.A.G.U.S.Assistant.Converters"
+             xmlns:t="clr-namespace:M.A.G.U.S.Things;assembly=M.A.G.U.S."
+             x:Class="M.A.G.U.S.Assistant.Views.EquipmentView"
+             x:ClassModifier="internal"
+             x:DataType="vm:CharacterViewModel">
+
+    <ContentView.Resources>
+        <ResourceDictionary>
+            <conv:TranslationConverter x:Key="TranslationConverter" />
+            <converters:EquipmentSorterConverter x:Key="EquipmentSorter" />
+        </ResourceDictionary>
+    </ContentView.Resources>
+    
+    <ScrollView>
+        <VerticalStackLayout Spacing="16" Padding="16">
+
+            <!-- Money -->
+            <Grid ColumnDefinitions="*,*">
+                <Border Style="{StaticResource BoxBorder}">
+                    <VerticalStackLayout>
+                        <Label Text="Money" Style="{StaticResource HeaderLabel}"/>
+                        <Grid ColumnDefinitions="*, *" RowDefinitions="Auto, Auto">
+                            <mc:EntryWithLabel Label="Copper" Text="{Binding Copper}" IsReadOnly="True" />
+                            <mc:EntryWithLabel Label="Silver" Text="{Binding Silver}" IsReadOnly="True" Grid.Row="1" />
+                            <mc:EntryWithLabel Label="Gold" Text="{Binding Gold}" IsReadOnly="True" Grid.Column="1" />
+                            <mc:EntryWithLabel Label="Mithril" Text="{Binding Mithril}" IsReadOnly="True" Grid.Row="1" Grid.Column="1" />
+                        </Grid>
+                    </VerticalStackLayout>
+                </Border>
+
+                <mc:MenuItem ImageName="market" LabelText="Market" PageType="{x:Type mv:MarketPage}" WidthRequest="100" HeightRequest="100" Parameter="{Binding Character}" Grid.Column="1" />
+            </Grid>
+
+            <!-- Equipment -->
+            <Border Style="{StaticResource BoxBorder}" Margin="0,10">
+                <VerticalStackLayout>
+                    <Label Text="Equipment" Style="{StaticResource HeaderLabel}" />
+                    <Grid Padding="6" ColumnDefinitions="*, Auto, Auto, Auto" ColumnSpacing="10">
+                        <Label Text="Name" VerticalOptions="Center" TextColor="Gray" FontAttributes="Bold"/>
+                        <Label Text="Weight (kg)" VerticalOptions="Center" Grid.Column="1" TextColor="Gray" FontAttributes="Bold" />
+                    </Grid>
+
+                    <CollectionView ItemsSource="{Binding Equipment, Converter={StaticResource EquipmentSorter}}" SelectionMode="None" HeightRequest="280">
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate x:DataType="t:Thing">
+                                <Grid Padding="6" ColumnDefinitions="*, Auto, Auto, Auto" ColumnSpacing="10">
+                                    <Label Text="{Binding Name, Converter={StaticResource TranslationConverter}}" 
+                                       VerticalOptions="Center" 
+                                       HorizontalOptions="Start" />
+
+                                    <Button Grid.Column="1"
+                                        Text="💎"
+                                        BackgroundColor="Transparent"
+                                        FontSize="12"
+                                        Command="{Binding Source={RelativeSource AncestorType={x:Type vm:CharacterViewModel}}, Path=SellItemCommand}"
+                                        CommandParameter="{Binding .}"
+                                        ToolTipProperties.Text="{Binding Source='Sell', Converter={StaticResource TranslationConverter}}" />
+
+                                    <Label Grid.Column="2" 
+                                       Text="{Binding Weight, Converter={StaticResource TranslationConverter}}" 
+                                       VerticalOptions="Center" />
+
+                                    <Button Grid.Column="3"
+                                        Text="🔥"
+                                        BackgroundColor="Transparent"
+                                        FontSize="12"
+                                        Command="{Binding Source={RelativeSource AncestorType={x:Type vm:CharacterViewModel}}, Path=DeleteEquipmentCommand}"
+                                        CommandParameter="{Binding .}"
+                                        ToolTipProperties.Text="{Binding Source='Discard item', Converter={StaticResource TranslationConverter}}" />
+
+                                </Grid>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                    <Grid Padding="6" ColumnDefinitions="*,Auto" ColumnSpacing="10" Margin="0,6,0,0">
+                        <Label Text="Total weight (kg)" VerticalOptions="Center" TextColor="Gray" FontAttributes="Bold" />
+                        <Label Text="{Binding TotalEquipmentWeight}" FontAttributes="Bold" HorizontalOptions="End" Margin="0,4,10,0" />
+                    </Grid>
+                </VerticalStackLayout>
+            </Border>
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentView>

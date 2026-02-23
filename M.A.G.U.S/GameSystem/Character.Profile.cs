@@ -18,8 +18,6 @@ public partial class Character : IHaveImage
 
     public string School { get; set; }
 
-    public Alignment Alignment { get; set; }
-
     //public IEnumerable<Image> Images { get; set; }
 
     public IClass BaseClass { get; set; }

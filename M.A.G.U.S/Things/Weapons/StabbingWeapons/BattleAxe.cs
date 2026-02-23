@@ -5,7 +5,7 @@ using M.A.G.U.S.Interfaces;
 
 namespace M.A.G.U.S.Things.Weapons.StabbingWeapons;
 
-public class BattleAx : Weapon, IMeleeWeapon
+public class BattleAxe : Weapon, IMeleeWeapon
 {
     public override double AttacksPerRound => 1;
 

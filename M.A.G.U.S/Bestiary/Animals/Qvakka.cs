@@ -4,9 +4,9 @@ using M.A.G.U.S.Models;
 
 namespace M.A.G.U.S.Bestiary.Animals;
 
-public sealed class Ovakka : Creature
+public sealed class Qvakka : Creature
 {
-    public Ovakka()
+    public Qvakka()
     {
         Occurrence = Occurrence.Frequent;
         Size = Size.Small;

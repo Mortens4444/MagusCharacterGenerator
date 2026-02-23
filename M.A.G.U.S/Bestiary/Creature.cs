@@ -105,8 +105,6 @@ public abstract class Creature : Attacker, IHaveImage
     public virtual string RandomImage => Images.Length > 1 ? Images[RandomProvider.GetSecureRandomInt(0, Images.Length)] : DefaultImage;
 
     public virtual string[] Sounds => [ $"{Name.ToImageName()}" ];
-
-    public Alignment? Alignment { get; set; }
     
     public IPsi Psi { get; set; }
 

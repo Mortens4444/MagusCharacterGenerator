@@ -101,7 +101,7 @@ public abstract class Priest : Class, IClass, ILikeMagic
     public override bool AddQualificationPointsOnFirstLevel => true;
 
     public override IRace[] AllowedRaces => [new Human(), new Dwarf(), new CourtOrc(), new Amund(), new Jann(), new Wier(), new Dahr(), new Dracker(),
-        new ForestGiant(), new FrostGiant(), new MountainGiant(), new SwampGiant(), new Gnome(), new CourtGoblin()];
+        new ForestGiant(), new FrostGiant(), new MountainGiant(), new SwampGiant(), new Gnome(), new CourtGoblin(), new SaQuad()];
 
     public override List<LevelRequirement> ExperienceLevels =>
     [

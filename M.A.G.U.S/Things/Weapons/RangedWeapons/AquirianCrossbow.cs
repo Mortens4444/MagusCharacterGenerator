@@ -22,7 +22,7 @@ public class AquirianCrossbow : Weapon, IRangedWeapon
     [DiceThrow(ThrowType._1D5_Ranged)]
     public override int GetDamage() => DiceThrow._1D5_RangedAttack();
 
-    public override string Name => "Aquir crossbow";
+    public override string Name => "Aquirian crossbow";
 
     public override string Description => "A specialized crossbow of Aquirian make, known for its fine balance and silent release. Preferred by skilled rangers and urban hunters.";
 }

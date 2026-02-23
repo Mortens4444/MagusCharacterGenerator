@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:M.A.G.U.S.Assistant.ViewModels"
+             xmlns:mc="clr-namespace:Mtf.Maui.Controls;assembly=Mtf.Maui.Controls"
+             x:Class="M.A.G.U.S.Assistant.Views.PsiManaMagicResistanceView"
+             x:ClassModifier="internal"
+             x:DataType="vm:CharacterViewModel">
+    <ScrollView>
+        <VerticalStackLayout Spacing="16" Padding="16">
+
+            <!-- ᛉ-pontok -->
+            <Border Style="{StaticResource BoxBorder}">
+                <VerticalStackLayout>
+                    <Label Text="ᛉ-points" Style="{StaticResource HeaderLabel}"/>
+                    <Grid ColumnDefinitions="*, *" RowSpacing="5" RowDefinitions="Auto">
+                        <mc:EntryWithLabel Label="Max. ᛉp" Text="{Binding MaxPsiPoints}" IsReadOnly="True" />
+                        <mc:EntryWithLabel Label="Max. ᛉp/level" Text="{Binding PsiPointsModifier}" IsReadOnly="True" Grid.Column="1" />
+                    </Grid>
+                </VerticalStackLayout>
+            </Border>
+
+            <!-- Mana-pontok -->
+            <Border Style="{StaticResource BoxBorder}">
+                <VerticalStackLayout>
+                    <Label Text="Mana-points" Style="{StaticResource HeaderLabel}"/>
+                    <Grid ColumnDefinitions="*, *" RowSpacing="5" RowDefinitions="Auto">
+                        <mc:EntryWithLabel Label="Max. Mp" Text="{Binding MaxManaPoints}" IsReadOnly="True" />
+                        <mc:EntryWithLabel Label="Max. Mp/level" Text="{Binding MaxManaPointsPerLevel}" IsReadOnly="True" Grid.Column="1" />
+                    </Grid>
+                </VerticalStackLayout>
+            </Border>
+
+            <!-- Mágiaellenállás és ᛉ-pajzsok -->
+            <Border Style="{StaticResource BoxBorder}">
+                <VerticalStackLayout>
+                    <Label Text="Magic Resistance" Style="{StaticResource HeaderLabel}"/>
+                    <Grid ColumnDefinitions="*, *" RowSpacing="5" RowDefinitions="Auto, Auto, Auto">
+                        <mc:EntryWithLabel Label="Unconscious Astral Magic Resistance" Text="{Binding UnconsciousAstralMagicResistance}" IsReadOnly="True" />
+                        <mc:EntryWithLabel Label="Unconscious Mental Magic Resistance" Text="{Binding UnconsciousMentalMagicResistance}" IsReadOnly="True" Grid.Column="1" />
+                        <mc:EntryWithLabel Label="Static Astral ᛉ-Shield" Text="{Binding StaticAstralPsiShield}" IsReadOnly="True" Grid.Row="1" />
+                        <mc:EntryWithLabel Label="Static Mental ᛉ-Shield" Text="{Binding StaticMentalPsiShield}" IsReadOnly="True" Grid.Row="1" Grid.Column="1" />
+                        <mc:EntryWithLabel Label="Dynamic Astral ᛉ-Shield" Text="{Binding DynamicAstralPsiShield}" IsReadOnly="True" Grid.Row="2" />
+                        <mc:EntryWithLabel Label="Dynamic Mental ᛉ-Shield" Text="{Binding DynamicMentalPsiShield}" IsReadOnly="True" Grid.Row="2" Grid.Column="1" />
+                    </Grid>
+                </VerticalStackLayout>
+            </Border>
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentView>

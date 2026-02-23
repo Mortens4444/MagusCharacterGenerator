@@ -98,7 +98,7 @@ public class Warlock : Class, IClass, ILikeMagic
 
     public override bool AddQualificationPointsOnFirstLevel => true;
 
-    public override IRace[] AllowedRaces => [new Human(), new HalfElf(), new CourtOrc(), new Amund(), new Jann(), new Wier(), new Draquon(), new CourtGoblin(), new MutantOrc()];
+    public override IRace[] AllowedRaces => [new Human(), new HalfElf(), new CourtOrc(), new Amund(), new Jann(), new Wier(), new Draquon(), new CourtGoblin(), new MutantOrc(), new MosQuin()];
 
     public override List<LevelRequirement> ExperienceLevels =>
     [

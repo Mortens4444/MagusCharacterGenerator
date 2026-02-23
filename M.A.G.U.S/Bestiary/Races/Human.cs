@@ -32,12 +32,12 @@ public sealed class Human : Creature
         PoisonResistance = 2;
 
         Intelligence = Enums.Intelligence.Average;
-        Alignment = Enums.Alignment.Various;
+        Alignment = Alignment.Various;
         ExperiencePoints = 30;
     }
 
-    [DiceThrow(ThrowType._1D10)]
-    public override int GetDamage() => DiceThrow._1D10();
+    [DiceThrow(ThrowType._1D6)]
+    public override int GetDamage() => DiceThrow._1D6();
 
     [DiceThrow(ThrowType._1D10)]
     public override int GetNumberAppearing() => DiceThrow._1D10();

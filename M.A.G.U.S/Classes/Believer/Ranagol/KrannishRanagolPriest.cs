@@ -20,9 +20,9 @@ public class KrannishRanagolPriest : Priest
             result.AddRange(
             [
                 new Spellcasting(level: 3),
-                new AncientTongueLore(AntientLanguage.Aquir, level: 5),
+                new AncientTongueLore(AntientLanguage.Aquirian, level: 5),
                 new Spellcasting(QualificationLevel.Master, 6),
-                new AncientTongueLore(AntientLanguage.Aquir, QualificationLevel.Master, 11)
+                new AncientTongueLore(AntientLanguage.Aquirian, QualificationLevel.Master, 11)
             ]);
             return BuildQualifications(result);
         }

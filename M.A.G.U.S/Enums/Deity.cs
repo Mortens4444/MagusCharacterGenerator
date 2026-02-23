@@ -70,6 +70,13 @@ public enum Deity
     [AvailableSpheres(Sphere.Domination, Sphere.Death)] // A Kosfejes Úr (Krán)
     Ranagol,
 
+    // Ranagol angyalai
+    Metha, // Sa-quadok istene, a kaotikus élet ura
+
+    [Description("Gria-duan")] // Sötét elfek istene
+    GriaDuan,
+
+    // Tűzisten
     [AvailableSpheres(Sphere.Fire, Sphere.Destruction)] // A Tűzkobra (Ordan)
     Sogron,
 

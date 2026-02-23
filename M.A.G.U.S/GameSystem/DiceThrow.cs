@@ -30,6 +30,9 @@ public class DiceThrow
     public int _1D3(bool hasLuckAmulet = false) =>
         ApplyLuck(RandomProvider.GetSecureRandomByte(1, 4), 1, 4, hasLuckAmulet);
 
+    public int _1D4(bool hasLuckAmulet = false) =>
+        ApplyLuck(RandomProvider.GetSecureRandomByte(1, 5), 1, 5, hasLuckAmulet);
+
     public int _1D3_RangedAttack(bool hasLuckAmulet = false) =>
         RangedAttack(1, 4, hasLuckAmulet);
 

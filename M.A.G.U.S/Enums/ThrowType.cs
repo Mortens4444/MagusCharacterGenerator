@@ -9,6 +9,8 @@ public enum ThrowType
     _1D1,
     [Description("1D2")]
     _1D2,
+    [Description("1D4")]
+    _1D4,
     [Description("1D5")]
     _1D5,
     [Description("1D6")]

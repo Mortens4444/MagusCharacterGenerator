@@ -30,6 +30,8 @@ public abstract class Attacker
     public event EventHandler? Died;
     public event EventHandler? LostConsciousness;
 
+    public Alignment Alignment { get; set; }
+
     public int NaturalArmorClass
     {
         get

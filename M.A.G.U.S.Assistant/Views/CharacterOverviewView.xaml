@@ -1,0 +1,81 @@
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:M.A.G.U.S.Assistant.ViewModels"
+             xmlns:mc="clr-namespace:Mtf.Maui.Controls;assembly=Mtf.Maui.Controls"
+             xmlns:conv="clr-namespace:Mtf.LanguageService.MAUI.Converters;assembly=Mtf.LanguageService.MAUI"
+             x:Class="M.A.G.U.S.Assistant.Views.CharacterOverviewView"
+             x:ClassModifier="internal"
+             x:DataType="vm:CharacterViewModel">
+
+    <ContentView.Resources>
+        <ResourceDictionary>
+            <conv:EnumDescriptionTranslationConverter x:Key="EnumDescriptionTranslationConverter" />
+            <conv:TranslationConverter x:Key="TranslationConverter" />
+        </ResourceDictionary>
+    </ContentView.Resources>
+
+    <ScrollView>        
+        <VerticalStackLayout Spacing="16" Padding="16">
+
+            <!-- Name, race, class, alinment, experience level -->
+            <Border Style="{StaticResource BoxBorder}">
+                <VerticalStackLayout>
+                    <Grid ColumnDefinitions="*,Auto">
+                        <mc:EntryWithLabel Label="Character name" Text="{Binding Character.Name}" />
+                        <Button Grid.Column="1" Text="🖨️" Command="{Binding PrintCommand}" VerticalOptions="End" Margin="10,0,0,5" HeightRequest="40"/>
+                    </Grid>
+
+                    <BoxView HeightRequest="1" Color="{AppThemeBinding Light={StaticResource Gray200}, Dark={StaticResource Gray600}}" Margin="0,5"/>
+                    <Grid ColumnDefinitions="*, *" RowDefinitions="Auto, Auto, Auto, Auto" MinimumWidthRequest="100" RowSpacing="5">
+
+                        <mc:EntryWithLabel Label="Race"
+                                       Text="{Binding Race, Converter={StaticResource TranslationConverter}}"
+                                       HorizontalOptions="Center"
+                                       IsReadOnly="True" />
+
+                        <mc:EntryWithLabel Label="Caste"
+                                       Text="{Binding Class, Converter={StaticResource TranslationConverter}}"
+                                       HorizontalOptions="Center"
+                                       IsReadOnly="True"
+                                       Grid.Column="1" />
+
+                        <mc:EntryWithLabel Label="Experience level"
+                                       Text="{Binding Level}"
+                                       HorizontalOptions="Center"
+                                       IsReadOnly="True"
+                                       Grid.Row="1"
+                                       Grid.ColumnSpan="2" />
+
+                        <Button Text="Level Up"
+                            Command="{Binding LevelUpCommand}"
+                            IsVisible="{Binding CanLevelUp}"
+                            Grid.Row="2"
+                            Grid.ColumnSpan="2"
+                            HorizontalOptions="Center" />
+
+                        <!--<Grid Grid.Row="1" ColumnDefinitions="*, Auto">
+                        <Label Grid.Column="0" Text="Player character" VerticalOptions="Center" LineBreakMode="WordWrap" />
+                        <Switch Grid.Column="1" IsToggled="{Binding PlayerCharacter}" />
+                    </Grid>-->
+
+                        <mc:EntryWithLabel Label="Experience points"
+                                       Text="{Binding ExperiencePoints}"
+                                       HorizontalOptions="Center"
+                                       IsReadOnly="True"
+                                       Grid.Row="3" />
+
+                        <Picker ItemsSource="{Binding Alignments}"
+                            ItemDisplayBinding="{Binding ., Converter={StaticResource EnumDescriptionTranslationConverter}}"
+                            SelectedItem="{Binding Alignment}"
+                            VerticalTextAlignment="Center"
+                            HorizontalTextAlignment="Center"
+                            MaximumHeightRequest="50"
+                            Grid.Row="3"
+                            Grid.Column="1" />
+                    </Grid>
+                </VerticalStackLayout>
+            </Border>
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentView>

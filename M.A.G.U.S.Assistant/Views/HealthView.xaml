@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:M.A.G.U.S.Assistant.ViewModels"
+             xmlns:mc="clr-namespace:Mtf.Maui.Controls;assembly=Mtf.Maui.Controls"
+             xmlns:mv="clr-namespace:M.A.G.U.S.Assistant.Views"
+             xmlns:t="clr-namespace:M.A.G.U.S.Things;assembly=M.A.G.U.S."
+             x:Class="M.A.G.U.S.Assistant.Views.HealthView"
+             x:ClassModifier="internal"
+             x:DataType="vm:CharacterViewModel">
+    <ScrollView>
+        <VerticalStackLayout Spacing="16" Padding="16">
+
+            <!-- Health & Pain Resistance -->
+            <Border Style="{StaticResource BoxBorder}">
+                <VerticalStackLayout>
+                    <Label Text="Health &amp; Pain Resistance" Style="{StaticResource HeaderLabel}"/>
+                    <Grid ColumnDefinitions="*, *, *" RowDefinitions="Auto">
+                        <mc:EntryWithLabel Label="Max. HP" Text="{Binding MaxHealthPoints}" IsReadOnly="True" WidthRequest="100" />
+                        <mc:EntryWithLabel Label="Max. PRP" Text="{Binding MaxPainTolerancePoints}" IsReadOnly="True" WidthRequest="100" Grid.Column="1" />
+                        <mc:EntryWithLabel Label="Max. PRP/level" Text="{Binding PainToleranceModifierFormula}" IsReadOnly="True" WidthRequest="100" Grid.Column="2" />
+                    </Grid>
+                </VerticalStackLayout>
+            </Border>
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentView>

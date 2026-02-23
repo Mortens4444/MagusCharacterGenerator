@@ -99,7 +99,7 @@ public class Assassin : Class, IClass, IJustFight
 
     public override bool AddQualificationPointsOnFirstLevel => true;
 
-    public override IRace[] AllowedRaces => [new Human(), new Elf(), new HalfElf(), new CourtOrc(), new Amund(), new Jann(), new Khal(), new Wier(), new Feenhar(), new Draquon()];
+    public override IRace[] AllowedRaces => [new Human(), new Elf(), new HalfElf(), new CourtOrc(), new Amund(), new Jann(), new Khal(), new Wier(), new Feenhar(), new Draquon(), new DarkElf()];
 
     public override List<LevelRequirement> ExperienceLevels =>
     [
