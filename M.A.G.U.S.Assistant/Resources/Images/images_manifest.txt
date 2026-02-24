@@ -64,11 +64,14 @@ steel_scale_armor.png
 studded_leather.png
 adachnoa.png
 anatyda.png
+astral_vampire.png
 barracuda.png
 bat.png
 bear.png
 black_shark.png
 byzon.png
+ceph.png
+coronella.png
 crazy_bear.png
 crocodile.png
 dark_elf.png
@@ -107,6 +110,7 @@ singa_hamata.png
 slave.png
 snow_leopard.png
 spider.png
+stinky_lizard.png
 trueblood.png
 umich.png
 umich_2.png
@@ -520,6 +524,7 @@ weapon_use.png
 weather_divination.png
 wrestling.png
 amund.png
+buzzgoblin.png
 court_goblin.png
 court_orc.png
 dahr.png

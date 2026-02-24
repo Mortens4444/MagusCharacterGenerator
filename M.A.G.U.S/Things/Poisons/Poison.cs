@@ -2,7 +2,7 @@
 using M.A.G.U.S.Things;
 using M.A.G.U.S.Utils;
 
-namespace M.A.G.U.S.GameSystem.PoisonsAndIllnesses;
+namespace M.A.G.U.S.Things.Poisons;
 
 public abstract class Poison : Thing
 {

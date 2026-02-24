@@ -1,7 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.Messaging;
 using M.A.G.U.S.Assistant.Models;
 using M.A.G.U.S.Bestiary;
-using M.A.G.U.S.GameSystem.PoisonsAndIllnesses;
 using M.A.G.U.S.GameSystem.Runes;
 using M.A.G.U.S.Interfaces;
 using M.A.G.U.S.Qualifications;
@@ -9,6 +8,7 @@ using M.A.G.U.S.Races;
 using M.A.G.U.S.Things;
 using M.A.G.U.S.Things.Gemstones;
 using M.A.G.U.S.Things.MagicalObjects;
+using M.A.G.U.S.Things.Poisons;
 using M.A.G.U.S.Things.Weapons;
 using M.A.G.U.S.Utils;
 using Mtf.Extensions;
@@ -193,7 +193,7 @@ internal sealed class PreloadService
         {
             try
             {
-                var poisons = "M.A.G.U.S.GameSystem.Poisons".CreateInstancesFromNamespace<Poison>()
+                var poisons = "M.A.G.U.S.Things.Poisons".CreateInstancesFromNamespace<Poison>()
                     .OrderBy(p => Lng.Elem(p.Name))
                     .ToArray();
 

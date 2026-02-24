@@ -1,7 +1,7 @@
 ﻿using M.A.G.U.S.Enums;
 using M.A.G.U.S.GameSystem.Valuables;
 
-namespace M.A.G.U.S.GameSystem.PoisonsAndIllnesses;
+namespace M.A.G.U.S.Things.Poisons;
 
 public class HempGrass : Poison
 {
