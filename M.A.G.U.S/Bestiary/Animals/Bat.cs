@@ -9,13 +9,18 @@ public sealed class Bat : Creature
     public Bat()
     {
         Occurrence = Occurrence.Frequent;
+        PlacesOfOccurrence = TerrainType.Cave | TerrainType.Crevice | TerrainType.TreeHollow | TerrainType.OldDilapidatedBuilding;
         Size = Size.Small;
+
         InitiateValue = 20;
         AttackValue = 20;
         DefenseValue = 92;
+
         HealthPoints = 2;
         PainTolerancePoints = 5;
+
         PoisonResistance = 3;
+
         Intelligence = Enums.Intelligence.Animal;
         ExperiencePoints = 1;
     }

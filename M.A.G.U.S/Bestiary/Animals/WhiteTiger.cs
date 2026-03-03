@@ -12,9 +12,12 @@ public sealed class WhiteTiger : Creature
     {
         Occurrence = Occurrence.Rare;
         Size = Size.Human;
+        PlacesOfOccurrence = TerrainType.Snowfield;
+
         AttackValue = 50;
         DefenseValue = 70;
         InitiateValue = 30;
+
         AttackModes =
         [
             new MeleeAttack(new BodyPart("Weak paw strike", ThrowType._1D5), AttackValue),
@@ -24,7 +27,9 @@ public sealed class WhiteTiger : Creature
 
         HealthPoints = 25;
         PainTolerancePoints = 40;
+
         PoisonResistance = 7;
+
         Intelligence = Enums.Intelligence.Animal;
         ExperiencePoints = 25;
     }

@@ -14,6 +14,7 @@ public sealed class Buzzgoblin : Creature
     {
         Occurrence = Occurrence.Frequent;
         Size = Size.Small;
+        PlacesOfOccurrence = TerrainType.TropicalForest;
 
         AttackValue = 45;
         DefenseValue = 80;

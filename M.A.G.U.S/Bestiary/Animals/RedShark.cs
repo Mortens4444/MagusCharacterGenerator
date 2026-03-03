@@ -12,12 +12,17 @@ public sealed class RedShark : Creature
         Occurrence = Occurrence.Rare;
         Intelligence = Enums.Intelligence.Animal;
         Size = Size.Up_to_3_meters;
+        PlacesOfOccurrence = TerrainType.Water;
+
         InitiateValue = 40;
         AttackValue = 70;
         DefenseValue = 100;
+
         HealthPoints = 20;
         PainTolerancePoints = 40;
+
         PoisonResistance = 5;
+
         ExperiencePoints = 35;
     }
 

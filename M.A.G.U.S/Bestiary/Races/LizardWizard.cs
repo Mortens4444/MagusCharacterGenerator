@@ -12,19 +12,25 @@ public sealed class LizardWizard : Creature
     {
         Occurrence = Occurrence.Rare;
         Size = Size.Human;
+        PlacesOfOccurrence = TerrainType.Riverbank | TerrainType.Plains;
+
         AttackValue = 64;
         DefenseValue = 108;
         InitiateValue = 35;
+        
         HealthPoints = 18;
         PainTolerancePoints = 70;
+
         AstralMagicResistance = 42;
         MentalMagicResistance = 39;
         PoisonResistance = 5;
+
         Psi = new PsiKyrMethod();
         PsiPoints = 80;
         ManaPoints = 100;
+
         Intelligence = Enums.Intelligence.Outstanding;
-        Alignment = Enums.Alignment.OrderDeath;
+        Alignment = Alignment.OrderDeath;
         ExperiencePoints = 7000;
     }
 

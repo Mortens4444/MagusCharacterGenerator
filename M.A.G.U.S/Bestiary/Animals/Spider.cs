@@ -9,9 +9,13 @@ public sealed class Spider : Creature
     public Spider()
     {
         Occurrence = Occurrence.Frequent;
+        PlacesOfOccurrence = TerrainType.Anywhere;
         Size = Size.Small;
+
         HealthPoints = 1;
+
         PoisonResistance = 8;
+
         Intelligence = Enums.Intelligence.Animal;
     }
 

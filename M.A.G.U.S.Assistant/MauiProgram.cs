@@ -2,10 +2,12 @@
 using M.A.G.U.S.Assistant.Database;
 using M.A.G.U.S.Assistant.Database.Repositories;
 using M.A.G.U.S.Assistant.Interfaces;
+using M.A.G.U.S.Assistant.Interfaces.Bluetooth;
 using M.A.G.U.S.Assistant.Services;
 using M.A.G.U.S.Assistant.ViewModels;
 using M.A.G.U.S.Assistant.Views;
 using M.A.G.U.S.Interfaces;
+using M.A.G.U.S.Utils;
 using Microsoft.Extensions.Logging;
 using Mtf.Maui.Controls.Messages;
 using System.Diagnostics;
@@ -90,15 +92,46 @@ internal static class MauiProgram
     {
         var serviceTypes = new List<Type>
         {
-            typeof(DatabaseContext),
-            typeof(SettingsService),
             typeof(CharacterService),
-            typeof(CombatEngine)
+            typeof(CombatEngine),
+            typeof(CommandRegistry),
+            typeof(DatabaseContext),
+            typeof(SettingsService)
         };
         foreach (var serviceType in serviceTypes)
         {
             builder.Services.AddTransient(serviceType);
         }
+
+        builder.Services.AddSingleton<IRuneTranslator, RuneTranslator>();
+
+        builder.Services.AddSingleton<IBluetoothService>(sp =>
+        {
+            var registry = sp.GetRequiredService<CommandRegistry>();
+
+            return new BluetoothService(
+                registry,
+                connector: sp.GetService<IBluetoothConnector>(),
+                listenerFactory: async () =>
+                {
+                    IBluetoothListener? listener = null;
+#if ANDROID
+                    listener = new Platforms.Android.AndroidBluetoothListener();
+#elif WINDOWS
+                    listener = new Platforms.Windows.WindowsBluetoothListener();
+#elif IOS
+
+#elif MACCATALYST
+
+#elif TIZEN
+
+#else
+                    listener = new StubBluetoothListener();
+#endif
+                    return listener;
+                });
+        });
+
         builder.Services.AddTransient<ISettings, SettingsService>();
     }
 
@@ -119,8 +152,8 @@ internal static class MauiProgram
         var repositoryTypes = new List<Type>
         {
             typeof(CharacterRepository),
-            typeof(SettingsRepository),
-            typeof(DrawingRepository)
+            typeof(DrawingRepository),
+            typeof(SettingsRepository)
         };
         foreach (var repositoryType in repositoryTypes)
         {
@@ -152,9 +185,11 @@ internal static class MauiProgram
             typeof(QualificationsViewModel),
             typeof(RacesViewModel),
             typeof(RollFormulaViewModel),
+            typeof(RunesViewModel),
             typeof(SearchListViewModel),
             typeof(SettingsViewModel),
             typeof(SoundViewModel),
+            typeof(StorytellingViewModel),
             typeof(WebBrowserViewModel),
         };
         foreach (var viewModelType in viewModelTypes)

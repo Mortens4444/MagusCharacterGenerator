@@ -16,6 +16,7 @@ public sealed class DreamCrystal : Creature
         // Willpower 14 + k6
         Occurrence = Occurrence.VeryRare;
         Size = Size.Maximum_1_meter;
+        PlacesOfOccurrence = TerrainType.Cave;
 
         AttackModes =
         [
@@ -26,21 +27,25 @@ public sealed class DreamCrystal : Creature
             new MeleeAttack(new Longsword(), AttackValue),
             new RangedAttack(new Shortbow(), AimValue),
             new RangedAttack(new Longbow(), AimValue)
-
         ];
+
         AttackValue = 35;
         DefenseValue = 96;
         InitiateValue = 25;
         AimValue = 4;
+
         HealthPoints = 20;
+
         AstralMagicResistance = 140;
         MentalMagicResistance = 170;
+        PoisonResistance = Int32.MaxValue;
+
         Psi = new PsiKyrMethod();
         PsiPoints = 70;
-        PoisonResistance = Int32.MaxValue;
-        Intelligence = Enums.Intelligence.Outstanding;
         ManaPoints = 100;
-        Alignment = Enums.Alignment.Various;
+
+        Intelligence = Enums.Intelligence.Outstanding;
+        Alignment = Alignment.Various;
         ExperiencePoints = 7500;
     }
 

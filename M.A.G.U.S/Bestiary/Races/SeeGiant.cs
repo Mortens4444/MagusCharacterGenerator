@@ -14,10 +14,14 @@ public sealed class SeeGiant : Creature
     {
         Occurrence = Occurrence.VeryRare;
         Size = Size.About_8_meters;
+        PlacesOfOccurrence = TerrainType.CoastalBarren | TerrainType.CoastalIsland;
+
+
         AttackValue = 85;
         DefenseValue = 135;
         InitiateValue = 35;
         AimValue = 0;
+
         //AttackModes =
         //[
         //    new MeleeAttack(new ShortSword(), AttackValue), // Traclon tőr TÉ: 12, VÉ: 14, KÉ: 9, Sebzés: 1k10+4
@@ -27,13 +31,16 @@ public sealed class SeeGiant : Creature
         //    new RangeAttack(new Shortbow(), AimValue),
         //    new RangeAttack(new Longbow(), AimValue) // Sacron Vadászathoz íjat és hajítódárdáka
         //];
+
         HealthPoints = 30;
         PainTolerancePoints = 120;
+
         AstralMagicResistance = 6;
         MentalMagicResistance = 30;
         PoisonResistance = Int32.MaxValue;
+
         Intelligence = Enums.Intelligence.High;
-        Alignment = Enums.Alignment.DeathChaos;
+        Alignment = Alignment.DeathChaos;
         ExperiencePoints = 650;
     }
 

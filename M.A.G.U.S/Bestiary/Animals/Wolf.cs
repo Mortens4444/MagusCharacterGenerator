@@ -11,12 +11,17 @@ public sealed class Wolf : Creature
     {
         Occurrence = Occurrence.Frequent;
         Size = Size.Small;
+        PlacesOfOccurrence = TerrainType.ArcticForest | TerrainType.TemperateForest;
+
         AttackValue = 35;
         DefenseValue = 60;
         InitiateValue = 10;
+
         HealthPoints = 18;
         PainTolerancePoints = 38;
+
         PoisonResistance = 4;
+
         Intelligence = Enums.Intelligence.Animal;
         ExperiencePoints = 4;
     }

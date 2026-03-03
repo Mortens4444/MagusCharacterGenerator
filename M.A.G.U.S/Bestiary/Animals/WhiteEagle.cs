@@ -10,12 +10,17 @@ public sealed class WhiteEagle : Creature
     {
         Occurrence = Occurrence.Frequent;
         Size = Size.Human;
+        PlacesOfOccurrence = TerrainType.AustralColdRegion;
+
         InitiateValue = 15;
         AttackValue = 50;
         DefenseValue = 90;
+
         HealthPoints = 5;
         PainTolerancePoints = 10;
+
         PoisonResistance = 4;
+
         Intelligence = Enums.Intelligence.Animal;
         ExperiencePoints = 2;
     }

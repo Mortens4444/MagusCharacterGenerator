@@ -9,13 +9,18 @@ public sealed class Qvakka : Creature
     public Qvakka()
     {
         Occurrence = Occurrence.Frequent;
+        PlacesOfOccurrence = TerrainType.Snowfield;
         Size = Size.Small;
+
         AttackValue = 40;
         DefenseValue = 75;
         InitiateValue = 20;
+
         HealthPoints = 5;
         PainTolerancePoints = 9;
+
         PoisonResistance = 2;
+
         Intelligence = Enums.Intelligence.Animal;
         ExperiencePoints = 4;
     }

@@ -15,7 +15,7 @@
                 x:ClassModifier="internal"
                 x:DataType="vm:EncounterViewModel"
                 Title="Clash">
-    
+
     <v:NotifierPage.Resources>
         <ResourceDictionary>
             <c:BoolToTextConverter x:Key="BoolToTextConverter" />
@@ -23,7 +23,8 @@
         </ResourceDictionary>
     </v:NotifierPage.Resources>
 
-    <Grid ColumnDefinitions="*,*" RowDefinitions="Auto,Auto,Auto,*" Padding="12">
+    <!-- RowDefinitions módosítva: top:Auto, assignments:Auto, turns:*, bottom:Auto -->
+    <Grid ColumnDefinitions="*,*" RowDefinitions="Auto,Auto,*,Auto" Padding="12">
 
         <!-- Characters -->
         <VerticalStackLayout Spacing="8" Margin="0,0,0,15" IsVisible="{Binding ShowControls}">
@@ -92,16 +93,8 @@
             </CollectionView>
         </VerticalStackLayout>
 
-        <!-- Run turn + toggle -->
-        <HorizontalStackLayout Grid.Row="2" Grid.ColumnSpan="2" Spacing="8">
-            <Button Text="Start New Round" Command="{Binding RunTurnCommand}" FontAttributes="Bold" />
-            <Button Text="{Binding ShowControls, Converter={StaticResource BoolToTextConverter}, ConverterParameter='Hide pairing|Pairing'}"
-                    Command="{Binding ToggleShowControlsCommand}" />
-        </HorizontalStackLayout>
-
-        <!-- Turns details -->
-        <Grid Grid.Row="3" Grid.ColumnSpan="2" RowDefinitions="Auto, *">
-
+        <!-- Turns details (most now a stretchable row) -->
+        <Grid Grid.Row="2" Grid.ColumnSpan="2" RowDefinitions="Auto, *">
             <Border Grid.Row="0" Padding="8" BackgroundColor="{AppThemeBinding Light=#F0F0F0, Dark=#333333}">
                 <Grid Padding="6" ColumnDefinitions="5*,4*,3*,8*" RowDefinitions="Auto,Auto">
                     <Label Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" Text="Attacker" FontAttributes="Bold" VerticalOptions="Center" />
@@ -112,10 +105,10 @@
                 </Grid>
             </Border>
 
-                            <!--MaximumHeightRequest="400"-->
             <CollectionView Grid.Row="1"
                             ItemsSource="{Binding SelectedTurnHistory}"
-                            x:Name="TurnHistoryView">
+                            x:Name="TurnHistoryView"
+                            VerticalOptions="Fill">
                 <CollectionView.ItemTemplate>
                     <DataTemplate x:DataType="vm:TurnViewModel">
                         <VerticalStackLayout Spacing="6">
@@ -143,6 +136,14 @@
                 </CollectionView.ItemTemplate>
             </CollectionView>
         </Grid>
+
+        <!-- Run turn + toggle (now docked to bottom) -->
+        <Grid Grid.Row="3" Grid.ColumnSpan="2" ColumnDefinitions="*,Auto" ColumnSpacing="8">
+            <Button Grid.Column="0" Command="{Binding ToggleShowControlsCommand}"
+                    Text="{Binding ShowControls, Converter={StaticResource BoolToTextConverter}, ConverterParameter='Hide pairing|Show pairing'}"/>
+            <Button Grid.Column="1" Text="Start New Round" Command="{Binding RunTurnCommand}" FontAttributes="Bold" />
+        </Grid>
+
     </Grid>
 
 </v:NotifierPage>

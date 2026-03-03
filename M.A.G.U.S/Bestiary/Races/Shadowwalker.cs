@@ -13,10 +13,13 @@ public sealed class Shadowwalker : Creature
     {
         Occurrence = Occurrence.Rare;
         Size = Size.Human;
+        PlacesOfOccurrence = TerrainType.CursedLand;
+
         AttackValue = 75;
         DefenseValue = 135;
         InitiateValue = 55;
         AimValue = 60;
+
         AttackModes =
         [
             new MeleeAttack(new ShortSword(), AttackValue),
@@ -24,13 +27,16 @@ public sealed class Shadowwalker : Creature
             new RangedAttack(new Shortbow(), AimValue),
             new RangedAttack(new Longbow(), AimValue)
         ];
+
         HealthPoints = 16;
         //PainTolerancePoints = 65 + DiceThrow._2D10();
         MinPainTolerancePoints = 67;
         MaxPainTolerancePoints = 85;
+
         AstralMagicResistance = 12;
         MentalMagicResistance = 9;
         PoisonResistance = Int32.MaxValue;
+
         Intelligence = Enums.Intelligence.High;
         ExperiencePoints = 350;
     }

@@ -10,16 +10,21 @@ public sealed class Narwhal : Creature
     public Narwhal()
     {
         Occurrence = Occurrence.Rare;
-        Intelligence = Enums.Intelligence.Animal;
+        PlacesOfOccurrence = TerrainType.Water;
         Size = Size._4_meters;
+
         InitiateValue = 5;
         AttackValue = 150;
         DefenseValue = 170;
+
         HealthPoints = 24;
         PainTolerancePoints = 32;
+        
         AstralMagicResistance = 0;
-        MentalMagicResistance = 0;
+        MentalMagicResistance = 0;        
         PoisonResistance = 7;
+
+        Intelligence = Enums.Intelligence.Animal;
         ExperiencePoints = 580;
     }
 

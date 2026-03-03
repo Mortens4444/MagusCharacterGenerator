@@ -12,6 +12,7 @@ public sealed class Dragon : Creature
     {
         Occurrence = Occurrence.VeryRare;
         Size = Size.Huge;
+        PlacesOfOccurrence = TerrainType.Cave;
 
         AttackModes =
         [

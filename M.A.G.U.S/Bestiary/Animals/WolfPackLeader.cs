@@ -12,12 +12,17 @@ public sealed class WolfPackLeader : Creature
     {
         Occurrence = Occurrence.Frequent;
         Size = Size.Small;
+        PlacesOfOccurrence = TerrainType.ArcticForest | TerrainType.TemperateForest;
+
         AttackValue = 40;
         DefenseValue = 65;
         InitiateValue = 10;
+
         HealthPoints = 20;
         PainTolerancePoints = 42;
+
         PoisonResistance = 4;
+
         Intelligence = Enums.Intelligence.Animal;
         ExperiencePoints = 4;
     }

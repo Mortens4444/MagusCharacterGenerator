@@ -11,6 +11,8 @@ public sealed class GrayDolphin : Creature
     {
         Occurrence = Occurrence.Frequent;
         Intelligence = Enums.Intelligence.High;
+        PlacesOfOccurrence = TerrainType.Water;
+
         Size = Size._1_5_meters;
         AttackValue = 40;
         DefenseValue = 80;
@@ -21,7 +23,7 @@ public sealed class GrayDolphin : Creature
         MentalMagicResistance = 3;
         PoisonResistance = 4;
         ExperiencePoints = 0;
-        Alignment = Enums.Alignment.Life;
+        Alignment = Alignment.Life;
     }
 
     public override string Name => "Gray dolphin";

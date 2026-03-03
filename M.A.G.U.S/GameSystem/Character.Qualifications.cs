@@ -190,10 +190,6 @@ public partial class Character
 
         qualifications.RemoveBy(specialQualifications);
 
-        //Qualifications.Clear();
-        //PercentQualifications.Clear();
-        //SpecialQualifications.Clear();
-
         Qualifications = qualifications;
         PercentQualifications = percentQualifications;
         SpecialQualifications = specialQualifications;

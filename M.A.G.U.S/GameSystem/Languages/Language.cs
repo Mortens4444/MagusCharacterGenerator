@@ -24,6 +24,7 @@ public enum Language
     Hobgoblin,
     Niarei,
     Khal,
+    Zagnol,
 
     Tchashka,
     Jadal,

@@ -11,19 +11,27 @@ public sealed class MosQuin : Creature
     {
         Occurrence = Occurrence.VeryRare;
         Size = Size.Human;
+        PlacesOfOccurrence = TerrainType.Anywhere;
+        Country = GameSystem.Places.Country.Kran;
+
         AttackValue = 80;
         DefenseValue = 130;
         InitiateValue = 55;
         AimValue = 0;
+
         HealthPoints = 18;
         PainTolerancePoints = 75;
+
         PoisonResistance = 10;
         AstralMagicResistance = 110;
         MentalMagicResistance = 110;
+
         AttacksPerRound = 2;
+
+        ManaPoints = 100;
+
         Intelligence = Enums.Intelligence.Outstanding;
         Alignment = Alignment.ChaosDeath;
-        ManaPoints = 100;
         ExperiencePoints = 20000;
     }
 

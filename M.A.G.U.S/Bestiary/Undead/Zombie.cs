@@ -11,15 +11,20 @@ public sealed class Zombie : LivingDead
     {
         Occurrence = Occurrence.Rare;
         Size = Size.Human;
+        PlacesOfOccurrence = TerrainType.Anywhere;
+
         AttackValue = 10;
         DefenseValue = 40;
         InitiateValue = 0;
+
         HealthPoints = 15;
+
         AstralMagicResistance = Int32.MaxValue;
         MentalMagicResistance = Int32.MaxValue;
         PoisonResistance = Int32.MaxValue;
+
         Intelligence = Enums.Intelligence.None;
-        Alignment = Enums.Alignment.ChaosDeath;
+        Alignment = Alignment.ChaosDeath;
         ExperiencePoints = 15;
         NecrographyDepartment = NecrographyDepartment.UnconsciousUndead;
     }

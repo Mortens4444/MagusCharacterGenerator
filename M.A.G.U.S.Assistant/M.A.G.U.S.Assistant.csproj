@@ -140,7 +140,7 @@
     <PackageReference Include="Microsoft.Maui.Graphics" Version="10.0.30" />
     <PackageReference Include="Microsoft.Maui.Graphics.Skia" Version="10.0.30" />
     <PackageReference Include="Mtf.Maui.Controls" Version="4.0.63" />
-    <PackageReference Include="Mtf.MAUI.LanguageService" Version="3.0.23" />
+    <PackageReference Include="Mtf.MAUI.LanguageService" Version="3.0.25" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.4" />
     <PackageReference Include="Plugin.Maui.Audio" Version="4.0.0" />
     <PackageReference Include="sqlite-net-pcl" Version="1.9.172" />
@@ -265,13 +265,22 @@
     <MauiXaml Update="Views\RollFormulaPage.xaml">
       <Generator>MSBuild:Compile</Generator>
     </MauiXaml>
+    <MauiXaml Update="Views\RunesPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </MauiXaml>
     <MauiXaml Update="Views\SearchListPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </MauiXaml>
+    <MauiXaml Update="Views\SearchListView.xaml">
       <Generator>MSBuild:Compile</Generator>
     </MauiXaml>
     <MauiXaml Update="Views\SettingsPage.xaml">
       <Generator>MSBuild:Compile</Generator>
     </MauiXaml>
     <MauiXaml Update="Views\SoundPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </MauiXaml>
+    <MauiXaml Update="Views\StorytellingPage.xaml">
       <Generator>MSBuild:Compile</Generator>
     </MauiXaml>
   </ItemGroup>

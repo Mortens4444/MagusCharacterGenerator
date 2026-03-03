@@ -11,15 +11,20 @@ public sealed class Werewolf : LivingDead
     {
         Occurrence = Occurrence.Rare;
         Size = Size.Human;
+        PlacesOfOccurrence = TerrainType.Anywhere;
+
         AttackValue = 60;
         DefenseValue = 75;
         InitiateValue = 25;
+
         PainTolerancePoints = 44;
+
         AstralMagicResistance = Int32.MaxValue;
         MentalMagicResistance = Int32.MaxValue;
         PoisonResistance = Int32.MaxValue;
+
         Intelligence = Enums.Intelligence.High;
-        Alignment = Enums.Alignment.ChaosDeath;
+        Alignment = Alignment.ChaosDeath;
         ExperiencePoints = 300;
         NecrographyDepartment = NecrographyDepartment.WanderingCorpse;
     }

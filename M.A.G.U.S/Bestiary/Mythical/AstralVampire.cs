@@ -9,6 +9,7 @@ public sealed class AstralVampire : Creature
     {
         Occurrence = Occurrence.VeryRare;
         Size = Size.Small;
+        PlacesOfOccurrence = TerrainType.Anywhere;
 
         AttackValue = 0;
         DefenseValue = 0;

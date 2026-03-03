@@ -14,10 +14,13 @@ public sealed class FrostGiant : Creature
     {
         Occurrence = Occurrence.VeryRare;
         Size = Size._4_to_5_5_meters;
+        PlacesOfOccurrence = TerrainType.Icefield | TerrainType.Snowfield | TerrainType.ArcticForest;
+
         AttackValue = 80;
         DefenseValue = 95;
         InitiateValue = 20;
         AimValue = 0;
+
         //AttackModes =
         //[
         //    new MeleeAttack(new Warhammer(), AttackValue),
@@ -27,13 +30,16 @@ public sealed class FrostGiant : Creature
         //    new RangeAttack(new Shortbow(), AimValue),
         //    new RangeAttack(new Longbow(), AimValue)
         //];
+
         HealthPoints = 30;
         PainTolerancePoints = 100;
+
         AstralMagicResistance = 8;
         MentalMagicResistance = 35;
         PoisonResistance = Int32.MaxValue;
+
         Intelligence = Enums.Intelligence.High;
-        Alignment = Enums.Alignment.LifeOrder;
+        Alignment = Alignment.LifeOrder;
         ExperiencePoints = 560;
     }
 

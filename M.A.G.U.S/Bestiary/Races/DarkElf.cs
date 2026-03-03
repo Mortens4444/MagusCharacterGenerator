@@ -13,6 +13,9 @@ public sealed class DarkElf : Creature
     {
         Occurrence = Occurrence.VeryRare;
         Size = Size.Human;
+        PlacesOfOccurrence = TerrainType.DeepUnderground;
+        Country = GameSystem.Places.Country.Kran;
+
         AttackValue = 200; // 250
         DefenseValue = 220; // 280
         InitiateValue = 85;

@@ -10,6 +10,7 @@ public sealed class Coronella : Creature
     {
         Occurrence = Occurrence.Rare;
         Size = Size.Human;
+        PlacesOfOccurrence = TerrainType.Desert | TerrainType.Plains | TerrainType.TemperateForest | TerrainType.TropicalForest;
 
         AttackValue = 40;
         DefenseValue = 60;

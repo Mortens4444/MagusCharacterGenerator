@@ -23,7 +23,7 @@ public sealed class MosQuin : Aquirian
     public override SpecialQualificationList SpecialQualifications =>
     [
         new AquirianPowerWords(),
-        new ManaReservoir(100, 10),
+        new ManaRegeneration(100, 10),
         new FastCasting(),
         new OneSpellPerRound()
     ];

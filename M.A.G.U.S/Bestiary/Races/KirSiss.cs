@@ -11,6 +11,9 @@ public sealed class KirSiss : Creature
     {
         Occurrence = Occurrence.VeryRare;
         Size = Size.Human;
+        PlacesOfOccurrence = TerrainType.Cave;
+        Country = GameSystem.Places.Country.Kran;
+
         AttackValue = 25;
         DefenseValue = 60;
         InitiateValue = 5;

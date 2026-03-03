@@ -11,16 +11,22 @@ public sealed class GhoRagg : Creature
     {
         Occurrence = Occurrence.VeryRare;
         Size = Size.Human;
+        PlacesOfOccurrence = TerrainType.Cave;
+
         AttackValue = 90;
         DefenseValue = 150;
         InitiateValue = 40;
         AimValue = 0;
+
         AttacksPerRound = 2;
+
         HealthPoints = 20;
         PainTolerancePoints = 80;
+
         PoisonResistance = 7;
         AstralMagicResistance = 50;
         MentalMagicResistance = 50;
+
         Intelligence = Enums.Intelligence.Average;
         Alignment = Alignment.ChaosDeath;
         ExperiencePoints = 750;

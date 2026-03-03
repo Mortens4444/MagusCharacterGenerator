@@ -5,6 +5,8 @@ namespace M.A.G.U.S.Qualifications;
 
 public abstract class Qualification : ImageOwner
 {
+    public virtual string Key => GetType().Name;
+
     public Qualification(QualificationLevel qualificationLevel = QualificationLevel.Base, int level = 1)
     {
         QualificationLevel = qualificationLevel;

@@ -14,10 +14,13 @@ public sealed class Human : Creature
     {
         Occurrence = Occurrence.Frequent;
         Size = Size.Human;
+        PlacesOfOccurrence = TerrainType.Urban;
+
         AttackValue = 45;
         DefenseValue = 95;
         InitiateValue = 30;
         AimValue = 10;
+
         AttackModes =
         [
             new MeleeAttack(new ShortSword(), AttackValue),
@@ -27,8 +30,10 @@ public sealed class Human : Creature
             new RangedAttack(new Shortbow(), AimValue),
             new RangedAttack(new Longbow(), AimValue)
         ];
+
         HealthPoints = 8;
         PainTolerancePoints = 12;
+
         PoisonResistance = 2;
 
         Intelligence = Enums.Intelligence.Average;

@@ -11,6 +11,8 @@ public sealed class GiantSpider : Creature
     public GiantSpider()
     {
         Armor = new NaturalArmor(2);
+        PlacesOfOccurrence = TerrainType.TropicalForest;
+
         Occurrence = Occurrence.VeryRare;
         Size = Size.Small;
         AttackValue = 30;

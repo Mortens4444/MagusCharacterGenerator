@@ -16,10 +16,13 @@ public sealed class MutantOrc : Creature
         Armor = new NaturalArmor(3);
         Occurrence = Occurrence.Rare;
         Size = Size.Human;
+        PlacesOfOccurrence = TerrainType.CursedLand;
+
         AttackValue = 65;
         DefenseValue = 95;
         InitiateValue = 35;
         AimValue = 15;
+
         AttackModes =
         [
             new MeleeAttack(new Warhammer(), AttackValue),
@@ -29,14 +32,17 @@ public sealed class MutantOrc : Creature
             new RangedAttack(new Shortbow(), AimValue),
             new RangedAttack(new Longbow(), AimValue)
         ];
+
         HealthPoints = 14;
         PainTolerancePoints = 27;
+
         PoisonResistance = Int32.MaxValue;
         AstralMagicResistance = 25;
         MentalMagicResistance = 15;
+
         MinIntelligence = Enums.Intelligence.Low;
         MaxIntelligence = Enums.Intelligence.High;
-        Alignment = Enums.Alignment.ChaosDeath;
+        Alignment = Alignment.ChaosDeath;
         ExperiencePoints = 45;
     }
 

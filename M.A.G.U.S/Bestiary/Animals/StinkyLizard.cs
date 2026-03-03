@@ -11,6 +11,7 @@ public sealed class StinkyLizard : Creature
     {
         Occurrence = Occurrence.Rare;
         Size = Size.Big;
+        PlacesOfOccurrence = TerrainType.Cave;
 
         AttackValue = 75;
         DefenseValue = 115;

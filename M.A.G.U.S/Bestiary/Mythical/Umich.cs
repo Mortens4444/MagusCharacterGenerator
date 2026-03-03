@@ -12,6 +12,11 @@ public sealed class Umich : Creature
     {
         Occurrence = Occurrence.Rare;
         Size = Size.Big;
+        PlacesOfOccurrence = TerrainType.Cave | TerrainType.Urban | TerrainType.OldDilapidatedBuilding;
+
+        AttackValue = 95;
+        DefenseValue = 130;
+        InitiateValue = 45;
 
         AttackModes =
         [
@@ -19,17 +24,17 @@ public sealed class Umich : Creature
             new MeleeAttack(new BodyPart("Strike II.", ThrowType._2D10), 95),
             new MeleeAttack(new BodyPart("Strike III.", ThrowType._1D10), 95)
         ];
-        AttackValue = 95;
-        DefenseValue = 130;
-        InitiateValue = 45;
+
         HealthPoints = 50;
-        HealthPoints = 110;
+        PainTolerancePoints = 110;
+
         AstralMagicResistance = Int32.MaxValue;
         MentalMagicResistance = Int32.MaxValue;
         PoisonResistance = 11;
         ResistantToPsi = true;
+
         Intelligence = Enums.Intelligence.High;
-        Alignment = Enums.Alignment.Chaos;
+        Alignment = Alignment.Chaos;
         ExperiencePoints = 350;
     }
 

@@ -14,21 +14,27 @@ public sealed class Goblin : Creature
     {
         Occurrence = Occurrence.Rare;
         Size = Size.Small;
+        PlacesOfOccurrence = TerrainType.Cave | TerrainType.Mines | TerrainType.OldDilapidatedBuilding;
+
         AttackValue = 25;
         DefenseValue = 60;
         InitiateValue = 10;
         AimValue = 0;
+
         AttackModes =
         [
             new MeleeAttack(new CarvedClub(), AttackValue),
             new MeleeAttack(new ShortSword(), AttackValue),
             new RangedAttack(new Shortbow(), AimValue)
         ];
+
         HealthPoints = 7;
         PainTolerancePoints = 12;
+
         PoisonResistance = 3;
+
         Intelligence = Enums.Intelligence.Low;
-        Alignment = Enums.Alignment.Chaos;
+        Alignment = Alignment.Chaos;
         ExperiencePoints = 10;
     }
 

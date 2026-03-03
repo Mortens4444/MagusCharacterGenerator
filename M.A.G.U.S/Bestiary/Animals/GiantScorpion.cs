@@ -12,6 +12,8 @@ public sealed class GiantScorpion : Creature
     public GiantScorpion()
     {
         Occurrence = Occurrence.VeryRare;
+        PlacesOfOccurrence = TerrainType.Anywhere;
+
         Intelligence = Enums.Intelligence.Animal;
         Size = Size.Small;
         InitiateValue = 30;

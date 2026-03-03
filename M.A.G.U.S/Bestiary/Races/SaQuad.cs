@@ -13,6 +13,8 @@ public sealed class SaQuad : Creature
     {
         Occurrence = Occurrence.VeryRare;
         Size = Size.Human;
+        PlacesOfOccurrence = TerrainType.Cave;
+        Country = GameSystem.Places.Country.Kran;
 
         AttackValue = 75;
         DefenseValue = 125;

@@ -10,16 +10,21 @@ public sealed class BlackShark : Creature
     public BlackShark()
     {
         Occurrence = Occurrence.Rare;
-        Intelligence = Enums.Intelligence.Animal;
+        PlacesOfOccurrence = TerrainType.Water;
         Size = Size._4_to_6_meters;
+
         InitiateValue = 45;
         AttackValue = 85;
         DefenseValue = 95;
         HealthPoints = 20;
+
         PainTolerancePoints = 55;
+
         AstralMagicResistance = 0;
         MentalMagicResistance = 0;
         PoisonResistance = 6;
+
+        Intelligence = Enums.Intelligence.Animal;
         ExperiencePoints = 55;
     }
 

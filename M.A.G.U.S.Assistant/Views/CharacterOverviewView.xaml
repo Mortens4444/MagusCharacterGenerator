@@ -29,49 +29,49 @@
                     <Grid ColumnDefinitions="*, *" RowDefinitions="Auto, Auto, Auto, Auto" MinimumWidthRequest="100" RowSpacing="5">
 
                         <mc:EntryWithLabel Label="Race"
-                                       Text="{Binding Race, Converter={StaticResource TranslationConverter}}"
-                                       HorizontalOptions="Center"
-                                       IsReadOnly="True" />
+                                           Text="{Binding Race, Converter={StaticResource TranslationConverter}}"
+                                           HorizontalOptions="Center"
+                                           IsReadOnly="True" />
 
                         <mc:EntryWithLabel Label="Caste"
-                                       Text="{Binding Class, Converter={StaticResource TranslationConverter}}"
-                                       HorizontalOptions="Center"
-                                       IsReadOnly="True"
-                                       Grid.Column="1" />
+                                           Text="{Binding Class, Converter={StaticResource TranslationConverter}}"
+                                           HorizontalOptions="Center"
+                                           IsReadOnly="True"
+                                           Grid.Column="1" />
 
                         <mc:EntryWithLabel Label="Experience level"
-                                       Text="{Binding Level}"
-                                       HorizontalOptions="Center"
-                                       IsReadOnly="True"
-                                       Grid.Row="1"
-                                       Grid.ColumnSpan="2" />
+                                           Text="{Binding Level}"
+                                           HorizontalOptions="Center"
+                                           IsReadOnly="True"
+                                           Grid.Row="1"
+                                           Grid.ColumnSpan="2" />
 
                         <Button Text="Level Up"
-                            Command="{Binding LevelUpCommand}"
-                            IsVisible="{Binding CanLevelUp}"
-                            Grid.Row="2"
-                            Grid.ColumnSpan="2"
-                            HorizontalOptions="Center" />
+                                Command="{Binding LevelUpCommand}"
+                                IsVisible="{Binding CanLevelUp}"
+                                Grid.Row="2"
+                                Grid.ColumnSpan="2"
+                                HorizontalOptions="Center" />
 
                         <!--<Grid Grid.Row="1" ColumnDefinitions="*, Auto">
-                        <Label Grid.Column="0" Text="Player character" VerticalOptions="Center" LineBreakMode="WordWrap" />
-                        <Switch Grid.Column="1" IsToggled="{Binding PlayerCharacter}" />
-                    </Grid>-->
+                            <Label Grid.Column="0" Text="Player character" VerticalOptions="Center" LineBreakMode="WordWrap" />
+                            <Switch Grid.Column="1" IsToggled="{Binding PlayerCharacter}" />
+                        </Grid>-->
 
                         <mc:EntryWithLabel Label="Experience points"
-                                       Text="{Binding ExperiencePoints}"
-                                       HorizontalOptions="Center"
-                                       IsReadOnly="True"
-                                       Grid.Row="3" />
+                                           Text="{Binding ExperiencePoints}"
+                                           HorizontalOptions="Center"
+                                           IsReadOnly="True"
+                                           Grid.Row="3" />
 
                         <Picker ItemsSource="{Binding Alignments}"
-                            ItemDisplayBinding="{Binding ., Converter={StaticResource EnumDescriptionTranslationConverter}}"
-                            SelectedItem="{Binding Alignment}"
-                            VerticalTextAlignment="Center"
-                            HorizontalTextAlignment="Center"
-                            MaximumHeightRequest="50"
-                            Grid.Row="3"
-                            Grid.Column="1" />
+                                ItemDisplayBinding="{Binding ., Converter={StaticResource EnumDescriptionTranslationConverter}}"
+                                SelectedItem="{Binding Alignment}"
+                                VerticalTextAlignment="Center"
+                                HorizontalTextAlignment="Center"
+                                MaximumHeightRequest="50"
+                                Grid.Row="3"
+                                Grid.Column="1" />
                     </Grid>
                 </VerticalStackLayout>
             </Border>

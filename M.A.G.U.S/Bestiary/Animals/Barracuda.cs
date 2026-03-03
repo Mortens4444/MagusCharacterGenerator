@@ -12,16 +12,22 @@ public sealed class Barracuda : Creature
     {
         Occurrence = Occurrence.Frequent;
         Size = Size.Big;
+        PlacesOfOccurrence = TerrainType.Water;
+
         AttackValue = 100;
         DefenseValue = 150;
         InitiateValue = 40;
+
         AttackModes =
         [
             new MeleeAttack(new BodyPart("Bite", ThrowType._1D10), AttackValue)
         ];
+
         HealthPoints = 5;
         PainTolerancePoints = 20;
+
         PoisonResistance = 5;
+
         Intelligence = Enums.Intelligence.Animal;
         ExperiencePoints = 15;
     }

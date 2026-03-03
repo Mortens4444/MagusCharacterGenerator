@@ -12,20 +12,26 @@ public sealed class Anatyda : Creature
     {
         Occurrence = Occurrence.VeryRare;
         Size = Size.Human;
+        PlacesOfOccurrence = TerrainType.Anywhere;
+
         AttackValue = 70;
         DefenseValue = 60;
         InitiateValue = 5;
+
         AttackModes =
         [
             new MeleeAttack(new ShortSword(), AttackValue),
             new MeleeAttack(new Dagger(), AttackValue),
             new MeleeAttack(new Knife(), AttackValue)
         ];
+
         HealthPoints = 8;
         PainTolerancePoints = 15;
+
         PoisonResistance = 5;
         AstralMagicResistance = 80;
         MentalMagicResistance = 70;
+
         Intelligence = Enums.Intelligence.High;
         Alignment = Alignment.Chaos;
         ExperiencePoints = 200;

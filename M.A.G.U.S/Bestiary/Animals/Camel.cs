@@ -10,15 +10,20 @@ public sealed class Camel : Creature
     public Camel()
     {
         Occurrence = Occurrence.Frequent;
+        PlacesOfOccurrence = TerrainType.Desert;
         Size = Size.Big;
+
         AttackValue = 5;
         DefenseValue = 40;
         InitiateValue = 7;
+
         MinHealthPoints = 20;
         MaxHealthPoints = 30;
         MinPainTolerancePoints = 30;
         MaxPainTolerancePoints = 35;
+
         PoisonResistance = 4;
+
         Intelligence = Enums.Intelligence.Animal;
         ExperiencePoints = 4;
     }

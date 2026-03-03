@@ -11,12 +11,17 @@ public sealed class WhiteWolf : Creature
     {
         Occurrence = Occurrence.Frequent;
         Size = Size.Human;
+        PlacesOfOccurrence = TerrainType.ArcticForest | TerrainType.Mountains;
+
         AttackValue = 30;
         DefenseValue = 50;
         InitiateValue = 10;
+
         HealthPoints = 18;
         PainTolerancePoints = 30;
+
         PoisonResistance = 4;
+
         Intelligence = Enums.Intelligence.Animal;
         ExperiencePoints = 3;
     }

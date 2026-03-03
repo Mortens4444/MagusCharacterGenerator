@@ -11,17 +11,22 @@ public sealed class LizardCreature : Creature
     {
         Occurrence = Occurrence.Rare;
         Size = Size.Human;
+        PlacesOfOccurrence = TerrainType.Riverbank;
+
         AttackValue = 60;
         DefenseValue = 100;
         InitiateValue = 25;
         AimValue = 30;
+
         HealthPoints = 15;
         PainTolerancePoints = 55;
+
         AstralMagicResistance = 22;
         MentalMagicResistance = 22;
         PoisonResistance = 5;
+
         Intelligence = Enums.Intelligence.Average;
-        Alignment = Enums.Alignment.OrderDeath;
+        Alignment = Alignment.OrderDeath;
         ExperiencePoints = 180;
     }
 

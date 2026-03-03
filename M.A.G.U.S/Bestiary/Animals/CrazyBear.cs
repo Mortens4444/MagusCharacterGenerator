@@ -2,6 +2,7 @@
 using M.A.G.U.S.GameSystem;
 using M.A.G.U.S.GameSystem.Attributes;
 using M.A.G.U.S.Models;
+using M.A.G.U.S.Things.Armors;
 using M.A.G.U.S.Things.Weapons;
 
 namespace M.A.G.U.S.Bestiary.Animals;
@@ -11,18 +12,25 @@ public sealed class CrazyBear : Creature
     public CrazyBear()
     {
         Occurrence = Occurrence.VeryRare;
+        PlacesOfOccurrence = TerrainType.ArcticForest | TerrainType.Snowfield | TerrainType.Icefield;
+
+        Armor = new NaturalArmor(1);
         Size = Size.Big;
+
         AttackValue = 80;
         DefenseValue = 90;
         InitiateValue = 25;
+
         AttackModes =
         [
             new MeleeAttack(new BodyPart("Left paw strike", ThrowType._2D6, 2), AttackValue),
             new MeleeAttack(new BodyPart("Right paw strike", ThrowType._2D6, 2), AttackValue),
             new MeleeAttack(new BodyPart("Bite", ThrowType._1D10), AttackValue)
         ];
+
         HealthPoints = 45;
         PainTolerancePoints = 110;
+
         PoisonResistance = 9;
         Intelligence = Enums.Intelligence.Animal;
         ExperiencePoints = 200;

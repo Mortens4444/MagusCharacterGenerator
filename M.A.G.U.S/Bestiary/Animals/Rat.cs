@@ -9,13 +9,18 @@ public sealed class Rat : Creature
     public Rat()
     {
         Occurrence = Occurrence.Frequent;
+        PlacesOfOccurrence = TerrainType.Urban;
         Size = Size.Small;
+
         AttackValue = 20;
         DefenseValue = 40;
         InitiateValue = 10;
+
         HealthPoints = 4;
         PainTolerancePoints = 8;
+
         PoisonResistance = 8;
+
         Intelligence = Enums.Intelligence.Animal;
         ExperiencePoints = 1;
     }

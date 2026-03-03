@@ -4,5 +4,5 @@ namespace M.A.G.U.S.Qualifications.Specialities;
 
 public class CanOnlyLearnPyarronPsi : SpecialQualification
 {
-    public override string Name => "Can only learn Pyarron Psi";
+    public override string Name => "Can only learn Pyarronian Psi";
 }

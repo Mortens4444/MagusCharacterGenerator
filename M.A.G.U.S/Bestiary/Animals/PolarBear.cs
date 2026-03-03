@@ -2,6 +2,7 @@
 using M.A.G.U.S.GameSystem;
 using M.A.G.U.S.GameSystem.Attributes;
 using M.A.G.U.S.Models;
+using M.A.G.U.S.Things.Armors;
 using M.A.G.U.S.Things.Weapons;
 
 namespace M.A.G.U.S.Bestiary.Animals;
@@ -10,19 +11,25 @@ public sealed class PolarBear : Creature
 {
     public PolarBear()
     {
+        Armor = new NaturalArmor(1);
         Occurrence = Occurrence.Frequent;
+        PlacesOfOccurrence = TerrainType.ArcticForest | TerrainType.Snowfield | TerrainType.Icefield;
         Size = Size.Big;
+
         AttackValue = 70;
         DefenseValue = 90;
         InitiateValue = 20;
+
         AttackModes =
         [
             new MeleeAttack(new BodyPart("Left paw strike", ThrowType._1D6, 2), AttackValue),
             new MeleeAttack(new BodyPart("Right paw strike", ThrowType._1D6, 2), AttackValue),
             new MeleeAttack(new BodyPart("Bite", ThrowType._1D6), AttackValue)
         ];
+
         HealthPoints = 45;
         PainTolerancePoints = 90;
+
         PoisonResistance = 8;
         Intelligence = Enums.Intelligence.Animal;
         ExperiencePoints = 80;

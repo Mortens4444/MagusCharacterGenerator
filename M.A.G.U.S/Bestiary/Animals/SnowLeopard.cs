@@ -11,10 +11,13 @@ public sealed class SnowLeopard : Creature
     public SnowLeopard()
     {
         Occurrence = Occurrence.Rare;
+        PlacesOfOccurrence = TerrainType.Snowfield;
         Size = Size.WithersHeight_1_20_meter;
+
         AttackValue = 90;
         DefenseValue = 140;
         InitiateValue = 65;
+
         AttackModes =
         [
             new MeleeAttack(new BodyPart("Left paw strike", ThrowType._1D6, 3), AttackValue),
@@ -25,7 +28,9 @@ public sealed class SnowLeopard : Creature
 
         HealthPoints = 25;
         PainTolerancePoints = 43;
+
         PoisonResistance = 9;
+
         Intelligence = Enums.Intelligence.Low;
         ExperiencePoints = 350;
     }

@@ -11,7 +11,11 @@ public sealed class GiantCrocodileOnLand : Creature
     public GiantCrocodileOnLand()
     {
         Armor = new NaturalArmor(8);
+        PlacesOfOccurrence = TerrainType.TropicalRiver | TerrainType.Swamp;
+
         Occurrence = Occurrence.Rare;
+        PlacesOfOccurrence = TerrainType.Swamp;
+
         Size = Size.Up_to_15_meters;
         AttackValue = 65;
         DefenseValue = 80;

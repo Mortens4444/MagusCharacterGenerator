@@ -238,6 +238,7 @@ internal partial class EncounterViewModel : CharacterListLoaderViewModel, IDispo
             ProcessConfirmedEnemies(configs, setupVm.MaxSimultaneousAttacks);
             SelectedEnemy = null;
             RunTurnCommand.NotifyCanExecuteChanged();
+            AddSingleCharacterToAssignments();
             return;
         }
 

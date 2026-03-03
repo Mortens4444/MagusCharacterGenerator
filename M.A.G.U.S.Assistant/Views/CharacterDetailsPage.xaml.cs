@@ -4,7 +4,7 @@ using Mtf.LanguageService.MAUI.Views;
 
 namespace M.A.G.U.S.Assistant.Views;
 
-internal partial class CharacterDetailsPage : NotifierPage
+internal partial class CharacterDetailsPage : NotifierTabbedPage
 {
     private readonly CharacterService characterService;
 

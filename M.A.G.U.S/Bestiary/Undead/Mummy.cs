@@ -11,15 +11,20 @@ public sealed class Mummy : LivingDead
     {
         Occurrence = Occurrence.Rare;
         Size = Size.Human;
+        PlacesOfOccurrence = TerrainType.Anywhere;
+
         AttackValue = 70;
         DefenseValue = 110;
         InitiateValue = 20;
+
         HealthPoints = 18;
+
         AstralMagicResistance = Int32.MaxValue;
         MentalMagicResistance = Int32.MaxValue;
         PoisonResistance = Int32.MaxValue;
+
         Intelligence = Enums.Intelligence.High;
-        Alignment = Enums.Alignment.ChaosDeath;
+        Alignment = Alignment.ChaosDeath;
         //Psi = as in life
         ExperiencePoints = 3000; // For a 10th level priest
         NecrographyDepartment = NecrographyDepartment.NightMonster;

@@ -14,10 +14,13 @@ public sealed class MountainGiant : Creature
     {
         Occurrence = Occurrence.VeryRare;
         Size = Size.About_8_5_meters;
+        PlacesOfOccurrence = TerrainType.Mountains;
+
         AttackValue = 110;
         DefenseValue = 170;
         InitiateValue = 20;
         AimValue = 0;
+
         //AttackModes =
         //[
         //    new MeleeAttack(new Warhammer(), AttackValue),
@@ -27,13 +30,16 @@ public sealed class MountainGiant : Creature
         //    new RangeAttack(new Shortbow(), AimValue),
         //    new RangeAttack(new Longbow(), AimValue)
         //];
+
         HealthPoints = 45;
         PainTolerancePoints = 120;
+
         AstralMagicResistance = 5;
         MentalMagicResistance = 25;
         PoisonResistance = Int32.MaxValue;
+
         Intelligence = Enums.Intelligence.Average;
-        Alignment = Enums.Alignment.Chaos;
+        Alignment = Alignment.Chaos;
         ExperiencePoints = 850;
     }
 

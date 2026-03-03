@@ -14,6 +14,7 @@ public sealed class Trueblood : Creature
     {
         Occurrence = Occurrence.VeryRare;
         Size = Size.Human;
+        PlacesOfOccurrence = TerrainType.Tunnels;
 
         AttackValue = 70;
         DefenseValue = 90;

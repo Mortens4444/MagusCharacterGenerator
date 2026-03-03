@@ -13,22 +13,28 @@ public sealed class Feenhar : Creature
     {
         Occurrence = Occurrence.Rare;
         Size = Size.Human;
+        PlacesOfOccurrence = TerrainType.Mountains;
+
         AttackValue = 45;
         DefenseValue = 80;
         InitiateValue = 25;
         AimValue = 0;
+
         AttackModes =
         [
             new MeleeAttack(new CommonWeapon("Weapon", 5, 10, 15, ThrowType._1D10, 2, true), AttackValue),
             new MeleeAttack(new Breeze(), AttackValue),
         ];
+
         HealthPoints = 20;
         PainTolerancePoints = 60;
+
         AstralMagicResistance = 70;
         MentalMagicResistance = 70;
         PoisonResistance = 20;
+
         Intelligence = Enums.Intelligence.High;
-        Alignment = Enums.Alignment.DeathOrder;
+        Alignment = Alignment.DeathOrder;
         ExperiencePoints = 105;
     }
 

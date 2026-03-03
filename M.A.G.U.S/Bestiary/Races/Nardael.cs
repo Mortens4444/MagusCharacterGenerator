@@ -15,10 +15,13 @@ public sealed class Nardael : Creature
 
         Occurrence = Occurrence.Rare;
         Size = Size.Human;
+        PlacesOfOccurrence = TerrainType.Forest;
+
         AttackValue = 50; // 50-100
         DefenseValue = 145; // 90-200
         InitiateValue = 42; // 25-60
         AimValue = 42; // 10-75
+
         AttackModes =
         [
             new MeleeAttack(new BodyPart("Magical sword (weak)", ThrowType._2D6), 50),
@@ -26,16 +29,20 @@ public sealed class Nardael : Creature
             new RangedAttack(new BreathWeapon("Magical elven bow (weak)", ThrowType._2D6_Ranged), 10 + ElvenBowAimValue + MasterAiming),
             new RangedAttack(new BreathWeapon("Magical elven bow (powerful)", ThrowType._2D6_Ranged), 75 + ElvenBowAimValue + MasterAiming)
         ];
+
         AttacksPerRound = 2;
+
         MinHealthPoints = 10;
         MaxHealthPoints = 50;
         MinPainTolerancePoints = 40;
         MaxPainTolerancePoints = 175;
+
         PoisonResistance = Int32.MaxValue;
         AstralMagicResistance = Int32.MaxValue;
         MentalMagicResistance = Int32.MaxValue;
+
         Intelligence = Enums.Intelligence.Outstanding;
-        Alignment = Enums.Alignment.Life;
+        Alignment = Alignment.Life;
         ExperiencePoints = 20000;
     }
 

@@ -75,6 +75,7 @@ coronella.png
 crazy_bear.png
 crocodile.png
 dark_elf.png
+daronne.png
 demon_shark.png
 dragon.png
 dream_crystal.png
@@ -92,6 +93,7 @@ lizard_creature.png
 lizard_wizard.png
 mongrel.png
 mummy.png
+myssera.png
 nalreth.png
 narwhal.png
 orc.png
@@ -106,6 +108,7 @@ sa_quad.png
 scorpion.png
 shadowwalker.png
 shi_kris.png
+silent_hound.png
 singa_hamata.png
 slave.png
 snow_leopard.png
@@ -123,6 +126,8 @@ white_wolf.png
 wolf.png
 wolf_pack_leader.png
 wolves.png
+zagnol.png
+zauder.png
 zombie.png
 air_wizard.png
 assassin.png
@@ -353,6 +358,7 @@ races.png
 runes.png
 settings.png
 sounds.png
+storytelling.png
 backpack_large.png
 backpack_small.png
 barrel_large.png
@@ -527,6 +533,7 @@ amund.png
 buzzgoblin.png
 court_goblin.png
 court_orc.png
+cwyveh_kah.png
 dahr.png
 dracker.png
 draquon.png

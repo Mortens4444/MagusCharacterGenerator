@@ -57,8 +57,7 @@ internal partial class RollFormulaViewModel : BaseViewModel, IDisposable
     {
         if (!IsResultLocked)
         {
-            WeakReferenceMessenger.Default.Send(
-                new ShowErrorMessage("Please roll or enter a result first."));
+            WeakReferenceMessenger.Default.Send(new ShowErrorMessage("Please roll or enter a result first."));
             return;
         }
 

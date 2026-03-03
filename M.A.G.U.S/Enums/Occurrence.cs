@@ -6,8 +6,12 @@ public enum Occurrence
 {
     [Description("Frequent")]
     Frequent,
+    
     [Description("Rare")]
     Rare,
+
     [Description("Very rare")]
-    VeryRare
+    VeryRare,
+
+    Summoned
 }

@@ -11,14 +11,19 @@ public sealed class CamelHerdLeader : Creature
     {
         Occurrence = Occurrence.Frequent;
         Size = Size.Big;
+        PlacesOfOccurrence = TerrainType.Desert;
+
         AttackValue = 12;
         DefenseValue = 55;
         InitiateValue = 7;
+
         MinHealthPoints = 20;
         MaxHealthPoints = 30;
         MinPainTolerancePoints = 30;
         MaxPainTolerancePoints = 35;
+
         PoisonResistance = 4;
+
         Intelligence = Enums.Intelligence.Animal;
         ExperiencePoints = 4;
     }

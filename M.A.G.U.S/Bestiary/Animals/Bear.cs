@@ -2,6 +2,7 @@
 using M.A.G.U.S.GameSystem;
 using M.A.G.U.S.GameSystem.Attributes;
 using M.A.G.U.S.Models;
+using M.A.G.U.S.Things.Armors;
 using M.A.G.U.S.Things.Weapons;
 
 namespace M.A.G.U.S.Bestiary.Animals;
@@ -10,20 +11,27 @@ public sealed class Bear : Creature
 {
     public Bear()
     {
+        Armor = new NaturalArmor(1);
         Occurrence = Occurrence.Frequent;
+        PlacesOfOccurrence = TerrainType.ArcticForest | TerrainType.TemperateForest;
         Size = Size.Big;
+
         AttackValue = 70;
         DefenseValue = 60;
         InitiateValue = 5;
+
         AttackModes =
         [
             new MeleeAttack(new BodyPart("Left paw strike", ThrowType._1D10, 2), AttackValue),
             new MeleeAttack(new BodyPart("Right paw strike", ThrowType._1D10, 2), AttackValue),
             new MeleeAttack(new BodyPart("Bite", ThrowType._1D6), AttackValue)
         ];
+
         HealthPoints = 38;
         PainTolerancePoints = 80;
+
         PoisonResistance = 8;
+
         Intelligence = Enums.Intelligence.Animal;
         ExperiencePoints = 50;
     }

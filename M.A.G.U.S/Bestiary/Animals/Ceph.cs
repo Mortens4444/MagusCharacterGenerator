@@ -10,6 +10,7 @@ public sealed class Ceph : Creature
     {
         Occurrence = Occurrence.Rare;
         Size = Size.Big;
+        PlacesOfOccurrence = TerrainType.Underground;
 
         AttackValue = 66;
         DefenseValue = 90;

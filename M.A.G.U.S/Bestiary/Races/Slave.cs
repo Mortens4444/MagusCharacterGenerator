@@ -11,8 +11,10 @@ public sealed class Slave : Creature
 {
     public Slave()
     {
-        Occurrence = Occurrence.Frequent; // Only Ediomad
+        Occurrence = Occurrence.Frequent;
         Size = Size.Human;
+        PlacesOfOccurrence = TerrainType.Anywhere;
+        Country = GameSystem.Places.Country.Ediomad;
 
         AttackValue = 60;
         DefenseValue = 100;

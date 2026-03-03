@@ -16,6 +16,8 @@ public sealed class TruebloodInCombatGear : Creature
     {
         Occurrence = Occurrence.VeryRare;
         Size = Size.Human;
+        PlacesOfOccurrence = TerrainType.Tunnels;
+        Country = GameSystem.Places.Country.Ediomad;
 
         AttackValue = 100;
         DefenseValue = 130;

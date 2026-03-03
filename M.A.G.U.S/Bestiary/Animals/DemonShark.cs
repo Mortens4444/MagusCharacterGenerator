@@ -10,15 +10,20 @@ public sealed class DemonShark : Creature
     public DemonShark()
     {
         Occurrence = Occurrence.Rare;
-        Intelligence = Enums.Intelligence.Animal;
         Size = Size._6_to_8_meters;
+        PlacesOfOccurrence = TerrainType.Water;
+
         InitiateValue = 40;
         AttackValue = 100;
         DefenseValue = 140;
+
         HealthPoints = 35;
+        
         AstralMagicResistance = Int32.MaxValue;
         MentalMagicResistance = Int32.MaxValue;
         PoisonResistance = 8;
+
+        Intelligence = Enums.Intelligence.Animal;
         ExperiencePoints = 95;
     }
 

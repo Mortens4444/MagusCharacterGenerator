@@ -13,6 +13,8 @@ public sealed class ShiKris : Creature
     {
         Occurrence = Occurrence.Rare;
         Size = Size.Human;
+        PlacesOfOccurrence = TerrainType.Anywhere;
+        Country = GameSystem.Places.Country.Kran;
 
         AttackValue = 35;
         DefenseValue = 80;

@@ -12,4 +12,9 @@ public class NaturalArmor : SpecialQualification
     {
         ArmorClass = armorClass;
     }
+
+    public override string ToString()
+    {
+        return $" ({ArmorClass})";
+    }
 }

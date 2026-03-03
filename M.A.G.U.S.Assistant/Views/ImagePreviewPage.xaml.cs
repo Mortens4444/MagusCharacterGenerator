@@ -30,6 +30,7 @@ internal partial class ImagePreviewPage : NotifierPage
 
         PreviewImage.AnchorX = 0.5;
         PreviewImage.AnchorY = 0.5;
+        Title = item.DisplayName;
 
         // Register gesture recognizers programmatically so sender is the Image instance we expect.
         //var pinch = new PinchGestureRecognizer();

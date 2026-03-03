@@ -10,14 +10,19 @@ public sealed class Falcon : Creature
     public Falcon()
     {
         Occurrence = Occurrence.Frequent;
-        Intelligence = Enums.Intelligence.Animal;
+        PlacesOfOccurrence = TerrainType.Anywhere;
         Size = Size.Small;
+
         InitiateValue = 12;
         AttackValue = 30;
         DefenseValue = 90;
+        
         HealthPoints = 4;
         PainTolerancePoints = 7;
+
         PoisonResistance = 3;
+
+        Intelligence = Enums.Intelligence.Animal;
         ExperiencePoints = 1;
     }
 

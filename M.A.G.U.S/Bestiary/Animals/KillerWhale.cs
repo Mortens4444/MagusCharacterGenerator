@@ -10,16 +10,21 @@ public sealed class KillerWhale : Creature
     public KillerWhale()
     {
         Occurrence = Occurrence.Rare;
-        Intelligence = Enums.Intelligence.Average;
         Size = Size._4_meters;
+        PlacesOfOccurrence = TerrainType.Water;
+
         InitiateValue = 5;
         AttackValue = 95;
         DefenseValue = 70;
+
         HealthPoints = 30;
         PainTolerancePoints = 68;
+
         AstralMagicResistance = 0;
         MentalMagicResistance = 0;
         PoisonResistance = 8;
+
+        Intelligence = Enums.Intelligence.Average;
         ExperiencePoints = 20;
     }
 

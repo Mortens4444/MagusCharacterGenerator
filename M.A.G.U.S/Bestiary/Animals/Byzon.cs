@@ -13,18 +13,24 @@ public sealed class Byzon : Creature
     {
         Armor = new NaturalArmor(1);
         Occurrence = Occurrence.Frequent;
+        PlacesOfOccurrence = TerrainType.Plains;
         Size = Size.Big;
+
         AttackValue = 60;
         DefenseValue = 60;
         InitiateValue = 7;
+
         AttackModes =
         [
             new MeleeAttack(new BodyPart("Horn​", ThrowType._1D6, 2), AttackValue),
             new MeleeAttack(new BodyPart("Hoof", ThrowType._1D6, 4), AttackValue),
         ];
+
         HealthPoints = 42;
         PainTolerancePoints = 54;
+
         PoisonResistance = 4;
+
         Intelligence = Enums.Intelligence.Animal;
         ExperiencePoints = 6;
     }

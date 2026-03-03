@@ -14,10 +14,13 @@ public sealed class SwampGiant : Creature
     {
         Occurrence = Occurrence.VeryRare;
         Size = Size.About_6_meters;
+        PlacesOfOccurrence = TerrainType.Swamp | TerrainType.Urban;
+
         AttackValue = 75;
         DefenseValue = 125;
         InitiateValue = 25;
         AimValue = 0;
+
         //AttackModes =
         //[
         //    new MeleeAttack(new ShortSword(), AttackValue), // Traclon tőr TÉ: 12, VÉ: 14, KÉ: 9, Sebzés: 1k10+4
@@ -27,13 +30,16 @@ public sealed class SwampGiant : Creature
         //    new RangeAttack(new Shortbow(), AimValue),
         //    new RangeAttack(new Longbow(), AimValue) // Sacron Vadászathoz íjat és hajítódárdáka
         //];
+
         HealthPoints = 20;
         PainTolerancePoints = 100;
+
         AstralMagicResistance = 4;
         MentalMagicResistance = 25;
         PoisonResistance = Int32.MaxValue;
+
         Intelligence = Enums.Intelligence.High;
-        Alignment = Enums.Alignment.Chaos;
+        Alignment = Alignment.Chaos;
         ExperiencePoints = 610;
     }
 

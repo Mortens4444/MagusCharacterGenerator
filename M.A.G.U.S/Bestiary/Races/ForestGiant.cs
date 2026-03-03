@@ -14,10 +14,13 @@ public sealed class ForestGiant : Creature
     {
         Occurrence = Occurrence.Rare;
         Size = Size.About_7_meters;
+        PlacesOfOccurrence = TerrainType.TemperateForest;
+
         AttackValue = 100;
         DefenseValue = 155;
         InitiateValue = 30;
         AimValue = 30;
+
         //AttackModes =
         //[
         //    new MeleeAttack(new Warhammer(), AttackValue),
@@ -27,13 +30,16 @@ public sealed class ForestGiant : Creature
         //    new RangeAttack(new Shortbow(), AimValue),
         //    new RangeAttack(new Longbow(), AimValue)
         //];
+
         HealthPoints = 22;
         PainTolerancePoints = 98;
+
         AstralMagicResistance = 7;
         MentalMagicResistance = 25;
         PoisonResistance = Int32.MaxValue;
+
         Intelligence = Enums.Intelligence.Average;
-        Alignment = Enums.Alignment.Chaos;
+        Alignment = Alignment.Chaos;
         ExperiencePoints = 720;
     }
 

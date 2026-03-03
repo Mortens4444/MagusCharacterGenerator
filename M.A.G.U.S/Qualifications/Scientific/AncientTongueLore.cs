@@ -6,6 +6,8 @@ namespace M.A.G.U.S.Qualifications.Scientific;
 
 public class AncientTongueLore : Qualification, ICanHaveMany
 {
+    public override string Key => $"{GetType().Name}:{Language?.GetType().Name ?? Guid.NewGuid().ToString()}";
+
     public AntientLanguage? Language { get; set; }
 
     [JsonConstructor]

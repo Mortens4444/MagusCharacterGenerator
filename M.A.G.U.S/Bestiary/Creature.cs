@@ -2,6 +2,7 @@
 using M.A.G.U.S.Extensions;
 using M.A.G.U.S.GameSystem;
 using M.A.G.U.S.GameSystem.Attributes;
+using M.A.G.U.S.GameSystem.Places;
 using M.A.G.U.S.GameSystem.Psi;
 using M.A.G.U.S.Interfaces;
 using M.A.G.U.S.Models;
@@ -20,6 +21,10 @@ public abstract class Creature : Attacker, IHaveImage
     private int? healthPoints;
 
     protected Creature() { }
+
+    public TerrainType PlacesOfOccurrence { get; protected set; }
+
+    public Country Country { get; protected set; }
 
     public Intelligence? Intelligence { get; protected set; }
     

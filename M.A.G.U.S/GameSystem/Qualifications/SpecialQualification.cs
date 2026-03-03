@@ -3,5 +3,7 @@
     public abstract class SpecialQualification : ISpecialQualification
     {
         public virtual string Name => GetType().Name;
+
+        public override string ToString() => String.Empty;
     }
 }

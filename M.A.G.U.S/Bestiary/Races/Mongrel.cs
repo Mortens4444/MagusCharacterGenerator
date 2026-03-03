@@ -12,8 +12,10 @@ public sealed class Mongrel : Creature
 {
     public Mongrel()
     {
-        Occurrence = Occurrence.Rare; // ritka (csak Ediomad)
+        Occurrence = Occurrence.Rare;
         Size = Size.Human;
+        PlacesOfOccurrence = TerrainType.Anywhere;
+        Country = GameSystem.Places.Country.Ediomad;
 
         AttackValue = 70;  // Változó
         DefenseValue = 110; // Változó

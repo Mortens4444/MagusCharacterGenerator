@@ -28,7 +28,7 @@ public class QualificationList : ExtendedObservableCollection<Qualification>
             }
             else
             {
-                var sameQualification = this.FirstOrDefault(q => q.ToString() == newMasterQualification.ToString());
+                var sameQualification = this.FirstOrDefault(q => q.Key == newMasterQualification.Key);
                 if (sameQualification != null)
                 {
                     if (sameQualification.QualificationLevel == QualificationLevel.Base && newMasterQualification.QualificationLevel == QualificationLevel.Master)
@@ -78,19 +78,24 @@ public class QualificationList : ExtendedObservableCollection<Qualification>
 
     public void AddFrom(IEnumerable<IClass> classes, IRace race)
     {
-        AddRange(race.Qualifications);
+        foreach (var qualification in race.Qualifications)
+        {
+            UpgradeOrAddQualification(qualification);
+        }
+
         foreach (var @class in classes)
         {
-            AddRange(@class.Qualifications);
+            foreach (var qualification in @class.Qualifications)
+            {
+                UpgradeOrAddQualification(qualification);
+            }
 
             var newQualifications = @class.FutureQualifications
-                .Where(futureQualification => futureQualification.ActualLevel <= @class.Level);
+                .Where(f => f.ActualLevel <= @class.Level);
 
-            AddRange(newQualifications.Where(q => q.QualificationLevel == QualificationLevel.Base));
-            var newMasterQualifications = newQualifications.Where(q => q.QualificationLevel == QualificationLevel.Master);
-            foreach (var newMasterQualification in newMasterQualifications)
+            foreach (var qualification in newQualifications)
             {
-                UpgradeOrAddQualification(newMasterQualification);
+                UpgradeOrAddQualification(qualification);
             }
         }
     }
@@ -127,16 +132,12 @@ public class QualificationList : ExtendedObservableCollection<Qualification>
             return true;
         }
 
-        existingQualification = this.FirstOrDefault(q => q.ToString() == qualification.ToString());
+        existingQualification = this.FirstOrDefault(q => q.Key == qualification.Key);
         if (existingQualification == null)
         {
             return true;
         }
 
-        if (existingQualification.QualificationLevel < qualification.QualificationLevel)
-        {
-            return true;
-        }
-        return false;
+        return existingQualification.QualificationLevel < qualification.QualificationLevel;
     }
 }

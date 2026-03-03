@@ -14,10 +14,13 @@ public sealed class Orc : Creature
     {
         Occurrence = Occurrence.Frequent;
         Size = Size.Human;
+        PlacesOfOccurrence = TerrainType.DeepUnderground;
+
         AttackValue = 55;
         DefenseValue = 85;
         InitiateValue = 20;
         AimValue = 0;
+
         AttackModes =
         [
             new MeleeAttack(new Warhammer(), AttackValue),
@@ -27,11 +30,14 @@ public sealed class Orc : Creature
             new RangedAttack(new Shortbow(), AimValue),
             new RangedAttack(new Longbow(), AimValue)
         ];
+
         HealthPoints = 10;
         PainTolerancePoints = 16;
+
         PoisonResistance = 3;
+
         Intelligence = Enums.Intelligence.Low;
-        Alignment = Enums.Alignment.Chaos;
+        Alignment = Alignment.Chaos;
         ExperiencePoints = 30;
     }
 

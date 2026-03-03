@@ -9,19 +9,24 @@ public sealed class Nalreth : Creature
 {
     public Nalreth()
     {
+        Armor = new NaturalArmor(3);
         Occurrence = Occurrence.Frequent;
         Size = Size._7_to_11_meters;
+        PlacesOfOccurrence = TerrainType.CursedLand;
+
         InitiateValue = 55;
         //AttackValue = 0;
         DefenseValue = 50;
         AimValue = 35;
+
         HealthPoints = 35;
+
         AstralMagicResistance = Int32.MaxValue;
         MentalMagicResistance = Int32.MaxValue;
         PoisonResistance = 7;
+        
         Intelligence = Enums.Intelligence.Animal;
         ExperiencePoints = 300;
-        Armor = new NaturalArmor(3);
     }
 
     [DiceThrow(ThrowType._1D6)]

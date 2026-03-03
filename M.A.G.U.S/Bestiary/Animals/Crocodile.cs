@@ -11,14 +11,19 @@ public sealed class Crocodile : Creature
     public Crocodile()
     {
         Armor = new NaturalArmor(5);
+        PlacesOfOccurrence = TerrainType.TropicalRiver | TerrainType.Swamp;
         Occurrence = Occurrence.Rare;
         Size = Size._6_to_8_meters;
+
         AttackValue = 55;
         DefenseValue = 100;
         InitiateValue = 50;
+        
         HealthPoints = 45;
         PainTolerancePoints = 90;
+
         PoisonResistance = 5;
+
         Intelligence = Enums.Intelligence.Animal;
         ExperiencePoints = 200;
     }
