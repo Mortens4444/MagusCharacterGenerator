@@ -11,6 +11,7 @@ public sealed class Zauder : Creature
     {
         Occurrence = Occurrence.Rare;
         Size = Size.Human;
+        PlacesOfOccurrence = TerrainType.Anywhere;
 
         AttackValue = 60; // változó
         DefenseValue = 120; // változó

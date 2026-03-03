@@ -11,6 +11,7 @@ public sealed class Zagnol : Creature
     {
         Occurrence = Occurrence.Frequent;
         Size = Size.Huge;
+        PlacesOfOccurrence = TerrainType.Anywhere;
 
         AttackValue = 65;
         DefenseValue = 100;

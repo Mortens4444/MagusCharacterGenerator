@@ -9,7 +9,9 @@ using M.A.G.U.S.Things.MagicalObjects;
 using M.A.G.U.S.Things.Poisons;
 using Mtf.Extensions;
 using Mtf.LanguageService.MAUI;
+using Mtf.LanguageService.MAUI.Converters;
 using System.ComponentModel;
+using System.Globalization;
 
 namespace M.A.G.U.S.Assistant.Models;
 
@@ -62,7 +64,8 @@ internal partial class DisplayItem : INotifyPropertyChanged
                 Gemstone gemstone => gemstone.Description ?? String.Empty,
                 Thing thing => $"{thing.Weight} {Lng.Elem("Kg")}",
                 Rune rune => rune.Equivalent ?? String.Empty,
-                Creature creature => $"{Lng.Elem("Speed")}:\r\n{String.Join("\r\n",
+                Creature creature => new EnumDescriptionTranslationConverter().Convert(creature.PlacesOfOccurrence, typeof(string), null, CultureInfo.CurrentCulture)?.ToString() ?? String.Empty,
+                /*Creature creature => $"{Lng.Elem("Speed")}:\r\n{String.Join("\r\n",
                     creature.Speeds.Select(speed =>
                     {
                         var mode = Lng.Elem(speed.TravelMode.GetDescription()) ?? String.Empty;
@@ -70,7 +73,7 @@ internal partial class DisplayItem : INotifyPropertyChanged
                         return String.IsNullOrWhiteSpace(val)
                             ? mode
                             : $"{mode} - {val}";
-                    }))}",
+                    }))}",*/
                 _ => String.Empty
             };
         }
