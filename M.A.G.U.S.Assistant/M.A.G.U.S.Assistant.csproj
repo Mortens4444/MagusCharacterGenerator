@@ -140,7 +140,7 @@
     <PackageReference Include="Microsoft.Maui.Graphics" Version="10.0.30" />
     <PackageReference Include="Microsoft.Maui.Graphics.Skia" Version="10.0.30" />
     <PackageReference Include="Mtf.Maui.Controls" Version="4.0.63" />
-    <PackageReference Include="Mtf.MAUI.LanguageService" Version="3.0.32" />
+    <PackageReference Include="Mtf.MAUI.LanguageService" Version="3.0.33" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.4" />
     <PackageReference Include="Plugin.Maui.Audio" Version="4.0.0" />
     <PackageReference Include="sqlite-net-pcl" Version="1.9.172" />
@@ -178,6 +178,9 @@
     </Compile>
     <Compile Update="Views\ObjectObserverPage.xaml.cs">
       <DependentUpon>ObjectObserverPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\BestiaryPage.xaml.cs">
+      <DependentUpon>BestiaryPage.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -263,6 +266,9 @@
       <Generator>MSBuild:Compile</Generator>
     </MauiXaml>
     <MauiXaml Update="Views\RollFormulaPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </MauiXaml>
+    <MauiXaml Update="Views\BestiaryPage.xaml">
       <Generator>MSBuild:Compile</Generator>
     </MauiXaml>
     <MauiXaml Update="Views\RunesPage.xaml">

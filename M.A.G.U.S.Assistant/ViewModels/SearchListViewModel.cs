@@ -19,6 +19,8 @@ namespace M.A.G.U.S.Assistant.ViewModels;
 
 internal partial class SearchListViewModel : BaseViewModel
 {
+    private readonly ISoundPlayer soundPlayer;
+
     private Character? character;
     private bool showOnlyAffordable;
     private string searchText = String.Empty;
@@ -27,8 +29,10 @@ internal partial class SearchListViewModel : BaseViewModel
     private string pageTitle = String.Empty;
     private DisplayItem? selectedItem;
     private CancellationTokenSource? filterCancellationTokenSource;
+    private ThingCategory selectedCategory = ThingCategory.All;
+    private bool showAdvancedFilters;    
 
-    private readonly ISoundPlayer soundPlayer;
+    protected bool isFiltering;
 
     public SearchListViewModel(ISoundPlayer soundPlayer)
     {
@@ -77,9 +81,6 @@ internal partial class SearchListViewModel : BaseViewModel
             OnPropertyChanged();
         }
     }
-
-    private ThingCategory selectedCategory = ThingCategory.All;
-    private bool showAdvancedFilters;
 
     public ThingCategory SelectedCategory
     {
@@ -226,10 +227,13 @@ internal partial class SearchListViewModel : BaseViewModel
 
         ApplyFilter();
     }
-    private bool isFiltering;
-    public void ApplyFilter()
+
+    public virtual void ApplyFilter()
     {
-        if (isFiltering) return;
+        if (isFiltering)
+        {
+            return;
+        }
 
         if (!MainThread.IsMainThread)
         {

@@ -530,6 +530,7 @@ weapon_use.png
 weather_divination.png
 wrestling.png
 amund.png
+aun.png
 buzzgoblin.png
 court_goblin.png
 court_orc.png
@@ -553,6 +554,7 @@ jann.png
 khal.png
 kir_siss.png
 kyr.png
+mantisfolk.png
 mos_quin.png
 mountain_giant.png
 mutant_orc.png

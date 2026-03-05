@@ -3,20 +3,24 @@ using M.A.G.U.S.Assistant.Models;
 using M.A.G.U.S.Assistant.Services;
 using M.A.G.U.S.Assistant.ViewModels;
 using M.A.G.U.S.Interfaces;
+using Mtf.LanguageService.MAUI.Views;
 using Mtf.Maui.Controls.Messages;
 
 namespace M.A.G.U.S.Assistant.Views;
 
-internal partial class BestiaryPage : SearchListPage
+internal partial class BestiaryPage : NotifierPage
 {
     private bool firstLoad = true;
-    private BestiaryViewModel viewModel;
+    private readonly BestiaryViewModel viewModel;
     private readonly ISettings settings;
 
     public BestiaryPage(BestiaryViewModel viewModel, ISettings settings)
-        : base(viewModel, false, "Bestiary",
-          PreloadService.Instance.Creatures.Select(DisplayItem.FromObject))
-    {
+	{
+		InitializeComponent();
+		BindingContext = viewModel;
+		
+		viewModel.LoadItems(PreloadService.Instance.Creatures.Select(DisplayItem.FromObject));
+
         this.settings = settings;
         this.viewModel = viewModel;
         var randomToolbarItem = new ToolbarItem

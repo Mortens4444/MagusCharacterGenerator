@@ -54,6 +54,12 @@ public partial class Character
         return HasQualification(qualification, QualificationLevel.Base) || HasQualification(qualification, QualificationLevel.Master);
     }
 
+    public TSpecialQualification? GetSpeciality<TSpecialQualification>()
+        where TSpecialQualification : SpecialQualification
+    {
+        return Race.SpecialQualifications.GetSpeciality<TSpecialQualification>() ?? BaseClass.SpecialQualifications.GetSpeciality<TSpecialQualification>();
+    }
+
     public bool HasPsi()
     {
         return Qualifications.Any(q => q is IPsi);

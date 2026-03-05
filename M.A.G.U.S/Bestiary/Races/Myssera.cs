@@ -23,8 +23,8 @@ public sealed class Myssera : Creature
 
         AttackModes =
         [
-            new RangedAttack(new KahreiCrossbow(), AimValue),
-            new MeleeAttack(new Broadsword(), AttackValue),
+            new RangedAttack(new HandCrossbow(), AimValue),
+            new MeleeAttack(new Longsword(), AttackValue),
             new MeleeAttack(new Dagger(), AttackValue)
         ];
 

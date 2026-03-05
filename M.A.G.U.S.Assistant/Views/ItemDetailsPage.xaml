@@ -183,16 +183,14 @@
             <VerticalStackLayout Grid.Column="2" IsVisible="{Binding IsPoison}">
                 <Label Text="Onset time" FontSize="Caption" />
                 <HorizontalStackLayout Spacing="4">
-                    <Label Text="{Binding PoisonOnsetTimeText}" FontAttributes="Bold" />
-                    <Label Text="{Binding PoisonOnsetDisplay}" TextColor="Gray" FontSize="Caption" />
+                    <Label Text="{Binding PoisonOnsetDisplay}" FontAttributes="Bold" />
                 </HorizontalStackLayout>
             </VerticalStackLayout>
 
             <VerticalStackLayout Grid.Column="2" IsVisible="{Binding IsPoison}">
                 <Label Text="Duration" FontSize="Caption" />
                 <HorizontalStackLayout Spacing="4">
-                    <Label Text="{Binding PoisonDurationText}" FontAttributes="Bold" />
-                    <Label Text="{Binding PoisonDurationDisplay}" TextColor="Gray" FontSize="Caption" />
+                    <Label Text="{Binding PoisonDurationDisplay}" FontAttributes="Bold" />
                 </HorizontalStackLayout>
             </VerticalStackLayout>
 

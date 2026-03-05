@@ -48,7 +48,7 @@
             <Label Text="Global Settings (Apply to All)" FontAttributes="Bold"/>
 
             <Grid ColumnDefinitions="*, Auto">
-                <mc:NumericUpDownWithLabel Label="Distance" Value="{Binding GlobalDistance}" />
+                <mc:NumericUpDownWithLabel Label="Distance" Value="{Binding GlobalDistance}" Maximum="3000" />
                 <Button Grid.Column="1" Text="Apply" Command="{Binding ApplyDistanceToAllCommand}" HeightRequest="40" VerticalOptions="End"/>
             </Grid>
 

@@ -7,6 +7,7 @@ using Mtf.Extensions.Services;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Text.Json.Serialization;
+using NaturalArmor = M.A.G.U.S.Qualifications.Specialities.NaturalArmor;
 
 namespace M.A.G.U.S.GameSystem;
 
@@ -38,20 +39,13 @@ public abstract class Attacker
         {
             if (this is Character character)
             {
-                var naturalArmor = character.Race.SpecialQualifications.GetSpeciality<NaturalArmor>();
+                var naturalArmor = character.GetSpeciality<NaturalArmor>();
                 if (naturalArmor != null)
                 {
                     return naturalArmor.ArmorClass;
                 }
-
-                var naturalArmor2 = character.BaseClass.SpecialQualifications.GetSpeciality<NaturalArmor>();
-                if (naturalArmor2 != null)
-                {
-                    return naturalArmor2.ArmorClass;
-                }
             }
-
-            if (this is Creature creature)
+            else if (this is Creature creature)
             {
                 return creature.Armor?.ArmorClass ?? 0;
             }

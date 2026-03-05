@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<v:NotifierPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                xmlns:conv="clr-namespace:Mtf.LanguageService.MAUI.Converters;assembly=Mtf.LanguageService.MAUI"
+                xmlns:v="clr-namespace:Mtf.LanguageService.MAUI.Views;assembly=Mtf.LanguageService.MAUI"
+                xmlns:view="clr-namespace:M.A.G.U.S.Assistant.Views"
+                xmlns:vm="clr-namespace:M.A.G.U.S.Assistant.ViewModels"
+                x:Class="M.A.G.U.S.Assistant.Views.BestiaryPage"
+                x:ClassModifier="internal"
+                x:DataType="vm:BestiaryViewModel"
+                Title="Bestiary">
+    
+    <v:NotifierPage.Resources>
+        <ResourceDictionary>
+            <conv:EnumDescriptionTranslationConverter x:Key="EnumDescriptionTranslationConverter" />
+        </ResourceDictionary>
+    </v:NotifierPage.Resources>
+    
+    <Grid RowDefinitions="Auto,*" Padding="10" RowSpacing="10">
+
+        <Border Grid.Row="0" Stroke="Gray" StrokeThickness="1" Padding="10">
+            <VerticalStackLayout Spacing="6">
+
+                <Label Text="Habitat" FontAttributes="Bold"/>
+                <Picker ItemsSource="{Binding AvailablePlaces}"
+                        ItemDisplayBinding="{Binding ., Converter={StaticResource EnumDescriptionTranslationConverter}}"
+                        SelectedItem="{Binding SelectedPlace}"
+                        WidthRequest="220"/>
+
+            </VerticalStackLayout>
+        </Border>
+
+        <view:SearchListView Grid.Row="1" />
+    </Grid>
+
+</v:NotifierPage>
