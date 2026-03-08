@@ -39,6 +39,8 @@ public sealed class Eccydoorr : Creature
 
     public override string Name => "Ice Dragon (Eccydoo'rr)";
 
+    public override string[] Images => ["eccydoo_rr.png"];
+
     [DiceThrow(ThrowType._4D6)]
     public override int GetDamage() => DiceThrow._4D6();
 

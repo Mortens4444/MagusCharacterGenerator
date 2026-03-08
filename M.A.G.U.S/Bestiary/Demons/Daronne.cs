@@ -51,6 +51,8 @@ public sealed class Daronne : Creature
 
     public override string Name => "Daronne (The Shadow)";
 
+    public override string[] Images => ["daronne.png"];
+
     [DiceThrowModifier(1)]
     public override int GetNumberAppearing() => 1;
 

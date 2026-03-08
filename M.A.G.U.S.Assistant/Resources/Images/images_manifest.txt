@@ -85,6 +85,7 @@ falcon.png
 giant_crocodile.png
 giant_scorpion.png
 giant_spider.png
+gider.png
 goblin.png
 golem.png
 gray_dolphin.png
@@ -93,6 +94,7 @@ killer_whale.png
 lathran.png
 lizard_creature.png
 lizard_wizard.png
+maasym.png
 mongrel.png
 mummy.png
 myssera.png
@@ -100,7 +102,6 @@ nalreth.png
 narwhal.png
 nayan.png
 orc.png
-panthen.png
 panther.png
 polar_bear.png
 qvakka.png
@@ -124,7 +125,6 @@ umich_2.png
 vampire.png
 vampire_lord.png
 varthon.png
-vart_hon.png
 werewolf.png
 white_eagle.png
 white_tiger.png

@@ -108,5 +108,8 @@ public enum Deity
     Urria,
 
     // Sámán hitvilág
-    Zherlig // Zherlig Démonkán
+    Zherlig, // Zherlig Démonkán
+
+    // Gnóm isten 
+    Berzebaal // Maga az anyatermészet?
 }

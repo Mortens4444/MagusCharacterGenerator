@@ -20,7 +20,7 @@ public class Gnome : Race
 
     public override int Intelligence => 1;
 
-    public override Alignment? Alignment => Enums.Alignment.ChaosLife;
+    public override Alignment? Alignment => Enums.Alignment.Order;
 
     public override QualificationList Qualifications =>
     [
