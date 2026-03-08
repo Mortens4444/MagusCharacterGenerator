@@ -26,6 +26,7 @@ internal partial class CharacterGeneratorViewModel : CharacterViewModel
     private readonly IShakeService shakeService;
 
     private int baseClassLevel = 1;
+    private bool isCharacterGenerated;
 
     public CharacterGeneratorViewModel(CharacterService characterService, ISoundPlayer soundPlayer, IShakeService shakeService, ISettings settings, IPrintService printService)
          : base(printService, soundPlayer, shakeService, settings)
@@ -61,6 +62,11 @@ internal partial class CharacterGeneratorViewModel : CharacterViewModel
         private set => SetProperty(ref isDirty, value);
     }
 
+    public bool IsCharacterGenerated
+    {
+        get => isCharacterGenerated;
+        set => SetProperty(ref isCharacterGenerated, value);
+    }
 
     [RelayCommand]
     public async Task GenerateCharacter()
@@ -105,6 +111,7 @@ internal partial class CharacterGeneratorViewModel : CharacterViewModel
                 }
             }
             Character = new Character(settings, NameGenerator.Get(selectedRace), selectedRace, instanceClass);
+            IsCharacterGenerated = true;
             MarkDirty();
             if (!settings.AutoIncreasePainTolerance)
             {

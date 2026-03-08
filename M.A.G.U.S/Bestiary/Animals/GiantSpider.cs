@@ -30,6 +30,7 @@ public sealed class GiantSpider : Creature
     [DiceThrow(ThrowType._1D3)]
     public override int GetDamage() => DiceThrow._1D3();
 
+    [DiceThrowModifier(1)]
     public override int GetNumberAppearing() => 1;
 
     public override List<Speed> Speeds => [new Speed(TravelMode.OnLand, 80)];

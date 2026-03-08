@@ -42,6 +42,7 @@ public sealed class SnowLeopard : Creature
     [DiceThrow(ThrowType._1D5)]
     public override int GetDamage() => DiceThrow._1D5();
 
+    [DiceThrowModifier(2)]
     public override int GetNumberAppearing() => 2;
 
     public override List<Speed> Speeds => [new Speed(TravelMode.OnLand, 160)];

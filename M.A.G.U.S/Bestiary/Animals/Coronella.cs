@@ -33,6 +33,7 @@ public sealed class Coronella : Creature
 
     public override string[] Images => ["coronella.png"];
 
+    [DiceThrowModifier(1)]
     public override int GetNumberAppearing() => 1;
 
     [DiceThrow(ThrowType._1D6)]

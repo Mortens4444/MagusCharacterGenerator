@@ -44,6 +44,7 @@ public sealed class VampireLord : LivingDead
     [DiceThrow(ThrowType._1D6)]
     public override int GetDamage() => DiceThrow._1D6();
 
+    [DiceThrowModifier(1)]
     public override int GetNumberAppearing() => 1;
 
     public override double AttacksPerRound => 2;

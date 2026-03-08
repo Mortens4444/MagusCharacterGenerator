@@ -43,12 +43,12 @@
             <mc:NumericUpDownWithLabel Label="Level" Minimum="1" Maximum="1000" Value="{Binding BaseClassLevel}" HorizontalOptions="Center" />
 
             <HorizontalStackLayout Spacing="8" VerticalOptions="Center" HorizontalOptions="Center">
-                <Button Text="Generate" Command="{Binding GenerateCharacterCommand}" HorizontalOptions="Center" Margin="0,20,5,0"/>
-                <Button Text="New name" Command="{Binding GenerateNewNameCommand}" HorizontalOptions="Center" Margin="5,20,0,0"/>
-                <Button Text="Save" Command="{Binding SaveCharacterCommand}" HorizontalOptions="Center" Margin="5,20,5,0"/>
+                <Button Text="Generate" Command="{Binding GenerateCharacterCommand}" HorizontalOptions="Center" Margin="0,20,5,0" />
+                <Button Text="New name" Command="{Binding GenerateNewNameCommand}" HorizontalOptions="Center" Margin="5,20,0,0" IsVisible="{Binding IsCharacterGenerated}" />
+                <Button Text="Save" Command="{Binding SaveCharacterCommand}" HorizontalOptions="Center" Margin="5,20,5,0" IsVisible="{Binding IsCharacterGenerated}" />
             </HorizontalStackLayout>
 
-            <mv:CharacterDetailsView />
+            <mv:CharacterDetailsView IsVisible="{Binding IsCharacterGenerated}" />
 
         </VerticalStackLayout>
     </ScrollView>

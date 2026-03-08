@@ -1,4 +1,5 @@
 ﻿using M.A.G.U.S.Enums;
+using M.A.G.U.S.GameSystem.Attributes;
 using M.A.G.U.S.Models;
 
 namespace M.A.G.U.S.Bestiary.Mythical;
@@ -34,8 +35,10 @@ public sealed class AstralVampire : Creature
 
     public override string Name => "Astral Vampire";
 
+    [DiceThrowModifier(1)]
     public override int GetNumberAppearing() => 1;
 
+    [DiceThrowModifier(0)]
     public override int GetDamage() => 0;
 
     public override List<Speed> Speeds =>

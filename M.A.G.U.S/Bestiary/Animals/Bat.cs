@@ -25,6 +25,7 @@ public sealed class Bat : Creature
         ExperiencePoints = 1;
     }
 
+    [DiceThrowModifier(1)]
     public override int GetDamage() => 1;
 
     [DiceThrow(ThrowType._2D10)]

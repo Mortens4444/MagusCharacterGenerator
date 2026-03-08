@@ -51,6 +51,7 @@ public sealed class DreamCrystal : Creature
 
     public override string Name => "Dream crystal";
 
+    [DiceThrowModifier(0)]
     public override int GetDamage() => 0;
 
     [DiceThrow(ThrowType._1D3)]

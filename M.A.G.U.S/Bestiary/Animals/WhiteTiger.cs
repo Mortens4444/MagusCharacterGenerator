@@ -41,6 +41,7 @@ public sealed class WhiteTiger : Creature
     [DiceThrow(ThrowType._1D5)]
     public override int GetDamage() => DiceThrow._1D5();
 
+    [DiceThrowModifier(1)]
     public override int GetNumberAppearing() => 1;
 
     public override List<Speed> Speeds => [new Speed(TravelMode.OnLand, 160)];

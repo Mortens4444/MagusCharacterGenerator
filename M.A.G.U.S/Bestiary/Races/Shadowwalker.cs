@@ -46,7 +46,6 @@ public sealed class Shadowwalker : Creature
     public override int GetDamage() => DiceThrow._1D6() + 4;
 
     [DiceThrow(ThrowType._1D100)]
-
     public override int GetNumberAppearing() => DiceThrow._1D100();
 
     public override List<Speed> Speeds => [new Speed(TravelMode.OnLand, 100)];

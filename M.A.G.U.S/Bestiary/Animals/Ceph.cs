@@ -31,6 +31,7 @@ public sealed class Ceph : Creature
         ExperiencePoints = 25;
     }
 
+    [DiceThrowModifier(1)]
     public override int GetNumberAppearing() => 1;
 
     [DiceThrow(ThrowType._1D10)]

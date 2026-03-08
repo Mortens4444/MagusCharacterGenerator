@@ -43,6 +43,7 @@ public sealed class Adachnoa : Creature
     [DiceThrow(ThrowType._1D6)]
     public override int GetDamage() => DiceThrow._1D6();
 
+    [DiceThrowModifier(1)]
     public override int GetNumberAppearing() => 1;
 
     public override List<Speed> Speeds => [new Speed(TravelMode.OnLand, 140)];

@@ -41,6 +41,7 @@ public sealed class Umich : Creature
     [DiceThrow(ThrowType._2D10)]
     public override int GetDamage() => DiceThrow._2D10();
 
+    [DiceThrow(ThrowType._1D2)]
     public override int GetNumberAppearing() => DiceThrow._1D2();
 
     public override string[] Images => ["umich.png", "umich_2.png"];

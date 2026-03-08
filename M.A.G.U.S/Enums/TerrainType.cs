@@ -9,8 +9,6 @@ public enum TerrainType : ulong
 
     Plains = 1UL << 0,
 
-    Snowfield = 1UL << 1,
-
     Hills = 1UL << 2,
 
     Mountains = 1UL << 3,
@@ -102,6 +100,15 @@ public enum TerrainType : ulong
 
     [Description("Tree hollow")]
     TreeHollow = 1UL << 36,
+
+    [Description("Southern snowfield")]
+    SouthernSnowfield = 1UL << 37,
+
+    [Description("Northern snowfield")]
+    NorthernSnowfield = 1UL << 38,
+
+    [Description("Snowfield")]
+    Snowfield = SouthernSnowfield | NorthernSnowfield,
 
     [Description("Deep underground")]
     DeepUnderground = Underground | Cave | Crevice | InnerChamber | VolcanicShaft | SubterraneanRiver,

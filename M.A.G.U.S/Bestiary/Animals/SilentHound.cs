@@ -42,6 +42,7 @@ public sealed class SilentHound : Creature
 
     public override string Name => "Silent hound";
 
+    [DiceThrow(ThrowType._1D3)]
     public override int GetNumberAppearing() => DiceThrow._1D3();
 
     [DiceThrow(ThrowType._2D6)]

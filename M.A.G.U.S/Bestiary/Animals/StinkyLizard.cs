@@ -41,6 +41,7 @@ public sealed class StinkyLizard : Creature
 
     public override string Name => "Stinky Lizard";
 
+    [DiceThrowModifier(1)]
     public override int GetNumberAppearing() => 1;
 
     [DiceThrow(ThrowType._1D10)]

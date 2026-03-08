@@ -32,6 +32,7 @@ public sealed class Werewolf : LivingDead
     [DiceThrow(ThrowType._1D10)]
     public override int GetDamage() => DiceThrow._1D10();
 
+    [DiceThrowModifier(1)]
     public override int GetNumberAppearing() => 1;
 
     public override string[] Sounds => ["werewolf_howl"];
