@@ -45,7 +45,7 @@
             <mc:MenuItem ImageName="paint" LabelText="Paint" PageType="{x:Type mv:PaintWizardPage}" />
             <mc:MenuItem ImageName="images" LabelText="Images" PageType="{x:Type mv:ImagesPage}" />
 
-            <mc:MenuItem ImageName="storytelling" LabelText="Storytelling" PageType="{x:Type mv:StorytellingPage}" />
+            <!--<mc:MenuItem ImageName="storytelling" LabelText="Storytelling" PageType="{x:Type mv:StorytellingPage}" />-->
             <mc:MenuItem ImageName="settings" LabelText="Settings" PageType="{x:Type mv:SettingsPage}" />
             <mc:MenuItem ImageName="about" LabelText="About" PageType="{x:Type mv:AboutPage}" />
 
