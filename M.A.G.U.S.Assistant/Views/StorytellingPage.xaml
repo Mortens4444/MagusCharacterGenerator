@@ -12,16 +12,14 @@
 
     <VerticalStackLayout Padding="10" Spacing="12">
 
-        <Button
-            Text="Start Story"
-            Command="{Binding StartStoryCommand}" />
+        <Button Text="Start Story" Command="{Binding StartStoryCommand}" />
+        <Label Text="{Binding StatusMessage}" FontAttributes="Bold" TextColor="Orange" />
 
         <Label Text="Connected Players" FontAttributes="Bold"/>
 
-        <CollectionView
-            ItemsSource="{Binding ConnectedPlayers}"
-            SelectionMode="Single"
-            SelectedItem="{Binding SelectedPlayer}">
+        <CollectionView ItemsSource="{Binding ConnectedPlayers}"
+                        SelectionMode="Single"
+                        SelectedItem="{Binding SelectedPlayer}">
             <CollectionView.ItemTemplate>
                 <DataTemplate>
                     <Label Text="{Binding Name}" Padding="6"/>
@@ -31,10 +29,9 @@
 
         <Label Text="Available Devices" FontAttributes="Bold"/>
 
-        <CollectionView
-            ItemsSource="{Binding AvailableDevices}"
-            SelectionMode="Single"
-            SelectedItem="{Binding SelectedDevice}">
+        <CollectionView ItemsSource="{Binding AvailableDevices}"
+                        SelectionMode="Single"
+                        SelectedItem="{Binding SelectedDevice}">
             <CollectionView.ItemTemplate>
                 <DataTemplate>
                     <Grid Padding="6">
@@ -45,11 +42,10 @@
 
                         <Label Text="{Binding Name}" />
 
-                        <Button
-                            Grid.Column="1"
-                            Text="Connect"
-                            Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.ConnectCommand}"
-                            CommandParameter="{Binding .}" />
+                        <Button Grid.Column="1"
+                                Text="Connect"
+                                Command="{Binding Source={RelativeSource AncestorType={x:Type v:NotifierPage}}, Path=BindingContext.ConnectCommand}"
+                                CommandParameter="{Binding .}" />
                     </Grid>
                 </DataTemplate>
             </CollectionView.ItemTemplate>

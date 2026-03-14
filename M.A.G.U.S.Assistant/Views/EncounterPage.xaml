@@ -96,7 +96,7 @@
         <!-- Turns details (most now a stretchable row) -->
         <Grid Grid.Row="2" Grid.ColumnSpan="2" RowDefinitions="Auto, *">
             <Border Grid.Row="0" Padding="8" BackgroundColor="{AppThemeBinding Light=#F0F0F0, Dark=#333333}">
-                <Grid Padding="6" ColumnDefinitions="5*,4*,3*,8*" RowDefinitions="Auto,Auto">
+                <Grid Padding="6" ColumnDefinitions="5*,5*,3*,7*" RowDefinitions="Auto,Auto">
                     <Label Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" Text="Attacker" FontAttributes="Bold" VerticalOptions="Center" />
                     <Label Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" Text="Attack" HorizontalTextAlignment="End" FontAttributes="Bold" />
                     <Label Grid.Row="1" Grid.Column="1" Text="Result" FontAttributes="Bold" />
@@ -121,7 +121,7 @@
                                 <CollectionView ItemsSource="{Binding Attacks}">
                                     <CollectionView.ItemTemplate>
                                         <DataTemplate x:DataType="vm:TurnAttackViewModel">
-                                            <Grid Padding="6" ColumnDefinitions="5*,4*,3*,8*">
+                                            <Grid Padding="6" ColumnDefinitions="5*,5*,3*,7*">
                                                 <Label Grid.Column="0" Text="{Binding Attacker}" />
                                                 <Label Grid.Column="1" Text="{Binding Result}" />
                                                 <Label Grid.Column="2" Text="{Binding Direction}" />

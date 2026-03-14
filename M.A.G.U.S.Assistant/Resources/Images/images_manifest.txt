@@ -38,6 +38,7 @@ abbit_steel_full_plate.png
 abbit_steel_half_plate.png
 abbit_steel_plate_armor.png
 abbit_steel_scale_armor.png
+aquirian_battle_armor.png
 brigandine_armor.png
 bronze_breastplate.png
 bronze_full_plate.png
@@ -132,8 +133,6 @@ white_wolf.png
 wolf.png
 wolf_pack_leader.png
 wolves.png
-zagnol.png
-zauder.png
 zombie.png
 air_wizard.png
 assassin.png
@@ -571,6 +570,8 @@ see_giant.png
 swamp_giant.png
 white_orc.png
 wier.png
+zagnol.png
+zauder.png
 large_shield.png
 medium_shield.png
 small_shield.png
@@ -635,7 +636,7 @@ scourge.png
 throwing_net.png
 waterskin.png
 whip.png
-aquir_crossbow.png
+aquirian_crossbow.png
 blowpipe.png
 elven_bow.png
 hand_crossbow.png

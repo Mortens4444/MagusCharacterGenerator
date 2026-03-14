@@ -1,8 +1,10 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using CommunityToolkit.Mvvm.Messaging;
 using M.A.G.U.S.Assistant.Interfaces.Bluetooth;
 using M.A.G.U.S.Assistant.Messages;
 using M.A.G.U.S.Assistant.Models.Bluetooth;
+using Mtf.Maui.Controls.Messages;
 using Newtonsoft.Json;
 using System.Collections.ObjectModel;
 
@@ -11,6 +13,9 @@ namespace M.A.G.U.S.Assistant.ViewModels;
 internal partial class StorytellingViewModel : ObservableObject
 {
     private readonly IBluetoothService bluetooth;
+    private PlayerModel? selectedPlayer;
+    private DeviceModel? selectedDevice;
+    private String statusMessage = "Server not started";
 
     public ObservableCollection<DeviceModel> AvailableDevices { get; } = [];
     public ObservableCollection<PlayerModel> ConnectedPlayers { get; } = [];
@@ -20,6 +25,24 @@ internal partial class StorytellingViewModel : ObservableObject
     public IAsyncRelayCommand<DeviceModel> ConnectCommand { get; }
     public IAsyncRelayCommand StartCombatCommand { get; }
     public IAsyncRelayCommand SendPsiCommand { get; }
+
+    public String StatusMessage
+    {
+        get => statusMessage;
+        set => SetProperty(ref statusMessage, value);
+    }
+
+    public PlayerModel? SelectedPlayer
+    {
+        get => selectedPlayer;
+        set => SetProperty(ref selectedPlayer, value);
+    }
+
+    public DeviceModel? SelectedDevice
+    {
+        get => selectedDevice;
+        set => SetProperty(ref selectedDevice, value);
+    }
 
     public StorytellingViewModel(IBluetoothService bluetooth)
     {
@@ -31,7 +54,20 @@ internal partial class StorytellingViewModel : ObservableObject
         SendPsiCommand = new AsyncRelayCommand(SendPsiAsync);
     }
 
-    private Task StartStoryAsync() => bluetooth.StartServerAsync();
+    private async Task StartStoryAsync()
+    {
+        try
+        {
+            StatusMessage = "Starting Bluetooth server...";
+            await bluetooth.StartServerAsync();
+            StatusMessage = "Bluetooth server started";
+        }
+        catch (Exception ex)
+        {
+            StatusMessage = ex.Message;
+            WeakReferenceMessenger.Default.Send(new ShowErrorMessage(ex));
+        }
+    }
 
     private Task ConnectAsync(DeviceModel device) => bluetooth.ConnectAsync(device.Id);
 

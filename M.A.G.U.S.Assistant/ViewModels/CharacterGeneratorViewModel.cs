@@ -12,6 +12,7 @@ using M.A.G.U.S.Qualifications;
 using M.A.G.U.S.Qualifications.Scientific.Psi;
 using M.A.G.U.S.Races;
 using M.A.G.U.S.Utils;
+using Mtf.Extensions.Services;
 using Mtf.LanguageService.MAUI;
 using Mtf.Maui.Controls.Messages;
 using System.Collections.ObjectModel;
@@ -38,8 +39,11 @@ internal partial class CharacterGeneratorViewModel : CharacterViewModel
         Character = new Character(settings);
 
         LoadAvailableTypes();
-        SelectedRace = AvailableRaces.FirstOrDefault();
-        SelectedClass = AvailableClasses.FirstOrDefault();
+
+        int raceIndex = RandomProvider.GetSecureRandomInt(0, AvailableRaces.Count);
+        int classIndex = RandomProvider.GetSecureRandomInt(0, AvailableClasses.Count);
+        SelectedRace = AvailableRaces[raceIndex];
+        SelectedClass = AvailableClasses[classIndex];
     }
 
     public ObservableCollection<IRace?> AvailableRaces { get; } = [];
