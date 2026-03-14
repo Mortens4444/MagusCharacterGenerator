@@ -4,6 +4,7 @@ using CommunityToolkit.Mvvm.Messaging;
 using M.A.G.U.S.Assistant.Interfaces.Bluetooth;
 using M.A.G.U.S.Assistant.Messages;
 using M.A.G.U.S.Assistant.Models.Bluetooth;
+using Mtf.LanguageService.MAUI;
 using Mtf.Maui.Controls.Messages;
 using Newtonsoft.Json;
 using System.Collections.ObjectModel;
@@ -15,7 +16,8 @@ internal partial class StorytellingViewModel : ObservableObject
     private readonly IBluetoothService bluetooth;
     private PlayerModel? selectedPlayer;
     private DeviceModel? selectedDevice;
-    private String statusMessage = "Server not started";
+    private String statusMessage = Lng.Elem("Server not started");
+    private bool serverRunning;
 
     public ObservableCollection<DeviceModel> AvailableDevices { get; } = [];
     public ObservableCollection<PlayerModel> ConnectedPlayers { get; } = [];
@@ -25,6 +27,18 @@ internal partial class StorytellingViewModel : ObservableObject
     public IAsyncRelayCommand<DeviceModel> ConnectCommand { get; }
     public IAsyncRelayCommand StartCombatCommand { get; }
     public IAsyncRelayCommand SendPsiCommand { get; }
+
+    public bool ServerRunning
+    {
+        get => serverRunning;
+        set
+        {
+            if (SetProperty(ref serverRunning, value))
+            {
+                StartStoryCommand.NotifyCanExecuteChanged();
+            }
+        }
+    }
 
     public String StatusMessage
     {
@@ -47,20 +61,52 @@ internal partial class StorytellingViewModel : ObservableObject
     public StorytellingViewModel(IBluetoothService bluetooth)
     {
         this.bluetooth = bluetooth;
+        bluetooth.DeviceDiscovered += device =>
+        {
+            MainThread.BeginInvokeOnMainThread(() =>
+            {
+                if (!AvailableDevices.Any(d => d.Id == device.Id))
+                {
+                    AvailableDevices.Add(device);
+                }
+            });
+        };
 
-        StartStoryCommand = new AsyncRelayCommand(StartStoryAsync);
+        StartStoryCommand = new AsyncRelayCommand(StartStoryAsync, CanStartStory);
         ConnectCommand = new AsyncRelayCommand<DeviceModel>(ConnectAsync);
         StartCombatCommand = new AsyncRelayCommand(StartCombatAsync);
         SendPsiCommand = new AsyncRelayCommand(SendPsiAsync);
+    }
+
+    public Task StartDiscoveryAsync()
+    {
+        StatusMessage = "Searching for devices...";
+        return bluetooth.StartDiscoveryAsync();
+    }
+
+    public async Task StopServerAsync()
+    {
+        try
+        {
+            await bluetooth.StopServerAsync().ConfigureAwait(false);
+            ServerRunning = false;
+            StatusMessage = Lng.Elem("Bluetooth server stopped");
+        }
+        catch (Exception ex)
+        {
+            WeakReferenceMessenger.Default.Send(new ShowErrorMessage(ex));
+        }
     }
 
     private async Task StartStoryAsync()
     {
         try
         {
-            StatusMessage = "Starting Bluetooth server...";
+            StatusMessage = Lng.Elem("Starting Bluetooth server...");
             await bluetooth.StartServerAsync();
-            StatusMessage = "Bluetooth server started";
+            ServerRunning = true;
+            StartStoryCommand.NotifyCanExecuteChanged();
+            StatusMessage = Lng.Elem("Bluetooth server started");
         }
         catch (Exception ex)
         {
@@ -70,6 +116,8 @@ internal partial class StorytellingViewModel : ObservableObject
     }
 
     private Task ConnectAsync(DeviceModel device) => bluetooth.ConnectAsync(device.Id);
+
+    private Boolean CanStartStory() => !ServerRunning;
 
     private async Task StartCombatAsync()
     {

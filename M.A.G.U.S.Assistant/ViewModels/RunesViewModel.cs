@@ -3,7 +3,7 @@ using M.A.G.U.S.Interfaces;
 
 namespace M.A.G.U.S.Assistant.ViewModels;
 
-internal sealed class RunesViewModel : SearchListViewModel
+internal partial class RunesViewModel : SearchListViewModel
 {
     private readonly IRuneTranslator runeTranslator;
 

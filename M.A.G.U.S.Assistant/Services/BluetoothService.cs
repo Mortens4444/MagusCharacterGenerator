@@ -1,6 +1,7 @@
 ﻿using M.A.G.U.S.Assistant.Contexts;
 using M.A.G.U.S.Assistant.Interfaces.Bluetooth;
 using M.A.G.U.S.Assistant.Messages;
+using M.A.G.U.S.Assistant.Models.Bluetooth;
 using Newtonsoft.Json;
 using System.Collections.Concurrent;
 
@@ -12,6 +13,7 @@ internal sealed class BluetoothService : IBluetoothService, IDisposable
     private readonly ConcurrentDictionary<string, IBluetoothConnection> connections = new();
     private readonly IBluetoothConnector? connector; // optional, injected if app supports outgoing connections
     private readonly Func<Task<IBluetoothListener>>? listenerFactory; // optional factory for server listener
+    private readonly IBluetoothDiscoveryService? discovery;
 
     private CancellationTokenSource? cts;
     private Task? acceptLoopTask;
@@ -19,18 +21,36 @@ internal sealed class BluetoothService : IBluetoothService, IDisposable
 
     public string LocalId { get; } = Guid.NewGuid().ToString();
 
+    public event Action<DeviceModel>? DeviceDiscovered;
     public event Func<BluetoothMessage, Task>? MessageReceived;
     public event Func<string, Task>? ClientConnected;    // remoteId
     public event Func<string, Task>? ClientDisconnected; // remoteId
 
     public BluetoothService(
         CommandRegistry registry,
-        IBluetoothConnector? connector = null,
-        Func<Task<IBluetoothListener>>? listenerFactory = null)
+        IBluetoothConnector? connector,
+        IBluetoothDiscoveryService ? discovery,
+        Func<Task<IBluetoothListener>>? listenerFactory)
     {
         this.registry = registry ?? throw new ArgumentNullException(nameof(registry));
         this.connector = connector;
         this.listenerFactory = listenerFactory;
+        this.discovery = discovery;
+
+        if (discovery != null)
+        {
+            discovery.DeviceDiscovered += d => DeviceDiscovered?.Invoke(d);
+        }
+    }
+
+    public Task StartDiscoveryAsync()
+    {
+        if (discovery is null)
+        {
+            throw new NotSupportedException("Discovery not supported on this platform.");
+        }
+
+        return discovery.StartDiscoveryAsync();
     }
 
     public Task StartServerAsync()
@@ -42,13 +62,57 @@ internal sealed class BluetoothService : IBluetoothService, IDisposable
 
         if (cts != null)
         {
-            return Task.CompletedTask; // already started
+            return Task.CompletedTask;
         }
 
         isServer = true;
         cts = new CancellationTokenSource();
         acceptLoopTask = Task.Run(() => AcceptLoopAsync(cts.Token), cts.Token);
         return Task.CompletedTask;
+    }
+
+    public async Task StopServerAsync()
+    {
+        if (cts is null)
+        {
+            return;
+        }
+
+        try
+        {
+            cts.Cancel();
+
+            if (acceptLoopTask is not null)
+            {
+                try
+                {
+                    await acceptLoopTask.ConfigureAwait(false);
+                }
+                catch (OperationCanceledException)
+                {
+                }
+            }
+
+            foreach (var kv in connections.ToArray())
+            {
+                try
+                {
+                    kv.Value.Dispose();
+                }
+                catch
+                {
+                }
+            }
+
+            connections.Clear();
+        }
+        finally
+        {
+            cts.Dispose();
+            cts = null;
+            acceptLoopTask = null;
+            isServer = false;
+        }
     }
 
     public async Task ConnectAsync(string deviceId)
@@ -144,7 +208,7 @@ internal sealed class BluetoothService : IBluetoothService, IDisposable
 
         // snapshot the connections to avoid collection mutation issues
         var targets = connections.Values
-            .Where(c => !message.TargetIds.Any() || message.TargetIds.Contains(c.RemoteId))
+            .Where(c => message.TargetIds.Count == 0 || message.TargetIds.Contains(c.RemoteId))
             .ToList();
 
         var sendTasks = targets.Select(c =>
@@ -240,5 +304,7 @@ internal sealed class BluetoothService : IBluetoothService, IDisposable
 
         cts?.Dispose();
         cts = null;
+
+        _ = discovery?.StopDiscoveryAsync();
     }
 }

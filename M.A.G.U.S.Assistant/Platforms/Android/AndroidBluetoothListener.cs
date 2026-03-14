@@ -7,7 +7,7 @@ internal sealed class AndroidBluetoothListener : IBluetoothListener
 {
     private BluetoothServerSocket? serverSocket;
 
-    public async Task<IBluetoothConnection> AcceptConnectionAsync(CancellationToken ct)
+    public Task<IBluetoothConnection> AcceptConnectionAsync(CancellationToken ct)
     {
         if (serverSocket == null)
         {
@@ -16,7 +16,7 @@ internal sealed class AndroidBluetoothListener : IBluetoothListener
                 "MAGUS_Service", Java.Util.UUID.RandomUUID());
         }
 
-        return await Task.Run(() =>
+        return Task.Run(() =>
         {
             BluetoothSocket socket = serverSocket.Accept();
             return (IBluetoothConnection)new AndroidBluetoothConnection(socket);

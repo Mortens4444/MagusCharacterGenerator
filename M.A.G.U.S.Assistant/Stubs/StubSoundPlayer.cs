@@ -1,7 +1,7 @@
 ﻿using M.A.G.U.S.Assistant.Interfaces;
 using M.A.G.U.S.Assistant.Models;
 
-namespace M.A.G.U.S.Assistant;
+namespace M.A.G.U.S.Assistant.Stubs;
 
 internal class StubSoundPlayer : ISoundPlayer
 {

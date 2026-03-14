@@ -10,4 +10,24 @@ internal partial class StorytellingPage : NotifierPage
 		InitializeComponent();
 		BindingContext = storytellingViewModel;
     }
+
+    protected override async void OnAppearing()
+    {
+        base.OnAppearing();
+
+        if (BindingContext is StorytellingViewModel vm)
+        {
+            await vm.StartDiscoveryAsync();
+        }
+    }
+
+    protected override async void OnDisappearing()
+    {
+        base.OnDisappearing();
+
+        if (BindingContext is StorytellingViewModel vm)
+        {
+            await vm.StopServerAsync();
+        }
+    }
 }

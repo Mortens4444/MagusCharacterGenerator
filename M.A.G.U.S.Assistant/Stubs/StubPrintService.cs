@@ -1,6 +1,6 @@
 ﻿using M.A.G.U.S.Assistant.Interfaces;
 
-namespace M.A.G.U.S.Assistant;
+namespace M.A.G.U.S.Assistant.Stubs;
 
 internal class StubPrintService : IPrintService
 {
