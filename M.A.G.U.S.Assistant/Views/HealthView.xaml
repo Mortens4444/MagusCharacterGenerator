@@ -15,10 +15,10 @@
             <Border Style="{StaticResource BoxBorder}">
                 <VerticalStackLayout>
                     <Label Text="Health &amp; Pain Resistance" Style="{StaticResource HeaderLabel}"/>
-                    <Grid ColumnDefinitions="*, *, *" RowDefinitions="Auto">
-                        <mc:EntryWithLabel Label="Max. HP" Text="{Binding MaxHealthPoints}" IsReadOnly="True" WidthRequest="100" />
-                        <mc:EntryWithLabel Label="Max. PRP" Text="{Binding MaxPainTolerancePoints}" IsReadOnly="True" WidthRequest="100" Grid.Column="1" />
-                        <mc:EntryWithLabel Label="Max. PRP/level" Text="{Binding PainToleranceModifierFormula}" IsReadOnly="True" WidthRequest="100" Grid.Column="2" />
+                    <Grid ColumnDefinitions="*, *" RowDefinitions="Auto, Auto">
+                        <mc:EntryWithLabel Label="Max. HP" Text="{Binding MaxHealthPoints}" IsReadOnly="True" WidthRequest="100" Grid.ColumnSpan="2" />
+                        <mc:EntryWithLabel Label="Max. PRP" Text="{Binding MaxPainTolerancePoints}" IsReadOnly="True" WidthRequest="100" Grid.Row="1" Grid.Column="0" />
+                        <mc:EntryWithLabel Label="Max. PRP/level" Text="{Binding PainToleranceModifierFormula}" IsReadOnly="True" WidthRequest="100" Grid.Row="1" Grid.Column="1" />
                     </Grid>
                 </VerticalStackLayout>
             </Border>

@@ -9,6 +9,8 @@ public enum TerrainType : ulong
 
     Plains = 1UL << 0,
 
+    Jungle = 1UL << 1,
+
     Hills = 1UL << 2,
 
     Mountains = 1UL << 3,
@@ -106,6 +108,10 @@ public enum TerrainType : ulong
 
     [Description("Northern snowfield")]
     NorthernSnowfield = 1UL << 38,
+
+    Grassland = 1UL << 39,
+
+    Savanna = 1UL << 40,
 
     [Description("Snowfield")]
     Snowfield = SouthernSnowfield | NorthernSnowfield,

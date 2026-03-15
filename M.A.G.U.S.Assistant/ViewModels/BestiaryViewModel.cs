@@ -43,7 +43,7 @@ internal partial class BestiaryViewModel : SearchListViewModel, IDisposable
         }
         PickRandomCommand = new RelayCommand(_ => PickRandomCreature());
         LoadAvailablePlaces();
-        SelectedPlace = AvailablePlaces.LastOrDefault();
+        SelectedPlace = TerrainType.Anywhere;
     }
 
     private void PickRandomCreature()

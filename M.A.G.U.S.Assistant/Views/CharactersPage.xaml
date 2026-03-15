@@ -21,10 +21,11 @@
     
     <Grid RowDefinitions="Auto, *">
         <ImageButton Grid.Column="1" Source="delete.png" HeightRequest="24" WidthRequest="24" VerticalOptions="Center"
-                        Command="{Binding Source={RelativeSource AncestorType={x:Type vm:CharactersViewModel}}, Path=DeleteAllCharacterCommand}">
+                     Command="{Binding Source={RelativeSource AncestorType={x:Type vm:CharactersViewModel}}, Path=DeleteAllCharacterCommand}">
         </ImageButton>
 
-        <RefreshView Grid.Row="1" IsRefreshing="{Binding IsLoading}" Command="{Binding LoadCharactersCommand}">
+        <RefreshView Grid.Row="1" IsRefreshing="{Binding IsLoading}">
+        <!--<RefreshView Grid.Row="1" IsRefreshing="{Binding IsLoading}" Command="{Binding LoadCharactersCommand}">-->
 
             <Grid>
                 

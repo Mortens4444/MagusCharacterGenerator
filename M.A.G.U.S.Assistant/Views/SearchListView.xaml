@@ -7,6 +7,7 @@
              xmlns:mc="clr-namespace:Mtf.Maui.Controls;assembly=Mtf.Maui.Controls"
              xmlns:vm="clr-namespace:M.A.G.U.S.Assistant.ViewModels"
              x:Class="M.A.G.U.S.Assistant.Views.SearchListView"
+             x:ClassModifier="internal"
              x:DataType="vm:SearchListViewModel">
 
     <ContentView.Resources>

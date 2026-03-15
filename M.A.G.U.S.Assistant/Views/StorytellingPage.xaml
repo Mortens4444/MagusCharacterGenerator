@@ -28,7 +28,6 @@
         </CollectionView>
 
         <Label Text="Available Devices" FontAttributes="Bold"/>
-
         <CollectionView ItemsSource="{Binding AvailableDevices}"
                         SelectionMode="Single"
                         SelectedItem="{Binding SelectedDevice}">
@@ -50,6 +49,11 @@
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>
+
+        <Label Text="Private message" FontAttributes="Bold"/>
+
+        <Entry Text="{Binding MessageText}" ClearButtonVisibility="WhileEditing" />
+        <Button Text="Send" Command="{Binding SendPrivateMessageCommand}" />
 
     </VerticalStackLayout>
 </v:NotifierPage>

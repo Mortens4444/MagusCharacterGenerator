@@ -17,7 +17,7 @@ internal partial class StorytellingPage : NotifierPage
 
         if (BindingContext is StorytellingViewModel vm)
         {
-            await vm.StartDiscoveryAsync();
+            await vm.StartDiscoveryAsync().ConfigureAwait(false);
         }
     }
 
@@ -27,7 +27,7 @@ internal partial class StorytellingPage : NotifierPage
 
         if (BindingContext is StorytellingViewModel vm)
         {
-            await vm.StopServerAsync();
+            await vm.StopServerAsync().ConfigureAwait(false);
         }
     }
 }

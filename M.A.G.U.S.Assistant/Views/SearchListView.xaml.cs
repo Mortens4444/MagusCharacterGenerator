@@ -1,9 +1,12 @@
+using Mtf.LanguageService.MAUI;
+
 namespace M.A.G.U.S.Assistant.Views;
 
-public partial class SearchListView : ContentView
+internal partial class SearchListView : ContentView
 {
 	public SearchListView()
 	{
 		InitializeComponent();
-	}
+        Translator.Translate(this);
+    }
 }

@@ -65,6 +65,7 @@ steel_scale_armor.png
 studded_leather.png
 adachnoa.png
 anatyda.png
+armored_rhino.png
 astral_vampire.png
 barracuda.png
 bat.png
@@ -72,6 +73,7 @@ bear.png
 black_shark.png
 byzon.png
 ceph.png
+common_rhino.png
 coronella.png
 crazy_bear.png
 crocodile.png
@@ -102,6 +104,7 @@ myssera.png
 nalreth.png
 narwhal.png
 nayan.png
+nganga.png
 orc.png
 panther.png
 polar_bear.png

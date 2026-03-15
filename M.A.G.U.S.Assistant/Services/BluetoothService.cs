@@ -4,10 +4,11 @@ using M.A.G.U.S.Assistant.Messages;
 using M.A.G.U.S.Assistant.Models.Bluetooth;
 using Newtonsoft.Json;
 using System.Collections.Concurrent;
+using System.Diagnostics;
 
 namespace M.A.G.U.S.Assistant.Services;
 
-internal sealed class BluetoothService : IBluetoothService, IDisposable
+internal partial class BluetoothService : IBluetoothService, IDisposable
 {
     private readonly CommandRegistry registry;
     private readonly ConcurrentDictionary<string, IBluetoothConnection> connections = new();
@@ -43,14 +44,35 @@ internal sealed class BluetoothService : IBluetoothService, IDisposable
         }
     }
 
-    public Task StartDiscoveryAsync()
+    public static async Task<bool> RequestBluetoothPermissionsAsync()
     {
+#if ANDROID
+        if (Android.OS.Build.VERSION.SdkInt < Android.OS.BuildVersionCodes.S)
+        {
+            return true;
+        }
+
+        var status = await Permissions.RequestAsync<BluetoothPermissions>().ConfigureAwait(false);
+        return status == PermissionStatus.Granted;
+#else
+        return true;
+#endif
+    }
+
+    public async Task StartDiscoveryAsync()
+    {
+        var granted = await RequestBluetoothPermissionsAsync().ConfigureAwait(false);
+        if (!granted)
+        {
+            throw new NotSupportedException("Bluetooth permission denied");
+        }
+
         if (discovery is null)
         {
             throw new NotSupportedException("Discovery not supported on this platform.");
         }
 
-        return discovery.StartDiscoveryAsync();
+        await discovery.StartDiscoveryAsync().ConfigureAwait(false);
     }
 
     public Task StartServerAsync()
@@ -80,7 +102,7 @@ internal sealed class BluetoothService : IBluetoothService, IDisposable
 
         try
         {
-            cts.Cancel();
+            await cts.CancelAsync().ConfigureAwait(false);
 
             if (acceptLoopTask is not null)
             {
@@ -122,10 +144,7 @@ internal sealed class BluetoothService : IBluetoothService, IDisposable
             throw new NotSupportedException("No connector provided.");
         }
 
-        if (cts is null)
-        {
-            cts = new CancellationTokenSource();
-        }
+        cts ??= new CancellationTokenSource();
 
         var ct = cts.Token;
         var conn = await connector.ConnectToAsync(deviceId, ct).ConfigureAwait(false);
@@ -148,7 +167,7 @@ internal sealed class BluetoothService : IBluetoothService, IDisposable
                 catch (Exception ex)
                 {
                     // log or surface error, then continue accepting
-                    System.Diagnostics.Debug.WriteLine($"AcceptLoop error: {ex}");
+                    Debug.WriteLine($"AcceptLoop error: {ex}");
                     await Task.Delay(500, ct).ConfigureAwait(false);
                 }
             }
@@ -191,7 +210,7 @@ internal sealed class BluetoothService : IBluetoothService, IDisposable
                 catch (OperationCanceledException) { break; }
                 catch (Exception ex)
                 {
-                    System.Diagnostics.Debug.WriteLine($"ReceiveLoop error ({connection.RemoteId}): {ex}");
+                    Debug.WriteLine($"ReceiveLoop error ({connection.RemoteId}): {ex}");
                     break;
                 }
             }
@@ -219,7 +238,7 @@ internal sealed class BluetoothService : IBluetoothService, IDisposable
             }
             catch (Exception ex)
             {
-                System.Diagnostics.Debug.WriteLine($"SendAsync start failed for {c.RemoteId}: {ex}");
+                Debug.WriteLine($"SendAsync start failed for {c.RemoteId}: {ex}");
                 return Task.CompletedTask;
             }
         }).ToArray();
@@ -229,14 +248,14 @@ internal sealed class BluetoothService : IBluetoothService, IDisposable
 
     private async Task OnRawMessageReceived(string json, string senderId)
     {
-        BluetoothMessage? message = null;
+        BluetoothMessage? message;
         try
         {
             message = JsonConvert.DeserializeObject<BluetoothMessage>(json);
         }
         catch (Exception ex)
         {
-            System.Diagnostics.Debug.WriteLine($"Invalid JSON from {senderId}: {ex}");
+            Debug.WriteLine($"Invalid JSON from {senderId}: {ex}");
             return;
         }
 
@@ -246,7 +265,7 @@ internal sealed class BluetoothService : IBluetoothService, IDisposable
         }
 
         // Server routing: if server and message has targets not including local, forward
-        if (isServer && message.TargetIds.Any() && !message.TargetIds.Contains(LocalId))
+        if (isServer && message.TargetIds.Count != 0 && !message.TargetIds.Contains(LocalId))
         {
             await SendAsync(message).ConfigureAwait(false);
             return;
@@ -268,7 +287,7 @@ internal sealed class BluetoothService : IBluetoothService, IDisposable
             }
             catch (Exception ex)
             {
-                System.Diagnostics.Debug.WriteLine($"Command {message.CommandType} failed: {ex}");
+                Debug.WriteLine($"Command {message.CommandType} failed: {ex}");
             }
         }
 
@@ -280,7 +299,7 @@ internal sealed class BluetoothService : IBluetoothService, IDisposable
 
     private void CleanupConnection(string remoteId)
     {
-        if (connections.TryRemove(remoteId, out var conn))
+        if (connections.TryRemove(remoteId, out IBluetoothConnection? conn))
         {
             try { conn.Dispose(); } catch { }
             _ = ClientDisconnected?.Invoke(remoteId);

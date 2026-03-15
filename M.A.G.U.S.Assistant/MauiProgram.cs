@@ -34,6 +34,7 @@ internal static class MauiProgram
 #endif
 
 #if ANDROID
+        builder.Services.AddSingleton<Android.Content.Context>(Android.App.Application.Context);
         builder.Services.AddSingleton<IPrintService, Platforms.Android.PrintService>();
         builder.Services.AddSingleton<ISoundPlayer, Platforms.Android.SoundPlayer>();
         builder.Services.AddTransient<IShakeService, Platforms.Android.ShakeService>();

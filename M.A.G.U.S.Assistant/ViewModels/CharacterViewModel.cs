@@ -29,12 +29,13 @@ internal partial class CharacterViewModel(IPrintService printService, ISoundPlay
     private Weapon? primaryWeapon;
     private Weapon? secondaryWeapon;
     private Armor? selectedArmor;
+    private View? currentView;
+    private readonly Dictionary<string, View> viewCache = [];
     private readonly IPrintService printService = printService;
     private readonly ISettings settings = settings;
     private readonly IShakeService shakeService = shakeService;
     private readonly ISoundPlayer soundPlayer = soundPlayer;
     private static readonly IEnumerable<Alignment> alignments = [.. Enum.GetValues<Alignment>()];
-
     public IEnumerable<Alignment> Alignments => alignments;
 
     public ObservableCollection<CombatValueModifier> AvailableCombatValueModifiers { get; } = [.. Enum.GetValues<CombatValueModifier>()];
@@ -464,6 +465,19 @@ internal partial class CharacterViewModel(IPrintService printService, ISoundPlay
     public ObservableCollection<Thing> Equipment => Character?.Equipment ?? [];
     public string TotalEquipmentWeight => Character?.TotalEquipmentWeight ?? String.Empty;
 
+    public View? CurrentView
+    {
+        get
+        {
+            if (currentView == null)
+            {
+                ChangeTab("0");
+            }
+            return currentView;
+        }
+        set => SetProperty(ref currentView, value);
+    }
+
     public string PainToleranceModifierFormula
     {
         get
@@ -672,6 +686,35 @@ internal partial class CharacterViewModel(IPrintService printService, ISoundPlay
         }
     }
 
+    [RelayCommand]
+    private void ChangeTab(string tabIndex)
+    {
+        if (!viewCache.TryGetValue(tabIndex, out View? view))
+        {
+            view = tabIndex switch
+            {
+                "0" => new VerticalStackLayout
+                {
+                    Spacing = 15,
+                    Children = { new CharacterOverviewView(), new HealthView() }
+                },
+                "1" => new AbilitiesView(),
+                "2" => new CombatValuesView(),
+                "3" => new PsiManaMagicResistanceView(),
+                "4" => new QualificationsView(),
+                "5" => new EquipmentView(),
+                _ => null
+            };
+
+            if (view != null)
+            {
+                viewCache[tabIndex] = view;
+            }
+        }
+
+        CurrentView = view;
+    }
+
     private void Equipment_CollectionChanged(object? sender, NotifyCollectionChangedEventArgs e)
     {
         switch (e.Action)
@@ -726,6 +769,7 @@ internal partial class CharacterViewModel(IPrintService printService, ISoundPlay
 
     public void Dispose()
     {
+        shakeService?.Dispose();
         if (subscribedEquipment != null)
         {
             subscribedEquipment.CollectionChanged -= Equipment_CollectionChanged;

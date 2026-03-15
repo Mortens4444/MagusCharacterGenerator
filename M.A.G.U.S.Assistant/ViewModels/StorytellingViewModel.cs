@@ -1,6 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.Messaging;
+using M.A.G.U.S.Assistant.Enums;
 using M.A.G.U.S.Assistant.Interfaces.Bluetooth;
 using M.A.G.U.S.Assistant.Messages;
 using M.A.G.U.S.Assistant.Models.Bluetooth;
@@ -18,6 +19,7 @@ internal partial class StorytellingViewModel : ObservableObject
     private DeviceModel? selectedDevice;
     private String statusMessage = Lng.Elem("Server not started");
     private bool serverRunning;
+    private String messageText = String.Empty;
 
     public ObservableCollection<DeviceModel> AvailableDevices { get; } = [];
     public ObservableCollection<PlayerModel> ConnectedPlayers { get; } = [];
@@ -27,6 +29,7 @@ internal partial class StorytellingViewModel : ObservableObject
     public IAsyncRelayCommand<DeviceModel> ConnectCommand { get; }
     public IAsyncRelayCommand StartCombatCommand { get; }
     public IAsyncRelayCommand SendPsiCommand { get; }
+    public IAsyncRelayCommand SendPrivateMessageCommand { get; }
 
     public bool ServerRunning
     {
@@ -40,6 +43,18 @@ internal partial class StorytellingViewModel : ObservableObject
         }
     }
 
+    public String MessageText
+    {
+        get => messageText;
+        set
+        {
+            if (SetProperty(ref messageText, value))
+            {
+                SendPrivateMessageCommand.NotifyCanExecuteChanged();
+            }
+        }
+    }
+
     public String StatusMessage
     {
         get => statusMessage;
@@ -49,7 +64,13 @@ internal partial class StorytellingViewModel : ObservableObject
     public PlayerModel? SelectedPlayer
     {
         get => selectedPlayer;
-        set => SetProperty(ref selectedPlayer, value);
+        set
+        {
+            if (SetProperty(ref selectedPlayer, value))
+            {
+                SendPrivateMessageCommand.NotifyCanExecuteChanged();
+            }
+        }
     }
 
     public DeviceModel? SelectedDevice
@@ -72,15 +93,19 @@ internal partial class StorytellingViewModel : ObservableObject
             });
         };
 
+        bluetooth.MessageReceived += OnMessageReceived;
+        //bluetooth.PeerDisconnected += OnPeerDisconnected;
+
         StartStoryCommand = new AsyncRelayCommand(StartStoryAsync, CanStartStory);
         ConnectCommand = new AsyncRelayCommand<DeviceModel>(ConnectAsync);
         StartCombatCommand = new AsyncRelayCommand(StartCombatAsync);
         SendPsiCommand = new AsyncRelayCommand(SendPsiAsync);
+        SendPrivateMessageCommand = new AsyncRelayCommand(SendPrivateMessageAsync, CanSendPrivateMessage);
     }
 
     public Task StartDiscoveryAsync()
     {
-        StatusMessage = "Searching for devices...";
+        StatusMessage = Lng.Elem("Searching for devices...");
         return bluetooth.StartDiscoveryAsync();
     }
 
@@ -103,7 +128,7 @@ internal partial class StorytellingViewModel : ObservableObject
         try
         {
             StatusMessage = Lng.Elem("Starting Bluetooth server...");
-            await bluetooth.StartServerAsync();
+            await bluetooth.StartServerAsync().ConfigureAwait(false);
             ServerRunning = true;
             StartStoryCommand.NotifyCanExecuteChanged();
             StatusMessage = Lng.Elem("Bluetooth server started");
@@ -115,9 +140,143 @@ internal partial class StorytellingViewModel : ObservableObject
         }
     }
 
-    private Task ConnectAsync(DeviceModel device) => bluetooth.ConnectAsync(device.Id);
+    private async Task ConnectAsync(DeviceModel device)
+    {
+        await bluetooth.ConnectAsync(device.Id).ConfigureAwait(false);
+        await bluetooth.SendAsync(new BluetoothMessage
+        {
+            CommandType = BluetoothCommandType.RegisterPlayer,
+            SenderId = bluetooth.LocalId,
+            TargetIds = [device.Id],
+            Payload = JsonConvert.SerializeObject(new RegisterPlayerData
+            {
+                Name = DeviceInfo.Name
+            })
+        }).ConfigureAwait(false);
+    }
 
-    private Boolean CanStartStory() => !ServerRunning;
+    private bool CanStartStory() => !ServerRunning;
+
+    private bool CanSendPrivateMessage()
+    {
+        return SelectedPlayer is not null && !String.IsNullOrWhiteSpace(MessageText);
+    }
+
+    //private void OnPeerDisconnected(object? sender, BluetoothPeerEventArgs e)
+    //{
+    //    MainThread.BeginInvokeOnMainThread(() =>
+    //    {
+    //        var player = ConnectedPlayers.FirstOrDefault(p => p.Id == e.PeerId);
+    //        if (player is not null)
+    //        {
+    //            ConnectedPlayers.Remove(player);
+    //        }
+    //    });
+    //}
+
+    private async Task OnMessageReceived(BluetoothMessage message)
+    {
+        switch (message.CommandType)
+        {
+            case BluetoothCommandType.RegisterPlayer:
+                await HandleRegisterPlayer(message).ConfigureAwait(false);
+                break;
+
+            case BluetoothCommandType.PrivateMessage:
+                await StorytellingViewModel.HandlePrivateMessage(message).ConfigureAwait(false);
+                break;
+        }
+        //if (message.CommandType != "RegisterPlayer")
+        //{
+        //    return;
+        //}
+
+        //var data = JsonConvert.DeserializeObject<RegisterPlayerData>(message.Payload);
+        //if (data is null)
+        //{
+        //    return;
+        //}
+
+        //MainThread.BeginInvokeOnMainThread(() =>
+        //{
+        //    if (ConnectedPlayers.Any(p => p.Id == message.SenderId))
+        //    {
+        //        return;
+        //    }
+
+        //    ConnectedPlayers.Add(new PlayerModel
+        //    {
+        //        Id = message.SenderId,
+        //        Name = data.Name
+        //    });
+        //});
+    }
+
+    private static Task HandlePrivateMessage(BluetoothMessage message)
+    {
+        var data = JsonConvert.DeserializeObject<PrivateMessageData>(message.Payload);
+        if (data is null)
+        {
+            return Task.CompletedTask;
+        }
+
+        WeakReferenceMessenger.Default.Send(
+            new ShowInfoMessage("Private message", data.Text)
+        );
+
+        return Task.CompletedTask;
+    }
+
+    private Task HandleRegisterPlayer(BluetoothMessage message)
+    {
+        var data = JsonConvert.DeserializeObject<RegisterPlayerData>(message.Payload);
+        if (data is null)
+        {
+            return Task.CompletedTask;
+        }
+
+        MainThread.BeginInvokeOnMainThread(() =>
+        {
+            if (ConnectedPlayers.Any(p => p.Id == message.SenderId))
+            {
+                return;
+            }
+
+            ConnectedPlayers.Add(new PlayerModel
+            {
+                Id = message.SenderId,
+                Name = data.Name
+            });
+        });
+
+        return Task.CompletedTask;
+    }
+
+    private async Task SendPrivateMessageAsync()
+    {
+        if (SelectedPlayer is null)
+        {
+            return;
+        }
+
+        if (String.IsNullOrWhiteSpace(MessageText))
+        {
+            return;
+        }
+
+        await bluetooth.SendAsync(new BluetoothMessage
+        {
+            CommandType = BluetoothCommandType.PrivateMessage,
+            SenderId = bluetooth.LocalId,
+            TargetIds = [SelectedPlayer.Id],
+            Payload = JsonConvert.SerializeObject(new PrivateMessageData
+            {
+                Text = MessageText
+            })
+        }).ConfigureAwait(false);
+
+        MessageText = String.Empty;
+    }
 
     private async Task StartCombatAsync()
     {
@@ -132,11 +291,13 @@ internal partial class StorytellingViewModel : ObservableObject
             .ToList();
 
         if (selectedEnemies.Count == 0 || selectedPlayers.Count == 0)
+        {
             return;
+        }
 
         await bluetooth.SendAsync(new BluetoothMessage
         {
-            CommandType = "ForceCombat",
+            CommandType = BluetoothCommandType.ForceCombat,
             SenderId = bluetooth.LocalId,
             TargetIds = selectedPlayers,
             Payload = JsonConvert.SerializeObject(new ForceCombatData
@@ -152,14 +313,18 @@ internal partial class StorytellingViewModel : ObservableObject
         var target = ConnectedPlayers.FirstOrDefault(p => p.IsSelectedTarget);
 
         if (sender is null || target is null)
+        {
             return;
+        }
 
         if (sender.Character.Psi == null || sender.Character.PsiPoints <= 0)
+        {
             return;
+        }
 
         await bluetooth.SendAsync(new BluetoothMessage
         {
-            CommandType = "PsiMessage",
+            CommandType = BluetoothCommandType.PsiMessage,
             SenderId = sender.Id,
             TargetIds = [target.Id],
             Payload = JsonConvert.SerializeObject(new SendPsiMessageData
