@@ -4,6 +4,7 @@ using M.A.G.U.S.Assistant.Services;
 using M.A.G.U.S.Bestiary;
 using M.A.G.U.S.Enums;
 using M.A.G.U.S.Extensions;
+using Mtf.Extensions;
 using Mtf.LanguageService.MAUI;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
@@ -138,9 +139,11 @@ internal partial class BestiaryViewModel : SearchListViewModel, IDisposable
 
     private void LoadAvailablePlaces()
     {
-        AvailablePlaces.Clear();
+        var values = Enum
+            .GetValues<TerrainType>()
+            .OrderBy(x => Lng.Elem(x.GetDescription()));
 
-        var values = Enum.GetValues<TerrainType>();
+        AvailablePlaces.Clear();
         foreach (var value in values)
         {
             AvailablePlaces.Add(value);

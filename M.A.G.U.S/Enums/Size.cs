@@ -5,6 +5,10 @@ namespace M.A.G.U.S.Enums;
 
 public enum Size
 {
+    [DefenseHelper(UInt16.MaxValue)]
+    [DistanceModifier(0)]
+    None,
+
     [Description("Coin")]
     [DefenseHelper(65)]
     [DistanceModifier(-GameSystem.Constants.DefaultEncounterDistance * 0.9)]

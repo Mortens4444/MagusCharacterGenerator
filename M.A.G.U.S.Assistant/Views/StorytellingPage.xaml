@@ -41,9 +41,13 @@
 
                         <Label Text="{Binding Name}" />
 
-                        <Button Grid.Column="1"
+                        <!--<Button Grid.Column="1"
                                 Text="Connect"
                                 Command="{Binding Source={RelativeSource AncestorType={x:Type v:NotifierPage}}, Path=BindingContext.ConnectCommand}"
+                                CommandParameter="{Binding .}" />-->
+                        <Button Grid.Column="1"
+                                Text="Connect"
+                                Command="{Binding BindingContext.ConnectCommand, Source={x:Reference Page}}"
                                 CommandParameter="{Binding .}" />
                     </Grid>
                 </DataTemplate>

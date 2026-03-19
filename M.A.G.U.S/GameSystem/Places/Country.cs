@@ -33,6 +33,9 @@ public enum Country
     [OfficialLanguage(Language.Dwoon)]
     Dwoon = 1 << 5,
 
+    [OfficialLanguage(Language.Pyarronian)]
+    DwyllUnion,
+
     // --- Toroni Szövetség ---
 
     [OfficialLanguage(Language.Toronian)]

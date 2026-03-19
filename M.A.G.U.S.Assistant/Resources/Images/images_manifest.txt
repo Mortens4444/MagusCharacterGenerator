@@ -63,6 +63,7 @@ steel_half_plate.png
 steel_plate_armor.png
 steel_scale_armor.png
 studded_leather.png
+aberration.png
 adachnoa.png
 anatyda.png
 armored_rhino.png
@@ -71,6 +72,7 @@ barracuda.png
 bat.png
 bear.png
 black_shark.png
+brothers.png
 byzon.png
 ceph.png
 common_rhino.png
@@ -85,6 +87,9 @@ dream_crystal.png
 eagle.png
 eccydoo_rr.png
 falcon.png
+fh_yanra.png
+follower_of_felice.png
+furud.png
 giant_crocodile.png
 giant_scorpion.png
 giant_spider.png
@@ -98,13 +103,16 @@ lathran.png
 lizard_creature.png
 lizard_wizard.png
 maasym.png
+molamoth.png
 mongrel.png
+morquor.png
 mummy.png
 myssera.png
 nalreth.png
 narwhal.png
 nayan.png
 nganga.png
+nightmare_seer.png
 orc.png
 panther.png
 polar_bear.png
@@ -113,8 +121,11 @@ rat.png
 red_shark.png
 rhyno.png
 rukh.png
+rutilicus.png
 sa_quad.png
 scorpion.png
+seidal.png
+seyrine.png
 shadowwalker.png
 shi_kris.png
 silent_hound.png
@@ -123,6 +134,8 @@ slave.png
 snow_leopard.png
 spider.png
 stinky_lizard.png
+syvan.png
+tortor_spiritus.png
 trueblood.png
 umich.png
 umich_2.png

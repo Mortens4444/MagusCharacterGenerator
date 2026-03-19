@@ -25,20 +25,26 @@ public sealed class Dragon : Creature
             new RangedAttack(new BreathWeapon("Weak fire breath", ThrowType._1D6_Ranged), 40),
             new RangedAttack(new BreathWeapon("Powerful fire breath", ThrowType._15D6_Ranged), 60)
         ];
+
         AttackValue = 70;
         DefenseValue = 125;
         InitiateValue = 0;
+
         MinHealthPoints = 50;
         MaxHealthPoints = 250;
         MinPainTolerancePoints = 150;
         MaxPainTolerancePoints = 650;
+
         AstralMagicResistance = Int32.MaxValue;
         MentalMagicResistance = Int32.MaxValue;
         PoisonResistance = Int32.MaxValue;
+
         MinIntelligence = Enums.Intelligence.Average;
         MaxIntelligence = Enums.Intelligence.Outstanding;
+
         //ManaPoints = Variable;
-        Alignment = Enums.Alignment.ChaosDeath;
+        Alignment = Alignment.ChaosDeath;
+
         ExperiencePoints = 300000;
     }
 

@@ -1,4 +1,8 @@
-﻿using M.A.G.U.S.Assistant.Contexts;
+﻿#if ANDROID
+using Android.Content;
+using Android.Locations;
+#endif
+using M.A.G.U.S.Assistant.Contexts;
 using M.A.G.U.S.Assistant.Interfaces.Bluetooth;
 using M.A.G.U.S.Assistant.Messages;
 using M.A.G.U.S.Assistant.Models.Bluetooth;
@@ -47,20 +51,62 @@ internal partial class BluetoothService : IBluetoothService, IDisposable
     public static async Task<bool> RequestBluetoothPermissionsAsync()
     {
 #if ANDROID
-        if (Android.OS.Build.VERSION.SdkInt < Android.OS.BuildVersionCodes.S)
+        if (Android.OS.Build.VERSION.SdkInt >= Android.OS.BuildVersionCodes.S)
         {
-            return true;
+            // Android 12+ uses specific Bluetooth permissions
+            // Note: Make sure BluetoothPermissions maps correctly to BLUETOOTH_SCAN and BLUETOOTH_CONNECT
+            var status = await Permissions.RequestAsync<BluetoothPermissions>().ConfigureAwait(false);
+            return status == PermissionStatus.Granted;
         }
-
-        var status = await Permissions.RequestAsync<BluetoothPermissions>().ConfigureAwait(false);
-        return status == PermissionStatus.Granted;
+        else
+        {
+            // Android 6.0 - 11.0 requires Location permission for discovery
+            var status = await Permissions.RequestAsync<Permissions.LocationWhenInUse>().ConfigureAwait(false);
+            return status == PermissionStatus.Granted;
+        }
 #else
         return true;
 #endif
     }
 
+    public static bool IsLocationServiceEnabled()
+    {
+#if ANDROID
+    var context = Android.App.Application.Context;
+    var locationManager = (LocationManager?)context.GetSystemService(Context.LocationService);
+
+    if (locationManager == null)
+    {
+        return false;
+    }
+
+    // For Android 9.0 (API 28) and above
+    if (Android.OS.Build.VERSION.SdkInt >= Android.OS.BuildVersionCodes.P)
+    {
+        // Suppress CA1416: Only call IsLocationEnabled on API 28+
+#pragma warning disable CA1416 // Validate platform compatibility
+        return locationManager.IsLocationEnabled;
+#pragma warning restore CA1416 // Validate platform compatibility
+    }
+    else
+    {
+        // For older Android versions
+        return locationManager.IsProviderEnabled(LocationManager.GpsProvider) ||
+               locationManager.IsProviderEnabled(LocationManager.NetworkProvider);
+    }
+#else
+    // Default to true for other platforms (Windows, iOS, etc.) unless you implement their specific checks
+    return true; 
+#endif
+    }
+
     public async Task StartDiscoveryAsync()
     {
+        if (!IsLocationServiceEnabled())
+        {
+            throw new InvalidOperationException("Please turn on your device's Location services to scan for Bluetooth devices.");
+        }
+
         var granted = await RequestBluetoothPermissionsAsync().ConfigureAwait(false);
         if (!granted)
         {

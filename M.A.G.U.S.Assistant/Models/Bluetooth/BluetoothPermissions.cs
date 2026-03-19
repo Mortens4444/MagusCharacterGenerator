@@ -8,6 +8,7 @@ public class BluetoothPermissions : Permissions.BasePlatformPermission
         (Android.Manifest.Permission.BluetoothScan, true),
         (Android.Manifest.Permission.BluetoothConnect, true),
         (Android.Manifest.Permission.BluetoothAdvertise, true),
+        (Android.Manifest.Permission.AccessFineLocation, true)
     ];
 }
 #endif

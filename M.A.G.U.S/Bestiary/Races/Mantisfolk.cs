@@ -39,6 +39,8 @@ public sealed class Mantisfolk : Creature
 
     public override string Name => "Mantisfolk (Aun)";
 
+    public override string[] Images => ["mantisfolk.png"];
+
     [DiceThrow(ThrowType._1D2)]
     public override int GetNumberAppearing() => DiceThrow._1D2();
 

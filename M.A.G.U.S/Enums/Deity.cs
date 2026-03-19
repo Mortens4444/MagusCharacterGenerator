@@ -85,6 +85,12 @@ public enum Deity
     [AvailableSpheres(Sphere.Order, Sphere.Magic)]
     Weila, // Kyria régi főistene
 
+    // Fh'yanra a hírnök istene (kyr) - Arnyékúrnő
+    Morgena, // Berkano a Sötét Anya
+
+    // Morgena párja
+    Igere,
+
     Phet, //Ediomadi Óisten - LizardWizard
 
     // Dzsadok istenei
@@ -111,5 +117,5 @@ public enum Deity
     Zherlig, // Zherlig Démonkán
 
     // Gnóm isten 
-    Berzebaal // Maga az anyatermészet?
+    Berzebaal, // Maga az anyatermészet?
 }

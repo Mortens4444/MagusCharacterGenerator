@@ -26,7 +26,7 @@ internal partial class StorytellingViewModel : ObservableObject
     public ObservableCollection<EnemyModel> Enemies { get; } = [];
 
     public IAsyncRelayCommand StartStoryCommand { get; }
-    public IAsyncRelayCommand<DeviceModel> ConnectCommand { get; }
+    public IAsyncRelayCommand<DeviceModel?> ConnectCommand { get; }
     public IAsyncRelayCommand StartCombatCommand { get; }
     public IAsyncRelayCommand SendPsiCommand { get; }
     public IAsyncRelayCommand SendPrivateMessageCommand { get; }
@@ -97,7 +97,7 @@ internal partial class StorytellingViewModel : ObservableObject
         //bluetooth.PeerDisconnected += OnPeerDisconnected;
 
         StartStoryCommand = new AsyncRelayCommand(StartStoryAsync, CanStartStory);
-        ConnectCommand = new AsyncRelayCommand<DeviceModel>(ConnectAsync);
+        ConnectCommand = new AsyncRelayCommand<DeviceModel?>(ConnectAsync);
         StartCombatCommand = new AsyncRelayCommand(StartCombatAsync);
         SendPsiCommand = new AsyncRelayCommand(SendPsiAsync);
         SendPrivateMessageCommand = new AsyncRelayCommand(SendPrivateMessageAsync, CanSendPrivateMessage);
@@ -140,19 +140,42 @@ internal partial class StorytellingViewModel : ObservableObject
         }
     }
 
-    private async Task ConnectAsync(DeviceModel device)
+    private async Task ConnectAsync(DeviceModel? device)
     {
-        await bluetooth.ConnectAsync(device.Id).ConfigureAwait(false);
-        await bluetooth.SendAsync(new BluetoothMessage
+        if (device is null)
         {
-            CommandType = BluetoothCommandType.RegisterPlayer,
-            SenderId = bluetooth.LocalId,
-            TargetIds = [device.Id],
-            Payload = JsonConvert.SerializeObject(new RegisterPlayerData
+            return;
+        }
+
+        try
+        {
+            await bluetooth.ConnectAsync(device.Id).ConfigureAwait(false);
+            await bluetooth.SendAsync(new BluetoothMessage
             {
-                Name = DeviceInfo.Name
-            })
-        }).ConfigureAwait(false);
+                CommandType = BluetoothCommandType.RegisterPlayer,
+                SenderId = bluetooth.LocalId,
+                TargetIds = [device.Id],
+                Payload = JsonConvert.SerializeObject(new RegisterPlayerData
+                {
+                    Name = DeviceInfo.Name
+                })
+            }).ConfigureAwait(false);
+        }
+        catch (Exception ex)
+        {
+            WeakReferenceMessenger.Default.Send(new ShowErrorMessage(ex));
+        }
+        //await bluetooth.ConnectAsync(device.Id).ConfigureAwait(false);
+        //await bluetooth.SendAsync(new BluetoothMessage
+        //{
+        //    CommandType = BluetoothCommandType.RegisterPlayer,
+        //    SenderId = bluetooth.LocalId,
+        //    TargetIds = [device.Id],
+        //    Payload = JsonConvert.SerializeObject(new RegisterPlayerData
+        //    {
+        //        Name = DeviceInfo.Name
+        //    })
+        //}).ConfigureAwait(false);
     }
 
     private bool CanStartStory() => !ServerRunning;
@@ -186,30 +209,6 @@ internal partial class StorytellingViewModel : ObservableObject
                 await StorytellingViewModel.HandlePrivateMessage(message).ConfigureAwait(false);
                 break;
         }
-        //if (message.CommandType != "RegisterPlayer")
-        //{
-        //    return;
-        //}
-
-        //var data = JsonConvert.DeserializeObject<RegisterPlayerData>(message.Payload);
-        //if (data is null)
-        //{
-        //    return;
-        //}
-
-        //MainThread.BeginInvokeOnMainThread(() =>
-        //{
-        //    if (ConnectedPlayers.Any(p => p.Id == message.SenderId))
-        //    {
-        //        return;
-        //    }
-
-        //    ConnectedPlayers.Add(new PlayerModel
-        //    {
-        //        Id = message.SenderId,
-        //        Name = data.Name
-        //    });
-        //});
     }
 
     private static Task HandlePrivateMessage(BluetoothMessage message)
