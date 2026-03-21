@@ -65,14 +65,12 @@ internal partial class ImagesViewModel : BaseViewModel
 
     private void LoadImagesFromTypes()
     {
-        // Ha már egyszer megcsináltuk, nem dolgozunk feleslegesen
         if (cachedImageItems == null)
         {
-            cachedImageItems = new List<ImageItem>();
+            cachedImageItems = [];
             BuildImageCache();
         }
 
-        // A UI kollekció feltöltése a cache-ből
         AllImages.Clear();
         foreach (var item in cachedImageItems.DistinctBy(i => i.ResourceId))
         {
@@ -114,11 +112,15 @@ internal partial class ImagesViewModel : BaseViewModel
                                     continue;
                                 }
 
-                                cachedImageItems.Add(new ImageItem
+                                var ei = cachedImageItems.FirstOrDefault(ci => ci.DisplayName == Lng.Elem(entityName));
+                                if (ei == null)
                                 {
-                                    ResourceId = image.Trim(),
-                                    DisplayName = Lng.Elem(entityName)
-                                });
+                                    cachedImageItems.Add(new ImageItem
+                                    {
+                                        ResourceId = image.Trim(),
+                                        DisplayName = Lng.Elem(entityName)
+                                    });                                    
+                                }
                             }
                         }
                     }

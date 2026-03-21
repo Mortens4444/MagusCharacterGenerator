@@ -54,6 +54,7 @@ internal partial class CreatureDetailsViewModel : BaseViewModel
     public Intelligence? MinIntelligence => Creature.MinIntelligence;
     public Intelligence? MaxIntelligence => Creature.MaxIntelligence;
     public M.A.G.U.S.Enums.Size Size => Creature.Size;
+    public M.A.G.U.S.Enums.Alignment Alignment => Creature.Alignment;
     public List<Speed> Speeds => Creature.Speeds;
     public TerrainType PlacesOfOccurrence => Creature.PlacesOfOccurrence;
     public int AttackValue => Creature.AttackValue;

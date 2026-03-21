@@ -117,7 +117,7 @@ public enum TerrainType : ulong
     Snowfield = SouthernSnowfield | NorthernSnowfield,
 
     [Description("Deep underground")]
-    DeepUnderground = Underground | Cave | Crevice | InnerChamber | VolcanicShaft | SubterraneanRiver,
+    DeepUnderground = Underground | Cave | Crevice | InnerHall | InnerChamber | VolcanicShaft | SubterraneanRiver,
 
     [Description("Forest")]
     Forest = ArcticForest | TemperateForest | TropicalForest,
@@ -126,5 +126,5 @@ public enum TerrainType : ulong
     Mines = AbbitMines | IronOreMines | CoalMines | GoldMines | CopperMines | SilverMines | GemstoneMines,
 
     [Description("Anywhere")]
-    Anywhere = Plains | Forest | Hills | Mines | Mountains | Swamp | Desert | Urban | Water | OldDilapidatedBuilding | TreeHollow | AustralColdRegion | Snowfield | CursedLand | DeepUnderground
+    Anywhere = 1UL << 62
 }

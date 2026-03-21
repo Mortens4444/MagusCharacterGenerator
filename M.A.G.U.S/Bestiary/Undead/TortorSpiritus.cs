@@ -32,7 +32,7 @@ public sealed class TortorSpiritus : LivingDead
 
     public override string Name => "Tortor spiritus";
 
-    public override string[] Images => ["tortor_spiritus.pmg"];
+    public override string[] Images => ["tortor_spiritus.png"];
 
     [DiceThrowModifier(1)]
     public override int GetNumberAppearing() => 1;

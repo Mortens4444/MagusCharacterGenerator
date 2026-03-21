@@ -8,7 +8,7 @@ public class PsiAntientWay(QualificationLevel qualificationLevel = Qualification
 {
     public PsiKind PsiKind => PsiKind.AntientWay;
 
-    public override string Name => "Psi, Pyarron";
+    public override string Name => "Psi, Antient way";
 
     public override int QpToBaseQualification => 10;
 

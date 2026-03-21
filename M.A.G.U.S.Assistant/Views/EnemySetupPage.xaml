@@ -113,7 +113,7 @@
                                 </HorizontalStackLayout>
 
                                 <Slider Minimum="{Binding MinHp}" Maximum="{Binding MaxHp}" Value="{Binding ActualHealthPoints}" IsVisible="{Binding HasHpRange}" />
-                                <Entry Text="{Binding ActualHealthPoints}"  Keyboard="Numeric" IsVisible="{Binding HasHpRange, Converter={StaticResource InverseBooleanConverter}}" />
+                                <Entry Text="{Binding ActualHealthPoints}" Keyboard="Numeric" IsVisible="{Binding HasHpRange, Converter={StaticResource InverseBooleanConverter}}" />
                             </VerticalStackLayout>
 
                             <VerticalStackLayout IsVisible="{Binding HasPainTolerance}">

@@ -71,6 +71,7 @@ astral_vampire.png
 barracuda.png
 bat.png
 bear.png
+blackflame.png
 black_shark.png
 brothers.png
 byzon.png
@@ -88,8 +89,10 @@ eagle.png
 eccydoo_rr.png
 falcon.png
 fh_yanra.png
+flame_wisp.png
 follower_of_felice.png
 furud.png
+gahul.png
 giant_crocodile.png
 giant_scorpion.png
 giant_spider.png
@@ -98,8 +101,14 @@ goblin.png
 golem.png
 gray_dolphin.png
 grizzly_bear.png
+guardian.png
+hatysa.png
+hekator.png
+homunculus_man.png
+izar.png
 killer_whale.png
 lathran.png
+lesath.png
 lizard_creature.png
 lizard_wizard.png
 maasym.png
@@ -115,6 +124,7 @@ nganga.png
 nightmare_seer.png
 orc.png
 panther.png
+phantom.png
 polar_bear.png
 qvakka.png
 rat.png

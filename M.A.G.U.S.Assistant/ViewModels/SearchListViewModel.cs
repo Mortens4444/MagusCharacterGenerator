@@ -24,7 +24,7 @@ internal partial class SearchListViewModel : BaseViewModel
     private Character? character;
     private bool showOnlyAffordable;
     private string searchText = String.Empty;
-    private double priceMultiplier = 1.0;
+    private double priceMultiplier = 1;
     private string categoryFilter = String.Empty;
     private string pageTitle = String.Empty;
     private DisplayItem? selectedItem;
@@ -52,7 +52,6 @@ internal partial class SearchListViewModel : BaseViewModel
 
         Character = null;
         PriceMultiplier = 1.0;
-
         SetCategories();
     }
 
@@ -111,7 +110,7 @@ internal partial class SearchListViewModel : BaseViewModel
             character = value;
             OnPropertyChanged();
             OnPropertyChanged(nameof(IsCharacterSet));
-            DebounceApplyFilter();
+            _ = DebounceApplyFilter();
         }
     }
 
@@ -146,7 +145,7 @@ internal partial class SearchListViewModel : BaseViewModel
             OnPropertyChanged();
 
             RefreshAllItems();
-            DebounceApplyFilter();
+            _ = DebounceApplyFilter();
         }
     }
 
@@ -162,7 +161,7 @@ internal partial class SearchListViewModel : BaseViewModel
 
             showOnlyAffordable = value;
             OnPropertyChanged();
-            DebounceApplyFilter();
+            _ = DebounceApplyFilter();
         }
     }
 
@@ -178,7 +177,7 @@ internal partial class SearchListViewModel : BaseViewModel
 
             searchText = value ?? String.Empty;
             OnPropertyChanged();
-            DebounceApplyFilter();
+            _ = DebounceApplyFilter();
         }
     }
 
@@ -226,6 +225,7 @@ internal partial class SearchListViewModel : BaseViewModel
         }
 
         ApplyFilter();
+        RefreshAllItems();
     }
 
     public virtual void ApplyFilter()

@@ -3,6 +3,7 @@
              xmlns:v="clr-namespace:Mtf.LanguageService.MAUI.Views;assembly=Mtf.LanguageService.MAUI"
              xmlns:vm="clr-namespace:M.A.G.U.S.Assistant.ViewModels"
              xmlns:m="clr-namespace:M.A.G.U.S.Assistant.Models"
+             xmlns:bm="clr-namespace:M.A.G.U.S.Assistant.Models.Bluetooth"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:mc="clr-namespace:Mtf.Maui.Controls;assembly=Mtf.Maui.Controls"
              x:Class="M.A.G.U.S.Assistant.Views.StorytellingPage"
@@ -32,7 +33,7 @@
                         SelectionMode="Single"
                         SelectedItem="{Binding SelectedDevice}">
             <CollectionView.ItemTemplate>
-                <DataTemplate>
+                <DataTemplate x:DataType="bm:DeviceModel">
                     <Grid Padding="6">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*" />
@@ -41,13 +42,9 @@
 
                         <Label Text="{Binding Name}" />
 
-                        <!--<Button Grid.Column="1"
-                                Text="Connect"
-                                Command="{Binding Source={RelativeSource AncestorType={x:Type v:NotifierPage}}, Path=BindingContext.ConnectCommand}"
-                                CommandParameter="{Binding .}" />-->
                         <Button Grid.Column="1"
                                 Text="Connect"
-                                Command="{Binding BindingContext.ConnectCommand, Source={x:Reference Page}}"
+                                Command="{Binding BindingContext.ConnectCommand, Source={RelativeSource AncestorType={x:Type v:NotifierPage}}}"
                                 CommandParameter="{Binding .}" />
                     </Grid>
                 </DataTemplate>

@@ -40,6 +40,8 @@ public sealed class Mantisfolk : Race
 
     public override string Name => "Mantisfolk (Aun)";
 
+    public override string[] Images => ["mantisfolk.png"];
+
     public override string GenerateCharacterName()
     {
         var start = new[] { "Za", "Kha", "Tza", "Rha", "Sza", "Qua" };

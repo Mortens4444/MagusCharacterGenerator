@@ -7,6 +7,8 @@ public enum Alignment
 {
     None,
 
+    Neutral,
+
     Animal,
 
     [Display(Name = "Unicorn")]

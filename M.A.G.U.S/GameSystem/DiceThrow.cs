@@ -45,6 +45,12 @@ public class DiceThrow
     public int _1D6(bool hasLuckAmulet = false) =>
         ApplyLuck(RandomProvider.GetSecureRandomByte(1, 7), 1, 7, hasLuckAmulet);
 
+    public int _1D7(bool hasLuckAmulet = false) =>
+        ApplyLuck(RandomProvider.GetSecureRandomByte(1, 8), 1, 8, hasLuckAmulet);
+
+    public int _1D8(bool hasLuckAmulet = false) =>
+        ApplyLuck(RandomProvider.GetSecureRandomByte(1, 9), 1, 9, hasLuckAmulet);
+
     public int _1D6_RangedAttack(bool hasLuckAmulet = false) =>
         RangedAttack(1, 7, hasLuckAmulet);
 
@@ -191,6 +197,8 @@ public class DiceThrow
             ThrowType._1D3 => _1D3(hasLuckAmulet),
             ThrowType._1D5 => _1D5(hasLuckAmulet),
             ThrowType._1D6 => _1D6(hasLuckAmulet),
+            ThrowType._1D7 => _1D7(hasLuckAmulet),
+            ThrowType._1D8 => _1D8(hasLuckAmulet),
             ThrowType._2D6 => _2D6(hasLuckAmulet),
             ThrowType._3D6 => _3D6(hasLuckAmulet),
             ThrowType._3D6_2_Times => _3D6_2_Times(hasLuckAmulet),

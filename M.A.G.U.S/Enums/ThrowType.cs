@@ -15,6 +15,10 @@ public enum ThrowType
     _1D5,
     [Description("1D6")]
     _1D6,
+    [Description("1D7")]
+    _1D7,
+    [Description("1D8")]
+    _1D8,
     [Description("1D6")]
     _1D6_Ranged,
     [Description("2D6")]

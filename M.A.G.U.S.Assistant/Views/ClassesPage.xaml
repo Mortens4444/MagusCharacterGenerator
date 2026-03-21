@@ -53,7 +53,7 @@
                         <CollectionView ItemsSource="{Binding DiceStats}" EmptyView="N/A">
                             <CollectionView.ItemTemplate>
                                 <DataTemplate x:DataType="m:DiceStat">
-                                    <Grid ColumnDefinitions="*,Auto" Padding="8">
+                                    <Grid ColumnDefinitions="*,*" Padding="8">
                                         <Label Grid.Column="0" Text="{Binding Name, Converter={StaticResource TranslationConverter}}" />
                                         <Label Grid.Column="1" Text="{Binding DisplayFormula, Converter={StaticResource TranslationConverter}}" />
                                     </Grid>

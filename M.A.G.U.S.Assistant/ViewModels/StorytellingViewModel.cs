@@ -144,6 +144,7 @@ internal partial class StorytellingViewModel : ObservableObject
     {
         if (device is null)
         {
+            WeakReferenceMessenger.Default.Send(new ShowErrorMessage("Device not found"));
             return;
         }
 
@@ -165,17 +166,6 @@ internal partial class StorytellingViewModel : ObservableObject
         {
             WeakReferenceMessenger.Default.Send(new ShowErrorMessage(ex));
         }
-        //await bluetooth.ConnectAsync(device.Id).ConfigureAwait(false);
-        //await bluetooth.SendAsync(new BluetoothMessage
-        //{
-        //    CommandType = BluetoothCommandType.RegisterPlayer,
-        //    SenderId = bluetooth.LocalId,
-        //    TargetIds = [device.Id],
-        //    Payload = JsonConvert.SerializeObject(new RegisterPlayerData
-        //    {
-        //        Name = DeviceInfo.Name
-        //    })
-        //}).ConfigureAwait(false);
     }
 
     private bool CanStartStory() => !ServerRunning;

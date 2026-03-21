@@ -14,6 +14,8 @@ namespace M.A.G.U.S.Assistant.ViewModels;
 internal partial class BestiaryViewModel : SearchListViewModel, IDisposable
 {
     private readonly IShakeService? shakeService;
+    private bool includeAnywhere;
+    private TerrainType selectedPlace;
 
     public IShakeService? ShakeService => shakeService;
 
@@ -21,7 +23,17 @@ internal partial class BestiaryViewModel : SearchListViewModel, IDisposable
 
     public ObservableCollection<TerrainType> AvailablePlaces { get; } = [];
 
-    private TerrainType selectedPlace;
+    public bool IncludeAnywhere
+    {
+        get => includeAnywhere;
+        set
+        {
+            if (SetProperty(ref includeAnywhere, value))
+            {
+                ApplyFilter();
+            }
+        }
+    }
 
     public TerrainType SelectedPlace
     {
@@ -121,7 +133,16 @@ internal partial class BestiaryViewModel : SearchListViewModel, IDisposable
                         return true;
                     }
 
-                    return creature.PlacesOfOccurrence.HasFlag(place);
+                    var matchesSelected = creature.PlacesOfOccurrence.HasFlag(place);
+                    //var matchesSelected = (creature.PlacesOfOccurrence & place) != 0;
+                    if (!IncludeAnywhere)
+                    {
+                        return matchesSelected;
+                    }
+
+                    //var matchesAnywhere = creature.PlacesOfOccurrence.HasFlag(TerrainType.Anywhere);
+                    var matchesAnywhere = (creature.PlacesOfOccurrence & TerrainType.Anywhere) != 0;
+                    return matchesSelected || matchesAnywhere;
                 });
             }
 
