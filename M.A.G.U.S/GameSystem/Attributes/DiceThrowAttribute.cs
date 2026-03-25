@@ -3,7 +3,7 @@ using Mtf.Extensions;
 
 namespace M.A.G.U.S.GameSystem.Attributes;
 
-[AttributeUsage(AttributeTargets.Property | AttributeTargets.Method | AttributeTargets.Field)]
+[AttributeUsage(AttributeTargets.Property | AttributeTargets.Method | AttributeTargets.Field, AllowMultiple = true)]
 public class DiceThrowAttribute(ThrowType diceThrowType) : Attribute
 {
     public ThrowType DiceThrowType { get; } = diceThrowType;

@@ -38,32 +38,38 @@ internal static class MauiProgram
         builder.Services.AddSingleton<IPrintService, Platforms.Android.PrintService>();
         builder.Services.AddSingleton<ISoundPlayer, Platforms.Android.SoundPlayer>();
         builder.Services.AddTransient<IShakeService, Platforms.Android.ShakeService>();
+        builder.Services.AddSingleton<IBluetoothConnector, Platforms.Android.AndroidBluetoothConnector>();
         builder.Services.AddSingleton<IBluetoothDiscoveryService, Platforms.Android.BluetoothDiscoveryService>();
 #elif WINDOWS
         builder.Services.AddSingleton<IPrintService, Platforms.Windows.PrintService>();
         builder.Services.AddSingleton<ISoundPlayer, Platforms.Windows.SoundPlayer>();
         builder.Services.AddTransient<IShakeService, Platforms.Windows.ShakeService>();
         builder.Services.AddSingleton<IWindowStateService, Platforms.Windows.WindowsWindowStateService>();
+        //builder.Services.AddSingleton<IBluetoothConnector, Platforms.Windows.WindowsBluetoothConnector>();
         builder.Services.AddSingleton<IBluetoothDiscoveryService, Platforms.Windows.BluetoothDiscoveryService>();
 #elif IOS
         builder.Services.AddSingleton<IPrintService, Platforms.iOS.PrintService>();
         builder.Services.AddSingleton<ISoundPlayer, Platforms.iOS.SoundPlayer>();
         builder.Services.AddTransient<IShakeService, Platforms.iOS.ShakeService>();
+        //builder.Services.AddSingleton<IBluetoothConnector, Platforms.iOS.iOSBluetoothConnector>();
         builder.Services.AddSingleton<IBluetoothDiscoveryService, Platforms.iOS.BluetoothDiscoveryService>();
 #elif MACCATALYST
         builder.Services.AddSingleton<IPrintService, Platforms.MacCatalyst.PrintService>();
         builder.Services.AddSingleton<ISoundPlayer, Platforms.MacCatalyst.SoundPlayer>();
         builder.Services.AddTransient<IShakeService, Platforms.MacCatalyst.ShakeService>();
+        //builder.Services.AddSingleton<IBluetoothConnector, Platforms.MacCatalyst.MacCatalystBluetoothConnector>();
         builder.Services.AddSingleton<IBluetoothDiscoveryService, Platforms.MacCatalyst.BluetoothDiscoveryService>();
 #elif TIZEN
         builder.Services.AddSingleton<IPrintService, Platforms.Tizen.PrintService>();
         builder.Services.AddSingleton<ISoundPlayer, Platforms.Tizen.SoundPlayer>();
         builder.Services.AddTransient<IShakeService, Platforms.Tizen.ShakeService>();
+        //builder.Services.AddSingleton<IBluetoothConnector, Platforms.Tizen.TizenBluetoothConnector>();
         builder.Services.AddSingleton<IBluetoothDiscoveryService, Platforms.Tizen.BluetoothDiscoveryService>();
 #else
         builder.Services.AddSingleton<IPrintService, StubPrintService>();
         builder.Services.AddSingleton<ISoundPlayer, StubSoundPlayer>();
         builder.Services.AddSingleton<IShakeService, StubShakeService>();
+        //builder.Services.AddSingleton<IBluetoothConnector, Platforms.Android.StubBluetoothConnector>();
         builder.Services.AddSingleton<IBluetoothDiscoveryService, StubBluetoothDiscoveryService>();
 #endif
         RegisterPages(builder);
@@ -140,7 +146,7 @@ internal static class MauiProgram
         }
 
         builder.Services.AddSingleton<IRuneTranslator, RuneTranslator>();
-
+        
         builder.Services.AddSingleton<IBluetoothService>(sp =>
         {
             var registry = sp.GetRequiredService<CommandRegistry>();

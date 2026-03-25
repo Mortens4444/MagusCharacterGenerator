@@ -4,7 +4,9 @@ namespace M.A.G.U.S.GameSystem.Languages;
 
 public enum AntientLanguage
 {
-	Kyr,
+    Crantai, // Nem tanulható!
+
+    Kyr,
 
 	[Description("Lingua Domini")]
 	LinguaDomini,

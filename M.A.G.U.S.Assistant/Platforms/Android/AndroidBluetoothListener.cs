@@ -12,13 +12,17 @@ internal sealed class AndroidBluetoothListener : IBluetoothListener
         if (serverSocket == null)
         {
             var adapter = BluetoothAdapter.DefaultAdapter;
-            serverSocket = adapter.ListenUsingRfcommWithServiceRecord(
-                "MAGUS_Service", Java.Util.UUID.RandomUUID());
+            serverSocket = adapter.ListenUsingRfcommWithServiceRecord("MAGUS_Service", AndroidBluetoothConnector.ServiceUuid);
         }
 
-        return Task.Run(() =>
+        return Task.Run(async () =>
         {
-            BluetoothSocket socket = serverSocket.Accept();
+            ct.Register(() =>
+            {
+                try { serverSocket?.Close(); } catch { }
+                serverSocket = null;
+            });
+            var socket = await serverSocket.AcceptAsync().ConfigureAwait(false);
             return (IBluetoothConnection)new AndroidBluetoothConnection(socket);
         }, ct);
     }

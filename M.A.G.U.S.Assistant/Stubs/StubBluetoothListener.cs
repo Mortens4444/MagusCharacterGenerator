@@ -26,5 +26,5 @@ internal sealed class StubBluetoothConnection : IBluetoothConnection
     
     public Task<string> ReceiveAsync(CancellationToken ct) => Task.FromResult(String.Empty);
     
-    public Task SendAsync(string json) => Task.CompletedTask;
+    public Task SendAsync(string json, CancellationToken ct = default) => Task.CompletedTask;
 }

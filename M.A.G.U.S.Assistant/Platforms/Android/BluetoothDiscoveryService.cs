@@ -15,13 +15,14 @@ internal sealed class BluetoothDiscoveryService(Context context)
 
     public event Action<DeviceModel>? DeviceDiscovered;
 
-    public Task StartDiscoveryAsync(CancellationToken cancellationToken = default)
+    public async Task StartDiscoveryAsync(CancellationToken cancellationToken = default)
     {
         if (adapter == null || !adapter.IsEnabled)
         {
-            return Task.CompletedTask;
+            return;
         }
 
+        await StopDiscoveryAsync().ConfigureAwait(false);
         if (adapter.BondedDevices != null)
         {
             foreach (var bonded in adapter.BondedDevices)
@@ -53,8 +54,6 @@ internal sealed class BluetoothDiscoveryService(Context context)
         }
 
         adapter.StartDiscovery();
-
-        return Task.CompletedTask;
     }
 
     public Task StopDiscoveryAsync()

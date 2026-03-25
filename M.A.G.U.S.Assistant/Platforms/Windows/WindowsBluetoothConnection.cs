@@ -50,7 +50,7 @@ internal sealed class WindowsBluetoothConnection : IBluetoothConnection
         return reader.ReadString(size);
     }
 
-    public async Task SendAsync(string json)
+    public async Task SendAsync(string json, CancellationToken ct = default)
     {
         var writer = new DataWriter(socket.OutputStream);
         writer.WriteString(json);

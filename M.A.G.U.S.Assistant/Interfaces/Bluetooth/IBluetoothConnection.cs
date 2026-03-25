@@ -7,7 +7,7 @@ internal interface IBluetoothConnection : IDisposable
     bool IsConnected { get; }
 
     /// <summary>Send a JSON string over the connection.</summary>
-    Task SendAsync(string json);
+    Task SendAsync(string json, CancellationToken ct = default);
 
     /// <summary>Receive a JSON string or null if closed.</summary>
     Task<string?> ReceiveAsync(CancellationToken ct);

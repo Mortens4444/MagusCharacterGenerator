@@ -9,14 +9,18 @@ public static class EnumExtensions
     public static string GetDiceFormula<TEnum>(this TEnum value)
         where TEnum : struct, Enum
     {
-        var type = typeof(TEnum);
-        var name = value.ToString();
-
-        var field = type.GetField(name);
+        var field = typeof(TEnum).GetField(value.ToString());
         if (field == null)
+        {
             return String.Empty;
+        }
 
-        var attribute = field.GetCustomAttribute<DiceThrowAttribute>();
-        return attribute.GetDescription();
+        var attributes = field.GetCustomAttributes<DiceThrowAttribute>();
+        if (!attributes.Any())
+        {
+            return String.Empty;
+        }
+
+        return String.Join(" + ", attributes.Select(a => a.ToString()));
     }
 }

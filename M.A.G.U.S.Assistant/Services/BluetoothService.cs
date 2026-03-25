@@ -1,11 +1,14 @@
 ﻿#if ANDROID
 using Android.Content;
 using Android.Locations;
+using CommunityToolkit.Mvvm.Messaging;
+
 #endif
 using M.A.G.U.S.Assistant.Contexts;
 using M.A.G.U.S.Assistant.Interfaces.Bluetooth;
 using M.A.G.U.S.Assistant.Messages;
 using M.A.G.U.S.Assistant.Models.Bluetooth;
+using Mtf.Maui.Controls.Messages;
 using Newtonsoft.Json;
 using System.Collections.Concurrent;
 using System.Diagnostics;
@@ -212,6 +215,9 @@ internal partial class BluetoothService : IBluetoothService, IDisposable
                 catch (OperationCanceledException) { break; }
                 catch (Exception ex)
                 {
+#if ANDROID
+                    WeakReferenceMessenger.Default.Send(new ShowErrorMessage(ex));
+#endif
                     // log or surface error, then continue accepting
                     Debug.WriteLine($"AcceptLoop error: {ex}");
                     await Task.Delay(500, ct).ConfigureAwait(false);
@@ -234,14 +240,25 @@ internal partial class BluetoothService : IBluetoothService, IDisposable
         }
 
         _ = Task.Run(() => ReceiveLoopAsync(connection)); // start receive loop
-        _ = ClientConnected?.Invoke(connection.RemoteId);
+        //_ = ClientConnected?.Invoke(connection.RemoteId);
+        _ = Task.Run(async () =>
+        {
+            try { await (ClientConnected?.Invoke(connection.RemoteId) ?? Task.CompletedTask); }
+            catch (Exception ex)
+            {
+#if ANDROID
+                WeakReferenceMessenger.Default.Send(new ShowErrorMessage(ex));
+#endif
+                Debug.WriteLine($"ClientConnected handler failed: {ex}");
+            }
+        });
     }
 
     private async Task ReceiveLoopAsync(IBluetoothConnection connection)
     {
         try
         {
-            while (connection.IsConnected && (cts is null || !cts.IsCancellationRequested))
+            while (connection.IsConnected && cts?.IsCancellationRequested != true)
             {
                 try
                 {
@@ -256,6 +273,9 @@ internal partial class BluetoothService : IBluetoothService, IDisposable
                 catch (OperationCanceledException) { break; }
                 catch (Exception ex)
                 {
+#if ANDROID
+                    WeakReferenceMessenger.Default.Send(new ShowErrorMessage(ex));
+#endif
                     Debug.WriteLine($"ReceiveLoop error ({connection.RemoteId}): {ex}");
                     break;
                 }
@@ -280,10 +300,13 @@ internal partial class BluetoothService : IBluetoothService, IDisposable
         {
             try
             {
-                return c.SendAsync(json);
+                return c.SendAsync(json, cts?.Token ?? CancellationToken.None);
             }
             catch (Exception ex)
             {
+#if ANDROID
+                WeakReferenceMessenger.Default.Send(new ShowErrorMessage(ex));
+#endif
                 Debug.WriteLine($"SendAsync start failed for {c.RemoteId}: {ex}");
                 return Task.CompletedTask;
             }
@@ -301,6 +324,9 @@ internal partial class BluetoothService : IBluetoothService, IDisposable
         }
         catch (Exception ex)
         {
+#if ANDROID
+            WeakReferenceMessenger.Default.Send(new ShowErrorMessage(ex));
+#endif
             Debug.WriteLine($"Invalid JSON from {senderId}: {ex}");
             return;
         }
@@ -333,6 +359,9 @@ internal partial class BluetoothService : IBluetoothService, IDisposable
             }
             catch (Exception ex)
             {
+#if ANDROID
+                WeakReferenceMessenger.Default.Send(new ShowErrorMessage(ex));
+#endif
                 Debug.WriteLine($"Command {message.CommandType} failed: {ex}");
             }
         }
