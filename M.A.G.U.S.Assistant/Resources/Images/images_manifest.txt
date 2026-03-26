@@ -95,6 +95,7 @@ dream_thief.png
 eagle.png
 earth_lord.png
 eccydoo_rr.png
+eleidin.png
 elven_hound.png
 falcon.png
 fh_yanra.png
@@ -116,13 +117,17 @@ guardian.png
 hatysa.png
 hekator.png
 homunculus_man.png
+ifrit.png
 izar.png
+kahra_jombata.png
+karaa.png
 killer_whale.png
 lathran.png
 lesath.png
 lizard_creature.png
 lizard_wizard.png
 maasym.png
+marid.png
 molamoth.png
 mongrel.png
 morquor.png
@@ -145,7 +150,12 @@ rukh.png
 rutilicus.png
 sa_quad.png
 scorpion.png
+sebitar.png
 seidal.png
+servant_air_elemental.png
+servant_earth_elemental.png
+servant_fire_elemental.png
+servant_water_elemental.png
 seyrine.png
 shade.png
 shadowwalker.png
@@ -164,6 +174,10 @@ umich_2.png
 vampire.png
 vampire_lord.png
 varthon.png
+warrior_air_elemental.png
+warrior_earth_elemental.png
+warrior_fire_elemental.png
+warrior_water_elemental.png
 water_lord.png
 werewolf.png
 white_eagle.png
@@ -173,6 +187,7 @@ wolf.png
 wolf_pack_leader.png
 wolves.png
 zombie.png
+zulfaim.png
 air_wizard.png
 assassin.png
 bard.png

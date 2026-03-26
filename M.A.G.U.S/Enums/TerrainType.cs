@@ -113,6 +113,13 @@ public enum TerrainType : ulong
 
     Savanna = 1UL << 40,
 
+    Volcano = 1UL << 41,
+
+    [Description("Lava lake")]
+    LavaLake = 1UL << 42,
+
+    Geyser = 1UL << 43,
+
     [Description("Snowfield")]
     Snowfield = SouthernSnowfield | NorthernSnowfield,
 

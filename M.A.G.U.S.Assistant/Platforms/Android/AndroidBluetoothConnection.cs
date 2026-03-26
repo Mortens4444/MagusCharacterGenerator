@@ -1,4 +1,5 @@
 ﻿using Android.Bluetooth;
+using M.A.G.U.S.Assistant.Exceptions;
 using M.A.G.U.S.Assistant.Interfaces.Bluetooth;
 using System.Text;
 
@@ -38,7 +39,9 @@ internal sealed class AndroidBluetoothConnection : IBluetoothConnection
         var result = Encoding.UTF8.GetString(messageBuffer);
 
         if (RawMessageReceived != null)
+        {
             await RawMessageReceived.Invoke(result).ConfigureAwait(false);
+        }
 
         return result;
     }
@@ -53,9 +56,11 @@ internal sealed class AndroidBluetoothConnection : IBluetoothConnection
             int read = await socket.InputStream!
                 .ReadAsync(buffer, offset, count - offset, ct)
                 .ConfigureAwait(false);
-
+            
             if (read <= 0)
-                throw new IOException("Bluetooth connection lost (read returned 0 or -1).");
+                throw new BluetoothDisconnectedException("Remote device disconnected.");
+            //if (read <= 0)
+            //    throw new IOException("Bluetooth connection lost (read returned 0 or -1).");
 
             offset += read;
         }

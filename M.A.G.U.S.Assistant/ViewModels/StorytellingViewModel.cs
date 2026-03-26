@@ -155,7 +155,8 @@ internal partial class StorytellingViewModel : ObservableObject
             {
                 CommandType = BluetoothCommandType.RegisterPlayer,
                 SenderId = bluetooth.LocalId,
-                TargetIds = [device.Id],
+                TargetIds = [],
+                //TargetIds = [device.Id],
                 Payload = JsonConvert.SerializeObject(new RegisterPlayerData
                 {
                     Name = DeviceInfo.Name
@@ -196,7 +197,7 @@ internal partial class StorytellingViewModel : ObservableObject
                 break;
 
             case BluetoothCommandType.PrivateMessage:
-                await StorytellingViewModel.HandlePrivateMessage(message).ConfigureAwait(false);
+                await HandlePrivateMessage(message).ConfigureAwait(false);
                 break;
         }
     }
@@ -209,10 +210,7 @@ internal partial class StorytellingViewModel : ObservableObject
             return Task.CompletedTask;
         }
 
-        WeakReferenceMessenger.Default.Send(
-            new ShowInfoMessage("Private message", data.Text)
-        );
-
+        WeakReferenceMessenger.Default.Send(new ShowInfoMessage("Private message", data.Text));
         return Task.CompletedTask;
     }
 

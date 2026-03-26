@@ -9,10 +9,6 @@ public abstract class ElementalLord : Elemental
         Occurrence = Occurrence.Summoned;
         Alignment = Alignment.Order;
 
-        AstralMagicResistance = Int32.MaxValue;
-        MentalMagicResistance = Int32.MaxValue;
-        PoisonResistance = Int32.MaxValue;
-
         AttacksPerRound = 1;
 
         MinIntelligence = null;
