@@ -42,7 +42,7 @@ public sealed class Dragon : Creature
         MinIntelligence = Enums.Intelligence.Average;
         MaxIntelligence = Enums.Intelligence.Outstanding;
 
-        //ManaPoints = Variable;
+        ManaPoints = 100;//Variable;
         Alignment = Alignment.ChaosDeath;
 
         ExperiencePoints = 300000;

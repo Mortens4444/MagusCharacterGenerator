@@ -5,21 +5,28 @@ namespace M.A.G.U.S.Enums;
 
 public enum Alignment
 {
+    [Description("None")]
     None,
 
+    [Description("Neutral")]
     Neutral,
 
+    [Description("Animal")]
     Animal,
 
+    [Description("Life")]
     [Display(Name = "Unicorn")]
     Life,
 
+    [Description("Death")]
     [Display(Name = "Manticore")]
     Death,
 
+    [Description("Chaos")]
     [Display(Name = "Traclon")]
     Chaos,
 
+    [Description("Order")]
     [Display(Name = "Draco")]
     Order,
 
@@ -55,5 +62,6 @@ public enum Alignment
     [Display(Name = "Kraken")]
     DeathOrder,
 
+    [Description("Various")]
     Various
 }

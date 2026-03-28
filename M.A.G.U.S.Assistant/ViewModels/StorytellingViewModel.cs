@@ -12,7 +12,7 @@ using System.Collections.ObjectModel;
 
 namespace M.A.G.U.S.Assistant.ViewModels;
 
-internal partial class StorytellingViewModel : ObservableObject
+internal partial class StorytellingViewModel : ObservableObject, IDisposable
 {
     private readonly IBluetoothService bluetooth;
     private PlayerModel? selectedPlayer;
@@ -82,17 +82,8 @@ internal partial class StorytellingViewModel : ObservableObject
     public StorytellingViewModel(IBluetoothService bluetooth)
     {
         this.bluetooth = bluetooth;
-        bluetooth.DeviceDiscovered += device =>
-        {
-            MainThread.BeginInvokeOnMainThread(() =>
-            {
-                if (!AvailableDevices.Any(d => d.Id == device.Id))
-                {
-                    AvailableDevices.Add(device);
-                }
-            });
-        };
 
+        bluetooth.DeviceDiscovered += Bluetooth_DeviceDiscovered;
         bluetooth.MessageReceived += OnMessageReceived;
         //bluetooth.PeerDisconnected += OnPeerDisconnected;
 
@@ -101,6 +92,17 @@ internal partial class StorytellingViewModel : ObservableObject
         StartCombatCommand = new AsyncRelayCommand(StartCombatAsync);
         SendPsiCommand = new AsyncRelayCommand(SendPsiAsync);
         SendPrivateMessageCommand = new AsyncRelayCommand(SendPrivateMessageAsync, CanSendPrivateMessage);
+    }
+
+    private void Bluetooth_DeviceDiscovered(DeviceModel device)
+    {
+        MainThread.BeginInvokeOnMainThread(() =>
+        {
+            if (!AvailableDevices.Any(d => d.Id == device.Id))
+            {
+                AvailableDevices.Add(device);
+            }
+        });
     }
 
     public Task StartDiscoveryAsync()
@@ -130,7 +132,6 @@ internal partial class StorytellingViewModel : ObservableObject
             StatusMessage = Lng.Elem("Starting Bluetooth server...");
             await bluetooth.StartServerAsync().ConfigureAwait(false);
             ServerRunning = true;
-            StartStoryCommand.NotifyCanExecuteChanged();
             StatusMessage = Lng.Elem("Bluetooth server started");
         }
         catch (Exception ex)
@@ -321,5 +322,12 @@ internal partial class StorytellingViewModel : ObservableObject
         }).ConfigureAwait(false);
 
         //sender.Character.PsiPoints--; TODO
+    }
+
+    public void Dispose()
+    {
+        bluetooth.DeviceDiscovered -= Bluetooth_DeviceDiscovered;
+        bluetooth.MessageReceived -= OnMessageReceived;
+        //bluetooth.PeerDisconnected -= OnPeerDisconnected;
     }
 }

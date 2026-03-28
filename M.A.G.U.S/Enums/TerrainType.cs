@@ -5,36 +5,52 @@ namespace M.A.G.U.S.Enums;
 [Flags]
 public enum TerrainType : ulong
 {
+    [Description("Unknown")]
     Unknown = 0,
 
+    [Description("Plains")]
     Plains = 1UL << 0,
 
+    [Description("Jungle")]
     Jungle = 1UL << 1,
 
+    [Description("Hills")]
     Hills = 1UL << 2,
 
+    [Description("Mountains")]
     Mountains = 1UL << 3,
 
+    [Description("Swamp")]
     Swamp = 1UL << 4,
 
+    [Description("Desert")]
     Desert = 1UL << 5,
 
+    [Description("Urban")]
     Urban = 1UL << 6,
 
+    [Description("Water")]
     Water = 1UL << 7,
 
+    [Description("Crevice")]
     Crevice = 1UL << 8,
 
+    [Description("Tunnels")]
     Tunnels = 1UL << 9,
 
+    [Description("Borderlands")]
     Borderlands = 1UL << 10,
 
+    [Description("Riverbank")]
     Riverbank = 1UL << 11,
 
+    [Description("Stronghold")]
     Stronghold = 1UL << 12,
 
+    [Description("Cave")]
     Cave = 1UL << 13,
 
+    [Description("Underground")]
     Underground = 1UL << 14,
 
     [Description("Arctic forest")]
@@ -109,16 +125,26 @@ public enum TerrainType : ulong
     [Description("Northern snowfield")]
     NorthernSnowfield = 1UL << 38,
 
+    [Description("Grassland")]
     Grassland = 1UL << 39,
 
+    [Description("Savanna")]
     Savanna = 1UL << 40,
 
+    [Description("Volcano")]
     Volcano = 1UL << 41,
 
     [Description("Lava lake")]
     LavaLake = 1UL << 42,
 
+    [Description("Geyser")]
     Geyser = 1UL << 43,
+
+    [Description("Catacombs")]
+    Catacombs = 1UL << 44,
+
+    [Description("Sewer")]
+    Sewer = 1UL << 45,
 
     [Description("Snowfield")]
     Snowfield = SouthernSnowfield | NorthernSnowfield,

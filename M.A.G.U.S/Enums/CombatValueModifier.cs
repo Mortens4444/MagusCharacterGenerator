@@ -4,6 +4,7 @@ namespace M.A.G.U.S.Enums;
 
 public enum CombatValueModifier
 {
+    [Description("Base")]
     Base,
 
     [Description("With primary weapon")]

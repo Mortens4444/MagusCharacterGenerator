@@ -13,5 +13,6 @@ public enum TravelMode
     [Description("In water")]
     InWater,
 
+    [Description("Underground")]
     Underground
 }

@@ -92,6 +92,8 @@ denebola.png
 dragon.png
 dream_crystal.png
 dream_thief.png
+dvorgaz.png
+dyphilla.png
 eagle.png
 earth_lord.png
 eccydoo_rr.png
@@ -117,10 +119,13 @@ guardian.png
 hatysa.png
 hekator.png
 homunculus_man.png
+huri.png
 ifrit.png
 izar.png
+jahrend.png
 kahra_jombata.png
 karaa.png
+kharad.png
 killer_whale.png
 lathran.png
 lesath.png

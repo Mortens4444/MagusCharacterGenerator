@@ -66,6 +66,8 @@ internal partial class CreatureDetailsViewModel : BaseViewModel
     public string AstralMagicResistance => !Creature.AstralMagicResistance.HasValue ? "-" : Creature.AstralMagicResistance.Value == Int32.MaxValue ? Lng.Elem("Immune") : Creature.AstralMagicResistance.Value.ToString(CultureInfo.InvariantCulture);
     public string MentalMagicResistance => !Creature.MentalMagicResistance.HasValue ? "-" : Creature.MentalMagicResistance == Int32.MaxValue ? Lng.Elem("Immune") : Creature.MentalMagicResistance.Value.ToString(CultureInfo.InvariantCulture);
     public string PoisonResistance => !Creature.PoisonResistance.HasValue ? "-" : Creature.PoisonResistance == Int32.MaxValue ? Lng.Elem("Immune") : Creature.PoisonResistance.Value.ToString(CultureInfo.InvariantCulture);
+    public int ManaPoints => Creature.ManaPoints;
+    public int PsiPoints => Creature.PsiPoints;
     public ulong ExperiencePoints => Creature.ExperiencePoints;
     public double AttacksPerRound => Creature.AttacksPerRound;
     public string RandomImage => Creature.RandomImage;

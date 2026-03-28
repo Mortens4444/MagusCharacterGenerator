@@ -13,5 +13,6 @@ public enum Occurrence
     [Description("Very rare")]
     VeryRare,
 
+    [Description("Summoned")]
     Summoned
 }

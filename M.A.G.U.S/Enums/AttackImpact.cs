@@ -4,6 +4,7 @@ namespace M.A.G.U.S.Enums;
 
 public enum AttackImpact
 {
+    [Description("Normal")]
     Normal,
 
     [Description("Fatal mistake")]

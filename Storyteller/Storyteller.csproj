@@ -13,7 +13,7 @@
     <PackageReference Include="FontAwesome.Sharp" Version="6.6.0" />
     <PackageReference Include="Mtf.MessageBoxes" Version="6.0.13" />
     <PackageReference Include="Mtf.Windows.Forms.Extensions" Version="1.0.19" />
-    <PackageReference Include="Mtf.Windows.Forms.LanguageService" Version="3.1.17" />
+    <PackageReference Include="Mtf.Windows.Forms.LanguageService" Version="3.1.19" />
   </ItemGroup>
 
   <ItemGroup>

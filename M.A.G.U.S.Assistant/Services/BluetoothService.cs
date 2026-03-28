@@ -151,14 +151,19 @@ internal partial class BluetoothService : IBluetoothService, IDisposable
 
     public async Task StopServerAsync()
     {
-        //if (cts is null)
-        //{
-        //    return;
-        //}
+        var tokenSource = Interlocked.Exchange(ref cts, null);
+        if (tokenSource is null)
+        {
+            return;
+        }
 
         try
         {
-            await cts.CancelAsync().ConfigureAwait(false);
+            if (discovery != null)
+            {
+                await discovery.StopDiscoveryAsync().ConfigureAwait(false);
+            }
+            await tokenSource.CancelAsync().ConfigureAwait(false);
 
             if (acceptLoopTask is not null)
             {
@@ -186,8 +191,7 @@ internal partial class BluetoothService : IBluetoothService, IDisposable
         }
         finally
         {
-            cts.Dispose();
-            cts = null;
+            tokenSource.Dispose();
             acceptLoopTask = null;
             isServer = false;
         }
@@ -398,8 +402,6 @@ internal partial class BluetoothService : IBluetoothService, IDisposable
 
         cts?.Dispose();
         cts = null;
-
-        _ = discovery?.StopDiscoveryAsync();
     }
 
     private static void ReportError(string titleFormatText, Exception ex)
