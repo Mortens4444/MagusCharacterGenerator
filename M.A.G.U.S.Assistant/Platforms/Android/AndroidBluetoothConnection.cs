@@ -1,6 +1,8 @@
 ﻿using Android.Bluetooth;
+using CommunityToolkit.Mvvm.Messaging;
 using M.A.G.U.S.Assistant.Exceptions;
 using M.A.G.U.S.Assistant.Interfaces.Bluetooth;
+using Mtf.Maui.Controls.Messages;
 using System.Text;
 
 namespace M.A.G.U.S.Assistant.Platforms.Android;
@@ -40,7 +42,14 @@ internal sealed class AndroidBluetoothConnection : IBluetoothConnection
 
         if (RawMessageReceived != null)
         {
-            await RawMessageReceived.Invoke(result).ConfigureAwait(false);
+            try
+            {
+                await RawMessageReceived.Invoke(result).ConfigureAwait(false);
+            }
+            catch (Exception ex)
+            {
+                WeakReferenceMessenger.Default.Send(new ShowErrorMessage(ex));
+            }
         }
 
         return result;
@@ -53,12 +62,19 @@ internal sealed class AndroidBluetoothConnection : IBluetoothConnection
         while (offset < count)
         {
             ct.ThrowIfCancellationRequested();
+            if (socket.InputStream == null || socket.OutputStream == null)
+            {
+                throw new InvalidOperationException("Bluetooth socket streams are not available.");
+            }
+
             int read = await socket.InputStream!
                 .ReadAsync(buffer, offset, count - offset, ct)
                 .ConfigureAwait(false);
             
             if (read <= 0)
+            {
                 throw new BluetoothDisconnectedException("Remote device disconnected.");
+            }
             //if (read <= 0)
             //    throw new IOException("Bluetooth connection lost (read returned 0 or -1).");
 
@@ -76,8 +92,9 @@ internal sealed class AndroidBluetoothConnection : IBluetoothConnection
         await sendLock.WaitAsync(ct).ConfigureAwait(false);
         try
         {
-            await socket.OutputStream!.WriteAsync(lengthPrefix, 0, 4).ConfigureAwait(false);
-            await socket.OutputStream!.WriteAsync(payload, 0, payload.Length).ConfigureAwait(false);
+            await socket.OutputStream!.WriteAsync(lengthPrefix, 0, lengthPrefix.Length, ct).ConfigureAwait(false);
+            await socket.OutputStream!.WriteAsync(payload, 0, payload.Length, ct).ConfigureAwait(false);
+            await socket.OutputStream.FlushAsync(ct).ConfigureAwait(false);
         }
         finally
         {
@@ -88,6 +105,10 @@ internal sealed class AndroidBluetoothConnection : IBluetoothConnection
     public void Dispose()
     {
         sendLock.Dispose();
-        try { socket.Close(); } catch { }
+        try
+        {
+            socket.Close();
+            socket.Dispose();
+        } catch { }
     }
 }

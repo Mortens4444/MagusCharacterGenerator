@@ -222,6 +222,9 @@ public class DiceThrow
             ThrowType._4D10 => _4D10(hasLuckAmulet),
             ThrowType._5D10 => _5D10(hasLuckAmulet),
             ThrowType._6D10 => _6D10(hasLuckAmulet),
+            ThrowType._7D10 => _7D10(hasLuckAmulet),
+            ThrowType._8D10 => _8D10(hasLuckAmulet),
+            ThrowType._9D10 => _9D10(hasLuckAmulet),
             ThrowType._10D10 => _10D10(hasLuckAmulet),
             ThrowType._1D100 => _1D100(hasLuckAmulet),
             ThrowType._3D100 => _3D100(hasLuckAmulet),
@@ -282,6 +285,9 @@ public class DiceThrow
             ThrowType._4D10 => new Range { Min = 4, Max = 40 },
             ThrowType._5D10 => new Range { Min = 5, Max = 50 },
             ThrowType._6D10 => new Range { Min = 6, Max = 60 },
+            ThrowType._7D10 => new Range { Min = 7, Max = 70 },
+            ThrowType._8D10 => new Range { Min = 8, Max = 80 },
+            ThrowType._9D10 => new Range { Min = 9, Max = 90 },
             ThrowType._10D10 => new Range { Min = 10, Max = 100 },
             ThrowType._1D100 => new Range { Max = 100 },
             ThrowType._3D100 => new Range { Min = 3, Max = 300 },
@@ -370,6 +376,15 @@ public class DiceThrow
 
     public int _6D10(bool hasLuckAmulet = false) =>
         ApplyLuck(RandomProvider.GetSecureRandomByte(6, 61), 6, 61, hasLuckAmulet);
+
+    public int _7D10(bool hasLuckAmulet = false) =>
+        ApplyLuck(RandomProvider.GetSecureRandomByte(7, 71), 7, 71, hasLuckAmulet);
+
+    public int _8D10(bool hasLuckAmulet = false) =>
+        ApplyLuck(RandomProvider.GetSecureRandomByte(8, 81), 8, 81, hasLuckAmulet);
+
+    public int _9D10(bool hasLuckAmulet = false) =>
+        ApplyLuck(RandomProvider.GetSecureRandomByte(9, 91), 9, 91, hasLuckAmulet);
 
     public int _10D10(bool hasLuckAmulet = false) =>
         ApplyLuck(RandomProvider.GetSecureRandomByte(10, 101), 10, 101, hasLuckAmulet);

@@ -337,13 +337,39 @@ internal partial class BluetoothService : IBluetoothService, IDisposable
         {
             return;
         }
+        
+        var isBroadcast = message.TargetIds.Count == 0;
+        var isForMe = isBroadcast || message.TargetIds.Contains(LocalId);
+        var isForOthers = isBroadcast || message.TargetIds.Any(id => id != LocalId && id != senderId);
 
-        // Server routing: if server and message has targets not including local, forward
-        if (isServer && message.TargetIds.Count != 0 && !message.TargetIds.Contains(LocalId))
+        if (isServer && isForOthers)
         {
-            await SendAsync(message).ConfigureAwait(false);
+            // Important: Don't bounce the message back to the sender
+            var forwardTasks = connections.Values
+                        .Where(c => c.RemoteId != senderId && (isBroadcast || message.TargetIds.Contains(c.RemoteId)))
+                        .Select(c => c.SendAsync(json, cts?.Token ?? CancellationToken.None));
+
+            try
+            {
+                await Task.WhenAll(forwardTasks).ConfigureAwait(false);
+            }
+            catch (Exception ex)
+            {
+                ReportError($"Forwarding failed: {{0}}", ex);
+            }
+        }
+
+        if (!isForMe)
+        {
             return;
         }
+
+        // Server routing: if server and message has targets not including local, forward
+        //if (isServer)
+        //{
+        //    await SendAsync(message).ConfigureAwait(false);
+        //    return;
+        //}
 
         // Execute command if exists
         if (registry.TryGet(message.CommandType, out var command))

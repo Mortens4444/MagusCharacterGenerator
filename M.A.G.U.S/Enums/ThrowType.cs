@@ -49,6 +49,12 @@ public enum ThrowType
     _5D10,
     [Description("6D10")]
     _6D10,
+    [Description("7D10")]
+    _7D10,
+    [Description("8D10")]
+    _8D10,
+    [Description("9D10")]
+    _9D10,
     [Description("10D10")]
     _10D10,
     [Description("4D6")]

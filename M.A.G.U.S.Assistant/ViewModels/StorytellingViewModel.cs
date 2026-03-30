@@ -200,6 +200,10 @@ internal partial class StorytellingViewModel : ObservableObject, IDisposable
             case BluetoothCommandType.PrivateMessage:
                 await HandlePrivateMessage(message).ConfigureAwait(false);
                 break;
+
+            default:
+                WeakReferenceMessenger.Default.Send(new ShowInfoMessage("Unknown message arrived", String.Concat(message.CommandType.ToString(), " - ", message.Payload)));
+                break;
         }
     }
 
@@ -242,14 +246,30 @@ internal partial class StorytellingViewModel : ObservableObject, IDisposable
 
     private async Task SendPrivateMessageAsync()
     {
-        if (SelectedPlayer is null)
+        if (SelectedPlayer is null || String.IsNullOrWhiteSpace(MessageText))
         {
             return;
         }
 
-        if (String.IsNullOrWhiteSpace(MessageText))
+        try
         {
-            return;
+            await bluetooth.SendAsync(new BluetoothMessage
+            {
+                CommandType = BluetoothCommandType.PrivateMessage,
+                SenderId = bluetooth.LocalId,
+                TargetIds = [SelectedPlayer.Id],
+                Payload = JsonConvert.SerializeObject(new PrivateMessageData
+                {
+                    Text = MessageText
+                })
+            }).ConfigureAwait(false);
+
+            WeakReferenceMessenger.Default.Send(new ShowInfoMessage(Lng.Elem("Private message"), Lng.Elem("Message sent successfully")));
+            MessageText = String.Empty;
+        }
+        catch (Exception ex)
+        {
+            WeakReferenceMessenger.Default.Send(new ShowErrorMessage($"{Lng.Elem("Failed to send private message")}: {ex.Message}"));
         }
 
         await bluetooth.SendAsync(new BluetoothMessage
@@ -329,5 +349,7 @@ internal partial class StorytellingViewModel : ObservableObject, IDisposable
         bluetooth.DeviceDiscovered -= Bluetooth_DeviceDiscovered;
         bluetooth.MessageReceived -= OnMessageReceived;
         //bluetooth.PeerDisconnected -= OnPeerDisconnected;
+
+        _ = StopServerAsync();
     }
 }

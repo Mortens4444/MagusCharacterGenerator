@@ -41,8 +41,5 @@ public sealed class AstralVampire : Creature
     [DiceThrowModifier(0)]
     public override int GetDamage() => 0;
 
-    public override List<Speed> Speeds =>
-    [
-        new Speed(TravelMode.InTheAir, 85)
-    ];
+    public override List<Speed> Speeds => [new Speed(TravelMode.InTheAir, 85)];
 }
