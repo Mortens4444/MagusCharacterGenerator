@@ -48,5 +48,7 @@ public sealed class DragonLizard : Creature
 
     public override double AttacksPerRound => 2;
 
+    public override string Name => "Dragon Lizard";
+
     public override List<Speed> Speeds => [new Speed(TravelMode.OnLand, 60)];
 }

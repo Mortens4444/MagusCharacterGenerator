@@ -150,9 +150,15 @@ orc.png
 panther.png
 phantom.png
 polar_bear.png
+pteropta.png
+querda.png
+quintarha.png
 qvakka.png
+rackla.png
+ralug.png
 rat.png
 red_shark.png
+rhagultaikky.png
 rhyno.png
 rukh.png
 rutilicus.png

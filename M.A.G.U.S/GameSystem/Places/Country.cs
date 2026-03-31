@@ -1,6 +1,7 @@
 ﻿using M.A.G.U.S.Enums;
 using M.A.G.U.S.GameSystem.Attributes;
 using M.A.G.U.S.GameSystem.Languages;
+using System.ComponentModel;
 
 namespace M.A.G.U.S.GameSystem.Places;
 
@@ -94,5 +95,17 @@ public enum Country
     // --- Keleti szigetvilág ---
 
     [OfficialLanguage(Language.Enosukean)]
-    Enosuke = 1 << 18
+    Enosuke = 1 << 18,
+
+    [OfficialLanguage(Language.Hilar)]
+    [OfficialLanguage(Language.Vanir)]
+    Tarin = 1 << 19,
+
+    [OfficialLanguage(Language.Orc)]
+    [OfficialReligion(Deity.Orwella)]
+    [Description("Gro-Ugon")]
+    GroUgon = 1 << 20,
+
+    [Description("Sheral")]
+    Sheral = 1 << 21
 }

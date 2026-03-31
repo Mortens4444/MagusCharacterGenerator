@@ -146,6 +146,9 @@ public enum TerrainType : ulong
     [Description("Sewer")]
     Sewer = 1UL << 45,
 
+    [Description("Lake")]
+    Lake = 1UL << 46,
+
     [Description("Snowfield")]
     Snowfield = SouthernSnowfield | NorthernSnowfield,
 
