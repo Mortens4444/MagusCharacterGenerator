@@ -10,7 +10,7 @@ public sealed class Carnomak : LivingDead
     {
         Occurrence = Occurrence.Rare;
         Size = Size.Human;
-        PlacesOfOccurrence = TerrainType.Water;
+        PlacesOfOccurrence = TerrainType.SaltWater;
 
         DefenseValue = 15;
         InitiateValue = 15;

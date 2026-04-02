@@ -14,7 +14,7 @@ public sealed class Rackla : Creature
         Country = GameSystem.Places.Country.Tarin;
 
         AttackValue = 35;
-        DefenseValue = 50;
+        DefenseValue = 50; // 80 levegőben
         InitiateValue = 15;
 
         HealthPoints = 8;

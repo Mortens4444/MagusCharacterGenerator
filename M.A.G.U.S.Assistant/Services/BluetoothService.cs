@@ -239,46 +239,73 @@ internal partial class BluetoothService : IBluetoothService, IDisposable
 
     private void RegisterConnection(IBluetoothConnection connection)
     {
-        if (!connections.TryAdd(connection.RemoteId, connection))
+        var remoteId = connection.RemoteId;
+
+        if (!connections.TryAdd(remoteId, connection))
         {
             // duplicate remote id? dispose new one
             connection.Dispose();
             return;
         }
 
-        _ = Task.Run(() => ReceiveLoopAsync(connection)); // start receive loop
-        //_ = ClientConnected?.Invoke(connection.RemoteId);
-        _ = Task.Run(async () =>
+        BluetoothService.FireAndForget(ReceiveLoopAsync(connection), "ReceiveLoopAsync");
+        BluetoothService.FireAndForget(NotifyClientConnectedAsync(connection), "ClientConnected notification");
+    }
+
+    private async Task NotifyClientConnectedAsync(IBluetoothConnection connection)
+    {
+        if (ClientConnected is null)
         {
-            try
+            return;
+        }
+
+        await (ClientConnected.Invoke(connection.RemoteId) ?? Task.CompletedTask).ConfigureAwait(false);
+    }
+
+    private static void FireAndForget(Task task, string operationName)
+    {
+        _ = task.ContinueWith(t =>
+        {
+            if (t.Exception != null)
             {
-                await (ClientConnected?.Invoke(connection.RemoteId) ?? Task.CompletedTask);
+                ReportError($"{operationName} failed: {{0}}", t.Exception.Flatten());
             }
-            catch (Exception ex)
-            {
-                ReportError($"Register connection failed: {{0}}", ex);
-            }
-        });
+        },
+        CancellationToken.None,
+        TaskContinuationOptions.OnlyOnFaulted,
+        TaskScheduler.Default);
     }
 
     private async Task ReceiveLoopAsync(IBluetoothConnection connection)
     {
+        ArgumentNullException.ThrowIfNull(connection);
+
+        var remoteId = connection.RemoteId;
+        var token = cts?.Token ?? CancellationToken.None;
+
         try
         {
-            while (connection.IsConnected && cts?.IsCancellationRequested != true)
+            while (!token.IsCancellationRequested && connection.IsConnected)
             {
                 try
                 {
-                    var json = await connection.ReceiveAsync(cts?.Token ?? CancellationToken.None).ConfigureAwait(false);
+                    var json = await connection.ReceiveAsync(token).ConfigureAwait(false);
                     if (String.IsNullOrEmpty(json))
                     {
                         break;
                     }
 
-                    await OnRawMessageReceived(json, connection.RemoteId).ConfigureAwait(false);
+                    await OnRawMessageReceived(json, remoteId).ConfigureAwait(false);
                 }
-                catch (OperationCanceledException) { break; }
+                catch (OperationCanceledException)
+                {
+                    break;
+                }
                 catch (BluetoothDisconnectedException)
+                {
+                    break;
+                }
+                catch (ObjectDisposedException)
                 {
                     break;
                 }
@@ -413,21 +440,39 @@ internal partial class BluetoothService : IBluetoothService, IDisposable
 
     public void Dispose()
     {
-        cts?.Cancel();
+        var tokenSource = Interlocked.Exchange(ref cts, null);
 
         try
         {
-            acceptLoopTask?.Wait(500);
-        }
-        catch { /* best effort */ }
+            tokenSource?.Cancel();
 
-        foreach (var kv in connections.ToArray())
+            try
+            {
+                acceptLoopTask?.Wait(500);
+            }
+            catch
+            {
+            }
+
+            foreach (var kv in connections.ToArray())
+            {
+                try
+                {
+                    kv.Value.Dispose();
+                }
+                catch
+                {
+                }
+            }
+
+            connections.Clear();
+        }
+        finally
         {
-            try { kv.Value.Dispose(); } catch { }
+            tokenSource?.Dispose();
+            acceptLoopTask = null;
+            isServer = false;
         }
-
-        cts?.Dispose();
-        cts = null;
     }
 
     private static void ReportError(string titleFormatText, Exception ex)

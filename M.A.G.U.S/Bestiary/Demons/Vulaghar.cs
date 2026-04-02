@@ -8,7 +8,7 @@ namespace M.A.G.U.S.Bestiary.Demons;
 
 public sealed class Vulaghar : Creature
 {
-    public Vulaghar() // Shrabtistt
+    public Vulaghar()
     {
         Occurrence = Occurrence.Rare;
         Size = Size.Human;
@@ -33,6 +33,10 @@ public sealed class Vulaghar : Creature
     }
 
     public override double AttacksPerRound => 3;
+
+    public override string Name => "Vulaghar (the dark wanderer)";
+
+    public override string[] Images => ["shrabtistt.png"];
 
     [DiceThrow(ThrowType._1D10)]
     public override int GetDamage() => DiceThrow._1D10();

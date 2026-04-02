@@ -12,7 +12,7 @@ public sealed class RedShark : Creature
         Occurrence = Occurrence.Rare;
         Intelligence = Enums.Intelligence.Animal;
         Size = Size.Up_to_3_meters;
-        PlacesOfOccurrence = TerrainType.Water;
+        PlacesOfOccurrence = TerrainType.SaltWater;
 
         InitiateValue = 40;
         AttackValue = 70;

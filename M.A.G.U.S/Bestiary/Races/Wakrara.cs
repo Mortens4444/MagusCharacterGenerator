@@ -13,6 +13,8 @@ public sealed class Wakrara : Creature
     {
         Occurrence = Occurrence.VeryRare;
         Size = Size.Huge;
+        PlacesOfOccurrence = TerrainType.Mountains | TerrainType.InnerTerritory;
+        Country = GameSystem.Places.Country.Kran;
 
         AttackValue = 120;
         DefenseValue = 155;
@@ -21,8 +23,8 @@ public sealed class Wakrara : Creature
 
         AttackModes =
         [
-            new MeleeAttack(new BodyPart("Left claw", ThrowType._3D6, 4), AttackValue),
-            new MeleeAttack(new BodyPart("Right claw", ThrowType._3D6, 4), AttackValue)
+            new MeleeAttack(new BodyPart("Left hand", ThrowType._3D6, 4), AttackValue),
+            new MeleeAttack(new BodyPart("Right hand", ThrowType._3D6, 4), AttackValue)
         ];
 
         HealthPoints = 45;

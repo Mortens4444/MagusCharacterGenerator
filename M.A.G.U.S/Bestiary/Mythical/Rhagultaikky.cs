@@ -44,4 +44,6 @@ public sealed class Rhagultaikky : Creature
     public override int GetNumberAppearing() => DiceThrow._1D4();
 
     public override List<Speed> Speeds => [new Speed(TravelMode.OnLand, 120)];
+
+    public override string[] Sounds => ["yeti-roar"];
 }

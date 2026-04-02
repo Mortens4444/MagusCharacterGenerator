@@ -10,7 +10,7 @@ public sealed class BlackShark : Creature
     public BlackShark()
     {
         Occurrence = Occurrence.Rare;
-        PlacesOfOccurrence = TerrainType.Water;
+        PlacesOfOccurrence = TerrainType.SaltWater;
         Size = Size._4_to_6_meters;
 
         InitiateValue = 45;

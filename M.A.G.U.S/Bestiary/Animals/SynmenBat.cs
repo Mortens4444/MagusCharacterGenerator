@@ -10,7 +10,7 @@ public sealed class SynmenBat : Creature
     {
         Occurrence = Occurrence.Frequent;
         Size = Size.Small;
-        PlacesOfOccurrence = TerrainType.Forest | TerrainType.ArcticForest;
+        PlacesOfOccurrence = TerrainType.ArcticForest;
 
         AttackValue = 25;
         DefenseValue = 60;

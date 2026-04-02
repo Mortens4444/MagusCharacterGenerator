@@ -11,7 +11,7 @@ public sealed class GrayDolphin : Creature
     {
         Occurrence = Occurrence.Frequent;
         Intelligence = Enums.Intelligence.High;
-        PlacesOfOccurrence = TerrainType.Water;
+        PlacesOfOccurrence = TerrainType.SaltWater;
 
         Size = Size._1_5_meters;
         AttackValue = 40;

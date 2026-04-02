@@ -41,5 +41,5 @@ public sealed class Warg : Creature
 
     public override List<Speed> Speeds => [new Speed(TravelMode.OnLand, 120)];
 
-    //public override string[] Sounds => ["warg_growl", "warg_howl"];
+    public override string[] Sounds => ["wolf"]; //["warg_growl", "warg_howl"];
 }

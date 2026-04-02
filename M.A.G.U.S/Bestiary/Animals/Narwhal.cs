@@ -10,7 +10,7 @@ public sealed class Narwhal : Creature
     public Narwhal()
     {
         Occurrence = Occurrence.Rare;
-        PlacesOfOccurrence = TerrainType.Water;
+        PlacesOfOccurrence = TerrainType.SaltWater;
         Size = Size._4_meters;
 
         InitiateValue = 5;

@@ -11,7 +11,7 @@ public sealed class KillerWhale : Creature
     {
         Occurrence = Occurrence.Rare;
         Size = Size._4_meters;
-        PlacesOfOccurrence = TerrainType.Water;
+        PlacesOfOccurrence = TerrainType.SaltWater;
 
         InitiateValue = 5;
         AttackValue = 95;

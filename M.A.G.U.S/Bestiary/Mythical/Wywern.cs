@@ -6,9 +6,9 @@ using M.A.G.U.S.Things.Weapons;
 
 namespace M.A.G.U.S.Bestiary.Mythical;
 
-public sealed class Wyvern : Creature
+public sealed class Wywern : Creature
 {
-    public Wyvern()
+    public Wywern()
     {
         Occurrence = Occurrence.Rare;
         Size = Size.Big; // 3.5 m hosszú

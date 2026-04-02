@@ -12,6 +12,7 @@ public sealed class SeaSnake : Creature
         Armor = new NaturalArmor(20); // 15-25, Fején 10-15
         Occurrence = Occurrence.VeryRare;
         Size = Size.Huge; // 800-1300 láb hosszú, átmérője 25 láb
+        PlacesOfOccurrence = TerrainType.SaltWater;
 
         AttackValue = 120;
         InitiateValue = 0;

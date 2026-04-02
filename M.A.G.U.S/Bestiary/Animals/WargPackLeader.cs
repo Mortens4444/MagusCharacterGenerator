@@ -43,5 +43,5 @@ public sealed class WargPackLeader : Creature
 
     public override string Name => "Warg pack leader";
 
-    //public override string[] Sounds => ["warg_growl", "warg_howl"];
+    public override string[] Sounds => ["werewolf_howl"]; //["warg_growl", "warg_howl"];
 }

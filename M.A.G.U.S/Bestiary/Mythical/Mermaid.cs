@@ -10,7 +10,7 @@ public sealed class Mermaid : Creature
     {
         Occurrence = Occurrence.VeryRare;
         Size = Size.Human;
-        PlacesOfOccurrence = TerrainType.Water;
+        PlacesOfOccurrence = TerrainType.SaltWater;
 
         AttackValue = 15;
         DefenseValue = 65;

@@ -12,7 +12,7 @@ public sealed class Barracuda : Creature
     {
         Occurrence = Occurrence.Frequent;
         Size = Size.Big;
-        PlacesOfOccurrence = TerrainType.Water;
+        PlacesOfOccurrence = TerrainType.SaltWater;
 
         AttackValue = 100;
         DefenseValue = 150;

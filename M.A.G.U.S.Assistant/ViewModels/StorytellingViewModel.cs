@@ -212,6 +212,7 @@ internal partial class StorytellingViewModel : ObservableObject, IDisposable
         var data = JsonConvert.DeserializeObject<PrivateMessageData>(message.Payload);
         if (data is null)
         {
+            WeakReferenceMessenger.Default.Send(new ShowInfoMessage("Private message", "No message"));
             return Task.CompletedTask;
         }
 
@@ -227,21 +228,18 @@ internal partial class StorytellingViewModel : ObservableObject, IDisposable
             return Task.CompletedTask;
         }
 
-        MainThread.BeginInvokeOnMainThread(() =>
+        if (ConnectedPlayers.Any(p => p.Id == message.SenderId))
         {
-            if (ConnectedPlayers.Any(p => p.Id == message.SenderId))
-            {
-                return;
-            }
+            return Task.CompletedTask;
+        }
 
-            ConnectedPlayers.Add(new PlayerModel
-            {
-                Id = message.SenderId,
-                Name = data.Name
-            });
-
-            WeakReferenceMessenger.Default.Send(new ShowInfoMessage(Lng.Elem("Player connected"), String.Concat(message.SenderId)));
+        ConnectedPlayers.Add(new PlayerModel
+        {
+            Id = message.SenderId,
+            Name = data.Name
         });
+
+        WeakReferenceMessenger.Default.Send(new ShowInfoMessage(Lng.Elem("Player connected"), String.Concat(message.SenderId)));
 
         return Task.CompletedTask;
     }

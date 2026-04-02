@@ -29,8 +29,8 @@ public enum TerrainType : ulong
     [Description("Urban")]
     Urban = 1UL << 6,
 
-    [Description("Water")]
-    Water = 1UL << 7,
+    [Description("Sea")]
+    Sea = 1UL << 7,
 
     [Description("Crevice")]
     Crevice = 1UL << 8,
@@ -148,6 +148,15 @@ public enum TerrainType : ulong
 
     [Description("Lake")]
     Lake = 1UL << 46,
+
+    [Description("Ocean")]
+    Ocean = 1UL << 47,
+
+    [Description("Inner territory")]
+    InnerTerritory = 1UL << 48,
+
+    [Description("Salt water")]
+    SaltWater = Sea | Ocean,
 
     [Description("Snowfield")]
     Snowfield = SouthernSnowfield | NorthernSnowfield,

@@ -28,6 +28,8 @@ public sealed class QuanaDokuna : Creature
 
     public override string Name => "Quana Dokuna (Contemplative)";
 
+    public override string[] Images => ["quana_dokuna.png"];
+
     [DiceThrowModifier(0)]
     public override int GetDamage() => 0;
 

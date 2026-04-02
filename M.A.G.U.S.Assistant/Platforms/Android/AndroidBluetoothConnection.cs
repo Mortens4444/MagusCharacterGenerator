@@ -3,6 +3,7 @@ using CommunityToolkit.Mvvm.Messaging;
 using M.A.G.U.S.Assistant.Exceptions;
 using M.A.G.U.S.Assistant.Interfaces.Bluetooth;
 using Mtf.Maui.Controls.Messages;
+using System.Net;
 using System.Text;
 
 namespace M.A.G.U.S.Assistant.Platforms.Android;
@@ -11,32 +12,58 @@ internal sealed class AndroidBluetoothConnection : IBluetoothConnection
 {
     private readonly BluetoothSocket socket;
     private readonly SemaphoreSlim sendLock = new(1, 1);
+    private readonly string remoteId;
+    private int disposed;
 
     public event Func<string, Task>? RawMessageReceived;
-    public string RemoteId => socket.RemoteDevice?.Address ?? "Unknown";
-    public bool IsConnected => socket.IsConnected;
+
+    public string RemoteId => remoteId;
+
+    public bool IsConnected
+    {
+        get
+        {
+            if (Volatile.Read(ref disposed) != 0)
+            {
+                return false;
+            }
+
+            try
+            {
+                return socket.IsConnected;
+            }
+            catch (ObjectDisposedException)
+            {
+                return false;
+            }
+        }
+    }
 
     public AndroidBluetoothConnection(BluetoothSocket socket)
     {
-        this.socket = socket;
+        this.socket = socket ?? throw new ArgumentNullException(nameof(socket));
+        remoteId = socket.RemoteDevice?.Address ?? "Unknown";
     }
 
-    public async Task<string> ReceiveAsync(CancellationToken ct)
+    public async Task<string?> ReceiveAsync(CancellationToken ct)
     {
+        ThrowIfDisposed();
+        
+        var stream = socket.InputStream ?? throw new BluetoothDisconnectedException("Bluetooth input stream is unavailable.");
+
         // Read a length prefix first (4 bytes, big-endian int)
         // so we know exactly how many bytes to expect.
         var lengthBuffer = new byte[4];
-        await ReadExactAsync(lengthBuffer, 4, ct).ConfigureAwait(false);
-        int messageLength = System.Net.IPAddress.NetworkToHostOrder(
-            BitConverter.ToInt32(lengthBuffer, 0));
+        await ReadExactAsync(stream, lengthBuffer, 4, ct).ConfigureAwait(false);
 
+        int messageLength = IPAddress.NetworkToHostOrder(BitConverter.ToInt32(lengthBuffer, 0));
         if (messageLength <= 0 || messageLength > 1024 * 1024) // sanity cap: 1 MB
         {
             throw new InvalidDataException($"Invalid message length: {messageLength}");
         }
 
         var messageBuffer = new byte[messageLength];
-        await ReadExactAsync(messageBuffer, messageLength, ct).ConfigureAwait(false);
+        await ReadExactAsync(stream, messageBuffer, messageLength, ct).ConfigureAwait(false);
 
         var result = Encoding.UTF8.GetString(messageBuffer);
 
@@ -56,7 +83,7 @@ internal sealed class AndroidBluetoothConnection : IBluetoothConnection
     }
 
     // Keeps reading until exactly `count` bytes are filled — crucial for streams.
-    private async Task ReadExactAsync(byte[] buffer, int count, CancellationToken ct)
+    private async Task ReadExactAsync(Stream stream, byte[] buffer, int count, CancellationToken ct)
     {
         int offset = 0;
         while (offset < count)
@@ -67,34 +94,49 @@ internal sealed class AndroidBluetoothConnection : IBluetoothConnection
                 throw new InvalidOperationException("Bluetooth socket streams are not available.");
             }
 
-            int read = await socket.InputStream!
-                .ReadAsync(buffer, offset, count - offset, ct)
-                .ConfigureAwait(false);
-            
-            if (read <= 0)
+            try
             {
-                throw new BluetoothDisconnectedException("Remote device disconnected.");
-            }
-            //if (read <= 0)
-            //    throw new IOException("Bluetooth connection lost (read returned 0 or -1).");
+                int read = await socket.InputStream!
+                        .ReadAsync(buffer.AsMemory(offset, count - offset), ct)
+                        .ConfigureAwait(false);
 
-            offset += read;
+                if (read <= 0)
+                {
+                    throw new BluetoothDisconnectedException("Remote device disconnected.");
+                }
+
+                offset += read;
+            }
+            catch (ObjectDisposedException)
+            {
+                throw new BluetoothDisconnectedException("Bluetooth socket was disposed while reading.");
+            }
         }
     }
 
-    public async Task SendAsync(string json, CancellationToken ct = default)
+    public async Task SendAsync(string message, CancellationToken ct = default)
     {
-        var payload = Encoding.UTF8.GetBytes(json);
-        var lengthPrefix = BitConverter.GetBytes(
-            System.Net.IPAddress.HostToNetworkOrder(payload.Length));
+        ArgumentNullException.ThrowIfNull(message);
+        ThrowIfDisposed();
 
-        // Serialize sends so concurrent calls don't interleave bytes.
         await sendLock.WaitAsync(ct).ConfigureAwait(false);
+
         try
         {
-            await socket.OutputStream!.WriteAsync(lengthPrefix, 0, lengthPrefix.Length, ct).ConfigureAwait(false);
-            await socket.OutputStream!.WriteAsync(payload, 0, payload.Length, ct).ConfigureAwait(false);
-            await socket.OutputStream.FlushAsync(ct).ConfigureAwait(false);
+            ThrowIfDisposed();
+
+            var stream = socket.OutputStream ?? throw new BluetoothDisconnectedException("Bluetooth output stream is unavailable.");
+            var payload = Encoding.UTF8.GetBytes(message);
+            var lengthPrefix = BitConverter.GetBytes(IPAddress.HostToNetworkOrder(payload.Length));
+
+            await stream.WriteAsync(lengthPrefix, ct).ConfigureAwait(false);
+            await stream.WriteAsync(payload, ct).ConfigureAwait(false);
+            await stream.FlushAsync(ct).ConfigureAwait(false);
+
+        }
+        catch (ObjectDisposedException)
+        {
+            throw new BluetoothDisconnectedException("Bluetooth socket was disposed.");
         }
         finally
         {
@@ -104,11 +146,28 @@ internal sealed class AndroidBluetoothConnection : IBluetoothConnection
 
     public void Dispose()
     {
-        sendLock.Dispose();
+        if (Interlocked.Exchange(ref disposed, 1) != 0)
+        {
+            return;
+        }
+
         try
         {
             socket.Close();
+        }
+        catch { }
+
+        try
+        {
             socket.Dispose();
-        } catch { }
+        }
+        catch { }
+
+        sendLock.Dispose();
+    }
+
+    private void ThrowIfDisposed()
+    {
+        ObjectDisposedException.ThrowIf(Volatile.Read(ref disposed) != 0, nameof(AndroidBluetoothConnection));
     }
 }

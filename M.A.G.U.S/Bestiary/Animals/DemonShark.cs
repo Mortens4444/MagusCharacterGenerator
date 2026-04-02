@@ -11,7 +11,7 @@ public sealed class DemonShark : Creature
     {
         Occurrence = Occurrence.Rare;
         Size = Size._6_to_8_meters;
-        PlacesOfOccurrence = TerrainType.Water;
+        PlacesOfOccurrence = TerrainType.SaltWater;
 
         InitiateValue = 40;
         AttackValue = 100;

@@ -36,6 +36,8 @@ public sealed class Querda : Creature
 
     public override string Name => "Querda (Khrii'de)";
 
+    public override string[] Images => ["querda.png"];
+
     public override double AttacksPerRound => 3;
 
     [DiceThrow(ThrowType._1D10)]
