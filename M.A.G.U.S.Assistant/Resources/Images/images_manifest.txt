@@ -76,10 +76,14 @@ bat.png
 bear.png
 blackflame.png
 black_shark.png
+bright_ginsour.png
 brothers.png
 byzon.png
 carnomak.png
+carrion_serpent.png
 ceph.png
+clay_golem.png
+clockwork_servant.png
 common_rhino.png
 coronella.png
 crantai_wanderer.png
@@ -91,8 +95,10 @@ demon_shark.png
 denebola.png
 dragon.png
 dragon_lizard.png
+dralyor.png
 dream_crystal.png
 dream_thief.png
+dusk_ginsour.png
 dvorgaz.png
 dyphilla.png
 eagle.png
@@ -114,8 +120,8 @@ giant_crocodile.png
 giant_scorpion.png
 giant_spider.png
 gider.png
+gliad.png
 goblin.png
-golem.png
 gray_dolphin.png
 grizzly_bear.png
 guardian.png
@@ -124,6 +130,7 @@ hekator.png
 homunculus_man.png
 huri.png
 ifrit.png
+iron_golem.png
 izar.png
 jahrend.png
 kahra_jombata.png
@@ -137,6 +144,7 @@ lizard_wizard.png
 maasym.png
 marid.png
 mermaid.png
+midnight_ginsour.png
 molamoth.png
 mongrel.png
 morquor.png
@@ -177,6 +185,7 @@ servant_water_elemental.png
 seyrine.png
 shade.png
 shadowwalker.png
+shereb.png
 shi_kris.png
 shrabtistt.png
 sicchel.png
@@ -187,8 +196,10 @@ slave.png
 snow_leopard.png
 spider.png
 stinky_lizard.png
+stone_golem.png
 successor.png
 synmen_bat.png
+sytix.png
 syvan.png
 tamari.png
 tortor_spiritus.png
@@ -214,11 +225,14 @@ wesen.png
 white_eagle.png
 white_tiger.png
 white_wolf.png
+wirg.png
 wolf.png
 wolf_pack_leader.png
 wolves.png
+wood_golem.png
 wysty.png
 wywern.png
+xing.png
 yamm_haikan.png
 yersenia.png
 yersenia_hunter.png

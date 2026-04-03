@@ -1,5 +1,7 @@
+using CommunityToolkit.Mvvm.Messaging;
 using M.A.G.U.S.Assistant.ViewModels;
 using Mtf.LanguageService.MAUI.Views;
+using Mtf.Maui.Controls.Messages;
 
 namespace M.A.G.U.S.Assistant.Views;
 
@@ -17,7 +19,11 @@ internal partial class StorytellingPage : NotifierPage
 
         if (BindingContext is StorytellingViewModel vm)
         {
-            await vm.StartDiscoveryAsync().ConfigureAwait(false);
+            var discoveryStarted = await vm.StartDiscoveryAsync().ConfigureAwait(false);
+            if (!discoveryStarted)
+            {
+                WeakReferenceMessenger.Default.Send(new ShowErrorMessage("Bluetooth discovery cannot be started."));
+            }
         }
     }
 

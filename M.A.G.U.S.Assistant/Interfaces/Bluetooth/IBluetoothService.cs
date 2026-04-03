@@ -11,7 +11,7 @@ internal interface IBluetoothService
 
     Task StopServerAsync();
 
-    Task StartDiscoveryAsync();
+    Task<bool> StartDiscoveryAsync();
 
     Task ConnectAsync(string deviceId);
 

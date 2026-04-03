@@ -1,11 +1,9 @@
 ﻿#if ANDROID
 using Android.Content;
 using Android.Locations;
-using CommunityToolkit.Mvvm.Messaging;
-
 #endif
+using CommunityToolkit.Mvvm.Messaging;
 using M.A.G.U.S.Assistant.Contexts;
-using M.A.G.U.S.Assistant.Exceptions;
 using M.A.G.U.S.Assistant.Interfaces.Bluetooth;
 using M.A.G.U.S.Assistant.Messages;
 using M.A.G.U.S.Assistant.Models.Bluetooth;
@@ -28,7 +26,6 @@ internal partial class BluetoothService : IBluetoothService, IDisposable
     private Task? acceptLoopTask;
     private bool isServer;
 
-    //public string LocalId { get; } = "2EE056EE-5939-4EC4-8593-BC606EE1BF9E";
     public string LocalId { get; } = Guid.NewGuid().ToString();
 
     public event Action<DeviceModel>? DeviceDiscovered;
@@ -47,10 +44,7 @@ internal partial class BluetoothService : IBluetoothService, IDisposable
         this.listenerFactory = listenerFactory;
         this.discovery = discovery;
 
-        if (discovery != null)
-        {
-            discovery.DeviceDiscovered += d => DeviceDiscovered?.Invoke(d);
-        }
+        discovery?.DeviceDiscovered += d => DeviceDiscovered?.Invoke(d);
     }
 
     public static async Task<bool> RequestBluetoothPermissionsAsync()
@@ -105,7 +99,7 @@ internal partial class BluetoothService : IBluetoothService, IDisposable
 #endif
     }
 
-    public async Task StartDiscoveryAsync()
+    public async Task<bool> StartDiscoveryAsync()
     {
         if (!IsLocationServiceEnabled())
         {
@@ -123,7 +117,7 @@ internal partial class BluetoothService : IBluetoothService, IDisposable
             throw new NotSupportedException("Discovery not supported on this platform.");
         }
 
-        await discovery.StartDiscoveryAsync().ConfigureAwait(false);
+        return discovery.StartDiscovery();
     }
 
     public async Task StartServerAsync()
@@ -159,10 +153,7 @@ internal partial class BluetoothService : IBluetoothService, IDisposable
 
         try
         {
-            if (discovery != null)
-            {
-                await discovery.StopDiscoveryAsync().ConfigureAwait(false);
-            }
+            discovery?.StopDiscovery();
             await tokenSource.CancelAsync().ConfigureAwait(false);
 
             if (acceptLoopTask is not null)
@@ -205,10 +196,8 @@ internal partial class BluetoothService : IBluetoothService, IDisposable
         }
 
         cts ??= new CancellationTokenSource();
-
-        var ct = cts.Token;
-        var conn = await connector.ConnectToAsync(deviceId, ct).ConfigureAwait(false);
-        RegisterConnection(conn);
+        var connection = await connector.ConnectToAsync(deviceId).ConfigureAwait(false);
+        RegisterConnection(connection);
     }
 
     private async Task AcceptLoopAsync(CancellationToken ct)
@@ -297,18 +286,6 @@ internal partial class BluetoothService : IBluetoothService, IDisposable
 
                     await OnRawMessageReceived(json, remoteId).ConfigureAwait(false);
                 }
-                catch (OperationCanceledException)
-                {
-                    break;
-                }
-                catch (BluetoothDisconnectedException)
-                {
-                    break;
-                }
-                catch (ObjectDisposedException)
-                {
-                    break;
-                }
                 catch (Exception ex)
                 {
                     ReportError($"ReceiveLoop error ({connection.RemoteId}): {{0}}", ex);
@@ -349,6 +326,8 @@ internal partial class BluetoothService : IBluetoothService, IDisposable
 
     private async Task OnRawMessageReceived(string json, string senderId)
     {
+        WeakReferenceMessenger.Default.Send(new ShowInfoMessage(senderId, json));
+
         BluetoothMessage? message;
         try
         {
@@ -364,31 +343,34 @@ internal partial class BluetoothService : IBluetoothService, IDisposable
         {
             return;
         }
-        
-        var isBroadcast = message.TargetIds.Count == 0;
-        var isForMe = isBroadcast || message.TargetIds.Contains(LocalId);
-        var isForOthers = isBroadcast || message.TargetIds.Any(id => id != LocalId && id != senderId);
 
-        if (isServer && isForOthers)
+        var isBroadcast = message.TargetIds.Count == 0;
+
+        if (isServer)
         {
-            // Important: Don't bounce the message back to the sender
-            var forwardTasks = connections.Values
+            var isForServer = !String.IsNullOrEmpty(LocalId) && message.TargetIds.Contains(LocalId);
+            var isForOthers = isBroadcast || message.TargetIds.Any(id => id != senderId);
+
+            if (isForOthers)
+            {
+                try
+                {
+                    var forwardTasks = connections.Values
                         .Where(c => c.RemoteId != senderId && (isBroadcast || message.TargetIds.Contains(c.RemoteId)))
                         .Select(c => c.SendAsync(json, cts?.Token ?? CancellationToken.None));
 
-            try
-            {
-                await Task.WhenAll(forwardTasks).ConfigureAwait(false);
+                    await Task.WhenAll(forwardTasks).ConfigureAwait(false);
+                }
+                catch (Exception ex)
+                {
+                    ReportError($"Forwarding failed: {{0}}", ex);
+                }
             }
-            catch (Exception ex)
-            {
-                ReportError($"Forwarding failed: {{0}}", ex);
-            }
-        }
 
-        if (!isForMe)
-        {
-            return;
+            if (!isBroadcast && !isForServer)
+            {
+                return;
+            }
         }
 
         // Server routing: if server and message has targets not including local, forward
@@ -477,8 +459,9 @@ internal partial class BluetoothService : IBluetoothService, IDisposable
 
     private static void ReportError(string titleFormatText, Exception ex)
     {
+        FireAndForget(MauiProgram.OpenEmailClientWithErrorAsync(ex), "ReportError");
 #if ANDROID
-        MainThread.BeginInvokeOnMainThread(() =>  WeakReferenceMessenger.Default.Send(new ShowErrorMessage(ex)));
+        MainThread.BeginInvokeOnMainThread(() => WeakReferenceMessenger.Default.Send(new ShowErrorMessage(ex)));
 #endif
         Debug.WriteLine(String.Format(titleFormatText, ex));
     }

@@ -17,16 +17,15 @@ internal sealed class BluetoothDiscoveryService : CBCentralManagerDelegate, IBlu
         manager = new CBCentralManager(this, DispatchQueue.MainQueue);
     }
 
-    public Task StartDiscoveryAsync(CancellationToken cancellationToken = default)
+    public bool StartDiscovery(CancellationToken cancellationToken = default)
     {
         manager?.ScanForPeripherals((CBUUID[])null);
-        return Task.CompletedTask;
+        return true;
     }
 
-    public Task StopDiscoveryAsync()
+    public void StopDiscovery()
     {
         manager?.StopScan();
-        return Task.CompletedTask;
     }
 
     public override void DiscoveredPeripheral(

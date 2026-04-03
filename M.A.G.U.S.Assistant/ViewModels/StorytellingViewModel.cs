@@ -105,7 +105,7 @@ internal partial class StorytellingViewModel : ObservableObject, IDisposable
         });
     }
 
-    public Task StartDiscoveryAsync()
+    public Task<bool> StartDiscoveryAsync()
     {
         StatusMessage = Lng.Elem("Searching for devices...");
         return bluetooth.StartDiscoveryAsync();

@@ -10,7 +10,7 @@ internal interface IBluetoothConnection : IDisposable
     Task SendAsync(string json, CancellationToken ct = default);
 
     /// <summary>Receive a JSON string or null if closed.</summary>
-    Task<string?> ReceiveAsync(CancellationToken ct);
+    Task<string> ReceiveAsync(CancellationToken ct);
 
     event Func<string, Task>? RawMessageReceived;
 }

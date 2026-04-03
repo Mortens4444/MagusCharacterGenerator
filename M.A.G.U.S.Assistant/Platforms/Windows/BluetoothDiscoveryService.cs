@@ -11,7 +11,7 @@ internal sealed class BluetoothDiscoveryService : IBluetoothDiscoveryService
 
     public event Action<DeviceModel>? DeviceDiscovered;
 
-    public Task StartDiscoveryAsync(CancellationToken cancellationToken = default)
+    public bool StartDiscovery(CancellationToken cancellationToken = default)
     {
         var selector = "System.Devices.Aep.ProtocolId:=\"{e0cbf06c-cd8b-4647-bb8a-263b43f0f974}\"";
 
@@ -27,8 +27,7 @@ internal sealed class BluetoothDiscoveryService : IBluetoothDiscoveryService
         };
 
         watcher.Start();
-
-        return Task.CompletedTask;
+        return true;
     }
 
     //public Task StartDiscoveryAsync(CancellationToken cancellationToken = default)
@@ -50,10 +49,9 @@ internal sealed class BluetoothDiscoveryService : IBluetoothDiscoveryService
     //    return Task.CompletedTask;
     //}
 
-    public Task StopDiscoveryAsync()
+    public void StopDiscovery()
     {
         watcher?.Stop();
         watcher = null;
-        return Task.CompletedTask;
     }
 }

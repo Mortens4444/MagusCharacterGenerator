@@ -4,7 +4,7 @@ using Windows.Storage.Streams;
 
 namespace M.A.G.U.S.Assistant.Platforms.Windows;
 
-internal sealed class WindowsBluetoothConnection : IBluetoothConnection
+internal sealed partial class WindowsBluetoothConnection : IBluetoothConnection
 {
     private readonly StreamSocket socket;
 
@@ -16,7 +16,7 @@ internal sealed class WindowsBluetoothConnection : IBluetoothConnection
 
     public WindowsBluetoothConnection(StreamSocket socket)
     {
-        socket = socket;
+        this.socket = socket;
         _ = StartReceiveLoop();
     }
 

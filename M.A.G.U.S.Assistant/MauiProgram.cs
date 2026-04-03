@@ -111,7 +111,7 @@ internal static class MauiProgram
         });
     }
 
-    private static async Task OpenEmailClientWithErrorAsync(Exception exception)
+    public static async Task OpenEmailClientWithErrorAsync(Exception exception)
     {
         try
         {

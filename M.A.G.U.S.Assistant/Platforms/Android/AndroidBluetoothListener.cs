@@ -1,62 +1,99 @@
 ﻿using Android.Bluetooth;
-using CommunityToolkit.Mvvm.Messaging;
 using M.A.G.U.S.Assistant.Interfaces.Bluetooth;
-using Mtf.Maui.Controls.Messages;
 
 namespace M.A.G.U.S.Assistant.Platforms.Android;
 
 internal sealed class AndroidBluetoothListener : IBluetoothListener
 {
-    private readonly object syncRoot = new();
+    private readonly Lock syncRoot = new();
     private BluetoothServerSocket? serverSocket;
+    private bool disposed;
 
-    public Task<IBluetoothConnection> AcceptConnectionAsync(CancellationToken ct)
+    public async Task<IBluetoothConnection> AcceptConnectionAsync(CancellationToken ct)
     {
+        var adapter = BluetoothAdapter.DefaultAdapter ?? throw new NotSupportedException("Bluetooth not supported.");
+        if (!adapter.IsEnabled)
+        {
+            throw new InvalidOperationException("Bluetooth is disabled.");
+        }
+
+        BluetoothServerSocket? localSocket;
         lock (syncRoot)
         {
-            serverSocket ??= BluetoothAdapter.DefaultAdapter?.ListenUsingRfcommWithServiceRecord(
-            "MAGUS_Service",
-            AndroidBluetoothConnector.ServiceUuid)
-            ?? throw new NotSupportedException("Bluetooth not supported");
+            ObjectDisposedException.ThrowIf(disposed, nameof(AndroidBluetoothListener));
 
-            var localSocket = serverSocket;
+            serverSocket ??= adapter.ListenUsingRfcommWithServiceRecord("MAGUS_Service", AndroidBluetoothConnector.ServiceUuid)
+                ?? throw new NotSupportedException("Bluetooth not supported.");
 
-            return Task.Run(async () =>
+            localSocket = serverSocket;
+        }
+
+        using var registration = ct.Register(() =>
+        {
+            lock (syncRoot)
             {
-                using var reg = ct.Register(() =>
+                if (ReferenceEquals(serverSocket, localSocket))
                 {
-                    try
-                    {
-                        localSocket?.Close();
-                    }
-                    catch (Exception ex)
-                    {
-                        WeakReferenceMessenger.Default.Send(new ShowErrorMessage(ex));
-                    }
-                    serverSocket = null;
-                });
-
-                if (localSocket == null)
-                {
-                    throw new ArgumentNullException(nameof(localSocket));
+                    CloseServerSocket(ref serverSocket);
+                    localSocket = null;
                 }
-                var socket = await localSocket.AcceptAsync().ConfigureAwait(false);
-                // reg is disposed here — cancellation callback is unregistered cleanly
-                return (IBluetoothConnection)new AndroidBluetoothConnection(socket!);
+                else
+                {
+                    CloseServerSocket(ref localSocket);
+                }
+            }
+        });
 
-                //ct.Register(() =>
-                //{
-                //    try { localSocket?.Close(); } catch { }
-                //    serverSocket = null;
-                //});
-                //var socket = await localSocket.AcceptAsync().ConfigureAwait(false);
-                //return (IBluetoothConnection)new AndroidBluetoothConnection(socket);
-            }, ct);
+        try
+        {
+            var socket = await localSocket.AcceptAsync().ConfigureAwait(false) ?? throw new InvalidOperationException("Bluetooth accept returned null socket.");
+            return new AndroidBluetoothConnection(socket);
+        }
+        catch when (ct.IsCancellationRequested)
+        {
+            throw new OperationCanceledException(ct);
+        }
+        catch
+        {
+            lock (syncRoot)
+            {
+                if (ReferenceEquals(serverSocket, localSocket))
+                {
+                    CloseServerSocket(ref serverSocket);
+                }
+            }
+
+            throw;
         }
     }
 
     public void Dispose()
     {
-        try { serverSocket?.Close(); } catch { }
+        lock (syncRoot)
+        {
+            if (disposed)
+            {
+                return;
+            }
+
+            disposed = true;
+
+            CloseServerSocket(ref serverSocket);
+        }
+    }
+
+    private static void CloseServerSocket(ref BluetoothServerSocket? bluetoothServerSocket)
+    {
+        try
+        {
+            bluetoothServerSocket?.Close();
+        }
+        catch { }
+        try
+        {
+            bluetoothServerSocket?.Dispose();
+        }
+        catch { }
+        bluetoothServerSocket = null;
     }
 }

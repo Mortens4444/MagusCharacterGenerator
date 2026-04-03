@@ -8,25 +8,37 @@ namespace M.A.G.U.S.Assistant.Platforms.Android;
 internal sealed class BluetoothDiscoveryService(Context context)
     : BroadcastReceiver, IBluetoothDiscoveryService, IDisposable
 {
-    private readonly BluetoothAdapter adapter = BluetoothAdapter.DefaultAdapter;
+    private readonly BluetoothAdapter adapter = BluetoothAdapter.DefaultAdapter ?? throw new NotSupportedException("Bluetooth not supported.");
     private readonly Context context = context;
+    private readonly Lock syncRoot = new();
 
     private bool disposed;
+    private bool isRegistered;
 
     public event Action<DeviceModel>? DeviceDiscovered;
 
-    public async Task StartDiscoveryAsync(CancellationToken cancellationToken = default)
+    public bool StartDiscovery(CancellationToken cancellationToken = default)
     {
-        if (adapter == null || !adapter.IsEnabled)
+        cancellationToken.ThrowIfCancellationRequested();
+
+        lock (syncRoot)
         {
-            return;
+            ObjectDisposedException.ThrowIf(disposed, this);
         }
 
-        await StopDiscoveryAsync().ConfigureAwait(false);
+        if (!adapter.IsEnabled)
+        {
+            throw new InvalidOperationException("Bluetooth is disabled.");
+        }
+
+        StopDiscovery();
+        cancellationToken.ThrowIfCancellationRequested();
+
         if (adapter.BondedDevices != null)
         {
             foreach (var bonded in adapter.BondedDevices)
             {
+                cancellationToken.ThrowIfCancellationRequested();
                 DeviceDiscovered?.Invoke(new DeviceModel
                 {
                     Id = bonded.Address!,
@@ -37,43 +49,79 @@ internal sealed class BluetoothDiscoveryService(Context context)
 
         using (var filter = new IntentFilter(BluetoothDevice.ActionFound))
         {
-#if ANDROID33_0_OR_GREATER
-            context.RegisterReceiver(this, filter, ReceiverFlags.NotExported);
-#elif ANDROID26_0_OR_GREATER
-            // For API 26+, use RegisterReceiver with ActivityFlags (no ReceiverFlags)
-            context.RegisterReceiver(this, filter, (Android.Content.ActivityFlags)0);
-#else
-            // For API < 26, use the legacy RegisterReceiver
-            context.RegisterReceiver(this, filter);
-#endif
-        }
+            lock (syncRoot)
+            {
+                ObjectDisposedException.ThrowIf(disposed, this);
 
+                // Use runtime checks so the platform analyzer knows these calls are guarded
+                if (OperatingSystem.IsAndroidVersionAtLeast(33))
+                {
+                    // API 33+ overload that accepts ReceiverFlags
+                    context.RegisterReceiver(this, filter, ReceiverFlags.NotExported);
+                }
+                else if (OperatingSystem.IsAndroidVersionAtLeast(26))
+                {
+                    // API 26+ overload that accepts ActivityFlags
+#if ANDROID26_0_OR_GREATER                       
+                    context.RegisterReceiver(this, filter, (global::Android.Content.ActivityFlags)0);
+#endif
+                }
+                else
+                {
+                    // Legacy overload for older Android versions
+                    context.RegisterReceiver(this, filter);
+                }
+
+                isRegistered = true;
+            }
+        }
+        
         if (adapter.IsDiscovering)
         {
             adapter.CancelDiscovery();
         }
 
-        adapter.StartDiscovery();
+        cancellationToken.ThrowIfCancellationRequested();
+        return adapter.StartDiscovery();
     }
 
-    public Task StopDiscoveryAsync()
+    public void StopDiscovery()
     {
-        if (adapter?.IsDiscovering == true)
+        lock (syncRoot)
         {
-            adapter.CancelDiscovery();
-        }
+            if (disposed)
+            {
+                return;
+            }
 
-        try
-        {
-            context.UnregisterReceiver(this);
-        }
-        catch { }
+            if (adapter.IsDiscovering)
+            {
+                adapter.CancelDiscovery();
+            }
 
-        return Task.CompletedTask;
+            if (isRegistered)
+            {
+                try
+                {
+                    context.UnregisterReceiver(this);
+                }
+                catch { }
+
+                isRegistered = false;
+            }
+        }
     }
 
     public override void OnReceive(Context context, Intent intent)
     {
+        lock (syncRoot)
+        {
+            if (disposed)
+            {
+                return;
+            }
+        }
+
         if (intent.Action != BluetoothDevice.ActionFound)
         {
             return;
@@ -100,26 +148,33 @@ internal sealed class BluetoothDiscoveryService(Context context)
 
     protected override void Dispose(bool disposing)
     {
-        if (disposed)
+        lock (syncRoot)
         {
-            base.Dispose(disposing);
-            return;
-        }
-
-        disposed = true;
-
-        if (disposing)
-        {
-            if (adapter?.IsDiscovering == true)
+            if (disposed)
             {
-                adapter.CancelDiscovery();
+                return;
             }
 
-            try
+            disposed = true;
+
+            if (disposing)
             {
-                context.UnregisterReceiver(this);
+                if (adapter.IsDiscovering)
+                {
+                    adapter.CancelDiscovery();
+                }
+
+                if (isRegistered)
+                {
+                    try
+                    {
+                        context.UnregisterReceiver(this);
+                    }
+                    catch { }
+
+                    isRegistered = false;
+                }
             }
-            catch { }
         }
 
         base.Dispose(disposing);
