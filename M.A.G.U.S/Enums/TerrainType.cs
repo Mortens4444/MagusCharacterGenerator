@@ -155,6 +155,9 @@ public enum TerrainType : ulong
     [Description("Inner territory")]
     InnerTerritory = 1UL << 48,
 
+    [Description("Coastal region")]
+    CoastalRegion = 1UL << 49,
+
     [Description("Salt water")]
     SaltWater = Sea | Ocean,
 

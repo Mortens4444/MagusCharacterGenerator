@@ -4,6 +4,7 @@ using Android.Locations;
 #endif
 using CommunityToolkit.Mvvm.Messaging;
 using M.A.G.U.S.Assistant.Contexts;
+using M.A.G.U.S.Assistant.Exceptions;
 using M.A.G.U.S.Assistant.Interfaces.Bluetooth;
 using M.A.G.U.S.Assistant.Messages;
 using M.A.G.U.S.Assistant.Models.Bluetooth;
@@ -286,6 +287,10 @@ internal partial class BluetoothService : IBluetoothService, IDisposable
 
                     await OnRawMessageReceived(json, remoteId).ConfigureAwait(false);
                 }
+                catch (BluetoothDisconnectedException ex)
+                {
+                    break;
+                }
                 catch (Exception ex)
                 {
                     ReportError($"ReceiveLoop error ({connection.RemoteId}): {{0}}", ex);
@@ -326,7 +331,7 @@ internal partial class BluetoothService : IBluetoothService, IDisposable
 
     private async Task OnRawMessageReceived(string json, string senderId)
     {
-        WeakReferenceMessenger.Default.Send(new ShowInfoMessage(senderId, json));
+        WeakReferenceMessenger.Default.Send(new ShowInfoMessage($"SenderId: {senderId}", json));
 
         BluetoothMessage? message;
         try

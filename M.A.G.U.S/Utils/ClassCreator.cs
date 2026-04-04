@@ -1,11 +1,11 @@
 ﻿using M.A.G.U.S.GameSystem.Psi;
 using M.A.G.U.S.Interfaces;
 
-namespace M.A.G.U.S.Test;
+namespace M.A.G.U.S.Utils;
 
-public class ClassCreator
+public static class ClassCreator
 {
-    public static IClass GetClass(Type classType, int level)
+    public static IClass GetClass(Type classType, int level, bool needPsi = true)
     {
         bool hasPsi = false;
         IClass? result = null;
@@ -18,7 +18,7 @@ public class ClassCreator
             }
             catch { }
         }
-        while (!hasPsi);
+        while (!hasPsi && needPsi);
         return result;
     }
 }

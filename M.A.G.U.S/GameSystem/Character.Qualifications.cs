@@ -49,15 +49,16 @@ public partial class Character
         return CanLearn(qualification, QualificationLevel.Base, out _) || CanLearn(qualification, QualificationLevel.Master, out _);
     }
 
-    public bool HasQualification(Qualification qualification)
-    {
-        return HasQualification(qualification, QualificationLevel.Base) || HasQualification(qualification, QualificationLevel.Master);
-    }
-
     public TSpecialQualification? GetSpeciality<TSpecialQualification>()
         where TSpecialQualification : SpecialQualification
     {
         return Race.SpecialQualifications.GetSpeciality<TSpecialQualification>() ?? BaseClass.SpecialQualifications.GetSpeciality<TSpecialQualification>();
+    }
+
+    // Move these to QualificationList and fixy Hilvar
+    public bool HasQualification(Qualification qualification)
+    {
+        return HasQualification(qualification, QualificationLevel.Base) || HasQualification(qualification, QualificationLevel.Master);
     }
 
     public bool HasPsi()

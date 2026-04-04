@@ -107,5 +107,11 @@ public enum Country
     GroUgon = 1 << 20,
 
     [Description("Sheral")]
-    Sheral = 1 << 21
+    Sheral = 1 << 21,
+
+    [Description("Elfendel")]
+    Elfendel = 1 << 22,
+
+    [Description("Godora sea")]
+    GodoraSea = 1 << 23
 }

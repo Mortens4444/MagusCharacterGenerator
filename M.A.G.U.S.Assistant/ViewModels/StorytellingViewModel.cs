@@ -239,8 +239,6 @@ internal partial class StorytellingViewModel : ObservableObject, IDisposable
             Name = data.Name
         });
 
-        WeakReferenceMessenger.Default.Send(new ShowInfoMessage(Lng.Elem("Player connected"), String.Concat(message.SenderId)));
-
         return Task.CompletedTask;
     }
 
@@ -264,7 +262,6 @@ internal partial class StorytellingViewModel : ObservableObject, IDisposable
                 })
             }).ConfigureAwait(false);
 
-            WeakReferenceMessenger.Default.Send(new ShowInfoMessage(Lng.Elem("Private message"), String.Concat(Lng.Elem("Message sent successfully"), " - ", SelectedPlayer.Id)));
             MessageText = String.Empty;
         }
         catch (Exception ex)

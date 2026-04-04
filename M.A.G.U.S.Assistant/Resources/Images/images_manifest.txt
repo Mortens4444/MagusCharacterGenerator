@@ -91,6 +91,7 @@ crazy_bear.png
 crocodile.png
 dark_elf.png
 daronne.png
+deathcrow.png
 demon_shark.png
 denebola.png
 dragon.png
@@ -127,6 +128,7 @@ grizzly_bear.png
 guardian.png
 hatysa.png
 hekator.png
+hilvar.png
 homunculus_man.png
 huri.png
 ifrit.png
@@ -193,6 +195,7 @@ silent_hound.png
 singa_hamata.png
 siramor.png
 slave.png
+snow_goblin.png
 snow_leopard.png
 spider.png
 stinky_lizard.png
@@ -671,6 +674,7 @@ mutant_orc.png
 nardael.png
 night_elf.png
 reptilian.png
+sand_elf.png
 see_giant.png
 swamp_giant.png
 white_orc.png

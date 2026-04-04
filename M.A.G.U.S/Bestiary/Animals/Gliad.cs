@@ -10,6 +10,8 @@ public sealed class Gliad : Creature
     {
         Occurrence = Occurrence.Rare;
         Size = Size.Small;
+        PlacesOfOccurrence = TerrainType.CoastalRegion | TerrainType.Mountains | TerrainType.Cave;
+        Country = GameSystem.Places.Country.Shadon | GameSystem.Places.Country.Elfendel | GameSystem.Places.Country.GodoraSea;
 
         AttackValue = 25;
         DefenseValue = 50;

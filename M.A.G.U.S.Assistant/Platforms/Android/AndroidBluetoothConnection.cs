@@ -1,6 +1,8 @@
 ﻿using Android.Bluetooth;
+using CommunityToolkit.Mvvm.Messaging;
 using M.A.G.U.S.Assistant.Exceptions;
 using M.A.G.U.S.Assistant.Interfaces.Bluetooth;
+using Mtf.Maui.Controls.Messages;
 using System.Net;
 using System.Text;
 
@@ -41,7 +43,7 @@ internal sealed class AndroidBluetoothConnection(BluetoothSocket bluetoothSocket
     {
         ThrowIfDisposed();
 
-        var stream = socket.InputStream ?? throw new BluetoothDisconnectedException("Bluetooth input stream is unavailable.");
+        var stream = socket.InputStream ?? throw new BluetoothDisconnectedException("Bluetooth input stream is unavailable");
 
         // Read a length prefix first (4 bytes, big-endian int)
         // so we know exactly how many bytes to expect.
@@ -49,6 +51,7 @@ internal sealed class AndroidBluetoothConnection(BluetoothSocket bluetoothSocket
         await ReadExactAsync(stream, lengthBuffer, 4, ct).ConfigureAwait(false);
 
         int messageLength = IPAddress.NetworkToHostOrder(BitConverter.ToInt32(lengthBuffer, 0));
+        WeakReferenceMessenger.Default.Send(new ShowInfoMessage("ReceiveAsync", $"Expected message length: {messageLength} bytes"));
         if (messageLength <= 0 || messageLength > 1024 * 1024) // sanity cap: 1 MB
         {
             throw new InvalidDataException($"Invalid message length: {messageLength}");
@@ -58,6 +61,7 @@ internal sealed class AndroidBluetoothConnection(BluetoothSocket bluetoothSocket
         await ReadExactAsync(stream, messageBuffer, messageLength, ct).ConfigureAwait(false);
 
         var result = Encoding.UTF8.GetString(messageBuffer);
+        WeakReferenceMessenger.Default.Send(new ShowInfoMessage("ReceiveAsync", $"Read message: {result}"));
 
         var handler = RawMessageReceived;
         if (handler != null)
@@ -76,10 +80,39 @@ internal sealed class AndroidBluetoothConnection(BluetoothSocket bluetoothSocket
         {
             ct.ThrowIfCancellationRequested();
 
-            var read = await stream.ReadAsync(buffer.AsMemory(offset, count - offset), ct).ConfigureAwait(false);
+            int read;
+            try
+            {
+                read = await stream.ReadAsync(buffer.AsMemory(offset, count - offset), ct).ConfigureAwait(false);
+            }
+            //catch (OperationCanceledException)
+            //{
+            //    // Honor cancellation and bubble up so callers can differentiate cancel vs disconnect.
+            //    throw;
+            //}
+            catch (ObjectDisposedException ex)
+            {
+                throw new BluetoothDisconnectedException("Remote device disconnected (stream disposed)");
+            }
+            catch (Java.IO.IOException ex)
+            {
+                // Map platform IO exceptions (including Java.IO.IOException from Android) to a coherent app-level exception.
+                throw new BluetoothDisconnectedException("Remote device disconnected (IO error)");
+            }
+            catch (IOException ex)
+            {
+                // Map platform IO exceptions (including Java.IO.IOException from Android) to a coherent app-level exception.
+                throw new BluetoothDisconnectedException("Remote device disconnected (IO error)");
+            }
+            catch (Exception ex)
+            {
+                // Any unexpected exception should also be treated as a disconnection in this read loop.
+                throw;
+            }
+            //var read = await stream.ReadAsync(buffer.AsMemory(offset, count - offset), ct).ConfigureAwait(false);
             if (read <= 0)
             {
-                throw new BluetoothDisconnectedException("Remote device disconnected.");
+                throw new BluetoothDisconnectedException("Remote device disconnected");
             }
 
             offset += read;
