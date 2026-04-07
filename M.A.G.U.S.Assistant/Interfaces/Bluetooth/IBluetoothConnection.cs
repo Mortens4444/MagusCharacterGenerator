@@ -2,7 +2,7 @@
 
 internal interface IBluetoothConnection : IDisposable
 {
-    string RemoteId { get; }
+    string MacAddress { get; }
 
     bool IsConnected { get; }
 

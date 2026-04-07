@@ -82,6 +82,11 @@ public enum ThrowType
     [Description("15D6")]
     _15D6,
 
+    [Description("1D40")]
+    _1D40,
+    [Description("2D40")]
+    _2D40,
+
     [Description("20 - 70")]
     _20_To_70,
 

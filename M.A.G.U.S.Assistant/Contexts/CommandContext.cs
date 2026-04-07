@@ -8,5 +8,5 @@ internal sealed class CommandContext
 
     public IBluetoothService BluetoothService { get; init; } = null!;
 
-    public string SenderDeviceId { get; init; } = String.Empty;
+    public string SenderMacAddress { get; init; } = String.Empty;
 }

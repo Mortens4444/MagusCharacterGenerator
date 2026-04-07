@@ -9,7 +9,8 @@ public abstract class Ginsour : Creature
     protected Ginsour()
     {
         Occurrence = Occurrence.VeryRare;
-        Size = Size.Small;
+        Size = Size.Small; // 5 arasz
+        PlacesOfOccurrence = TerrainType.Anywhere;
 
         AttackValue = 50;
         DefenseValue = 95;

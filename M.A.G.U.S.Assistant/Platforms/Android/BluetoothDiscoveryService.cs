@@ -41,7 +41,7 @@ internal sealed class BluetoothDiscoveryService(Context context)
                 cancellationToken.ThrowIfCancellationRequested();
                 DeviceDiscovered?.Invoke(new DeviceModel
                 {
-                    Id = bonded.Address!,
+                    MacAddress = bonded.Address!,
                     Name = bonded.Name ?? "Unknown device"
                 });
             }
@@ -141,7 +141,7 @@ internal sealed class BluetoothDiscoveryService(Context context)
 
         DeviceDiscovered?.Invoke(new DeviceModel
         {
-            Id = device.Address,
+            MacAddress = device.Address,
             Name = device.Name ?? "Unknown device"
         });
     }

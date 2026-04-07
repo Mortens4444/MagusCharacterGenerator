@@ -25,7 +25,7 @@
     <ApplicationId>com.mortens.MAGUS.Assistant</ApplicationId>
     <!-- Versions -->
     <MajorVersion>1</MajorVersion>
-    <MinorVersion>70</MinorVersion>
+    <MinorVersion>74</MinorVersion>
     <BuildNumber>0</BuildNumber>
     <PatchNumber>0</PatchNumber>
     <FileVersion>$(MajorVersion).$(MinorVersion).$(BuildNumber).$(PatchNumber)</FileVersion>
@@ -136,16 +136,16 @@
     <AndroidProguardConfig Include="proguard.cfg" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Microsoft.Maui.Controls" Version="10.0.30" />
-    <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="10.0.3" />
-    <PackageReference Include="Microsoft.Maui.Graphics" Version="10.0.30" />
-    <PackageReference Include="Microsoft.Maui.Graphics.Skia" Version="10.0.30" />
+    <PackageReference Include="Microsoft.Maui.Controls" Version="10.0.51" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="10.0.5" />
+    <PackageReference Include="Microsoft.Maui.Graphics" Version="10.0.51" />
+    <PackageReference Include="Microsoft.Maui.Graphics.Skia" Version="10.0.51" />
     <PackageReference Include="Mtf.Maui.Controls" Version="4.0.63" />
-    <PackageReference Include="Mtf.MAUI.LanguageService" Version="3.0.47" />
+    <PackageReference Include="Mtf.MAUI.LanguageService" Version="3.0.59" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.4" />
     <PackageReference Include="Plugin.Maui.Audio" Version="4.0.0" />
     <PackageReference Include="sqlite-net-pcl" Version="1.9.172" />
-    <PackageReference Include="SQLitePCLRaw.bundle_green" Version="2.1.10" />
+    <PackageReference Include="SQLitePCLRaw.bundle_green" Version="2.1.11" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\M.A.G.U.S\M.A.G.U.S..csproj" />

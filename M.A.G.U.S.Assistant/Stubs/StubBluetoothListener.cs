@@ -16,7 +16,7 @@ internal sealed class StubBluetoothListener : IBluetoothListener
 
 internal sealed class StubBluetoothConnection : IBluetoothConnection
 {
-    public string RemoteId => "Stub Bluetooth Connection";
+    public string MacAddress => "Stub Bluetooth Connection";
     
     public bool IsConnected => true;
 

@@ -13,7 +13,7 @@ internal interface IBluetoothService
 
     Task<bool> StartDiscoveryAsync();
 
-    Task ConnectAsync(string deviceId);
+    Task ConnectAsync(string macAddress);
 
     Task SendAsync(BluetoothMessage message);
 

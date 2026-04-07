@@ -12,12 +12,12 @@ internal sealed class AndroidBluetoothConnection(BluetoothSocket bluetoothSocket
 {
     private readonly BluetoothSocket socket = bluetoothSocket ?? throw new ArgumentNullException(nameof(bluetoothSocket));
     private readonly SemaphoreSlim sendLock = new(1, 1);
-    private readonly string remoteId = bluetoothSocket.RemoteDevice?.Address ?? "Unknown";
+    private readonly string macAddress = bluetoothSocket.RemoteDevice?.Address ?? "Unknown";
     private int disposed;
 
     public event Func<string, Task>? RawMessageReceived;
 
-    public string RemoteId => remoteId;
+    public string MacAddress => macAddress;
 
     public bool IsConnected
     {
@@ -51,7 +51,7 @@ internal sealed class AndroidBluetoothConnection(BluetoothSocket bluetoothSocket
         await ReadExactAsync(stream, lengthBuffer, 4, ct).ConfigureAwait(false);
 
         int messageLength = IPAddress.NetworkToHostOrder(BitConverter.ToInt32(lengthBuffer, 0));
-        WeakReferenceMessenger.Default.Send(new ShowInfoMessage("ReceiveAsync", $"Expected message length: {messageLength} bytes"));
+        //WeakReferenceMessenger.Default.Send(new ShowInfoMessage("ReceiveAsync", $"Expected message length: {messageLength} bytes"));
         if (messageLength <= 0 || messageLength > 1024 * 1024) // sanity cap: 1 MB
         {
             throw new InvalidDataException($"Invalid message length: {messageLength}");
@@ -61,7 +61,7 @@ internal sealed class AndroidBluetoothConnection(BluetoothSocket bluetoothSocket
         await ReadExactAsync(stream, messageBuffer, messageLength, ct).ConfigureAwait(false);
 
         var result = Encoding.UTF8.GetString(messageBuffer);
-        WeakReferenceMessenger.Default.Send(new ShowInfoMessage("ReceiveAsync", $"Read message: {result}"));
+        //WeakReferenceMessenger.Default.Send(new ShowInfoMessage("ReceiveAsync", $"Read message: {result}"));
 
         var handler = RawMessageReceived;
         if (handler != null)

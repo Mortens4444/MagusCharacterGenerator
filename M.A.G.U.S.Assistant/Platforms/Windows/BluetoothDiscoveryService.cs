@@ -21,7 +21,7 @@ internal sealed class BluetoothDiscoveryService : IBluetoothDiscoveryService
         {
             DeviceDiscovered?.Invoke(new DeviceModel
             {
-                Id = device.Id,
+                MacAddress = device.Id,
                 Name = device.Name
             });
         };

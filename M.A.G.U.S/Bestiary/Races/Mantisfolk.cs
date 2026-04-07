@@ -11,6 +11,7 @@ public sealed class Mantisfolk : Creature
     {
         Occurrence = Occurrence.Frequent;
         Size = Size.Human;
+        PlacesOfOccurrence = TerrainType.Anywhere;
 
         AttackValue = 80;
         DefenseValue = 120;

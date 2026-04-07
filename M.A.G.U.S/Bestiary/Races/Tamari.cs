@@ -10,6 +10,7 @@ public sealed class Tamari : Creature
     {
         Occurrence = Occurrence.Rare;
         Size = Size.Human;
+        PlacesOfOccurrence = TerrainType.DeepUnderground;
 
         AttackValue = 75;
         DefenseValue = 115;

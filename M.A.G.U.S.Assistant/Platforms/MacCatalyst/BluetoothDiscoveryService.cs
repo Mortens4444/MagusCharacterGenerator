@@ -36,7 +36,7 @@ internal sealed class BluetoothDiscoveryService : CBCentralManagerDelegate, IBlu
     {
         DeviceDiscovered?.Invoke(new DeviceModel
         {
-            Id = peripheral.Identifier.ToString(),
+            MacAddress = peripheral.Identifier.ToString(),
             Name = peripheral.Name ?? "Unknown device"
         });
     }

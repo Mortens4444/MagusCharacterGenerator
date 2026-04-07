@@ -8,7 +8,7 @@ internal sealed partial class WindowsBluetoothConnection : IBluetoothConnection
 {
     private readonly StreamSocket socket;
 
-    public string RemoteId => socket.Information.RemoteAddress?.DisplayName ?? "Unknown";
+    public string MacAddress => socket.Information.RemoteAddress?.DisplayName ?? "Unknown";
 
     public bool IsConnected => true;
 

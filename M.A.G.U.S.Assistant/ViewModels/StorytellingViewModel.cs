@@ -1,4 +1,8 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
+﻿#if ANDROID
+using Android.Bluetooth;
+using Android.Content;
+#endif
+using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.Messaging;
 using M.A.G.U.S.Assistant.Enums;
@@ -98,7 +102,7 @@ internal partial class StorytellingViewModel : ObservableObject, IDisposable
     {
         MainThread.BeginInvokeOnMainThread(() =>
         {
-            if (!AvailableDevices.Any(d => d.Id == device.Id))
+            if (!AvailableDevices.Any(d => d.MacAddress == device.MacAddress))
             {
                 AvailableDevices.Add(device);
             }
@@ -107,8 +111,46 @@ internal partial class StorytellingViewModel : ObservableObject, IDisposable
 
     public Task<bool> StartDiscoveryAsync()
     {
-        StatusMessage = Lng.Elem("Searching for devices...");
-        return bluetooth.StartDiscoveryAsync();
+        try
+        {
+            StatusMessage = Lng.Elem("Searching for devices...");
+            return bluetooth.StartDiscoveryAsync();
+        }
+        catch (Exception ex)
+        {
+            WeakReferenceMessenger.Default.Send(new ShowErrorMessage(ex));
+
+#if ANDROID
+            // If the platform reports Bluetooth disabled, try prompting the user to enable it.
+            try
+            {
+                if (ex.Message?.Contains("Bluetooth is disabled") == true)
+                {
+                    try
+                    {
+                        // Prefer the current activity when available so the system dialog can return a result.
+                        var activity = Platform.CurrentActivity;
+                        var ctx = (Context?)activity ?? Android.App.Application.Context;
+
+                        using var enableIntent = new Intent(BluetoothAdapter.ActionRequestEnable);
+                        // If starting from a non-activity context, ensure a new task flag is present
+                        enableIntent.AddFlags(ActivityFlags.NewTask);
+                        ctx.StartActivity(enableIntent);
+
+                        // Let the caller know discovery did not start yet; UI can retry after user enables Bluetooth.
+                        return Task.FromResult(false);
+                    }
+                    catch (Exception inner)
+                    {
+                        WeakReferenceMessenger.Default.Send(new ShowErrorMessage(inner));
+                    }
+                }
+            }
+            catch (Exception) { }
+#endif
+
+            return Task.FromResult(false);
+        }
     }
 
     public async Task StopServerAsync()
@@ -151,13 +193,13 @@ internal partial class StorytellingViewModel : ObservableObject, IDisposable
 
         try
         {
-            await bluetooth.ConnectAsync(device.Id).ConfigureAwait(false);
+            await bluetooth.ConnectAsync(device.MacAddress).ConfigureAwait(false);
             await bluetooth.SendAsync(new BluetoothMessage
             {
                 CommandType = BluetoothCommandType.RegisterPlayer,
                 SenderId = bluetooth.LocalId,
-                TargetIds = [],
-                //TargetIds = [device.Id],
+                //TargetIds = [],
+                TargetIds = [device.MacAddress],
                 Payload = JsonConvert.SerializeObject(new RegisterPlayerData
                 {
                     Name = DeviceInfo.Name
@@ -251,11 +293,12 @@ internal partial class StorytellingViewModel : ObservableObject, IDisposable
 
         try
         {
+            WeakReferenceMessenger.Default.Send(new ShowInfoMessage($"Send: {SelectedPlayer.Id}", $"To {SelectedPlayer.Name}: {MessageText}"));
             await bluetooth.SendAsync(new BluetoothMessage
             {
                 CommandType = BluetoothCommandType.PrivateMessage,
                 SenderId = bluetooth.LocalId,
-                TargetIds = [SelectedPlayer.Id],
+                TargetIds = [],//SelectedPlayer.Id],
                 Payload = JsonConvert.SerializeObject(new PrivateMessageData
                 {
                     Text = MessageText

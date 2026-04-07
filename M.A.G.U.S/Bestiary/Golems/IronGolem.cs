@@ -10,6 +10,7 @@ public sealed class IronGolem : Creature
     {
         Occurrence = Occurrence.VeryRare;
         Size = Size.Huge;
+        PlacesOfOccurrence = TerrainType.Anywhere;
 
         AttackValue = 85;
         DefenseValue = 105;

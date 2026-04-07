@@ -13,6 +13,7 @@ public sealed class Ansinatis : Creature
         Occurrence = Occurrence.VeryRare;
         InitiateValue = 35;
         Alignment = GetAlignment();
+        PlacesOfOccurrence = TerrainType.Anywhere;
 
         AstralMagicResistance = Int32.MaxValue;
         MentalMagicResistance = Int32.MaxValue;

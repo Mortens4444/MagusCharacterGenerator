@@ -10,6 +10,7 @@ public sealed class StoneGolem : Creature
     {
         Occurrence = Occurrence.VeryRare;
         Size = Size.Huge;
+        PlacesOfOccurrence = TerrainType.Anywhere;
 
         AttackValue = 75;
         DefenseValue = 95;

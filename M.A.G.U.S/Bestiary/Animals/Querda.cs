@@ -12,6 +12,7 @@ public sealed class Querda : Creature
     {
         Occurrence = Occurrence.Rare;
         Size = Size.Big;
+        PlacesOfOccurrence = TerrainType.CursedLand;
 
         AttackValue = 105;
         DefenseValue = 145;
@@ -40,8 +41,8 @@ public sealed class Querda : Creature
 
     public override double AttacksPerRound => 3;
 
-    [DiceThrow(ThrowType._1D10)]
-    public override int GetDamage() => DiceThrow._1D10();
+    [DiceThrow(ThrowType._2D6)]
+    public override int GetDamage() => DiceThrow._2D6();
 
     [DiceThrow(ThrowType._1D6)]
     public override int GetNumberAppearing() => DiceThrow._1D6();

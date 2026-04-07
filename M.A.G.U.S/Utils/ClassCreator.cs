@@ -13,7 +13,7 @@ public static class ClassCreator
         {
             try
             {
-                result = (IClass)Activator.CreateInstance(classType, [level]);
+                result = (IClass)Activator.CreateInstance(classType, [level, true]);
                 hasPsi = result.Qualifications.Any(q => q is IPsi);
             }
             catch { }
