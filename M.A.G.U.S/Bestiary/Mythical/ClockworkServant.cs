@@ -1,6 +1,7 @@
 ﻿using M.A.G.U.S.Enums;
 using M.A.G.U.S.GameSystem.Attributes;
 using M.A.G.U.S.Models;
+using M.A.G.U.S.Things.Armors;
 
 namespace M.A.G.U.S.Bestiary.Mythical;
 
@@ -8,8 +9,10 @@ public sealed class ClockworkServant : Creature
 {
     public ClockworkServant()
     {
+        Armor = new NaturalArmor(6);
         Occurrence = Occurrence.VeryRare;
         Size = Size.Human;
+        PlacesOfOccurrence = TerrainType.Anywhere;
 
         AttackValue = 58;
         DefenseValue = 88;

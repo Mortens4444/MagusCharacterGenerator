@@ -14,6 +14,7 @@ public sealed class Hilvar : Creature
     {
         Occurrence = Occurrence.VeryRare;
         Size = Size.Human;
+        PlacesOfOccurrence = TerrainType.Anywhere;
 
         var classes = new[] { typeof(Warrior), typeof(Thief), typeof(Assassin) };
         var classSelector = RandomProvider.GetSecureRandomInt(0, 3);

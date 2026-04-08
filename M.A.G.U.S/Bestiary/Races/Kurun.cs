@@ -10,6 +10,7 @@ public sealed class Kurun : Creature
     {
         Occurrence = Occurrence.Rare;
         Size = Size.Huge;
+        PlacesOfOccurrence = TerrainType.Cave | TerrainType.Mines;
 
         AttackValue = 55;
         DefenseValue = 96;

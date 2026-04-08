@@ -1,6 +1,7 @@
 ﻿using M.A.G.U.S.Enums;
 using M.A.G.U.S.GameSystem.Attributes;
 using M.A.G.U.S.Models;
+using M.A.G.U.S.Things.Armors;
 
 namespace M.A.G.U.S.Bestiary.Races;
 
@@ -8,8 +9,10 @@ public sealed class Kuvarc : Creature
 {
     public Kuvarc()
     {
+        Armor = new NaturalArmor(6); // 2 zúzófegyverek ellen
         Occurrence = Occurrence.VeryRare;
         Size = Size.Huge;
+        PlacesOfOccurrence = TerrainType.Mines;
 
         AttackValue = 60;
         DefenseValue = 104;

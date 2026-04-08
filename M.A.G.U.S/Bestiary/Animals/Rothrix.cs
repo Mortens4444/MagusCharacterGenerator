@@ -10,6 +10,7 @@ public sealed class Rothrix : Creature
     {
         Occurrence = Occurrence.Frequent;
         Size = Size.Small;
+        PlacesOfOccurrence = TerrainType.CursedLand;
 
         AttackValue = 45;
         DefenseValue = 95;

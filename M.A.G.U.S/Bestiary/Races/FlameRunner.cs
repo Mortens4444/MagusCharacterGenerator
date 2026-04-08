@@ -10,6 +10,7 @@ public sealed class FlameRunner : Creature
     {
         Occurrence = Occurrence.VeryRare;
         Size = Size.Small;
+        PlacesOfOccurrence = TerrainType.Forest;
 
         HealthPoints = 1;
         PainTolerancePoints = 3;

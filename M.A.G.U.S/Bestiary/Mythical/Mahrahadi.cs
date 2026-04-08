@@ -11,6 +11,8 @@ public sealed class Mahrahadi : Creature
         Occurrence = Occurrence.VeryRare;
         Size = Size.Small;
         Alignment = Alignment.Death;
+        Country = GameSystem.Places.Country.TabaElIbara;
+        PlacesOfOccurrence = TerrainType.Desert;
 
         DefenseValue = 0;
         InitiateValue = 120;

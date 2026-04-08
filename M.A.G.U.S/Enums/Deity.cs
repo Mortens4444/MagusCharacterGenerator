@@ -118,4 +118,7 @@ public enum Deity
 
     // Gnóm isten 
     Berzebaal, // Maga az anyatermészet?
+
+    // Törpe
+    Kadal, //a Kövek Atyja
 }

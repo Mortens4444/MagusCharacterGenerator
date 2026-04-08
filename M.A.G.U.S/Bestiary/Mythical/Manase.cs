@@ -11,6 +11,7 @@ public sealed class Manase : Creature
         Occurrence = Occurrence.VeryRare;
         Size = Size.Big;
         Alignment = Alignment.ChaosDeath;
+        PlacesOfOccurrence = TerrainType.Anywhere;
 
         AttackValue = 110;
         DefenseValue = 140;

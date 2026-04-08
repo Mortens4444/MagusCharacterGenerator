@@ -10,6 +10,7 @@ public sealed class Leviuur : Creature
     {
         Occurrence = Occurrence.Rare;
         Size = Size.Small;
+        PlacesOfOccurrence = TerrainType.TropicalForest;
 
         AttackValue = 30;
         DefenseValue = 50;

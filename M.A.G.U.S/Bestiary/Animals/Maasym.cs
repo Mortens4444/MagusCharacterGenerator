@@ -12,6 +12,7 @@ public sealed class Maasym : Creature
         Armor = new NaturalArmor(4);
         Occurrence = Occurrence.Frequent;
         Size = Size.Small; // Size.Human
+        PlacesOfOccurrence = TerrainType.Desert;
 
         AttackValue = 48;
         DefenseValue = 70; // 90 a csápokra -> CombatModifier?

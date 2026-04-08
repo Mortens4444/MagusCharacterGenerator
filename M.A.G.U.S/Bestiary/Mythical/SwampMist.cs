@@ -10,6 +10,7 @@ public sealed class SwampMist : Creature
     {
         Occurrence = Occurrence.Rare;
         Size = Size.Big;
+        PlacesOfOccurrence = TerrainType.Anywhere;
 
         AttackValue = 80;
         DefenseValue = 20;

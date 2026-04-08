@@ -334,16 +334,27 @@ internal partial class BluetoothService : IBluetoothService, IDisposable
     public Task SendAsync(BluetoothMessage message)
     {
         var json = JsonConvert.SerializeObject(message);
+        var registeredTargets = connections
+            .Where(kv => message.TargetIds.Count == 0 || message.TargetIds.Contains(kv.Key))
+            .Select(kv => kv.Value);
 
+        var pendingTargets = pendingConnections
+            .Where(kv => message.TargetIds.Count == 0 || message.TargetIds.Contains(kv.Key))
+            .Select(kv => kv.Value);
+
+        var targets = registeredTargets
+            .Concat(pendingTargets)
+            .Distinct()
+            .ToList();
         // snapshot the connections to avoid collection mutation issues
         //var targets = connections.Values
         //    .Where(c => message.TargetIds.Count == 0 || message.TargetIds.Contains(c.MacAddress))
         //    .ToList();
-        var targets = connections
-            .Where(kv => message.TargetIds.Count == 0 || message.TargetIds.Contains(kv.Key))
-            .Select(kv => kv.Value)
-            .Distinct()
-            .ToList();
+        //var targets = connections
+        //    .Where(kv => message.TargetIds.Count == 0 || message.TargetIds.Contains(kv.Key))
+        //    .Select(kv => kv.Value)
+        //    .Distinct()
+        //    .ToList();
         var sendTasks = targets.Select(c => c.SendAsync(json, cts?.Token ?? CancellationToken.None));
 
         //var sendTasks = targets.Select(c =>

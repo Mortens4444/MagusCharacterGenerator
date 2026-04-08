@@ -10,6 +10,7 @@ public sealed class Lyennara : Creature
     {
         Size = Size.Human;
         Alignment = Alignment.OrderLife;
+        PlacesOfOccurrence = TerrainType.Anywhere;
 
         AttackValue = 45;
         DefenseValue = 135;

@@ -11,6 +11,7 @@ public sealed class Xing : Creature
     {
         Occurrence = Occurrence.Summoned;
         Size = Size.Human;
+        PlacesOfOccurrence = TerrainType.Anywhere;
 
         AttackValue = 110;
         DefenseValue = 150;

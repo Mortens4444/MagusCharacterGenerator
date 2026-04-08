@@ -10,6 +10,8 @@ public sealed class Malhohaury : Creature
     {
         Occurrence = Occurrence.VeryRare;
         Size = Size.Big;
+        Country = GameSystem.Places.Country.Sheral;
+        PlacesOfOccurrence = TerrainType.Mountains;
 
         AttackValue = 90;
         DefenseValue = 100;

@@ -10,6 +10,7 @@ public sealed class Dralyor : Creature
     {
         Occurrence = Occurrence.VeryRare;
         Size = Size.Human;
+        PlacesOfOccurrence = TerrainType.CursedLand;
 
         AttackValue = 90; // 65;
         DefenseValue = 130;

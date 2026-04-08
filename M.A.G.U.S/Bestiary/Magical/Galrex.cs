@@ -10,6 +10,7 @@ public sealed class Galrex : Creature
     {
         Occurrence = Occurrence.VeryRare;
         Size = Size.Huge;
+        PlacesOfOccurrence = TerrainType.Anywhere;
 
         DefenseValue = 60;
 

@@ -10,6 +10,8 @@ public sealed class Ogar : Creature
     {
         Occurrence = Occurrence.Frequent;
         Size = Size.Huge;
+        PlacesOfOccurrence = TerrainType.Anywhere;
+        //Leggyakrabban Gro-Ugon gyepűin, vagy a Városállamokat és a Keleti Barbárokat elválasztó pusztaságokban tűnnek fel.
 
         AttackValue = 90;
         DefenseValue = 110;

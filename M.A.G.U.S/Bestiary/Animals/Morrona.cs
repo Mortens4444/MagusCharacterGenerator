@@ -9,6 +9,7 @@ public sealed class Morrona : Creature
     public Morrona()
     {
         Occurrence = Occurrence.Rare;
+        PlacesOfOccurrence = TerrainType.Forest | TerrainType.Mountains | TerrainType.Cave;
         Size = Size.Small;
 
         AttackValue = 75;

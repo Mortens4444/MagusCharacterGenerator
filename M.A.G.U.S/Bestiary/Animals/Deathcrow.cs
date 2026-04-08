@@ -10,6 +10,7 @@ public sealed class Deathcrow : Creature
     {
         Occurrence = Occurrence.Frequent;
         Size = Size.Small;
+        PlacesOfOccurrence = TerrainType.Anywhere;
 
         AttackValue = 60;
         DefenseValue = 98;

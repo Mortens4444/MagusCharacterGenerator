@@ -113,5 +113,8 @@ public enum Country
     Elfendel = 1 << 22,
 
     [Description("Godora sea")]
-    GodoraSea = 1 << 23
+    GodoraSea = 1 << 23,
+
+    [Description("Taba el-Ibara")]
+    TabaElIbara = 1 << 24,
 }

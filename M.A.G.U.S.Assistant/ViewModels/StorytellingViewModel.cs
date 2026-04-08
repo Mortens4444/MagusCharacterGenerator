@@ -198,8 +198,8 @@ internal partial class StorytellingViewModel : ObservableObject, IDisposable
             {
                 CommandType = BluetoothCommandType.RegisterPlayer,
                 SenderId = bluetooth.LocalId,
-                //TargetIds = [],
-                TargetIds = [device.MacAddress],
+                TargetIds = [],
+                //TargetIds = [device.MacAddress],
                 Payload = JsonConvert.SerializeObject(new RegisterPlayerData
                 {
                     Name = DeviceInfo.Name
@@ -270,16 +270,29 @@ internal partial class StorytellingViewModel : ObservableObject, IDisposable
             return Task.CompletedTask;
         }
 
-        if (ConnectedPlayers.Any(p => p.Id == message.SenderId))
+        MainThread.BeginInvokeOnMainThread(() =>
         {
-            return Task.CompletedTask;
-        }
+            if (ConnectedPlayers.Any(p => p.Id == message.SenderId))
+            {
+                return;
+            }
 
-        ConnectedPlayers.Add(new PlayerModel
-        {
-            Id = message.SenderId,
-            Name = data.Name
+            ConnectedPlayers.Add(new PlayerModel
+            {
+                Id = message.SenderId,
+                Name = data.Name
+            });
         });
+        //if (ConnectedPlayers.Any(p => p.Id == message.SenderId))
+        //{
+        //    return Task.CompletedTask;
+        //}
+
+        //ConnectedPlayers.Add(new PlayerModel
+        //{
+        //    Id = message.SenderId,
+        //    Name = data.Name
+        //});
 
         return Task.CompletedTask;
     }

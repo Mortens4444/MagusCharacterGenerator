@@ -10,6 +10,7 @@ public sealed class HomunculusMan : Creature
     {
         Occurrence = Occurrence.Rare;
         Size = Size.Human;
+        PlacesOfOccurrence = TerrainType.Anywhere;
 
         AttackValue = 25;
         DefenseValue = 75;
