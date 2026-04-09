@@ -1,5 +1,4 @@
-﻿using M.A.G.U.S.Classes.Believer;
-using M.A.G.U.S.Classes.Believer.Ranagol;
+﻿using M.A.G.U.S.Classes.Believer.Ranagol;
 using M.A.G.U.S.Classes.Fighter;
 using M.A.G.U.S.Classes.Sorcerer;
 using M.A.G.U.S.Enums;

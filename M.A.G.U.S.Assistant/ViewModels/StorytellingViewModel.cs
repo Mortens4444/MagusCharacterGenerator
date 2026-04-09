@@ -109,12 +109,12 @@ internal partial class StorytellingViewModel : ObservableObject, IDisposable
         });
     }
 
-    public Task<bool> StartDiscoveryAsync()
+    public async Task<bool> StartDiscoveryAsync()
     {
         try
         {
             StatusMessage = Lng.Elem("Searching for devices...");
-            return bluetooth.StartDiscoveryAsync();
+            return await bluetooth.StartDiscoveryAsync().ConfigureAwait(false);
         }
         catch (Exception ex)
         {
@@ -138,7 +138,7 @@ internal partial class StorytellingViewModel : ObservableObject, IDisposable
                         ctx.StartActivity(enableIntent);
 
                         // Let the caller know discovery did not start yet; UI can retry after user enables Bluetooth.
-                        return Task.FromResult(false);
+                        return false;
                     }
                     catch (Exception inner)
                     {
@@ -149,7 +149,7 @@ internal partial class StorytellingViewModel : ObservableObject, IDisposable
             catch (Exception) { }
 #endif
 
-            return Task.FromResult(false);
+            return false;
         }
     }
 
@@ -311,7 +311,8 @@ internal partial class StorytellingViewModel : ObservableObject, IDisposable
             {
                 CommandType = BluetoothCommandType.PrivateMessage,
                 SenderId = bluetooth.LocalId,
-                TargetIds = [],//SelectedPlayer.Id],
+                //TargetIds = [],
+                TargetIds = [SelectedPlayer.Id],
                 Payload = JsonConvert.SerializeObject(new PrivateMessageData
                 {
                     Text = MessageText
