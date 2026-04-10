@@ -1,14 +1,13 @@
 ﻿using M.A.G.U.S.Enums;
 using M.A.G.U.S.GameSystem.Attributes;
 using M.A.G.U.S.Models;
-using M.A.G.U.S.Qualifications.Scientific.Psi;
 using M.A.G.U.S.Things.Armors;
 
-namespace M.A.G.U.S.Bestiary.Envoys.Darton;
+namespace M.A.G.U.S.Bestiary.Envoys;
 
-public sealed class DarkAngel : Creature
+public sealed class Raquan : Creature
 {
-    public DarkAngel()
+    public Raquan()
     {
         Armor = new NaturalArmor(9);
         PlacesOfOccurrence = TerrainType.Anywhere;
@@ -16,8 +15,8 @@ public sealed class DarkAngel : Creature
         Size = Size.Big;
         Alignment = Alignment.Death;
 
-        AttackValue = 111;
-        DefenseValue = 154;
+        AttackValue = 100;
+        DefenseValue = 150;
         InitiateValue = 50;
 
         AttacksPerRound = 2;
@@ -25,19 +24,15 @@ public sealed class DarkAngel : Creature
         HealthPoints = 30;
         PainTolerancePoints = 160;
 
-        AstralMagicResistance = 135;
-        MentalMagicResistance = 135;
+        AstralMagicResistance = Int32.MaxValue;
+        MentalMagicResistance = Int32.MaxValue;
         PoisonResistance = Int32.MaxValue;
 
-        Psi = new PsiPyarron();
-        PsiPoints = 50;
-        ManaPoints = 108;
-
         Intelligence = Enums.Intelligence.Outstanding;
-        ExperiencePoints = 12000;
+        ExperiencePoints = 10000;
     }
 
-    public override string Name => "Dark angel";
+    public override string[] Images => ["ranagol.png"];
 
     [DiceThrow(ThrowType._3D6)]
     [DiceThrowModifier(6)]
@@ -46,9 +41,11 @@ public sealed class DarkAngel : Creature
     [DiceThrowModifier(1)]
     public override int GetNumberAppearing() => 1;
 
+    public Deity God => Deity.Ranagol;
+
     public override List<Speed> Speeds =>
     [
-        new Speed(TravelMode.OnLand, 120),
+        new Speed(TravelMode.OnLand, 90),
         new Speed(TravelMode.InTheAir, 150)
     ];
 }

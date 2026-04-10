@@ -3,7 +3,7 @@ using M.A.G.U.S.GameSystem.Attributes;
 using M.A.G.U.S.Models;
 using M.A.G.U.S.Things.Armors;
 
-namespace M.A.G.U.S.Bestiary.Envoys.Ranagol;
+namespace M.A.G.U.S.Bestiary.Envoys;
 
 public sealed class Arhquuis : Creature
 {
@@ -40,6 +40,8 @@ public sealed class Arhquuis : Creature
 
     [DiceThrowModifier(1)]
     public override int GetNumberAppearing() => 1;
+
+    public Deity God => Deity.Ranagol;
 
     public override List<Speed> Speeds =>
     [

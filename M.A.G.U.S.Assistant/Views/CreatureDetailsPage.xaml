@@ -23,7 +23,11 @@
 
     <ScrollView>
         <StackLayout Padding="12" Spacing="8">
-
+            <Label Text="{Binding Creature.Name}"
+                   FontSize="24"
+                   FontAttributes="Bold"
+                   LineBreakMode="WordWrap" />
+            
             <!-- Image & sound -->
             <Image Source="{Binding RandomImage}" HeightRequest="200" Aspect="AspectFit">
                 <Image.GestureRecognizers>

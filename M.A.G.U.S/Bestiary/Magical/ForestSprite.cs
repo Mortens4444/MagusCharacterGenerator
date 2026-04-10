@@ -3,7 +3,7 @@ using M.A.G.U.S.GameSystem;
 using M.A.G.U.S.GameSystem.Attributes;
 using M.A.G.U.S.Models;
 
-namespace M.A.G.U.S.Bestiary.Fey;
+namespace M.A.G.U.S.Bestiary.Magical;
 
 public sealed class ForestSprite : Creature
 {

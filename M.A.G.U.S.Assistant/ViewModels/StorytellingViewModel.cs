@@ -93,8 +93,8 @@ internal partial class StorytellingViewModel : ObservableObject, IDisposable
 
         StartStoryCommand = new AsyncRelayCommand(StartStoryAsync, CanStartStory);
         ConnectCommand = new AsyncRelayCommand<DeviceModel?>(ConnectAsync);
-        StartCombatCommand = new AsyncRelayCommand(StartCombatAsync);
-        SendPsiCommand = new AsyncRelayCommand(SendPsiAsync);
+        //StartCombatCommand = new AsyncRelayCommand(StartCombatAsync);
+        //SendPsiCommand = new AsyncRelayCommand(SendPsiAsync);
         SendPrivateMessageCommand = new AsyncRelayCommand(SendPrivateMessageAsync, CanSendPrivateMessage);
     }
 
@@ -109,7 +109,7 @@ internal partial class StorytellingViewModel : ObservableObject, IDisposable
         });
     }
 
-    public async Task<bool> StartDiscoveryAsync()
+    public async Task<bool?> StartDiscoveryAsync()
     {
         try
         {
@@ -118,8 +118,6 @@ internal partial class StorytellingViewModel : ObservableObject, IDisposable
         }
         catch (Exception ex)
         {
-            WeakReferenceMessenger.Default.Send(new ShowErrorMessage(ex));
-
 #if ANDROID
             // If the platform reports Bluetooth disabled, try prompting the user to enable it.
             try
@@ -138,15 +136,21 @@ internal partial class StorytellingViewModel : ObservableObject, IDisposable
                         ctx.StartActivity(enableIntent);
 
                         // Let the caller know discovery did not start yet; UI can retry after user enables Bluetooth.
-                        return false;
+                        return null;
                     }
                     catch (Exception inner)
                     {
                         WeakReferenceMessenger.Default.Send(new ShowErrorMessage(inner));
                     }
                 }
+                else
+                {
+                    WeakReferenceMessenger.Default.Send(new ShowErrorMessage(ex));
+                }
             }
             catch (Exception) { }
+#else
+            WeakReferenceMessenger.Default.Send(new ShowErrorMessage(ex));
 #endif
 
             return false;
@@ -157,7 +161,7 @@ internal partial class StorytellingViewModel : ObservableObject, IDisposable
     {
         try
         {
-            await bluetooth.StopServerAsync().ConfigureAwait(false);
+            await bluetooth.StopServerAsync().ConfigureAwait(true);
             ServerRunning = false;
             StatusMessage = Lng.Elem("Bluetooth server stopped");
         }
@@ -283,16 +287,6 @@ internal partial class StorytellingViewModel : ObservableObject, IDisposable
                 Name = data.Name
             });
         });
-        //if (ConnectedPlayers.Any(p => p.Id == message.SenderId))
-        //{
-        //    return Task.CompletedTask;
-        //}
-
-        //ConnectedPlayers.Add(new PlayerModel
-        //{
-        //    Id = message.SenderId,
-        //    Name = data.Name
-        //});
 
         return Task.CompletedTask;
     }
@@ -306,7 +300,7 @@ internal partial class StorytellingViewModel : ObservableObject, IDisposable
 
         try
         {
-            WeakReferenceMessenger.Default.Send(new ShowInfoMessage($"Send: {SelectedPlayer.Id}", $"To {SelectedPlayer.Name}: {MessageText}"));
+            //WeakReferenceMessenger.Default.Send(new ShowInfoMessage($"Sending: {SelectedPlayer.Id}", $"To {SelectedPlayer.Name}: {MessageText}"));
             await bluetooth.SendAsync(new BluetoothMessage
             {
                 CommandType = BluetoothCommandType.PrivateMessage,
@@ -327,63 +321,63 @@ internal partial class StorytellingViewModel : ObservableObject, IDisposable
         }
     }
 
-    private async Task StartCombatAsync()
-    {
-        var selectedEnemies = Enemies
-            .Where(e => e.IsSelected)
-            .Select(e => e.Id)
-            .ToList();
+    //private async Task StartCombatAsync()
+    //{
+    //    var selectedEnemies = Enemies
+    //        .Where(e => e.IsSelected)
+    //        .Select(e => e.Id)
+    //        .ToList();
 
-        var selectedPlayers = ConnectedPlayers
-            .Where(p => p.IsSelected)
-            .Select(p => p.Id)
-            .ToList();
+    //    var selectedPlayers = ConnectedPlayers
+    //        .Where(p => p.IsSelected)
+    //        .Select(p => p.Id)
+    //        .ToList();
 
-        if (selectedEnemies.Count == 0 || selectedPlayers.Count == 0)
-        {
-            return;
-        }
+    //    if (selectedEnemies.Count == 0 || selectedPlayers.Count == 0)
+    //    {
+    //        return;
+    //    }
 
-        await bluetooth.SendAsync(new BluetoothMessage
-        {
-            CommandType = BluetoothCommandType.ForceCombat,
-            SenderId = bluetooth.LocalId,
-            TargetIds = selectedPlayers,
-            Payload = JsonConvert.SerializeObject(new ForceCombatData
-            {
-                EnemyIds = selectedEnemies
-            })
-        }).ConfigureAwait(false);
-    }
+    //    await bluetooth.SendAsync(new BluetoothMessage
+    //    {
+    //        CommandType = BluetoothCommandType.ForceCombat,
+    //        SenderId = bluetooth.LocalId,
+    //        TargetIds = selectedPlayers,
+    //        Payload = JsonConvert.SerializeObject(new ForceCombatData
+    //        {
+    //            EnemyIds = selectedEnemies
+    //        })
+    //    }).ConfigureAwait(false);
+    //}
 
-    private async Task SendPsiAsync()
-    {
-        var sender = ConnectedPlayers.FirstOrDefault(p => p.IsSelectedSender);
-        var target = ConnectedPlayers.FirstOrDefault(p => p.IsSelectedTarget);
+    //private async Task SendPsiAsync()
+    //{
+    //    var sender = ConnectedPlayers.FirstOrDefault(p => p.IsSelectedSender);
+    //    var target = ConnectedPlayers.FirstOrDefault(p => p.IsSelectedTarget);
 
-        if (sender is null || target is null)
-        {
-            return;
-        }
+    //    if (sender is null || target is null)
+    //    {
+    //        return;
+    //    }
 
-        if (sender.Character.Psi == null || sender.Character.PsiPoints <= 0)
-        {
-            return;
-        }
+    //    if (sender.Character.Psi == null || sender.Character.PsiPoints <= 0)
+    //    {
+    //        return;
+    //    }
 
-        await bluetooth.SendAsync(new BluetoothMessage
-        {
-            CommandType = BluetoothCommandType.PsiMessage,
-            SenderId = sender.Id,
-            TargetIds = [target.Id],
-            Payload = JsonConvert.SerializeObject(new SendPsiMessageData
-            {
-                Message = "Psi message..."
-            })
-        }).ConfigureAwait(false);
+    //    await bluetooth.SendAsync(new BluetoothMessage
+    //    {
+    //        CommandType = BluetoothCommandType.PsiMessage,
+    //        SenderId = sender.Id,
+    //        TargetIds = [target.Id],
+    //        Payload = JsonConvert.SerializeObject(new SendPsiMessageData
+    //        {
+    //            Message = "Psi message..."
+    //        })
+    //    }).ConfigureAwait(false);
 
-        //sender.Character.PsiPoints--; TODO
-    }
+    //    //sender.Character.PsiPoints--; TODO
+    //}
 
     public void Dispose()
     {

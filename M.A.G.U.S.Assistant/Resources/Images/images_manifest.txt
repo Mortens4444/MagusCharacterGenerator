@@ -76,6 +76,7 @@ avenger.png
 barracuda.png
 bat.png
 bear.png
+bearhawk.png
 blackflame.png
 black_shark.png
 blue_lizard.png
@@ -136,7 +137,6 @@ gray_dolphin.png
 grizzly_bear.png
 guardian.png
 hatysa.png
-hawk_bear.png
 hekator.png
 hilvar.png
 homunculus_man.png

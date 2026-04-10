@@ -21,8 +21,8 @@ internal partial class BluetoothService : IBluetoothService, IDisposable
     private readonly CommandRegistry registry;
     private readonly ConcurrentDictionary<string, IBluetoothConnection> pendingConnections = new();
     private readonly ConcurrentDictionary<string, IBluetoothConnection> connections = new();
-    private readonly IBluetoothConnector? connector; // optional, injected if app supports outgoing connections
-    private readonly Func<Task<IBluetoothListener>>? listenerFactory; // optional factory for server listener
+    private readonly IBluetoothConnector? connector;
+    private readonly Func<Task<IBluetoothListener>>? listenerFactory;
     private readonly IBluetoothDiscoveryService? discovery;
 
     private CancellationTokenSource? cts;
@@ -259,12 +259,6 @@ internal partial class BluetoothService : IBluetoothService, IDisposable
 
     private void RegisterConnection(IBluetoothConnection connection)
     {
-        //if (!connections.TryAdd(LocalId, connection))
-        //{
-        //    // duplicate remote id? dispose new one
-        //    connection.Dispose();
-        //    return;
-        //}
         pendingConnections[connection.MacAddress] = connection;
         FireAndForget(ReceiveLoopAsync(connection), "ReceiveLoopAsync");
         FireAndForget(NotifyClientConnectedAsync(connection), "ClientConnected notification");
@@ -346,37 +340,13 @@ internal partial class BluetoothService : IBluetoothService, IDisposable
             .Concat(pendingTargets)
             .Distinct()
             .ToList();
-        // snapshot the connections to avoid collection mutation issues
-        //var targets = connections.Values
-        //    .Where(c => message.TargetIds.Count == 0 || message.TargetIds.Contains(c.MacAddress))
-        //    .ToList();
-        //var targets = connections
-        //    .Where(kv => message.TargetIds.Count == 0 || message.TargetIds.Contains(kv.Key))
-        //    .Select(kv => kv.Value)
-        //    .Distinct()
-        //    .ToList();
+
         var sendTasks = targets.Select(c => c.SendAsync(json, cts?.Token ?? CancellationToken.None));
-
-        //var sendTasks = targets.Select(c =>
-        //{
-        //    try
-        //    {
-        //        return c.SendAsync(json, cts?.Token ?? CancellationToken.None);
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        ReportError($"SendAsync start failed for {c.MacAddress}: {{0}}", ex);
-        //        return Task.CompletedTask;
-        //    }
-        //}).ToArray();
-
         return Task.WhenAll(sendTasks);
     }
 
     private async Task OnRawMessageReceived(string json, IBluetoothConnection connection)
     {
-        //WeakReferenceMessenger.Default.Send(new ShowInfoMessage($"SenderId: {senderMacAddress}", json));
-
         BluetoothMessage? message;
         try
         {
@@ -397,10 +367,6 @@ internal partial class BluetoothService : IBluetoothService, IDisposable
         {
             pendingConnections.TryRemove(connection.MacAddress, out _);
             connections[message.SenderId] = connection;
-            //if (!connections.TryAdd(message.SenderId, connection))
-            //{
-            //    connection.Dispose();
-            //}
         }
 
         var isBroadcast = message.TargetIds.Count == 0;
@@ -418,10 +384,6 @@ internal partial class BluetoothService : IBluetoothService, IDisposable
                         .Where(kv => kv.Key != message.SenderId && (isBroadcast || message.TargetIds.Contains(kv.Key)))
                         .Select(kv => kv.Value.SendAsync(json, cts?.Token ?? CancellationToken.None));
 
-                    //var forwardTasks = connections.Values
-                    //    .Where(c => c.MacAddress != connection.MacAddress && (isBroadcast || message.TargetIds.Contains(c.MacAddress)))
-                    //    .Select(c => c.SendAsync(json, cts?.Token ?? CancellationToken.None));
-
                     await Task.WhenAll(forwardTasks).ConfigureAwait(false);
                 }
                 catch (Exception ex)
@@ -435,13 +397,6 @@ internal partial class BluetoothService : IBluetoothService, IDisposable
                 return;
             }
         }
-
-        // Server routing: if server and message has targets not including local, forward
-        //if (isServer)
-        //{
-        //    await SendAsync(message).ConfigureAwait(false);
-        //    return;
-        //}
 
         // Execute command if exists
         if (registry.TryGet(message.CommandType, out var command))
@@ -469,19 +424,6 @@ internal partial class BluetoothService : IBluetoothService, IDisposable
         }
     }
 
-    //private void CleanupConnection(string remoteId)
-    //{
-    //    if (connections.TryRemove(remoteId, out IBluetoothConnection? conn))
-    //    {
-    //        try { conn.Dispose(); } catch { }
-
-    //        _ = Task.Run(async () =>
-    //        {
-    //            try { await (ClientDisconnected?.Invoke(remoteId) ?? Task.CompletedTask); }
-    //            catch (Exception ex) { ReportError($"CleanupConnection failed: {{0}}", ex); }
-    //        });
-    //    }
-    //}
     private void CleanupConnection(IBluetoothConnection connection)
     {
         pendingConnections.TryRemove(connection.MacAddress, out _);

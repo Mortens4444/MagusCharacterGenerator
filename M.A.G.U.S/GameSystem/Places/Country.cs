@@ -35,6 +35,7 @@ public enum Country
     Dwoon = 1 << 5,
 
     [OfficialLanguage(Language.Pyarronian)]
+    [Description("Dwyll Union")]
     DwyllUnion,
 
     // --- Toroni Szövetség ---

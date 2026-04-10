@@ -6,7 +6,7 @@ using M.A.G.U.S.Qualifications.Scientific.Psi;
 using M.A.G.U.S.Things.Weapons;
 using M.A.G.U.S.Things.Weapons.RangedWeapons;
 
-namespace M.A.G.U.S.Bestiary.Intelligent;
+namespace M.A.G.U.S.Bestiary.Races;
 
 public sealed class CwyvehKah : Creature
 {

@@ -6,5 +6,5 @@ public class Diamond : Gemstone
 {
     public override Money Price => new(500);
 
-    public override string Description => "undeads, poisons, illnesses";
+    public override string Description => "undead, poisons, illnesses";
 }

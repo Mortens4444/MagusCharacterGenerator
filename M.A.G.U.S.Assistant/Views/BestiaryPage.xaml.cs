@@ -52,6 +52,7 @@ internal partial class BestiaryPage : NotifierPage
             }
             if (BindingContext is BestiaryViewModel vm)
             {
+                vm.SelectedBestiaryCategory = vm.BestiaryCategories[0];
                 if (settings.ShowRandomBeastWhenBestiaryPageOpened)
                 {
                     _ = Task.Run(async () =>

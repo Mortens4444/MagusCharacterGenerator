@@ -4,6 +4,7 @@ using M.A.G.U.S.Assistant.Services;
 using M.A.G.U.S.Bestiary;
 using M.A.G.U.S.Enums;
 using M.A.G.U.S.Extensions;
+using M.A.G.U.S.GameSystem.Places;
 using Mtf.Extensions;
 using Mtf.LanguageService.MAUI;
 using System.Collections.ObjectModel;
@@ -16,12 +17,41 @@ internal partial class BestiaryViewModel : SearchListViewModel, IDisposable
     private readonly IShakeService? shakeService;
     private bool includeAnywhere;
     private TerrainType selectedPlace;
+    private BestiaryCategoryItem? selectedBestiaryCategory;
+    private Country selectedCountry;
+
+    public ObservableCollection<BestiaryCategoryItem> BestiaryCategories { get; } = [];
+    public ObservableCollection<Country> AvailableCountries { get; } = [];
 
     public IShakeService? ShakeService => shakeService;
 
     public ICommand PickRandomCommand { get; }
 
     public ObservableCollection<TerrainType> AvailablePlaces { get; } = [];
+
+    public BestiaryCategoryItem? SelectedBestiaryCategory
+    {
+        get => selectedBestiaryCategory;
+        set
+        {
+            if (SetProperty(ref selectedBestiaryCategory, value))
+            {
+                ApplyFilter();
+            }
+        }
+    }
+
+    public Country SelectedCountry
+    {
+        get => selectedCountry;
+        set
+        {
+            if (SetProperty(ref selectedCountry, value))
+            {
+                ApplyFilter();
+            }
+        }
+    }
 
     public bool IncludeAnywhere
     {
@@ -50,13 +80,16 @@ internal partial class BestiaryViewModel : SearchListViewModel, IDisposable
     public BestiaryViewModel(ISoundPlayer soundPlayer, IShakeService shakeService) : base(soundPlayer)
     {
         this.shakeService = shakeService;
-        if (shakeService != null)
-        {
-            shakeService.ShakeDetected += OnShakeDetected;
-        }
+        shakeService?.ShakeDetected += OnShakeDetected;
         PickRandomCommand = new RelayCommand(_ => PickRandomCreature());
+
         LoadAvailablePlaces();
+        LoadBestiaryCategories();
+        LoadAvailableCountries();
+
+        //SelectedBestiaryCategory = BestiaryCategories[0];
         SelectedPlace = TerrainType.Anywhere;
+        SelectedCountry = Country.Unknown;
     }
 
     private void PickRandomCreature()
@@ -88,7 +121,7 @@ internal partial class BestiaryViewModel : SearchListViewModel, IDisposable
         {
             return;
         }
-
+        
         if (!MainThread.IsMainThread)
         {
             MainThread.BeginInvokeOnMainThread(ApplyFilter);
@@ -108,6 +141,32 @@ internal partial class BestiaryViewModel : SearchListViewModel, IDisposable
                     (Lng.Elem(i.Subtitle)?.IndexOf(st, StringComparison.InvariantCultureIgnoreCase) >= 0) ||
                     (Lng.Elem(i.Key)?.IndexOf(st, StringComparison.InvariantCultureIgnoreCase) >= 0));
             }
+
+            if (SelectedBestiaryCategory != null && !String.Equals(SelectedBestiaryCategory.Key, "All", StringComparison.OrdinalIgnoreCase))
+            {
+                q = q.Where(i =>
+                {
+                    var category = i.Source?.GetType().Namespace?.Split('.').LastOrDefault();
+                    return String.Equals(category, SelectedBestiaryCategory.Key, StringComparison.OrdinalIgnoreCase);
+                });
+            }
+
+            //if (SelectedCountry != Country.Unknown)
+            //{
+            //    q = q.Where(i =>
+            //    {
+            //        if (i.Source is not Creature creature)
+            //        {
+            //            return false;
+            //        }
+
+            //        //var matchesSelected = creature.Country.HasFlag(SelectedCountry);
+            //        //var matchesAnywhere = creature.Country.HasFlag(Country.Anywhere);
+            //        //return matchesSelected || matchesAnywhere;
+
+            //        return creature.Country.HasFlag(SelectedCountry);
+            //    });
+            //}
 
             if (SelectedCategory is ThingCategory thingCategory && thingCategory != ThingCategory.All)
             {
@@ -158,6 +217,12 @@ internal partial class BestiaryViewModel : SearchListViewModel, IDisposable
         }
     }
 
+    public new void LoadItems(IEnumerable<DisplayItem> items)
+    {
+        base.LoadItems(items);
+        LoadBestiaryCategories();
+    }
+
     private void LoadAvailablePlaces()
     {
         var values = Enum
@@ -168,6 +233,45 @@ internal partial class BestiaryViewModel : SearchListViewModel, IDisposable
         foreach (var value in values)
         {
             AvailablePlaces.Add(value);
+        }
+    }
+
+    private void LoadBestiaryCategories()
+    {
+        var categories = Items
+            .OfType<DisplayItem>()
+            .Select(i => i.Source?.GetType().Namespace?.Split('.').LastOrDefault())
+            .Where(x => !String.IsNullOrWhiteSpace(x))
+            .Distinct(StringComparer.InvariantCultureIgnoreCase)
+            .OrderBy(x => Lng.Elem(x!) ?? x, StringComparer.InvariantCultureIgnoreCase)
+            .Select(x => new BestiaryCategoryItem
+            {
+                Key = x!
+            });
+
+        BestiaryCategories.Clear();
+        BestiaryCategories.Add(new BestiaryCategoryItem
+        {
+            Key = "All"
+        });
+
+        foreach (var category in categories)
+        {
+            BestiaryCategories.Add(category);
+        }
+    }
+
+    private void LoadAvailableCountries()
+    {
+        var values = Enum
+            .GetValues<Country>()
+            .OrderBy(x => Lng.Elem(x.GetDescription()) ?? x.ToString(), StringComparer.InvariantCultureIgnoreCase);
+
+        AvailableCountries.Clear();
+
+        foreach (var value in values)
+        {
+            AvailableCountries.Add(value);
         }
     }
 }

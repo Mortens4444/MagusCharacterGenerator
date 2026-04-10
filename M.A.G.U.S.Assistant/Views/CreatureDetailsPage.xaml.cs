@@ -9,7 +9,7 @@ internal partial class CreatureDetailsPage : NotifierPage
     public CreatureDetailsPage(CreatureDetailsViewModel creatureDetailsViewModel)
     {
         InitializeComponent();
-        Title = Lng.Elem(creatureDetailsViewModel.Creature.Name);
+        //Title = Lng.Elem(creatureDetailsViewModel.Creature.Name);
         BindingContext = creatureDetailsViewModel;
     }
 }

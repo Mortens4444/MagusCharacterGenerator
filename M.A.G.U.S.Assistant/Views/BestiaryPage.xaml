@@ -28,6 +28,16 @@
                         WidthRequest="220"/>
 
                 <mc:CheckBoxWithLabel Label="Include 'Anywhere'" IsChecked="{Binding IncludeAnywhere}" HorizontalOptions="Center" />
+
+                <Picker Title="Category"
+                        ItemsSource="{Binding BestiaryCategories}"
+                        ItemDisplayBinding="{Binding Name}"
+                        SelectedItem="{Binding SelectedBestiaryCategory}" />
+
+                <!--<Picker Title="Country"
+                        ItemsSource="{Binding AvailableCountries}"
+                        ItemDisplayBinding="{Binding ., Converter={StaticResource EnumDescriptionTranslationConverter}}"
+                        SelectedItem="{Binding SelectedCountry}" />-->
             </VerticalStackLayout>
         </Border>
 

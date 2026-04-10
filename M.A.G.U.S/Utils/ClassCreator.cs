@@ -18,36 +18,22 @@ public static class ClassCreator
 
         for (var i = 0; i < maxAttempts; i++)
         {
-            if (Activator.CreateInstance(classType, level, true) is not IClass result)
+            try
             {
-                continue;
-            }
+                if (Activator.CreateInstance(classType, level, true) is not IClass result)
+                {
+                    continue;
+                }
 
-            var hasPsi = result.Qualifications.Any(q => q is IPsi);
-            if (!needPsi || hasPsi)
-            {
-                return result;
+                var hasPsi = result.Qualifications.Any(q => q is IPsi);
+                if (!needPsi || hasPsi)
+                {
+                    return result;
+                }
             }
+            catch { }
         }
 
-        throw new InvalidOperationException(
-            $"Could not create an instance of {classType.FullName} that satisfies needPsi = {needPsi}.");
-
-        //bool hasPsi = false;
-        //IClass? result = null;
-        //do
-        //{
-        //    try
-        //    {
-        //        result = (IClass)Activator.CreateInstance(classType, [level, true]);
-        //        if (result != null)
-        //        {
-        //            hasPsi = result.Qualifications.Any(q => q is IPsi);
-        //        }
-        //    }
-        //    catch { }
-        //}
-        //while (result == null || (!hasPsi && needPsi));
-        //return result;
+        throw new InvalidOperationException($"Could not create an instance of {classType.FullName} that satisfies needPsi = {needPsi}.");
     }
 }

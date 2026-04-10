@@ -1,6 +1,8 @@
 ﻿using M.A.G.U.S.Enums;
+using M.A.G.U.S.GameSystem;
 using M.A.G.U.S.GameSystem.Attributes;
 using M.A.G.U.S.Models;
+using M.A.G.U.S.Things.Weapons;
 
 namespace M.A.G.U.S.Bestiary.Mythical;
 
@@ -17,7 +19,7 @@ public sealed class AstralVampire : Creature
         InitiateValue = 0;
         AimValue = 0;
 
-        AttackModes = [];
+        //AttackModes = [];
 
         HealthPoints = 0;
         PainTolerancePoints = 0;

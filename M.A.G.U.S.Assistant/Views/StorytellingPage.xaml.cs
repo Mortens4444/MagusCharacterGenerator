@@ -20,7 +20,7 @@ internal partial class StorytellingPage : NotifierPage
         if (BindingContext is StorytellingViewModel vm)
         {
             var discoveryStarted = await vm.StartDiscoveryAsync().ConfigureAwait(true);
-            if (!discoveryStarted)
+            if (discoveryStarted == false)
             {
                 WeakReferenceMessenger.Default.Send(new ShowErrorMessage("Bluetooth discovery cannot be started."));
             }

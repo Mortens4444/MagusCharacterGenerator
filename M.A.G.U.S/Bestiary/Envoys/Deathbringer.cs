@@ -4,7 +4,7 @@ using M.A.G.U.S.Models;
 using M.A.G.U.S.Qualifications.Scientific.Psi;
 using M.A.G.U.S.Things.Armors;
 
-namespace M.A.G.U.S.Bestiary.Envoys.Darton;
+namespace M.A.G.U.S.Bestiary.Envoys;
 
 public sealed class Deathbringer : Creature
 {
@@ -44,6 +44,8 @@ public sealed class Deathbringer : Creature
 
     [DiceThrowModifier(1)]
     public override int GetNumberAppearing() => 1;
+
+    public Deity God => Deity.Darton;
 
     public override List<Speed> Speeds =>
     [
