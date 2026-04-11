@@ -102,7 +102,7 @@
                             </VerticalStackLayout>
 
                             <Label Text="{Binding RightText}"
-                                   VerticalOptions="Center"
+                                   VerticalOptions="End"
                                    Grid.Column="1"
                                    FontAttributes="Bold"
                                    TextColor="{Binding Enabled, Converter={StaticResource BoolToColorConverter}}" />

@@ -29,11 +29,11 @@
             </CollectionView.ItemTemplate>
         </CollectionView>
 
-        <StackLayout Grid.Row="2" Orientation="Horizontal" Spacing="10" HorizontalOptions="Center">
+        <HorizontalStackLayout Grid.Row="2" Spacing="5" HorizontalOptions="Center" Margin="5">
             <Button Text="Play" Command="{Binding PlayCommand}" IsEnabled="{Binding CanPlay}" />
             <Button Text="Stop" Command="{Binding StopCommand}" IsEnabled="{Binding IsPlaying}" />
             <Label Text="Volume" VerticalOptions="Center" />
             <Slider Minimum="0" Maximum="1" Value="{Binding Volume}" WidthRequest="140" />
-        </StackLayout>
+        </HorizontalStackLayout>
     </Grid>
 </v:NotifierPage>

@@ -243,8 +243,8 @@ tamari.png
 tortor_spiritus.png
 troll.png
 trueblood.png
+trueblood_in_armor.png
 umich.png
-umich_2.png
 unicorn.png
 vampire.png
 vampire_lord.png

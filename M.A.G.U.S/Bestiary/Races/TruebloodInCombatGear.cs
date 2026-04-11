@@ -58,7 +58,7 @@ public sealed class TruebloodInCombatGear : Creature
 
     public override string Name => "Trueblood (Rachat Ma'Niigan) (in armor)";
 
-    public override string[] Images => ["trueblood.png"];
+    public override string[] Images => ["trueblood_in_armor.png"];
 
     [DiceThrow(ThrowType._1D6)]
     public override int GetNumberAppearing() => DiceThrow._1D6();
