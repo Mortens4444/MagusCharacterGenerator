@@ -33,6 +33,7 @@ internal partial class StorytellingPage : NotifierPage
 
         if (BindingContext is StorytellingViewModel vm)
         {
+            vm.StopDiscovery();
             await vm.StopServerAsync().ConfigureAwait(true);
         }
     }

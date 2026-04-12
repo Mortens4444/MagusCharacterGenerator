@@ -16,7 +16,7 @@ using System.Collections.ObjectModel;
 
 namespace M.A.G.U.S.Assistant.ViewModels;
 
-internal partial class StorytellingViewModel : ObservableObject, IDisposable
+internal partial class StorytellingViewModel : ObservableObject, IDisposable, IAsyncDisposable
 {
     private readonly IBluetoothService bluetooth;
     private PlayerModel? selectedPlayer;
@@ -89,7 +89,7 @@ internal partial class StorytellingViewModel : ObservableObject, IDisposable
 
         bluetooth.DeviceDiscovered += Bluetooth_DeviceDiscovered;
         bluetooth.MessageReceived += OnMessageReceived;
-        //bluetooth.PeerDisconnected += OnPeerDisconnected;
+        bluetooth.ClientDisconnected += OnClientDisconnected;
 
         StartStoryCommand = new AsyncRelayCommand(StartStoryAsync, CanStartStory);
         ConnectCommand = new AsyncRelayCommand<DeviceModel?>(ConnectAsync);
@@ -223,17 +223,17 @@ internal partial class StorytellingViewModel : ObservableObject, IDisposable
         return SelectedPlayer is not null && !String.IsNullOrWhiteSpace(MessageText);
     }
 
-    //private void OnPeerDisconnected(object? sender, BluetoothPeerEventArgs e)
-    //{
-    //    MainThread.BeginInvokeOnMainThread(() =>
-    //    {
-    //        var player = ConnectedPlayers.FirstOrDefault(p => p.Id == e.PeerId);
-    //        if (player is not null)
-    //        {
-    //            ConnectedPlayers.Remove(player);
-    //        }
-    //    });
-    //}
+    private Task OnClientDisconnected(string macAddress)
+    {
+        return MainThread.InvokeOnMainThreadAsync(() =>
+        {
+            var player = ConnectedPlayers.FirstOrDefault(p => p.Id == macAddress);
+            if (player is not null)
+            {
+                ConnectedPlayers.Remove(player);
+            }
+        });
+    }
 
     private async Task OnMessageReceived(BluetoothMessage message)
     {
@@ -276,8 +276,10 @@ internal partial class StorytellingViewModel : ObservableObject, IDisposable
 
         MainThread.BeginInvokeOnMainThread(() =>
         {
-            if (ConnectedPlayers.Any(p => p.Id == message.SenderId))
+            var existingPlayer = ConnectedPlayers.FirstOrDefault(p => p.Id == message.SenderId);
+            if (existingPlayer is not null)
             {
+                existingPlayer.Name = data.Name;
                 return;
             }
 
@@ -379,12 +381,20 @@ internal partial class StorytellingViewModel : ObservableObject, IDisposable
     //    //sender.Character.PsiPoints--; TODO
     //}
 
+    public void StopDiscovery()
+    {
+        bluetooth?.StopDiscovery();
+    }
+
+    public async ValueTask DisposeAsync()
+    {
+        await StopServerAsync().ConfigureAwait(false);
+    }
+
     public void Dispose()
     {
         bluetooth.DeviceDiscovered -= Bluetooth_DeviceDiscovered;
         bluetooth.MessageReceived -= OnMessageReceived;
-        //bluetooth.PeerDisconnected -= OnPeerDisconnected;
-
-        _ = StopServerAsync();
+        bluetooth.ClientDisconnected -= OnClientDisconnected;
     }
 }

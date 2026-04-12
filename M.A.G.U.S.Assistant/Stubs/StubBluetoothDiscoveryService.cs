@@ -7,7 +7,7 @@ internal sealed class StubBluetoothDiscoveryService : IBluetoothDiscoveryService
 {
     public event Action<DeviceModel>? DeviceDiscovered;
 
-    public bool StartDiscovery(CancellationToken cancellationToken = default) => false;
+    public Task<bool> StartDiscoveryAsync(CancellationToken cancellationToken = default) => Task.FromResult(false);
 
     public void StopDiscovery() { }
 }

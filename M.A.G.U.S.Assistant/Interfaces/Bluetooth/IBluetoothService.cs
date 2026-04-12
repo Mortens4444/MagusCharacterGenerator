@@ -13,11 +13,15 @@ internal interface IBluetoothService
 
     Task<bool> StartDiscoveryAsync();
 
+    void StopDiscovery();
+
     Task ConnectAsync(string macAddress);
 
     Task SendAsync(BluetoothMessage message);
 
     event Action<DeviceModel> DeviceDiscovered;
+
+    event Func<string, Task>? ClientDisconnected;
 
     event Func<BluetoothMessage, Task>? MessageReceived;
 }

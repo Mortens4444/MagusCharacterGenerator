@@ -4,6 +4,8 @@ namespace M.A.G.U.S.Assistant;
 
 internal class Constants
 {
+    public const string ServiceGuid = "2EE056EE-5939-4EC4-8593-BC606EE1BF9E";
+
     public const bool AddCombatValueModifierPointsOnFirstLevelForAllClass = true;
     public const bool AddPainTolerancePointsOnFirstLevelForAllClass = true;
     public const bool AddQualificationPointsOnFirstLevelForAllClass = true;

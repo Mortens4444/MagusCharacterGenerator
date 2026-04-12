@@ -6,7 +6,7 @@ internal interface IBluetoothDiscoveryService
 {
     event Action<DeviceModel> DeviceDiscovered;
 
-    bool StartDiscovery(CancellationToken cancellationToken = default);
+    Task<bool> StartDiscoveryAsync(CancellationToken cancellationToken = default);
 
     void StopDiscovery();
 }

@@ -45,7 +45,7 @@ internal static class MauiProgram
         builder.Services.AddSingleton<ISoundPlayer, Platforms.Windows.SoundPlayer>();
         builder.Services.AddTransient<IShakeService, Platforms.Windows.ShakeService>();
         builder.Services.AddSingleton<IWindowStateService, Platforms.Windows.WindowsWindowStateService>();
-        //builder.Services.AddSingleton<IBluetoothConnector, Platforms.Windows.WindowsBluetoothConnector>();
+        builder.Services.AddSingleton<IBluetoothConnector, Platforms.Windows.WindowsBluetoothConnector>();
         builder.Services.AddSingleton<IBluetoothDiscoveryService, Platforms.Windows.BluetoothDiscoveryService>();
 #elif IOS
         builder.Services.AddSingleton<IPrintService, Platforms.iOS.PrintService>();

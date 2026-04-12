@@ -7,7 +7,7 @@ namespace M.A.G.U.S.Assistant.Platforms.Android;
 internal sealed class AndroidBluetoothConnector : IBluetoothConnector
 {
     private readonly BluetoothAdapter adapter;
-    public static readonly UUID ServiceUuid = UUID.FromString("2EE056EE-5939-4EC4-8593-BC606EE1BF9E");
+    public static readonly UUID ServiceUuid = UUID.FromString(Constants.ServiceGuid);
 
     public AndroidBluetoothConnector()
     {
@@ -29,7 +29,7 @@ internal sealed class AndroidBluetoothConnector : IBluetoothConnector
         try
         {
             var device = adapter.GetRemoteDevice(deviceId) ?? throw new ArgumentException($"No device found for address: {deviceId}", nameof(deviceId));
-            socket = device.CreateRfcommSocketToServiceRecord(ServiceUuid) ?? throw new InvalidOperationException("Could not create Bluetooth socket."); ;
+            socket = device.CreateRfcommSocketToServiceRecord(ServiceUuid) ?? throw new InvalidOperationException("Could not create Bluetooth socket.");
             adapter.CancelDiscovery();
             await socket.ConnectAsync().ConfigureAwait(false);
             return new AndroidBluetoothConnection(socket);

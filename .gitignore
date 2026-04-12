@@ -5,3 +5,4 @@ packages/
 Pdf/
 *.log
 *.tmp
+*.user

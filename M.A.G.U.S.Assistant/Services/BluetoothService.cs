@@ -74,6 +74,27 @@ internal partial class BluetoothService : IBluetoothService, IDisposable
         {
             // ignore and fall back to GUID below
         }
+#elif WINDOWS
+    try
+    {
+        var adapter = global::Windows.Devices.Bluetooth.BluetoothAdapter
+            .GetDefaultAsync()
+            .AsTask()
+            .GetAwaiter()
+            .GetResult();
+
+        if (adapter != null)
+        {
+            var address = adapter.BluetoothAddress;
+            if (address != 0)
+            {
+                return FormatBluetoothAddress(address);
+            }
+        }
+    }
+    catch
+    {
+    }
 #endif
         return Guid.NewGuid().ToString();
     }
@@ -148,7 +169,12 @@ internal partial class BluetoothService : IBluetoothService, IDisposable
             throw new NotSupportedException("Discovery not supported on this platform.");
         }
 
-        return discovery.StartDiscovery();
+        return await discovery.StartDiscoveryAsync().ConfigureAwait(false);
+    }
+
+    public void StopDiscovery()
+    {
+        discovery?.StopDiscovery();
     }
 
     public async Task StartServerAsync()
@@ -231,6 +257,29 @@ internal partial class BluetoothService : IBluetoothService, IDisposable
         RegisterConnection(connection);
     }
 
+#if WINDOWS
+    private static string FormatBluetoothAddress(ulong address)
+    {
+        return String.Create(17, address, static (span, value) =>
+        {
+            for (var i = 0; i < 6; i++)
+            {
+                var shift = (5 - i) * 8;
+                var b = (byte)((value >> shift) & 0xFF);
+
+                var hex = b.ToString("X2");
+                span[i * 3] = hex[0];
+                span[i * 3 + 1] = hex[1];
+
+                if (i < 5)
+                {
+                    span[i * 3 + 2] = ':';
+                }
+            }
+        });
+    }
+#endif
+
     private async Task AcceptLoopAsync(CancellationToken ct)
     {
         IBluetoothListener listener = await listenerFactory!.Invoke().ConfigureAwait(false);
@@ -248,6 +297,7 @@ internal partial class BluetoothService : IBluetoothService, IDisposable
                 {
                     ReportError($"AcceptLoop error: {{0}}", ex);
                     await Task.Delay(500, ct).ConfigureAwait(false);
+                    break;
                 }
             }
         }
@@ -308,8 +358,32 @@ internal partial class BluetoothService : IBluetoothService, IDisposable
 
                     await OnRawMessageReceived(json, connection).ConfigureAwait(false);
                 }
-                catch (BluetoothDisconnectedException ex)
+                catch (BluetoothDisconnectedException)
                 {
+                    break;
+                }
+                catch (TaskCanceledException)
+                {
+                    break;
+                }
+                catch (IOException ex)
+                {
+                    if (ex.Message != "Remote device disconnected.")
+                    {
+                        ReportError($"ReceiveLoop error ({connection.MacAddress}): {{0}}", ex);
+                    }
+                    else
+                    {
+                        var keysToRemove = connections
+                            .Where(kv => kv.Value.MacAddress == connection.MacAddress)
+                            .Select(kv => kv.Key)
+                            .ToList();
+
+                        foreach (var key in keysToRemove)
+                        {
+                            connections.TryRemove(key, out _);
+                        }
+                    }
                     break;
                 }
                 catch (Exception ex)

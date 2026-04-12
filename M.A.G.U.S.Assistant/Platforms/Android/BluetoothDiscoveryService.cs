@@ -17,7 +17,7 @@ internal sealed class BluetoothDiscoveryService(Context context)
 
     public event Action<DeviceModel>? DeviceDiscovered;
 
-    public bool StartDiscovery(CancellationToken cancellationToken = default)
+    public Task<bool> StartDiscoveryAsync(CancellationToken cancellationToken = default)
     {
         cancellationToken.ThrowIfCancellationRequested();
 
@@ -82,7 +82,7 @@ internal sealed class BluetoothDiscoveryService(Context context)
         }
 
         cancellationToken.ThrowIfCancellationRequested();
-        return adapter.StartDiscovery();
+        return Task.FromResult(adapter.StartDiscovery());
     }
 
     public void StopDiscovery()

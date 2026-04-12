@@ -27,6 +27,6 @@ public static class ObjectArrayExtensions
             Formula = formula,
             Modifier = modifierAttribute != null ? modifierAttribute.Modifier : 0,
             HasSpecialTraining = hasSpecialTraining
-        }; ;
+        };
     }
 }
