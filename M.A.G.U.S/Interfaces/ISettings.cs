@@ -1,4 +1,6 @@
-﻿namespace M.A.G.U.S.Interfaces;
+﻿using M.A.G.U.S.Enums;
+
+namespace M.A.G.U.S.Interfaces;
 
 public interface ISettings
 {
@@ -29,4 +31,6 @@ public interface ISettings
     bool UseRaceClassRestrictions { get; }
 
     bool ShowRandomBeastWhenBestiaryPageOpened { get; }
+
+    CombatSimulatorMode CombatSimulatorMode { get; }
 }

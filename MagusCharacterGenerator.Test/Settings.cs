@@ -1,4 +1,5 @@
-﻿using M.A.G.U.S.Interfaces;
+﻿using M.A.G.U.S.Enums;
+using M.A.G.U.S.Interfaces;
 
 namespace M.A.G.U.S.Test
 {
@@ -33,5 +34,7 @@ namespace M.A.G.U.S.Test
         public bool UseRaceClassRestrictions => true;
 
         public bool ShowRandomBeastWhenBestiaryPageOpened => true;
+
+        public CombatSimulatorMode CombatSimulatorMode => CombatSimulatorMode.SemiAuto;
     }
 }

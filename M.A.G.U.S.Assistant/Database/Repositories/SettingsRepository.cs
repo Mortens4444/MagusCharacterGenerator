@@ -54,4 +54,28 @@ internal class SettingsRepository(DatabaseContext context)
         var setting = await connection.FindWithQueryAsync<SettingsEntity>("SELECT * FROM Settings WHERE Name = ?", key).ConfigureAwait(false);
         return setting?.Value ?? String.Empty;
     }
+
+    public Task SaveEnumSettingAsync<TEnum>(string key, TEnum value)
+        where TEnum : struct, Enum
+    {
+        return SaveSettingAsync(key, value.ToString());
+    }
+
+    public async Task<TEnum> GetEnumSettingAsync<TEnum>(string key, TEnum defaultValue)
+        where TEnum : struct, Enum
+    {
+        var val = await GetSettingAsync(key).ConfigureAwait(false);
+
+        if (String.IsNullOrEmpty(val))
+        {
+            return defaultValue;
+        }
+
+        if (Enum.TryParse<TEnum>(val, true, out var result))
+        {
+            return result;
+        }
+
+        return defaultValue;
+    }
 }

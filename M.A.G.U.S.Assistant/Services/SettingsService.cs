@@ -1,4 +1,5 @@
 ﻿using M.A.G.U.S.Assistant.Database.Repositories;
+using M.A.G.U.S.Enums;
 using M.A.G.U.S.Interfaces;
 using Mtf.LanguageService.Enums;
 
@@ -21,7 +22,8 @@ internal sealed class SettingsService : ISettings
     public int MaxDiesCount { get; private set; }
     public bool UseRaceClassRestrictions { get; private set; }
     public bool AssignmentTurnHistoryNewestOnTop { get; private set; }
-    public bool ShowRandomBeastWhenBestiaryPageOpened { get; private set; }    
+    public bool ShowRandomBeastWhenBestiaryPageOpened { get; private set; }
+    public CombatSimulatorMode CombatSimulatorMode { get; private set; }
 
     private const string KeyLanguage = "Setting_Language";
 
@@ -41,6 +43,7 @@ internal sealed class SettingsService : ISettings
     
     private const string KeyAssignmentTurnHistoryNewestOnTop = "Setting_AssignmentTurnHistoryNewestOnTop";
     private const string KeyShowRandomBeastWhenBestiaryPageOpened = "Setting_ShowRandomBeastWhenBestiaryPageOpened";
+    private const string KeyCombatSimulatorMode = "Setting_CombatSimulatorMode";
 
     public SettingsService(SettingsRepository settingsRepository)
     {
@@ -66,6 +69,7 @@ internal sealed class SettingsService : ISettings
 
         AssignmentTurnHistoryNewestOnTop = await settingsRepository.GetBoolSettingAsync(KeyAssignmentTurnHistoryNewestOnTop, Constants.AssignmentTurnHistoryNewestOnTop).ConfigureAwait(false);
         ShowRandomBeastWhenBestiaryPageOpened = await settingsRepository.GetBoolSettingAsync(KeyShowRandomBeastWhenBestiaryPageOpened, Constants.ShowRandomBeastWhenBestiaryPageOpened).ConfigureAwait(false);
+        CombatSimulatorMode = await settingsRepository.GetEnumSettingAsync<CombatSimulatorMode>(KeyCombatSimulatorMode, Constants.CombatSimulatorMode).ConfigureAwait(false);
     }
 
     public Task SaveAddCombatValueAsync(bool value)
@@ -152,10 +156,19 @@ internal sealed class SettingsService : ISettings
         return settingsRepository.SaveBoolSettingAsync(KeyShowRandomBeastWhenBestiaryPageOpened, value);
     }
 
-    public async Task<Language> GetCurrentLanguageAsync()
+    public Task<CombatSimulatorMode> GetCombatSimulatorModeAsync()
     {
-        var langString = await settingsRepository.GetSettingAsync(KeyLanguage).ConfigureAwait(false);
-        return Enum.TryParse<Language>(langString, out var savedLanguage) ? savedLanguage : Constants.DefaultLanguage;
+        return settingsRepository.GetEnumSettingAsync(KeyCombatSimulatorMode, Constants.CombatSimulatorMode);
+    }
+
+    public Task SaveCombatSimulatorModeAsync(CombatSimulatorMode combatSimulatorModec)
+    {
+        return settingsRepository.SaveSettingAsync(KeyCombatSimulatorMode, combatSimulatorModec.ToString());
+    }
+
+    public Task<Language> GetCurrentLanguageAsync()
+    {
+        return settingsRepository.GetEnumSettingAsync(KeyLanguage, Constants.DefaultLanguage);
     }
 
     public Task SaveDefaultLanguageAsync(Language language)

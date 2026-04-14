@@ -86,7 +86,8 @@ internal partial class StorytellingViewModel : ObservableObject, IDisposable, IA
     public StorytellingViewModel(IBluetoothService bluetooth)
     {
         this.bluetooth = bluetooth;
-
+        
+        Unsubscribe();
         bluetooth.DeviceDiscovered += Bluetooth_DeviceDiscovered;
         bluetooth.MessageReceived += OnMessageReceived;
         bluetooth.ClientDisconnected += OnClientDisconnected;
@@ -392,6 +393,11 @@ internal partial class StorytellingViewModel : ObservableObject, IDisposable, IA
     }
 
     public void Dispose()
+    {
+        Unsubscribe();
+    }
+
+    private void Unsubscribe()
     {
         bluetooth.DeviceDiscovered -= Bluetooth_DeviceDiscovered;
         bluetooth.MessageReceived -= OnMessageReceived;

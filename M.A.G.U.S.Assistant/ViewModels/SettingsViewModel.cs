@@ -1,6 +1,9 @@
 ﻿using CommunityToolkit.Mvvm.Input;
 using M.A.G.U.S.Assistant.Services;
+using M.A.G.U.S.Enums;
+using Mtf.Extensions;
 using Mtf.LanguageService.Enums;
+using System.Collections.ObjectModel;
 using System.Reflection;
 using System.Windows.Input;
 
@@ -9,7 +12,9 @@ namespace M.A.G.U.S.Assistant.ViewModels;
 internal partial class SettingsViewModel : BaseViewModel
 {
     private readonly SettingsService settingsService;
-    
+
+    public ObservableCollection<CombatSimulatorMode> CombatSimulatorModes { get; } = [];
+
     public ICommand ToggleSettingCommand { get; }
 
     public SettingsViewModel(SettingsService settingsService)
@@ -28,7 +33,19 @@ internal partial class SettingsViewModel : BaseViewModel
         OnPropertyChanged(nameof(AutoIncreaseManaPoints));
         OnPropertyChanged(nameof(MaxDiesCount));
         OnPropertyChanged(nameof(UseRaceClassRestrictions));
+        OnPropertyChanged(nameof(CombatSimulatorMode));
         ToggleSettingCommand = new RelayCommand<object?>(ToggleSetting);
+
+        var combatSimulatorModes = Enum.GetValues<CombatSimulatorMode>().Cast<CombatSimulatorMode>()
+            .OrderBy(l => l.GetDescription())
+            .ToList();
+
+        CombatSimulatorModes.Clear();
+        foreach (var combatSimulatorMode in combatSimulatorModes)
+        {
+            CombatSimulatorModes.Add(combatSimulatorMode);
+        }
+        CombatSimulatorMode = settingsService.GetCombatSimulatorModeAsync().GetAwaiter().GetResult();
     }
 
     public bool AddCombatValueModifierPointsOnFirstLevelForAllClass
@@ -219,6 +236,16 @@ internal partial class SettingsViewModel : BaseViewModel
         set
         {
             settingsService.SaveDefaultLanguageAsync(value);
+            OnPropertyChanged();
+        }
+    }
+
+    public CombatSimulatorMode CombatSimulatorMode
+    {
+        get => settingsService.GetCombatSimulatorModeAsync().GetAwaiter().GetResult();
+        set
+        {
+            settingsService.SaveCombatSimulatorModeAsync(value);
             OnPropertyChanged();
         }
     }

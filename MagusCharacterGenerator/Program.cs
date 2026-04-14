@@ -3,33 +3,31 @@ using M.A.G.U.S.Classes.Slan;
 using M.A.G.U.S.Classes.Sorcerer;
 using M.A.G.U.S.GameSystem;
 using M.A.G.U.S.Races;
-using M.A.G.U.S.Test;
 
-namespace MagusCharacterGenerator
+namespace MagusCharacterGenerator;
+
+class Program
 {
-	class Program
+    static void Main()
     {
-        static void Main(string[] args)
-        {
-            //Lng.ChangeToLanguage(Language.English);
+        //Lng.ChangeToLanguage(Language.English);
 
-            var level = 6;
-            var witch = new Character(new Settings(), "Mirena", new Human(), new Witch(level, true));
-            Console.WriteLine(witch);
+        var level = 6;
+        var witch = new Character(new Settings(), "Mirena", new Human(), new Witch(level, true));
+        Console.WriteLine(witch);
 
-            var fireWizard = new Character(new Settings(), "Siron", new Human(), new FireMage(level, true));
-            Console.WriteLine(fireWizard);
+        var fireWizard = new Character(new Settings(), "Siron", new Human(), new FireMage(level, true));
+        Console.WriteLine(fireWizard);
 
-            var headHunter = new Character(new Settings(), "Vesryn", new Elf(), new Assassin(level, true));
-            Console.WriteLine(headHunter);
+        var headHunter = new Character(new Settings(), "Vesryn", new Elf(), new Assassin(level, true));
+        Console.WriteLine(headHunter);
 
-            var slan = new Character(new Settings(), "Toll", new Elf(), new MartialArtist(level, true));
-            Console.WriteLine(slan);
+        var slan = new Character(new Settings(), "Toll", new Elf(), new MartialArtist(level, true));
+        Console.WriteLine(slan);
 
-            var wizard = new Character(new Settings(), "Maron", new Elf(), new Wizard(level, true));
-            Console.WriteLine(wizard);
+        var wizard = new Character(new Settings(), "Maron", new Elf(), new Wizard(level, true));
+        Console.WriteLine(wizard);
 
-            Console.ReadKey();
-        }
+        Console.ReadKey();
     }
 }

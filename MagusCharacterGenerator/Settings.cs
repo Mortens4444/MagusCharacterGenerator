@@ -1,35 +1,37 @@
-﻿using M.A.G.U.S.Interfaces;
+﻿using M.A.G.U.S.Enums;
+using M.A.G.U.S.Interfaces;
 
-namespace M.A.G.U.S.Test
+namespace MagusCharacterGenerator;
+
+class Settings : ISettings
 {
-    class Settings : ISettings
-    {
-        public bool AddCombatValueOnFirstLevelForAllClass => true;
+    public bool AddCombatValueOnFirstLevelForAllClass => true;
 
-        public bool AddPainToleranceOnFirstLevelForAllClass => true;
+    public bool AddPainToleranceOnFirstLevelForAllClass => true;
 
-        public bool AddQualificationPointsOnFirstLevelForAllClass => true;
+    public bool AddQualificationPointsOnFirstLevelForAllClass => true;
 
-        public bool AddManaPointsOnFirstLevelForAllClass => true;
+    public bool AddManaPointsOnFirstLevelForAllClass => true;
 
-        public bool AddPsiPointsOnFirstLevelForAllClass => true;
+    public bool AddPsiPointsOnFirstLevelForAllClass => true;
 
-        public bool AutoDistributeCombatValues => true;
+    public bool AutoDistributeCombatValues => true;
 
-        public bool AutoDistributeQualificationPoints => true;
+    public bool AutoDistributeQualificationPoints => true;
 
-        public bool AutoIncreasePainTolerance => true;
+    public bool AutoIncreasePainTolerance => true;
 
-        public bool AutoGenerateSkills => true;
+    public bool AutoGenerateSkills => true;
 
-        public bool AssignmentTurnHistoryNewestOnTop => true;
+    public bool AssignmentTurnHistoryNewestOnTop => true;
 
-        public bool AutoIncreaseManaPoints => true;
+    public bool AutoIncreaseManaPoints => true;
 
-        public int MaxDiesCount => 1;
+    public int MaxDiesCount => 1;
 
-        public bool UseRaceClassRestrictions => true;
+    public bool UseRaceClassRestrictions => true;
 
-        public bool ShowRandomBeastWhenBestiaryPageOpened => true;
-    }
+    public bool ShowRandomBeastWhenBestiaryPageOpened => true;
+
+    public CombatSimulatorMode CombatSimulatorMode => CombatSimulatorMode.SemiAuto;
 }

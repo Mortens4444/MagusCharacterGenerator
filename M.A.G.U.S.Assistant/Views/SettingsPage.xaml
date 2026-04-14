@@ -3,11 +3,16 @@
                 xmlns:v="clr-namespace:Mtf.LanguageService.MAUI.Views;assembly=Mtf.LanguageService.MAUI"
                 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
                 xmlns:vm="clr-namespace:M.A.G.U.S.Assistant.ViewModels"
+                xmlns:conv="clr-namespace:Mtf.LanguageService.MAUI.Converters;assembly=Mtf.LanguageService.MAUI"
                 x:Class="M.A.G.U.S.Assistant.Views.SettingsPage"
                 Title="Settings"
                 x:ClassModifier="internal"
                 x:DataType="vm:SettingsViewModel">
-    
+    <v:NotifierPage.Resources>
+        <ResourceDictionary>
+            <conv:EnumDescriptionTranslationConverter x:Key="EnumDescriptionTranslationConverter" />
+        </ResourceDictionary>
+    </v:NotifierPage.Resources>
     <ScrollView>
         <VerticalStackLayout Padding="20" Spacing="20">
             
@@ -186,6 +191,19 @@
                            VerticalOptions="Center"
                            LineBreakMode="WordWrap" />
                     <Switch Grid.Column="1" IsToggled="{Binding ShowRandomBeastWhenBestiaryPageOpened}" />
+                </Grid>
+            </Border>
+
+            <Border StrokeShape="RoundRectangle 10" Padding="15" StrokeThickness="0"
+                    BackgroundColor="{AppThemeBinding Light={StaticResource Gray100}, Dark={StaticResource Gray600}}">
+                <Grid ColumnDefinitions="*, Auto">
+                    <Label Grid.Column="0" Text="Combat Simulator Mode" VerticalOptions="Center" FontAttributes="Bold"/>
+                    <!--<Picker Grid.Column="1" x:Name="CombatSimulatorModePicker" Title="Select combat simulator mode" WidthRequest="200" />-->
+                    <Picker Title="Select combat simulator mode" WidthRequest="200"
+                            Grid.Column="1" ItemsSource="{Binding CombatSimulatorModes}"
+                            ItemDisplayBinding="{Binding ., Converter={StaticResource EnumDescriptionTranslationConverter}}"
+                            SelectedItem="{Binding CombatSimulatorMode, Mode=TwoWay}" />
+                    
                 </Grid>
             </Border>
 

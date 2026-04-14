@@ -1,4 +1,5 @@
-﻿using Mtf.LanguageService.Enums;
+﻿using M.A.G.U.S.Enums;
+using Mtf.LanguageService.Enums;
 
 namespace M.A.G.U.S.Assistant;
 
@@ -20,6 +21,7 @@ internal class Constants
     public const bool UseRaceClassRestrictions = true;
     public const bool AssignmentTurnHistoryNewestOnTop = true;
     public const bool ShowRandomBeastWhenBestiaryPageOpened = true;
+    public const CombatSimulatorMode CombatSimulatorMode = CombatSimulatorMode.SemiAuto;
 
     public const Language DefaultLanguage = Language.Hungarian;
 }
