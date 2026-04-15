@@ -1,5 +1,7 @@
 ﻿using M.A.G.U.S.Enums;
 using M.A.G.U.S.GameSystem;
+using M.A.G.U.S.Interfaces;
+using M.A.G.U.S.Services;
 using Mtf.Extensions;
 
 namespace M.A.G.U.S.Utils;
@@ -7,8 +9,10 @@ namespace M.A.G.U.S.Utils;
 public static class HitLocationSelector
 {
     private static readonly DiceThrow diceThrow = new();
+    
+    public static (PlaceOfAttack, string) GetLocation(AttackDirection attackDirection) => GetLocationAsync(attackDirection, new AutoCombatRollService()).GetAwaiter().GetResult();
 
-    public static (PlaceOfAttack, string) GetLocation(AttackDirection attackDirection)
+    public static Task<(PlaceOfAttack, string)> GetLocationAsync(AttackDirection attackDirection, ICombatRollService rollService)
     {
         var hitLocation = Get();
         var subLocation = String.Empty;
@@ -53,7 +57,7 @@ public static class HitLocationSelector
                 throw new NotImplementedException();
         }
 
-        return (hitLocation, subLocation);
+        return Task.FromResult((hitLocation, subLocation));
     }
 
     private static PlaceOfAttack Get()

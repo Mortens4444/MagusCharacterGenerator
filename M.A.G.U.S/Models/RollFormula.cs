@@ -1,14 +1,12 @@
 ﻿using M.A.G.U.S.Enums;
 using M.A.G.U.S.GameSystem.Attributes;
-using M.A.G.U.S.Models;
 using Mtf.Extensions;
-using Mtf.LanguageService.MAUI;
 using System.Reflection;
 using System.Text.RegularExpressions;
 
-namespace M.A.G.U.S.Assistant.Models;
+namespace M.A.G.U.S.Models;
 
-internal class RollFormula
+public class RollFormula
 {
     public RollFormula(string formula, int modifier, bool specialTraining, string title = "Roll")
     {
@@ -67,14 +65,4 @@ internal class RollFormula
     public bool SpecialTraining { get; private set; }
 
     public bool DefaultToAuto { get; set; } = true;
-
-    public string FullFormula
-    {
-        get
-        {
-            var modPart = Modifier != 0 ? $" + {Modifier}" : String.Empty;
-            var specialPart = SpecialTraining ? $" + {Lng.Elem("Special Training")}" : String.Empty;
-            return $"{Lng.Elem(ThrowType.GetDescription())}{modPart}{specialPart}";
-        }
-    }
 }

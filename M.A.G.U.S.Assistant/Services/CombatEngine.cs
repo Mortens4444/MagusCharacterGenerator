@@ -3,6 +3,7 @@ using M.A.G.U.S.Enums;
 using M.A.G.U.S.GameSystem;
 using M.A.G.U.S.GameSystem.CombatModifiers;
 using M.A.G.U.S.GameSystem.Turn;
+using M.A.G.U.S.Interfaces;
 using M.A.G.U.S.Utils;
 using Mtf.Extensions;
 
@@ -10,15 +11,15 @@ namespace M.A.G.U.S.Assistant.Services;
 
 internal class CombatEngine
 {
-    public static void ProcessAssignmentTurn(AssignmentViewModel assignment, int round)
+    public static async Task ProcessAssignmentTurnAsync(AssignmentViewModel assignment, int round, ICombatRollService rollService)
     {
         var turn = new TurnData { Round = round };
-        var initiatives = EncounterHelpers.GetInitiatives(assignment, turn).ToList();
+        var initiatives = await EncounterHelpers.GetInitiativesAsync(assignment, turn, rollService).ConfigureAwait(false);
         turn.Initiatives.AddRange(initiatives);
 
         foreach (var initiative in turn.Initiatives)
         {
-            ProcessInitiative(initiative, assignment);
+            await ProcessInitiativeAsync(initiative, assignment, rollService).ConfigureAwait(false);
         }
 
         if (initiatives.Count != 0)
@@ -27,7 +28,7 @@ internal class CombatEngine
         }
     }
 
-    private static void ProcessInitiative(InitiativeEntry initiative, AssignmentViewModel assignment)
+    private static async Task ProcessInitiativeAsync(InitiativeEntry initiative, AssignmentViewModel assignment, ICombatRollService rollService)
     {
         Attacker attacker = initiative.Attacker.Source;
         Attacker target = initiative.Target.Source;
@@ -41,7 +42,8 @@ internal class CombatEngine
             initiative.Attacker.AddTemporaryModifier(ambushMod);
         }
 
-        var (hitLocation, subLocation) = HitLocationSelector.GetLocation(attackDirection);
+        var (hitLocation, subLocation) = await HitLocationSelector.GetLocationAsync(attackDirection, rollService).ConfigureAwait(false);
+        //var (hitLocation, subLocation) = HitLocationSelector.GetLocation(attackDirection);
         var locationDescription = hitLocation.GetDescription();
         if (initiative.SelectedAttack == null)
         {
@@ -53,6 +55,7 @@ internal class CombatEngine
         if (!target.IsConscious)
         {
             // Automatic damage
+            //var baseDamage = await initiative.SelectedAttack.GetDamageAsync(rollService).ConfigureAwait(false);
             var baseDamage = initiative.SelectedAttack.GetDamage();
             var finalDamage = Math.Max(0, baseDamage - (target.Armor?.ArmorClass ?? 0));
             target.ActualHealthPoints -= finalDamage;

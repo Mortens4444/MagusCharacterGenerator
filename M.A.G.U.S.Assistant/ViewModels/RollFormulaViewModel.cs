@@ -20,12 +20,12 @@ internal partial class RollFormulaViewModel : BaseViewModel, IDisposable
     private readonly IShakeService? shakeService;
     private readonly DiceThrow diceThrow = new();
 
-    private RollFormula rollFormula;
+    private LocalizedRollFormula rollFormula;
     private int result;
     private string userResultString = String.Empty;
     private bool resultLocked;
 
-    public RollFormulaViewModel(ISoundPlayer? soundPlayer, IShakeService? shakeService, RollFormula rollFormula)
+    public RollFormulaViewModel(ISoundPlayer? soundPlayer, IShakeService? shakeService, LocalizedRollFormula rollFormula)
     {
         this.rollFormula = rollFormula;
         this.soundPlayer = soundPlayer;
@@ -80,7 +80,7 @@ internal partial class RollFormulaViewModel : BaseViewModel, IDisposable
 
     public bool IsActionEnabled => !IsResultLocked;
 
-    public RollFormula RollFormula
+    public LocalizedRollFormula RollFormula
     {
         get => rollFormula;
         set

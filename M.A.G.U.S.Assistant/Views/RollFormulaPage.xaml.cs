@@ -20,11 +20,11 @@ internal partial class RollFormulaPage : NotifierPage
     private readonly TaskCompletionSource<int> tcs = new();
 
     public RollFormulaPage(ISoundPlayer soundPlayer, IShakeService shakeService, DiceThrowFormula rollFormula, string title)
-        : this(soundPlayer, shakeService, new RollFormula(rollFormula, title))
+        : this(soundPlayer, shakeService, new LocalizedRollFormula(rollFormula, title))
     {
     }
 
-    public RollFormulaPage(ISoundPlayer soundPlayer, IShakeService shakeService, RollFormula rollFormula)
+    public RollFormulaPage(ISoundPlayer soundPlayer, IShakeService shakeService, LocalizedRollFormula rollFormula)
     {
         InitializeComponent();
         RollFormulaTitle.Text = Lng.Elem(rollFormula.Title);

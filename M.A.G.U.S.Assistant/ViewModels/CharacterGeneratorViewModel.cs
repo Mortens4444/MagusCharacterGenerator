@@ -107,7 +107,7 @@ internal partial class CharacterGeneratorViewModel : CharacterViewModel
 
                 foreach (var propertyInfo in skillProperties)
                 {
-                    var rollFormula = new RollFormula(propertyInfo, $"{Lng.Elem("Create character")} - {Lng.Elem(propertyInfo!.Name)}");
+                    var rollFormula = new LocalizedRollFormula(propertyInfo, $"{Lng.Elem("Create character")} - {Lng.Elem(propertyInfo!.Name)}");
                     var page = new RollFormulaPage(soundPlayer, shakeService, rollFormula);
                     await ShellNavigationService.ShowPageAsync(page).ConfigureAwait(true);
                     var result = await page.ResultTask.ConfigureAwait(true);

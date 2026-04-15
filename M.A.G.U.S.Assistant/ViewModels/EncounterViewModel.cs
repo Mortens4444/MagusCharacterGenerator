@@ -4,9 +4,11 @@ using M.A.G.U.S.Assistant.Enums;
 using M.A.G.U.S.Assistant.Services;
 using M.A.G.U.S.Assistant.Views;
 using M.A.G.U.S.Bestiary;
+using M.A.G.U.S.Enums;
 using M.A.G.U.S.Extensions;
 using M.A.G.U.S.GameSystem;
 using M.A.G.U.S.Interfaces;
+using M.A.G.U.S.Services;
 using Mtf.LanguageService.MAUI;
 using Mtf.Maui.Controls.Messages;
 using System.Collections.ObjectModel;
@@ -230,6 +232,75 @@ internal partial class EncounterViewModel : CharacterListLoaderViewModel, IDispo
     [RelayCommand(CanExecute = nameof(CanRunTurn))]
     private async Task RunTurnAsync()
     {
+        var mode = settings.CombatSimulatorMode;
+
+        switch (mode)
+        {
+            case CombatSimulatorMode.Manual:
+            case CombatSimulatorMode.SemiAuto:
+                await RunTurnsAsync(runUntilFinished: false).ConfigureAwait(false);
+                break;
+
+            case CombatSimulatorMode.FullAuto:
+                await RunTurnsAsync(runUntilFinished: true).ConfigureAwait(false);
+                break;
+        }
+    }
+    
+    private ICombatRollService CreateCombatRollService()
+    {
+        return settings.CombatSimulatorMode == CombatSimulatorMode.Manual
+            //? new ManualCombatRollService(soundPlayer, shakeService)
+            ? new ManualCombatRollService(null, null)
+            : new AutoCombatRollService();
+    }
+
+    private async Task RunTurnsAsync(bool runUntilFinished)
+    {
+        if (await TryPrepareEncounterAsync().ConfigureAwait(false))
+        {
+            return;
+        }
+
+        await SetTurnRunningStateAsync(true).ConfigureAwait(false);
+
+        try
+        {
+            var rollService = CreateCombatRollService();
+
+            do
+            {
+                await RunSingleRoundAsync(rollService).ConfigureAwait(false);
+            }
+            while (runUntilFinished && !IsEncounterOver());
+        }
+        finally
+        {
+            await MainThread.InvokeOnMainThreadAsync(() =>
+            {
+                IsRunningTurns = false;
+                RunTurnCommand.NotifyCanExecuteChanged();
+
+                if (IsEncounterOver())
+                {
+                    EndEncounter();
+                }
+            }).ConfigureAwait(false);
+        }
+    }
+
+    private Task SetTurnRunningStateAsync(bool isRunning)
+    {
+        return MainThread.InvokeOnMainThreadAsync(() =>
+        {
+            IsRunningTurns = isRunning;
+            ShowControls = !isRunning;
+            RunTurnCommand.NotifyCanExecuteChanged();
+        });
+    }
+
+    private async Task<bool> TryPrepareEncounterAsync()
+    {
         var hasEnemies = Assignments.Any(a => a.Enemies?.Count > 0);
         if (!hasEnemies && SelectedEnemy is Creature autoCreature)
         {
@@ -239,40 +310,28 @@ internal partial class EncounterViewModel : CharacterListLoaderViewModel, IDispo
             SelectedEnemy = null;
             RunTurnCommand.NotifyCanExecuteChanged();
             AddSingleCharacterToAssignments();
-            return;
+            return true;
         }
 
         if (IsEncounterOver())
         {
             await NewEncounter().ConfigureAwait(false);
             AddSingleCharacterToAssignments();
-            return;
+            return true;
         }
 
-        IsRunningTurns = true;
-        ShowControls = false;
-        RunTurnCommand.NotifyCanExecuteChanged();
+        return false;
+    }
 
+    private async Task RunSingleRoundAsync(ICombatRollService rollService)
+    {
         var assignmentsSnapshot = Assignments.ToList();
-        await Task.Run(() =>
-        {
-            foreach (var assignment in assignmentsSnapshot)
-            {
-                var round = assignment.TurnHistory.Count + 1;
-                CombatEngine.ProcessAssignmentTurn(assignment, round);
-            }
-        }).ConfigureAwait(false);
 
-        await MainThread.InvokeOnMainThreadAsync(() =>
+        foreach (var assignment in assignmentsSnapshot)
         {
-            IsRunningTurns = false;
-            RunTurnCommand.NotifyCanExecuteChanged();
-
-            if (IsEncounterOver())
-            {
-                EndEncounter();
-            }
-        }).ConfigureAwait(false);
+            var round = assignment.TurnHistory.Count + 1;
+            await CombatEngine.ProcessAssignmentTurnAsync(assignment, round, rollService).ConfigureAwait(false);
+        }
     }
 
     private void RebuildSelectedTurnHistory()

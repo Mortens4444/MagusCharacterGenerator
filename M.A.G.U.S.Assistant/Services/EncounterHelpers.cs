@@ -2,13 +2,23 @@
 using M.A.G.U.S.Enums;
 using M.A.G.U.S.GameSystem;
 using M.A.G.U.S.GameSystem.Turn;
+using M.A.G.U.S.Interfaces;
+using M.A.G.U.S.Services;
 using Mtf.Extensions.Services;
 
 namespace M.A.G.U.S.Assistant.Services;
 
 internal static class EncounterHelpers
 {
-    public static IOrderedEnumerable<InitiativeEntry> GetInitiatives(AssignmentViewModel assignment, TurnData turn)
+    public static Task<List<InitiativeEntry>> GetInitiativesAsync(AssignmentViewModel assignment, TurnData turn, ICombatRollService rollService)
+    {
+        var result = GetInitiatives(assignment, turn, rollService).ToList();
+        return Task.FromResult(result);
+    }
+
+    public static IOrderedEnumerable<InitiativeEntry> GetInitiatives(AssignmentViewModel assignment, TurnData turn) => GetInitiatives(assignment, turn, new AutoCombatRollService());
+
+    public static IOrderedEnumerable<InitiativeEntry> GetInitiatives(AssignmentViewModel assignment, TurnData turn, ICombatRollService rollService)
     {
         var result = new List<InitiativeEntry>();
         if (!assignment.Enemies.Any())
