@@ -1,3 +1,4 @@
+- DiceThrowFormula, ThrowType, RollFormua, LocalizedRollFormua -> should be simplified
 - refactor DiceThrow to use Range in these:     public int _9D10(bool hasLuckAmulet = false) => ApplyLuck(RandomProvider.GetSecureRandomByte(9, 91), 9, 91, hasLuckAmulet);
 - what kind of classes can be created an amount of xp (ex:50000XP)
 - xp set after ancounter ends, or get a logic, which sets automatically the earned xp from max xp and combat style

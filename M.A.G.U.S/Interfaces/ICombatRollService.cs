@@ -4,5 +4,11 @@ namespace M.A.G.U.S.Interfaces;
 
 public interface ICombatRollService
 {
+    Task<int> RollInitiativeAsync(string title = "");
+
+    Task<int> RollAttackAsync(string title = "");
+
+    Task<int> RollAsync(RollFormula formula, string title = "");
+
     Task<int> RollAsync(DiceThrowFormula formula, string title);
 }

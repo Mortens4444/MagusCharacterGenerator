@@ -28,6 +28,11 @@ internal class LocalizedRollFormula : RollFormula
     {
     }
 
+    public LocalizedRollFormula(RollFormula rollFormula, string title = "Roll")
+        : base(rollFormula.ThrowType, rollFormula.Modifier, rollFormula.SpecialTraining, title)
+    {
+    }
+
     public string FullFormula
     {
         get

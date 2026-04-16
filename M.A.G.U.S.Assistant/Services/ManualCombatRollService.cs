@@ -1,5 +1,8 @@
 ﻿using M.A.G.U.S.Assistant.Interfaces;
+using M.A.G.U.S.Assistant.Models;
 using M.A.G.U.S.Assistant.Views;
+using M.A.G.U.S.Enums;
+using M.A.G.U.S.GameSystem;
 using M.A.G.U.S.Interfaces;
 using M.A.G.U.S.Models;
 
@@ -10,10 +13,30 @@ internal sealed class ManualCombatRollService(ISoundPlayer soundPlayer, IShakeSe
     private readonly ISoundPlayer soundPlayer = soundPlayer;
     private readonly IShakeService shakeService = shakeService;
 
+    public async Task<int> RollAsync(RollFormula formula, string title = "")
+    {
+        var locailzedRollFormula = formula is LocalizedRollFormula localizedFormula ? localizedFormula : new LocalizedRollFormula(formula, title);
+        var page = new RollFormulaPage(soundPlayer, shakeService, locailzedRollFormula);
+        await ShellNavigationService.ShowPageAsync(page).ConfigureAwait(true);
+        return await page.ResultTask.ConfigureAwait(true);
+    }
+
     public async Task<int> RollAsync(DiceThrowFormula formula, string title)
     {
         var page = new RollFormulaPage(soundPlayer, shakeService, formula, title);
         await ShellNavigationService.ShowPageAsync(page).ConfigureAwait(true);
         return await page.ResultTask.ConfigureAwait(true);
+    }
+
+    public Task<int> RollAttackAsync(string title = "")
+    {
+        var locailzedRollFormula = new LocalizedRollFormula(ThrowType._1D100, 0, false, title);
+        return RollAsync(locailzedRollFormula);
+    }
+
+    public Task<int> RollInitiativeAsync(string title = "")
+    {
+        var locailzedRollFormula = new LocalizedRollFormula(ThrowType._1D10, 0, false, title);
+        return RollAsync(locailzedRollFormula);
     }
 }

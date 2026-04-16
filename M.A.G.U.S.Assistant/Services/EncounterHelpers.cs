@@ -5,6 +5,8 @@ using M.A.G.U.S.GameSystem.Turn;
 using M.A.G.U.S.Interfaces;
 using M.A.G.U.S.Services;
 using Mtf.Extensions.Services;
+using Mtf.LanguageService.MAUI;
+using System.Linq;
 
 namespace M.A.G.U.S.Assistant.Services;
 
@@ -33,22 +35,22 @@ internal static class EncounterHelpers
                 continue;
             }
             int dist = assignment.GetDistanceInMeters(enemy);
-            var intendedAttack = enemy.GetRandomAttackMode();
+            var intendedAttack = enemy.GetRandomAttackMode(); // Need an attack mode provider like ICombatRollService
             int range = Attacker.GetAttackRangeInMeters(intendedAttack);
             if (dist > range)
             {
                 int speed = enemy.GetMaxMovementSpeed();
                 assignment.DecreaseDistance(enemy, speed);
-                AddInitiative(new CombatantRef(enemy), new CombatantRef(assignment.Character), null, result);
+                AddInitiative(new CombatantRef(enemy), new CombatantRef(assignment.Character), null, result, rollService);
                 continue;
             }
 
             if (result.Count < assignment.MaxSimultaneousAttacks)
             {
-                int attackCount = enemy.GetAttackCountForRound(turn.Round);
+                int attackCount = enemy.GetAttackCountForRound(turn.Round); // Shouldn't it use intendedAttack also to determinate the attack count?
                 for (var i = 0; i < attackCount; i++)
                 {
-                    AddInitiative(new CombatantRef(enemy), new CombatantRef(assignment.Character), intendedAttack, result);
+                    AddInitiative(new CombatantRef(enemy), new CombatantRef(assignment.Character), intendedAttack, result, rollService);
                 }
             }
         }
@@ -67,26 +69,28 @@ internal static class EncounterHelpers
             _ => throw new NotImplementedException()
         });
 
-        int characterAttackCount = assignment.Character.GetAttackCountForRound(turn.Round);
+        int characterAttackCount = assignment.Character.GetAttackCountForRound(turn.Round); // Same here with charIntendedAttack?
         var charIntendedAttack = assignment.Character.AttackModes.FirstOrDefault();
         int charDist = assignment.GetDistanceInMeters(target);
 
         for (var i = 0; i < characterAttackCount; i++)
         {
-            AddInitiative(new CombatantRef(assignment.Character), new CombatantRef(target), charIntendedAttack, result);
+            AddInitiative(new CombatantRef(assignment.Character), new CombatantRef(target), charIntendedAttack, result, rollService);
         }
         return result.OrderByDescending(initiative => initiative.FinalInitiative);
     }
 
-    private static void AddInitiative(CombatantRef attacker, CombatantRef target, Attack? attack, List<InitiativeEntry> result)
+    private static void AddInitiative(CombatantRef attacker, CombatantRef target, Attack? attack, List<InitiativeEntry> result, ICombatRollService rollService)
     {
+        var name = attacker.Source is Character character ? character.Name : Lng.Elem(attacker.Source.Name);
+        var init = Lng.Elem("Initiative");
         result.Add(new InitiativeEntry
         {
             Attacker = attacker,
             Target = target,
             SelectedAttack = attack,
             BaseInitiative = attacker.Source.InitiateValue,
-            RolledValue = attacker.Source.RollInitiative()
+            RolledValue = rollService.RollInitiativeAsync($"{name} {init}").GetAwaiter().GetResult()
         });
     }
 }
