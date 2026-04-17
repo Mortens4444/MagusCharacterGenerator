@@ -17,6 +17,7 @@ internal sealed class ManualCombatRollService(ISoundPlayer soundPlayer, IShakeSe
         var locailzedRollFormula = formula is LocalizedRollFormula localizedFormula ? localizedFormula : new LocalizedRollFormula(formula, title);
         var page = new RollFormulaPage(soundPlayer, shakeService, locailzedRollFormula);
         await ShellNavigationService.ShowModalPageAsync(page).ConfigureAwait(true);
+        await Task.Yield();
         return await page.ResultTask.ConfigureAwait(true);
     }
 
@@ -24,6 +25,7 @@ internal sealed class ManualCombatRollService(ISoundPlayer soundPlayer, IShakeSe
     {
         var page = new RollFormulaPage(soundPlayer, shakeService, formula, title);
         await ShellNavigationService.ShowModalPageAsync(page).ConfigureAwait(true);
+        await Task.Yield();
         return await page.ResultTask.ConfigureAwait(true);
     }
 

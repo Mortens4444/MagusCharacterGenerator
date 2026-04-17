@@ -6,26 +6,43 @@ using M.A.G.U.S.Interfaces;
 using M.A.G.U.S.Services;
 using Mtf.Extensions.Services;
 using Mtf.LanguageService.MAUI;
-using System.Linq;
 
 namespace M.A.G.U.S.Assistant.Services;
 
 internal static class EncounterHelpers
 {
-    public static Task<List<InitiativeEntry>> GetInitiativesAsync(AssignmentViewModel assignment, TurnData turn, ICombatRollService rollService)
+    public static async Task<List<InitiativeEntry>> GetInitiativesAsync(
+        AssignmentViewModel assignment,
+        TurnData turn,
+        ICombatRollService rollService)
     {
-        var result = GetInitiatives(assignment, turn, rollService).ToList();
-        return Task.FromResult(result);
+        var result = await GetInitiativesInternalAsync(assignment, turn, rollService).ConfigureAwait(false);
+        return result.OrderByDescending(initiative => initiative.FinalInitiative).ToList();
     }
 
-    public static IOrderedEnumerable<InitiativeEntry> GetInitiatives(AssignmentViewModel assignment, TurnData turn) => GetInitiatives(assignment, turn, new AutoCombatRollService());
+    public static IOrderedEnumerable<InitiativeEntry> GetInitiatives(
+        AssignmentViewModel assignment,
+        TurnData turn) =>
+        GetInitiativesAsync(assignment, turn, new AutoCombatRollService())
+            .GetAwaiter()
+            .GetResult()
+            .OrderByDescending(initiative => initiative.FinalInitiative);
 
-    public static IOrderedEnumerable<InitiativeEntry> GetInitiatives(AssignmentViewModel assignment, TurnData turn, ICombatRollService rollService)
+    public static async Task<IOrderedEnumerable<InitiativeEntry>> GetInitiativesAsync(
+        AssignmentViewModel assignment,
+        TurnData turn) =>
+        (await GetInitiativesInternalAsync(assignment, turn, new AutoCombatRollService()).ConfigureAwait(false))
+            .OrderByDescending(initiative => initiative.FinalInitiative);
+
+    private static async Task<List<InitiativeEntry>> GetInitiativesInternalAsync(
+        AssignmentViewModel assignment,
+        TurnData turn,
+        ICombatRollService rollService)
     {
         var result = new List<InitiativeEntry>();
         if (!assignment.Enemies.Any())
         {
-            return result.OrderByDescending(initiative => initiative.FinalInitiative);
+            return result;
         }
 
         foreach (var enemy in assignment.Enemies.ToList())
@@ -34,14 +51,16 @@ internal static class EncounterHelpers
             {
                 continue;
             }
+
             int dist = assignment.GetDistanceInMeters(enemy);
             var intendedAttack = enemy.GetRandomAttackMode(); // Need an attack mode provider like ICombatRollService
             int range = Attacker.GetAttackRangeInMeters(intendedAttack);
+
             if (dist > range)
             {
                 int speed = enemy.GetMaxMovementSpeed();
                 assignment.DecreaseDistance(enemy, speed);
-                AddInitiative(new CombatantRef(enemy), new CombatantRef(assignment.Character), null, result, rollService);
+                await AddInitiativeAsync(new CombatantRef(enemy), new CombatantRef(assignment.Character), null, result, rollService).ConfigureAwait(false);
                 continue;
             }
 
@@ -50,14 +69,14 @@ internal static class EncounterHelpers
                 int attackCount = enemy.GetAttackCountForRound(turn.Round); // Shouldn't it use intendedAttack also to determinate the attack count?
                 for (var i = 0; i < attackCount; i++)
                 {
-                    AddInitiative(new CombatantRef(enemy), new CombatantRef(assignment.Character), intendedAttack, result, rollService);
+                    await AddInitiativeAsync(new CombatantRef(enemy), new CombatantRef(assignment.Character), intendedAttack, result, rollService).ConfigureAwait(false);
                 }
             }
         }
 
         if (!assignment.Character.IsConscious)
         {
-            return result.OrderByDescending(initiative => initiative.FinalInitiative);
+            return result;
         }
 
         var target = (Attacker)(assignment.Character.AttackStrategy switch
@@ -71,26 +90,32 @@ internal static class EncounterHelpers
 
         int characterAttackCount = assignment.Character.GetAttackCountForRound(turn.Round); // Same here with charIntendedAttack?
         var charIntendedAttack = assignment.Character.AttackModes.FirstOrDefault();
-        int charDist = assignment.GetDistanceInMeters(target);
 
         for (var i = 0; i < characterAttackCount; i++)
         {
-            AddInitiative(new CombatantRef(assignment.Character), new CombatantRef(target), charIntendedAttack, result, rollService);
+            await AddInitiativeAsync(new CombatantRef(assignment.Character), new CombatantRef(target), charIntendedAttack, result, rollService).ConfigureAwait(false);
         }
-        return result.OrderByDescending(initiative => initiative.FinalInitiative);
+
+        return result;
     }
 
-    private static void AddInitiative(CombatantRef attacker, CombatantRef target, Attack? attack, List<InitiativeEntry> result, ICombatRollService rollService)
+    private static async Task AddInitiativeAsync(
+        CombatantRef attacker,
+        CombatantRef target,
+        Attack? attack,
+        List<InitiativeEntry> result,
+        ICombatRollService rollService)
     {
         var name = attacker.Source is Character character ? character.Name : Lng.Elem(attacker.Source.Name);
-        var init = Lng.Elem("Initiative");
+        var init = Lng.Elem("Initiate");
+
         result.Add(new InitiativeEntry
         {
             Attacker = attacker,
             Target = target,
             SelectedAttack = attack,
             BaseInitiative = attacker.Source.InitiateValue,
-            RolledValue = rollService.RollInitiativeAsync($"{name} {init}").GetAwaiter().GetResult()
+            RolledValue = await rollService.RollInitiativeAsync($"{name} {init}").ConfigureAwait(false)
         });
     }
 }

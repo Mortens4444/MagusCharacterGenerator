@@ -41,7 +41,9 @@ public enum ThrowType
 	_1D100,
 	[Description("1D3")]
 	_1D3,
-	[Description("3D100")]
+    [Description("2D100")]
+    _2D100,
+    [Description("3D100")]
 	_3D100,
     [Description("4D10")]
     _4D10,
