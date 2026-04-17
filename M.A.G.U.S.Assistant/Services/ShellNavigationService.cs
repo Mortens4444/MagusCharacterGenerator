@@ -42,29 +42,54 @@ internal static class ShellNavigationService
         });
     }
 
-    public static Task ShowPageAsync(Page page) => MainThread.InvokeOnMainThreadAsync(async () =>
+    public static Task ShowModalPageAsync(Page page) => MainThread.InvokeOnMainThreadAsync(async () =>
+    {
+        try
         {
-            try
-            {
-                await Shell.Current.Navigation.PushAsync(page).ConfigureAwait(true);
-            }
-            catch (Exception ex)
-            {
-                WeakReferenceMessenger.Default.Send(new ShowErrorMessage(ex));
-            }
-        });
+            await Shell.Current.Navigation.PushModalAsync(page).ConfigureAwait(true);
+        }
+        catch (Exception ex)
+        {
+            WeakReferenceMessenger.Default.Send(new ShowErrorMessage(ex));
+        }
+    });
+
+    public static Task ShowPageAsync(Page page) => MainThread.InvokeOnMainThreadAsync(async () =>
+    {
+        try
+        {
+            await Shell.Current.Navigation.PushAsync(page).ConfigureAwait(true);
+        }
+        catch (Exception ex)
+        {
+            WeakReferenceMessenger.Default.Send(new ShowErrorMessage(ex));
+        }
+    });
 
     public static Task ClosePageAsync() => MainThread.InvokeOnMainThreadAsync(async () =>
+    {
+        try
         {
-            try
-            {
-                await Shell.Current.Navigation.PopAsync().ConfigureAwait(true);
-            }
-            catch (Exception ex)
-            {
-                WeakReferenceMessenger.Default.Send(new ShowErrorMessage(ex));
-            }
-        });
+            await Shell.Current.Navigation.PopAsync().ConfigureAwait(true);
+        }
+        catch (Exception ex)
+        {
+            WeakReferenceMessenger.Default.Send(new ShowErrorMessage(ex));
+        }
+    });
+
+    public static Task CloseModalPageAsync()
+    {
+        try
+        {
+            return MainThread.InvokeOnMainThreadAsync(() => Shell.Current.Navigation.PopModalAsync());
+        }
+        catch (Exception ex)
+        {
+            WeakReferenceMessenger.Default.Send(new ShowErrorMessage(ex));
+            return Task.CompletedTask;
+        }
+    }
 
     public static Task NavigateToAsync(string route, object? parameter = null, bool animate = true)
     {

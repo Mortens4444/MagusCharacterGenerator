@@ -1,6 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.Messaging;
 using M.A.G.U.S.Assistant.Enums;
+using M.A.G.U.S.Assistant.Interfaces;
 using M.A.G.U.S.Assistant.Services;
 using M.A.G.U.S.Assistant.Views;
 using M.A.G.U.S.Bestiary;
@@ -26,12 +27,16 @@ internal partial class EncounterViewModel : CharacterListLoaderViewModel, IDispo
     private bool showControls = true;
     private bool isRunningTurns;
     private AssignmentViewModel? previousSelectedAssignment;
+    private readonly ISoundPlayer soundPlayer;
+    private readonly IShakeService shakeService;
 
     public ObservableCollection<TurnViewModel> SelectedTurnHistory { get; } = [];
 
-    public EncounterViewModel(ISettings settings, CharacterService characterService) : base(characterService)
+    public EncounterViewModel(ISettings settings, CharacterService characterService, ISoundPlayer soundPlayer, IShakeService shakeService) : base(characterService)
     {
         this.settings = settings;
+        this.soundPlayer = soundPlayer;
+        this.shakeService = shakeService;
     }
 
     public ObservableCollection<Character> Characters { get; } = [];
@@ -250,8 +255,7 @@ internal partial class EncounterViewModel : CharacterListLoaderViewModel, IDispo
     private ICombatRollService CreateCombatRollService()
     {
         return settings.CombatSimulatorMode == CombatSimulatorMode.Manual
-            //? new ManualCombatRollService(soundPlayer, shakeService)
-            ? new ManualCombatRollService(null, null)
+            ? new ManualCombatRollService(soundPlayer, shakeService)
             : new AutoCombatRollService();
     }
 

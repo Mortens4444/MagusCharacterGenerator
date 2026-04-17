@@ -76,7 +76,7 @@ internal partial class RollFormulaPage : NotifierPage
         if (!isClosing)
         {
             isClosing = true;
-            await ShellNavigationService.ClosePageAsync().ConfigureAwait(true);
+            await ShellNavigationService.CloseModalPageAsync().ConfigureAwait(true);
             tcs.TrySetResult(ViewModel.Result);
         }
     }
