@@ -20,6 +20,26 @@ internal static class MauiProgram
 
     public static MauiApp CreateMauiApp()
     {
+        AppDomain.CurrentDomain.UnhandledException += (sender, args) =>
+        {
+            if (args.ExceptionObject is Exception exception)
+            {
+                Console.Error.WriteLine($"{exception}");
+                Debug.WriteLine($"Global error: {exception}");
+                OpenEmailClientWithError(exception);
+                //WeakReferenceMessenger.Default.Send(new ShowErrorMessage(exception));
+            }
+        };
+
+        TaskScheduler.UnobservedTaskException += (sender, args) =>
+        {
+            Console.Error.WriteLine($"{args.Exception}");
+            Debug.WriteLine($"Task error: {args.Exception}");
+            OpenEmailClientWithError(args.Exception);
+            //WeakReferenceMessenger.Default.Send(new ShowErrorMessage(args.Exception));
+            args.SetObserved();
+        };
+
         var builder = MauiApp.CreateBuilder();
         builder
             .UseMauiApp<App>()
@@ -78,26 +98,6 @@ internal static class MauiProgram
         RegisterServices(builder);
         RegisterSingletonServices(builder);
 
-        AppDomain.CurrentDomain.UnhandledException += (sender, args) =>
-        {
-            if (args.ExceptionObject is Exception exception)
-            {
-                OpenEmailClientWithError(exception);
-                Console.Error.WriteLine($"{exception}");
-                Debug.WriteLine($"Global error: {exception}");
-                //WeakReferenceMessenger.Default.Send(new ShowErrorMessage(exception));
-            }
-        };
-
-        TaskScheduler.UnobservedTaskException += (sender, args) =>
-        {
-            OpenEmailClientWithError(args.Exception);
-            Console.Error.WriteLine($"{args.Exception}");
-            Debug.WriteLine($"Task error: {args.Exception}");
-            //WeakReferenceMessenger.Default.Send(new ShowErrorMessage(args.Exception));
-            args.SetObserved();
-        };
-        
         var app = builder.Build();
         Services = app.Services;
         return app;

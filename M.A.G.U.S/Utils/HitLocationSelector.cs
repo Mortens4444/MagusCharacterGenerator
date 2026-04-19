@@ -1,5 +1,4 @@
 ﻿using M.A.G.U.S.Enums;
-using M.A.G.U.S.GameSystem;
 using M.A.G.U.S.Interfaces;
 using M.A.G.U.S.Services;
 using Mtf.Extensions;
@@ -8,48 +7,45 @@ namespace M.A.G.U.S.Utils;
 
 public static class HitLocationSelector
 {
-    private static readonly DiceThrow diceThrow = new();
-    
-    public static (PlaceOfAttack, string) GetLocation(AttackDirection attackDirection) => GetLocationAsync(attackDirection, new AutoCombatRollService()).GetAwaiter().GetResult();
+    public static (PlaceOfAttack, string) GetLocation(AttackDirection attackDirection) =>
+        GetLocationAsync(attackDirection, new AutoCombatRollService(), String.Empty).GetAwaiter().GetResult();
 
-    public static Task<(PlaceOfAttack, string)> GetLocationAsync(AttackDirection attackDirection, ICombatRollService rollService)
+    public static async Task<(PlaceOfAttack, string)> GetLocationAsync(AttackDirection attackDirection, ICombatRollService rollService, string title)
     {
-        var hitLocation = Get();
+        var hitLocation = await GetAsync(rollService, title);
         var subLocation = String.Empty;
 
         switch (hitLocation)
         {
             case PlaceOfAttack.Head:
-                var headPart = GetOnHead();
+                var headPart = await GetOnHeadAsync(rollService, title);
                 subLocation = headPart.GetDescription();
                 break;
 
             case PlaceOfAttack.Torso:
-
                 switch (attackDirection)
                 {
                     case AttackDirection.Front:
-                        var torsoPart = GetOnTorso();
+                        var torsoPart = await GetOnTorsoAsync(rollService, title);
                         subLocation = torsoPart.GetDescription();
                         break;
+
                     case AttackDirection.Behind:
-                        var torsoPartBack = GetOnTorsoFromBehind();
+                        var torsoPartBack = await GetOnTorsoFromBehindAsync(rollService, title);
                         subLocation = torsoPartBack.GetDescription();
-                        break;
-                    default:
                         break;
                 }
                 break;
 
             case PlaceOfAttack.WeaponWieldingArm:
             case PlaceOfAttack.NonWeaponWieldingArm:
-                var armPart = GetOnArm();
+                var armPart = await GetOnArmAsync(rollService, title);
                 subLocation = armPart.GetDescription();
                 break;
 
             case PlaceOfAttack.RightLeg:
             case PlaceOfAttack.LeftLeg:
-                var legPart = GetOnLeg();
+                var legPart = await GetOnLegAsync(rollService, title);
                 subLocation = legPart.GetDescription();
                 break;
 
@@ -57,12 +53,12 @@ public static class HitLocationSelector
                 throw new NotImplementedException();
         }
 
-        return Task.FromResult((hitLocation, subLocation));
+        return (hitLocation, subLocation);
     }
 
-    private static PlaceOfAttack Get()
+    private static async Task<PlaceOfAttack> GetAsync(ICombatRollService rollService, string title)
     {
-        var result = diceThrow._1D9();
+        var result = await rollService.RollAsync(ThrowType._1D9, title);
         return result switch
         {
             1 or 2 => PlaceOfAttack.WeaponWieldingArm,
@@ -75,9 +71,9 @@ public static class HitLocationSelector
         };
     }
 
-    private static PlaceOfAttackOnHead GetOnHead()
+    private static async Task<PlaceOfAttackOnHead> GetOnHeadAsync(ICombatRollService rollService, string title)
     {
-        var result = diceThrow._1D10() - 1;
+        var result = await rollService.RollAsync(ThrowType._1D10, title) - 1;
         return result switch
         {
             0 or 1 => PlaceOfAttackOnHead.Skull,
@@ -89,9 +85,9 @@ public static class HitLocationSelector
         };
     }
 
-    private static PlaceOfAttackOnArm GetOnArm()
+    private static async Task<PlaceOfAttackOnArm> GetOnArmAsync(ICombatRollService rollService, string title)
     {
-        var result = diceThrow._1D10() - 1;
+        var result = await rollService.RollAsync(ThrowType._1D10, title) - 1;
         return result switch
         {
             0 or 1 or 2 => PlaceOfAttackOnArm.Shoulder,
@@ -104,9 +100,9 @@ public static class HitLocationSelector
         };
     }
 
-    private static PlaceOfAttackOnLeg GetOnLeg()
+    private static async Task<PlaceOfAttackOnLeg> GetOnLegAsync(ICombatRollService rollService, string title)
     {
-        var result = diceThrow._1D10() - 1;
+        var result = await rollService.RollAsync(ThrowType._1D10, title) - 1;
         return result switch
         {
             0 or 1 or 2 or 3 or 4 => PlaceOfAttackOnLeg.Thigh,
@@ -118,9 +114,9 @@ public static class HitLocationSelector
         };
     }
 
-    private static PlaceOfAttackOnTorso GetOnTorso()
+    private static async Task<PlaceOfAttackOnTorso> GetOnTorsoAsync(ICombatRollService rollService, string title)
     {
-        var result = diceThrow._1D10() - 1;
+        var result = await rollService.RollAsync(ThrowType._1D10, title) - 1;
         return result switch
         {
             0 => PlaceOfAttackOnTorso.RightCollarbone,
@@ -136,9 +132,9 @@ public static class HitLocationSelector
         };
     }
 
-    private static PlaceOfAttackOnTorsoFromBehind GetOnTorsoFromBehind()
+    private static async Task<PlaceOfAttackOnTorsoFromBehind> GetOnTorsoFromBehindAsync(ICombatRollService rollService, string title)
     {
-        var result = diceThrow._1D10() - 1;
+        var result = await rollService.RollAsync(ThrowType._1D10, title) - 1;
         return result switch
         {
             0 => PlaceOfAttackOnTorsoFromBehind.RightShoulderBlade,

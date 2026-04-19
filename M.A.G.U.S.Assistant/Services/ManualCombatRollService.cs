@@ -29,15 +29,9 @@ internal sealed class ManualCombatRollService(ISoundPlayer soundPlayer, IShakeSe
         return await page.ResultTask.ConfigureAwait(true);
     }
 
-    public Task<int> RollAttackAsync(string title = "")
+    public Task<int> RollAsync(ThrowType throwType, string title = "")
     {
-        var locailzedRollFormula = new LocalizedRollFormula(ThrowType._1D100, 0, false, title);
-        return RollAsync(locailzedRollFormula);
-    }
-
-    public Task<int> RollInitiativeAsync(string title = "")
-    {
-        var locailzedRollFormula = new LocalizedRollFormula(ThrowType._1D10, 0, false, title);
+        var locailzedRollFormula = new LocalizedRollFormula(throwType, 0, false, title);
         return RollAsync(locailzedRollFormula);
     }
 }

@@ -9,123 +9,135 @@ public enum ThrowType
     _1D1,
     [Description("1D2")]
     _1D2,
+    [Description("1D3")]
+    _1D3,
+    [Description("1D3")]
+    _1D3_Ranged,
     [Description("1D4")]
     _1D4,
     [Description("1D5")]
     _1D5,
+    [Description("1D5")]
+    _1D5_Ranged,
     [Description("1D6")]
     _1D6,
+    [Description("1D6")]
+    _1D6_Ranged,
     [Description("1D7")]
     _1D7,
     [Description("1D8")]
     _1D8,
-    [Description("1D6")]
-    _1D6_Ranged,
-    [Description("2D6")]
-    _2D6,
     [Description("1D9")]
     _1D9,
     [Description("1D10")]
     _1D10,
+    [Description("1D10")]
+    _1D10_Ranged,
     [Description("1D10 (2x)")]
     _1D10_2_Times,
+    [Description("1D40")]
+    _1D40,
+    [Description("1D100")]
+    _1D100,
+
+    [Description("2D6")]
+    _2D6,
+    [Description("2D6")]
+    _2D6_Ranged,
     [Description("2D10")]
     _2D10,
+    [Description("2D10")]
+    _2D10_Ranged,
+    [Description("2D40")]
+    _2D40,
+    [Description("2D100")]
+    _2D100,
+
     [Description("3D10")]
     _3D10,
     [Description("3D6")]
 	_3D6,
-	[Description("3D6 (2x)")]
-	_3D6_2_Times,
-	[Description("1D100")]
-	_1D100,
-	[Description("1D3")]
-	_1D3,
-    [Description("2D100")]
-    _2D100,
-    [Description("3D100")]
-	_3D100,
-    [Description("4D10")]
-    _4D10,
-    [Description("5D10")]
-    _5D10,
-    [Description("6D10")]
-    _6D10,
-    [Description("7D10")]
-    _7D10,
-    [Description("8D10")]
-    _8D10,
-    [Description("9D10")]
-    _9D10,
-    [Description("10D10")]
-    _10D10,
-    [Description("4D6")]
-    _4D6,
-    [Description("5D6")]
-    _5D6,
-    [Description("6D6")]
-    _6D6,
-    [Description("7D6")]
-    _7D6,
-    [Description("8D6")]
-    _8D6,
-    [Description("9D6")]
-    _9D6,
-    [Description("10D6")]
-    _10D6,
-    [Description("11D6")]
-    _11D6,
-    [Description("12D6")]
-    _12D6,
-    [Description("13D6")]
-    _13D6,
-    [Description("14D6")]
-    _14D6,
-    [Description("15D6")]
-    _15D6,
-
-    [Description("1D40")]
-    _1D40,
-    [Description("2D40")]
-    _2D40,
-
-    [Description("20 - 70")]
-    _20_To_70,
-
-    [Description("1D10")]
-    _1D10_Ranged,
-    [Description("2D10")]
-    _2D10_Ranged,
-    [Description("1D3")]
-    _1D3_Ranged,
-    [Description("1D5")]
-    _1D5_Ranged,
-    [Description("2D6")]
-    _2D6_Ranged,
     [Description("3D6")]
     _3D6_Ranged,
+    [Description("3D6 (2x)")]
+	_3D6_2_Times,
+    [Description("3D100")]
+	_3D100,
+
+    [Description("4D6")]
+    _4D6,
     [Description("4D6")]
     _4D6_Ranged,
+    [Description("4D10")]
+    _4D10,
+
+    [Description("5D6")]
+    _5D6,
     [Description("5D6")]
     _5D6_Ranged,
+    [Description("5D10")]
+    _5D10,
+
+    [Description("6D6")]
+    _6D6,
     [Description("6D6")]
     _6D6_Ranged,
+    [Description("6D10")]
+    _6D10,
+
+    [Description("7D6")]
+    _7D6,
     [Description("7D6")]
     _7D6_Ranged,
+    [Description("7D10")]
+    _7D10,
+
+    [Description("8D6")]
+    _8D6,
     [Description("8D6")]
     _8D6_Ranged,
+    [Description("8D10")]
+    _8D10,
+
+    [Description("9D6")]
+    _9D6,
     [Description("9D6")]
     _9D6_Ranged,
+    [Description("9D10")]
+    _9D10,
+
+    [Description("10D6")]
+    _10D6,
     [Description("10D6")]
     _10D6_Ranged,
+    [Description("10D10")]
+    _10D10,
+
+    [Description("11D6")]
+    _11D6,
     [Description("11D6")]
     _11D6_Ranged,
+
+    [Description("12D6")]
+    _12D6,
     [Description("12D6")]
     _12D6_Ranged,
+
+    [Description("13D6")]
+    _13D6,
     [Description("13D6")]
     _13D6_Ranged,
+
+    [Description("14D6")]
+    _14D6,
     [Description("14D6")]
     _14D6_Ranged,
+
     [Description("15D6")]
-    _15D6_Ranged
+    _15D6,
+    [Description("15D6")]
+    _15D6_Ranged,
+
+    [Description("20 - 70")]
+    _20_To_70
 }

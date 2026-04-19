@@ -1,4 +1,5 @@
-﻿using M.A.G.U.S.GameSystem;
+﻿using M.A.G.U.S.Enums;
+using M.A.G.U.S.GameSystem;
 using M.A.G.U.S.Interfaces;
 using M.A.G.U.S.Models;
 
@@ -24,7 +25,5 @@ public sealed class AutoCombatRollService : ICombatRollService
         return Task.FromResult(result);
     }
 
-    public Task<int> RollAttackAsync(string title = "") => Task.FromResult(diceThrow._1D100());
-
-    public Task<int> RollInitiativeAsync(string title = "") => Task.FromResult(diceThrow._1D10());
+    public Task<int> RollAsync(ThrowType throwType, string title = "") => Task.FromResult(diceThrow.Throw(throwType));
 }

@@ -3,7 +3,6 @@ using M.A.G.U.S.Enums;
 using M.A.G.U.S.GameSystem;
 using M.A.G.U.S.GameSystem.Turn;
 using M.A.G.U.S.Interfaces;
-using M.A.G.U.S.Services;
 using Mtf.Extensions.Services;
 using Mtf.LanguageService.MAUI;
 
@@ -11,33 +10,13 @@ namespace M.A.G.U.S.Assistant.Services;
 
 internal static class EncounterHelpers
 {
-    public static async Task<List<InitiativeEntry>> GetInitiativesAsync(
-        AssignmentViewModel assignment,
-        TurnData turn,
-        ICombatRollService rollService)
+    public static async Task<List<InitiativeEntry>> GetInitiativesAsync(AssignmentViewModel assignment, TurnData turn, ICombatRollService rollService)
     {
         var result = await GetInitiativesInternalAsync(assignment, turn, rollService).ConfigureAwait(false);
-        return result.OrderByDescending(initiative => initiative.FinalInitiative).ToList();
+        return [.. result.OrderByDescending(initiative => initiative.FinalInitiative)];
     }
 
-    public static IOrderedEnumerable<InitiativeEntry> GetInitiatives(
-        AssignmentViewModel assignment,
-        TurnData turn) =>
-        GetInitiativesAsync(assignment, turn, new AutoCombatRollService())
-            .GetAwaiter()
-            .GetResult()
-            .OrderByDescending(initiative => initiative.FinalInitiative);
-
-    public static async Task<IOrderedEnumerable<InitiativeEntry>> GetInitiativesAsync(
-        AssignmentViewModel assignment,
-        TurnData turn) =>
-        (await GetInitiativesInternalAsync(assignment, turn, new AutoCombatRollService()).ConfigureAwait(false))
-            .OrderByDescending(initiative => initiative.FinalInitiative);
-
-    private static async Task<List<InitiativeEntry>> GetInitiativesInternalAsync(
-        AssignmentViewModel assignment,
-        TurnData turn,
-        ICombatRollService rollService)
+    private static async Task<List<InitiativeEntry>> GetInitiativesInternalAsync(AssignmentViewModel assignment, TurnData turn, ICombatRollService rollService)
     {
         var result = new List<InitiativeEntry>();
         if (!assignment.Enemies.Any())
@@ -115,7 +94,7 @@ internal static class EncounterHelpers
             Target = target,
             SelectedAttack = attack,
             BaseInitiative = attacker.Source.InitiateValue,
-            RolledValue = await rollService.RollInitiativeAsync($"{name} {init}").ConfigureAwait(false)
+            RolledValue = await rollService.RollAsync(ThrowType._1D10, $"{name} - {init}").ConfigureAwait(false)
         });
     }
 }

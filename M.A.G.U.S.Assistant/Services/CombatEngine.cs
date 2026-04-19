@@ -6,6 +6,7 @@ using M.A.G.U.S.GameSystem.Turn;
 using M.A.G.U.S.Interfaces;
 using M.A.G.U.S.Utils;
 using Mtf.Extensions;
+using Mtf.LanguageService.MAUI;
 
 namespace M.A.G.U.S.Assistant.Services;
 
@@ -42,9 +43,6 @@ internal class CombatEngine
             initiative.Attacker.AddTemporaryModifier(ambushMod);
         }
 
-        var (hitLocation, subLocation) = await HitLocationSelector.GetLocationAsync(attackDirection, rollService).ConfigureAwait(false);
-        //var (hitLocation, subLocation) = HitLocationSelector.GetLocation(attackDirection);
-        var locationDescription = hitLocation.GetDescription();
         if (initiative.SelectedAttack == null)
         {
             var speed = attacker.GetMaxMovementSpeed();
@@ -52,6 +50,9 @@ internal class CombatEngine
             return;
         }
 
+        var name = attacker is Character character ? character.Name : Lng.Elem(attacker.Name);
+        var (hitLocation, subLocation) = await HitLocationSelector.GetLocationAsync(attackDirection, rollService, $"{name} - {Lng.Elem("Hit location")}").ConfigureAwait(false);
+        var locationDescription = hitLocation.GetDescription();
         if (!target.IsConscious)
         {
             // Automatic damage
@@ -70,26 +71,31 @@ internal class CombatEngine
         }
         else
         {
-            if (initiative.SelectedAttack is RangedAttack)
+            if (initiative.SelectedAttack is RangedAttack rangedAttack)
             {
                 var targetDistance = assignment.GetDistanceInMeters(initiative.Target.Source);
-                initiative.AttackOrAimResolution = new AimResolution(initiative, targetDistance, MovementType.Predictable, WeatherCondition.Clear)
-                {
-                    Attack = initiative.SelectedAttack,
-                    Direction = attackDirection,
-                    HitLocation = locationDescription,
-                    HitSubLocation = subLocation
-                };
+                initiative.AttackOrAimResolution = await AimResolution.CreateAsync(
+                    initiative,
+                    targetDistance,
+                    MovementType.Predictable,
+                    WeatherCondition.Clear,
+                    rollService,
+                    $"{name} - {Lng.Elem("Aim")}",
+                    rangedAttack,
+                    attackDirection,
+                    locationDescription,
+                    subLocation).ConfigureAwait(false);
             }
             else
             {
-                initiative.AttackOrAimResolution = new AttackResolution(initiative)
-                {
-                    Attack = initiative.SelectedAttack,
-                    Direction = attackDirection,
-                    HitLocation = locationDescription,
-                    HitSubLocation = subLocation
-                };
+                initiative.AttackOrAimResolution = await AttackResolution.CreateAsync(
+                    initiative,
+                    rollService,
+                    $"{name} - {Lng.Elem("Attack")}",
+                    initiative.SelectedAttack,
+                    attackDirection,
+                    locationDescription,
+                    subLocation).ConfigureAwait(false);
             }
 
             // Damage

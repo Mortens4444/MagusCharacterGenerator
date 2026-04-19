@@ -1,12 +1,11 @@
-﻿using M.A.G.U.S.Models;
+﻿using M.A.G.U.S.Enums;
+using M.A.G.U.S.Models;
 
 namespace M.A.G.U.S.Interfaces;
 
 public interface ICombatRollService
 {
-    Task<int> RollInitiativeAsync(string title = "");
-
-    Task<int> RollAttackAsync(string title = "");
+    Task<int> RollAsync(ThrowType throwType, string title = "");
 
     Task<int> RollAsync(RollFormula formula, string title = "");
 
