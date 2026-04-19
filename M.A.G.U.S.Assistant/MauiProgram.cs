@@ -1,5 +1,4 @@
-﻿using CommunityToolkit.Mvvm.Messaging;
-using M.A.G.U.S.Assistant.Database;
+﻿using M.A.G.U.S.Assistant.Database;
 using M.A.G.U.S.Assistant.Database.Repositories;
 using M.A.G.U.S.Assistant.Interfaces;
 using M.A.G.U.S.Assistant.Interfaces.Bluetooth;
@@ -9,7 +8,6 @@ using M.A.G.U.S.Assistant.Views;
 using M.A.G.U.S.Interfaces;
 using M.A.G.U.S.Utils;
 using Microsoft.Extensions.Logging;
-using Mtf.Maui.Controls.Messages;
 using System.Diagnostics;
 
 namespace M.A.G.U.S.Assistant;

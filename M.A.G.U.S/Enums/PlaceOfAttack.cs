@@ -5,7 +5,7 @@ namespace M.A.G.U.S.Enums;
 [Flags]
 public enum PlaceOfAttack
 {
-    [Description("None")]
+    [Description("")]
     None = 0,
 
     [Description("Weapon-wielding arm")]

@@ -1,41 +1,46 @@
 - Fainted and dead messages shoould be added to the list in EncounterPage (with anouther colors)
-- DiceThrowFormula, ThrowType, RollFormua, LocalizedRollFormua -> should be simplified
-- refactor DiceThrow to use Range in these:     public int _9D10(bool hasLuckAmulet = false) => ApplyLuck(RandomProvider.GetSecureRandomByte(9, 91), 9, 91, hasLuckAmulet);
-- what kind of classes can be created an amount of xp (ex:50000XP)
-- xp set after ancounter ends, or get a logic, which sets automatically the earned xp from max xp and combat style
 - when a character kills all of it's enemies in encounter, redistribute enemies should be called with a UI
 - Fix zoom image preview (zooming is not smooth)
-- after rotating an item on PaintWizardPage, use rotated points to move the object, not the original ones
-- generate button not available, after canceling strength probe?
-- Add custom attributes to runeswords (each one is a rune) - maybe not, think again!
-- Priest Mana points per level should use RollFormulaPage + setting
-- Fix search and price multiplier change on market
+- generate button is not available, after canceling strength probe?
 - MaxDieNumber setting & property in Character class + DieCounter on UI - Resetable? If DieCount == MaxDieCount => Status = Alive->Dead S
 - Refactor: Remove Calculate functions from Character class - compute all properties
-- // Speeds shoud be filled from races
+- // Speeds should be filled from races
 - Add predefined objects to PaintWizardPage (trees, rocks, table, chair) // Need save and load into json format? load two json into one background!
+
+Level up
+--------
+- what kind of classes can be created an amount of xp (ex:50000XP)
+- xp set after ancounter ends, or get a logic, which sets automatically the earned xp from max xp and combat style
+- Priest Mana points per level should use RollFormulaPage + setting
+- Need loot system (taking the night elf weapon after defeating him, and equipment list)
+
+Dice throw
+----------
+- DiceThrowFormula, ThrowType, RollFormua, LocalizedRollFormua -> should be simplified
+- refactor DiceThrow to use Range in these:     public int _9D10(bool hasLuckAmulet = false) => ApplyLuck(RandomProvider.GetSecureRandomByte(9, 91), 9, 91, hasLuckAmulet);
+
+Runes
+-----
+- Add custom attributes to runeswords (each one is a rune) - maybe not, think again!
 - Message to rune -> With RunicMagic the message could be translated
 
 - Paint component should be in Mtf.MAUI.Controls
 - New race: https://kalandozok.hu/cikkgyujtemeny/kieg%C3%A9sz%C3%ADt%C5%91k/fajok/j%C3%A1tszhat%C3%B3-fajok/fajok-k%C3%B6nyve-r62/
-- Need loot system (taking the night elf weapon after defeating him, and equipment list)
-- Combat simulator: L Semi-auto (current implementation), need Full-auto, and manual with RollFormulaPage
 - Change weapon/language attribute on qualifications
-- Save on Android did not show message from success operation sometimes (focused element?)
-- After buying something on the market, refresh the affordable items list
+
 - Max. Distance for a day S
 
 - Should appear in equipment list? For example Rune sword? Changes the speed (horse or ship)?
 - Can the MapPage open PDFs also? M
 - Show illnesses M
 - Other modifier tables M
+- Add more beasts (plants, dogs, horses) to Bestiary M (Bestiárium)
 
-- Fix PaintWizardPage L
+- Fix PaintWizardPage L (after rotating an item on PaintWizardPage, use rotated points to move the object, not the original ones)
 - Character.cs mana, magic resistance L
 
 - Add more animations, images, and sounds XL
 - Psi XXL (Pszi diszciplínák)
-- Add more beasts to Bestiary XXXL (Bestiárium)
 - Show stories and paint a digital map, for them (map, and sounds), store story descriptions XXXL
 - Create a story for every qualification XXXL
 - Magic XXXL (Mágiarendszer)

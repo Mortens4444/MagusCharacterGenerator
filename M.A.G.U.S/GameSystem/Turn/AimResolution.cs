@@ -2,6 +2,7 @@
 using M.A.G.U.S.Interfaces;
 using M.A.G.U.S.Qualifications.Specialities;
 using M.A.G.U.S.Utils;
+using Mtf.Extensions;
 
 namespace M.A.G.U.S.GameSystem.Turn;
 
@@ -19,9 +20,9 @@ public sealed class AimResolution : ResolutionBase
         ICombatRollService rollService,
         string title,
         Attack attack,
-        AttackDirection direction,
-        string hitLocation,
-        string? hitSubLocation)
+        AttackDirection attackDirection,
+        string hitLocationTitle,
+        bool manualRollService)
     {
         var rollValue = await rollService.RollAsync(ThrowType._1D100, title);
         var aimTotal = initiative.Attacker.Source.AimValue + rollValue;
@@ -37,15 +38,17 @@ public sealed class AimResolution : ResolutionBase
             ? initiative.Target.Source.DefenseValue
             : BaseAimDefense + movementDefense;
 
+        var successful = aimTotal > defenseValue;
+        var (hitLocation, subLocation) = successful || !manualRollService ? await HitLocationSelector.GetLocationAsync(attackDirection, rollService, hitLocationTitle).ConfigureAwait(false) : (PlaceOfAttack.None, String.Empty);
         return new AimResolution
         {
             Attack = attack,
             RollValue = rollValue,
-            IsSuccessful = aimTotal > defenseValue,
+            IsSuccessful = successful,
             IsHpDamage = aimTotal > defenseValue + OverHitValue,
-            Direction = direction,
-            HitLocation = hitLocation,
-            HitSubLocation = hitSubLocation
+            Direction = attackDirection,
+            HitLocation = hitLocation.GetDescription(),
+            HitSubLocation = subLocation
         };
     }
 }

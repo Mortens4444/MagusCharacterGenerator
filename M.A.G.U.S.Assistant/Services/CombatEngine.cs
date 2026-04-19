@@ -51,8 +51,7 @@ internal class CombatEngine
         }
 
         var name = attacker is Character character ? character.Name : Lng.Elem(attacker.Name);
-        var (hitLocation, subLocation) = await HitLocationSelector.GetLocationAsync(attackDirection, rollService, $"{name} - {Lng.Elem("Hit location")}").ConfigureAwait(false);
-        var locationDescription = hitLocation.GetDescription();
+        var hitLocationTitle = $"{name} - {Lng.Elem("Hit location")}";
         if (!target.IsConscious)
         {
             // Automatic damage
@@ -61,13 +60,7 @@ internal class CombatEngine
             var finalDamage = Math.Max(0, baseDamage - (target.Armor?.ArmorClass ?? 0));
             target.ActualHealthPoints -= finalDamage;
 
-            initiative.AttackOrAimResolution = new ForcedResolution(initiative, finalDamage)
-            {
-                Attack = initiative.SelectedAttack!,
-                Direction = attackDirection,
-                HitLocation = locationDescription,
-                HitSubLocation = subLocation
-            };
+            initiative.AttackOrAimResolution = await ForcedResolution.CreateAsync(initiative, finalDamage, attackDirection, rollService, hitLocationTitle).ConfigureAwait(false);
         }
         else
         {
@@ -83,8 +76,8 @@ internal class CombatEngine
                     $"{name} - {Lng.Elem("Aim")}",
                     rangedAttack,
                     attackDirection,
-                    locationDescription,
-                    subLocation).ConfigureAwait(false);
+                    hitLocationTitle,
+                    rollService is ManualCombatRollService).ConfigureAwait(false);
             }
             else
             {
@@ -94,8 +87,8 @@ internal class CombatEngine
                     $"{name} - {Lng.Elem("Attack")}",
                     initiative.SelectedAttack,
                     attackDirection,
-                    locationDescription,
-                    subLocation).ConfigureAwait(false);
+                    hitLocationTitle,
+                    rollService is ManualCombatRollService).ConfigureAwait(false);
             }
 
             // Damage
