@@ -1,14 +1,13 @@
-﻿#if WINDOWS
-using M.A.G.U.S.Assistant.Interfaces;
-#endif
+﻿using M.A.G.U.S.Assistant.Interfaces;
 
 namespace M.A.G.U.S.Assistant;
 
 public partial class App : Application
 {
-    public App()
+    public App(INotificationService notificationService)
     {
         InitializeComponent();
+        notificationService?.Initialize();
         UserAppTheme = AppTheme.Dark;
     }
 

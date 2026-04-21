@@ -8,6 +8,7 @@ using M.A.G.U.S.Bestiary;
 using M.A.G.U.S.Enums;
 using M.A.G.U.S.Extensions;
 using M.A.G.U.S.GameSystem;
+using M.A.G.U.S.GameSystem.Turn;
 using M.A.G.U.S.Interfaces;
 using M.A.G.U.S.Services;
 using Mtf.LanguageService.MAUI;
@@ -18,26 +19,19 @@ using System.Globalization;
 
 namespace M.A.G.U.S.Assistant.ViewModels;
 
-internal partial class EncounterViewModel : CharacterListLoaderViewModel, IDisposable
+internal partial class EncounterViewModel(ISettings settings, CharacterService characterService, ISoundPlayer soundPlayer, IShakeService shakeService) : CharacterListLoaderViewModel(characterService), IDisposable
 {
     private Character? selectedCharacter;
     private Attacker? selectedEnemy;
     private AssignmentViewModel? selectedAssignment;
-    private readonly ISettings settings;
+    private readonly ISettings settings = settings;
     private bool showControls = true;
     private bool isRunningTurns;
     private AssignmentViewModel? previousSelectedAssignment;
-    private readonly ISoundPlayer soundPlayer;
-    private readonly IShakeService shakeService;
+    private readonly ISoundPlayer soundPlayer = soundPlayer;
+    private readonly IShakeService shakeService = shakeService;
 
     public ObservableCollection<TurnViewModel> SelectedTurnHistory { get; } = [];
-
-    public EncounterViewModel(ISettings settings, CharacterService characterService, ISoundPlayer soundPlayer, IShakeService shakeService) : base(characterService)
-    {
-        this.settings = settings;
-        this.soundPlayer = soundPlayer;
-        this.shakeService = shakeService;
-    }
 
     public ObservableCollection<Character> Characters { get; } = [];
     public ObservableCollection<Attacker> Enemies { get; } = [];
@@ -581,6 +575,15 @@ internal partial class EncounterViewModel : CharacterListLoaderViewModel, IDispo
         foreach (var assignment in Assignments)
         {
             RemoveEnemyHandlers(assignment.Enemies);
+        }
+
+        try
+        {
+            shakeService?.Dispose();
+        }
+        catch (Exception ex)
+        {
+            WeakReferenceMessenger.Default.Send(new ShowErrorMessage(ex));
         }
     }
 }

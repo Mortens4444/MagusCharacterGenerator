@@ -4,8 +4,6 @@ using M.A.G.U.S.GameSystem;
 using M.A.G.U.S.GameSystem.CombatModifiers;
 using M.A.G.U.S.GameSystem.Turn;
 using M.A.G.U.S.Interfaces;
-using M.A.G.U.S.Utils;
-using Mtf.Extensions;
 using Mtf.LanguageService.MAUI;
 
 namespace M.A.G.U.S.Assistant.Services;
