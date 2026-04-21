@@ -65,6 +65,7 @@ steel_scale_armor.png
 studded_leather.png
 aberration.png
 adachnoa.png
+aeternam.png
 air_lord.png
 anatyda.png
 ansinatis.png
@@ -79,6 +80,7 @@ bear.png
 bearhawk.png
 blackflame.png
 black_shark.png
+blegront.png
 blue_lizard.png
 bright_ginsour.png
 brothers.png
@@ -87,6 +89,7 @@ carnomak.png
 carrion_serpent.png
 ceph.png
 cherub.png
+cirnecos.png
 clay_golem.png
 clockwork_servant.png
 common_rhino.png
@@ -101,6 +104,7 @@ deathbringer.png
 deathcrow.png
 demon_shark.png
 denebola.png
+dog_common.png
 dragon.png
 dragon_lizard.png
 dralyor.png
@@ -136,6 +140,7 @@ goblin.png
 gray_dolphin.png
 grizzly_bear.png
 guardian.png
+hastin.png
 hatysa.png
 hekator.png
 hilvar.png
@@ -186,6 +191,7 @@ panthal_blob.png
 panther.png
 pegasus.png
 phantom.png
+pittaros.png
 polar_bear.png
 pteropta.png
 quana_dokuna.png
@@ -200,6 +206,7 @@ rat_baron.png
 red_shark.png
 rhagultaikky.png
 rhyno.png
+robardoar.png
 rochalea.png
 rothrix.png
 rukh.png
@@ -264,6 +271,7 @@ white_angel.png
 white_eagle.png
 white_tiger.png
 white_wolf.png
+wild_dog.png
 wirg.png
 wolf.png
 wolf_pack_leader.png

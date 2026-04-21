@@ -1,3 +1,4 @@
+- Send notifications (random time, randomm enemy, random text [somebody attacked you on your journey...], flee or fight?, pathes [through the mountains or a forest, etc...])
 - Fainted and dead messages shoould be added to the list in EncounterPage (with anouther colors)
 - when a character kills all of it's enemies in encounter, redistribute enemies should be called with a UI
 - Fix zoom image preview (zooming is not smooth)
@@ -6,6 +7,14 @@
 - Refactor: Remove Calculate functions from Character class - compute all properties
 - // Speeds should be filled from races
 - Add predefined objects to PaintWizardPage (trees, rocks, table, chair) // Need save and load into json format? load two json into one background!
+- Paint component should be in Mtf.MAUI.Controls
+- New race: https://kalandozok.hu/cikkgyujtemeny/kieg%C3%A9sz%C3%ADt%C5%91k/fajok/j%C3%A1tszhat%C3%B3-fajok/fajok-k%C3%B6nyve-r62/
+- Change weapon/language attribute on qualifications
+- Add new classes (Warriors, etc.) - Új kasztok (harcosok, stb...)
+- Ynev fõbb helyei
+- Karakter származás
+- FIXME: Multi-class (+ age of character should be introduced)
+- Play Videos (Videóklippek lejátszása)
 
 Level up
 --------
@@ -24,17 +33,13 @@ Runes
 - Add custom attributes to runeswords (each one is a rune) - maybe not, think again!
 - Message to rune -> With RunicMagic the message could be translated
 
-- Paint component should be in Mtf.MAUI.Controls
-- New race: https://kalandozok.hu/cikkgyujtemeny/kieg%C3%A9sz%C3%ADt%C5%91k/fajok/j%C3%A1tszhat%C3%B3-fajok/fajok-k%C3%B6nyve-r62/
-- Change weapon/language attribute on qualifications
-
 - Max. Distance for a day S
 
 - Should appear in equipment list? For example Rune sword? Changes the speed (horse or ship)?
 - Can the MapPage open PDFs also? M
 - Show illnesses M
 - Other modifier tables M
-- Add more beasts (plants, dogs, horses) to Bestiary M (Bestiárium)
+- Add more beasts (plants) to Bestiary M (Bestiárium)
 
 - Fix PaintWizardPage L (after rotating an item on PaintWizardPage, use rotated points to move the object, not the original ones)
 - Character.cs mana, magic resistance L
@@ -44,12 +49,6 @@ Runes
 - Show stories and paint a digital map, for them (map, and sounds), store story descriptions XXXL
 - Create a story for every qualification XXXL
 - Magic XXXL (Mágiarendszer)
-
-- Add new classes (Warriors, etc.) - Új kasztok (harcosok, stb...)
-- Ynev fõbb helyei
-- Karakter származás
-- FIXME: Multi-class (+ age of character should be introduced)
-- Play Videos (Videóklippek lejátszása)
 
 https://www.yumpu.com/hu/document/view/5842996/magus-puska-071-verzio-http-wwwszerepjatektk/5
 https://nemaakos.wordpress.com/magus/jatek-elmelet/harc-es-szimulacio/

@@ -11,6 +11,4 @@ public sealed class CombatModifier : ICombatModifier
     public int DefenseValue { get; set; }
 
     public int AimValue { get; set; }
-
-    public int CombatModifierPoints { get; set; }
 }
