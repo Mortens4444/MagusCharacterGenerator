@@ -35,8 +35,5 @@ public sealed class Manase : Creature
     [DiceThrowModifier(1)]
     public override int GetNumberAppearing() => 1;
 
-    public override List<Speed> Speeds =>
-    [
-        new Speed(TravelMode.OnLand, 150)
-    ];
+    public override List<Speed> Speeds => [new Speed(TravelMode.OnLand, 150)];
 }

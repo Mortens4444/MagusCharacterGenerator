@@ -36,9 +36,5 @@ public sealed class Varthon : Creature
     [DiceThrow(ThrowType._1D10)]
     public override int GetDamage() => DiceThrow._1D10();
 
-    public override List<Speed> Speeds =>
-    [
-        new Speed(TravelMode.OnLand, 50),
-        new Speed(TravelMode.InTheAir, 120)
-    ];
+    public override List<Speed> Speeds => [new Speed(TravelMode.OnLand, 50), new Speed(TravelMode.InTheAir, 120)];
 }

@@ -46,9 +46,5 @@ public sealed class Pteropta : Creature
     [DiceThrow(ThrowType._1D6)]
     public override int GetNumberAppearing() => DiceThrow._1D6();
 
-    public override List<Speed> Speeds =>
-    [
-        new Speed(TravelMode.OnLand, 40),
-        new Speed(TravelMode.InTheAir, 240)
-    ];
+    public override List<Speed> Speeds => [new Speed(TravelMode.OnLand, 40), new Speed(TravelMode.InTheAir, 240)];
 }

@@ -38,9 +38,5 @@ public sealed class ForestSprite : Creature
     [DiceThrowModifier(0)]
     public override int GetDamage() => 0; // + DreamOintment poison
 
-    public override List<Speed> Speeds =>
-    [
-        new Speed(TravelMode.OnLand, 12),
-        new Speed(TravelMode.InTheAir, 50)
-    ];
+    public override List<Speed> Speeds => [new Speed(TravelMode.OnLand, 12), new Speed(TravelMode.InTheAir, 50)];
 }

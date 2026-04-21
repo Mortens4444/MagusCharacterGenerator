@@ -51,8 +51,5 @@ public sealed class ShiKris : Creature
     [DiceThrow(ThrowType._1D10)]
     public override int GetDamage() => DiceThrow._1D10();
 
-    public override List<Speed> Speeds =>
-    [
-        new Speed(TravelMode.OnLand, 100)
-    ];
+    public override List<Speed> Speeds => [new Speed(TravelMode.OnLand, 100)];
 }

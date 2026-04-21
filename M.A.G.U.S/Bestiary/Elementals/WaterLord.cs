@@ -32,9 +32,5 @@ public sealed class WaterLord : ElementalLord
     [DiceThrowModifier(36)]
     public override int GetDamage() => DiceThrow._1D10() + 36;
 
-    public override List<Speed> Speeds =>
-    [
-        new Speed(TravelMode.OnLand, 80),
-        new Speed(TravelMode.InWater, 160)
-    ];
+    public override List<Speed> Speeds => [new Speed(TravelMode.OnLand, 80), new Speed(TravelMode.InWater, 160)];
 }

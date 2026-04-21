@@ -133,14 +133,14 @@
                                 <mc:NumericUpDownWithLabel Label="Distance" Value="{Binding Distance}" Grid.ColumnSpan="2" />
 
                                 <VerticalStackLayout Grid.Row="1">
-                                    <Label Text="{Binding Source='Strategy', Converter={StaticResource TranslationConverter}}" FontSize="10"/>
+                                    <Label Text="{Binding Source='Strategy', Converter={StaticResource TranslationConverter}}" FontSize="10" />
                                     <Picker ItemsSource="{Binding AttackStrategies}"
                                             SelectedItem="{Binding Strategy}"
                                             ItemDisplayBinding="{Binding ., Converter={StaticResource EnumDescriptionTranslationConverter}}" />
                                 </VerticalStackLayout>
 
                                 <VerticalStackLayout Grid.Row="1" Grid.Column="1">
-                                    <Label Text="{Binding Source='Direction', Converter={StaticResource TranslationConverter}}" FontSize="10"/>
+                                    <Label Text="{Binding Source='Direction', Converter={StaticResource TranslationConverter}}" FontSize="10" />
                                     <Picker ItemsSource="{Binding AttackDirections}"
                                             SelectedItem="{Binding Direction}"
                                             ItemDisplayBinding="{Binding ., Converter={StaticResource EnumDescriptionTranslationConverter}}" />

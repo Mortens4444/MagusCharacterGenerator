@@ -31,8 +31,5 @@ public sealed class FlameRunner : Creature
     [DiceThrow(ThrowType._1D2)]
     public override int GetNumberAppearing() => DiceThrow._1D2(); // Sometimes 1D6 by description.
 
-    public override List<Speed> Speeds =>
-    [
-        new Speed(TravelMode.InTheAir, 380)
-    ];
+    public override List<Speed> Speeds => [new Speed(TravelMode.InTheAir, 380)];
 }

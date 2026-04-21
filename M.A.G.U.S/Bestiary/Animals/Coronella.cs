@@ -39,9 +39,5 @@ public sealed class Coronella : Creature
     [DiceThrow(ThrowType._1D6)]
     public override int GetDamage() => DiceThrow._1D6(); // + poison
 
-    public override List<Speed> Speeds =>
-    [
-        new Speed(TravelMode.InTheAir, 120),
-        new Speed(TravelMode.Underground, 10)
-    ];
+    public override List<Speed> Speeds => [new Speed(TravelMode.InTheAir, 120), new Speed(TravelMode.Underground, 10)];
 }

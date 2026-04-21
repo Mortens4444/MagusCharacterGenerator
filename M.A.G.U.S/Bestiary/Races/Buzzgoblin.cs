@@ -51,8 +51,5 @@ public sealed class Buzzgoblin : Creature
     [DiceThrow(ThrowType._1D2)]
     public override int GetDamage() => DiceThrow._1D2();
 
-    public override List<Speed> Speeds =>
-    [
-        new Speed(TravelMode.OnLand, 70)
-    ];
+    public override List<Speed> Speeds => [new Speed(TravelMode.OnLand, 70)];
 }

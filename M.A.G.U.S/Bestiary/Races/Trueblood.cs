@@ -59,8 +59,5 @@ public sealed class Trueblood : Creature
     [DiceThrow(ThrowType._1D6)]
     public override int GetDamage() => DiceThrow._1D6();
 
-    public override List<Speed> Speeds =>
-    [
-        new Speed(TravelMode.OnLand, 60)
-    ];
+    public override List<Speed> Speeds => [new Speed(TravelMode.OnLand, 60)];
 }

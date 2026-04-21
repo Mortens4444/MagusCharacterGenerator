@@ -38,8 +38,5 @@ public sealed class Zauder : Creature
     [DiceThrowModifier(2)]
     public override int GetDamage() => DiceThrow._1D10() + 2; // változó
 
-    public override List<Speed> Speeds =>
-    [
-        new Speed(TravelMode.OnLand, 90) // változó
-    ];
+    public override List<Speed> Speeds => [new Speed(TravelMode.OnLand, 90) /* változó */];
 }

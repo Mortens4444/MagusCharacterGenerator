@@ -39,7 +39,7 @@
             </ScrollView.GestureRecognizers>
             <StackLayout Spacing="8">
                 <!-- Képességek -->
-                <Label Text="{Binding SelectedRace.Name, Converter={StaticResource TranslationConverter}}" FontSize="20" FontAttributes="Bold"/>
+                <Label Text="{Binding SelectedRace.Name, Converter={StaticResource TranslationConverter}}" FontSize="20" FontAttributes="Bold" />
 
                 <Border Stroke="{AppThemeBinding Light={StaticResource Gray300}, Dark={StaticResource Gray500}}"
                         StrokeThickness="1" Padding="10" BackgroundColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource Gray900}}">

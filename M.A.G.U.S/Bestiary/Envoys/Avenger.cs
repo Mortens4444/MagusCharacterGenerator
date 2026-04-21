@@ -49,9 +49,5 @@ public sealed class Avenger : Creature
 
     public Deity God => Deity.Darton;
 
-    public override List<Speed> Speeds =>
-    [
-        new Speed(TravelMode.OnLand, 120),
-        new Speed(TravelMode.InTheAir, 150)
-    ];
+    public override List<Speed> Speeds => [new Speed(TravelMode.OnLand, 120), new Speed(TravelMode.InTheAir, 150)];
 }

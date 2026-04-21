@@ -32,9 +32,5 @@ public sealed class Rackla : Creature
     [DiceThrow(ThrowType._1D2)]
     public override int GetNumberAppearing() => DiceThrow._1D2();
 
-    public override List<Speed> Speeds =>
-    [
-        new Speed(TravelMode.OnLand, 50),
-        new Speed(TravelMode.InTheAir, 110)
-    ];
+    public override List<Speed> Speeds => [new Speed(TravelMode.OnLand, 50), new Speed(TravelMode.InTheAir, 110)];
 }

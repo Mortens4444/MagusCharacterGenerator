@@ -28,5 +28,5 @@ public sealed class Carnomak : LivingDead
     [DiceThrowModifier(0)]
     public override int GetDamage() => 0;
 
-    public override List<Speed> Speeds => [];
+    public override List<Speed> Speeds => [new Speed(TravelMode.InWater, 60)];
 }

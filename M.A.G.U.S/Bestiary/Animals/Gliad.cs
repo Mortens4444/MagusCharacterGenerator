@@ -35,9 +35,5 @@ public sealed class Gliad : Creature
     [DiceThrow(ThrowType._2D10)]
     public override int GetNumberAppearing() => DiceThrow._2D10();
 
-    public override List<Speed> Speeds =>
-    [
-        new Speed(TravelMode.OnLand, 120),
-        new Speed(TravelMode.OnWalls, 60)
-    ];
+    public override List<Speed> Speeds => [new Speed(TravelMode.OnLand, 120), new Speed(TravelMode.OnWalls, 60)];
 }

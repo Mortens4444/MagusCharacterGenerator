@@ -17,6 +17,10 @@ public abstract class Attacker
     private readonly DiceThrow diceThrow = new();
 
     [NonSerialized, JsonIgnore, Newtonsoft.Json.JsonIgnore]
+    private bool lostConsciousnessRaised;
+    [NonSerialized, JsonIgnore, Newtonsoft.Json.JsonIgnore]
+    private bool diedRaised;
+    [NonSerialized, JsonIgnore, Newtonsoft.Json.JsonIgnore]
     private int actualHealthPoints;
     [NonSerialized, JsonIgnore, Newtonsoft.Json.JsonIgnore]
     private int? actualPainTolerancePoints;
@@ -97,25 +101,29 @@ public abstract class Attacker
         get => actualHealthPoints;
         set
         {
-            if (actualHealthPoints != value)
+            if (actualHealthPoints == value)
             {
-                var wasAlive = actualHealthPoints > 0;
-                if (value < actualHealthPoints)
-                {
-                    var damage = actualHealthPoints - value;
-                    if (actualPainTolerancePoints.HasValue)
-                    {
-                        ActualPainTolerancePoints = actualPainTolerancePoints - (2 * damage);
-                    }
-                }
+                return;
+            }
 
-                actualHealthPoints = value;
-                OnPropertyChanged();
+            var oldHealthPoints = actualHealthPoints;
+            var wasAlive = oldHealthPoints > 0;
+            var damage = Math.Max(0, oldHealthPoints - value);
+            var willDie = wasAlive && value <= 0;
 
-                if (wasAlive && actualHealthPoints <= 0)
-                {
-                    Died?.Invoke(this, EventArgs.Empty);
-                }
+            actualHealthPoints = value;
+            OnPropertyChanged();
+
+            if (willDie && !diedRaised)
+            {
+                diedRaised = true;
+                Died?.Invoke(this, EventArgs.Empty);
+                return;
+            }
+
+            if (damage > 0 && actualPainTolerancePoints.HasValue)
+            {
+                ActualPainTolerancePoints = actualPainTolerancePoints.Value - (2 * damage);
             }
         }
     }
@@ -125,20 +133,28 @@ public abstract class Attacker
         get => actualPainTolerancePoints;
         set
         {
-            if (actualPainTolerancePoints != value)
+            if (actualPainTolerancePoints == value)
             {
-                var wasConscious = (actualPainTolerancePoints ?? 1) > 0;
-                actualPainTolerancePoints = value;
-                OnPropertyChanged();
+                return;
+            }
 
-                if (wasConscious && (actualPainTolerancePoints ?? 1) <= 0)
-                {
-                    LostConsciousness?.Invoke(this, EventArgs.Empty);
-                }
+            var wasConscious = IsConscious;
+            actualPainTolerancePoints = value;
+            
+            OnPropertyChanged();
+            if (IsDead)
+            {
+                return;
+            }
+
+            if (!lostConsciousnessRaised && wasConscious && !IsConscious)
+            {
+                lostConsciousnessRaised = true;
+                LostConsciousness?.Invoke(this, EventArgs.Empty);
             }
         }
     }
-
+    
     public virtual double AttacksPerRound { get; protected set; } = 1;
 
     public AttackStrategy AttackStrategy { get; set; } = AttackStrategy.AttackFirst;
@@ -222,11 +238,12 @@ public abstract class Attacker
 
     public bool IsDead => ActualHealthPoints <= 0;
 
+    public bool IsConscious => ActualPainTolerancePoints == null || ActualPainTolerancePoints > 0 && (!IsDead || IsUndead);
+
     public AttackDirection AttackDirection { get; set; }
 
     public virtual bool IsUndead { get; set; } = false;
 
-    public bool IsConscious => ActualPainTolerancePoints == null || ActualPainTolerancePoints > 0 && (!IsDead || IsUndead);
 
     public void AddTemporaryModifier(ICombatModifier combatModifier)
     {

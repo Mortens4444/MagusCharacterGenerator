@@ -47,9 +47,5 @@ public sealed class Eccydoorr : Creature
     [DiceThrowModifier(1)]
     public override int GetNumberAppearing() => 1;
 
-    public override List<Speed> Speeds =>
-    [
-        new Speed(TravelMode.OnLand, 60),
-        new Speed(TravelMode.InTheAir, 120)
-    ];
+    public override List<Speed> Speeds => [new Speed(TravelMode.OnLand, 60), new Speed(TravelMode.InTheAir, 120)];
 }

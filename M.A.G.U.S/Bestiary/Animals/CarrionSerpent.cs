@@ -36,9 +36,5 @@ public sealed class CarrionSerpent : Creature
     [DiceThrowModifier(1)]
     public override int GetNumberAppearing() => 1;
 
-    public override List<Speed> Speeds =>
-    [
-        new Speed(TravelMode.OnLand, 18),
-        new Speed(TravelMode.InWater, 8)
-    ];
+    public override List<Speed> Speeds => [new Speed(TravelMode.OnLand, 18), new Speed(TravelMode.InWater, 8)];
 }

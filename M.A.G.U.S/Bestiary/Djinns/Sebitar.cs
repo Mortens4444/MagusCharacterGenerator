@@ -42,9 +42,5 @@ public sealed class Sebitar : DjinnCreature
     [DiceThrowModifier(1)]
     public override int GetNumberAppearing() => 1;
 
-    public override List<Speed> Speeds =>
-    [
-        new Speed(TravelMode.OnLand, 140),
-        new Speed(TravelMode.InTheAir, 200)
-    ];
+    public override List<Speed> Speeds => [new Speed(TravelMode.OnLand, 140), new Speed(TravelMode.InTheAir, 200)];
 }

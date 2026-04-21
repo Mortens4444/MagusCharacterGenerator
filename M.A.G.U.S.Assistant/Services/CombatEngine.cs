@@ -1,4 +1,5 @@
-﻿using M.A.G.U.S.Assistant.ViewModels;
+﻿using M.A.G.U.S.Assistant.Extensions;
+using M.A.G.U.S.Assistant.ViewModels;
 using M.A.G.U.S.Enums;
 using M.A.G.U.S.GameSystem;
 using M.A.G.U.S.GameSystem.CombatModifiers;
@@ -31,6 +32,16 @@ internal class CombatEngine
     {
         Attacker attacker = initiative.Attacker.Source;
         Attacker target = initiative.Target.Source;
+        
+        if (attacker.IsDead || target.IsDead)
+        {
+            return;
+        }
+
+        if (!attacker.IsConscious)
+        {
+            return;
+        }
 
         initiative.Attacker.RemoveTemporaryModifiers();
         var attackDirection = attacker.AttackDirection;
@@ -48,7 +59,7 @@ internal class CombatEngine
             return;
         }
 
-        var name = attacker is Character character ? character.Name : Lng.Elem(attacker.Name);
+        var name = attacker.GetName();
         var hitLocationTitle = $"{name} - {Lng.Elem("Hit location")}";
         if (!target.IsConscious)
         {
@@ -99,6 +110,11 @@ internal class CombatEngine
 
     private static void ApplyCombatDamage(InitiativeEntry initiative, Attacker attacker, Attacker target)
     {
+        if (attacker.IsDead || target.IsDead)
+        {
+            return;
+        }
+
         var resolution = initiative.AttackOrAimResolution;
         if (resolution == null)
         {

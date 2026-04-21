@@ -47,9 +47,5 @@ public sealed class Cherub : Creature
 
     public Deity God => Deity.Domvik;
 
-    public override List<Speed> Speeds =>
-    [
-        new Speed(TravelMode.OnLand, 90),
-        new Speed(TravelMode.InTheAir, 150)
-    ];
+    public override List<Speed> Speeds => [new Speed(TravelMode.OnLand, 90), new Speed(TravelMode.InTheAir, 150)];
 }

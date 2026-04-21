@@ -47,9 +47,5 @@ public sealed class Illouquid : Creature
     [DiceThrow(ThrowType._2D6)]
     public override int GetNumberAppearing() => DiceThrow._2D6();
 
-    public override List<Speed> Speeds =>
-    [
-        new Speed(TravelMode.OnLand, 90),
-        new Speed(TravelMode.InWater, 80)
-    ];
+    public override List<Speed> Speeds => [new Speed(TravelMode.OnLand, 90), new Speed(TravelMode.InWater, 80)];
 }

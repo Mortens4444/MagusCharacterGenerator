@@ -46,7 +46,7 @@ public sealed class Seidal : LivingDead
     [DiceThrow(ThrowType._1D6)]
     public override int GetDamage() => DiceThrow._1D6(); // + special (roots + leaves)
 
-    public override List<Speed> Speeds => [];
+    public override List<Speed> Speeds => [new Speed(TravelMode.OnLand, 1)]; //0
 
     public override double AttacksPerRound => 1 + age / 10;
 }

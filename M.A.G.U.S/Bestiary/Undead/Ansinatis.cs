@@ -29,7 +29,7 @@ public sealed class Ansinatis : Creature
 
     public override string[] Sounds => [];
 
-    public override List<Speed> Speeds => [];
+    public override List<Speed> Speeds => [new Speed(TravelMode.OnLand, 110)];
 
     public PossessionResult GetPossessionResult()
     {

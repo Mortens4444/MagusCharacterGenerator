@@ -40,8 +40,5 @@ public sealed class Mahrahadi : Creature
     [DiceThrow(ThrowType._1D2)]
     public override int GetNumberAppearing() => DiceThrow._1D2();
 
-    public override List<Speed> Speeds =>
-    [
-        new Speed(TravelMode.InTheAir, 100)
-    ];
+    public override List<Speed> Speeds => [new Speed(TravelMode.InTheAir, 100)];
 }

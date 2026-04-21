@@ -58,8 +58,5 @@ public sealed class Mongrel : Creature
     [DiceThrow(ThrowType._1D6)]
     public override int GetDamage() => DiceThrow._1D6();
 
-    public override List<Speed> Speeds =>
-    [
-        new Speed(TravelMode.OnLand, 100)
-    ];
+    public override List<Speed> Speeds => [new Speed(TravelMode.OnLand, 100)];
 }

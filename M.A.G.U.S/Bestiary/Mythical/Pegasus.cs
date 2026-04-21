@@ -45,9 +45,5 @@ public sealed class Pegasus : Creature
 
     public override double AttacksPerRound => 3;
 
-    public override List<Speed> Speeds =>
-    [
-        new Speed(TravelMode.OnLand, 150),
-        new Speed(TravelMode.InTheAir, 300)
-    ];
+    public override List<Speed> Speeds => [new Speed(TravelMode.OnLand, 150), new Speed(TravelMode.InTheAir, 300)];
 }

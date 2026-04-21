@@ -22,15 +22,16 @@ internal partial class EncounterPage : NotifierPage
         {
             vm.SelectedTurnHistory.CollectionChanged += (s, e) =>
             {
-                if (e.Action == NotifyCollectionChangedAction.Add && e.NewItems != null)
+                if (e.Action == NotifyCollectionChangedAction.Add && e.NewItems != null && e.NewItems.Count > 0)
                 {
-                    var item = (TurnViewModel)e.NewItems[0];
-                    MainThread.BeginInvokeOnMainThread(async () =>
+                    if (e.NewItems[0] is TurnViewModel item)
                     {
-                        await Task.Delay(16);
-                        var position = vm.Settings.AssignmentTurnHistoryNewestOnTop ? ScrollToPosition.Start : ScrollToPosition.End;
-                        TurnHistoryView?.ScrollTo(item, position);
-                    });
+                        _ = MainThread.InvokeOnMainThreadAsync(async () =>
+                        {
+                            var position = vm.Settings.AssignmentTurnHistoryNewestOnTop ? ScrollToPosition.Start : ScrollToPosition.End;
+                            TurnHistoryView?.ScrollTo(item, position);
+                        });
+                    }
                 }
             };
         }

@@ -59,8 +59,5 @@ public sealed class Daronne : Creature
     [DiceThrow(ThrowType._2D10)]
     public override int GetDamage() => DiceThrow._2D10();
 
-    public override List<Speed> Speeds =>
-    [
-        new Speed(TravelMode.InTheAir, 180)
-    ];
+    public override List<Speed> Speeds => [new Speed(TravelMode.InTheAir, 180)];
 }

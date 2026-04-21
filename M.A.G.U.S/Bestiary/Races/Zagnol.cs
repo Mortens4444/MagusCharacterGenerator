@@ -38,8 +38,5 @@ public sealed class Zagnol : Creature
     [DiceThrowModifier(3)]
     public override int GetDamage() => DiceThrow._1D10() + 3;
 
-    public override List<Speed> Speeds =>
-    [
-        new Speed(TravelMode.OnLand, 90)
-    ];
+    public override List<Speed> Speeds => [new Speed(TravelMode.OnLand, 90)];
 }

@@ -44,8 +44,5 @@ public sealed class SingaHamata : Creature
 
     public override string[] Images => ["singa_hamata.png"];
 
-    public override List<Speed> Speeds =>
-    [
-        new Speed(TravelMode.OnLand, 160)
-    ];
+    public override List<Speed> Speeds => [new Speed(TravelMode.OnLand, 160)];
 }

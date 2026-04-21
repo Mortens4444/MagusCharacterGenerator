@@ -1,4 +1,5 @@
-﻿using M.A.G.U.S.Enums;
+﻿using M.A.G.U.S.Assistant.Extensions;
+using M.A.G.U.S.Enums;
 using M.A.G.U.S.GameSystem;
 using M.A.G.U.S.GameSystem.Turn;
 using Mtf.Extensions;
@@ -9,14 +10,14 @@ namespace M.A.G.U.S.Assistant.ViewModels;
 internal sealed class TurnAttackViewModel(int roundNumber, InitiativeEntry initiativeEntry)
 {
     private readonly InitiativeEntry initiativeEntry = initiativeEntry;
-    private readonly ResolutionBase attack = initiativeEntry.AttackOrAimResolution!;
+    private readonly ResolutionBase? attack = initiativeEntry.AttackOrAimResolution!;
     private readonly int roundNumber = roundNumber;
 
     public int RoundNumber => roundNumber;
 
     public int Initiative => initiativeEntry?.FinalInitiative ?? 0;
 
-    public string Attacker => initiativeEntry?.Attacker?.Source is Character character ? character.Name : Lng.Elem(initiativeEntry?.Attacker?.Source?.Name ?? String.Empty);
+    public string Attacker => initiativeEntry?.Attacker?.Source.GetName() ?? String.Empty;
 
     public string Direction => attack != null ? Lng.Elem(attack.Direction.GetDescription()) : String.Empty; // Should be in InitiateEntry?
 
@@ -32,7 +33,21 @@ internal sealed class TurnAttackViewModel(int roundNumber, InitiativeEntry initi
         {
             if (attack == null)
             {
-                return "🚶‍";
+                var source = initiativeEntry?.Attacker?.Source;
+                if (source != null)
+                {
+                    if (source.IsDead)
+                    {
+                        return "☠"; // death marker
+                    }
+
+                    if (!source.IsConscious)
+                    {
+                        return "😵‍💫"; // faint marker
+                    }
+                }
+
+                return "🚶";
             }
 
             var isRanged = attack.Attack is RangedAttack;
@@ -42,7 +57,7 @@ internal sealed class TurnAttackViewModel(int roundNumber, InitiativeEntry initi
             }
 
             var impact = attack.Impact == AttackImpact.Normal ? String.Empty :
-                attack.Impact == AttackImpact.CriticalDamage ? "⚝" : "☠️";
+                attack.Impact == AttackImpact.CriticalDamage ? "⚝" : "🌩️";
             var attackMode = isRanged ? "🏹" : "🗡";
             var isHpAttack = attack.IsHpDamage ? "🩸" : String.Empty;
             string damageKind = attack.IsHpDamage ? Lng.Elem("HP") : Lng.Elem("PTP");

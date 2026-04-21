@@ -23,8 +23,5 @@ public sealed class SoulVortex : Creature
     [DiceThrowModifier(1)]
     public override int GetNumberAppearing() => 1;
 
-    public override List<Speed> Speeds =>
-    [
-        new Speed(TravelMode.InTheAir, 250)
-    ];
+    public override List<Speed> Speeds => [new Speed(TravelMode.InTheAir, 250)];
 }

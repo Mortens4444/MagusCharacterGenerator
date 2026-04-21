@@ -38,8 +38,5 @@ public sealed class ApeHyena : Creature
     [DiceThrowModifier(1)]
     public override int GetNumberAppearing() => 1;
 
-    public override List<Speed> Speeds =>
-    [
-        new Speed(TravelMode.OnLand, 300)
-    ];
+    public override List<Speed> Speeds => [new Speed(TravelMode.OnLand, 300)];
 }

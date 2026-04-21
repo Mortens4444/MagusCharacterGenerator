@@ -35,8 +35,5 @@ public sealed class Leviuur : Creature
     [DiceThrowModifier(1)]
     public override int GetNumberAppearing() => 1;
 
-    public override List<Speed> Speeds =>
-    [
-        new Speed(TravelMode.OnLand, 90)
-    ];
+    public override List<Speed> Speeds => [new Speed(TravelMode.OnLand, 90)];
 }

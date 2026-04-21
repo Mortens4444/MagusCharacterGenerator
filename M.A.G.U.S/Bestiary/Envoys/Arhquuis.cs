@@ -43,9 +43,5 @@ public sealed class Arhquuis : Creature
 
     public Deity God => Deity.Ranagol;
 
-    public override List<Speed> Speeds =>
-    [
-        new Speed(TravelMode.OnLand, 90),
-        new Speed(TravelMode.InTheAir, 150)
-    ];
+    public override List<Speed> Speeds => [new Speed(TravelMode.OnLand, 90), new Speed(TravelMode.InTheAir, 150)];
 }

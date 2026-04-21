@@ -1,6 +1,10 @@
 ﻿using M.A.G.U.S.Enums;
+using M.A.G.U.S.GameSystem;
 using M.A.G.U.S.GameSystem.Attributes;
 using M.A.G.U.S.Models;
+using M.A.G.U.S.Things.Weapons.CrushingWeapons;
+using M.A.G.U.S.Things.Weapons.RangedWeapons;
+using M.A.G.U.S.Things.Weapons.StabbingWeapons;
 
 namespace M.A.G.U.S.Bestiary.Races;
 
@@ -19,6 +23,15 @@ public sealed class Lyennara : Creature
 
         HealthPoints = 15;
         PainTolerancePoints = 98;
+        AttackModes =
+        [
+            new MeleeAttack(new Warhammer(), AttackValue),
+            new MeleeAttack(new TwoHandedMace(), AttackValue),
+            new MeleeAttack(new ShortSword(), AttackValue),
+            new MeleeAttack(new Longsword(), AttackValue),
+            new RangedAttack(new Shortbow(), AimValue),
+            new RangedAttack(new Longbow(), AimValue)
+        ];
 
         AstralMagicResistance = Int32.MaxValue;
         MentalMagicResistance = 180;
@@ -42,5 +55,5 @@ public sealed class Lyennara : Creature
     [DiceThrowModifier(1)]
     public override int GetNumberAppearing() => 1; // See description
 
-    public override List<Speed> Speeds => [];
+    public override List<Speed> Speeds => [new Speed(TravelMode.OnLand, 110)];
 }

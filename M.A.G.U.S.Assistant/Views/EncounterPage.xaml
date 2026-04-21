@@ -113,7 +113,8 @@
                     <DataTemplate x:DataType="vm:TurnViewModel">
                         <VerticalStackLayout Spacing="6">
                             <HorizontalStackLayout BackgroundColor="{StaticResource Tertiary}">
-                                <Label Text="Round" FontAttributes="Bold" Padding="10,5" />
+                                <Binding Source="Round" Converter="{StaticResource TranslationConverter}" />
+                                <Label Text="{Binding Source='Round', Converter={StaticResource TranslationConverter}}" FontAttributes="Bold" Padding="10,5" />
                                 <Label Text="{Binding Turn.Round}" FontAttributes="Bold" Padding="10,5" />
                             </HorizontalStackLayout>
 

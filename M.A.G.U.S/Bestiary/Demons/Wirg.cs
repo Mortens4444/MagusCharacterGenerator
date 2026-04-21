@@ -40,9 +40,5 @@ public sealed class Wirg : Creature
     [DiceThrowModifier(1)]
     public override int GetNumberAppearing() => 1;
 
-    public override List<Speed> Speeds =>
-    [
-        new Speed(TravelMode.OnLand, 40),
-        new Speed(TravelMode.InTheAir, 120)
-    ];
+    public override List<Speed> Speeds => [new Speed(TravelMode.OnLand, 40), new Speed(TravelMode.InTheAir, 120)];
 }

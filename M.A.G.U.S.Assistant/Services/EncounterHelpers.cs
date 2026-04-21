@@ -1,4 +1,5 @@
-﻿using M.A.G.U.S.Assistant.ViewModels;
+﻿using M.A.G.U.S.Assistant.Extensions;
+using M.A.G.U.S.Assistant.ViewModels;
 using M.A.G.U.S.Enums;
 using M.A.G.U.S.GameSystem;
 using M.A.G.U.S.GameSystem.Turn;
@@ -85,7 +86,7 @@ internal static class EncounterHelpers
         List<InitiativeEntry> result,
         ICombatRollService rollService)
     {
-        var name = attacker.Source is Character character ? character.Name : Lng.Elem(attacker.Source.Name);
+        var name = attacker.Source.GetName();
         var init = Lng.Elem("Initiate");
 
         result.Add(new InitiativeEntry
