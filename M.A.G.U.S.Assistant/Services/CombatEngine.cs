@@ -24,7 +24,8 @@ internal class CombatEngine
 
         if (initiatives.Count != 0)
         {
-            assignment.AddTurn(turn);
+            // Ensure collection modifications that affect UI are performed on the main thread
+            await MainThread.InvokeOnMainThreadAsync(() => assignment.AddTurn(turn)).ConfigureAwait(false);
         }
     }
 
