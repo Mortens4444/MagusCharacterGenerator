@@ -38,9 +38,15 @@ internal static class EncounterHelpers
 
             if (dist > range)
             {
+                var oldDistance = assignment.GetDistanceInMeters(enemy);
                 int speed = enemy.GetMaxMovementSpeed();
                 assignment.DecreaseDistance(enemy, speed);
-                await AddInitiativeAsync(new CombatantRef(enemy), new CombatantRef(assignment.Character), null, result, rollService).ConfigureAwait(false);
+                var newDistance = assignment.GetDistanceInMeters(enemy);
+                var initiative = await AddInitiativeAsync(InitiativeEntryKind.Movement, new CombatantRef(enemy), new CombatantRef(assignment.Character), null, result, rollService).ConfigureAwait(false);
+                if (oldDistance != newDistance)
+                {
+                    turn.Initiatives.Add(initiative);
+                }
                 continue;
             }
 
@@ -49,7 +55,7 @@ internal static class EncounterHelpers
                 int attackCount = enemy.GetAttackCountForRound(turn.Round); // Shouldn't it use intendedAttack also to determinate the attack count?
                 for (var i = 0; i < attackCount; i++)
                 {
-                    await AddInitiativeAsync(new CombatantRef(enemy), new CombatantRef(assignment.Character), intendedAttack, result, rollService).ConfigureAwait(false);
+                    await AddInitiativeAsync(InitiativeEntryKind.Attack, new CombatantRef(enemy), new CombatantRef(assignment.Character), intendedAttack, result, rollService).ConfigureAwait(false);
                 }
             }
         }
@@ -73,13 +79,14 @@ internal static class EncounterHelpers
 
         for (var i = 0; i < characterAttackCount; i++)
         {
-            await AddInitiativeAsync(new CombatantRef(assignment.Character), new CombatantRef(target), charIntendedAttack, result, rollService).ConfigureAwait(false);
+            await AddInitiativeAsync(InitiativeEntryKind.Attack, new CombatantRef(assignment.Character), new CombatantRef(target), charIntendedAttack, result, rollService).ConfigureAwait(false);
         }
 
         return result;
     }
 
-    private static async Task AddInitiativeAsync(
+    private static async Task<InitiativeEntry> AddInitiativeAsync(
+        InitiativeEntryKind initiativeEntryKind,
         CombatantRef attacker,
         CombatantRef target,
         Attack? attack,
@@ -89,13 +96,16 @@ internal static class EncounterHelpers
         var name = attacker.Source.GetName();
         var init = Lng.Elem("Initiate");
 
-        result.Add(new InitiativeEntry
+        var initiative = new InitiativeEntry
         {
+            Kind = initiativeEntryKind,
             Attacker = attacker,
             Target = target,
             SelectedAttack = attack,
             BaseInitiative = attacker.Source.InitiateValue,
             RolledValue = await rollService.RollAsync(ThrowType._1D10, $"{name} - {init}").ConfigureAwait(false)
-        });
+        };
+        result.Add(initiative);
+        return initiative;
     }
 }

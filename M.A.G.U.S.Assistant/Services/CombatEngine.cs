@@ -15,11 +15,11 @@ internal class CombatEngine
     {
         var turn = new TurnData { Round = round };
         var initiatives = await EncounterHelpers.GetInitiativesAsync(assignment, turn, rollService).ConfigureAwait(false);
-        turn.Initiatives.AddRange(initiatives);
+        //turn.Initiatives.AddRange(initiatives);
 
-        foreach (var initiative in turn.Initiatives)
+        foreach (var initiative in initiatives)
         {
-            await ProcessInitiativeAsync(initiative, assignment, rollService).ConfigureAwait(false);
+            await ProcessInitiativeAsync(turn, initiative, assignment, rollService).ConfigureAwait(false);
         }
 
         if (initiatives.Count != 0)
@@ -28,17 +28,12 @@ internal class CombatEngine
         }
     }
 
-    private static async Task ProcessInitiativeAsync(InitiativeEntry initiative, AssignmentViewModel assignment, ICombatRollService rollService)
+    private static async Task ProcessInitiativeAsync(TurnData turn, InitiativeEntry initiative, AssignmentViewModel assignment, ICombatRollService rollService)
     {
         Attacker attacker = initiative.Attacker.Source;
         Attacker target = initiative.Target.Source;
         
-        if (attacker.IsDead || target.IsDead)
-        {
-            return;
-        }
-
-        if (!attacker.IsConscious)
+        if (attacker.IsDead || target.IsDead || !attacker.IsConscious)
         {
             return;
         }
@@ -48,16 +43,20 @@ internal class CombatEngine
 
         if (attackDirection == AttackDirection.Behind)
         {
-            var ambushMod = new AttackFromAmbush();
-            initiative.Attacker.AddTemporaryModifier(ambushMod);
+            initiative.Attacker.AddTemporaryModifier(new AttackFromBehind());
         }
 
         if (initiative.SelectedAttack == null)
         {
-            var speed = attacker.GetMaxMovementSpeed();
-            assignment.DecreaseDistance(initiative.Attacker.Source, speed);
+            //EncounterHelpers.GetInitiativesInternalAsync decreases the distance
             return;
         }
+
+        var targetWasDead = target.IsDead;
+        var targetWasConscious = target.IsConscious;
+
+        var attackerWasDead = attacker.IsDead;
+        var attackerWasConscious = attacker.IsConscious;
 
         var name = attacker.GetName();
         var hitLocationTitle = $"{name} - {Lng.Elem("Hit location")}";
@@ -70,12 +69,16 @@ internal class CombatEngine
             target.ActualHealthPoints -= finalDamage;
 
             initiative.AttackOrAimResolution = await ForcedResolution.CreateAsync(initiative, finalDamage, attackDirection, rollService, hitLocationTitle).ConfigureAwait(false);
+
+            turn.Initiatives.Add(initiative);
+            AddStateChanges(turn, attacker, attackerWasDead, attackerWasConscious);
+            AddStateChanges(turn, target, targetWasDead, targetWasConscious);
         }
         else
         {
             if (initiative.SelectedAttack is RangedAttack rangedAttack)
             {
-                var targetDistance = assignment.GetDistanceInMeters(initiative.Target.Source);
+                var targetDistance = assignment.GetDistanceInMeters(target);
                 initiative.AttackOrAimResolution = await AimResolution.CreateAsync(
                     initiative,
                     targetDistance,
@@ -105,7 +108,41 @@ internal class CombatEngine
             {
                 ApplyCombatDamage(initiative, attacker, target);
             }
+
+            turn.Initiatives.Add(initiative);
+
+            AddStateChanges(turn, attacker, attackerWasDead, attackerWasConscious);
+            AddStateChanges(turn, target, targetWasDead, targetWasConscious);
         }
+    }
+
+    private static void AddStateChanges(TurnData turn, Attacker attacker, bool wasDead, bool wasConscious)
+    {
+        if (!wasDead && attacker.IsDead)
+        {
+            AddSpecialInitiative(turn, attacker, InitiativeEntryKind.Death);
+            return;
+        }
+
+        if (wasConscious && !attacker.IsConscious && !attacker.IsDead)
+        {
+            AddSpecialInitiative(turn, attacker, InitiativeEntryKind.LostConsciousness);
+        }
+    }
+
+    private static void AddSpecialInitiative(TurnData turn, Attacker attacker, InitiativeEntryKind kind)
+    {
+        var initiative = new InitiativeEntry
+        {
+            Kind = kind,
+            Attacker = new CombatantRef(attacker),
+            Target = new CombatantRef(attacker),
+            SelectedAttack = null,
+            BaseInitiative = 0,
+            RolledValue = 0
+        };
+
+        turn.Initiatives.Add(initiative);
     }
 
     private static void ApplyCombatDamage(InitiativeEntry initiative, Attacker attacker, Attacker target)

@@ -1,7 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.Messaging;
 using M.A.G.U.S.Assistant.Enums;
-using M.A.G.U.S.Assistant.Extensions;
 using M.A.G.U.S.Assistant.Interfaces;
 using M.A.G.U.S.Assistant.Services;
 using M.A.G.U.S.Assistant.Views;
@@ -9,14 +8,12 @@ using M.A.G.U.S.Bestiary;
 using M.A.G.U.S.Enums;
 using M.A.G.U.S.Extensions;
 using M.A.G.U.S.GameSystem;
-using M.A.G.U.S.GameSystem.Turn;
 using M.A.G.U.S.Interfaces;
 using M.A.G.U.S.Services;
-using Mtf.LanguageService.MAUI;
+using Mtf.Extensions;
 using Mtf.Maui.Controls.Messages;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
-using System.Globalization;
 
 namespace M.A.G.U.S.Assistant.ViewModels;
 
@@ -428,11 +425,6 @@ internal partial class EncounterViewModel(ISettings settings, CharacterService c
                     enemyAssignment.Enemies.Remove(diedEntity);
                 }
 
-                if (eventAssignment != null)
-                {
-                    AddDeathTurn(diedEntity, eventAssignment);
-                }
-
                 RunTurnCommand.NotifyCanExecuteChanged();
 
                 if (IsEncounterOver())
@@ -445,128 +437,6 @@ internal partial class EncounterViewModel(ISettings settings, CharacterService c
                 WeakReferenceMessenger.Default.Send(new ShowErrorMessage(ex));
             }
         });
-    }
-    //private void DieHandler(object? sender, EventArgs e)
-    //{
-    //    if (sender is not Attacker diedEntity)
-    //    {
-    //        return;
-    //    }
-
-    //    diedEntity.Died -= DieHandler;
-    //    diedEntity.LostConsciousness -= LostConsciousnessHandler;
-
-    //    var assignment = Assignments.FirstOrDefault(a => a.Enemies.Contains(diedEntity));
-    //    if (assignment != null)
-    //    {
-    //        AddXp(assignment.Character, diedEntity);
-    //    }
-
-    //    MainThread.BeginInvokeOnMainThread(() =>
-    //    {
-    //        try
-    //        {
-    //            var charAssignment = Assignments.FirstOrDefault(a => a.Character == diedEntity);
-    //            // Capture the enemy assignment reference early so we can record an event turn even after removal
-    //            AssignmentViewModel? enemyAssignment = null;
-
-    //            if (charAssignment != null)
-    //            {
-    //                var enemiesToRedistribute = charAssignment.Enemies.ToList();
-    //                charAssignment.Enemies.Clear();
-    //                charAssignment.IsFinished = true;
-    //                //Assignments.Remove(charAssignment);
-    //                RedistributeEnemies(enemiesToRedistribute);
-    //            }
-    //            else
-    //            {
-    //                enemyAssignment = Assignments.FirstOrDefault(a => a.Enemies.Contains(diedEntity));
-    //                if (enemyAssignment != null)
-    //                {
-    //                    enemyAssignment.RemoveEnemyDistance(diedEntity);
-    //                    enemyAssignment.Enemies.Remove(diedEntity);
-    //                }
-    //            }
-
-    //            RunTurnCommand.NotifyCanExecuteChanged();
-
-    //            // Add a turn entry recording the death to the relevant assignment's turn history
-    //            try
-    //            {
-    //                AssignmentViewModel? eventAssignment = null;
-    //                // If the dead entity was the character in an assignment
-    //                if (charAssignment != null)
-    //                {
-    //                    eventAssignment = charAssignment;
-    //                }
-    //                else
-    //                {
-    //                    // Use the captured enemyAssignment (it may have been removed from the collection already)
-    //                    if (enemyAssignment != null)
-    //                    {
-    //                        eventAssignment = enemyAssignment;
-    //                    }
-    //                    else
-    //                    {
-    //                        // Fallback: try to find it (defensive)
-    //                        var found = Assignments.FirstOrDefault(a => a.Enemies.Contains(diedEntity));
-    //                        if (found != null)
-    //                        {
-    //                            eventAssignment = found;
-    //                        }
-    //                    }
-    //                }
-
-    //                if (eventAssignment != null)
-    //                {
-    //                    AddDeathTurn(diedEntity, eventAssignment);
-    //                }
-    //            }
-    //            catch
-    //            {
-    //                // ignore failures adding turn entries
-    //            }
-
-    //            if (IsEncounterOver())
-    //            {
-    //                EndEncounter();
-    //            }
-    //        }
-    //        catch (Exception ex)
-    //        {
-    //            WeakReferenceMessenger.Default.Send(new ShowErrorMessage(ex));
-    //        }
-    //    });
-    //}
-
-    private static void AddDeathTurn(Attacker diedEntity, AssignmentViewModel assignment)
-    {
-        AddSpecialTurn(diedEntity, assignment, "☠");
-    }
-
-    private static void AddFaintTurn(Attacker attacker, AssignmentViewModel assignment)
-    {
-        AddSpecialTurn(attacker, assignment, "😵‍💫");
-    }
-
-    private static void AddSpecialTurn(Attacker attacker, AssignmentViewModel eventAssignment, string turnInfo)
-    {
-        var th = eventAssignment.TurnHistory.Last();
-        //var turn = new TurnData { Round = eventAssignment.TurnHistory.Count + 1 };
-        var attackerRef = new CombatantRef(attacker, $"{attacker.GetName()} {turnInfo}");
-        var targetRef = new CombatantRef(attacker);
-
-        var initiative = new InitiativeEntry
-        {
-            Attacker = attackerRef,
-            Target = targetRef,
-            SelectedAttack = null,
-            BaseInitiative = 0,
-            RolledValue = 0
-        };
-        th.Turn.Initiatives.Add(initiative);
-        //turn.Initiatives.Add(initiative);
-        //eventAssignment.AddTurn(turn);
     }
 
     private bool IsEncounterOver()
@@ -607,29 +477,6 @@ internal partial class EncounterViewModel(ISettings settings, CharacterService c
 
     private void LostConsciousnessHandler(object? sender, EventArgs e)
     {
-        if (sender is not Attacker attacker)
-        {
-            return;
-        }
-
-        MainThread.BeginInvokeOnMainThread(() =>
-        {
-            try
-            {
-                //Find the assignment this attacker belongs to (as character or enemy)
-                AssignmentViewModel? eventAssignment = Assignments.FirstOrDefault(a => a.Character == attacker) ??
-                    Assignments.FirstOrDefault(a => a.Enemies.Contains(attacker));
-
-                if (eventAssignment != null)
-                {
-                    AddFaintTurn(attacker, eventAssignment);
-                }
-            }
-            catch (Exception ex)
-            {
-                WeakReferenceMessenger.Default.Send(new ShowErrorMessage(ex));
-            }
-        });
     }
 
     private void ProcessConfirmedEnemies(List<EnemyConfigurationItem> configs, int maxSimultaneousAttacks)

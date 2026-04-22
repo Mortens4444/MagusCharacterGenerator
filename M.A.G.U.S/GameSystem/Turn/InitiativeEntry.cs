@@ -1,4 +1,6 @@
-﻿namespace M.A.G.U.S.GameSystem.Turn;
+﻿using M.A.G.U.S.Enums;
+
+namespace M.A.G.U.S.GameSystem.Turn;
 
 public sealed class InitiativeEntry
 {
@@ -9,6 +11,8 @@ public sealed class InitiativeEntry
     public required Attack? SelectedAttack { get; init; }
 
     public ResolutionBase? AttackOrAimResolution { get; set; }
+
+    public InitiativeEntryKind Kind { get; set; } = InitiativeEntryKind.Attack;
 
     public int BaseInitiative { get; init; }
 

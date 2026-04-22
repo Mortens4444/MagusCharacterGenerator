@@ -33,21 +33,7 @@ internal sealed class TurnAttackViewModel(int roundNumber, InitiativeEntry initi
         {
             if (attack == null)
             {
-                var source = initiativeEntry?.Attacker?.Source;
-                if (source != null)
-                {
-                    if (source.IsDead)
-                    {
-                        return "☠"; // death marker
-                    }
-
-                    if (!source.IsConscious)
-                    {
-                        return "😵‍💫"; // faint marker
-                    }
-                }
-
-                return "🚶";
+                return initiativeEntry.Kind.GetDescription();
             }
 
             var isRanged = attack.Attack is RangedAttack;
@@ -63,7 +49,7 @@ internal sealed class TurnAttackViewModel(int roundNumber, InitiativeEntry initi
             string damageKind = attack.IsHpDamage ? Lng.Elem("HP") : Lng.Elem("PTP");
             var target = isRanged ? "🎯" : "💥";
 
-            return $"{attackMode}{isHpAttack}{impact} {attack.RollValue + attack.Attack.Value}{(attack.IsSuccessful ? $"{target}{attack.Damage}{damageKind}" : String.Empty)}";
+            return $"{attackMode}{isHpAttack}{impact} {attack.RollValue + attack.Attack.Value}{(attack.IsSuccessful ? $"{target}{attack.Damage} {damageKind}" : String.Empty)}";
         }
     }
 }
