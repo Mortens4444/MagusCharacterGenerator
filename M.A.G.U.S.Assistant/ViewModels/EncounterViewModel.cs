@@ -227,21 +227,24 @@ internal partial class EncounterViewModel(ISettings settings, CharacterService c
     }
 
     [RelayCommand(CanExecute = nameof(CanRunTurn))]
-    private async Task RunTurnAsync()
+    private void RunTurn()
     {
         var mode = settings.CombatSimulatorMode;
+        var runUntilFinished = mode == CombatSimulatorMode.FullAuto;
 
-        switch (mode)
+        // Run the combat loop on a background thread to keep the UI responsive. UI updates
+        // (like adding turns) are marshalled to the main thread in CombatEngine/VM.
+        _ = Task.Run(async () =>
         {
-            case CombatSimulatorMode.Manual:
-            case CombatSimulatorMode.SemiAuto:
-                await RunTurnsAsync(runUntilFinished: false).ConfigureAwait(false);
-                break;
-
-            case CombatSimulatorMode.FullAuto:
-                await RunTurnsAsync(runUntilFinished: true).ConfigureAwait(false);
-                break;
-        }
+            try
+            {
+                await RunTurnsAsync(runUntilFinished).ConfigureAwait(false);
+            }
+            catch (Exception ex)
+            {
+                WeakReferenceMessenger.Default.Send(new ShowErrorMessage(ex));
+            }
+        });
     }
     
     private ICombatRollService CreateCombatRollService()
