@@ -509,7 +509,6 @@ map.png
 market.png
 paint.png
 poisons.png
-psi.png
 qualifications.png
 races.png
 runes.png
@@ -635,6 +634,7 @@ leadership.png
 legend_lore.png
 lip_reading.png
 local_knowledge.png
+lock_picking.png
 magic_lore.png
 mechanics.png
 mountain_survival.png
@@ -645,6 +645,7 @@ pick_pocketing.png
 plant_growing.png
 poisoning_neutralization.png
 pottery.png
+psi.png
 reading_writing.png
 religion_lore.png
 riding.png
