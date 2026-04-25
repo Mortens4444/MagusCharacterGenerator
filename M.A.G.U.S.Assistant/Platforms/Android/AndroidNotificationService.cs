@@ -1,6 +1,5 @@
 ﻿using Android.App;
 using Android.Content;
-using Android.OS;
 using AndroidX.Core.App;
 using M.A.G.U.S.Assistant.Interfaces;
 
@@ -20,9 +19,18 @@ internal sealed class AndroidNotificationService : INotificationService
             return;
         }
 
-        if (Build.VERSION.SdkInt >= BuildVersionCodes.O)
+        var context = global::Android.App.Application.Context;
+        if (context == null)
         {
-            var channel = new NotificationChannel(
+            // Cannot initialize without a context
+            return;
+        }
+
+        // Use OperatingSystem.IsAndroidVersionAtLeast so the platform compatibility analyzer
+        // understands the runtime API check (NotificationChannel requires API 26+).
+        if (OperatingSystem.IsAndroidVersionAtLeast(26))
+        {
+            using var channel = new NotificationChannel(
                 ChannelId,
                 ChannelName,
                 NotificationImportance.Default)
@@ -30,7 +38,7 @@ internal sealed class AndroidNotificationService : INotificationService
                 Description = "General app notifications"
             };
 
-            var manager = (NotificationManager?)global::Android.App.Application.Context.GetSystemService(Context.NotificationService);
+            var manager = context.GetSystemService(Context.NotificationService) as NotificationManager;
             manager?.CreateNotificationChannel(channel);
         }
 
@@ -41,14 +49,70 @@ internal sealed class AndroidNotificationService : INotificationService
     {
         Initialize();
 
-        var builder = new NotificationCompat.Builder(global::Android.App.Application.Context, ChannelId)
-            .SetContentTitle(title)
-            .SetContentText(message)
-            .SetSmallIcon(Resource.Mipmap.appicon)
-            .SetPriority((int)NotificationPriority.Default)
-            .SetAutoCancel(true);
+        var context = global::Android.App.Application.Context;
+        if (context == null)
+        {
+            return;
+        }
 
-        var manager = NotificationManagerCompat.From(global::Android.App.Application.Context);
-        manager.Notify(notificationId, builder.Build());
+        var manager = NotificationManagerCompat.From(context);
+        if (manager == null)
+        {
+            return;
+        }
+
+        // Ensure the builder is disposed even if Build() or Notify() throws.
+        using var builder = new NotificationCompat.Builder(context, ChannelId);
+        // Methods return the builder but the instance is not null; call them for side-effects.
+        builder.SetContentTitle(title);
+        builder.SetContentText(message);
+        builder.SetSmallIcon(Resource.Mipmap.appicon);
+        builder.SetPriority((int)NotificationPriority.Default);
+        builder.SetAutoCancel(true);
+
+        var notification = builder.Build();
+        if (notification != null)
+        {
+            manager.Notify(notificationId, notification);
+        }
+    }
+
+    public void StartBackgroundNotificationService()
+    {
+        Initialize();
+
+        var context = global::Android.App.Application.Context;
+        if (context == null)
+        {
+            return;
+        }
+
+        using var intent = new Intent(context, typeof(NotificationForegroundService));
+        intent.SetAction(NotificationServiceActions.Start);
+
+        // Use OperatingSystem.IsAndroidVersionAtLeast so the platform compatibility analyzer
+        // understands the runtime API check (StartForegroundService requires API 26+).
+        if (OperatingSystem.IsAndroidVersionAtLeast(26))
+        {
+            context.StartForegroundService(intent);
+        }
+        else
+        {
+            context.StartService(intent);
+        }
+    }
+
+    public void StopBackgroundNotificationService()
+    {
+        var context = global::Android.App.Application.Context;
+        if (context == null)
+        {
+            return;
+        }
+
+        using var intent = new Intent(context, typeof(NotificationForegroundService));
+        intent.SetAction(NotificationServiceActions.Stop);
+
+        context.StartService(intent);
     }
 }

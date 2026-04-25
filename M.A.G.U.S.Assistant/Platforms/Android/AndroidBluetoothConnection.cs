@@ -1,8 +1,6 @@
 ﻿using Android.Bluetooth;
-using CommunityToolkit.Mvvm.Messaging;
 using M.A.G.U.S.Assistant.Exceptions;
 using M.A.G.U.S.Assistant.Interfaces.Bluetooth;
-using Mtf.Maui.Controls.Messages;
 using System.Net;
 using System.Text;
 

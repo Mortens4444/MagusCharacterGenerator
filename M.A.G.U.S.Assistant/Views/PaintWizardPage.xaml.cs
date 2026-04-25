@@ -56,10 +56,25 @@ internal partial class PaintWizardPage : NotifierPage
         return startPoint.GetHashCode();
     }
 
-    protected override async void OnAppearing()
+    protected override void OnAppearing()
     {
         base.OnAppearing();
-        await viewModel.RefreshSavedDrawingsCommand.ExecuteAsync(null).ConfigureAwait(true);
+        _ = RefreshSavedDrawingsSafelyAsync();
+    }
+
+    private async Task RefreshSavedDrawingsSafelyAsync()
+    {
+        try
+        {
+            await viewModel.RefreshSavedDrawingsCommand.ExecuteAsync(null).ConfigureAwait(true);
+        }
+        catch (Exception ex)
+        {
+            await ShellNavigationService.DisplayAlertAsync(
+                Lng.Elem("Error"),
+                ex.Message,
+                Lng.Elem("OK")).ConfigureAwait(true);
+        }
     }
 
     private void OnTouchStart(object sender, TouchEventArgs e)
@@ -340,8 +355,23 @@ internal partial class PaintWizardPage : NotifierPage
 
     protected override bool OnBackButtonPressed()
     {
-        _ = ConfirmAndNavigateAsync();
+        _ = MainThread.InvokeOnMainThreadAsync(ConfirmAndNavigateSafelyAsync);
         return true;
+    }
+
+    private async Task ConfirmAndNavigateSafelyAsync()
+    {
+        try
+        {
+            await ConfirmAndNavigateAsync().ConfigureAwait(true);
+        }
+        catch (Exception ex)
+        {
+            await ShellNavigationService.DisplayAlertAsync(
+                Lng.Elem("Error"),
+                ex.Message,
+                Lng.Elem("OK")).ConfigureAwait(true);
+        }
     }
 
     private static async Task ConfirmAndNavigateAsync()

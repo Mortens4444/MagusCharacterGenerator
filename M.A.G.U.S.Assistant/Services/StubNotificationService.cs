@@ -7,13 +7,21 @@ internal sealed class StubNotificationService : INotificationService
 {
     public void Initialize()
     {
-        // No-op stub to avoid nulls on platforms without a concrete implementation
         Debug.WriteLine("StubNotificationService.Initialize() called");
     }
 
     public void ShowNotification(string title, string message, int notificationId = 1)
     {
-        // No-op. Log for diagnostics.
         Debug.WriteLine($"StubNotificationService.ShowNotification: {title} - {message} (id={notificationId})");
+    }
+
+    public void StartBackgroundNotificationService()
+    {
+        Debug.WriteLine("StubNotificationService.StartBackgroundNotificationService() called");
+    }
+
+    public void StopBackgroundNotificationService()
+    {
+        Debug.WriteLine("StubNotificationService.StopBackgroundNotificationService() called");
     }
 }

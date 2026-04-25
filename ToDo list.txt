@@ -1,4 +1,4 @@
-- Send notifications (random time, randomm enemy, random text [somebody attacked you on your journey...], flee or fight?, pathes [through the mountains or a forest, etc...])
+- Send notifications (random time, random enemy, random text [somebody attacked you on your journey...], flee or fight?, pathes [through the mountains or a forest, etc...])
 - when a character kills all of it's enemies in encounter, redistribute enemies should be called with a UI
 - Fix zoom image preview (zooming is not smooth)
 - generate button is not available, after canceling strength probe?

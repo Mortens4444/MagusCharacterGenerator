@@ -1,7 +1,9 @@
-using CommunityToolkit.Mvvm.ComponentModel;
+using M.A.G.U.S.Assistant.Interfaces;
+#if ANDROID
+using M.A.G.U.S.Assistant.Platforms.Android;
+#endif
 using M.A.G.U.S.Assistant.Services;
 using Mtf.LanguageService.Enums;
-using System.Threading.Tasks;
 
 namespace M.A.G.U.S.Assistant.ViewModels;
 
@@ -10,10 +12,12 @@ internal class MainPageViewModel : BaseViewModel
     private readonly SettingsService settingsService;
 
     private Language currentLanguage;
+    private readonly INotificationService notificationService;
 
-    public MainPageViewModel(SettingsService settingsService)
+    public MainPageViewModel(SettingsService settingsService, INotificationService notificationService)
     {
         this.settingsService = settingsService;
+        this.notificationService = notificationService;
     }
 
     public Language CurrentLanguage
@@ -28,10 +32,31 @@ internal class MainPageViewModel : BaseViewModel
         {
             var lang = await settingsService.GetCurrentLanguageAsync().ConfigureAwait(false);
             CurrentLanguage = lang;
+
+#if ANDROID
+            var status = await Permissions.CheckStatusAsync<PostNotificationsPermission>().ConfigureAwait(false);
+
+            if (status != PermissionStatus.Granted)
+            {
+                status = await Permissions.RequestAsync<PostNotificationsPermission>().ConfigureAwait(false);
+            }
+
+            if (status == PermissionStatus.Granted)
+            {
+                notificationService.StartBackgroundNotificationService();
+            }
+#else
+            notificationService.StartBackgroundNotificationService();
+#endif
         }
         catch
         {
             // ignore
         }
+    }
+
+    public void StopNotifications()
+    {
+        notificationService.StopBackgroundNotificationService();
     }
 }

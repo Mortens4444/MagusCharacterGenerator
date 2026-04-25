@@ -36,4 +36,9 @@ internal partial class MainPage : NotifierPage
             _ = Translator.Translate(this);
         }
     }
+
+    protected override void OnDisappearing()
+    {
+        ((MainPageViewModel)BindingContext).StopNotifications();
+    }
 }
