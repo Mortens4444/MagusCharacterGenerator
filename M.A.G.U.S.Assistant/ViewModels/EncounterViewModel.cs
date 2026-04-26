@@ -30,7 +30,6 @@ internal partial class EncounterViewModel(ISettings settings, CharacterService c
     private readonly IShakeService shakeService = shakeService;
 
     public ObservableCollection<TurnViewModel> SelectedTurnHistory { get; } = [];
-
     public ObservableCollection<Character> Characters { get; } = [];
     public ObservableCollection<Attacker> Enemies { get; } = [];
     public ObservableCollection<Attacker> AvailableEnemies { get; } = [];
@@ -227,24 +226,22 @@ internal partial class EncounterViewModel(ISettings settings, CharacterService c
     }
 
     [RelayCommand(CanExecute = nameof(CanRunTurn))]
-    private void RunTurn()
+    private async Task RunTurnAsync()
     {
-        var mode = settings.CombatSimulatorMode;
-        var runUntilFinished = mode == CombatSimulatorMode.FullAuto;
-
-        // Run the combat loop on a background thread to keep the UI responsive. UI updates
-        // (like adding turns) are marshalled to the main thread in CombatEngine/VM.
-        _ = Task.Run(async () =>
+        if (IsRunningTurns)
         {
-            try
-            {
-                await RunTurnsAsync(runUntilFinished).ConfigureAwait(false);
-            }
-            catch (Exception ex)
-            {
-                WeakReferenceMessenger.Default.Send(new ShowErrorMessage(ex));
-            }
-        });
+            return;
+        }
+
+        try
+        {
+            var runUntilFinished = settings.CombatSimulatorMode == CombatSimulatorMode.FullAuto;
+            await RunTurnsAsync(runUntilFinished).ConfigureAwait(true);
+        }
+        catch (Exception ex)
+        {
+            WeakReferenceMessenger.Default.Send(new ShowErrorMessage(ex));
+        }
     }
     
     private ICombatRollService CreateCombatRollService()
@@ -256,7 +253,7 @@ internal partial class EncounterViewModel(ISettings settings, CharacterService c
 
     private async Task RunTurnsAsync(bool runUntilFinished)
     {
-        if (await TryPrepareEncounterAsync().ConfigureAwait(false))
+        if (await TryPrepareEncounterAsync().ConfigureAwait(true))
         {
             return;
         }

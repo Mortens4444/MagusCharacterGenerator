@@ -6,9 +6,11 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.Messaging;
 using M.A.G.U.S.Assistant.Enums;
+using M.A.G.U.S.Assistant.Interfaces;
 using M.A.G.U.S.Assistant.Interfaces.Bluetooth;
 using M.A.G.U.S.Assistant.Messages;
 using M.A.G.U.S.Assistant.Models.Bluetooth;
+using Mtf.Extensions.Services;
 using Mtf.LanguageService.MAUI;
 using Mtf.Maui.Controls.Messages;
 using Newtonsoft.Json;
@@ -19,6 +21,8 @@ namespace M.A.G.U.S.Assistant.ViewModels;
 internal partial class StorytellingViewModel : ObservableObject, IDisposable, IAsyncDisposable
 {
     private readonly IBluetoothService bluetooth;
+    private readonly INotificationService notificationService;
+
     private PlayerModel? selectedPlayer;
     private DeviceModel? selectedDevice;
     private String statusMessage = Lng.Elem("Server not started");
@@ -34,6 +38,7 @@ internal partial class StorytellingViewModel : ObservableObject, IDisposable, IA
     public IAsyncRelayCommand StartCombatCommand { get; }
     public IAsyncRelayCommand SendPsiCommand { get; }
     public IAsyncRelayCommand SendPrivateMessageCommand { get; }
+    public IAsyncRelayCommand SendNotificationCommand { get; }
 
     public bool ServerRunning
     {
@@ -55,6 +60,7 @@ internal partial class StorytellingViewModel : ObservableObject, IDisposable, IA
             if (SetProperty(ref messageText, value))
             {
                 SendPrivateMessageCommand.NotifyCanExecuteChanged();
+                SendNotificationCommand.NotifyCanExecuteChanged();
             }
         }
     }
@@ -73,6 +79,7 @@ internal partial class StorytellingViewModel : ObservableObject, IDisposable, IA
             if (SetProperty(ref selectedPlayer, value))
             {
                 SendPrivateMessageCommand.NotifyCanExecuteChanged();
+                SendNotificationCommand.NotifyCanExecuteChanged();
             }
         }
     }
@@ -83,12 +90,13 @@ internal partial class StorytellingViewModel : ObservableObject, IDisposable, IA
         set => SetProperty(ref selectedDevice, value);
     }
 
-    public StorytellingViewModel(IBluetoothService bluetooth)
+    public StorytellingViewModel(IBluetoothService bluetooth, INotificationService notificationService)
     {
         this.bluetooth = bluetooth;
-        
+        this.notificationService = notificationService;
+
         Unsubscribe();
-        bluetooth.DeviceDiscovered += Bluetooth_DeviceDiscovered;
+        bluetooth.DeviceDiscovered += BluetoothDeviceDiscovered;
         bluetooth.MessageReceived += OnMessageReceived;
         bluetooth.ClientDisconnected += OnClientDisconnected;
 
@@ -97,9 +105,11 @@ internal partial class StorytellingViewModel : ObservableObject, IDisposable, IA
         //StartCombatCommand = new AsyncRelayCommand(StartCombatAsync);
         //SendPsiCommand = new AsyncRelayCommand(SendPsiAsync);
         SendPrivateMessageCommand = new AsyncRelayCommand(SendPrivateMessageAsync, CanSendPrivateMessage);
+        SendNotificationCommand = new AsyncRelayCommand(SendNotificationAsync, CanSendPrivateMessage);
+
     }
 
-    private void Bluetooth_DeviceDiscovered(DeviceModel device)
+    private void BluetoothDeviceDiscovered(DeviceModel device)
     {
         MainThread.BeginInvokeOnMainThread(() =>
         {
@@ -248,10 +258,27 @@ internal partial class StorytellingViewModel : ObservableObject, IDisposable, IA
                 await HandlePrivateMessage(message).ConfigureAwait(false);
                 break;
 
+            case BluetoothCommandType.NotificationMessage:
+                HandleNotificationMessage(message);
+                break;
+
             default:
                 WeakReferenceMessenger.Default.Send(new ShowInfoMessage("Unknown message arrived", String.Concat(message.CommandType.ToString(), " - ", message.Payload)));
                 break;
         }
+    }
+
+    private void HandleNotificationMessage(BluetoothMessage message)
+    {
+        var data = JsonConvert.DeserializeObject<NotificationMessageData>(message.Payload);
+        if (data is null || String.IsNullOrWhiteSpace(data.Message))
+        {
+            return;
+        }
+
+        var title = String.IsNullOrWhiteSpace(data.Title) ? "M.A.G.U.S. Assistant" : data.Title;
+        var id = RandomProvider.GetSecureRandomInt(Int32.MinValue, Int32.MaxValue);
+        notificationService.ShowNotification(title, data.Message, id);
     }
 
     private static Task HandlePrivateMessage(BluetoothMessage message)
@@ -321,6 +348,36 @@ internal partial class StorytellingViewModel : ObservableObject, IDisposable, IA
         catch (Exception ex)
         {
             WeakReferenceMessenger.Default.Send(new ShowErrorMessage($"{Lng.Elem("Failed to send private message")}: {ex.Message}"));
+        }
+    }
+
+    private async Task SendNotificationAsync()
+    {
+        if (SelectedPlayer is null || String.IsNullOrWhiteSpace(MessageText))
+        {
+            return;
+        }
+
+        try
+        {
+            await bluetooth.SendAsync(new BluetoothMessage
+            {
+                CommandType = BluetoothCommandType.NotificationMessage,
+                SenderId = bluetooth.LocalId,
+                TargetIds = [SelectedPlayer.Id],
+                Payload = JsonConvert.SerializeObject(new NotificationMessageData
+                {
+                    Title = "M.A.G.U.S. Assistant",
+                    Message = MessageText
+                })
+            }).ConfigureAwait(false);
+
+            MessageText = String.Empty;
+        }
+        catch (Exception ex)
+        {
+            WeakReferenceMessenger.Default.Send(new ShowErrorMessage(
+                $"{Lng.Elem("Failed to send notification")}: {ex.Message}"));
         }
     }
 
@@ -399,7 +456,7 @@ internal partial class StorytellingViewModel : ObservableObject, IDisposable, IA
 
     private void Unsubscribe()
     {
-        bluetooth.DeviceDiscovered -= Bluetooth_DeviceDiscovered;
+        bluetooth.DeviceDiscovered -= BluetoothDeviceDiscovered;
         bluetooth.MessageReceived -= OnMessageReceived;
         bluetooth.ClientDisconnected -= OnClientDisconnected;
     }

@@ -5,6 +5,7 @@ internal enum BluetoothCommandType
     Unknown = 0,
     RegisterPlayer,
     PrivateMessage,
+    NotificationMessage,
     ForceCombat,
     PsiMessage
 }

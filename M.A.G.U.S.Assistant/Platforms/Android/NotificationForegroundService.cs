@@ -83,7 +83,7 @@ internal sealed class NotificationForegroundService : Service
         if (OperatingSystem.IsAndroidVersionAtLeast(34))
         {
             StartForeground(ForegroundNotificationId, foregroundNotification!, global::Android.Content.PM.ForegroundService.TypeSpecialUse);
-}
+        }
         else
         {
             // For Android versions earlier than 34, use the two-argument overload.
@@ -142,7 +142,7 @@ internal sealed class NotificationForegroundService : Service
 
     private void ShowNotification(string title, string message, int id)
     {
-        if (!CanSendNotifications())
+        if (!AndroidNotificationHelper.CanSendNotifications(this))
         {
             return;
         }
@@ -153,23 +153,14 @@ internal sealed class NotificationForegroundService : Service
             return;
         }
 
-        var manager = NotificationManagerCompat.From(this);
-        if (manager is null)
-        {
-            return;
-        }
-
-        // notification was null-checked above; use null-forgiving to satisfy flow analysis.
-        manager.Notify(id, notification!);
+        NotificationManagerCompat.From(this).Notify(id, notification);
     }
 
     private Notification? CreateNotification(string title, string message)
     {
-        // Create the intent and dispose it after creating the PendingIntent to satisfy CA2000.
         using var stopIntent = new Intent(this, typeof(NotificationForegroundService));
         stopIntent.SetAction(NotificationServiceActions.Stop);
 
-        // Build flags conditionally to avoid using PendingIntentFlags.Immutable on API < 23
         var pendingIntentFlags = PendingIntentFlags.UpdateCurrent;
         if (OperatingSystem.IsAndroidVersionAtLeast(23))
         {
@@ -177,44 +168,14 @@ internal sealed class NotificationForegroundService : Service
         }
 
         var stopPendingIntent = PendingIntent.GetService(this, 0, stopIntent, pendingIntentFlags);
-
-        // Use a using on the builder to ensure it is disposed (fixes CA2000).
-        using var builder = new NotificationCompat.Builder(this, ChannelId);
-        builder.SetContentTitle(title);
-        builder.SetContentText(message);
-        builder.SetSmallIcon(Resource.Mipmap.appicon);
-        builder.SetOngoing(true);
-        builder.SetPriority((int)NotificationPriority.Default);
-
-        // Add action only when the PendingIntent is not null to avoid potential null-dereference.
-        if (stopPendingIntent is not null)
-        {
-            builder.AddAction(0, "Leállítás", stopPendingIntent);
-        }
-
-        // Build can theoretically return null in some bindings; keep nullable return and let callers handle it.
-        return builder.Build();
+        return AndroidNotificationHelper.CreateNotification(this, AndroidNotificationHelper.BackgroundChannelId, title, message, ongoing: true, actionIntent: stopPendingIntent);
     }
 
     [SupportedOSPlatform("android26.0")]
     private void CreateNotificationChannel()
     {
-        // Create and dispose the channel after registering it to satisfy CA2000.
-        using var channel = new NotificationChannel(
-            ChannelId,
-            ChannelName,
-            NotificationImportance.Default)
-        {
-            Description = "MAGUS Assistant background notification service"
-        };
-
-        var manager = (NotificationManager?)GetSystemService(NotificationService);
-        if (manager is null)
-        {
-            return;
-        }
-
-        manager.CreateNotificationChannel(channel);
+        AndroidNotificationHelper.CreateChannel(this, AndroidNotificationHelper.BackgroundChannelId,
+            AndroidNotificationHelper.BackgroundChannelName, "MAGUS Assistant background notification service");
     }
 
     private bool CanSendNotifications()

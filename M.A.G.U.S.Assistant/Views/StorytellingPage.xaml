@@ -54,7 +54,10 @@
         <Label Text="Private message" FontAttributes="Bold"/>
 
         <Entry Text="{Binding MessageText}" ClearButtonVisibility="WhileEditing" />
-        <Button Text="Send" Command="{Binding SendPrivateMessageCommand}" />
+        <Grid ColumnDefinitions="*,*" ColumnSpacing="8">
+            <Button Grid.Column="0" Text="Send message" Command="{Binding SendPrivateMessageCommand}" />
+            <Button Grid.Column="1" Text="Send notification" Command="{Binding SendNotificationCommand}" />
+        </Grid>
 
     </VerticalStackLayout>
 </v:NotifierPage>
