@@ -1,11 +1,10 @@
 ﻿using M.A.G.U.S.GameSystem.Languages;
 using M.A.G.U.S.GameSystem.Qualifications;
-using M.A.G.U.S.Things.Weapons;
 using Newtonsoft.Json;
 
 namespace M.A.G.U.S.Qualifications.Scientific;
 
-public class LanguageLore : Qualification, ICanHaveMany
+public class LanguageLore : Qualification, ICanHaveMany, IScientificQualification
 {
     public override string Key => $"{GetType().Name}:{Language?.GetType().Name ?? Guid.NewGuid().ToString()}";
 

@@ -3,7 +3,7 @@ using Newtonsoft.Json;
 
 namespace M.A.G.U.S.Qualifications.Laical;
 
-public class Craft : Qualification
+public class Craft : Qualification, ILaicalQualification
 {
     public Profession Profession { get; set; }
 

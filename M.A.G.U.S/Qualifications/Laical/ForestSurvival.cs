@@ -2,7 +2,7 @@
 
 namespace M.A.G.U.S.Qualifications.Laical;
 
-public class ForestSurvival(QualificationLevel qualificationLevel = QualificationLevel.Base, int level = 1) : Qualification(qualificationLevel, level)
+public class ForestSurvival(QualificationLevel qualificationLevel = QualificationLevel.Base, int level = 1) : Qualification(qualificationLevel, level), ILaicalQualification
 {
     public override string Name => "Forest survival";
 

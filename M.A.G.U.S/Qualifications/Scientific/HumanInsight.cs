@@ -2,7 +2,7 @@
 
 namespace M.A.G.U.S.Qualifications.Scientific;
 
-public class HumanInsight(QualificationLevel qualificationLevel = QualificationLevel.Base, int level = 1) : Qualification(qualificationLevel, level)
+public class HumanInsight(QualificationLevel qualificationLevel = QualificationLevel.Base, int level = 1) : Qualification(qualificationLevel, level), IScientificQualification
 {
     public override string Name => "Human insight";
 

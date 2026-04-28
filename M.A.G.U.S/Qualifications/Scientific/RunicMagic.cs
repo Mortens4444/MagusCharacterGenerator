@@ -2,7 +2,7 @@
 
 namespace M.A.G.U.S.Qualifications.Scientific;
 
-public class RunicMagic(QualificationLevel qualificationLevel = QualificationLevel.Base, int level = 1) : Qualification(qualificationLevel, level)
+public class RunicMagic(QualificationLevel qualificationLevel = QualificationLevel.Base, int level = 1) : Qualification(qualificationLevel, level), IScientificQualification
 {
     public override string Name => "Runic magic";
 

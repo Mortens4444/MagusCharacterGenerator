@@ -4,7 +4,7 @@ using Newtonsoft.Json;
 
 namespace M.A.G.U.S.Qualifications.Scientific;
 
-public class AncientTongueLore : Qualification, ICanHaveMany
+public class AncientTongueLore : Qualification, ICanHaveMany, IScientificQualification
 {
     public override string Key => $"{GetType().Name}:{Language?.GetType().Name ?? Guid.NewGuid().ToString()}";
 

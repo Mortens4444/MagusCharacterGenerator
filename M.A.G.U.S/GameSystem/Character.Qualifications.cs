@@ -1,6 +1,8 @@
 ﻿using M.A.G.U.S.Classes.Believer.Ranagol;
+using M.A.G.U.S.Classes.Fighter;
 using M.A.G.U.S.Classes.Sorcerer;
 using M.A.G.U.S.Enums;
+using M.A.G.U.S.GameSystem.Languages;
 using M.A.G.U.S.GameSystem.Psi;
 using M.A.G.U.S.GameSystem.Qualifications;
 using M.A.G.U.S.Interfaces;
@@ -120,7 +122,7 @@ public partial class Character
         if (qualification is ICanHaveMany)
         {
             requiredQualificationPoints = qualification.QpToBaseQualification;
-            return true;
+            return IsHardLearner(qualification, ref requiredQualificationPoints, qualificationLevel);
         }
 
         var hasBase = HasQualification(qualification, QualificationLevel.Base);
@@ -136,12 +138,38 @@ public partial class Character
             return false;
         }
 
-        var hasEnoughtQualificationPoints = QualificationPoints >= requiredQualificationPoints;
-        return hasEnoughtQualificationPoints;
+        return IsHardLearner(qualification, ref requiredQualificationPoints, qualificationLevel);
+    }
+
+    private bool IsHardLearner(Qualification qualification, ref int requiredQualificationPoints, QualificationLevel qualificationLevel)
+    {
+        if (qualification is IScientificQualification)
+        {
+            requiredQualificationPoints = BaseClass switch
+            {
+                Amazon => requiredQualificationPoints * 3,
+                Barbarian => ((qualification is LanguageLore || qualification is ReadingAndWriting || qualification is AncientTongueLore || qualification is LegendLore || qualification is HistoryLore || qualification is ReligionLore) && qualificationLevel == QualificationLevel.Base) || qualification is Healing || qualification is PoisoningAndNeutralization || qualification is Herbalism ? requiredQualificationPoints : 10000,
+                _ => requiredQualificationPoints
+            };
+        }
+        if (qualification is ILaicalQualification)
+        {
+            requiredQualificationPoints = BaseClass switch
+            {
+                Barbarian => (int)Math.Round(requiredQualificationPoints * 1.5),
+                _ => requiredQualificationPoints
+            };
+        }
+        return QualificationPoints >= requiredQualificationPoints;
     }
 
     public void Learn(Qualification qualification, QualificationLevel qualificationLevel)
     {
+        if (BaseClass is Duelist && (qualification is not LanguageLore))
+        {
+            throw new InvalidOperationException("Cannot learn new qualifications, except languages");
+        }
+
         if (!CanLearn(qualification, qualificationLevel, out var qp))
         {
             throw new InvalidOperationException("Cannot learn this qualification");
