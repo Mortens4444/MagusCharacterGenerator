@@ -126,7 +126,7 @@ public class Amazon : Class, IClass, IJustFight
         new WeaponUse() { Weapon = new Longsword() },
         new WeaponUse() { Weapon = new Dagger() },
         new WeaponUse() { Weapon = new Longbow() },
-        new WeaponUse() { Weapon = new Spear() },
+        new WeaponUse() { Weapon = new Javelin() },
         new WeaponThrowing() { Weapon = new Dagger() },
         new WeatherDivination(),
         new Herbalism(),

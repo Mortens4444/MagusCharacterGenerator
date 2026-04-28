@@ -286,11 +286,18 @@ yersenia_hunter.png
 ymorre.png
 zombie.png
 zulfaim.png
+abasissi_gladiator.png
+abasissi_phalanx_warrior.png
 air_wizard.png
+amazon.png
 assassin.png
+barbarian.png
 bard.png
 blademaster.png
 craftsman.png
+duelist.png
+dwoon_heavy_infantry.png
+ereni_bluecloak.png
 fire_mage.png
 gladiator.png
 gladiator_2.png
@@ -334,6 +341,7 @@ soldier.png
 thief.png
 warlock.png
 warrior.png
+white_rider.png
 wiseman.png
 witch.png
 witch_2.png
