@@ -6,16 +6,18 @@ using M.A.G.U.S.GameSystem.FightMode;
 using M.A.G.U.S.Interfaces;
 using M.A.G.U.S.Qualifications;
 using M.A.G.U.S.Qualifications.Combat;
-using M.A.G.U.S.Qualifications.Scientific;
+using M.A.G.U.S.Qualifications.Laical;
+using M.A.G.U.S.Qualifications.Percentages;
+using M.A.G.U.S.Qualifications.Scientific.Psi;
 using M.A.G.U.S.Races;
 
 namespace M.A.G.U.S.Classes.Fighter;
 
-public class DwarvenWarrior : Class, IClass, IJustFight
+public class ArmoredBear : Class, IClass, IJustFight
 {
-    public DwarvenWarrior() : base(1, false) { }
+    public ArmoredBear() : base(1, false) { }
 
-    public DwarvenWarrior(int level, bool autoGenerateSkills) : base(level, autoGenerateSkills) { }
+    public ArmoredBear(int level, bool autoGenerateSkills) : base(level, autoGenerateSkills) { }
 
     [DiceThrow(ThrowType._1D6)]
     [DiceThrowModifier(12)]
@@ -79,7 +81,7 @@ public class DwarvenWarrior : Class, IClass, IJustFight
 
     public override int CombatValueModifierPerLevel => 11;
 
-    public override int BaseQualificationPoints => 3;
+    public override int BaseQualificationPoints => 10;
 
     public override int QualificationPointsModifier => 14;
 
@@ -111,36 +113,35 @@ public class DwarvenWarrior : Class, IClass, IJustFight
         new() { Level = 12, MinExperience = 80001, MaxExperience = 112000 }
     ];
 
-    public override string Name => "Dwarven Warrior";
+    public override string Name => "Armored Bear";
 
     public override ulong ExpPerLevelAfter12 => 31200;
 
-    public override IRace[] AllowedRaces => [new Dwarf()];
+    public override IRace[] AllowedRaces => [new Human(), new Elf(), new HalfElf(), new Dwarf(), new CourtOrc(), new Amund(), new Jann(), new Khal(), new Wier(), new Feenhar(), new Dahr(), new Dracker(), new Draquon(),
+        new ForestGiant(), new FrostGiant(), new MountainGiant(), new SwampGiant(), new Gnome(), new CourtGoblin(), new GhoRagg(), new MutantOrc(), new CwyvehKah(), new Faun()];
 
     public override QualificationList Qualifications => BuildQualifications(
     [
+        new WeaponUse(), // csak egykezes fegyverekhez értenek
         new WeaponUse(),
         new WeaponUse(),
-        new WeaponUse(),
-        new WeaponThrowing(),
-        new ShieldUse(),
-        new Fistfight(),
-        new BlindFighting(),
-        new ReadingAndWriting(),
-        new Cartography(),
-        new Architecture()
+        new Riding(),
+        new Swimming(),
+        new Running(),
+        new HeavyArmorWearing(),
+        new PsiPyarron()
     ]);
 
     public override QualificationList FutureQualifications => BuildQualifications(
     [
-        //new Leadership(level: 6)
+        new Leadership(level: 6)
     ]);
 
     public override PercentQualificationList PercentQualifications =>
     [
-        //new Climbing(15),
-        //new Falling(20),
-        //new Jumping(10)
+        new Climbing(15),
+        new Falling(20),
+        new Jumping(10)
     ];
 
     public override SpecialQualificationList SpecialQualifications => [];

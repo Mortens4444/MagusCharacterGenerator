@@ -100,6 +100,10 @@ public enum Deity
     [AvailableSpheres(Sphere.Life, Sphere.Soul)]
     Jah,
 
+    // Amazonok istennője
+    [Description("Mother Earth")] //Igeret?, Néven nevezhetetlen ősistennő - Földanya
+    MotherEarth,
+
     // Amundok istenei
     [Description("Theemeth")] // Napisten
     Themes,
