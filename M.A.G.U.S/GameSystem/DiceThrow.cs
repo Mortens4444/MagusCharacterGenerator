@@ -135,6 +135,9 @@ public class DiceThrow
     public int _1D10_Plus_8(bool hasLuckAmulet = false) =>
         ApplyLuck(RandomProvider.GetSecureRandomByte(9, 19), 9, 19, hasLuckAmulet);
 
+    public int _1D10_Plus_9(bool hasLuckAmulet = false) =>
+        ApplyLuck(RandomProvider.GetSecureRandomByte(10, 20), 10, 20, hasLuckAmulet);
+
     public int _1D10_Plus_8_2_Times(bool hasLuckAmulet = false)
     {
         var first = _1D10_Plus_8(hasLuckAmulet);
@@ -223,6 +226,8 @@ public class DiceThrow
             ThrowType._15D6 => _15D6(hasLuckAmulet),
             ThrowType._1D9 => _1D9(hasLuckAmulet),
             ThrowType._1D10 => _1D10(hasLuckAmulet),
+            ThrowType._1D10_Plus_8 => _1D10_Plus_8(hasLuckAmulet),
+            ThrowType._1D10_Plus_9 => _1D10_Plus_9(hasLuckAmulet),
             ThrowType._1D10_2_Times => _1D10_2_Times(hasLuckAmulet),
             ThrowType._2D10 => _2D10(hasLuckAmulet),
             ThrowType._3D10 => _3D10(hasLuckAmulet),
@@ -291,6 +296,8 @@ public class DiceThrow
             ThrowType._15D6 => new Range { Min = 15, Max = 90 },
             ThrowType._1D9 => new Range { Max = 9 },
             ThrowType._1D10 => new Range { Max = 10 },
+            ThrowType._1D10_Plus_8 => new Range { Min = 10, Max = 18 },
+            ThrowType._1D10_Plus_9 => new Range { Min = 10, Max = 19 },
             ThrowType._1D10_2_Times => new Range { Max = 10 },
             ThrowType._2D10 => new Range { Min = 2, Max = 20 },
             ThrowType._3D10 => new Range { Min = 3, Max = 30 },

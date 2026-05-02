@@ -1,10 +1,15 @@
+using M.A.G.U.S.Enums;
 using M.A.G.U.S.GameSystem.Valuables;
 
 namespace M.A.G.U.S.Things.Animals;
 
-public class HorseHeavyWar : Thing
+public class HorseHeavyWar : Horse
 {
-	public override string Name => "Horse, heavy war";
+    public HorseHeavyWar() : this(ThrowType._2D10) { }
+
+    public HorseHeavyWar(ThrowType qualityRollMode) : base(qualityRollMode) { }
+
+    public override string Name => "Horse, heavy war";
 
 	public override Money Price => new(10, 0, 0);
 

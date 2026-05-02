@@ -2,6 +2,7 @@
 using M.A.G.U.S.GameSystem.Experience;
 using M.A.G.U.S.Models;
 using M.A.G.U.S.Qualifications;
+using M.A.G.U.S.Things;
 
 namespace M.A.G.U.S.Interfaces;
 
@@ -34,6 +35,8 @@ public interface IClass : IAttacker, IAbilities
     bool AddPainToleranceOnFirstLevel { get; }
 
     bool AddQualificationPointsOnFirstLevel { get; }
+
+    List<Thing> StartingEquipment { get; }
 
     QualificationList Qualifications { get; }
 

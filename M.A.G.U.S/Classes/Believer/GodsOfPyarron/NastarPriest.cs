@@ -9,6 +9,7 @@ using M.A.G.U.S.Qualifications;
 using M.A.G.U.S.Qualifications.Combat;
 using M.A.G.U.S.Qualifications.Laical;
 using M.A.G.U.S.Qualifications.Magic;
+using M.A.G.U.S.Qualifications.Other;
 using M.A.G.U.S.Qualifications.Scientific;
 using M.A.G.U.S.Qualifications.Scientific.Psi;
 using M.A.G.U.S.Qualifications.Specialities;
@@ -116,13 +117,11 @@ public class NastarPriest : Class, IClass, ILikeMagic
         new HistoryLore(),
         new LegendLore(),
         new Craft(Profession.Jeweler),
-
-		// TODO
-		//new Emberismeret()
-		//new Erkölcs(),
-		//new Helyismeret 60%
-		//new Kultúra (Saját)
-		//new ÉkszerészSzakma
+        new LocalKnowledge(), // 60%
+        new HumanInsight(),
+        new Jeweler()
+        //new Morality() // Erkölcs
+        //new Culture() // Saját Kultúra
     ]);
 
     public override QualificationList FutureQualifications => BuildQualifications(
@@ -132,11 +131,11 @@ public class NastarPriest : Class, IClass, ILikeMagic
         new Healing(level: 3),
         new ReadingAndWriting(QualificationLevel.Master, 4),
         new LanguageLore(Language.Pyarronian, 6, 4),
-		//new Emberismeret MF 5
+        new HumanInsight(QualificationLevel.Master, 5),
 		new Healing(QualificationLevel.Master, 5),
         new LegendLore(QualificationLevel.Master, 6),
         new Craft(Profession.Jeweler, QualificationLevel.Master, 8),
-		//new DrágakőMágia(QualificationLevel.Master, 12)
+        new GemstoneMagic(QualificationLevel.Master, 12)
 	]);
 
     public override PercentQualificationList PercentQualifications => [];

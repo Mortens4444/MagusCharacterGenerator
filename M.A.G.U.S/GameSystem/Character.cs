@@ -4,6 +4,7 @@ using M.A.G.U.S.Interfaces;
 using M.A.G.U.S.Models;
 using M.A.G.U.S.Races;
 using M.A.G.U.S.Utils;
+using Mtf.Extensions;
 using System.ComponentModel;
 using System.Runtime.Serialization;
 using System.Text.Json.Serialization;
@@ -53,6 +54,12 @@ public partial class Character : Attacker, ICombatModifier, ILiving, IAbilities,
         BaseClass = classes.First();
         Alignment = race.Alignment ?? BaseClass.Alignment;
         Classes = classes;
+
+        foreach (var @class in classes)
+        {
+            Equipment.AddRange(@class.StartingEquipment);
+        }
+
         CreateSpecifiedLevel();
         EnsureSubscriptions();
 

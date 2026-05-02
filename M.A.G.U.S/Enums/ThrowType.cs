@@ -31,6 +31,10 @@ public enum ThrowType
     _1D9,
     [Description("1D10")]
     _1D10,
+    [Description("1D10 + 8")]
+    _1D10_Plus_8,
+    [Description("1D10 + 9")]
+    _1D10_Plus_9,
     [Description("1D10")]
     _1D10_Ranged,
     [Description("1D10 (2x)")]

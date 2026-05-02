@@ -85,7 +85,7 @@
                         <Label Text="Qualifications" FontAttributes="Bold"/>
                         <Grid ColumnDefinitions="*, Auto" ColumnSpacing="10" Padding="6">
                             <Label Text="Name" VerticalOptions="Center" TextColor="Gray" FontAttributes="Bold"/>
-                            <Label Text="Level" VerticalOptions="Center" HorizontalOptions="End" TextColor="Gray" FontAttributes="Bold"/>
+                            <Label Text="Degree" VerticalOptions="Center" HorizontalOptions="End" TextColor="Gray" FontAttributes="Bold"/>
                         </Grid>
 
                         <CollectionView ItemsSource="{Binding Qualifications, Converter={StaticResource QualificationSorter}}" SelectionMode="None">

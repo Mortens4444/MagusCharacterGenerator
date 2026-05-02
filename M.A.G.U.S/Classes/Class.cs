@@ -8,6 +8,7 @@ using M.A.G.U.S.Interfaces;
 using M.A.G.U.S.Models;
 using M.A.G.U.S.Qualifications;
 using M.A.G.U.S.Races;
+using M.A.G.U.S.Things;
 using System.Text.Json.Serialization;
 
 namespace M.A.G.U.S.Classes;
@@ -167,6 +168,8 @@ public abstract class Class : ImageOwner, IClass
             }
         }
     }
+
+    public virtual List<Thing> StartingEquipment { get; init; } = [];
 
     public virtual Alignment Alignment => Alignment.Order;
 

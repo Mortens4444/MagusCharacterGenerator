@@ -119,15 +119,16 @@ public class NastarPaladin : Class, IClass, IHateRangedWeapons
         new Riding(),
         new Healing(),
         new HistoryLore(),
-        new ReligionLore()
-        // new Erkölcs(QualificationLevel.Master)
-        // new Helyismeret(60%)
-        // new Kultúra(QualificationLevel.Master) Saját
+        new ReligionLore(),
+
+        new LocalKnowledge(), // 60%
+        //new Morality(QualificationLevel.Master) // Erkölcs
+        //new Culture(QualificationLevel.Master) // Saját Kultúra
     ]);
 
     public override QualificationList FutureQualifications => BuildQualifications(
     [
-		// new HárítófegyverHasználat(level: 2)
+        new UseOfParryingWeapon(level: 2),
 		new Craft(Profession.Smith, level: 3),
         new HistoryLore(QualificationLevel.Master, 4),
         new Craft(Profession.Smith, QualificationLevel.Master, 6),

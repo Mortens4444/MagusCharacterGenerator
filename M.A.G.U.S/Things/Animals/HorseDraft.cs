@@ -1,10 +1,15 @@
+using M.A.G.U.S.Enums;
 using M.A.G.U.S.GameSystem.Valuables;
 
 namespace M.A.G.U.S.Things.Animals;
 
-public class HorseDraft : Thing
+public class HorseDraft : Horse
 {
-	public override string Name => "Horse, draft";
+    public HorseDraft() : this(ThrowType._2D10) { }
+
+    public HorseDraft(ThrowType qualityRollMode) : base(qualityRollMode) { }
+
+    public override string Name => "Horse, draft";
 
 	public override Money Price => new(0, 8, 0);
 

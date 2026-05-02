@@ -14,35 +14,36 @@ internal class QualificationNameConverter : IValueConverter
     {
         if (value is LanguageLore ll)
         {
-            if (ll.Language.HasValue)
-            {
-                if (ll.QualificationLevel == QualificationLevel.Base)
-                {
-                    return $"{Lng.Elem(ll.Name)} - {Lng.Elem(ll.Language.Value.GetDescription())} ({ll.LanguageLevel})";
-                }
-                return $"{Lng.Elem(ll.Name)} - {Lng.Elem(ll.Language.Value.GetDescription())}";
-            }
-            return Lng.Elem(ll.Name);
+            var text = ll.Language.HasValue
+                ? ll.QualificationLevel == QualificationLevel.Base
+                    ? $"{Lng.Elem(ll.Name)} - {Lng.Elem(ll.Language.Value.GetDescription())} ({ll.LanguageLevel})"
+                    : $"{Lng.Elem(ll.Name)} - {Lng.Elem(ll.Language.Value.GetDescription())}"
+                : Lng.Elem(ll.Name);
+
+            return AppendNote(ll, text);
         }
-        else if (value is AncientTongueLore atl)
+
+        if (value is AncientTongueLore atl)
         {
-            if (atl.Language.HasValue)
-            {
-                return $"{Lng.Elem(atl.Name)} - {Lng.Elem(atl.Language.Value.GetDescription())}";
-            }
-            return Lng.Elem(atl.Name);
+            var text = atl.Language.HasValue
+                ? $"{Lng.Elem(atl.Name)} - {Lng.Elem(atl.Language.Value.GetDescription())}"
+                : Lng.Elem(atl.Name);
+
+            return AppendNote(atl, text);
         }
-        else if (value is WeaponQualification wq)
+
+        if (value is WeaponQualification wq)
         {
-            if (wq.Weapon != null)
-            {
-                return $"{Lng.Elem(wq.Name)} - {Lng.Elem(wq.Weapon.Name)}";
-            }
-            return Lng.Elem(wq.Name);
+            var text = wq.Weapon != null
+                ? $"{Lng.Elem(wq.Name)} - {Lng.Elem(wq.Weapon.Name)}"
+                : Lng.Elem(wq.Name);
+
+            return AppendNote(wq, text);
         }
-        else if (value is Qualification q)
+
+        if (value is Qualification qualification)
         {
-            return Lng.Elem(q.Name);
+            return AppendNote(qualification, Lng.Elem(qualification.Name));
         }
 
         return String.Empty;
@@ -51,5 +52,10 @@ internal class QualificationNameConverter : IValueConverter
     public object? ConvertBack(object? value, Type targetType, object? parameter, CultureInfo culture)
     {
         return value;
+    }
+
+    private static string AppendNote(Qualification qualification, string text)
+    {
+        return String.IsNullOrWhiteSpace(qualification.Note) ? text : $"{text} ({Lng.Elem(qualification.Note)})";
     }
 }

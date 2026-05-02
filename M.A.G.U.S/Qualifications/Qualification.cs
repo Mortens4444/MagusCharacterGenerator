@@ -7,6 +7,8 @@ public abstract class Qualification : ImageOwner
 {
     public virtual string Key => GetType().Name;
 
+    public string Note = String.Empty;
+
     public Qualification(QualificationLevel qualificationLevel = QualificationLevel.Base, int level = 1)
     {
         QualificationLevel = qualificationLevel;
@@ -40,8 +42,5 @@ public abstract class Qualification : ImageOwner
 
     public virtual int QpToMasterQualification { get; }
 
-    public override string ToString()
-    {
-        return Name;
-    }
+    public override string ToString() => Name;
 }

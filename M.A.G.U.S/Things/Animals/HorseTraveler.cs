@@ -1,10 +1,15 @@
+using M.A.G.U.S.Enums;
 using M.A.G.U.S.GameSystem.Valuables;
 
 namespace M.A.G.U.S.Things.Animals;
 
-public class HorseTraveler : Thing
+public class HorseTraveler : Horse
 {
-	public override string Name => "Horse, traveler";
+    public HorseTraveler() : this(ThrowType._2D10) { }
+
+    public HorseTraveler(ThrowType qualityRollMode) : base(qualityRollMode) { }
+
+    public override string Name => "Horse, traveler";
 
 	public override Money Price => new(1, 0, 0);
 
