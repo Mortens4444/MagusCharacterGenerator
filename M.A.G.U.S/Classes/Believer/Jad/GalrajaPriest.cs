@@ -8,10 +8,9 @@ using M.A.G.U.S.Qualifications.Laical;
 using M.A.G.U.S.Qualifications.Scientific;
 using M.A.G.U.S.Qualifications.Scientific.Psi;
 using M.A.G.U.S.Qualifications.Specialities;
-using M.A.G.U.S.Qualifications.Underworld;
 using M.A.G.U.S.Races;
 
-namespace M.A.G.U.S.Classes.Believer.Ranagol;
+namespace M.A.G.U.S.Classes.Believer.Jad;
 
 public class GalrajaPriest : Priest
 {

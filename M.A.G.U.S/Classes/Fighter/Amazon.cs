@@ -15,7 +15,6 @@ using M.A.G.U.S.Races;
 using M.A.G.U.S.Things.Weapons.RangedWeapons;
 using M.A.G.U.S.Things.Weapons.Spears;
 using M.A.G.U.S.Things.Weapons.StabbingWeapons;
-using Mtf.Extensions.Models;
 
 namespace M.A.G.U.S.Classes.Fighter;
 
@@ -152,8 +151,7 @@ public class Amazon : Class, IClass, IJustFight
 
     public override SpecialQualificationList SpecialQualifications =>
     [
-        new BetterResistanceToLieDetection(70),
-        //new Persuasion(Level * 12) // Per level
+        new BetterResistanceToLieDetection(70)
     ];
 
     [DiceThrow(ThrowType._1D6)]

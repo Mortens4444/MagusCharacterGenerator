@@ -9,6 +9,7 @@ using M.A.G.U.S.Qualifications;
 using M.A.G.U.S.Qualifications.Combat;
 using M.A.G.U.S.Qualifications.Laical;
 using M.A.G.U.S.Qualifications.Magic;
+using M.A.G.U.S.Qualifications.Other;
 using M.A.G.U.S.Qualifications.Scientific;
 using M.A.G.U.S.Qualifications.Scientific.Psi;
 using M.A.G.U.S.Qualifications.Specialities;
@@ -115,22 +116,21 @@ public class VelarPriest : Class, IClass, ILikeMagic
         new HistoryLore(),
         new SingingAndMakingMusic(),
 
-		// TODO
-		//new Emberismeret()
-		//new Erkölcs(QualificationLevel.Master),
-		//new Helyismeret 60%
-		//new Kultúra (QualificationLevel.Master) //Saját
-		//new Politika/Diplomácia()
+        new HumanInsight(),
+        new LocalKnowledge(),// { Note = "60%" },
+        new Culture(QualificationLevel.Master) { Note = "Own" },
+        new Morality(QualificationLevel.Master),
+		new PoliticsDiplomacy()
     ]);
 
     public override QualificationList FutureQualifications => BuildQualifications(
     [
-		//new Balzsamozás(level: 2)
-		//new Jog/Törvénykezés(level: 2)
+		new Embalming(level: 2),
+		new LawJurisprudence(level: 2),
         new HistoryLore(QualificationLevel.Master, 3),
         new ReadingAndWriting(QualificationLevel.Master, 4),
-		//new Emberismeret(QualificationLevel.Master, 5)
-		//new Balzsamozás(QualificationLevel.Master, 6)
+        new HumanInsight(QualificationLevel.Master, 5),
+		new Embalming(QualificationLevel.Master, 6)
 	]);
 
     public override PercentQualificationList PercentQualifications => [];

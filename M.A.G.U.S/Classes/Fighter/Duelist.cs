@@ -139,7 +139,7 @@ public class Duelist : Class, IClass, IJustFight
         new SingingAndMakingMusic(),
         new Swimming(),
         new Etiquette(QualificationLevel.Master),
-        new Dancing(QualificationLevel.Master) // Court style
+        new Dancing(QualificationLevel.Master) { Note = "Court style" }
     ]);
 
     public override QualificationList FutureQualifications => BuildQualifications(
@@ -152,7 +152,7 @@ public class Duelist : Class, IClass, IJustFight
     public override PercentQualificationList PercentQualifications =>
     [
         // Only for Aleggheri style
-        new Jumping(20) // + 3% per level
+        new Jumping(17 + Level * 3)
     ];
 
     public override SpecialQualificationList SpecialQualifications =>

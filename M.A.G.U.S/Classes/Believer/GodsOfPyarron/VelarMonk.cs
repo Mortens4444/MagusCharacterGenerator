@@ -7,7 +7,9 @@ using M.A.G.U.S.GameSystem.Qualifications;
 using M.A.G.U.S.Interfaces;
 using M.A.G.U.S.Qualifications;
 using M.A.G.U.S.Qualifications.Combat;
+using M.A.G.U.S.Qualifications.Laical;
 using M.A.G.U.S.Qualifications.Magic;
+using M.A.G.U.S.Qualifications.Other;
 using M.A.G.U.S.Qualifications.Scientific;
 using M.A.G.U.S.Qualifications.Scientific.Psi;
 using M.A.G.U.S.Qualifications.Specialities;
@@ -110,12 +112,10 @@ public class VelarMonk : Class, IClass, ILikeMagic
         new PsiPyarron(QualificationLevel.Master),
         new Healing(),
         new ReligionLore(QualificationLevel.Master),
-        new Fistfight(QualificationLevel.Master)
-
-       // TODO
-       //new Kínzás elviselése(QualificationLevel.Master),
-       //new Kultúra (QualificationLevel.Master) //Saját
-       //new Helyismeret 60%
+        new Fistfight(QualificationLevel.Master),
+        new LocalKnowledge(),// { Note = "60%" },
+        new TortureResistance(QualificationLevel.Master),
+        new Culture(QualificationLevel.Master) { Note = "Own" }
     ]);
 
     public override QualificationList FutureQualifications => BuildQualifications(

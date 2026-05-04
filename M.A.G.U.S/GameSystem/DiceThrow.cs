@@ -178,6 +178,13 @@ public class DiceThrow
     public int _3D6(bool hasLuckAmulet = false) =>
         ApplyLuck(RandomProvider.GetSecureRandomByte(3, 19), 3, 19, hasLuckAmulet);
 
+    public int _2D6_2_Times(bool hasLuckAmulet = false)
+    {
+        var first = _2D6(hasLuckAmulet);
+        var second = _2D6(hasLuckAmulet);
+        return Math.Max(first, second);
+    }
+
     public int _3D6_2_Times(bool hasLuckAmulet = false)
     {
         var first = _3D6(hasLuckAmulet);
@@ -210,6 +217,7 @@ public class DiceThrow
             ThrowType._1D7 => _1D7(hasLuckAmulet),
             ThrowType._1D8 => _1D8(hasLuckAmulet),
             ThrowType._2D6 => _2D6(hasLuckAmulet),
+            ThrowType._2D6_2_Times => _2D6_2_Times(hasLuckAmulet),
             ThrowType._3D6 => _3D6(hasLuckAmulet),
             ThrowType._3D6_2_Times => _3D6_2_Times(hasLuckAmulet),
             ThrowType._4D6 => _4D6(hasLuckAmulet),
@@ -280,6 +288,7 @@ public class DiceThrow
             ThrowType._1D7 => new Range { Max = 7 },
             ThrowType._1D8 => new Range { Max = 8 },
             ThrowType._2D6 => new Range { Min = 2, Max = 12 },
+            ThrowType._2D6_2_Times => new Range { Min = 2, Max = 12 },
             ThrowType._3D6 => new Range { Min = 3, Max = 18 },
             ThrowType._3D6_2_Times => new Range { Min = 3, Max = 18 },
             ThrowType._4D6 => new Range { Min = 4, Max = 24 },

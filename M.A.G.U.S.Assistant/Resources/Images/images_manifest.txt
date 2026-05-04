@@ -638,6 +638,7 @@ artic_survival.png
 backstab.png
 blind_fighting.png
 boot_making.png
+bowyer.png
 camouflage_disguise.png
 card_sharping.png
 carpentry.png
@@ -652,6 +653,7 @@ deflection_evasive_talk.png
 demonology.png
 disarmament.png
 divination.png
+embalming.png
 empty.png
 escape_bonds.png
 etiquette.png
@@ -668,12 +670,15 @@ heraldry.png
 herbalism.png
 hiding.png
 history_lore.png
+horse_trader.png
 human_insight.png
 hunting_fishing.png
+jeweler.png
 juggling.png
 jumping.png
 knotting.png
 language_lore.png
+law_jurisprudence.png
 leadership.png
 legend_lore.png
 lip_reading.png
@@ -688,6 +693,7 @@ physiology.png
 pick_pocketing.png
 plant_growing.png
 poisoning_neutralization.png
+politics_diplomacy.png
 pottery.png
 psi.png
 reading_writing.png
@@ -895,3 +901,4 @@ throwing_ax.png
 throwing_axe.png
 throwing_dagger.png
 two_handed_axe.png
+appicon.png

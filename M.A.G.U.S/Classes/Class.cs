@@ -4,6 +4,7 @@ using M.A.G.U.S.GameSystem;
 using M.A.G.U.S.GameSystem.Attributes;
 using M.A.G.U.S.GameSystem.Experience;
 using M.A.G.U.S.GameSystem.Psi;
+using M.A.G.U.S.GameSystem.Qualifications;
 using M.A.G.U.S.Interfaces;
 using M.A.G.U.S.Models;
 using M.A.G.U.S.Qualifications;
@@ -15,8 +16,6 @@ namespace M.A.G.U.S.Classes;
 
 public abstract class Class : ImageOwner, IClass
 {
-    protected const string _1D6_Plus_12_Plus_SpecialTraining = "1D6 + 12 + Special training";
-
     protected readonly DiceThrow DiceThrow = new();
     private ulong experiencePoints;
     private int level;
@@ -148,9 +147,9 @@ public abstract class Class : ImageOwner, IClass
     [OrderAttibute(12)]
     public abstract int Gold { get; set; }
 
-    public int AstralMagicResistance { get; }
+    public int AstralMagicResistance { get; init; }
 
-    public int MentalMagicResistance { get; }
+    public int MentalMagicResistance { get; init; }
 
     [JsonIgnore, Newtonsoft.Json.JsonIgnore]
     public bool CanUpgrade { get; private set; }

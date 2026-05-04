@@ -9,34 +9,23 @@ using M.A.G.U.S.Qualifications;
 using M.A.G.U.S.Qualifications.Combat;
 using M.A.G.U.S.Qualifications.Laical;
 using M.A.G.U.S.Qualifications.Percentages;
-using M.A.G.U.S.Qualifications.Scientific;
-using M.A.G.U.S.Qualifications.Specialities;
 using M.A.G.U.S.Races;
 
 namespace M.A.G.U.S.Classes.Fighter;
 
-public class Barbarian : Class, IClass, IJustFight
+public class BannerOfPraedarmon : Class, IClass, IJustFight
 {
-    //A korg Teljes ME-je(Asztrális és Mentális is) első szinten 15 és minden további szinten 4 - el nő.
-    public Barbarian() : base(1, false)
-    {
-        AstralMagicResistance = 15;
-        MentalMagicResistance = 15;
-    }
+    public BannerOfPraedarmon() : base(1, false) { }
 
-    public Barbarian(int level, bool autoGenerateSkills) : base(level, autoGenerateSkills)
-    {
-        AstralMagicResistance = 15;
-        MentalMagicResistance = 15;
-    }
+    public BannerOfPraedarmon(int level, bool autoGenerateSkills) : base(level, autoGenerateSkills) { }
 
     [DiceThrow(ThrowType._1D6)]
-    [DiceThrowModifier(14)]
+    [DiceThrowModifier(12)]
     [SpecialTraining]
     public override int Strength { get; set; }
 
-    [DiceThrow(ThrowType._1D10)]
-    [DiceThrowModifier(8)]
+    [DiceThrow(ThrowType._2D6)]
+    [DiceThrowModifier(6)]
     [SpecialTraining]
     public override int Quickness { get; set; }
 
@@ -45,8 +34,9 @@ public class Barbarian : Class, IClass, IJustFight
     [SpecialTraining]
     public override int Dexterity { get; set; }
 
-    [DiceThrow(ThrowType._1D6)]
-    [DiceThrowModifier(14)]
+    [DiceThrow(ThrowType._1D10)]
+    [DiceThrowModifier(8)]
+    [SpecialTraining]
     public override int Stamina { get; set; }
 
     [DiceThrow(ThrowType._1D10)]
@@ -56,7 +46,7 @@ public class Barbarian : Class, IClass, IJustFight
     [DiceThrow(ThrowType._3D6_2_Times)]
     public override int Beauty { get; set; }
 
-    [DiceThrow(ThrowType._3D6)]
+    [DiceThrow(ThrowType._3D6_2_Times)]
     public override int Intelligence { get; set; }
 
     [DiceThrow(ThrowType._2D6)]
@@ -70,7 +60,7 @@ public class Barbarian : Class, IClass, IJustFight
     public override int Gold { get; set; }
 
     [DiceThrow(ThrowType._2D6)]
-    [DiceThrowModifier(-1)]
+    [DiceThrowModifier(8)]
     public override int Bravery { get; set; }
 
     [DiceThrow(ThrowType._2D6)]
@@ -81,23 +71,23 @@ public class Barbarian : Class, IClass, IJustFight
     [DiceThrowModifier(6)]
     public override int Detection { get; set; }
 
-    public override int InitiateBaseValue => 10;
+    public override int InitiateBaseValue => 9;
 
-    public override int AttackBaseValue => 26;
+    public override int AttackBaseValue => 19 + Level;
 
-    public override int DefenseBaseValue => 70;
+    public override int DefenseBaseValue => 75;
 
     public override int AimBaseValue => 0;
 
-    public override int CombatValueModifierPerLevel => 12;
+    public override int CombatValueModifierPerLevel => 11;
 
-    public override int BaseQualificationPoints => 7;
+    public override int BaseQualificationPoints => 6;
 
-    public override int QualificationPointsModifier => 10;
+    public override int QualificationPointsModifier => 5;
 
     public override int PercentQualificationModifier => 0;
 
-    public override int BaseLifePoints => 8;
+    public override int BaseLifePoints => 7;
 
     public override int BasePainTolerancePoints => 7;
 
@@ -109,53 +99,59 @@ public class Barbarian : Class, IClass, IJustFight
 
     public override List<LevelRequirement> ExperienceLevels =>
     [
-        new() { Level = 1,  MinExperience = 0,     MaxExperience = 150 },
-        new() { Level = 2,  MinExperience = 151,   MaxExperience = 310 },
-        new() { Level = 3,  MinExperience = 311,   MaxExperience = 630 },
-        new() { Level = 4,  MinExperience = 631,   MaxExperience = 1300 },
-        new() { Level = 5,  MinExperience = 1301,  MaxExperience = 2700 },
-        new() { Level = 6,  MinExperience = 2701,  MaxExperience = 5400 },
-        new() { Level = 7,  MinExperience = 5401,  MaxExperience = 10800 },
-        new() { Level = 8,  MinExperience = 10801, MaxExperience = 21600 },
-        new() { Level = 9,  MinExperience = 21601, MaxExperience = 42000 },
-        new() { Level = 10, MinExperience = 42001, MaxExperience = 65000 },
-        new() { Level = 11, MinExperience = 65001, MaxExperience = 90000 },
-        new() { Level = 12, MinExperience = 90001, MaxExperience = 120000 }
+        new() { Level = 1,  MinExperience = 0,     MaxExperience = 160 },
+        new() { Level = 2,  MinExperience = 161,   MaxExperience = 320 },
+        new() { Level = 3,  MinExperience = 321,   MaxExperience = 640 },
+        new() { Level = 4,  MinExperience = 641,   MaxExperience = 1440 },
+        new() { Level = 5,  MinExperience = 1441,  MaxExperience = 2800 },
+        new() { Level = 6,  MinExperience = 2801,  MaxExperience = 5600 },
+        new() { Level = 7,  MinExperience = 5601,  MaxExperience = 10000 },
+        new() { Level = 8,  MinExperience = 10001, MaxExperience = 20000 },
+        new() { Level = 9,  MinExperience = 20001, MaxExperience = 40000 },
+        new() { Level = 10, MinExperience = 40001, MaxExperience = 60000 },
+        new() { Level = 11, MinExperience = 60001, MaxExperience = 80000 },
+        new() { Level = 12, MinExperience = 80001, MaxExperience = 112000 }
     ];
+
+    public override string Name => "Banner of Praedarmon";
 
     public override ulong ExpPerLevelAfter12 => 31200;
 
     public override IRace[] AllowedRaces => [new Human(), new Elf(), new HalfElf(), new Dwarf(), new CourtOrc(), new Amund(), new Jann(), new Khal(), new Wier(), new Feenhar(), new Dahr(), new Dracker(), new Draquon(),
-        new ForestGiant(), new FrostGiant(), new MountainGiant(), new SwampGiant(), new Gnome(), new CourtGoblin(), new GhoRagg(), new MutantOrc(), new CwyvehKah(), new Faun()];
+        new ForestGiant(), new FrostGiant(), new MountainGiant(), new SwampGiant(), new Gnome(), new CourtGoblin(), new GhoRagg(), new MutantOrc(), new CwyvehKah()];
 
     public override QualificationList Qualifications => BuildQualifications(
     [
         new WeaponUse(),
         new WeaponUse(),
         new WeaponUse(),
-        new Wrestling(),
+        new WeaponUse(),
+        new WeaponUse(),
+        new Riding(),
+        new Running(),
         new Fistfight(),
-        new WeaponBreaking(),
-        new WeatherDivination(),
-        new ForestSurvival(QualificationLevel.Master),
-        new HuntingAndFishing(QualificationLevel.Master),
-        new Running()
+        new ShieldUse(),
+        new TwoHandedCombat(),
     ]);
 
     public override QualificationList FutureQualifications => BuildQualifications(
     [
+        new Fistfight(QualificationLevel.Master, 3),
+        new WeaponUse(QualificationLevel.Master, 4),
+        new TwoHandedCombat(QualificationLevel.Master, 5),
+        new Leadership(level: 6) { Note = "Cavalry" },
+        new ShieldUse(QualificationLevel.Master, 8),
+        new WeaponUse(QualificationLevel.Master, 9)
     ]);
 
     public override PercentQualificationList PercentQualifications =>
     [
-        new Falling(40),
-        new Jumping(25)
+        new Climbing(15),
+        new Falling(20),
+        new Jumping(10)
     ];
 
-    public override SpecialQualificationList SpecialQualifications =>
-    [
-        new ExtraMagicResistanceOnLevelUp(4)
-    ];
+    public override SpecialQualificationList SpecialQualifications => [];
 
     [DiceThrow(ThrowType._1D6)]
     [DiceThrowModifier(4)]

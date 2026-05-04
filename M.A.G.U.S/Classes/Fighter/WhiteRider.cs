@@ -134,7 +134,7 @@ public class WhiteRider : Class, IClass, IJustFight
     public override QualificationList FutureQualifications => BuildQualifications(
     [
         new WeaponUse(level: 3),
-        new Leadership(level: 6), // könnyűlovasság
+        new Leadership(level: 6) { Note = "Light cavalry" },
     ]);
 
     public override PercentQualificationList PercentQualifications =>

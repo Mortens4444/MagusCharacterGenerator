@@ -46,6 +46,8 @@ public enum ThrowType
 
     [Description("2D6")]
     _2D6,
+    [Description("2D6 (2x)")]
+    _2D6_2_Times,
     [Description("2D6")]
     _2D6_Ranged,
     [Description("2D10")]

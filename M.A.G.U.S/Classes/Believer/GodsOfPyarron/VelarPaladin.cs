@@ -9,6 +9,7 @@ using M.A.G.U.S.Qualifications;
 using M.A.G.U.S.Qualifications.Combat;
 using M.A.G.U.S.Qualifications.Laical;
 using M.A.G.U.S.Qualifications.Magic;
+using M.A.G.U.S.Qualifications.Other;
 using M.A.G.U.S.Qualifications.Scientific;
 using M.A.G.U.S.Qualifications.Scientific.Psi;
 using M.A.G.U.S.Qualifications.Specialities;
@@ -118,20 +119,18 @@ public class VelarPaladin : Class, IClass, ILikeMagic
         new Healing(),
         new ReligionLore(QualificationLevel.Master),
         new HistoryLore(),
-
-		// TODO
-		//new Emberismeret()
-		//new Erkölcs(QualificationLevel.Master),
-		//new Helyismeret 60%
-		//new Kultúra (QualificationLevel.Master) //Saját
-		//new Jog/Törvénykezés()
+        new HumanInsight(),
+        new LocalKnowledge(),// { Note = "60%" },
+        new Culture(QualificationLevel.Master) { Note = "Own" },
+        new Morality(QualificationLevel.Master),
+		new LawJurisprudence()
     ]);
 
     public override QualificationList FutureQualifications => BuildQualifications(
     [
         new Heraldry(level: 2),
-		//new Emberismeret(QualificationLevel.Master, 3)
-		//new Jog/Törvénykezés(QualificationLevel.Master, 3)
+        new HumanInsight(QualificationLevel.Master, 3),
+		new LawJurisprudence(QualificationLevel.Master, 3),
 		new Healing(QualificationLevel.Master, 4),
         new Leadership(level: 5),
         new TwoHandedCombat(QualificationLevel.Master, 6)

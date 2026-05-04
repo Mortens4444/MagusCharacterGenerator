@@ -1,5 +1,4 @@
 ﻿using M.A.G.U.S.GameSystem.Qualifications;
-using M.A.G.U.S.Qualifications;
 
 namespace M.A.G.U.S.Assistant.CustomEventArgs;
 

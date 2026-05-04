@@ -1,4 +1,5 @@
-﻿using System.Collections.ObjectModel;
+﻿using M.A.G.U.S.GameSystem.Qualifications;
+using System.Collections.ObjectModel;
 
 namespace M.A.G.U.S.Qualifications;
 

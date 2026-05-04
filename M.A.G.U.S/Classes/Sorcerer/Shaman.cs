@@ -9,6 +9,7 @@ using M.A.G.U.S.Qualifications;
 using M.A.G.U.S.Qualifications.Combat;
 using M.A.G.U.S.Qualifications.Laical;
 using M.A.G.U.S.Qualifications.Magic;
+using M.A.G.U.S.Qualifications.Other;
 using M.A.G.U.S.Qualifications.Percentages;
 using M.A.G.U.S.Qualifications.Scientific;
 using M.A.G.U.S.Qualifications.Specialities;
@@ -31,7 +32,7 @@ public class Shaman : Class, IClass, ILikeMagic
     [DiceThrow(ThrowType._3D6_2_Times)]
     public override int Dexterity { get; set; }
 
-    [DiceThrow(ThrowType._2D6)] // 2 Times
+    [DiceThrow(ThrowType._2D6_2_Times)]
     [DiceThrowModifier(6)]
     public override int Stamina { get; set; }
 
@@ -129,8 +130,8 @@ public class Shaman : Class, IClass, ILikeMagic
         new ForestSurvival(),
         new SteppeSurvival(),
         new SingingAndMakingMusic(),
-        new ReligionLore(QualificationLevel.Master), // Own
-        new LegendLore(), // Own
+        new ReligionLore(QualificationLevel.Master) { Note = "Own" },
+        new LegendLore() { Note = "Own" },
         new TortureResistance(QualificationLevel.Master)
     ]);
 
@@ -138,9 +139,9 @@ public class Shaman : Class, IClass, ILikeMagic
     [
         new Onomatopoeia(level: 2),
         new WeatherDivination(QualificationLevel.Master, 3),
-        new LegendLore(QualificationLevel.Master, 4), // Own
-        //new Astrology(level: 5),
-        new HistoryLore(level: 5), // Own
+        new LegendLore(QualificationLevel.Master, 4) { Note = "Own" },
+        new Astrology(level: 5),
+        new HistoryLore(level: 5) { Note = "Own" },
         new PoisoningAndNeutralization(QualificationLevel.Master, 5),
         new Demonology(),
         new Onomatopoeia(QualificationLevel.Master, 7),

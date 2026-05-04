@@ -140,7 +140,7 @@ public class EreniBluecloak : Class, IClass, IJustFight
         new Cartography(level: 3),
         new Healing(level: 4),
         new TwoHandedCombat(level: 4),
-        new AnimalTraining(level: 5), // Horse
+        new AnimalTraining(level: 5) { Note = "Horse only" },
     ]);
 
     public override PercentQualificationList PercentQualifications =>

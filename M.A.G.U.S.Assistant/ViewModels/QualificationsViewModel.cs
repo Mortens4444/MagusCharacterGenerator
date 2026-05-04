@@ -4,6 +4,7 @@ using M.A.G.U.S.Assistant.CustomEventArgs;
 using M.A.G.U.S.Assistant.Services;
 using M.A.G.U.S.Assistant.Views;
 using M.A.G.U.S.GameSystem;
+using M.A.G.U.S.GameSystem.Qualifications;
 using M.A.G.U.S.Qualifications;
 using Mtf.Extensions;
 using Mtf.LanguageService.MAUI;

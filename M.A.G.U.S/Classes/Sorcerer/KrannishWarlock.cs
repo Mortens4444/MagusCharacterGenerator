@@ -10,6 +10,7 @@ using M.A.G.U.S.Qualifications;
 using M.A.G.U.S.Qualifications.Combat;
 using M.A.G.U.S.Qualifications.Laical;
 using M.A.G.U.S.Qualifications.Magic;
+using M.A.G.U.S.Qualifications.Other;
 using M.A.G.U.S.Qualifications.Percentages;
 using M.A.G.U.S.Qualifications.Scientific;
 using M.A.G.U.S.Qualifications.Scientific.Psi;
@@ -134,9 +135,9 @@ public class KrannishWarlock : Class, IClass, ILikeMagic
         new LanguageLore(Language.Krannish, 3),
         new Alchemy(),
         new AncientTongueLore(AntientLanguage.Aquirian),
-        new Etiquette(), // Krannish
-        //new Cluture(QualificationLevel.Master) // Order
-		//new Helyismeret 60%
+        new Etiquette() { Note = "Krannish" },
+        new Culture(QualificationLevel.Master) { Note = "Order" },
+        new LocalKnowledge(),// { Note = "60%" },
     ]);
 
     public override QualificationList FutureQualifications => BuildQualifications(
@@ -145,7 +146,7 @@ public class KrannishWarlock : Class, IClass, ILikeMagic
         new ReligionLore(level: 2),
         new Herbalism(level: 3),
         new Alchemy(QualificationLevel.Master, 3),
-        new Etiquette(QualificationLevel.Master, 4), //Krannish
+        new Etiquette(QualificationLevel.Master, 4) { Note = "Krannish" },
         new PoisoningAndNeutralization(QualificationLevel.Master, 4),
         new Craft(Profession.TattoMaker, QualificationLevel.Master, 5),
         new Backstab(level: 5),

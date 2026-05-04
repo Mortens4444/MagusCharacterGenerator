@@ -1,7 +1,6 @@
-﻿using M.A.G.U.S.GameSystem.Qualifications;
-using M.A.G.U.S.Models;
+﻿using M.A.G.U.S.Models;
 
-namespace M.A.G.U.S.Qualifications;
+namespace M.A.G.U.S.GameSystem.Qualifications;
 
 public abstract class Qualification : ImageOwner
 {

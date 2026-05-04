@@ -1,9 +1,9 @@
 ﻿using CommunityToolkit.Mvvm.Messaging;
 using M.A.G.U.S.Assistant.Models;
 using M.A.G.U.S.Bestiary;
+using M.A.G.U.S.GameSystem.Qualifications;
 using M.A.G.U.S.GameSystem.Runes;
 using M.A.G.U.S.Interfaces;
-using M.A.G.U.S.Qualifications;
 using M.A.G.U.S.Races;
 using M.A.G.U.S.Things;
 using M.A.G.U.S.Things.Gemstones;

@@ -4,7 +4,6 @@ using M.A.G.U.S.Assistant.Services;
 using M.A.G.U.S.GameSystem;
 using M.A.G.U.S.GameSystem.Languages;
 using M.A.G.U.S.GameSystem.Qualifications;
-using M.A.G.U.S.Qualifications;
 using M.A.G.U.S.Qualifications.Combat;
 using M.A.G.U.S.Qualifications.Scientific;
 using M.A.G.U.S.Things.Weapons;

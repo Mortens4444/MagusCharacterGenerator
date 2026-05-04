@@ -1,3 +1,4 @@
+- 2 Times throws should be elliminated, and a times parameter should be added to the DiceThrowFormula, and the formula should be applied times times. (ex: 2D10 => 2 times D10)
 - Send notifications (random time, random enemy, [somebody attacked you on your journey...], flee or fight?, pathes [through the mountains or a forest, etc...])
 - when a character kills all of it's enemies in encounter, redistribute enemies should be called with a UI
 - Fix zoom image preview (zooming is not smooth)

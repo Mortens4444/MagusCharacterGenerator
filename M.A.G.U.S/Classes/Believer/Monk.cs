@@ -127,7 +127,7 @@ public class Monk : Class, IClass, ILikeMagic
         new ReadingAndWriting(),
         new LanguageLore(Language.Pyarronian, 4),
         new HumanInsight(),
-        new ReligionLore(QualificationLevel.Master), // Own
+        new ReligionLore(QualificationLevel.Master) { Note = "Own" },
         new Healing(),
         new PsiMonk(),
         new TortureResistance(QualificationLevel.Master)
