@@ -13,5 +13,9 @@ public enum Sphere
     Domination, // Hatalom/Uralom (pl. Ranagol)
     Order,      // Rend (pl. Dreina)
     Chaos,      // Káosz
-    Magic       // Mágia (pl. Adron)
+    Magic,       // Mágia (pl. Adron)
+    
+    ElementalForces,
+    OtherForces,
+    SpatialMagic
 }

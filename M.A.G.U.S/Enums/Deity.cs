@@ -125,4 +125,8 @@ public enum Deity
 
     // Törpe
     Kadal, //a Kövek Atyja
+    
+    [Description("Bul Ruurig")]
+    [AvailableSpheres(Sphere.ElementalForces, Sphere.OtherForces, Sphere.SpatialMagic)]
+    BulRuurig
 }
