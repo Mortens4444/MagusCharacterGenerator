@@ -2,7 +2,7 @@ using M.A.G.U.S.GameSystem.Valuables;
 
 namespace M.A.G.U.S.Things.Armors;
 
-public class AbbitSteelBreastPlate : Breastplate
+public class AbbitSteelBreastplate : Breastplate
 {
 	public override string Name => "Abbit-steel breastplate";
 
