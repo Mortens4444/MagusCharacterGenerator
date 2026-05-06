@@ -5,4 +5,8 @@ namespace M.A.G.U.S.Qualifications.Other;
 public class Culture(QualificationLevel qualificationLevel = QualificationLevel.Base, int level = 1) : Qualification(qualificationLevel, level)
 {
     public Culture() : this(QualificationLevel.Base) { }
+
+    public override int QpToBaseQualification => 2;
+
+    public override int QpToMasterQualification => 15;
 }

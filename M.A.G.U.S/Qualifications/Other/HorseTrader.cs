@@ -6,5 +6,9 @@ public class HorseTrader(QualificationLevel qualificationLevel = QualificationLe
 {
     public HorseTrader() : this(QualificationLevel.Base) { }
 
+    public override int QpToBaseQualification => 2;
+
+    public override int QpToMasterQualification => 15;
+
     public override string Name => "Horse Trader";
 }

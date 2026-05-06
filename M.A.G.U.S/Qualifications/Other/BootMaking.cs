@@ -7,4 +7,8 @@ public class BootMaking(QualificationLevel qualificationLevel = QualificationLev
     public override string Name => "Boot making";
 
     public BootMaking() : this(QualificationLevel.Base) { }
+
+    public override int QpToBaseQualification => 2;
+
+    public override int QpToMasterQualification => 15;
 }

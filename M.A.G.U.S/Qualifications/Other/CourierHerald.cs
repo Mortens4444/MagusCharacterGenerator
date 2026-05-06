@@ -7,4 +7,8 @@ public class CourierHerald(QualificationLevel qualificationLevel = Qualification
     public override string Name => "Courier/Herald";
 
     public CourierHerald() : this(QualificationLevel.Base) { }
+
+    public override int QpToBaseQualification => 2;
+
+    public override int QpToMasterQualification => 15;
 }

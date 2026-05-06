@@ -6,5 +6,9 @@ public class LawJurisprudence(QualificationLevel qualificationLevel = Qualificat
 {
     public LawJurisprudence() : this(QualificationLevel.Base) { }
 
+    public override int QpToBaseQualification => 2;
+
+    public override int QpToMasterQualification => 15;
+
     public override string Name => "Law / Jurisprudence";
 }

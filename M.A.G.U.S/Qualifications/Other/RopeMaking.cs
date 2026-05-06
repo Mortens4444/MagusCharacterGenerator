@@ -7,4 +7,8 @@ public class RopeMaking(QualificationLevel qualificationLevel = QualificationLev
     public override string Name => "Rope making";
 
     public RopeMaking() : this(QualificationLevel.Base) { }
+
+    public override int QpToBaseQualification => 2;
+
+    public override int QpToMasterQualification => 15;
 }

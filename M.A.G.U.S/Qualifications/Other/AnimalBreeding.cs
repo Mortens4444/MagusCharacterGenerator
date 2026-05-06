@@ -7,4 +7,8 @@ public class AnimalBreeding(QualificationLevel qualificationLevel = Qualificatio
     public override string Name => "Animal breeding";
 
     public AnimalBreeding() : this(QualificationLevel.Base) { }
+
+    public override int QpToBaseQualification => 2;
+
+    public override int QpToMasterQualification => 15;
 }

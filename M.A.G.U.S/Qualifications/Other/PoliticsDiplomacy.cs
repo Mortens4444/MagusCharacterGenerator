@@ -6,5 +6,9 @@ public class PoliticsDiplomacy(QualificationLevel qualificationLevel = Qualifica
 {
     public PoliticsDiplomacy() : this(QualificationLevel.Base) { }
 
+    public override int QpToBaseQualification => 2;
+
+    public override int QpToMasterQualification => 15;
+
     public override string Name => "Politics / Diplomacy";
 }

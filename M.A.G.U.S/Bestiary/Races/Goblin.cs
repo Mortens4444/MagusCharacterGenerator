@@ -25,7 +25,7 @@ public sealed class Goblin : Creature
         [
             new MeleeAttack(new CarvedClub(), AttackValue),
             new MeleeAttack(new ShortSword(), AttackValue),
-            new RangedAttack(new Shortbow(), AimValue)
+            new RangedAttack(new GoblinBow(), AimValue)
         ];
 
         HealthPoints = 7;
