@@ -1,4 +1,5 @@
-﻿using M.A.G.U.S.Enums;
+﻿using M.A.G.U.S.Classes.Fighter;
+using M.A.G.U.S.Enums;
 using M.A.G.U.S.Interfaces;
 using M.A.G.U.S.Qualifications.Specialities;
 using M.A.G.U.S.Utils;
@@ -45,7 +46,7 @@ public sealed class AimResolution : ResolutionBase
             Attack = attack,
             RollValue = rollValue,
             IsSuccessful = successful,
-            IsHpDamage = aimTotal > defenseValue + OverHitValue,
+            IsHpDamage = aimTotal - defenseValue >= (initiative.Attacker.Source is Character c && c.BaseClass is Nerton ? NertonOverHitValue : OverHitValue),
             Direction = attackDirection,
             HitLocation = hitLocation.GetDescription(),
             HitSubLocation = subLocation

@@ -3,38 +3,24 @@ using M.A.G.U.S.GameSystem;
 using M.A.G.U.S.GameSystem.Attributes;
 using M.A.G.U.S.GameSystem.Experience;
 using M.A.G.U.S.GameSystem.FightMode;
+using M.A.G.U.S.GameSystem.Languages;
 using M.A.G.U.S.GameSystem.Qualifications;
 using M.A.G.U.S.Interfaces;
 using M.A.G.U.S.Qualifications;
 using M.A.G.U.S.Qualifications.Combat;
 using M.A.G.U.S.Qualifications.Laical;
-using M.A.G.U.S.Qualifications.Other;
+using M.A.G.U.S.Qualifications.Percentages;
 using M.A.G.U.S.Qualifications.Scientific;
+using M.A.G.U.S.Qualifications.Scientific.Psi;
 using M.A.G.U.S.Races;
-using M.A.G.U.S.Things;
-using M.A.G.U.S.Things.Animals;
-using M.A.G.U.S.Things.Shields;
-using M.A.G.U.S.Things.Weapons;
-using M.A.G.U.S.Things.Weapons.RangedWeapons;
-using M.A.G.U.S.Things.Weapons.Spears;
-using M.A.G.U.S.Things.Weapons.StabbingWeapons;
-using Mtf.Extensions.Services;
 
 namespace M.A.G.U.S.Classes.Fighter;
 
-public class Hawk : Class, IClass, IJustFight
+public class StarOfAlborne : Class, IClass, IJustFight
 {
-    private readonly List<Weapon> weapons =
-    [
-        RandomProvider.GetSecureRandomInt(0, 2) == 0 ? new Saber() : new Longsword(),
-        RandomProvider.GetSecureRandomInt(0, 2) == 0 ? new Spear() : new BattleAxe(),
-        new Javelin(),
-        new NomadBow()
-    ];
+    public StarOfAlborne() : base(1, false) { }
 
-    public Hawk() : base(1, false) { }
-
-    public Hawk(int level, bool autoGenerateSkills) : base(level, autoGenerateSkills) { }
+    public StarOfAlborne(int level, bool autoGenerateSkills) : base(level, autoGenerateSkills) { }
 
     [DiceThrow(ThrowType._1D6)]
     [DiceThrowModifier(12)]
@@ -94,13 +80,13 @@ public class Hawk : Class, IClass, IJustFight
 
     public override int DefenseBaseValue => 75;
 
-    public override int AimBaseValue => 25;
+    public override int AimBaseValue => 0;
 
     public override int CombatValueModifierPerLevel => 11;
 
-    public override int BaseQualificationPoints => 5;
+    public override int BaseQualificationPoints => 10;
 
-    public override int QualificationPointsModifier => 7;
+    public override int QualificationPointsModifier => 14;
 
     public override int PercentQualificationModifier => 0;
 
@@ -130,14 +116,7 @@ public class Hawk : Class, IClass, IJustFight
         new() { Level = 12, MinExperience = 80001, MaxExperience = 112000 }
     ];
 
-    public override List<Thing> StartingEquipment =>
-    [
-        ..weapons,
-        new HorseLightWar(ThrowType._1D10_Plus_9),
-        new SmallShield()
-    ];
-
-    public override string[] Images => ["yllinor_hawk.png"];
+    public override string Name => "Star of Alborne";
 
     public override ulong ExpPerLevelAfter12 => 31200;
 
@@ -146,29 +125,31 @@ public class Hawk : Class, IClass, IJustFight
 
     public override QualificationList Qualifications => BuildQualifications(
     [
-        new WeaponUse() { Weapon = weapons[0] },
-        new WeaponUse() { Weapon = weapons[1] },
-        new WeaponUse() { Weapon = weapons[2] },
-        new WeaponUse(QualificationLevel.Master) { Weapon = weapons[3] },
-
-        new Riding(QualificationLevel.Master),
-        new AnimalTraining(QualificationLevel.Master) { Note = "Horse only" },
+        new WeaponUse(),
+        new WeaponUse(),
+        new SexualCulture(),
+        new Riding(),
         new Swimming(),
-        new Running(),
-        new Healing(),
-        new Herbalism(),
-        new Bowyer(QualificationLevel.Master),
-        new HorseTrader(QualificationLevel.Master)
+        new ReadingAndWriting(),
+        new Heraldry(),
+        new PsiPyarron(),
+        new Etiquette(),
+        new LanguageLore(3) { Language = Language.Pyarronian }
     ]);
 
     public override QualificationList FutureQualifications => BuildQualifications(
     [
-        new MountedArchery(QualificationLevel.Master, level: 3),
-        new Aiming(QualificationLevel.Master, level: 4)
+        //new Jumping(20, 3), //level: 3
+        new Etiquette(QualificationLevel.Master, 4),
+        new LanguageLore(5, 5) { Language = Language.Pyarronian },
+        new LegendLore(level: 6),
+        new Heraldry(QualificationLevel.Master, 8)
     ]);
 
     public override PercentQualificationList PercentQualifications =>
     [
+        new Climbing(15),
+        new Falling(20),
     ];
 
     public override SpecialQualificationList SpecialQualifications => [];

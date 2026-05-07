@@ -5,6 +5,7 @@ namespace M.A.G.U.S.GameSystem.Turn;
 public abstract class ResolutionBase
 {
     public const int OverHitValue = 50;
+    public const int NertonOverHitValue = 75;
 
     protected int? damage;
 

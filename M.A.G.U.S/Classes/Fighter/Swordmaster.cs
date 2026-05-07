@@ -8,33 +8,18 @@ using M.A.G.U.S.Interfaces;
 using M.A.G.U.S.Qualifications;
 using M.A.G.U.S.Qualifications.Combat;
 using M.A.G.U.S.Qualifications.Laical;
-using M.A.G.U.S.Qualifications.Other;
+using M.A.G.U.S.Qualifications.Percentages;
 using M.A.G.U.S.Qualifications.Scientific;
+using M.A.G.U.S.Qualifications.Scientific.Psi;
 using M.A.G.U.S.Races;
-using M.A.G.U.S.Things;
-using M.A.G.U.S.Things.Animals;
-using M.A.G.U.S.Things.Shields;
-using M.A.G.U.S.Things.Weapons;
-using M.A.G.U.S.Things.Weapons.RangedWeapons;
-using M.A.G.U.S.Things.Weapons.Spears;
-using M.A.G.U.S.Things.Weapons.StabbingWeapons;
-using Mtf.Extensions.Services;
 
 namespace M.A.G.U.S.Classes.Fighter;
 
-public class Hawk : Class, IClass, IJustFight
+public class Swordmaster : Class, IClass, IJustFight
 {
-    private readonly List<Weapon> weapons =
-    [
-        RandomProvider.GetSecureRandomInt(0, 2) == 0 ? new Saber() : new Longsword(),
-        RandomProvider.GetSecureRandomInt(0, 2) == 0 ? new Spear() : new BattleAxe(),
-        new Javelin(),
-        new NomadBow()
-    ];
+    public Swordmaster() : base(1, false) { }
 
-    public Hawk() : base(1, false) { }
-
-    public Hawk(int level, bool autoGenerateSkills) : base(level, autoGenerateSkills) { }
+    public Swordmaster(int level, bool autoGenerateSkills) : base(level, autoGenerateSkills) { }
 
     [DiceThrow(ThrowType._1D6)]
     [DiceThrowModifier(12)]
@@ -94,13 +79,13 @@ public class Hawk : Class, IClass, IJustFight
 
     public override int DefenseBaseValue => 75;
 
-    public override int AimBaseValue => 25;
+    public override int AimBaseValue => 0;
 
     public override int CombatValueModifierPerLevel => 11;
 
-    public override int BaseQualificationPoints => 5;
+    public override int BaseQualificationPoints => 4;
 
-    public override int QualificationPointsModifier => 7;
+    public override int QualificationPointsModifier => 12;
 
     public override int PercentQualificationModifier => 0;
 
@@ -130,15 +115,6 @@ public class Hawk : Class, IClass, IJustFight
         new() { Level = 12, MinExperience = 80001, MaxExperience = 112000 }
     ];
 
-    public override List<Thing> StartingEquipment =>
-    [
-        ..weapons,
-        new HorseLightWar(ThrowType._1D10_Plus_9),
-        new SmallShield()
-    ];
-
-    public override string[] Images => ["yllinor_hawk.png"];
-
     public override ulong ExpPerLevelAfter12 => 31200;
 
     public override IRace[] AllowedRaces => [new Human(), new Elf(), new HalfElf(), new Dwarf(), new CourtOrc(), new Amund(), new Jann(), new Khal(), new Wier(), new Feenhar(), new Dahr(), new Dracker(), new Draquon(),
@@ -146,29 +122,29 @@ public class Hawk : Class, IClass, IJustFight
 
     public override QualificationList Qualifications => BuildQualifications(
     [
-        new WeaponUse() { Weapon = weapons[0] },
-        new WeaponUse() { Weapon = weapons[1] },
-        new WeaponUse() { Weapon = weapons[2] },
-        new WeaponUse(QualificationLevel.Master) { Weapon = weapons[3] },
-
-        new Riding(QualificationLevel.Master),
-        new AnimalTraining(QualificationLevel.Master) { Note = "Horse only" },
+        new WeaponUse(),// { Weapon = new Mastersword() },
+        new WeaponUse(),
+        new Fistfight(),
+        new ReadingAndWriting(),
         new Swimming(),
         new Running(),
-        new Healing(),
-        new Herbalism(),
-        new Bowyer(QualificationLevel.Master),
-        new HorseTrader(QualificationLevel.Master)
+        new Etiquette(),
+        new PsiPyarron(), // speciális, nem tanulhat Mf-ot
     ]);
 
     public override QualificationList FutureQualifications => BuildQualifications(
     [
-        new MountedArchery(QualificationLevel.Master, level: 3),
-        new Aiming(QualificationLevel.Master, level: 4)
+        new BlindFighting(level: 3),
+        new WeaponUse(QualificationLevel.Master, 4),// { Weapon = new Mastersword() },
+        new WeaponBreaking(level: 5),
+        new Healing(level: 6)
     ]);
 
     public override PercentQualificationList PercentQualifications =>
     [
+        new Climbing(10),
+        new Falling(20),
+        new Jumping(10)
     ];
 
     public override SpecialQualificationList SpecialQualifications => [];
