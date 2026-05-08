@@ -8,16 +8,20 @@ using M.A.G.U.S.Qualifications;
 using M.A.G.U.S.Qualifications.Combat;
 using M.A.G.U.S.Qualifications.Laical;
 using M.A.G.U.S.Qualifications.Percentages;
+using M.A.G.U.S.Qualifications.Scientific;
 using M.A.G.U.S.Races;
-using M.A.G.U.S.Things.Weapons.RangedWeapons;
+using M.A.G.U.S.Things;
+using M.A.G.U.S.Things.Armors;
+using M.A.G.U.S.Things.Weapons.CrushingWeapons;
+using M.A.G.U.S.Things.Weapons.Spears;
 
 namespace M.A.G.U.S.Classes.Fighter;
 
-public class GoblinWarrior : Class, IClass, IJustFight
+public class PredociHeavyInfantry : Class, IClass, IJustFight
 {
-    public GoblinWarrior() : base(1, false) { }
+    public PredociHeavyInfantry() : base(1, false) { }
 
-    public GoblinWarrior(int level, bool autoGenerateSkills) : base(level, autoGenerateSkills) { }
+    public PredociHeavyInfantry(int level, bool autoGenerateSkills) : base(level, autoGenerateSkills) { }
 
     [DiceThrow(ThrowType._1D6)]
     [DiceThrowModifier(12)]
@@ -79,7 +83,7 @@ public class GoblinWarrior : Class, IClass, IJustFight
 
     public override int AimBaseValue => 0;
 
-    public override int CombatValueModifierPerLevel => 8;
+    public override int CombatValueModifierPerLevel => 11;
 
     public override int BaseQualificationPoints => 10;
 
@@ -103,36 +107,47 @@ public class GoblinWarrior : Class, IClass, IJustFight
         new() { Level = 2,  MinExperience = 161,   MaxExperience = 320 },
         new() { Level = 3,  MinExperience = 321,   MaxExperience = 640 },
         new() { Level = 4,  MinExperience = 641,   MaxExperience = 1440 },
-        new() { Level = 5,  MinExperience = 1441,  MaxExperience = UInt64.MaxValue },
-        //new() { Level = 5,  MinExperience = 1441,  MaxExperience = 2800 },
-        //new() { Level = 6,  MinExperience = 2801,  MaxExperience = 5600 },
-        //new() { Level = 7,  MinExperience = 5601,  MaxExperience = 10000 },
-        //new() { Level = 8,  MinExperience = 10001, MaxExperience = 20000 },
-        //new() { Level = 9,  MinExperience = 20001, MaxExperience = 40000 },
-        //new() { Level = 10, MinExperience = 40001, MaxExperience = 60000 },
-        //new() { Level = 11, MinExperience = 60001, MaxExperience = 80000 },
-        //new() { Level = 12, MinExperience = 80001, MaxExperience = 112000 }
+        new() { Level = 5,  MinExperience = 1441,  MaxExperience = 2800 },
+        new() { Level = 6,  MinExperience = 2801,  MaxExperience = 5600 },
+        new() { Level = 7,  MinExperience = 5601,  MaxExperience = 10000 },
+        new() { Level = 8,  MinExperience = 10001, MaxExperience = 20000 },
+        new() { Level = 9,  MinExperience = 20001, MaxExperience = 40000 },
+        new() { Level = 10, MinExperience = 40001, MaxExperience = 60000 },
+        new() { Level = 11, MinExperience = 60001, MaxExperience = 80000 },
+        new() { Level = 12, MinExperience = 80001, MaxExperience = 112000 }
     ];
 
-    public override string Name => "Goblin Warrior";
+    public override string Name => "Predoci Heavy Infantry";
 
     public override ulong ExpPerLevelAfter12 => 31200;
 
-    public override IRace[] AllowedRaces => [new Goblin()];
+    public override IRace[] AllowedRaces => [new Human(), new Elf(), new HalfElf(), new Dwarf(), new CourtOrc(), new Amund(), new Jann(), new Khal(), new Wier(), new Feenhar(), new Dahr(), new Dracker(), new Draquon(),
+        new ForestGiant(), new FrostGiant(), new MountainGiant(), new SwampGiant(), new Gnome(), new CourtGoblin(), new GhoRagg(), new MutantOrc(), new CwyvehKah()];
+
+    public override List<Thing> StartingEquipment =>
+    [
+        //new PredociSword(),
+        //new PredociFullPlate(), //predoci teljesvért, ami a leginkább a rákozott páncélhoz hasonlatos
+        // Predici telivér
+    ];
 
     public override QualificationList Qualifications => BuildQualifications(
     [
-        new WeaponUse() { Weapon = new GoblinBow() },
-        new WeaponUse(),
+        new WeaponUse(),// { Weapon = new PredociSword() }, //predoci kard - átmenetet képez a hosszúkard és tőrkard között
+        new WeaponUse() { Weapon = new HeavyCavalryLance() },
+        new WeaponUse() { Weapon = new FeatheredMace() },
         new WeaponUse(),
         new Riding(),
-        new Swimming(),
-        new Running()
+        new ReadingAndWriting(),
+        new HeavyArmorWearing(),
+        new Heraldry(),
+        new Etiquette() { Note = "Pyarronian" }
     ]);
 
     public override QualificationList FutureQualifications => BuildQualifications(
     [
-        new Leadership(level: 6)
+        new ShieldUse(level: 4),
+        new Leadership(level: 5) { Note = "Heavy cavalry" }
     ]);
 
     public override PercentQualificationList PercentQualifications =>
@@ -145,5 +160,6 @@ public class GoblinWarrior : Class, IClass, IJustFight
     public override SpecialQualificationList SpecialQualifications => [];
 
     [DiceThrow(ThrowType._1D6)]
-    public override int GetPainToleranceModifier() => DiceThrow._1D6();
+    [DiceThrowModifier(4)]
+    public override int GetPainToleranceModifier() => DiceThrow._1D6() + 4;
 }

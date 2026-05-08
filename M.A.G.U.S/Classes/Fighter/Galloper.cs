@@ -32,16 +32,6 @@ public class Galloper : Class, IClass, IJustFight
         new NomadBow()
     ];
 
-    private List<Thing> BuildStartingEquipment()
-    {
-        return
-        [
-            ..weapons,
-            new HorseLightWar(ThrowType._1D10_Plus_9),
-            new SmallShield()
-        ];
-    }
-
     public Galloper() : base(1, false) { }
 
     public Galloper(int level, bool autoGenerateSkills) : base(level, autoGenerateSkills) { }
@@ -140,7 +130,12 @@ public class Galloper : Class, IClass, IJustFight
         new() { Level = 12, MinExperience = 80001, MaxExperience = 112000 }
     ];
 
-    public override List<Thing> StartingEquipment => BuildStartingEquipment();
+    public override List<Thing> StartingEquipment =>
+    [
+        ..weapons,
+        new HorseLightWar(ThrowType._1D10_Plus_9),
+        new SmallShield()
+    ];
 
     public override string Name => "Galloper (Dhuni)";
 

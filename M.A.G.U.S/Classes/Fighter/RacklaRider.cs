@@ -1,23 +1,26 @@
-﻿using M.A.G.U.S.Enums;
+﻿using M.A.G.U.S.Bestiary.Animals;
+using M.A.G.U.S.Enums;
 using M.A.G.U.S.GameSystem;
 using M.A.G.U.S.GameSystem.Attributes;
 using M.A.G.U.S.GameSystem.Experience;
 using M.A.G.U.S.GameSystem.FightMode;
+using M.A.G.U.S.GameSystem.Qualifications;
 using M.A.G.U.S.Interfaces;
 using M.A.G.U.S.Qualifications;
 using M.A.G.U.S.Qualifications.Combat;
 using M.A.G.U.S.Qualifications.Laical;
 using M.A.G.U.S.Qualifications.Percentages;
+using M.A.G.U.S.Qualifications.Scientific;
+using M.A.G.U.S.Qualifications.Scientific.Psi;
 using M.A.G.U.S.Races;
-using M.A.G.U.S.Things.Weapons.RangedWeapons;
 
 namespace M.A.G.U.S.Classes.Fighter;
 
-public class GoblinWarrior : Class, IClass, IJustFight
+public class RacklaRider : Class, IClass, IJustFight
 {
-    public GoblinWarrior() : base(1, false) { }
+    public RacklaRider() : base(1, false) { }
 
-    public GoblinWarrior(int level, bool autoGenerateSkills) : base(level, autoGenerateSkills) { }
+    public RacklaRider(int level, bool autoGenerateSkills) : base(level, autoGenerateSkills) { }
 
     [DiceThrow(ThrowType._1D6)]
     [DiceThrowModifier(12)]
@@ -79,9 +82,9 @@ public class GoblinWarrior : Class, IClass, IJustFight
 
     public override int AimBaseValue => 0;
 
-    public override int CombatValueModifierPerLevel => 8;
+    public override int CombatValueModifierPerLevel => 11;
 
-    public override int BaseQualificationPoints => 10;
+    public override int BaseQualificationPoints => 3;
 
     public override int QualificationPointsModifier => 14;
 
@@ -103,47 +106,53 @@ public class GoblinWarrior : Class, IClass, IJustFight
         new() { Level = 2,  MinExperience = 161,   MaxExperience = 320 },
         new() { Level = 3,  MinExperience = 321,   MaxExperience = 640 },
         new() { Level = 4,  MinExperience = 641,   MaxExperience = 1440 },
-        new() { Level = 5,  MinExperience = 1441,  MaxExperience = UInt64.MaxValue },
-        //new() { Level = 5,  MinExperience = 1441,  MaxExperience = 2800 },
-        //new() { Level = 6,  MinExperience = 2801,  MaxExperience = 5600 },
-        //new() { Level = 7,  MinExperience = 5601,  MaxExperience = 10000 },
-        //new() { Level = 8,  MinExperience = 10001, MaxExperience = 20000 },
-        //new() { Level = 9,  MinExperience = 20001, MaxExperience = 40000 },
-        //new() { Level = 10, MinExperience = 40001, MaxExperience = 60000 },
-        //new() { Level = 11, MinExperience = 60001, MaxExperience = 80000 },
-        //new() { Level = 12, MinExperience = 80001, MaxExperience = 112000 }
+        new() { Level = 5,  MinExperience = 1441,  MaxExperience = 2800 },
+        new() { Level = 6,  MinExperience = 2801,  MaxExperience = 5600 },
+        new() { Level = 7,  MinExperience = 5601,  MaxExperience = 10000 },
+        new() { Level = 8,  MinExperience = 10001, MaxExperience = 20000 },
+        new() { Level = 9,  MinExperience = 20001, MaxExperience = 40000 },
+        new() { Level = 10, MinExperience = 40001, MaxExperience = 60000 },
+        new() { Level = 11, MinExperience = 60001, MaxExperience = 80000 },
+        new() { Level = 12, MinExperience = 80001, MaxExperience = 112000 }
     ];
 
-    public override string Name => "Goblin Warrior";
+    public override string Name => "Rackla Rider";
 
     public override ulong ExpPerLevelAfter12 => 31200;
 
-    public override IRace[] AllowedRaces => [new Goblin()];
+    public override IRace[] AllowedRaces => [new Dwarf()];
 
     public override QualificationList Qualifications => BuildQualifications(
     [
-        new WeaponUse() { Weapon = new GoblinBow() },
         new WeaponUse(),
         new WeaponUse(),
-        new Riding(),
-        new Swimming(),
-        new Running()
+        new WeaponUse(),
+        new WeaponThrowing(),
+        new ReadingAndWriting(),
+        new Architecture(),
+        new Cartography(),
+        new PsiPyarron(QualificationLevel.Master),
+        new WeaponBreaking(),
+        new Fistfight(QualificationLevel.Master),
+        new ShieldUse(QualificationLevel.Master),
+        new BlindFighting(QualificationLevel.Master),
+        new AnimalTraining() { Note = "Only Rackla" },
+        new TrackingConcealment(),
+        new Onomatopoeia() { Note = "Cave creatures" },
+        new LegendLore()
     ]);
 
     public override QualificationList FutureQualifications => BuildQualifications(
     [
-        new Leadership(level: 6)
     ]);
 
     public override PercentQualificationList PercentQualifications =>
     [
-        new Climbing(15),
-        new Falling(20),
-        new Jumping(10)
     ];
 
     public override SpecialQualificationList SpecialQualifications => [];
 
     [DiceThrow(ThrowType._1D6)]
-    public override int GetPainToleranceModifier() => DiceThrow._1D6();
+    [DiceThrowModifier(4)]
+    public override int GetPainToleranceModifier() => DiceThrow._1D6() + 4;
 }

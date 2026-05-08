@@ -84,9 +84,9 @@ public class StarOfAlborne : Class, IClass, IJustFight
 
     public override int CombatValueModifierPerLevel => 11;
 
-    public override int BaseQualificationPoints => 10;
+    public override int BaseQualificationPoints => 5;
 
-    public override int QualificationPointsModifier => 14;
+    public override int QualificationPointsModifier => 8;
 
     public override int PercentQualificationModifier => 0;
 

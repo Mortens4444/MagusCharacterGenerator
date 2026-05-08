@@ -116,7 +116,7 @@ public class ErigowianArcher : Class, IClass, IJustFight
         new() { Level = 12, MinExperience = 80001, MaxExperience = 112000 }
     ];
 
-    public override string Name => "";
+    public override string Name => "Erigowian Archer";
 
     public override ulong ExpPerLevelAfter12 => 31200;
 

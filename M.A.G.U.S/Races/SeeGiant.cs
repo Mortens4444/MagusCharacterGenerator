@@ -26,7 +26,7 @@ public class SeeGiant : HalfGiant
             [
                 new AncientTongueLore(AntientLanguage.Voul),
                 new SwampSurvival(QualificationLevel.Master),
-				new SeeSurvival(QualificationLevel.Master),
+				new SeaSurvival(QualificationLevel.Master),
                 new Swimming(QualificationLevel.Master)
             ]);
             return result;
