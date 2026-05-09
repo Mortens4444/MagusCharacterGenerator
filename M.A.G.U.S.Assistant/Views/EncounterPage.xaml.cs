@@ -6,7 +6,7 @@ using System.Collections.Specialized;
 
 namespace M.A.G.U.S.Assistant.Views;
 
-internal partial class EncounterPage : NotifierPage
+internal sealed partial class EncounterPage : NotifierPage
 {
     private bool firstRun = true;
     private EncounterViewModel? viewModel;

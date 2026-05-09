@@ -1,4 +1,4 @@
-﻿namespace M.A.G.U.S.Qualifications;
+﻿namespace M.A.G.U.S.GameSystem.Qualifications;
 
 public class PercentQualification(int percent)
 {

@@ -9,7 +9,7 @@ using Mtf.LanguageService.MAUI;
 
 namespace M.A.G.U.S.Assistant.Services;
 
-internal class CombatEngine
+internal sealed class CombatEngine
 {
     public static async Task ProcessAssignmentTurnAsync(AssignmentViewModel assignment, int round, ICombatRollService rollService)
     {

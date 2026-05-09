@@ -5,7 +5,7 @@ using Mtf.Maui.Controls.Messages;
 
 namespace M.A.G.U.S.Assistant.Views;
 
-internal partial class StorytellingPage : NotifierPage
+internal sealed partial class StorytellingPage : NotifierPage
 {
 	public StorytellingPage(StorytellingViewModel storytellingViewModel)
 	{

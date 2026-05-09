@@ -4,7 +4,7 @@ using Mtf.Maui.Controls.Messages;
 
 namespace M.A.G.U.S.Assistant.Platforms.iOS;
 
-internal class ShakeService : IShakeService
+internal sealed class ShakeService : IShakeService
 {
     public const double ThresholdG = 2.2;
     public const int DebounceMs = 800;

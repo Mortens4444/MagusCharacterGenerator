@@ -1,4 +1,6 @@
-﻿namespace M.A.G.U.S.Qualifications.Percentages;
+﻿using M.A.G.U.S.GameSystem.Qualifications;
+
+namespace M.A.G.U.S.Qualifications.Percentages;
 
 public class AlertnessPerception(int percent) : PercentQualification(percent)
 {

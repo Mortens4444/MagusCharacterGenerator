@@ -1,6 +1,6 @@
 ﻿namespace M.A.G.U.S.Assistant.Models;
 
-internal class DrawableShape
+internal sealed class DrawableShape
 {
     public string Type { get; set; } = String.Empty;
     public float X { get; set; }

@@ -2,7 +2,7 @@
 
 namespace M.A.G.U.S.Assistant;
 
-internal class Program
+internal sealed class Program
 {
     static void Main(string[] args)
     {

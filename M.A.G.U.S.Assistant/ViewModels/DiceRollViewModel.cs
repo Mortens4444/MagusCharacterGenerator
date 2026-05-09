@@ -9,7 +9,7 @@ using System.Windows.Input;
 
 namespace M.A.G.U.S.Assistant.ViewModels;
 
-internal partial class DiceRollViewModel : BaseViewModel
+internal sealed partial class DiceRollViewModel : BaseViewModel
 {
     private readonly ISoundPlayer? soundPlayer;
     private readonly IShakeService? shakeService;

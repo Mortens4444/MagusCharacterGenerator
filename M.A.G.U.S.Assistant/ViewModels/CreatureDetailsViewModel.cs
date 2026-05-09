@@ -17,7 +17,7 @@ using System.Windows.Input;
 
 namespace M.A.G.U.S.Assistant.ViewModels;
 
-internal partial class CreatureDetailsViewModel : BaseViewModel
+internal sealed partial class CreatureDetailsViewModel : BaseViewModel
 {
     private readonly ISoundPlayer soundPlayer;
     private string lastAction;

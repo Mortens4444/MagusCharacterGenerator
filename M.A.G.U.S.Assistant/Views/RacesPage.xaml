@@ -7,7 +7,7 @@
                 xmlns:vm="clr-namespace:M.A.G.U.S.Assistant.ViewModels"
                 xmlns:r="clr-namespace:M.A.G.U.S.Races;assembly=M.A.G.U.S."
                 xmlns:mc="clr-namespace:Mtf.Maui.Controls;assembly=Mtf.Maui.Controls"
-                xmlns:local="clr-namespace:M.A.G.U.S.Qualifications;assembly=M.A.G.U.S."
+                xmlns:local="clr-namespace:M.A.G.U.S.GameSystem.Qualifications;assembly=M.A.G.U.S."
                 xmlns:q="clr-namespace:M.A.G.U.S.GameSystem.Qualifications;assembly=M.A.G.U.S."
                 x:Class="M.A.G.U.S.Assistant.Views.RacesPage"
                 x:ClassModifier="internal"

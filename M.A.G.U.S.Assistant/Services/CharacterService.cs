@@ -3,7 +3,7 @@ using M.A.G.U.S.GameSystem;
 
 namespace M.A.G.U.S.Assistant.Services;
 
-internal class CharacterService(CharacterRepository characterRepository)
+internal sealed class CharacterService(CharacterRepository characterRepository)
 {
     private readonly CharacterRepository characterRepository = characterRepository;
 

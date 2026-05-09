@@ -16,7 +16,7 @@ using System.Diagnostics;
 
 namespace M.A.G.U.S.Assistant.Services;
 
-internal partial class BluetoothService : IBluetoothService, IDisposable
+internal sealed partial class BluetoothService : IBluetoothService, IDisposable
 {
     private readonly CommandRegistry registry;
     private readonly ConcurrentDictionary<string, IBluetoothConnection> pendingConnections = new();

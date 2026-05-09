@@ -4,7 +4,7 @@ using System;
 
 namespace M.A.G.U.S.Assistant;
 
-internal class Program : MauiApplication
+internal sealed class Program : MauiApplication
 {
     protected override MauiApp CreateMauiApp() => MauiProgram.CreateMauiApp();
 

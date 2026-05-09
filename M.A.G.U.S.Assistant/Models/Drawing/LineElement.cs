@@ -2,7 +2,7 @@
 
 namespace M.A.G.U.S.Assistant.Models.Drawing;
 
-internal class LineElement : IDrawableElement
+internal sealed class LineElement : IDrawableElement
 {
     public required Color Color { get; set; }
 

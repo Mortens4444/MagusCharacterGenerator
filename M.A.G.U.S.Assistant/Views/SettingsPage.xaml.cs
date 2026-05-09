@@ -7,7 +7,7 @@ using Mtf.LanguageService.MAUI.Views;
 
 namespace M.A.G.U.S.Assistant.Views;
 
-internal partial class SettingsPage : NotifierPage
+internal sealed partial class SettingsPage : NotifierPage
 {
     private Dictionary<object, string>? originalTextElements;
 

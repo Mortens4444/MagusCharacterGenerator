@@ -3,7 +3,7 @@ using System.Globalization;
 
 namespace M.A.G.U.S.Assistant.Database.Repositories;
 
-internal class SettingsRepository(DatabaseContext context)
+internal sealed class SettingsRepository(DatabaseContext context)
 {
     private readonly DatabaseContext context = context;
 

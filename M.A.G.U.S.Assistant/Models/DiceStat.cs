@@ -2,7 +2,7 @@
 
 namespace M.A.G.U.S.Assistant.Models;
 
-internal class DiceStat
+internal sealed class DiceStat
 {
     public string Name { get; set; }
     public string Formula { get; set; }

@@ -15,7 +15,7 @@ using System.Globalization;
 
 namespace M.A.G.U.S.Assistant.Models;
 
-internal partial class DisplayItem : INotifyPropertyChanged
+internal sealed partial class DisplayItem : INotifyPropertyChanged
 {
     public object? Source { get; init; }
     

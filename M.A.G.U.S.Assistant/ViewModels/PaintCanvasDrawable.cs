@@ -3,7 +3,7 @@ using M.A.G.U.S.Assistant.Models.Drawing;
 
 namespace M.A.G.U.S.Assistant.ViewModels;
 
-internal class PaintCanvasDrawable : IDrawable
+internal sealed class PaintCanvasDrawable : IDrawable
 {
     public PaintWizardViewModel? ViewModel { get; set; }
 

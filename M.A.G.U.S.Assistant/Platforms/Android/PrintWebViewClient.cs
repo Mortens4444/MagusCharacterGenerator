@@ -4,7 +4,7 @@ using Android.Webkit;
 
 namespace M.A.G.U.S.Assistant.Platforms.Android;
 
-internal class PrintWebViewClient(string jobName) : WebViewClient
+internal sealed class PrintWebViewClient(string jobName) : WebViewClient
 {
     private readonly string jobName = jobName;
 

@@ -7,7 +7,7 @@ using Mtf.LanguageService.Enums;
 
 namespace M.A.G.U.S.Assistant.ViewModels;
 
-internal class MainPageViewModel : BaseViewModel
+internal sealed class MainPageViewModel : BaseViewModel
 {
     private readonly SettingsService settingsService;
 

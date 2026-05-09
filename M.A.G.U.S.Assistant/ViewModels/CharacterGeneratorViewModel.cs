@@ -19,7 +19,7 @@ using System.Collections.ObjectModel;
 using System.Reflection;
 namespace M.A.G.U.S.Assistant.ViewModels;
 
-internal partial class CharacterGeneratorViewModel : CharacterViewModel
+internal sealed partial class CharacterGeneratorViewModel : CharacterViewModel
 {
     private readonly ISettings settings;
     private readonly CharacterService characterService;

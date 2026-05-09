@@ -1,11 +1,10 @@
 ﻿using M.A.G.U.S.GameSystem.Qualifications;
-using M.A.G.U.S.Qualifications;
 using Mtf.LanguageService.MAUI;
 using System.Globalization;
 
 namespace M.A.G.U.S.Assistant.Converters;
 
-internal class QualificationSorter : IValueConverter
+internal sealed class QualificationSorter : IValueConverter
 {
     public object? Convert(object? value, Type targetType, object? parameter, CultureInfo culture)
     {

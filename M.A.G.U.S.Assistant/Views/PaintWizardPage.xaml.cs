@@ -9,7 +9,7 @@ using Mtf.LanguageService.MAUI.Views;
 
 namespace M.A.G.U.S.Assistant.Views;
 
-internal partial class PaintWizardPage : NotifierPage
+internal sealed partial class PaintWizardPage : NotifierPage
 {
     private readonly PaintWizardViewModel viewModel;
     private PointF startPoint;

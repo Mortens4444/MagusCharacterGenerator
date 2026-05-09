@@ -9,7 +9,7 @@ using System.Windows.Input;
 
 namespace M.A.G.U.S.Assistant.ViewModels;
 
-internal partial class SettingsViewModel : BaseViewModel
+internal sealed partial class SettingsViewModel : BaseViewModel
 {
     private readonly SettingsService settingsService;
 

@@ -4,7 +4,7 @@ using Mtf.LanguageService.MAUI.Views;
 
 namespace M.A.G.U.S.Assistant.Views;
 
-internal partial class CharacterGeneratorPage : NotifierPage
+internal sealed partial class CharacterGeneratorPage : NotifierPage
 {
     private CharacterGeneratorViewModel ViewModel => (CharacterGeneratorViewModel)BindingContext;
 

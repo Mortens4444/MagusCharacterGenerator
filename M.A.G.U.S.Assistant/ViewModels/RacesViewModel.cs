@@ -7,7 +7,7 @@ using System.Collections.ObjectModel;
 
 namespace M.A.G.U.S.Assistant.ViewModels;
 
-internal partial class RacesViewModel : BaseViewModel
+internal sealed partial class RacesViewModel : BaseViewModel
 {
     public ObservableCollection<Race> Races { get; } = [];
     public ObservableCollection<Race> FilteredRaces { get; } = [];

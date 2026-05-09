@@ -1,6 +1,6 @@
 ﻿namespace M.A.G.U.S.Assistant.Models;
 
-internal class ImageItem
+internal sealed class ImageItem
 {
     public string ResourceId { get; set; } = String.Empty;
 

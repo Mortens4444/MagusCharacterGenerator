@@ -10,7 +10,7 @@ using System.Windows.Input;
 
 namespace M.A.G.U.S.Assistant.ViewModels;
 
-internal partial class ImagesViewModel : BaseViewModel
+internal sealed partial class ImagesViewModel : BaseViewModel
 {
     private string searchText = String.Empty;
     private static List<ImageItem>? cachedImageItems;

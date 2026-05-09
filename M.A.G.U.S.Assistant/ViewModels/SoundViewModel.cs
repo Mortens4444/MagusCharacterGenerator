@@ -10,7 +10,7 @@ using System.Windows.Input;
 
 namespace M.A.G.U.S.Assistant.ViewModels;
 
-internal partial class SoundViewModel : BaseViewModel
+internal sealed partial class SoundViewModel : BaseViewModel
 {
     private bool isPlaying;
     private double volume = 1.0;

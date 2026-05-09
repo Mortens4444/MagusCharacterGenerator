@@ -12,7 +12,7 @@ using System.Windows.Input;
 
 namespace M.A.G.U.S.Assistant.ViewModels;
 
-internal partial class BestiaryViewModel : SearchListViewModel, IDisposable
+internal sealed partial class BestiaryViewModel : SearchListViewModel, IDisposable
 {
     private readonly IShakeService? shakeService;
     private bool includeAnywhere;

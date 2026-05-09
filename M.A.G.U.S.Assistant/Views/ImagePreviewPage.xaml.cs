@@ -5,7 +5,7 @@ using Mtf.LanguageService.MAUI.Views;
 
 namespace M.A.G.U.S.Assistant.Views;
 
-internal partial class ImagePreviewPage : NotifierPage
+internal sealed partial class ImagePreviewPage : NotifierPage
 {
     private readonly ImageItem item;
 

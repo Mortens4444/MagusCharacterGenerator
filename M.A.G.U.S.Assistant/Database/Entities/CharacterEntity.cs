@@ -3,7 +3,7 @@
 namespace M.A.G.U.S.Assistant.Database.Entities;
 
 [Table("Characters")]
-internal class CharacterEntity
+internal sealed class CharacterEntity
 {
     [PrimaryKey, AutoIncrement]
     public int Id { get; set; }

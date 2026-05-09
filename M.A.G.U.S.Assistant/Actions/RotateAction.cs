@@ -2,7 +2,7 @@
 
 namespace M.A.G.U.S.Assistant.Actions;
 
-internal class RotateAction(IDrawableElement element, float deltaRotation) : IPaintAction
+internal sealed class RotateAction(IDrawableElement element, float deltaRotation) : IPaintAction
 {
     private readonly IDrawableElement element = element;
     private readonly float deltaRotation = deltaRotation;

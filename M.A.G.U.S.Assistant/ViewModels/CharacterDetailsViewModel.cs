@@ -5,7 +5,7 @@ using M.A.G.U.S.Interfaces;
 namespace M.A.G.U.S.Assistant.ViewModels;
 
 [QueryProperty(nameof(Name), nameof(name))]
-internal partial class CharacterDetailsViewModel : CharacterViewModel
+internal sealed partial class CharacterDetailsViewModel : CharacterViewModel
 {
     private readonly CharacterService characterService;
     private string name = String.Empty;

@@ -2,7 +2,7 @@
 
 namespace M.A.G.U.S.Assistant;
 
-internal partial class StubShakeService : IShakeService
+internal sealed partial class StubShakeService : IShakeService
 {
     public bool IsMonitoring => throw new NotImplementedException();
 

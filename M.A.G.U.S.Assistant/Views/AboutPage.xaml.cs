@@ -3,7 +3,7 @@ using Mtf.LanguageService.MAUI.Views;
 
 namespace M.A.G.U.S.Assistant.Views;
 
-internal partial class AboutPage : NotifierPage
+internal sealed partial class AboutPage : NotifierPage
 {
     public AboutPage(AboutPageViewModel viewModel)
     {

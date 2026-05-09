@@ -2,7 +2,7 @@
 
 namespace M.A.G.U.S.Assistant.Actions;
 
-internal class AddAction(IDrawableElement element) : IPaintAction
+internal sealed class AddAction(IDrawableElement element) : IPaintAction
 {
     private readonly IDrawableElement element = element;
 

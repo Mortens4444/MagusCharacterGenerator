@@ -7,7 +7,7 @@ using Mtf.Maui.Controls.Messages;
 
 namespace M.A.G.U.S.Assistant.Views;
 
-internal partial class ItemDetailsPage : NotifierPage
+internal sealed partial class ItemDetailsPage : NotifierPage
 {
     public ItemDetailsPage(ItemDetailsViewModel itemDetailsViewModel)
     {

@@ -2,7 +2,7 @@
 
 namespace M.A.G.U.S.Assistant.Actions;
 
-internal class MoveAction(IDrawableElement element, float dx, float dy) : IPaintAction
+internal sealed class MoveAction(IDrawableElement element, float dx, float dy) : IPaintAction
 {
     private readonly IDrawableElement element = element;
     private readonly float dx = dx;

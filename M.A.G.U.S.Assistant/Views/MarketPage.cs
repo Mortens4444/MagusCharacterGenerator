@@ -6,7 +6,7 @@ using Mtf.LanguageService.MAUI;
 
 namespace M.A.G.U.S.Assistant.Views;
 
-internal partial class MarketPage : SearchListPage
+internal sealed partial class MarketPage : SearchListPage
 {
     public MarketPage(SearchListViewModel viewModel)
         : base(viewModel, true, "Market", PreloadService.Instance.Things.Select(DisplayItem.FromObject))

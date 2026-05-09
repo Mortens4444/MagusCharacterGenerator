@@ -3,7 +3,7 @@ using M.A.G.U.S.Assistant.Models;
 
 namespace M.A.G.U.S.Assistant.Stubs;
 
-internal class StubSoundPlayer : ISoundPlayer
+internal sealed class StubSoundPlayer : ISoundPlayer
 {
     public event EventHandler? PlaybackEnded;
 

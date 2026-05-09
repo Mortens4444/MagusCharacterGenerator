@@ -7,7 +7,7 @@ using System.Globalization;
 
 namespace M.A.G.U.S.Assistant.Converters;
 
-internal class QualificationNameConverter : IValueConverter
+internal sealed class QualificationNameConverter : IValueConverter
 {
     public object? Convert(object? value, Type targetType, object? parameter, CultureInfo culture)
     {

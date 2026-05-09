@@ -3,7 +3,7 @@ using SQLite;
 
 namespace M.A.G.U.S.Assistant.Database;
 
-internal class DatabaseContext
+internal sealed class DatabaseContext
 {
     private const string DbName = "magus_data.db3";
     private SQLiteAsyncConnection? connection;

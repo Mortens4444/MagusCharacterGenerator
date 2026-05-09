@@ -4,7 +4,7 @@ using Mtf.Maui.Controls.Messages;
 
 namespace M.A.G.U.S.Assistant.Platforms.Android;
 
-internal class ShakeService : IShakeService
+internal sealed class ShakeService : IShakeService
 {
     private const double ThresholdG = 2.2;
     private const int DebounceMs = 800;

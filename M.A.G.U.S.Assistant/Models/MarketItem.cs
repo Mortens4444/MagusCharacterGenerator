@@ -6,7 +6,7 @@ using Mtf.Maui.Controls.Extensions;
 
 namespace M.A.G.U.S.Assistant.Models;
 
-internal class MarketItem(Thing thing)
+internal sealed class MarketItem(Thing thing)
 {
     public string Name { get; set; } = Lng.Elem(thing.Name);
     public string DefaultImage { get; set; } = thing.DefaultImage;

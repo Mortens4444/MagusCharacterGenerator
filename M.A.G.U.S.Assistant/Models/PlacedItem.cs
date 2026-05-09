@@ -1,6 +1,6 @@
 ﻿namespace M.A.G.U.S.Assistant.Models;
 
-internal class PlacedItem
+internal sealed class PlacedItem
 {
     public string Id { get; set; } = Guid.NewGuid().ToString();
     public string PaletteItemId { get; set; } = String.Empty;

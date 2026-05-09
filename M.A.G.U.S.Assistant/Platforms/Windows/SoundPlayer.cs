@@ -11,7 +11,7 @@ using Windows.Storage.Streams;
 
 namespace M.A.G.U.S.Assistant.Platforms.Windows;
 
-internal partial class SoundPlayer : ISoundPlayer, IDisposable
+internal sealed partial class SoundPlayer : ISoundPlayer, IDisposable
 {
     private MediaPlayer? windowsPlayer;
     private InMemoryRandomAccessStream? currentStream;

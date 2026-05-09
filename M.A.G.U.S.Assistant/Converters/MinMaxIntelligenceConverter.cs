@@ -4,7 +4,7 @@ using System.Globalization;
 
 namespace M.A.G.U.S.Assistant.Converters;
 
-internal class MinMaxIntelligenceConverter : IValueConverter, IMultiValueConverter
+internal sealed class MinMaxIntelligenceConverter : IValueConverter, IMultiValueConverter
 {
     private readonly EnumDescriptionTranslationConverter enumConverter = new();
 

@@ -7,7 +7,7 @@ using System.Collections.ObjectModel;
 
 namespace M.A.G.U.S.Assistant.ViewModels;
 
-internal class AssignmentViewModel : BaseViewModel
+internal sealed class AssignmentViewModel : BaseViewModel
 {
     private const int RoomDistance = 5;
     private readonly ISettings settings;

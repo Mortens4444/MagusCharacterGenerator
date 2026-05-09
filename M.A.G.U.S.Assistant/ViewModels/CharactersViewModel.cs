@@ -5,7 +5,7 @@ using Mtf.LanguageService.MAUI;
 
 namespace M.A.G.U.S.Assistant.ViewModels;
 
-internal partial class CharactersViewModel(CharacterService characterService) : CharacterListLoaderViewModel(characterService)
+internal sealed partial class CharactersViewModel(CharacterService characterService) : CharacterListLoaderViewModel(characterService)
 {
     [RelayCommand]
     private async Task DeleteAllCharacterAsync()

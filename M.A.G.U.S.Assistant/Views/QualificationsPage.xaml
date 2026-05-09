@@ -5,6 +5,7 @@
                 xmlns:v="clr-namespace:Mtf.LanguageService.MAUI.Views;assembly=Mtf.LanguageService.MAUI"
                 xmlns:vm="clr-namespace:M.A.G.U.S.Assistant.ViewModels"
                 xmlns:m="clr-namespace:M.A.G.U.S.Qualifications;assembly=M.A.G.U.S."
+                xmlns:local="clr-namespace:M.A.G.U.S.GameSystem.Qualifications;assembly=M.A.G.U.S."
                 xmlns:mc="clr-namespace:Mtf.Maui.Controls;assembly=Mtf.Maui.Controls"
                 x:Class="M.A.G.U.S.Assistant.Views.QualificationsPage"
                 x:DataType="vm:QualificationsViewModel"
@@ -39,7 +40,7 @@
             </CollectionView.GroupHeaderTemplate>
 
             <CollectionView.ItemTemplate>
-                <DataTemplate x:DataType="m:Qualification">
+                <DataTemplate x:DataType="local:Qualification">
                     <Border Stroke="Gray" StrokeThickness="1" Padding="8" Margin="0,4">
                         <Grid ColumnDefinitions="Auto,*,Auto,Auto" ColumnSpacing="8" VerticalOptions="Center">
 

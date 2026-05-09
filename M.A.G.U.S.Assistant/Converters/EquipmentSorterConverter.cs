@@ -4,7 +4,7 @@ using System.Globalization;
 
 namespace M.A.G.U.S.Assistant.Converters;
 
-internal class EquipmentSorterConverter : IValueConverter
+internal sealed class EquipmentSorterConverter : IValueConverter
 {
     public object? Convert(object? value, Type targetType, object? parameter, CultureInfo culture)
     {

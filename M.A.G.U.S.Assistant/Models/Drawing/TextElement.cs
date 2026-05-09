@@ -2,7 +2,7 @@
 
 namespace M.A.G.U.S.Assistant.Models.Drawing;
 
-internal class TextElement : IDrawableElement
+internal sealed class TextElement : IDrawableElement
 {
     public required string Text { get; set; }
 

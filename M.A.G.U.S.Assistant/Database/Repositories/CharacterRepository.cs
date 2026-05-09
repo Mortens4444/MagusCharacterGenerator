@@ -6,7 +6,7 @@ using Newtonsoft.Json;
 
 namespace M.A.G.U.S.Assistant.Database.Repositories;
 
-internal class CharacterRepository(DatabaseContext context)
+internal sealed class CharacterRepository(DatabaseContext context)
 {
     private readonly DatabaseContext context = context;
 

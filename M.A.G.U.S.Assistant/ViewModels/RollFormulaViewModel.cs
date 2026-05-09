@@ -11,7 +11,7 @@ using System.Windows.Input;
 
 namespace M.A.G.U.S.Assistant.ViewModels;
 
-internal partial class RollFormulaViewModel : BaseViewModel, IDisposable
+internal sealed partial class RollFormulaViewModel : BaseViewModel, IDisposable
 {
     public event EventHandler<TaskCompletionSource<bool>>? RollRequested;
     public event EventHandler? CloseRequested;

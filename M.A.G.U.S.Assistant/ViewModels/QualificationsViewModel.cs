@@ -14,7 +14,7 @@ using System.Windows.Input;
 
 namespace M.A.G.U.S.Assistant.ViewModels;
 
-internal partial class QualificationsViewModel : BaseViewModel
+internal sealed partial class QualificationsViewModel : BaseViewModel
 {
     private Character? character;
 

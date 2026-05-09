@@ -5,7 +5,7 @@ using Mtf.LanguageService.MAUI.Views;
 
 namespace M.A.G.U.S.Assistant.Views;
 
-internal partial class RunesPage : NotifierPage
+internal sealed partial class RunesPage : NotifierPage
 {
 	public RunesPage(RunesViewModel viewModel)
 	{

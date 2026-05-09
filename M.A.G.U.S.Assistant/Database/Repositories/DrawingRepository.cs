@@ -6,7 +6,7 @@ using Newtonsoft.Json;
 
 namespace M.A.G.U.S.Assistant.Database.Repositories;
 
-internal class DrawingRepository(DatabaseContext context)
+internal sealed class DrawingRepository(DatabaseContext context)
 {
     private readonly DatabaseContext context = context;
 

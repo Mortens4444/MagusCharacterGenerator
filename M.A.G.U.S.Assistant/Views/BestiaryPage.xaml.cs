@@ -8,7 +8,7 @@ using Mtf.Maui.Controls.Messages;
 
 namespace M.A.G.U.S.Assistant.Views;
 
-internal partial class BestiaryPage : NotifierPage
+internal sealed partial class BestiaryPage : NotifierPage
 {
     private bool firstLoad = true;
     private readonly BestiaryViewModel viewModel;

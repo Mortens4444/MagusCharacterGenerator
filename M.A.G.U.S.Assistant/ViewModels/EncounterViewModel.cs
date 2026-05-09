@@ -17,7 +17,7 @@ using System.Collections.Specialized;
 
 namespace M.A.G.U.S.Assistant.ViewModels;
 
-internal partial class EncounterViewModel(ISettings settings, CharacterService characterService, ISoundPlayer soundPlayer, IShakeService shakeService) : CharacterListLoaderViewModel(characterService), IDisposable
+internal sealed partial class EncounterViewModel(ISettings settings, CharacterService characterService, ISoundPlayer soundPlayer, IShakeService shakeService) : CharacterListLoaderViewModel(characterService), IDisposable
 {
     private Character? selectedCharacter;
     private Attacker? selectedEnemy;

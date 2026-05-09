@@ -7,7 +7,7 @@ using Mtf.LanguageService.MAUI;
 
 namespace M.A.G.U.S.Assistant.ViewModels;
 
-internal partial class EnemyConfigurationItem : ObservableObject
+internal sealed partial class EnemyConfigurationItem : ObservableObject
 {
     private readonly Creature template;
     private int distance;

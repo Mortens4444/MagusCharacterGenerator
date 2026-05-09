@@ -9,7 +9,7 @@ using System.Collections.ObjectModel;
 
 namespace M.A.G.U.S.Assistant.ViewModels;
 
-internal partial class ClassesViewModel : BaseViewModel
+internal sealed partial class ClassesViewModel : BaseViewModel
 {
     private string searchText = String.Empty;
     private IClass? selectedClass;

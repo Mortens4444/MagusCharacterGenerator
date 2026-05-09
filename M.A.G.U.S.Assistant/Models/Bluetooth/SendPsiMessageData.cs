@@ -1,6 +1,6 @@
 ﻿namespace M.A.G.U.S.Assistant.Models.Bluetooth;
 
-internal class SendPsiMessageData
+internal sealed class SendPsiMessageData
 {
     public string Message { get; init; } = String.Empty;
 }

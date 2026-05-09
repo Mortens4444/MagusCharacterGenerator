@@ -2,7 +2,7 @@
 
 namespace M.A.G.U.S.Assistant.Platforms.Tizen;
 
-internal class ShakeService : IShakeService
+internal sealed class ShakeService : IShakeService
 {
     public bool IsMonitoring => false;
 

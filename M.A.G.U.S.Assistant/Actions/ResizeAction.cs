@@ -2,7 +2,7 @@
 
 namespace M.A.G.U.S.Assistant.Actions;
 
-internal class ResizeAction(IDrawableElement element, float scaleFactor) : IPaintAction
+internal sealed class ResizeAction(IDrawableElement element, float scaleFactor) : IPaintAction
 {
     private readonly IDrawableElement element = element;
     private readonly float scaleFactor = scaleFactor;

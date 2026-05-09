@@ -4,7 +4,7 @@
              xmlns:vm="clr-namespace:M.A.G.U.S.Assistant.ViewModels"
              xmlns:mc="clr-namespace:Mtf.Maui.Controls;assembly=Mtf.Maui.Controls"
              xmlns:mv="clr-namespace:M.A.G.U.S.Assistant.Views"
-             xmlns:local="clr-namespace:M.A.G.U.S.Qualifications;assembly=M.A.G.U.S."
+             xmlns:local="clr-namespace:M.A.G.U.S.GameSystem.Qualifications;assembly=M.A.G.U.S."
              xmlns:q="clr-namespace:M.A.G.U.S.GameSystem.Qualifications;assembly=M.A.G.U.S."
              xmlns:conv="clr-namespace:Mtf.LanguageService.MAUI.Converters;assembly=Mtf.LanguageService.MAUI"
              xmlns:converters="clr-namespace:M.A.G.U.S.Assistant.Converters"

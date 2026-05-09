@@ -2,7 +2,7 @@
 
 namespace M.A.G.U.S.Assistant.Platforms.Windows;
 
-internal partial class ShakeService : IShakeService
+internal sealed partial class ShakeService : IShakeService
 {
     public bool IsMonitoring => false;
 

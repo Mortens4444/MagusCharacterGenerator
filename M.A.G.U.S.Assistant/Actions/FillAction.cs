@@ -3,7 +3,7 @@ using M.A.G.U.S.Assistant.Models.Drawing;
 
 namespace M.A.G.U.S.Assistant.Actions;
 
-internal class FillAction(IDrawableElement element, Color oldColor, Color newColor) : IPaintAction
+internal sealed class FillAction(IDrawableElement element, Color oldColor, Color newColor) : IPaintAction
 {
     private readonly IDrawableElement element = element;
     private readonly Color oldColor = oldColor;

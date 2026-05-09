@@ -6,7 +6,7 @@ using System.Reflection;
 
 namespace M.A.G.U.S.Assistant.Models;
 
-internal class LocalizedRollFormula : RollFormula
+internal sealed class LocalizedRollFormula : RollFormula
 {
     public LocalizedRollFormula(string formula, int modifier, bool specialTraining, string title = "Roll")
         : base(formula, modifier, specialTraining, title)

@@ -8,7 +8,7 @@ using System.Collections.ObjectModel;
 
 namespace M.A.G.U.S.Assistant.ViewModels;
 
-internal partial class EnemySetupViewModel : ObservableObject
+internal sealed partial class EnemySetupViewModel : ObservableObject
 {
     private readonly Creature templateEnemy;
     private int enemyCountMin = 1;

@@ -7,7 +7,7 @@ using global::Windows.Devices.Bluetooth.Rfcomm;
 using global::Windows.Storage.Streams;
 using System.Diagnostics;
 
-internal partial class WindowsBluetoothListener : IBluetoothListener, IDisposable
+internal sealed partial class WindowsBluetoothListener : IBluetoothListener, IDisposable
 {
     private StreamSocketListener? listener;
     private TaskCompletionSource<IBluetoothConnection>? pendingTcs;

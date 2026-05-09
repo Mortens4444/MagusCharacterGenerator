@@ -2,7 +2,7 @@
 
 namespace M.A.G.U.S.Assistant.Converters;
 
-internal class ColorComparisonConverter : IMultiValueConverter
+internal sealed class ColorComparisonConverter : IMultiValueConverter
 {
     public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
     {

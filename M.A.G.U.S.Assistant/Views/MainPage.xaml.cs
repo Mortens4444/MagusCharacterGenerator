@@ -5,7 +5,7 @@ using M.A.G.U.S.Assistant.ViewModels;
 
 namespace M.A.G.U.S.Assistant.Views;
 
-internal partial class MainPage : NotifierPage
+internal sealed partial class MainPage : NotifierPage
 {
     private bool firstRun = true;
     private readonly Dictionary<object, string>? originalTextElements;

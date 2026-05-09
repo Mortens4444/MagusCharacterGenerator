@@ -4,7 +4,7 @@ using AppInfo = M.A.G.U.S.Assistant.Models.AppInfo;
 
 namespace M.A.G.U.S.Assistant.ViewModels;
 
-internal partial class AboutPageViewModel : BaseViewModel
+internal sealed partial class AboutPageViewModel : BaseViewModel
 {
     static AboutPageViewModel()
     {

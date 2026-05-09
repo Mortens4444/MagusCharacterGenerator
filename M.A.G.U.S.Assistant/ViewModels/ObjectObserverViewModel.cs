@@ -4,7 +4,7 @@ using System.Reflection;
 
 namespace M.A.G.U.S.Assistant.ViewModels;
 
-internal partial class ObjectObserverViewModel : BaseViewModel
+internal sealed partial class ObjectObserverViewModel : BaseViewModel
 {
     private readonly List<string> forbiddenData = ["Source", "Character", "DefaultImage", "Enabled"];
     private readonly Dictionary<string, string> manipulatedName = new()

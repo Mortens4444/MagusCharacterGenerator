@@ -1,4 +1,5 @@
-﻿using M.A.G.U.S.Interfaces;
+﻿using M.A.G.U.S.GameSystem.Qualifications;
+using M.A.G.U.S.Interfaces;
 using M.A.G.U.S.Qualifications.Percentages;
 using M.A.G.U.S.Utils;
 

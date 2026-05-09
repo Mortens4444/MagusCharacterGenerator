@@ -10,7 +10,7 @@ using Mtf.Maui.Controls.Messages;
 
 namespace M.A.G.U.S.Assistant.Views;
 
-internal partial class RollFormulaPage : NotifierPage
+internal sealed partial class RollFormulaPage : NotifierPage
 {
     private bool isClosing;
     private bool firstRun = true;

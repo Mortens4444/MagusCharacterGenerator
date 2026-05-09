@@ -11,7 +11,7 @@ using System.Collections.ObjectModel;
 
 namespace M.A.G.U.S.Assistant.ViewModels;
 
-internal partial class PaintWizardViewModel : BaseViewModel
+internal sealed partial class PaintWizardViewModel : BaseViewModel
 {
     private IRelayCommand? selectToolCommand;
     private IRelayCommand? selectColorCommand;

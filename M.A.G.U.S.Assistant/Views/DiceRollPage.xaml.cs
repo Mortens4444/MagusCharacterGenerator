@@ -6,7 +6,7 @@ using Mtf.Maui.Controls.Messages;
 
 namespace M.A.G.U.S.Assistant.Views;
 
-internal partial class DiceRollPage : NotifierPage
+internal sealed partial class DiceRollPage : NotifierPage
 {
     private bool firstRun = true;
     private DiceRollViewModel ViewModel => BindingContext as DiceRollViewModel;

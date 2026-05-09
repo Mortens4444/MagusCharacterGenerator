@@ -7,7 +7,7 @@ using System.Windows.Input;
 
 namespace M.A.G.U.S.Assistant.ViewModels;
 
-internal partial class LanguagesViewModel : BaseViewModel
+internal sealed partial class LanguagesViewModel : BaseViewModel
 {
     public ObservableCollection<LanguageTypes> Types { get; } =
         [LanguageTypes.Living, LanguageTypes.Ancient];

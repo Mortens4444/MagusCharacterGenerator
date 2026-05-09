@@ -1,6 +1,6 @@
 ﻿namespace M.A.G.U.S.Assistant.Models;
 
-internal class PaletteItem
+internal sealed class PaletteItem
 {
     public string Id { get; set; } = String.Empty;
     public string Name { get; set; } = String.Empty;

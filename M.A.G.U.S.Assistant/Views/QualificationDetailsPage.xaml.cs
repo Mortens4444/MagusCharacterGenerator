@@ -7,7 +7,7 @@ using Mtf.Maui.Controls.Messages;
 
 namespace M.A.G.U.S.Assistant.Views;
 
-internal partial class QualificationDetailsPage : NotifierPage
+internal sealed partial class QualificationDetailsPage : NotifierPage
 {
     public QualificationDetailsPage(QualificationDetailsViewModel qualificationDetailsViewModel)
     {

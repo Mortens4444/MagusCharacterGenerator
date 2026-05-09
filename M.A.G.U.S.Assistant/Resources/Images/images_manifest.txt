@@ -324,6 +324,7 @@ iron_rider.png
 knight.png
 krannish_freeblade.png
 krannish_mage.png
+lance_wolf.png
 martial_artist.png
 merchant.png
 monk.png
@@ -343,7 +344,6 @@ paladin_of_ranagol.png
 paladin_of_uwel.png
 paladin_of_velar.png
 peasant.png
-pikeman_wolf.png
 predoci_heavy_infantry.png
 priest.png
 priest_of_arel.png
@@ -631,12 +631,15 @@ alchemy.png
 alertness_perception.png
 ancient_tongue_lore.png
 animal_breeding.png
+animal_lore.png
 animal_training.png
 appraisal.png
 architecture.png
 artic_survival.png
+astrology.png
 backstab.png
 blind_fighting.png
+bloodlust.png
 boot_making.png
 bowyer.png
 camouflage_disguise.png
@@ -645,18 +648,23 @@ carpentry.png
 cartography.png
 climbing.png
 close_combat.png
+close_quarters_combat.png
 coinage.png
 courier_herald.png
 craft.png
+culture.png
 dancing.png
 deflection_evasive_talk.png
 demonology.png
+desert_survival.png
+destruction.png
 disarmament.png
 divination.png
 embalming.png
 empty.png
 escape_bonds.png
 etiquette.png
+extra_attack.png
 falling.png
 feenhar_falcon_betrayal.png
 fistfight.png
@@ -673,6 +681,7 @@ history_lore.png
 horse_trader.png
 human_insight.png
 hunting_fishing.png
+inflicting_pain.png
 jeweler.png
 juggling.png
 jumping.png
@@ -686,7 +695,10 @@ local_knowledge.png
 lock_picking.png
 magic_lore.png
 mechanics.png
+military_formation.png
+morality.png
 mountain_survival.png
+mounted_archery.png
 onomatopoeia.png
 painting_drawing.png
 physiology.png
@@ -704,8 +716,8 @@ runic_magic.png
 running.png
 sailing.png
 sculptury.png
+sea_survival.png
 secret_door_search.png
-see_survival.png
 sense_of_danger.png
 sense_of_mortal_peril.png
 sexual_culture.png
@@ -713,6 +725,7 @@ shield_use.png
 singing_music_making.png
 smithing.png
 sneaking.png
+special_weapon_use.png
 spellcasting.png
 steppe_survival.png
 swamp_survival.png
@@ -901,4 +914,3 @@ throwing_ax.png
 throwing_axe.png
 throwing_dagger.png
 two_handed_axe.png
-appicon.png

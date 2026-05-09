@@ -18,7 +18,7 @@ using System.Collections.ObjectModel;
 
 namespace M.A.G.U.S.Assistant.ViewModels;
 
-internal partial class StorytellingViewModel : ObservableObject, IDisposable, IAsyncDisposable
+internal sealed partial class StorytellingViewModel : ObservableObject, IDisposable, IAsyncDisposable
 {
     private readonly IBluetoothService bluetooth;
     private readonly INotificationService notificationService;

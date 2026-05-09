@@ -7,7 +7,7 @@ using System.Text;
 
 namespace M.A.G.U.S.Assistant.Services;
 
-internal class CharacterHtmlService
+internal sealed class CharacterHtmlService
 {
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Globalization", "CA1305:Specify IFormatProvider", Justification = "<Pending>")]
     public string GenerateCharacterHtml(ICharacter character)

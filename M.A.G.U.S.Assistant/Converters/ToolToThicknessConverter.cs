@@ -2,7 +2,7 @@
 
 namespace M.A.G.U.S.Assistant.Converters;
 
-internal class ToolToThicknessConverter : IValueConverter
+internal sealed class ToolToThicknessConverter : IValueConverter
 {
     public object? Convert(object? value, Type targetType, object? parameter, CultureInfo culture)
     {

@@ -1,6 +1,6 @@
 ﻿namespace M.A.G.U.S.Assistant.Models;
 
-internal class LanguageItem
+internal sealed class LanguageItem
 {
     public string EnumKey { get; set; } = String.Empty;
 
