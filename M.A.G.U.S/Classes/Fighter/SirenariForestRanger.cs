@@ -16,11 +16,11 @@ using M.A.G.U.S.Things.Weapons.StabbingWeapons;
 
 namespace M.A.G.U.S.Classes.Fighter;
 
-public class SirenariForestRangers : Class, IClass, IJustFight
+public class SirenariForestRanger : Class, IClass, IJustFight
 {
-    public SirenariForestRangers() : base(1, false) { }
+    public SirenariForestRanger() : base(1, false) { }
 
-    public SirenariForestRangers(int level, bool autoGenerateSkills) : base(level, autoGenerateSkills) { }
+    public SirenariForestRanger(int level, bool autoGenerateSkills) : base(level, autoGenerateSkills) { }
 
     [DiceThrow(ThrowType._1D6)]
     [DiceThrowModifier(12)]
@@ -116,7 +116,7 @@ public class SirenariForestRangers : Class, IClass, IJustFight
         new() { Level = 12, MinExperience = 80001, MaxExperience = 112000 }
     ];
 
-    public override string Name => "Sirenari Forest Rangers";
+    public override string Name => "Sirenari Forest Ranger";
 
     public override ulong ExpPerLevelAfter12 => 31200;
 

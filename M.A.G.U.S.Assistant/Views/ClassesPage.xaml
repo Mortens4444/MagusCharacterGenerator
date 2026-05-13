@@ -111,7 +111,7 @@
                             <Label Text="%" VerticalOptions="Center" HorizontalOptions="End" TextColor="Gray" FontAttributes="Bold"/>
                         </Grid>
 
-                        <CollectionView ItemsSource="{Binding PercentQualifications, Converter={StaticResource QualificationSorter}}" SelectionMode="None" HeightRequest="280">
+                        <CollectionView ItemsSource="{Binding PercentQualifications, Converter={StaticResource QualificationSorter}}" SelectionMode="None">
                             <CollectionView.ItemTemplate>
                                 <DataTemplate x:DataType="local:PercentQualification">
                                     <Grid Padding="6" ColumnDefinitions="*,Auto" ColumnSpacing="10">
@@ -133,7 +133,7 @@
                             <Label Text="Name" VerticalOptions="Center" TextColor="Gray" FontAttributes="Bold"/>
                         </Grid>
 
-                        <CollectionView ItemsSource="{Binding SpecialQualifications, Converter={StaticResource QualificationSorter}}" SelectionMode="None" HeightRequest="280">
+                        <CollectionView ItemsSource="{Binding SpecialQualifications, Converter={StaticResource QualificationSorter}}" SelectionMode="None">
                             <CollectionView.ItemTemplate>
                                 <DataTemplate x:DataType="q:ISpecialQualification">
                                     <Grid Padding="6" ColumnDefinitions="*" ColumnSpacing="10">
@@ -180,7 +180,7 @@
                             <Label Text="Experience range" Grid.Column="1" FontAttributes="Bold" TextColor="Gray"/>
                         </Grid>
 
-                        <CollectionView ItemsSource="{Binding ExperienceLevels}" SelectionMode="Single" HeightRequest="220">
+                        <CollectionView ItemsSource="{Binding ExperienceLevels}" SelectionMode="Single">
                             <CollectionView.ItemTemplate>
                                 <DataTemplate x:DataType="m:ExperienceLevelDisplay">
                                     <Grid Padding="6" ColumnDefinitions="100, *" ColumnSpacing="10">

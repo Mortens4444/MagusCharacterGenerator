@@ -86,7 +86,7 @@
                             <Label Text="Name" VerticalOptions="Center" TextColor="Gray" FontAttributes="Bold"/>
                             <Label Text="Level" VerticalOptions="Center" Grid.Column="1" HorizontalOptions="End" TextColor="Gray" FontAttributes="Bold"/>
                         </Grid>
-                        <CollectionView ItemsSource="{Binding SelectedRace.Qualifications}" SelectionMode="None" HeightRequest="200">
+                        <CollectionView ItemsSource="{Binding SelectedRace.Qualifications}" SelectionMode="None">
                             <CollectionView.ItemTemplate>
                                 <DataTemplate x:DataType="local:Qualification">
                                     <Grid Padding="6" ColumnDefinitions="*,Auto" ColumnSpacing="10">
@@ -109,7 +109,7 @@
                             <Label Text="Name" VerticalOptions="Center" TextColor="Gray" FontAttributes="Bold"/>
                             <Label Text="%" VerticalOptions="Center" Grid.Column="1" HorizontalOptions="End" TextColor="Gray" FontAttributes="Bold"/>
                         </Grid>
-                        <CollectionView ItemsSource="{Binding SelectedRace.PercentQualifications}" SelectionMode="None" HeightRequest="200">
+                        <CollectionView ItemsSource="{Binding SelectedRace.PercentQualifications}" SelectionMode="None">
                             <CollectionView.ItemTemplate>
                                 <DataTemplate x:DataType="local:PercentQualification">
                                     <Grid Padding="6" ColumnDefinitions="*,Auto" ColumnSpacing="10">
@@ -131,7 +131,7 @@
                         <Grid Padding="6" ColumnDefinitions="*" ColumnSpacing="10">
                             <Label Text="Name" VerticalOptions="Center" TextColor="Gray" FontAttributes="Bold"/>
                         </Grid>
-                        <CollectionView ItemsSource="{Binding SelectedRace.SpecialQualifications}" SelectionMode="None" HeightRequest="200">
+                        <CollectionView ItemsSource="{Binding SelectedRace.SpecialQualifications}" SelectionMode="None">
                             <CollectionView.ItemTemplate>
                                 <DataTemplate x:DataType="q:SpecialQualification">
                                     <Grid Padding="6" ColumnDefinitions="*" ColumnSpacing="10">

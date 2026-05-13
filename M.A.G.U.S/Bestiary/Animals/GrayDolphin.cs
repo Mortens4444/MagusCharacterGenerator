@@ -22,7 +22,7 @@ public sealed class GrayDolphin : Creature
         AstralMagicResistance = 3;
         MentalMagicResistance = 3;
         PoisonResistance = 4;
-        ExperiencePoints = 0;
+        ExperiencePoints = 10;
         Alignment = Alignment.Life;
     }
 

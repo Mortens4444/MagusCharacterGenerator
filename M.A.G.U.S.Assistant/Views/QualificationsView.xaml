@@ -31,7 +31,7 @@
                 <VerticalStackLayout>
                     <Grid ColumnDefinitions="*,*">
                         <mc:EntryWithLabel Label="SP" Text="{Binding QualificationPoints}" IsReadOnly="True" />
-                        <mc:MenuItem ImageName="qualifications" LabelText="Qualifications" PageType="{x:Type mv:QualificationsPage}" WidthRequest="100" HeightRequest="100" Grid.Column="1"
+                        <mc:MenuItem ImageName="qualifications" LabelText="Qualifications" PageType="{x:Type mv:QualificationsPage}" WidthRequest="100" Grid.Column="1"
                                  Parameter="{Binding Character}" IsVisible="{Binding CanAllocateQualificationPoints, Converter={StaticResource BoolToVisibilityConverter}}" />
                     </Grid>
 
@@ -41,7 +41,7 @@
                         <Label Text="Level" VerticalOptions="Center" HorizontalOptions="End" TextColor="Gray" FontAttributes="Bold"/>
                     </Grid>
 
-                    <CollectionView ItemsSource="{Binding Qualifications, Converter={StaticResource QualificationSorter}}" SelectionMode="None" HeightRequest="280">
+                    <CollectionView ItemsSource="{Binding Qualifications, Converter={StaticResource QualificationSorter}}" SelectionMode="None">
                         <CollectionView.ItemTemplate>
                             <DataTemplate x:DataType="local:Qualification">
                                 <Grid Padding="6" ColumnDefinitions="*,Auto" ColumnSpacing="10">
@@ -63,7 +63,7 @@
                         <Label Text="%" VerticalOptions="Center" HorizontalOptions="End" TextColor="Gray" FontAttributes="Bold"/>
                     </Grid>
 
-                    <CollectionView ItemsSource="{Binding PercentQualifications, Converter={StaticResource QualificationSorter}}" SelectionMode="None" HeightRequest="280">
+                    <CollectionView ItemsSource="{Binding PercentQualifications, Converter={StaticResource QualificationSorter}}" SelectionMode="None">
                         <CollectionView.ItemTemplate>
                             <DataTemplate x:DataType="local:PercentQualification">
                                 <Grid Padding="6" ColumnDefinitions="*,Auto" ColumnSpacing="10">
@@ -84,7 +84,7 @@
                         <Label Text="Name" VerticalOptions="Center" TextColor="Gray" FontAttributes="Bold"/>
                     </Grid>
 
-                    <CollectionView ItemsSource="{Binding SpecialQualifications, Converter={StaticResource QualificationSorter}}" SelectionMode="None" HeightRequest="280">
+                    <CollectionView ItemsSource="{Binding SpecialQualifications, Converter={StaticResource QualificationSorter}}" SelectionMode="None">
                         <CollectionView.ItemTemplate>
                             <DataTemplate x:DataType="q:ISpecialQualification">
                                 <Grid Padding="6" ColumnDefinitions="*" ColumnSpacing="10">

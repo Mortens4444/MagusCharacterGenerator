@@ -26,7 +26,7 @@ public sealed class Lesath : LivingDead
 
         Intelligence = Enums.Intelligence.Outstanding;
         Alignment = Alignment.ChaosDeath;
-        ExperiencePoints = 0;
+        ExperiencePoints = 100; // Változó
         NecrographyDepartment = NecrographyDepartment.SpiritFeedingOnVitality;
     }
 

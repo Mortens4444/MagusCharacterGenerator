@@ -22,7 +22,7 @@ public sealed class GiantSpider : Creature
         PainTolerancePoints = 13;
         PoisonResistance = 8;
         Intelligence = Enums.Intelligence.Animal;
-        ExperiencePoints = 0;
+        ExperiencePoints = 3;
     }
 
     public override string Name => "Giant spider";
