@@ -10,7 +10,7 @@
 - Paint component should be in Mtf.MAUI.Controls
 - New race: https://kalandozok.hu/cikkgyujtemeny/kieg%C3%A9sz%C3%ADt%C5%91k/fajok/j%C3%A1tszhat%C3%B3-fajok/fajok-k%C3%B6nyve-r62/
 - Change weapon/language attribute on qualifications
-- Add new classes (Warriors, etc.) - Új kasztok (harcosok, stb...)
+- Add new classes (Priests & Paladins, etc.)
 - Ynev fõbb helyei
 - Karakter származás
 - FIXME: Multi-class (+ age of character should be introduced)
