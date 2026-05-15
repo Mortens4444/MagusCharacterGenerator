@@ -22,5 +22,7 @@ public class GoblinBow : Weapon, IRangedWeapon, INotForSale
     [DiceThrow(ThrowType._1D5_Ranged)]
     public override int GetDamage() => DiceThrow._1D5_RangedAttack();
 
+    public override string Name => "Goblin bow";
+
     public override string Description => "Goblin-crafted bow, which cannot compete with those made by human or elven hands.";
 }

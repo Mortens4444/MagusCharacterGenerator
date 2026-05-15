@@ -40,7 +40,7 @@ public sealed class Mongrel : Creature
         MinIntelligence = Enums.Intelligence.Low;
         MaxIntelligence = Enums.Intelligence.Outstanding;
 
-        ExperiencePoints = 0; // Változó
+        ExperiencePoints = 100; // Változó
 
         Alignment = Alignment.ChaosDeath;
 

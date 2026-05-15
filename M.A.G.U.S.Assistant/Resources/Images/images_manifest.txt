@@ -324,7 +324,7 @@ iron_rider.png
 knight.png
 krannish_freeblade.png
 krannish_mage.png
-lance_wolf.png
+lancer_wolf.png
 martial_artist.png
 merchant.png
 monk.png
@@ -334,7 +334,7 @@ nasti_light_cavalry.png
 nerton.png
 noble.png
 orc_warrior.png
-ordani_flame_guard.png
+ordanian_flame_guard.png
 paladin_of_darton.png
 paladin_of_domvik.png
 paladin_of_dreina.png

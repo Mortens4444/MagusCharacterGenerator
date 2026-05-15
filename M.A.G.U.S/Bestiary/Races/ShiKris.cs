@@ -40,7 +40,7 @@ public sealed class ShiKris : Creature
 
         Alignment = Alignment.ChaosDeath;
 
-        ExperiencePoints = 0; // változó (forma függő)
+        ExperiencePoints = 300; // változó (forma függő)
     }
 
     public override string Name => "Shi-kris";

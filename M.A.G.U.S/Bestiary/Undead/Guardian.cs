@@ -25,7 +25,7 @@ public sealed class Guardian : LivingDead
         PoisonResistance = Int32.MaxValue;
 
         Alignment = Alignment.Order;
-        ExperiencePoints = 0;
+        ExperiencePoints = 5000; // Változó
 
         Psi = new PsiPyarron(); // Like in life
         Intelligence = Enums.Intelligence.High; // Like in life
