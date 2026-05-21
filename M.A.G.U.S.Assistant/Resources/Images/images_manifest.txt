@@ -376,6 +376,7 @@ syburri_heavy_infantry.png
 thief.png
 toronian_elite_warrior.png
 toronian_silver_sword_champion.png
+varjen.png
 warlock.png
 warrior.png
 warrior_sailor.png
