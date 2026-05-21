@@ -7,6 +7,8 @@ public enum Sphere
     Soul,       // Lélek
     Nature,     // Természet
 
+    Light,     // Fény (Bárd)
+
     // Specifikusabb / Egyéb szférák (rendszertől függően ETK/UTK)
     Fire,       // Tűz (pl. Sogron)
     Destruction,// Pusztítás (pl. Tharr)

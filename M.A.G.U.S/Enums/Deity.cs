@@ -9,7 +9,7 @@ public enum Deity
 
     // --- Pyarroni Panteon ---
 
-    [AvailableSpheres(Sphere.Life, Sphere.Magic)]
+    [AvailableSpheres(Sphere.Life, Sphere.Soul, Sphere.Light)]
     Adron, // A mágia ura
 
     [AvailableSpheres(Sphere.Nature, Sphere.Life)] // Hagyományosan bárdok is tisztelik
