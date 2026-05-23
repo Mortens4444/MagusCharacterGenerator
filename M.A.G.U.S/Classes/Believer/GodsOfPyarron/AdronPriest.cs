@@ -37,7 +37,7 @@ public class AdronPriest : Priest
 			[
 				new Alchemy(),
 				new LegendLore(QualificationLevel.Master),
-                new MagicUsage(),
+                new Spellcasting(),
                 new Healing(QualificationLevel.Master),
 				new AncientTongueLore()
             ]);
@@ -53,7 +53,7 @@ public class AdronPriest : Priest
 			result.AddRange(
 			[
 				new Physiology(level: 2),
-				new MagicUsage(QualificationLevel.Master, level: 2),
+				new Spellcasting(QualificationLevel.Master, level: 2),
                 new Herbalism(level: 4),
 				new Alchemy(QualificationLevel.Master, level: 6),
 				new AncientTongueLore(QualificationLevel.Master, 7)

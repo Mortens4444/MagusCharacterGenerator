@@ -351,6 +351,7 @@ paladin_of_velar.png
 peasant.png
 predoci_heavy_infantry.png
 priest.png
+priest_of_adron.png
 priest_of_arel.png
 priest_of_darton.png
 priest_of_doljah.png
@@ -921,3 +922,4 @@ throwing_ax.png
 throwing_axe.png
 throwing_dagger.png
 two_handed_axe.png
+appicon.png
