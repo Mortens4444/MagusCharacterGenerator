@@ -1,6 +1,6 @@
 ﻿using M.A.G.U.S.GameSystem.Qualifications;
 
-namespace M.A.G.U.S.Qualifications.Other;
+namespace M.A.G.U.S.Qualifications.Laical;
 
 public class Culture(QualificationLevel qualificationLevel = QualificationLevel.Base, int level = 1) : Qualification(qualificationLevel, level)
 {
@@ -8,5 +8,5 @@ public class Culture(QualificationLevel qualificationLevel = QualificationLevel.
 
     public override int QpToBaseQualification => 2;
 
-    public override int QpToMasterQualification => 15;
+    public override int QpToMasterQualification => 30;
 }

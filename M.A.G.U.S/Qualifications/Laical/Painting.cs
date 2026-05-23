@@ -1,0 +1,12 @@
+﻿using M.A.G.U.S.GameSystem.Qualifications;
+
+namespace M.A.G.U.S.Qualifications.Laical;
+
+public class Painting(QualificationLevel qualificationLevel = QualificationLevel.Base, int level = 1) : Qualification(qualificationLevel, level), ILaicalQualification
+{
+    public override int QpToBaseQualification => 5;
+
+    public override int QpToMasterQualification => 30;
+
+    public Painting() : this(QualificationLevel.Base) { }
+}

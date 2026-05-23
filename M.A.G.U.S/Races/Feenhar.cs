@@ -27,7 +27,8 @@ public class Feenhar : Race
     public override QualificationList Qualifications =>
     [
         new HuntingAndFishing(QualificationLevel.Base),
-        new PaintingDrawing(QualificationLevel.Base),
+        new Painting(QualificationLevel.Base),
+        new Drawing(QualificationLevel.Base),
         new Sculptury(QualificationLevel.Base),
         new Architecture(QualificationLevel.Base)
     ];
