@@ -2,6 +2,7 @@
 using M.A.G.U.S.GameSystem.Attributes;
 using M.A.G.U.S.GameSystem.Qualifications;
 using M.A.G.U.S.Qualifications;
+using M.A.G.U.S.Qualifications.Laical;
 using M.A.G.U.S.Qualifications.Scientific;
 
 namespace M.A.G.U.S.Classes.Believer.GodsOfPyarron;
@@ -16,7 +17,7 @@ public class AdronPriest : Priest
     [DiceThrowModifier(14)]
     public override int Astral { get; set; }
 
-    public override Alignment Alignment => Alignment.ChaosLife;
+    public override Alignment Alignment => Alignment.Order;
 
     public override int InitiateBaseValue => 4;
 

@@ -8,6 +8,7 @@ using M.A.G.U.S.GameSystem.Qualifications;
 using M.A.G.U.S.Interfaces;
 using M.A.G.U.S.Models;
 using M.A.G.U.S.Qualifications;
+using M.A.G.U.S.Qualifications.Other;
 using M.A.G.U.S.Races;
 using M.A.G.U.S.Things;
 using System.Text.Json.Serialization;
@@ -209,6 +210,13 @@ public abstract class Class : ImageOwner, IClass
             if (qualification is IPsi)
             {
                 if (Intelligence > 11 && Willpower > 11 && Astral > 11)
+                {
+                    result.Add(qualification);
+                }
+            }
+            else if (qualification is AntisWalking)
+            {
+                if (Willpower > 12 && Astral > 12)
                 {
                     result.Add(qualification);
                 }

@@ -12,7 +12,7 @@ public enum Deity
     [AvailableSpheres(Sphere.Life, Sphere.Soul, Sphere.Light)]
     Adron, // A mágia ura
 
-    [AvailableSpheres(Sphere.Nature, Sphere.Life)] // Hagyományosan bárdok is tisztelik
+    [AvailableSpheres(Sphere.Nature, Sphere.Life)] // Hagyományosan bárdok is tisztelik - Bensőséges kapcsolat Gilronnal
     Alborne,
 
     [AvailableSpheres(Sphere.Nature, Sphere.Life)] // A tengerek ura
