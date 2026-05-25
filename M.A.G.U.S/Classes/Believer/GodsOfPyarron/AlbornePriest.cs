@@ -4,7 +4,6 @@ using M.A.G.U.S.Qualifications;
 using M.A.G.U.S.Qualifications.Combat;
 using M.A.G.U.S.Qualifications.Laical;
 using M.A.G.U.S.Qualifications.Other;
-using M.A.G.U.S.Qualifications.Percentages;
 using M.A.G.U.S.Qualifications.Scientific;
 using Mtf.Extensions.Services;
 
@@ -74,9 +73,9 @@ public class AlbornePriest : Priest
 			var result = base.FutureQualifications;
 			result.AddRange(
 			[
-				new SingingAndMakingMusic(QualificationLevel.Master, level: 3),
+				new SingingAndMakingMusic(QualificationLevel.Master, 3),
                 new Disarmament(level: 4),
-				new Herbalism(QualificationLevel.Master, level: 5)
+				new Herbalism(QualificationLevel.Master, 5)
 			]);
 			return BuildQualifications(result);
 		}

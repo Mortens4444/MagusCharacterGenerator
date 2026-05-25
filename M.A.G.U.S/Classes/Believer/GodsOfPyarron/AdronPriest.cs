@@ -54,9 +54,9 @@ public class AdronPriest : Priest
 			result.AddRange(
 			[
 				new Physiology(level: 2),
-				new Spellcasting(QualificationLevel.Master, level: 2),
+				new Spellcasting(QualificationLevel.Master, 2),
                 new Herbalism(level: 4),
-				new Alchemy(QualificationLevel.Master, level: 6),
+				new Alchemy(QualificationLevel.Master, 6),
 				new AncientTongueLore(QualificationLevel.Master, 7)
 			]);
 			return BuildQualifications(result);

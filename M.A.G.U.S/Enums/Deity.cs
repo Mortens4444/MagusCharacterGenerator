@@ -15,7 +15,7 @@ public enum Deity
     [AvailableSpheres(Sphere.Nature, Sphere.Life)] // Hagyományosan bárdok is tisztelik - Bensőséges kapcsolat Gilronnal
     Alborne,
 
-    [AvailableSpheres(Sphere.Nature, Sphere.Life)] // A tengerek ura
+    [AvailableSpheres(Sphere.Nature, Sphere.Life)] // A tengerek ura (Arel és Uwel gyermeke), Isteni síkja a Hussala mely egy végeláthatatlan óceán (inkább dwoon, min tpyarroni?) Valamelyeset szemben áll Kraddal, Kyellel és Dreinával, szent szimbóluma a viharkagyló
     Antoh,
 
     [AvailableSpheres(Sphere.Nature, Sphere.Life, Sphere.Death, Sphere.Soul)] // A harc és természet úrnője
