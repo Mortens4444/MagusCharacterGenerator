@@ -18,6 +18,14 @@ public class ArelPriest : Priest
 
     public override Alignment Alignment => Alignment.ChaosLife;
 
+    public override int InitiateBaseValue => 9;
+
+    public override int AttackBaseValue => 18;
+
+    public override int DefenseBaseValue => 73;
+
+    public override int CombatValueModifierPerLevel => 9;
+
     public override QualificationList Qualifications
 	{
 		get

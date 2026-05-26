@@ -353,6 +353,7 @@ predoci_heavy_infantry.png
 priest.png
 priest_of_adron.png
 priest_of_alborne.png
+priest_of_antoh.png
 priest_of_arel.png
 priest_of_darton.png
 priest_of_doljah.png
@@ -370,7 +371,7 @@ priest_of_velar.png
 rackla_rider.png
 sea_hunter.png
 shaman.png
-sirenari_forest_rangers.png
+sirenari_forest_ranger.png
 soldier.png
 star_of_alborne.png
 swordmaster.png
@@ -633,6 +634,7 @@ the_emperor_s_revenge.png
 three_thieves.png
 tongue_soother.png
 toron_s_hell.png
+acting.png
 agriculture.png
 aiming.png
 alchemy.png
@@ -641,11 +643,14 @@ ancient_tongue_lore.png
 animal_breeding.png
 animal_lore.png
 animal_training.png
+antis_walking.png
 appraisal.png
 architecture.png
 artic_survival.png
+art_history.png
 astrology.png
 backstab.png
+blacksmith.png
 blind_fighting.png
 bloodlust.png
 boot_making.png
@@ -668,6 +673,7 @@ desert_survival.png
 destruction.png
 disarmament.png
 divination.png
+drawing.png
 embalming.png
 empty.png
 escape_bonds.png
@@ -675,6 +681,7 @@ etiquette.png
 extra_attack.png
 falling.png
 feenhar_falcon_betrayal.png
+finance_estate_management.png
 fistfight.png
 forest_survival.png
 forgery.png
@@ -699,6 +706,7 @@ law_jurisprudence.png
 leadership.png
 legend_lore.png
 lip_reading.png
+literature.png
 local_knowledge.png
 lock_picking.png
 magic_lore.png
@@ -708,7 +716,7 @@ morality.png
 mountain_survival.png
 mounted_archery.png
 onomatopoeia.png
-painting_drawing.png
+painting.png
 physiology.png
 pick_pocketing.png
 plant_growing.png
@@ -923,4 +931,3 @@ throwing_ax.png
 throwing_axe.png
 throwing_dagger.png
 two_handed_axe.png
-appicon.png
