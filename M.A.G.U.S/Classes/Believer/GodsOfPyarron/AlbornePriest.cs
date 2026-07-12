@@ -39,31 +39,23 @@ public class AlbornePriest : Priest
 		}
 	}
 
-    public QualificationList ArtQualifications
+    public static QualificationList ArtQualifications
 	{
 		get
 		{
 			var random = RandomProvider.GetSecureRandomInt(0, 6);
-			switch (random)
-			{
-                case 0:
-                    return [new Architecture(QualificationLevel.Master), new Sculptury(QualificationLevel.Master)];
-                case 1:
-                    return [new LanguageLore(6), new Literature(QualificationLevel.Master)];
-                case 2:
-                    return [new LanguageLore(6), new Acting(QualificationLevel.Master)];
-                case 3:
-                    return [
-						//new Jumping(50),
-						new Dancing(QualificationLevel.Master)];
-                case 4:
-                    return [new Painting(QualificationLevel.Master), new Drawing(QualificationLevel.Master)];
-                case 5:
-                    return [new Blacksmith(QualificationLevel.Master), new Jeweler(QualificationLevel.Master)];
-                default:
-					throw new NotImplementedException();
-			}
-		}
+            return random switch
+            {
+                0 => [new Architecture(QualificationLevel.Master), new Sculptury(QualificationLevel.Master)],
+                1 => [new LanguageLore(6), new Literature(QualificationLevel.Master)],
+                2 => [new LanguageLore(6), new Acting(QualificationLevel.Master)],
+                3 => [//new Jumping(50),
+                      new Dancing(QualificationLevel.Master)],
+                4 => [new Painting(QualificationLevel.Master), new Drawing(QualificationLevel.Master)],
+                5 => [new Blacksmith(QualificationLevel.Master), new Jeweler(QualificationLevel.Master)],
+                _ => throw new NotImplementedException(),
+            };
+        }
     }
 
     public override QualificationList FutureQualifications
