@@ -5,7 +5,7 @@ using M.A.G.U.S.Assistant.Interfaces;
 using M.A.G.U.S.Assistant.Models;
 using M.A.G.U.S.Assistant.Services;
 using M.A.G.U.S.GameSystem;
-using Mtf.LanguageService.MAUI;
+using Mtf.LanguageService.Core;
 using Mtf.Maui.Controls.Messages;
 using System.Windows.Input;
 

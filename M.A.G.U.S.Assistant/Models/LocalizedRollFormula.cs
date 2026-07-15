@@ -1,7 +1,7 @@
 ﻿using M.A.G.U.S.Enums;
 using M.A.G.U.S.Models;
 using Mtf.Extensions;
-using Mtf.LanguageService.MAUI;
+using Mtf.LanguageService.Core;
 using System.Reflection;
 
 namespace M.A.G.U.S.Assistant.Models;

@@ -3,7 +3,7 @@ using Android.Content;
 using Android.OS;
 using AndroidX.Core.App;
 using AndroidX.Core.Content;
-using Mtf.LanguageService.MAUI;
+using Mtf.LanguageService.Core;
 
 namespace M.A.G.U.S.Assistant.Platforms.Android;
 
@@ -43,10 +43,14 @@ internal static class AndroidNotificationHelper
         bool ongoing = false,
         PendingIntent? actionIntent = null)
     {
+        using var style = new NotificationCompat.BigTextStyle();
+        style.BigText(message);
+
         using var builder = new NotificationCompat.Builder(context, channelId);
 
         builder.SetContentTitle(title);
         builder.SetContentText(message);
+        builder.SetStyle(style);
         builder.SetSmallIcon(Resource.Mipmap.appicon);
         builder.SetPriority((int)NotificationPriority.Default);
         builder.SetAutoCancel(!ongoing);

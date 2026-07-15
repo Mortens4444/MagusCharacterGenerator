@@ -6,7 +6,7 @@ using M.A.G.U.S.Enums;
 using M.A.G.U.S.Extensions;
 using M.A.G.U.S.GameSystem.Places;
 using Mtf.Extensions;
-using Mtf.LanguageService.MAUI;
+using Mtf.LanguageService.Core;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
 

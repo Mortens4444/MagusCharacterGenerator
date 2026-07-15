@@ -2,7 +2,7 @@
 using M.A.G.U.S.Enums;
 using M.A.G.U.S.GameSystem.Attributes;
 using Mtf.Extensions;
-using Mtf.LanguageService.MAUI;
+using Mtf.LanguageService.Core;
 using Mtf.Maui.Controls.Messages;
 using System.Globalization;
 using System.Reflection;

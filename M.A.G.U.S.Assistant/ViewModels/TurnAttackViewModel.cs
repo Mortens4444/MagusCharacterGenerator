@@ -3,7 +3,7 @@ using M.A.G.U.S.Enums;
 using M.A.G.U.S.GameSystem;
 using M.A.G.U.S.GameSystem.Turn;
 using Mtf.Extensions;
-using Mtf.LanguageService.MAUI;
+using Mtf.LanguageService.Core;
 
 namespace M.A.G.U.S.Assistant.ViewModels;
 

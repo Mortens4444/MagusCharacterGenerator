@@ -8,7 +8,7 @@ using M.A.G.U.S.Things.Gemstones;
 using M.A.G.U.S.Things.MagicalObjects;
 using M.A.G.U.S.Things.Poisons;
 using Mtf.Extensions;
-using Mtf.LanguageService.MAUI;
+using Mtf.LanguageService.Core;
 using Mtf.LanguageService.MAUI.Converters;
 using System.ComponentModel;
 using System.Globalization;

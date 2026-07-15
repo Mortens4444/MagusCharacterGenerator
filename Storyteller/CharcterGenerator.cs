@@ -6,7 +6,7 @@ using M.A.G.U.S.Interfaces;
 using M.A.G.U.S.Races;
 using M.A.G.U.S.Utils;
 using Mtf.Extensions;
-using Mtf.LanguageService;
+using Mtf.LanguageService.Core;
 using Mtf.LanguageService.Windows.Forms;
 using Mtf.MessageBoxes;
 using Mtf.MessageBoxes.Enums;

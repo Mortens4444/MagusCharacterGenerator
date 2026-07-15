@@ -3,7 +3,7 @@ using M.A.G.U.S.Classes;
 using M.A.G.U.S.GameSystem;
 using Microsoft.Win32;
 using Mtf.Extensions;
-using Mtf.LanguageService;
+using Mtf.LanguageService.Core;
 using Mtf.LanguageService.Enums;
 using Mtf.LanguageService.Windows.Forms;
 using Mtf.MessageBoxes;

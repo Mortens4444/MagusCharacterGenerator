@@ -12,7 +12,7 @@ using M.A.G.U.S.Things.Poisons;
 using M.A.G.U.S.Things.Weapons;
 using M.A.G.U.S.Utils;
 using Mtf.Extensions;
-using Mtf.LanguageService.MAUI;
+using Mtf.LanguageService.Core;
 using System.Reflection;
 
 namespace M.A.G.U.S.Assistant.Services;

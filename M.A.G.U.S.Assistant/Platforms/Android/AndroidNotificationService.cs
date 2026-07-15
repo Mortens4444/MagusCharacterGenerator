@@ -36,7 +36,8 @@ internal sealed class AndroidNotificationService : INotificationService
             return;
         }
 
-        var notification = AndroidNotificationHelper.CreateNotification(context, AndroidNotificationHelper.GeneralChannelId, title, message);
+        // A 'using var' biztosítja, hogy a metódus végén meghívódjon a Dispose()
+        using var notification = AndroidNotificationHelper.CreateNotification(context, AndroidNotificationHelper.GeneralChannelId, title, message);
         if (notification is null)
         {
             return;

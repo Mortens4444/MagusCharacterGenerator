@@ -3,7 +3,7 @@ using M.A.G.U.S.Bestiary;
 using M.A.G.U.S.Enums;
 using M.A.G.U.S.GameSystem;
 using Mtf.Extensions.Services;
-using Mtf.LanguageService.MAUI;
+using Mtf.LanguageService.Core;
 
 namespace M.A.G.U.S.Assistant.ViewModels;
 

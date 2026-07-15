@@ -13,7 +13,7 @@ using M.A.G.U.S.Qualifications.Scientific.Psi;
 using M.A.G.U.S.Races;
 using M.A.G.U.S.Utils;
 using Mtf.Extensions.Services;
-using Mtf.LanguageService.MAUI;
+using Mtf.LanguageService.Core;
 using Mtf.Maui.Controls.Messages;
 using System.Collections.ObjectModel;
 using System.Reflection;

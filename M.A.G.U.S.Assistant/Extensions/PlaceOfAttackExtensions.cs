@@ -1,5 +1,5 @@
 ﻿using M.A.G.U.S.Enums;
-using Mtf.LanguageService.MAUI;
+using Mtf.LanguageService.Core;
 using System.ComponentModel;
 using System.Reflection;
 

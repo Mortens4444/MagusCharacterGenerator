@@ -2,7 +2,7 @@
 using M.A.G.U.S.Assistant.Services;
 using M.A.G.U.S.Races;
 using Mtf.Extensions;
-using Mtf.LanguageService.MAUI;
+using Mtf.LanguageService.Core;
 using System.Collections.ObjectModel;
 
 namespace M.A.G.U.S.Assistant.ViewModels;

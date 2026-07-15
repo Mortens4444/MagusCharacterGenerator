@@ -6,7 +6,7 @@ using M.A.G.U.S.Assistant.Enums;
 using M.A.G.U.S.Assistant.Interfaces;
 using M.A.G.U.S.Assistant.Models.Drawing;
 using M.A.G.U.S.Assistant.Services;
-using Mtf.LanguageService.MAUI;
+using Mtf.LanguageService.Core;
 using System.Collections.ObjectModel;
 
 namespace M.A.G.U.S.Assistant.ViewModels;

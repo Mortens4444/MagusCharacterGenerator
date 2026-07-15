@@ -2,9 +2,8 @@
 using Android.Content;
 using Android.OS;
 using AndroidX.Core.App;
-using AndroidX.Core.Content;
 using Mtf.Extensions.Services;
-using Mtf.LanguageService.MAUI;
+using Mtf.LanguageService.Core;
 using System.Runtime.Versioning;
 
 namespace M.A.G.U.S.Assistant.Platforms.Android;
@@ -14,8 +13,6 @@ namespace M.A.G.U.S.Assistant.Platforms.Android;
     Exported = false)]
 internal sealed class NotificationForegroundService : Service
 {
-    private const string ChannelId = "background_notification_service";
-    private const string ChannelName = "Background Notification Service";
     private const int ForegroundNotificationId = 5000;
 
     private CancellationTokenSource? cancellationTokenSource;
@@ -61,33 +58,28 @@ internal sealed class NotificationForegroundService : Service
             return StartCommandResult.NotSticky;
         }
 
-        // Use OperatingSystem.IsAndroidVersionAtLeast so the platform analyzer recognizes the guard for API 26+.
         if (OperatingSystem.IsAndroidVersionAtLeast(26))
         {
             CreateNotificationChannel();
         }
 
         var notificationIndex = RandomProvider.GetSecureRandomInt(0, notifications.Length);
-        var foregroundNotification = CreateNotification("M.A.G.U.S. Assistant", Lng.Elem(notifications[notificationIndex]));
+
+        using var foregroundNotification = CreateNotification("M.A.G.U.S. Assistant", Lng.Elem(notifications[notificationIndex]));
 
         if (foregroundNotification is null)
         {
-            // If we couldn't create a notification, there's no point in running as a foreground service.
             StopSelf();
             return StartCommandResult.NotSticky;
         }
 
-        // Use a platform API check that the analyzer recognizes to avoid CA1416.
-        // Only call the overload that accepts a ForegroundService type when running on Android 34+,
-        // because the enum value TypeSpecialUse is only supported on 34.0 and later.
         if (OperatingSystem.IsAndroidVersionAtLeast(34))
         {
-            StartForeground(ForegroundNotificationId, foregroundNotification!, global::Android.Content.PM.ForegroundService.TypeSpecialUse);
+            StartForeground(ForegroundNotificationId, foregroundNotification, global::Android.Content.PM.ForegroundService.TypeSpecialUse);
         }
         else
         {
-            // For Android versions earlier than 34, use the two-argument overload.
-            StartForeground(ForegroundNotificationId, foregroundNotification!);
+            StartForeground(ForegroundNotificationId, foregroundNotification);
         }
 
         StartNotificationLoop();
@@ -147,7 +139,7 @@ internal sealed class NotificationForegroundService : Service
             return;
         }
 
-        var notification = CreateNotification(title, message);
+        using var notification = CreateNotification(title, message);
         if (notification is null)
         {
             return;
@@ -176,21 +168,5 @@ internal sealed class NotificationForegroundService : Service
     {
         AndroidNotificationHelper.CreateChannel(this, AndroidNotificationHelper.BackgroundChannelId,
             AndroidNotificationHelper.BackgroundChannelName, "MAGUS Assistant background notification service");
-    }
-
-    private bool CanSendNotifications()
-    {
-        if (Build.VERSION.SdkInt < BuildVersionCodes.Tiramisu)
-        {
-            return true;
-        }
-
-        // Avoid referencing Manifest.Permission.PostNotifications (annotated for Android 33+)
-        // to silence CA1416 while still performing the runtime SDK check above.
-        const string postNotificationsPermission = "android.permission.POST_NOTIFICATIONS";
-
-        return ContextCompat.CheckSelfPermission(
-            this,
-            postNotificationsPermission) == global::Android.Content.PM.Permission.Granted;
     }
 }

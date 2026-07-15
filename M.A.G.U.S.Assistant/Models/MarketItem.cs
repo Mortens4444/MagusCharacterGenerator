@@ -1,7 +1,7 @@
 ﻿using M.A.G.U.S.Assistant.Extensions;
 using M.A.G.U.S.GameSystem.Valuables;
 using M.A.G.U.S.Things;
-using Mtf.LanguageService.MAUI;
+using Mtf.LanguageService.Core;
 using Mtf.Maui.Controls.Extensions;
 
 namespace M.A.G.U.S.Assistant.Models;

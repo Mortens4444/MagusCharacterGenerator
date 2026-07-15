@@ -1,5 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.Messaging;
-using Mtf.LanguageService.MAUI;
+using Mtf.LanguageService.Core;
 using Mtf.Maui.Controls.Messages;
 
 namespace M.A.G.U.S.Assistant.Services;

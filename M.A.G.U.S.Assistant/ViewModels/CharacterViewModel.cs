@@ -13,7 +13,7 @@ using M.A.G.U.S.Qualifications;
 using M.A.G.U.S.Things;
 using M.A.G.U.S.Things.Armors;
 using M.A.G.U.S.Things.Weapons;
-using Mtf.LanguageService.MAUI;
+using Mtf.LanguageService.Core;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.ComponentModel;

@@ -7,7 +7,7 @@ using M.A.G.U.S.GameSystem;
 using M.A.G.U.S.GameSystem.Qualifications;
 using M.A.G.U.S.Qualifications;
 using Mtf.Extensions;
-using Mtf.LanguageService.MAUI;
+using Mtf.LanguageService.Core;
 using Mtf.Maui.Controls.Messages;
 using System.Collections.ObjectModel;
 using System.Windows.Input;

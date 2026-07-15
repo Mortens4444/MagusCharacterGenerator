@@ -10,7 +10,7 @@ using M.A.G.U.S.Things.Weapons;
 using M.A.G.U.S.Utils;
 using Mtf.Extensions;
 using Mtf.Extensions.Services;
-using Mtf.LanguageService.MAUI;
+using Mtf.LanguageService.Core;
 using Mtf.Maui.Controls.Messages;
 using System.Globalization;
 using System.Windows.Input;

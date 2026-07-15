@@ -12,7 +12,7 @@ using M.A.G.U.S.Things.MagicalObjects;
 using M.A.G.U.S.Things.Poisons;
 using M.A.G.U.S.Things.Shields;
 using Mtf.Extensions;
-using Mtf.LanguageService.MAUI;
+using Mtf.LanguageService.Core;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
 using RelayCommand = CommunityToolkit.Mvvm.Input.RelayCommand;

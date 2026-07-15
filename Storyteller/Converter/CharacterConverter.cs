@@ -1,7 +1,7 @@
-﻿using System.Text;
-using M.A.G.U.S.GameSystem;
+﻿using M.A.G.U.S.GameSystem;
 using Mtf.Extensions;
-using Mtf.LanguageService;
+using Mtf.LanguageService.Core;
+using System.Text;
 
 namespace Storyteller.Converter;
 

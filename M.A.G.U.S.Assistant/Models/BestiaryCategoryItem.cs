@@ -1,4 +1,4 @@
-﻿using Mtf.LanguageService.MAUI;
+﻿using Mtf.LanguageService.Core;
 
 namespace M.A.G.U.S.Assistant.Models;
 

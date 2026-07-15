@@ -5,7 +5,7 @@ using M.A.G.U.S.GameSystem;
 using M.A.G.U.S.GameSystem.Turn;
 using M.A.G.U.S.Interfaces;
 using Mtf.Extensions.Services;
-using Mtf.LanguageService.MAUI;
+using Mtf.LanguageService.Core;
 
 namespace M.A.G.U.S.Assistant.Services;
 

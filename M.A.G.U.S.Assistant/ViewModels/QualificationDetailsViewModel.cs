@@ -7,7 +7,7 @@ using M.A.G.U.S.GameSystem.Qualifications;
 using M.A.G.U.S.Qualifications.Combat;
 using M.A.G.U.S.Qualifications.Scientific;
 using M.A.G.U.S.Things.Weapons;
-using Mtf.LanguageService.MAUI;
+using Mtf.LanguageService.Core;
 using System.Windows.Input;
 
 namespace M.A.G.U.S.Assistant.ViewModels;
