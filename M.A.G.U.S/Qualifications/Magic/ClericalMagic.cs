@@ -22,4 +22,6 @@ public class ClericalMagic : Sorcery
     }
 
     public override string Name => "Clerical magic";
+
+    public override MagicSchool School => MagicSchool.Priest;
 }

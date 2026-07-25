@@ -42,6 +42,8 @@ public abstract class ResolutionBase
     
     public bool IsHpDamage { get; init; }
 
+    public virtual bool BypassesArmor => false;
+
     public AttackDirection Direction { get; init; }
 
     public required string HitLocation { get; init; }

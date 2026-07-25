@@ -1,6 +1,8 @@
 ﻿using M.A.G.U.S.Enums;
 using M.A.G.U.S.GameSystem.Attributes;
 using M.A.G.U.S.GameSystem.FightMode;
+using M.A.G.U.S.GameSystem.Magic;
+using M.A.G.U.S.GameSystem.Psi;
 using M.A.G.U.S.Interfaces;
 using M.A.G.U.S.Qualifications.Specialities;
 using M.A.G.U.S.Things.Weapons;
@@ -150,6 +152,22 @@ public partial class Character : ICharacter
                     attackModes.Add(new RangedAttack(rangedWeapon2, AimValue));
                 }
                 attackModes.Add(new MeleeAttack(fist, AttackValue));
+
+                foreach (var discipline in PsiDisciplineCatalog.GetAvailable(this))
+                {
+                    if (PsiPoints >= discipline.PsiPointCost)
+                    {
+                        attackModes.Add(new PsiAttack(discipline));
+                    }
+                }
+
+                foreach (var spell in SpellCatalog.GetAvailable(this))
+                {
+                    if (ManaPoints >= spell.ManaCost)
+                    {
+                        attackModes.Add(new SpellAttack(spell));
+                    }
+                }
             }
 
             return attackModes;

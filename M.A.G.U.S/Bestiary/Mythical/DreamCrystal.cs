@@ -1,6 +1,8 @@
 ﻿using M.A.G.U.S.Enums;
 using M.A.G.U.S.GameSystem;
 using M.A.G.U.S.GameSystem.Attributes;
+using M.A.G.U.S.GameSystem.Magic.Spells.Mosaic;
+using M.A.G.U.S.GameSystem.Psi.Disciplines.Kyr;
 using M.A.G.U.S.Models;
 using M.A.G.U.S.Qualifications.Scientific.Psi;
 using M.A.G.U.S.Things.Weapons.CrushingWeapons;
@@ -20,7 +22,8 @@ public sealed class DreamCrystal : Creature
 
         AttackModes =
         [
-            new MentalAttack("Magic or Psi", 55, 5, 10), // Attack with magic has InitiateValue = 55,
+            new PsiAttack(new MindBlast()),
+            new SpellAttack(new MagicMissile()),
             new MeleeAttack(new Warhammer(), AttackValue),
             new MeleeAttack(new TwoHandedMace(), AttackValue),
             new MeleeAttack(new ShortSword(), AttackValue),

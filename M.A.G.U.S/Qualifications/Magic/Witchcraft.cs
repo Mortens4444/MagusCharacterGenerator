@@ -1,4 +1,5 @@
-﻿using M.A.G.U.S.GameSystem.Magic;
+﻿using M.A.G.U.S.Enums;
+using M.A.G.U.S.GameSystem.Magic;
 
 namespace M.A.G.U.S.Qualifications.Magic;
 
@@ -8,4 +9,6 @@ public class Witchcraft : Sorcery
     {
         ManaPoints = 8;
     }
+
+    public override MagicSchool School => MagicSchool.Witch;
 }

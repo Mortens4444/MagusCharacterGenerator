@@ -19,6 +19,7 @@
     <v:NotifierPage.Resources>
         <ResourceDictionary>
             <c:BoolToTextConverter x:Key="BoolToTextConverter" />
+            <c:AttackModeNameConverter x:Key="AttackModeNameConverter" />
             <conv:TranslationConverter x:Key="TranslationConverter" />
         </ResourceDictionary>
     </v:NotifierPage.Resources>
@@ -71,6 +72,11 @@
 
                                 <Label Text="{Binding Character.Name}" FontAttributes="Bold" />
                                 <!--<Label Text="{Binding Character.Speed, StringFormat='Speed: {0} m/s'}" FontSize="12" />-->
+
+                                <Picker ItemsSource="{Binding AvailableAttackModes}"
+                                        SelectedItem="{Binding SelectedAttackMode, Mode=TwoWay}"
+                                        ItemDisplayBinding="{Binding ., Converter={StaticResource AttackModeNameConverter}}"
+                                        Title="Attack mode" />
 
                                 <CollectionView ItemsSource="{Binding Enemies}" MaximumHeightRequest="100">
                                     <CollectionView.ItemTemplate>

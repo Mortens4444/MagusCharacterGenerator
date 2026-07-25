@@ -1,5 +1,5 @@
 ﻿using M.A.G.U.S.GameSystem.Qualifications;
-using Mtf.LanguageService.Core;
+using Mtf.LanguageService;
 using System.Globalization;
 
 namespace M.A.G.U.S.Assistant.Converters;

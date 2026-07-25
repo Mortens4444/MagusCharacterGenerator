@@ -2,7 +2,7 @@
 using M.A.G.U.S.Assistant.Models;
 using M.A.G.U.S.Assistant.Services;
 using M.A.G.U.S.Interfaces;
-using Mtf.LanguageService.Core;
+using Mtf.LanguageService;
 using Mtf.Maui.Controls.Messages;
 using System.Collections.ObjectModel;
 using System.Diagnostics;

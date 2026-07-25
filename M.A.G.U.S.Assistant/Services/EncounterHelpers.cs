@@ -5,7 +5,7 @@ using M.A.G.U.S.GameSystem;
 using M.A.G.U.S.GameSystem.Turn;
 using M.A.G.U.S.Interfaces;
 using Mtf.Extensions.Services;
-using Mtf.LanguageService.Core;
+using Mtf.LanguageService;
 
 namespace M.A.G.U.S.Assistant.Services;
 
@@ -52,7 +52,7 @@ internal static class EncounterHelpers
 
             if (result.Count < assignment.MaxSimultaneousAttacks)
             {
-                int attackCount = enemy.GetAttackCountForRound(turn.Round); // Shouldn't it use intendedAttack also to determinate the attack count?
+                int attackCount = GetAttackCountForRound(enemy, intendedAttack, turn.Round);
                 for (var i = 0; i < attackCount; i++)
                 {
                     await AddInitiativeAsync(InitiativeEntryKind.Attack, new CombatantRef(enemy), new CombatantRef(assignment.Character), intendedAttack, result, rollService).ConfigureAwait(false);
@@ -74,8 +74,8 @@ internal static class EncounterHelpers
             _ => throw new NotImplementedException()
         });
 
-        int characterAttackCount = assignment.Character.GetAttackCountForRound(turn.Round); // Same here with charIntendedAttack?
-        var charIntendedAttack = assignment.Character.AttackModes.FirstOrDefault();
+        var charIntendedAttack = assignment.SelectedAttackMode ?? assignment.Character.AttackModes.FirstOrDefault();
+        int characterAttackCount = GetAttackCountForRound(assignment.Character, charIntendedAttack, turn.Round);
 
         for (var i = 0; i < characterAttackCount; i++)
         {
@@ -84,6 +84,13 @@ internal static class EncounterHelpers
 
         return result;
     }
+
+    /// <summary>
+    /// Mystic attacks (psi/spells) aren't bound by the attacker's weapon-based attacks-per-round: a round has 10 segments,
+    /// and a discipline/spell can be cast as many times as its own casting time fits into that budget.
+    /// </summary>
+    private static int GetAttackCountForRound(Attacker attacker, Attack? intendedAttack, int round) =>
+        intendedAttack is MysticAttack mysticAttack ? mysticAttack.MaxCastsPerRound : attacker.GetAttackCountForRound(round);
 
     private static async Task<InitiativeEntry> AddInitiativeAsync(
         InitiativeEntryKind initiativeEntryKind,

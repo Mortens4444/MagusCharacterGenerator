@@ -49,6 +49,7 @@ public partial class Character
             {
                 manaPoints = value;
                 OnPropertyChanged();
+                InvalidateAttackModes();
             }
         }
     }
@@ -157,6 +158,12 @@ public partial class Character
             }
         }
     }
+
+    public override int GetAstralMagicResistance() => UnconsciousAstralMagicResistance + (IsConscious ? StaticAstralPsiShield + DynamicAstralPsiShield : 0);
+
+    public override int GetMentalMagicResistance() => UnconsciousMentalMagicResistance + (IsConscious ? StaticMentalPsiShield + DynamicMentalPsiShield : 0);
+
+    public override int GetManaPoints() => ManaPoints;
 
     private void CalculateUnconsciousAstralMagicResistance()
     {

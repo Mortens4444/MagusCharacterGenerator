@@ -1,5 +1,5 @@
 ﻿using M.A.G.U.S.GameSystem.Valuables;
-using Mtf.LanguageService.Core;
+using Mtf.LanguageService;
 
 namespace M.A.G.U.S.Assistant.Extensions;
 

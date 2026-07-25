@@ -33,6 +33,7 @@ public partial class Character
             {
                 psiPoints = value;
                 OnPropertyChanged();
+                InvalidateAttackModes();
             }
         }
     }
@@ -49,6 +50,8 @@ public partial class Character
             }
         }
     }
+
+    public override int GetPsiPoints() => PsiPoints;
 
     private void CalculatePsiPoints(bool isJann, ISettings? settings)
     {

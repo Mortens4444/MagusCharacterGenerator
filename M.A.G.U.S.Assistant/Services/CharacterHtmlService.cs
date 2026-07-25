@@ -1,7 +1,7 @@
 ﻿using M.A.G.U.S.Assistant.Extensions;
 using M.A.G.U.S.Interfaces;
 using Mtf.Extensions;
-using Mtf.LanguageService.Core;
+using Mtf.LanguageService;
 using System.Globalization;
 using System.Text;
 

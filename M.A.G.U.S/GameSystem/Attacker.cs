@@ -1,5 +1,6 @@
 ﻿using M.A.G.U.S.Bestiary;
 using M.A.G.U.S.Enums;
+using M.A.G.U.S.GameSystem.Turn;
 using M.A.G.U.S.Interfaces;
 using M.A.G.U.S.Models;
 using M.A.G.U.S.Things.Armors;
@@ -161,6 +162,9 @@ public abstract class Attacker
 
     public List<ICombatModifier> TemporaryModifiers { get; } = [];
 
+    /// <summary>Lingering effects (e.g. a curse) still ticking on this attacker round after round.</summary>
+    public List<ActiveEffect> ActiveEffects { get; } = [];
+
     public abstract List<Attack> AttackModes { get; protected set; }
 
     public abstract List<Speed> Speeds { get; }
@@ -171,6 +175,14 @@ public abstract class Attacker
 
     public abstract int GetDamage();
 
+    public virtual int GetAstralMagicResistance() => 0;
+
+    public virtual int GetMentalMagicResistance() => 0;
+
+    public virtual int GetPsiPoints() => 0;
+
+    public virtual int GetManaPoints() => 0;
+
     public Attack GetRandomAttackMode()
     {
         if (AttackModes == null || AttackModes.Count == 0)
@@ -178,15 +190,32 @@ public abstract class Attacker
             throw new InvalidOperationException("No attack modes available.");
         }
 
-        int randomIndex = RandomProvider.GetSecureRandomInt(0, AttackModes.Count);
-        return AttackModes[randomIndex];
+        var affordableAttacks = AttackModes.Where(CanAfford).ToList();
+        if (affordableAttacks.Count == 0)
+        {
+            throw new InvalidOperationException("No attack modes available.");
+        }
+
+        int randomIndex = RandomProvider.GetSecureRandomInt(0, affordableAttacks.Count);
+        return affordableAttacks[randomIndex];
     }
+
+    private bool CanAfford(Attack attack) => attack switch
+    {
+        PsiAttack psiAttack => GetPsiPoints() >= psiAttack.PsiPointCost,
+        SpellAttack spellAttack => GetManaPoints() >= spellAttack.ManaCost,
+        _ => true
+    };
 
     public static int GetAttackRangeInMeters(Attack attack)
     {
         if (attack is RangedAttack rangeAttack)
         {
             return rangeAttack.Weapon.Distance;
+        }
+        if (attack is MysticAttack)
+        {
+            return MysticAttack.CastingRangeInMeters;
         }
         return MeleeDistance;
     }

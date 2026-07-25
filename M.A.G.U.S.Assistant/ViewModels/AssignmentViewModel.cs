@@ -4,6 +4,7 @@ using M.A.G.U.S.Interfaces;
 using M.A.G.U.S.Qualifications.Specialities;
 using M.A.G.U.S.Utils;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 
 namespace M.A.G.U.S.Assistant.ViewModels;
 
@@ -12,7 +13,8 @@ internal sealed class AssignmentViewModel : BaseViewModel
     private const int RoomDistance = 5;
     private readonly ISettings settings;
     private readonly Dictionary<Guid, int> enemyDistances = [];
-    
+    private Attack? selectedAttackMode;
+
     public int MaxSimultaneousAttacks { get; set; }
 
     public bool IsFinished { get; set; }
@@ -25,9 +27,42 @@ internal sealed class AssignmentViewModel : BaseViewModel
     {
         this.settings = settings;
         Character = character;
+        Character.PropertyChanged += OnCharacterPropertyChanged;
     }
 
     public Character Character { get; init; }
+
+    /// <summary>The attack the player wants to use next round. Null means "let the engine pick the first attack mode".</summary>
+    public Attack? SelectedAttackMode
+    {
+        get => selectedAttackMode;
+        set => SetProperty(ref selectedAttackMode, value);
+    }
+
+    /// <summary>Null (="Auto") plus every attack mode (weapon, psi, spell) currently available to the character.</summary>
+    public IReadOnlyList<Attack?> AvailableAttackModes
+    {
+        get
+        {
+            var modes = new List<Attack?> { null };
+            modes.AddRange(Character.AttackModes);
+            return modes;
+        }
+    }
+
+    private void OnCharacterPropertyChanged(object? sender, PropertyChangedEventArgs e)
+    {
+        if (e.PropertyName != nameof(GameSystem.Character.AttackModes))
+        {
+            return;
+        }
+
+        OnPropertyChanged(nameof(AvailableAttackModes));
+        if (SelectedAttackMode != null && !Character.AttackModes.Contains(SelectedAttackMode))
+        {
+            SelectedAttackMode = null;
+        }
+    }
 
     public bool IsIndoorEncounter { get; set; }
 

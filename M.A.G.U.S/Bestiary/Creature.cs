@@ -63,6 +63,10 @@ public abstract class Creature : Attacker, IHaveImage
 
     public int? MentalMagicResistance { get; protected set; }
 
+    public override int GetAstralMagicResistance() => AstralMagicResistance ?? 0;
+
+    public override int GetMentalMagicResistance() => MentalMagicResistance ?? 0;
+
     public int? PoisonResistance { get; protected set; }
 
     public int? HealthPoints
@@ -118,6 +122,10 @@ public abstract class Creature : Attacker, IHaveImage
     public bool ResistantToPsi { get; set; }
 
     public int ManaPoints { get; set; }
+
+    public override int GetPsiPoints() => PsiPoints;
+
+    public override int GetManaPoints() => ManaPoints;
 
     protected readonly DiceThrow DiceThrow = new();
 

@@ -14,5 +14,8 @@ public enum InitiativeEntryKind
     Death,
 
     [Description("😵‍💫")]
-    LostConsciousness
+    LostConsciousness,
+
+    [Description("☣")]
+    EffectTick
 }

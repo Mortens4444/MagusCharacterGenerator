@@ -2,7 +2,7 @@ using M.A.G.U.S.Assistant.Models;
 using M.A.G.U.S.Assistant.Services;
 using M.A.G.U.S.Assistant.ViewModels;
 using M.A.G.U.S.GameSystem;
-using Mtf.LanguageService.Core;
+using Mtf.LanguageService;
 
 namespace M.A.G.U.S.Assistant.Views;
 

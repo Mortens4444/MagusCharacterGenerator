@@ -1,4 +1,5 @@
-﻿using M.A.G.U.S.GameSystem.Magic;
+﻿using M.A.G.U.S.Enums;
+using M.A.G.U.S.GameSystem.Magic;
 
 namespace M.A.G.U.S.Qualifications.Magic;
 
@@ -10,6 +11,8 @@ public class OrdanianFlameGuardFireMagic : Sorcery
     }
 
     public override string Name => "Fire magic";
+
+    public override MagicSchool School => MagicSchool.Fire;
 
     public override int GetManaPointsModifier()
     {

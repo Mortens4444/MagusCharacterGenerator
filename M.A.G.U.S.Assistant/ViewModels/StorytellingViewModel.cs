@@ -11,7 +11,7 @@ using M.A.G.U.S.Assistant.Interfaces.Bluetooth;
 using M.A.G.U.S.Assistant.Messages;
 using M.A.G.U.S.Assistant.Models.Bluetooth;
 using Mtf.Extensions.Services;
-using Mtf.LanguageService.Core;
+using Mtf.LanguageService;
 using Mtf.Maui.Controls.Messages;
 using Newtonsoft.Json;
 using System.Collections.ObjectModel;

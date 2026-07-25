@@ -3,7 +3,7 @@ using Android.Content;
 using Android.OS;
 using AndroidX.Core.App;
 using AndroidX.Core.Content;
-using Mtf.LanguageService.Core;
+using Mtf.LanguageService;
 
 namespace M.A.G.U.S.Assistant.Platforms.Android;
 
