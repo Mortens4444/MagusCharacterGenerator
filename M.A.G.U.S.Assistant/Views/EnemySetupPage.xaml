@@ -119,7 +119,7 @@
 
                             <VerticalStackLayout IsVisible="{Binding HasPainTolerance}">
                                 <HorizontalStackLayout>
-                                    <Label Text="{Binding Source='Pain Tolerance', Converter={StaticResource TranslationConverter}}" FontSize="12" />
+                                    <Label Text="{Binding Source='Pain tolerance points', Converter={StaticResource TranslationConverter}}" FontSize="12" />
                                     <Label Text=":" FontSize="12" FontAttributes="Bold" Margin="0,0,3,0" />
                                     <Label Text="{Binding ActualPainTolerancePoints}" FontSize="12" />
                                 </HorizontalStackLayout>

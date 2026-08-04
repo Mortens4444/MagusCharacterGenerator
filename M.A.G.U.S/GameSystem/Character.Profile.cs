@@ -43,7 +43,22 @@ public partial class Character : IHaveImage
         }
     }
 
-    public virtual string[] Images { get; set; } = [];
+    private string[] images = [];
+
+    public virtual string[] Images
+    {
+        get => images;
+        set
+        {
+            if (images != value)
+            {
+                images = value;
+                OnPropertyChanged();
+                OnPropertyChanged(nameof(DefaultImage));
+                OnPropertyChanged(nameof(RandomImage));
+            }
+        }
+    }
 
     [JsonIgnore, Newtonsoft.Json.JsonIgnore]
     public virtual string DefaultImage => Images.Length > 0 ? Images[0] : String.Empty;

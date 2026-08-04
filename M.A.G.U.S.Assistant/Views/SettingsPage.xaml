@@ -194,6 +194,33 @@
                 </Grid>
             </Border>
 
+            <Label Text="Sleep / Rest"
+                   FontSize="18"
+                   FontAttributes="Bold"
+                   TextColor="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource White}}"/>
+
+            <Border StrokeShape="RoundRectangle 10" Padding="15" StrokeThickness="0"
+                    BackgroundColor="{AppThemeBinding Light={StaticResource Gray100}, Dark={StaticResource Gray600}}">
+                <VerticalStackLayout Spacing="12">
+                    <Grid ColumnDefinitions="*, Auto">
+                        <Label Grid.Column="0" Text="Health points restored per hour of sleep" VerticalOptions="Center" LineBreakMode="WordWrap" />
+                        <Entry Grid.Column="1" Text="{Binding RestoreHealthPointsPerHourOfSleepString}" Keyboard="Numeric" WidthRequest="80" HorizontalTextAlignment="End" />
+                    </Grid>
+                    <Grid ColumnDefinitions="*, Auto">
+                        <Label Grid.Column="0" Text="Pain tolerance points restored per hour of sleep" VerticalOptions="Center" LineBreakMode="WordWrap" />
+                        <Entry Grid.Column="1" Text="{Binding RestorePainTolerancePointsPerHourOfSleepString}" Keyboard="Numeric" WidthRequest="80" HorizontalTextAlignment="End" />
+                    </Grid>
+                    <Grid ColumnDefinitions="*, Auto">
+                        <Label Grid.Column="0" Text="Mana points restored per hour of sleep" VerticalOptions="Center" LineBreakMode="WordWrap" />
+                        <Entry Grid.Column="1" Text="{Binding RestoreManaPointsPerHourOfSleepString}" Keyboard="Numeric" WidthRequest="80" HorizontalTextAlignment="End" />
+                    </Grid>
+                    <Grid ColumnDefinitions="*, Auto">
+                        <Label Grid.Column="0" Text="Psi points restored per hour of sleep" VerticalOptions="Center" LineBreakMode="WordWrap" />
+                        <Entry Grid.Column="1" Text="{Binding RestorePsiPointsPerHourOfSleepString}" Keyboard="Numeric" WidthRequest="80" HorizontalTextAlignment="End" />
+                    </Grid>
+                </VerticalStackLayout>
+            </Border>
+
             <Border StrokeShape="RoundRectangle 10" Padding="15" StrokeThickness="0"
                     BackgroundColor="{AppThemeBinding Light={StaticResource Gray100}, Dark={StaticResource Gray600}}">
                 <Grid ColumnDefinitions="*, Auto">

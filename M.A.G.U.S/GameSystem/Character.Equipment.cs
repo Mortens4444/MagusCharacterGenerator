@@ -12,6 +12,8 @@ public partial class Character
     private Money money = new(0);
 
     public ObservableCollection<Thing> Equipment { get; init; } = [];
+    
+    public List<Thing> StartingEquipment { get; set; } = [];
 
     public Money Money
     {

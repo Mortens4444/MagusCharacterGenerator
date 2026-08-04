@@ -4,6 +4,7 @@ using M.A.G.U.S.Enums;
 using Mtf.Extensions;
 using Mtf.LanguageService.Enums;
 using System.Collections.ObjectModel;
+using System.Globalization;
 using System.Reflection;
 using System.Windows.Input;
 
@@ -34,6 +35,10 @@ internal sealed partial class SettingsViewModel : BaseViewModel
         OnPropertyChanged(nameof(MaxDiesCount));
         OnPropertyChanged(nameof(UseRaceClassRestrictions));
         OnPropertyChanged(nameof(CombatSimulatorMode));
+        OnPropertyChanged(nameof(RestoreHealthPointsPerHourOfSleepString));
+        OnPropertyChanged(nameof(RestorePainTolerancePointsPerHourOfSleepString));
+        OnPropertyChanged(nameof(RestoreManaPointsPerHourOfSleepString));
+        OnPropertyChanged(nameof(RestorePsiPointsPerHourOfSleepString));
         ToggleSettingCommand = new RelayCommand<object?>(ToggleSetting);
 
         var combatSimulatorModes = Enum.GetValues<CombatSimulatorMode>().Cast<CombatSimulatorMode>()
@@ -248,6 +253,63 @@ internal sealed partial class SettingsViewModel : BaseViewModel
             settingsService.SaveCombatSimulatorModeAsync(value);
             OnPropertyChanged();
         }
+    }
+
+    public string RestoreHealthPointsPerHourOfSleepString
+    {
+        get => settingsService.RestoreHealthPointsPerHourOfSleep.ToString(CultureInfo.InvariantCulture);
+        set
+        {
+            if (TryParseNonNegativeInt(value, out var parsed) && settingsService.RestoreHealthPointsPerHourOfSleep != parsed)
+            {
+                settingsService.SaveRestoreHealthPointsPerHourOfSleepAsync(parsed);
+                OnPropertyChanged();
+            }
+        }
+    }
+
+    public string RestorePainTolerancePointsPerHourOfSleepString
+    {
+        get => settingsService.RestorePainTolerancePointsPerHourOfSleep.ToString(CultureInfo.InvariantCulture);
+        set
+        {
+            if (TryParseNonNegativeInt(value, out var parsed) && settingsService.RestorePainTolerancePointsPerHourOfSleep != parsed)
+            {
+                settingsService.SaveRestorePainTolerancePointsPerHourOfSleepAsync(parsed);
+                OnPropertyChanged();
+            }
+        }
+    }
+
+    public string RestoreManaPointsPerHourOfSleepString
+    {
+        get => settingsService.RestoreManaPointsPerHourOfSleep.ToString(CultureInfo.InvariantCulture);
+        set
+        {
+            if (TryParseNonNegativeInt(value, out var parsed) && settingsService.RestoreManaPointsPerHourOfSleep != parsed)
+            {
+                settingsService.SaveRestoreManaPointsPerHourOfSleepAsync(parsed);
+                OnPropertyChanged();
+            }
+        }
+    }
+
+    public string RestorePsiPointsPerHourOfSleepString
+    {
+        get => settingsService.RestorePsiPointsPerHourOfSleep.ToString(CultureInfo.InvariantCulture);
+        set
+        {
+            if (TryParseNonNegativeInt(value, out var parsed) && settingsService.RestorePsiPointsPerHourOfSleep != parsed)
+            {
+                settingsService.SaveRestorePsiPointsPerHourOfSleepAsync(parsed);
+                OnPropertyChanged();
+            }
+        }
+    }
+
+    private static bool TryParseNonNegativeInt(string? value, out int parsed)
+    {
+        return Int32.TryParse(value, NumberStyles.Integer, CultureInfo.InvariantCulture, out parsed) && parsed >= 0;
     }
 
     private void ToggleSetting(object? parameter)

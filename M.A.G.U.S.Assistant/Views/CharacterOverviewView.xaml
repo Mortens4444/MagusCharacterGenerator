@@ -17,6 +17,14 @@
     <ScrollView>        
         <VerticalStackLayout Spacing="16" Padding="16">
 
+            <!-- Portrait -->
+            <Border Style="{StaticResource BoxBorder}">
+                <HorizontalStackLayout Spacing="12">
+                    <Image Source="{Binding PortraitImage}" HeightRequest="80" WidthRequest="80" Aspect="AspectFill" />
+                    <Button Text="Change portrait" Command="{Binding ChangePortraitCommand}" VerticalOptions="Center" />
+                </HorizontalStackLayout>
+            </Border>
+
             <!-- Name, race, class, alinment, experience level -->
             <Border Style="{StaticResource BoxBorder}">
                 <VerticalStackLayout>

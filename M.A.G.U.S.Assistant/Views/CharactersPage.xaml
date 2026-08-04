@@ -6,6 +6,7 @@
                 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
                 xmlns:vm="clr-namespace:M.A.G.U.S.Assistant.ViewModels"
                 xmlns:model="clr-namespace:M.A.G.U.S.GameSystem;assembly=M.A.G.U.S."
+                xmlns:converters="clr-namespace:M.A.G.U.S.Assistant.Converters"
                 x:Class="M.A.G.U.S.Assistant.Views.CharactersPage"
                 x:DataType="vm:CharactersViewModel"
                 Title="Characters"
@@ -16,6 +17,7 @@
         <ResourceDictionary>
             <conv:InverseBooleanConverter x:Key="InverseBooleanConverter" />
             <c:TranslationConverter x:Key="TranslationConverter" />
+            <converters:IsDefaultCharacterConverter x:Key="IsDefaultCharacterConverter" />
         </ResourceDictionary>
     </v:NotifierPage.Resources>
     
@@ -61,10 +63,10 @@
                                                               CommandParameter="{Binding .}"/>
                                     </Border.GestureRecognizers>
 
-                                    <Grid ColumnDefinitions="*, Auto">
+                                    <Grid ColumnDefinitions="*, Auto, Auto, Auto, Auto">
                                         <VerticalStackLayout Grid.Column="0" Spacing="2">
-                                            <Label Text="{Binding Name}" 
-                                                   FontAttributes="Bold" 
+                                            <Label Text="{Binding Name}"
+                                                   FontAttributes="Bold"
                                                    FontSize="18"/>
 
                                             <HorizontalStackLayout Spacing="5">
@@ -76,7 +78,41 @@
                                             <Label Text="{Binding BaseClass.Level, StringFormat='Level {0}'}"  FontSize="12" TextColor="{StaticResource Primary}"/>
                                         </VerticalStackLayout>
 
-                                        <ImageButton Grid.Column="1" Source="delete.png" HeightRequest="24" WidthRequest="24" VerticalOptions="Center"
+                                        <Label Grid.Column="1" FontSize="24" VerticalOptions="Center" HorizontalOptions="Center"
+                                               WidthRequest="36" HorizontalTextAlignment="Center"
+                                               TextColor="{StaticResource Primary}"
+                                               ToolTipProperties.Text="Default character (used for background story events)">
+                                            <Label.Text>
+                                                <MultiBinding Converter="{StaticResource IsDefaultCharacterConverter}">
+                                                    <Binding Path="Name" />
+                                                    <Binding Source="{RelativeSource AncestorType={x:Type vm:CharactersViewModel}}" Path="DefaultCharacterName" />
+                                                </MultiBinding>
+                                            </Label.Text>
+                                            <Label.GestureRecognizers>
+                                                <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type vm:CharactersViewModel}}, Path=SetDefaultCharacterCommand}"
+                                                                      CommandParameter="{Binding .}"/>
+                                            </Label.GestureRecognizers>
+                                        </Label>
+
+                                        <Label Grid.Column="2" Text="😴" FontSize="22" VerticalOptions="Center" HorizontalOptions="Center"
+                                               WidthRequest="36" HorizontalTextAlignment="Center"
+                                               ToolTipProperties.Text="Send to sleep (restores HP/PTP/Mana/Psi)">
+                                            <Label.GestureRecognizers>
+                                                <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type vm:CharactersViewModel}}, Path=SleepCommand}"
+                                                                      CommandParameter="{Binding .}"/>
+                                            </Label.GestureRecognizers>
+                                        </Label>
+
+                                        <Label Grid.Column="3" Text="🍗" FontSize="22" VerticalOptions="Center" HorizontalOptions="Center"
+                                               WidthRequest="36" HorizontalTextAlignment="Center"
+                                               ToolTipProperties.Text="Eat (clears hunger, consumes one food item)">
+                                            <Label.GestureRecognizers>
+                                                <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type vm:CharactersViewModel}}, Path=EatCommand}"
+                                                                      CommandParameter="{Binding .}"/>
+                                            </Label.GestureRecognizers>
+                                        </Label>
+
+                                        <ImageButton Grid.Column="4" Source="delete.png" HeightRequest="24" WidthRequest="24" VerticalOptions="Center"
                                                      Command="{Binding Source={RelativeSource AncestorType={x:Type vm:CharactersViewModel}}, Path=DeleteCharacterCommand}"
                                                      CommandParameter="{Binding .}">
                                         </ImageButton>

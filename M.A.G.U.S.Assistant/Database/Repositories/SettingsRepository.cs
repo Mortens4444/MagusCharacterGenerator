@@ -11,6 +11,8 @@ internal sealed class SettingsRepository(DatabaseContext context)
 
     public Task SaveInt32SettingAsync(string key, int value) => SaveSettingAsync(key, value.ToString(CultureInfo.InvariantCulture));
 
+    public Task SaveDoubleSettingAsync(string key, double value) => SaveSettingAsync(key, value.ToString(CultureInfo.InvariantCulture));
+
     public async Task<bool> GetBoolSettingAsync(string key, bool defaultValue = true)
     {
         var val = await GetSettingAsync(key).ConfigureAwait(false);
@@ -34,6 +36,22 @@ internal sealed class SettingsRepository(DatabaseContext context)
         }
 
         if (Int32.TryParse(val, NumberStyles.Any, CultureInfo.InvariantCulture, out int result))
+        {
+            return result;
+        }
+
+        return defaultValue;
+    }
+
+    public async Task<double> GetDoubleSettingAsync(string key, double defaultValue = 0)
+    {
+        var val = await GetSettingAsync(key).ConfigureAwait(false);
+        if (String.IsNullOrEmpty(val))
+        {
+            return defaultValue;
+        }
+
+        if (Double.TryParse(val, NumberStyles.Any, CultureInfo.InvariantCulture, out double result))
         {
             return result;
         }

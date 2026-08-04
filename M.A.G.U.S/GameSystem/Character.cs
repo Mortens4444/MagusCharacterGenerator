@@ -109,6 +109,8 @@ public partial class Character : Attacker, ICombatModifier, ILiving, IAbilities,
         {
             Qualifications.CollectionChanged += Qualifications_CollectionChanged;
         }
+
+        Died += OnDied;
     }
 
     private void UnsubscribeFromCollections()
@@ -121,6 +123,8 @@ public partial class Character : Attacker, ICombatModifier, ILiving, IAbilities,
         {
             Qualifications.CollectionChanged -= Qualifications_CollectionChanged;
         }
+
+        Died -= OnDied;
     }
 
     [OnDeserializing]

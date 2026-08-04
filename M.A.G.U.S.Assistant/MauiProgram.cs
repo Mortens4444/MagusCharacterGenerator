@@ -151,6 +151,7 @@ internal static class MauiProgram
         }
 
         builder.Services.AddSingleton<IRuneTranslator, RuneTranslator>();
+        builder.Services.AddSingleton<GameEventService>();
         
         builder.Services.AddSingleton<IBluetoothService>(sp =>
         {
@@ -215,6 +216,8 @@ internal static class MauiProgram
         {
             typeof(MainPageViewModel),
             typeof(AboutPageViewModel),
+            typeof(AmbushViewModel),
+            typeof(CharacterPortraitPickerViewModel),
             typeof(BestiaryViewModel),
             //typeof(CanvasDrawable),
             typeof(CharacterDetailsViewModel),
@@ -252,8 +255,10 @@ internal static class MauiProgram
         var pageTypes = new List<Type>
         {
             typeof(AboutPage),
+            typeof(AmbushPage),
             typeof(BestiaryPage),
             typeof(CharacterDetailsPage),
+            typeof(CharacterPortraitPickerPage),
             typeof(CharacterGeneratorPage),
             typeof(CharactersPage),
             typeof(ClassesPage),

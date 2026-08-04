@@ -18,6 +18,10 @@ internal sealed class Constants
     public const bool AutoIncreaseMana = false;
     public const bool AutoGenerateSkills = false;
     public const int MaxDiesCount = 1;
+    public const int RestoreHealthPointsPerHourOfSleep = 1;
+    public const int RestorePainTolerancePointsPerHourOfSleep = 2;
+    public const int RestoreManaPointsPerHourOfSleep = 1;
+    public const int RestorePsiPointsPerHourOfSleep = 1;
     public const bool UseRaceClassRestrictions = true;
     public const bool AssignmentTurnHistoryNewestOnTop = true;
     public const bool ShowRandomBeastWhenBestiaryPageOpened = true;

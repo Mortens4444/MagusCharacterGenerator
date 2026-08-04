@@ -251,10 +251,10 @@ public class DiceThrow
             ThrowType._2D100 => _2D100(hasLuckAmulet),
             ThrowType._3D100 => _3D100(hasLuckAmulet),
             ThrowType._20_To_70 => Range(20, 70, hasLuckAmulet),
-            ThrowType._1D6_Ranged => _1D6_RangedAttack(hasLuckAmulet),
-            ThrowType._2D6_Ranged => _2D6_RangedAttack(hasLuckAmulet),
             ThrowType._1D10_Ranged => _1D10_RangedAttack(hasLuckAmulet),
             ThrowType._2D10_Ranged => _2D10_RangedAttack(hasLuckAmulet),
+            ThrowType._1D6_Ranged => _1D6_RangedAttack(hasLuckAmulet),
+            ThrowType._2D6_Ranged => _2D6_RangedAttack(hasLuckAmulet),
             ThrowType._3D6_Ranged => _3D6_RangedAttack(hasLuckAmulet),
             ThrowType._4D6_Ranged => _4D6_RangedAttack(hasLuckAmulet),
             ThrowType._5D6_Ranged => _5D6_RangedAttack(hasLuckAmulet),
@@ -268,7 +268,7 @@ public class DiceThrow
             ThrowType._13D6_Ranged => _13D6_RangedAttack(hasLuckAmulet),
             ThrowType._14D6_Ranged => _14D6_RangedAttack(hasLuckAmulet),
             ThrowType._15D6_Ranged => _15D6_RangedAttack(hasLuckAmulet),
-            _ => throw new ArgumentOutOfRangeException(nameof(throwType))
+            _ => throw new ArgumentOutOfRangeException(nameof(throwType), $"Invalid throw type: {throwType}")
         };
         var result = throwResult + modifier;
         return specialTraing ? SpecialTraining(result, hasLuckAmulet) : result;
@@ -322,9 +322,9 @@ public class DiceThrow
             ThrowType._2D100 => new Range { Min = 2, Max = 200 },
             ThrowType._3D100 => new Range { Min = 3, Max = 300 },
             ThrowType._20_To_70 => new Range { Min = 20, Max = 70 },
-            ThrowType._1D6_Ranged => new Range { Min = 1, Max = 6 },
             ThrowType._1D10_Ranged => new Range { Min = 1, Max = 10 },
             ThrowType._2D10_Ranged => new Range { Min = 2, Max = 20 },
+            ThrowType._1D6_Ranged => new Range { Min = 1, Max = 6 },
             ThrowType._2D6_Ranged => new Range { Min = 2, Max = 12 },
             ThrowType._3D6_Ranged => new Range { Min = 3, Max = 18 },
             ThrowType._4D6_Ranged => new Range { Min = 4, Max = 24 },
@@ -339,7 +339,7 @@ public class DiceThrow
             ThrowType._13D6_Ranged => new Range { Min = 13, Max = 78 },
             ThrowType._14D6_Ranged => new Range { Min = 14, Max = 84 },
             ThrowType._15D6_Ranged => new Range { Min = 15, Max = 90 },
-            _ => throw new ArgumentOutOfRangeException(nameof(throwType))
+            _ => throw new ArgumentOutOfRangeException(nameof(throwType), $"Invalid throw type: {throwType}")
         };
         result.Min += modifier;
         result.Max += modifier;

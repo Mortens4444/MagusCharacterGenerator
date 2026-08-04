@@ -70,7 +70,10 @@
                         <Border Padding="8" Margin="4">
                             <StackLayout Spacing="6">
 
-                                <Label Text="{Binding Character.Name}" FontAttributes="Bold" />
+                                <HorizontalStackLayout Spacing="8">
+                                    <Image Source="{Binding Character.RandomImage}" HeightRequest="48" WidthRequest="48" Aspect="AspectFill" />
+                                    <Label Text="{Binding Character.Name}" FontAttributes="Bold" VerticalOptions="Center" />
+                                </HorizontalStackLayout>
                                 <!--<Label Text="{Binding Character.Speed, StringFormat='Speed: {0} m/s'}" FontSize="12" />-->
 
                                 <Picker ItemsSource="{Binding AvailableAttackModes}"
@@ -78,11 +81,16 @@
                                         ItemDisplayBinding="{Binding ., Converter={StaticResource AttackModeNameConverter}}"
                                         Title="Attack mode" />
 
-                                <CollectionView ItemsSource="{Binding Enemies}" MaximumHeightRequest="100">
+                                <CollectionView ItemsSource="{Binding Enemies}" MaximumHeightRequest="140">
                                     <CollectionView.ItemTemplate>
-                                        <DataTemplate x:DataType="b:Creature">
-                                            <Grid ColumnDefinitions="*,Auto">
-                                                <Label Text="{Binding Name, Converter={StaticResource TranslationConverter}}" Margin="30,0,0,0" />
+                                        <!-- No x:DataType here on purpose: an enemy can be a Creature or a Character
+                                             (see EncounterViewModel.LoadBestiaryAsync) - both expose RandomImage/Name,
+                                             but not through a shared Attacker-level member, so this binds by
+                                             reflection against whichever concrete type each item actually is. -->
+                                        <DataTemplate>
+                                            <Grid ColumnDefinitions="Auto,*,Auto" Padding="0,4">
+                                                <Image Grid.Column="0" Source="{Binding RandomImage}" HeightRequest="36" WidthRequest="36" Aspect="AspectFill" />
+                                                <Label Grid.Column="1" Text="{Binding Name, Converter={StaticResource TranslationConverter}}" Margin="8,0,0,0" VerticalOptions="Center" />
                                                 <!--<Button MaximumHeightRequest="10" MaximumWidthRequest="10" Text="X" />--> <!--Need Delete Enemy from assignment function with nicer delte buttons, nice text UTF-8 delete char-->
                                                 <!--<Label Grid.Column="1" Text="{Binding Distance, StringFormat='{0} m'}" />-->
                                                 <!--<Label Grid.Column="1" Text="{Binding Status}" />-->
@@ -128,7 +136,7 @@
                                     <CollectionView.ItemTemplate>
                                         <DataTemplate x:DataType="vm:TurnAttackViewModel">
                                             <Grid Padding="6" ColumnDefinitions="5*,5*,3*,7*">
-                                                <Label Grid.Column="0" Text="{Binding Attacker}" />
+                                                <Image Grid.Column="0" Source="{Binding AttackerImage}" HeightRequest="32" WidthRequest="32" Aspect="AspectFill" HorizontalOptions="Start" />
                                                 <Label Grid.Column="1" Text="{Binding Result}" />
                                                 <Label Grid.Column="2" Text="{Binding Direction}" />
                                                 <Label Grid.Column="3" Text="{Binding HitLocation}" />

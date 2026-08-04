@@ -4,6 +4,7 @@ using Android.Content.PM;
 using Android.OS;
 using AndroidX.Core.App;
 using AndroidX.Core.Content;
+using M.A.G.U.S.Assistant.Services;
 
 namespace M.A.G.U.S.Assistant;
 
@@ -14,6 +15,43 @@ public class MainActivity : MauiAppCompatActivity
     {
         base.OnCreate(savedInstanceState);
         RequestNotificationPermission();
+    }
+
+    protected override void OnResume()
+    {
+        base.OnResume();
+        CheckPendingInteractiveEvent();
+    }
+
+    // Runs on every resume - covers both a cold start from the notification and the app simply
+    // being brought back to the foreground while the background service kept running - without
+    // needing to reason about Intent extras or MAUI Shell readiness timing.
+    private static void CheckPendingInteractiveEvent()
+    {
+        try
+        {
+            var gameEventService = MauiProgram.Services.GetRequiredService<GameEventService>();
+            if (!gameEventService.HasPendingInteractiveEvent)
+            {
+                return;
+            }
+
+            MainThread.BeginInvokeOnMainThread(async () =>
+            {
+                try
+                {
+                    await gameEventService.ResolvePendingInteractiveEventIfAnyAsync().ConfigureAwait(false);
+                }
+                catch
+                {
+                    // best-effort; never let a background event check crash the activity
+                }
+            });
+        }
+        catch
+        {
+            // best-effort; never let a background event check crash the activity
+        }
     }
 
     private void RequestNotificationPermission()

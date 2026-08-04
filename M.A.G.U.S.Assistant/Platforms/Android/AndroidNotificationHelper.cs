@@ -41,7 +41,8 @@ internal static class AndroidNotificationHelper
         string title,
         string message,
         bool ongoing = false,
-        PendingIntent? actionIntent = null)
+        PendingIntent? actionIntent = null,
+        PendingIntent? contentIntent = null)
     {
         using var style = new NotificationCompat.BigTextStyle();
         style.BigText(message);
@@ -59,6 +60,11 @@ internal static class AndroidNotificationHelper
         if (actionIntent is not null)
         {
             builder.AddAction(0, Lng.Elem("Stop"), actionIntent);
+        }
+
+        if (contentIntent is not null)
+        {
+            builder.SetContentIntent(contentIntent);
         }
 
         return builder.Build();

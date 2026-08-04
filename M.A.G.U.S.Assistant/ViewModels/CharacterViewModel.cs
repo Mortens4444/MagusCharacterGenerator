@@ -178,6 +178,7 @@ internal partial class CharacterViewModel(IPrintService printService, ISoundPlay
             OnPropertyChanged(nameof(MaxHealthPoints));
             OnPropertyChanged(nameof(MaxPainTolerancePoints));
             OnPropertyChanged(nameof(PainToleranceModifierFormula));
+            OnPropertyChanged(nameof(DeathCount));
 
             OnPropertyChanged(nameof(CanAllocateCombatModifier));
             OnPropertyChanged(nameof(MaxInitiateValue));
@@ -376,6 +377,7 @@ internal partial class CharacterViewModel(IPrintService printService, ISoundPlay
     public int Erudition => Character?.Erudition ?? 0;
     public int MaxHealthPoints => Character?.MaxHealthPoints ?? 0;
     public int MaxPainTolerancePoints => Character?.MaxPainTolerancePoints ?? 0;
+    public int DeathCount => Character?.DeathCount ?? 0;
 
     public int ArmorClass => Character?.Armor?.ArmorClass ?? 0;
     public int ArmorCheckPenalty => Character?.Armor?.ArmorCheckPenalty ?? 0;
@@ -464,6 +466,7 @@ internal partial class CharacterViewModel(IPrintService printService, ISoundPlay
     
     public ObservableCollection<Thing> Equipment => Character?.Equipment ?? [];
     public string TotalEquipmentWeight => Character?.TotalEquipmentWeight ?? String.Empty;
+    public string PortraitImage => Character?.RandomImage ?? String.Empty;
 
     public View? CurrentView
     {
@@ -667,6 +670,29 @@ internal partial class CharacterViewModel(IPrintService printService, ISoundPlay
         DecrementDefenseCommand.NotifyCanExecuteChanged();
         IncrementAimCommand.NotifyCanExecuteChanged();
         DecrementAimCommand.NotifyCanExecuteChanged();
+    }
+
+    [RelayCommand]
+    public async Task ChangePortraitAsync()
+    {
+        if (Character == null)
+        {
+            return;
+        }
+
+        await PreloadService.Instance.InitializeAsync().ConfigureAwait(true);
+
+        var pickerViewModel = new CharacterPortraitPickerViewModel(Character.Images);
+        var pickerPage = new CharacterPortraitPickerPage(pickerViewModel);
+
+        await ShellNavigationService.ShowModalPageAsync(pickerPage).ConfigureAwait(true);
+        var result = await pickerPage.ResultTask.ConfigureAwait(true);
+
+        if (result != null)
+        {
+            Character.Images = [.. result];
+            OnPropertyChanged(nameof(PortraitImage));
+        }
     }
 
     [RelayCommand]

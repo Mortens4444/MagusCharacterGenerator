@@ -51,7 +51,7 @@
                         <Picker ItemsSource="{Binding AvailableWeapons}"
                                 SelectedItem="{Binding SelectedWeapon}"
                                 ItemDisplayBinding="{Binding Name, Converter={StaticResource TranslationConverter}}"
-                                Title="Select weapon" WidthRequest="220" />
+                                Title="Select weapon" HorizontalOptions="Fill" />
                     </StackLayout>
 
                     <!-- Language (common languages) -->

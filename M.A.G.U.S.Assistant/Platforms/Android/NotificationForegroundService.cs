@@ -2,7 +2,7 @@
 using Android.Content;
 using Android.OS;
 using AndroidX.Core.App;
-using Mtf.Extensions.Services;
+using M.A.G.U.S.Assistant.Services;
 using Mtf.LanguageService;
 using System.Runtime.Versioning;
 
@@ -24,31 +24,6 @@ internal sealed class NotificationForegroundService : Service
     }
 
     private const double TimerIntervalMinutes = 60;
-    private static readonly string[] notifications = [
-        "You heard a strange noise. In the Battle menu, you can find out what it was...",
-        "You can send your opinion about the game, or what should be improved, to the email address found in the About menu.",
-        "If the gods of luck are on your side today, you will soon find out in the Dice menu.",
-        "You found the tracks of an unknown creature in the mud. In the Bestiary menu, you can look up what you are facing.",
-        "- Stupid dog, what are you snarling at! (Last words)",
-        "- Relax, it is just a kobold. How dangerous can it be? (Last words)",
-        "- I think it is asleep. I will go over and poke it. (Last words)",
-        "- Let us not waste magic on it. I will handle it with a stick. (Last words)",
-        "- What trap? I do not see any trap. (Last words)",
-        "- I bet this drink is a healing potion. (Last words)",
-        "- The necromancer is a person too. Let us talk it out with him. (Last words)",
-        "- Come on, statues do not move. (Last words)",
-        "- Do not worry, I can swim in armor. (Last words)",
-        "- This bridge looks completely stable. (Last words)",
-        "- Who is Darton, and why should I be afraid of him? (Last words)",
-        "- We do not need a watch. No one comes through here anyway. (Last words)",
-        "- I will distract the giant. (Last words)",
-        "- According to the map, this way is shorter. (Last words)",
-        "- The sound came from inside the wall. I will put my ear to it. (Last words)",
-        "- This wolf is too skinny to be a problem. (Last words)",
-        "- The orc is just bluffing. (Last words)",
-        "- Relax, I know what I am doing. (Last words)",
-        "- If you are going to be picky, I will eat it! (Last words)"
-    ];
 
     public override StartCommandResult OnStartCommand(Intent? intent, StartCommandFlags flags, int startId)
     {
@@ -63,9 +38,10 @@ internal sealed class NotificationForegroundService : Service
             CreateNotificationChannel();
         }
 
-        var notificationIndex = RandomProvider.GetSecureRandomInt(0, notifications.Length);
-
-        using var foregroundNotification = CreateNotification("M.A.G.U.S. Assistant", Lng.Elem(notifications[notificationIndex]));
+        // Kept flavor-only and synchronous here: Android requires StartForeground to be called
+        // promptly, so the real (DB-backed) GameEventService roll only happens on the recurring
+        // timer below, which has no such time budget constraint.
+        using var foregroundNotification = CreateNotification("M.A.G.U.S. Assistant", Lng.Elem(GameEventService.PickFlavorOnlyMessage()));
 
         if (foregroundNotification is null)
         {
@@ -125,11 +101,28 @@ internal sealed class NotificationForegroundService : Service
             while (!token.IsCancellationRequested && await periodicTimer.WaitForNextTickAsync(token).ConfigureAwait(false))
             {
                 var id = Interlocked.Increment(ref notificationId);
-
-                var notificationIndex = RandomProvider.GetSecureRandomInt(0, notifications.Length);
-                ShowNotification("M.A.G.U.S. Assistant", Lng.Elem(notifications[notificationIndex]), id);
+                await ShowRolledEventNotificationAsync(id).ConfigureAwait(false);
             }
         }, token);
+    }
+
+    private async Task ShowRolledEventNotificationAsync(int id)
+    {
+        string title;
+        string message;
+
+        try
+        {
+            var gameEventService = MauiProgram.Services.GetRequiredService<GameEventService>();
+            (title, message) = await gameEventService.RollAndApplyAsync().ConfigureAwait(false);
+        }
+        catch (Exception)
+        {
+            title = "M.A.G.U.S. Assistant";
+            message = Lng.Elem(GameEventService.PickFlavorOnlyMessage());
+        }
+
+        ShowNotification(title, message, id);
     }
 
     private void ShowNotification(string title, string message, int id)
@@ -160,7 +153,12 @@ internal sealed class NotificationForegroundService : Service
         }
 
         var stopPendingIntent = PendingIntent.GetService(this, 0, stopIntent, pendingIntentFlags);
-        return AndroidNotificationHelper.CreateNotification(this, AndroidNotificationHelper.BackgroundChannelId, title, message, ongoing: true, actionIntent: stopPendingIntent);
+
+        using var contentIntent = new Intent(this, typeof(MainActivity));
+        contentIntent.SetFlags(ActivityFlags.SingleTop | ActivityFlags.ReorderToFront);
+        var contentPendingIntent = PendingIntent.GetActivity(this, 0, contentIntent, pendingIntentFlags);
+
+        return AndroidNotificationHelper.CreateNotification(this, AndroidNotificationHelper.BackgroundChannelId, title, message, ongoing: true, actionIntent: stopPendingIntent, contentIntent: contentPendingIntent);
     }
 
     [SupportedOSPlatform("android26.0")]

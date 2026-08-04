@@ -1,4 +1,5 @@
 ﻿using M.A.G.U.S.Assistant.Extensions;
+using M.A.G.U.S.Bestiary;
 using M.A.G.U.S.Enums;
 using M.A.G.U.S.GameSystem;
 using M.A.G.U.S.GameSystem.Turn;
@@ -18,6 +19,13 @@ internal sealed class TurnAttackViewModel(int roundNumber, InitiativeEntry initi
     public int Initiative => initiativeEntry?.FinalInitiative ?? 0;
 
     public string Attacker => initiativeEntry?.Attacker?.Source.GetName() ?? String.Empty;
+
+    public string AttackerImage => initiativeEntry?.Attacker?.Source switch
+    {
+        Creature creature => creature.RandomImage,
+        Character character => character.RandomImage,
+        _ => String.Empty
+    };
 
     public string Direction => attack != null ? Lng.Elem(attack.Direction.GetDescription()) : String.Empty; // Should be in InitiateEntry?
 

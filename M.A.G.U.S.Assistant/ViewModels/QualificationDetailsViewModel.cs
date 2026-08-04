@@ -38,21 +38,39 @@ internal partial class QualificationDetailsViewModel : BaseViewModel
     public Weapon? SelectedWeapon
     {
         get => selectedWeapon;
-        set => SetProperty(ref selectedWeapon, value);
+        set
+        {
+            if (SetProperty(ref selectedWeapon, value))
+            {
+                UpdateDerived();
+            }
+        }
     }
 
     public IList<Language> AvailableLanguages => availableLanguages;
     public Language? SelectedLanguage
     {
         get => selectedLanguage;
-        set => SetProperty(ref selectedLanguage, value);
+        set
+        {
+            if (SetProperty(ref selectedLanguage, value))
+            {
+                UpdateDerived();
+            }
+        }
     }
 
     public IList<AntientLanguage> AvailableAntientLanguages => availableAntientLanguages;
     public AntientLanguage? SelectedAntientLanguage
     {
         get => selectedAntientLanguage;
-        set => SetProperty(ref selectedAntientLanguage, value);
+        set
+        {
+            if (SetProperty(ref selectedAntientLanguage, value))
+            {
+                UpdateDerived();
+            }
+        }
     }
 
     public int[] AvailableLanguageLevels => availableLanguageLevels;
@@ -142,14 +160,11 @@ internal partial class QualificationDetailsViewModel : BaseViewModel
         bool learnable;
         int requiredQp;
 
-        if (IsLanguageLore && Qualification is LanguageLore ll)
-        {
-            ll.LanguageLevel = SelectedLanguageLevel;
-        }
-
         if (Character != null)
         {
-            learnable = Character.CanLearn(Qualification, SelectedLevel, out requiredQp);
+            // Probe with a configured copy, so the selected weapon / language is taken into account
+            // when deciding whether this level is still learnable and how much QP it costs.
+            learnable = Character.CanLearn(CreateQualificationToLearn(), SelectedLevel, out requiredQp);
         }
         else
         {
@@ -173,24 +188,45 @@ internal partial class QualificationDetailsViewModel : BaseViewModel
             return;
         }
 
-        if (IsWeaponQualification && Qualification is WeaponQualification wq)
+        Learned?.Invoke(this, new QualificationLearnedEventArgs(CreateQualificationToLearn(), SelectedLevel));
+        UpdateDerived();
+    }
+
+    /// <summary>
+    /// Qualification comes from the shared PreloadService catalogue, so it must never be mutated directly -
+    /// otherwise every character (and every further weapon / language choice) would see the change.
+    /// This returns a fresh copy configured with the current selection.
+    /// </summary>
+    private Qualification CreateQualificationToLearn()
+    {
+        Qualification qualificationToLearn;
+        try
+        {
+            qualificationToLearn = Activator.CreateInstance(Qualification.GetType()) as Qualification ?? Qualification;
+        }
+        catch (Exception ex) when (ex is MissingMethodException or System.Reflection.TargetInvocationException)
+        {
+            // No usable public parameterless constructor - fall back to the catalogue instance.
+            qualificationToLearn = Qualification;
+        }
+
+        if (qualificationToLearn is WeaponQualification wq)
         {
             wq.Weapon = SelectedWeapon;
         }
 
-        if (IsLanguageLore && Qualification is LanguageLore ll)
+        if (qualificationToLearn is LanguageLore ll)
         {
             ll.Language = SelectedLanguage;
             ll.LanguageLevel = SelectedLanguageLevel;
         }
 
-        if (IsAncientTongueLore && Qualification is AncientTongueLore atl && SelectedAntientLanguage.HasValue)
+        if (qualificationToLearn is AncientTongueLore atl && SelectedAntientLanguage.HasValue)
         {
             atl.Language = SelectedAntientLanguage.Value;
         }
 
-        Learned?.Invoke(this, new QualificationLearnedEventArgs(Qualification, SelectedLevel));
-        UpdateDerived();
+        return qualificationToLearn;
     }
 
     protected virtual void OnClosed()

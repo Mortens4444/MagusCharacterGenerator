@@ -169,7 +169,7 @@ public abstract class Class : ImageOwner, IClass
         }
     }
 
-    public virtual List<Thing> StartingEquipment { get; init; } = [];
+    public virtual List<Thing> StartingEquipment { get; set; } = [];
 
     public virtual Alignment Alignment => Alignment.Order;
 

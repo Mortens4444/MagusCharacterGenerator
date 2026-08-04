@@ -24,6 +24,14 @@ internal sealed class SettingsService : ISettings
     public bool AssignmentTurnHistoryNewestOnTop { get; private set; }
     public bool ShowRandomBeastWhenBestiaryPageOpened { get; private set; }
     public CombatSimulatorMode CombatSimulatorMode { get; private set; }
+    public string? DefaultCharacterName { get; private set; }
+    public double ActiveMarketPriceMultiplier { get; private set; } = 1.0;
+    public string? PendingEventKind { get; private set; }
+    public string? PendingEventPayload { get; private set; }
+    public int RestoreHealthPointsPerHourOfSleep { get; private set; }
+    public int RestorePainTolerancePointsPerHourOfSleep { get; private set; }
+    public int RestoreManaPointsPerHourOfSleep { get; private set; }
+    public int RestorePsiPointsPerHourOfSleep { get; private set; }
 
     private const string KeyLanguage = "Setting_Language";
 
@@ -44,6 +52,14 @@ internal sealed class SettingsService : ISettings
     private const string KeyAssignmentTurnHistoryNewestOnTop = "Setting_AssignmentTurnHistoryNewestOnTop";
     private const string KeyShowRandomBeastWhenBestiaryPageOpened = "Setting_ShowRandomBeastWhenBestiaryPageOpened";
     private const string KeyCombatSimulatorMode = "Setting_CombatSimulatorMode";
+    private const string KeyDefaultCharacterName = "Setting_DefaultCharacterName";
+    private const string KeyActiveMarketPriceMultiplier = "Setting_ActiveMarketPriceMultiplier";
+    private const string KeyPendingEventKind = "Setting_PendingEventKind";
+    private const string KeyPendingEventPayload = "Setting_PendingEventPayload";
+    private const string KeyRestoreHealthPointsPerHourOfSleep = "Setting_RestoreHealthPointsPerHourOfSleep";
+    private const string KeyRestorePainTolerancePointsPerHourOfSleep = "Setting_RestorePainTolerancePointsPerHourOfSleep";
+    private const string KeyRestoreManaPointsPerHourOfSleep = "Setting_RestoreManaPointsPerHourOfSleep";
+    private const string KeyRestorePsiPointsPerHourOfSleep = "Setting_RestorePsiPointsPerHourOfSleep";
 
     public SettingsService(SettingsRepository settingsRepository)
     {
@@ -70,6 +86,22 @@ internal sealed class SettingsService : ISettings
         AssignmentTurnHistoryNewestOnTop = await settingsRepository.GetBoolSettingAsync(KeyAssignmentTurnHistoryNewestOnTop, Constants.AssignmentTurnHistoryNewestOnTop).ConfigureAwait(false);
         ShowRandomBeastWhenBestiaryPageOpened = await settingsRepository.GetBoolSettingAsync(KeyShowRandomBeastWhenBestiaryPageOpened, Constants.ShowRandomBeastWhenBestiaryPageOpened).ConfigureAwait(false);
         CombatSimulatorMode = await settingsRepository.GetEnumSettingAsync<CombatSimulatorMode>(KeyCombatSimulatorMode, Constants.CombatSimulatorMode).ConfigureAwait(false);
+
+        var defaultCharacterName = await settingsRepository.GetSettingAsync(KeyDefaultCharacterName).ConfigureAwait(false);
+        DefaultCharacterName = String.IsNullOrEmpty(defaultCharacterName) ? null : defaultCharacterName;
+
+        ActiveMarketPriceMultiplier = await settingsRepository.GetDoubleSettingAsync(KeyActiveMarketPriceMultiplier, 1.0).ConfigureAwait(false);
+
+        var pendingEventKind = await settingsRepository.GetSettingAsync(KeyPendingEventKind).ConfigureAwait(false);
+        PendingEventKind = String.IsNullOrEmpty(pendingEventKind) ? null : pendingEventKind;
+
+        var pendingEventPayload = await settingsRepository.GetSettingAsync(KeyPendingEventPayload).ConfigureAwait(false);
+        PendingEventPayload = String.IsNullOrEmpty(pendingEventPayload) ? null : pendingEventPayload;
+
+        RestoreHealthPointsPerHourOfSleep = await settingsRepository.GetInt32SettingAsync(KeyRestoreHealthPointsPerHourOfSleep, Constants.RestoreHealthPointsPerHourOfSleep).ConfigureAwait(false);
+        RestorePainTolerancePointsPerHourOfSleep = await settingsRepository.GetInt32SettingAsync(KeyRestorePainTolerancePointsPerHourOfSleep, Constants.RestorePainTolerancePointsPerHourOfSleep).ConfigureAwait(false);
+        RestoreManaPointsPerHourOfSleep = await settingsRepository.GetInt32SettingAsync(KeyRestoreManaPointsPerHourOfSleep, Constants.RestoreManaPointsPerHourOfSleep).ConfigureAwait(false);
+        RestorePsiPointsPerHourOfSleep = await settingsRepository.GetInt32SettingAsync(KeyRestorePsiPointsPerHourOfSleep, Constants.RestorePsiPointsPerHourOfSleep).ConfigureAwait(false);
     }
 
     public Task SaveAddCombatValueAsync(bool value)
@@ -174,5 +206,49 @@ internal sealed class SettingsService : ISettings
     public Task SaveDefaultLanguageAsync(Language language)
     {
         return settingsRepository.SaveSettingAsync(KeyLanguage, language.ToString());
+    }
+
+    public Task SetDefaultCharacterNameAsync(string? name)
+    {
+        DefaultCharacterName = name;
+        return settingsRepository.SaveSettingAsync(KeyDefaultCharacterName, name ?? String.Empty);
+    }
+
+    public Task SaveActiveMarketPriceMultiplierAsync(double value)
+    {
+        ActiveMarketPriceMultiplier = value;
+        return settingsRepository.SaveDoubleSettingAsync(KeyActiveMarketPriceMultiplier, value);
+    }
+
+    public async Task SavePendingEventAsync(string? kind, string? payload)
+    {
+        PendingEventKind = kind;
+        PendingEventPayload = payload;
+        await settingsRepository.SaveSettingAsync(KeyPendingEventKind, kind ?? String.Empty).ConfigureAwait(false);
+        await settingsRepository.SaveSettingAsync(KeyPendingEventPayload, payload ?? String.Empty).ConfigureAwait(false);
+    }
+
+    public Task SaveRestoreHealthPointsPerHourOfSleepAsync(int value)
+    {
+        RestoreHealthPointsPerHourOfSleep = value;
+        return settingsRepository.SaveInt32SettingAsync(KeyRestoreHealthPointsPerHourOfSleep, value);
+    }
+
+    public Task SaveRestorePainTolerancePointsPerHourOfSleepAsync(int value)
+    {
+        RestorePainTolerancePointsPerHourOfSleep = value;
+        return settingsRepository.SaveInt32SettingAsync(KeyRestorePainTolerancePointsPerHourOfSleep, value);
+    }
+
+    public Task SaveRestoreManaPointsPerHourOfSleepAsync(int value)
+    {
+        RestoreManaPointsPerHourOfSleep = value;
+        return settingsRepository.SaveInt32SettingAsync(KeyRestoreManaPointsPerHourOfSleep, value);
+    }
+
+    public Task SaveRestorePsiPointsPerHourOfSleepAsync(int value)
+    {
+        RestorePsiPointsPerHourOfSleep = value;
+        return settingsRepository.SaveInt32SettingAsync(KeyRestorePsiPointsPerHourOfSleep, value);
     }
 }

@@ -68,11 +68,11 @@
                     <VerticalStackLayout>
                         <Label Text="Combat values" Style="{StaticResource HeaderLabel}"/>
                         <Grid ColumnDefinitions="*, *" RowDefinitions="Auto, Auto, Auto">
-                            <mc:EntryWithLabel Label="Initiator value" Text="{Binding InitiateBaseValue}" IsEnabled="False" />
-                            <mc:EntryWithLabel Label="Attack value" Text="{Binding AttackBaseValue}" IsEnabled="False" Grid.Column="1" />
-                            <mc:EntryWithLabel Label="Defense value" Text="{Binding DefenseBaseValue}" IsEnabled="False" Grid.Row="1" />
-                            <mc:EntryWithLabel Label="Aim value" Text="{Binding AimBaseValue}" IsEnabled="False" Grid.Row="1" Grid.Column="1" />
-                            <mc:EntryWithLabel Label="CM/level" Text="{Binding CombatValueModifierPerLevel}" IsEnabled="False" Grid.Row="2" />
+                            <mc:EntryWithLabel Label="Initiator value" Text="{Binding InitiateBaseValue}" IsReadOnly="True" />
+                            <mc:EntryWithLabel Label="Attack value" Text="{Binding AttackBaseValue}" IsReadOnly="True" Grid.Column="1" />
+                            <mc:EntryWithLabel Label="Defense value" Text="{Binding DefenseBaseValue}" IsReadOnly="True" Grid.Row="1" />
+                            <mc:EntryWithLabel Label="Aim value" Text="{Binding AimBaseValue}" IsReadOnly="True" Grid.Row="1" Grid.Column="1" />
+                            <mc:EntryWithLabel Label="CM/level" Text="{Binding CombatValueModifierPerLevel}" IsReadOnly="True" Grid.Row="2" />
                         </Grid>
                     </VerticalStackLayout>
                 </Border>

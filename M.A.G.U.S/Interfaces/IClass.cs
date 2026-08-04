@@ -36,7 +36,7 @@ public interface IClass : IAttacker, IAbilities
 
     bool AddQualificationPointsOnFirstLevel { get; }
 
-    List<Thing> StartingEquipment { get; }
+    List<Thing> StartingEquipment { get; set; }
 
     QualificationList Qualifications { get; }
 

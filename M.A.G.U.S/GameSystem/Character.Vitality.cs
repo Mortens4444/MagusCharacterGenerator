@@ -42,6 +42,14 @@ public partial class Character
         }
     }
 
+    public int DeathCount { get; set; }
+
+    private void OnDied(object? sender, EventArgs e)
+    {
+        DeathCount++;
+        OnPropertyChanged(nameof(DeathCount));
+    }
+
     private void CalculateLifePoints()
     {
         ActualHealthPoints = BaseClass.BaseLifePoints;

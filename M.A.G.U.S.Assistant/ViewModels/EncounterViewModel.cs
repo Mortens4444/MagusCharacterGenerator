@@ -112,17 +112,28 @@ internal sealed partial class EncounterViewModel(ISettings settings, CharacterSe
 
     public EncounterState EncounterState { get; private set; }
 
+    /// <summary>
+    /// Populates the enemy picker with the bestiary plus every saved character (loaded as fresh,
+    /// independent instances - not the same objects used for "my side" - so a character can be
+    /// pitted against another character, or itself, without the two sharing HP/state).
+    /// </summary>
     public async Task LoadBestiaryAsync()
     {
         try
         {
             var creatures = PreloadService.Instance.Creatures;
+            var characters = await characterService.GetAllAsync().ConfigureAwait(true);
+
             await MainThread.InvokeOnMainThreadAsync(() =>
             {
                 AvailableEnemies.Clear();
                 foreach (var creature in creatures)
                 {
                     AvailableEnemies.Add(creature);
+                }
+                foreach (var character in characters)
+                {
+                    AvailableEnemies.Add(character);
                 }
             }).ConfigureAwait(true);
         }
@@ -186,7 +197,38 @@ internal sealed partial class EncounterViewModel(ISettings settings, CharacterSe
     [RelayCommand]
     private void PickRandomEnemy()
     {
-        SelectedEnemy = EnemyProvider.PickWeightedRandom(AvailableEnemies, e => e.Occurrence.GetWeight());
+        // Restricted to creatures: a character showing up as a random monster encounter would be
+        // a confusing surprise, so picking a specific person to fight stays a deliberate choice.
+        var randomizableEnemies = AvailableEnemies.OfType<Creature>().ToList();
+        SelectedEnemy = EnemyProvider.PickWeightedRandom(randomizableEnemies, e => e.Occurrence.GetWeight());
+    }
+
+    /// <summary>
+    /// Seeds this encounter with a specific character and enemy template rather than the
+    /// usual manual selection, for flows (like a background-rolled ambush) that already
+    /// know exactly who is fighting what.
+    /// </summary>
+    public void StartAmbush(Character character, Creature enemyTemplate)
+    {
+        character.LostConsciousness += LostConsciousnessHandler;
+        character.Died += DieHandler;
+        character.SetMaxValues();
+
+        Characters.Add(character);
+        var assignment = new AssignmentViewModel(settings, character);
+        Assignments.Add(assignment);
+        SelectedAssignment = assignment;
+
+        var existingInAvailable = AvailableCharacters.FirstOrDefault(c => c.Name == character.Name);
+        if (existingInAvailable != null)
+        {
+            AvailableCharacters.Remove(existingInAvailable);
+        }
+
+        var setupVm = new EnemySetupViewModel(enemyTemplate);
+        ProcessConfirmedEnemies(setupVm.ConfigItems.ToList(), setupVm.MaxSimultaneousAttacks);
+
+        RunTurnCommand.NotifyCanExecuteChanged();
     }
 
     [RelayCommand(CanExecute = nameof(CanAddEnemy))]

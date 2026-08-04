@@ -17,6 +17,12 @@ internal sealed partial class EncounterPage : NotifierPage
         BindingContext = viewModel;
     }
 
+    /// <summary>
+    /// When true, skips the normal OnAppearing auto-setup (random character/enemy pick) so a
+    /// pre-seeded encounter (e.g. a background-rolled ambush) isn't immediately overwritten.
+    /// </summary>
+    public bool SuppressAutoInitialize { get; set; }
+
     protected override void OnBindingContextChanged()
     {
         if (viewModel is not null)
@@ -88,6 +94,12 @@ internal sealed partial class EncounterPage : NotifierPage
         }
 
         firstRun = false;
+
+        if (SuppressAutoInitialize)
+        {
+            return;
+        }
+
         _ = InitializeSafelyAsync();
     }
 

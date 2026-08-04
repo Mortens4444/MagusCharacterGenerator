@@ -70,19 +70,39 @@ public partial class Character
 
     public bool HasQualification(Qualification qualification, QualificationLevel qualificationLevel)
     {
-        if (qualification is AncientTongueLore ancientTongueLore)
+        return FindQualification(qualification, qualificationLevel) != null;
+    }
+
+    /// <summary>
+    /// Returns the already owned qualification that represents the same skill as <paramref name="qualification"/>,
+    /// optionally restricted to a given level. Returns null when the character does not have it.
+    /// </summary>
+    private Qualification? FindQualification(Qualification qualification, QualificationLevel? qualificationLevel = null)
+    {
+        return Qualifications.FirstOrDefault(q => IsSameQualification(q, qualification)
+            && (qualificationLevel == null || q.QualificationLevel == qualificationLevel));
+    }
+
+    /// <summary>
+    /// Two qualifications describe the same skill when they are of the same concrete type and their
+    /// discriminator (language, ancient language or weapon type) matches as well.
+    /// </summary>
+    private static bool IsSameQualification(Qualification owned, Qualification other)
+    {
+        if (owned.GetType() != other.GetType())
         {
-            return Qualifications.Any(q => q is AncientTongueLore atl && atl.Language == ancientTongueLore.Language && q.QualificationLevel == qualificationLevel);
+            return false;
         }
-        if (qualification is LanguageLore languageLore)
+
+        return (owned, other) switch
         {
-            return Qualifications.Any(q => q is LanguageLore ll && ll.Language == languageLore.Language && q.QualificationLevel == qualificationLevel);
-        }
-        if (qualification is WeaponQualification weaponQualification)
-        {
-            return Qualifications.Any(q => q is WeaponQualification wq && wq.Weapon == weaponQualification.Weapon && q.QualificationLevel == qualificationLevel);
-        }
-        return Qualifications.Any(q => q.Name == qualification.Name && q.QualificationLevel == qualificationLevel);
+            (AncientTongueLore ownedAtl, AncientTongueLore otherAtl) => ownedAtl.Language == otherAtl.Language,
+            (LanguageLore ownedLl, LanguageLore otherLl) => ownedLl.Language == otherLl.Language,
+            // Weapons are compared by their type, not by their per-instance Id, because every Weapon
+            // instance gets a fresh Guid. This is consistent with WeaponQualification.Key.
+            (WeaponQualification ownedWq, WeaponQualification otherWq) => ownedWq.Weapon?.GetType() == otherWq.Weapon?.GetType(),
+            _ => owned.Name == other.Name
+        };
     }
 
     public bool CanLearn(Qualification qualification, QualificationLevel qualificationLevel)
@@ -175,6 +195,26 @@ public partial class Character
             throw new InvalidOperationException("Cannot learn this qualification");
         }
         QualificationPoints -= qp;
+
+        var existingQualification = qualification is ICanHaveMany ? null : FindQualification(qualification);
+        if (existingQualification != null)
+        {
+            // Already owned at base level: upgrade it in place instead of adding a second entry,
+            // otherwise the character would show both the base and the master level of the same skill.
+            existingQualification.QualificationLevel = qualificationLevel;
+            if (qualificationLevel == QualificationLevel.Master && existingQualification.MasterQualificationLevel < 1)
+            {
+                existingQualification.MasterQualificationLevel = 1;
+            }
+            OnPropertyChanged(nameof(Qualifications));
+            return;
+        }
+
+        qualification.QualificationLevel = qualificationLevel;
+        if (qualificationLevel == QualificationLevel.Master && qualification.MasterQualificationLevel < 1)
+        {
+            qualification.MasterQualificationLevel = 1;
+        }
         Qualifications.Add(qualification);
     }
 
