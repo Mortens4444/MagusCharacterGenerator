@@ -1,0 +1,316 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFrameworks>net10.0-android;net10.0-ios;net10.0-maccatalyst</TargetFrameworks>
+    <TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('windows'))">$(TargetFrameworks);net10.0-windows10.0.19041.0</TargetFrameworks>
+    <!-- Uncomment to also build the tizen app. You will need to install tizen by following this: https://github.com/Samsung/Tizen.NET -->
+    <!-- <TargetFrameworks>$(TargetFrameworks);net10.0-tizen</TargetFrameworks> -->
+    <!-- Note for MacCatalyst:
+		The default runtime is maccatalyst-x64, except in Release config, in which case the default is maccatalyst-x64;maccatalyst-arm64.
+		When specifying both architectures, use the plural <RuntimeIdentifiers> instead of the singular <RuntimeIdentifier>.
+		The Mac App Store will NOT accept apps with ONLY maccatalyst-arm64 indicated;
+		either BOTH runtimes must be indicated or ONLY macatalyst-x64. -->
+    <!-- For example: <RuntimeIdentifiers>maccatalyst-x64;maccatalyst-arm64</RuntimeIdentifiers> -->
+    <OutputType>Exe</OutputType>
+    <RootNamespace>MAGUS.Assistant</RootNamespace>
+    <UseMaui>true</UseMaui>
+    <SingleProject>true</SingleProject>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <!--<AndroidSupportedAbis>arm64-v8a</AndroidSupportedAbis>-->
+    <AndroidSupportedAbis>arm64-v8a;x86_64</AndroidSupportedAbis>
+    <!--<AndroidSupportedAbis>arm64-v8a;armeabi-v7a;x86;x86_64</AndroidSupportedAbis>-->
+    <!-- Display name -->
+    <ApplicationTitle>MAGUS Assistant</ApplicationTitle>
+    <!-- App Identifier -->
+    <ApplicationId>com.mortens.MAGUS.Assistant</ApplicationId>
+    <!-- Versions -->
+    <MajorVersion>1</MajorVersion>
+    <MinorVersion>100</MinorVersion>
+    <BuildNumber>0</BuildNumber>
+    <PatchNumber>0</PatchNumber>
+    <FileVersion>$(MajorVersion).$(MinorVersion).$(BuildNumber).$(PatchNumber)</FileVersion>
+    <AssemblyVersion>$(FileVersion)</AssemblyVersion>
+    <ApplicationDisplayVersion>$(MajorVersion).$(MinorVersion).$(BuildNumber)</ApplicationDisplayVersion>
+    <PackageVersion>$(ApplicationDisplayVersion)</PackageVersion>
+    <ApplicationVersion>$(MajorVersion)</ApplicationVersion>
+    <WarningLevel>9999</WarningLevel>
+    <EnforceCodeStyleInBuild>True</EnforceCodeStyleInBuild>
+    <AnalysisLevel>latest-all</AnalysisLevel>
+    <WindowsPackageType>None</WindowsPackageType>
+    <Company>Mortens</Company>
+    <Authors>Mortens</Authors>
+    <IncludeSymbols>True</IncludeSymbols>
+    <UseWindowsForms>false</UseWindowsForms>
+    <UseWPF>false</UseWPF>
+    <RunAOTCompilation>false</RunAOTCompilation>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <JavaMaxHeapSize>1G</JavaMaxHeapSize>
+    <AndroidLinkMode>None</AndroidLinkMode>
+    <AndroidEnableMultiDex>true</AndroidEnableMultiDex>
+    <SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios'">16.1</SupportedOSPlatformVersion>
+    <SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'maccatalyst'">15.0</SupportedOSPlatformVersion>
+    <SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android'">23.0</SupportedOSPlatformVersion>
+    <SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">10.0.17763.0</SupportedOSPlatformVersion>
+    <TargetPlatformMinVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">10.0.17763.0</TargetPlatformMinVersion>
+    <SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'tizen'">6.5</SupportedOSPlatformVersion>
+    <DefaultLanguage>en-US</DefaultLanguage>
+    <LangVersion>preview</LangVersion>
+  </PropertyGroup>
+  <!--<PropertyGroup>
+    <RuntimeIdentifiers>
+      android-x64;android-arm64
+    </RuntimeIdentifiers>
+  </PropertyGroup>-->
+  <PropertyGroup Condition="'$(Configuration)'=='Release' AND '$(TargetFramework)'=='net10.0-android'">
+    <PublishTrimmed>false</PublishTrimmed>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)' == 'Release'">
+    <AndroidCreatePackagePerAbi>false</AndroidCreatePackagePerAbi>
+    <AndroidKeyStore>True</AndroidKeyStore>
+    <AndroidSigningKeyAlias>h4ckw1thm3</AndroidSigningKeyAlias>
+    <AndroidSigningKeyStore>C:\Work\KeyStore\H4ckW1thM3\keystore.jks</AndroidSigningKeyStore>
+    <AndroidSigningKeyPass>file:C:\Work\KeyStore\H4ckW1thM3\AndroidSigningKeyPass.txt</AndroidSigningKeyPass>
+    <AndroidSigningStorePass>file:C:\Work\KeyStore\H4ckW1thM3\AndroidSigningStorePass.txt</AndroidSigningStorePass>
+    <!--<AndroidSigningKeyAlias>magus_assistant</AndroidSigningKeyAlias>
+    <AndroidSigningKeyStore>C:\Work\KeyStore\MAGUS_Assistant\keystore.jks</AndroidSigningKeyStore>
+    <AndroidSigningKeyPass>file:C:\Work\KeyStore\MAGUS_Assistant\AndroidSigningKeyPass.txt</AndroidSigningKeyPass>
+    <AndroidSigningStorePass>file:C:\Work\KeyStore\MAGUS_Assistant\AndroidSigningStorePass.txt</AndroidSigningStorePass>-->
+    <AndroidPackageFormats>apk</AndroidPackageFormats>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net10.0-android|AnyCPU'">
+    <JavaMaximumHeapSize>2G</JavaMaximumHeapSize>
+    <AndroidEnableMultiDex>True</AndroidEnableMultiDex>
+    <EmbedAssembliesIntoApk>True</EmbedAssembliesIntoApk>
+    <PublishTrimmed>false</PublishTrimmed>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net10.0-android|AnyCPU'">
+    <JavaMaximumHeapSize>2G</JavaMaximumHeapSize>
+    <AndroidEnableMultiDex>True</AndroidEnableMultiDex>
+    <EmbedAssembliesIntoApk>True</EmbedAssembliesIntoApk>
+    <PublishTrimmed>false</PublishTrimmed>
+  </PropertyGroup>
+  <ItemGroup>
+    <!-- App Icon -->
+    <MauiIcon Include="Resources\AppIcon\appicon.png" ForegroundFile="Resources\AppIcon\appicon.png" Color="#000000" />
+    <!-- Splash Screen -->
+    <MauiSplashScreen Include="Resources\Splash\splash.png" Color="#000000" BaseSize="128,128" />
+    <!-- Images -->
+    <!--<MauiImage Include="Resources\Images\**\*" />-->
+    <MauiImage Include="Resources\Images\*.png" />
+    <MauiImage Include="Resources\Images\Accomodation\*.png" />
+    <MauiImage Include="Resources\Images\Animals\*.png" />
+    <MauiImage Include="Resources\Images\Armors\*.png" />
+    <MauiImage Include="Resources\Images\Bestiary\*.png" />
+    <MauiImage Include="Resources\Images\Classes\*.png" />
+    <MauiImage Include="Resources\Images\Clothes\*.png" />
+    <MauiImage Include="Resources\Images\Debauchery\*.png" />
+    <MauiImage Include="Resources\Images\Food\*.png" />
+    <MauiImage Include="Resources\Images\Gemstones\*.png" />
+    <MauiImage Include="Resources\Images\MagicalItems\*.png" />
+    <MauiImage Include="Resources\Images\Menu\*.png" />
+    <MauiImage Include="Resources\Images\Other\*.png" />
+    <MauiImage Include="Resources\Images\Poisons\*.png" />
+    <MauiImage Include="Resources\Images\Qualifications\*.png" />
+    <MauiImage Include="Resources\Images\Races\*.png" />
+    <MauiImage Include="Resources\Images\Shields\*.png" />
+    <MauiImage Include="Resources\Images\Trappings\*.png" />
+    <MauiImage Include="Resources\Images\Travelling\*.png" />
+    <MauiImage Include="Resources\Images\Weapons\CrushingWeapons\*.png" />
+    <MauiImage Include="Resources\Images\Weapons\OtherWeapons\*.png" />
+    <MauiImage Include="Resources\Images\Weapons\RangedWeapons\*.png" />
+    <MauiImage Include="Resources\Images\Weapons\Spears\*.png" />
+    <MauiImage Include="Resources\Images\Weapons\StabbingWeapons\*.png" />
+    <!-- Sounds -->
+    <EmbeddedResource Include="Resources\Raw\**" />
+    <!-- Custom Fonts -->
+    <MauiFont Include="Resources\Fonts\*" />
+    <!-- Raw Assets (also remove the "Resources\Raw" prefix) -->
+    <!--<MauiAsset Include="Resources\Raw\**" LogicalName="%(RecursiveDir)%(Filename)%(Extension)" />-->
+  </ItemGroup>
+  <ItemGroup>
+    <MauiImage Remove="Resources\Images\images_manifest.txt" />
+    <EmbeddedResource Include="Resources\Images\images_manifest.txt" />
+    <None Remove="Platforms\Android\Resources\values\styles.xml" />
+  </ItemGroup>
+  <ItemGroup Condition="'$(TargetFramework)' == 'net10.0-android'">
+    <AndroidProguardConfig Include="proguard.cfg" />
+    <!-- Pin newer than the version Microsoft.Maui.Controls 10.0.90 pulls transitively (1.12.0.5),
+         to pick up the latest edge-to-edge fixes for Android 15's deprecated setStatusBarColor/
+         setNavigationBarColor warnings. See material-components/material-components-android#4732.
+         Requires minSdk 23 (see SupportedOSPlatformVersion above) - it pulls in AndroidX Lifecycle
+         2.10.0.2, which needs API 23+. -->
+    <PackageReference Include="Xamarin.Google.Android.Material" Version="1.14.0.6" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Maui.Controls" Version="10.0.90" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="10.0.10" />
+    <PackageReference Include="Microsoft.Maui.Graphics" Version="10.0.90" />
+    <PackageReference Include="Microsoft.Maui.Graphics.Skia" Version="10.0.90" />
+    <PackageReference Include="Mtf.Maui.Controls" Version="4.0.63" />
+    <PackageReference Include="Mtf.Maui.Drawing" Version="1.0.4" />
+    <PackageReference Include="Mtf.MAUI.LanguageService" Version="3.0.95" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.4" />
+    <PackageReference Include="Plugin.Maui.Audio" Version="4.0.0" />
+    <PackageReference Include="sqlite-net-pcl" Version="1.11.285" />
+    <PackageReference Include="SQLitePCLRaw.bundle_green" Version="2.1.11" />
+    <!-- SQLitePCLRaw.bundle_green 2.1.11 still pins the native e_sqlite3 builds to a version vulnerable to
+         CVE-2025-6965 (GHSA-2m69-gcr7-jv3q). Force the patched native builds until bundle_green itself is republished. -->
+    <PackageReference Include="SQLitePCLRaw.lib.e_sqlite3" Version="3.53.3" />
+    <PackageReference Include="SQLitePCLRaw.lib.e_sqlite3.android" Version="2.1.12" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\MAGUS\MAGUS.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Update="Views\CharacterGeneratorPage.xaml.cs">
+      <DependentUpon>CharacterGeneratorPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\CharacterDetailsPage.xaml.cs">
+      <DependentUpon>CharacterDetailsPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\AbilitiesView.xaml.cs">
+      <DependentUpon>AbilitiesView.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\HealthView.xaml.cs">
+      <DependentUpon>HealthView.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\QualificationsView.xaml.cs">
+      <DependentUpon>QualificationsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\PsiManaMagicResistanceView.xaml.cs">
+      <DependentUpon>PsiManaMagicResistanceView.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\ItemDetailsPage.xaml.cs">
+      <DependentUpon>ItemDetailsPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\EncounterPage.xaml.cs">
+      <DependentUpon>EncounterPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\MapPage.xaml.cs">
+      <DependentUpon>MapPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\ObjectObserverPage.xaml.cs">
+      <DependentUpon>ObjectObserverPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\BestiaryPage.xaml.cs">
+      <DependentUpon>BestiaryPage.xaml</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <MauiXaml Update="Views\AboutPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </MauiXaml>
+    <MauiXaml Update="Views\CharacterDetailsView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </MauiXaml>
+    <MauiXaml Update="Views\CharacterGeneratorPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </MauiXaml>
+    <MauiXaml Update="Views\CharacterOverviewView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </MauiXaml>
+    <MauiXaml Update="Views\CharactersPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </MauiXaml>
+    <MauiXaml Update="Views\ClassesPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </MauiXaml>
+    <MauiXaml Update="Views\CharacterDetailsPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </MauiXaml>
+    <MauiXaml Update="Views\AbilitiesView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </MauiXaml>
+    <MauiXaml Update="Views\HealthView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </MauiXaml>
+    <MauiXaml Update="Views\EquipmentView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </MauiXaml>
+    <MauiXaml Update="Views\QualificationsView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </MauiXaml>
+    <MauiXaml Update="Views\PsiManaMagicResistanceView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </MauiXaml>
+    <MauiXaml Update="Views\CombatValuesView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </MauiXaml>
+    <MauiXaml Update="Views\EnemySetupPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </MauiXaml>
+    <MauiXaml Update="Views\ItemDetailsPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </MauiXaml>
+    <MauiXaml Update="Views\CreatureDetailsPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </MauiXaml>
+    <MauiXaml Update="Views\DiceRollPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </MauiXaml>
+    <MauiXaml Update="Views\ImagePreviewPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </MauiXaml>
+    <MauiXaml Update="Views\ImagesPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </MauiXaml>
+    <MauiXaml Update="Views\LanguagesPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </MauiXaml>
+    <MauiXaml Update="Views\EncounterPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </MauiXaml>
+    <MauiXaml Update="Views\MapPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </MauiXaml>
+    <MauiXaml Update="Views\ObjectObserverPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </MauiXaml>
+    <MauiXaml Update="Views\PaintWizardPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </MauiXaml>
+    <MauiXaml Update="Views\QualificationDetailsPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </MauiXaml>
+    <MauiXaml Update="Views\QualificationsPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </MauiXaml>
+    <MauiXaml Update="Views\RacesPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </MauiXaml>
+    <MauiXaml Update="Views\RollFormulaPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </MauiXaml>
+    <MauiXaml Update="Views\BestiaryPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </MauiXaml>
+    <MauiXaml Update="Views\RunesPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </MauiXaml>
+    <MauiXaml Update="Views\SearchListPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </MauiXaml>
+    <MauiXaml Update="Views\SearchListView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </MauiXaml>
+    <MauiXaml Update="Views\SettingsPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </MauiXaml>
+    <MauiXaml Update="Views\SoundPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </MauiXaml>
+    <MauiXaml Update="Views\StorytellingPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </MauiXaml>
+  </ItemGroup>
+  <Target Name="GenerateImageManifest" BeforeTargets="BeforeBuild">
+    <ItemGroup>
+      <AllImages Include="@(MauiImage)" />
+    </ItemGroup>
+    <PropertyGroup>
+      <ImageManifestPath>$(ProjectDir)Resources\Images\images_manifest.txt</ImageManifestPath>
+    </PropertyGroup>
+    <!--<WriteLinesToFile File="$(ImageManifestPath)" Lines="@(AllImages->'%(RelativeDir)%(Filename)%(Extension)')" Overwrite="true" Encoding="UTF-8" />-->
+    <WriteLinesToFile File="$(ImageManifestPath)" Lines="@(AllImages-&gt;'%(Filename)%(Extension)')" Overwrite="true" Encoding="UTF-8" />
+  </Target>
+</Project>

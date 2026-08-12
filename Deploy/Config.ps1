@@ -3,7 +3,7 @@
 # Base folders
 $Solution = "MagusCharacterGenerator"
 $SolutionRoot = "F:\Work\$Solution"
-$Project = "M.A.G.U.S.Assistant"
+$Project = "MAGUS.Assistant"
 
 # Project paths
 $CsprojRelative = "..\$Project\$Project.csproj"

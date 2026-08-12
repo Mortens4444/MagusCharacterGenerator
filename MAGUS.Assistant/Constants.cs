@@ -1,0 +1,31 @@
+﻿using MAGUS.Enums;
+using Mtf.LanguageService.Enums;
+
+namespace MAGUS.Assistant;
+
+internal sealed class Constants
+{
+    public const string ServiceGuid = "2EE056EE-5939-4EC4-8593-BC606EE1BF9E";
+
+    public const bool AddCombatValueModifierPointsOnFirstLevelForAllClass = true;
+    public const bool AddPainTolerancePointsOnFirstLevelForAllClass = true;
+    public const bool AddQualificationPointsOnFirstLevelForAllClass = true;
+    public const bool AddManaPointsOnFirstLevelForAllClass = false;
+    public const bool AddPsiPointsOnFirstLevelForAllClass = false;
+    public const bool AutoDistributeCombatValues = false;
+    public const bool AutoDistributeQualificationPoints = false;
+    public const bool AutoIncreasePainTolerance = false;
+    public const bool AutoIncreaseMana = false;
+    public const bool AutoGenerateSkills = false;
+    public const int MaxDiesCount = 1;
+    public const int RestoreHealthPointsPerHourOfSleep = 1;
+    public const int RestorePainTolerancePointsPerHourOfSleep = 2;
+    public const int RestoreManaPointsPerHourOfSleep = 1;
+    public const int RestorePsiPointsPerHourOfSleep = 1;
+    public const bool UseRaceClassRestrictions = true;
+    public const bool AssignmentTurnHistoryNewestOnTop = true;
+    public const bool ShowRandomBeastWhenBestiaryPageOpened = true;
+    public const CombatSimulatorMode CombatSimulatorMode = CombatSimulatorMode.SemiAuto;
+
+    public const Language DefaultLanguage = Language.Hungarian;
+}

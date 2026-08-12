@@ -1,0 +1,32 @@
+﻿using MAGUS.Enums;
+using MAGUS.GameSystem.Attributes;
+using MAGUS.Models;
+
+namespace MAGUS.Bestiary.Undead;
+
+public sealed class Carnomak : LivingDead
+{
+    public Carnomak()
+    {
+        Occurrence = Occurrence.Rare;
+        Size = Size.Human;
+        PlacesOfOccurrence = TerrainType.SaltWater;
+
+        DefenseValue = 15;
+        InitiateValue = 15;
+
+        HealthPoints = 5;
+
+        Intelligence = Enums.Intelligence.Average;
+        Alignment = Alignment.Death;
+        ExperiencePoints = 150;
+    }
+
+    [DiceThrow(ThrowType._2D10)]
+    public override int GetNumberAppearing() => DiceThrow._2D10();
+    
+    [DiceThrowModifier(0)]
+    public override int GetDamage() => 0;
+
+    public override List<Speed> Speeds => [new Speed(TravelMode.InWater, 60)];
+}

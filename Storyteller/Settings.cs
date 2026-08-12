@@ -1,5 +1,5 @@
-﻿using M.A.G.U.S.Enums;
-using M.A.G.U.S.Interfaces;
+﻿using MAGUS.Enums;
+using MAGUS.Interfaces;
 
 namespace Storyteller;
 

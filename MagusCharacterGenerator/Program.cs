@@ -1,8 +1,8 @@
-﻿using M.A.G.U.S.Classes.Fighter;
-using M.A.G.U.S.Classes.Slan;
-using M.A.G.U.S.Classes.Sorcerer;
-using M.A.G.U.S.GameSystem;
-using M.A.G.U.S.Races;
+﻿using MAGUS.Classes.Fighter;
+using MAGUS.Classes.Slan;
+using MAGUS.Classes.Sorcerer;
+using MAGUS.GameSystem;
+using MAGUS.Races;
 
 namespace MagusCharacterGenerator;
 

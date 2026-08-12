@@ -1,0 +1,14 @@
+﻿using MAGUS.GameSystem.Qualifications;
+
+namespace MAGUS.Qualifications.Laical;
+
+public class TrapSetting(QualificationLevel qualificationLevel = QualificationLevel.Base, int level = 1) : Qualification(qualificationLevel, level), ILaicalQualification
+{
+    public override string Name => "Trap setting";
+
+    public override int QpToBaseQualification => 10;
+
+    public override int QpToMasterQualification => 20;
+
+    public TrapSetting() : this(QualificationLevel.Base) { }
+}

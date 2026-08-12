@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<v:NotifierPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:v="clr-namespace:Mtf.LanguageService.MAUI.Views;assembly=Mtf.LanguageService.MAUI"
+             xmlns:vm="clr-namespace:MAGUS.Assistant.ViewModels"
+             xmlns:m="clr-namespace:MAGUS.Assistant.Models"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:mc="clr-namespace:Mtf.Maui.Controls;assembly=Mtf.Maui.Controls"
+             x:Class="MAGUS.Assistant.Views.SoundPage"
+             x:ClassModifier="internal"
+             Title="Sounds"
+             x:DataType="vm:SoundViewModel">
+
+    <Grid Padding="12" RowDefinitions="Auto,*,Auto" RowSpacing="8">
+
+        <mc:EntryWithLabel Label="Search"
+                       Text="{Binding SearchText}"
+                       Grid.Row="0" />
+
+        <CollectionView Grid.Row="1"
+                        ItemsSource="{Binding FilteredSounds}"
+                        SelectionMode="Single"
+                        SelectedItem="{Binding SelectedSound}">
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="m:SoundItem">
+                    <Grid Padding="8">
+                        <Label Text="{Binding DisplayName}" />
+                    </Grid>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+        <HorizontalStackLayout Grid.Row="2" Spacing="5" HorizontalOptions="Center" Margin="5">
+            <Button Text="Play" Command="{Binding PlayCommand}" IsEnabled="{Binding CanPlay}" />
+            <Button Text="Stop" Command="{Binding StopCommand}" IsEnabled="{Binding IsPlaying}" />
+            <Label Text="Volume" VerticalOptions="Center" />
+            <Slider Minimum="0" Maximum="1" Value="{Binding Volume}" WidthRequest="140" />
+        </HorizontalStackLayout>
+    </Grid>
+</v:NotifierPage>

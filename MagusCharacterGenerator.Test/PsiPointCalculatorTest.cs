@@ -1,12 +1,12 @@
-﻿using M.A.G.U.S.Classes.Fighter;
-using M.A.G.U.S.Classes.Slan;
-using M.A.G.U.S.Classes.Sorcerer;
-using M.A.G.U.S.GameSystem;
-using M.A.G.U.S.Interfaces;
-using M.A.G.U.S.Races;
-using M.A.G.U.S.Utils;
+﻿using MAGUS.Classes.Fighter;
+using MAGUS.Classes.Slan;
+using MAGUS.Classes.Sorcerer;
+using MAGUS.GameSystem;
+using MAGUS.Interfaces;
+using MAGUS.Races;
+using MAGUS.Utils;
 
-namespace M.A.G.U.S.Test
+namespace MAGUS.Test
 {
     [TestFixture]
     public class PsiPointCalculatorTest

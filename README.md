@@ -1,6 +1,6 @@
-# M.A.G.U.S. Assistant
+# MAGUS Assistant
 
-A companion MAUI app and tools for managing M.A.G.U.S. characters, encounters and small-scale combat simulation.
+A companion MAUI app and tools for managing MAGUS characters, encounters and small-scale combat simulation.
 Designed for developers and GMs who want an offline helper (character sheets, encounter runner, turn history, simple AI enemies, translations, etc.).
 
 ---
@@ -39,7 +39,7 @@ dotnet restore
 dotnet build -f net10.0-windows10.0.19041.0
 
 # run locally (Windows)
-dotnet run -f net10.0-windows10.0.19041.0 --project M.A.G.U.S.Assistant
+dotnet run -f net10.0-windows10.0.19041.0 --project MAGUS.Assistant
 
 # run for Android (emulator) - adjust TFM and project as needed
 dotnet build -f net10.0-android
@@ -60,13 +60,13 @@ dotnet test
 
 ```
 /src
-  /M.A.G.U.S.Assistant          # MAUI app (views, viewmodels, pages)
-  /M.A.G.U.S.GameSystem         # Domain: Character, Creature, Combat logic
-  /M.A.G.U.S.Bestiary           # Creature definitions
+  /MAGUS.Assistant          # MAUI app (views, viewmodels, pages)
+  /MAGUS.GameSystem         # Domain: Character, Creature, Combat logic
+  /MAGUS.Bestiary           # Creature definitions
   /Mtf.Maui.Controls            # Shared custom MAUI controls (NumericUpDownWithLabel, EntryWithLabel,...)
   /Mtf.LanguageService.MAUI     # Runtime UI translator & converters
 /tests
-  /M.A.G.U.S.Tests              # Unit and integration tests (NUnit)
+  /MAGUS.Tests              # Unit and integration tests (NUnit)
 ```
 
 Key types you’ll see:

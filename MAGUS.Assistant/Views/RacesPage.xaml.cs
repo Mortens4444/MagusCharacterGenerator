@@ -1,0 +1,20 @@
+using MAGUS.Assistant.ViewModels;
+using Mtf.LanguageService.MAUI.Views;
+
+namespace MAGUS.Assistant.Views;
+
+internal sealed partial class RacesPage : NotifierPage
+{
+    public RacesPage(RacesViewModel viewModel)
+    {
+        InitializeComponent();
+        BindingContext = viewModel;
+    }
+
+    protected override void OnAppearing()
+    {
+        base.OnAppearing();
+        var vm = BindingContext as RacesViewModel ?? throw new ArgumentNullException(nameof(BindingContext));
+        vm.SelectedRace ??= vm.FilteredRaces.First();
+    }
+}

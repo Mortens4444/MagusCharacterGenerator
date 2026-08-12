@@ -1,10 +1,10 @@
 ﻿{
   "$id": "1",
-  "$type": "M.A.G.U.S.GameSystem.Character, M.A.G.U.S.",
+  "$type": "MAGUS.GameSystem.Character, MAGUS",
   "Name": "Mirena",
   "BaseClass": {
     "$id": "2",
-    "$type": "M.A.G.U.S.Classes.Sorcerer.Witch, M.A.G.U.S.",
+    "$type": "MAGUS.Classes.Sorcerer.Witch, MAGUS",
     "Strength": 11,
     "Quickness": 9,
     "Dexterity": 14,
@@ -32,11 +32,11 @@
     "AddPainToleranceOnFirstLevel": false,
     "AddQualificationPointsOnFirstLevel": true,
     "Qualifications": {
-      "$type": "M.A.G.U.S.Qualifications.QualificationList, M.A.G.U.S.",
+      "$type": "MAGUS.Qualifications.QualificationList, MAGUS",
       "$values": [
         {
           "$id": "3",
-          "$type": "M.A.G.U.S.Qualifications.Combat.WeaponUse, M.A.G.U.S.",
+          "$type": "MAGUS.Qualifications.Combat.WeaponUse, MAGUS",
           "Weapon": null,
           "Name": "Weapon use",
           "QpToBaseQualification": 3,
@@ -46,11 +46,11 @@
           "BaseQualificationLevel": 1,
           "MasterQualificationLevel": 0,
           "QpToMaxBaseQualification": null,
-          "QualificationType": "M.A.G.U.S.Qualifications.Combat.WeaponUse, M.A.G.U.S., Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
+          "QualificationType": "MAGUS.Qualifications.Combat.WeaponUse, MAGUS, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
         },
         {
           "$id": "4",
-          "$type": "M.A.G.U.S.Qualifications.Combat.WeaponThrowing, M.A.G.U.S.",
+          "$type": "MAGUS.Qualifications.Combat.WeaponThrowing, MAGUS",
           "Weapon": null,
           "Name": "Weapon throwing",
           "QpToBaseQualification": 4,
@@ -60,11 +60,11 @@
           "BaseQualificationLevel": 1,
           "MasterQualificationLevel": 0,
           "QpToMaxBaseQualification": null,
-          "QualificationType": "M.A.G.U.S.Qualifications.Combat.WeaponThrowing, M.A.G.U.S., Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
+          "QualificationType": "MAGUS.Qualifications.Combat.WeaponThrowing, MAGUS, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
         },
         {
           "$id": "5",
-          "$type": "M.A.G.U.S.Qualifications.Scientific.Psi.PsiPyarron, M.A.G.U.S.",
+          "$type": "MAGUS.Qualifications.Scientific.Psi.PsiPyarron, MAGUS",
           "PsiKind": 0,
           "Name": "Psi, Pyarron",
           "QpToBaseQualification": 10,
@@ -74,11 +74,11 @@
           "BaseQualificationLevel": 0,
           "MasterQualificationLevel": 1,
           "QpToMaxBaseQualification": null,
-          "QualificationType": "M.A.G.U.S.Qualifications.Scientific.Psi.PsiPyarron, M.A.G.U.S., Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
+          "QualificationType": "MAGUS.Qualifications.Scientific.Psi.PsiPyarron, MAGUS, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
         },
         {
           "$id": "6",
-          "$type": "M.A.G.U.S.Qualifications.Scientific.LanguageLore, M.A.G.U.S.",
+          "$type": "MAGUS.Qualifications.Scientific.LanguageLore, MAGUS",
           "Language": 0,
           "Name": "Language lore",
           "QpToBaseQualification": 1,
@@ -88,11 +88,11 @@
           "QualificationLevel": 0,
           "BaseQualificationLevel": 1,
           "MasterQualificationLevel": 0,
-          "QualificationType": "M.A.G.U.S.Qualifications.Scientific.LanguageLore, M.A.G.U.S., Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
+          "QualificationType": "MAGUS.Qualifications.Scientific.LanguageLore, MAGUS, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
         },
         {
           "$id": "7",
-          "$type": "M.A.G.U.S.Qualifications.Scientific.LanguageLore, M.A.G.U.S.",
+          "$type": "MAGUS.Qualifications.Scientific.LanguageLore, MAGUS",
           "Language": 0,
           "Name": "Language lore",
           "QpToBaseQualification": 1,
@@ -102,11 +102,11 @@
           "QualificationLevel": 0,
           "BaseQualificationLevel": 1,
           "MasterQualificationLevel": 0,
-          "QualificationType": "M.A.G.U.S.Qualifications.Scientific.LanguageLore, M.A.G.U.S., Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
+          "QualificationType": "MAGUS.Qualifications.Scientific.LanguageLore, MAGUS, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
         },
         {
           "$id": "8",
-          "$type": "M.A.G.U.S.Qualifications.Scientific.Herbalism, M.A.G.U.S.",
+          "$type": "MAGUS.Qualifications.Scientific.Herbalism, MAGUS",
           "QpToBaseQualification": 5,
           "QpToMasterQualification": 35,
           "Category": "Scientific",
@@ -115,11 +115,11 @@
           "BaseQualificationLevel": 1,
           "MasterQualificationLevel": 0,
           "QpToMaxBaseQualification": null,
-          "QualificationType": "M.A.G.U.S.Qualifications.Scientific.Herbalism, M.A.G.U.S., Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
+          "QualificationType": "MAGUS.Qualifications.Scientific.Herbalism, MAGUS, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
         },
         {
           "$id": "9",
-          "$type": "M.A.G.U.S.Qualifications.Scientific.ReadingAndWriting, M.A.G.U.S.",
+          "$type": "MAGUS.Qualifications.Scientific.ReadingAndWriting, MAGUS",
           "Name": "Reading/writing",
           "QpToBaseQualification": 5,
           "QpToMasterQualification": 25,
@@ -128,11 +128,11 @@
           "BaseQualificationLevel": 1,
           "MasterQualificationLevel": 0,
           "QpToMaxBaseQualification": null,
-          "QualificationType": "M.A.G.U.S.Qualifications.Scientific.ReadingAndWriting, M.A.G.U.S., Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
+          "QualificationType": "MAGUS.Qualifications.Scientific.ReadingAndWriting, MAGUS, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
         },
         {
           "$id": "10",
-          "$type": "M.A.G.U.S.Qualifications.Scientific.PoisoningAndNeutralization, M.A.G.U.S.",
+          "$type": "MAGUS.Qualifications.Scientific.PoisoningAndNeutralization, MAGUS",
           "Name": "Poisoning/neutralization",
           "QpToBaseQualification": 15,
           "QpToMasterQualification": 60,
@@ -141,11 +141,11 @@
           "BaseQualificationLevel": 1,
           "MasterQualificationLevel": 0,
           "QpToMaxBaseQualification": null,
-          "QualificationType": "M.A.G.U.S.Qualifications.Scientific.PoisoningAndNeutralization, M.A.G.U.S., Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
+          "QualificationType": "MAGUS.Qualifications.Scientific.PoisoningAndNeutralization, MAGUS, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
         },
         {
           "$id": "11",
-          "$type": "M.A.G.U.S.Qualifications.Scientific.Healing, M.A.G.U.S.",
+          "$type": "MAGUS.Qualifications.Scientific.Healing, MAGUS",
           "QpToBaseQualification": 15,
           "QpToMasterQualification": 30,
           "Category": "Scientific",
@@ -154,11 +154,11 @@
           "BaseQualificationLevel": 1,
           "MasterQualificationLevel": 0,
           "QpToMaxBaseQualification": null,
-          "QualificationType": "M.A.G.U.S.Qualifications.Scientific.Healing, M.A.G.U.S., Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
+          "QualificationType": "MAGUS.Qualifications.Scientific.Healing, MAGUS, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
         },
         {
           "$id": "12",
-          "$type": "M.A.G.U.S.Qualifications.Laical.SexualCulture, M.A.G.U.S.",
+          "$type": "MAGUS.Qualifications.Laical.SexualCulture, MAGUS",
           "Name": "Sexual culture",
           "QpToBaseQualification": 5,
           "QpToMasterQualification": 30,
@@ -167,16 +167,16 @@
           "BaseQualificationLevel": 1,
           "MasterQualificationLevel": 0,
           "QpToMaxBaseQualification": null,
-          "QualificationType": "M.A.G.U.S.Qualifications.Laical.SexualCulture, M.A.G.U.S., Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
+          "QualificationType": "MAGUS.Qualifications.Laical.SexualCulture, MAGUS, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
         }
       ]
     },
     "FutureQualifications": {
-      "$type": "M.A.G.U.S.Qualifications.QualificationList, M.A.G.U.S.",
+      "$type": "MAGUS.Qualifications.QualificationList, MAGUS",
       "$values": [
         {
           "$id": "13",
-          "$type": "M.A.G.U.S.Qualifications.Scientific.PoisoningAndNeutralization, M.A.G.U.S.",
+          "$type": "MAGUS.Qualifications.Scientific.PoisoningAndNeutralization, MAGUS",
           "Name": "Poisoning/neutralization",
           "QpToBaseQualification": 15,
           "QpToMasterQualification": 60,
@@ -185,11 +185,11 @@
           "BaseQualificationLevel": 0,
           "MasterQualificationLevel": 4,
           "QpToMaxBaseQualification": null,
-          "QualificationType": "M.A.G.U.S.Qualifications.Scientific.PoisoningAndNeutralization, M.A.G.U.S., Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
+          "QualificationType": "MAGUS.Qualifications.Scientific.PoisoningAndNeutralization, MAGUS, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
         },
         {
           "$id": "14",
-          "$type": "M.A.G.U.S.Qualifications.Scientific.Herbalism, M.A.G.U.S.",
+          "$type": "MAGUS.Qualifications.Scientific.Herbalism, MAGUS",
           "QpToBaseQualification": 5,
           "QpToMasterQualification": 35,
           "Category": "Scientific",
@@ -198,20 +198,20 @@
           "BaseQualificationLevel": 0,
           "MasterQualificationLevel": 5,
           "QpToMaxBaseQualification": null,
-          "QualificationType": "M.A.G.U.S.Qualifications.Scientific.Herbalism, M.A.G.U.S., Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
+          "QualificationType": "MAGUS.Qualifications.Scientific.Herbalism, MAGUS, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
         }
       ]
     },
     "PercentQualifications": {
-      "$type": "M.A.G.U.S.Qualifications.PercentQualificationList, M.A.G.U.S.",
+      "$type": "MAGUS.Qualifications.PercentQualificationList, MAGUS",
       "$values": []
     },
     "SpecialQualifications": {
-      "$type": "M.A.G.U.S.Qualifications.SpecialQualificationList, M.A.G.U.S.",
+      "$type": "MAGUS.Qualifications.SpecialQualificationList, MAGUS",
       "$values": [
         {
           "$id": "15",
-          "$type": "M.A.G.U.S.Qualifications.Magic.Witchcraft, M.A.G.U.S.",
+          "$type": "MAGUS.Qualifications.Magic.Witchcraft, MAGUS",
           "ManaPoints": 8,
           "Name": "Witchcraft"
         }
@@ -224,7 +224,7 @@
     "ExperiencePoints": 0
   },
   "Classes": {
-    "$type": "M.A.G.U.S.Interfaces.IClass[], M.A.G.U.S.",
+    "$type": "MAGUS.Interfaces.IClass[], MAGUS",
     "$values": [
       {
         "$ref": "2"
@@ -233,18 +233,18 @@
   },
   "Race": {
     "$id": "16",
-    "$type": "M.A.G.U.S.Races.Human, M.A.G.U.S.",
+    "$type": "MAGUS.Races.Human, MAGUS",
     "Name": "Human",
     "Qualifications": {
-      "$type": "M.A.G.U.S.Qualifications.QualificationList, M.A.G.U.S.",
+      "$type": "MAGUS.Qualifications.QualificationList, MAGUS",
       "$values": []
     },
     "PercentQualifications": {
-      "$type": "M.A.G.U.S.Qualifications.PercentQualificationList, M.A.G.U.S.",
+      "$type": "MAGUS.Qualifications.PercentQualificationList, MAGUS",
       "$values": []
     },
     "SpecialQualifications": {
-      "$type": "M.A.G.U.S.Qualifications.SpecialQualificationList, M.A.G.U.S.",
+      "$type": "MAGUS.Qualifications.SpecialQualificationList, MAGUS",
       "$values": []
     },
     "Strength": 0,
@@ -262,7 +262,7 @@
   },
   "Money": {
     "$id": "17",
-    "$type": "M.A.G.U.S.GameSystem.Valuables.Money, M.A.G.U.S.",
+    "$type": "MAGUS.GameSystem.Valuables.Money, MAGUS",
     "Mithril": 0.0,
     "Gold": 8.0,
     "Silver": 0.0,
@@ -300,13 +300,13 @@
   "Alignment": 0,
   "Sorcery": {
     "$id": "18",
-    "$type": "M.A.G.U.S.Qualifications.Magic.Witchcraft, M.A.G.U.S.",
+    "$type": "MAGUS.Qualifications.Magic.Witchcraft, MAGUS",
     "ManaPoints": 8,
     "Name": "Witchcraft"
   },
   "Psi": {
     "$id": "19",
-    "$type": "M.A.G.U.S.Qualifications.Scientific.Psi.PsiPyarron, M.A.G.U.S.",
+    "$type": "MAGUS.Qualifications.Scientific.Psi.PsiPyarron, MAGUS",
     "PsiKind": 0,
     "Name": "Psi, Pyarron",
     "QpToBaseQualification": 10,
@@ -316,7 +316,7 @@
     "BaseQualificationLevel": 0,
     "MasterQualificationLevel": 1,
     "QpToMaxBaseQualification": null,
-    "QualificationType": "M.A.G.U.S.Qualifications.Scientific.Psi.PsiPyarron, M.A.G.U.S., Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
+    "QualificationType": "MAGUS.Qualifications.Scientific.Psi.PsiPyarron, MAGUS, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
   },
   "ManaPoints": 40,
   "MaxManaPoints": 40,
@@ -326,11 +326,11 @@
   "TotalEquipmentWeight": null,
   "PsiPointsModifier": 4,
   "Qualifications": {
-    "$type": "M.A.G.U.S.Qualifications.QualificationList, M.A.G.U.S.",
+    "$type": "MAGUS.Qualifications.QualificationList, MAGUS",
     "$values": [
       {
         "$id": "20",
-        "$type": "M.A.G.U.S.Qualifications.Combat.WeaponUse, M.A.G.U.S.",
+        "$type": "MAGUS.Qualifications.Combat.WeaponUse, MAGUS",
         "Weapon": null,
         "Name": "Weapon use",
         "QpToBaseQualification": 3,
@@ -340,11 +340,11 @@
         "BaseQualificationLevel": 1,
         "MasterQualificationLevel": 0,
         "QpToMaxBaseQualification": null,
-        "QualificationType": "M.A.G.U.S.Qualifications.Combat.WeaponUse, M.A.G.U.S., Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
+        "QualificationType": "MAGUS.Qualifications.Combat.WeaponUse, MAGUS, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
       },
       {
         "$id": "21",
-        "$type": "M.A.G.U.S.Qualifications.Combat.WeaponThrowing, M.A.G.U.S.",
+        "$type": "MAGUS.Qualifications.Combat.WeaponThrowing, MAGUS",
         "Weapon": null,
         "Name": "Weapon throwing",
         "QpToBaseQualification": 4,
@@ -354,14 +354,14 @@
         "BaseQualificationLevel": 1,
         "MasterQualificationLevel": 0,
         "QpToMaxBaseQualification": null,
-        "QualificationType": "M.A.G.U.S.Qualifications.Combat.WeaponThrowing, M.A.G.U.S., Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
+        "QualificationType": "MAGUS.Qualifications.Combat.WeaponThrowing, MAGUS, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
       },
       {
         "$ref": "19"
       },
       {
         "$id": "22",
-        "$type": "M.A.G.U.S.Qualifications.Scientific.LanguageLore, M.A.G.U.S.",
+        "$type": "MAGUS.Qualifications.Scientific.LanguageLore, MAGUS",
         "Language": 0,
         "Name": "Language lore",
         "QpToBaseQualification": 1,
@@ -371,11 +371,11 @@
         "QualificationLevel": 0,
         "BaseQualificationLevel": 1,
         "MasterQualificationLevel": 0,
-        "QualificationType": "M.A.G.U.S.Qualifications.Scientific.LanguageLore, M.A.G.U.S., Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
+        "QualificationType": "MAGUS.Qualifications.Scientific.LanguageLore, MAGUS, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
       },
       {
         "$id": "23",
-        "$type": "M.A.G.U.S.Qualifications.Scientific.LanguageLore, M.A.G.U.S.",
+        "$type": "MAGUS.Qualifications.Scientific.LanguageLore, MAGUS",
         "Language": 0,
         "Name": "Language lore",
         "QpToBaseQualification": 1,
@@ -385,11 +385,11 @@
         "QualificationLevel": 0,
         "BaseQualificationLevel": 1,
         "MasterQualificationLevel": 0,
-        "QualificationType": "M.A.G.U.S.Qualifications.Scientific.LanguageLore, M.A.G.U.S., Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
+        "QualificationType": "MAGUS.Qualifications.Scientific.LanguageLore, MAGUS, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
       },
       {
         "$id": "24",
-        "$type": "M.A.G.U.S.Qualifications.Scientific.Herbalism, M.A.G.U.S.",
+        "$type": "MAGUS.Qualifications.Scientific.Herbalism, MAGUS",
         "QpToBaseQualification": 5,
         "QpToMasterQualification": 35,
         "Category": "Scientific",
@@ -398,11 +398,11 @@
         "BaseQualificationLevel": 1,
         "MasterQualificationLevel": 5,
         "QpToMaxBaseQualification": null,
-        "QualificationType": "M.A.G.U.S.Qualifications.Scientific.Herbalism, M.A.G.U.S., Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
+        "QualificationType": "MAGUS.Qualifications.Scientific.Herbalism, MAGUS, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
       },
       {
         "$id": "25",
-        "$type": "M.A.G.U.S.Qualifications.Scientific.ReadingAndWriting, M.A.G.U.S.",
+        "$type": "MAGUS.Qualifications.Scientific.ReadingAndWriting, MAGUS",
         "Name": "Reading/writing",
         "QpToBaseQualification": 5,
         "QpToMasterQualification": 25,
@@ -411,11 +411,11 @@
         "BaseQualificationLevel": 1,
         "MasterQualificationLevel": 0,
         "QpToMaxBaseQualification": null,
-        "QualificationType": "M.A.G.U.S.Qualifications.Scientific.ReadingAndWriting, M.A.G.U.S., Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
+        "QualificationType": "MAGUS.Qualifications.Scientific.ReadingAndWriting, MAGUS, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
       },
       {
         "$id": "26",
-        "$type": "M.A.G.U.S.Qualifications.Scientific.PoisoningAndNeutralization, M.A.G.U.S.",
+        "$type": "MAGUS.Qualifications.Scientific.PoisoningAndNeutralization, MAGUS",
         "Name": "Poisoning/neutralization",
         "QpToBaseQualification": 15,
         "QpToMasterQualification": 60,
@@ -424,11 +424,11 @@
         "BaseQualificationLevel": 1,
         "MasterQualificationLevel": 4,
         "QpToMaxBaseQualification": null,
-        "QualificationType": "M.A.G.U.S.Qualifications.Scientific.PoisoningAndNeutralization, M.A.G.U.S., Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
+        "QualificationType": "MAGUS.Qualifications.Scientific.PoisoningAndNeutralization, MAGUS, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
       },
       {
         "$id": "27",
-        "$type": "M.A.G.U.S.Qualifications.Scientific.Healing, M.A.G.U.S.",
+        "$type": "MAGUS.Qualifications.Scientific.Healing, MAGUS",
         "QpToBaseQualification": 15,
         "QpToMasterQualification": 30,
         "Category": "Scientific",
@@ -437,11 +437,11 @@
         "BaseQualificationLevel": 1,
         "MasterQualificationLevel": 0,
         "QpToMaxBaseQualification": null,
-        "QualificationType": "M.A.G.U.S.Qualifications.Scientific.Healing, M.A.G.U.S., Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
+        "QualificationType": "MAGUS.Qualifications.Scientific.Healing, MAGUS, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
       },
       {
         "$id": "28",
-        "$type": "M.A.G.U.S.Qualifications.Laical.SexualCulture, M.A.G.U.S.",
+        "$type": "MAGUS.Qualifications.Laical.SexualCulture, MAGUS",
         "Name": "Sexual culture",
         "QpToBaseQualification": 5,
         "QpToMasterQualification": 30,
@@ -450,39 +450,39 @@
         "BaseQualificationLevel": 1,
         "MasterQualificationLevel": 0,
         "QpToMaxBaseQualification": null,
-        "QualificationType": "M.A.G.U.S.Qualifications.Laical.SexualCulture, M.A.G.U.S., Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
+        "QualificationType": "MAGUS.Qualifications.Laical.SexualCulture, MAGUS, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
       }
     ]
   },
   "SpecialQualifications": {
-    "$type": "M.A.G.U.S.Qualifications.SpecialQualificationList, M.A.G.U.S.",
+    "$type": "MAGUS.Qualifications.SpecialQualificationList, MAGUS",
     "$values": []
   },
   "PercentQualifications": {
-    "$type": "M.A.G.U.S.Qualifications.PercentQualificationList, M.A.G.U.S.",
+    "$type": "MAGUS.Qualifications.PercentQualificationList, MAGUS",
     "$values": [
       {
         "$id": "29",
-        "$type": "M.A.G.U.S.Qualifications.Percentages.Falling, M.A.G.U.S.",
+        "$type": "MAGUS.Qualifications.Percentages.Falling, MAGUS",
         "Percent": 5,
         "Name": "Falling"
       },
       {
         "$id": "30",
-        "$type": "M.A.G.U.S.Qualifications.Percentages.Climbing, M.A.G.U.S.",
+        "$type": "MAGUS.Qualifications.Percentages.Climbing, MAGUS",
         "Name": "Climbing",
         "Percent": 5
       },
       {
         "$id": "31",
-        "$type": "M.A.G.U.S.Qualifications.Percentages.Jumping, M.A.G.U.S.",
+        "$type": "MAGUS.Qualifications.Percentages.Jumping, MAGUS",
         "Percent": 5,
         "Name": "Jumping"
       }
     ]
   },
   "Equipment": {
-    "$type": "System.Collections.ObjectModel.ObservableCollection`1[[M.A.G.U.S.Things.Thing, M.A.G.U.S.]], System.ObjectModel",
+    "$type": "System.Collections.ObjectModel.ObservableCollection`1[[MAGUS.Things.Thing, MAGUS]], System.ObjectModel",
     "$values": []
   }
 }

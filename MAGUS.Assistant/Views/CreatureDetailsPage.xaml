@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<v:NotifierPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+              xmlns:v="clr-namespace:Mtf.LanguageService.MAUI.Views;assembly=Mtf.LanguageService.MAUI"
+              xmlns:m="clr-namespace:MAGUS.GameSystem;assembly=MAGUS"
+              xmlns:e="clr-namespace:MAGUS.Models;assembly=MAGUS"
+              xmlns:converters="clr-namespace:MAGUS.Assistant.Converters"
+              xmlns:vm="clr-namespace:MAGUS.Assistant.ViewModels"
+              xmlns:conv="clr-namespace:Mtf.LanguageService.MAUI.Converters;assembly=Mtf.LanguageService.MAUI"
+              x:Class="MAGUS.Assistant.Views.CreatureDetailsPage"
+              x:ClassModifier="internal"
+              x:DataType="vm:CreatureDetailsViewModel">
+
+    <v:NotifierPage.Resources>
+        <ResourceDictionary>
+            <conv:TranslationConverter x:Key="TranslationConverter" />
+            <conv:EnumDescriptionTranslationConverter x:Key="EnumDescriptionTranslationConverter" />
+            <converters:FractionConverter x:Key="FractionConverter" />
+            <converters:MinMaxIntelligenceConverter x:Key="MinMaxIntelligenceConverter" />
+            <converters:SpeedConverter x:Key="SpeedConverter" />
+        </ResourceDictionary>
+    </v:NotifierPage.Resources>
+
+    <ScrollView>
+        <StackLayout Padding="12" Spacing="8">
+            <Label Text="{Binding Creature.Name}"
+                   FontSize="24"
+                   FontAttributes="Bold"
+                   LineBreakMode="WordWrap" />
+            
+            <!-- Image & sound -->
+            <Image Source="{Binding RandomImage}" HeightRequest="200" Aspect="AspectFit">
+                <Image.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding PreviewImageCommand}" />
+                </Image.GestureRecognizers>
+            </Image>
+            <Button Text="🔈" BackgroundColor="Transparent" Command="{Binding PlaySoundCommand}" IsVisible="{Binding IsSoundAvailable}" />
+            
+            <!-- Top summary -->
+            <Border Padding="5">
+                <Grid ColumnDefinitions="Auto, *" RowDefinitions="Auto,Auto" ColumnSpacing="12" RowSpacing="6">
+                    <Label Text="Number appearing" FontAttributes="Bold" Grid.Row="0" Grid.Column="0" />
+                   <Label Text="{Binding NumberAppearing}" Grid.Row="0" Grid.Column="1" />
+                </Grid>
+            </Border>
+            
+            <!-- Damage area -->
+            <Border Padding="5">
+                <VerticalStackLayout Spacing="8">
+                    <Grid ColumnDefinitions="4*,3*,3*" RowDefinitions="Auto, Auto, Auto">
+                        
+                        <Label Text="Attack mode" FontAttributes="Bold" VerticalOptions="Center" />
+                        <Picker ItemsSource="{Binding AttackModes}"
+                                ItemDisplayBinding="{Binding Name, Converter={StaticResource TranslationConverter}}"
+                                SelectedItem="{Binding SelectedAttackMode}"
+                                Grid.Column="1"
+                                Grid.ColumnSpan="2"/>
+
+                        <Label Text="Attack direction" FontAttributes="Bold" VerticalOptions="Center" Grid.Row="1" Grid.Column="0"/>
+                        <Picker ItemsSource="{Binding AttackDirections}"
+                                SelectedItem="{Binding SelectedAttackDirection}"
+                                ItemDisplayBinding="{Binding ., Converter={StaticResource EnumDescriptionTranslationConverter}}"
+                                Grid.Row="1"
+                                Grid.Column="1"
+                                Grid.ColumnSpan="2" />
+
+                        <Button Grid.Row="2" Grid.ColumnSpan="3" Text="Attack" Command="{Binding RollRoundCommand}" Margin="0,0,5,0" />
+                    </Grid>
+
+                    <Label Text="{Binding PlaceOfAttack}" Grid.Row="1" Grid.Column="1" />
+                    <Label Text="{Binding LastAction}" FontSize="12" />
+                </VerticalStackLayout>
+            </Border>
+
+            <!-- Properties two-column -->
+            <Border Padding="5">
+                <Grid ColumnDefinitions="2*,3*" RowSpacing="6" ColumnSpacing="12" RowDefinitions="*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*">
+                    <!-- Static list of properties you mentioned on the screenshot -->
+                    <Label Text="Occurrence" Grid.Row="0" Grid.Column="0" FontAttributes="Bold" />
+                    <Label Text="{Binding Occurrence, Converter={StaticResource EnumDescriptionTranslationConverter}}" Grid.Row="0" Grid.Column="1" />
+
+                    <Label Text="Places of Occurrence" Grid.Row="1" Grid.Column="0" FontAttributes="Bold" />
+                    <Label Text="{Binding PlacesOfOccurrence, Converter={StaticResource EnumDescriptionTranslationConverter}}" Grid.Row="1" Grid.Column="1" />
+
+                    <Label Text="Alignment" Grid.Row="2" Grid.Column="0" FontAttributes="Bold" />
+                    <Label Text="{Binding Alignment, Converter={StaticResource EnumDescriptionTranslationConverter}}" Grid.Row="2" Grid.Column="1" />
+
+                    <Label Text="Intelligence" Grid.Row="3" Grid.Column="0" FontAttributes="Bold" />
+                    <Label Grid.Row="3" Grid.Column="1">
+                        <Label.Text>
+                            <MultiBinding Converter="{StaticResource MinMaxIntelligenceConverter}">
+                                <Binding Path="MinIntelligence" />
+                                <Binding Path="MaxIntelligence" />
+                                <Binding Path="Intelligence" />
+                            </MultiBinding>
+                        </Label.Text>
+                    </Label>
+
+                    <Label Text="Size" Grid.Row="4" Grid.Column="0" FontAttributes="Bold" />
+                    <Label Text="{Binding Size, Converter={StaticResource EnumDescriptionTranslationConverter}}" Grid.Row="4" Grid.Column="1" />
+
+                    <Label Text="Speed" Grid.Row="5" Grid.Column="0" FontAttributes="Bold" />
+                    <!--<Label Text="{Binding Speed}" Grid.Row="4" Grid.Column="1" />-->
+                    <StackLayout Grid.Row="5" Grid.Column="1" Spacing="0">
+                        <CollectionView ItemsSource="{Binding Speeds}">
+                            <CollectionView.ItemTemplate>
+                                <DataTemplate x:DataType="e:Speed">
+                                    <Label Text="{Binding ., Converter={StaticResource SpeedConverter}}" />
+                                </DataTemplate>
+                            </CollectionView.ItemTemplate>
+                        </CollectionView>
+                    </StackLayout>
+
+                    <Label Text="Attacks per round" Grid.Row="6" Grid.Column="0" FontAttributes="Bold" />
+                    <Label Text="{Binding AttacksPerRound, Converter={StaticResource FractionConverter}}" Grid.Row="6" Grid.Column="1" />
+
+                    <Label Text="Initiator value" Grid.Row="7" Grid.Column="0" FontAttributes="Bold" />
+                    <Label Text="{Binding InitiateValue}" Grid.Row="7" Grid.Column="1" />
+
+                    <Label Text="Attack modes" Grid.Row="8" Grid.Column="0" FontAttributes="Bold" />
+                    <StackLayout Grid.Row="8" Grid.Column="1" Spacing="0">
+                        <CollectionView ItemsSource="{Binding AttackModes}">
+                            <CollectionView.ItemTemplate>
+                                <DataTemplate x:DataType="m:Attack">
+                                    <Label>
+                                        <Label.Text>
+                                            <MultiBinding StringFormat="{}{0} - {1}">
+                                                <Binding Path="Name" Converter="{StaticResource TranslationConverter}" />
+                                                <Binding Path="Value" />
+                                            </MultiBinding>
+                                        </Label.Text>
+                                    </Label>
+                                </DataTemplate>
+                            </CollectionView.ItemTemplate>
+                        </CollectionView>
+                    </StackLayout>
+
+                    <Label Text="Defense value" Grid.Row="9" Grid.Column="0" FontAttributes="Bold" />
+                    <Label Text="{Binding DefenseValue}" Grid.Row="9" Grid.Column="1" />
+
+                    <Label Text="Health points" Grid.Row="10" Grid.Column="0" FontAttributes="Bold" />
+                    <Label Text="{Binding HealthPoints}" Grid.Row="10" Grid.Column="1" />
+
+                    <Label Text="Pain tolerance points" Grid.Row="11" Grid.Column="0" FontAttributes="Bold" />
+                    <Label Text="{Binding PainTolerancePoints}" Grid.Row="11" Grid.Column="1" />
+
+                    <Label Text="ᛉ-points" Grid.Row="12" Grid.Column="0" FontAttributes="Bold" />
+                    <Label Text="{Binding PsiPoints}" Grid.Row="12" Grid.Column="1" />
+
+                    <Label Text="Mana-points" Grid.Row="13" Grid.Column="0" FontAttributes="Bold" />
+                    <Label Text="{Binding ManaPoints}" Grid.Row="13" Grid.Column="1" />
+
+                    <Label Text="Astral Magic Resistance" Grid.Row="14" Grid.Column="0" FontAttributes="Bold" />
+                    <Label Text="{Binding AstralMagicResistance}" Grid.Row="14" Grid.Column="1" />
+
+                    <Label Text="Mental Magic Resistance" Grid.Row="15" Grid.Column="0" FontAttributes="Bold" />
+                    <Label Text="{Binding MentalMagicResistance}" Grid.Row="15" Grid.Column="1" />
+
+                    <Label Text="Poison resistance" Grid.Row="16" Grid.Column="0" FontAttributes="Bold" />
+                    <Label Text="{Binding PoisonResistance}" Grid.Row="16" Grid.Column="1" />
+
+                    <Label Text="Experience points" Grid.Row="17" Grid.Column="0" FontAttributes="Bold" />
+                    <Label Text="{Binding ExperiencePoints}" Grid.Row="17" Grid.Column="1" />
+                </Grid>
+            </Border>
+        </StackLayout>
+    </ScrollView>
+</v:NotifierPage>

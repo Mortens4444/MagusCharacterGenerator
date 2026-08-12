@@ -9,7 +9,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\M.A.G.U.S\M.A.G.U.S..csproj" />
+    <ProjectReference Include="..\MAGUS\MAGUS.csproj" />
   </ItemGroup>
 
 </Project>

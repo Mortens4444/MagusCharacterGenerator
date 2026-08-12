@@ -1,0 +1,14 @@
+﻿using MAGUS.GameSystem.Qualifications;
+
+namespace MAGUS.Qualifications.Laical;
+
+public class ArticSurvival(QualificationLevel qualificationLevel = QualificationLevel.Base, int level = 1) : Qualification(qualificationLevel, level), ILaicalQualification
+{
+    public override string Name => "Artic survival";
+
+    public override int QpToBaseQualification => 5;
+
+    public override int QpToMasterQualification => 14;
+
+    public ArticSurvival() : this(QualificationLevel.Base) { }
+}

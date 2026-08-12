@@ -1,0 +1,174 @@
+﻿using CommunityToolkit.Mvvm.Input;
+using CommunityToolkit.Mvvm.Messaging;
+using MAGUS.Assistant.CustomEventArgs;
+using MAGUS.Assistant.Services;
+using MAGUS.Assistant.Views;
+using MAGUS.GameSystem;
+using MAGUS.GameSystem.Qualifications;
+using MAGUS.Qualifications;
+using Mtf.Extensions;
+using Mtf.LanguageService;
+using Mtf.Maui.Controls.Messages;
+using System.Collections.ObjectModel;
+using System.Windows.Input;
+
+namespace MAGUS.Assistant.ViewModels;
+
+internal sealed partial class QualificationsViewModel : BaseViewModel
+{
+    private Character? character;
+
+    public QualificationsViewModel()
+    {
+        ApplyFilterCommand = new RelayCommand(() => ApplyFilter());
+        ClearFilterCommand = new RelayCommand(() => ClearFilter());
+
+        Seed();
+        ApplyFilter();
+    }
+
+    public ICommand ApplyFilterCommand { get; }
+
+    public ICommand ClearFilterCommand { get; }
+
+    public ObservableCollection<Qualification> Qualifications { get; } = [];
+
+    public ObservableCollection<Qualification> FilteredQualifications { get; } = [];
+
+    public ObservableCollection<GroupedQualifications> GroupedQualifications
+    {
+        get => groupedQualifications;
+        set
+        {
+            if (groupedQualifications == value)
+            {
+                return;
+            }
+
+            groupedQualifications = value;
+            OnPropertyChanged();
+        }
+    }
+    string _searchText = String.Empty;
+    private ObservableCollection<GroupedQualifications> groupedQualifications = [];
+
+    public string SearchText
+    {
+        get => _searchText;
+        set
+        {
+            if (_searchText == value)
+            {
+                return;
+            }
+
+            _searchText = value ?? String.Empty;
+            OnPropertyChanged();
+            ApplyFilter();
+        }
+    }
+
+    public Character? Character
+    {
+        get => character;
+        set
+        {
+            if (character == value)
+            {
+                return;
+            }
+
+            character = value;
+            OnPropertyChanged();
+            ApplyFilter();
+        }
+    }
+
+    private Qualification? selectedItem;
+    public Qualification? SelectedItem
+    {
+        get => selectedItem;
+        set
+        {
+            if (selectedItem == value)
+            {
+                return;
+            }
+
+            selectedItem = value;
+            OnPropertyChanged();
+
+            if (selectedItem != null)
+            {
+                _ = OpenDetailsAsync(selectedItem);
+            }
+        }
+    }
+
+    private void Seed()
+    {
+        var qualifications = PreloadService.Instance.Qualifications;
+        Qualifications.Clear();
+        foreach (var q in qualifications)
+        {
+            Qualifications.Add(q);
+        }
+    }
+
+    private void ApplyFilter()
+    {
+        var query = Qualifications.AsEnumerable();
+        if (Character != null)
+        {
+            query = query.Where(q => Character.CanLearn(q));
+        }
+
+        var st = SearchText?.Trim();
+        if (!String.IsNullOrWhiteSpace(st))
+        {
+            query = query.Where(q => Lng.Elem(q.Name)?.IndexOf(st, StringComparison.InvariantCultureIgnoreCase) >= 0)
+                .OrderBy(c => c.Category.Equals("Other", StringComparison.OrdinalIgnoreCase))
+                .ThenBy(c => Lng.Elem(c.Name));
+        }
+
+        var grouped = query
+            .GroupBy(q => q.Category)
+            .OrderBy(c => c.Key.Equals("Other", StringComparison.OrdinalIgnoreCase))
+            .ThenBy(c => Lng.Elem(c.Key))
+            .Select(g => new GroupedQualifications(Lng.Elem(g.Key), g));
+
+        MainThread.BeginInvokeOnMainThread(() =>
+        {
+            GroupedQualifications = new ObservableCollection<GroupedQualifications>(grouped);
+        });
+    }
+
+    private void ClearFilter()
+    {
+        SearchText = String.Empty;
+        ApplyFilter();
+    }
+
+    private Task OpenDetailsAsync(Qualification selectedItem)
+    {
+        var qualificationDetailsViewModel = new QualificationDetailsViewModel(Character, selectedItem);
+        qualificationDetailsViewModel.Learned += LearnHandler;
+        var page = new QualificationDetailsPage(qualificationDetailsViewModel);
+        SelectedItem = null;
+        return ShellNavigationService.ShowPageAsync(page);
+    }
+
+    private void LearnHandler(object? sender, QualificationLearnedEventArgs e)
+    {
+        try
+        {
+            Character?.Learn(e.Qualification, e.QualificationLevel);
+            ApplyFilter();
+            ShellNavigationService.ClosePageAsync();
+        }
+        catch (Exception ex)
+        {
+            WeakReferenceMessenger.Default.Send(new ShowErrorMessage(ex));
+        }
+    }
+}

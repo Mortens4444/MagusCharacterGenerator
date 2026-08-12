@@ -1,0 +1,28 @@
+﻿using MAGUS.Enums;
+using MAGUS.GameSystem.Attributes;
+using MAGUS.GameSystem.Valuables;
+using MAGUS.Interfaces;
+
+namespace MAGUS.Things.Weapons.StabbingWeapons;
+
+public class SlanSword : Weapon, IMeleeWeapon
+{
+    public override double AttacksPerRound => 1;
+
+    public override int InitiateValue => 8;
+
+    public int AttackValue => 20;
+
+    public int DefenseValue => 12;
+
+    public override double Weight => 1.4;
+
+    public override Money Price => new(100);
+
+    [DiceThrow(ThrowType._1D10)]
+    public override int GetDamage() => DiceThrow._1D10() + 2;
+
+    public override string Name => "Slan sword";
+
+    public override string Description => "A long, curved weapon resembling a katana, crafted for the graceful but deadly fighting techniques of the Slan. Its flexible steel and razor-sharp edge make it ideal for sweeping cuts, rapid combinations, and the signature flowing movements characteristic of Slan swordmasters.";
+}

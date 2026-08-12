@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Shell x:Class="MAGUS.Assistant.AppShell"
+       xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+       xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+       xmlns:v="clr-namespace:Mtf.LanguageService.MAUI.Views;assembly=Mtf.LanguageService.MAUI"
+       xmlns:mv="clr-namespace:MAGUS.Assistant.Views"
+       Title="MAGUS.Assistant">
+
+    <ShellContent ContentTemplate="{DataTemplate mv:MainPage}"
+                  Route="MainPage" />
+
+</Shell>

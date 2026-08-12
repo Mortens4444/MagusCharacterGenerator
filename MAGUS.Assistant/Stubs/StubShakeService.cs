@@ -1,0 +1,23 @@
+﻿using MAGUS.Assistant.Interfaces;
+
+namespace MAGUS.Assistant;
+
+internal sealed partial class StubShakeService : IShakeService
+{
+    public bool IsMonitoring => throw new NotImplementedException();
+
+    public event EventHandler? ShakeDetected;
+
+    public void Dispose()
+    {
+    }
+
+    public void Start(double thresholdG = 2.2, int debounceMs = 800)
+    {
+        ShakeDetected?.Invoke(this, EventArgs.Empty);
+    }
+
+    public void Stop()
+    {
+    }
+}

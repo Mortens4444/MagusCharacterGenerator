@@ -1,0 +1,14 @@
+﻿using MAGUS.GameSystem.Qualifications;
+
+namespace MAGUS.Qualifications.Laical;
+
+public class LipReading(QualificationLevel qualificationLevel = QualificationLevel.Base, int level = 1) : Qualification(qualificationLevel, level), ILaicalQualification
+{
+    public override string Name => "Lip reading";
+
+    public override int QpToBaseQualification => 7;
+
+    public override int QpToMasterQualification => 10;
+
+    public LipReading() : this(QualificationLevel.Base) { }
+}

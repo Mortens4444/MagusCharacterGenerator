@@ -1,0 +1,46 @@
+﻿using MAGUS.Enums;
+using MAGUS.GameSystem;
+using MAGUS.GameSystem.Valuables;
+using MAGUS.Interfaces;
+
+namespace MAGUS.Things.Weapons;
+
+public class BreathWeapon : Weapon, IRangedWeapon, INotForSale
+{
+    private readonly string name;
+    private readonly ThrowType throwType;
+    private readonly int modifier;
+
+    public BreathWeapon() { }
+
+    public BreathWeapon(string name, ThrowType throwType, int modifier = 0)
+    {
+        this.name = name;
+        this.throwType = throwType;
+        this.modifier = modifier;
+    }
+
+    public int AimValue => 0;
+
+    public override string Name => name;
+
+    public override double AttacksPerRound => 1;
+
+    public override int InitiateValue => 0;
+
+    public override double Weight => 0;
+
+    public override Money Price => Money.Free;
+
+    public ThrowType ThrowType => throwType;
+
+    public int Modifier => modifier;
+
+    public int Distance => 0;
+
+    public override int GetDamage()
+    {
+        var diceThrow = new DiceThrow();
+        return diceThrow.Throw(throwType, modifier);
+    }
+}

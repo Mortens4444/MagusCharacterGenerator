@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<v:NotifierPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+              xmlns:v="clr-namespace:Mtf.LanguageService.MAUI.Views;assembly=Mtf.LanguageService.MAUI"
+              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+              x:Class="MAGUS.Assistant.Views.ImagePreviewPage"
+              x:ClassModifier="internal"
+              Title="Preview">
+
+    <Grid Padding="12">
+        <Image x:Name="PreviewImage" Aspect="AspectFit">
+            <Image.GestureRecognizers>
+                <PinchGestureRecognizer PinchUpdated="OnPinchUpdated" />
+                <PanGestureRecognizer PanUpdated="OnPanUpdated" />
+                <TapGestureRecognizer NumberOfTapsRequired="2" Tapped="OnDoubleTapped" />
+            </Image.GestureRecognizers>
+        </Image>
+        <Button Text="Close" VerticalOptions="End" HorizontalOptions="Center" Clicked="CloseClicked" />
+    </Grid>
+</v:NotifierPage>

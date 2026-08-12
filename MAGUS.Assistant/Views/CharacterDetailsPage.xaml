@@ -1,0 +1,26 @@
+<v:NotifierPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+            xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+            xmlns:mv="clr-namespace:MAGUS.Assistant.Views"
+            xmlns:v="clr-namespace:Mtf.LanguageService.MAUI.Views;assembly=Mtf.LanguageService.MAUI"
+            xmlns:vm="clr-namespace:MAGUS.Assistant.ViewModels"
+            x:Class="MAGUS.Assistant.Views.CharacterDetailsPage"
+            x:ClassModifier="internal"
+            x:DataType="vm:CharacterViewModel">
+
+    <Grid RowDefinitions="Auto, *">
+
+        <ScrollView Orientation="Horizontal" HorizontalScrollBarVisibility="Never"
+                    Margin="0,5,0,10" HorizontalOptions="Center">
+            <HorizontalStackLayout Spacing="10" Padding="10,0">
+                <Button Text="⛤" Command="{Binding ChangeTabCommand}" CommandParameter="0" />
+                <Button Text="✨" Command="{Binding ChangeTabCommand}" CommandParameter="1" />
+                <Button Text="⚔" Command="{Binding ChangeTabCommand}" CommandParameter="2" />
+                <Button Text="🧙" Command="{Binding ChangeTabCommand}" CommandParameter="3" />
+                <Button Text="📖" Command="{Binding ChangeTabCommand}" CommandParameter="4" />
+                <Button Text="🎒" Command="{Binding ChangeTabCommand}" CommandParameter="5" />
+            </HorizontalStackLayout>
+        </ScrollView>
+
+        <ContentView Grid.Row="1" Content="{Binding CurrentView}" />
+    </Grid>
+</v:NotifierPage>

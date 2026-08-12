@@ -1,10 +1,10 @@
 ﻿using FontAwesome.Sharp;
-using M.A.G.U.S.Classes.Believer.GodsOfPyarron;
-using M.A.G.U.S.GameSystem;
-using M.A.G.U.S.GameSystem.Attributes;
-using M.A.G.U.S.Interfaces;
-using M.A.G.U.S.Races;
-using M.A.G.U.S.Utils;
+using MAGUS.Classes.Believer.GodsOfPyarron;
+using MAGUS.GameSystem;
+using MAGUS.GameSystem.Attributes;
+using MAGUS.Interfaces;
+using MAGUS.Races;
+using MAGUS.Utils;
 using Mtf.Extensions;
 using Mtf.LanguageService.Core;
 using Mtf.LanguageService.Windows.Forms;
@@ -85,7 +85,7 @@ public partial class CharcterGenerator : Form
 
     private void CharcterGenerator_Load(object sender, EventArgs e)
 	{
-		var magusCharacterGeneratorTypes = Assembly.Load("M.A.G.U.S.").GetTypes();
+		var magusCharacterGeneratorTypes = Assembly.Load("MAGUS").GetTypes();
 
 		var racesWithTypes = magusCharacterGeneratorTypes
 			.Where(type => !type.IsInterface && !type.IsAbstract && typeof(IRace).IsAssignableFrom(type))

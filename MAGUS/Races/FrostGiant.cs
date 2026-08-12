@@ -1,0 +1,51 @@
+﻿using MAGUS.Enums;
+using MAGUS.GameSystem.Qualifications;
+using MAGUS.Qualifications;
+using MAGUS.Qualifications.Laical;
+using MAGUS.Qualifications.Scientific;
+using MAGUS.Qualifications.Specialities;
+
+namespace MAGUS.Races;
+
+/// <summary>
+/// https://kalandozok.hu/cikkgyujtemeny/kieg%C3%A9sz%C3%ADt%C5%91k/fajok/j%C3%A1tszhat%C3%B3-fajok/fajok-k%C3%B6nyve-r62/
+/// </summary>
+public class FrostGiant : HalfGiant
+{
+    public override Alignment? Alignment => Enums.Alignment.OrderLife;
+
+    public override Size Size => Size._4_to_5_5_meters;
+
+    public override QualificationList Qualifications
+    {
+        get
+        {
+            var result = base.Qualifications;
+            result.AddRange(
+            [
+                new AnimalTraining(),
+                new WeatherDivination(QualificationLevel.Master),
+                new ArticSurvival(QualificationLevel.Master)
+            ]);
+            return result;
+        }
+    }
+
+    public override SpecialQualificationList SpecialQualifications
+    {
+        get
+        {
+            var result = base.SpecialQualifications;
+            result.AddRange(
+            [
+                new Infravision(40),
+                new BetterResistanceToCold(50)
+			]);
+            return result;
+        }
+    }
+
+    public override string Name => "Half-giant (frost giant)";
+
+    public override string[] Images => ["frost_giant.png"];
+}

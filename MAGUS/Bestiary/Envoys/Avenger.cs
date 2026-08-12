@@ -1,0 +1,53 @@
+﻿using MAGUS.Enums;
+using MAGUS.GameSystem.Attributes;
+using MAGUS.Models;
+using MAGUS.Qualifications.Scientific.Psi;
+using MAGUS.Things.Armors;
+
+namespace MAGUS.Bestiary.Envoys;
+
+public sealed class Avenger : Creature
+{
+    public Avenger()
+    {
+        Armor = new NaturalArmor(10);
+        PlacesOfOccurrence = TerrainType.Anywhere;
+        Occurrence = Occurrence.VeryRare;
+        Size = Size.Big;
+        Alignment = Alignment.Death;
+
+        AttackValue = 130;
+        DefenseValue = 174;
+        InitiateValue = 67;
+        AimValue = 55;
+
+        AttacksPerRound = 2;
+
+        HealthPoints = 35;
+        PainTolerancePoints = 215;
+
+        AstralMagicResistance = 190;
+        MentalMagicResistance = 190;
+        PoisonResistance = Int32.MaxValue;
+
+        Psi = new PsiPyarron();
+        PsiPoints = 70;
+        ManaPoints = 153;
+
+        Intelligence = Enums.Intelligence.Outstanding;
+        ExperiencePoints = 25000;
+    }
+
+    public override string[] Images => ["envoy_avenger.png"];
+
+    [DiceThrow(ThrowType._3D6)]
+    [DiceThrowModifier(7)]
+    public override int GetDamage() => DiceThrow._3D6() + 7;
+
+    [DiceThrowModifier(1)]
+    public override int GetNumberAppearing() => 1;
+
+    public Deity God => Deity.Darton;
+
+    public override List<Speed> Speeds => [new Speed(TravelMode.OnLand, 120), new Speed(TravelMode.InTheAir, 150)];
+}

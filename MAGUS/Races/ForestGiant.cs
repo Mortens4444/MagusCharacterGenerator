@@ -1,0 +1,56 @@
+﻿using MAGUS.Enums;
+using MAGUS.GameSystem.Qualifications;
+using MAGUS.Qualifications;
+using MAGUS.Qualifications.Laical;
+using MAGUS.Qualifications.Percentages;
+using MAGUS.Qualifications.Specialities;
+
+namespace MAGUS.Races;
+
+/// <summary>
+/// https://kalandozok.hu/cikkgyujtemeny/kieg%C3%A9sz%C3%ADt%C5%91k/fajok/j%C3%A1tszhat%C3%B3-fajok/fajok-k%C3%B6nyve-r62/
+/// </summary>
+public class ForestGiant : HalfGiant
+{
+    public override Alignment? Alignment => Enums.Alignment.Chaos;
+
+    public override Size Size => Size.About_7_meters;
+
+    public override PercentQualificationList PercentQualifications =>
+    [
+        new Sneaking(20),
+        new Hiding(20)
+    ];
+
+    public override QualificationList Qualifications
+    {
+        get
+        {
+            var result = base.Qualifications;
+            result.AddRange(
+            [
+                new ForestSurvival(QualificationLevel.Master),
+                new TrackingConcealment(),
+                new Craft(Profession.Carpenter, QualificationLevel.Master)
+            ]);
+            return result;
+        }
+    }
+
+    public override SpecialQualificationList SpecialQualifications
+    {
+        get
+        {
+            var result = base.SpecialQualifications;
+            result.AddRange(
+            [
+                new Infravision(50)
+            ]);
+            return result;
+        }
+    }
+
+    public override string Name => "Half-giant (forest giant)";
+
+    public override string[] Images => ["forest_giant.png"];
+}

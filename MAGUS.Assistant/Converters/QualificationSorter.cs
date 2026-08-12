@@ -1,0 +1,30 @@
+﻿using MAGUS.GameSystem.Qualifications;
+using Mtf.LanguageService;
+using System.Globalization;
+
+namespace MAGUS.Assistant.Converters;
+
+internal sealed class QualificationSorter : IValueConverter
+{
+    public object? Convert(object? value, Type targetType, object? parameter, CultureInfo culture)
+    {
+        if (value is IEnumerable<Qualification> collection)
+        {
+            return collection.OrderBy(q => q.ActualLevel).ThenBy(q => Lng.Elem(q.Name)).ToList();
+        }
+        if (value is IEnumerable<ISpecialQualification> specailCollection)
+        {
+            return specailCollection.OrderBy(q => Lng.Elem(q.Name)).ToList();
+        }
+        if (value is IEnumerable<PercentQualification> percentCollection)
+        {
+            return percentCollection.OrderBy(q => Lng.Elem(q.Name)).ToList();
+        }
+        return value;
+    }
+
+    public object? ConvertBack(object? value, Type targetType, object? parameter, CultureInfo culture)
+    {
+        throw new NotImplementedException();
+    }
+}

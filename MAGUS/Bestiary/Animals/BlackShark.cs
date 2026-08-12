@@ -1,0 +1,42 @@
+﻿using MAGUS.Enums;
+using MAGUS.GameSystem;
+using MAGUS.GameSystem.Attributes;
+using MAGUS.Models;
+
+namespace MAGUS.Bestiary.Animals;
+
+public sealed class BlackShark : Creature
+{
+    public BlackShark()
+    {
+        Occurrence = Occurrence.Rare;
+        PlacesOfOccurrence = TerrainType.SaltWater;
+        Size = Size._4_to_6_meters;
+
+        InitiateValue = 45;
+        AttackValue = 85;
+        DefenseValue = 95;
+        HealthPoints = 20;
+
+        PainTolerancePoints = 55;
+
+        AstralMagicResistance = 0;
+        MentalMagicResistance = 0;
+        PoisonResistance = 6;
+
+        Intelligence = Enums.Intelligence.Animal;
+        ExperiencePoints = 55;
+    }
+
+    public override string Name => "Black shark";
+
+    [DiceThrow(ThrowType._1D10)]
+    [DiceThrowModifier(2)]
+    public override int GetDamage() => DiceThrow._1D10() + 2;
+
+
+    [DiceThrow(ThrowType._1D10)]
+    public override int GetNumberAppearing() => DiceThrow._1D10();
+
+    public override List<Speed> Speeds => [new Speed(TravelMode.InWater, 175)];
+}

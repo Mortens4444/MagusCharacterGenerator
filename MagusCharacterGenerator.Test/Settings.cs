@@ -1,7 +1,7 @@
-﻿using M.A.G.U.S.Enums;
-using M.A.G.U.S.Interfaces;
+﻿using MAGUS.Enums;
+using MAGUS.Interfaces;
 
-namespace M.A.G.U.S.Test
+namespace MAGUS.Test
 {
     class Settings(bool addPsiPointOnFirstLevel) : ISettings
     {

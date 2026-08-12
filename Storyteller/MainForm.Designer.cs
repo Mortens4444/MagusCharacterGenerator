@@ -52,7 +52,7 @@
             tsmiGoogle = new ToolStripMenuItem();
             tsmiPinterest = new ToolStripMenuItem();
             tsmiClasses = new ToolStripMenuItem();
-            tsmiKranichWarlock = new ToolStripMenuItem();
+            tsmiKrannishWarlock = new ToolStripMenuItem();
             tsmiNastarPriest = new ToolStripMenuItem();
             tsmiVelarPriest = new ToolStripMenuItem();
             tsmiOther = new ToolStripMenuItem();
@@ -265,20 +265,20 @@
             tsmiPinterest.Size = new Size(120, 22);
             tsmiPinterest.Text = "Pinterest";
             tsmiPinterest.Click += TsmiPinterest_Click;
-            // 
+            // tsmiKrannishWarlock
             // tsmiClasses
             // 
-            tsmiClasses.DropDownItems.AddRange(new ToolStripItem[] { tsmiKranichWarlock, tsmiNastarPriest, tsmiVelarPriest });
+            tsmiClasses.DropDownItems.AddRange(new ToolStripItem[] { tsmiKrannishWarlock, tsmiNastarPriest, tsmiVelarPriest });
             tsmiClasses.Name = "tsmiClasses";
             tsmiClasses.Size = new Size(133, 22);
             tsmiClasses.Text = "Classes";
             // 
-            // tsmiKranichWarlock
+            // tsmiKrannishWarlock
             // 
-            tsmiKranichWarlock.Name = "tsmiKranichWarlock";
-            tsmiKranichWarlock.Size = new Size(158, 22);
-            tsmiKranichWarlock.Text = "Kranich warlock";
-            tsmiKranichWarlock.Click += TsmiKranichWarlock_Click;
+            tsmiKrannishWarlock.Name = "tsmiKrannishWarlock";
+            tsmiKrannishWarlock.Size = new Size(158, 22);
+            tsmiKrannishWarlock.Text = "Krannish warlock";
+            tsmiKrannishWarlock.Click += TsmiKrannishWarlock_Click;
             // 
             // tsmiNastarPriest
             // 
@@ -1226,7 +1226,7 @@
 		private System.Windows.Forms.ColumnHeader chLoop;
 		private System.Windows.Forms.ColumnHeader chLoopMusic;
 		private System.Windows.Forms.ToolStripMenuItem tsmiClasses;
-		private System.Windows.Forms.ToolStripMenuItem tsmiKranichWarlock;
+		private System.Windows.Forms.ToolStripMenuItem tsmiKrannishWarlock;
 		private System.Windows.Forms.ToolStripMenuItem tsmiNastarPriest;
 		private System.Windows.Forms.ToolStripMenuItem tsmiVelarPriest;
 		private System.Windows.Forms.ToolStripMenuItem tsmiOther;

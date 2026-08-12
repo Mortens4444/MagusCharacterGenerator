@@ -1,0 +1,41 @@
+﻿using MAGUS.Enums;
+using MAGUS.GameSystem;
+using MAGUS.GameSystem.Attributes;
+using MAGUS.Models;
+
+namespace MAGUS.Bestiary.Animals;
+
+public sealed class DemonShark : Creature
+{
+    public DemonShark()
+    {
+        Occurrence = Occurrence.Rare;
+        Size = Size._6_to_8_meters;
+        PlacesOfOccurrence = TerrainType.SaltWater;
+
+        InitiateValue = 40;
+        AttackValue = 100;
+        DefenseValue = 140;
+
+        HealthPoints = 35;
+        
+        AstralMagicResistance = Int32.MaxValue;
+        MentalMagicResistance = Int32.MaxValue;
+        PoisonResistance = 8;
+
+        Intelligence = Enums.Intelligence.Animal;
+        ExperiencePoints = 95;
+    }
+
+    public override string Name => "Demon shark";
+
+    [DiceThrow(ThrowType._2D10)]
+    [DiceThrowModifier(5)]
+    public override int GetDamage() => DiceThrow._2D10() + 5;
+
+
+    [DiceThrow(ThrowType._1D10)]
+    public override int GetNumberAppearing() => DiceThrow._1D10();
+
+    public override List<Speed> Speeds => [new Speed(TravelMode.InWater, 185)];
+}

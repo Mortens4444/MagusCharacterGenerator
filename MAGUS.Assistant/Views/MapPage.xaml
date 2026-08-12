@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<v:NotifierPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                xmlns:v="clr-namespace:Mtf.LanguageService.MAUI.Views;assembly=Mtf.LanguageService.MAUI"
+                xmlns:vm="clr-namespace:MAGUS.Assistant.ViewModels"
+                xmlns:mc="clr-namespace:Mtf.Maui.Controls;assembly=Mtf.Maui.Controls"
+                x:Class="MAGUS.Assistant.Views.MapPage"
+                x:DataType="vm:WebBrowserViewModel"
+                x:ClassModifier="internal"
+                Title="Map">
+
+    <v:NotifierPage.Resources>
+        <ResourceDictionary>
+            <Style x:Key="BoxBorder" TargetType="Border">
+                <Setter Property="StrokeShape" Value="{RoundRectangle CornerRadius=8}"/>
+                <Setter Property="Stroke" Value="{AppThemeBinding Light={StaticResource Gray300}, Dark={StaticResource Gray500}}"/>
+                <Setter Property="StrokeThickness" Value="1"/>
+                <Setter Property="Padding" Value="8"/>
+                <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource Gray900}}"/>
+            </Style>
+        </ResourceDictionary>
+    </v:NotifierPage.Resources>
+
+    <Grid Padding="10" RowSpacing="8">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <WebView x:Name="Browser" Source="{Binding CurrentUrl}" Grid.Row="0" />
+
+        <mc:Hyperlink Grid.Row="1" LinkLabel="kalandozok.hu" Url="https://kalandozok.hu/ynev/" HorizontalOptions="Center" VerticalOptions="End" Margin="0,8,0,0" />
+    </Grid>
+
+</v:NotifierPage>

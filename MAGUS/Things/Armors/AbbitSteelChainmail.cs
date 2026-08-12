@@ -1,0 +1,18 @@
+using MAGUS.GameSystem.Valuables;
+
+namespace MAGUS.Things.Armors;
+
+public class AbbitSteelChainMail : Chainmail
+{
+	public override string Name => "Abbit-steel chainmail";
+
+	public override Money Price => new(30, 0, 0);
+
+	public override int ArmorCheckPenalty => 0;
+
+	public override int ArmorClass => 4;
+
+	public override double Weight => 12;
+
+    public override string Description => "A shirt of interlocking rings fashioned from the rare and potent Abbit-steel. It is lighter than plate yet resists slashes and piercing thrusts with exceptional resilience.";
+}

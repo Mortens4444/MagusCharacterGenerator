@@ -1,0 +1,48 @@
+﻿using MAGUS.Enums;
+using MAGUS.GameSystem;
+using MAGUS.GameSystem.Attributes;
+using MAGUS.Models;
+using MAGUS.Things.Weapons;
+
+namespace MAGUS.Bestiary.Mythical;
+
+public sealed class Umich : Creature
+{
+    public Umich()
+    {
+        Occurrence = Occurrence.Rare;
+        Size = Size.Big;
+        PlacesOfOccurrence = TerrainType.Cave | TerrainType.Urban | TerrainType.OldDilapidatedBuilding;
+
+        AttackValue = 95;
+        DefenseValue = 130;
+        InitiateValue = 45;
+
+        AttackModes =
+        [
+            new MeleeAttack(new BodyPart("Strike I.", ThrowType._2D10), 95),
+            new MeleeAttack(new BodyPart("Strike II.", ThrowType._2D10), 95),
+            new MeleeAttack(new BodyPart("Strike III.", ThrowType._1D10), 95)
+        ];
+
+        HealthPoints = 50;
+        PainTolerancePoints = 110;
+
+        AstralMagicResistance = Int32.MaxValue;
+        MentalMagicResistance = Int32.MaxValue;
+        PoisonResistance = 11;
+        ResistantToPsi = true;
+
+        Intelligence = Enums.Intelligence.High;
+        Alignment = Alignment.Chaos;
+        ExperiencePoints = 350;
+    }
+
+    [DiceThrow(ThrowType._2D10)]
+    public override int GetDamage() => DiceThrow._2D10();
+
+    [DiceThrow(ThrowType._1D2)]
+    public override int GetNumberAppearing() => DiceThrow._1D2();
+
+    public override List<Speed> Speeds => [new Speed(TravelMode.OnLand, 20)];
+}

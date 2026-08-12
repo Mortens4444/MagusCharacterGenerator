@@ -1,0 +1,47 @@
+﻿using MAGUS.Enums;
+using MAGUS.Qualifications;
+using MAGUS.Qualifications.Specialities;
+
+namespace MAGUS.Races;
+
+public class Amund : Race
+{
+    public override int Strength => 1;
+
+    public override int Stamina => 1;
+
+    public override int Beauty => 3;
+
+    public override int Astral => -1;
+
+    public override Alignment? Alignment => Enums.Alignment.ChaosDeath;
+
+    public override SpecialQualificationList SpecialQualifications =>
+    [
+        // FireEye
+        new Ultravision(20),
+        new CantLearnPsi(),
+        new ExtraMagicResistanceOnLevelUp(4),
+        new MagicalResistanceRegeneration()
+    ];
+
+    public override string GenerateCharacterName()
+    {
+        var start = new[]
+        {
+            "Kar", "Tah", "Bar", "Han", "Zar", "Dar", "Har", "Tash"
+        };
+
+        var middle = new[]
+        {
+            "ak", "ar", "ta", "ra", "ad", "ha"
+        };
+
+        var end = new[]
+        {
+            "an", "ar", "ash", "ad", "han", "tar"
+        };
+
+        return GenerateCharacterName(start, middle, end);
+    }
+}

@@ -1,0 +1,26 @@
+using MAGUS.Enums;
+using MAGUS.GameSystem.Valuables;
+
+namespace MAGUS.Things.Armors;
+
+public class Rag : Armor
+{
+	public override Money Price => new(0, 1, 0);
+
+	public override int ArmorCheckPenalty => 0;
+
+	public override int ArmorClass => 1;
+
+	public override double Weight => 5;
+
+    public override string Name => "Cloth";
+
+    public override string Description => "A piece of tattered, simple cloth wrapped about the body. Offers only the most pathetic defense against the elements and virtually none against a drawn weapon.";
+
+    public override PlaceOfAttack ProtectedMainPlaces =>
+        PlaceOfAttack.Torso | PlaceOfAttack.WeaponWieldingArm |
+        PlaceOfAttack.NonWeaponWieldingArm | PlaceOfAttack.LeftLeg | PlaceOfAttack.RightLeg;
+
+    public override PlaceOfAttackOnArm ProtectedArmParts => PlaceOfAttackOnArm.Shoulder | PlaceOfAttackOnArm.UpperArm;
+    public override PlaceOfAttackOnLeg ProtectedLegParts => PlaceOfAttackOnLeg.Thigh;
+}

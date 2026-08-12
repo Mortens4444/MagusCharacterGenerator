@@ -1,0 +1,35 @@
+﻿using MAGUS.Enums;
+using MAGUS.GameSystem.Attributes;
+using MAGUS.Models;
+
+namespace MAGUS.Bestiary.Animals;
+
+public sealed class Bat : Creature
+{
+    public Bat()
+    {
+        Occurrence = Occurrence.Frequent;
+        PlacesOfOccurrence = TerrainType.Cave | TerrainType.Crevice | TerrainType.TreeHollow | TerrainType.OldDilapidatedBuilding;
+        Size = Size.Small;
+
+        InitiateValue = 20;
+        AttackValue = 20;
+        DefenseValue = 92;
+
+        HealthPoints = 2;
+        PainTolerancePoints = 5;
+
+        PoisonResistance = 3;
+
+        Intelligence = Enums.Intelligence.Animal;
+        ExperiencePoints = 1;
+    }
+
+    [DiceThrowModifier(1)]
+    public override int GetDamage() => 1;
+
+    [DiceThrow(ThrowType._2D10)]
+    public override int GetNumberAppearing() => DiceThrow._2D10();
+
+    public override List<Speed> Speeds => [new Speed(TravelMode.InTheAir, 120), new Speed(TravelMode.OnLand, 30)];
+}

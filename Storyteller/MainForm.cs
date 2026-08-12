@@ -1,6 +1,6 @@
 ﻿using FontAwesome.Sharp;
-using M.A.G.U.S.Classes;
-using M.A.G.U.S.GameSystem;
+using MAGUS.Classes;
+using MAGUS.GameSystem;
 using Microsoft.Win32;
 using Mtf.Extensions;
 using Mtf.LanguageService.Core;
@@ -139,7 +139,7 @@ namespace Storyteller
 
 		private void FillListViewGroup(ListView listView, string listViewGroupName)
 		{
-			var types = typeof(Class).GetTypesInNamespace($"M.A.G.U.S.Things.{listViewGroupName}");
+			var types = typeof(Class).GetTypesInNamespace($"MAGUS.Things.{listViewGroupName}");
 			int index = 0;
 			foreach (var type in types)
 			{
@@ -420,12 +420,12 @@ namespace Storyteller
 
 		private void TsmiCharacterSheetOdt_Click(object sender, EventArgs e)
 		{
-			ProcessUtils.Start(Path.Combine(Application.StartupPath, @"CharacterSheet\M.A.G.U.S. Karakterlap.odt"));
+			ProcessUtils.Start(Path.Combine(Application.StartupPath, @"CharacterSheet\MAGUS Karakterlap.odt"));
 		}
 
 		private void TsmiCharacterSheetPdf_Click(object sender, EventArgs e)
 		{
-			ProcessUtils.Start(Path.Combine(Application.StartupPath, @"CharacterSheet\M.A.G.U.S. Karakterlap.pdf"));
+			ProcessUtils.Start(Path.Combine(Application.StartupPath, @"CharacterSheet\MAGUS Karakterlap.pdf"));
 		}
 
 		private void TsmiExit_Click(object sender, EventArgs e)
@@ -449,7 +449,7 @@ namespace Storyteller
 			ProcessUtils.Start("https://arkenforge.com/");
 		}
 
-		private void TsmiKranichWarlock_Click(object sender, EventArgs e)
+		private void TsmiKrannishWarlock_Click(object sender, EventArgs e)
 		{
 			ProcessUtils.Start("https://www.kalandozok.hu/magus/kalandozok/jatszhatokasztok/magiahasznalo/boszorkanymester/kraniboszorkanymester(mg)kalandozok.pdf");
 		}

@@ -1,0 +1,28 @@
+﻿using MAGUS.Enums;
+using MAGUS.GameSystem.Attributes;
+using MAGUS.GameSystem.Valuables;
+using MAGUS.Interfaces;
+
+namespace MAGUS.Things.Weapons.Spears;
+
+public class HeavyCavalryLance : Weapon, IMeleeWeapon
+{
+    public override double AttacksPerRound => 1.0 / 3;
+
+    public override int InitiateValue => 0;
+
+    public int AttackValue => 16;
+
+    public int DefenseValue => 0;
+
+    public override double Weight => 5;
+
+    public override Money Price => new(1, 5);
+
+    [DiceThrow(ThrowType._2D10)]
+    public override int GetDamage() => DiceThrow._2D10();
+
+    public override string Name => "Heavy cavalry lance";
+
+    public override string Description => "A thick, reinforced lance designed for the heaviest armoured knights on the largest warhorses. The shaft is often protected by a vamplate near the grip.";
+}

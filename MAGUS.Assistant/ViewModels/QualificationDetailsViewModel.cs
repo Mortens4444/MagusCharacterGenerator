@@ -1,0 +1,243 @@
+﻿using CommunityToolkit.Mvvm.Input;
+using MAGUS.Assistant.CustomEventArgs;
+using MAGUS.Assistant.Services;
+using MAGUS.GameSystem;
+using MAGUS.GameSystem.Languages;
+using MAGUS.GameSystem.Qualifications;
+using MAGUS.Qualifications.Combat;
+using MAGUS.Qualifications.Scientific;
+using MAGUS.Things.Weapons;
+using Mtf.LanguageService;
+using System.Windows.Input;
+
+namespace MAGUS.Assistant.ViewModels;
+
+internal partial class QualificationDetailsViewModel : BaseViewModel
+{
+    private QualificationLevel selectedLevel;
+    private bool canLearn;
+    private int requiredSp;
+    private AsyncRelayCommand? previewImageCommand;
+
+    private Weapon? selectedWeapon;
+    private IReadOnlyList<Weapon> availableWeapons = PreloadService.Instance.Weapons;
+
+    private Language? selectedLanguage;
+    private AntientLanguage? selectedAntientLanguage;
+    private int selectedLanguageLevel = 1;
+    private readonly IList<Language> availableLanguages = [.. Enum.GetValues<Language>()];
+    private readonly IList<AntientLanguage> availableAntientLanguages = [.. Enum.GetValues<AntientLanguage>()];
+    private readonly int[] availableLanguageLevels = [1, 2, 3, 4, 5];
+
+    public IReadOnlyList<Weapon> AvailableWeapons
+    {
+        get => availableWeapons;
+        private set => SetProperty(ref availableWeapons, value);
+    }
+
+    public Weapon? SelectedWeapon
+    {
+        get => selectedWeapon;
+        set
+        {
+            if (SetProperty(ref selectedWeapon, value))
+            {
+                UpdateDerived();
+            }
+        }
+    }
+
+    public IList<Language> AvailableLanguages => availableLanguages;
+    public Language? SelectedLanguage
+    {
+        get => selectedLanguage;
+        set
+        {
+            if (SetProperty(ref selectedLanguage, value))
+            {
+                UpdateDerived();
+            }
+        }
+    }
+
+    public IList<AntientLanguage> AvailableAntientLanguages => availableAntientLanguages;
+    public AntientLanguage? SelectedAntientLanguage
+    {
+        get => selectedAntientLanguage;
+        set
+        {
+            if (SetProperty(ref selectedAntientLanguage, value))
+            {
+                UpdateDerived();
+            }
+        }
+    }
+
+    public int[] AvailableLanguageLevels => availableLanguageLevels;
+    public int SelectedLanguageLevel
+    {
+        get => selectedLanguageLevel;
+        set
+        {
+            if (SetProperty(ref selectedLanguageLevel, value))
+            {
+                UpdateDerived();
+            }
+        }
+    }
+
+    public bool IsWeaponQualification => Qualification is WeaponQualification;
+
+    public bool IsLanguageLore => Qualification is LanguageLore;
+
+    public bool IsAncientTongueLore => Qualification is AncientTongueLore;
+
+    public QualificationDetailsViewModel(Character? character, Qualification qualification)
+    {
+        Qualification = qualification ?? throw new ArgumentNullException(nameof(qualification));
+        Character = character;
+
+        if (qualification is WeaponQualification wq && wq.Weapon != null)
+        {
+            SelectedWeapon = AvailableWeapons.FirstOrDefault(w => w.Id == wq.Weapon.Id) ?? wq.Weapon;
+        }
+
+        if (qualification is LanguageLore ll)
+        {
+            SelectedLanguage = ll.Language;
+            SelectedLanguageLevel = Math.Clamp(ll.LanguageLevel, 1, 5);
+        }
+
+        if (qualification is AncientTongueLore atl && atl.Language.HasValue)
+        {
+            SelectedAntientLanguage = atl.Language.Value;
+        }
+
+        AvailableLevels = [ QualificationLevel.Base, QualificationLevel.Master ];
+        SelectedLevel = qualification.QualificationLevel;
+
+        Name = Lng.Elem(Qualification.Name);
+        Category = qualification.Category;
+        Description = Qualification.Description;
+        DefaultImage = Qualification.DefaultImage;
+
+        LearnCommand = new RelayCommand(Learn, () => CanLearn);
+        CloseCommand = new RelayCommand(OnClosed);
+
+        UpdateDerived();
+    }
+
+    public Qualification Qualification { get; }
+    public Character? Character { get; }
+    public string Name { get; } = String.Empty;
+    public string Category { get; } = String.Empty;
+    public string Description { get; } = String.Empty;
+    public string DefaultImage { get; } = String.Empty;
+    public QualificationLevel[] AvailableLevels { get; }
+    public ICommand LearnCommand { get; }
+    public ICommand CloseCommand { get; }
+
+    public QualificationLevel SelectedLevel
+    {
+        get => selectedLevel;
+        set
+        {
+            if (SetProperty(ref selectedLevel, value))
+            {
+                UpdateDerived();
+            }
+        }
+    }
+
+    public bool CanLearn { get => canLearn; set => SetProperty(ref canLearn, value); }
+    public int RequiredSp { get => requiredSp; set => SetProperty(ref requiredSp, value); }
+
+    public event EventHandler<QualificationLearnedEventArgs>? Learned;
+    public event EventHandler? Closed;
+
+    private void UpdateDerived()
+    {
+        bool learnable;
+        int requiredQp;
+
+        if (Character != null)
+        {
+            // Probe with a configured copy, so the selected weapon / language is taken into account
+            // when deciding whether this level is still learnable and how much QP it costs.
+            learnable = Character.CanLearn(CreateQualificationToLearn(), SelectedLevel, out requiredQp);
+        }
+        else
+        {
+            requiredQp = SelectedLevel == QualificationLevel.Base
+                ? Qualification.QpToBaseQualification
+                : Qualification.QpToMasterQualification;
+            learnable = false;
+        }
+        RequiredSp = requiredQp;
+        canLearn = learnable;
+
+        OnPropertyChanged(nameof(RequiredSp));
+        OnPropertyChanged(nameof(CanLearn));
+        (LearnCommand as RelayCommand)?.NotifyCanExecuteChanged();
+    }
+
+    private void Learn()
+    {
+        if (!CanLearn)
+        {
+            return;
+        }
+
+        Learned?.Invoke(this, new QualificationLearnedEventArgs(CreateQualificationToLearn(), SelectedLevel));
+        UpdateDerived();
+    }
+
+    /// <summary>
+    /// Qualification comes from the shared PreloadService catalogue, so it must never be mutated directly -
+    /// otherwise every character (and every further weapon / language choice) would see the change.
+    /// This returns a fresh copy configured with the current selection.
+    /// </summary>
+    private Qualification CreateQualificationToLearn()
+    {
+        Qualification qualificationToLearn;
+        try
+        {
+            qualificationToLearn = Activator.CreateInstance(Qualification.GetType()) as Qualification ?? Qualification;
+        }
+        catch (Exception ex) when (ex is MissingMethodException or System.Reflection.TargetInvocationException)
+        {
+            // No usable public parameterless constructor - fall back to the catalogue instance.
+            qualificationToLearn = Qualification;
+        }
+
+        if (qualificationToLearn is WeaponQualification wq)
+        {
+            wq.Weapon = SelectedWeapon;
+        }
+
+        if (qualificationToLearn is LanguageLore ll)
+        {
+            ll.Language = SelectedLanguage;
+            ll.LanguageLevel = SelectedLanguageLevel;
+        }
+
+        if (qualificationToLearn is AncientTongueLore atl && SelectedAntientLanguage.HasValue)
+        {
+            atl.Language = SelectedAntientLanguage.Value;
+        }
+
+        return qualificationToLearn;
+    }
+
+    protected virtual void OnClosed()
+    {
+        Closed?.Invoke(this, EventArgs.Empty);
+    }
+
+    public IAsyncRelayCommand PreviewImageCommand => previewImageCommand ??= new AsyncRelayCommand(PreviewImage);
+
+    private Task PreviewImage()
+    {
+        return ImagePreviewService.ShowAsync(Qualification?.DefaultImage);
+    }
+}

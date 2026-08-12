@@ -1,9 +1,9 @@
-﻿using M.A.G.U.S.GameSystem;
-using M.A.G.U.S.Interfaces;
-using M.A.G.U.S.Qualifications.Scientific;
-using M.A.G.U.S.Races;
+﻿using MAGUS.GameSystem;
+using MAGUS.Interfaces;
+using MAGUS.Qualifications.Scientific;
+using MAGUS.Races;
 
-namespace M.A.G.U.S.Test;
+namespace MAGUS.Test;
 
 public class TestDto
 {

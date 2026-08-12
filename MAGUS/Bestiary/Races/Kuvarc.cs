@@ -1,0 +1,39 @@
+﻿using MAGUS.Enums;
+using MAGUS.GameSystem.Attributes;
+using MAGUS.Models;
+using MAGUS.Things.Armors;
+
+namespace MAGUS.Bestiary.Races;
+
+public sealed class Kuvarc : Creature
+{
+    public Kuvarc()
+    {
+        Armor = new NaturalArmor(6); // 2 zúzófegyverek ellen
+        Occurrence = Occurrence.VeryRare;
+        Size = Size.Huge;
+        PlacesOfOccurrence = TerrainType.Mines;
+
+        AttackValue = 60;
+        DefenseValue = 104;
+        InitiateValue = 10;
+
+        HealthPoints = 20;
+
+        AstralMagicResistance = Int32.MaxValue;
+        MentalMagicResistance = 64;
+        PoisonResistance = Int32.MaxValue;
+
+        Intelligence = Enums.Intelligence.Average;
+        Alignment = Alignment.Order;
+        ExperiencePoints = 265;
+    }
+
+    [DiceThrow(ThrowType._2D6)]
+    public override int GetDamage() => DiceThrow._2D6(); // + special
+
+    [DiceThrowModifier(1)]
+    public override int GetNumberAppearing() => 1;
+
+    public override List<Speed> Speeds => [new Speed(TravelMode.OnLand, 50)];
+}

@@ -1,7 +1,7 @@
-﻿using M.A.G.U.S.GameSystem;
-using M.A.G.U.S.Interfaces;
-using M.A.G.U.S.Races;
-using M.A.G.U.S.Utils;
+﻿using MAGUS.GameSystem;
+using MAGUS.Interfaces;
+using MAGUS.Races;
+using MAGUS.Utils;
 using System.Reflection;
 
 namespace CharacterGeneratorCli;
@@ -38,7 +38,7 @@ class Program
 	{
 		try
 		{
-			var magusCharacterGeneratorTypes = Assembly.Load("M.A.G.U.S.").GetTypes();
+			var magusCharacterGeneratorTypes = Assembly.Load("MAGUS").GetTypes();
 			var races = magusCharacterGeneratorTypes
 				.Where(type => !type.IsInterface && !type.IsAbstract && typeof(IRace).IsAssignableFrom(type))
 				.Select(raceType => (IRace)Activator.CreateInstance(raceType));

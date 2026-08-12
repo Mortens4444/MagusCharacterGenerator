@@ -1,0 +1,38 @@
+﻿using MAGUS.Enums;
+using MAGUS.Qualifications;
+using MAGUS.Qualifications.Specialities;
+
+namespace MAGUS.Races;
+
+/// <summary>
+/// https://kalandozok.hu/cikkgyujtemeny/kieg%C3%A9sz%C3%ADt%C5%91k/fajok/j%C3%A1tszhat%C3%B3-fajok/f%C3%A9lork-goblin-r67/
+/// </summary>
+public class Goblin : Race
+{
+    public override int Strength => -2;
+
+    public override int Dexterity => 3;
+
+    public override int Quickness => 3;
+
+    public override int Beauty => -4;
+
+    public override int Willpower => -1;
+
+    public override int Astral => -2;
+
+    public override Alignment? Alignment => Enums.Alignment.ChaosDeath;
+
+    public override SpecialQualificationList SpecialQualifications =>
+    [
+        new Infravision(10),
+        new UndergroundMasters(5)
+    ];
+
+    public override string GenerateCharacterName()
+    {
+        var consonants = new[] { 'k', 'g', 't', 'z', 's', 'b', 'p', 'd' };
+        var vowels = new[] { 'a', 'e', 'i' };
+        return GenerateCharacterName(consonants, vowels);
+    }
+}

@@ -1,0 +1,19 @@
+﻿using MAGUS.GameSystem.Psi;
+using MAGUS.GameSystem.Qualifications;
+
+namespace MAGUS.Qualifications.Scientific.Psi;
+
+public class PsiKrannish(QualificationLevel qualificationLevel = QualificationLevel.Base, int level = 1) : Qualification(qualificationLevel, level), IPsi
+{
+    public PsiKind PsiKind => PsiKind.Krannish;
+
+    public override int QpToBaseQualification => 10;
+
+    public override int QpToMasterQualification => 55;
+
+    public override string Name => "Psi, Krannish";
+
+    public override string[] Images => ["psi.png"];
+
+    public PsiKrannish() :this(QualificationLevel.Base) { }
+}

@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<v:NotifierPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                xmlns:c="clr-namespace:Mtf.LanguageService.MAUI.Converters;assembly=Mtf.LanguageService.MAUI"
+                xmlns:conv="clr-namespace:Mtf.Maui.Controls.Converters;assembly=Mtf.Maui.Controls"
+                xmlns:v="clr-namespace:Mtf.LanguageService.MAUI.Views;assembly=Mtf.LanguageService.MAUI"
+                xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                xmlns:vm="clr-namespace:MAGUS.Assistant.ViewModels"
+                xmlns:model="clr-namespace:MAGUS.GameSystem;assembly=MAGUS"
+                xmlns:converters="clr-namespace:MAGUS.Assistant.Converters"
+                x:Class="MAGUS.Assistant.Views.CharactersPage"
+                x:DataType="vm:CharactersViewModel"
+                Title="Characters"
+                x:ClassModifier="internal"
+                BackgroundColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource Gray900}}">
+    
+    <v:NotifierPage.Resources>
+        <ResourceDictionary>
+            <conv:InverseBooleanConverter x:Key="InverseBooleanConverter" />
+            <c:TranslationConverter x:Key="TranslationConverter" />
+            <converters:IsDefaultCharacterConverter x:Key="IsDefaultCharacterConverter" />
+        </ResourceDictionary>
+    </v:NotifierPage.Resources>
+    
+    <Grid RowDefinitions="Auto, *">
+        <ImageButton Grid.Column="1" Source="delete.png" HeightRequest="24" WidthRequest="24" VerticalOptions="Center"
+                     Command="{Binding Source={RelativeSource AncestorType={x:Type vm:CharactersViewModel}}, Path=DeleteAllCharacterCommand}">
+        </ImageButton>
+
+        <RefreshView Grid.Row="1" IsRefreshing="{Binding IsLoading}">
+        <!--<RefreshView Grid.Row="1" IsRefreshing="{Binding IsLoading}" Command="{Binding LoadCharactersCommand}">-->
+
+            <Grid>
+                
+                <VerticalStackLayout VerticalOptions="Center" HorizontalOptions="Center" IsVisible="{Binding IsEmpty}" Spacing="10">
+                    <Label Text="No characters found." HorizontalOptions="Center" FontSize="18" />
+                    <Label Text="Go to 'Create character' to create one." TextColor="Gray" HorizontalOptions="Center"/>
+                </VerticalStackLayout>
+
+                <CollectionView ItemsSource="{Binding AvailableCharacters}"
+                                SelectionMode="Single">
+
+                    <CollectionView.ItemsLayout>
+                        <LinearItemsLayout Orientation="Vertical" ItemSpacing="10" />
+                    </CollectionView.ItemsLayout>
+
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate x:DataType="model:Character">
+                            <SwipeView>
+                                <SwipeView.RightItems>
+                                    <SwipeItems>
+                                        <SwipeItem Text="Delete" BackgroundColor="#FF3B30" CommandParameter="{Binding .}"
+                                                   Command="{Binding Source={RelativeSource AncestorType={x:Type vm:CharactersViewModel}}, Path=DeleteCharacterCommand}" />
+                                    </SwipeItems>
+                                </SwipeView.RightItems>
+
+                                <Border StrokeShape="RoundRectangle 10"
+                                        StrokeThickness="1"
+                                        Margin="10"
+                                        Padding="15"
+                                        BackgroundColor="{AppThemeBinding Light={StaticResource Gray100}, Dark={StaticResource Gray900}}">
+                                    <Border.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type vm:CharactersViewModel}}, Path=OpenDetailsCommand}"
+                                                              CommandParameter="{Binding .}"/>
+                                    </Border.GestureRecognizers>
+
+                                    <Grid ColumnDefinitions="*, Auto, Auto, Auto, Auto">
+                                        <VerticalStackLayout Grid.Column="0" Spacing="2">
+                                            <Label Text="{Binding Name}"
+                                                   FontAttributes="Bold"
+                                                   FontSize="18"/>
+
+                                            <HorizontalStackLayout Spacing="5">
+                                                <Label Text="{Binding Race.Name, Converter={StaticResource TranslationConverter}}" TextColor="{AppThemeBinding Light=Gray, Dark=LightGray}"/>
+                                                <Label Text="-" TextColor="Gray"/>
+                                                <Label Text="{Binding BaseClass.Name, Converter={StaticResource TranslationConverter}}" TextColor="{AppThemeBinding Light=Gray, Dark=LightGray}"/>
+                                            </HorizontalStackLayout>
+
+                                            <Label Text="{Binding BaseClass.Level, StringFormat='Level {0}'}"  FontSize="12" TextColor="{StaticResource Primary}"/>
+                                        </VerticalStackLayout>
+
+                                        <Label Grid.Column="1" FontSize="24" VerticalOptions="Center" HorizontalOptions="Center"
+                                               WidthRequest="36" HorizontalTextAlignment="Center"
+                                               TextColor="{StaticResource Primary}"
+                                               ToolTipProperties.Text="Default character (used for background story events)">
+                                            <Label.Text>
+                                                <MultiBinding Converter="{StaticResource IsDefaultCharacterConverter}">
+                                                    <Binding Path="Name" />
+                                                    <Binding Source="{RelativeSource AncestorType={x:Type vm:CharactersViewModel}}" Path="DefaultCharacterName" />
+                                                </MultiBinding>
+                                            </Label.Text>
+                                            <Label.GestureRecognizers>
+                                                <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type vm:CharactersViewModel}}, Path=SetDefaultCharacterCommand}"
+                                                                      CommandParameter="{Binding .}"/>
+                                            </Label.GestureRecognizers>
+                                        </Label>
+
+                                        <Label Grid.Column="2" Text="😴" FontSize="22" VerticalOptions="Center" HorizontalOptions="Center"
+                                               WidthRequest="36" HorizontalTextAlignment="Center"
+                                               ToolTipProperties.Text="Send to sleep (restores HP/PTP/Mana/Psi)">
+                                            <Label.GestureRecognizers>
+                                                <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type vm:CharactersViewModel}}, Path=SleepCommand}"
+                                                                      CommandParameter="{Binding .}"/>
+                                            </Label.GestureRecognizers>
+                                        </Label>
+
+                                        <Label Grid.Column="3" Text="🍗" FontSize="22" VerticalOptions="Center" HorizontalOptions="Center"
+                                               WidthRequest="36" HorizontalTextAlignment="Center"
+                                               ToolTipProperties.Text="Eat (clears hunger, consumes one food item)">
+                                            <Label.GestureRecognizers>
+                                                <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type vm:CharactersViewModel}}, Path=EatCommand}"
+                                                                      CommandParameter="{Binding .}"/>
+                                            </Label.GestureRecognizers>
+                                        </Label>
+
+                                        <ImageButton Grid.Column="4" Source="delete.png" HeightRequest="24" WidthRequest="24" VerticalOptions="Center"
+                                                     Command="{Binding Source={RelativeSource AncestorType={x:Type vm:CharactersViewModel}}, Path=DeleteCharacterCommand}"
+                                                     CommandParameter="{Binding .}">
+                                        </ImageButton>
+                                    </Grid>
+                                </Border>
+                            </SwipeView>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </Grid>
+        </RefreshView>
+    </Grid>
+</v:NotifierPage>

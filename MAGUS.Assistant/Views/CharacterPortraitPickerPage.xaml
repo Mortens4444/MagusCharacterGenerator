@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<v:NotifierPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                xmlns:m="clr-namespace:MAGUS.Assistant.Models"
+                xmlns:vm="clr-namespace:MAGUS.Assistant.ViewModels"
+                xmlns:v="clr-namespace:Mtf.LanguageService.MAUI.Views;assembly=Mtf.LanguageService.MAUI"
+                xmlns:mc="clr-namespace:Mtf.Maui.Controls;assembly=Mtf.Maui.Controls"
+                x:Class="MAGUS.Assistant.Views.CharacterPortraitPickerPage"
+                x:DataType="vm:CharacterPortraitPickerViewModel"
+                x:ClassModifier="internal"
+                Title="Choose portrait(s)">
+
+    <Grid Padding="10" RowDefinitions="Auto,*,Auto">
+        <mc:EntryWithLabel Grid.Row="0" Label="Search" Text="{Binding SearchText}" />
+
+        <CollectionView Grid.Row="1" SelectionMode="Multiple"
+                        ItemsSource="{Binding FilteredImages}"
+                        SelectedItems="{Binding SelectedImages, Mode=TwoWay}">
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="m:ImageItem">
+                    <Border Stroke="Gray" StrokeThickness="1" Padding="8" Margin="0,4">
+                        <Grid ColumnDefinitions="80,*" ColumnSpacing="8" VerticalOptions="Center">
+                            <Image Source="{Binding Thumbnail}" WidthRequest="64" HeightRequest="64" Aspect="AspectFill" Grid.Column="0"/>
+                            <Label Grid.Column="1" Text="{Binding DisplayName}" FontAttributes="Bold" LineBreakMode="TailTruncation" VerticalOptions="Center"/>
+                        </Grid>
+                    </Border>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+        <Grid Grid.Row="2" ColumnDefinitions="*,*" ColumnSpacing="8" Margin="0,8,0,0">
+            <Button Grid.Column="0" Text="Cancel" Command="{Binding CancelCommand}" />
+            <Button Grid.Column="1" Text="Done" Command="{Binding ConfirmCommand}" FontAttributes="Bold" />
+        </Grid>
+    </Grid>
+</v:NotifierPage>

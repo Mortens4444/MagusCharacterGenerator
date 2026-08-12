@@ -1,0 +1,14 @@
+﻿using MAGUS.GameSystem.Qualifications;
+
+namespace MAGUS.Qualifications.Laical;
+
+public class SwampSurvival(QualificationLevel qualificationLevel = QualificationLevel.Base, int level = 1) : Qualification(qualificationLevel, level), ILaicalQualification
+{
+    public override string Name => "Swamp survival";
+
+    public override int QpToBaseQualification => 5;
+
+    public override int QpToMasterQualification => 14;
+
+    public SwampSurvival() : this(QualificationLevel.Base) { }
+}

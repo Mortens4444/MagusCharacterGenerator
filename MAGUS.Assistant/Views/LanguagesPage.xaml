@@ -1,0 +1,48 @@
+<v:NotifierPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                xmlns:conv="clr-namespace:Mtf.LanguageService.MAUI.Converters;assembly=Mtf.LanguageService.MAUI"
+                xmlns:v="clr-namespace:Mtf.LanguageService.MAUI.Views;assembly=Mtf.LanguageService.MAUI"
+                xmlns:m="clr-namespace:MAGUS.Assistant.Models"
+                xmlns:vm="clr-namespace:MAGUS.Assistant.ViewModels"
+                xmlns:gs="clr-namespace:MAGUS.GameSystem.Languages;assembly=MAGUS"
+                xmlns:mc="clr-namespace:Mtf.Maui.Controls;assembly=Mtf.Maui.Controls"
+                x:Class="MAGUS.Assistant.Views.LanguagesPage"
+                x:DataType="vm:LanguagesViewModel"
+                x:Name="PageRoot"
+                x:ClassModifier="internal"
+                Title="Languages">
+
+    <v:NotifierPage.Resources>
+        <ResourceDictionary>
+            <conv:TranslationConverter x:Key="TranslationConverter" />
+            <conv:EnumDescriptionTranslationConverter x:Key="EnumDescriptionTranslationConverter" />
+        </ResourceDictionary>
+    </v:NotifierPage.Resources>
+
+    <Grid Padding="10" RowDefinitions="Auto,Auto,*" RowSpacing="8">
+        <HorizontalStackLayout Grid.Row="0" Spacing="8" VerticalOptions="Center">
+            <Label Text="Type" VerticalOptions="Center" />
+            <Picker ItemsSource="{Binding Types}"
+                    SelectedItem="{Binding SelectedType}"
+                    ItemDisplayBinding="{Binding ., Converter={StaticResource TranslationConverter}}" />
+        </HorizontalStackLayout>
+
+        <mc:EntryWithLabel Grid.Row="1" Label="Search" Text="{Binding SearchText}" />
+
+        <CollectionView Grid.Row="2"
+                        ItemsSource="{Binding FilteredLanguages}"
+                        SelectionMode="Single"
+                        SelectedItem="{Binding SelectedLanguage, Mode=TwoWay}"
+                        ItemsLayout="VerticalList">
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="m:LanguageItem">
+                    <Border Stroke="Gray" StrokeThickness="1" Padding="8" Margin="0,4">
+                        <Grid ColumnDefinitions="*" ColumnSpacing="8" VerticalOptions="Center">
+                            <Label Text="{Binding Description, Converter={StaticResource EnumDescriptionTranslationConverter}}" FontAttributes="Bold" />
+                        </Grid>
+                    </Border>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </Grid>
+</v:NotifierPage>

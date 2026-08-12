@@ -1,12 +1,12 @@
-using M.A.G.U.S.Bestiary;
-using M.A.G.U.S.Enums;
-using M.A.G.U.S.GameSystem;
-using M.A.G.U.S.GameSystem.Psi.Disciplines.Kyr;
-using M.A.G.U.S.GameSystem.Turn;
-using M.A.G.U.S.Models;
-using M.A.G.U.S.Services;
+using MAGUS.Bestiary;
+using MAGUS.Enums;
+using MAGUS.GameSystem;
+using MAGUS.GameSystem.Psi.Disciplines.Kyr;
+using MAGUS.GameSystem.Turn;
+using MAGUS.Models;
+using MAGUS.Services;
 
-namespace M.A.G.U.S.Test;
+namespace MAGUS.Test;
 
 [TestFixture]
 public class MysticResolutionTest

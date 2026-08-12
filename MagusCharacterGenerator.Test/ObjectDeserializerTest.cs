@@ -1,12 +1,12 @@
-﻿using M.A.G.U.S.Classes.Believer.GodsOfPyarron;
-using M.A.G.U.S.Classes.Sorcerer;
-using M.A.G.U.S.GameSystem;
-using M.A.G.U.S.GameSystem.Languages;
-using M.A.G.U.S.Qualifications.Scientific;
-using M.A.G.U.S.Races;
-using M.A.G.U.S.Utils;
+﻿using MAGUS.Classes.Believer.GodsOfPyarron;
+using MAGUS.Classes.Sorcerer;
+using MAGUS.GameSystem;
+using MAGUS.GameSystem.Languages;
+using MAGUS.Qualifications.Scientific;
+using MAGUS.Races;
+using MAGUS.Utils;
 
-namespace M.A.G.U.S.Test
+namespace MAGUS.Test
 {
 	[TestFixture]
 	public class ObjectDeserializerTest
@@ -49,7 +49,7 @@ namespace M.A.G.U.S.Test
 		[Test]
 		public void DeserializeCharacter()
 		{
-			var savedCharacterJson = EmbeddedResourceReader.Get("M.A.G.U.S.Test.ObjectDeserializationResults.Character.json", typeof(ObjectDeserializerTest).Assembly);
+			var savedCharacterJson = EmbeddedResourceReader.Get("MAGUS.Test.ObjectDeserializationResults.Character.json", typeof(ObjectDeserializerTest).Assembly);
 			var character = ObjectSerializer.LoadContent<Character>(savedCharacterJson);
 			Assert.That(character.Classes, Is.Not.Null);
 		}

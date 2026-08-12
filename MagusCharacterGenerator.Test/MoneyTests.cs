@@ -1,6 +1,6 @@
-﻿using M.A.G.U.S.GameSystem.Valuables;
+﻿using MAGUS.GameSystem.Valuables;
 
-namespace M.A.G.U.S.Test;
+namespace MAGUS.Test;
 
 [TestFixture]
 public class MoneyTests

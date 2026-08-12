@@ -1,0 +1,10 @@
+<v:NotifierPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                xmlns:v="clr-namespace:Mtf.LanguageService.MAUI.Views;assembly=Mtf.LanguageService.MAUI"
+                xmlns:views="clr-namespace:MAGUS.Assistant.Views"
+                x:ClassModifier="internal"
+                x:Class="MAGUS.Assistant.Views.SearchListPage">
+
+    <views:SearchListView />
+
+</v:NotifierPage>

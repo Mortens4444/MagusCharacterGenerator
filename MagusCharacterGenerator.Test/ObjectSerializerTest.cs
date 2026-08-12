@@ -1,6 +1,6 @@
-﻿using M.A.G.U.S.Utils;
+﻿using MAGUS.Utils;
 
-namespace M.A.G.U.S.Test
+namespace MAGUS.Test
 {
 	[TestFixture]
 	public class ObjectSerializerTest
@@ -22,7 +22,7 @@ namespace M.A.G.U.S.Test
 					String = "str",
 					Char = 'c'
 				},
-				"M.A.G.U.S.Test.ObjectSerializationResults.Primitives.json");
+				"MAGUS.Test.ObjectSerializationResults.Primitives.json");
 		}
 
 		[Test]
@@ -33,7 +33,7 @@ namespace M.A.G.U.S.Test
 					Bytes = new int[] { 1, 2, 3 },
 					Strings = new[] { "a", "b", "c" }
 				},
-				"M.A.G.U.S.Test.ObjectSerializationResults.Arrays.json");
+				"MAGUS.Test.ObjectSerializationResults.Arrays.json");
 		}
 
 		[Test]
@@ -44,7 +44,7 @@ namespace M.A.G.U.S.Test
 					Bytes = new List<int> { 1, 2, 3 },
 					Strings = new List<string> { "a", "b", "c" }
 				},
-				"M.A.G.U.S.Test.ObjectSerializationResults.Lists.json");
+				"MAGUS.Test.ObjectSerializationResults.Lists.json");
 		}
 
 		private static void TestSerialization(object obj, string serializationResultFileName)

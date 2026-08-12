@@ -1,0 +1,14 @@
+﻿using MAGUS.GameSystem.Qualifications;
+
+namespace MAGUS.Qualifications.Combat;
+
+public class WeaponBreaking(QualificationLevel qualificationLevel = QualificationLevel.Base, int level = 1) : Qualification(qualificationLevel, level)
+{
+    public override string Name => "Weapon breaking";
+
+    public override int QpToBaseQualification => 5;
+
+    public override int QpToMasterQualification => 20;
+
+    public WeaponBreaking() : this(QualificationLevel.Base) { }
+}

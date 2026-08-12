@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<v:NotifierPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:v="clr-namespace:Mtf.LanguageService.MAUI.Views;assembly=Mtf.LanguageService.MAUI"
+             xmlns:vm="clr-namespace:MAGUS.Assistant.ViewModels"
+             xmlns:m="clr-namespace:MAGUS.Assistant.Models"
+             xmlns:bm="clr-namespace:MAGUS.Assistant.Models.Bluetooth"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:mc="clr-namespace:Mtf.Maui.Controls;assembly=Mtf.Maui.Controls"
+             x:Class="MAGUS.Assistant.Views.StorytellingPage"
+             x:ClassModifier="internal"
+             Title="Storytelling"
+             x:DataType="vm:StorytellingViewModel">
+
+    <VerticalStackLayout Padding="10" Spacing="12">
+
+        <Button Text="Start Story" Command="{Binding StartStoryCommand}" />
+        <Label Text="{Binding StatusMessage}" FontAttributes="Bold" TextColor="Orange" />
+
+        <Label Text="Connected Players" FontAttributes="Bold"/>
+
+        <CollectionView ItemsSource="{Binding ConnectedPlayers}"
+                        SelectionMode="Single"
+                        SelectedItem="{Binding SelectedPlayer}">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Label Text="{Binding Name}" Padding="6"/>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+        <Label Text="Available Devices" FontAttributes="Bold"/>
+        <CollectionView ItemsSource="{Binding AvailableDevices}"
+                        SelectionMode="Single"
+                        SelectedItem="{Binding SelectedDevice}">
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="bm:DeviceModel">
+                    <Grid Padding="6">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Label Text="{Binding Name}" />
+
+                        <Button Grid.Column="1"
+                                Text="Connect"
+                                Command="{Binding BindingContext.ConnectCommand, Source={RelativeSource AncestorType={x:Type v:NotifierPage}}}"
+                                CommandParameter="{Binding .}" />
+                    </Grid>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+        <Label Text="Private message" FontAttributes="Bold"/>
+
+        <Entry Text="{Binding MessageText}" ClearButtonVisibility="WhileEditing" />
+        <Grid ColumnDefinitions="*,*" ColumnSpacing="8">
+            <Button Grid.Column="0" Text="Send message" Command="{Binding SendPrivateMessageCommand}" />
+            <Button Grid.Column="1" Text="Send notification" Command="{Binding SendNotificationCommand}" />
+        </Grid>
+
+    </VerticalStackLayout>
+</v:NotifierPage>

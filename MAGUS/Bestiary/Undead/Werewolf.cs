@@ -1,0 +1,41 @@
+﻿using MAGUS.Enums;
+using MAGUS.GameSystem;
+using MAGUS.GameSystem.Attributes;
+using MAGUS.Models;
+
+namespace MAGUS.Bestiary.Undead;
+
+public sealed class Werewolf : LivingDead
+{
+    public Werewolf()
+    {
+        Occurrence = Occurrence.Rare;
+        Size = Size.Human;
+        PlacesOfOccurrence = TerrainType.Anywhere;
+
+        AttackValue = 60;
+        DefenseValue = 75;
+        InitiateValue = 25;
+
+        PainTolerancePoints = 44;
+
+        AstralMagicResistance = Int32.MaxValue;
+        MentalMagicResistance = Int32.MaxValue;
+        PoisonResistance = Int32.MaxValue;
+
+        Intelligence = Enums.Intelligence.High;
+        Alignment = Alignment.ChaosDeath;
+        ExperiencePoints = 300;
+        NecrographyDepartment = NecrographyDepartment.WanderingCorpse;
+    }
+
+    [DiceThrow(ThrowType._1D10)]
+    public override int GetDamage() => DiceThrow._1D10();
+
+    [DiceThrowModifier(1)]
+    public override int GetNumberAppearing() => 1;
+
+    public override string[] Sounds => ["werewolf_howl"];
+
+    public override List<Speed> Speeds => [new Speed(TravelMode.InTheAir, 20), new Speed(TravelMode.OnLand, description: "Possessed body")];
+}

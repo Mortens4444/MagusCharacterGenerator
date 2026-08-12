@@ -4,7 +4,7 @@ static class CliHelp
 {
 	public static void Show()
 	{
-		Console.WriteLine("Command line interface to generate a M.A.G.U.S. character");
+		Console.WriteLine("Command line interface to generate a MAGUS character");
 		Console.WriteLine();
 		Console.WriteLine("Arguments:");
 		Console.WriteLine("----------");

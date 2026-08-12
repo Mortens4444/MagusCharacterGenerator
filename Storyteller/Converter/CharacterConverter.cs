@@ -1,4 +1,4 @@
-﻿using M.A.G.U.S.GameSystem;
+﻿using MAGUS.GameSystem;
 using Mtf.Extensions;
 using Mtf.LanguageService.Core;
 using System.Text;

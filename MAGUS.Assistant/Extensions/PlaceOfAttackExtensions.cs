@@ -1,0 +1,37 @@
+﻿using MAGUS.Enums;
+using Mtf.LanguageService;
+using System.ComponentModel;
+using System.Reflection;
+
+namespace MAGUS.Assistant.Extensions;
+
+internal static class PlaceOfAttackExtensions
+{
+    public static string ToLocalizedString(this PlaceOfAttack value)
+    {
+        if (value == PlaceOfAttack.None)
+        {
+            return String.Empty;
+        }
+
+        if (value == PlaceOfAttack.Everywhere)
+        {
+            return Lng.Elem(PlaceOfAttack.Everywhere.GetDescription());
+        }
+
+        var parts = Enum.GetValues<PlaceOfAttack>()
+            .Where(v => v != PlaceOfAttack.None && value.HasFlag(v))
+            .Select(v => Lng.Elem(v.GetDescription()))
+            .ToArray();
+
+        return String.Join(", ", parts);
+    }
+
+    private static string GetDescription(this Enum value)
+    {
+        var field = value.GetType().GetField(value.ToString());
+        var attr = field?.GetCustomAttribute<DescriptionAttribute>();
+
+        return attr?.Description ?? value.ToString();
+    }
+}

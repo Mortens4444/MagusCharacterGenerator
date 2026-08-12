@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<v:NotifierPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                xmlns:conv="clr-namespace:Mtf.LanguageService.MAUI.Converters;assembly=Mtf.LanguageService.MAUI"
+                xmlns:v="clr-namespace:Mtf.LanguageService.MAUI.Views;assembly=Mtf.LanguageService.MAUI"
+                xmlns:mv="clr-namespace:MAGUS.Assistant.Views"
+                xmlns:vm="clr-namespace:MAGUS.Assistant.ViewModels"
+                xmlns:mc="clr-namespace:Mtf.Maui.Controls;assembly=Mtf.Maui.Controls"
+                x:Class="MAGUS.Assistant.Views.CharacterGeneratorPage"
+                x:DataType="vm:CharacterGeneratorViewModel"
+                x:ClassModifier="internal"
+                Title="Character sheet">
+
+    <v:NotifierPage.Resources>
+        <ResourceDictionary>
+            <conv:TranslationConverter x:Key="TranslationConverter" />
+        </ResourceDictionary>
+    </v:NotifierPage.Resources>
+    
+    <Shell.BackButtonBehavior>
+        <BackButtonBehavior Command="{Binding BackCommand}" />
+    </Shell.BackButtonBehavior>
+    
+    <ScrollView>
+        <VerticalStackLayout Spacing="15" Padding="15">
+
+            <HorizontalStackLayout Spacing="8" VerticalOptions="Center" HorizontalOptions="Center">
+                <Label Text="Race" VerticalOptions="Center"/>
+                <Picker ItemsSource="{Binding AvailableRaces}"
+                        ItemDisplayBinding="{Binding Name, Converter={StaticResource TranslationConverter}}"
+                        SelectedItem="{Binding SelectedRace}"
+                        WidthRequest="220"/>
+            </HorizontalStackLayout>
+
+            <HorizontalStackLayout Spacing="8" VerticalOptions="Center" HorizontalOptions="Center">
+                <Label Text="Caste" VerticalOptions="Center"/>
+                <Picker ItemsSource="{Binding AvailableClasses}"
+                        ItemDisplayBinding="{Binding Name, Converter={StaticResource TranslationConverter}}"
+                        SelectedItem="{Binding SelectedClass}"
+                        WidthRequest="220"/>
+            </HorizontalStackLayout>
+
+            <mc:NumericUpDownWithLabel Label="Level" Minimum="1" Maximum="1000" Value="{Binding BaseClassLevel}" HorizontalOptions="Center" />
+
+            <HorizontalStackLayout Spacing="8" VerticalOptions="Center" HorizontalOptions="Center">
+                <Button Text="Generate" Command="{Binding GenerateCharacterCommand}" HorizontalOptions="Center" Margin="0,20,5,0" />
+                <Button Text="New name" Command="{Binding GenerateNewNameCommand}" HorizontalOptions="Center" Margin="5,20,0,0" IsVisible="{Binding IsCharacterGenerated}" />
+                <Button Text="Save" Command="{Binding SaveCharacterCommand}" HorizontalOptions="Center" Margin="5,20,5,0" IsVisible="{Binding IsCharacterGenerated}" />
+            </HorizontalStackLayout>
+
+            <mv:CharacterDetailsView IsVisible="{Binding IsCharacterGenerated}" />
+
+        </VerticalStackLayout>
+    </ScrollView>
+</v:NotifierPage>

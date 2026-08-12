@@ -1,12 +1,12 @@
-using M.A.G.U.S.Bestiary;
-using M.A.G.U.S.Enums;
-using M.A.G.U.S.GameSystem;
-using M.A.G.U.S.GameSystem.Magic.Spells.Witch;
-using M.A.G.U.S.GameSystem.Psi.Disciplines.Kyr;
-using M.A.G.U.S.GameSystem.Psi.Disciplines.Pyarron;
-using M.A.G.U.S.Models;
+using MAGUS.Bestiary;
+using MAGUS.Enums;
+using MAGUS.GameSystem;
+using MAGUS.GameSystem.Magic.Spells.Witch;
+using MAGUS.GameSystem.Psi.Disciplines.Kyr;
+using MAGUS.GameSystem.Psi.Disciplines.Pyarron;
+using MAGUS.Models;
 
-namespace M.A.G.U.S.Test;
+namespace MAGUS.Test;
 
 [TestFixture]
 public class MysticAttackTest
