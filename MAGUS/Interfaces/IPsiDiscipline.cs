@@ -1,5 +1,5 @@
 using MAGUS.Enums;
-using MAGUS.GameSystem.Psi;
+using MAGUS.GameSystem;
 
 namespace MAGUS.Interfaces;
 
@@ -7,9 +7,8 @@ public interface IPsiDiscipline
 {
     string Name { get; }
 
-    PsiKind PsiKind { get; }
-
-    int InitiateValue { get; }
+    /// <summary>Power rolled against the target's magic resistance. Null means the discipline bypasses the resistance roll entirely (always connects); 0 is a valid, rollable power.</summary>
+    int? Power { get; }
 
     int PsiPointCost { get; }
 
@@ -22,4 +21,7 @@ public interface IPsiDiscipline
     int DurationInRounds { get; }
 
     int GetDamage();
+
+    /// <summary>Extra, non-damage effect applied once the discipline successfully connects (e.g. reducing the target's stats or psi shields). No-op by default; most damage-dealing disciplines don't need one.</summary>
+    void OnHit(Attacker caster, Attacker target) { }
 }

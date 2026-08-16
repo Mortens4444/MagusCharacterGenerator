@@ -6,3 +6,6 @@ Pdf/
 *.log
 *.tmp
 *.user
+Deploy/.last-adb-target.txt
+coverage-baseline/
+coverage-sweep1/

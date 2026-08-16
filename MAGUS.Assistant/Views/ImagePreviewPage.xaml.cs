@@ -10,7 +10,6 @@ internal sealed partial class ImagePreviewPage : NotifierPage
     private readonly ImageItem item;
 
     private double scale = 1;
-    private double lastScale = 1;
 
     private double xOffset;
     private double yOffset;
@@ -31,19 +30,6 @@ internal sealed partial class ImagePreviewPage : NotifierPage
         PreviewImage.AnchorX = 0.5;
         PreviewImage.AnchorY = 0.5;
         Title = item.DisplayName;
-
-        // Register gesture recognizers programmatically so sender is the Image instance we expect.
-        //var pinch = new PinchGestureRecognizer();
-        //pinch.PinchUpdated += (s, e) => OnPinchUpdated(PreviewImage, e);
-        //PreviewImage.GestureRecognizers.Add(pinch);
-
-        //var pan = new PanGestureRecognizer { TouchPoints = 1 };
-        //pan.PanUpdated += (s, e) => OnPanUpdated(PreviewImage, e);
-        //PreviewImage.GestureRecognizers.Add(pan);
-
-        //var doubleTap = new TapGestureRecognizer { NumberOfTapsRequired = 2 };
-        //doubleTap.Tapped += (s, e) => OnDoubleTapped(PreviewImage, EventArgs.Empty);
-        //PreviewImage.GestureRecognizers.Add(doubleTap);
     }
 
     private async void CloseClicked(object sender, EventArgs e)
@@ -91,13 +77,14 @@ internal sealed partial class ImagePreviewPage : NotifierPage
         if (e.Status == GestureStatus.Started)
         {
             isGestureRunning = true;
-            lastScale = scale;
         }
         else if (e.Status == GestureStatus.Running)
         {
-            var newScale = Math.Clamp(lastScale * e.Scale, MinScale, MaxScale);
+            // e.Scale is the delta since the previous PinchUpdated callback, not since the
+            // gesture started, so it must be accumulated into the running scale on every
+            // callback rather than reapplied on top of the value captured at Started.
+            var newScale = Math.Clamp(scale * e.Scale, MinScale, MaxScale);
 
-            // 🔒 Android fix: csak akkor frissítünk, ha tényleg változott
             if (Math.Abs(newScale - scale) < 0.001)
             {
                 return;
@@ -108,7 +95,6 @@ internal sealed partial class ImagePreviewPage : NotifierPage
         }
         else if (e.Status is GestureStatus.Completed or GestureStatus.Canceled)
         {
-            lastScale = scale;
             xOffset = image.TranslationX;
             yOffset = image.TranslationY;
             isGestureRunning = false;
@@ -123,7 +109,6 @@ internal sealed partial class ImagePreviewPage : NotifierPage
         }
 
         scale = 1;
-        lastScale = 1;
         xOffset = 0;
         yOffset = 0;
 

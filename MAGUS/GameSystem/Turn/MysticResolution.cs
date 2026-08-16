@@ -33,8 +33,29 @@ public sealed class MysticResolution : ResolutionBase
             };
         }
 
+        // An attack with no Power (ISpell.Power/IPsiDiscipline.Power == null) bypasses the
+        // magic-resistance roll entirely and always connects.
+        if (attack.Power is null)
+        {
+            return new MysticResolution
+            {
+                Attack = attack,
+                RollValue = 0,
+                IsSuccessful = true,
+                IsHpDamage = true,
+                Direction = attackDirection,
+                HitLocation = PlaceOfAttack.None.GetDescription()
+            };
+        }
+
         var rollValue = await rollService.RollAsync(ThrowType._1D100, title);
-        var total = attack.InitiateValue + rollValue;
+
+        // Empowering a spell with extra mana (Character.TryEmpowerSpell) only strengthens actual
+        // spellcasting, not psi disciplines, which have their own separate psi-surge mechanic.
+        var spellPowerBonus = attack is SpellAttack && initiative.Attacker.Source is Character caster
+            ? caster.SpellPowerBonus
+            : 0;
+        var total = attack.Power.Value + spellPowerBonus + rollValue;
 
         var resistance = attack.ResistanceType == MagicResistanceType.Astral
             ? target.GetAstralMagicResistance()

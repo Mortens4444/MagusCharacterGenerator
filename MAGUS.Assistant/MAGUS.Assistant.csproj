@@ -25,7 +25,7 @@
     <ApplicationId>com.mortens.MAGUS.Assistant</ApplicationId>
     <!-- Versions -->
     <MajorVersion>1</MajorVersion>
-    <MinorVersion>100</MinorVersion>
+    <MinorVersion>102</MinorVersion>
     <BuildNumber>0</BuildNumber>
     <PatchNumber>0</PatchNumber>
     <FileVersion>$(MajorVersion).$(MinorVersion).$(BuildNumber).$(PatchNumber)</FileVersion>
@@ -49,7 +49,7 @@
     <AndroidEnableMultiDex>true</AndroidEnableMultiDex>
     <SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios'">16.1</SupportedOSPlatformVersion>
     <SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'maccatalyst'">15.0</SupportedOSPlatformVersion>
-    <SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android'">23.0</SupportedOSPlatformVersion>
+    <SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android'">21.0</SupportedOSPlatformVersion>
     <SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">10.0.17763.0</SupportedOSPlatformVersion>
     <TargetPlatformMinVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">10.0.17763.0</TargetPlatformMinVersion>
     <SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'tizen'">6.5</SupportedOSPlatformVersion>
@@ -131,15 +131,6 @@
     <MauiImage Remove="Resources\Images\images_manifest.txt" />
     <EmbeddedResource Include="Resources\Images\images_manifest.txt" />
     <None Remove="Platforms\Android\Resources\values\styles.xml" />
-  </ItemGroup>
-  <ItemGroup Condition="'$(TargetFramework)' == 'net10.0-android'">
-    <AndroidProguardConfig Include="proguard.cfg" />
-    <!-- Pin newer than the version Microsoft.Maui.Controls 10.0.90 pulls transitively (1.12.0.5),
-         to pick up the latest edge-to-edge fixes for Android 15's deprecated setStatusBarColor/
-         setNavigationBarColor warnings. See material-components/material-components-android#4732.
-         Requires minSdk 23 (see SupportedOSPlatformVersion above) - it pulls in AndroidX Lifecycle
-         2.10.0.2, which needs API 23+. -->
-    <PackageReference Include="Xamarin.Google.Android.Material" Version="1.14.0.6" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.Maui.Controls" Version="10.0.90" />

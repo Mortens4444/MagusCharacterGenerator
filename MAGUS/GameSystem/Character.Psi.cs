@@ -51,6 +51,36 @@ public partial class Character
         }
     }
 
+    /// <summary>
+    /// Attack value bonus banked by <see cref="TryUsePsiSurge"/> for the round currently being
+    /// resolved. Cleared once that round finishes (see CombatEngine.ProcessAssignmentTurnAsync),
+    /// so it applies to every attack the character makes this round without being wiped by the
+    /// per-initiative TemporaryModifiers reset used for direction modifiers.
+    /// </summary>
+    [JsonIgnore, Newtonsoft.Json.JsonIgnore]
+    public int PsiSurgeAttackBonus { get; private set; }
+
+    public const int PsiSurgeAttackValuePerPoint = 2;
+
+    /// <summary>
+    /// Spends psi points on a psi-surge: each point banks +2 attack value for the round
+    /// currently being resolved, taking 1 segment to invoke. Available to any character with
+    /// psi, regardless of discipline/school.
+    /// </summary>
+    public bool TryUsePsiSurge(int points)
+    {
+        if (Psi == null || points <= 0 || points > PsiPoints)
+        {
+            return false;
+        }
+
+        PsiPoints -= points;
+        PsiSurgeAttackBonus += points * PsiSurgeAttackValuePerPoint;
+        return true;
+    }
+
+    public void ClearPsiSurge() => PsiSurgeAttackBonus = 0;
+
     public override int GetPsiPoints() => PsiPoints;
 
     private void CalculatePsiPoints(bool isJann, ISettings? settings)

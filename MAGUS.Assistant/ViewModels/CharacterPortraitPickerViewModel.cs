@@ -1,6 +1,7 @@
 using CommunityToolkit.Mvvm.Input;
 using MAGUS.Assistant.Models;
 using MAGUS.Assistant.Services;
+using Mtf.LanguageService;
 using System.Collections.ObjectModel;
 
 namespace MAGUS.Assistant.ViewModels;
@@ -8,7 +9,7 @@ namespace MAGUS.Assistant.ViewModels;
 internal sealed partial class CharacterPortraitPickerViewModel : BaseViewModel
 {
     private string searchText = String.Empty;
-    private ObservableCollection<ImageItem> selectedImages;
+    private ImageItem? selectedImage;
 
     public event Action<IReadOnlyList<string>>? Confirmed;
     public event Action? Cancelled;
@@ -17,8 +18,12 @@ internal sealed partial class CharacterPortraitPickerViewModel : BaseViewModel
 
     public CharacterPortraitPickerViewModel(IEnumerable<string> currentResourceIds)
     {
-        var currentIds = new HashSet<string>(currentResourceIds);
-        selectedImages = [.. PreloadService.Instance.CachedImageItems.Where(i => currentIds.Contains(i.ResourceId))];
+        var currentId = currentResourceIds.FirstOrDefault();
+        if (currentId != null)
+        {
+            selectedImage = PreloadService.Instance.CachedImageItems.FirstOrDefault(i => i.ResourceId == currentId)
+                ?? new ImageItem { ResourceId = currentId, DisplayName = Lng.Elem("Custom image") };
+        }
 
         ApplyFilter();
     }
@@ -35,10 +40,10 @@ internal sealed partial class CharacterPortraitPickerViewModel : BaseViewModel
         }
     }
 
-    public ObservableCollection<ImageItem> SelectedImages
+    public ImageItem? SelectedImage
     {
-        get => selectedImages;
-        set => SetProperty(ref selectedImages, value);
+        get => selectedImage;
+        set => SetProperty(ref selectedImage, value);
     }
 
     private void ApplyFilter()
@@ -58,7 +63,7 @@ internal sealed partial class CharacterPortraitPickerViewModel : BaseViewModel
     [RelayCommand]
     private void Confirm()
     {
-        Confirmed?.Invoke([.. SelectedImages.Select(i => i.ResourceId)]);
+        Confirmed?.Invoke(SelectedImage != null ? [SelectedImage.ResourceId] : []);
     }
 
     [RelayCommand]

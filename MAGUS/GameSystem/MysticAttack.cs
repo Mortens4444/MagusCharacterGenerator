@@ -10,7 +10,8 @@ public abstract class MysticAttack : Attack
     /// <summary>A round has 10 segments; casting time is spent out of this budget.</summary>
     public const int SegmentsPerRound = 10;
 
-    public int InitiateValue { get; init; }
+    /// <summary>Power rolled against the target's magic resistance. Null means the attack bypasses the resistance roll entirely (always connects); 0 is a valid, rollable power that can still be raised via mana/psi empowerment.</summary>
+    public int? Power { get; init; }
 
     public MagicResistanceType ResistanceType { get; init; }
 
@@ -24,10 +25,10 @@ public abstract class MysticAttack : Attack
     [JsonConstructor]
     protected MysticAttack() : base() { }
 
-    protected MysticAttack(string name, int initiateValue, MagicResistanceType resistanceType, int castingTimeInSegments, int durationInRounds, Func<int> getDamageCallback)
-        : base(name, initiateValue, getDamageCallback)
+    protected MysticAttack(string name, int? power, MagicResistanceType resistanceType, int castingTimeInSegments, int durationInRounds, Func<int> getDamageCallback)
+        : base(name, power ?? 0, getDamageCallback)
     {
-        InitiateValue = initiateValue;
+        Power = power;
         ResistanceType = resistanceType;
         CastingTimeInSegments = castingTimeInSegments;
         DurationInRounds = durationInRounds;

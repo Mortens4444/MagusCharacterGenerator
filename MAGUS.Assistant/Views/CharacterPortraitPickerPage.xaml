@@ -8,14 +8,16 @@
                 x:Class="MAGUS.Assistant.Views.CharacterPortraitPickerPage"
                 x:DataType="vm:CharacterPortraitPickerViewModel"
                 x:ClassModifier="internal"
-                Title="Choose portrait(s)">
+                Title="Choose portrait">
 
-    <Grid Padding="10" RowDefinitions="Auto,*,Auto">
+    <Grid Padding="10" RowDefinitions="Auto,Auto,*,Auto">
         <mc:EntryWithLabel Grid.Row="0" Label="Search" Text="{Binding SearchText}" />
 
-        <CollectionView Grid.Row="1" SelectionMode="Multiple"
+        <Button Grid.Row="1" Text="Upload custom image" Margin="0,8,0,0" Clicked="PickCustomImageClicked" />
+
+        <CollectionView x:Name="ImagesCollectionView" Grid.Row="2" SelectionMode="Single"
                         ItemsSource="{Binding FilteredImages}"
-                        SelectedItems="{Binding SelectedImages, Mode=TwoWay}">
+                        SelectionChanged="OnSelectionChanged">
             <CollectionView.ItemTemplate>
                 <DataTemplate x:DataType="m:ImageItem">
                     <Border Stroke="Gray" StrokeThickness="1" Padding="8" Margin="0,4">
@@ -28,7 +30,7 @@
             </CollectionView.ItemTemplate>
         </CollectionView>
 
-        <Grid Grid.Row="2" ColumnDefinitions="*,*" ColumnSpacing="8" Margin="0,8,0,0">
+        <Grid Grid.Row="3" ColumnDefinitions="*,*" ColumnSpacing="8" Margin="0,8,0,0">
             <Button Grid.Column="0" Text="Cancel" Command="{Binding CancelCommand}" />
             <Button Grid.Column="1" Text="Done" Command="{Binding ConfirmCommand}" FontAttributes="Bold" />
         </Grid>

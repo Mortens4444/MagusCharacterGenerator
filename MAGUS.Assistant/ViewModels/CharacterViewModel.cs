@@ -38,6 +38,9 @@ internal partial class CharacterViewModel(IPrintService printService, ISoundPlay
     private static readonly IEnumerable<Alignment> alignments = [.. Enum.GetValues<Alignment>()];
     public IEnumerable<Alignment> Alignments => alignments;
 
+    private static readonly IEnumerable<Deity> deities = [.. Enum.GetValues<Deity>()];
+    public IEnumerable<Deity> Deities => deities;
+
     public ObservableCollection<CombatValueModifier> AvailableCombatValueModifiers { get; } = [.. Enum.GetValues<CombatValueModifier>()];
 
     public ObservableCollection<IWeapon> AvailableWeapons { get; } = [];
@@ -163,6 +166,7 @@ internal partial class CharacterViewModel(IPrintService printService, ISoundPlay
             OnPropertyChanged(nameof(CanLevelUp));
             OnPropertyChanged(nameof(PlayerCharacter));
             OnPropertyChanged(nameof(Alignment));
+            OnPropertyChanged(nameof(Deity));
 
             OnPropertyChanged(nameof(Strength));
             OnPropertyChanged(nameof(Stamina));
@@ -228,6 +232,7 @@ internal partial class CharacterViewModel(IPrintService printService, ISoundPlay
 
             OnPropertyChanged(nameof(Equipment));
             OnPropertyChanged(nameof(TotalEquipmentWeight));
+            OnPropertyChanged(nameof(PortraitImage));
         }
     }
 
@@ -360,6 +365,22 @@ internal partial class CharacterViewModel(IPrintService printService, ISoundPlay
             if (Character != null && Character.Alignment != value)
             {
                 Character.Alignment = value;
+                OnPropertyChanged();
+            }
+        }
+    }
+
+    public Deity Deity
+    {
+        get
+        {
+            return Character?.Deity ?? Deity.Unbeliever;
+        }
+        set
+        {
+            if (Character != null && Character.Deity != value)
+            {
+                Character.Deity = value;
                 OnPropertyChanged();
             }
         }

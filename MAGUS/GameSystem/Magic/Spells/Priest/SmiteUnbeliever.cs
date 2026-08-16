@@ -8,16 +8,17 @@ public sealed class SmiteUnbeliever : ISpell
 {
     private readonly DiceThrow diceThrow = new();
 
-    /// <summary>Which priest sphere grants this spell. Not yet cross-checked against a deity (Character has no Deity field).</summary>
-    public Sphere Sphere => Sphere.Destruction;
+    public Sphere[] Spheres => [Sphere.Destruction];
 
     public string Name => "Smite unbeliever";
 
     public MagicSchool School => MagicSchool.Priest;
 
-    public int InitiateValue => 30;
+    public int? Power => 9;
 
     public int ManaCost => 5;
+
+    public int PowerBonusPerManaPoint => 3;
 
     public MagicResistanceType ResistanceType => MagicResistanceType.Astral;
 

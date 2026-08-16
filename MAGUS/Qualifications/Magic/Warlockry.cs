@@ -1,4 +1,5 @@
-﻿using MAGUS.GameSystem.Magic;
+﻿using MAGUS.Enums;
+using MAGUS.GameSystem.Magic;
 
 namespace MAGUS.Qualifications.Magic;
 
@@ -8,4 +9,6 @@ public class Warlockry : Sorcery
     {
         ManaPoints = 7;
     }
+
+    public override MagicSchool School => MagicSchool.Warlock;
 }

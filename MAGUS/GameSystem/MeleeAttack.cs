@@ -18,4 +18,10 @@ public class MeleeAttack : Attack
     {
         Weapon = weapon;
     }
+
+    public MeleeAttack(IMeleeWeapon weapon, int value, int damageBonus)
+        : base(weapon.Name, value + weapon.AttackValue, () => weapon.GetDamage() + damageBonus)
+    {
+        Weapon = weapon;
+    }
 }

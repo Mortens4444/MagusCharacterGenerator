@@ -34,6 +34,21 @@ internal sealed class CombatEngine
             // Ensure collection modifications that affect UI are performed on the main thread
             await MainThread.InvokeOnMainThreadAsync(() => assignment.AddTurn(turn)).ConfigureAwait(false);
         }
+
+        // A psi surge or spell empowerment only banks its bonus for the round it was invoked in.
+        assignment.Character.ClearPsiSurge();
+        assignment.Character.ClearSpellPower();
+
+        // Temporary combat modifiers (direction bonuses, psi effects like PsiPush's defense
+        // penalty) are only ever meant to last the round they were applied in. They're normally
+        // cleared per-attacker at the start of each of that attacker's own initiatives, but a
+        // modifier applied to a target rather than an attacker (e.g. PsiPush hitting an enemy)
+        // would otherwise linger indefinitely, so clear everyone's explicitly at round end too.
+        assignment.Character.RemoveTemporaryModifiers();
+        foreach (var enemy in assignment.Enemies)
+        {
+            enemy.RemoveTemporaryModifiers();
+        }
     }
 
     private static void TickActiveEffects(TurnData turn, Attacker attacker)
@@ -99,6 +114,10 @@ internal sealed class CombatEngine
         if (attackDirection == AttackDirection.Behind)
         {
             initiative.Attacker.AddTemporaryModifier(new AttackFromBehind());
+        }
+        else if (attackDirection == AttackDirection.HalfBehind)
+        {
+            initiative.Attacker.AddTemporaryModifier(new AttackFromHalfBehind());
         }
 
         if (initiative.SelectedAttack == null)
@@ -173,6 +192,15 @@ internal sealed class CombatEngine
             if (initiative.AttackOrAimResolution.IsSuccessful)
             {
                 ApplyCombatDamage(initiative, attacker, target);
+
+                if (initiative.SelectedAttack is PsiAttack { Discipline: { } discipline })
+                {
+                    discipline.OnHit(attacker, target);
+                }
+                else if (initiative.SelectedAttack is SpellAttack { Spell: { } spell })
+                {
+                    spell.OnHit(attacker, target);
+                }
             }
 
             turn.Initiatives.Add(initiative);

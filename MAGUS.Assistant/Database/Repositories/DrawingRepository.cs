@@ -1,6 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.Messaging;
 using MAGUS.Assistant.Database.Entities;
 using MAGUS.Assistant.Interfaces;
+using MAGUS.Utils;
 using Mtf.Maui.Controls.Messages;
 using Newtonsoft.Json;
 
@@ -13,6 +14,7 @@ internal sealed class DrawingRepository(DatabaseContext context)
     private readonly JsonSerializerSettings jsonSettings = new()
     {
         TypeNameHandling = TypeNameHandling.Auto, // Kritikus az interfészek miatt!
+        SerializationBinder = new LegacyAssemblySerializationBinder(),
 #if DEBUG
         Formatting = Formatting.Indented,
 #else

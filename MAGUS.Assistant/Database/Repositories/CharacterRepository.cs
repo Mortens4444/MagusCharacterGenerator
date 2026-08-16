@@ -1,6 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.Messaging;
 using MAGUS.Assistant.Database.Entities;
 using MAGUS.GameSystem;
+using MAGUS.Utils;
 using Mtf.Maui.Controls.Messages;
 using Newtonsoft.Json;
 
@@ -13,6 +14,7 @@ internal sealed class CharacterRepository(DatabaseContext context)
     private readonly JsonSerializerSettings jsonSettings = new()
     {
         TypeNameHandling = TypeNameHandling.Auto,
+        SerializationBinder = new LegacyAssemblySerializationBinder(),
 #if DEBUG
         Formatting = Formatting.Indented,
 #else

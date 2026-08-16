@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="com.mortens.MAGUS.Assistant" android:versionCode="100">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="com.mortens.MAGUS.Assistant" android:versionCode="102">
   <queries>
     <intent>
       <action android:name="android.intent.action.SENDTO" />
@@ -9,7 +9,6 @@
   <application android:enableOnBackInvokedCallback="true" android:allowBackup="true" android:icon="@mipmap/appicon" android:roundIcon="@mipmap/appicon_round" android:supportsRtl="true" android:label="MAGUS Assistant">
     <service android:name="MAGUS.Assistant.Platforms.Android.NotificationForegroundService" android:enabled="true" android:exported="false" android:foregroundServiceType="specialUse" />
   </application>
-  <!--<uses-sdk android:minSdkVersion="21" android:targetSdkVersion="35" />-->
   <uses-permission android:name="android.permission.VIBRATE" />
   <uses-permission android:name="android.permission.INTERNET" />
   <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />

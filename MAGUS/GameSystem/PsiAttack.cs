@@ -13,7 +13,7 @@ public sealed class PsiAttack : MysticAttack
     public PsiAttack() : base() { }
 
     public PsiAttack(IPsiDiscipline discipline)
-        : base(discipline.Name, discipline.InitiateValue, discipline.ResistanceType, discipline.CastingTimeInSegments, discipline.DurationInRounds, discipline.GetDamage)
+        : base(discipline.Name, discipline.Power, discipline.ResistanceType, discipline.CastingTimeInSegments, discipline.DurationInRounds, discipline.GetDamage)
     {
         Discipline = discipline;
     }

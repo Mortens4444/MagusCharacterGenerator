@@ -54,6 +54,8 @@ public interface IClass : IAttacker, IAbilities
 
     Alignment Alignment { get; }
 
+    Deity Deity { get; }
+
     ulong GetExperiencePointsForLevel(int level);
 
     int GetLevelByExperiencePoints(ulong experiencePoints);

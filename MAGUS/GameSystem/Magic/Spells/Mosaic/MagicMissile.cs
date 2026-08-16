@@ -12,9 +12,11 @@ public sealed class MagicMissile : ISpell
 
     public MagicSchool School => MagicSchool.Mosaic;
 
-    public int InitiateValue => 30;
+    public int? Power => 7;
 
     public int ManaCost => 3;
+
+    public int PowerBonusPerManaPoint => 2;
 
     public MagicResistanceType ResistanceType => MagicResistanceType.Astral;
 

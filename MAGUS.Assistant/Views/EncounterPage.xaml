@@ -152,10 +152,12 @@
         </Grid>
 
         <!-- Run turn + toggle (now docked to bottom) -->
-        <Grid Grid.Row="3" Grid.ColumnSpan="2" ColumnDefinitions="*,Auto" ColumnSpacing="8">
+        <Grid Grid.Row="3" Grid.ColumnSpan="2" ColumnDefinitions="*,Auto,Auto,Auto" ColumnSpacing="8">
             <Button Grid.Column="0" Command="{Binding ToggleShowControlsCommand}"
                     Text="{Binding ShowControls, Converter={StaticResource BoolToTextConverter}, ConverterParameter='Hide pairing|Show pairing'}"/>
-            <Button Grid.Column="1" Text="Start New Round" Command="{Binding RunTurnCommand}" FontAttributes="Bold" />
+            <Button Grid.Column="1" Text="Psi surge" Command="{Binding UsePsiSurgeCommand}" IsVisible="{Binding SelectedCharacterHasPsi}" />
+            <Button Grid.Column="2" Text="Empower spell" Command="{Binding EmpowerSpellCommand}" IsVisible="{Binding SelectedCharacterHasSorcery}" />
+            <Button Grid.Column="3" Text="Start New Round" Command="{Binding RunTurnCommand}" FontAttributes="Bold" />
         </Grid>
 
     </Grid>

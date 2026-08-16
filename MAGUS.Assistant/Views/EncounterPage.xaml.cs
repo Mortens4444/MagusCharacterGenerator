@@ -1,4 +1,4 @@
-﻿using CommunityToolkit.Mvvm.Messaging;
+using CommunityToolkit.Mvvm.Messaging;
 using MAGUS.Assistant.ViewModels;
 using Mtf.LanguageService.MAUI.Views;
 using Mtf.Maui.Controls.Messages;
@@ -42,18 +42,15 @@ internal sealed partial class EncounterPage : NotifierPage
 
     private void OnSelectedTurnHistoryChanged(object? sender, NotifyCollectionChangedEventArgs e)
     {
-        if (e.Action != NotifyCollectionChangedAction.Add ||
-            e.NewItems is null ||
-            e.NewItems.Count == 0 ||
-            e.NewItems[0] is not TurnViewModel item)
+        if (e.Action != NotifyCollectionChangedAction.Add || e.NewItems is null || e.NewItems.Count == 0)
         {
             return;
         }
 
-        _ = ScrollToTurnSafelyAsync(item);
+        _ = ScrollToNewestTurnSafelyAsync();
     }
 
-    private async Task ScrollToTurnSafelyAsync(TurnViewModel item)
+    private async Task ScrollToNewestTurnSafelyAsync()
     {
         try
         {
@@ -64,18 +61,22 @@ internal sealed partial class EncounterPage : NotifierPage
                     return;
                 }
 
-                await Task.Delay(100).ConfigureAwait(true);
+                // Target by index (always 0/Count-1, i.e. the newest) rather than a captured item
+                // reference: bursts of rounds fire this handler repeatedly, and resolving the
+                // target fresh each time means every attempt converges on the true latest state
+                // regardless of execution order.
+                await Task.Delay(50).ConfigureAwait(true);
 
-                if (!viewModel.SelectedTurnHistory.Contains(item))
+                if (viewModel.SelectedTurnHistory.Count == 0)
                 {
                     return;
                 }
 
-                var position = viewModel.Settings.AssignmentTurnHistoryNewestOnTop
-                    ? ScrollToPosition.Start
-                    : ScrollToPosition.End;
+                var newestFirst = viewModel.Settings.AssignmentTurnHistoryNewestOnTop;
+                var targetIndex = newestFirst ? 0 : viewModel.SelectedTurnHistory.Count - 1;
+                var position = newestFirst ? ScrollToPosition.Start : ScrollToPosition.End;
 
-                TurnHistoryView.ScrollTo(item, position, animate: false);
+                TurnHistoryView.ScrollTo(targetIndex, position: position, animate: false);
             }).ConfigureAwait(false);
         }
         catch (Exception ex)
@@ -87,6 +88,16 @@ internal sealed partial class EncounterPage : NotifierPage
     protected override void OnAppearing()
     {
         base.OnAppearing();
+
+        // OnDisappearing (below) unsubscribes unconditionally, including when this page is
+        // merely covered by a modal (e.g. the enemy picker, or a manual-mode dice-roll dialog
+        // fired per attack) rather than actually left. Without re-subscribing here, the first
+        // such modal permanently kills round updates/auto-scroll for the rest of the encounter.
+        if (viewModel is not null)
+        {
+            viewModel.SelectedTurnHistory.CollectionChanged -= OnSelectedTurnHistoryChanged;
+            viewModel.SelectedTurnHistory.CollectionChanged += OnSelectedTurnHistoryChanged;
+        }
 
         if (!firstRun)
         {

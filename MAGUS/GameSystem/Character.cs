@@ -53,6 +53,7 @@ public partial class Character : Attacker, ICombatModifier, ILiving, IAbilities,
         Name = name;
         BaseClass = classes.First();
         Alignment = race.Alignment ?? BaseClass.Alignment;
+        Deity = BaseClass.Deity;
         Classes = classes;
 
         foreach (var @class in classes)

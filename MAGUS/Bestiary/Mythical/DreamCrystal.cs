@@ -2,7 +2,7 @@
 using MAGUS.GameSystem;
 using MAGUS.GameSystem.Attributes;
 using MAGUS.GameSystem.Magic.Spells.Mosaic;
-using MAGUS.GameSystem.Psi.Disciplines.Kyr;
+using MAGUS.GameSystem.Psi.Disciplines.Slan;
 using MAGUS.Models;
 using MAGUS.Qualifications.Scientific.Psi;
 using MAGUS.Things.Weapons.CrushingWeapons;
@@ -22,7 +22,7 @@ public sealed class DreamCrystal : Creature
 
         AttackModes =
         [
-            new PsiAttack(new MindBlast()),
+            new PsiAttack(new DeathTouch()), // Real Kyr-módszer disciplines aren't implemented yet; stands in until they are.
             new SpellAttack(new MagicMissile()),
             new MeleeAttack(new Warhammer(), AttackValue),
             new MeleeAttack(new TwoHandedMace(), AttackValue),

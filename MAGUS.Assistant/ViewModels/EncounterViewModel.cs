@@ -11,9 +11,11 @@ using MAGUS.GameSystem;
 using MAGUS.Interfaces;
 using MAGUS.Services;
 using Mtf.Extensions;
+using Mtf.LanguageService;
 using Mtf.Maui.Controls.Messages;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
+using System.Globalization;
 
 namespace MAGUS.Assistant.ViewModels;
 
@@ -106,9 +108,15 @@ internal sealed partial class EncounterViewModel(ISettings settings, CharacterSe
                 }
 
                 AddEnemyCommand.NotifyCanExecuteChanged();
+                UsePsiSurgeCommand.NotifyCanExecuteChanged();
+                OnPropertyChanged(nameof(SelectedCharacterHasPsi));
+                OnPropertyChanged(nameof(SelectedCharacterHasSorcery));
             }
         }
     }
+
+    public bool SelectedCharacterHasPsi => SelectedAssignment?.Character.Psi != null;
+    public bool SelectedCharacterHasSorcery => SelectedAssignment?.Character.Sorcery != null;
 
     public EncounterState EncounterState { get; private set; }
 
@@ -264,6 +272,81 @@ internal sealed partial class EncounterViewModel(ISettings settings, CharacterSe
 
             SelectedEnemy = null;
             RunTurnCommand.NotifyCanExecuteChanged();
+        }
+    }
+
+    private bool CanUsePsiSurge() => SelectedAssignment?.Character.Psi != null && SelectedAssignment.Character.PsiPoints > 0;
+
+    [RelayCommand(CanExecute = nameof(CanUsePsiSurge))]
+    private async Task UsePsiSurgeAsync()
+    {
+        if (SelectedAssignment?.Character is not { Psi: not null } character)
+        {
+            return;
+        }
+
+        var pointsText = await ShellNavigationService.DisplayPromptAsync(
+            "Psi surge",
+            String.Format(
+                Lng.Elem("Spend how many psi points (max {0}) for +{1} attack value each, for this round only?"),
+                character.PsiPoints,
+                Character.PsiSurgeAttackValuePerPoint),
+            "OK",
+            "Cancel",
+            character.PsiPoints.ToString(CultureInfo.InvariantCulture)).ConfigureAwait(true);
+
+        if (String.IsNullOrWhiteSpace(pointsText) ||
+            !int.TryParse(pointsText, NumberStyles.Integer, CultureInfo.InvariantCulture, out var points))
+        {
+            return;
+        }
+
+        if (!character.TryUsePsiSurge(points))
+        {
+            await ShellNavigationService.DisplayAlertAsync(Lng.Elem("Not enough psi points.")).ConfigureAwait(true);
+            return;
+        }
+
+        UsePsiSurgeCommand.NotifyCanExecuteChanged();
+    }
+
+    [RelayCommand]
+    private async Task EmpowerSpellAsync()
+    {
+        if (SelectedAssignment is not { } assignment)
+        {
+            return;
+        }
+
+        if (assignment.SelectedAttackMode is not SpellAttack spellAttack)
+        {
+            await ShellNavigationService.DisplayAlertAsync(Lng.Elem("Select a spell as the attack mode first.")).ConfigureAwait(true);
+            return;
+        }
+
+        var character = assignment.Character;
+        var spell = spellAttack.Spell;
+
+        var pointsText = await ShellNavigationService.DisplayPromptAsync(
+            "Empower spell",
+            String.Format(
+                Lng.Elem("Spend how many extra mana points (max {0}) on {1}, for +{2} power each this round?"),
+                character.ManaPoints,
+                Lng.Elem(spell.Name),
+                spell.PowerBonusPerManaPoint),
+            "OK",
+            "Cancel",
+            character.ManaPoints.ToString(CultureInfo.InvariantCulture)).ConfigureAwait(true);
+
+        if (String.IsNullOrWhiteSpace(pointsText) ||
+            !int.TryParse(pointsText, NumberStyles.Integer, CultureInfo.InvariantCulture, out var points))
+        {
+            return;
+        }
+
+        if (!character.TryEmpowerSpell(spell, points))
+        {
+            await ShellNavigationService.DisplayAlertAsync(Lng.Elem("Not enough mana points.")).ConfigureAwait(true);
         }
     }
 

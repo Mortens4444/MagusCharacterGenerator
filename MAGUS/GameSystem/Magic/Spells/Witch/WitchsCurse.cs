@@ -12,9 +12,11 @@ public sealed class WitchsCurse : ISpell
 
     public MagicSchool School => MagicSchool.Witch;
 
-    public int InitiateValue => 25;
+    public int? Power => 6;
 
     public int ManaCost => 5;
+
+    public int PowerBonusPerManaPoint => 2;
 
     public MagicResistanceType ResistanceType => MagicResistanceType.Mental;
 

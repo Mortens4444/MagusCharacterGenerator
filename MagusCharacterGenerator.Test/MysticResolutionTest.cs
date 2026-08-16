@@ -1,8 +1,8 @@
 using MAGUS.Bestiary;
 using MAGUS.Enums;
 using MAGUS.GameSystem;
-using MAGUS.GameSystem.Psi.Disciplines.Kyr;
 using MAGUS.GameSystem.Turn;
+using MAGUS.Interfaces;
 using MAGUS.Models;
 using MAGUS.Services;
 
@@ -27,6 +27,17 @@ public class MysticResolutionTest
         public override List<Speed> Speeds => [new Speed(TravelMode.OnLand, 10)];
     }
 
+    private sealed class TestDiscipline : IPsiDiscipline
+    {
+        public string Name => "Test discipline";
+        public int? Power => 10;
+        public int PsiPointCost => 1;
+        public MagicResistanceType ResistanceType => MagicResistanceType.Mental;
+        public int CastingTimeInSegments => 1;
+        public int DurationInRounds => 1;
+        public int GetDamage() => 1;
+    }
+
     private static InitiativeEntry CreateInitiative(Attacker attacker, Attacker target, Attack attack) => new()
     {
         Attacker = new CombatantRef(attacker),
@@ -41,7 +52,7 @@ public class MysticResolutionTest
     {
         var attacker = new TestCreature();
         var target = new TestCreature(mentalMagicResistance: 10);
-        var attack = new PsiAttack(new MindBlast());
+        var attack = new PsiAttack(new TestDiscipline());
         var initiative = CreateInitiative(attacker, target, attack);
 
         var resolution = await MysticResolution.CreateAsync(initiative, new AutoCombatRollService(), "test", attack, AttackDirection.Front);
@@ -55,7 +66,7 @@ public class MysticResolutionTest
     {
         var attacker = new TestCreature();
         var target = new TestCreature(mentalMagicResistance: 500);
-        var attack = new PsiAttack(new MindBlast());
+        var attack = new PsiAttack(new TestDiscipline());
         var initiative = CreateInitiative(attacker, target, attack);
 
         var resolution = await MysticResolution.CreateAsync(initiative, new AutoCombatRollService(), "test", attack, AttackDirection.Front);
@@ -68,7 +79,7 @@ public class MysticResolutionTest
     {
         var attacker = new TestCreature();
         var target = new TestCreature(mentalMagicResistance: 0, resistantToPsi: true);
-        var attack = new PsiAttack(new MindBlast());
+        var attack = new PsiAttack(new TestDiscipline());
         var initiative = CreateInitiative(attacker, target, attack);
 
         var resolution = await MysticResolution.CreateAsync(initiative, new AutoCombatRollService(), "test", attack, AttackDirection.Front);
@@ -80,7 +91,7 @@ public class MysticResolutionTest
     [Test]
     public void CreateOutOfPoints_IsAlwaysUnsuccessful()
     {
-        var attack = new PsiAttack(new MindBlast());
+        var attack = new PsiAttack(new TestDiscipline());
 
         var resolution = MysticResolution.CreateOutOfPoints(attack, AttackDirection.Front);
 

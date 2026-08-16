@@ -24,8 +24,22 @@
         <Label Grid.Row="1" Grid.Column="1" Text="{Binding RollFormula.FullFormula}" VerticalOptions="Center" />
 
         <!-- MODE -->
-        <Button Grid.Row="2" Text="Manual" Command="{Binding SetManualCommand}" IsEnabled="{Binding IsAuto}" />
-        <Button Grid.Row="2" Grid.Column="1" Text="Auto" Command="{Binding SetAutoCommand}" IsEnabled="{Binding IsAuto, Converter={StaticResource InverseBooleanConverter}}" />
+        <Button Grid.Row="2" Text="Manual" Command="{Binding SetManualCommand}">
+            <Button.Triggers>
+                <DataTrigger TargetType="Button" Binding="{Binding IsAuto}" Value="False">
+                    <Setter Property="BorderColor" Value="{StaticResource Tertiary}" />
+                    <Setter Property="BorderWidth" Value="3" />
+                </DataTrigger>
+            </Button.Triggers>
+        </Button>
+        <Button Grid.Row="2" Grid.Column="1" Text="Auto" Command="{Binding SetAutoCommand}">
+            <Button.Triggers>
+                <DataTrigger TargetType="Button" Binding="{Binding IsAuto}" Value="True">
+                    <Setter Property="BorderColor" Value="{StaticResource Tertiary}" />
+                    <Setter Property="BorderWidth" Value="3" />
+                </DataTrigger>
+            </Button.Triggers>
+        </Button>
 
         <!-- ACTIONS -->
         <Button Grid.Row="3"

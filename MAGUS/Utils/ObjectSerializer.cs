@@ -35,6 +35,7 @@ public class ObjectSerializer
 		return new JsonSerializerSettings
         {
             TypeNameHandling = TypeNameHandling.Auto,
+            SerializationBinder = new LegacyAssemblySerializationBinder(),
 #if DEBUG
             Formatting = Formatting.Indented,
 #else

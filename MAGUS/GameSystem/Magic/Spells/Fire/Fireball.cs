@@ -12,9 +12,11 @@ public sealed class Fireball : ISpell
 
     public MagicSchool School => MagicSchool.Fire;
 
-    public int InitiateValue => 35;
+    public int? Power => 10;
 
     public int ManaCost => 6;
+
+    public int PowerBonusPerManaPoint => 3;
 
     public MagicResistanceType ResistanceType => MagicResistanceType.Astral;
 

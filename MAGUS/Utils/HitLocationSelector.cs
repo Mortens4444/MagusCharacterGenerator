@@ -31,6 +31,7 @@ public static class HitLocationSelector
                         break;
 
                     case AttackDirection.Behind:
+                    case AttackDirection.HalfBehind:
                         var torsoPartBack = await GetOnTorsoFromBehindAsync(rollService, title);
                         subLocation = torsoPartBack.GetDescription();
                         break;

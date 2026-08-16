@@ -1,5 +1,6 @@
 ﻿using MAGUS.Classes.Rogue;
 using MAGUS.Classes.Sorcerer;
+using MAGUS.Enums;
 using MAGUS.Extensions;
 using MAGUS.GameSystem.Magic;
 using MAGUS.Interfaces;
@@ -36,7 +37,25 @@ public partial class Character
     [NonSerialized, JsonIgnore, Newtonsoft.Json.JsonIgnore]
     public int dynamicMentalPsiShield;
 
+    [NonSerialized, JsonIgnore, Newtonsoft.Json.JsonIgnore]
+    private Deity deity = Deity.Unbeliever;
+
     public Sorcery? Sorcery { get; set; }
+
+    /// <summary>Which god the character worships. Gates which priest spheres (and therefore which priest spells) they have access to; see DeityExtensions.GetAvailableSpheres.</summary>
+    public Deity Deity
+    {
+        get => deity;
+        set
+        {
+            if (value != deity)
+            {
+                deity = value;
+                OnPropertyChanged();
+                InvalidateAttackModes();
+            }
+        }
+    }
 
     public int MaxManaPointsPerLevel { get; set; }
 
@@ -164,6 +183,34 @@ public partial class Character
     public override int GetMentalMagicResistance() => UnconsciousMentalMagicResistance + (IsConscious ? StaticMentalPsiShield + DynamicMentalPsiShield : 0);
 
     public override int GetManaPoints() => ManaPoints;
+
+    /// <summary>
+    /// Power bonus banked by <see cref="TryEmpowerSpell"/> for the spell cast currently being
+    /// resolved this round (added to the spell's Power in MysticResolution, i.e. it makes
+    /// the spell harder for the target to resist, not more damaging). Cleared once the round
+    /// finishes; see CombatEngine.ProcessAssignmentTurnAsync.
+    /// </summary>
+    [JsonIgnore, Newtonsoft.Json.JsonIgnore]
+    public int SpellPowerBonus { get; private set; }
+
+    /// <summary>
+    /// Spends extra mana to empower a specific spell: each point banks that spell's own
+    /// <see cref="ISpell.PowerBonusPerManaPoint"/> as power for the round
+    /// currently being resolved. The rate varies per spell.
+    /// </summary>
+    public bool TryEmpowerSpell(ISpell spell, int manaPoints)
+    {
+        if (Sorcery == null || manaPoints <= 0 || manaPoints > ManaPoints)
+        {
+            return false;
+        }
+
+        ManaPoints -= manaPoints;
+        SpellPowerBonus += manaPoints * spell.PowerBonusPerManaPoint;
+        return true;
+    }
+
+    public void ClearSpellPower() => SpellPowerBonus = 0;
 
     private void CalculateUnconsciousAstralMagicResistance()
     {

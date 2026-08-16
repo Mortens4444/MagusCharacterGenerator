@@ -89,13 +89,34 @@ public abstract class Attacker
 
     public virtual Size Size { get; protected set; }
 
-    public virtual int InitiateValue { get; set; }
+    private int baseInitiateValue;
+    private int baseAttackValue;
+    private int baseDefenseValue;
+    private int baseAimValue;
 
-    public virtual int AttackValue { get; set; }
+    public virtual int InitiateValue
+    {
+        get => baseInitiateValue + TemporaryModifiers.Sum(m => m.InitiateValue);
+        set => baseInitiateValue = value;
+    }
 
-    public virtual int DefenseValue { get; set; }
+    public virtual int AttackValue
+    {
+        get => baseAttackValue + TemporaryModifiers.Sum(m => m.AttackValue);
+        set => baseAttackValue = value;
+    }
 
-    public virtual int AimValue { get; set; }
+    public virtual int DefenseValue
+    {
+        get => baseDefenseValue + TemporaryModifiers.Sum(m => m.DefenseValue);
+        set => baseDefenseValue = value;
+    }
+
+    public virtual int AimValue
+    {
+        get => baseAimValue + TemporaryModifiers.Sum(m => m.AimValue);
+        set => baseAimValue = value;
+    }
 
     public int ActualHealthPoints
     {

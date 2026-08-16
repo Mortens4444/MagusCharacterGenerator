@@ -38,7 +38,14 @@ public partial class Character : ICharacter
     private int lockedAllocatedToDefense;
     private int lockedAllocatedToAim;
 
-    public override double AttacksPerRound => (PrimaryWeapon ?? SecondaryWeapon)?.AttacksPerRound ?? fist.AttacksPerRound;
+    public override double AttacksPerRound
+    {
+        get
+        {
+            var baseAttacksPerRound = (PrimaryWeapon ?? SecondaryWeapon)?.AttacksPerRound ?? fist.AttacksPerRound;
+            return Quickness > 16 && Dexterity > 16 ? baseAttacksPerRound * 2 : baseAttacksPerRound;
+        }
+    }
 
     [JsonInclude, Newtonsoft.Json.JsonProperty]
     public CombatValueModifier SelectedCombatValueModifier
@@ -133,10 +140,11 @@ public partial class Character : ICharacter
             if (attackModes == null)
             {
                 attackModes = [];
+                var strengthDamageBonus = MathHelper.GetStrengthMeleeDamageBonus(Strength);
 
                 if (PrimaryWeapon is IMeleeWeapon meleeWeapon)
                 {
-                    attackModes.Add(new MeleeAttack(meleeWeapon, AttackValue));
+                    attackModes.Add(new MeleeAttack(meleeWeapon, AttackValue, strengthDamageBonus));
                 }
                 else if (PrimaryWeapon is IRangedWeapon rangedWeapon)
                 {
@@ -145,13 +153,13 @@ public partial class Character : ICharacter
 
                 if (SecondaryWeapon is IMeleeWeapon meleeWeapon2)
                 {
-                    attackModes.Add(new MeleeAttack(meleeWeapon2, AttackValue));
+                    attackModes.Add(new MeleeAttack(meleeWeapon2, AttackValue, strengthDamageBonus));
                 }
                 else if (SecondaryWeapon is IRangedWeapon rangedWeapon2)
                 {
                     attackModes.Add(new RangedAttack(rangedWeapon2, AimValue));
                 }
-                attackModes.Add(new MeleeAttack(fist, AttackValue));
+                attackModes.Add(new MeleeAttack(fist, AttackValue, strengthDamageBonus));
 
                 foreach (var discipline in PsiDisciplineCatalog.GetAvailable(this))
                 {
@@ -319,7 +327,7 @@ public partial class Character : ICharacter
                 _ => fist.InitiateValue,
             };
 
-            return @base + AllocatedToInitiate + weaponBonus;
+            return @base + AllocatedToInitiate + weaponBonus + TemporaryModifiers.Sum(m => m.InitiateValue);
         }
     }
 
@@ -340,7 +348,7 @@ public partial class Character : ICharacter
                 _ => fist.AttackValue,
             };
 
-            return @base + AllocatedToAttack + weaponBonus;
+            return @base + AllocatedToAttack + weaponBonus + PsiSurgeAttackBonus + TemporaryModifiers.Sum(m => m.AttackValue);
         }
     }
 
@@ -360,7 +368,7 @@ public partial class Character : ICharacter
                 _ => fist.DefenseValue,
             };
 
-            return @base + AllocatedToDefense + weaponBonus;
+            return @base + AllocatedToDefense + weaponBonus + TemporaryModifiers.Sum(m => m.DefenseValue);
         }
     }
 
@@ -381,7 +389,7 @@ public partial class Character : ICharacter
                 _ => 0,
             };
 
-            return @base + AllocatedToAim + weaponBonus;
+            return @base + AllocatedToAim + weaponBonus + TemporaryModifiers.Sum(m => m.AimValue);
         }
     }
 
