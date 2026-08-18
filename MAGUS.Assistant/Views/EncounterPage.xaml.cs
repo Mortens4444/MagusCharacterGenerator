@@ -1,5 +1,6 @@
 using CommunityToolkit.Mvvm.Messaging;
 using MAGUS.Assistant.ViewModels;
+using Mtf.LanguageService.MAUI;
 using Mtf.LanguageService.MAUI.Views;
 using Mtf.Maui.Controls.Messages;
 using System.Collections.Specialized;
@@ -10,6 +11,7 @@ internal sealed partial class EncounterPage : NotifierPage
 {
     private bool firstRun = true;
     private EncounterViewModel? viewModel;
+    private Dictionary<object, string>? originalTextElements;
 
     public EncounterPage(EncounterViewModel viewModel)
     {
@@ -88,6 +90,18 @@ internal sealed partial class EncounterPage : NotifierPage
     protected override void OnAppearing()
     {
         base.OnAppearing();
+
+        // Re-translate every time, so the "Clash" title picks up a language change made on the
+        // Settings page (this page's static text was never fed through the translator at all).
+        if (originalTextElements == null)
+        {
+            originalTextElements = Translator.Translate(this);
+        }
+        else
+        {
+            Translator.SetOriginalTexts(originalTextElements);
+            _ = Translator.Translate(this);
+        }
 
         // OnDisappearing (below) unsubscribes unconditionally, including when this page is
         // merely covered by a modal (e.g. the enemy picker, or a manual-mode dice-roll dialog

@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFrameworks>net10.0-android;net10.0-ios;net10.0-maccatalyst</TargetFrameworks>
     <TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('windows'))">$(TargetFrameworks);net10.0-windows10.0.19041.0</TargetFrameworks>
@@ -134,12 +134,12 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.Maui.Controls" Version="10.0.90" />
-    <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="10.0.10" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="10.0.11" />
     <PackageReference Include="Microsoft.Maui.Graphics" Version="10.0.90" />
     <PackageReference Include="Microsoft.Maui.Graphics.Skia" Version="10.0.90" />
     <PackageReference Include="Mtf.Maui.Controls" Version="4.0.63" />
     <PackageReference Include="Mtf.Maui.Drawing" Version="1.0.4" />
-    <PackageReference Include="Mtf.MAUI.LanguageService" Version="3.0.95" />
+    <PackageReference Include="Mtf.MAUI.LanguageService" Version="3.0.99" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.4" />
     <PackageReference Include="Plugin.Maui.Audio" Version="4.0.0" />
     <PackageReference Include="sqlite-net-pcl" Version="1.11.285" />
@@ -147,7 +147,7 @@
     <!-- SQLitePCLRaw.bundle_green 2.1.11 still pins the native e_sqlite3 builds to a version vulnerable to
          CVE-2025-6965 (GHSA-2m69-gcr7-jv3q). Force the patched native builds until bundle_green itself is republished. -->
     <PackageReference Include="SQLitePCLRaw.lib.e_sqlite3" Version="3.53.3" />
-    <PackageReference Include="SQLitePCLRaw.lib.e_sqlite3.android" Version="2.1.12" />
+    <PackageReference Include="SQLitePCLRaw.lib.e_sqlite3.android" Version="2.1.13" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\MAGUS\MAGUS.csproj" />
@@ -302,6 +302,6 @@
       <ImageManifestPath>$(ProjectDir)Resources\Images\images_manifest.txt</ImageManifestPath>
     </PropertyGroup>
     <!--<WriteLinesToFile File="$(ImageManifestPath)" Lines="@(AllImages->'%(RelativeDir)%(Filename)%(Extension)')" Overwrite="true" Encoding="UTF-8" />-->
-    <WriteLinesToFile File="$(ImageManifestPath)" Lines="@(AllImages-&gt;'%(Filename)%(Extension)')" Overwrite="true" Encoding="UTF-8" />
+    <WriteLinesToFile File="$(ImageManifestPath)" Lines="@(AllImages->'%(Filename)%(Extension)')" Overwrite="true" Encoding="UTF-8" />
   </Target>
 </Project>

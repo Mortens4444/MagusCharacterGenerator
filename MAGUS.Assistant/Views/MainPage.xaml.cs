@@ -21,19 +21,21 @@ internal sealed partial class MainPage : NotifierPage
     {
         base.OnAppearing();
 
+        // Re-translate every time (not just on first run), so labels like the "Clash" menu
+        // item pick up a language change made on the Settings page after the user navigates back.
+        if (originalTextElements != null)
+        {
+            Translator.SetOriginalTexts(originalTextElements);
+        }
+        _ = Translator.Translate(this);
+
         if (firstRun)
         {
             firstRun = false;
 
-            if (originalTextElements != null)
-            {
-                Translator.SetOriginalTexts(originalTextElements);
-            }
-
             // initialize view model and language
             _ = ((MainPageViewModel)BindingContext).InitializeAsync();
             _ = PreloadService.Instance.InitializeAsync();
-            _ = Translator.Translate(this);
         }
     }
 

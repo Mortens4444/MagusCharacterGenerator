@@ -14,7 +14,7 @@ using Mtf.Maui.Controls.Messages;
 
 namespace MAGUS.Assistant.Services;
 
-internal sealed class GameEventService(SettingsService settingsService, CharacterService characterService, IServiceProvider serviceProvider)
+internal sealed class GameEventService(CharacterService characterService, IServiceProvider serviceProvider)
 {
     private static readonly string[] flavorOnlyMessages = [
         "You heard a strange noise. In the Battle menu, you can find out what it was...",
@@ -63,7 +63,6 @@ internal sealed class GameEventService(SettingsService settingsService, Characte
 
     private const int HungerDamagePerTick = 2;
 
-    private readonly SettingsService settingsService = settingsService;
     private readonly CharacterService characterService = characterService;
     private readonly IServiceProvider serviceProvider = serviceProvider;
 
@@ -73,7 +72,13 @@ internal sealed class GameEventService(SettingsService settingsService, Characte
         return flavorOnlyMessages[index];
     }
 
-    public bool HasPendingInteractiveEvent => !String.IsNullOrEmpty(settingsService.PendingEventKind);
+    // GameEventService is a singleton but SettingsService is transient and caches its values
+    // in memory at construction time, so a SettingsService captured once (e.g. via constructor
+    // injection) would never see settings changed afterwards (default character, pending event,
+    // ...) by any other part of the app. Resolving a fresh instance per call keeps it current.
+    private SettingsService GetCurrentSettings() => serviceProvider.GetRequiredService<SettingsService>();
+
+    public bool HasPendingInteractiveEvent => !String.IsNullOrEmpty(GetCurrentSettings().PendingEventKind);
 
     /// <summary>
     /// Rolls a random story event and, when a default character is set, applies its real effect
@@ -85,7 +90,8 @@ internal sealed class GameEventService(SettingsService settingsService, Characte
     {
         try
         {
-            var character = await GetDefaultCharacterAsync().ConfigureAwait(false);
+            var settingsService = GetCurrentSettings();
+            var character = await GetDefaultCharacterAsync(settingsService).ConfigureAwait(false);
             if (character is not null && character.IsHungry)
             {
                 return await ApplyHungerProgressionAsync(character).ConfigureAwait(false);
@@ -95,15 +101,15 @@ internal sealed class GameEventService(SettingsService settingsService, Characte
 
             return kind switch
             {
-                GameEventKind.MarketSale => await ApplyMarketEventAsync(0.5,
+                GameEventKind.MarketSale => await ApplyMarketEventAsync(settingsService, 0.5,
                     "A traveling merchant is desperate to offload his stock - everything in the Market is half price for a while!").ConfigureAwait(false),
-                GameEventKind.MarketInflation => await ApplyMarketEventAsync(2.0,
+                GameEventKind.MarketInflation => await ApplyMarketEventAsync(settingsService, 2.0,
                     "Word is a noble's caravan is buying up supplies - Market prices have doubled for a while.").ConfigureAwait(false),
                 GameEventKind.ItemStolen => await ApplyItemStolenAsync(character!).ConfigureAwait(false),
-                GameEventKind.Ambush => await ApplyAmbushAsync(character!).ConfigureAwait(false),
+                GameEventKind.Ambush => await ApplyAmbushAsync(settingsService, character!).ConfigureAwait(false),
                 GameEventKind.FortuneGift => await ApplyFortuneGiftAsync(character!).ConfigureAwait(false),
                 GameEventKind.StrayDog => await ApplyStrayDogAsync(character!).ConfigureAwait(false),
-                GameEventKind.PersonInNeed => await ApplyPersonInNeedAsync(character!).ConfigureAwait(false),
+                GameEventKind.PersonInNeed => await ApplyPersonInNeedAsync(settingsService, character!).ConfigureAwait(false),
                 GameEventKind.Hunger => await ApplyHungerOnsetAsync(character!).ConfigureAwait(false),
                 GameEventKind.Trap => await ApplyTrapAsync(character!).ConfigureAwait(false),
                 _ => ("MAGUS Assistant", Lng.Elem(PickFlavorOnlyMessage())),
@@ -123,6 +129,7 @@ internal sealed class GameEventService(SettingsService settingsService, Characte
     /// </summary>
     public async Task ResolvePendingInteractiveEventIfAnyAsync()
     {
+        var settingsService = GetCurrentSettings();
         var kind = settingsService.PendingEventKind;
         if (String.IsNullOrEmpty(kind))
         {
@@ -136,11 +143,11 @@ internal sealed class GameEventService(SettingsService settingsService, Characte
         {
             if (kind == nameof(GameEventKind.Ambush) && !String.IsNullOrEmpty(payload))
             {
-                await ResolveAmbushAsync(payload).ConfigureAwait(true);
+                await ResolveAmbushAsync(settingsService, payload).ConfigureAwait(true);
             }
             else if (kind == nameof(GameEventKind.PersonInNeed))
             {
-                await ResolvePersonInNeedAsync(payload).ConfigureAwait(true);
+                await ResolvePersonInNeedAsync(settingsService, payload).ConfigureAwait(true);
             }
         }
         catch (Exception ex)
@@ -149,12 +156,12 @@ internal sealed class GameEventService(SettingsService settingsService, Characte
         }
     }
 
-    private async Task ResolveAmbushAsync(string creatureTypeName)
+    private async Task ResolveAmbushAsync(SettingsService settingsService, string creatureTypeName)
     {
         await PreloadService.Instance.InitializeAsync().ConfigureAwait(true);
 
         var creature = PreloadService.Instance.Creatures.FirstOrDefault(c => c.GetType().Name == creatureTypeName);
-        var character = await GetDefaultCharacterAsync().ConfigureAwait(true);
+        var character = await GetDefaultCharacterAsync(settingsService).ConfigureAwait(true);
 
         if (creature is null || character is null)
         {
@@ -188,9 +195,9 @@ internal sealed class GameEventService(SettingsService settingsService, Characte
         await ShellNavigationService.ShowPageAsync(encounterPage).ConfigureAwait(true);
     }
 
-    private async Task ResolvePersonInNeedAsync(string? payload)
+    private async Task ResolvePersonInNeedAsync(SettingsService settingsService, string? payload)
     {
-        var character = await GetDefaultCharacterAsync().ConfigureAwait(true);
+        var character = await GetDefaultCharacterAsync(settingsService).ConfigureAwait(true);
         if (character is null)
         {
             return;
@@ -251,7 +258,7 @@ internal sealed class GameEventService(SettingsService settingsService, Characte
         await ShellNavigationService.DisplayAlertAsync(Lng.Elem("A stranger in need"), message).ConfigureAwait(true);
     }
 
-    private async Task<Character?> GetDefaultCharacterAsync()
+    private async Task<Character?> GetDefaultCharacterAsync(SettingsService settingsService)
     {
         var name = settingsService.DefaultCharacterName;
         if (String.IsNullOrWhiteSpace(name))
@@ -264,7 +271,7 @@ internal sealed class GameEventService(SettingsService settingsService, Characte
 
     private static GameEventKind PickEventKind() => EnemyProvider.PickWeightedRandom(eventWeights, w => w.Weight).Kind;
 
-    private async Task<(string Title, string Message)> ApplyMarketEventAsync(double multiplier, string flavorText)
+    private async Task<(string Title, string Message)> ApplyMarketEventAsync(SettingsService settingsService, double multiplier, string flavorText)
     {
         await PreloadService.Instance.InitializeAsync().ConfigureAwait(false);
 
@@ -297,7 +304,7 @@ internal sealed class GameEventService(SettingsService settingsService, Characte
             String.Format(Lng.Elem("You wake up to find your pouch feels lighter, {0}... your {1} is gone. Stolen, maybe?"), character.Name, itemName));
     }
 
-    private async Task<(string Title, string Message)> ApplyAmbushAsync(Character character)
+    private async Task<(string Title, string Message)> ApplyAmbushAsync(SettingsService settingsService, Character character)
     {
         await PreloadService.Instance.InitializeAsync().ConfigureAwait(false);
 
@@ -357,7 +364,7 @@ internal sealed class GameEventService(SettingsService settingsService, Characte
             String.Format(Lng.Elem("A stray {0} has taken a liking to you, {1}, and now follows you everywhere."), dogName, character.Name));
     }
 
-    private async Task<(string Title, string Message)> ApplyPersonInNeedAsync(Character character)
+    private async Task<(string Title, string Message)> ApplyPersonInNeedAsync(SettingsService settingsService, Character character)
     {
         await PreloadService.Instance.InitializeAsync().ConfigureAwait(false);
 
