@@ -352,16 +352,18 @@ public class DiceThrow
 
     private int RangedAttack(int min, int max, bool hasLuckAmulet)
     {
-        int result = 0, partialResult;
+        int result = 0, rawRoll;
         do
         {
-            partialResult = RandomProvider.GetSecureRandomInt(min, max);
+            rawRoll = RandomProvider.GetSecureRandomInt(min, max);
             // Alkalmazzuk a szerencsét a részeredményre
-            partialResult = ApplyLuck(partialResult, min, max, hasLuckAmulet);
-            result += partialResult;
+            result += ApplyLuck(rawRoll, min, max, hasLuckAmulet);
         }
-        // Az újradobás feltétele (MAGUS-ban a max dobásnál adódik hozzá az új dobás)
-        while (partialResult == (max - 1));
+        // Az újradobás feltétele (MAGUS-ban a max dobásnál adódik hozzá az új dobás).
+        // The reroll must key off the raw roll, not the luck-adjusted value: ApplyLuck can
+        // itself produce max-1 (e.g. for a 1-3 range every remapped result lands on max-1),
+        // which would otherwise make this loop forever.
+        while (rawRoll == (max - 1));
         return result;
     }
 

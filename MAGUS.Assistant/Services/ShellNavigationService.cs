@@ -122,4 +122,12 @@ internal static class ShellNavigationService
                 initialValue: Lng.Elem(initialValue)));
 
     public static Task GoToAsync(Uri uri, bool animate = true) => MainThread.InvokeOnMainThreadAsync(() => Shell.Current.GoToAsync(uri, animate: animate));
+
+    public static Task<string?> DisplayActionSheetAsync(string title, string cancel, string? destruction, params string[] buttons)
+        => MainThread.InvokeOnMainThreadAsync(() =>
+            Shell.Current.DisplayActionSheet(
+                Lng.Elem(title),
+                Lng.Elem(cancel),
+                destruction == null ? null : Lng.Elem(destruction),
+                [.. buttons.Select(Lng.Elem)]));
 }

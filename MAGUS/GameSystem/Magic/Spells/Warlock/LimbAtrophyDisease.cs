@@ -1,0 +1,32 @@
+using MAGUS.Enums;
+using MAGUS.Interfaces;
+
+namespace MAGUS.GameSystem.Magic.Spells.Warlock;
+
+/// <summary>
+/// Végtagsorvasztás (Boszorkánymester — Rontás, Első Törvénykönyv p.249-250). Level 5 disease
+/// that atrophies one chosen limb, worsening a severity category each round until permanently
+/// useless. This codebase has no disease-progression simulation (severity stages, day/hour
+/// timelines, contagion); this class exists only as a spellbook/catalog entry with no simulated
+/// mechanical effect.
+/// </summary>
+public sealed class LimbAtrophyDisease : ISpell
+{
+    public string Name => "Limb atrophy disease";
+
+    public MagicSchool School => MagicSchool.Warlock;
+
+    public int? Power => null;
+
+    public int ManaCost => 14;
+
+    public int PowerBonusPerManaPoint => 0;
+
+    public MagicResistanceType ResistanceType => MagicResistanceType.Astral;
+
+    public int CastingTimeInSegments => 5;
+
+    public int DurationInRounds => 1;
+
+    public int GetDamage() => 0;
+}

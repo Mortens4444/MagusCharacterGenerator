@@ -1,11 +1,12 @@
 ﻿using MAGUS.Assistant.Database.Repositories;
+using MAGUS.Assistant.Interfaces;
 using MAGUS.Enums;
 using MAGUS.Interfaces;
 using Mtf.LanguageService.Enums;
 
 namespace MAGUS.Assistant.Services;
 
-internal sealed class SettingsService : ISettings
+internal sealed class SettingsService : ISettings, ILanguageSettingsService
 {
     private readonly SettingsRepository settingsRepository;
 

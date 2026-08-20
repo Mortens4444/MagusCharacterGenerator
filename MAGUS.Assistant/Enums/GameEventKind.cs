@@ -10,6 +10,5 @@ internal enum GameEventKind
     FortuneGift,
     StrayDog,
     PersonInNeed,
-    Hunger,
     Trap
 }

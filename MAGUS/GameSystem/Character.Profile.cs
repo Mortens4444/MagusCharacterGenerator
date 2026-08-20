@@ -1,4 +1,5 @@
 ﻿using MAGUS.Enums;
+using MAGUS.GameSystem.Places;
 using MAGUS.Interfaces;
 using MAGUS.Races;
 using Mtf.Extensions.Services;
@@ -14,7 +15,33 @@ public partial class Character : IHaveImage
     [NonSerialized, JsonIgnore, Newtonsoft.Json.JsonIgnore]
     private readonly MultiClassMode multiClassMode = MultiClassMode.Normal_Or_SwitchedClass;
 
-    public string Birthplace { get; set; }
+    [NonSerialized, JsonIgnore, Newtonsoft.Json.JsonIgnore]
+    private City? currentLocation;
+
+    // Birthplace used to be a free-text string that nothing in the UI ever actually set, so existing
+    // saved characters may have a JSON null here; NullValueHandling.Ignore keeps that from throwing
+    // during deserialization (Newtonsoft otherwise fails converting a null token into a non-nullable
+    // enum) - it just leaves the default City.Unknown instead.
+    [Newtonsoft.Json.JsonProperty(NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+    public City Birthplace { get; set; }
+
+    /// <summary>
+    /// Where the character actually is right now, as of their last Travel action (see
+    /// Places/TravelCalculator.cs). Falls back to Birthplace until they've traveled at least once,
+    /// so a freshly-created character needs no separate initialization step.
+    /// </summary>
+    public City CurrentLocation
+    {
+        get => currentLocation ?? Birthplace;
+        set
+        {
+            if (currentLocation != value)
+            {
+                currentLocation = value;
+                OnPropertyChanged();
+            }
+        }
+    }
 
     public string School { get; set; }
 

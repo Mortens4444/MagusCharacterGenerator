@@ -61,11 +61,28 @@ public class CharacterPsiBehaviorTests
     public void TryUsePsiSurge_WithoutPsi_ReturnsFalse()
     {
         var character = new Character(new Settings(true), "Test", new Human(), new Craftsman());
-        Assert.That(character.TryUsePsiSurge(1), Is.False);
+        Assert.That(character.TryUsePsiSurge(), Is.False);
     }
 
     [Test]
-    public void TryUsePsiSurge_WithPsi_SpendsPointsAndBanksBonus()
+    public void TryUsePsiSurge_WithoutAnyPoints_ReturnsFalse()
+    {
+        var character = new Character(new Settings(true), "Test", new Human(), new Assassin());
+        if (character.Psi == null)
+        {
+            Assert.Ignore("Generated assassin has no psi this run.");
+            return;
+        }
+
+        character.PsiPoints = 0;
+        character.TryAdjustDynamicPsiShield(true, -character.DynamicAstralPsiShield);
+        character.TryAdjustDynamicPsiShield(false, -character.DynamicMentalPsiShield);
+
+        Assert.That(character.TryUsePsiSurge(), Is.False);
+    }
+
+    [Test]
+    public void TryUsePsiSurge_WithPsi_BurnsAllPointsAndDynamicShieldsAndBanksBonus()
     {
         var character = new Character(new Settings(true), "Test", new Human(), new Assassin());
         if (character.Psi == null || character.PsiPoints <= 0)
@@ -74,23 +91,49 @@ public class CharacterPsiBehaviorTests
             return;
         }
 
-        var before = character.PsiPoints;
-        var result = character.TryUsePsiSurge(1);
+        // Park one point in a Dinamikus Pajzs to verify Roham drains it too, per the book's
+        // "beleértve a Dinamikus Pajzsban tároltakat is" rule.
+        character.TryAdjustDynamicPsiShield(true, 1);
+        var total = character.PsiPoints + character.DynamicAstralPsiShield + character.DynamicMentalPsiShield;
+
+        var result = character.TryUsePsiSurge();
 
         Assert.That(result, Is.True);
-        Assert.That(character.PsiPoints, Is.EqualTo(before - 1));
-        Assert.That(character.PsiSurgeAttackBonus, Is.EqualTo(Character.PsiSurgeAttackValuePerPoint));
+        Assert.That(character.PsiPoints, Is.EqualTo(0));
+        Assert.That(character.DynamicAstralPsiShield, Is.EqualTo(0));
+        Assert.That(character.DynamicMentalPsiShield, Is.EqualTo(0));
+        Assert.That(character.PsiSurgeAttackBonus, Is.EqualTo(total * Character.PsiSurgeAttackValuePerPoint));
 
         character.ClearPsiSurge();
         Assert.That(character.PsiSurgeAttackBonus, Is.EqualTo(0));
     }
 
     [Test]
-    public void TryUsePsiSurge_InvalidAmounts_ReturnsFalse()
+    public void TryUseMegfekezes_WithoutPsi_ReturnsFalse()
+    {
+        var character = new Character(new Settings(true), "Test", new Human(), new Craftsman());
+        var opponent = new Character(new Settings(true), "Opponent", new Human(), new Craftsman());
+        Assert.That(character.TryUseMegfekezes(opponent), Is.False);
+    }
+
+    [Test]
+    public void TryUseMegfekezes_WithPsi_BurnsAllPointsAndWeakensOpponent()
     {
         var character = new Character(new Settings(true), "Test", new Human(), new Assassin());
-        Assert.That(character.TryUsePsiSurge(0), Is.False);
-        Assert.That(character.TryUsePsiSurge(-1), Is.False);
-        Assert.That(character.TryUsePsiSurge(Int32.MaxValue), Is.False);
+        if (character.Psi == null || character.PsiPoints <= 0)
+        {
+            Assert.Ignore("Generated assassin has no psi points this run.");
+            return;
+        }
+
+        var opponent = new Character(new Settings(true), "Opponent", new Human(), new Craftsman());
+        var total = character.PsiPoints;
+        var opponentAttackBefore = opponent.AttackValue;
+
+        var result = character.TryUseMegfekezes(opponent);
+
+        Assert.That(result, Is.True);
+        Assert.That(character.PsiPoints, Is.EqualTo(0));
+        Assert.That(opponent.AttackValue, Is.EqualTo(opponentAttackBefore - (total * Character.PsiSurgeAttackValuePerPoint)));
     }
 }

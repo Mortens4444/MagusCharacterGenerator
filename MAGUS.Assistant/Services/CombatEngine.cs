@@ -235,7 +235,15 @@ internal sealed class CombatEngine
                 {
                     return false;
                 }
+                if (spellAttack.PainTolerancePointCost > 0 && character.ActualPainTolerancePoints is int characterFp && characterFp < spellAttack.PainTolerancePointCost)
+                {
+                    return false;
+                }
                 character.ManaPoints -= spellAttack.ManaCost;
+                if (spellAttack.PainTolerancePointCost > 0 && character.ActualPainTolerancePoints.HasValue)
+                {
+                    character.ActualPainTolerancePoints -= spellAttack.PainTolerancePointCost;
+                }
                 return true;
 
             case SpellAttack spellAttack when attacker is Creature creature:
@@ -243,12 +251,63 @@ internal sealed class CombatEngine
                 {
                     return false;
                 }
+                if (spellAttack.PainTolerancePointCost > 0 && creature.ActualPainTolerancePoints is int creatureFp && creatureFp < spellAttack.PainTolerancePointCost)
+                {
+                    return false;
+                }
                 creature.ManaPoints -= spellAttack.ManaCost;
+                if (spellAttack.PainTolerancePointCost > 0 && creature.ActualPainTolerancePoints.HasValue)
+                {
+                    creature.ActualPainTolerancePoints -= spellAttack.PainTolerancePointCost;
+                }
                 return true;
 
             default:
                 return false;
         }
+    }
+
+    /// <summary>
+    /// Casts a spell/discipline outside of a running Encounter (e.g. from the CharDetails "care"
+    /// panel) - on self or another saved character - reusing the exact same resolution rules a live
+    /// combat turn would (TryPayCastingCost, MysticResolution's hit/crit/fumble roll, ApplyCombatDamage's
+    /// HP-vs-FP routing, and the spell/discipline's own OnHit), just without a real Encounter/turn
+    /// around it. Returns false if the caster can't afford it or the cast simply misses.
+    /// </summary>
+    public static async Task<bool> CastOutsideCombatAsync(Character caster, Character target, MysticAttack attack, ICombatRollService rollService)
+    {
+        if (!TryPayCastingCost(caster, attack))
+        {
+            return false;
+        }
+
+        var initiative = new InitiativeEntry
+        {
+            Attacker = new CombatantRef(caster),
+            Target = new CombatantRef(target),
+            SelectedAttack = attack,
+            BaseInitiative = 0,
+            RolledValue = 0
+        };
+
+        var resolution = await MysticResolution.CreateAsync(initiative, rollService, "Cast", attack, AttackDirection.Front).ConfigureAwait(false);
+        initiative.AttackOrAimResolution = resolution;
+
+        if (resolution.IsSuccessful)
+        {
+            ApplyCombatDamage(initiative, caster, target);
+
+            if (attack is PsiAttack { Discipline: { } discipline })
+            {
+                discipline.OnHit(caster, target);
+            }
+            else if (attack is SpellAttack { Spell: { } spell })
+            {
+                spell.OnHit(caster, target);
+            }
+        }
+
+        return resolution.IsSuccessful;
     }
 
     private static void AddStateChanges(TurnData turn, Attacker attacker, bool wasDead, bool wasConscious)

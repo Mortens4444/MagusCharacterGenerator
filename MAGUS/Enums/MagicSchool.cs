@@ -7,5 +7,7 @@ public enum MagicSchool
     Witch,      // Boszorkányság
     Warlock,    // Boszorkánymesterség
     Priest,     // Papi (szféra-alapú)
+    Bard,       // Bárdmágia
+    Shaman,     // Sámánmágia
     Other
 }

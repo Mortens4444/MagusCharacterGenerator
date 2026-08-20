@@ -1,0 +1,2323 @@
+=== PDF page 110 ===
+JÁTÉKOSOK 
+igyekeznek hoszabb,rövidebb időre beférk~zni egy,egy tudo, 
+mányukat méltányoló földesúr kegyeibe. Altalában vidékén 
+találják meg könyebben a számításukat; ahol a vándorcirkusz 
+érkezte jelentős eseménynek, kitüntetett látványoságnak 
+számít. A nagyobb városokban már csak az igazi profik kere, 
+sik meg a kenyerüket, míg a főnemesi , ne adj isten királyi , 
+udvarokba csak a legjobbak juthatnak be. 
+Af: A karakter kezdő szinten zsonglőrködik: ügyesen do, 
+bál a levegó'be egyszerre három, akár négy tárgyat is; és eze, 
+ket semmiképp sem ejti el. Nehezebb kunsztokba azonban, 
+közönség előtt , jobb, ha nem fog. 
+' 
+Mf: A karakter mesterien zsonlőrködik. Bármilyen társu, 
+latban, a legelőkeló'bb közönség előtt is megállja a helyét; a 
+piacterekre kiállva hamar pénzhez jut. 
+A legnagyobb zsonglőrök általában a dzsadok, vagy a 
+gorviki tolvajklánok tagjai közül kerülnek ki. 
+Futás 
+A Futás képzettség sokkal inkább jelent kitartó, mint szélse, 
+bes futást. 
+Af: Az Alapfokú képzettséggel bíró karakter órákig képes 
+egyfolytában, lendületes ~tempóban futni , pontosan annyi 
+óra hosszat, amennyi az Allóképessége. 
+Mf: A Futás képzettségnek is akadnak hihetetlen teljesít, 
+ményekre képes űzői. Olyanok, akik napokig bírnak futni 
+egyfolytában, pihenő nélkül; vagy olyanok, akik órák hosszat 
+lépést tartanak egy vágtató lóval. A Mesterfokon futó karak, 
+ter nincs időhöz kötve képzettsége gyakorlásában, ám ha túl, 
+feszíti a húrt, akár életét is vesztheti. 
+Futásban a legkitartóbbak az elfek. 
+Mászás 
+A Mászás képzettség a fák, falak megmászásában való külön, 
+leges jártasságot jelenti. Azt, amikor a karakter fürgén és biz, 
+tosan kúszik fel az átlagember számára megmászhatatlannak 
+ítélt meredélyeken is. Az igazán gyakorlott falmászók hihe, 
+tetlenül sima felületeken is képesek kapaszkodót, támaszt ta, 
+lá.lni. Nem jelentenek számukra akadályt a várak, lakóházak 
+falai, a függőleges, vagy akár \<ifelé dó1ő sziklák sem. 
+A Mászás képzettségben való Százalékos Jártasság értéke 
+olyan falra, fára vonatkozik, melyet nagy szerencsével egy 
+ügyes, de gyakorlatlan karakter is képes lenne megmászni. 
+Ilyenkor módosító tényező mincs. Ha a fal nehezebben vagy 
+könyebben lekűzhető, akkor a KM a karakter hátrányára 
+vagy előnyére százalékot vonhat le vagy adhat hozzá a jár, 
+tassághoz. Átlagos nehézségűnek minősül a függőleges, egy, 
+másra rakott dinnyényi kövekből halmozott várfal, ahol a ki, 
+álló kövek, és a repedések sűrű és könnyű kapaszkodót kí, 
+nálnak. 
+A Képzettségpróbát minden megtett 25 méter~ (ayagy 3 
+perc tétlen kapaszkodás) után meg kell ismételni. lgy egy 50 
+méter magas várfal lekűzdése két sikeres Képzettségpróbát is 
+igényel. 
+A Mászás képzettség leginkább a tolvajok sajátja, de so, 
+kan űzik ilyen vagy olyan , akár még az övéknél is magasabb 
+, szinten. 
+••••••••••••••••••••••••••••••••••••••• 
+KÉZIKÖNYVE 
+Esés 
+A karakter ügyesen kigurulja, tompítja az eséseket. Ha na, 
+gyon ma asról zuhan, érti a módját, hogy a keze ügyébe aka, 
+dó rögzített tágyak segítségével hogyan fékezze, vagy akár ál, 
+lítsa meg a zuhanást. Regéket mesélnek olyan harcművészek, 
+ről, akik egy kutba zuhanva, a kövek összeillesztésénél kelet, 
+kező résekbe bele,belekapaszkodva képesek voltak fékezni, 
+sőt, kis idő múltán akár a falhoz tapadva meg is állítani az 
+esést. 
+A képzettség általános felhasználása azonban a harc so, 
+rán való esésekből származó ütések tompítása. Az a karak, 
+ter, aki sikeres Képzettségpróbát tesz, nem szenvedi el az 
+esésből származó sebzést, sőt, jóval könyebben talpra is ke, 
+veredik. 
+Az Esés képzettségből való előnyök kihasználásához a ka, 
+rakternek eló'bb sikeres Képzettségpróbát kell tennie. Az Esés 
+avatatlan nagymesterei mindenképpen a harcművészek, ám 
+a képzettség mindenki számára tanulható. 
+Ugrás/ Akrobatika 
+A karakter a legkülönlegesebb ugrások, perdülések, szaltók, 
+passzív és dinamikus hajlékonysági elemek végrehajtására ké, 
+pes; ezeket akár harc közben is alkalmazni tudja. Ezzel ter, 
+mészetesen nehezebbé teszi ellenfele számára, hogy az meg, 
+sebezhesse őt. Így az Ugrás képzettséget harc közben is hasz, 
+náló karaktér VÉ,jéhez hozzáadódik az ugrás százalék egyötö, 
+de. (pld: Ugrás: 40%, akkor +8 a VÉ,re). Ennek természe, 
+tesen alapvető feltétele, hogy a küzdelem helyszínén ehhez 
+elegendő tér álljon rendelkezésre. Vagyis alacsony helyiségek, 
+ben, szűk folyosókban az Ugrás képzettség harc közben nem 
+alkalmazható. 
+A Képesség nem használatos arra, hogy a karakter külön, 
+legesen magas falakat, vagy különlegesen széles árkokat 
+ugrorjon át. Ezt a Pszi Testsúlycsökkentés diszciplinájával [e, 
+het elérni. 
+Szakma 
+Természetesen Y nev világán is élnek suszterek, szatócsok, ko, 
+vácsok, asztalosok; mindnek megvan a maga tudománya, más, 
+ként fogalmazva a szakmája. A M.A.G.U.S. Képzettségrend, 
+szerében a karakternek arra is van lehetősége, hogy ezeket el, 
+sajátítsa. Akár azért, hogy ínséges idó~ben megéljen beló1e, 
+akár azért, mert úgy véli, hasznára válik az efféle ismeret ka, 
+landozása során. A Szakma képzettség segítségével a karakter 
+elsajátíthat egy általa megnevezett kézműves, "civil" szakmát. 
+Af: A karkter ismeri a szakma alapjait; inasként bárhol be, 
+válna. Egyszerűbb feladatokat maga is képes elvégezni, de 
+semmiképpen sem számít elismert mesterembernek. 
+Mf: A karakter szakemberként ismeri az adott szakmát. 
+Tudása elegendő arra, hogy, ha úgy hozza a szükség, akár 
+meg is éljen belőle. Bárhol telepszik le, szívesen fogadják, 
+hozzáértését elismerik. Műhely híján képes egyszerűbb, mű, 
+helyben akár bonyolultabb holmik elkészítésére. 
+. 
+A szemléletesség kedvéért felsorolunk néhány szakmát és 
+meghatározzuk tevékenységi körét is: 
+\ ...................................... . 
+
+=== PDF page 111 ===
+JÁTÉKOSOK $ 
+KÉZIKÖNYVE 
+d ta~ég további IK6 Ép - mindenképpen Ép - se-
+bet kep~ ókozm. 
+Képzettségek III. táblázat 
+kovács 
+patkolókovács 
+fegyverkovács _ 
+páncélkovács 
+íjkészítő 
+fémtárgyakat készít 
+patkókafkészít, lovakat patkol 
+fém fegyvereket készít 
+AJHá g{szúrás képzettség ismeretébó1 származó addicio, 
+nálisJ,t zés csak akkor jelentkezik, ha a karakter hátulról és 
+"'.,____n1eglepetésszerűen támad. 
+ács 
+asztalos 
+szatócs 
+suszter 
+_._. ___ _ 
+szabó 
+fogadós 
+kerékgyártó 
+bognár 
+földmCíves 
+ékszerész 
+lócsiszár 
+fém páncélokat, vérteket készít 
+íjakat, számszeríjakat, nyílves ..... ro
+„.>l<J
+, .~.e-t_k
+._é_s_z_í~
+, 
+épilletek faszerkezeteit készíti ~1 
+fa tárgyakat készít (bútorokat) 
+vegyeskereskedő 
+cipé)t készít 
+runákat készít 
+vendégeket fogad 
+kocsikerekeket készít. 
+hordókat készít 
+roCíveli a földet 
+ékszereket készít, ad,vesz 
+lovakat nevel, elad 
+ALVILÁGI KÉPZETTSÉGEK 
+11 
+z Jlloilá~i képzettségek nem pusztán nevükben al, 
+világiak, általában alviláginak számító alakok bírják 
+óK.et. Egyes efféle képzettségeket persze más kasztok 
+képviselői is egészen magas szinten űzhetnek. 
+Kocsmai verekedés 
+A karakter gyakorlott kocsmai verekedő. Képes bármilyen 
+_kezébe akadó, fegyverként használható tárggyal verekedni. 
+Korsóval, székkel, asztallábbal. Az efféle képzettséget általá, 
+ban saját kárán okulva sajátítja el, esetleg valamely "mester" 
+útmutatásai alapján. Ilyesmit oktató iskolák, tárgyaló köny, 
+vek nemigen akadnak. 
+Af: Ha a felsorolt használati tárgyakkal verekszik, a karak, 
+ter TÉ,je, VÉ,je nem csökken a Képzetlen Fegyverforgatás, 
+ból származó mínuszokkal. 
+Mf: A felsorolt tárgyakkal, egy kör alatt, képes mindkét 
+kézzel támadni. 
+Hátbaszúrás 
+A leggyakrabban Fejvadászok vagy Boszorkánymesterek által 
+ismert és oktatott képzettség. Ma már azonban más kasztok, 
+ba tartozó személyek, olykor egész klánok és rendek folya, 
+modnak használatához. A képzettséggel bíró karakter halá, 
+los pontosággal támad hátulról: tudja hova, milyen erővel 
+kell döfnie, vágnia, ütnie, hogy ezzel áldozatán a lehetőleg, 
+súlyosabb sebet ejtse. Hátbaszúrásra csak olyan egykezes 
+fegyvert lehet használni, melynek forgatásában a karakter 
+legalább Alapfokon képzett. 
+Af: A hátulról ejtett seb Sp értékéhez a fegyver sebzésén 
+túl még hozzáadódik 2K6 Sp. 
+Mf: Különféle ősi, mítikus mozdulatok sorozata, melyek 
+hatásaként a karakter megacélozza akaratát, megfékezi kezé, 
+nek remegését, s minden figyelmét a döfés pontosságának fi, 
+nomítására szenteli. Az Af,nál már tárgyaltakon kívül az ál, 
+••••••••••••••••••••••••••••••••••••••• 
+Hamis kártyázás 
+Y nev fogadóiban, tábortűzei mellett, de még az úri körökben 
+is ismerik és űzik a kártyajátékokat. És akadnak persze olya, 
+nok is, akik fittyet hánynak a szabályoknak, és kézügyességű, 
+ket kihasználva, becstelen trükkök bevetésével igyekszenek 
+meggazdagodni becsületesebb vagy éppen ostobább társaik 
+kárára. A kártyalapok szemfényvesztő forgatását, cserélgeté, 
+sét; a hátlapokra rótt tikos jelek leolvasásával folytatott játé, 
+kot nevezzük hamiskártyázásnak. A képzettség ezen kétes ér, 
+tékű tudományt jelenti. 
+Alap, és Mesterfoka között nincs számokkal mérhető kü, 
+lönbség; fogalmazzunk úgy, hogy a Mesterfokú Hamiskártyás 
+átveri még a képzettség Alapfokú ismerőjét is, míg ugyanez 
+fordítva nem áll. 
+Álcázás/álruhaviselés 
+Gyakran tanácsos az embernek arcot váltania, mássá alakul, 
+nia, hogy eltűnhessen a tömegben, megtévessze ellenségeit. 
+A menekülés, nemkülönben az észrevétlen támadás eszköze 
+ez. A képzettségben jártas karakter képes álcázni magát, bár, 
+mely szituációban meggyőző álruhát ölt. 
+Af: Az Alapfokon képzett karakter képes elváltoztatni ar, 
+cát, alakját, olyannyira, hogy legközelebbi ismerősei sem igen 
+ismerik fel. 
+Mf: A Mesterfokú képzettség már annyit tesz, hogy a ka, 
+rakter bárkinek az alakját, arvonásait képes felölteni némi se, 
+gédanyag, ruházat és kozmetikum segítségével. 
+A képzettséget legmagasabb szinten a Fejvadászok űzik; 
+esetükben az ember soha nem ttidhatja, ártalmatlan öreg, 
+anyóval, vagy életveszélyes· gyilkossal áll, e szemben. 
+Lopózás 
+A Lopózás képzettségben járatos karakter képes csendben 
+haladni. Sem léptei, sem egyéb mozdulatai nem vernek neszt. 
+Minél képzettebb, annál "nehezebb" talajon teheti. Nagy se, 
+gítségére lehet ez az észrevétlen behatolásban, a meglepetés, 
+szerű támadásban. Mindezen túl a képzettség ismerete még a 
+haladás közbeni rejtőzködés képességét is jelenti, mikor a 
+lopozó kihasználja a terep kínálta tárgyakat, azok takarásába, 
+netán árnyékba húzódva közelíti meg célpontját. 
+A Lopózás mesterei a könnyű léptű elfek valamint a tol, 
+vajok és a fejvadászok. Ők azok is, akiktől a karakter a leg, 
+magasabb szinten sajátíthatja el a képzettséget. 
+Rejtőzés 
+A Rejtőzés a félhomályban, vagy tárgyak takarásában való moz, 
+dulatlan meghúzódás tudományát jelenti. A képzett karakter 
+képes felfedezni és kihasználni a fényviszonyok, az emberi gon, 
+dolkodás hiányosságai kínálta legalkalmasabb búvóhelyeket. 
+• •••••••••••••••••••••••••••••••••••••• 
+
+=== PDF page 112 ===
+JÁTÉKOSOK (/(_ s 
+K É z· 1 K Ö N Y V E 
+A Rejtőzés képzettség a Lopózáshoz hasonlóan a tolvajok 
+és fejvadászok sajátja. Igazi mesterei képesek szi te egybeol-
+vadni a tereptárgyakkal, akár még fénye nappal is. 
+Kötéltánc 
+A kötéltánc nem feltétlenül a mutatványosok egy szál köté, 
+len bemutatott szórakoztató produkcióit jelenti. Felettébb 
+hasznos képzettség ez a hétköznapi életben is , különösen 
+azok számára, akik gyakran kényszerülnek úgy távozni vala, 
+honnan, hogy más ne eredhessen nyomukba. A képzett ka, 
+rakter képes vízszintes, vagy attól 30 fokban eltérő szögben 
+kifeszített kötélen, rúdon pallón sétálni. Hogy ezt megtehes, 
+se, ahhoz sikeres Képzettségpróbát kell dobnia, amit minden 
+megtett 10 láb után meg kell ismételnie. képzettségének szá, 
+zalékban mért értéke átlagos nehézségű feladatra vonatkozik, 
+amit befolyásolhat a kötél (palló, rúd) meredeksége illetőleg 
+vastagsága, a szél ereje, stb. 
+Átlagos nehézségű Kötéltáncnak nevezzük a két cm vas, 
+tag, mereven kifeszített kötélen való gyaloglást, mikor a ka, 
+rakter minden figyelmét a feladatnak szentelheti, és szél, to, 
+vábbá egyéb zavaró körülmények nincsenek. 
+A Kötéltánc mesterei a harcművészek és a tolvajok. 
+Zsebmetszés 
+Y nev világán is akadnak emberek, akik mások pénzének el, 
+csenésébó1 kívánnak meggazdagodni. A tolvajláson és az erő, 
+szakos rabláson túl azonban akadnak jóval finomabb módsze, 
+rek is. Ilyen a Zsebmetszés. Általában tömegben, a kínálko, 
+zó alkalmat kihasználva űzik. A tolvaj belenyúl áldozata zse, 
+bébe vagy erszényébe, netán felmetszi azt, és a benne talál, 
+ható javakat elemeli. 
+Ahhoz hogy sikerrel járjon, Képzettségpróbát kell tennie. 
+Természetesen léteznek bizonyos könnyítő és nehezítő körül, 
+mények, melyekkel számolni kell , ez azonban a KM felada, 
+ta és jogköre! 
+I 
+Csapdakeresés 
+Az elrejtett csapdák felfedezése és hatástalanítása rendkívül 
+hasznos tudomány. Sok kellemetlenségtől óvhatja meg a ka, 
+raktert és a társait. Természetesen a tevékenység nem tudat, 
+alatti, csak akkor alkalmazható, ha a karakter előre szól. Nem 
+is nevezhető gyorsnak, hiszen a gyanús terület aprólékos át, 
+vizsgálásából áll. 
+A felfedezés és hatástalanítás sikere két egymás utáni 
+Képzettségpróba függvénye. 
+Zárnyitás 
+Zárt ajtókkal, lakatokkal gyakran szebesül a kalandozó , hi, 
+szen számtalanszor tér be mások házába, kincseskamrájába 
+••••••••••••••••••••••••••••••••••••••• 
+meghívó nélkul. Az ajtók beszakítása, a lakatok leverése nem 
+mindig célravezető, mivel nemkívánatos zajjal jár. A zárakkal 
+egyidős a alkulcsok alkalmazásának tudománya. 
+yá:rnyitásban járatos kara~ter ismeri a zárak szerkeze, 
+tét, működési mechanizmusát. Alkulcs készlete , vagy jobb 
+híján egy darab drót , segítségével csodákra képes. A sikeres 
+zárnyitás esélyét növelheti a kiváló minőségű felszerelés és 
+csökkenti a zár bonyolultsága, összetettsége, hozzáférhetet, 
+lansége, netán egyedisége. 
+Titkosajtó-keresés 
+Várakba, kastélyokba, de olykor még városi házakba is építe, 
+nek olyan titkos folyosókat, melyek létéró1, bejáratáról a ház 
+urának és bizalmasainak kivételével senki nem tud. A lakók 
+ha bajba kerülnek, ezeken észrevétlenül elhagyhatják az épü~ 
+letet, vagy meghúzódhatnak a rejtett hyelyiségekben. Gyak, 
+ran efféle folyosók vezetnek a kincseskamrákba, a titkos la, 
+boratóriumokba vagy földalatti tanácskozó termekbe. 
+Ugyanide soroljuk még a falakban nyíló titkos kamrákat és 
+fülkéket, a padlódeszkák alatt vagy a mennyezetet borító ro, 
+zetták mögött meghúzódó rekeszeket. 
+A Titkosajtó keresésben járatos karakternek esélye van 
+arra, hogy meglelje ezen rejtett helyiségek bejáratát, ha létü, 
+ket sejti, de pontos helyükró1 nem tud. A képesség gyakorlá, 
+sához a karakternek a legtöbb esetben be kell jelentenie ku, 
+tatási szándékát. Ilyenkor a falat kopogtatja döngő szakaszo, 
+kat keresve, rések, repedések után vizsgálódik. A Képzettség, 
+próbát pozitívan befolyásolja, ha a karakter megmondja pon, 
+tosan mit, és hol keres. Minél pontosabb meghatározást ad a 
+keresés mikéntjéró1, annál nagyobb az esélye a sikerre, per, 
+sze csak abban az esetben, ha a titkos bejárat valóban a gya, 
+núnak megfelelő természetű. A siker esélye ~nnál kissebb, 
+minél jobban álcázták a titkosajtót, minél szokatlanabb mó, 
+don helyezték el. 
+Bizonyos esetekben akkor is adódik lehetőség egy 
+titkosajtó észlelésére, ha a karakter nem jelenti be kutatási 
+szándékát. Ilyenkor persze nem magát az ajtót leli meg, csak 
+a gyanúja támad fel a léte feló1. Például indokolatlan huzatot 
+érezhet, szemet szúrhatnak neki bizonyos jellegzetes építésze, 
+ti megoldások. Ha az adott helyiségben ilyesmi előfordul, a 
+KM titokban Képzettségpróbát dob a karakter helyett, s csak 
+akkor szól neki, ha a próba sikeres. Ilyen esetekben még a ka, 
+rakternek is dobnia kell, ha meg is kívánja lelni az ajtót , ám 
+dobására + 25%,ot kap. 
+A titkosajtó felfedezése nem egyenlő kinyitásával. Olykor 
+egyszerű retesz, zár, netán ravasz mechanizmus gondoskodik 
+a túloldali helyiség biztonságáról. Ha a zár nem nyitható né, 
+hány egyszerű mozdulattal, ha a karakter nem rendelkezik a 
+beleillő kulccsal, vagy a mechanizmus működtetéséhez szük, 
+séges ismerettel, csak a Zárnyitás képzettség segíthet , vagy a 
+fejsze. 
+~ 
+~ ...................................... . 
+~ 
+
+=== PDF page 113 ===
+)ÁTÉKOSOK 
+KÉZIKÖNYVE 
+A Pszi 
+Mágiaellenállás 
+Pyarroni módszer 
+Slan út 
+Kyr metódus 
+PSZI 
+Jl
+gondolkodó dme hatalmas 
+erőforrásokat rejt, melyek fel, 
+használásával uralmunk alá 
+hajthatjuk testünk minden porcikáját, 
+befolyásolhatjuk az anyagi világ törvé, 
+nyeit, vagy akár mások tudatát. Ezt az 
+erőt Pszinek ('P) nevezzük. A Pszi olyan 
+rejtett tudás, mely minden élő, gondol, 
+kodó elmében ott rejlik, s olykor még 
+teljes képzetlenség esetén is megnyilvá, 
+nul. A képzés folyamán a 'P ,alkalmazó 
+feltérképezi ezeket az erőforrásokat, szi, 
+gorú diszciplínákkal akaratát gyémánt, 
+keménységűre csiszolja, tudatalatti fo, 
+lyamatait átrendezi és tudata irányítása 
+alá rendeli. A 'P ,alkalmazó agya úgy vi, 
+szonyul egy képzetlen tudatához, mint 
+egy csiszolt drágakő a hegymélybó1 ki, 
+bányászotthoz. 
+A Pszi tudományát két egymástól 
+teljesen független kaszt mesterei dol, 
+gozták ki. 
+A harcművészek által megteremtet 
+Slan~út a maga nemében a 'P ,alka, 
+lmazás legmagasabb fokát jelenti , dis, 
+zciplínái segítségével a harcművész 
+olyan hatalmat nyer saját teste és tuda, 
+ta felett, mely már,már természetfelet, 
+tinek tűnik. 
+•• 
+0 
+szpontosított, ki, 
+terjesztette testére 
+tudatának hatalmát. 
+A hangok tompábbá, a fé, 
+nyek vakítóbbá váltak ahogy 
+megiramodott; az éló'holt ki, 
+nyúlt érte, mozdulata azon, 
+ban reménytelenül lassú volt, 
+akár a mézbe ragadt rovar 
+rándulása ... 
+, részlet Wayne Chapman 
+Csepp és tenger e. regényébó1 
+{qJ) 
+A kyr mágusok a mágia alapelem, 
+ének tekintették a 'P ,energiákat, kuta, 
+tásaikat ezirányban tökéletesítették, s 
+elérték, hogy a 'P ,erőt elméjük hatal, 
+mával közvetlenül Manává alakíthat, 
+ták. A 'P alkalmazásának ezt a módját 
+Kyr metódusnak nevezik, s kizárólag a 
+mágusoknak oktatják. 
+Pyarronban dolgozták ki a Pszi min, 
+denki számára megtanulható fajtáját, 
+mely segítségével önmagunk és mások 
+felet is korlátozott befolyásra tehetünk 
+szert. A Pyarroni módszer nem alkal, 
+mas sem Mana előállítására, és nem is 
+olyan hatékony, mint a Slan út , ám 
+nagy előnye, hogy rövidebb idő alatt 
+elsajátítható, mint az eló'bbi kettő, és 
+gyakorlatilag bármelyik kaszt számára 
+elérhető. 
+PYARRONI MÓDSZER 
+- ALAPFOK 
+S 
+egíts~g~~I saját testünk és 
+akaratunk felett nyerhetünk 
+hatalmat, elménk köré asztrá, 
+lis, vagy mentális pajzsokat építhetünk. 
+••••••••••••••••••••••••••••••••••••••• 
+. „ .................................... . 
+
+=== PDF page 114 ===
+JÁTÉKOSOK 
+Az alapfok alkalmazói az Általános Diszciplínák 
+t degyikét 
+végrehajhatják, ám csak saját magukon. Elsajátítá„ához 
+gendő két-három év, noha szükséges, hogy a tanuló nwlli-
+genciája, Asztrálja és Akaratereje legalább 12 legyet\ 
+PYARRONI MÓDSZER- MESTERFOK 
+11
+'1'-alkalmazás azon foka, mely megengedi, hogy má-
+sok tudatára vagy fizikumára is hatást gyakoroljunk. 
+A mesterfok ismerői képesek más 'I' -pajzsokat le-
+bontani, és az Általános Diszciplínákat nem csak magukon, 
+hanem másokon is végrehajthatják. Igaz, ilyenkor a befolyá-
+solni kívánt személy ME dobásra jogosult - asztrálisra vagy 
+mentálisra, attól függően, hogy a diszciplína a tudat melyik 
+síkját támadja. 
+A mestrefok eléréséhez szükséges az alapfok ismerete, jó 
+néhány év gyakorlat, és rövid képzés egy 'I' -mestertől íleg-
+alább S.szintű mesterfokú '!'-használó). 
+KYRMETÓDUS 
+m 
+agában foglalja a Pyarroni módszer teljes - alap-
+és mesterfokú - tudását, diszciplínái segítségével 
+az elme hatékonyabban védhető és támadható, 
+mint a Pyarroni módszerrel. Tökéletesebb uralmat ad mások 
+tudata és teste felett, mint bármely egyéb 'I' -alkalmazási el-
+járás. Legnagyobb erénye mégis az, hogy képes a 'I' -pontokat 
+Mana-pontokká alakítani. A Kyr metódus diszciplínáit (Kyr 
+Diszciplínák) csakis varázslóknak és mágusoknak oktatják. E 
+tudást gondosan őrzik, így más kaszt tagjai soha nem juthat-
+nak hozzá. Megértéséhez és elsajátításához legkevesebb hat, 
+kemény tanulással töltött esztendő szükséges, meg olyan ké-
+zikönyvek, melyek ritka példányait biztos helyen rejtegetik. 
+A pyarroni Fehér Páholy és az északi Doran beavatottjai szá-
+zadok óta dolgoznak újabbnál újabb diszciplínákon, ám eze-
+ket csak a felsőkasztba tartozó mágusok számára teszik elér-
+hetővé. 
+SLAN-ÚT 
+n 
+iatt~i sz~ttzd~~k évezredes tapasztalatát, munká-
+ját foglalták egységbe a Slan-út megalkotásakor. E 'I' -
+alkalmazás használói - kizárólag harc- és kardművé­
+szek - a testük és tudatuk feletti tökéletes uralmat valósítot-
+ták meg. Képesek végrehajtani bármit, ami a Pyarroni mód-
+szer része, ám saját diszciplínáikat (kevés kivétellel) csak ön-
+magukra tudják vonatkoztatni. A Slan-út segítségével felépí-
+tett Statikus 'I' -pajzs lebonthatatlan, csak megalkotója tudja 
+megszüntetni. A Slan Diszciplínák megalkotása során nem 
+törekedtek a mások felett gyakorolt ellenőrzés módszereinek 
+tökéletesítésére - a Kyr metódus e téren felülmúlja-, s ener-
+giáit sem képes Manává alakítani. Mindettó1 függetlenül az 
+elme és az akarat csiszoltságának magasiskolája, az önkont-
+roll legtökéletesebb formája. Elsajátításához tíz-tizenkét esz-
+KÉZIKÖNYVE 
+tendő zük ges, és egy Slan tanár útmutatásai. Egyszerű 
+harc- va 
+ardművész - aki nem tanítómester - képtelen to-
+vábbadni tudását, bármekkora hatalma legyen is a 'I' -
+ener · ák felett. 
+PSZI-PONT 
+11 
+Pszi-~n~ttgia mennyiségét Pszi-pontokban ('I'p) 
+mérik. Azt, hogy egy 'I' -alkalmazó mennyi 'I'p-ot 
+képes elméje pihentetése nélkül egyszerre vagy fo, 
+lyamatosan felhasználni, maximális 'I'p-jainak (max.'I'p) szá-
+ma mutatja meg. A max. 'I'p tehát nem más, mint egy telje-
+sen kipihent és feltöltődött tudat rendelkezésére álló Pszi 
+energiák mennyisége. A maximális 'I'p-ok száma a 'I' -alka-
+lmazás szintjétől és módjától függ. Minél magasabb szintű 'I', 
+alkalmazó valaki, annál több maximális 'I'p-tal rendelkezhet. 
+Az aktuális 'J'p„ok száma arról tanúskodik, hogy a Pszi-
+alkalmazó max. 'I'p-jaiból mennyit tud még felhasználni a 
+következő pihenésig. Bármiféle Pszi-tevékenység , 'I' -pajzs 
+emelése, Dinamikus 'I' -pajzs fenntartása, 'I' -ostrom folytatá-
+sa, vagy akármely diszciplína alkalmazása - adott mennyisé-
+gű 'I' -energiát emészt fel, azaz bizonyos mennyiségű 'I'p-ba 
+kerül. 
+Egy teljesen pihent elme Pszi hatásfoka maximumán áll. 
+Ha azonban elkezdi használni tudata energiáit, ezek lassan el-
+fogynak. Amikor már minden 'I'p-ját felhasználta, a 'I' -alka-
+lmazónak pihennie kell, hogy elméje regenerálódjon, és ismét 
+energiákkal teljen meg. 
+••••••••••••••••••••••••••••••••••••••• 115 ••••••••••••••••••••••••••••••••••••••• 
+
+=== PDF page 115 ===
+JÁTÉKOSOK '1 e 
+KÉZIKÖNYVE 
+Leegyszerűsítve: képzeljük el az emberi agyat kehelynek. 
+A benne tárolt bor a Pszi. Azt, hogy összesen mennyi bor 
+('l'p) fér a kehelybe, a max. 'Pp-ok száma mutatj meg. At 
+aktuális 'Pp-ok száma pedig arról tájékoztat, ho 
+éppeh 
+mennyi bor ('Pp) van a kehelyben. 
+Az alábbi táblázat arról tudósít, hogy különböző helyze-
+tekben'hogyan regenerálódik az elme. 
+Pszi I. táblázat 
+Tevékenység 
+1 'l'p visszanyeréséhez 
+szük&éges idő 
+Meditáció 
+2 perc 
+Alvás 
+10 perc 
+Pihenés (üldögélés) 
+20 perc 
+Könnyű séta, léptetés lovon 
+30 perc 
+Utazás, ~tés va 
+v~_a~~~----
+60 perc ~-----~ 
+Eró1tetett menet, fárasztó utazás során 'Pp nem nyerhető 
+vissza. 
+Teljes pihenés után „ ez csak olyan alvás segítségével 
+érhető el, ami természetes ébredéssel ér véget „ a 'P -alkalma-
+zó agyi energiái maximumára kerül (azaz efféle alvás után 
+max. 'l'p-ja lesz). 
+'l'-ALKALMAZÁS SZINTJE 
+11 
+'l'-alkalmazás szintje arra utal, hogy az alkalmazó 
+mennyire gyakorlott, milyen mértékben ura energi-
+áinak. Minél tovább használja tudata különleges ké-
+pességeit, annál könnyebben sikerül ez a továbbiakban, s an-
+nál több 'l'p-t képes használni. A tanulás és gyakorlás persze 
+nem hoz azonnal eredményt „ időt kívánó feladat. 
+A 'I' -alkalmazás szintje egyidó'ben növekszik a karakter 
+Tapasztalati Szintjével. Ez tehát azt jelenti, hogy amint valaki 
+a következő Tapasztalati Szintre lép, magasabb 'I' -alkalmazói 
+szintre is jut, feltéve, ha már megismerkedett ezzel a tudo-
+mánnyal. 
+Amennyiben valaki nem rendelkezik 'J',képzettséggel 
+első Tapasztalati Szinten, akkor hiába lesz második szintű, 
+nem képes automatikusan 'P ,t használni. 
+PÉLDÁUL: 
+Egy első Tapasztalati Szintű karakter, ha rendelkezik 'P 
+képzettséggel „ akár, mert erre áldozta Képzettség Pontjait, 
+akár, mert kasztja miatt automatikusan megkapta ezt a kép, 
+zettséget , amikor második Tapasztalati Szintre lép, második 
+szintű 'I' ,alkalmazó lesz. Ha csak negyedik Tapasztalati Szin, 
+ten tudta megszerezni a 'I' képzettséget, akkor negyedik Ta, 
+pasztalati Szinten lesz első szintű 'I' ,alkalmazó, ötödik Tapasz, 
+talati Szinten második szintű 'I' ,alkalmazó, és így tovább. 
+Az elóobi kelyhes párhuzamot folytatva kiviláglik, hogy a 
+'I' ,alkalmazás szintje nem más, mint a kehely nagysága. Mi, 
+nél magasabb szintű 'I' ,alkalmazó valaki, annál több 'J'p,t 
+tud tárolni, azaz annál nagyobb lesz a kehely. Az, hogy a kely, 
+het mikor kapja meg, attól függ, hogy mikor szerzi meg a 'l' 
+képzettséget. 
+A 1 .táb1ázat megmutatja, hogy miképpen alakul szinten, 
+léént a w,alkalmazók 'J'p,jainak száma. 
+Pszi II. táblázat 
+'I' -alkalmazás módja 
+'l'pontok 
+Minden 
+1.szinten további szinten 
+Pyarroni inódszer 
+-alapfok 
+41 
++3 
+-mesterfok 
+5 
++4 
+Slan,út 
+6 
++5 
+Kyrmet6dus 
+7 
++6 
+FIGYELEM! 
+Az a karakter aki a Pyarroni módszer alapfokán kezdte a 'I', 
+alkalmazást, és később szerezte meg a mesterfokot, nem ve, 
+szíti el addig összegyűjtött 'J'p,jait. A különbség csupán 
+annyi, hogy miután mesterfokú 'I' -alkalmazó lett, a táblázat 
+idevonatkozó szabályai_ szerint kapja további szintlépésekor a 
+'J'p,jait. 
+MÁGIAELLENÁLLÁS 
+m 
+int máat a fentiekből kiviláglott a mágia alapkö, 
+ve a Y. Ebből adódik, hogy az elmére irányuló 
+mágikus támadások ellen Pszi-energiáink segít-
+ségével védekezhetünk. 
+Mielőtt azonban az elme védelmének tudatos felépítését 
+bemutatnánk, szót kell ejteni, az úgynevezett Tudatalatti 
+Mágiaellenállásról. 
+Minden értelmes, gondolkodó vagy lélekkel bíró lény ké, 
+pes arra, hogy tudatalatti ellenállást fejtsen ki a rá irányuló 
+mágikus és Pszi hatásokkal szemben. Ezt nevezzük Mágiael-
+lenállásnak (ME). A Tudatalatti ME (TME), a megtáma, 
+dott személy pillanatnyi állapotától függetlenül is megszün, 
+tetheti a mágikus vagy 'l' támadást. Fontos tehát megjegyez, 
+ni, hogy a ME tudalatti része minden esetben működik, ak, 
+kor is ha valaki nem számít a támadásra, vagy alszik, sőt 
+olyankor is, ha eszméletlen. 
+Az elmét ért támadásoknak kétféle módja lehet, így a 
+TME is két részre bomlik. 
+Azokat a praktikákat, melyek a befolyásolni kívánt sze, 
+mély , indulatait, érzelmeit próbálják megváltoztatni, asztrális 
+támadásnak nevezzük. Az efféle hatásokat, csak erős érzelmi 
+megállapodottság, és gondosan kordában tartott indulatvilág 
+képes legyőzni, ezért az asztrális támadások elleni TME az 
+Asztrál tíz feletti része. 
+Azaz, ha valakit asztrális támadás ér, s elméjét nem védi 
+semmiféle felépített védőpajzs vagy amulett, egyedül a 
+TME-re támaszkodhat. Egy ilyen támadás sikerességét úgy 
+határozzuk meg, hogy a megtámadott dob a KJO,zel. A do, 
+bás eredményéhez hozzáadja a mágia vagy a 'I' -diszciplína 
+erősségét. Ha az eredmény kevesebb (egyenlő), mint a meg-
+támadott Asztráljának tíz feletti része, akkor a támadás si, 
+••••••••••••••••••••••••••••••••••••••• ' 1f6 ••••••••••••••• · •••••••••••••••••••••••• 
+
+=== PDF page 116 ===
+JÁTÉKOSOK ~- e 
+KÉZIKÖNYVE 
+kertelen, vagyis a TME működött. Ha az eredmény nagyobb, 
+mint az Asztrál tíz feletti része, akkor az asztrál támadás si-
+keresnek bizonyult, s az áldozat nem képes legyozni a kivál„ 
+tott hatást. 
+A közvetlenül az intellektust célzó, ártó módszereket 
+mentális támadásoknak hívjuk. Ezek általában arra irányul„ 
+nak, hogy átvegyék az áldozat elméje fölötti uralmat, saját 
+akaratával ellentétes dologok végrehajtására bírják, netán 
+tudatába idegen gondlatokat ültessenek, melyek kényszere 
+alatt nem képes reálisan, saját értékrendszere szerint dönte„ 
+ni. Ezeket az erőket csupán az elme Akaratereje képes 
+legyőzni. Kézenfekvő, hogy a mentális támadásokkal szembe„ 
+ni TME az Akaraterő tíz feletti része. 
+Egy védtelenül hagyott elme mentális támadások elleni 
+tudatalatti védelmét ugyanúgy számoljuk ki, mint az asztrális 
+TME„t, azzal a különbséggel, hogy az Asztrál helyett az 
+Akaraterő tíz feletti részét vesszük alapul. Ha a dobás (Kl 0) 
+és a hatás erősségének összeadott eredménye kisebb (egyen„ 
+lő), mint az Akaraterőbó1 számított TME, akkor az áldozat 
+sikeresen ellenállt. Ha nem ... az istenek legyenek hozzá Íf„ 
+galmasak! 
+Aki csak teheti megpróbálja felvértezni elméjét eféle me„ 
+rényletek ellen. Erre két különböző mód nyílik. Tudatát övez„ 
+heti '!'„pajzsokkal „ ennek módozatait az alább következő 
+Általános Diszciplínáknál tárgyaljuk „, vagy használhat kü„ 
+lönféle Óvó Amuletteket (lásd Amulettek). E módszerek rá„ 
+épülnek a TME„ra (hozzáadódnak), s olykor teljesen lehetet„ 
+lenné teszik a tudat befolyásolását. Nem szabad azonban va„ 
+kon megbíznunk ezekben sem, hiszen egy kellően felerősített 
+mágia, vagy 'I' „diszciplína keresztülhatolhat a legerősebb paj„ 
+zson, a legfortélyosabban elkészített amuletten is. 
+A fentiek fényében elmondhatjuk, hogy az elme teljes vé„ 
+delmét, azaz a valós ME„t a következő módon számíthatjuk ki. 
+Asztrális támadások esetén: 
+A karakter Asztrál képességének tíz feletti részéhez hozzáad„ 
+juk a Statikus Asztrál Pajzs erősségét (lásd Általános Diszciplí„ 
+nák, Statikus Pajzs), valamint a Dinamikus Asztrál Pajzs 
+erősségét (lásd Általános Diszciplínák, Dinamikus Pajzs) és az 
+Asztrált Óvó Amulettek erősségét (lásd Amulettek). Az így ka„ 
+pott szám lesz a Teljes Asztrális ME. 
+Egy asztrális támadás sikerességét ugyanúgy kapjuk meg, 
+mint ahogyan a TME„nél leírtuk: a megtámadott dob KlO„ 
+zel, a dobás eredményéhez hozzáadja a támadás erősségét, és 
+ha _az így kapott eredmény kisebb (egyenlő), mint a megtá„ 
+madott Teljes Asztrális ME„a, akkor a támadás sikertelen. 
+Mentális támadások esetén: 
+A karakter az Akaraterő tíz feletti részéhez hozzáadjuk a 
+Statikus Mentál Pajzs (lásd Általános Diszciplínák, Statikus 
+Pajzs), valamint a Dinamikus Mentál Pajzs erősségét (lásd Ál„ 
+talános Diszciplínák, Dinamikus Pajzs), és a Mentált Óvó Amu„ 
+lettek erősségét (lásd Amulettek). Az így kapott érték a Teljes 
+Mentális ME. 
+Egy mentális támadás sikerességét a fentiek szerint hatá„ 
+rozzuk meg, csupán a Teljes Mentális ME„t kell alapul ven„ 
+nünk . 
+••••••••••••••••••••••••••••••••••••••• 
+FIGYELEM! 
+Tudatalatti Mágiellenállást csak akkor kell dobnia a megtá„ 
+madottnak, ha semmilyen tudatos védelem (Statikus, Dina„ 
+mikus Pajzs vagy Amulett) nem óvja. Minden egyéb esetben 
+ki kell számolni a működő teljes ME„t, és azt kell figyelembe 
+venni. 
+Olykor az asztrális vagy mentális hatások jószándékkal 
+próbálják befolyásolni az elmét. Hiába tudja ezt a karakter, s 
+hiába győzték meg arról, hogy a mágia vagy 'I' „diszciplína se„ 
+gít rajta, a TME mégis működik. Tehát még a karakter teljes 
+· beleegyezése esetén sem bizonyos, hogy a hatás létrejön. Rá„ 
+adásul működik a Statikus Pajzs is (amennyiben van), hacsak 
+a leírtak szerint (lásd Általános Diszciplínák, Statikus Pajzs) 
+előtte meg nem szüntették. 
+A karakter csak annyiban segítheti a számára kedvezőnek 
+ítélt mágia vagy 'I' „diszciplína hatásának létrejöttét, hogy Di„ 
+namikus Pajzsát 0 erősségűre csökkenti. 
+Mindazon varázslatok és 'I' „diszciplínák, melyeket a má„ 
+giahasználó vagy 'I' „alkalmazó önmagán akar végrehajtani, a 
+tudaton belül jönnek létre, így ezek ellen sem Tudatalatti 
+Mágiallenállást, sem Teljes Mágiaellenállást nem ~L:ii J obni: 
+a kívánt eredmény mindenképpen megszületik. 
+DISZCIPLÍNÁK 
+11 
+diszciplínák azok a gyakorlatok, módszerek, ame„ 
+lyek segítségével a 'I' „alkalmazó energiát használni 
+tudja. Minden iskola különböző formákat talált ki 
+egy„egy általuk kívánatosnak vélt hatás elérésére. A diszcip„ 
+línák nem igényelnek mást, mint nagyfokú koncentrációt (ez 
+mindegyikre igaz), a különbség annyi, hogy mire, milyen mó„ 
+don koncentrál a 'I' „alkalmazó. Egy Telekinézis alkalmazásá„ 
+nál, a karakter kiüríti elméjét, felvillantja benne az emelkedő 
+tárgy képét. Ez a legalapvetó'bb fajtája a 'I' „koncentrációnak. 
+A Slan„út és a Kyr metódus alkalmazói gyakran bonyolult 
+mintázatokat vagy szimbólumokat idéznek fel „ zavaró gon„ 
+dolatoktól megtisztított.„ tudatukban. A 'J'„alkalmazás szín„ 
+tjétől függ hogy ezt milyen gyorsan és hatékonyan képesek 
+végrehajtani. Minél kevesebb energiát emészt fel a koncent„ 
+ráció, annál hatékonyabban képesek a maradék energiát a 
+diszciplínák végrehajtására fordítani, így érthető, hogy több 
+'J'p„öt tudnak elméjük rendelkezésére bocsátani. Ezért lesz 
+szintenként (ahogy gyakorlottságuk növekszik) több 'J'p„juk. 
+A diszciplínákhoz olykor nem elég a pillanatnyi koncent„ 
+ráció, néha a tökéletes tudatállapot megteremtéséhez medi„ 
+tálni kell. A meditációhoz azonban nem szükséges mozdulat„ 
+lanul a földre kuporodni, elég a tudatosságot igénylő cseleke„ 
+detekkel felhagyni. Az igazi meditációs pózok „ iskolánként 
+és mesterenként különböznek „ persze tökéletesebb ered„ 
+ményt hoznak, de nem kötelezőek. Meditációs állapotban 
+csak egy legalább S.szintű harc„ vagy kardművész képes har„ 
+colni, ám ő is csak Védekező Harcot folytathat. 
+A harc„ és kardművészek a 11. szintet elérve már képesek 
+meditáció közben harcolni, ám ez a Chi„harcra (lásd Slan„út, 
+Chi„harc) nem vonatkozik. Más kasztok tagjai meditáció köz„ 
+ben semmiféle harcot nem folytathatnak. 
+
+=== PDF page 117 ===
+Több Pszi,diszciplína egyidejű alkalmazása (;'.iak al<kor le-
+hetséges, ha az elsőként használt fenntartása nem igényel R zi 
+használatot kizáró erős koncentrációt. Pl.: Belső id&en al, 
+kalmazható más diszciplína, míg Chi,harc közben em. fn 
+meg kell jegyeznünk, hogy ennek a két diszciplínának az e , 
+idejű alkalmazásá:i;a semmilyen kombinációban és semmiféle 
+körülmények között nincs mód. 
+Minden Pszi,diszciplína hatékony alkalmazásához 
+(amennyiben az egy másik lényre hat, nem magára a Pszi, 
+alkalmazóra) tisztán látnia kell az áldozatott (arcvonások 
+felismerhetőek legyenek). Ez a gyakorlatban szabad szemmel, 
+segédeszközök nélkül, jó látási viszonyok és nappali megvilá, 
+gítás mellett 100 lábnyit jelent. 
+ÁLTALÁNOS DISZCIPLÍNÁK 
+11 
+z 1Íltalános Diszciplínákat minden 'I' ,alkalmazó 
+képes használni, függetlenül attól, hogy az alkalma, 
+zás mely módjában járatos. A Pyarroni módszer alap, 
+fokú alkaimazói, bármely szinten legyenek is, diszciplínákat 
+csak saját magukon képesek végrehajtani. A mesterfokot el, 
+érve a diszciplínák hatását másokra is kiterjeszthetik. Igaz, 
+ilyenkor a befolyásolni kívánt személy, a Mágiaellenállásról 
+szóló részben leírt i:nód szerint ME dobásra jogosult. A Slan, 
+út és Kyr metódus használói az Általános Diszciplínák kap, 
+csán már az első szinten is mesterfokú alkalmazónak minő, 
+sülnek. 
+Azon diszciplínák, melyek neve után nincs ~árójelben egy 
+újabb név, csak alapfokon használhatók. 
+A diszcipl(na neve mellett feltüntetett zárójeles név, a dísz, 
+ciplína mesterfokon történő felhasználására vonatkozik, az, 
+az, ha hatását másokra akarjuk kiterjeszteni, még mire hasz, 
+nálható. 
+PÉLDÁUL: 
+A Fájdalomcsillapítás alapfokon csak önmagunkra műkö, 
+dik. (Működne elméletben· a Kínokozás is, de valószínűtlen, 
+hogy valaki ilyesmire használná a diszciplínát.) Mesterfokon 
+már nem csak a saját fp,inket tudjuk visszaadni, de bárme, 
+lyik társunkon is segíthetünk. Mi több a Kínokozással ártha, 
+tunk ellenfelünknek, azaz mesterfokon a diszciplína bárkin 
+oda,vissza végrehajtható. 
+A 'l'p azt mutatja, hogy a diszciplína végre hajtása meny, 
+nyí 'J'p,ba kerül. (Ennyit kell levonni az aktuális 'J'p,okból.) 
+Ha nincs meghatározva, úgy a diszciplína nem fogyaszt 'J'p, 
+ot, ám legalább 1 'l'p,tal kell hozzá rendelkezni. 
+Az .ME arról tá)éko2tat, hogy a diszciplína a tudat mely ré, 
+szére hat, tehát asztrális vagy mentális támadásnak minősül,e. 
+A meditáció ideje megmondja, hogy a diszciplína végre, 
+hajtása mennyi idóoe kerül. 
+Az Időtartam arról árulkodik, hogy a diszciplína hatása 
+mennyi ideig tart. Amennyiben nincs meghatározott időtar, 
+tam, úgy a diszciplína a pillanatnyi hatás kifejtése után meg, 
+szűnik működni. 
+Az Erősség azt mutatja, hogy a diszciplína milyen erős 
+••••••••••••••••••••••••••••••••••••••• 
+KÉZIKÖNYVE 
+mlékfelidézés (Emlékek Felidézése) 
+A meditáció ideje: 2 kör 
+Időtartama: 3 év vagy 10 kör, és lásd a leírást! 
+A diszciplína helyszínek, szövegek, vagy események meg, 
+jegyzésében, illetve régi , egyébként már elfelejtett , esemé, 
+nyek felidézésében nyújt segítséget. Ha a 'I' ,alkalmazó szeret, 
+ne valamit úgy az elméjébe vésni, hogy arra késóob , minden 
+részletében , visszaemlékezzen, akkor rövid (két körig tartó) 
+meditációval mintegy beleégeti a kívánt dolgot az agyába. Ezek 
+után az emlék még három éven át ti;'>kéletesen tisztán él ben, 
+ne, s minden különösebb erőfeszítés (vagy diszciplína alkalma, 
+zása) nélkül felidézhető. Az emlék három év után ugyanúgy 
+halványodni kezd, mint egy nem efféle beégetésel szerzett kép. 
+Ha a 'I' ,alkalmazó olyan emléket kíván felidézni, melyet 
+nem a fent említett módon tárol az agyában, akkor a diszcip, 
+lína használatásval erre is mód nyílik. Az így felidézett emlék 
+10 körig tökéletesen éles lesz, ám utána semmivé válik, s csak 
+a diszciplína újbóli alkalmazásával kerül elő megint. 
+Mesterfokú alkalmazás esetén nem csak saját magunkban 
+idézhetünk fel emléket, hanem másokban is. 
+Ébredés (Ébresztés) 
+'l'p: , 
+ME: mentál 
+A meditáció ideje: 1 kör 
+Időtartam: , 
+A 'I' ,alkalmazó képes beprogramozni magát arra, hogy egy 
+meghatározott idóoen minden külső befolyásolás nélkül feléb, 
+redjen. Az önszugesztiónak vagy arra kell irányulnia, hogy 
+mennyi idő mulva szakadjon ki az álomból, vagy egy külső jel, 
+hez kell kapcsolódnia. Mivel az érzékszervek az álom alatt is 
+működnek, noha normális esetben a gyenge ingereket a tu, 
+dat figyelmenkívül hagyja , a diszciplína alkalmazója olyasfé, 
+le jeleket határozhat meg ébredési pontnak, mint hajnali ka, 
+kasszó, az Éjközép teljes ,sötétje, lova ideges horakantása, stb. 
+A diszciplína nem mú1cödik, ha a karakter elájult, kábító, 
+szeres álomba merült, vagy valamely mentális támads hatá, 
+sára kapcsolt ki tudata. Az alkalmazáshoz legalább egy 'J'p, 
+tal kell rendelkeznie . . 
+Érzékélesítés (Tompítás és Megzavarás) 
+'l'p: érzékszervenként 2 'Pp 
+ME: mentál 
+A meditáció ideje: 2 kör 
+Időtartama: 1 kör 
+A Pszi,energiák lehetőséget nyújtanak arra, hogy felhasz, 
+nálásukkal az alapvető öt érzékszerv hatásfokát növeljük 
+vagy csökkentsük. A diszciplína arra ad módot, hogy a látást, 
+
+=== PDF page 118 ===
+JÁTÉKOSOK ~-
+KÉZIKÖNYVE 
+hallást, szaglást, tapintást és ízlelést akaratunk szerin béfo„ 
+lyásoljuk. 
+A Látás befolyásolásával nemcsak élesíthetjük a szemet 
+(esetleg elhomályosíthatjuk), hanem lehetőségünk nyílik a 
+Megzavarására is. A látás élesítésével maximum megkétszere.-
+ződik a látótávolság, tompításával azonban vakság is okozható. 
+Megzavarás esetén a szem nem tud kellőképpen fókuszál, 
+ni, így felléphet kettőslátás, esetleg a távolság, vagy egy kö, 
+zeledő tárgy, lény sebességének felmérése okozhat problémát. 
+A valóságtól való eltérés 10% és 60% között mozoghat. (Ki, 
+számítása: 1K6, majd az eredmény megszorzandó 10,zel.) 
+A Hallás élesítése kétszeresére növeli a hallótávolságot, 
+míg tompítása akár süketséghez is vezethet. 
+Megzavarásakor a hangok távolságát, esetleg irányát véti 
+el a befolyásolt lény. Az eltrés és a kiszámítás módja megegye, 
+zik a Látás befolyásolásnál leírtakkal. 
+A Szaglás, a Tapintás és az Ízlelés felerősítése megkétszere, 
+zi ezen érzékszervek hatásfokát, tompításuk az érzékszervek 
+teljes kikapcsolásával is járhat. Megzavarásukkal elérhetjük, 
+hogy más szag, anyagi minőség (esetleg hőmérséklet), vagy íz 
+érződjék . A Megzavarás mértékének eldöntése a Kalandmes, 
+ter feladata. 
+FIGYELEM! 
+A diszciplína nem·alkamas arra, hogy bármely érzékszerv 
+befolyásolásával valós kárt okozzon. Pl.: Nem lehet a 
+hőérzetet annyira fokozni, ami már Fp vesztéssel jár. 
+A diszciplína végrehajtása érzékszervenként 2 'Pp,ba ke, 
+rül, és hatását 1 körig fejti ki. 4 'Pp,ért két érzékszervet lehet 
+befolyásolni 1 körig, vagy egy érzékszervet 2 körig, stb. 
+Fájdalomcsillapítás (Kínokozás) 
+'l'p: 1 'Pp/Fp 
+ME: asztrál 
+A meditáció ideje: 1 kör 
+Időtartam: végleges 
+A diszciplína segítségével az agy fájdalomközpontjára gya, 
+korolhatunk hatást. Lehetőség nyílik fájdalomérzet tompít, 
+sára vagy keltésére. Miután nem gyógyít vagy okoz val(>di se, 
+besüléseket, az Életerő Pontokra nincs befolyással. Csak fp, 
+ot adhatunk vissza, vagy vehetünk el. A fp,ok teljes elvoná, 
+sával , 0 fp,ra kínzás , elérhetjük, hogy az áldozat elájuljon, 
+ám igazi seb ekkor sem keletkezik rajta. Maximum Fp fölé 
+sem önmag~nkat, sem másokat nem juttathatunk, bármeny, 
+nyi 'I'p,ot is áldoznánk rá. Asztráltesttel nem rendelkező lé, 
+nyekre a diszciplína hatástalan. 
+'l'p: 5 'Pp 
+ME:, 
+Hatodik Érzék 
+A meditáció ideje: 5 szegmens 
+Időtartam: 60 kör 
+A Hatodik Érzék az agy azon különleges képességeit hasz, 
+nálja fel, mely lehetővé teszi, hogy, az 
+idő szövedékén 
+••••••••••••••••••••••••••••••••••••••• 
+átszaiőd() eseménymozaikokat összerendezve mgérezze a 
+ki zeljövóben beköetkező történések irányát. 
+A diszciplína alkalmazója megérzésekhez juthat az időtar, 
+tam ata t. Ezek a megérzések semmiféle pontossággal nem 
+bírnak, csupán egy hamarosan bekövetkező eseményre figyel, 
+meztetik a karaktert. A megérzések lehetnek jó, vagy rossz 
+előjelűek. 
+Rossz előérzetet kelt minden olyan történés, mely ártal, 
+mas lehet, vagy gonosz szándékkal cselekedték. 
+Jó előérzethez juthat a diszciplína alkalmazója, ha az idő, 
+tartam alatt semmiféle baj nem történik vele, illetve' a rá vá, 
+ró események a javára válnak. 
+A Hatodik Érzéknek két alkalmazási módja lehetséges. Az 
+első esetben a karakter csupán általánosságban kíváncsi az 
+időtartam alatt bekövetkező események rá vonatkozó elő, 
+jelére. Ennek tipitkus példája, ha a karakter egy sötét barlang 
+szájánál megtorpanva alkalmazza a diszciplínát. Amennyiben 
+a barlangban ellenséges lények lapulnak, akik valamilyen 
+módon a biztonságára törnek a diszciplína időtartama alatt, 
+akkor a karaktert Rossz Előérzet fogja el. Nem tudja az okát, 
+sőt, a leselkedő veszedelem mértékét és pontos irányát sem 
+ismeri, csupán arról szerez tudomást, hogy valami vár rá. Be, 
+lépve a barlangba fokozódik Rossz Előérzete , ahogy az idő, 
+ben közeledik az ártalmas esemény,, majd a baj közvetlen 
+megtörténte előtt egy pillanattal megérzi irányát is. Ha ez egy 
+támadás volt, már nem érte a diszciplína alkalmazóját várat, 
+lanul, s ebben az esetben az ellenséges akció nem minősül 
+Meglepetésnek. 
+A Hatodik Érzék másik alkalmazási módja, ha a karakter 
+arra kíváncsi, hogy egy általa végrehajtott cselekmény milyen 
+hatással jár rá nézve. Ilyenkor a diszciplína alkalmzása után 
+megkérdezheti Kalandmesterét, hogy milyen előérzetei van, 
+nak, érdemes,e megtenni, amire készül. A válasz minden 
+esetben csak annyi, hogy jó vagy rossz érzések ébrednek ben, 
+ne. Indoklás sosincs. Jellemző helyzet, mikor a karakter egy 
+sírt kíván kibontani. Végrehajtja a diszciplínát, s megkérdezi 
+Kalandmesterét érzeteiró1. Ha a sírban éló'halott fekszik, a 
+karakternek Rossz Előérzetei támadnak. Ha a sírban semmi 
+sincs (legfeljebb egy porladó tetem), vagy a koporsó méllyén 
+kincs hever, a karakterben Jó Előérzetek ébrednek. 
+A diszciplína 5 'Pp,ért 60 körig (azaz 10 percig) engedi ef, 
+féle korlátozott módon a jövő titkainak felfedését. 10 'Pp fel, 
+használásával az időtartam megduplázódik, stb. 
+A Hatodik Érzék csak alapfokon működik, mesterfoka 
+nincs. 
+Képességjavítás (Rontás) 
+'l'p: lásd a leírást! 
+ME: asztrál 
+A meditáció ideje: 2 kör 
+Időtartam: 6 kör 
+Olykor , különleges vészhelyzetekben , az emberi fizikum 
+látszólag csodákra képes. Egy vadállattól megrémült gyermek 
+hihetetlen gyorsasággal képes felkúszni egy sudár, ág nélküli 
+fa törzsén, s miután a veszély elmult, nem csak azon csodál, 
+kozik, hogy miképp sikerült ez neki, hanem gyakorta lemász, 
+••••••••••••••••••••••••••••••••••••••• 
+
+=== PDF page 119 ===
+JÁTÉKO, SOK 
+ni sem tud magától. Ez jellemző példája a 'I' akaratlan meg-
+nyilvánulásának., hiszen ilyenkor az agy szabadí fe a testben 
+olyan erőforrásokat, melyek egyébként nem hozzafémetéíek. 
+A diszciplína ugyanezt képes végrehajtani, termes etesen 
+a tudat teljes irányítása alatt. A 'I' -erők segítségével a fizikai 
+képességek „ a Szépség kivételével „ megváltoztathatóak. A 
+változtatás idó1eges, s a diszciplína hatásának elmúltával visz-
+szatémek az eredeti értékek. Ugyanakkor lehetetlent nem 
+szabad elvárnunk a 'I' -tó1 sem: egyik képességünket sem 
+emelhetjük 20 fölé. 
+FIGYELEM! 
+Bármely képesség nullára „ vagy nulla alá „ csökkentése 
+azonnali halálhoz vezet. 
+A Képességjavítás az egyik legkedveltebb Általános Disz-
+ciplína. Gyakorta használják a Méregellenállás „ az Egészség 
+tíz feletti része „ megnövelésére. Valójában igen hasznos min-
+den olyan esetben, amikor Képességpróbára kényszerülünk, 
+hiszen az adott pillanatban valóban erősebbek, gyorsabbak, 
+egészségesebbek vagy ügyesebbek leszünk. Nem szabad elfe„ 
+lejteni, hogy ha harc folyamán megnöveljük Egészségünket „ 
+és egy csapást csak az így nyert Ép-okkal éltünk túl „, amint 
+a diszciplína hatása elmúlik, a nyert Ép-k is semmivé lesznek, 
+s ebbe akár bele is halhatunk. 
+Ha Rontással az ellenfelünk Egészségét annyira lecsök-
+kentettük, hogy ettó1 elveszíti maradék Ép-jait, akkor meg-
+hal. Hiába jönnek vissza az Ép-ok a diszciplína hatásának 
+megszűntével, a lélek nem költözik vissza a halott testbe. 
++/„ módosítás az eredeti 1 
+képességhez képest 
+szükséges 'l'P. -----
+2 
+3 
+4 
+5 
+6 
+8 
+16 
+32 
+A táblázatban feltüntetett 'I'p értékek a diszciplína alap 
+időtartamára (6 kör) vonatkoznak. A felhasznált 'l'p-ok 
+megduplázásával a hatás időtartamának megduplázását ér-
+hetjük el, megtriplázásával a hatás ideje megháromszorozó-
+dik, és így tovább. 
+Roham (Megfék~zés) 
+'l'p: 1 'I'p = + 2 TÉ 
+ME: asztrál 
+A meditáció ideje: 1 szegmens 
+Időtartam: 1 támadás 
+A diszciplína alkalmazója egyetlen csapásra összpontosít-
+va, teste és elméje minden tartalékát kiadja egy lerohanássz-
+erű támadásban. Az alkalmazó mély, torokhangú kiáltás kí-
+séretében hajtja végre a rohamot. 
+A diszciplína felemészti az alkalmazó összes aktuális 'I'p-
+ját, beleértve a Dinamikus Pajzsban tároltakat is. Ez azt je-
+lenti, hogy a támadó kénytelen felhasználni minden 'l'p-ot, 
+amivel rendelkezik, s az ebből nyert energia hozzáadódik a 
+Támadó Értékéhez. 1 'l'p + 2 TÉ-t jelent. (Azaz 5 'I'p felhasz-
+nálása esetén + 10 van a TÉ-n.) 
+Amennyiben az ellenfél nem ugyanazt a diszciplínát alkal-
+KÉZIKÖNYVE 
+mazza, a e .1eményezés automatikusan a Roham alkalmazó-
+ját illeti, kezdeményező dobás nélkül. 
+Megfé~ zés esetén a diszciplína végrehajtója ezzel a mód-
+szerr l .megakasztja, megzavarja támadóját, az elveszíti a kez-
+deményezést és a fenti módon kiszámított érték levonódik a 
+Támadó Értékébó1. 
+Ez a diszciplína olykor igen hasznos lehet, ám nem szabad 
+figyelmen kívül hagyni veszélyét: agyunk feltöltődéséig kép-
+telenek leszünk bármiféle 'I' -alkalmazásra és elménket is csak 
+a Statikus Pajzs védi. 
+'l'p: 2 \f'p/1 kg 
+ME:-
+Telekinézis 
+A meditáció ideje: 1 szegmens 
+Időtartam: 1 kör 
+Agyi energiáink segítségével kisebb tárgyakat mozgatha-
+tunk látótávolságon belül. Elfordíthatunk a zárban egy kul-
+csot, a tőlünk távol heverő fegyvert magunkhoz húzhatjuk, 
+vagy észrevétlenül elcsenhetünk az ékszerészműhelybó1 némi 
+drágaságot. A diszciplína alkalmazása taglejtéseket nem igé-
+nyel, pusztán a mozgatni kívánt tárgyon kell tartani tekinte-
+tünket. Amint elfordulunk, vagy valami eltakarja a tárgyat, 
+az mozdulatlann válik, esetleg „ ha a levegóoen volt „ lepoty-
+tyan. A Telekinézis csak lassú mozgatásra alkalmas „ egy fu„ 
+tó ember sebességénél nagyobbat nem érhetünk el vele „ 
+ezért ilyen módon fegyvert dobni, vagy sebesülést okozni 
+színte lehetetlen. 
+A diszciplína kifejti hatását mágikus tárgyakra is. 
+2 'I'p felhasználásával 1 kg súlyú tárgy mozgatható 1 kö-
+rig, 4 'I'p rááldozásával mozgathatunk 1 kg-os tárgyat 2 kö-
+rig, vagy 2 kg-ot 1 körig, stb. 
+Telepátia (Gondolatátvitel) 
+'l'p: lásd a leírást! 
+ME: mentál 
+A meditáció ideje: 3 kör 
+Időtartam: lásd a leírást! 
+Az egyik legősibb alkalmazás, más néven Gondolatátvitel. 
+Az Általános Diszciplínák azon kivétele, mely igazán csak 
+mesterfokon használható. Segítségével gondolati úton lehet 
+beszélgetni, vagy a \f'-alkalmazó által felidézett képeket kö-
+zölni. A Telepátia csak 'l' képzettséggel rendelkezők között 
+működik. Alapfokon az alkalmazó nem tud beszélgetést kez-
+deményezni, sőt válaszolni sem, csupán a hozzá 1.ntézet gon-
+dolati üzenetet képes venni. 
+A diszciplína mesterfokú alkalmazása ad módot arrra, 
+hogy a Gondolatátvitelt megindítsa, és „ két mesterfokú al-
+kalmazó esetében „ válaszoljon a kérdésekre. 
+A 
+Telepátia 
+alkalmazásához 
+a 
+Gondolatátvitel 
+megkezdőjének tökéletesen ismernie kell a gondolatokat fo„ 
+gadó személyt „ ebben az esetben a távolság nem számít „, 
+vagy látnia kell azt. 
+Amennyiben a Telepátiában résztvevők látják egymást, 
+••••••••••••••••••••••••••••••••••••••• 
+
+=== PDF page 120 ===
+JÁTÉKOSOK 
+csupán 2 'J'p,ba kerül az 1 körig tartó godolatá · el. Ha nem 
+látják egymást 1 szegmensenként kerül l 'l'p,ba. '->A 'J'p, k 
+növelésével egyenlő arányban növelhető a diszcip 'na időtar, 
+tama is. 
+Egyszerre legfeljebb két elme kapcsolható össze Telepáti~ 
+ával, tehát a gondolati úton történő beszélgetésbe nem lehet 
+harmadik részró1 sem beleszólni, sem azt lehallgatni. 
+Az egyetlen olyan diszciplína, mely megtalálja a módját, 
+hogy átszivárogjon a Statikus Pajzson, noha a Dinamikus 
+Pajzs ezt is feltartóztatja. Ha egy efféle pajzsot viselőnek kül, 
+denek Telepátiával üzenetet, az csak azt fogja érzékelni, hogy 
+kapcsolatot keresnek vele. Amennyiben fogadni kívánja az 
+üzenetet 1 szegmenses koncentrációval át kell rendeznie Di, 
+namikus Pajzsát, és a kapcsolat létrejöhet. A Dinamikus Paj, 
+zsot nem kell megszüntetnie, elméje nem válik védtelenné a 
+Gondolatátvitel időtartamára. A Telepátia megvalósulásakor 
+a fogadó nem rést nyit a tudatát óvó pajzson, hanem átren, 
+dezi azt, ezért nincs arra mód, hogy a kapcsolat megszületé, 
+sének pillanatában valaki, akár a Gondolatátvitel kezdemé, 
+nyezője , egy másik, ügyes diszciplína hatásával kedvesked, 
+jen az üzenetet fogadónak. 
+A Telepátia mindíg csak annak a 'I' ,alkalmazónak kerül 
+'l'p,jába, aki a gondolati közlést kezdeményezte. 
+Testhőmérséklet Növelés (Hűtés) 
+'l'p: 5 fokonként 1 'Pp 
+ME: mentál 
+A meditáció ideje: 6 kör 
+Időtartam: 1 óra 
+A diszciplína alkalmazója képes saját, mesterfokon más, 
+testének hőmérsékletét növelni vagy csökkenteni. Így lehető, 
+sége nyílik a vizes ruhát megszárítani magán, vagy egy lángo, 
+ló házból kimenekülni égési sérülések nélkül. Minden felhasz, 
+nált 'Pp 5 fokkal képes megváltoztatni a testhőmérsékletet. 
+Az ötven fok fölé emelt testhő hat kör után ájulást ered, 
+ményez, hosszabb távon halállal jár. A húsz fokra csökkentett 
+hőmérséklet Tetszhalálhoz vezet , ilyen formán még egy fel, 
+készületlen szervezet is képes életben maradni néhány hóna, 
+pig ,, a húsz fok alá csökkentett testhő maradandó egészség, 
+károsodással jár, míg a negyedórát meghaladó öt fok alatti ál, 
+lapot visszafordíthatatlan folyamatot indít el a szervezetben, 
+és az áldozat meghal. 
+A diszciplína lehetőséget ad arra, hogy 1 'l'p,ért 5 fokkal 
+eltérő hőmérsékletet 1 óráig fenntartsa, 2 'l'p,ért az 5 fokos 
+befolyásolást két óráig, vagy a 10 fokos változtatást 1 órán ke, 
+resztül biztosítsa, stb. 
+'l'p: 1 'l'p/l kg 
+ME:, 
+'P-lökés 
+A meditáció ideje: 1 szegmens 
+Időtartam: , 
+Más néven Energialökés. A mágiához legközelebb álló, 
+alapvető diszciplína. Használata során a· 'I' ,alkalmazó kis 
+KÉZIKÖNYVE 
+mennyiségű ágikus energiát gyűjt magába, ám mivel táro, 
+lására nem , észíti fel a módszer, azonnal ki is á~amlik belőle. 
+A \f'-lök.és irányítható, gyenge szél fuvallat formájában nyíl, 
+vánul 
+eg. Taszító ereje felhsznált 'J'p,onként 1 kg. Apróbb 
+aolgok felborítására, arrébb lökésére szokták használni, oly, 
+kor, kellő erővel alkalmazva, tárgyak vagy emberek egyen, 
+súlyi helyzetét lehet megszüntetni vele. 
+Statikus 'P -pajzs 
+'l'p: nincs meghatározva, de min. 1 'l'p 
+ME:, 
+A meditáció ideje: 90 kör 
+Időtartam: lásd a leírást! 
+A p,pajzsok hivatottak megvédeni az elmét a mágikus és 
+Pszi befolyások ellen. A 'P ,alkalmazó agyi energiáiból 
+erőteret épít tudata köré, melyen a tudati támadások fenna, 
+kadhatnak. A Statikus Pajzs egyfajta állandó védelem, ami 
+mindaddig óvja a tudatot, amíg azt az alkalmazó meg nem 
+szünteti, vagy valaki le nem Rombolja. 
+A Statikus Pajzs erőssé_ge annyi, ahány 'l'p,ból építették. 
+Gyakorlati hatása abban nyilvánul meg, hogy a pajzs erőssé, 
+gét hozzáadjuk a Tudalatti Mágiaellenálláshoz és így dobjuk 
+a ME,t. Két különböző Statikus Pajzs létezik: asztrális és men, 
+tális. Az Asztráls Pajzs az asztrális támadások ME,ához adó, 
+dik hozzá, míg a Mentális Pajzs a mentális ME,hoz. 
+A Statikus Pajzs, miután felépült, többé nem befolyásol, 
+ható: 'l'p,okat sem hozzáadni, sem elvonni nem lehetséges. 
+Védő hatását akkor is kifejti, ha a 'I' ,alkalmazó alszik, eszmé, 
+letlen, vagy bármely egyéb okból öntudatlan, hiszen immár 
+az elmétől függetlenül működik. Lebontani is csak újabb ki, 
+lencven körön át tartó meditációval lehet, vagy 'l',ostrom, 
+mal (lásd Általános Diszciplínák, 'P ,ostrom). 
+A Statikus Pajzshoz felhasznált 'l'p,ok a késó'bbiekben 
+nem számítanak bele az aktuális 'J'p,ok számába. Ez azt je, 
+lenti, hogy az alkalmazó megteheti, hogy egy békés napon az 
+összes 'J'p,ját Statikus Pajzsok emelésére fordítja, majd pihe, 
+nés után ismét maximális 'J'p,jaira támaszkodhat, noha tu, 
+datát már védi(k) a Statikus Pajzs(ok). Minden elme köré 
+legfeljebb egy asztrális és egy mentális Statikus Pajzs építhető. 
+Statikus 'I' ,pajzs, mesterfokú alkalarnzással bárki elméje 
+köré (nemcsak ember, de lélekkel rendelkező állat) építhető, 
+ám a más elméj_e köré épített pajzs, akárki építette is (harc, 
+művész, kardművész vagy varázsló), bárki által alkalmazott 
+'I' ,ostrommal lerombolható. 
+Dinamikus 'P -pajzs 
+'l'p: nincs meghatározva, de min. 1 'l'p 
+ME:, 
+A meditáció ideje: 30 kör; lásd még a leírást! 
+Időtartam: végleges; lásd még a leírást! 
+A Statikus Pajzsokra építhető egyetlen újabb védelmi ré, 
+teg, az úgynevezett Dinamikus Pajzs. A 30 körig tartó meditá, 
+ció után a Dinamikus Pajzs megmarad mindaddig, míg az al, 
+kalmazó meg nem szünteti, vagy 'I' ,ostrommal le nem bont, 
+••••••••••••••••••••••••••••••••••••••• 
+
+=== PDF page 121 ===
+JÁTÉKOSOK 
+ják. Felépítése után - ellentétben a Statikus Pajzzsal bánni-
+kor további 'I'p-ok adhatók hozzá (azaz erősfth tő), vagy 
+vonhatók el belőle. Ez minden alkalommal 1 körig tartó, rö-
+vid, meditatív koncentrációt igényel. Erőssége minden eset-
+ben megegyezik az éppen benne tárolt 'I'p-ok mennyiségével, 
+ám az aktuális 'I'p-ok számánál sosem lehet több. A Dinami-
+kus Pajzsokban tartott 'I'p-ok beleszámítanak a karakter ak-
+tuális 'I'p-jaiba, azaz az asztrális és mentális Dinamikus Paj-
+zsokban működő 'I'p-ok és a diszciplínákra felhasználható 
+pontok összessége a karakter max. 'l'p-ja. 
+Fenntartása folytonos, gyenge koncentrációt igényel, ami-
+re a 'I' -alkalmazó szinte bármely esetben képes - kivéve, ha al-
+szik, eszméletelen vagy bármely egyéb okból öntudatlan. Ha az 
+elmét valamilyen erős sokk éri, akárcsak egy pillanatra is, vagy 
+a tudatot megbénítják, a Dinamikus Pajzs azonnal lebomlik. 
+A Dinamikus Pajzsnak éppen úgy két fajtája létezik, mint 
+a Statikusnak (asztrális és mentális), és erőssége is éppen úgy 
+adódik hozzá a ME-hoz. Előnye a Statikus Pajzshoz képest, 
+hogy a benne tárolt 'I' -energia bármikor hozzáférhető, s fel-
+haználható egyéb diszciplínák alkalmazásához vagy 'I' -ostrom 
+folytatásához. Hátránya, hogy a Dinamikus Pajzs lebontásával 
+a támadó nemcsak közelebb jutott az elméhez, hanem az al-
+kalmazót a diszciplínákra felhasználható 'l'p-jai nagyrészétó1 
+(a Dinamikus Pajzsban tároltaktól) is megfosztotta. 
+Dinamikus Pajzs más elméje köré nem építhető. 
+'P-ostrom 
+'Pp: nincs meghatározva, de min. 1 'I'p 
+ME:-
+A meditáció ideje: 1 szegmens 
+Időtartam: -
+A tudat védelmére felépített 'I' -pajzsok megsemmisítésé-
+re szolgáló diszciplína, mely csak mesterfokon alkalmazható. 
+Két különböző típusa létezik: a lJ'-rombolás és lJ'-bontás. 
+lJ'-rombolással a Statikus pajzsokat lehet megszüntetni. A 
+Statikus Pajzsok nem bonthatók 'l'p-onként - egyszerre kell 
+lerombolni ó~et. Ez a következőképp történik: 
+A diszciplína alkalmazója meghatározza, hogy a '!'-rom-
+boláshoz hány 'I'p-ot kíván felhasználni. Ennyi lesz a Rom-
+bolás erősítése. Ha ez nagyobb (egyenlő), mint a Statikus 
+Pajzs erősítése, akkor a Statikus Pajzs megszűnik, s a pajzshoz 
+felhasznált energia semmivé válik. Amennyiben a 'I' -rom-
+boláshoz valaki kevesebb 'I'p-ot használ, mint amenyiből a 
+Statikus Pajzsot felépítették (legyen az asztrális vagy mentá-
+lis), akkor a pajzs teljes erősítéssel megmarad, míg a Rombo-
+láshoz felhasznált 'l'p-ok elvesznek. A 'I' -rombolás nem árt 
+a Dinamikus Pajzsoknak. 
+A Dinamikus Pajzsok kiiktatására a P-bontás szolgál. Se-
+gítségével akár 'I'p-onként is bontható a dinamikus Pajzs. 
+Ilyenkor a Bontáshoz használt 'I'p-ok mennyiségével mege-
+gyező 'I'p bomlik le a Dinamikus Pajzsból. 'I' -bontással nem 
+támadható a Statikus Pajzs. 
+Egy 10 'l'p erősségű Statikus Pajzs, csak egy legalább 10 
+'l'p erősségű (vagy nagyobb) 'I' -rombolással semmisíthető 
+meg. Ekkor a pajzs viselője (a pajzs építéséhez felhasznált, ám 
+az aktuális 'l'p-jaiba nem beleszámító) és a Rombolás alkal-
+KÉZIKÖNYVE 
+mazója (a Romboláshoz felhasznált) 'I'p-jait is elveszíti. Ha a 
+Romboláshoz kevesebb, mint 10 'l'p-ot használtak, a Stati-
+kus Pajzi teljes erősítéssel megmarad, míg a Romboláshoz 
+igénybe vett 'I'p-ok elvesznek. 
+Egy 10 'I'p nagyságú Dinamikus Pajzs lebontható 1, 2 vagy 
+3 'I'p-onként, de felhasználható egyszerre 10 vagy több 'l'p 
+is. A Dinamikus Pajzs mindíg elveszít annyit az erősségébó1, 
+ahány 'I'p erősségű a Bontás. Persze, ha már nincs pajzs, a 
+Romboláshoz vagy Bontáshoz felhasznált 'I'p-ok elvesznek, 
+hiszen ugyanúgy levonódnak az aktuális 'l'p-ok számából, 
+mintha lett volna pajzs. 
+A 'I' alapfokú alkalmazói nem érzékelik, ha egy elmét paj-
+zsok védenek. Mesterfokon már gyenge ('I'p-ot nem igénylő) 
+koncentrációval megállapítható, ha a tudatot övezi valami-
+féle védelem. Azt azonban, hogy Statikus vagy Dinamikus 
+Pajzsok működnek, csak a Kyr metódus alkalmazói tudhatják 
+(lásd Kyr Diszciplínák, Auraérzékelés). 
+A 'I' -ostrom folytatója következtethet a pajzsok típusaira, 
+hiszen pontosan érzékeli, ha az Ostrom valamely fajtája siker-
+rel jár, vagy a felhasznált energiák nem ütköznek ellenállásba. 
+SLAN DISZCIPLÍNÁK 
+11 
+Slan-út mesterei által kidolgozott, csak harc- és 
+kardművészek (a kivételt lásd Kasztok, Fejvadász) 
+által alkalmazható módszereket Slan Diszciplínák-
+nak nevezik. A Slan Pszi-fejlesztésének célja mindig is az 
+egyén, az alkalmazó volt, így az összes Slan Diszciplína a hasz-
+nálat során alapfokú alkalmazásnak minősül, azaz hatását 
+csak a 'I'-alkalmazóra fejti ki. (Ez alól is akad ugyan egy-két 
+kivétel, de az nem számottevő.) 
+A harcművészek a 'P-t az önmaguk tökéletesítéséhez 
+vezető útnak, sokszor titkos tudománynak tartják. Az elsajá-
+tításához szükséges útmutatások, módozatok nincsenek 
+könyvekben leírva, mesterről tanítványra szállnak. A Slan 
+Pszi tanítása nehéz, számtalan veszélytől terhes. Az egyes 
+diszciplínák helytelen alkalmazása - ilyen például az aranyha-
+rang - végzetes következményekkel is járhat. 
+A Slan Pszi a harcművészet alapja és lelke. Mind a puszta-
+kezes harcot, mind a vívást megtanulhatja bárki - akár egy 
+harc- vagy kardművész útmutatásai alapján is. Ám az igazi 
+hatalom, az igazi tudás, ami a Slan-eket egy jól verekedő gla-
+diátor, vagy a híres erigowi vívók fölé helyezi, a Slan Pszi. Ép-
+pen ezért nem várható el, hogy egy Slan effajta tudását meg-
+ossza bárkivel. 
+Azt azonban le kell szögeznünk, hogy mindazok, akik ma-
+radéktalanul képesek a Slan-út alkalmazására - bármilyen 
+kasztúak legyenek is - Slan-nek, azaz harcművésznek 
+minősülnek. 
+Mindazonáltal Ynev történelmében legfeljebb egy tucat 
+olyan esetet jegyeztek fel, amikor egy nem harc- vagy kard-
+művész kasztú embert megtanítottak volna a Slan-út·alkal-
+mazására. Ilyen kegyben részesült Shilen da Ranka, az ereni 
+embervadász klán nagymestere, aki a III. Toroni Hadjárat 
+alatt kis híján az életét áldozta a Tiadlani Dorcha védelmé-
+ben, és Mogorva Chei, Yllinor királya. 
+••••••••••••••••••••••••••••••••••••••• 122 ••••••••••••••••••••••••••••••••••••••• 
+
+=== PDF page 122 ===
+JÁTÉKOSOK l 9 
+KÉZIKÖNYVE 
+A Slan \J',t csak emberek képesek megt nulni, és a 
+félelfek, akiknek tudati sémája az emberével egye ik. 
+A Slan Pszi erősítése, akárcsak az Általános Diszciplíná, 
+ké alapban 6. A diszciplínák elején található rövidíté k ér-
+telmezését lásd az Általános Diszciplínák alfejezetben! 
+'l'p: 1 \J'p/l SFÉ 
+ME:, 
+Ara~yharang 
+A meditáció ideje: 1 kör 
+Időtartam: 2 kör és lásd a leírást! 
+A tudat test feletti tökéletes uralma nyilvánul meg ebben 
+a diszciplínában. Segítségével az alkalmazó képessé válik tes, 
+tét élő páncéllá alakítani. Ezt izomzata átrendezésével, és \}', 
+energiáinak erős kiságárzásával éri el. Az Aranyharang éppen 
+olyan Sebzés Felfogó Értéket ad alkalmazójának, mint bármi, 
+lyen páncél , az így nyert SFÉ megegyezik a felhasznált \J'p, 
+ok számával. A diszciplína az egyik legnehezebben elsajátít, 
+ható, és legveszedelmesebb \}' ,alakalmazási módszer. Éppen 
+ezért az alkalmazó nem használhatja korlátlanul: maximális 
+mértéke megegyezik az alkalmazó Tapasztalati Szintjével. Ez 
+a gyakorlatban azt jelenti, hogy az Aranyharang SfÉ,je so, 
+sem lehet nagyobb a diszciplínát használó Tapasztalati Szint, 
+jénél (azaz egy 4.szintű Slan legfeljebb 4,es SfÉ,jű Aranyha, 
+rangot képes csinálni). 
+Az Időtartam sem növelhető a végtelenségig, ha ugyanis 
+valaki túllépi a 3 kör/TSZ határt, akkor a; Állóképessége ide, 
+iglenesen csökken annyival, amennyivel túllépte. A csökke, 
+nés ideje annyi lesz, amennyi ideig a diszciplína hatása alatt 
+állt. Ha egy első szintű harcművész 6 körig alkalmazott 
+Aranyharangot, akkor 3 körrel lépte túl a határt, tehát a 
+következő 6 körre ,3 járul az Állóképességéhez. 
+1 \J'p,ért 1,es SFÉ nyerhető kétkörre, 2 \J'p,ért 2,es SFÉ 
+2 körre, vagy l,es SFÉ 4 körre, stb. 
+'l'p: 10 \J'p 
+ME:, 
+Belső Idő 
+A meditáció ideje: 1 szegmens 
+Időtartam: 1 szegmens 
+A Slan Pszi alkalmazásának tökélyre vitele. A diszciplína 
+alkalmazója képes saját belső idejét annyira lelassítani, hogy 
+minden, a valóságban, egy szegmensnyi időt egy teljes kör, 
+nek érzékel. Ez lehetőséget nyújt az alkalmazónak arra, hogy 
+az eseményeket jobban végig gondolva mérlegeljen, s hogy az 
+eltelt valós idő helyett a saját belső ideje szerint alkalmazzon 
+\}'diszciplínákat. Mindemellett a Saln,út Belső Ideje nemcsak 
+a gondolati folyamatokat gyorsítja fel, hanem a diszciplína 
+használójának testét is, így az alkalmazónak minden szem, 
+pontból egy teljes köre van cselekedni, akár harcolni is,, míg 
+a külvilág számára csupán egyetlen szegmens telik el. 
+A külső szemlélő érzékei szinte követhetetlen gyorsaságú, 
+nak találják a diszciplína alkalmazóját, az időtartam alatt a 
+Kezdeményezés minden esetben a Belső Idővel felgyorsítottt 
+••••••••••••••••••••••••••••••••••••••• 
+Slant illeti meg. A használat során az alkalmazó képes kitér, 
+ni a mágik s lövedékek eló1, a rálőtt nyílvesszőket akár pusz, 
+ta kézzel i~ megfoghatja, és lehetetlen meglepetésszerű tárna, 
+dást intézni ellene. 
+Rendkívül megeró1tető diszciplína. Az Időtartam lejárta 
+után az alkalmazó annyi körig kényszerül pihenni, ahány kört 
+, az ő szemszögébó1 szegmenst , a diszciplína hatása alatt töl, 
+tött. A pihenő alatt semmiféle \}',tevékenységet nem folytat, 
+hat, a pajzsok fenntartásán kívül, és bármely megerőltető te, 
+vékenység (pl.: harc) csak ,25,ös módosítóval végezhető, ez 
+harc esetén a KÉ,re, TÉ,re, VÉ,re és CÉ,re egyszerre vonat, 
+kozik. 
+10 \J'p felhasználásával a valós idő 1 szegmense lassítható 
+le, 20 \J'p,ért már két szegmens, stb. 
+'l'p: 1 \J'p/kör 
+ME:, 
+Chi„harc 
+A meditáció ideje: 1 szegmens 
+Időtartam: lásd a leírást! 
+A Chi,harc nem más, mint a harc, vagy kardművész azon 
+tudása, mely segítségével a belső energiáit harc közben a tes, 
+te szolgálatába állíthatja. Ettől lesz több minden egyéb pusz, 
+takezes verekedőnél és fegyverhasználónál , ez a harc művé, 
+szete. Az alkalmazás közben mozdalatati csiszoltabbá, ponto, 
+sabbá válnak, saját belső ideje lelassul. Ütéseiben nemcsak 
+izomzatának ereje és testének súlya nyilvánul meg, hanem 
+felszabadított tudati energiái is. A harcművész puszta keze , 
+ha úgy kívánja , a legélesebb karddal lesz egyenértél\ű, vagy 
+buzogányként zúz. A kardművész eggyé válik fegyverével, 
+mintegy saját végtagjaként érzékeli azt. 
+A Chi,harc folyamán nem lehet meglepni az alkalmazót, 
+és lehetetlen olyan módon harcolni, hogy az ellenfél csak ár, 
+talmatlanná váljon. Használat során az alkalmazó vonásai 
+összpontosításról árulkodnak, arca kifejezéstelen kőmaszk, 
+ként hat, tekintete maga elé mered, hiszen nem csak a sze, 
+mére, hanem érzékeinek együttesére hagyatkozik. Mondják 
+a Slan,ek az effajta állapotot a Sárkány ébredésének nevezik. 
+A Chi,harc hatékonyságát az alábbi táblázat mutatja. 
+Tapasztalati Tám/kör Időtartam TÉ,VÉ 
+KÉ 
+Sp 
+1. 
+1 
+1 kör 
++10 
++2 
++1 
+3. 
+2 
+1 kör 
++15 
++4 
++3 
+5. 
+3 
+2 kör 
++20 
++6 
++5 
+7. 
+4 
+2 kör 
++25 
++8 
++7 
+9. 
+5 
+3 kör 
++30 
++10 
++9 
+11. 
+6 
+4 kör 
++35 
++12 
++11 
+13. 
+6 
+5 kör 
++40 
++14 
++13 
+15. 
+6 
+6 kör 
++45 
++16 
++15 
+17. 
+6 
+7 kör 
++50 
++18 
++17 
+19. 
+6 
+korlátlan 
++50 
++18 
++19 
+Minden ezutáni Tapasztalati Szinten már csak a sebzés nő 
++ l,gyel. 
+Azaz 1,2. szinten 1 \J'p felhasználásával a diszciplína al, 
+• •••••••••••••••••••••••••••••••••••••• 
+
+=== PDF page 123 ===
+JÁTÉKOSOK 
+kalmazója 1 körig képes a Chi-harcra; miáltal !\ma 6 Ért „ 
+ke, Védő Értéke 10-zel növekszik, Kezdeménye 6 Értékéhez 
++ 2 adódik, míg sebzéséhez + 1. További ·'I'p-ok ráá1aozásá-
+val csak az Időtartamot lehet elnyújtani, a TÉ, VÉ, KÉ és a 
+Sebzés nem növelhető. Ezen értékek csak a fent közölt mér-
+tékben változnak. A diszciplína alkalmazása nagyon megter-
+heli a testet és a szellemet. Ezért amikor a Chi-harc Időtar­
+tama lejár, a felhasználónak annyi kört kell "pihenéssel" töl-
+tenie, mielőtt újra használhatná, amennyit a diszciplína ha-
+tása alatt töltött. A pihenés itt mindössze annyit jelent, hogy 
+a karakternek "normál harcot" kell folytatnia, de más diszci-
+plínákat alkalmazhat. 
+A következő táblázat a Chi-harcban tölthető idő meg-
+hosszabításakor az erre költendő 'I'p-ok mennyiségéró1 ad 
+felvilágosítást: 
+További körök száma 
+1. 
+2. 
+3. 
+4 . 
+.-....-~~---5. 
+6. 
+'1'-pont 
+4 
+9 
+16 
+25 
+36 
+49 
+Ezek szerint, egy 6. TSZ-ű harcművésznek, ha 4 kört óhajt 
+Chi-harcban tölteni, akkor 15 'I'p-ot kell kifizetnie. 2 kört 
+tölthetne elméletileg a diszciplína hatása alatt, ez (2 x 1 'Pp) 
+2 'Pp, az első plusz kör még 4 'I'p-ba, a második további 9-be 
+kerül: 2 + 4 + 9 = 15. Persze a kényszerpihenő hossza is 4 
+körre növekszik az időtartam lejárta után. 
+Chi-harccal egyidejűleg semmilyen más diszciplína nem 
+alkalmazható, kivéve a pajzsok fenntartását és az Aranyha-
+rangot. Azokra az esetekre is vonatkozik, amikor az alkalma- . 
+zó olyai:i. 'I' -hatást hoz létre, aminek fenntartásához nincs 
+szükség további koncentrációra, és még ezen diszciplína 
+Időtartamának lejárta előtt megpróbál a Chi-harcot folytat-
+ni. Ilyen esetben vagy egyik vagy másik hatás nem fog mű­
+ködni. 
+'l'p: 8 'Pp 
+ME:-
+Érzékelhetetlenség 
+A meditáció ideje: 1 kör 
+Időtartam: 1 kör 
+A diszciplína alkalmazója mozdulatlanná dermedve képes 
+érzékelhetetlenné válni. Ebben az állapotában még a legéle-
+sebb érzékszervek (pl.: látás, hallás, szaglás stb.) számára sem 
+fedezhető fel, és kikerül a Hatodik Érzék hatósugarából is. Az 
+Érzékelhetetlenség folyamán semmilyen tevékenység (mozgás, 
+harc, '!'-alkalmazás vagy kommunikáció) nem végezhető. 
+A Kyr metódus Auraérzékelés előtt is rejtve marad, csu-
+pán olyan Láthatatlanság-észleléssel fedezhető fel, amely leg-
+alább 4-es erősítésű. 
+Nyolc 'Pp felhasználásával 1 körig alkalmazható a diszcip-
+lína, 16 'I'p-ért 2 körig, stb. 
+••••••••••••••••••••••••••••••••••••••• 
+KÉZIKÖNYVE 
+Halálos Ujj 
+editáció ideje: 1 szegmens 
+Időtartam: 24 óra 
+/\ Pszi energiák koncentrált, romboló kisugárzásának mód-
+szere Yadegori Chunin nevéhez fűződik. Yadegori ellentétben a 
+híresztelésekkel kardművész volt, noha a pusztakezes harcmű­
+vészet nagymestereként tartják számon. Ennek oka, hogy közel 
+tíz évet töltött az Oltalmazó Keleti Szél kolostorában, ahol 
+Enoszukéról magával hozott tudását tanította a szerzeteseknek. 
+Hamar híressé vált, s elterjedt róla, egyetlen érintésével képes 
+ölni. A Gyémántol<: évének nyolcadik havában Yi Chien Mu 
+császári herceg, máig ismeretlen okból párviadalra hívta ki. 
+Yadegori többször visszautasította a kihívást, ám egy ízben a 
+herceg meditácó közben zavarta meg, s tiszteletlenségével ad-
+dig provokálta, míg az enoszukei mester „ anélkül, hogy egy szót 
+szólt volna „ odelépett a herceghez és mutatóujjával megbökte. 
+Yi Chien Mu azonnal kiszenvedett. Az esetnek hamar híre 
+ment, így Yadegori kénytelen volt menekülni. Azonban mielőtt 
+elhagyta volna a kolostort, megtanította a rendfőnököt arra a 
+diszciplínára, melynek segítségével megölte e császári herceget. 
+A Halálos Ujjat „ nevezik Yadegori érintésének is - sokáig tit-
+kos tanításként kezelték, csak nem rég jutott el Tiadlanba, ahol 
+a legtöbb Slan iskola átvette és tanítani kézdte. 
+A diszciplínát a legveszélyesebb '!'-alkalmazásnak tartják. 
+Használatával időzített belső sérülések okozhatók. Az alkal-
+mazójának meg kell érintenie valamelyik mutatóujjával az el-
+lenfelét. Ez harci szituációban sikeres támadást igényel. Az 
+okozott sérülés az alkalmazó akarata szerinti - de huszonnégy 
+órán belül eső - időpontben keletkezik, gyógyítása nem lehet-
+séges. A diszciplína minden esetben Ép veszteséget okoz, s a 
+páncélok Sebzés Felfogó Értéke nem vonódik le beló1e, sőt az 
+Aranyharang sem jelent védelmet hatása ellen. 
+Nehézsége okán nem alaklamzható korlátlanul: minden 
+Tapasztalati Szinten csak 1 Ép sérülés okozható, mely 3 'I'p 
+felhasználásába kerül. Második Tsz-en már 6 'I'p rááldozásá-
+val 2 Ép veszteség érhető el, stb. 
+'l'p: 6 'Pp 
+ME:-
+Jelentéktelenség 
+A meditáció ideje: 1 szegmens 
+Időtartam: 1 kör 
+A Slan-ek életük nagy részét „ míg ki nem kerülnek a ko-
+lostorból vagy iskolából - csöndes önmagukba zárkózással, 
+nyugalmas elmélyedéssel töltik. A szinte észrevétlen jelenlét, 
+háttérbe húzódó viselkedés az effajta életmód egyik alapkö-
+vetelménye. Mindezt tökélyre fejleszteve, és a '!'-energiákat 
+is segítségül hívva, a Slan-út alkalmazói elérték, hogy a tel-
+jes Jelentéktelenség aurájába burkolózhassanak. 
+A diszciplína használatakor az alkalmazó nem tűnik föl a 
+legéberebb őrnek, a legfigyelmesebb szemlélőnek sem. A 
+ráirányított tekintet lesiklik róla, jelentéktelen, figyelmet 
+• •••••••••••••••••••••••••••••••••••••• 
+
+=== PDF page 124 ===
+JÁTÉKOSOK 
+nem érdelmő senkinek hat. A tudatos érzékel€: ek persze fel-
+fedezik (Auraérzékelés, Láthatatlanság Észlelés , Hatodik 
+Érzék) és lelepleződik akkor is, ha a figyelmes szemlél6 sike-
+res Intelligencia Próbát dob. Ha azonban az alkalmazó má 
+elhagyta a helyszínt - ahol a diszciplína segítségével sikerült 
+észrevétlennek maradnia - hiába járt le a Jelentéktelenség 
+időtartama, nem ébred gyanú senkiben. 
+Közönséges példája ennek, ha az alkalmazó úgy kíván halá-
+los ellenségeinek táborán végighaladni - esetleg kikémlelni azt 
+-, hogy járása-kelése észrevétlen maradjon. Ilyenkor a diszciplí-
+na segítségével jelentéktelenné válik, s az őrök meg a táborla-
+kók „ sikeres Intelligencia Próba, vagy tudatos érzékelés híján „ 
+nem figyelnek föl rá: maguk közé tartozónak tekintik. Miután 
+a tábort elhagyta, senkinek nem jut eszébe, hogy idegen járt kö-
+zöttük. Távozása éppúgy jelentőség nélkül való, mint jelenléte. 
+A diszciplína alkalmazása közben szólni, beszédbe elegyedni 
+nem lehet „ ez azonnali lelepleződéssel jár-, miképpen a harc-
+ba bocsátkozás is megszünteti a Jelentéktelenséget. 
+A diszciplína értelemetlen alkalmazása is balul üthet ki: ma-
+gányos ~mberhez odamenni, vagy hegyi óriások falujáb besétál-
+ni „ azaz bármi olyat tenni, amikor nincs mód a környezetben 
+tartózkodókhoz való azonosulásra „ nem vezethet sikerhez. 
+A Jelentéktelenség 6 'Pp-ért 1 körig tartható fenn, 12 'Pp-
+ért 2 körig, stb. 
+'l'p: 1 'Pp 
+ME: „ 
+Levitáció 
+A meditáció ideje: 1 kör 
+Időtartam: 1 óra 
+Meglehetősen kevés gyakorlati alkalmazhatósággal bíró 
+diszciplína, ám a Slanek szertartásainak elengedhetetlen kel-
+léke. Az emberi test súlyának teljes leküzdésére szolgál, alka-
+lmzásával föld feletti lebegésre nyílik mód. 1 'Pp felhasználá-
+sával 1 órán keresztül lehet 1 méter magasságban lebegni, 2 
+'Pp-ért már két órán keresztül tartható fenn a diszciplína ha-
+tása. A Levitáció magassága nem növelhető, ám az alklal-
+mazó bármekkora súly „ amennyiben a teste korlátai elbírják 
+„ felemelésére képes. A diszciplína alkalmazása közben a Slan 
+teste sebezhetetlenné válik bármely - nem mágikus „ fegyver-
+rel szemben. A diszciplína folyamatos koncentrációt igényel, 
+közben fizikai támadás, egyéb diszciplína vagy varázslat hasz-
+nálata nem lehetséges. 
+Statikus 'I' .-pajzs 
+'l'p: nincs meghatározva, de min. 1 'Pp 
+ME:-
+A meditáció ideje: 90 kör 
+Időtartam: lásd a leírást! 
+A Slan-út alkalmazói által gerjesztett Statikus Pajzs felépí-
+tésében gyökeresen különbözik a Pyarroni módszer segítségé-
+vel létrehozottól, ám működésében és alkalmazásában telje-
+sen megegyezik azzal. A pontos leírást lásd az Általános Disz-
+ciplínák, Statikus 'P -pajzs diszciplína tárgyalásánál. 
+KÉZIKÖNYVE 
+A valódi különbség a végeredményben mutatkozik meg: 
+a Slan-ú Statikus 'P -pajzsát senki nem képes lerombolni, 
+csak maga az alkalmazó szüntetheti meg és építheti újra. Ef „ 
+éle pajzsot a Slan csak a saját elméje köré képes felhúzni. 
+Testsúlyváltoztatás 
+'l'p: lásd a leírást! 
+ME: „ 
+A meditáció ideje: 1 kör 
+Időtartam: 3 kör 
+A diszciplína használatával a 'P -alkalmazó képes saját 
+testsúlyát megnövelni, avagy lecsökkenteni. Ezáltal képessé 
+válik több emelet magasba felugrani, a havon futni anélkül, 
+hogy mély nyomot hagyna, esetleg gyorsabban úszni. A disz-
+ciplínával nem változtatható meg az alkalmazó által hordott 
+vagy viselt tárgyak súlya. 
+Az alábbi táblázatb~l kiderül, hogy a testsúly különböző 
+mértékű megváltoztatása mennyi 'Pp-ba kerül. A felhasznált 
+'Pp-ok növelésével a diszciplína Időtartama is meghosszab-
+bítható. 
++ /„ módosítás az eredetihez 
+képest lkg 3kg 5kg 9kg 13kg 3 lkg 
+'l'p 
+1 
+2 
+4 
+7 
+10 
+20 
+2x 
+30 
+3x 
+35 
+Háromszorosnál nagyobbra növelni, vagy harmadánál ke-
+vesebbre csökkenteni a testsúlyt bármennyi 'I'p rááldozásá-
+val sem lehet. 
+'l'p: 6 'I'p 
+ME:-
+Tetszhalál 
+A meditáció ideje: 10 kör 
+Időtartam: 1 óra 
+Az alkalmazás segítségével lehetőség nyílik a test élettani 
+folyamatainak felfüggesztésére. Ilyenkor az alkalmazó semmi-
+féle életjelet nem ad, nincs szüksége táplálékra vagy folyadék-
+ra, de még levegőre sem. Mozdulatlanná válik „ olyan ez mint 
+a halál dermedtsége „ és kihül, a tudati folymatok megszűnnek, 
+így lebomlik a Dinamikus Pszi-pajzs, csupán a Statikus marad 
+meg. Ezzel szemben az Asztrál- és Mentáltest nem alszik, így az 
+alkalmazó továbbra sem lehet alanya a Természeti Anyag Má-
+giájának. Az alkalmazónak előre el kell döntenie a Tetszhalál 
+időtartamát, mert nincs rá mód, hogy az Időtartam lejárta előtt 
+félbeszakítsák a diszciplínát. Tetszhalál állapotában semmiféle 
+fájdalom (Fp) nem okozható, és a testet ért (Ép) sérülések 
+feleződnek. Az egyetelen olyan diszciplína ez, melynek alkal-
+mazása során valóban regenerálódik a test. Minden Tetszha-
+lálban töltött óra alatt 1 Ép regenerálódik „ azaz gyógyul ma-
+gától-, és 10 Fp. Maximuma fölé sem az Ép, sem az Fp nem 
+emelkedhet. A szervezetbe került mérgek hatóideje háromszo-
+rosára lassul, ráadásul sebzésük is hannadolódik. 
+A Tetszhalál felfedezése csak a Kyr Metódus Auraérzéke-
+lésével lehetséges . 
+••••••••••••••••••••••••••••••••••••••• 125 ••••••••••••••••••••••••••••••••••••••• 
+
+=== PDF page 125 ===
+JÁTÉKOSOK "
+-
+KÉZIKÖNYVE 
+A 'I'p,ok megduplázásával az 
+időtartam. 
+ereződik, triplázásával megháromszorozódik, stb. 
+KYR DISZCIPLÍNÁK 
+Pszi Kyr metódusát Délen Pyarron, Északon Doran 
+Zavarás 
+'l'p: min. 20 'I'p; lásd a leírást! 
+ME: mentál 
+--::'"-~ 
+mágusmesterei alkották meg, a régi letűnt kyr mágu, 
+sok mentális erejéről valló írott emlékek értelmezé, 
+A meditáció ideje: 1 szegmens 
+Időtartam: 1 szegmens 
+A Zavarás olyan rövid tudati csapás, mely képes kibillen, 
+teni ellenfelünket koncentrációjából, megzavarni meditáció, 
+ját, megtörni a Transzállapotot. A legtöbb 'I' ,diszciplína 
+azonnal megszakad, ha alkalmazója ellen sikeres Zavarást 
+hajtottak végre. Kivételt csupán a Tetszhalál képez. Ahhoz, 
+hogy sikeres legyen, a Zavaráshoz legalább eggyel több 'I'p, 
+ot kell mint amennyi a megzavarni kívánt személy mentális 
+pajzsaiban (statikus és Dinamikus) van, ám ha ez a feltétel 
+teljesül, akkor nincs helye rovábbi TME,nek. A Zavarás nem 
+bontja le a megzavart lény pajzsait, csupán keresztülférkőzik 
+rajtuk, hatását még abban a szegmensben kifejti, és megszű, 
+nik. Az áldozat sem abban a körben, sem a következó'ben 
+nem képes semmi olyasmit cselekedni, mely komoly koncent, 
+rációt igényel, azaz Pszit használni vagy varázsolni. 
+sével. A Kyr metódus szerves része a kyr alapú mozaikmágiá, 
+nak, úgy is fogalmazhatunk, annak alapköve. A varázsló,ta, 
+noncok, mikor a mágia tanulásába fognak, mindig a Pszit, s 
+azon belül a Kyr metódust sajátítják el eló"bb, s csak aztán a 
+varázslás tudományát. 
+A Kyr metódus nem továbblépés a Pszi mesterfokú alka}, 
+mazásához képest , miként a Slan út sem az alapfokhoz ké, 
+pest ,, hanem eltérő útirány. Minden diszciplínája egyetlen, 
+jól meghatározható célt szolgál: a varázslás segítését. Leg, 
+többször kiegészíti a varázslatokat, olykor helyettesíti azokat. 
+A Kyr Diszciplínákat teljes egészében csak a varázslók ta, 
+nulják, akik titkaikat féltékenyen őrzik. Egyes diszciplínák el, 
+sajátításának módja mégis kiszivárgott; ma már más varázs, 
+használó kasztok , boszorkányok, boszorkánymesterek , is 
+használják. Hogy mely diszciplínák ezek, azt lásd az említett 
+kasztok leírásában, a különleges képességeknél! 
+A Kyr metódus diszciplínái erősségükben a varázslat mo, 
+zaikokra hasonlítanak. Alaphelyzetben erősség.ük 1, ám az al, 
+kalmazáshoz szükséges 'I' ,pontok többszörözésével a diszcip, 
+lína erőssége is növelhető. A diszciplínák leírásában találha, 
+tó rövidítéseket lásd az Általános Diszciplínák alfejezetben! 
+Energiagyűjtés 
+'l'p: lásd a leírást! 
+ME:, 
+A meditáció ideje: lásd a leírást! 
+Időtartam: , 
+A Kyr metódus legalapvetó'bb diszciplínája, a varázslók tu, 
+dományának alapja. Segítségével a varázsló elméjébe gyűjt, 
+heti a világegyetemet átható mágikus energiát (Mana,pont), 
+az energiát, melybó1 a varázslatait létrehozza. Természetesen 
+egyszerre maximum annyit, amennyit befogadni képes. Erről 
+a mennyiségró1 a Tapasztalati Szint függvényében a max. Ma, 
+na,pont tudósít. Az Energiagyűjtés leegyszerűsítve nem más, 
+mint a 'I' ,pontok Mana,pontokra váltása , a váltószám az 
+Energiagyűjtésre alkalmazott módszertó1 függ. Itt csak ahá, 
+rom alapvető módszert ismertetjük: a Meditációs,formula, a 
+Kivonás és a Kisajtolás. 
+A meditációs formula (1 'I'p = 10 Mp) alkalmazásához a 
+varázslónak a Meditációs Varázskörben kell tartózkodnia 
+'I'ennek elkészítése 18 Mp,ba kerül és 30 percbe telik) és ott 
+1 óra hosszan transzállapotban meditálnia (lásd Kyr Diszcip, 
+línák, Transz). Már ebbó1 is látszik, hogy ennél a módszernél 
+jelentős előkészületekre van szükség, s a varázsló másfél óra 
+hosszan helyhez van kötve. Mégis, a varázslók, ha idejük és 
+a körülmények engedik, ehhez az energiagyűjtési módszerhez 
+folyamodnak, mert így juthatnak a legtöbb mágikus energiá, 
+hoz (Mp) a legkevesebb 'I'p,ért. 
+Ha a meditáció bármely okból félbeszakad, az Energia, 
+gyűjtés sikertelen lesz, s a felhasznált 'I'p,ok is elvesznek. Mi 
+••••••••••••••••••••••••••••••••••••••• 126 ••••••••••••••••••••••••••••••••••••••• 
+
+=== PDF page 126 ===
+JÁTÉKOSOK 
+több a varázsló elméjébó''f elillan a már korábban begyűjtött 
+energia is, azaz Mana„pontjainak száma nullára zuhan. 
+Ha az 1 órás meditáció zavartalanul véget ér, zzal a va„ 
+rázsló sikerrel gyűjtötte elméjébe a kívánt mennyiségű mági„ 
+kus energiát. Tízszer annyi Mana„pontot kap, mint ahány 'P „ 
+pontot a diszciplína alkalmazására fordított; tehát a Meditá„ 
+dós formula alkalmazásával 1\f'„pontért10 Mana„pont jár. 
+Kivonáshoz (1 'Pp=3 Mp) a varázslók olyankor folya„ 
+modnak, ha kifogytak az elméjükben tárolt energiából, és 
+sürgősen utánpótlásra van szükségük. A segítségért cserébe a 
+kisebb hatékonysággal fizetnek „ a módszer a \Jfp„ok valósá„ 
+gos pazarlása! Ellenben csak 2 körig tart, és sem Transz, sem 
+Meditációs Varázskör nem kell hozzá; azaz semmiféle el61<:é„ 
+születet nem igényel, mindössze némi összpontosítást. Köz„ 
+ben a varázsló sétálhat, léptethet a lován, de nem harcolhat, 
+varázsolhat, s nem alkalmazhat más diszciplín~t. 
+A módszer alkalmazásakor a varázsló kivonja környezeté„ 
+ből a többletenergiákat, mindenhonnan csak keveset és csak 
+a felesleget „ nem árt senkinek és semminek. Kivonással há„ 
+romszor annyi Mana„ponthoz jut, mint amennyi 'P „pontot a 
+diszciplínára áldozott; tehát 1 'P „pontért 3 Mana„pontot nyer. 
+A Kisajtolás (1 Yp=5 Mp) természetéből fakadóan feke„ 
+te mágia! Alkalmazásakor a varázsló nem a felesleget vonja 
+el a környezetét61, hanem kisajtol abból annyi energiát, 
+amennyit csak képes. A folyamat eredményeként a varázsló 
+Zónájában (20 m sugarú gömb) a növények elszáradnak 
+(csak 20 Mp fölött) és az élőlények kínzó fájdalmat éreznek 
+egész testükben. A fájdalom nem jár sebbel, de fp„vesztést 
+okoz a varázsló Zónájában tartózkodó összes lénynek. A vesz„ 
+teség minden megkezdett 20 Mp után K6 Fp Ypl.: 20 Mp= 
+K6 Fp; 25 Mp = 2 K6 Fp; 70 Mp = 4 K6 Fp). Az áldozat 
+ilyen módon Ép„t soha nem veszíthet! 
+A Kisajtolás 5 szegmens alatt elvégezhető, és ötször annyi 
+Mp„ot eredményez, mint amennyi \Jf p„ot a varázsló a dísz„ 
+ciplínára elhasznált, vagyis 1 \f'p„ért 5 Mp jár. 
+A leírtak kivételével a Kisajtolás módszere teljesen azo„ 
+nos a Kivonással. 
+'l'p: 1 'Pp 
+ME:„ 
+Transz 
+A meditáció ideje: 10 perc 
+Időtartam: korlátlan 
+A diszciplína segíségével a végrehajtó transzállapotba ke„ 
+rülhet. Hogy ez megtörténjék, tíz percig mozdulatlan medi„ 
+tál, teljes szellemiségével a transz elérésére összpontosít. Ez 
+alatt nem végezhet fizikai vagy szellemi tevékenységet, moz„ 
+dulatlanul áll vagy ül, netán fekszik. 
+Transzban lassú mozdulatokkal képes mozogni, akár egy 
+sétáló lovat is megülni, vagy gyalogolni, mágikus jeleket raj„ 
+zolni, beszélni, írni; de nem képes fürge mozdulatokra, közel„ 
+harcra és a transztól eltérő összpontosításra. Maga a végrehaj„ 
+tó bármikor visszatérhet a normális tudatállapotba; más azon„ 
+ban nehezen képes kizökkenteni. A transzban lévő emberhez 
+••••••••••••••••••••••••••••••••••••••• 
+KÉZIKÖNYVE 
+hiába ,&szélt;l.ek, rázzák, öntik nyakon vízzel; a transz csak Fp 
+vagy Ep e zt:ést okozó "zavarás" hatására szakad félbe. 
+A trarrs:zállapot feltétlenül szükséges egyes mágikus tanok 
+gyakorlásánál (pl.: Jelmágia), s a varázslók ilyenkor ezen dísz„ 
+ciptínához folyamodnak. Egyetlen 'P „pont felhasználásával a 
+végrehajtó korlátlan ideig transzállapotba kerülhet. Természe„ 
+tesen léteznek más módszerek is a transzállapot elérésére, mint 
+például a koplalás, kántálás vagy a törzsi tánc „ ám ezek a ja„ 
+vasasszonyok, boswrkányok, sámánok fegyvertárába tartoznak. 
+Transzállapotban az ember testi funkciói lelassulnak, így 
+jóval (ötször) hosszabb időt képes kibírni evés, ivás vagy lev„ 
+egővétel nélkül. 
+Láthatalanság Észlelése 
+'l'p: 5 'Pp (erősíthető) 
+ME:„ 
+A meditáció ideje: 2 szegmens 
+Időtartam: 5 kör 
+A diszciplína végrehajtója öt körön keresztül látja a má„ 
+gikusan láthatatlanná tett tárgyakat és élőlényeket. Termé„ 
+szetesen csak azokat, amelyeknél a diszciplína erőssége meg„ 
+haladja a láthatatlanság Erősségét (E). Hasonlóképp a Lep„ 
+lezett varázslatok esetében: az alkalmazó megpillanthatja a 
+láthatalanná tett mágikus hatásokat, varázslatokat. 
+Alapesetben a diszciplína erőssége (E) 1, de ez dupla vagy 
+tripla mennyiségű 'P „pont felhasználásával a végtelenségig 
+többszörözhető. Ugyenez igaz az 5 körös időtartamra is. 
+Asztrálszem 
+'l'p: 3 'Pp (erősíthető) 
+ME: asztrál 
+A meditáció ideje: 3 szegmens 
+Időtartam: azonnali 
+A diszciplína mások érzelmeinek, indulatainak kifürké„ 
+szésére alkalmas. Segítségével át lehet "látni" az Asztrál Paj„ 
+zson is. Bármilyen erőssítésű Asztrálszemmel tekintünk is va„ 
+lakire, egyet mindenképpen és biztosan megtudhatunk: az 
+illető érzelmi kiegyensúlyozottságának mértékét, másként 
+szólva Asztrálját (lásd Képességek). Ezen túl az áldozat jogo„ 
+sult Asztrális Mágiaellenállásra. 
+Abban az esetben, ha a kiszemelt áldozat Mágiaellenállása 
+sikeres, az alkalmazó csak a legnyilvánvalóbb érzelmeiről sze„ 
+rez tudomást „ melyek áltlában már puszta emberismerettel 
+is felfedezhetőek. Kimagaslóan erős érzelmekről van itt szó: 
+ilyen a heves szerelem, a vak gyűlölet, a szamuráj hűsége vagy 
+éppen a fellángoló szexuális vágy. Mindezeknek is csak a lé„ 
+tére derül fény; a céljukra, arra hogy az illető kinek vagy mi„ 
+nek az irányában érez, arra nem. Erre a diszciplína alkalma„ 
+zója legfeljebb következtethet: például kitalálhatja, hogy a 
+pap vak hűsége istene felé irányul. 
+Ha az áldozat elvéti Asztrális Mágiaellenállását, világossá 
+válik az érzelmek célja is, mitöbb, a kevésbé nyilvánvaló ér„ 
+zelmek is napvilágra kerülnek. Persze az Asztrál Szem egysze„ 
+ri használata nem egyenlő az áldozat érzelmi életének teljes 
+7 ••••••••••••••••••••••••••••••••••••••• 
+
+=== PDF page 127 ===
+JÁTÉKOSOK 
+feltérképezésével. Segítségével megpillantható „t nyí.lv-ánya„ 
+ló,-három átlagos vagy egy titkolt érzelem. Leg~többiról a „ 
+kor beszélünk, ha valaki összpontosít arra, hogy le ke mélyén 
+elrejtsen egy érzelmet illetve indulatot „ egyszerre legfeljebb 
+kettővel teheti. 
+A Szem alkalmazója vagy a KM„re bízza, hogy mesélje el, 
+mi az, amit lát, vagy célirányosan kérdezhet is. Felteheti a 
+kérdést, hogy a diszciplína áldozata miként érez meghatáro„ 
+zott személyek vagy eszmék irányában. Kérheti az öt legnyil„ 
+vánvalóbb érzelem felsorolását, vagy tudakozódhat egy eset„ 
+leges titkolt érzelem feló1. A választól függetlenül, a kérde„ 
+zést annyiszor ismételheti meg, ahányszor a felsorolt feltéte„ 
+lek lehetővé teszik. 
+A diszciplína egyszerre egyetlen személy ellen alkalmazha„ 
+tó, és a feltüntetet~ 3 szegmens alatt a teljes információcsere 
+lezajlik. Ez idő alatt az alkalmazó meditatív tudatállapotban 
+kell legyen. 
+A diszciplína másik használati módja, mikor az alkalmazó 
+az Asztrálszem tekintetével nem egy valakit vesz alaposan 
+szemügyre, hanem a 3 szegmens alatt gyorsan körbepásztáz. 
+Ilyenkor megtudhatja a közelben tartózkodó „ legfeljebb tíz „ 
+személy Asztrál Képességének értékét, de az érzelmeiket és 
+azok célját nem fürkészheti ki. 
+Az alkalmazásra szánt minden egyes további 'P „pont „ a 
+feltüntetett )„on felül „ nem egyel, hanem )„mal növeli a 
+diszciplína Erősségét. 
+Az Asztrálszém használatáról a diszciplína áldozata ill. ál„ 
+dozatai nem szereznek tudomást! 
+••••••••••••••••••••••••••••••••••••••• 
+KÉZIKÖNYVE 
+Mentálszem 
+A Mentálszem egyetlen személy gondolati életének 
+minőségéró1 ad felvilágosítást. Segítségével át lehet "látni" a 
+Mentálpajzson, bár ilyenkor nem égbekiáltó az eredmény „ de 
+nem is lebecsülendő. 
+A Mentálszem használata ellen a kiszemelt áldozat Men„ 
+tális Mágiaellenállásra jogosult. Ha ez sikeres, akkor az alkal„ 
+mazó csak annyit tud meg róla, hogy figyelemreméltó elme„e, 
+netán átlagos gondolkodó, vagy éppen afféle "ostoba tuskó". 
+Továbbá azt, hogy valakitó1, vagy valakihez Mentál„fonál ve„ 
+zet. Hogy kitó1 kihez, az csak akkor deríthető ki, ha az alkal„ 
+mazó mindkét áldozatot szemügyre veszi Mentál Szemével. 
+Ha az áldozat elvéti Mágiaellenállását, az alkalmazó szám„ 
+szerűen tudomást szerez Intelligencia és Akaraterő Képessé„ 
+géró1, valamint a Kasztjáról és plusz„mínusz 1 eltéréssel Ta„ 
+pasztalati Szintjéről és 'P „használatának szintjéró1. 
+A diszciplína egyszerre egyetlen személy ellen alkalmazha„ 
+tó, és a feltüntetett 5 szegmens alatt a teljes infomációcsere 
+lezajlik. Ez alatt az alkalmazó meditatív tudatállapotban kell 
+legyen. 
+A diszciplína másik használati módja, mikor az alkalmazó 
+a Mentál Szemmel nem egy valakit vesz alaposan szemügyre, 
+hanem az 5 szegmens alatt gyorsan körbepásztáz. Ilyenkor 
+legfeljebb tíz, közelében tartózkodó személyró1 tudhatja meg 
+azt, amit a sikeres Mágiaellenállás esetében írtunk le, de mást 
+nem fürkészhet ki. 
+Az alkalmazásra szánt minden egyes további 'P „pont „ a 
+feltüntett 5„ön felül „ nem 1„gyel, hanem z„vel növeli a dísz„ 
+ciplína Erősségét. 
+A Mentálszem használatáról a diszciplína áldozata ill. ál„ 
+dozatai nem szereznek tudomást! 
+Auraérzékelés 
+'l'p: 7 'Pp (erősíthető) 
+ME: asztrál és mentál 
+A meditáció ideje: 1 szegmens 
+Időtartam: lásd a leírást! 
+Minden kifejlett lélekkel bíró teremtmény kisugároz magá„ 
+ból Személyes Aurát. Ez azon túl, hogy megvédi a lélek uralta 
+testet a mágia bizonyos formáitól, messzemenően jellemző az 
+illetőre. Egy varázsló képes arra, hogy különleges érzékeivel 
+szemügyre vegye az Aurát. Ha már máskor is "látta" és megje„ 
+gyezte, az Aura alapján felismeri a lelket, bármely testben lako„ 
+zik is. Képes észlelni a szembeötlő természetellenességet is, mint 
+mikor az emberi lélek állatban lakozik, vagy fordítva. Továbbá 
+meg tudja állapítani, hogy az illető milyen fajhoz tartozik. 
+Mivel azonban az Asztrál és Mentál Pajzsok az Aura kö„ 
+rül épülnek fel, mindezen információt csak akkor szerezheti 
+meg, ha "átlát" a Pajzsokon. Ezt csak úgy érheti el, hogy az 
+. Auraérzékelést annyira felerősíti, hogy áldozata elvétse külön„ 
+••••••••••••••••••••••••••••••••••••••• 
+
+=== PDF page 128 ===
+JÁTÉKOSOK 
+külön, mind Asztrális, mind Mentális Mágiaellena 
+Mindaddig, míg ez nem történik meg, a dísze 
+&na csa 
+Pajzsok erősségéró1 szolgáltat adatokat. Nem sz~lS!lef'(í 
+hanem a következő táblázat szerint elárulja, milyen na1Z"1~1z:.-„ 
+rendű az illető Statikus Asztrál- és Mentálpajzsa, valamin. 
+Dinamikus Asztrál- és Mentálpajzsa. 
+pajzs E„je 
+nagyságrend 
+A diszciplínát előszeretettel használják alakjukat megvál-
+toztatott személyek felismerésére, netán vélt azonosság vagy 
+ennek ellenkezőjének tisztázására, mivel az Aura elváltozta, 
+tására nincs mód! 
+Az Auraérzékelésre szánt minden további 'I' -pont - a le-
+írt 7 -en felül - nem eggyel, hanem 2-vel növeli a diszciplína 
+erősségét. 
+Mágikus Tekintet 
+'l'p: 4 'l'p (erősíthető} 
+ME: akaraterőpróba 
+A meditáció ideje: 1 szegmens 
+Időtartam: lásd a leírást! 
+A diszciplína az Energiagyűjtés mellett a Kyr metódus má-
+sik csúcspontját jelenti. Kifejezetten újkeletű, bár évek alatt 
+széles körben elterjedt; kifejlesztése egy Ynev-szerte csak a 
+Smaragd Uraként ismert pyarroni mágus nevéhez fűződik. 
+Alapja az okkult tan, miszerint az anyagi porhüvelyben a 
+szem a legrövidebb út a lélek felé. Éppen ezért az alkalmazó-
+nak minden esetben a kiszemelt áldozat szemébe kell néznie. 
+Bárki, aki a diszciplína alkalmazójának szemébe néz, 
+Akaraterő-próbát köteles dobni, amit ha elvét többé nem ké-
+pes tekintetét a varázslóétól elszakítani. Bármit tehet, hátr-
+lálhat, akár rá is támadhat az alkalmazóra, de nem cseleked-
+het semmi olyat, minek eredményeként kiszabadulna a Má-
+gikus Tekintet béklyójából. Vagyis nem helyezhet semmit az 
+összekapcsolódó tekintetek útjába, nem fordulhat el, nem 
+léphet takarásba. A kapcsolat megtartása minden célja előtt 
+való! A Mágikus Tekintettől csak akkor szabadulhat, ha az 
+alkalamazó, tekintetének elfordításával szabadon engedi, 
+illetó1eg, ha harmadik személy akár csak egy szemvillanásra 
+is akadályt gördít a két pillantás kereszttüzébe. 
+Ha az áldozat kiszabadult, a diszciplína időtartama azon, 
+nal lejár, egyébként percekig, órákig, de elméletileg akár a 
+végtelenségig is tarthat. 
+A varázsló az ellen a személy ellen, aki Mágikus Tekinteté-
+nek rabja, magasabb hatásfokon képes Asztrál- és Mentálmá-
+giát alkalmazni. Ami természetesen feltételezi, hogy a varázs-
+lat ideje alatt az áldozat nem szabadul. Hogy az említett maga-
+sabb hatásfok mit jelent, az a következő táblázatból derül ki. 
+••••••••••••••••••••••••••••••••••••••• 
+10. 
+11. 
+12. 
+13. 
+14. 
+15. 
+KÉZIKÖNYVE 
++E 
+A varázslat Erősségéhez 'l'E) hozzáadandó az adott Ta-
+pasztalati Szinten, a +E rovtban feltüntetett E érték. '!'Pél-
+dául: 4. TSZ-en, ha a varázslat E-je 13, Mágikus Tekintet rab-
+ságában az Erősség 20-nak minősül.} 
+A varázslat létrejöttével - de még időtartamának lejártával 
+sem - az áldozat nem szabadul a Mágikus Tekintet bilincséb61. 
+Ez csak a fent említett esetekben történhet, addig a varázsló 
+annyiszor varázsol rá a leírt kedvezménnyel, ahányszor csak jó-
+nak látja, illetve ameddig Mana-pontjai el nem fogynak. 
+'P-ostrom 
+'l'p: 1 'l'p (erősíthető) 
+ME:-
+A meditáció ideje: l szegmens 
+Időtartam: lásd a leírást! 
+Mindenben azonos az Általános Diszciplínáknál leírt '!'-
+ostrommal, ám ezzel 1 '1'-pontért 2 '1'-pont bontható le a 
+Dinamikus, és 2 E rombolható le a statikus pajzsokból. 
+• •••••••••••••••••••••••••••••••••••••• 
+
+=== PDF page 129 ===
+JÁTÉKOSOK 
+Pszi diszciplínák össz.ef oglaló táblázata 
+Általános Diszciplína 
+'l'p igény 
+Telekinézis 
+Telepátia 
+Testhőmérséklet n/cs 
+_, ___ '""""-........... -
+Pszi,lökés 
+Slan Diszciplína 
+Zavarás 
+Pszi,pajzs, Statikus 
+Kyr Diszciplína 
+Asztrálszem 
+Auraérzékelés „ ____ _ 
+Energiagyűjtés 
+Láthatatlanság Észlelése 
+Mágikus Tekintet 
+Mentálszem 
+'l'p igény 
+mint 
+'l'p igény 
+........ .._ .. ------~--~'~ 
+Transz 
+Pszi, ostrom 
+1 (erősíthető) 
+ME* 
+ME 
+ME 
+*A, Asztrál ME; M, Mentál ME; AP, Akaraterő,próba 
+••••••••••••••••••••••••••••••••••••••• 
+KÉZIKÖNYVE 
+Meditáció ideje 
+Meditáció ideje 
+Meditáció ideje 
+1 szegmens 
+Időtartam 
+Időtartam 
+1 óra 
+3 kör 
+lóra 
+1 
+lásd a leírást 
+Időtartam 
+korlátlan 
+lásd a leírást 
+• •••••••••••••••••••••••••••••••••••••• 
+
+=== PDF page 130 ===
+JÁTÉKOSOK 
+KÉZIKÖNYVE 
+Típus 
+Szféra 
+Mana-pont 
+Erősség 
+Varázslás ideje 
+Hatótáv 
+Időtartam 
+Mág.iae11ená1lás 
+G 
+ttaum hátrazuhant, 
+szétvetett karokkal 
+terült el. Nevezetes 
+csontfüzérének egy darabja 
+vakítóan tündökölt, bíbor 
+izzással övezte alakját. Azu-
+tán életre kelt: a nyers ma-
+na hajtásai mohón kígyóz-
+tak a boszorkány felé, s 
+szomjasan nyelték aurájá-
+ból az energiát ... 
+,részlet Wayne Chapman 
+Csepp és tenger e. regényéből 
+MÁGIARENDSZER 
+BEVEZETŐ 
+11 
+z ~gy~s "attázslatok leírása-
+kor több ismétlődő fogalom-
+mal találkozhat a játékos. Ezek 
+a mágia olyan jellemzői, melyek min-
+den varázslat leírásában előfordulnak, s 
+fontos szerepük van a pontos hatás is-
+mertetésében. 
+TíPUS 
+E 
+z a ttO\)at tájékoztat arról, hogy 
+a varázslat a mágiarendszer 
+mely nagy csoportjába tartozik. 
+A csoportok leírásában sok tudnivaló 
+szerepel, mely minden oda tartozó va-
+rázslatra jellemző. Ez segít a játékosnak 
+és a KM-nek, hogy könnyebben lássák 
+át a varázslatok felépítésének rendsze-
+rét. Az ily módon szerzett rálátás lehe-
+tővé teszi, hogy egy mágiahasználó el -
+kötelezhesse magát egy vagy több kivá-
+lasztott csoport mellet, ha úgy látja he-
+lyesnek. Még átélhetóobé válik a ka-
+rakter akkor, ha ez személyiségében is 
+megjelenik. 
+SZFÉRA 
+· K 
+izáttólag a papmágia varázsla-
+tainál találkozhatunk ezzel a 
+· 
+jellemzővel, mely szerepét te-
+kintve megegyezik a fenti Típuséval. 
+Részletes leírásával a papmágia foglal-
+kozik. 
+MANA-PONT 
+B 
+tto"at megmutatja, a varázslat 
+megidézése mennyi mágikus 
+energia befektetését, azaz Mp-t 
+követel használójától. A mágiahaszná-
+lók maximális Mp-iró1 és azok vissza-
+nyeréséről. bővebben a Kasztoknál ol-
+vashatók tudnivalók. Fontos, hogy a va-
+rázslat Mana-pont igénye arra az Erős­
+ségre vonatkozik, amely az azonos nevű 
+rovatban szerepel. További Mp-k befek-
+tetésével az Erősítés a varázslatban leírt 
+módon növelhető, így a Mana-pont ro-
+vat csak a varázslat használatához szük-
+séges legkevesebb Mp-t adja meg. 
+~~ 
+••••••••••••••••••••••••••••••••••••••• 
+· 1~1 )······································· 
+
+=== PDF page 131 ===
+JÁTÉKOSOK 
+ERŐSSÉG 
+1 
+tt találjuk a varázslat minimális erősítésének 
+mágia típusától függően az erősítés kihathat a me · 
+mágiával szemben alkalmazható ellenállás leküzdésére, i ·, 
+letve a létrehozott mágia nagyságára. Elóobiró1 részletesen a 
+Mágiellenállás leírása tudósít. Az elemi mágia erősségének 
+nagysága minden esetben a megidézett anyag mennyiségében 
+jelenik meg. 
+A VARÁZSLÁS IDEJE 
+11 
+zt az időtartamot jelenti, mely a varázslat megidé, 
+zéséhez szükséges. Arra az esetre vonatkozik, amikor 
+a mágiahasználó a varázslás összes szükséges kel, 
+lékével rendelkezik. 
+HATÓTÁV 
+B 
+bool d~ttül ki, hogy az alkalmazott mágia mekkora tá, 
+volsfigig használható, illetve mekkora területen fejti ki 
+hatását. 
+IDŐTARTAM 
+11 
+uattázslat hatóidejét jelöli meg. A végleges és ma, 
+radandó Időtartamok hatása soha nem enyészik el, 
+hacsak más, természetes vagy mágikus módon nem 
+változtatják meg azt. Az "egyszeri„ kifejezés olyan varázslatok 
+esetében használandó, melyek egyetlen alkalommal, gyorsan 
+fejtik ki hatásukat , mint például a villámok. 
+MÁGIAELLENÁLLÁS 
+m 
+~gmutatja, mi módon védekezhet a megtáma, 
+dott a varázslat hatása ellen. Az Asztrál, és 
+Mentálmágia ellen lehetőség nyílik Mágiaellen, 
+állás dobásra, a Pszi idevágó fejezetében leírtak szerint. A 
+megtámadott klO,zel dob, s a kapott eredményhez hozzáad, 
+ja a varázslat Erősítését. Amennyiben az így kapott érték ki, 
+sebb vagy egyenlő, mint az Asztrál illetve Mentál ME, az el, 
+lenállás sikeres, a mágia hatástalan maradt. Az Elemi és Ter, 
+mészeti mágia ellen ME nincs, bár ez alól egyes esetek kivé, 
+telt képezhetnek. Itt említjük meg, hogy .a varázslók és har, 
+művészek, ha úgy érzik, hogy a rájuk varázsolt mágia hasznos 
+számukra, megszüntethetik TME,jüket. Erre csak ó'k képe, 
+sek, a jelenség magyarázata pedig az a mindenre kiterjedő 
+szellemi kontroll, amivel senki más nem rendelkezik. 
+A varázslatok legfontosabb ismérveit összefoglalva talál, 
+hatjuk meg az ezzel foglalkozó táblázatokban. Ezekből meg, 
+tudhatók a varázslat olyan jellemzői, melyek segítségével rö, 
+vid gyakorlat után szükségtelenné válik a részletes leírás fella, 
+pozása, s a játék sebessége ezáltal jelentősen megnövelhető . 
+••••••••••••••••••••••••••••••••••••••• 
+KÉZIKÖNYVE 
+• •••••••••••••••••••••••••••••••••••••• 
+
+=== PDF page 132 ===
+JÁTÉK 0 S o ·K 
+KÉZIKÖNYVE 
+Dalmágia 
+Hangmágia 
+Fénymágia 
+Egyéb hárdmágiák 
+(J 
+Qttás közMn szabad-
+jára engedte energiá-
+it. A búvárok vakító 
+villanást láttak, aztán, ahogy a 
+manaörvény lecsapott rájuk, 
+nem láttak többé semmit: a va-
+rázslat éteri szikrává robban-
+totta a fénysugarakat, és utat 
+nyitott az bárd számára a 
+kapubolt felé.„ 
+részlet Wayne Chapman 
+Karnevál e. regényéből 
+BÁRDMÁGIA 
+A BÁRD MANA-PONTJAI 
+11 
+báttd mágiájának titkát hiába 
+keresnénk Y nev beláthatatlan 
+térségein: e kaszt képviselői 
+Mana-pontjaikat - ellentétben az összes 
+többi varázshasználó kaszttal - a Fel-
+só1Jb Szférák, a csillagok energiájából 
+merítik. Éjszakánként, mikor fények 
+garmadája tündököl az égen, a bárdnak 
+lehetősége nyílik arra, hogy (maga vá-
+lasztotta föhangszerén) ·megszólaltassa 
+a misztikus erők Összhangzatát. Az 
+Összhangzat megszólaltatása mind-
+össze 18 kört vesz igénybe, ez idő alatt 
+a bárd max. Mp-jaira kerül. A bárd 
+csak akkor képes az Összhangzat segít-
+ségével Mana-pontokhoz jutni, ha a 
+csillagfény szabad szemmel érzékelhető 
+számára - borús ég alatt, zivatar sötét-
+jében nem jutnak el hozzá az energiák. 
+l~I 
+DALMÁCIA 
+V 
+swu 
+báttdjai jártasak az 
+Asztrál- és Mentálvarázslatok 
+használatában, ám azokat csak 
+egy különleges módszer, a Dalmágia se-
+gítségével képesek alkalmazni. Ennek 
+gyakorlásához énekelniük vagy muzsi-
+kálniuk kell, hogy a dallamok formába 
+öntsék, és célba juttassák, a varázslat 
+bennük felgyűlt energiáit. 
+FIGYELEM! A bárd dalmágiája ki-
+zárólag éló1ényekre hat! 
+A varázslat eredményességének 
+feltélele az is, hogy a kiszemelt alany 
+hallja a dalt. Amennyiben a célpont sü-
+ket, vagy - saját jól felfogott érdekében 
+- fülének befogásával védekezik a má-
+gia ellen, a dal hatástalan marad. 
+A bárdok egyszerre több lényre is al-
+kalmazhatják a Dalmágia varázslatait, s 
+a dal hatókörén belül ó1c határozhatják 
+meg, ki le8Yen az, akire a dal varázslat-
+ként hat. A dal többi hallgatója nem 
+észleli a dallamba ágyazott mágiát: ér-
+tetlenül állnak majd társaik megválto-
+·····························~········· 
+••••••••••••••••••••••••••••••••••••••• 

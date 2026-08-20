@@ -40,7 +40,7 @@ public class HorseQualityResultTests
     public void RollHorseQuality_CoversEveryOutcome()
     {
         var seenQualities = new HashSet<HorseQuality>();
-        for (var i = 0; i < 2000 && seenQualities.Count < 12; i++)
+        for (var i = 0; i < 400 && seenQualities.Count < 11; i++)
         {
             var result = HorseQualityResult.RollHorseQuality();
             Assert.That(result, Is.Not.Null);

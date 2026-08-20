@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:MAGUS.Assistant.ViewModels"
+             x:Class="MAGUS.Assistant.Views.CharacterCareView"
+             x:ClassModifier="internal"
+             x:DataType="vm:CharacterViewModel">
+    <ScrollView>
+        <VerticalStackLayout Spacing="16" Padding="16">
+
+            <!-- Hunger -->
+            <Border Style="{StaticResource BoxBorder}">
+                <VerticalStackLayout Spacing="4">
+                    <Label Text="Hunger" Style="{StaticResource HeaderLabel}"/>
+                    <Label Text="{Binding HungerPercent, StringFormat='{0:F0}%'}" FontSize="20">
+                        <Label.Triggers>
+                            <DataTrigger TargetType="Label" Binding="{Binding IsHungerCritical}" Value="True">
+                                <Setter Property="TextColor" Value="#FF3B30" />
+                            </DataTrigger>
+                        </Label.Triggers>
+                    </Label>
+                    <Label Text="Critically hungry - eating or a healing spell is urgent." TextColor="#FF3B30" IsVisible="{Binding IsHungerCritical}" FontSize="12" />
+                </VerticalStackLayout>
+            </Border>
+
+            <!-- Sleep -->
+            <Border Style="{StaticResource BoxBorder}">
+                <VerticalStackLayout Spacing="4">
+                    <Label Text="Rest" Style="{StaticResource HeaderLabel}"/>
+                    <Label Text="{Binding SleepPercent, StringFormat='{0:F0}%'}" FontSize="20">
+                        <Label.Triggers>
+                            <DataTrigger TargetType="Label" Binding="{Binding IsSleepCritical}" Value="True">
+                                <Setter Property="TextColor" Value="#FF3B30" />
+                            </DataTrigger>
+                        </Label.Triggers>
+                    </Label>
+                    <Label Text="Critically sleep-deprived - sleeping or a healing spell is urgent." TextColor="#FF3B30" IsVisible="{Binding IsSleepCritical}" FontSize="12" />
+                </VerticalStackLayout>
+            </Border>
+
+            <!-- Care actions -->
+            <Border Style="{StaticResource BoxBorder}">
+                <VerticalStackLayout Spacing="10">
+                    <Label Text="Care" Style="{StaticResource HeaderLabel}"/>
+                    <Button Text="Sleep" Command="{Binding SleepCommand}" />
+                    <Button Text="Eat" Command="{Binding EatCommand}" />
+                    <Button Text="Cast spell" Command="{Binding CastSpellCommand}" IsVisible="{Binding HasMagic}" />
+                </VerticalStackLayout>
+            </Border>
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentView>

@@ -39,17 +39,6 @@ internal sealed class AssignmentViewModel : BaseViewModel
         set => SetProperty(ref selectedAttackMode, value);
     }
 
-    /// <summary>Null (="Auto") plus every attack mode (weapon, psi, spell) currently available to the character.</summary>
-    public IReadOnlyList<Attack?> AvailableAttackModes
-    {
-        get
-        {
-            var modes = new List<Attack?> { null };
-            modes.AddRange(Character.AttackModes);
-            return modes;
-        }
-    }
-
     private void OnCharacterPropertyChanged(object? sender, PropertyChangedEventArgs e)
     {
         if (e.PropertyName != nameof(GameSystem.Character.AttackModes))
@@ -57,7 +46,6 @@ internal sealed class AssignmentViewModel : BaseViewModel
             return;
         }
 
-        OnPropertyChanged(nameof(AvailableAttackModes));
         if (SelectedAttackMode != null && !Character.AttackModes.Contains(SelectedAttackMode))
         {
             SelectedAttackMode = null;

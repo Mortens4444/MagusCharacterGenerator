@@ -1,4 +1,5 @@
 ﻿using MAGUS.Enums;
+using MAGUS.GameSystem.Places;
 using MAGUS.GameSystem.Valuables;
 using MAGUS.Models;
 using MAGUS.Qualifications;
@@ -50,7 +51,9 @@ public interface ICharacter
 
     int DynamicMentalPsiShield { get; }
 
-    string Birthplace { get; set; }
+    City Birthplace { get; set; }
+
+    City CurrentLocation { get; set; }
 
     string School { get; set; }
 

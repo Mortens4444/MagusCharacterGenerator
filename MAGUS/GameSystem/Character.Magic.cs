@@ -178,9 +178,12 @@ public partial class Character
         }
     }
 
-    public override int GetAstralMagicResistance() => UnconsciousAstralMagicResistance + (IsConscious ? StaticAstralPsiShield + DynamicAstralPsiShield : 0);
+    // Rulebook (p.121): a Statikus Pajzs keeps working even while its builder is asleep or
+    // unconscious ("Védő hatását akkor is kifejti, ha a P-alkalmazó alszik, eszméletlen..."), so
+    // unlike the Dynamic shield it isn't gated behind IsConscious.
+    public override int GetAstralMagicResistance() => UnconsciousAstralMagicResistance + StaticAstralPsiShield + (IsConscious ? DynamicAstralPsiShield : 0);
 
-    public override int GetMentalMagicResistance() => UnconsciousMentalMagicResistance + (IsConscious ? StaticMentalPsiShield + DynamicMentalPsiShield : 0);
+    public override int GetMentalMagicResistance() => UnconsciousMentalMagicResistance + StaticMentalPsiShield + (IsConscious ? DynamicMentalPsiShield : 0);
 
     public override int GetManaPoints() => ManaPoints;
 

@@ -9,6 +9,8 @@ public sealed class SpellAttack : MysticAttack
 
     public int ManaCost => Spell.ManaCost;
 
+    public int PainTolerancePointCost => Spell.PainTolerancePointCost;
+
     [JsonConstructor]
     public SpellAttack() : base() { }
 

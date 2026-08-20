@@ -76,10 +76,9 @@
                                 </HorizontalStackLayout>
                                 <!--<Label Text="{Binding Character.Speed, StringFormat='Speed: {0} m/s'}" FontSize="12" />-->
 
-                                <Picker ItemsSource="{Binding AvailableAttackModes}"
-                                        SelectedItem="{Binding SelectedAttackMode, Mode=TwoWay}"
-                                        ItemDisplayBinding="{Binding ., Converter={StaticResource AttackModeNameConverter}}"
-                                        Title="Attack mode" />
+                                <Button Text="{Binding SelectedAttackMode, Converter={StaticResource AttackModeNameConverter}, StringFormat='Attack mode: {0}'}"
+                                        Command="{Binding Source={RelativeSource AncestorType={x:Type vm:EncounterViewModel}}, Path=SelectAttackModeCommand}"
+                                        CommandParameter="{Binding .}" />
 
                                 <CollectionView ItemsSource="{Binding Enemies}" MaximumHeightRequest="140">
                                     <CollectionView.ItemTemplate>
@@ -152,12 +151,13 @@
         </Grid>
 
         <!-- Run turn + toggle (now docked to bottom) -->
-        <Grid Grid.Row="3" Grid.ColumnSpan="2" ColumnDefinitions="*,Auto,Auto,Auto" ColumnSpacing="8">
+        <Grid Grid.Row="3" Grid.ColumnSpan="2" ColumnDefinitions="*,Auto,Auto,Auto,Auto" ColumnSpacing="8">
             <Button Grid.Column="0" Command="{Binding ToggleShowControlsCommand}"
                     Text="{Binding ShowControls, Converter={StaticResource BoolToTextConverter}, ConverterParameter='Hide pairing|Show pairing'}"/>
             <Button Grid.Column="1" Text="Psi surge" Command="{Binding UsePsiSurgeCommand}" IsVisible="{Binding SelectedCharacterHasPsi}" />
-            <Button Grid.Column="2" Text="Empower spell" Command="{Binding EmpowerSpellCommand}" IsVisible="{Binding SelectedCharacterHasSorcery}" />
-            <Button Grid.Column="3" Text="Start New Round" Command="{Binding RunTurnCommand}" FontAttributes="Bold" />
+            <Button Grid.Column="2" Text="Dismantle shield" Command="{Binding DismantlePsiShieldCommand}" IsVisible="{Binding SelectedCharacterHasPsi}" />
+            <Button Grid.Column="3" Text="Empower spell" Command="{Binding EmpowerSpellCommand}" IsVisible="{Binding SelectedCharacterHasSorcery}" />
+            <Button Grid.Column="4" Text="Start New Round" Command="{Binding RunTurnCommand}" FontAttributes="Bold" />
         </Grid>
 
     </Grid>

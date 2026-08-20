@@ -7,13 +7,11 @@ namespace MAGUS.Assistant.ViewModels;
 [QueryProperty(nameof(Name), nameof(name))]
 internal sealed partial class CharacterDetailsViewModel : CharacterViewModel
 {
-    private readonly CharacterService characterService;
     private string name = String.Empty;
 
-    public CharacterDetailsViewModel(CharacterService characterService, ISoundPlayer soundPlayer, IShakeService shakeService, ISettings settings, IPrintService printService)
-        : base(printService, soundPlayer, shakeService, settings)
+    public CharacterDetailsViewModel(CharacterService characterService, ISoundPlayer soundPlayer, IShakeService shakeService, ISettings settings, IPrintService printService, SettingsService settingsService)
+        : base(printService, soundPlayer, shakeService, settings, characterService, settingsService)
     {
-        this.characterService = characterService;
         SelectedCombatValueModifier = AvailableCombatValueModifiers.FirstOrDefault();
     }
 

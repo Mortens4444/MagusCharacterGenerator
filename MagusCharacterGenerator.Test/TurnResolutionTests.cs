@@ -9,19 +9,38 @@ using MAGUS.Utils;
 
 namespace MAGUS.Test;
 
-internal sealed class FakeCombatRollService(int fixedRoll) : ICombatRollService
+internal sealed class FakeCombatRollService : ICombatRollService
 {
-    private readonly Queue<int>? sequence = null;
+    private const int SafeLocationRoll = 5; // valid for both HitLocationSelector's 1D9 and 1D10 sub-rolls
 
-    public int FixedRoll { get; set; } = fixedRoll;
+    private readonly Queue<int>? sequence;
 
-    public FakeCombatRollService(params int[] sequence) : this(sequence.Length > 0 ? sequence[0] : 1)
+    public int FixedRoll { get; set; }
+
+    /// <summary>Returns <paramref name="fixedRoll"/> for the 1D100 attack/aim roll, and a roll safely
+    /// within HitLocationSelector's ranges for everything else (so callers don't need to reason
+    /// about the hit-location sub-rolls that follow a successful attack).</summary>
+    public FakeCombatRollService(int fixedRoll)
     {
+        FixedRoll = fixedRoll;
+    }
+
+    /// <summary>Returns each value in sequence, one per call, regardless of throw type.</summary>
+    public FakeCombatRollService(params int[] sequence)
+    {
+        FixedRoll = sequence.Length > 0 ? sequence[0] : 1;
         this.sequence = new Queue<int>(sequence);
     }
 
-    public Task<int> RollAsync(ThrowType throwType, string title = "") =>
-        Task.FromResult(sequence != null && sequence.Count > 0 ? sequence.Dequeue() : FixedRoll);
+    public Task<int> RollAsync(ThrowType throwType, string title = "")
+    {
+        if (sequence != null)
+        {
+            return Task.FromResult(sequence.Count > 0 ? sequence.Dequeue() : FixedRoll);
+        }
+
+        return Task.FromResult(throwType == ThrowType._1D100 ? FixedRoll : SafeLocationRoll);
+    }
 
     public Task<int> RollAsync(RollFormula formula, string title = "") => Task.FromResult(FixedRoll);
 

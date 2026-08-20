@@ -17,6 +17,9 @@ public interface ISpell
 
     int ManaCost { get; }
 
+    /// <summary>Extra Fájdalomtűrés (pain tolerance) points the caster themselves must spend to cast this, on top of ManaCost. Only a handful of Sámán spells have this "Mp + FP" cost split in the book; 0 for everything else.</summary>
+    int PainTolerancePointCost => 0;
+
     /// <summary>How much extra Power each additional mana point spent when casting this specific spell buys. Varies per spell.</summary>
     int PowerBonusPerManaPoint { get; }
 

@@ -14,8 +14,28 @@
         </ResourceDictionary>
     </ContentView.Resources>
 
-    <ScrollView>        
+    <ScrollView>
         <VerticalStackLayout Spacing="16" Padding="16">
+
+            <!-- Hunger and sleep: always visible, turn red once critical (see the Care tab for Sleep/Eat/Cast actions) -->
+            <Border Style="{StaticResource BoxBorder}">
+                <VerticalStackLayout Spacing="4">
+                    <Label Text="{Binding HungerPercent, StringFormat='🍗 Hunger: {0:F0}%'}" FontAttributes="Bold">
+                        <Label.Triggers>
+                            <DataTrigger TargetType="Label" Binding="{Binding IsHungerCritical}" Value="True">
+                                <Setter Property="TextColor" Value="#FF3B30" />
+                            </DataTrigger>
+                        </Label.Triggers>
+                    </Label>
+                    <Label Text="{Binding SleepPercent, StringFormat='😴 Rest: {0:F0}%'}" FontAttributes="Bold">
+                        <Label.Triggers>
+                            <DataTrigger TargetType="Label" Binding="{Binding IsSleepCritical}" Value="True">
+                                <Setter Property="TextColor" Value="#FF3B30" />
+                            </DataTrigger>
+                        </Label.Triggers>
+                    </Label>
+                </VerticalStackLayout>
+            </Border>
 
             <!-- Portrait -->
             <Border Style="{StaticResource BoxBorder}">
@@ -92,6 +112,21 @@
                                 Grid.Row="5"
                                 Grid.ColumnSpan="2" />
                     </Grid>
+                </VerticalStackLayout>
+            </Border>
+
+            <!-- Birthplace, current location, travel -->
+            <Border Style="{StaticResource BoxBorder}">
+                <VerticalStackLayout Spacing="8">
+                    <Label Text="Birthplace and travel" Style="{StaticResource HeaderLabel}"/>
+                    <Picker ItemsSource="{Binding Cities}"
+                            ItemDisplayBinding="{Binding ., Converter={StaticResource EnumDescriptionTranslationConverter}}"
+                            SelectedItem="{Binding Birthplace}"
+                            Title="Birthplace" />
+                    <mc:EntryWithLabel Label="Current location"
+                                       Text="{Binding CurrentLocation, Converter={StaticResource EnumDescriptionTranslationConverter}}"
+                                       IsReadOnly="True" />
+                    <Button Text="Travel" Command="{Binding TravelCommand}" />
                 </VerticalStackLayout>
             </Border>
 

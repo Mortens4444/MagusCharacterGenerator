@@ -1,4 +1,5 @@
 using MAGUS.GameSystem.Psi.Disciplines.General;
+using MAGUS.GameSystem.Psi.Disciplines.Kyr;
 using MAGUS.GameSystem.Psi.Disciplines.Slan;
 using MAGUS.Interfaces;
 
@@ -15,10 +16,47 @@ public static class PsiDisciplineCatalog
     private static readonly IReadOnlyList<IPsiDiscipline> General =
     [
         new PsiPush(),
-        new PsiSiege()
+        new PsiSiege(),
+        new MemoryRecall(),
+        new SelfWaking(),
+        new SenseAlteration(),
+        new PainRelief(),
+        new SixthSense(),
+        new AbilityEnhancement(),
+        new Telekinesis(),
+        new Telepathy(),
+        new BodyTemperatureControl(),
+        new StaticPsiShield(),
+        new DynamicPsiShield()
     ];
 
-    private static readonly IReadOnlyList<IPsiDiscipline> SlanOnly = [new DeathTouch()];
+    private static readonly IReadOnlyList<IPsiDiscipline> SlanOnly =
+    [
+        new DeathTouch(),
+        new GoldenBell(),
+        new InnerTime(),
+        new ChiCombat(),
+        new Imperceptibility(),
+        new Insignificance(),
+        new SlanLevitation(),
+        new SlanStaticPsiShield(),
+        new WeightChange(),
+        new SuspendedAnimation()
+    ];
+
+    private static readonly IReadOnlyList<IPsiDiscipline> KyrOnly =
+    [
+        new Disruption(),
+        new EnergyGathering(),
+        new ForcedEnergyExtraction(),
+        new KyrTrance(),
+        new DetectInvisibilityKyr(),
+        new AstralEye(),
+        new MentalEye(),
+        new AuraSense(),
+        new MagicGaze(),
+        new KyrPsiSiege()
+    ];
 
     public static IEnumerable<IPsiDiscipline> GetAvailable(Character character)
     {
@@ -30,6 +68,7 @@ public static class PsiDisciplineCatalog
         return character.Psi.PsiKind switch
         {
             PsiKind.Slan => [.. General, .. SlanOnly],
+            PsiKind.Kyr => [.. General, .. KyrOnly],
             _ => General
         };
     }

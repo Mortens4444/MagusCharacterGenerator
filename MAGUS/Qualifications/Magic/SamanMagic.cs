@@ -1,4 +1,5 @@
-﻿using MAGUS.GameSystem.Magic;
+﻿using MAGUS.Enums;
+using MAGUS.GameSystem.Magic;
 using MAGUS.Utils;
 
 namespace MAGUS.Qualifications.Magic;
@@ -19,4 +20,6 @@ public class SamanMagic : Sorcery
     }
 
     public override string Name => "Saman magic";
+
+    public override MagicSchool School => MagicSchool.Shaman;
 }

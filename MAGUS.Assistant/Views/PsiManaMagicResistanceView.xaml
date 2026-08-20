@@ -43,8 +43,11 @@
                         <mc:EntryWithLabel Label="Dynamic Astral ᛉ-Shield" Text="{Binding DynamicAstralPsiShield}" IsReadOnly="True" Grid.Row="2" />
                         <mc:EntryWithLabel Label="Dynamic Mental ᛉ-Shield" Text="{Binding DynamicMentalPsiShield}" IsReadOnly="True" Grid.Row="2" Grid.Column="1" />
                     </Grid>
+                    <Button Text="Build psi shield" Command="{Binding BuildPsiShieldCommand}" IsVisible="{Binding HasPsi}" Margin="0,10,0,0" />
                 </VerticalStackLayout>
             </Border>
+
+            <Button Text="Cast spell" Command="{Binding CastSpellCommand}" IsVisible="{Binding HasMagic}" />
 
         </VerticalStackLayout>
     </ScrollView>

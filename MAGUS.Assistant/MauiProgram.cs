@@ -182,6 +182,7 @@ internal static class MauiProgram
         });
 
         builder.Services.AddTransient<ISettings, SettingsService>();
+        builder.Services.AddTransient<ILanguageSettingsService, SettingsService>();
     }
 
     private static void RegisterSingletonServices(MauiAppBuilder builder)

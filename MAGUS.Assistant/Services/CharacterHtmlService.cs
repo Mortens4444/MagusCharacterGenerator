@@ -67,7 +67,7 @@ internal sealed class CharacterHtmlService
             .Append(CreateCell(Lng.Elem("Level"), character.Level.ToString(), "15%"))
             .Append(CreateCell(Lng.Elem("Alignment"), Lng.Elem(Lng.Elem(character.Alignment.GetDescription())), "35%"))
             .Append("</div><div class='row'>")
-            .Append(CreateCell(Lng.Elem("Birthplace"), character.Birthplace, "50%"))
+            .Append(CreateCell(Lng.Elem("Birthplace"), Lng.Elem(character.Birthplace.GetDescription()), "50%"))
             .Append(CreateCell(Lng.Elem("School"), character.School, "50%"))
             .Append("</div></div>")
 

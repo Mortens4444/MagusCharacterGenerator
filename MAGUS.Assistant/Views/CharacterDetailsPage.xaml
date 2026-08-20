@@ -18,6 +18,7 @@
                 <Button Text="🧙" Command="{Binding ChangeTabCommand}" CommandParameter="3" />
                 <Button Text="📖" Command="{Binding ChangeTabCommand}" CommandParameter="4" />
                 <Button Text="🎒" Command="{Binding ChangeTabCommand}" CommandParameter="5" />
+                <Button Text="🍗" Command="{Binding ChangeTabCommand}" CommandParameter="6" />
             </HorizontalStackLayout>
         </ScrollView>
 

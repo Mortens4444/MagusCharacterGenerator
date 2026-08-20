@@ -50,9 +50,10 @@ public class MoneyOperatorTests
         Assert.That(big > small, Is.True);
         Assert.That(small <= new Money(1), Is.True);
         Assert.That(big >= new Money(1), Is.True);
-        Assert.That(small == small, Is.True);
-        Assert.That(small <= small, Is.True);
-        Assert.That(small >= small, Is.True);
+        var sameInstance = small;
+        Assert.That(small == sameInstance, Is.True);
+        Assert.That(small <= sameInstance, Is.True);
+        Assert.That(small >= sameInstance, Is.True);
     }
 
     [Test]

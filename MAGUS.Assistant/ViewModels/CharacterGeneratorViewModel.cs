@@ -22,18 +22,16 @@ namespace MAGUS.Assistant.ViewModels;
 internal sealed partial class CharacterGeneratorViewModel : CharacterViewModel
 {
     private readonly ISettings settings;
-    private readonly CharacterService characterService;
     private readonly ISoundPlayer soundPlayer;
     private readonly IShakeService shakeService;
 
     private int baseClassLevel = 1;
     private bool isCharacterGenerated;
 
-    public CharacterGeneratorViewModel(CharacterService characterService, ISoundPlayer soundPlayer, IShakeService shakeService, ISettings settings, IPrintService printService)
-         : base(printService, soundPlayer, shakeService, settings)
+    public CharacterGeneratorViewModel(CharacterService characterService, ISoundPlayer soundPlayer, IShakeService shakeService, ISettings settings, IPrintService printService, SettingsService settingsService)
+         : base(printService, soundPlayer, shakeService, settings, characterService, settingsService)
     {
         this.settings = settings;
-        this.characterService = characterService;
         this.soundPlayer = soundPlayer;
         this.shakeService = shakeService;
         Character = new Character(settings);

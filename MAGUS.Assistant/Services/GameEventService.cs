@@ -57,12 +57,24 @@ internal sealed class GameEventService(CharacterService characterService, IServi
         (GameEventKind.FortuneGift, 7),
         (GameEventKind.StrayDog, 5),
         (GameEventKind.PersonInNeed, 8),
-        (GameEventKind.Hunger, 7),
         (GameEventKind.Trap, 5)
     ];
 
-    private const int HungerDamagePerTick = 2;
+    // Hunger and sleep no longer compete for a slot in eventWeights above - both decay
+    // unconditionally every tick (see ApplyHungerTickAsync/ApplySleepTickAsync), independent of
+    // which random event (if any) also rolls.
+    private const double HungerDecayPercentPerTick = 100.0 / 8; // 0% (fully starving) after 8 ticks without food
+    private const double SleepDecayPercentPerTick = 100.0 / 16; // 0% (exhausted) after 16 ticks without sleep - a character needs to sleep about half as often as they need to eat
+    private const double CriticalNeedThreshold = 10; // shared by hunger and sleep: below this, each further tick costs Fájdalomtűrés/HP
 
+    // Non-critical "you should eat/sleep soon" warnings, shown once each as the percentage first
+    // drops below them (lowest/most urgent one crossed in a given tick wins, in case a single
+    // tick's decay skips past more than one - e.g. the fixed-size hunger step from 25% lands on
+    // 12.5%, crossing both 20 and 15 at once). Kept ascending so the ordering logic below reads
+    // naturally. Shared between hunger and sleep since both use the same warning percentages.
+    private static readonly double[] needWarningThresholds = [20, 15];
+
+    private readonly DiceThrow diceThrow = new();
     private readonly CharacterService characterService = characterService;
     private readonly IServiceProvider serviceProvider = serviceProvider;
 
@@ -82,9 +94,13 @@ internal sealed class GameEventService(CharacterService characterService, IServi
 
     /// <summary>
     /// Rolls a random story event and, when a default character is set, applies its real effect
-    /// (market prices, a stolen item, or a pending ambush) against that character. An already-hungry
-    /// character bypasses the normal roll entirely: hunger keeps reminding and escalating every tick
-    /// until it's addressed (see ApplyHungerProgressionAsync).
+    /// (market prices, a stolen item, or a pending ambush) against that character. Hunger and sleep
+    /// both decay unconditionally on every tick regardless of what else rolls (see
+    /// ApplyHungerTickAsync/ApplySleepTickAsync) - both always run, so neither's progress is ever
+    /// skipped because the other also had something to say this tick. Only when one of them actually
+    /// has something noteworthy (a threshold crossed, or critical damage) does it dominate the tick
+    /// and suppress the normal roll; hunger wins if both do in the same tick, an arbitrary but
+    /// deterministic tie-break for what should be a rare simultaneous crossing.
     /// </summary>
     public async Task<(string Title, string Message)> RollAndApplyAsync()
     {
@@ -92,9 +108,21 @@ internal sealed class GameEventService(CharacterService characterService, IServi
         {
             var settingsService = GetCurrentSettings();
             var character = await GetDefaultCharacterAsync(settingsService).ConfigureAwait(false);
-            if (character is not null && character.IsHungry)
+
+            if (character is not null)
             {
-                return await ApplyHungerProgressionAsync(character).ConfigureAwait(false);
+                var hungerResult = await ApplyHungerTickAsync(character).ConfigureAwait(false);
+                var sleepResult = await ApplySleepTickAsync(character).ConfigureAwait(false);
+
+                if (hungerResult is { } hunger)
+                {
+                    return hunger;
+                }
+
+                if (sleepResult is { } sleep)
+                {
+                    return sleep;
+                }
             }
 
             var kind = character is null ? GameEventKind.Flavor : PickEventKind();
@@ -110,7 +138,6 @@ internal sealed class GameEventService(CharacterService characterService, IServi
                 GameEventKind.FortuneGift => await ApplyFortuneGiftAsync(character!).ConfigureAwait(false),
                 GameEventKind.StrayDog => await ApplyStrayDogAsync(character!).ConfigureAwait(false),
                 GameEventKind.PersonInNeed => await ApplyPersonInNeedAsync(settingsService, character!).ConfigureAwait(false),
-                GameEventKind.Hunger => await ApplyHungerOnsetAsync(character!).ConfigureAwait(false),
                 GameEventKind.Trap => await ApplyTrapAsync(character!).ConfigureAwait(false),
                 _ => ("MAGUS Assistant", Lng.Elem(PickFlavorOnlyMessage())),
             };
@@ -399,46 +426,118 @@ internal sealed class GameEventService(CharacterService characterService, IServi
         return $"{article} {Lng.Elem(trait)} {Lng.Elem(raceName)} {Lng.Elem(genderWord)}";
     }
 
-    private async Task<(string Title, string Message)> ApplyHungerOnsetAsync(Character character)
-    {
-        character.IsHungry = true;
-        await characterService.SaveAsync(character).ConfigureAwait(false);
-
-        return ("MAGUS Assistant",
-            String.Format(Lng.Elem("Your stomach growls, {0}. You should eat something soon."), character.Name));
-    }
-
     /// <summary>
-    /// Runs every tick while the character is hungry and hasn't eaten: pain tolerance drains first
-    /// (down to unconsciousness), and once that's exhausted, health points start dropping instead -
-    /// all the way to death if hunger is never addressed.
+    /// Runs on every background tick regardless of whether a random event also rolls: hunger always
+    /// drains by HungerDecayPercentPerTick. Crossing a needWarningThresholds entry (20%, 15%) shows
+    /// a one-time "you should eat soon" nudge with no mechanical effect yet. Below
+    /// CriticalNeedThreshold it starts actively hurting the character each further tick - pain
+    /// tolerance drains first (down to unconsciousness), and once that's exhausted, health points
+    /// start dropping instead, all the way to death if hunger is never addressed. Returns null only
+    /// when nothing noteworthy happened this tick, so the caller knows to let the normal event roll
+    /// (or the sleep tick's own message) take priority instead.
     /// </summary>
-    private async Task<(string Title, string Message)> ApplyHungerProgressionAsync(Character character)
+    private async Task<(string Title, string Message)?> ApplyHungerTickAsync(Character character)
     {
+        var previousHungerPercent = character.HungerPercent;
+        character.HungerPercent = Math.Max(0, previousHungerPercent - HungerDecayPercentPerTick);
+
+        if (character.HungerPercent >= CriticalNeedThreshold)
+        {
+            await characterService.SaveAsync(character).ConfigureAwait(false);
+
+            var crossedThreshold = needWarningThresholds
+                .Where(threshold => previousHungerPercent >= threshold && character.HungerPercent < threshold)
+                .OrderBy(threshold => threshold)
+                .Cast<double?>()
+                .FirstOrDefault();
+
+            if (crossedThreshold is not { } threshold)
+            {
+                return null;
+            }
+
+            var warningMessage = threshold <= 15
+                ? String.Format(Lng.Elem("You're quite hungry now, {0} ({1:F0}% fed) - eat soon or it will start to hurt."), character.Name, character.HungerPercent)
+                : String.Format(Lng.Elem("Your stomach growls, {0} ({1:F0}% fed) - you're getting hungry."), character.Name, character.HungerPercent);
+
+            return ("MAGUS Assistant", warningMessage);
+        }
+
+        var damage = diceThrow._1D6();
         var hasPainTolerance = character.MaxPainTolerancePoints.HasValue;
         var currentPainTolerancePoints = character.ActualPainTolerancePoints ?? 0;
 
         string message;
         if (hasPainTolerance && currentPainTolerancePoints > 0)
         {
-            character.ActualPainTolerancePoints = Math.Max(0, currentPainTolerancePoints - HungerDamagePerTick);
+            character.ActualPainTolerancePoints = Math.Max(0, currentPainTolerancePoints - damage);
             message = character.ActualPainTolerancePoints <= 0
-                ? String.Format(Lng.Elem("Hunger has worn you down, {0} - you collapse, barely conscious. Eat something!"), character.Name)
-                : String.Format(Lng.Elem("You are still hungry, {0}, and it is starting to hurt. Eat something soon."), character.Name);
+                ? String.Format(Lng.Elem("Starvation has worn you down, {0} - you collapse, barely conscious. Eat something!"), character.Name)
+                : String.Format(Lng.Elem("You are critically hungry, {0}, and it is starting to hurt badly. Eat something now!"), character.Name);
         }
         else
         {
-            character.ActualHealthPoints = Math.Max(0, character.ActualHealthPoints - HungerDamagePerTick);
+            character.ActualHealthPoints = Math.Max(0, character.ActualHealthPoints - damage);
+            message = character.IsDead
+                ? String.Format(Lng.Elem("{0} has starved to death. Without food, the body simply gives out."), character.Name)
+                : String.Format(Lng.Elem("Starvation is taking its toll on your body, {0}. You need food, now."), character.Name);
+        }
 
-            if (character.IsDead)
+        await characterService.SaveAsync(character).ConfigureAwait(false);
+
+        return ("MAGUS Assistant", message);
+    }
+
+    /// <summary>
+    /// Sleep's counterpart to ApplyHungerTickAsync - same shape, half the decay rate (a character
+    /// needs to sleep about half as often as they need to eat), same shared warning/critical
+    /// thresholds. Returns null only when nothing noteworthy happened this tick.
+    /// </summary>
+    private async Task<(string Title, string Message)?> ApplySleepTickAsync(Character character)
+    {
+        var previousSleepPercent = character.SleepPercent;
+        character.SleepPercent = Math.Max(0, previousSleepPercent - SleepDecayPercentPerTick);
+
+        if (character.SleepPercent >= CriticalNeedThreshold)
+        {
+            await characterService.SaveAsync(character).ConfigureAwait(false);
+
+            var crossedThreshold = needWarningThresholds
+                .Where(threshold => previousSleepPercent >= threshold && character.SleepPercent < threshold)
+                .OrderBy(threshold => threshold)
+                .Cast<double?>()
+                .FirstOrDefault();
+
+            if (crossedThreshold is not { } threshold)
             {
-                character.IsHungry = false;
-                message = String.Format(Lng.Elem("{0} has starved to death. Without food, the body simply gives out."), character.Name);
+                return null;
             }
-            else
-            {
-                message = String.Format(Lng.Elem("Starvation is taking its toll on your body, {0}. You need food, now."), character.Name);
-            }
+
+            var warningMessage = threshold <= 15
+                ? String.Format(Lng.Elem("You're exhausted, {0} ({1:F0}% rested) - sleep soon or it will start to hurt."), character.Name, character.SleepPercent)
+                : String.Format(Lng.Elem("You're getting tired, {0} ({1:F0}% rested) - you should sleep soon."), character.Name, character.SleepPercent);
+
+            return ("MAGUS Assistant", warningMessage);
+        }
+
+        var damage = diceThrow._1D6();
+        var hasPainTolerance = character.MaxPainTolerancePoints.HasValue;
+        var currentPainTolerancePoints = character.ActualPainTolerancePoints ?? 0;
+
+        string message;
+        if (hasPainTolerance && currentPainTolerancePoints > 0)
+        {
+            character.ActualPainTolerancePoints = Math.Max(0, currentPainTolerancePoints - damage);
+            message = character.ActualPainTolerancePoints <= 0
+                ? String.Format(Lng.Elem("Sleep deprivation has worn you down, {0} - you collapse, barely conscious. Get some sleep!"), character.Name)
+                : String.Format(Lng.Elem("You are critically sleep-deprived, {0}, and it is starting to hurt badly. Sleep now!"), character.Name);
+        }
+        else
+        {
+            character.ActualHealthPoints = Math.Max(0, character.ActualHealthPoints - damage);
+            message = character.IsDead
+                ? String.Format(Lng.Elem("{0} has collapsed from exhaustion and never woke up again."), character.Name)
+                : String.Format(Lng.Elem("Exhaustion is taking its toll on your body, {0}. You need sleep, now."), character.Name);
         }
 
         await characterService.SaveAsync(character).ConfigureAwait(false);

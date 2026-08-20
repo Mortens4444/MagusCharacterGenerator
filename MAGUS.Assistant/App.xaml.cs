@@ -1,12 +1,16 @@
 ﻿using MAGUS.Assistant.Interfaces;
-using MAGUS.Assistant.Services;
 using Mtf.LanguageService;
 
 namespace MAGUS.Assistant;
 
 public partial class App : Application
 {
-    internal App(INotificationService notificationService, SettingsService settingsService)
+    // Must stay public: MAUI's DI container (MauiApplication.OnCreate -> GetRequiredService<IApplication>)
+    // only considers public constructors via reflection, so App can't be constructed at all if this
+    // is internal - which is also why the parameter below is an interface (ILanguageSettingsService)
+    // rather than the concrete, internal SettingsService: a public constructor of a public class can't
+    // take a less-accessible parameter type (CS0051).
+    public App(INotificationService notificationService, ILanguageSettingsService languageSettingsService)
     {
         InitializeComponent();
         notificationService?.Initialize();
@@ -17,7 +21,7 @@ public partial class App : Application
             // Must happen before any page is constructed, so the very first
             // Translator.Translate(this) call on any page uses the persisted language
             // instead of the language service's built-in default.
-            Lng.DefaultLanguage = settingsService.GetCurrentLanguageAsync().GetAwaiter().GetResult();
+            Lng.DefaultLanguage = languageSettingsService.GetCurrentLanguageAsync().GetAwaiter().GetResult();
         }
         catch
         {

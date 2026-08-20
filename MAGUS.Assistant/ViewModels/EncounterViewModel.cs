@@ -275,8 +275,15 @@ internal sealed partial class EncounterViewModel(ISettings settings, CharacterSe
         }
     }
 
-    private bool CanUsePsiSurge() => SelectedAssignment?.Character.Psi != null && SelectedAssignment.Character.PsiPoints > 0;
+    private bool CanUsePsiSurge() => SelectedAssignment?.Character is { Psi: not null } character &&
+        character.PsiPoints + character.DynamicAstralPsiShield + character.DynamicMentalPsiShield > 0;
 
+    /// <summary>
+    /// Roham (Megfékezés) — book p.118-119 all-or-nothing discipline: burns every currently
+    /// available psi point (free ones plus anything parked in a Dinamikus Pajzs) either on the
+    /// caster's own attack (Roham) or to weaken a chosen opponent's attack (Megfékezés). There is
+    /// no partial-amount option, unlike the old per-point prompt this replaced.
+    /// </summary>
     [RelayCommand(CanExecute = nameof(CanUsePsiSurge))]
     private async Task UsePsiSurgeAsync()
     {
@@ -285,29 +292,196 @@ internal sealed partial class EncounterViewModel(ISettings settings, CharacterSe
             return;
         }
 
-        var pointsText = await ShellNavigationService.DisplayPromptAsync(
+        var total = character.PsiPoints + character.DynamicAstralPsiShield + character.DynamicMentalPsiShield;
+
+        var choice = await ShellNavigationService.DisplayActionSheetAsync(
             "Psi surge",
-            String.Format(
-                Lng.Elem("Spend how many psi points (max {0}) for +{1} attack value each, for this round only?"),
-                character.PsiPoints,
-                Character.PsiSurgeAttackValuePerPoint),
-            "OK",
             "Cancel",
-            character.PsiPoints.ToString(CultureInfo.InvariantCulture)).ConfigureAwait(true);
+            null,
+            "Roham",
+            "Megfékezés").ConfigureAwait(true);
 
-        if (String.IsNullOrWhiteSpace(pointsText) ||
-            !int.TryParse(pointsText, NumberStyles.Integer, CultureInfo.InvariantCulture, out var points))
+        switch (choice)
         {
-            return;
-        }
+            case "Roham":
+                var confirmRoham = await ShellNavigationService.DisplayAlertAsync(
+                    "Psi surge",
+                    String.Format(
+                        Lng.Elem("Burn all {0} psi points (including any held in a Dinamikus Pajzs) for +{1} attack value each, for this round only?"),
+                        total,
+                        Character.PsiSurgeAttackValuePerPoint),
+                    Lng.Elem("Roham"),
+                    Lng.Elem("Cancel")).ConfigureAwait(true);
 
-        if (!character.TryUsePsiSurge(points))
-        {
-            await ShellNavigationService.DisplayAlertAsync(Lng.Elem("Not enough psi points.")).ConfigureAwait(true);
-            return;
+                if (confirmRoham)
+                {
+                    character.TryUsePsiSurge();
+                }
+                break;
+
+            case "Megfékezés":
+                var enemies = SelectedAssignment.Enemies;
+                if (enemies.Count == 0)
+                {
+                    await ShellNavigationService.DisplayAlertAsync(Lng.Elem("No enemy assigned to weaken.")).ConfigureAwait(true);
+                    break;
+                }
+
+                var enemyNames = enemies.Select(e => e.Name).ToArray();
+                var enemyChoice = await ShellNavigationService.DisplayActionSheetAsync(
+                    "Megfékezés",
+                    "Cancel",
+                    null,
+                    enemyNames).ConfigureAwait(true);
+
+                var target = enemies.FirstOrDefault(e => e.Name == enemyChoice);
+                if (target != null)
+                {
+                    character.TryUseMegfekezes(target);
+                }
+                break;
         }
 
         UsePsiSurgeCommand.NotifyCanExecuteChanged();
+    }
+
+    private bool CanDismantlePsiShield() => SelectedAssignment?.Character.Psi != null;
+
+    /// <summary>
+    /// Combat only allows tearing a psi shield back down - building one (spending points on a new
+    /// Statikus Pajzs, or feeding a Dinamikus Pajzs) takes place ahead of time on the character's
+    /// details page (see CharacterViewModel.BuildPsiShieldAsync), not mid-fight.
+    /// </summary>
+    [RelayCommand(CanExecute = nameof(CanDismantlePsiShield))]
+    private async Task DismantlePsiShieldAsync()
+    {
+        if (SelectedAssignment?.Character is not { Psi: not null } character)
+        {
+            return;
+        }
+
+        var options = new List<string>();
+        if (character.StaticAstralPsiShield > 0)
+        {
+            options.Add("Static astral");
+        }
+        if (character.StaticMentalPsiShield > 0)
+        {
+            options.Add("Static mental");
+        }
+        if (character.DynamicAstralPsiShield > 0)
+        {
+            options.Add("Dynamic astral");
+        }
+        if (character.DynamicMentalPsiShield > 0)
+        {
+            options.Add("Dynamic mental");
+        }
+
+        if (options.Count == 0)
+        {
+            await ShellNavigationService.DisplayAlertAsync(Lng.Elem("This character has no psi shield to dismantle.")).ConfigureAwait(true);
+            return;
+        }
+
+        var choice = await ShellNavigationService.DisplayActionSheetAsync(
+            "Psi shield",
+            "Cancel",
+            null,
+            [.. options]).ConfigureAwait(true);
+
+        switch (choice)
+        {
+            case "Static astral":
+                character.RemoveStaticPsiShield(true);
+                break;
+            case "Static mental":
+                character.RemoveStaticPsiShield(false);
+                break;
+            case "Dynamic astral":
+                character.TryAdjustDynamicPsiShield(true, -character.DynamicAstralPsiShield);
+                break;
+            case "Dynamic mental":
+                character.TryAdjustDynamicPsiShield(false, -character.DynamicMentalPsiShield);
+                break;
+        }
+
+        UsePsiSurgeCommand.NotifyCanExecuteChanged();
+    }
+
+    /// <summary>
+    /// Two-step attack-mode picker: MAUI's Picker control has no grouping/section support, so instead
+    /// of one flat dropdown mixing weapons, psi disciplines and spells, this asks for a category
+    /// first (Auto/Weapon/Psi/Magic - only the categories the character actually has something in),
+    /// then the specific attack within it.
+    /// </summary>
+    [RelayCommand]
+    private async Task SelectAttackModeAsync(AssignmentViewModel assignment)
+    {
+        if (assignment == null)
+        {
+            return;
+        }
+
+        const string autoLabel = "Auto (first attack)";
+        const string weaponLabel = "Weapon";
+        const string psiLabel = "Psi";
+        const string magicLabel = "Magic";
+
+        var weaponModes = assignment.Character.AttackModes.Where(a => a is MeleeAttack or RangedAttack).ToList();
+        var psiModes = assignment.Character.AttackModes.OfType<PsiAttack>().Cast<Attack>().ToList();
+        var magicModes = assignment.Character.AttackModes.OfType<SpellAttack>().Cast<Attack>().ToList();
+
+        var categories = new List<string> { autoLabel };
+        if (weaponModes.Count > 0)
+        {
+            categories.Add(weaponLabel);
+        }
+        if (psiModes.Count > 0)
+        {
+            categories.Add(psiLabel);
+        }
+        if (magicModes.Count > 0)
+        {
+            categories.Add(magicLabel);
+        }
+
+        var categoryChoice = await ShellNavigationService.DisplayActionSheetAsync(
+            "Attack mode",
+            "Cancel",
+            null,
+            [.. categories]).ConfigureAwait(true);
+
+        if (categoryChoice == autoLabel)
+        {
+            assignment.SelectedAttackMode = null;
+            return;
+        }
+
+        var modes = categoryChoice switch
+        {
+            weaponLabel => weaponModes,
+            psiLabel => psiModes,
+            magicLabel => magicModes,
+            _ => []
+        };
+
+        if (modes.Count == 0)
+        {
+            return;
+        }
+
+        var modeChoice = await ShellNavigationService.DisplayActionSheetAsync(
+            categoryChoice,
+            "Cancel",
+            null,
+            [.. modes.Select(m => Lng.Elem(m.Name))]).ConfigureAwait(true);
+
+        var selected = modes.FirstOrDefault(m => Lng.Elem(m.Name) == modeChoice);
+        if (selected != null)
+        {
+            assignment.SelectedAttackMode = selected;
+        }
     }
 
     [RelayCommand]
