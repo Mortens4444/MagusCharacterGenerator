@@ -1,5 +1,4 @@
 ﻿using MAGUS.GameSystem.Attributes;
-using Mtf.Extensions;
 using System.Reflection;
 
 namespace MAGUS.Extensions;

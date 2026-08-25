@@ -15,8 +15,10 @@ internal sealed partial class PaintWizardViewModel : BaseViewModel
 {
     private IRelayCommand? selectToolCommand;
     private IRelayCommand? selectColorCommand;
+    private IRelayCommand? selectPredefinedObjectCommand;
     private IDrawableElement? currentElement;
     private PaintTool activeTool = PaintTool.Pencil;
+    private PredefinedObjectType selectedPredefinedObject = PredefinedObjectType.Tree;
     private Color selectedColor = GetDefaultColor();
     private string defaultText = "𝕸.𝕬.𝕲.𝖀.𝕾. - Ҝ.Ա.ᚠ.Ᵽ.⅃.";
     private bool autoFill;
@@ -59,6 +61,12 @@ internal sealed partial class PaintWizardViewModel : BaseViewModel
     {
         get => activeTool;
         set => SetProperty(ref activeTool, value);
+    }
+
+    public PredefinedObjectType SelectedPredefinedObject
+    {
+        get => selectedPredefinedObject;
+        set => SetProperty(ref selectedPredefinedObject, value);
     }
 
     public Color SelectedColor
@@ -143,6 +151,102 @@ internal sealed partial class PaintWizardViewModel : BaseViewModel
     }
 
     [RelayCommand]
+    public async Task ExportSvg()
+    {
+        try
+        {
+            var svg = SvgDrawingService.ToSvg(Elements);
+            var fileName = $"{Lng.Elem("Drawing")}_{DateTime.Now:yyyyMMdd_HHmm}.svg";
+            var path = Path.Combine(FileSystem.CacheDirectory, fileName);
+            await File.WriteAllTextAsync(path, svg).ConfigureAwait(true);
+
+            await Share.Default.RequestAsync(new ShareFileRequest
+            {
+                Title = Lng.Elem("Export SVG"),
+                File = new ShareFile(path)
+            }).ConfigureAwait(true);
+        }
+        catch (Exception ex)
+        {
+            await ShellNavigationService.DisplayAlertAsync("Error", ex.Message).ConfigureAwait(true);
+        }
+    }
+
+    [RelayCommand]
+    public async Task ImportSvg()
+    {
+        try
+        {
+            var result = await FilePicker.Default.PickAsync(new PickOptions
+            {
+                PickerTitle = Lng.Elem("Import SVG"),
+                FileTypes = new FilePickerFileType(new Dictionary<DevicePlatform, IEnumerable<string>>
+                {
+                    [DevicePlatform.WinUI] = [".svg"],
+                    [DevicePlatform.Android] = ["image/svg+xml"],
+                    [DevicePlatform.iOS] = ["public.svg-image"],
+                    [DevicePlatform.MacCatalyst] = ["public.svg-image"]
+                })
+            }).ConfigureAwait(true);
+
+            if (result == null)
+            {
+                return;
+            }
+
+            var svgContent = await File.ReadAllTextAsync(result.FullPath).ConfigureAwait(true);
+            var importedElements = SvgDrawingService.FromSvg(svgContent);
+
+            var replaceOption = Lng.Elem("Replace canvas");
+            var mergeOption = Lng.Elem("Merge onto current canvas");
+            var cancelOption = Lng.Elem("Cancel");
+
+            var choice = await ShellNavigationService.DisplayActionSheetAsync(
+                String.Format(Lng.Elem("Import '{0}'"), result.FileName),
+                cancelOption,
+                null,
+                replaceOption,
+                mergeOption).ConfigureAwait(true);
+
+            if (choice != replaceOption && choice != mergeOption)
+            {
+                return;
+            }
+
+            var merge = choice == mergeOption;
+
+            MainThread.BeginInvokeOnMainThread(() =>
+            {
+                if (!merge)
+                {
+                    Elements.Clear();
+                    undoStack.Clear();
+                    redoStack.Clear();
+                }
+
+                foreach (var el in importedElements)
+                {
+                    Elements.Add(el);
+                }
+
+                if (merge)
+                {
+                    RegisterAction(new BatchAction([.. importedElements.Select(el => new AddAction(el))]));
+                }
+                else
+                {
+                    UndoCommand.NotifyCanExecuteChanged();
+                    RedoCommand.NotifyCanExecuteChanged();
+                }
+            });
+        }
+        catch (Exception ex)
+        {
+            await ShellNavigationService.DisplayAlertAsync("Error", ex.Message).ConfigureAwait(true);
+        }
+    }
+
+    [RelayCommand]
     public async Task DeleteDrawing(DrawingEntity drawing)
     {
         if (drawing == null)
@@ -167,32 +271,61 @@ internal sealed partial class PaintWizardViewModel : BaseViewModel
             return;
         }
 
-        var confirmText = String.Format(Lng.Elem("Are you sure you want to load '{0}'?"), drawing.Name);
-        bool confirm = await ShellNavigationService.DisplayAlertAsync("Load", confirmText, "Yes", "No").ConfigureAwait(true);
-        if (confirm)
+        var replaceOption = Lng.Elem("Replace canvas");
+        var mergeOption = Lng.Elem("Merge onto current canvas");
+        var cancelOption = Lng.Elem("Cancel");
+
+        var choice = await ShellNavigationService.DisplayActionSheetAsync(
+            String.Format(Lng.Elem("Load '{0}'"), drawing.Name),
+            cancelOption,
+            null,
+            replaceOption,
+            mergeOption).ConfigureAwait(true);
+
+        if (choice != replaceOption && choice != mergeOption)
         {
-            var loadedElements = await drawingRepository.GetDrawingByNameAsync(drawing.Name).ConfigureAwait(false);
-            if (loadedElements != null)
-            {
-                MainThread.BeginInvokeOnMainThread(() =>
-                {
-                    Elements.Clear();
-                    undoStack.Clear();
-                    redoStack.Clear();
-                    UndoCommand.NotifyCanExecuteChanged();
-                    RedoCommand.NotifyCanExecuteChanged();
-                    foreach (var el in loadedElements)
-                    {
-                        Elements.Add(el);
-                    }
-                });
-            }
+            return;
         }
+
+        var loadedElements = await drawingRepository.GetDrawingByNameAsync(drawing.Name).ConfigureAwait(false);
+        if (loadedElements == null)
+        {
+            return;
+        }
+
+        var merge = choice == mergeOption;
+
+        MainThread.BeginInvokeOnMainThread(() =>
+        {
+            if (!merge)
+            {
+                Elements.Clear();
+                undoStack.Clear();
+                redoStack.Clear();
+            }
+
+            foreach (var el in loadedElements)
+            {
+                Elements.Add(el);
+            }
+
+            if (merge)
+            {
+                RegisterAction(new BatchAction([.. loadedElements.Select(el => new AddAction(el))]));
+            }
+            else
+            {
+                UndoCommand.NotifyCanExecuteChanged();
+                RedoCommand.NotifyCanExecuteChanged();
+            }
+        });
     }
 
     public IRelayCommand SelectToolCommand => selectToolCommand ??= new RelayCommand<PaintTool>(SelectTool);
 
     public IRelayCommand SelectColorCommand => selectColorCommand ??= new RelayCommand<Color>(SelectColor);
+
+    public IRelayCommand SelectPredefinedObjectCommand => selectPredefinedObjectCommand ??= new RelayCommand<PredefinedObjectType>(SelectPredefinedObject);
 
     public bool CanUndo => undoStack.Count > 0;
 
@@ -292,4 +425,10 @@ internal sealed partial class PaintWizardViewModel : BaseViewModel
     private void SelectTool(PaintTool tool) => ActiveTool = tool;
 
     private void SelectColor(Color? color) => SelectedColor = color ?? GetDefaultColor();
+
+    private void SelectPredefinedObject(PredefinedObjectType type)
+    {
+        SelectedPredefinedObject = type;
+        ActiveTool = PaintTool.Stamp;
+    }
 }

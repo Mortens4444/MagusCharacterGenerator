@@ -11,7 +11,17 @@ public class QualificationList : ExtendedObservableCollection<Qualification>
 {
     public void UpgradeOrAddQualification(Qualification newMasterQualification)
     {
-        // WeaponUse, WeaponThrow should be handled => Or main weapons should be listed first!
+        // WeaponUse/WeaponThrowing (and anything else ICanHaveMany) stringify identically to every
+        // other not-yet-selected instance of themselves ("Weapon use", no weapon suffix yet), so the
+        // ToString()-based match below would wrongly treat a second/third granted slot as "the same
+        // qualification, just upgrade its level" instead of a separate slot - always add fresh instead,
+        // matching how Check()/Add() already special-case ICanHaveMany.
+        if (newMasterQualification is ICanHaveMany)
+        {
+            Add(newMasterQualification);
+            return;
+        }
+
         var firstBaseQualification = this.FirstOrDefault(
             qualification => qualification.ToString().Equals(newMasterQualification.ToString())
             && qualification.QualificationLevel == QualificationLevel.Base);
@@ -22,24 +32,17 @@ public class QualificationList : ExtendedObservableCollection<Qualification>
         }
         else
         {
-            if (newMasterQualification is ICanHaveMany)
+            var sameQualification = this.FirstOrDefault(q => q.Key == newMasterQualification.Key);
+            if (sameQualification != null)
             {
-                Add(newMasterQualification);
+                if (sameQualification.QualificationLevel == QualificationLevel.Base && newMasterQualification.QualificationLevel == QualificationLevel.Master)
+                {
+                    sameQualification.QualificationLevel = QualificationLevel.Master;
+                }
             }
             else
             {
-                var sameQualification = this.FirstOrDefault(q => q.Key == newMasterQualification.Key);
-                if (sameQualification != null)
-                {
-                    if (sameQualification.QualificationLevel == QualificationLevel.Base && newMasterQualification.QualificationLevel == QualificationLevel.Master)
-                    {
-                        sameQualification.QualificationLevel = QualificationLevel.Master;
-                    }
-                }
-                else
-                {
-                    Add(newMasterQualification);
-                }
+                Add(newMasterQualification);
             }
         }
     }

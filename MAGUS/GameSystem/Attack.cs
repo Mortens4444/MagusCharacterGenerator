@@ -1,5 +1,5 @@
 ﻿using MAGUS.Enums;
-using Newtonsoft.Json;
+using System.Text.Json.Serialization;
 
 namespace MAGUS.GameSystem;
 
@@ -9,7 +9,7 @@ public abstract class Attack
 
     public int Value { get; set; }
 
-    [JsonIgnore]
+    [JsonIgnore, Newtonsoft.Json.JsonIgnore]
     public Func<int> GetDamage { get; set; }
 
     [JsonConstructor]

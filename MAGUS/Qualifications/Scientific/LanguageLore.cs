@@ -9,8 +9,10 @@ public class LanguageLore : Qualification, ICanHaveMany, IScientificQualificatio
     public override string Key => $"{GetType().Name}:{Language?.GetType().Name ?? Guid.NewGuid().ToString()}";
 
     public Language? Language { get; set; }
-    
+
     public int LanguageLevel { get; set; }
+
+    public override bool NeedsSelection => Language == null;
 
     [JsonConstructor]
     public LanguageLore() { }

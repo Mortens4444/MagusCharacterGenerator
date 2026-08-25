@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFrameworks>net10.0-android;net10.0-ios;net10.0-maccatalyst</TargetFrameworks>
     <TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('windows'))">$(TargetFrameworks);net10.0-windows10.0.19041.0</TargetFrameworks>
@@ -133,13 +133,13 @@
     <None Remove="Platforms\Android\Resources\values\styles.xml" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Microsoft.Maui.Controls" Version="10.0.90" />
+    <PackageReference Include="Microsoft.Maui.Controls" Version="10.0.100" />
     <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="10.0.11" />
-    <PackageReference Include="Microsoft.Maui.Graphics" Version="10.0.90" />
-    <PackageReference Include="Microsoft.Maui.Graphics.Skia" Version="10.0.90" />
+    <PackageReference Include="Microsoft.Maui.Graphics" Version="10.0.100" />
+    <PackageReference Include="Microsoft.Maui.Graphics.Skia" Version="10.0.100" />
     <PackageReference Include="Mtf.Maui.Controls" Version="4.0.63" />
     <PackageReference Include="Mtf.Maui.Drawing" Version="1.0.4" />
-    <PackageReference Include="Mtf.MAUI.LanguageService" Version="3.0.99" />
+    <PackageReference Include="Mtf.MAUI.LanguageService" Version="3.0.102" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.4" />
     <PackageReference Include="Plugin.Maui.Audio" Version="4.0.0" />
     <PackageReference Include="sqlite-net-pcl" Version="1.11.285" />
@@ -153,6 +153,9 @@
     <ProjectReference Include="..\MAGUS\MAGUS.csproj" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Update="Views\PlacesView.xaml.cs">
+      <DependentUpon>PlacesView.xaml</DependentUpon>
+    </Compile>
     <Compile Update="Views\CharacterGeneratorPage.xaml.cs">
       <DependentUpon>CharacterGeneratorPage.xaml</DependentUpon>
     </Compile>
@@ -189,6 +192,12 @@
   </ItemGroup>
   <ItemGroup>
     <MauiXaml Update="Views\AboutPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </MauiXaml>
+    <MauiXaml Update="Views\PlacesView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </MauiXaml>
+    <MauiXaml Update="Views\ArmorsView.xaml">
       <Generator>MSBuild:Compile</Generator>
     </MauiXaml>
     <MauiXaml Update="Views\CharacterDetailsView.xaml">
@@ -302,6 +311,6 @@
       <ImageManifestPath>$(ProjectDir)Resources\Images\images_manifest.txt</ImageManifestPath>
     </PropertyGroup>
     <!--<WriteLinesToFile File="$(ImageManifestPath)" Lines="@(AllImages->'%(RelativeDir)%(Filename)%(Extension)')" Overwrite="true" Encoding="UTF-8" />-->
-    <WriteLinesToFile File="$(ImageManifestPath)" Lines="@(AllImages-&gt;'%(Filename)%(Extension)')" Overwrite="true" Encoding="UTF-8" />
+    <WriteLinesToFile File="$(ImageManifestPath)" Lines="@(AllImages->'%(Filename)%(Extension)')" Overwrite="true" Encoding="UTF-8" />
   </Target>
 </Project>

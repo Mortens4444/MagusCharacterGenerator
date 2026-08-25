@@ -8,6 +8,8 @@ public class OldWineFromPredoc2Clusters : Thing
 
 	public override Money Price => new(0, 0, 50);
 
+    public override int HungerValue => 5;
+
     public override string Description => "A bottle of exceptionally well-aged wine from Predoc. The difference in vintage grants it greater character and depth, highly valued by the wealthy.";
 
     public override string[] Images => ["wine.png"];

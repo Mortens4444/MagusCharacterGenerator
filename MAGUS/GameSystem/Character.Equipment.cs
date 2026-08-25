@@ -29,7 +29,7 @@ public partial class Character
         }
     }
 
-    public string TotalEquipmentWeight => (Equipment?.Sum(e => e.Weight) ?? 0).ToString("N1");
+    public string TotalEquipmentWeight => (Equipment?.Sum(e => e.EffectiveWeight) ?? 0).ToString("N1");
 
     public void Buy(Thing thing)
     {
@@ -48,6 +48,14 @@ public partial class Character
         return Equipment.OfType<T>().Any();
     }
 
+    /// <summary>
+    /// Adds an item this character didn't buy - loot taken from a defeated enemy (see
+    /// EncounterViewModel.OfferLootAsync) rather than a shop purchase, so unlike Buy this never
+    /// touches Money. EquipmentOnCollectionChanged already raises the Equipment/TotalEquipmentWeight
+    /// notifications for us.
+    /// </summary>
+    public void AddEquipment(Thing thing) => Equipment.Add(thing);
+
     public void RemoveEquipment(Thing thing)
     {
         if (Equipment.Remove(thing))
@@ -55,6 +63,13 @@ public partial class Character
             OnPropertyChanged(nameof(TotalEquipmentWeight));
         }
     }
+
+    /// <summary>
+    /// Call after mutating an owned Thing's RemainingPortions in place (e.g. eating one portion of a
+    /// bulk food item - see CharacterCareActions.EatAsync) so TotalEquipmentWeight refreshes even
+    /// though Equipment itself didn't gain or lose an item.
+    /// </summary>
+    public void NotifyEquipmentWeightChanged() => OnPropertyChanged(nameof(TotalEquipmentWeight));
 
     public void Sell(Thing thing)
     {

@@ -255,11 +255,17 @@ public partial class Character
                 {
                     manaPoints += BaseClass.Level;
                 }
-                for (int lvl = 1; lvl <= @class.Level; lvl++)
+                // Mirrors CalculatePainTolerancePoints's gating: when AutoIncreaseManaPoints is off, the
+                // per-level roll is skipped here entirely so CharacterGeneratorViewModel.GenerateCharacter
+                // can fill it in via an interactive RollFormulaPage instead, one level at a time.
+                if (settings?.AutoIncreaseManaPoints ?? true)
                 {
-                    if (lvl > 1 || (settings?.AddManaPointsOnFirstLevelForAllClass ?? false))
+                    for (int lvl = 1; lvl <= @class.Level; lvl++)
                     {
-                        manaPoints += sorcery.GetManaPointsModifier();
+                        if (lvl > 1 || (settings?.AddManaPointsOnFirstLevelForAllClass ?? false))
+                        {
+                            manaPoints += sorcery.GetManaPointsModifier();
+                        }
                     }
                 }
                 //maxManaPointsPerLevel = sorcery.GetManaPointsModifier();

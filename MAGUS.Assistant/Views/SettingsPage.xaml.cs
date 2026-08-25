@@ -10,12 +10,13 @@ namespace MAGUS.Assistant.Views;
 
 internal sealed partial class SettingsPage : NotifierPage
 {
-    private Dictionary<object, string>? originalTextElements;
+    private readonly Dictionary<object, string>? originalTextElements;
 
     public SettingsPage(SettingsViewModel viewModel)
     {
         InitializeComponent();
         BindingContext = viewModel;
+        originalTextElements = Translator.Translate(this);
 
         var languages = Enum.GetValues<ImplementedLanguage>().Cast<ImplementedLanguage>()
             .OrderBy(l => l.GetDescription())
@@ -37,17 +38,9 @@ internal sealed partial class SettingsPage : NotifierPage
             var selectedLanguage = selectedLangEnum.ToLanguage();
             viewModel.CurrentLanguage = selectedLanguage;
             Lng.DefaultLanguage = selectedLanguage;
-
-            if (originalTextElements == null)
-            {
-                originalTextElements = Translator.Translate(this);
-            }
-            else
-            {
-                Translator.SetOriginalTexts(originalTextElements);
-                _ = Translator.Translate(this);
-            }
-
+            Translator.SetOriginalTexts(originalTextElements);
+            _ = Translator.Translate(this);
+            viewModel.RefreshLanguageDependentBindings();
             Shell.Current.Title = Lng.Elem("MAGUS Assistant");
         };
 

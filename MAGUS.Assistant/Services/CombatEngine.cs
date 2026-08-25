@@ -60,6 +60,14 @@ internal sealed class CombatEngine
 
         foreach (var effect in attacker.ActiveEffects.ToList())
         {
+            // GetTickDamage isn't serialized (it closes over the originating attack), so an effect
+            // reloaded from a save has it null - nothing left to tick, so just drop it.
+            if (effect.GetTickDamage == null)
+            {
+                attacker.ActiveEffects.Remove(effect);
+                continue;
+            }
+
             var wasDead = attacker.IsDead;
             var wasConscious = attacker.IsConscious;
 

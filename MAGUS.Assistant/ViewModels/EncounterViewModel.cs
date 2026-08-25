@@ -1,6 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.Messaging;
 using MAGUS.Assistant.Enums;
+using MAGUS.Assistant.Extensions;
 using MAGUS.Assistant.Interfaces;
 using MAGUS.Assistant.Services;
 using MAGUS.Assistant.Views;
@@ -8,8 +9,12 @@ using MAGUS.Bestiary;
 using MAGUS.Enums;
 using MAGUS.Extensions;
 using MAGUS.GameSystem;
+using MAGUS.GameSystem.Quests;
 using MAGUS.Interfaces;
 using MAGUS.Services;
+using MAGUS.Things;
+using MAGUS.Things.Armors;
+using MAGUS.Things.Weapons;
 using Mtf.Extensions;
 using Mtf.LanguageService;
 using Mtf.Maui.Controls.Messages;
@@ -30,6 +35,18 @@ internal sealed partial class EncounterViewModel(ISettings settings, CharacterSe
     private AssignmentViewModel? previousSelectedAssignment;
     private readonly ISoundPlayer soundPlayer = soundPlayer;
     private readonly IShakeService shakeService = shakeService;
+
+    /// <summary>
+    /// A permanent "Bandit" entry mixed into AvailableEnemies (see LoadBestiaryAsync) alongside the
+    /// real Bestiary/Character picks - never itself added to a fight. Picking it and pressing "Add
+    /// enemy" is instead detected by reference in AddEnemyAsync and generates a fresh, actually-named
+    /// BanditGenerator.CreateRandomBandit each time, so the same list entry can be used repeatedly to
+    /// spawn a different bandit every time.
+    /// </summary>
+    private readonly Character banditPlaceholder = new(settings) { Name = "Bandit" };
+
+    /// <summary>Ally Assignments added via AddProtectedAllyAsync, mapped to the protect-quest they're standing in for and the character who accepted it - checked in DieHandler (ally dies -> quest fails) and EndEncounter (ally survives -> quest completes).</summary>
+    private readonly Dictionary<AssignmentViewModel, (Quest Quest, Character Protector)> protectedAllies = [];
 
     public ObservableCollection<TurnViewModel> SelectedTurnHistory { get; } = [];
     public ObservableCollection<Character> Characters { get; } = [];
@@ -143,6 +160,7 @@ internal sealed partial class EncounterViewModel(ISettings settings, CharacterSe
                 {
                     AvailableEnemies.Add(character);
                 }
+                AvailableEnemies.Add(banditPlaceholder);
             }).ConfigureAwait(true);
         }
         catch (Exception ex)
@@ -212,6 +230,69 @@ internal sealed partial class EncounterViewModel(ISettings settings, CharacterSe
     }
 
     /// <summary>
+    /// Adds a throwaway ally Character (same generation recipe as BanditGenerator.CreateRandomBandit, fighting
+    /// alongside SelectedAssignment's character instead of against them) for a protect-in-combat
+    /// quest (see Quest.HasProtectAlly) that character has accepted - picks the quest automatically
+    /// if there's exactly one, otherwise asks. Tracked in protectedAllies so DieHandler/EndEncounter
+    /// know to fail or complete the quest once the fight resolves.
+    /// </summary>
+    [RelayCommand]
+    private async Task AddProtectedAllyAsync()
+    {
+        if (SelectedAssignment is not { } assignment)
+        {
+            return;
+        }
+
+        var protector = assignment.Character;
+        var protectQuests = PreloadService.Instance.Quests
+            .Where(q => q.HasProtectAlly && protector.GetQuestStatus(q) == QuestStatus.Accepted)
+            .ToList();
+
+        if (protectQuests.Count == 0)
+        {
+            await ShellNavigationService.DisplayAlertAsync(
+                Lng.Elem("Protect"),
+                String.Format(Lng.Elem("{0} has no accepted quest that needs an ally protected."), protector.Name)).ConfigureAwait(true);
+            return;
+        }
+
+        Quest quest;
+        if (protectQuests.Count == 1)
+        {
+            quest = protectQuests[0];
+        }
+        else
+        {
+            var choice = await ShellNavigationService.DisplayActionSheetAsync(
+                "Protect",
+                "Cancel",
+                null,
+                [.. protectQuests.Select(q => Lng.Elem(q.Name))]).ConfigureAwait(true);
+
+            var picked = protectQuests.FirstOrDefault(q => Lng.Elem(q.Name) == choice);
+            if (picked == null)
+            {
+                return;
+            }
+            quest = picked;
+        }
+
+        var ally = BanditGenerator.CreateRandomBandit(settings);
+        ally.Name = Lng.Elem(quest.AllyDescription);
+        ally.LostConsciousness += LostConsciousnessHandler;
+        ally.Died += DieHandler;
+        ally.SetMaxValues();
+
+        Characters.Add(ally);
+        var allyAssignment = new AssignmentViewModel(settings, ally);
+        Assignments.Add(allyAssignment);
+        protectedAllies[allyAssignment] = (quest, protector);
+
+        RunTurnCommand.NotifyCanExecuteChanged();
+    }
+
+    /// <summary>
     /// Seeds this encounter with a specific character and enemy template rather than the
     /// usual manual selection, for flows (like a background-rolled ambush) that already
     /// know exactly who is fighting what.
@@ -262,17 +343,57 @@ internal sealed partial class EncounterViewModel(ISettings settings, CharacterSe
             };
             await ShellNavigationService.ShowPageAsync(setupPage).ConfigureAwait(true);
         }
-        else
+        else if (ReferenceEquals(SelectedEnemy, banditPlaceholder))
         {
-            SelectedEnemy.LostConsciousness += LostConsciousnessHandler;
-            SelectedEnemy.Died += DieHandler;
-
-            SelectedAssignment!.Enemies.Add(SelectedEnemy);
-            SelectedAssignment.SetDistance(SelectedEnemy, GameSystem.Constants.DefaultEncounterDistance);
-
+            // The "Bandit" list entry is never itself fought - picking it and pressing "Add enemy"
+            // spawns a fresh, actually-named bandit (see BanditGenerator) each time instead, so the
+            // same entry can be reused to add any number of different bandits.
+            var bandit = BanditGenerator.CreateRandomBandit(settings);
+            AddEnemyToAssignment(SelectedAssignment!, bandit);
             SelectedEnemy = null;
             RunTurnCommand.NotifyCanExecuteChanged();
         }
+        else
+        {
+            AddEnemyToAssignment(SelectedAssignment!, SelectedEnemy);
+            SelectedEnemy = null;
+            RunTurnCommand.NotifyCanExecuteChanged();
+        }
+    }
+
+    /// <summary>
+    /// Attaches a non-Bestiary enemy (a generated bandit, or a saved Character picked as an opponent)
+    /// directly to an assignment - subscribes the shared LostConsciousness/Died handlers and sets its
+    /// starting distance and attack allowance, the same way AddEnemyAsync's non-Creature branch always
+    /// has.
+    /// </summary>
+    private void AddEnemyToAssignment(AssignmentViewModel assignment, Attacker enemy)
+    {
+        enemy.LostConsciousness += LostConsciousnessHandler;
+        enemy.Died += DieHandler;
+
+        assignment.Enemies.Add(enemy);
+
+        // A melee-only opponent (e.g. a generated bandit - see BanditGenerator, which never equips
+        // a ranged weapon) starting at the default 20m encounter distance would spend its entire
+        // first round just closing the distance instead of ever attacking, which reads as "this
+        // enemy's attacks never show up." Start it at melee range instead when it has no ranged
+        // attack that could actually make use of the extra distance.
+        var startingDistance = enemy.AttackModes.Any(a => a is RangedAttack)
+            ? GameSystem.Constants.DefaultEncounterDistance
+            : Attacker.MeleeDistance;
+        assignment.SetDistance(enemy, startingDistance);
+
+        // MaxSimultaneousAttacks is otherwise only ever set by the Creature/EnemySetupPage flow
+        // (ProcessConfirmedEnemies) - an assignment whose first enemy comes in through this path
+        // instead (a bandit, or any enemy added without ever opening that setup dialog) stays at its
+        // default 0, and EncounterHelpers.GetInitiativesInternalAsync's "if (result.Count <
+        // MaxSimultaneousAttacks)" gate then blocks every enemy in the assignment from ever generating
+        // an attack initiative - forever, not just occasionally. That's the actual reason a generated
+        // bandit's own attacks (and even its movement, once it reaches range) never appeared in the
+        // EncounterPage turn log, no matter how tough the bandit was. Bump it up to at least 1 rather
+        // than overwrite a higher value a prior Creature setup may have already established.
+        assignment.MaxSimultaneousAttacks = Math.Max(assignment.MaxSimultaneousAttacks, 1);
     }
 
     private bool CanUsePsiSurge() => SelectedAssignment?.Character is { Psi: not null } character &&
@@ -685,6 +806,7 @@ internal sealed partial class EncounterViewModel(ISettings settings, CharacterSe
         Dispose();
         Assignments.Clear();
         Characters.Clear();
+        protectedAllies.Clear();
         return LoadCharactersAsync();
     }
 
@@ -702,9 +824,22 @@ internal sealed partial class EncounterViewModel(ISettings settings, CharacterSe
         var enemyAssignment = Assignments.FirstOrDefault(a => a.Enemies.Contains(diedEntity));
         var eventAssignment = charAssignment ?? enemyAssignment;
 
+        if (charAssignment != null && protectedAllies.TryGetValue(charAssignment, out var protectedInfo))
+        {
+            protectedInfo.Protector.FailQuest(protectedInfo.Quest);
+            protectedAllies.Remove(charAssignment);
+            _ = characterService.SaveAsync(protectedInfo.Protector);
+
+            WeakReferenceMessenger.Default.Send(new ShowInfoMessage(
+                Lng.Elem("Quest failed"),
+                String.Format(Lng.Elem("{0} falls - \"{1}\" can no longer be protected."), diedEntity.Name, Lng.Elem(protectedInfo.Quest.Name))));
+        }
+
         if (enemyAssignment != null)
         {
             AddXp(enemyAssignment.Character, diedEntity);
+            CompleteMatchingQuests(enemyAssignment.Character, diedEntity);
+            _ = OfferLootAsync(enemyAssignment.Character, diedEntity);
         }
 
         MainThread.BeginInvokeOnMainThread(() =>
@@ -769,6 +904,25 @@ internal sealed partial class EncounterViewModel(ISettings settings, CharacterSe
             assignment.Character.Died -= DieHandler;
             RemoveEnemyHandlers(assignment.Enemies);
         }
+
+        // Any protect-in-combat ally still tracked here made it through the whole fight alive - a
+        // dead one was already removed from protectedAllies (and failed) by DieHandler.
+        foreach (var (allyAssignment, protectedInfo) in protectedAllies)
+        {
+            protectedInfo.Protector.CompleteQuest(protectedInfo.Quest);
+            _ = characterService.SaveAsync(protectedInfo.Protector);
+
+            WeakReferenceMessenger.Default.Send(new ShowInfoMessage(
+                Lng.Elem("Quest complete"),
+                String.Format(
+                    Lng.Elem("{0} survives the fight. \"{1}\" is complete - {2}{3}."),
+                    allyAssignment.Character.Name,
+                    Lng.Elem(protectedInfo.Quest.Name),
+                    protectedInfo.Quest.MoneyReward.ToTranslatedString(),
+                    protectedInfo.Quest.ExperienceReward > 0 ? String.Format(Lng.Elem(" and {0} XP"), protectedInfo.Quest.ExperienceReward) : String.Empty)));
+        }
+        protectedAllies.Clear();
+
         ShowControls = true;
         EncounterState = EncounterState.Finished;
         RunTurnCommand.NotifyCanExecuteChanged();
@@ -849,6 +1003,172 @@ internal sealed partial class EncounterViewModel(ISettings settings, CharacterSe
             _ = characterService.SaveAsync(character);
         }
     }
+
+    /// <summary>
+    /// Auto-completes any of this character's accepted quests whose Quest.TargetCreatureName
+    /// matches the creature that just died - e.g. a bounty on wolves finishes itself the moment a
+    /// Wolf falls, without the player needing to press "Mark complete" by hand. A killed Character
+    /// flagged IsGeneratedEnemy (see BanditGenerator) instead matches quests with
+    /// TargetIsGeneratedBandit, for combat quests with no dedicated Bestiary type. Quests with
+    /// neither (investigation, negotiation, ...) are unaffected and stay manual-only.
+    /// </summary>
+    private void CompleteMatchingQuests(Attacker attacker, Attacker target)
+    {
+        if (attacker is not Character character)
+        {
+            return;
+        }
+
+        List<Quest> matchingQuests;
+        if (target is Creature creature)
+        {
+            var creatureName = creature.GetType().Name;
+            matchingQuests = PreloadService.Instance.Quests
+                .Where(q => q.TargetCreatureName == creatureName && character.GetQuestStatus(q) == QuestStatus.Accepted)
+                .ToList();
+        }
+        else if (target is Character { IsGeneratedEnemy: true })
+        {
+            matchingQuests = PreloadService.Instance.Quests
+                .Where(q => q.TargetIsGeneratedBandit && character.GetQuestStatus(q) == QuestStatus.Accepted)
+                .ToList();
+        }
+        else
+        {
+            return;
+        }
+
+        if (matchingQuests.Count == 0)
+        {
+            return;
+        }
+
+        foreach (var quest in matchingQuests)
+        {
+            character.CompleteQuest(quest);
+
+            WeakReferenceMessenger.Default.Send(new ShowInfoMessage(
+                Lng.Elem("Quest complete"),
+                String.Format(Lng.Elem("{0} completes \"{1}\"."), character.Name, Lng.Elem(quest.Name))));
+        }
+
+        _ = characterService.SaveAsync(character);
+    }
+
+    /// <summary>
+    /// Lets the killer take equipment off whatever they just defeated - a Creature's real Weapon/Armor
+    /// Things (pulled out of AttackModes/Armor, see GetLootableItems) for a Bestiary kill, or the
+    /// fallen Character's own Equipment for a bandit/NPC kill (see BanditGenerator). Offered one item
+    /// at a time so the player can pick and choose rather than an all-or-nothing grab.
+    /// </summary>
+    private async Task OfferLootAsync(Character looter, Attacker diedEntity)
+    {
+        var lootable = GetLootableItems(diedEntity);
+        if (lootable.Count == 0)
+        {
+            return;
+        }
+
+        var takeAllLabel = Lng.Elem("Take everything");
+        var leaveLabel = Lng.Elem("Leave it");
+
+        while (lootable.Count > 0)
+        {
+            var options = new List<string> { takeAllLabel };
+            options.AddRange(lootable.Select(item => Lng.Elem(item.Name)));
+
+            var choice = await ShellNavigationService.DisplayActionSheetAsync(
+                String.Format(Lng.Elem("Loot {0}"), Lng.Elem(diedEntity.Name)),
+                leaveLabel,
+                null,
+                [.. options]).ConfigureAwait(true);
+
+            if (choice == null || choice == leaveLabel)
+            {
+                break;
+            }
+
+            if (choice == takeAllLabel)
+            {
+                foreach (var item in lootable)
+                {
+                    looter.AddEquipment(item);
+                    (diedEntity as Character)?.RemoveEquipment(item);
+                }
+                lootable.Clear();
+                break;
+            }
+
+            var picked = lootable.FirstOrDefault(item => Lng.Elem(item.Name) == choice);
+            if (picked == null)
+            {
+                break;
+            }
+
+            looter.AddEquipment(picked);
+            (diedEntity as Character)?.RemoveEquipment(picked);
+            lootable.Remove(picked);
+        }
+
+        await characterService.SaveAsync(looter).ConfigureAwait(false);
+
+        // Don't persist a BanditGenerator throwaway - it was never saved to begin with and isn't
+        // meant to become a permanent entry in the character list.
+        if (diedEntity is Character { IsGeneratedEnemy: false } diedCharacter)
+        {
+            await characterService.SaveAsync(diedCharacter).ConfigureAwait(false);
+        }
+    }
+
+    /// <summary>
+    /// Real, catalog Things worth looting off a defeated Attacker - for a Creature, the actual Weapon
+    /// instances behind its MeleeAttack/RangedAttack modes plus non-natural Armor, skipping the
+    /// generic ad-hoc attack shapes (BodyPart claws/bites, CommonWeapon/CommonRangedWeapon/BreathWeapon)
+    /// that exist only for combat math and were never meant to be equipped by a Character. For a
+    /// Character (e.g. a BanditGenerator-spawned NPC), its own Equipment is already the real thing.
+    /// </summary>
+    private static List<Thing> GetLootableItems(Attacker diedEntity)
+    {
+        if (diedEntity is Character character)
+        {
+            return [.. character.Equipment];
+        }
+
+        if (diedEntity is not Creature creature)
+        {
+            return [];
+        }
+
+        var items = new List<Thing>();
+
+        foreach (var attack in creature.AttackModes)
+        {
+            var weapon = attack switch
+            {
+                MeleeAttack { Weapon: Weapon w } => w,
+                RangedAttack { Weapon: Weapon w } => w,
+                _ => null
+            };
+
+            if (weapon != null && !IsGenericAttackShape(weapon))
+            {
+                items.Add(weapon);
+            }
+        }
+
+        if (creature.Armor is { } armor && armor is not NaturalArmor)
+        {
+            items.Add(armor);
+        }
+
+        return items;
+    }
+
+    private static bool IsGenericAttackShape(Weapon weapon) =>
+        weapon.GetType() == typeof(BodyPart) ||
+        weapon.GetType() == typeof(CommonWeapon) ||
+        weapon.GetType() == typeof(CommonRangedWeapon) ||
+        weapon.GetType() == typeof(BreathWeapon);
 
     public void Dispose()
     {

@@ -7,7 +7,7 @@ using System.Globalization;
 
 namespace MAGUS.Assistant.ViewModels;
 
-internal sealed partial class CharactersViewModel(CharacterService characterService, SettingsService settingsService) : CharacterListLoaderViewModel(characterService)
+internal sealed partial class CharactersViewModel(CharacterService characterService, SettingsService settingsService, GameEventService gameEventService) : CharacterListLoaderViewModel(characterService)
 {
     private string? defaultCharacterName = settingsService.DefaultCharacterName;
 
@@ -38,7 +38,7 @@ internal sealed partial class CharactersViewModel(CharacterService characterServ
             return;
         }
 
-        await CharacterCareActions.SleepAsync(character, settingsService, characterService).ConfigureAwait(true);
+        await CharacterCareActions.SleepAsync(character, characterService, gameEventService).ConfigureAwait(true);
     }
 
     [RelayCommand]

@@ -9,7 +9,11 @@ using MAGUS.Assistant.Enums;
 using MAGUS.Assistant.Interfaces;
 using MAGUS.Assistant.Interfaces.Bluetooth;
 using MAGUS.Assistant.Messages;
+using MAGUS.Assistant.Models;
 using MAGUS.Assistant.Models.Bluetooth;
+using MAGUS.Assistant.Services;
+using MAGUS.Bestiary;
+using MAGUS.Things;
 using Mtf.Extensions.Services;
 using Mtf.LanguageService;
 using Mtf.Maui.Controls.Messages;
@@ -22,16 +26,23 @@ internal sealed partial class StorytellingViewModel : ObservableObject, IDisposa
 {
     private readonly IBluetoothService bluetooth;
     private readonly INotificationService notificationService;
+    private readonly GameEventService gameEventService;
+    private readonly CharacterService characterService;
+    private readonly SettingsService settingsService;
 
     private PlayerModel? selectedPlayer;
     private DeviceModel? selectedDevice;
     private String statusMessage = Lng.Elem("Server not started");
     private bool serverRunning;
     private String messageText = String.Empty;
+    private DisplayItem? selectedCreature;
+    private DisplayItem? selectedFoundItem;
 
     public ObservableCollection<DeviceModel> AvailableDevices { get; } = [];
     public ObservableCollection<PlayerModel> ConnectedPlayers { get; } = [];
     public ObservableCollection<EnemyModel> Enemies { get; } = [];
+    public ObservableCollection<DisplayItem> AvailableCreatures { get; } = [];
+    public ObservableCollection<DisplayItem> AvailableItems { get; } = [];
 
     public IAsyncRelayCommand StartStoryCommand { get; }
     public IAsyncRelayCommand<DeviceModel?> ConnectCommand { get; }
@@ -39,6 +50,8 @@ internal sealed partial class StorytellingViewModel : ObservableObject, IDisposa
     public IAsyncRelayCommand SendPsiCommand { get; }
     public IAsyncRelayCommand SendPrivateMessageCommand { get; }
     public IAsyncRelayCommand SendNotificationCommand { get; }
+    public IAsyncRelayCommand SendAttackCommand { get; }
+    public IAsyncRelayCommand SendFoundItemCommand { get; }
 
     public bool ServerRunning
     {
@@ -80,6 +93,8 @@ internal sealed partial class StorytellingViewModel : ObservableObject, IDisposa
             {
                 SendPrivateMessageCommand.NotifyCanExecuteChanged();
                 SendNotificationCommand.NotifyCanExecuteChanged();
+                SendAttackCommand.NotifyCanExecuteChanged();
+                SendFoundItemCommand.NotifyCanExecuteChanged();
             }
         }
     }
@@ -90,10 +105,42 @@ internal sealed partial class StorytellingViewModel : ObservableObject, IDisposa
         set => SetProperty(ref selectedDevice, value);
     }
 
-    public StorytellingViewModel(IBluetoothService bluetooth, INotificationService notificationService)
+    public DisplayItem? SelectedCreature
+    {
+        get => selectedCreature;
+        set
+        {
+            if (SetProperty(ref selectedCreature, value))
+            {
+                SendAttackCommand.NotifyCanExecuteChanged();
+            }
+        }
+    }
+
+    public DisplayItem? SelectedFoundItem
+    {
+        get => selectedFoundItem;
+        set
+        {
+            if (SetProperty(ref selectedFoundItem, value))
+            {
+                SendFoundItemCommand.NotifyCanExecuteChanged();
+            }
+        }
+    }
+
+    public StorytellingViewModel(
+        IBluetoothService bluetooth,
+        INotificationService notificationService,
+        GameEventService gameEventService,
+        CharacterService characterService,
+        SettingsService settingsService)
     {
         this.bluetooth = bluetooth;
         this.notificationService = notificationService;
+        this.gameEventService = gameEventService;
+        this.characterService = characterService;
+        this.settingsService = settingsService;
 
         Unsubscribe();
         bluetooth.DeviceDiscovered += BluetoothDeviceDiscovered;
@@ -106,7 +153,25 @@ internal sealed partial class StorytellingViewModel : ObservableObject, IDisposa
         //SendPsiCommand = new AsyncRelayCommand(SendPsiAsync);
         SendPrivateMessageCommand = new AsyncRelayCommand(SendPrivateMessageAsync, CanSendPrivateMessage);
         SendNotificationCommand = new AsyncRelayCommand(SendNotificationAsync, CanSendPrivateMessage);
+        SendAttackCommand = new AsyncRelayCommand(SendAttackAsync, CanSendAttack);
+        SendFoundItemCommand = new AsyncRelayCommand(SendFoundItemAsync, CanSendFoundItem);
 
+        _ = LoadCatalogAsync();
+    }
+
+    private async Task LoadCatalogAsync()
+    {
+        await PreloadService.Instance.InitializeAsync().ConfigureAwait(true);
+
+        foreach (var creature in PreloadService.Instance.Creatures)
+        {
+            AvailableCreatures.Add(DisplayItem.FromObject(creature));
+        }
+
+        foreach (var thing in PreloadService.Instance.Things)
+        {
+            AvailableItems.Add(DisplayItem.FromObject(thing));
+        }
     }
 
     private void BluetoothDeviceDiscovered(DeviceModel device)
@@ -262,6 +327,14 @@ internal sealed partial class StorytellingViewModel : ObservableObject, IDisposa
                 HandleNotificationMessage(message);
                 break;
 
+            case BluetoothCommandType.Attack:
+                await HandleAttackEvent(message).ConfigureAwait(false);
+                break;
+
+            case BluetoothCommandType.FoundItem:
+                await HandleFoundItemEvent(message).ConfigureAwait(false);
+                break;
+
             default:
                 WeakReferenceMessenger.Default.Send(new ShowInfoMessage("Unknown message arrived", String.Concat(message.CommandType.ToString(), " - ", message.Payload)));
                 break;
@@ -292,6 +365,46 @@ internal sealed partial class StorytellingViewModel : ObservableObject, IDisposa
 
         WeakReferenceMessenger.Default.Send(new ShowInfoMessage("Private message", data.Text));
         return Task.CompletedTask;
+    }
+
+    private async Task HandleAttackEvent(BluetoothMessage message)
+    {
+        var data = JsonConvert.DeserializeObject<AttackEventData>(message.Payload);
+        if (String.IsNullOrWhiteSpace(data?.CreatureTypeName))
+        {
+            return;
+        }
+
+        await gameEventService.ResolveAmbushAsync(settingsService, data.CreatureTypeName).ConfigureAwait(true);
+    }
+
+    private async Task HandleFoundItemEvent(BluetoothMessage message)
+    {
+        var data = JsonConvert.DeserializeObject<FoundItemEventData>(message.Payload);
+        if (String.IsNullOrWhiteSpace(data?.ItemTypeName))
+        {
+            return;
+        }
+
+        var name = settingsService.DefaultCharacterName;
+        if (String.IsNullOrWhiteSpace(name))
+        {
+            return;
+        }
+
+        var character = await characterService.GetByNameAsync(name).ConfigureAwait(true);
+        var item = PreloadService.Instance.Things.FirstOrDefault(t => t.GetType().Name == data.ItemTypeName);
+        if (character is null || item is null)
+        {
+            return;
+        }
+
+        character.AddEquipment(item);
+        await characterService.SaveAsync(character).ConfigureAwait(true);
+
+        WeakReferenceMessenger.Default.Send(new ShowInfoMessage(
+            Lng.Elem("Item found"),
+            String.Format(Lng.Elem("You found: {0}"), Lng.Elem(item.Name))));
     }
 
     private Task HandleRegisterPlayer(BluetoothMessage message)
@@ -378,6 +491,62 @@ internal sealed partial class StorytellingViewModel : ObservableObject, IDisposa
         {
             WeakReferenceMessenger.Default.Send(new ShowErrorMessage(
                 $"{Lng.Elem("Failed to send notification")}: {ex.Message}"));
+        }
+    }
+
+    private bool CanSendAttack() => SelectedPlayer is not null && SelectedCreature is not null;
+
+    private async Task SendAttackAsync()
+    {
+        if (SelectedPlayer is null || SelectedCreature?.Source is not Creature creature)
+        {
+            return;
+        }
+
+        try
+        {
+            await bluetooth.SendAsync(new BluetoothMessage
+            {
+                CommandType = BluetoothCommandType.Attack,
+                SenderId = bluetooth.LocalId,
+                TargetIds = [SelectedPlayer.Id],
+                Payload = JsonConvert.SerializeObject(new AttackEventData
+                {
+                    CreatureTypeName = creature.GetType().Name
+                })
+            }).ConfigureAwait(false);
+        }
+        catch (Exception ex)
+        {
+            WeakReferenceMessenger.Default.Send(new ShowErrorMessage($"{Lng.Elem("Failed to send attack")}: {ex.Message}"));
+        }
+    }
+
+    private bool CanSendFoundItem() => SelectedPlayer is not null && SelectedFoundItem is not null;
+
+    private async Task SendFoundItemAsync()
+    {
+        if (SelectedPlayer is null || SelectedFoundItem?.Source is not Thing thing)
+        {
+            return;
+        }
+
+        try
+        {
+            await bluetooth.SendAsync(new BluetoothMessage
+            {
+                CommandType = BluetoothCommandType.FoundItem,
+                SenderId = bluetooth.LocalId,
+                TargetIds = [SelectedPlayer.Id],
+                Payload = JsonConvert.SerializeObject(new FoundItemEventData
+                {
+                    ItemTypeName = thing.GetType().Name
+                })
+            }).ConfigureAwait(false);
+        }
+        catch (Exception ex)
+        {
+            WeakReferenceMessenger.Default.Send(new ShowErrorMessage($"{Lng.Elem("Failed to send found item")}: {ex.Message}"));
         }
     }
 

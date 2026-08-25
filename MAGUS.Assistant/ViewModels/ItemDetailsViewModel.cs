@@ -31,7 +31,7 @@ internal partial class ItemDetailsViewModel : BaseViewModel
 
         if (character != null)
         {
-            Type targetType;
+            Type? targetType;
             if (thingToBuy is RuneArmor)
             {
                 targetType = typeof(Armor);
@@ -42,19 +42,21 @@ internal partial class ItemDetailsViewModel : BaseViewModel
             }
             else
             {
-                targetType = typeof(Thing);
+                targetType = null;
             }
 
-            var targets = character.Equipment.Where(e => targetType.IsAssignableFrom(e.GetType())).ToList();
-
-            foreach (var item in targets)
+            if (targetType != null)
             {
-                item.PriceMultiplier = priceMultiplier;
-                RuneTargets.Add(item);
-            }
+                var targets = character.Equipment.Where(e => targetType.IsAssignableFrom(e.GetType())).ToList();
+                foreach (var item in targets)
+                {
+                    item.PriceMultiplier = priceMultiplier;
+                    RuneTargets.Add(item);
+                }
 
-            IsRunecraftingVisible = RuneTargets.Any() && (thingToBuy is RuneArmor || thingToBuy is RuneSword);
-            SelectedRuneTarget = RuneTargets.FirstOrDefault();
+                IsRunecraftingVisible = RuneTargets.Any() && (thingToBuy is RuneArmor || thingToBuy is RuneSword);
+                SelectedRuneTarget = RuneTargets.FirstOrDefault();
+            }
         }
         else
         {
@@ -137,7 +139,9 @@ internal partial class ItemDetailsViewModel : BaseViewModel
 
     private void OnSelectedRuneTargetChanged()
     {
-        Money = (SelectedRuneTarget!.MultipliedPrice * 2).ToTranslatedString();
+        Money = SelectedRuneTarget == null
+            ? ThingToBuy.MultipliedPrice.ToTranslatedString()
+            : (SelectedRuneTarget.MultipliedPrice * 2).ToTranslatedString();
         OnPropertyChanged(nameof(Money));
     }
 

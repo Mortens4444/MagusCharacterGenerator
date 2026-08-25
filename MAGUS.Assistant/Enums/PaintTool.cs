@@ -11,5 +11,6 @@ internal enum PaintTool
     Circle,
     Move,
     Rotate,
-    Resize
+    Resize,
+    Stamp
 }

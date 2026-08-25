@@ -8,6 +8,8 @@ public class LunchDinner : Thing
 
 	public override Money Price => new(0, 0, 5);
 
+    public override int HungerValue => 100;
+
     public override string Description => "A single, prepared meal, served hot at an inn or tavern. Typically consists of stew, bread, and perhaps a small cut of common meat.";
 
     public override string[] Images => ["lunch_dinner.png"];

@@ -2,6 +2,7 @@
 using MAGUS.Assistant.Models;
 using MAGUS.Bestiary;
 using MAGUS.GameSystem.Qualifications;
+using MAGUS.GameSystem.Quests;
 using MAGUS.GameSystem.Runes;
 using MAGUS.Interfaces;
 using MAGUS.Races;
@@ -38,6 +39,7 @@ internal sealed class PreloadService
     public IReadOnlyList<ImageItem> CachedImageItems { get; private set; } = [];
     public IReadOnlyList<SoundItem> AllSounds { get; private set; } = [];
     public IReadOnlyList<Qualification> Qualifications { get; private set; } = [];
+    public IReadOnlyList<Quest> Quests { get; private set; } = [];
 
     private PreloadService() { }
 
@@ -71,7 +73,8 @@ internal sealed class PreloadService
                 LoadMagicalObjectsAsync(),
                 BuildImageCacheAsync(),
                 LoadSoundListAsync(),
-                LoadQualificationsAsync()
+                LoadQualificationsAsync(),
+                LoadQuestsAsync()
             };
 
             await Task.WhenAll(tasks).ConfigureAwait(false);
@@ -233,6 +236,21 @@ internal sealed class PreloadService
                     .ToArray();
 
                 Qualifications = qualifications;
+            }
+            catch (Exception ex)
+            {
+                WeakReferenceMessenger.Default.Send(new Mtf.Maui.Controls.Messages.ShowErrorMessage(ex));
+            }
+        });
+
+    private Task LoadQuestsAsync()
+        => Task.Run(() =>
+        {
+            try
+            {
+                Quests = "MAGUS.GameSystem.Quests".CreateInstancesFromNamespace<Quest>()
+                    .OrderBy(q => Lng.Elem(q.Name))
+                    .ToArray();
             }
             catch (Exception ex)
             {

@@ -7,5 +7,7 @@ internal enum BluetoothCommandType
     PrivateMessage,
     NotificationMessage,
     ForceCombat,
-    PsiMessage
+    PsiMessage,
+    Attack,
+    FoundItem
 }

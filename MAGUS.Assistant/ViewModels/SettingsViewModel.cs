@@ -255,6 +255,23 @@ internal sealed partial class SettingsViewModel : BaseViewModel
         }
     }
 
+    /// <summary>
+    /// Pickers with a converter-based ItemDisplayBinding (e.g. CombatSimulatorMode, translated via
+    /// EnumDescriptionTranslationConverter) only re-run that converter when their ItemsSource raises
+    /// a collection-changed event or their SelectedItem changes - not when the language changes
+    /// elsewhere. Re-adding the items forces the picker to redraw with the newly selected language.
+    /// </summary>
+    public void RefreshLanguageDependentBindings()
+    {
+        var modes = CombatSimulatorModes.ToList();
+        CombatSimulatorModes.Clear();
+        foreach (var mode in modes)
+        {
+            CombatSimulatorModes.Add(mode);
+        }
+        OnPropertyChanged(nameof(CombatSimulatorMode));
+    }
+
     public string RestoreHealthPointsPerHourOfSleepString
     {
         get => settingsService.RestoreHealthPointsPerHourOfSleep.ToString(CultureInfo.InvariantCulture);

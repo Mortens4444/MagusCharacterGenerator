@@ -13,4 +13,8 @@ public class WaterOfLife : MagicalObject
     public override int ManaPoints => 200;
 
     public override IEnumerable<Class> AllowedCreators => [new Witch()];
+
+    public override bool HealsFully => true;
+
+    public override bool Resurrects => true;
 }

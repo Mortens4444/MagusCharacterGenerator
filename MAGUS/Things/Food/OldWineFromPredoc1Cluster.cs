@@ -8,6 +8,8 @@ public class OldWineFromPredoc1Cluster : Thing
 
 	public override Money Price => new(0, 0, 20);
 
+    public override int HungerValue => 5;
+
     public override string Description => "A single bottle of aged, high-quality wine originating from the renowned Predoc region, noted for its complex bouquet. A true delight for the connoisseur.";
 
     public override string[] Images => ["wine.png"];

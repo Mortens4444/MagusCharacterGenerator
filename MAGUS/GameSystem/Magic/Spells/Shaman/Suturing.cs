@@ -11,7 +11,7 @@ namespace MAGUS.GameSystem.Magic.Spells.Shaman;
 /// healed is approximated with the same 1D6 baseline the codebase already uses for a comparable
 /// minor heal (Witch's KissOfLife).
 /// </summary>
-public sealed class Suturing : ISpell
+public sealed class Suturing : IHealingSpell
 {
     private readonly DiceThrow diceThrow = new();
 

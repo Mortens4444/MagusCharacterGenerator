@@ -41,5 +41,13 @@ public abstract class Qualification : ImageOwner
 
     public virtual int QpToMasterQualification { get; }
 
+    /// <summary>
+    /// True when this qualification instance still needs the player to pick something (a weapon type,
+    /// a language) before it's fully meaningful - e.g. a WeaponUse granted automatically by class/race
+    /// with no Weapon chosen yet. See WeaponQualification/LanguageLore/AncientTongueLore for the actual
+    /// checks, and QualificationsView.xaml, which shows a "Choose" prompt while this is true.
+    /// </summary>
+    public virtual bool NeedsSelection => false;
+
     public override string ToString() => Name;
 }

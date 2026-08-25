@@ -9,5 +9,7 @@ public abstract class WeaponQualification(QualificationLevel qualificationLevel 
 
     public Weapon? Weapon { get; set; }
 
+    public override bool NeedsSelection => Weapon == null;
+
     public WeaponQualification() : this(QualificationLevel.Base) { }
 }

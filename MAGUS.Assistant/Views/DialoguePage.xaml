@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<v:NotifierPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                xmlns:v="clr-namespace:Mtf.LanguageService.MAUI.Views;assembly=Mtf.LanguageService.MAUI"
+                xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                xmlns:vm="clr-namespace:MAGUS.Assistant.ViewModels"
+                xmlns:qst="clr-namespace:MAGUS.GameSystem.Quests;assembly=MAGUS"
+                x:Class="MAGUS.Assistant.Views.DialoguePage"
+                x:ClassModifier="internal"
+                x:DataType="vm:DialogueViewModel"
+                BackgroundColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource Gray900}}">
+
+    <ScrollView>
+        <Grid RowDefinitions="Auto, *" Padding="24" RowSpacing="16">
+
+            <Label Grid.Row="0"
+                   Text="{Binding Text}"
+                   FontSize="18"
+                   LineBreakMode="WordWrap"
+                   TextColor="{AppThemeBinding Light=Black, Dark=White}" />
+
+            <CollectionView Grid.Row="1" ItemsSource="{Binding Options}" SelectionMode="None">
+                <CollectionView.ItemsLayout>
+                    <LinearItemsLayout Orientation="Vertical" ItemSpacing="10" />
+                </CollectionView.ItemsLayout>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="qst:DialogueOption">
+                        <Button Text="{Binding Text}"
+                                LineBreakMode="WordWrap"
+                                HorizontalOptions="Fill"
+                                Command="{Binding Source={RelativeSource AncestorType={x:Type vm:DialogueViewModel}}, Path=SelectOptionCommand}"
+                                CommandParameter="{Binding .}" />
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+        </Grid>
+    </ScrollView>
+
+</v:NotifierPage>

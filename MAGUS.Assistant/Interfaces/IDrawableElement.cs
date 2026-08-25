@@ -7,6 +7,7 @@ namespace MAGUS.Assistant.Interfaces;
 [JsonDerivedType(typeof(RectangleElement), typeDiscriminator: "rect")]
 [JsonDerivedType(typeof(CircleElement), typeDiscriminator: "circle")]
 [JsonDerivedType(typeof(TextElement), typeDiscriminator: "text")]
+[JsonDerivedType(typeof(GroupElement), typeDiscriminator: "group")]
 internal interface IDrawableElement
 {
     Color Color { get; set; }

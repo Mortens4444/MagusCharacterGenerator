@@ -10,6 +10,8 @@ public class AncientTongueLore : Qualification, ICanHaveMany, IScientificQualifi
 
     public AntientLanguage? Language { get; set; }
 
+    public override bool NeedsSelection => !Language.HasValue;
+
     [JsonConstructor]
     public AncientTongueLore() { }
 

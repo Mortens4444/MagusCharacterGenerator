@@ -33,7 +33,7 @@ internal static class EncounterHelpers
             }
 
             int dist = assignment.GetDistanceInMeters(enemy);
-            var intendedAttack = enemy.GetRandomAttackMode(); // Need an attack mode provider like ICombatRollService
+            var intendedAttack = enemy.GetTacticalAttackMode();
             int range = Attacker.GetAttackRangeInMeters(intendedAttack);
 
             if (dist > range)

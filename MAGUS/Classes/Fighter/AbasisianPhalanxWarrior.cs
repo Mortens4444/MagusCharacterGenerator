@@ -14,11 +14,11 @@ using MAGUS.Things.Weapons.StabbingWeapons;
 
 namespace MAGUS.Classes.Fighter;
 
-public class AbasissiPhalanxWarrior : Class, IClass, IJustFight
+public class AbasisianPhalanxWarrior : Class, IClass, IJustFight
 {
-    public AbasissiPhalanxWarrior() : base(1, false) { }
+    public AbasisianPhalanxWarrior() : base(1, false) { }
 
-    public AbasissiPhalanxWarrior(int level, bool autoGenerateSkills) : base(level, autoGenerateSkills) { }
+    public AbasisianPhalanxWarrior(int level, bool autoGenerateSkills) : base(level, autoGenerateSkills) { }
 
     [DiceThrow(ThrowType._1D6)]
     [DiceThrowModifier(12)]
@@ -114,7 +114,7 @@ public class AbasissiPhalanxWarrior : Class, IClass, IJustFight
         new() { Level = 12, MinExperience = 80001, MaxExperience = 112000 }
     ];
 
-    public override string Name => "Abasissi Phalanx Warrior";
+    public override string Name => "Abasisian Phalanx Warrior";
 
     public override ulong ExpPerLevelAfter12 => 31200;
 

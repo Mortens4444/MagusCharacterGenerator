@@ -129,5 +129,5 @@ internal static class ShellNavigationService
                 Lng.Elem(title),
                 Lng.Elem(cancel),
                 destruction == null ? null : Lng.Elem(destruction),
-                [.. buttons.Select(Lng.Elem)]));
+                [.. buttons.Select(b => Lng.Elem(b))]));
 }

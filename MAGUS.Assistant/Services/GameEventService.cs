@@ -3,6 +3,7 @@ using MAGUS.Assistant.Enums;
 using MAGUS.Assistant.Extensions;
 using MAGUS.Assistant.ViewModels;
 using MAGUS.Assistant.Views;
+using MAGUS.Bestiary;
 using MAGUS.Enums;
 using MAGUS.Extensions;
 using MAGUS.GameSystem;
@@ -62,9 +63,9 @@ internal sealed class GameEventService(CharacterService characterService, IServi
 
     // Hunger and sleep no longer compete for a slot in eventWeights above - both decay
     // unconditionally every tick (see ApplyHungerTickAsync/ApplySleepTickAsync), independent of
-    // which random event (if any) also rolls.
-    private const double HungerDecayPercentPerTick = 100.0 / 8; // 0% (fully starving) after 8 ticks without food
-    private const double SleepDecayPercentPerTick = 100.0 / 16; // 0% (exhausted) after 16 ticks without sleep - a character needs to sleep about half as often as they need to eat
+    // which random event (if any) also rolls. The decay itself is driven by real elapsed time
+    // (Character.ApplyElapsedHungerDecay/ApplyElapsedSleepDecay), not a fixed per-tick amount, so it
+    // stays correct even if this tick fires late or ticks were missed entirely.
     private const double CriticalNeedThreshold = 10; // shared by hunger and sleep: below this, each further tick costs Fájdalomtűrés/HP
 
     // Non-critical "you should eat/sleep soon" warnings, shown once each as the percentage first
@@ -183,7 +184,14 @@ internal sealed class GameEventService(CharacterService characterService, IServi
         }
     }
 
-    private async Task ResolveAmbushAsync(SettingsService settingsService, string creatureTypeName)
+    /// <summary>
+    /// Looks up a specific creature by its class name and drops the default character into an
+    /// ambush with it via the shared flee-or-fight flow. Used both for the scheduled background
+    /// Ambush event (a pre-chosen creature name saved to the pending event) and for a
+    /// GM-triggered Bluetooth Attack event (see StorytellingViewModel.HandleAttackEvent), where
+    /// another device picks the specific beast to send.
+    /// </summary>
+    public async Task ResolveAmbushAsync(SettingsService settingsService, string creatureTypeName)
     {
         await PreloadService.Instance.InitializeAsync().ConfigureAwait(true);
 
@@ -195,6 +203,32 @@ internal sealed class GameEventService(CharacterService characterService, IServi
             return;
         }
 
+        await RunAmbushEncounterAsync(character, creature).ConfigureAwait(true);
+    }
+
+    /// <summary>
+    /// Picks a random creature (same Occurrence-weighted roll as the background Ambush event) and
+    /// drops the given character into it via the same flee-or-fight flow a notification-triggered
+    /// ambush uses. Reusable from anywhere that wants an unplanned fight without going through the
+    /// SavePendingEvent/notification indirection - e.g. CharacterViewModel.SearchAsync, when
+    /// searching somewhere dangerous turns up more than the character bargained for.
+    /// </summary>
+    public async Task TriggerRandomEncounterAsync(Character character)
+    {
+        await PreloadService.Instance.InitializeAsync().ConfigureAwait(true);
+
+        var creature = EnemyProvider.PickWeightedRandom(PreloadService.Instance.Creatures, c => c.Occurrence.GetWeight());
+        if (creature is null)
+        {
+            return;
+        }
+
+        await RunAmbushEncounterAsync(character, creature).ConfigureAwait(true);
+    }
+
+    /// <summary>Shared flee-or-fight flow behind both ResolveAmbushAsync (a pre-chosen, notification-scheduled creature) and TriggerRandomEncounterAsync (a freshly rolled one).</summary>
+    private async Task RunAmbushEncounterAsync(Character character, Creature creature)
+    {
         var creatureName = Lng.Elem(creature.Name);
         var message = String.Format(Lng.Elem("A {0} blocks your path, {1}. Flee, or stand and fight?"), creatureName, character.Name);
 
@@ -428,7 +462,8 @@ internal sealed class GameEventService(CharacterService characterService, IServi
 
     /// <summary>
     /// Runs on every background tick regardless of whether a random event also rolls: hunger always
-    /// drains by HungerDecayPercentPerTick. Crossing a needWarningThresholds entry (20%, 15%) shows
+    /// drains via Character.ApplyElapsedHungerDecay (real elapsed time, not a fixed per-tick amount).
+    /// Crossing a needWarningThresholds entry (20%, 15%) shows
     /// a one-time "you should eat soon" nudge with no mechanical effect yet. Below
     /// CriticalNeedThreshold it starts actively hurting the character each further tick - pain
     /// tolerance drains first (down to unconsciousness), and once that's exhausted, health points
@@ -439,7 +474,7 @@ internal sealed class GameEventService(CharacterService characterService, IServi
     private async Task<(string Title, string Message)?> ApplyHungerTickAsync(Character character)
     {
         var previousHungerPercent = character.HungerPercent;
-        character.HungerPercent = Math.Max(0, previousHungerPercent - HungerDecayPercentPerTick);
+        character.ApplyElapsedHungerDecay();
 
         if (character.HungerPercent >= CriticalNeedThreshold)
         {
@@ -496,7 +531,7 @@ internal sealed class GameEventService(CharacterService characterService, IServi
     private async Task<(string Title, string Message)?> ApplySleepTickAsync(Character character)
     {
         var previousSleepPercent = character.SleepPercent;
-        character.SleepPercent = Math.Max(0, previousSleepPercent - SleepDecayPercentPerTick);
+        character.ApplyElapsedSleepDecay();
 
         if (character.SleepPercent >= CriticalNeedThreshold)
         {

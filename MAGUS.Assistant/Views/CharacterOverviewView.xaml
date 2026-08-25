@@ -3,6 +3,7 @@
              xmlns:vm="clr-namespace:MAGUS.Assistant.ViewModels"
              xmlns:mc="clr-namespace:Mtf.Maui.Controls;assembly=Mtf.Maui.Controls"
              xmlns:conv="clr-namespace:Mtf.LanguageService.MAUI.Converters;assembly=Mtf.LanguageService.MAUI"
+             xmlns:mcconv="clr-namespace:Mtf.Maui.Controls.Converters;assembly=Mtf.Maui.Controls"
              x:Class="MAGUS.Assistant.Views.CharacterOverviewView"
              x:ClassModifier="internal"
              x:DataType="vm:CharacterViewModel">
@@ -11,6 +12,7 @@
         <ResourceDictionary>
             <conv:EnumDescriptionTranslationConverter x:Key="EnumDescriptionTranslationConverter" />
             <conv:TranslationConverter x:Key="TranslationConverter" />
+            <mcconv:InverseBooleanConverter x:Key="InverseBooleanConverter" />
         </ResourceDictionary>
     </ContentView.Resources>
 
@@ -18,7 +20,7 @@
         <VerticalStackLayout Spacing="16" Padding="16">
 
             <!-- Hunger and sleep: always visible, turn red once critical (see the Care tab for Sleep/Eat/Cast actions) -->
-            <Border Style="{StaticResource BoxBorder}">
+            <!--<Border Style="{StaticResource BoxBorder}">
                 <VerticalStackLayout Spacing="4">
                     <Label Text="{Binding HungerPercent, StringFormat='🍗 Hunger: {0:F0}%'}" FontAttributes="Bold">
                         <Label.Triggers>
@@ -35,7 +37,7 @@
                         </Label.Triggers>
                     </Label>
                 </VerticalStackLayout>
-            </Border>
+            </Border>-->
 
             <!-- Portrait -->
             <Border Style="{StaticResource BoxBorder}">
@@ -60,14 +62,33 @@
                                            Text="{Binding Race, Converter={StaticResource TranslationConverter}}"
                                            HorizontalOptions="Center"
                                            IsReadOnly="True"
-                                           Grid.ColumnSpan="2" />
+                                           Grid.Column="0" />
 
                         <mc:EntryWithLabel Label="Caste"
                                            Text="{Binding Class, Converter={StaticResource TranslationConverter}}"
                                            HorizontalOptions="Center"
                                            IsReadOnly="True"
-                                           Grid.Row="1"
-                                           Grid.ColumnSpan="2" />
+                                           Grid.Column="1" />
+
+                        <VerticalStackLayout Grid.Row="1">
+                            <Label Text="Alignment" HorizontalOptions="Center" />
+                            <Picker ItemsSource="{Binding Alignments}"
+                                    ItemDisplayBinding="{Binding ., Converter={StaticResource EnumDescriptionTranslationConverter}}"
+                                    SelectedItem="{Binding Alignment}"
+                                    VerticalTextAlignment="Center"
+                                    HorizontalTextAlignment="Center"
+                                    MaximumHeightRequest="50" />
+                        </VerticalStackLayout>
+
+                        <VerticalStackLayout Grid.Row="1" Grid.Column="1">
+                            <Label Text="Deity" HorizontalOptions="Center" />
+                            <Picker ItemsSource="{Binding Deities}"
+                                ItemDisplayBinding="{Binding ., Converter={StaticResource EnumDescriptionTranslationConverter}}"
+                                SelectedItem="{Binding Deity}"
+                                VerticalTextAlignment="Center"
+                                HorizontalTextAlignment="Center"
+                                MaximumHeightRequest="50" />
+                        </VerticalStackLayout>
 
                         <mc:EntryWithLabel Label="Experience level"
                                            Text="{Binding Level}"
@@ -94,39 +115,7 @@
                             <Switch Grid.Column="1" IsToggled="{Binding PlayerCharacter}" />
                         </Grid>-->
 
-                        <Picker ItemsSource="{Binding Alignments}"
-                                ItemDisplayBinding="{Binding ., Converter={StaticResource EnumDescriptionTranslationConverter}}"
-                                SelectedItem="{Binding Alignment}"
-                                VerticalTextAlignment="Center"
-                                HorizontalTextAlignment="Center"
-                                MaximumHeightRequest="50"
-                                Grid.Row="4"
-                                Grid.ColumnSpan="2" />
-
-                        <Picker ItemsSource="{Binding Deities}"
-                                ItemDisplayBinding="{Binding ., Converter={StaticResource EnumDescriptionTranslationConverter}}"
-                                SelectedItem="{Binding Deity}"
-                                VerticalTextAlignment="Center"
-                                HorizontalTextAlignment="Center"
-                                MaximumHeightRequest="50"
-                                Grid.Row="5"
-                                Grid.ColumnSpan="2" />
                     </Grid>
-                </VerticalStackLayout>
-            </Border>
-
-            <!-- Birthplace, current location, travel -->
-            <Border Style="{StaticResource BoxBorder}">
-                <VerticalStackLayout Spacing="8">
-                    <Label Text="Birthplace and travel" Style="{StaticResource HeaderLabel}"/>
-                    <Picker ItemsSource="{Binding Cities}"
-                            ItemDisplayBinding="{Binding ., Converter={StaticResource EnumDescriptionTranslationConverter}}"
-                            SelectedItem="{Binding Birthplace}"
-                            Title="Birthplace" />
-                    <mc:EntryWithLabel Label="Current location"
-                                       Text="{Binding CurrentLocation, Converter={StaticResource EnumDescriptionTranslationConverter}}"
-                                       IsReadOnly="True" />
-                    <Button Text="Travel" Command="{Binding TravelCommand}" />
                 </VerticalStackLayout>
             </Border>
 

@@ -3,11 +3,13 @@ using MAGUS.Classes.Fighter;
 using MAGUS.Classes.Sorcerer;
 using MAGUS.Enums;
 using MAGUS.GameSystem.Languages;
+using MAGUS.GameSystem.Magic;
 using MAGUS.GameSystem.Psi;
 using MAGUS.GameSystem.Qualifications;
 using MAGUS.Interfaces;
 using MAGUS.Qualifications;
 using MAGUS.Qualifications.Combat;
+using MAGUS.Qualifications.Percentages;
 using MAGUS.Qualifications.Scientific;
 using MAGUS.Qualifications.Scientific.Psi;
 using MAGUS.Qualifications.Specialities;
@@ -66,6 +68,37 @@ public partial class Character
     public bool HasPsi()
     {
         return Qualifications.Any(q => q is IPsi);
+    }
+
+    public bool HasRunicMagic()
+    {
+        return Qualifications.Any(q => q is RunicMagic);
+    }
+
+    /// <summary>
+    /// True if this character can meaningfully treat an injury - the Healing qualification
+    /// (MAGUS.Qualifications.Scientific.Healing), Poisoning/neutralization (just as valid for a
+    /// venom/poison-flavored injury - see VenomInTheBloodAlidax), or a known spell marked
+    /// IHealingSpell (see KissOfLife/Suturing). Used to gate the Heal quest mechanic
+    /// (CharacterViewModel.HealAsync).
+    /// </summary>
+    public bool CanHeal()
+    {
+        return Qualifications.Any(q => q is Healing or PoisoningAndNeutralization) || SpellCatalog.GetAvailable(this).Any(s => s is IHealingSpell);
+    }
+
+    /// <summary>
+    /// Best available chance (0-100) of spotting a trap or secret door - the higher of
+    /// TrapDetection/SecretDoorSearch's own Percent, or 0 if the character has neither. Used as the
+    /// success chance for the trap/secret-door quest mechanic (CharacterViewModel.SearchForTrapsAsync)
+    /// instead of a flat difficulty, since these percent qualifications already represent exactly
+    /// this kind of skill-based chance.
+    /// </summary>
+    public int TrapSearchSkillPercent()
+    {
+        var trapDetection = PercentQualifications.OfType<TrapDetection>().Select(q => q.Percent).DefaultIfEmpty(0).Max();
+        var secretDoorSearch = PercentQualifications.OfType<SecretDoorSearch>().Select(q => q.Percent).DefaultIfEmpty(0).Max();
+        return Math.Max(trapDetection, secretDoorSearch);
     }
 
     public bool HasQualification(Qualification qualification, QualificationLevel qualificationLevel)

@@ -44,6 +44,24 @@ public partial class Character
 
     public int DeathCount { get; set; }
 
+    /// <summary>
+    /// Brings this character back to full health - restoring ActualHealthPoints/ActualPainTolerancePoints
+    /// to their maximums heals every wound in the same stroke, and clears the one-shot
+    /// diedRaised/lostConsciousnessRaised latches (see Attacker) so a character who dies again later
+    /// still raises Died/LostConsciousness instead of staying silently inert. Safe to call on a
+    /// character who was never dead - it's just a full heal at that point. Does not restore
+    /// ManaPoints/PsiPoints, which aren't wounds. See MAGUS.Things.MagicalObjects.WaterOfLife and
+    /// CharacterCareActions.UseHealingItemAsync.
+    /// </summary>
+    public void Revive()
+    {
+        diedRaised = false;
+        lostConsciousnessRaised = false;
+
+        ActualHealthPoints = MaxHealthPoints;
+        ActualPainTolerancePoints = MaxPainTolerancePoints;
+    }
+
     private void OnDied(object? sender, EventArgs e)
     {
         DeathCount++;

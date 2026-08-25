@@ -1,0 +1,316 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:mc="clr-namespace:Mtf.Maui.Controls;assembly=Mtf.Maui.Controls"
+             xmlns:vm="clr-namespace:MAGUS.Assistant.ViewModels"
+             xmlns:conv="clr-namespace:Mtf.LanguageService.MAUI.Converters;assembly=Mtf.LanguageService.MAUI"
+             xmlns:mcconv="clr-namespace:Mtf.Maui.Controls.Converters;assembly=Mtf.Maui.Controls"
+             xmlns:qst="clr-namespace:MAGUS.GameSystem.Quests;assembly=MAGUS"
+             xmlns:converters="clr-namespace:MAGUS.Assistant.Converters"
+             x:Class="MAGUS.Assistant.Views.PlacesView"
+             x:ClassModifier="internal"
+             x:DataType="vm:CharacterViewModel">
+
+    <ContentView.Resources>
+        <ResourceDictionary>
+            <conv:EnumDescriptionTranslationConverter x:Key="EnumDescriptionTranslationConverter" />
+            <conv:TranslationConverter x:Key="TranslationConverter" />
+            <mcconv:InverseBooleanConverter x:Key="InverseBooleanConverter" />
+            <converters:HasItemsConverter x:Key="HasItemsConverter" />
+            <converters:QuestLevelRangeConverter x:Key="QuestLevelRangeConverter" />
+            <converters:QuestTimeLimitConverter x:Key="QuestTimeLimitConverter" />
+        </ResourceDictionary>
+    </ContentView.Resources>
+
+    <ScrollView>
+        <VerticalStackLayout Spacing="16" Padding="16">
+            <Border Style="{StaticResource BoxBorder}">
+                <VerticalStackLayout Spacing="8">
+                    <Label Text="Birthplace and travel" />
+
+                    <Picker ItemsSource="{Binding Cities}"
+                            ItemDisplayBinding="{Binding ., Converter={StaticResource EnumDescriptionTranslationConverter}}"
+                            SelectedItem="{Binding Birthplace}"
+                            Title="Birthplace" />
+
+                    <mc:EntryWithLabel Label="Current location"
+                                       Text="{Binding CurrentLocation, Converter={StaticResource EnumDescriptionTranslationConverter}}"
+                                       IsReadOnly="True" />
+
+                    <Picker ItemsSource="{Binding TravelDestinations}"
+                            ItemDisplayBinding="{Binding ., Converter={StaticResource EnumDescriptionTranslationConverter}}"
+                            SelectedItem="{Binding SelectedTravelDestination}"
+                            Title="Destination"
+                            IsVisible="{Binding IsTraveling, Converter={StaticResource InverseBooleanConverter}}" />
+
+                    <VerticalStackLayout Spacing="4" IsVisible="{Binding IsTraveling}">
+                        <Label FontAttributes="Italic">
+                            <Label.FormattedText>
+                                <FormattedString>
+                                    <Span Text="{Binding CurrentLocation, Converter={StaticResource EnumDescriptionTranslationConverter}}" />
+                                    <Span Text=" → " />
+                                    <Span Text="{Binding TravelDestinationDescription}" />
+                                </FormattedString>
+                            </Label.FormattedText>
+                        </Label>
+
+                        <ProgressBar Progress="{Binding TravelProgress}" />
+
+                        <Label Text="{Binding TravelWaypointsDescription}"
+                               FontSize="11" TextColor="Gray"
+                               IsVisible="{Binding TravelWaypointsDescription, Converter={StaticResource HasItemsConverter}}" />
+
+                        <Button Text="Stop traveling"
+                                Command="{Binding StopTravelCommand}"
+                                ToolTipProperties.Text="Cancel the journey early - current location becomes Unknown until you travel again" />
+                    </VerticalStackLayout>
+
+                    <Button Text="Travel"
+                            Command="{Binding TravelCommand}"
+                            IsVisible="{Binding IsTraveling, Converter={StaticResource InverseBooleanConverter}}" />
+                </VerticalStackLayout>
+            </Border>
+
+            <!-- Quests offered in the city the character is currently in - see CharacterViewModel.AvailableQuestsHere -->
+            <Border Style="{StaticResource BoxBorder}" IsVisible="{Binding AvailableQuestsHere, Converter={StaticResource HasItemsConverter}}">
+                <VerticalStackLayout Spacing="8">
+                    <Label Text="Quests here" Style="{StaticResource HeaderLabel}" />
+
+                    <CollectionView ItemsSource="{Binding AvailableQuestsHere}" SelectionMode="None">
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate x:DataType="qst:Quest">
+                                <Border Stroke="Gray" StrokeThickness="1" Padding="8" Margin="0,4">
+                                    <VerticalStackLayout Spacing="4">
+                                        <Label Text="{Binding Name, Converter={StaticResource TranslationConverter}}" FontAttributes="Bold" />
+                                        <Label Text="{Binding ., Converter={StaticResource QuestLevelRangeConverter}}" FontSize="11" TextColor="Gray" />
+                                        <Label Text="{Binding Description, Converter={StaticResource TranslationConverter}}" FontSize="12" LineBreakMode="WordWrap" />
+                                        <Label FontSize="12" FontAttributes="Italic" LineBreakMode="WordWrap">
+                                            <Label.FormattedText>
+                                                <FormattedString>
+                                                    <Span Text="{Binding Objective, Converter={StaticResource TranslationConverter}}" />
+                                                </FormattedString>
+                                            </Label.FormattedText>
+                                        </Label>
+                                        <Label Text="{Binding TimeLimitHours, Converter={StaticResource QuestTimeLimitConverter}}"
+                                               FontSize="11" FontAttributes="Italic" TextColor="#FF9500"
+                                               IsVisible="{Binding HasTimeLimit}" />
+                                        <Button Text="Accept quest"
+                                                Command="{Binding Source={RelativeSource AncestorType={x:Type vm:CharacterViewModel}}, Path=AcceptQuestCommand}"
+                                                CommandParameter="{Binding .}" />
+                                    </VerticalStackLayout>
+                                </Border>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                </VerticalStackLayout>
+            </Border>
+
+            <!-- Accepted quests that can be advanced by searching right here - see CharacterViewModel.SearchableQuestsHere/SearchAsync -->
+            <Border Style="{StaticResource BoxBorder}" IsVisible="{Binding SearchableQuestsHere, Converter={StaticResource HasItemsConverter}}">
+                <VerticalStackLayout Spacing="8">
+                    <Label Text="Search here" Style="{StaticResource HeaderLabel}" />
+
+                    <CollectionView ItemsSource="{Binding SearchableQuestsHere}" SelectionMode="None">
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate x:DataType="qst:Quest">
+                                <Border Stroke="Gray" StrokeThickness="1" Padding="8" Margin="0,4">
+                                    <VerticalStackLayout Spacing="4">
+                                        <Label Text="{Binding Name, Converter={StaticResource TranslationConverter}}" FontAttributes="Bold" />
+                                        <Label Text="{Binding Objective, Converter={StaticResource TranslationConverter}}" FontSize="12" LineBreakMode="WordWrap" />
+                                        <Button Text="Search"
+                                                Command="{Binding Source={RelativeSource AncestorType={x:Type vm:CharacterViewModel}}, Path=SearchCommand}"
+                                                CommandParameter="{Binding .}" />
+                                    </VerticalStackLayout>
+                                </Border>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                </VerticalStackLayout>
+            </Border>
+
+            <!-- Accepted quests that can be advanced by negotiating right here - see CharacterViewModel.NegotiableQuestsHere/NegotiateAsync -->
+            <Border Style="{StaticResource BoxBorder}" IsVisible="{Binding NegotiableQuestsHere, Converter={StaticResource HasItemsConverter}}">
+                <VerticalStackLayout Spacing="8">
+                    <Label Text="Negotiate here" Style="{StaticResource HeaderLabel}" />
+
+                    <CollectionView ItemsSource="{Binding NegotiableQuestsHere}" SelectionMode="None">
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate x:DataType="qst:Quest">
+                                <Border Stroke="Gray" StrokeThickness="1" Padding="8" Margin="0,4">
+                                    <VerticalStackLayout Spacing="4">
+                                        <Label Text="{Binding Name, Converter={StaticResource TranslationConverter}}" FontAttributes="Bold" />
+                                        <Label Text="{Binding Objective, Converter={StaticResource TranslationConverter}}" FontSize="12" LineBreakMode="WordWrap" />
+                                        <Button Text="Negotiate"
+                                                Command="{Binding Source={RelativeSource AncestorType={x:Type vm:CharacterViewModel}}, Path=NegotiateCommand}"
+                                                CommandParameter="{Binding .}" />
+                                    </VerticalStackLayout>
+                                </Border>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                </VerticalStackLayout>
+            </Border>
+
+            <!-- Accepted quests that can be completed by treating an injury right here - see CharacterViewModel.HealableQuestsHere/HealAsync -->
+            <Border Style="{StaticResource BoxBorder}" IsVisible="{Binding HealableQuestsHere, Converter={StaticResource HasItemsConverter}}">
+                <VerticalStackLayout Spacing="8">
+                    <Label Text="Treat here" Style="{StaticResource HeaderLabel}" />
+
+                    <CollectionView ItemsSource="{Binding HealableQuestsHere}" SelectionMode="None">
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate x:DataType="qst:Quest">
+                                <Border Stroke="Gray" StrokeThickness="1" Padding="8" Margin="0,4">
+                                    <VerticalStackLayout Spacing="4">
+                                        <Label Text="{Binding Name, Converter={StaticResource TranslationConverter}}" FontAttributes="Bold" />
+                                        <Label Text="{Binding Objective, Converter={StaticResource TranslationConverter}}" FontSize="12" LineBreakMode="WordWrap" />
+                                        <Button Text="Treat"
+                                                Command="{Binding Source={RelativeSource AncestorType={x:Type vm:CharacterViewModel}}, Path=HealCommand}"
+                                                CommandParameter="{Binding .}"
+                                                ToolTipProperties.Text="Needs the Healing qualification or a known healing spell" />
+                                    </VerticalStackLayout>
+                                </Border>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                </VerticalStackLayout>
+            </Border>
+
+            <!-- Accepted quests that can be advanced by stealing right here - see CharacterViewModel.StealableQuestsHere/StealAsync -->
+            <Border Style="{StaticResource BoxBorder}" IsVisible="{Binding StealableQuestsHere, Converter={StaticResource HasItemsConverter}}">
+                <VerticalStackLayout Spacing="8">
+                    <Label Text="Steal here" Style="{StaticResource HeaderLabel}" />
+
+                    <CollectionView ItemsSource="{Binding StealableQuestsHere}" SelectionMode="None">
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate x:DataType="qst:Quest">
+                                <Border Stroke="Gray" StrokeThickness="1" Padding="8" Margin="0,4">
+                                    <VerticalStackLayout Spacing="4">
+                                        <Label Text="{Binding Name, Converter={StaticResource TranslationConverter}}" FontAttributes="Bold" />
+                                        <Label Text="{Binding Objective, Converter={StaticResource TranslationConverter}}" FontSize="12" LineBreakMode="WordWrap" />
+                                        <Button Text="Steal"
+                                                Command="{Binding Source={RelativeSource AncestorType={x:Type vm:CharacterViewModel}}, Path=StealCommand}"
+                                                CommandParameter="{Binding .}" />
+                                    </VerticalStackLayout>
+                                </Border>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                </VerticalStackLayout>
+            </Border>
+
+            <!-- Accepted quests that can be advanced by searching for a trap/secret door right here - see CharacterViewModel.TrapSearchableQuestsHere/SearchForTrapsAsync -->
+            <Border Style="{StaticResource BoxBorder}" IsVisible="{Binding TrapSearchableQuestsHere, Converter={StaticResource HasItemsConverter}}">
+                <VerticalStackLayout Spacing="8">
+                    <Label Text="Search for traps/secret doors here" Style="{StaticResource HeaderLabel}" />
+
+                    <CollectionView ItemsSource="{Binding TrapSearchableQuestsHere}" SelectionMode="None">
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate x:DataType="qst:Quest">
+                                <Border Stroke="Gray" StrokeThickness="1" Padding="8" Margin="0,4">
+                                    <VerticalStackLayout Spacing="4">
+                                        <Label Text="{Binding Name, Converter={StaticResource TranslationConverter}}" FontAttributes="Bold" />
+                                        <Label Text="{Binding Objective, Converter={StaticResource TranslationConverter}}" FontSize="12" LineBreakMode="WordWrap" />
+                                        <Button Text="Search"
+                                                Command="{Binding Source={RelativeSource AncestorType={x:Type vm:CharacterViewModel}}, Path=SearchForTrapsCommand}"
+                                                CommandParameter="{Binding .}"
+                                                ToolTipProperties.Text="Needs Trap detection or Secret door search" />
+                                    </VerticalStackLayout>
+                                </Border>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                </VerticalStackLayout>
+            </Border>
+
+            <!-- Quests already accepted, tracked regardless of which city the character is currently in -->
+            <Border Style="{StaticResource BoxBorder}" IsVisible="{Binding AcceptedQuests, Converter={StaticResource HasItemsConverter}}">
+                <VerticalStackLayout Spacing="8">
+                    <Label Text="Active quests" Style="{StaticResource HeaderLabel}" />
+
+                    <CollectionView ItemsSource="{Binding AcceptedQuests}" SelectionMode="None">
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate x:DataType="qst:Quest">
+                                <Border Stroke="Gray" StrokeThickness="1" Padding="8" Margin="0,4">
+                                    <VerticalStackLayout Spacing="4">
+                                        <Label Text="{Binding Name, Converter={StaticResource TranslationConverter}}" FontAttributes="Bold" />
+                                        <Label Text="{Binding ., Converter={StaticResource QuestLevelRangeConverter}}" FontSize="11" TextColor="Gray" />
+                                        <Label Text="{Binding Objective, Converter={StaticResource TranslationConverter}}" FontSize="12" LineBreakMode="WordWrap" />
+                                        <Label Text="{Binding TimeLimitHours, Converter={StaticResource QuestTimeLimitConverter}}"
+                                               FontSize="11" FontAttributes="Italic" TextColor="#FF9500"
+                                               IsVisible="{Binding HasTimeLimit}" />
+                                        <Label FontSize="11" FontAttributes="Italic" TextColor="Gray"
+                                               IsVisible="{Binding TargetCreatureName, Converter={StaticResource HasItemsConverter}}">
+                                            <Label.FormattedText>
+                                                <FormattedString>
+                                                    <Span Text="Completes automatically by defeating: " />
+                                                    <Span Text="{Binding TargetCreatureName, Converter={StaticResource TranslationConverter}}" />
+                                                </FormattedString>
+                                            </Label.FormattedText>
+                                        </Label>
+                                        <Label FontSize="11" FontAttributes="Italic" TextColor="Gray"
+                                               IsVisible="{Binding HasSearchLocation}">
+                                            <Label.FormattedText>
+                                                <FormattedString>
+                                                    <Span Text="Can be advanced by searching in: " />
+                                                    <Span Text="{Binding SearchLocation, Converter={StaticResource EnumDescriptionTranslationConverter}}" />
+                                                </FormattedString>
+                                            </Label.FormattedText>
+                                        </Label>
+                                        <Label Text="Can be advanced by negotiating - see the Negotiate here section above."
+                                               FontSize="11" FontAttributes="Italic" TextColor="Gray"
+                                               IsVisible="{Binding HasDialogueRoot}" />
+                                        <Label Text="Completes by keeping an ally alive in an Encounter - see the Protect button there."
+                                               FontSize="11" FontAttributes="Italic" TextColor="Gray"
+                                               IsVisible="{Binding HasProtectAlly}" />
+                                        <Label Text="Can be completed by treating the injury - see the Treat here section above."
+                                               FontSize="11" FontAttributes="Italic" TextColor="Gray"
+                                               IsVisible="{Binding RequiresHealing}" />
+                                        <Label FontSize="11" FontAttributes="Italic" TextColor="Gray"
+                                               IsVisible="{Binding HasStealLocation}">
+                                            <Label.FormattedText>
+                                                <FormattedString>
+                                                    <Span Text="Can be advanced by stealing in: " />
+                                                    <Span Text="{Binding StealLocation, Converter={StaticResource EnumDescriptionTranslationConverter}}" />
+                                                </FormattedString>
+                                            </Label.FormattedText>
+                                        </Label>
+                                        <Label FontSize="11" FontAttributes="Italic" TextColor="Gray"
+                                               IsVisible="{Binding HasTrapLocation}">
+                                            <Label.FormattedText>
+                                                <FormattedString>
+                                                    <Span Text="Can be advanced by searching for traps/secret doors in: " />
+                                                    <Span Text="{Binding TrapLocation, Converter={StaticResource EnumDescriptionTranslationConverter}}" />
+                                                </FormattedString>
+                                            </Label.FormattedText>
+                                        </Label>
+                                        <Label FontSize="11" FontAttributes="Italic" TextColor="Gray"
+                                               IsVisible="{Binding HasDeliveryDestination}">
+                                            <Label.FormattedText>
+                                                <FormattedString>
+                                                    <Span Text="Once found, completes automatically upon delivering it in: " />
+                                                    <Span Text="{Binding DeliveryDestination, Converter={StaticResource EnumDescriptionTranslationConverter}}" />
+                                                </FormattedString>
+                                            </Label.FormattedText>
+                                        </Label>
+                                        <Label FontSize="11" FontAttributes="Italic" TextColor="Gray"
+                                               IsVisible="{Binding HasEscortDestination}">
+                                            <Label.FormattedText>
+                                                <FormattedString>
+                                                    <Span Text="Completes automatically upon arriving in: " />
+                                                    <Span Text="{Binding EscortDestination, Converter={StaticResource EnumDescriptionTranslationConverter}}" />
+                                                </FormattedString>
+                                            </Label.FormattedText>
+                                        </Label>
+                                        <Button Text="Mark complete"
+                                                Command="{Binding Source={RelativeSource AncestorType={x:Type vm:CharacterViewModel}}, Path=CompleteQuestCommand}"
+                                                CommandParameter="{Binding .}" />
+                                    </VerticalStackLayout>
+                                </Border>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                </VerticalStackLayout>
+            </Border>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentView>

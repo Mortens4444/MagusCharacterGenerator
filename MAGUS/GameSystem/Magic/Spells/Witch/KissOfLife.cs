@@ -11,7 +11,7 @@ namespace MAGUS.GameSystem.Magic.Spells.Witch;
 /// perfectly synced with the damage just dealt, but conveys the mechanic (mirrors the Warlock
 /// StealLifeForce class's approach).
 /// </summary>
-public sealed class KissOfLife : ISpell
+public sealed class KissOfLife : IHealingSpell
 {
     private readonly DiceThrow diceThrow = new();
 

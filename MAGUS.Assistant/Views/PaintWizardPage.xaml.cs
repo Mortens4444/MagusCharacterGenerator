@@ -108,6 +108,15 @@ internal sealed partial class PaintWizardPage : NotifierPage
             return;
         }
 
+        if (viewModel.ActiveTool == PaintTool.Stamp)
+        {
+            var stampElement = PredefinedObjects.Create(viewModel.SelectedPredefinedObject, startPoint);
+            viewModel.Elements.Add(stampElement);
+            viewModel.RegisterAction(new AddAction(stampElement));
+            CanvasView.Invalidate();
+            return;
+        }
+
         var currentFillColor = viewModel.AutoFill ? viewModel.SelectedColor : Colors.Transparent;
         switch (viewModel.ActiveTool)
         {
@@ -253,7 +262,7 @@ internal sealed partial class PaintWizardPage : NotifierPage
                 break;
 
             case CircleElement circle:
-                if (viewModel.IsCircleRectMode) // Ez a checkboxod értéke
+                if (viewModel.IsCircleRectMode) // Ez a checkboxod ï¿½rtï¿½ke
                 {
                     circle.IsBoundedByRect = true;
                     float x1 = Math.Min(startPoint.X, currentPoint.X);

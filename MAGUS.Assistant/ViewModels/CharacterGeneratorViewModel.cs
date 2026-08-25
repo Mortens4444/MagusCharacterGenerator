@@ -28,8 +28,8 @@ internal sealed partial class CharacterGeneratorViewModel : CharacterViewModel
     private int baseClassLevel = 1;
     private bool isCharacterGenerated;
 
-    public CharacterGeneratorViewModel(CharacterService characterService, ISoundPlayer soundPlayer, IShakeService shakeService, ISettings settings, IPrintService printService, SettingsService settingsService)
-         : base(printService, soundPlayer, shakeService, settings, characterService, settingsService)
+    public CharacterGeneratorViewModel(CharacterService characterService, ISoundPlayer soundPlayer, IShakeService shakeService, ISettings settings, IPrintService printService, SettingsService settingsService, IRuneTranslator runeTranslator, GameEventService gameEventService)
+         : base(printService, soundPlayer, shakeService, settings, characterService, settingsService, runeTranslator, gameEventService)
     {
         this.settings = settings;
         this.soundPlayer = soundPlayer;
@@ -124,6 +124,25 @@ internal sealed partial class CharacterGeneratorViewModel : CharacterViewModel
                     await ShellNavigationService.ShowPageAsync(page).ConfigureAwait(true);
                     var result = await page.ResultTask.ConfigureAwait(true);
                     Character.MaxPainTolerancePoints += result;
+                }
+            }
+
+            // Priest-type classes (ClericalMagic) roll mana per level - CalculateManaPoints (called by
+            // the Character constructor above) already skipped that roll when AutoIncreaseManaPoints is
+            // off, so it's filled in here interactively instead, the same way Pain Tolerance is above.
+            if (Character.Sorcery != null && !settings.AutoIncreaseManaPoints)
+            {
+                var manaFormula = Character.MaxManaPointsPerLevelFormula;
+                if (!String.IsNullOrEmpty(manaFormula?.Formula))
+                {
+                    for (var level = Level; level <= Level; level++)
+                    {
+                        var page = new RollFormulaPage(soundPlayer, shakeService, manaFormula, $"{Lng.Elem("Create character")} - {Lng.Elem("Mana-points")} ({level}. {Lng.Elem("Level")})");
+                        await ShellNavigationService.ShowPageAsync(page).ConfigureAwait(true);
+                        var result = await page.ResultTask.ConfigureAwait(true);
+                        Character.MaxManaPoints += result;
+                        Character.ManaPoints += result;
+                    }
                 }
             }
             if (settings.AutoDistributeQualificationPoints)

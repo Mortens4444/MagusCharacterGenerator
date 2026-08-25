@@ -13,11 +13,11 @@ using MAGUS.Races;
 
 namespace MAGUS.Classes.Fighter;
 
-public class AbasissiGladiator : Class, IClass, IJustFight
+public class AbasisianGladiator : Class, IClass, IJustFight
 {
-    public AbasissiGladiator() : base(1, false) { }
+    public AbasisianGladiator() : base(1, false) { }
 
-    public AbasissiGladiator(int level, bool autoGenerateSkills) : base(level, autoGenerateSkills) { }
+    public AbasisianGladiator(int level, bool autoGenerateSkills) : base(level, autoGenerateSkills) { }
 
     [DiceThrow(ThrowType._1D6)]
     [DiceThrowModifier(12)]
@@ -116,7 +116,7 @@ public class AbasissiGladiator : Class, IClass, IJustFight
         new() { Level = 12, MinExperience = 93001, MaxExperience = 130000 }
     ];
 
-    public override string Name => "Abasissi Gladiator";
+    public override string Name => "Abasisian Gladiator";
 
     public override ulong ExpPerLevelAfter12 => 40000;
 

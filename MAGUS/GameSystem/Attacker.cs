@@ -17,10 +17,13 @@ public abstract class Attacker
     public const int MeleeDistance = 2;
     private readonly DiceThrow diceThrow = new();
 
+    // Protected (not private) so a subclass can clear them on resurrection (see Character.Revive) -
+    // otherwise these one-shot latches would permanently block Died/LostConsciousness from ever
+    // firing again for a revived Attacker whose health later drops back to 0.
     [NonSerialized, JsonIgnore, Newtonsoft.Json.JsonIgnore]
-    private bool lostConsciousnessRaised;
+    protected bool lostConsciousnessRaised;
     [NonSerialized, JsonIgnore, Newtonsoft.Json.JsonIgnore]
-    private bool diedRaised;
+    protected bool diedRaised;
     [NonSerialized, JsonIgnore, Newtonsoft.Json.JsonIgnore]
     private int actualHealthPoints;
     [NonSerialized, JsonIgnore, Newtonsoft.Json.JsonIgnore]
@@ -227,6 +230,40 @@ public abstract class Attacker
         SpellAttack spellAttack => GetManaPoints() >= spellAttack.ManaCost,
         _ => true
     };
+
+    /// <summary>
+    /// AI attack-mode pick for unattended combatants (enemies): a caster with an affordable
+    /// psi/spell attack casts it instead of swinging a weapon, while a pure fighter - who has
+    /// no mystic attack modes at all - just falls through to its weapon. Picks randomly within
+    /// whichever pool (mystic vs weapon) ends up in play, so casters still vary which spell they
+    /// use round to round instead of always casting the same one.
+    /// </summary>
+    public Attack GetTacticalAttackMode()
+    {
+        if (AttackModes == null || AttackModes.Count == 0)
+        {
+            throw new InvalidOperationException("No attack modes available.");
+        }
+
+        if (this is Creature { PreferredAttackMode: { } preferred } && CanAfford(preferred))
+        {
+            return preferred;
+        }
+
+        var affordableMystic = AttackModes.Where(a => a is MysticAttack && CanAfford(a)).ToList();
+        if (affordableMystic.Count > 0)
+        {
+            return affordableMystic[RandomProvider.GetSecureRandomInt(0, affordableMystic.Count)];
+        }
+
+        var affordableOther = AttackModes.Where(a => a is not MysticAttack && CanAfford(a)).ToList();
+        if (affordableOther.Count > 0)
+        {
+            return affordableOther[RandomProvider.GetSecureRandomInt(0, affordableOther.Count)];
+        }
+
+        throw new InvalidOperationException("No attack modes available.");
+    }
 
     public static int GetAttackRangeInMeters(Attack attack)
     {

@@ -17,6 +17,8 @@
         <mv:HealthView />
 
         <mv:CombatValuesView />
+        
+        <mv:ArmorsView />
 
         <mv:PsiManaMagicResistanceView />
 

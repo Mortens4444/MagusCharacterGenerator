@@ -57,7 +57,7 @@ internal sealed class TurnAttackViewModel(int roundNumber, InitiativeEntry initi
             string damageKind = attack.IsHpDamage ? Lng.Elem("HP") : Lng.Elem("PTP");
             var target = isRanged ? "🎯" : "💥";
 
-            return $"{attackMode}{isHpAttack}{impact} {attack.RollValue + attack.Attack.Value}{(attack.IsSuccessful ? $"{target}{attack.Damage} {damageKind}" : String.Empty)}";
+            return $"{attackMode}{isHpAttack}{impact} {attack.RollValue + attack.Attack.Value}{(attack.IsSuccessful ? $"\r\n{target}{attack.Damage} {damageKind}" : String.Empty)}";
         }
     }
 }

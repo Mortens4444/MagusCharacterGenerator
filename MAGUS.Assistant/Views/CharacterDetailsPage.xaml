@@ -7,21 +7,21 @@
             x:ClassModifier="internal"
             x:DataType="vm:CharacterViewModel">
 
-    <Grid RowDefinitions="Auto, *">
-
-        <ScrollView Orientation="Horizontal" HorizontalScrollBarVisibility="Never"
-                    Margin="0,5,0,10" HorizontalOptions="Center">
-            <HorizontalStackLayout Spacing="10" Padding="10,0">
-                <Button Text="⛤" Command="{Binding ChangeTabCommand}" CommandParameter="0" />
-                <Button Text="✨" Command="{Binding ChangeTabCommand}" CommandParameter="1" />
-                <Button Text="⚔" Command="{Binding ChangeTabCommand}" CommandParameter="2" />
-                <Button Text="🧙" Command="{Binding ChangeTabCommand}" CommandParameter="3" />
-                <Button Text="📖" Command="{Binding ChangeTabCommand}" CommandParameter="4" />
-                <Button Text="🎒" Command="{Binding ChangeTabCommand}" CommandParameter="5" />
-                <Button Text="🍗" Command="{Binding ChangeTabCommand}" CommandParameter="6" />
-            </HorizontalStackLayout>
-        </ScrollView>
-
-        <ContentView Grid.Row="1" Content="{Binding CurrentView}" />
+    <Grid RowDefinitions="Auto, Auto, *">
+        <HorizontalStackLayout Spacing="10" Padding="10,0">
+            <Button Text="⛤" Command="{Binding ChangeTabCommand}" CommandParameter="0" />
+            <Button Text="✨" Command="{Binding ChangeTabCommand}" CommandParameter="1" />
+            <Button Text="⚔" Command="{Binding ChangeTabCommand}" CommandParameter="2" />
+            <Button Text="🛡️" Command="{Binding ChangeTabCommand}" CommandParameter="3" />
+            <Button Text="🗺️" Command="{Binding ChangeTabCommand}" CommandParameter="4" />
+        </HorizontalStackLayout>
+        <HorizontalStackLayout Spacing="10" Padding="10,0" Grid.Row="1">
+            <Button Text="♥️" Command="{Binding ChangeTabCommand}" CommandParameter="5" />
+            <Button Text="🧙" Command="{Binding ChangeTabCommand}" CommandParameter="6" />
+            <Button Text="📖" Command="{Binding ChangeTabCommand}" CommandParameter="7" />
+            <Button Text="🎒" Command="{Binding ChangeTabCommand}" CommandParameter="8" />
+            <Button Text="🍗" Command="{Binding ChangeTabCommand}" CommandParameter="9" />
+        </HorizontalStackLayout>
+        <ContentView Grid.Row="2" Content="{Binding CurrentView}" />
     </Grid>
 </v:NotifierPage>

@@ -3,7 +3,6 @@ using MAGUS.GameSystem.Qualifications;
 using MAGUS.Qualifications;
 using MAGUS.Qualifications.Laical;
 using MAGUS.Qualifications.Percentages;
-using Mtf.Extensions;
 
 namespace MAGUS.Races;
 

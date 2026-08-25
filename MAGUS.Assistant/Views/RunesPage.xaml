@@ -9,21 +9,6 @@
                 x:DataType="vm:RunesViewModel"
                 Title="Runes">
 
-    <Grid RowDefinitions="Auto,*" Padding="10" RowSpacing="10">
-
-        <Border Grid.Row="0" Stroke="Gray" StrokeThickness="1" Padding="10">
-            <VerticalStackLayout Spacing="6">
-
-                <Label Text="Plain text" FontAttributes="Bold"/>
-                <Entry Text="{Binding PlainText}" />
-
-                <Label Text="Runes" FontAttributes="Bold"/>
-                <Entry Text="{Binding RuneText}" />
-
-            </VerticalStackLayout>
-        </Border>
-
-        <view:SearchListView Grid.Row="1" />
-    </Grid>
+    <view:SearchListView />
 
 </v:NotifierPage>

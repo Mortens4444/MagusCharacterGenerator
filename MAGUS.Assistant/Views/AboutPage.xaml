@@ -25,6 +25,8 @@
             <!--<mc:Hyperlink LinkLabel="Update" Url="https://samu.us/mortens/com.mortens.h4ckw1thm3-signed.apk" HorizontalOptions="Center" />-->
             <mc:Hyperlink LinkLabel="Privacy Policy" Url="https://samu.us/mortens/MPrivacyPolicy.txt" HorizontalOptions="Center" />
 
+            <mc:UriOpenerButtonWithLabel WidthRequest="55" ImageName="donate" LabelText="Donate more" Url="https://www.patreon.com/Mortens" HorizontalOptions="Center" />
+
             <Label Text="{Binding AppEmail}"
                    HorizontalOptions="Center"
                    TextColor="LightBlue">

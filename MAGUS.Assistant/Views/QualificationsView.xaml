@@ -44,9 +44,13 @@
                     <CollectionView ItemsSource="{Binding Qualifications, Converter={StaticResource QualificationSorter}}" SelectionMode="None">
                         <CollectionView.ItemTemplate>
                             <DataTemplate x:DataType="local:Qualification">
-                                <Grid Padding="6" ColumnDefinitions="*,Auto" ColumnSpacing="10">
+                                <Grid Padding="6" ColumnDefinitions="*,Auto,Auto" ColumnSpacing="10">
                                     <Label Text="{Binding ., Converter={StaticResource QualificationNameConverter}}" VerticalOptions="Center" HorizontalOptions="Start" />
-                                    <Label Text="{Binding QualificationLevel, Converter={StaticResource TranslationConverter}}" VerticalOptions="Center" HorizontalTextAlignment="End" />
+                                    <Button Grid.Column="1" Text="Choose" FontSize="12" Padding="10,2"
+                                            IsVisible="{Binding NeedsSelection}"
+                                            Command="{Binding Source={RelativeSource AncestorType={x:Type vm:CharacterViewModel}}, Path=SelectQualificationAttributeCommand}"
+                                            CommandParameter="{Binding .}" />
+                                    <Label Grid.Column="2" Text="{Binding QualificationLevel, Converter={StaticResource TranslationConverter}}" VerticalOptions="Center" HorizontalTextAlignment="End" />
                                 </Grid>
                             </DataTemplate>
                         </CollectionView.ItemTemplate>

@@ -59,5 +59,19 @@
             <Button Grid.Column="1" Text="Send notification" Command="{Binding SendNotificationCommand}" />
         </Grid>
 
+        <Label Text="Send attack" FontAttributes="Bold"/>
+        <Picker ItemsSource="{Binding AvailableCreatures}"
+                ItemDisplayBinding="{Binding Title}"
+                SelectedItem="{Binding SelectedCreature}"
+                Title="Choose a creature" />
+        <Button Text="Send attack" Command="{Binding SendAttackCommand}" />
+
+        <Label Text="Send found item" FontAttributes="Bold"/>
+        <Picker ItemsSource="{Binding AvailableItems}"
+                ItemDisplayBinding="{Binding Title}"
+                SelectedItem="{Binding SelectedFoundItem}"
+                Title="Choose an item" />
+        <Button Text="Send found item" Command="{Binding SendFoundItemCommand}" />
+
     </VerticalStackLayout>
 </v:NotifierPage>

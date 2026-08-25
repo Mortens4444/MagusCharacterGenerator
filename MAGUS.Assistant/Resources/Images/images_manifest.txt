@@ -291,8 +291,8 @@ yersenia_hunter.png
 ymorre.png
 zombie.png
 zulfaim.png
-abasissi_gladiator.png
-abasissi_phalanx_warrior.png
+abasisian_gladiator.png
+abasisian_phalanx_warrior.png
 air_wizard.png
 amazon.png
 armored_bear.png
@@ -552,6 +552,7 @@ bestiary.png
 character_generation.png
 character_list.png
 classes.png
+donate.png
 encounter.png
 gemstone.png
 images.png
@@ -767,7 +768,6 @@ weapon_use.png
 weather_divination.png
 wrestling.png
 amund.png
-aun.png
 buzzgoblin.png
 chaos_spawn.png
 court_goblin.png

@@ -13,10 +13,12 @@
             <Border Style="{StaticResource BoxBorder}">
                 <VerticalStackLayout>
                     <Label Text="ᛉ-points" Style="{StaticResource HeaderLabel}"/>
-                    <Grid ColumnDefinitions="*, *" RowSpacing="5" RowDefinitions="Auto">
-                        <mc:EntryWithLabel Label="Max. ᛉp" Text="{Binding MaxPsiPoints}" IsReadOnly="True" />
-                        <mc:EntryWithLabel Label="Max. ᛉp/level" Text="{Binding PsiPointsModifier}" IsReadOnly="True" Grid.Column="1" />
+                    <Grid ColumnDefinitions="*, *" RowSpacing="5" RowDefinitions="Auto, Auto">
+                        <mc:EntryWithLabel Label="Act. ᛉp" Text="{Binding PsiPoints}" IsReadOnly="True" />
+                        <mc:EntryWithLabel Label="Max. ᛉp" Text="{Binding MaxPsiPoints}" IsReadOnly="True" Grid.Column="1" />
+                        <mc:EntryWithLabel Label="Max. ᛉp/level" Text="{Binding PsiPointsModifier}" IsReadOnly="True" Grid.Row="1" />
                     </Grid>
+                    <Button Text="Cast psi" Command="{Binding CastPsiCommand}" IsEnabled="{Binding HasPsi}" Margin="0,10,0,0" />
                 </VerticalStackLayout>
             </Border>
 
@@ -24,10 +26,12 @@
             <Border Style="{StaticResource BoxBorder}">
                 <VerticalStackLayout>
                     <Label Text="Mana-points" Style="{StaticResource HeaderLabel}"/>
-                    <Grid ColumnDefinitions="*, *" RowSpacing="5" RowDefinitions="Auto">
-                        <mc:EntryWithLabel Label="Max. Mp" Text="{Binding MaxManaPoints}" IsReadOnly="True" />
-                        <mc:EntryWithLabel Label="Max. Mp/level" Text="{Binding MaxManaPointsPerLevel}" IsReadOnly="True" Grid.Column="1" />
+                    <Grid ColumnDefinitions="*, *" RowSpacing="5" RowDefinitions="Auto, Auto">
+                        <mc:EntryWithLabel Label="Act. Mp" Text="{Binding ManaPoints}" IsReadOnly="True" />
+                        <mc:EntryWithLabel Label="Max. Mp" Text="{Binding MaxManaPoints}" IsReadOnly="True" Grid.Column="1" />
+                        <mc:EntryWithLabel Label="Max. Mp/level" Text="{Binding MaxManaPointsPerLevel}" IsReadOnly="True" Grid.Row="1" />
                     </Grid>
+                    <Button Text="Cast spell" Command="{Binding CastSpellCommand}" IsVisible="{Binding HasSorcery}" Margin="0,10,0,0" />
                 </VerticalStackLayout>
             </Border>
 
@@ -47,7 +51,21 @@
                 </VerticalStackLayout>
             </Border>
 
-            <Button Text="Cast spell" Command="{Binding CastSpellCommand}" IsVisible="{Binding HasMagic}" />
+            <!-- Rune cipher -->
+            <Border Style="{StaticResource BoxBorder}" IsVisible="{Binding HasRunicMagic}">
+                <VerticalStackLayout Spacing="6">
+                    <Label Text="Rune cipher" Style="{StaticResource HeaderLabel}"/>
+
+                    <Label Text="Plain text" FontAttributes="Bold"/>
+                    <Entry Text="{Binding RunePlainText}" />
+
+                    <Label Text="Runes" FontAttributes="Bold"/>
+                    <Grid ColumnDefinitions="*,Auto" ColumnSpacing="8">
+                        <Entry Grid.Column="0" Text="{Binding RuneCipherText}" />
+                        <Button Grid.Column="1" Text="Copy" Command="{Binding CopyRuneCipherTextCommand}" />
+                    </Grid>
+                </VerticalStackLayout>
+            </Border>
 
         </VerticalStackLayout>
     </ScrollView>

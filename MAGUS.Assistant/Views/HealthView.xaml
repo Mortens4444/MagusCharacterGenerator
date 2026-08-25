@@ -13,7 +13,7 @@
 
             <!-- Health & Pain Resistance -->
             <Border Style="{StaticResource BoxBorder}">
-                <VerticalStackLayout>
+                <VerticalStackLayout Margin="16">
                     <Label Text="Health &amp; Pain Resistance" Style="{StaticResource HeaderLabel}"/>
                     <Grid ColumnDefinitions="*, *" RowDefinitions="Auto, Auto, Auto">
                         <mc:EntryWithLabel Label="Max. HP" Text="{Binding MaxHealthPoints}" IsReadOnly="True" WidthRequest="100" Grid.ColumnSpan="2" />

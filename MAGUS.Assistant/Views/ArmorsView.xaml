@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:mc="clr-namespace:Mtf.Maui.Controls;assembly=Mtf.Maui.Controls"
+             xmlns:vm="clr-namespace:MAGUS.Assistant.ViewModels"
+             xmlns:conv="clr-namespace:Mtf.LanguageService.MAUI.Converters;assembly=Mtf.LanguageService.MAUI"
+             x:Class="MAGUS.Assistant.Views.ArmorsView"
+             x:ClassModifier="internal"
+             x:DataType="vm:CharacterViewModel">
+
+    <ContentView.Resources>
+        <ResourceDictionary>
+            <conv:TranslationConverter x:Key="TranslationConverter" />
+        </ResourceDictionary>
+    </ContentView.Resources>
+
+    <VerticalStackLayout Spacing="16" Padding="16">
+        <Border Style="{StaticResource BoxBorder}">
+            <Grid ColumnSpacing="10" RowDefinitions="Auto, Auto" ColumnDefinitions="*, *">
+                <VerticalStackLayout Grid.ColumnSpan="2">
+                    <Label Text="Armor" />
+                    <Picker Title="Select armor"
+                            ItemsSource="{Binding AvailableArmors}"
+                            ItemDisplayBinding="{Binding Name, Converter={StaticResource TranslationConverter}}"
+                            SelectedItem="{Binding SelectedArmor}" />
+                </VerticalStackLayout>
+
+                <mc:EntryWithLabel Grid.Row="1" Label="AC" Text="{Binding ArmorClass}" IsReadOnly="True" WidthRequest="100" />
+                <mc:EntryWithLabel Grid.Row="1" Grid.Column="1" Label="ACP" Text="{Binding ArmorCheckPenalty}" IsReadOnly="True" WidthRequest="100" />
+            </Grid>
+        </Border>
+    </VerticalStackLayout>
+</ContentView>

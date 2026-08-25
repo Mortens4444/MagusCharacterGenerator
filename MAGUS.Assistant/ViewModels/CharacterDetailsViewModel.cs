@@ -9,8 +9,8 @@ internal sealed partial class CharacterDetailsViewModel : CharacterViewModel
 {
     private string name = String.Empty;
 
-    public CharacterDetailsViewModel(CharacterService characterService, ISoundPlayer soundPlayer, IShakeService shakeService, ISettings settings, IPrintService printService, SettingsService settingsService)
-        : base(printService, soundPlayer, shakeService, settings, characterService, settingsService)
+    public CharacterDetailsViewModel(CharacterService characterService, ISoundPlayer soundPlayer, IShakeService shakeService, ISettings settings, IPrintService printService, SettingsService settingsService, IRuneTranslator runeTranslator, GameEventService gameEventService)
+        : base(printService, soundPlayer, shakeService, settings, characterService, settingsService, runeTranslator, gameEventService)
     {
         SelectedCombatValueModifier = AvailableCombatValueModifiers.FirstOrDefault();
     }

@@ -1,9 +1,6 @@
 ﻿using MAGUS.Enums;
 using MAGUS.GameSystem.Attributes;
-using MAGUS.GameSystem.BreedModifiers;
-using MAGUS.Interfaces;
 using MAGUS.Models;
-using Mtf.Extensions.Services;
 
 namespace MAGUS.Bestiary.Animals;
 

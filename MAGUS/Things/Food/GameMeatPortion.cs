@@ -8,5 +8,7 @@ public class GameMeatPortion : Thing
 
 	public override Money Price => new(0, 0, 4);
 
+    public override int HungerValue => 100;
+
     public override string Description => "A single serving of wild flesh, such as venison, boar, or fowl taken from the hunt. Richer in flavour than common livestock, and often reserved for feast days.";
 }
