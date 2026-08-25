@@ -44,6 +44,18 @@ public partial class Character
     }
 
     /// <summary>
+    /// How many real hours have passed since SleepStartUtc, capped at SleepDurationHours (never more
+    /// than what was actually planned/possible to sleep) - used to prorate restoration when a sleep
+    /// is cut short before finishing naturally, whether by the player (CharacterViewModel.StopSleep)
+    /// or by hunger becoming critical mid-sleep (CharacterViewModel.InterruptSleep). 0 when not
+    /// currently sleeping.
+    /// </summary>
+    [JsonIgnore, Newtonsoft.Json.JsonIgnore]
+    public double ElapsedSleepHours => SleepStartUtc is { } start
+        ? Math.Min((DateTime.UtcNow - start).TotalHours, SleepDurationHours)
+        : 0;
+
+    /// <summary>
     /// Applies sleep decay for however much real time has passed since LastSleepTickUtc, then
     /// advances the checkpoint to now. Safe to call as often as convenient (e.g. whenever a
     /// character is loaded) - a second call right after a first is a no-op since no time has passed.

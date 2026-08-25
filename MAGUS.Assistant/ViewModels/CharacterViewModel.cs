@@ -163,6 +163,11 @@ internal partial class CharacterViewModel(IPrintService printService, ISoundPlay
             value?.CompleteTravelIfArrived();
             value?.ApplyElapsedHungerDecay();
             value?.ApplyElapsedSleepDecay();
+            // Hunger keeps decaying during sleep, so reopening the app after enough real time has
+            // passed can find a still-in-progress sleep (finishedSleepHours null) where hunger has
+            // since dropped critical - same threshold as IsHungerCritical. See RefreshLiveProgress for
+            // the equivalent live-page check.
+            var interruptedByHunger = finishedSleepHours == null && value is { IsSleeping: true, HungerPercent: < 10 };
             // Don't re-announce waypoints already behind this character when their journey was already
             // in progress before this load (e.g. reopening the app mid-journey) - see RefreshLiveProgress.
             lastNotifiedTravelProgress = value?.TravelProgress ?? 0;
@@ -176,6 +181,10 @@ internal partial class CharacterViewModel(IPrintService printService, ISoundPlay
             if (value != null && finishedSleepHours is { } sleptHours)
             {
                 CompleteSleep(value, sleptHours);
+            }
+            else if (value != null && interruptedByHunger)
+            {
+                InterruptSleep(value, String.Format(Lng.Elem("Hunger wakes {0} up before a full night's rest."), value.Name));
             }
 
             if (value != null)
@@ -241,6 +250,7 @@ internal partial class CharacterViewModel(IPrintService printService, ISoundPlay
             OnPropertyChanged(nameof(IsSleeping));
             OnPropertyChanged(nameof(SleepProgress));
             SleepCommand.NotifyCanExecuteChanged();
+            StopSleepCommand.NotifyCanExecuteChanged();
 
             OnPropertyChanged(nameof(Strength));
             OnPropertyChanged(nameof(Stamina));
@@ -319,6 +329,7 @@ internal partial class CharacterViewModel(IPrintService printService, ISoundPlay
             OnPropertyChanged(nameof(IsSleepCritical));
 
             SleepCommand.NotifyCanExecuteChanged();
+            StopSleepCommand.NotifyCanExecuteChanged();
             EatCommand.NotifyCanExecuteChanged();
             CastSpellCommand.NotifyCanExecuteChanged();
             CastPsiCommand.NotifyCanExecuteChanged();
@@ -607,13 +618,13 @@ internal partial class CharacterViewModel(IPrintService printService, ISoundPlay
         {
             object[]? customAttributes;
             DiceThrowFormula? formula;
-            if (Character?.PrimaryWeapon != null && Character.SelectedCombatValueModifier == MAGUS.Enums.CombatValueModifier.PrimaryWeapon)
+            if (Character?.PrimaryWeapon != null && Character.SelectedCombatValueModifier is MAGUS.Enums.CombatValueModifier.PrimaryWeapon or MAGUS.Enums.CombatValueModifier.PrimaryWeaponThrown)
             {
                 customAttributes = Character.PrimaryWeapon.GetType().GetMethod(nameof(Character.PrimaryWeapon.GetDamage))?.GetCustomAttributes(false);
                 formula = customAttributes.GetDiceThrowFormula();
                 return formula?.GetDisplayFormula() ?? String.Empty;
             }
-            if (Character?.SecondaryWeapon != null && Character.SelectedCombatValueModifier == MAGUS.Enums.CombatValueModifier.SecondaryWeapon)
+            if (Character?.SecondaryWeapon != null && Character.SelectedCombatValueModifier is MAGUS.Enums.CombatValueModifier.SecondaryWeapon or MAGUS.Enums.CombatValueModifier.SecondaryWeaponThrown)
             {
                 customAttributes = Character.SecondaryWeapon.GetType().GetMethod(nameof(Character.SecondaryWeapon.GetDamage))?.GetCustomAttributes(false);
                 formula = customAttributes.GetDiceThrowFormula();
@@ -1264,6 +1275,29 @@ internal partial class CharacterViewModel(IPrintService printService, ISoundPlay
         SleepCommand.NotifyCanExecuteChanged();
     }
 
+    private bool CanStopSleep => Character is { IsSleeping: true };
+
+    /// <summary>
+    /// Lets the player wake the character up early, before SleepDurationHours has fully elapsed -
+    /// mirrors StopTravelAsync. Restoration is prorated to however long they actually slept in real
+    /// time (Character.ElapsedSleepHours) rather than the full planned duration - see InterruptSleep.
+    /// </summary>
+    [RelayCommand(CanExecute = nameof(CanStopSleep))]
+    private void StopSleep()
+    {
+        if (Character is not { IsSleeping: true } character)
+        {
+            return;
+        }
+
+        InterruptSleep(character, String.Format(Lng.Elem("{0} wakes up early, only partially rested."), character.Name));
+
+        OnPropertyChanged(nameof(IsSleeping));
+        OnPropertyChanged(nameof(SleepProgress));
+        SleepCommand.NotifyCanExecuteChanged();
+        StopSleepCommand.NotifyCanExecuteChanged();
+    }
+
     [RelayCommand(CanExecute = nameof(CanSleepOrEat))]
     private async Task EatAsync()
     {
@@ -1639,14 +1673,28 @@ internal partial class CharacterViewModel(IPrintService printService, ISoundPlay
         {
             CompleteSleep(character, character.SleepDurationHours);
         }
+        else if (character.IsSleeping)
+        {
+            // Hunger keeps decaying during sleep (Character.ApplyElapsedHungerDecay has no IsSleeping
+            // guard, unlike sleep's own decay) - so a long enough sleep can run the character into
+            // critical hunger before SleepDurationHours is up. Same threshold as IsHungerCritical.
+            character.ApplyElapsedHungerDecay();
+            if (character.HungerPercent < 10)
+            {
+                InterruptSleep(character, String.Format(Lng.Elem("Hunger wakes {0} up before a full night's rest."), character.Name));
+            }
+        }
 
         OnPropertyChanged(nameof(IsTraveling));
         OnPropertyChanged(nameof(TravelProgress));
         OnPropertyChanged(nameof(IsSleeping));
         OnPropertyChanged(nameof(SleepProgress));
+        OnPropertyChanged(nameof(HungerPercent));
+        OnPropertyChanged(nameof(IsHungerCritical));
         TravelCommand.NotifyCanExecuteChanged();
         StopTravelCommand.NotifyCanExecuteChanged();
         SleepCommand.NotifyCanExecuteChanged();
+        StopSleepCommand.NotifyCanExecuteChanged();
 
         ExpireOverdueQuests(character);
     }
@@ -1691,12 +1739,13 @@ internal partial class CharacterViewModel(IPrintService printService, ISoundPlay
     }
 
     /// <summary>
-    /// Applies the settings-configured per-hour restoration for a finished sleep (see
-    /// Character.IsSleeping/SleepProgress, set by CharacterCareActions.SleepAsync) and clears the
-    /// sleep state - the restoration math needs SettingsService, which only lives at this layer, so
-    /// unlike CompleteTravelIfArrived this can't be resolved entirely inside Character itself.
+    /// Applies the settings-configured per-hour restoration for <paramref name="hours"/> of sleep to
+    /// HP/PRP/Mana/Psi - the math needs SettingsService, which only lives at this layer, so unlike
+    /// CompleteTravelIfArrived this can't be resolved entirely inside Character itself. Shared by
+    /// CompleteSleep (a full night, hours = SleepDurationHours) and InterruptSleep (a cut-short one,
+    /// hours = however much real time actually passed - see Character.ElapsedSleepHours).
     /// </summary>
-    private void CompleteSleep(Character character, double hours)
+    private void ApplySleepRestoration(Character character, double hours)
     {
         character.ActualHealthPoints = Math.Min(character.MaxHealthPoints, character.ActualHealthPoints + (int)Math.Round(hours * settingsService.RestoreHealthPointsPerHourOfSleep));
         character.ManaPoints = Math.Min(character.MaxManaPoints, character.ManaPoints + (int)Math.Round(hours * settingsService.RestoreManaPointsPerHourOfSleep));
@@ -1707,13 +1756,39 @@ internal partial class CharacterViewModel(IPrintService printService, ISoundPlay
             var restored = (int)Math.Round(hours * settingsService.RestorePainTolerancePointsPerHourOfSleep);
             character.ActualPainTolerancePoints = Math.Min(character.MaxPainTolerancePoints.Value, (character.ActualPainTolerancePoints ?? 0) + restored);
         }
+    }
 
+    /// <summary>
+    /// Applies the full-duration restoration for a sleep that ran its course (see
+    /// Character.IsSleeping/SleepProgress, set by CharacterCareActions.SleepAsync) and clears the
+    /// sleep state.
+    /// </summary>
+    private void CompleteSleep(Character character, double hours)
+    {
+        ApplySleepRestoration(character, hours);
         character.ClearSleepState();
         _ = characterService.SaveAsync(character);
 
         WeakReferenceMessenger.Default.Send(new ShowInfoMessage(
             Lng.Elem("Sleep"),
             String.Format(Lng.Elem("{0} wakes up feeling refreshed."), character.Name)));
+    }
+
+    /// <summary>
+    /// Ends an in-progress sleep before SleepDurationHours has fully elapsed - either the player
+    /// cutting it short (StopSleep) or hunger becoming critical mid-sleep (RefreshLiveProgress/the
+    /// Character setter's catch-up hook). Restores HP/PRP/Mana/Psi prorated to however many hours
+    /// actually passed (Character.ElapsedSleepHours) rather than the full planned duration, then
+    /// clears the sleep state. The caller supplies the wake-up message since the two cases read very
+    /// differently ("wakes up early" vs. "hunger wakes them up").
+    /// </summary>
+    private void InterruptSleep(Character character, string wakeMessage)
+    {
+        ApplySleepRestoration(character, character.ElapsedSleepHours);
+        character.ClearSleepState();
+        _ = characterService.SaveAsync(character);
+
+        WeakReferenceMessenger.Default.Send(new ShowInfoMessage(Lng.Elem("Sleep"), wakeMessage));
     }
 
     /// <summary>Fails any timed quest (see Quest.TimeLimitHours) whose deadline has passed, one "quest failed" notification per quest, and saves if anything changed.</summary>

@@ -7,21 +7,35 @@
             x:ClassModifier="internal"
             x:DataType="vm:CharacterViewModel">
 
-    <Grid RowDefinitions="Auto, Auto, *">
-        <HorizontalStackLayout Spacing="10" Padding="10,0">
-            <Button Text="⛤" Command="{Binding ChangeTabCommand}" CommandParameter="0" />
-            <Button Text="✨" Command="{Binding ChangeTabCommand}" CommandParameter="1" />
-            <Button Text="⚔" Command="{Binding ChangeTabCommand}" CommandParameter="2" />
-            <Button Text="🛡️" Command="{Binding ChangeTabCommand}" CommandParameter="3" />
-            <Button Text="🗺️" Command="{Binding ChangeTabCommand}" CommandParameter="4" />
-        </HorizontalStackLayout>
-        <HorizontalStackLayout Spacing="10" Padding="10,0" Grid.Row="1">
-            <Button Text="♥️" Command="{Binding ChangeTabCommand}" CommandParameter="5" />
-            <Button Text="🧙" Command="{Binding ChangeTabCommand}" CommandParameter="6" />
-            <Button Text="📖" Command="{Binding ChangeTabCommand}" CommandParameter="7" />
-            <Button Text="🎒" Command="{Binding ChangeTabCommand}" CommandParameter="8" />
-            <Button Text="🍗" Command="{Binding ChangeTabCommand}" CommandParameter="9" />
-        </HorizontalStackLayout>
-        <ContentView Grid.Row="2" Content="{Binding CurrentView}" />
+    <Grid RowDefinitions="Auto, *" RowSpacing="0">
+        <Border Style="{StaticResource BoxBorder}" Padding="6" Margin="8,8,8,4">
+            <Grid ColumnDefinitions="*,*,*,*,*"
+                  RowDefinitions="Auto, Auto"
+                  ColumnSpacing="4" RowSpacing="4">
+                <Grid.Resources>
+                    <Style TargetType="Button">
+                        <Setter Property="Padding" Value="0" />
+                        <Setter Property="FontSize" Value="20" />
+                        <Setter Property="HeightRequest" Value="44" />
+                        <Setter Property="HorizontalOptions" Value="Fill" />
+                        <Setter Property="VerticalOptions" Value="Fill" />
+                    </Style>
+                </Grid.Resources>
+
+                <Button Grid.Row="0" Grid.Column="0" Text="⛤" Command="{Binding ChangeTabCommand}" CommandParameter="0" />
+                <Button Grid.Row="0" Grid.Column="1" Text="✨" Command="{Binding ChangeTabCommand}" CommandParameter="1" />
+                <Button Grid.Row="0" Grid.Column="2" Text="⚔" Command="{Binding ChangeTabCommand}" CommandParameter="2" />
+                <Button Grid.Row="0" Grid.Column="3" Text="🛡️" Command="{Binding ChangeTabCommand}" CommandParameter="3" />
+                <Button Grid.Row="0" Grid.Column="4" Text="🗺️" Command="{Binding ChangeTabCommand}" CommandParameter="4" />
+
+                <Button Grid.Row="1" Grid.Column="0" Text="♥️" Command="{Binding ChangeTabCommand}" CommandParameter="5" />
+                <Button Grid.Row="1" Grid.Column="1" Text="🧙" Command="{Binding ChangeTabCommand}" CommandParameter="6" />
+                <Button Grid.Row="1" Grid.Column="2" Text="📖" Command="{Binding ChangeTabCommand}" CommandParameter="7" />
+                <Button Grid.Row="1" Grid.Column="3" Text="🎒" Command="{Binding ChangeTabCommand}" CommandParameter="8" />
+                <Button Grid.Row="1" Grid.Column="4" Text="🍗" Command="{Binding ChangeTabCommand}" CommandParameter="9" />
+            </Grid>
+        </Border>
+
+        <ContentView Grid.Row="1" Content="{Binding CurrentView}" />
     </Grid>
 </v:NotifierPage>

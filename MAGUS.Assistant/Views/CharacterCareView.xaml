@@ -44,6 +44,9 @@
                     <VerticalStackLayout Spacing="4" IsVisible="{Binding IsSleeping}">
                         <Label Text="Asleep - progress resolves over real time, even with the app closed." FontSize="12" FontAttributes="Italic" />
                         <ProgressBar Progress="{Binding SleepProgress}" />
+                        <Button Text="Stop sleeping"
+                                Command="{Binding StopSleepCommand}"
+                                ToolTipProperties.Text="Wake up early - restoration is prorated to however long you actually slept" />
                     </VerticalStackLayout>
                 </VerticalStackLayout>
             </Border>

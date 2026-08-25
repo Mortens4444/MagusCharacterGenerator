@@ -64,13 +64,13 @@ public partial class Character
     public const int PsiSurgeAttackValuePerPoint = 2;
 
     /// <summary>
-    /// Roham - General Diszciplína (p.118-119), offensive half of Roham (Megfékezés). The book
+    /// Charge - General Diszciplína (p.118-119), offensive half of Roham (Megfékezés). The book
     /// makes this an all-or-nothing spend: it burns every Psi point the character currently has
     /// available, including any parked in a Dinamikus Pajzs ("A diszciplína felemészti az
     /// alkalmazó összes aktuális Pp-ját, beleértve a Dinamikus Pajzsban tároltakat is") - there is
     /// no partial-amount option. Each point banks +2 attack value for the round currently being
     /// resolved. Available to any character with psi, regardless of discipline/school. See
-    /// <see cref="TryUseMegfekezes"/> for the defensive counterpart.
+    /// <see cref="TryUseRestraint"/> for the defensive counterpart.
     /// </summary>
     public bool TryUsePsiSurge()
     {
@@ -95,14 +95,14 @@ public partial class Character
     public void ClearPsiSurge() => PsiSurgeAttackBonus = 0;
 
     /// <summary>
-    /// Megfékezés - General Diszciplína (p.118-119), defensive half of Roham (Megfékezés). Same
+    /// Restraint - General Diszciplína (p.118-119), defensive half of Roham (Megfékezés). Same
     /// all-or-nothing Psi-point cost as <see cref="TryUsePsiSurge"/> (including the Dinamikus
     /// Pajzs), but instead of boosting the user's own attack it subtracts 2 attack value per point
     /// from a specific opponent's attack this round. The book also has the user automatically win
     /// initiative against a non-Roham opponent when using this; that initiative-ordering rule
     /// isn't modeled here (would need to hook into the combat engine's turn-order logic).
     /// </summary>
-    public bool TryUseMegfekezes(Attacker opponent)
+    public bool TryUseRestraint(Attacker opponent)
     {
         if (Psi == null || opponent == null)
         {

@@ -1,9 +1,12 @@
 ﻿using MAGUS.Enums;
 using MAGUS.GameSystem.Attributes;
+using MAGUS.GameSystem.CombatModifiers;
 using MAGUS.GameSystem.FightMode;
 using MAGUS.GameSystem.Magic;
 using MAGUS.GameSystem.Psi;
+using MAGUS.GameSystem.Qualifications;
 using MAGUS.Interfaces;
+using MAGUS.Qualifications.Combat;
 using MAGUS.Qualifications.Specialities;
 using MAGUS.Things.Weapons;
 using MAGUS.Things.Weapons.OtherWeapons;
@@ -322,12 +325,12 @@ public partial class Character : ICharacter
 
             var weaponBonus = selectedCombatValueModifier switch
             {
-                CombatValueModifier.PrimaryWeapon when PrimaryWeapon is IWeapon weapon => weapon.InitiateValue,
-                CombatValueModifier.SecondaryWeapon when SecondaryWeapon is IWeapon secondaryWeapon => secondaryWeapon.InitiateValue,
+                CombatValueModifier.PrimaryWeapon or CombatValueModifier.PrimaryWeaponThrown when PrimaryWeapon is IWeapon weapon => weapon.InitiateValue,
+                CombatValueModifier.SecondaryWeapon or CombatValueModifier.SecondaryWeaponThrown when SecondaryWeapon is IWeapon secondaryWeapon => secondaryWeapon.InitiateValue,
                 _ => fist.InitiateValue,
             };
 
-            return @base + AllocatedToInitiate + weaponBonus + TemporaryModifiers.Sum(m => m.InitiateValue);
+            return @base + AllocatedToInitiate + weaponBonus + GetWeaponUseModifier().InitiateValue + TemporaryModifiers.Sum(m => m.InitiateValue);
         }
     }
 
@@ -343,12 +346,12 @@ public partial class Character : ICharacter
             
             var weaponBonus = selectedCombatValueModifier switch
             {
-                CombatValueModifier.PrimaryWeapon when PrimaryWeapon is IMeleeWeapon meleeWeapon => meleeWeapon.AttackValue,
-                CombatValueModifier.SecondaryWeapon when SecondaryWeapon is IMeleeWeapon secondaryMeleeWeapon => secondaryMeleeWeapon.AttackValue,
+                CombatValueModifier.PrimaryWeapon or CombatValueModifier.PrimaryWeaponThrown when PrimaryWeapon is IMeleeWeapon meleeWeapon => meleeWeapon.AttackValue,
+                CombatValueModifier.SecondaryWeapon or CombatValueModifier.SecondaryWeaponThrown when SecondaryWeapon is IMeleeWeapon secondaryMeleeWeapon => secondaryMeleeWeapon.AttackValue,
                 _ => fist.AttackValue,
             };
 
-            return @base + AllocatedToAttack + weaponBonus + PsiSurgeAttackBonus + TemporaryModifiers.Sum(m => m.AttackValue);
+            return @base + AllocatedToAttack + weaponBonus + GetWeaponUseModifier().AttackValue + GetWeaponThrowingModifier() + PsiSurgeAttackBonus + TemporaryModifiers.Sum(m => m.AttackValue);
         }
     }
 
@@ -368,7 +371,7 @@ public partial class Character : ICharacter
                 _ => fist.DefenseValue,
             };
 
-            return @base + AllocatedToDefense + weaponBonus + TemporaryModifiers.Sum(m => m.DefenseValue);
+            return @base + AllocatedToDefense + weaponBonus + GetWeaponUseModifier().DefenseValue + TemporaryModifiers.Sum(m => m.DefenseValue);
         }
     }
 
@@ -389,7 +392,7 @@ public partial class Character : ICharacter
                 _ => 0,
             };
 
-            return @base + AllocatedToAim + weaponBonus + TemporaryModifiers.Sum(m => m.AimValue);
+            return @base + AllocatedToAim + weaponBonus + GetWeaponUseModifier().AimValue + TemporaryModifiers.Sum(m => m.AimValue);
         }
     }
 
@@ -397,6 +400,78 @@ public partial class Character : ICharacter
     {
         primaryWeapon = ResolveWeaponById(PrimaryWeaponId);
         secondaryWeapon = ResolveWeaponById(SecondaryWeaponId);
+    }
+
+    /// <summary>
+    /// KÉ/TÉ/VÉ/CÉ modifier from the Weapon use (Fegyverhasználat) qualification for whichever weapon
+    /// is currently selected via SelectedCombatValueModifier (Első Törvénykönyv, "Képzetlen
+    /// fegyverforgatás" and "Harci Képzettségek - Fegyverhasználat"): no matching qualification at all
+    /// is an untrained penalty (-10/-25/-20, plus -30 Aim for a ranged weapon), Base level is neutral,
+    /// and Master level grants +5/+10/+10/+10. Fist attacks (Ökölharc) are a separate qualification and
+    /// are not affected here.
+    /// </summary>
+    private WeaponCombatModifier GetWeaponUseModifier()
+    {
+        var selectedWeapon = selectedCombatValueModifier switch
+        {
+            CombatValueModifier.PrimaryWeapon => PrimaryWeapon,
+            CombatValueModifier.SecondaryWeapon => SecondaryWeapon,
+            _ => null,
+        };
+
+        if (selectedWeapon == null)
+        {
+            return new WeaponCombatModifier();
+        }
+
+        var weaponUse = new WeaponUse { Weapon = selectedWeapon };
+        if (HasQualification(weaponUse, QualificationLevel.Master))
+        {
+            return new WeaponCombatModifier { InitiateValue = 5, AttackValue = 10, DefenseValue = 10, AimValue = 10 };
+        }
+
+        if (HasQualification(weaponUse, QualificationLevel.Base))
+        {
+            return new WeaponCombatModifier();
+        }
+
+        var untrainedAimPenalty = selectedWeapon is IRangedWeapon ? -30 : 0;
+        return new WeaponCombatModifier { InitiateValue = -10, AttackValue = -25, DefenseValue = -20, AimValue = untrainedAimPenalty };
+    }
+
+    /// <summary>
+    /// TÉ modifier from the Weapon throwing (Fegyverdobás) qualification when SelectedCombatValueModifier
+    /// is one of the "thrown" modes (Első Törvénykönyv, "Fegyverdobás"): throwing always resolves as an
+    /// Attack Roll, never an Aim Roll, so this only ever affects Attack value. No matching qualification
+    /// is the untrained penalty (-25, same magnitude as Képzetlen fegyverforgatás's TÉ penalty), Base
+    /// level is neutral ("nincsen mínusza"), and Master level adds +10.
+    /// </summary>
+    private int GetWeaponThrowingModifier()
+    {
+        var thrownWeapon = selectedCombatValueModifier switch
+        {
+            CombatValueModifier.PrimaryWeaponThrown => PrimaryWeapon,
+            CombatValueModifier.SecondaryWeaponThrown => SecondaryWeapon,
+            _ => null,
+        };
+
+        if (thrownWeapon == null)
+        {
+            return 0;
+        }
+
+        var weaponThrowing = new WeaponThrowing { Weapon = thrownWeapon };
+        if (HasQualification(weaponThrowing, QualificationLevel.Master))
+        {
+            return 10;
+        }
+
+        if (HasQualification(weaponThrowing, QualificationLevel.Base))
+        {
+            return 0;
+        }
+
+        return -25;
     }
 
     public void ChangeInitiator(int delta) => ChangeAllocation(ref allocatedToInitiate, delta, AllocationTarget.Initiate);

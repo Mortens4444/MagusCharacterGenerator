@@ -17,6 +17,7 @@
             <conv:TranslationConverter x:Key="TranslationConverter" />
             <mcconv:InverseBooleanConverter x:Key="InverseBooleanConverter" />
             <converters:HasItemsConverter x:Key="HasItemsConverter" />
+            <converters:LiteralTranslationConverter x:Key="LiteralTranslationConverter" />
             <converters:QuestLevelRangeConverter x:Key="QuestLevelRangeConverter" />
             <converters:QuestTimeLimitConverter x:Key="QuestTimeLimitConverter" />
         </ResourceDictionary>
@@ -94,7 +95,7 @@
                                         <Label Text="{Binding TimeLimitHours, Converter={StaticResource QuestTimeLimitConverter}}"
                                                FontSize="11" FontAttributes="Italic" TextColor="#FF9500"
                                                IsVisible="{Binding HasTimeLimit}" />
-                                        <Button Text="Accept quest"
+                                        <Button Text="{Binding ., Converter={StaticResource LiteralTranslationConverter}, ConverterParameter='Accept quest'}"
                                                 Command="{Binding Source={RelativeSource AncestorType={x:Type vm:CharacterViewModel}}, Path=AcceptQuestCommand}"
                                                 CommandParameter="{Binding .}" />
                                     </VerticalStackLayout>
@@ -117,7 +118,7 @@
                                     <VerticalStackLayout Spacing="4">
                                         <Label Text="{Binding Name, Converter={StaticResource TranslationConverter}}" FontAttributes="Bold" />
                                         <Label Text="{Binding Objective, Converter={StaticResource TranslationConverter}}" FontSize="12" LineBreakMode="WordWrap" />
-                                        <Button Text="Search"
+                                        <Button Text="{Binding ., Converter={StaticResource LiteralTranslationConverter}, ConverterParameter='Search'}"
                                                 Command="{Binding Source={RelativeSource AncestorType={x:Type vm:CharacterViewModel}}, Path=SearchCommand}"
                                                 CommandParameter="{Binding .}" />
                                     </VerticalStackLayout>
@@ -140,7 +141,7 @@
                                     <VerticalStackLayout Spacing="4">
                                         <Label Text="{Binding Name, Converter={StaticResource TranslationConverter}}" FontAttributes="Bold" />
                                         <Label Text="{Binding Objective, Converter={StaticResource TranslationConverter}}" FontSize="12" LineBreakMode="WordWrap" />
-                                        <Button Text="Negotiate"
+                                        <Button Text="{Binding ., Converter={StaticResource LiteralTranslationConverter}, ConverterParameter='Negotiate'}"
                                                 Command="{Binding Source={RelativeSource AncestorType={x:Type vm:CharacterViewModel}}, Path=NegotiateCommand}"
                                                 CommandParameter="{Binding .}" />
                                     </VerticalStackLayout>
@@ -163,10 +164,10 @@
                                     <VerticalStackLayout Spacing="4">
                                         <Label Text="{Binding Name, Converter={StaticResource TranslationConverter}}" FontAttributes="Bold" />
                                         <Label Text="{Binding Objective, Converter={StaticResource TranslationConverter}}" FontSize="12" LineBreakMode="WordWrap" />
-                                        <Button Text="Treat"
+                                        <Button Text="{Binding ., Converter={StaticResource LiteralTranslationConverter}, ConverterParameter='Treat'}"
                                                 Command="{Binding Source={RelativeSource AncestorType={x:Type vm:CharacterViewModel}}, Path=HealCommand}"
                                                 CommandParameter="{Binding .}"
-                                                ToolTipProperties.Text="Needs the Healing qualification or a known healing spell" />
+                                                ToolTipProperties.Text="{Binding ., Converter={StaticResource LiteralTranslationConverter}, ConverterParameter='Needs the Healing qualification or a known healing spell'}" />
                                     </VerticalStackLayout>
                                 </Border>
                             </DataTemplate>
@@ -187,7 +188,7 @@
                                     <VerticalStackLayout Spacing="4">
                                         <Label Text="{Binding Name, Converter={StaticResource TranslationConverter}}" FontAttributes="Bold" />
                                         <Label Text="{Binding Objective, Converter={StaticResource TranslationConverter}}" FontSize="12" LineBreakMode="WordWrap" />
-                                        <Button Text="Steal"
+                                        <Button Text="{Binding ., Converter={StaticResource LiteralTranslationConverter}, ConverterParameter='Steal'}"
                                                 Command="{Binding Source={RelativeSource AncestorType={x:Type vm:CharacterViewModel}}, Path=StealCommand}"
                                                 CommandParameter="{Binding .}" />
                                     </VerticalStackLayout>
@@ -210,10 +211,10 @@
                                     <VerticalStackLayout Spacing="4">
                                         <Label Text="{Binding Name, Converter={StaticResource TranslationConverter}}" FontAttributes="Bold" />
                                         <Label Text="{Binding Objective, Converter={StaticResource TranslationConverter}}" FontSize="12" LineBreakMode="WordWrap" />
-                                        <Button Text="Search"
+                                        <Button Text="{Binding ., Converter={StaticResource LiteralTranslationConverter}, ConverterParameter='Search'}"
                                                 Command="{Binding Source={RelativeSource AncestorType={x:Type vm:CharacterViewModel}}, Path=SearchForTrapsCommand}"
                                                 CommandParameter="{Binding .}"
-                                                ToolTipProperties.Text="Needs Trap detection or Secret door search" />
+                                                ToolTipProperties.Text="{Binding ., Converter={StaticResource LiteralTranslationConverter}, ConverterParameter='Needs Trap detection or Secret door search'}" />
                                     </VerticalStackLayout>
                                 </Border>
                             </DataTemplate>
@@ -242,7 +243,7 @@
                                                IsVisible="{Binding TargetCreatureName, Converter={StaticResource HasItemsConverter}}">
                                             <Label.FormattedText>
                                                 <FormattedString>
-                                                    <Span Text="Completes automatically by defeating: " />
+                                                    <Span Text="{Binding ., Converter={StaticResource LiteralTranslationConverter}, ConverterParameter='Completes automatically by defeating: '}" />
                                                     <Span Text="{Binding TargetCreatureName, Converter={StaticResource TranslationConverter}}" />
                                                 </FormattedString>
                                             </Label.FormattedText>
@@ -251,25 +252,25 @@
                                                IsVisible="{Binding HasSearchLocation}">
                                             <Label.FormattedText>
                                                 <FormattedString>
-                                                    <Span Text="Can be advanced by searching in: " />
+                                                    <Span Text="{Binding ., Converter={StaticResource LiteralTranslationConverter}, ConverterParameter='Can be advanced by searching in: '}" />
                                                     <Span Text="{Binding SearchLocation, Converter={StaticResource EnumDescriptionTranslationConverter}}" />
                                                 </FormattedString>
                                             </Label.FormattedText>
                                         </Label>
-                                        <Label Text="Can be advanced by negotiating - see the Negotiate here section above."
+                                        <Label Text="{Binding ., Converter={StaticResource LiteralTranslationConverter}, ConverterParameter='Can be advanced by negotiating - see the Negotiate here section above.'}"
                                                FontSize="11" FontAttributes="Italic" TextColor="Gray"
                                                IsVisible="{Binding HasDialogueRoot}" />
-                                        <Label Text="Completes by keeping an ally alive in an Encounter - see the Protect button there."
+                                        <Label Text="{Binding ., Converter={StaticResource LiteralTranslationConverter}, ConverterParameter='Completes by keeping an ally alive in an Encounter - see the Protect button there.'}"
                                                FontSize="11" FontAttributes="Italic" TextColor="Gray"
                                                IsVisible="{Binding HasProtectAlly}" />
-                                        <Label Text="Can be completed by treating the injury - see the Treat here section above."
+                                        <Label Text="{Binding ., Converter={StaticResource LiteralTranslationConverter}, ConverterParameter='Can be completed by treating the injury - see the Treat here section above.'}"
                                                FontSize="11" FontAttributes="Italic" TextColor="Gray"
                                                IsVisible="{Binding RequiresHealing}" />
                                         <Label FontSize="11" FontAttributes="Italic" TextColor="Gray"
                                                IsVisible="{Binding HasStealLocation}">
                                             <Label.FormattedText>
                                                 <FormattedString>
-                                                    <Span Text="Can be advanced by stealing in: " />
+                                                    <Span Text="{Binding ., Converter={StaticResource LiteralTranslationConverter}, ConverterParameter='Can be advanced by stealing in: '}" />
                                                     <Span Text="{Binding StealLocation, Converter={StaticResource EnumDescriptionTranslationConverter}}" />
                                                 </FormattedString>
                                             </Label.FormattedText>
@@ -278,7 +279,7 @@
                                                IsVisible="{Binding HasTrapLocation}">
                                             <Label.FormattedText>
                                                 <FormattedString>
-                                                    <Span Text="Can be advanced by searching for traps/secret doors in: " />
+                                                    <Span Text="{Binding ., Converter={StaticResource LiteralTranslationConverter}, ConverterParameter='Can be advanced by searching for traps/secret doors in: '}" />
                                                     <Span Text="{Binding TrapLocation, Converter={StaticResource EnumDescriptionTranslationConverter}}" />
                                                 </FormattedString>
                                             </Label.FormattedText>
@@ -287,7 +288,7 @@
                                                IsVisible="{Binding HasDeliveryDestination}">
                                             <Label.FormattedText>
                                                 <FormattedString>
-                                                    <Span Text="Once found, completes automatically upon delivering it in: " />
+                                                    <Span Text="{Binding ., Converter={StaticResource LiteralTranslationConverter}, ConverterParameter='Once found, completes automatically upon delivering it in: '}" />
                                                     <Span Text="{Binding DeliveryDestination, Converter={StaticResource EnumDescriptionTranslationConverter}}" />
                                                 </FormattedString>
                                             </Label.FormattedText>
@@ -296,12 +297,12 @@
                                                IsVisible="{Binding HasEscortDestination}">
                                             <Label.FormattedText>
                                                 <FormattedString>
-                                                    <Span Text="Completes automatically upon arriving in: " />
+                                                    <Span Text="{Binding ., Converter={StaticResource LiteralTranslationConverter}, ConverterParameter='Completes automatically upon arriving in: '}" />
                                                     <Span Text="{Binding EscortDestination, Converter={StaticResource EnumDescriptionTranslationConverter}}" />
                                                 </FormattedString>
                                             </Label.FormattedText>
                                         </Label>
-                                        <Button Text="Mark complete"
+                                        <Button Text="{Binding ., Converter={StaticResource LiteralTranslationConverter}, ConverterParameter='Mark complete'}"
                                                 Command="{Binding Source={RelativeSource AncestorType={x:Type vm:CharacterViewModel}}, Path=CompleteQuestCommand}"
                                                 CommandParameter="{Binding .}" />
                                     </VerticalStackLayout>

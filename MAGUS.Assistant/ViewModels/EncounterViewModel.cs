@@ -402,8 +402,9 @@ internal sealed partial class EncounterViewModel(ISettings settings, CharacterSe
     /// <summary>
     /// Roham (Megfékezés) — book p.118-119 all-or-nothing discipline: burns every currently
     /// available psi point (free ones plus anything parked in a Dinamikus Pajzs) either on the
-    /// caster's own attack (Roham) or to weaken a chosen opponent's attack (Megfékezés). There is
-    /// no partial-amount option, unlike the old per-point prompt this replaced.
+    /// caster's own attack (Charge, i.e. Roham) or to weaken a chosen opponent's attack (Restrain,
+    /// i.e. Megfékezés). There is no partial-amount option, unlike the old per-point prompt this
+    /// replaced.
     /// </summary>
     [RelayCommand(CanExecute = nameof(CanUsePsiSurge))]
     private async Task UsePsiSurgeAsync()
@@ -415,42 +416,45 @@ internal sealed partial class EncounterViewModel(ISettings settings, CharacterSe
 
         var total = character.PsiPoints + character.DynamicAstralPsiShield + character.DynamicMentalPsiShield;
 
+        // DisplayActionSheetAsync/DisplayAlertAsync translate every label they're given via Lng.Elem(),
+        // so the choice they return must be matched back the same way (see LearnQualificationAsync's
+        // weapon picker above for the same pattern) - comparing against the raw literal only matches
+        // by luck, whenever a given label happens to have no translation entry.
         var choice = await ShellNavigationService.DisplayActionSheetAsync(
             "Psi surge",
             "Cancel",
             null,
-            "Roham",
-            "Megfékezés").ConfigureAwait(true);
+            "Charge",
+            "Restrain").ConfigureAwait(true);
 
-        switch (choice)
+        if (choice == Lng.Elem("Charge"))
         {
-            case "Roham":
-                var confirmRoham = await ShellNavigationService.DisplayAlertAsync(
-                    "Psi surge",
-                    String.Format(
-                        Lng.Elem("Burn all {0} psi points (including any held in a Dinamikus Pajzs) for +{1} attack value each, for this round only?"),
-                        total,
-                        Character.PsiSurgeAttackValuePerPoint),
-                    Lng.Elem("Roham"),
-                    Lng.Elem("Cancel")).ConfigureAwait(true);
+            var confirmCharge = await ShellNavigationService.DisplayAlertAsync(
+                "Psi surge",
+                String.Format(
+                    Lng.Elem("Burn all {0} psi points (including any held in a Dinamic Shield) for +{1} attack value each, for this round only?"),
+                    total,
+                    Character.PsiSurgeAttackValuePerPoint),
+                "Surge",
+                "Cancel").ConfigureAwait(true);
 
-                if (confirmRoham)
-                {
-                    character.TryUsePsiSurge();
-                }
-                break;
-
-            case "Megfékezés":
-                var enemies = SelectedAssignment.Enemies;
-                if (enemies.Count == 0)
-                {
-                    await ShellNavigationService.DisplayAlertAsync(Lng.Elem("No enemy assigned to weaken.")).ConfigureAwait(true);
-                    break;
-                }
-
+            if (confirmCharge)
+            {
+                character.TryUsePsiSurge();
+            }
+        }
+        else if (choice == Lng.Elem("Restrain"))
+        {
+            var enemies = SelectedAssignment.Enemies;
+            if (enemies.Count == 0)
+            {
+                await ShellNavigationService.DisplayAlertAsync(Lng.Elem("No enemy assigned to weaken.")).ConfigureAwait(true);
+            }
+            else
+            {
                 var enemyNames = enemies.Select(e => e.Name).ToArray();
                 var enemyChoice = await ShellNavigationService.DisplayActionSheetAsync(
-                    "Megfékezés",
+                    "Restrain",
                     "Cancel",
                     null,
                     enemyNames).ConfigureAwait(true);
@@ -458,9 +462,9 @@ internal sealed partial class EncounterViewModel(ISettings settings, CharacterSe
                 var target = enemies.FirstOrDefault(e => e.Name == enemyChoice);
                 if (target != null)
                 {
-                    character.TryUseMegfekezes(target);
+                    character.TryUseRestraint(target);
                 }
-                break;
+            }
         }
 
         UsePsiSurgeCommand.NotifyCanExecuteChanged();

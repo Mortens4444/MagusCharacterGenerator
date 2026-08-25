@@ -11,5 +11,11 @@ public enum CombatValueModifier
     PrimaryWeapon,
 
     [Description("With secondary weapon")]
-    SecondaryWeapon
+    SecondaryWeapon,
+
+    [Description("Throwing primary weapon")]
+    PrimaryWeaponThrown,
+
+    [Description("Throwing secondary weapon")]
+    SecondaryWeaponThrown
 }

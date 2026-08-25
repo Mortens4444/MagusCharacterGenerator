@@ -109,15 +109,15 @@ public class CharacterPsiBehaviorTests
     }
 
     [Test]
-    public void TryUseMegfekezes_WithoutPsi_ReturnsFalse()
+    public void TryUseRestraint_WithoutPsi_ReturnsFalse()
     {
         var character = new Character(new Settings(true), "Test", new Human(), new Craftsman());
         var opponent = new Character(new Settings(true), "Opponent", new Human(), new Craftsman());
-        Assert.That(character.TryUseMegfekezes(opponent), Is.False);
+        Assert.That(character.TryUseRestraint(opponent), Is.False);
     }
 
     [Test]
-    public void TryUseMegfekezes_WithPsi_BurnsAllPointsAndWeakensOpponent()
+    public void TryUseRestraint_WithPsi_BurnsAllPointsAndWeakensOpponent()
     {
         var character = new Character(new Settings(true), "Test", new Human(), new Assassin());
         if (character.Psi == null || character.PsiPoints <= 0)
@@ -130,7 +130,7 @@ public class CharacterPsiBehaviorTests
         var total = character.PsiPoints;
         var opponentAttackBefore = opponent.AttackValue;
 
-        var result = character.TryUseMegfekezes(opponent);
+        var result = character.TryUseRestraint(opponent);
 
         Assert.That(result, Is.True);
         Assert.That(character.PsiPoints, Is.EqualTo(0));
