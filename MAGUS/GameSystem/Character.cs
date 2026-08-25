@@ -21,16 +21,7 @@ public partial class Character : Attacker, ICombatModifier, ILiving, IAbilities,
 
     public bool PlayerCharacter { get; set; }
 
-    public override List<Speed> Speeds { get; } = [
-        new Speed(TravelMode.OnLand, 6, speedLevel: SpeedLevel.Slowest),   // Séta ~1.2 m/s
-        new Speed(TravelMode.OnLand, 17, speedLevel: SpeedLevel.Slow),      // Gyors gyaloglás ~1.7 m/s
-        new Speed(TravelMode.OnLand, 30, speedLevel: SpeedLevel.Normal),    // Kocogás ~3.0 m/s
-        new Speed(TravelMode.OnLand, 45, speedLevel: SpeedLevel.Fast),      // Futás ~4.5 m/s
-        new Speed(TravelMode.OnLand, 110, speedLevel: SpeedLevel.Fastest),  // Sprint ~11.0 m/s
-        new Speed(TravelMode.InWater, 6, speedLevel: SpeedLevel.Slowest),   // Átlagos úszó ~0.6 m/s
-        new Speed(TravelMode.InWater, 11, speedLevel: SpeedLevel.Slow),     // Jó úszó ~1.1 m/s
-        new Speed(TravelMode.InWater, 21, speedLevel: SpeedLevel.Fast)      // Versenyúszó ~2.1 m/s
-    ];
+    public override List<Speed> Speeds => Race.Speeds;
 
     public Character() : this(null) { }
 
@@ -63,11 +54,6 @@ public partial class Character : Attacker, ICombatModifier, ILiving, IAbilities,
 
         CreateSpecifiedLevel();
         EnsureSubscriptions();
-
-        if (race is Feenhar || race is Draquon) // Speeds shoud be filled from races
-        {
-            Speeds.Add(new Speed(TravelMode.InTheAir, 60));
-        }
     }
 
     public static Character Load(string fullPath, ISettings settings)

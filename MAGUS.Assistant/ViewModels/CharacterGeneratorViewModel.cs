@@ -70,6 +70,8 @@ internal sealed partial class CharacterGeneratorViewModel : CharacterViewModel
         set => SetProperty(ref isCharacterGenerated, value);
     }
 
+    public override bool CanReviseQualificationSelection => true;
+
     [RelayCommand]
     public async Task GenerateCharacter()
     {
@@ -172,9 +174,16 @@ internal sealed partial class CharacterGeneratorViewModel : CharacterViewModel
     [RelayCommand]
     public async Task SaveCharacter()
     {
-        await characterService.SaveAsync(Character).ConfigureAwait(false);
+        await characterService.SaveAsync(Character).ConfigureAwait(true);
         MarkClean();
-        WeakReferenceMessenger.Default.Send(new ShowInfoMessage(Lng.Elem("Character saved"), Lng.FormattedElem("Successfully saved {0}", 0, Character.Name)));
+
+        // CharacterGeneratorPage is reached via Mtf.Maui.Controls.MenuItem's raw
+        // Navigation.PushAsync (bypassing Shell's registered-route navigation), while the page's own
+        // back-navigation logic assumes Shell route navigation - that mismatch can leave more than one
+        // NotifierPage-registered instance alive, so a WeakReferenceMessenger-based toast here can
+        // render twice. DisplayAlertAsync talks directly to the current page instead of broadcasting,
+        // so it can't double-fire the same way.
+        await ShellNavigationService.DisplayAlertAsync(Lng.Elem("Character saved"), Lng.FormattedElem("Successfully saved {0}", 0, Character.Name)).ConfigureAwait(true);
     }
 
     [RelayCommand]

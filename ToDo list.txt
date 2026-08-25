@@ -1,18 +1,14 @@
-- kalandrendszer városonként
+- when a character kills all of it's enemies in encounter, redistribute enemies should be called with a UI
 
 - 2 Times throws should be elliminated, and a times parameter should be added to the DiceThrowFormula, and the formula should be applied times times. (ex: 2D10 => 2 times D10)
 - Travelling pathes [through the mountains or a forest, etc...] should affect random encounter notifications
-- when a character kills all of it's enemies in encounter, redistribute enemies should be called with a UI
 - when zooming the image, sometime the image moves away (like it jumps)
 - generate button is not available, after canceling strength probe?
 - MaxDieNumber setting & property in Character class + DieCounter on UI - Resetable? If DieCount == MaxDieCount => Status = Alive->Dead S
 - Refactor: Remove Calculate functions from Character class - compute all properties
-- // Speeds should be filled from races
 - Paint component should be in Mtf.MAUI.Controls
 - New race: https://kalandozok.hu/cikkgyujtemeny/kieg%C3%A9sz%C3%ADt%C5%91k/fajok/j%C3%A1tszhat%C3%B3-fajok/fajok-k%C3%B6nyve-r62/
 - Add new classes (Priests & Paladins, etc.)
-- Ynev fõbb helyei
-- Karakter származás
 - FIXME: Multi-class (+ age of character should be introduced)
 - Play Videos (Videóklippek lejátszása)
 

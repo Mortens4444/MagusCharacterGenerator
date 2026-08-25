@@ -1,4 +1,5 @@
 ﻿using MAGUS.Enums;
+using MAGUS.Models;
 using MAGUS.Qualifications;
 using MAGUS.Qualifications.Specialities;
 
@@ -23,6 +24,8 @@ public class MutantOrc : Race
     public override Alignment? Alignment => Enums.Alignment.ChaosDeath;
 
     public override string Name => "Mutant orc";
+
+    public override List<Speed> Speeds => [.. base.Speeds, new Speed(TravelMode.InTheAir, 50)];
 
     public override SpecialQualificationList SpecialQualifications =>
     [

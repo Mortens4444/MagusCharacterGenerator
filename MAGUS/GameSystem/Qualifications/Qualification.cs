@@ -49,5 +49,12 @@ public abstract class Qualification : ImageOwner
     /// </summary>
     public virtual bool NeedsSelection => false;
 
+    /// <summary>
+    /// True for qualifications that offer a weapon/language pick (see NeedsSelection) even after one has
+    /// already been made - QualificationsView.xaml keeps its "Choose" button visible while this is true,
+    /// so the player can revisit and change an earlier pick instead of it disappearing once made.
+    /// </summary>
+    public virtual bool IsSelectable => false;
+
     public override string ToString() => Name;
 }

@@ -19,6 +19,7 @@
             <converters:QualificationNameConverter x:Key="QualificationNameConverter" />
             <converters:QualificationSorter x:Key="QualificationSorter" />
             <converters:SpecialQualificationNameConverter x:Key="SpecialQualificationNameConverter" />
+            <converters:QualificationChooseButtonVisibleConverter x:Key="QualificationChooseButtonVisibleConverter" />
             <mcc:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter" />
         </ResourceDictionary>
     </ContentView.Resources>
@@ -47,9 +48,16 @@
                                 <Grid Padding="6" ColumnDefinitions="*,Auto,Auto" ColumnSpacing="10">
                                     <Label Text="{Binding ., Converter={StaticResource QualificationNameConverter}}" VerticalOptions="Center" HorizontalOptions="Start" />
                                     <Button Grid.Column="1" Text="Choose" FontSize="12" Padding="10,2"
-                                            IsVisible="{Binding NeedsSelection}"
                                             Command="{Binding Source={RelativeSource AncestorType={x:Type vm:CharacterViewModel}}, Path=SelectQualificationAttributeCommand}"
-                                            CommandParameter="{Binding .}" />
+                                            CommandParameter="{Binding .}">
+                                        <Button.IsVisible>
+                                            <MultiBinding Converter="{StaticResource QualificationChooseButtonVisibleConverter}">
+                                                <Binding Path="NeedsSelection" />
+                                                <Binding Path="IsSelectable" />
+                                                <Binding Source="{RelativeSource AncestorType={x:Type vm:CharacterViewModel}}" Path="CanReviseQualificationSelection" />
+                                            </MultiBinding>
+                                        </Button.IsVisible>
+                                    </Button>
                                     <Label Grid.Column="2" Text="{Binding QualificationLevel, Converter={StaticResource TranslationConverter}}" VerticalOptions="Center" HorizontalTextAlignment="End" />
                                 </Grid>
                             </DataTemplate>

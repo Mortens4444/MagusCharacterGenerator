@@ -11,5 +11,7 @@ public abstract class WeaponQualification(QualificationLevel qualificationLevel 
 
     public override bool NeedsSelection => Weapon == null;
 
+    public override bool IsSelectable => true;
+
     public WeaponQualification() : this(QualificationLevel.Base) { }
 }

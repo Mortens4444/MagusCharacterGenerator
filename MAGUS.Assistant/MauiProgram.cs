@@ -8,7 +8,9 @@ using MAGUS.Assistant.Views;
 using MAGUS.Interfaces;
 using MAGUS.Utils;
 using Microsoft.Extensions.Logging;
+using Mtf.LanguageService;
 using System.Diagnostics;
+using System.Globalization;
 
 namespace MAGUS.Assistant;
 
@@ -123,7 +125,17 @@ internal static class MauiProgram
             var message = new EmailMessage
             {
                 Subject = "MAGUS Assistant - Error report",
-                Body = $"Time: {DateTime.Now}\n\nError details:\n{exception}",
+                Body = $"""
+                    Time: {DateTime.Now}
+                    App version: {AppInfo.Current.VersionString} (build {AppInfo.Current.BuildString})
+                    Platform: {DeviceInfo.Current.Platform} {DeviceInfo.Current.VersionString}
+                    Device: {DeviceInfo.Current.Manufacturer} {DeviceInfo.Current.Model} ({DeviceInfo.Current.Idiom}, {DeviceInfo.Current.DeviceType})
+                    Culture: {CultureInfo.CurrentCulture} (UI: {CultureInfo.CurrentUICulture})
+                    App language: {Lng.DefaultLanguage}
+
+                    Error details:
+                    {exception}
+                    """,
                 To = ["mortens.4444@gmail.com"]
             };
 

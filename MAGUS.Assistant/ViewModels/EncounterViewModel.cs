@@ -573,7 +573,10 @@ internal sealed partial class EncounterViewModel(ISettings settings, CharacterSe
             null,
             [.. categories]).ConfigureAwait(true);
 
-        if (categoryChoice == autoLabel)
+        // DisplayActionSheetAsync translates each button label via Lng.Elem(), so the returned choice
+        // must be matched back the same way - comparing against the raw labels only matches by luck,
+        // whenever the current language happens to have no translation entry for them.
+        if (categoryChoice == Lng.Elem(autoLabel))
         {
             assignment.SelectedAttackMode = null;
             return;
@@ -581,9 +584,9 @@ internal sealed partial class EncounterViewModel(ISettings settings, CharacterSe
 
         var modes = categoryChoice switch
         {
-            weaponLabel => weaponModes,
-            psiLabel => psiModes,
-            magicLabel => magicModes,
+            _ when categoryChoice == Lng.Elem(weaponLabel) => weaponModes,
+            _ when categoryChoice == Lng.Elem(psiLabel) => psiModes,
+            _ when categoryChoice == Lng.Elem(magicLabel) => magicModes,
             _ => []
         };
 
@@ -857,6 +860,11 @@ internal sealed partial class EncounterViewModel(ISettings settings, CharacterSe
                 {
                     enemyAssignment.RemoveEnemyDistance(diedEntity);
                     enemyAssignment.Enemies.Remove(diedEntity);
+
+                    if (enemyAssignment.Enemies.Count == 0)
+                    {
+                        RedistributeSurplusEnemies(enemyAssignment);
+                    }
                 }
 
                 RunTurnCommand.NotifyCanExecuteChanged();
@@ -986,6 +994,30 @@ internal sealed partial class EncounterViewModel(ISettings settings, CharacterSe
             Assignments[index % Assignments.Count].Enemies.Add(enemy);
             index++;
         }
+    }
+
+    /// <summary>
+    /// Called when a character finishes off every enemy assigned to them while other assignments still
+    /// have some left - without this, that character would just stand idle for the rest of the
+    /// encounter (see DieHandler) instead of being handed a share of the remaining fight, the way
+    /// RedistributeEnemies already does for a dead character's leftover enemies.
+    /// </summary>
+    private void RedistributeSurplusEnemies(AssignmentViewModel emptiedAssignment)
+    {
+        var donor = Assignments
+            .Where(a => a != emptiedAssignment && !a.IsFinished && a.Enemies.Count > 1)
+            .OrderByDescending(a => a.Enemies.Count)
+            .FirstOrDefault();
+
+        if (donor == null)
+        {
+            return;
+        }
+
+        var enemy = donor.Enemies[^1];
+        donor.Enemies.Remove(enemy);
+        donor.RemoveEnemyDistance(enemy);
+        emptiedAssignment.Enemies.Add(enemy);
     }
 
     private void AddXp(Attacker attacker, Attacker target)

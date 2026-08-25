@@ -1,5 +1,6 @@
 ﻿using MAGUS.Enums;
 using MAGUS.GameSystem.Qualifications;
+using MAGUS.Models;
 using MAGUS.Qualifications;
 using MAGUS.Qualifications.Combat;
 using MAGUS.Qualifications.Percentages;
@@ -52,17 +53,17 @@ public class Draquon : Race
         new NotTolerateStrongLight(12, -20)
     ];
 
-    //public override List<Speed> Speeds { get; } = [
-    //    new Speed(TravelMode.OnLand, 6, speedLevel: SpeedLevel.Slowest),
-    //    new Speed(TravelMode.OnLand, 17, speedLevel: SpeedLevel.Slow),
-    //    new Speed(TravelMode.OnLand, 15, speedLevel: SpeedLevel.Normal),
-    //    new Speed(TravelMode.OnLand, 80, speedLevel: SpeedLevel.Fast),
-    //    new Speed(TravelMode.OnLand, 120, speedLevel: SpeedLevel.Fastest),
-        
-    //    new Speed(TravelMode.InTheAir, 16, speedLevel: SpeedLevel.Slowest),
-    //    new Speed(TravelMode.InTheAir, 45, speedLevel: SpeedLevel.Slow),
-    //    new Speed(TravelMode.InTheAir, 130, speedLevel: SpeedLevel.Normal),
-    //    new Speed(TravelMode.InTheAir, 180, speedLevel: SpeedLevel.Fast),
-    //    new Speed(TravelMode.InTheAir, 220, speedLevel: SpeedLevel.Fastest)
-    //];
+    public override List<Speed> Speeds { get; } = [
+        new Speed(TravelMode.OnLand, 6, speedLevel: SpeedLevel.Slowest),
+        new Speed(TravelMode.OnLand, 17, speedLevel: SpeedLevel.Slow),
+        new Speed(TravelMode.OnLand, 15, speedLevel: SpeedLevel.Normal),
+        new Speed(TravelMode.OnLand, 80, speedLevel: SpeedLevel.Fast),
+        new Speed(TravelMode.OnLand, 120, speedLevel: SpeedLevel.Fastest),
+
+        new Speed(TravelMode.InTheAir, 16, speedLevel: SpeedLevel.Slowest),
+        new Speed(TravelMode.InTheAir, 45, speedLevel: SpeedLevel.Slow),
+        new Speed(TravelMode.InTheAir, 130, speedLevel: SpeedLevel.Normal),
+        new Speed(TravelMode.InTheAir, 180, speedLevel: SpeedLevel.Fast),
+        new Speed(TravelMode.InTheAir, 220, speedLevel: SpeedLevel.Fastest)
+    ];
 }

@@ -762,6 +762,15 @@ internal partial class CharacterViewModel(IPrintService printService, ISoundPlay
     public SpecialQualificationList SpecialQualifications => Character?.SpecialQualifications ?? [];
 
     /// <summary>
+    /// True only while a brand-new character is still being built (see
+    /// CharacterGeneratorViewModel.CanReviseQualificationSelection) - QualificationsView.xaml uses this,
+    /// together with Qualification.IsSelectable, to keep the "Choose" button revisitable during
+    /// creation but lock it once the character has been saved, so a Weapon use/Weapon throwing/Ancient
+    /// tongue lore/Language lore pick already made on a saved character can no longer be changed.
+    /// </summary>
+    public virtual bool CanReviseQualificationSelection => false;
+
+    /// <summary>
     /// Fills in the Weapon/Language a class/race-granted qualification left unset (see
     /// Qualification.NeedsSelection) - unlike learning a brand-new qualification via
     /// QualificationDetailsViewModel, this mutates the character's own already-owned instance in
@@ -790,7 +799,11 @@ internal partial class CharacterViewModel(IPrintService printService, ISoundPlay
                         null,
                         [.. weapons.Select(w => w.Name)]).ConfigureAwait(true);
 
-                    var weapon = weapons.FirstOrDefault(w => w.Name == weaponChoice);
+                    // DisplayActionSheetAsync translates each button label via Lng.Elem(), so the
+                    // returned choice must be matched back the same way (see PickLanguageAsync below,
+                    // which already does this) - comparing against the raw w.Name only matches by luck,
+                    // whenever a given weapon happens to have no translation entry.
+                    var weapon = weapons.FirstOrDefault(w => Lng.Elem(w.Name) == weaponChoice);
                     if (weapon == null)
                     {
                         return;

@@ -1,5 +1,6 @@
 ﻿using MAGUS.Enums;
 using MAGUS.Interfaces;
+using MAGUS.Models;
 using MAGUS.Qualifications;
 
 namespace MAGUS.Races;
@@ -13,6 +14,8 @@ public interface IRace : IAbilities
     PercentQualificationList PercentQualifications { get; }
 
     SpecialQualificationList SpecialQualifications { get; }
+
+    List<Speed> Speeds { get; }
 
     string GenerateCharacterName();
 

@@ -48,6 +48,18 @@ public abstract class Race : ImageOwner, IRace
 
     public virtual Alignment? Alignment => null;
 
+    public virtual List<Speed> Speeds =>
+    [
+        new Speed(TravelMode.OnLand, 6, speedLevel: SpeedLevel.Slowest),   // Séta ~1.2 m/s
+        new Speed(TravelMode.OnLand, 17, speedLevel: SpeedLevel.Slow),     // Gyors gyaloglás ~1.7 m/s
+        new Speed(TravelMode.OnLand, 30, speedLevel: SpeedLevel.Normal),   // Kocogás ~3.0 m/s
+        new Speed(TravelMode.OnLand, 45, speedLevel: SpeedLevel.Fast),     // Futás ~4.5 m/s
+        new Speed(TravelMode.OnLand, 110, speedLevel: SpeedLevel.Fastest), // Sprint ~11.0 m/s
+        new Speed(TravelMode.InWater, 6, speedLevel: SpeedLevel.Slowest),  // Átlagos úszó ~0.6 m/s
+        new Speed(TravelMode.InWater, 11, speedLevel: SpeedLevel.Slow),    // Jó úszó ~1.1 m/s
+        new Speed(TravelMode.InWater, 21, speedLevel: SpeedLevel.Fast)     // Versenyúszó ~2.1 m/s
+    ];
+
     public virtual string GenerateCharacterName()
     {
         var start = new[]

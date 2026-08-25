@@ -14,6 +14,8 @@ public class LanguageLore : Qualification, ICanHaveMany, IScientificQualificatio
 
     public override bool NeedsSelection => Language == null;
 
+    public override bool IsSelectable => true;
+
     [JsonConstructor]
     public LanguageLore() { }
 

@@ -1,5 +1,6 @@
 ﻿using MAGUS.Enums;
 using MAGUS.GameSystem.Qualifications;
+using MAGUS.Models;
 using MAGUS.Qualifications;
 using MAGUS.Qualifications.Laical;
 using MAGUS.Qualifications.Scientific;
@@ -23,7 +24,9 @@ public class Feenhar : Race
     public override int Astral => -1;
 
     public override Alignment? Alignment => Enums.Alignment.OrderDeath;
-    
+
+    public override List<Speed> Speeds => [.. base.Speeds, new Speed(TravelMode.InTheAir, 60)];
+
     public override QualificationList Qualifications =>
     [
         new HuntingAndFishing(QualificationLevel.Base),
