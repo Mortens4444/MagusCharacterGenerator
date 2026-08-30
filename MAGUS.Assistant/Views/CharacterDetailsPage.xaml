@@ -22,9 +22,9 @@
                     </Style>
                 </Grid.Resources>
 
-                <Button Grid.Row="0" Grid.Column="0" Text="⛤" Command="{Binding ChangeTabCommand}" CommandParameter="0" />
+                <Button Grid.Row="0" Grid.Column="0" Text="👤" Command="{Binding ChangeTabCommand}" CommandParameter="0" />
                 <Button Grid.Row="0" Grid.Column="1" Text="✨" Command="{Binding ChangeTabCommand}" CommandParameter="1" />
-                <Button Grid.Row="0" Grid.Column="2" Text="⚔" Command="{Binding ChangeTabCommand}" CommandParameter="2" />
+                <Button Grid.Row="0" Grid.Column="2" Text="⚔️" Command="{Binding ChangeTabCommand}" CommandParameter="2" />
                 <Button Grid.Row="0" Grid.Column="3" Text="🛡️" Command="{Binding ChangeTabCommand}" CommandParameter="3" />
                 <Button Grid.Row="0" Grid.Column="4" Text="🗺️" Command="{Binding ChangeTabCommand}" CommandParameter="4" />
 

@@ -24,83 +24,25 @@
                 </Grid>
             </Border>
             
-            <Label Text="Character Creation Rules" 
-                   FontSize="18" 
-                   FontAttributes="Bold" 
+            <Label Text="Automatic Rules"
+                   FontSize="18"
+                   FontAttributes="Bold"
                    TextColor="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource White}}"/>
 
-            <Border StrokeShape="RoundRectangle 10" Padding="15" StrokeThickness="0" 
+            <Border StrokeShape="RoundRectangle 10" Padding="15" StrokeThickness="1"
+                    Stroke="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource White}}"
                     BackgroundColor="{AppThemeBinding Light={StaticResource Gray100}, Dark={StaticResource Gray600}}">
                 <Border.GestureRecognizers>
                     <TapGestureRecognizer Command="{Binding ToggleSettingCommand}"
-                                          CommandParameter="AddCombatValueModifierPointsOnFirstLevelForAllClass" />
+                                          CommandParameter="AllAutomaticRulesEnabled" />
                 </Border.GestureRecognizers>
                 <Grid ColumnDefinitions="*, Auto">
-                    <Label Grid.Column="0" 
-                           Text="Add combat value modifiers at level 1 for all classes" 
-                           VerticalOptions="Center" 
-                           LineBreakMode="WordWrap" />
-                    <Switch Grid.Column="1" IsToggled="{Binding AddCombatValueModifierPointsOnFirstLevelForAllClass}" />
-                </Grid>
-            </Border>
-
-            <Border StrokeShape="RoundRectangle 10" Padding="15" StrokeThickness="0"
-                    BackgroundColor="{AppThemeBinding Light={StaticResource Gray100}, Dark={StaticResource Gray600}}">
-                <Border.GestureRecognizers>
-                    <TapGestureRecognizer Command="{Binding ToggleSettingCommand}"
-                                          CommandParameter="AddPainToleranceOnFirstLevelForAllClass" />
-                </Border.GestureRecognizers>
-                <Grid ColumnDefinitions="*, Auto">
-                    <Label Grid.Column="0" 
-                           Text="Add pain tolerance point modifiers at level 1 for all classes" 
+                    <Label Grid.Column="0"
+                           Text="Enable all automatic rules"
                            VerticalOptions="Center"
+                           FontAttributes="Bold"
                            LineBreakMode="WordWrap" />
-                    <Switch Grid.Column="1" IsToggled="{Binding AddPainToleranceOnFirstLevelForAllClass}" />
-                </Grid>
-            </Border>
-
-            <Border StrokeShape="RoundRectangle 10" Padding="15" StrokeThickness="0"
-                    BackgroundColor="{AppThemeBinding Light={StaticResource Gray100}, Dark={StaticResource Gray600}}">
-                <Border.GestureRecognizers>
-                    <TapGestureRecognizer Command="{Binding ToggleSettingCommand}"
-                                          CommandParameter="AddQualificationPointsOnFirstLevelForAllClass" />
-                </Border.GestureRecognizers>
-                <Grid ColumnDefinitions="*, Auto">
-                    <Label Grid.Column="0" 
-                           Text="Add skill point modifiers at level 1 for all classes" 
-                           VerticalOptions="Center"
-                           LineBreakMode="WordWrap" />
-                    <Switch Grid.Column="1" IsToggled="{Binding AddQualificationPointsOnFirstLevelForAllClass}" />
-                </Grid>
-            </Border>
-
-            <Border StrokeShape="RoundRectangle 10" Padding="15" StrokeThickness="0"
-                    BackgroundColor="{AppThemeBinding Light={StaticResource Gray100}, Dark={StaticResource Gray600}}">
-                <Border.GestureRecognizers>
-                    <TapGestureRecognizer Command="{Binding ToggleSettingCommand}"
-                                          CommandParameter="AddManaPointsOnFirstLevelForAllClass" />
-                </Border.GestureRecognizers>
-                <Grid ColumnDefinitions="*, Auto">
-                    <Label Grid.Column="0" 
-                           Text="Add mana point modifiers at level 1 for all classes" 
-                           VerticalOptions="Center"
-                           LineBreakMode="WordWrap" />
-                    <Switch Grid.Column="1" IsToggled="{Binding AddManaPointsOnFirstLevelForAllClass}" />
-                </Grid>
-            </Border>
-
-            <Border StrokeShape="RoundRectangle 10" Padding="15" StrokeThickness="0"
-                    BackgroundColor="{AppThemeBinding Light={StaticResource Gray100}, Dark={StaticResource Gray600}}">
-                <Border.GestureRecognizers>
-                    <TapGestureRecognizer Command="{Binding ToggleSettingCommand}"
-                                          CommandParameter="AddPsiPointsOnFirstLevelForAllClass" />
-                </Border.GestureRecognizers>
-                <Grid ColumnDefinitions="*, Auto">
-                    <Label Grid.Column="0" 
-                           Text="Add psi point modifiers at level 1 for all classes" 
-                           VerticalOptions="Center"
-                           LineBreakMode="WordWrap" />
-                    <Switch Grid.Column="1" IsToggled="{Binding AddPsiPointsOnFirstLevelForAllClass}" />
+                    <Switch Grid.Column="1" IsToggled="{Binding AllAutomaticRulesEnabled}" />
                 </Grid>
             </Border>
 
@@ -179,18 +121,25 @@
                 </Grid>
             </Border>
 
-            <Border StrokeShape="RoundRectangle 10" Padding="15" StrokeThickness="0"
+            <Label Text="Level 1 Point Bonuses"
+                   FontSize="18"
+                   FontAttributes="Bold"
+                   TextColor="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource White}}"/>
+
+            <Border StrokeShape="RoundRectangle 10" Padding="15" StrokeThickness="1"
+                    Stroke="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource White}}"
                     BackgroundColor="{AppThemeBinding Light={StaticResource Gray100}, Dark={StaticResource Gray600}}">
                 <Border.GestureRecognizers>
                     <TapGestureRecognizer Command="{Binding ToggleSettingCommand}"
-                                          CommandParameter="AssignmentTurnHistoryNewestOnTop" />
+                                          CommandParameter="AllFirstLevelBonusesEnabled" />
                 </Border.GestureRecognizers>
                 <Grid ColumnDefinitions="*, Auto">
                     <Label Grid.Column="0"
-                           Text="Show the newest turns at the top of the encounter page"
+                           Text="Enable all level 1 point bonuses"
                            VerticalOptions="Center"
+                           FontAttributes="Bold"
                            LineBreakMode="WordWrap" />
-                    <Switch Grid.Column="1" IsToggled="{Binding AssignmentTurnHistoryNewestOnTop}" />
+                    <Switch Grid.Column="1" IsToggled="{Binding AllFirstLevelBonusesEnabled}" />
                 </Grid>
             </Border>
 
@@ -198,14 +147,74 @@
                     BackgroundColor="{AppThemeBinding Light={StaticResource Gray100}, Dark={StaticResource Gray600}}">
                 <Border.GestureRecognizers>
                     <TapGestureRecognizer Command="{Binding ToggleSettingCommand}"
-                                          CommandParameter="ShowRandomBeastWhenBestiaryPageOpened" />
+                                          CommandParameter="AddCombatValueModifierPointsOnFirstLevelForAllClass" />
                 </Border.GestureRecognizers>
                 <Grid ColumnDefinitions="*, Auto">
                     <Label Grid.Column="0"
-                           Text="Show a random beast when the Bestiary page is opened"
+                           Text="Add combat value modifiers at level 1 for all classes"
                            VerticalOptions="Center"
                            LineBreakMode="WordWrap" />
-                    <Switch Grid.Column="1" IsToggled="{Binding ShowRandomBeastWhenBestiaryPageOpened}" />
+                    <Switch Grid.Column="1" IsToggled="{Binding AddCombatValueModifierPointsOnFirstLevelForAllClass}" />
+                </Grid>
+            </Border>
+
+            <Border StrokeShape="RoundRectangle 10" Padding="15" StrokeThickness="0"
+                    BackgroundColor="{AppThemeBinding Light={StaticResource Gray100}, Dark={StaticResource Gray600}}">
+                <Border.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding ToggleSettingCommand}"
+                                          CommandParameter="AddPainToleranceOnFirstLevelForAllClass" />
+                </Border.GestureRecognizers>
+                <Grid ColumnDefinitions="*, Auto">
+                    <Label Grid.Column="0"
+                           Text="Add pain tolerance point modifiers at level 1 for all classes"
+                           VerticalOptions="Center"
+                           LineBreakMode="WordWrap" />
+                    <Switch Grid.Column="1" IsToggled="{Binding AddPainToleranceOnFirstLevelForAllClass}" />
+                </Grid>
+            </Border>
+
+            <Border StrokeShape="RoundRectangle 10" Padding="15" StrokeThickness="0"
+                    BackgroundColor="{AppThemeBinding Light={StaticResource Gray100}, Dark={StaticResource Gray600}}">
+                <Border.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding ToggleSettingCommand}"
+                                          CommandParameter="AddQualificationPointsOnFirstLevelForAllClass" />
+                </Border.GestureRecognizers>
+                <Grid ColumnDefinitions="*, Auto">
+                    <Label Grid.Column="0"
+                           Text="Add skill point modifiers at level 1 for all classes"
+                           VerticalOptions="Center"
+                           LineBreakMode="WordWrap" />
+                    <Switch Grid.Column="1" IsToggled="{Binding AddQualificationPointsOnFirstLevelForAllClass}" />
+                </Grid>
+            </Border>
+
+            <Border StrokeShape="RoundRectangle 10" Padding="15" StrokeThickness="0"
+                    BackgroundColor="{AppThemeBinding Light={StaticResource Gray100}, Dark={StaticResource Gray600}}">
+                <Border.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding ToggleSettingCommand}"
+                                          CommandParameter="AddManaPointsOnFirstLevelForAllClass" />
+                </Border.GestureRecognizers>
+                <Grid ColumnDefinitions="*, Auto">
+                    <Label Grid.Column="0"
+                           Text="Add mana point modifiers at level 1 for all classes"
+                           VerticalOptions="Center"
+                           LineBreakMode="WordWrap" />
+                    <Switch Grid.Column="1" IsToggled="{Binding AddManaPointsOnFirstLevelForAllClass}" />
+                </Grid>
+            </Border>
+
+            <Border StrokeShape="RoundRectangle 10" Padding="15" StrokeThickness="0"
+                    BackgroundColor="{AppThemeBinding Light={StaticResource Gray100}, Dark={StaticResource Gray600}}">
+                <Border.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding ToggleSettingCommand}"
+                                          CommandParameter="AddPsiPointsOnFirstLevelForAllClass" />
+                </Border.GestureRecognizers>
+                <Grid ColumnDefinitions="*, Auto">
+                    <Label Grid.Column="0"
+                           Text="Add psi point modifiers at level 1 for all classes"
+                           VerticalOptions="Center"
+                           LineBreakMode="WordWrap" />
+                    <Switch Grid.Column="1" IsToggled="{Binding AddPsiPointsOnFirstLevelForAllClass}" />
                 </Grid>
             </Border>
 
@@ -236,16 +245,94 @@
                 </VerticalStackLayout>
             </Border>
 
+            <Label Text="Other"
+                   FontSize="18"
+                   FontAttributes="Bold"
+                   TextColor="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource White}}"/>
+
+            <Border StrokeShape="RoundRectangle 10" Padding="15" StrokeThickness="0"
+                    BackgroundColor="{AppThemeBinding Light={StaticResource Gray100}, Dark={StaticResource Gray600}}">
+                <Border.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding ToggleSettingCommand}"
+                                          CommandParameter="AssignmentTurnHistoryNewestOnTop" />
+                </Border.GestureRecognizers>
+                <Grid ColumnDefinitions="*, Auto">
+                    <Label Grid.Column="0"
+                           Text="Show the newest turns at the top of the encounter page"
+                           VerticalOptions="Center"
+                           LineBreakMode="WordWrap" />
+                    <Switch Grid.Column="1" IsToggled="{Binding AssignmentTurnHistoryNewestOnTop}" />
+                </Grid>
+            </Border>
+
+            <Border StrokeShape="RoundRectangle 10" Padding="15" StrokeThickness="0"
+                    BackgroundColor="{AppThemeBinding Light={StaticResource Gray100}, Dark={StaticResource Gray600}}">
+                <Border.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding ToggleSettingCommand}"
+                                          CommandParameter="ShowRandomBeastWhenBestiaryPageOpened" />
+                </Border.GestureRecognizers>
+                <Grid ColumnDefinitions="*, Auto">
+                    <Label Grid.Column="0"
+                           Text="Show a random beast when the Bestiary page is opened"
+                           VerticalOptions="Center"
+                           LineBreakMode="WordWrap" />
+                    <Switch Grid.Column="1" IsToggled="{Binding ShowRandomBeastWhenBestiaryPageOpened}" />
+                </Grid>
+            </Border>
+
+            <Border StrokeShape="RoundRectangle 10" Padding="15" StrokeThickness="0"
+                    BackgroundColor="{AppThemeBinding Light={StaticResource Gray100}, Dark={StaticResource Gray600}}">
+                <Border.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding ToggleSettingCommand}"
+                                          CommandParameter="UseRaceClassRestrictions" />
+                </Border.GestureRecognizers>
+                <Grid ColumnDefinitions="*, Auto">
+                    <Label Grid.Column="0"
+                           Text="Only offer races a class actually allows when generating a character"
+                           VerticalOptions="Center"
+                           LineBreakMode="WordWrap" />
+                    <Switch Grid.Column="1" IsToggled="{Binding UseRaceClassRestrictions}" />
+                </Grid>
+            </Border>
+
+            <Border StrokeShape="RoundRectangle 10" Padding="15" StrokeThickness="0"
+                    BackgroundColor="{AppThemeBinding Light={StaticResource Gray100}, Dark={StaticResource Gray600}}">
+                <Border.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding ToggleSettingCommand}"
+                                          CommandParameter="ShowFlavorOnlyNotifications" />
+                </Border.GestureRecognizers>
+                <Grid ColumnDefinitions="*, Auto">
+                    <Label Grid.Column="0"
+                           Text="Show flavor-only notifications (jokes, ambient hints - no game effect)"
+                           VerticalOptions="Center"
+                           LineBreakMode="WordWrap" />
+                    <Switch Grid.Column="1" IsToggled="{Binding ShowFlavorOnlyNotifications}" />
+                </Grid>
+            </Border>
+
+            <Border StrokeShape="RoundRectangle 10" Padding="15" StrokeThickness="0"
+                    BackgroundColor="{AppThemeBinding Light={StaticResource Gray100}, Dark={StaticResource Gray600}}">
+                <Border.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding ToggleSettingCommand}"
+                                          CommandParameter="ShowRandomWorldEventNotifications" />
+                </Border.GestureRecognizers>
+                <Grid ColumnDefinitions="*, Auto">
+                    <Label Grid.Column="0"
+                           Text="Show random world event notifications (market swings, a stray dog, a gift, a stranger in need, a stolen item)"
+                           VerticalOptions="Center"
+                           LineBreakMode="WordWrap" />
+                    <Switch Grid.Column="1" IsToggled="{Binding ShowRandomWorldEventNotifications}" />
+                </Grid>
+            </Border>
+
             <Border StrokeShape="RoundRectangle 10" Padding="15" StrokeThickness="0"
                     BackgroundColor="{AppThemeBinding Light={StaticResource Gray100}, Dark={StaticResource Gray600}}">
                 <Grid ColumnDefinitions="*, Auto">
                     <Label Grid.Column="0" Text="Combat Simulator Mode" VerticalOptions="Center" FontAttributes="Bold"/>
-                    <!--<Picker Grid.Column="1" x:Name="CombatSimulatorModePicker" Title="Select combat simulator mode" WidthRequest="200" />-->
                     <Picker Title="Select combat simulator mode" WidthRequest="200"
                             Grid.Column="1" ItemsSource="{Binding CombatSimulatorModes}"
                             ItemDisplayBinding="{Binding ., Converter={StaticResource EnumDescriptionTranslationConverter}}"
                             SelectedItem="{Binding CombatSimulatorMode, Mode=TwoWay}" />
-                    
                 </Grid>
             </Border>
 

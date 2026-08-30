@@ -7,7 +7,7 @@ using System.Globalization;
 
 namespace MAGUS.Assistant.ViewModels;
 
-internal sealed partial class CharactersViewModel(CharacterService characterService, SettingsService settingsService, GameEventService gameEventService) : CharacterListLoaderViewModel(characterService)
+internal sealed partial class CharactersViewModel(CharacterService characterService, SettingsService settingsService) : CharacterListLoaderViewModel(characterService)
 {
     private string? defaultCharacterName = settingsService.DefaultCharacterName;
 
@@ -28,28 +28,6 @@ internal sealed partial class CharactersViewModel(CharacterService characterServ
         var newDefaultName = DefaultCharacterName == character.Name ? null : character.Name;
         await settingsService.SetDefaultCharacterNameAsync(newDefaultName).ConfigureAwait(true);
         DefaultCharacterName = newDefaultName;
-    }
-
-    [RelayCommand]
-    private async Task SleepAsync(Character character)
-    {
-        if (character == null)
-        {
-            return;
-        }
-
-        await CharacterCareActions.SleepAsync(character, characterService, gameEventService).ConfigureAwait(true);
-    }
-
-    [RelayCommand]
-    private async Task EatAsync(Character character)
-    {
-        if (character == null)
-        {
-            return;
-        }
-
-        await CharacterCareActions.EatAsync(character, characterService).ConfigureAwait(true);
     }
 
     [RelayCommand]

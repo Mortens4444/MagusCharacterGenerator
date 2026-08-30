@@ -126,14 +126,17 @@ internal sealed partial class EncounterViewModel(ISettings settings, CharacterSe
 
                 AddEnemyCommand.NotifyCanExecuteChanged();
                 UsePsiSurgeCommand.NotifyCanExecuteChanged();
+                TryTameCommand.NotifyCanExecuteChanged();
                 OnPropertyChanged(nameof(SelectedCharacterHasPsi));
                 OnPropertyChanged(nameof(SelectedCharacterHasSorcery));
+                OnPropertyChanged(nameof(SelectedCharacterCanTame));
             }
         }
     }
 
     public bool SelectedCharacterHasPsi => SelectedAssignment?.Character.Psi != null;
     public bool SelectedCharacterHasSorcery => SelectedAssignment?.Character.Sorcery != null;
+    public bool SelectedCharacterCanTame => SelectedAssignment?.Character.HasMasterAnimalTraining == true;
 
     public EncounterState EncounterState { get; private set; }
 
@@ -459,7 +462,10 @@ internal sealed partial class EncounterViewModel(ISettings settings, CharacterSe
                     null,
                     enemyNames).ConfigureAwait(true);
 
-                var target = enemies.FirstOrDefault(e => e.Name == enemyChoice);
+                // DisplayActionSheetAsync translates each button label via Lng.Elem() before returning
+                // the tapped choice, so comparing against the raw e.Name only matches by luck, whenever
+                // the current language happens to have no translation entry for it.
+                var target = enemies.FirstOrDefault(e => Lng.Elem(e.Name) == enemyChoice);
                 if (target != null)
                 {
                     character.TryUseRestraint(target);
@@ -468,6 +474,85 @@ internal sealed partial class EncounterViewModel(ISettings settings, CharacterSe
         }
 
         UsePsiSurgeCommand.NotifyCanExecuteChanged();
+    }
+
+    private bool CanTryTame() => SelectedCharacterCanTame;
+
+    /// <summary>
+    /// Idomítás (Animal training) at Master level lets a character attempt to tame a wild land/air
+    /// animal instead of continuing to fight it - see Character.CanTame/TryTameCreature for the
+    /// gating and roll, and TamedCreature for where a tamed animal ends up. The success chance isn't
+    /// sourced from a rulebook formula (Első Törvénykönyv p.107's Idomítás section only covers
+    /// training an already-owned animal, not subduing a hostile one mid-fight) - see
+    /// Character.TameChancePercent's comment.
+    /// </summary>
+    [RelayCommand(CanExecute = nameof(CanTryTame))]
+    private async Task TryTameAsync()
+    {
+        if (SelectedAssignment is not { } assignment)
+        {
+            return;
+        }
+
+        var character = assignment.Character;
+        var tameable = assignment.Enemies.OfType<Creature>().Where(character.CanTame).ToList();
+        if (tameable.Count == 0)
+        {
+            await ShellNavigationService.DisplayAlertAsync(Lng.Elem("No tameable animal assigned.")).ConfigureAwait(true);
+            return;
+        }
+
+        var target = tameable[0];
+        if (tameable.Count > 1)
+        {
+            var enemyNames = tameable.Select(e => e.Name).ToArray();
+            var enemyChoice = await ShellNavigationService.DisplayActionSheetAsync(
+                "Tame",
+                "Cancel",
+                null,
+                enemyNames).ConfigureAwait(true);
+
+            // DisplayActionSheetAsync translates each button label via Lng.Elem() before returning
+            // the tapped choice, so comparing against the raw e.Name only matches by luck, whenever
+            // the current language happens to have no translation entry for it.
+            var picked = tameable.FirstOrDefault(e => Lng.Elem(e.Name) == enemyChoice);
+            if (picked == null)
+            {
+                return;
+            }
+            target = picked;
+        }
+
+        if (character.TryTameCreature(target))
+        {
+            target.Died -= DieHandler;
+            target.LostConsciousness -= LostConsciousnessHandler;
+            assignment.RemoveEnemyDistance(target);
+            assignment.Enemies.Remove(target);
+
+            if (assignment.Enemies.Count == 0)
+            {
+                RedistributeSurplusEnemies(assignment);
+            }
+
+            await characterService.SaveAsync(character).ConfigureAwait(true);
+
+            await ShellNavigationService.DisplayAlertAsync(
+                Lng.Elem("Tame"),
+                String.Format(Lng.Elem("{0} is tamed and joins {1}'s tamed creatures."), Lng.Elem(target.Name), character.Name)).ConfigureAwait(true);
+
+            RunTurnCommand.NotifyCanExecuteChanged();
+            if (IsEncounterOver())
+            {
+                EndEncounter();
+            }
+        }
+        else
+        {
+            await ShellNavigationService.DisplayAlertAsync(
+                Lng.Elem("Tame"),
+                String.Format(Lng.Elem("The taming attempt on {0} fails."), Lng.Elem(target.Name))).ConfigureAwait(true);
+        }
     }
 
     private bool CanDismantlePsiShield() => SelectedAssignment?.Character.Psi != null;
@@ -599,16 +684,22 @@ internal sealed partial class EncounterViewModel(ISettings settings, CharacterSe
             return;
         }
 
+        // Dual-wielding two of the same weapon (a common two-handed-fighting setup) gives the primary
+        // and secondary MeleeAttack/RangedAttack the same Attack.Name, so the sheet would show two
+        // identical buttons and always resolve back to the first (primary) one - tag each with which
+        // slot it came from so they're distinguishable and the tapped choice matches back unambiguously.
+        var labels = modes.Select(m => m.GetDisplayLabel(assignment.Character)).ToList();
+
         var modeChoice = await ShellNavigationService.DisplayActionSheetAsync(
             categoryChoice,
             "Cancel",
             null,
-            [.. modes.Select(m => Lng.Elem(m.Name))]).ConfigureAwait(true);
+            [.. labels]).ConfigureAwait(true);
 
-        var selected = modes.FirstOrDefault(m => Lng.Elem(m.Name) == modeChoice);
-        if (selected != null)
+        var modeIndex = labels.FindIndex(l => l == modeChoice);
+        if (modeIndex >= 0)
         {
-            assignment.SelectedAttackMode = selected;
+            assignment.SelectedAttackMode = modes[modeIndex];
         }
     }
 

@@ -41,7 +41,7 @@ internal sealed class NotificationForegroundService : Service
         // Kept flavor-only and synchronous here: Android requires StartForeground to be called
         // promptly, so the real (DB-backed) GameEventService roll only happens on the recurring
         // timer below, which has no such time budget constraint.
-        using var foregroundNotification = CreateNotification("MAGUS Assistant", Lng.Elem(GameEventService.PickFlavorOnlyMessage()));
+        using var foregroundNotification = CreateNotification("MAGUS Assistant", Lng.Elem(GameEventService.PickFlavorOnlyMessage()), ongoing: true);
 
         if (foregroundNotification is null)
         {
@@ -132,7 +132,14 @@ internal sealed class NotificationForegroundService : Service
             return;
         }
 
-        using var notification = CreateNotification(title, message);
+        // Not ongoing: each rolled event (ambush, item stolen, ...) is its own discrete, dismissable
+        // notification, not a status the app is continuously reporting - unlike the persistent
+        // "service is running" notification (id 5000, see OnStartCommand), which does need ongoing:
+        // true. Marking every one of these ongoing was making some OEM notification shades collapse
+        // them into a single always-latest entry, silently discarding earlier events' text (an
+        // ambush/theft notification could get replaced by the next hourly tick's flavor text before
+        // ever being read).
+        using var notification = CreateNotification(title, message, ongoing: false);
         if (notification is null)
         {
             return;
@@ -141,7 +148,7 @@ internal sealed class NotificationForegroundService : Service
         NotificationManagerCompat.From(this).Notify(id, notification);
     }
 
-    private Notification? CreateNotification(string title, string message)
+    private Notification? CreateNotification(string title, string message, bool ongoing)
     {
         using var stopIntent = new Intent(this, typeof(NotificationForegroundService));
         stopIntent.SetAction(NotificationServiceActions.Stop);
@@ -158,7 +165,7 @@ internal sealed class NotificationForegroundService : Service
         contentIntent.SetFlags(ActivityFlags.SingleTop | ActivityFlags.ReorderToFront);
         var contentPendingIntent = PendingIntent.GetActivity(this, 0, contentIntent, pendingIntentFlags);
 
-        return AndroidNotificationHelper.CreateNotification(this, AndroidNotificationHelper.BackgroundChannelId, title, message, ongoing: true, actionIntent: stopPendingIntent, contentIntent: contentPendingIntent);
+        return AndroidNotificationHelper.CreateNotification(this, AndroidNotificationHelper.BackgroundChannelId, title, message, ongoing: ongoing, actionIntent: stopPendingIntent, contentIntent: contentPendingIntent);
     }
 
     [SupportedOSPlatform("android26.0")]

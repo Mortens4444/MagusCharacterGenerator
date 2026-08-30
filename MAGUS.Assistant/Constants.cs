@@ -25,6 +25,8 @@ internal sealed class Constants
     public const bool UseRaceClassRestrictions = true;
     public const bool AssignmentTurnHistoryNewestOnTop = true;
     public const bool ShowRandomBeastWhenBestiaryPageOpened = true;
+    public const bool ShowFlavorOnlyNotifications = true;
+    public const bool ShowRandomWorldEventNotifications = true;
     public const CombatSimulatorMode CombatSimulatorMode = CombatSimulatorMode.SemiAuto;
 
     public const Language DefaultLanguage = Language.Hungarian;

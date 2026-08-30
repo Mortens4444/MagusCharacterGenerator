@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<v:NotifierPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                xmlns:v="clr-namespace:Mtf.LanguageService.MAUI.Views;assembly=Mtf.LanguageService.MAUI"
+                xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                xmlns:vm="clr-namespace:MAGUS.Assistant.ViewModels"
+                x:Class="MAGUS.Assistant.Views.FireMageSpecializationPage"
+                x:ClassModifier="internal"
+                x:DataType="vm:FireMageSpecializationViewModel"
+                Title="Choose your path">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="16" Spacing="12">
+
+            <Label Text="At level 5, a Fire Mage must choose one of three Paths - Második Törvénykönyv."
+                   FontAttributes="Bold" FontSize="16" />
+
+            <Border StrokeShape="RoundRectangle 10" Padding="15" StrokeThickness="2" Stroke="Transparent">
+                <Border.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding SelectDestructiveFireCommand}" />
+                </Border.GestureRecognizers>
+                <Border.Triggers>
+                    <DataTrigger TargetType="Border" Binding="{Binding IsDestructiveFireSelected}" Value="True">
+                        <Setter Property="Stroke" Value="{StaticResource Tertiary}" />
+                    </DataTrigger>
+                </Border.Triggers>
+                <VerticalStackLayout Spacing="4">
+                    <Label Text="Pusztító Tűz Útja (Path of Destructive Fire)" FontAttributes="Bold" />
+                    <Label Text="Tűz Harcosai Rend. From level 5: +1 Combat Value Modifier and +2 Pain Tolerance per level. Grants Weapon use (Master), History lore, Leadership and Military formation." FontSize="12" />
+                </VerticalStackLayout>
+            </Border>
+
+            <Border StrokeShape="RoundRectangle 10" Padding="15" StrokeThickness="2" Stroke="Transparent">
+                <Border.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding SelectLightCommand}" />
+                </Border.GestureRecognizers>
+                <Border.Triggers>
+                    <DataTrigger TargetType="Border" Binding="{Binding IsLightSelected}" Value="True">
+                        <Setter Property="Stroke" Value="{StaticResource Tertiary}" />
+                    </DataTrigger>
+                </Border.Triggers>
+                <VerticalStackLayout Spacing="4">
+                    <Label Text="Fény Ösvénye (Path of Light)" FontAttributes="Bold" />
+                    <Label Text="Tűz Hordozói Rend. No change to Combat Value/Pain Tolerance growth. Grants Ancient tongue lore (Old Godonian), History lore and Legend lore." FontSize="12" />
+                </VerticalStackLayout>
+            </Border>
+
+            <Border StrokeShape="RoundRectangle 10" Padding="15" StrokeThickness="2" Stroke="Transparent">
+                <Border.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding SelectSogronCommand}" />
+                </Border.GestureRecognizers>
+                <Border.Triggers>
+                    <DataTrigger TargetType="Border" Binding="{Binding IsSogronSelected}" Value="True">
+                        <Setter Property="Stroke" Value="{StaticResource Tertiary}" />
+                    </DataTrigger>
+                </Border.Triggers>
+                <VerticalStackLayout Spacing="4">
+                    <Label Text="Sogron Útja (Path of Sogron)" FontAttributes="Bold" />
+                    <Label Text="Tűz Táplálói Rend. The character becomes a priest of Sogron from here on (same level and experience, but future growth follows Priest rules) - every Fire Mage qualification already learned is kept." FontSize="12" />
+                </VerticalStackLayout>
+            </Border>
+
+            <Button Text="Confirm" Command="{Binding ConfirmCommand}" IsEnabled="{Binding IsConfirmEnabled}" Margin="0,10,0,0" />
+
+        </VerticalStackLayout>
+    </ScrollView>
+
+</v:NotifierPage>

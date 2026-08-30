@@ -1,12 +1,15 @@
 using MAGUS.Enums;
 using MAGUS.Interfaces;
+using MAGUS.Things.Food;
 
 namespace MAGUS.GameSystem.Magic.Spells.Priest;
 
 /// <summary>
 /// Élelemteremtés (Szférikus — Élet, Természet). Conjures food/drink enough for 3 people or one
-/// horse-sized creature. Pure utility, not an attack, so it deals no damage and isn't wired into
-/// the enemy-targeting combat pipeline.
+/// horse-sized creature - modeled as a single ready-to-eat meal (LunchDinner, HungerValue 100) added
+/// to the target's Equipment, same "self or another saved character" target picker as any other spell
+/// (CharacterViewModel.CastSpellAsync), letting a priest feed a starving companion as well as
+/// themselves. Deals no damage; only OnHit does anything.
 /// </summary>
 public sealed class CreateFood : ISpell
 {
@@ -29,4 +32,12 @@ public sealed class CreateFood : ISpell
     public int DurationInRounds => 999;
 
     public int GetDamage() => 0;
+
+    public void OnHit(Attacker caster, Attacker target)
+    {
+        if (target is Character character)
+        {
+            character.Equipment.Add(new LunchDinner());
+        }
+    }
 }

@@ -38,10 +38,15 @@ internal sealed partial class CharacterGeneratorViewModel : CharacterViewModel
 
         LoadAvailableTypes();
 
-        int raceIndex = RandomProvider.GetSecureRandomInt(0, AvailableRaces.Count);
+        // Pick the class first, then the race from whatever FilterAvailableRaces (below) leaves in
+        // AvailableRaces for it - otherwise a fully independent random pick could just as easily land
+        // on a race that class doesn't allow, the same problem UseRaceClassRestrictions exists to
+        // prevent when the player picks manually.
         int classIndex = RandomProvider.GetSecureRandomInt(0, AvailableClasses.Count);
-        SelectedRace = AvailableRaces[raceIndex];
         SelectedClass = AvailableClasses[classIndex];
+
+        int raceIndex = RandomProvider.GetSecureRandomInt(0, AvailableRaces.Count);
+        SelectedRace = AvailableRaces[raceIndex];
     }
 
     public ObservableCollection<IRace?> AvailableRaces { get; } = [];
@@ -54,7 +59,45 @@ internal sealed partial class CharacterGeneratorViewModel : CharacterViewModel
     public IRace? SelectedRace { get => selectedRace; set => SetProperty(ref selectedRace, value); }
 
     private IClass? selectedClass;
-    public IClass? SelectedClass { get => selectedClass; set => SetProperty(ref selectedClass, value); }
+    public IClass? SelectedClass
+    {
+        get => selectedClass;
+        set
+        {
+            if (SetProperty(ref selectedClass, value))
+            {
+                FilterAvailableRaces();
+            }
+        }
+    }
+
+    /// <summary>
+    /// Settings > Other "Use race/class restrictions" (UseRaceClassRestrictions) - when on, narrows
+    /// AvailableRaces to SelectedClass.AllowedRaces so the race picker can't land on a combination the
+    /// class doesn't actually support. An empty AllowedRaces is the established "no restriction"
+    /// convention (see Class.AllowedRaces's default), so that - and the setting being off - both mean
+    /// every race stays available.
+    /// </summary>
+    private void FilterAvailableRaces()
+    {
+        var allowedRaces = (selectedClass as MAGUS.Classes.Class)?.AllowedRaces ?? [];
+        var restricted = settings.UseRaceClassRestrictions && allowedRaces.Length > 0;
+        var allowedTypes = restricted ? allowedRaces.Select(r => r.GetType()).ToHashSet() : null;
+
+        AvailableRaces.Clear();
+        foreach (var race in PreloadService.Instance.Races)
+        {
+            if (allowedTypes is null || allowedTypes.Contains(race.GetType()))
+            {
+                AvailableRaces.Add(race);
+            }
+        }
+
+        if (SelectedRace is null || !AvailableRaces.Contains(SelectedRace))
+        {
+            SelectedRace = AvailableRaces.FirstOrDefault();
+        }
+    }
 
     private bool isDirty;
 
@@ -119,9 +162,9 @@ internal sealed partial class CharacterGeneratorViewModel : CharacterViewModel
             MarkDirty();
             if (!settings.AutoIncreasePainTolerance)
             {
-                var formula = Character?.BaseClass.GetPainToleranceModifierFormula();
                 for (var level = Level; level <= Level; level++)
                 {
+                    var formula = Character?.BaseClass.GetPainToleranceModifierFormula(level);
                     var page = new RollFormulaPage(soundPlayer, shakeService, formula, $"{Lng.Elem("Create character")} - {Lng.Elem("PTP")} ({level}. {Lng.Elem("Level")})");
                     await ShellNavigationService.ShowPageAsync(page).ConfigureAwait(true);
                     var result = await page.ResultTask.ConfigureAwait(true);

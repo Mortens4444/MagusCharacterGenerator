@@ -41,12 +41,22 @@ public partial class Character : ICharacter
     private int lockedAllocatedToDefense;
     private int lockedAllocatedToAim;
 
+    private bool isFightingTwoHanded;
+    private bool isAiming;
+
     public override double AttacksPerRound
     {
         get
         {
             var baseAttacksPerRound = (PrimaryWeapon ?? SecondaryWeapon)?.AttacksPerRound ?? fist.AttacksPerRound;
-            return Quickness > 16 && Dexterity > 16 ? baseAttacksPerRound * 2 : baseAttacksPerRound;
+            var quicknessAttacksPerRound = Quickness > 16 && Dexterity > 16 ? baseAttacksPerRound * 2 : baseAttacksPerRound;
+
+            // Első Törvénykönyv, "A támadások száma": multiple attack-granting conditions don't stack
+            // ("nem adódik össze az eredmény") - a two-handed fighter gets the better of this and the
+            // Quickness/Dexterity bonus above, not both added together.
+            var twoHandedAttacksPerRound = IsFightingTwoHanded && PrimaryWeapon is IMeleeWeapon && SecondaryWeapon is IMeleeWeapon ? 2 : 0;
+
+            return Math.Max(quicknessAttacksPerRound, twoHandedAttacksPerRound);
         }
     }
 
@@ -62,6 +72,61 @@ public partial class Character : ICharacter
             }
 
             selectedCombatValueModifier = value;
+            OnPropertyChanged();
+            OnCombatValuesChanged();
+        }
+    }
+
+    /// <summary>
+    /// Whether the character is currently fighting with a weapon in each hand (Első Törvénykönyv,
+    /// "Kétkezes harc": "Kétkezes harcot folytat az, aki mindkét kezében fegyvert tart... minden
+    /// harci körben kétszer támad") - toggled from the Encounter page rather than derived
+    /// automatically from having both PrimaryWeapon and SecondaryWeapon equipped, since a character
+    /// can carry a spare weapon without actually fighting two-handed with it. Grants a second attack
+    /// (see AttacksPerRound) and, while a given weapon slot is the active one
+    /// (SelectedCombatValueModifier), applies that hand's Kétkezes harc modifier on top of its
+    /// WeaponUse one - see GetTwoHandedCombatModifier.
+    /// </summary>
+    [JsonInclude, Newtonsoft.Json.JsonProperty]
+    public bool IsFightingTwoHanded
+    {
+        get => isFightingTwoHanded;
+        set
+        {
+            if (isFightingTwoHanded == value)
+            {
+                return;
+            }
+
+            isFightingTwoHanded = value;
+            OnPropertyChanged();
+            OnPropertyChanged(nameof(AttacksPerRound));
+            OnCombatValuesChanged();
+            InvalidateAttackModes();
+        }
+    }
+
+    /// <summary>
+    /// Whether the character is currently spending the round(s) in the intense concentration the
+    /// Aiming (Célzás) qualification requires (Harcosok, Barbárok, Gladiátorok, "Célzás": "1-2 körön
+    /// keresztül, erősen koncentrálva céloz egy mozdulatlan, vagy kiszámíthatóan mozgó célpontot") -
+    /// toggled from the Encounter page like IsFightingTwoHanded, since the book's own restrictions
+    /// while concentrating (can't otherwise fight, move, or use Psi; a successful interruption forces
+    /// a GM-adjudicated Akaraterő-próba that can cut or cancel the bonus) aren't tracked automatically
+    /// here. Grants the CÉ bonus applied in GetAimingModifier while toggled on.
+    /// </summary>
+    [JsonInclude, Newtonsoft.Json.JsonProperty]
+    public bool IsAiming
+    {
+        get => isAiming;
+        set
+        {
+            if (isAiming == value)
+            {
+                return;
+            }
+
+            isAiming = value;
             OnPropertyChanged();
             OnCombatValuesChanged();
         }
@@ -199,7 +264,7 @@ public partial class Character : ICharacter
     public int LockedAllocatedToAim { get => lockedAllocatedToAim; private set => lockedAllocatedToAim = value; }
 
     [JsonIgnore, Newtonsoft.Json.JsonIgnore]
-    public int CombatValueModifierPerLevel => BaseClass.CombatValueModifierPerLevel;
+    public int CombatValueModifierPerLevel => BaseClass.GetCombatValueModifierForLevel(BaseClass.Level);
 
     [JsonIgnore, Newtonsoft.Json.JsonIgnore]
     public int RemainingCombatValueModifier => TotalCombatValueModifier - AllocatedToInitiate - AllocatedToAttack - AllocatedToDefense - AllocatedToAim;
@@ -330,7 +395,7 @@ public partial class Character : ICharacter
                 _ => fist.InitiateValue,
             };
 
-            return @base + AllocatedToInitiate + weaponBonus + GetWeaponUseModifier().InitiateValue + TemporaryModifiers.Sum(m => m.InitiateValue);
+            return @base + AllocatedToInitiate + weaponBonus + GetWeaponUseModifier().InitiateValue + GetTwoHandedCombatModifier().InitiateValue + TemporaryModifiers.Sum(m => m.InitiateValue);
         }
     }
 
@@ -351,7 +416,7 @@ public partial class Character : ICharacter
                 _ => fist.AttackValue,
             };
 
-            return @base + AllocatedToAttack + weaponBonus + GetWeaponUseModifier().AttackValue + GetWeaponThrowingModifier() + PsiSurgeAttackBonus + TemporaryModifiers.Sum(m => m.AttackValue);
+            return @base + AllocatedToAttack + weaponBonus + GetWeaponUseModifier().AttackValue + GetTwoHandedCombatModifier().AttackValue + GetWeaponThrowingModifier() + PsiSurgeAttackBonus + TemporaryModifiers.Sum(m => m.AttackValue);
         }
     }
 
@@ -371,7 +436,7 @@ public partial class Character : ICharacter
                 _ => fist.DefenseValue,
             };
 
-            return @base + AllocatedToDefense + weaponBonus + GetWeaponUseModifier().DefenseValue + TemporaryModifiers.Sum(m => m.DefenseValue);
+            return @base + AllocatedToDefense + weaponBonus + GetWeaponUseModifier().DefenseValue + GetTwoHandedCombatModifier().DefenseValue + TemporaryModifiers.Sum(m => m.DefenseValue);
         }
     }
 
@@ -392,7 +457,7 @@ public partial class Character : ICharacter
                 _ => 0,
             };
 
-            return @base + AllocatedToAim + weaponBonus + GetWeaponUseModifier().AimValue + TemporaryModifiers.Sum(m => m.AimValue);
+            return @base + AllocatedToAim + weaponBonus + GetWeaponUseModifier().AimValue + GetAimingModifier() + TemporaryModifiers.Sum(m => m.AimValue);
         }
     }
 
@@ -440,6 +505,58 @@ public partial class Character : ICharacter
     }
 
     /// <summary>
+    /// KÉ/TÉ/VÉ modifier from the Two-handed combat (Kétkezes harc) qualification, on top of whatever
+    /// GetWeaponUseModifier already applies for the same weapon - only in effect while
+    /// IsFightingTwoHanded and both hands hold a melee weapon (Első Törvénykönyv, "Kétkezes harc":
+    /// "Kétkezes harcot folytat az, aki mindkét kezében fegyvert tart"). The better (jobb/right) hand
+    /// is PrimaryWeapon, the worse (bal/left) is SecondaryWeapon - checked independently per hand
+    /// against that hand's own weapon type, same as GetWeaponUseModifier. No TwoHandedCombat for that
+    /// weapon: -5/-10/-10 on the right hand, but the left hand takes the full Képzetlen
+    /// Fegyverforgatás penalty -10/-25/-20 regardless of that weapon's own WeaponUse skill ("míg
+    /// rosszabbik (bal) kezét a Képzetlen Fegyverforgatásból származó mínuszok sújtják"). Base level
+    /// clears the right hand's penalty entirely and softens the left hand's to -2/-5/-5. Master level
+    /// clears both.
+    /// </summary>
+    private WeaponCombatModifier GetTwoHandedCombatModifier()
+    {
+        if (!IsFightingTwoHanded || PrimaryWeapon is not IMeleeWeapon || SecondaryWeapon is not IMeleeWeapon)
+        {
+            return new WeaponCombatModifier();
+        }
+
+        var selectedWeapon = selectedCombatValueModifier switch
+        {
+            CombatValueModifier.PrimaryWeapon => PrimaryWeapon,
+            CombatValueModifier.SecondaryWeapon => SecondaryWeapon,
+            _ => null,
+        };
+
+        if (selectedWeapon == null)
+        {
+            return new WeaponCombatModifier();
+        }
+
+        var isOffHand = selectedCombatValueModifier == CombatValueModifier.SecondaryWeapon;
+        var twoHandedCombat = new TwoHandedCombat { Weapon = selectedWeapon };
+
+        if (HasQualification(twoHandedCombat, QualificationLevel.Master))
+        {
+            return new WeaponCombatModifier();
+        }
+
+        if (HasQualification(twoHandedCombat, QualificationLevel.Base))
+        {
+            return isOffHand
+                ? new WeaponCombatModifier { InitiateValue = -2, AttackValue = -5, DefenseValue = -5 }
+                : new WeaponCombatModifier();
+        }
+
+        return isOffHand
+            ? new WeaponCombatModifier { InitiateValue = -10, AttackValue = -25, DefenseValue = -20 }
+            : new WeaponCombatModifier { InitiateValue = -5, AttackValue = -10, DefenseValue = -10 };
+    }
+
+    /// <summary>
     /// TÉ modifier from the Weapon throwing (Fegyverdobás) qualification when SelectedCombatValueModifier
     /// is one of the "thrown" modes (Első Törvénykönyv, "Fegyverdobás"): throwing always resolves as an
     /// Attack Roll, never an Aim Roll, so this only ever affects Attack value. No matching qualification
@@ -472,6 +589,40 @@ public partial class Character : ICharacter
         }
 
         return -25;
+    }
+
+    /// <summary>
+    /// CÉ bonus from the Aiming (Célzás) qualification (Harcosok, Barbárok, Gladiátorok, "Célzás"):
+    /// only available with a ranged weapon selected and only while IsAiming reflects the character
+    /// actually spending the round(s) concentrating - Base grants +20 CÉ (after 2 rounds of
+    /// concentration), Master grants +35 CÉ (after 1 round), per the book's text.
+    /// </summary>
+    private int GetAimingModifier()
+    {
+        var selectedWeapon = selectedCombatValueModifier switch
+        {
+            CombatValueModifier.PrimaryWeapon => PrimaryWeapon,
+            CombatValueModifier.SecondaryWeapon => SecondaryWeapon,
+            _ => null,
+        };
+
+        if (!IsAiming || selectedWeapon is not IRangedWeapon)
+        {
+            return 0;
+        }
+
+        var aiming = new Aiming();
+        if (HasQualification(aiming, QualificationLevel.Master))
+        {
+            return 35;
+        }
+
+        if (HasQualification(aiming, QualificationLevel.Base))
+        {
+            return 20;
+        }
+
+        return 0;
     }
 
     public void ChangeInitiator(int delta) => ChangeAllocation(ref allocatedToInitiate, delta, AllocationTarget.Initiate);
@@ -596,7 +747,17 @@ public partial class Character : ICharacter
     {
         var (attackPercentage, defencePercentage, aimingPercentage) = DistributionProvider.Get(BaseClass, Race);
         var addCombatValuesOnFirstLevel = settings?.AddCombatValueOnFirstLevelForAllClass ?? true;
-        var combatValueModifier = (BaseClass.AddCombatModifierOnFirstLevel || addCombatValuesOnFirstLevel ? BaseClass.Level : BaseClass.Level - 1) * BaseClass.CombatValueModifierPerLevel;
+
+        // Summed per level (not a flat levelCount * rate multiplication) so a class whose rate
+        // changes partway through a career (e.g. FireMage's Destructive Fire path from level 5 on)
+        // isn't retroactively applied to earlier levels - every other class's rate is constant, so
+        // this produces the exact same total as the old multiplication for them.
+        var startLevel = BaseClass.AddCombatModifierOnFirstLevel || addCombatValuesOnFirstLevel ? 1 : 2;
+        var combatValueModifier = 0;
+        for (var lvl = startLevel; lvl <= BaseClass.Level; lvl++)
+        {
+            combatValueModifier += BaseClass.GetCombatValueModifierForLevel(lvl);
+        }
 
         TotalCombatValueModifier = combatValueModifier;
         var autoDistributeCombatValues = settings?.AutoDistributeCombatValues ?? false;

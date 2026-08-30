@@ -1,3 +1,30 @@
+- ⛤ és ⚔ nem jelenik meg Androidon (csere vagy javítható - mintha korábban nem lett volna ezzel gond - translate rontja el?)
+
+- kéne translate a current place-re is Unknown miatt
+- Critically hungry - eating or a healing spell is urgent. and Critically sleep-deprived - sleeping or a healing spell is urgent. not translated but I see in Languages.csv
+
+- A Harc szimulátor mód az egyéb alatt kéne legyen, és az egyéb csoport kéne utolsó legyen a SettingsPage-n
+- kikapcsolható kéne legyen az utolsó mondatok, és az események is (mint pl idegen kutya csatlakozik hozzád, new animal added to your tamed animals)
+- az első szinten hozzáadandó beállításokat külön kéne csoportosítani (HM, FP, MP, PsziPont, KP) - ezekre is lehet saját csoport szintű kapcsoló
+- need setting (Use allowed races restrictions) in SettingsPage, which filters AllowedRaces (these are already filled, if not filled, do not show that race) when generating new character
+
+- images/qualifications/languages/classes/races pages cannot be search (not clickable?)
+
+- a manapontoknál nem látom a varázslás gombot (azért mert nincs varázstudásom?) pszinél is így van? legyen konzisztens.
+
+- not translated, but why?
+<HorizontalStackLayout Spacing="6">
+	<CheckBox IsChecked="{Binding Character.IsFightingTwoHanded, Mode=TwoWay}" />
+	<Label Text="Two-handed combat" VerticalOptions="Center"
+		   ToolTipProperties.Text="Fighting with a weapon in each hand - grants a second attack, but penalizes both hands without the Two-handed combat qualification (worse on the off-hand)" />
+</HorizontalStackLayout>
+
+<HorizontalStackLayout Spacing="6">
+	<CheckBox IsChecked="{Binding Character.IsAiming, Mode=TwoWay}" />
+	<Label Text="Aiming" VerticalOptions="Center"
+		   ToolTipProperties.Text="Spending the round(s) in intense concentration on a ranged target for a large Aim Value bonus (with the Aiming qualification: +20 CÉ at Base after 2 rounds, +35 CÉ at Master after 1 round) - the character can't otherwise fight, move or use Psi while concentrating, and a successful interruption forces a GM-adjudicated Willpower check that this app doesn't automate" />
+</HorizontalStackLayout>
+
 - when a character kills all of it's enemies in encounter, redistribute enemies should be called with a UI
 
 - 2 Times throws should be elliminated, and a times parameter should be added to the DiceThrowFormula, and the formula should be applied times times. (ex: 2D10 => 2 times D10)
@@ -9,7 +36,7 @@
 - Paint component should be in Mtf.MAUI.Controls
 - New race: https://kalandozok.hu/cikkgyujtemeny/kieg%C3%A9sz%C3%ADt%C5%91k/fajok/j%C3%A1tszhat%C3%B3-fajok/fajok-k%C3%B6nyve-r62/
 - Add new classes (Priests & Paladins, etc.)
-- FIXME: Multi-class (+ age of character should be introduced)
+- Multi-class (+ age of character should be introduced)
 - Play Videos (Videóklippek lejátszása)
 
 Level up

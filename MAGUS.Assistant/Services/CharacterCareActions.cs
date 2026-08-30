@@ -117,7 +117,11 @@ internal static class CharacterCareActions
             null,
             [.. foodItems.Select(item => item.Name)]).ConfigureAwait(true);
 
-        var foodItem = foodItems.FirstOrDefault(item => item.Name == choice);
+        // DisplayActionSheetAsync translates each button label via Lng.Elem() before returning the
+        // tapped choice, so comparing against the raw item.Name only matches by luck, whenever the
+        // current language happens to have no translation entry for it - e.g. a Hungarian translation
+        // for a common food name like "Bread" made this silently fail to match, so Eat did nothing.
+        var foodItem = foodItems.FirstOrDefault(item => Lng.Elem(item.Name) == choice);
         if (foodItem == null)
         {
             return;
@@ -174,7 +178,9 @@ internal static class CharacterCareActions
             null,
             [.. healingItems.Select(item => item.Name)]).ConfigureAwait(true);
 
-        var item = healingItems.FirstOrDefault(i => i.Name == itemChoice);
+        // See the matching comment in EatAsync - DisplayActionSheetAsync translates each label before
+        // returning the tapped choice, so it must be matched back the same way.
+        var item = healingItems.FirstOrDefault(i => Lng.Elem(i.Name) == itemChoice);
         if (item == null)
         {
             return;
@@ -199,7 +205,7 @@ internal static class CharacterCareActions
             null,
             [.. targetNames]).ConfigureAwait(true);
 
-        var target = targetChoice == selfLabel ? character : otherCharacters.FirstOrDefault(c => c.Name == targetChoice);
+        var target = targetChoice == selfLabel ? character : otherCharacters.FirstOrDefault(c => Lng.Elem(c.Name) == targetChoice);
         if (target == null)
         {
             return;

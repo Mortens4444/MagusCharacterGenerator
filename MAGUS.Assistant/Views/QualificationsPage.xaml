@@ -20,7 +20,8 @@
 
     <Grid Padding="10" RowSpacing="8" RowDefinitions="Auto, Auto, *">
 
-        <mc:EntryWithLabel Grid.Row="0" Label="Search" Text="{Binding SearchText}" />
+        <!-- SearchBar, not EntryWithLabel - see ImagesPage.xaml's comment on the same swap. -->
+        <SearchBar Grid.Row="0" Text="{Binding SearchText}" Placeholder="Search…" />
 
         <Grid Padding="6" Grid.Row="1" ColumnDefinitions="*, Auto, Auto" ColumnSpacing="10">
             <Label Text="Name" VerticalOptions="Center" TextColor="Gray" FontAttributes="Bold" />

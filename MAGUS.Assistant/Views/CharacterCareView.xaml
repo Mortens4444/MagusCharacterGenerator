@@ -3,16 +3,26 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:vm="clr-namespace:MAGUS.Assistant.ViewModels"
              xmlns:mcconv="clr-namespace:Mtf.Maui.Controls.Converters;assembly=Mtf.Maui.Controls"
+             xmlns:converters="clr-namespace:MAGUS.Assistant.Converters"
              x:Class="MAGUS.Assistant.Views.CharacterCareView"
              x:ClassModifier="internal"
              x:DataType="vm:CharacterViewModel">
     <ContentView.Resources>
         <ResourceDictionary>
             <mcconv:InverseBooleanConverter x:Key="InverseBooleanConverter" />
+            <converters:LiteralTranslationConverter x:Key="LiteralTranslationConverter" />
         </ResourceDictionary>
     </ContentView.Resources>
     <ScrollView>
         <VerticalStackLayout Spacing="16" Padding="16">
+
+            <!-- Death -->
+            <Border Style="{StaticResource BoxBorder}" IsVisible="{Binding IsDead}" Stroke="#FF3B30">
+                <VerticalStackLayout Spacing="4">
+                    <Label Text="Dead" Style="{StaticResource HeaderLabel}" TextColor="#FF3B30" />
+                    <Label Text="{Binding ., Converter={StaticResource LiteralTranslationConverter}, ConverterParameter='This character has died - no action is possible until another character revives them with an item that resurrects (e.g. Water of Life).'}" TextColor="#FF3B30" FontSize="12" />
+                </VerticalStackLayout>
+            </Border>
 
             <!-- Hunger -->
             <Border Style="{StaticResource BoxBorder}">
@@ -25,7 +35,7 @@
                             </DataTrigger>
                         </Label.Triggers>
                     </Label>
-                    <Label Text="Critically hungry - eating or a healing spell is urgent." TextColor="#FF3B30" IsVisible="{Binding IsHungerCritical}" FontSize="12" />
+                    <Label Text="{Binding ., Converter={StaticResource LiteralTranslationConverter}, ConverterParameter='Critically hungry - eating or a healing spell is urgent.'}" TextColor="#FF3B30" IsVisible="{Binding IsHungerCritical}" FontSize="12" />
                 </VerticalStackLayout>
             </Border>
 
@@ -40,9 +50,9 @@
                             </DataTrigger>
                         </Label.Triggers>
                     </Label>
-                    <Label Text="Critically sleep-deprived - sleeping or a healing spell is urgent." TextColor="#FF3B30" IsVisible="{Binding IsSleepCritical}" FontSize="12" />
+                    <Label Text="{Binding ., Converter={StaticResource LiteralTranslationConverter}, ConverterParameter='Critically sleep-deprived - sleeping or a healing spell is urgent.'}" TextColor="#FF3B30" IsVisible="{Binding IsSleepCritical}" FontSize="12" />
                     <VerticalStackLayout Spacing="4" IsVisible="{Binding IsSleeping}">
-                        <Label Text="Asleep - progress resolves over real time, even with the app closed." FontSize="12" FontAttributes="Italic" />
+                        <Label Text="{Binding ., Converter={StaticResource LiteralTranslationConverter}, ConverterParameter='Asleep - progress resolves over real time, even with the app closed.'}" FontSize="12" FontAttributes="Italic" />
                         <ProgressBar Progress="{Binding SleepProgress}" />
                         <Button Text="Stop sleeping"
                                 Command="{Binding StopSleepCommand}"

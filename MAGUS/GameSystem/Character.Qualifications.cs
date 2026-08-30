@@ -13,6 +13,7 @@ using MAGUS.Qualifications.Percentages;
 using MAGUS.Qualifications.Scientific;
 using MAGUS.Qualifications.Scientific.Psi;
 using MAGUS.Qualifications.Specialities;
+using MAGUS.Races;
 using MAGUS.Utils;
 using System.Collections.Specialized;
 using System.Text.Json.Serialization;
@@ -24,6 +25,15 @@ public partial class Character
     [NonSerialized, JsonIgnore, Newtonsoft.Json.JsonIgnore]
     private int qualificationPoints;
 
+    [NonSerialized, JsonIgnore, Newtonsoft.Json.JsonIgnore]
+    private int percentQualificationPoints;
+
+    /// <summary>Percent gained per PercentQualificationPointCost spent - see IncreasePercentQualification.</summary>
+    public const int PercentPerQualificationPoint = 3;
+
+    /// <summary>PercentQualificationPoints cost of one PercentPerQualificationPoint increase - see IncreasePercentQualification.</summary>
+    public const int PercentQualificationPointCost = 1;
+
     public QualificationList Qualifications { get; private set; } = [];
 
     public SpecialQualificationList SpecialQualifications { get; private set; } = [];
@@ -33,7 +43,18 @@ public partial class Character
     [JsonIgnore, Newtonsoft.Json.JsonIgnore]
     public bool CanAllocateQualificationPoints => QualificationPoints != 0;
 
-    public int PercentQualificationPoints { get; set; }
+    public int PercentQualificationPoints
+    {
+        get => percentQualificationPoints;
+        set
+        {
+            if (value != percentQualificationPoints)
+            {
+                percentQualificationPoints = value;
+                OnPropertyChanged();
+            }
+        }
+    }
 
     public int QualificationPoints
     {
@@ -99,6 +120,29 @@ public partial class Character
         var trapDetection = PercentQualifications.OfType<TrapDetection>().Select(q => q.Percent).DefaultIfEmpty(0).Max();
         var secretDoorSearch = PercentQualifications.OfType<SecretDoorSearch>().Select(q => q.Percent).DefaultIfEmpty(0).Max();
         return Math.Max(trapDetection, secretDoorSearch);
+    }
+
+    /// <summary>True if this character has enough PercentQualificationPoints to raise percentQualification's Percent by one increment - see IncreasePercentQualification.</summary>
+    public bool CanIncreasePercentQualification(PercentQualification percentQualification)
+    {
+        return percentQualification != null && PercentQualifications.Contains(percentQualification) && PercentQualificationPoints >= PercentQualificationPointCost;
+    }
+
+    /// <summary>
+    /// Spends PercentQualificationPointCost PercentQualificationPoints to raise a percent qualification's
+    /// Percent by PercentPerQualificationPoint - only some classes (Első Törvénykönyv), e.g. Thief/Bard/
+    /// Warlock, earn PercentQualificationPoints per level (see Class.PercentQualificationModifier) to
+    /// spend this way.
+    /// </summary>
+    public void IncreasePercentQualification(PercentQualification percentQualification)
+    {
+        if (!CanIncreasePercentQualification(percentQualification))
+        {
+            throw new InvalidOperationException("Not enough percent qualification points");
+        }
+
+        PercentQualificationPoints -= PercentQualificationPointCost;
+        percentQualification.Percent += PercentPerQualificationPoint;
     }
 
     public bool HasQualification(Qualification qualification, QualificationLevel qualificationLevel)
@@ -240,6 +284,10 @@ public partial class Character
                 existingQualification.MasterQualificationLevel = 1;
             }
             OnPropertyChanged(nameof(Qualifications));
+            if (existingQualification is IPsi)
+            {
+                CalculatePsiPoints(Race is Jann, settings);
+            }
             return;
         }
 
@@ -249,6 +297,14 @@ public partial class Character
             qualification.MasterQualificationLevel = 1;
         }
         Qualifications.Add(qualification);
+
+        // PsiPoints/MaxPsiPoints are cached (see CalculatePsiPoints) and otherwise only refresh when
+        // Intelligence changes - learning a brand-new Psi qualification here would otherwise leave the
+        // character showing 0 psi points until some unrelated action happened to touch Intelligence.
+        if (qualification is IPsi)
+        {
+            CalculatePsiPoints(Race is Jann, settings);
+        }
     }
 
     private void Qualifications_CollectionChanged(object? sender, NotifyCollectionChangedEventArgs e)
@@ -271,7 +327,7 @@ public partial class Character
             }
             for (int i = 1; i < BaseClass.Level; i++)
             {
-                qualificationPoints += BaseClass.QualificationPointsModifier;
+                qualificationPoints += BaseClass.GetQualificationPointsModifierForLevel(i + 1);
                 percentQualificationPoints += BaseClass.PercentQualificationModifier;
             }
         }

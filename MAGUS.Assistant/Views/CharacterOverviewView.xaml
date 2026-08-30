@@ -42,7 +42,7 @@
             <!-- Portrait -->
             <Border Style="{StaticResource BoxBorder}">
                 <HorizontalStackLayout Spacing="12">
-                    <Image Source="{Binding PortraitImage}" HeightRequest="80" WidthRequest="80" Aspect="AspectFill" />
+                    <Image Source="{Binding PortraitImage}" HeightRequest="80" WidthRequest="80" Aspect="AspectFit" />
                     <Button Text="Change portrait" Command="{Binding ChangePortraitCommand}" VerticalOptions="Center" />
                 </HorizontalStackLayout>
             </Border>
@@ -51,7 +51,7 @@
             <Border Style="{StaticResource BoxBorder}">
                 <VerticalStackLayout>
                     <Grid ColumnDefinitions="*,Auto">
-                        <mc:EntryWithLabel Label="Character name" Text="{Binding Character.Name}" />
+                        <mc:EntryWithLabel Label="Character name" Text="{Binding Character.Name, Mode=TwoWay}" />
                         <Button Grid.Column="1" Text="🖨️" Command="{Binding PrintCommand}" VerticalOptions="End" Margin="10,0,0,5" HeightRequest="40"/>
                     </Grid>
 

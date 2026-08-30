@@ -50,6 +50,18 @@ public interface IClass : IAttacker, IAbilities
 
     DiceThrowFormula? GetPainToleranceModifierFormula();
 
+    /// <summary>Combat-value-modifier rate for a specific level - defaults to CombatValueModifierPerLevel for every class, but lets one (e.g. FireMage's Destructive Fire path) vary its rate from a given level onward. See Class's default implementation.</summary>
+    int GetCombatValueModifierForLevel(int level);
+
+    /// <summary>Qualification-points rate for a specific level - see GetCombatValueModifierForLevel.</summary>
+    int GetQualificationPointsModifierForLevel(int level);
+
+    /// <summary>Pain-tolerance roll for a specific level - see GetCombatValueModifierForLevel.</summary>
+    int GetPainToleranceModifier(int level);
+
+    /// <summary>Pain-tolerance roll formula (for the manual-roll UI) for a specific level - see GetCombatValueModifierForLevel.</summary>
+    DiceThrowFormula? GetPainToleranceModifierFormula(int level);
+
     ulong ExperiencePoints { get; set; }
 
     Alignment Alignment { get; }

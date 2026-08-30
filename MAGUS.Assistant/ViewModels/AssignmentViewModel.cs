@@ -1,8 +1,10 @@
-﻿using MAGUS.GameSystem;
+﻿using MAGUS.Assistant.Extensions;
+using MAGUS.GameSystem;
 using MAGUS.GameSystem.Turn;
 using MAGUS.Interfaces;
 using MAGUS.Qualifications.Specialities;
 using MAGUS.Utils;
+using Mtf.LanguageService;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 
@@ -36,8 +38,17 @@ internal sealed class AssignmentViewModel : BaseViewModel
     public Attack? SelectedAttackMode
     {
         get => selectedAttackMode;
-        set => SetProperty(ref selectedAttackMode, value);
+        set
+        {
+            if (SetProperty(ref selectedAttackMode, value))
+            {
+                OnPropertyChanged(nameof(SelectedAttackModeLabel));
+            }
+        }
     }
+
+    /// <summary>Translated "Attack mode: ..." button text for SelectedAttackMode - see AttackExtensions.GetDisplayLabel.</summary>
+    public string SelectedAttackModeLabel => SelectedAttackMode is { } attack ? attack.GetDisplayLabel(Character) : Lng.Elem("Auto (first attack)");
 
     private void OnCharacterPropertyChanged(object? sender, PropertyChangedEventArgs e)
     {

@@ -252,4 +252,182 @@ public class CharacterCombatBehaviorTests
         var character = CreateCharacter();
         Assert.That(character.GetDamage(), Is.GreaterThanOrEqualTo(0));
     }
+
+    private static Character CreateTwoHandedCharacter(out ShortStaff primary, out Dagger secondary)
+    {
+        var character = CreateCharacter();
+        primary = new ShortStaff();
+        secondary = new Dagger();
+        character.Equipment.Add(primary);
+        character.Equipment.Add(secondary);
+        character.PrimaryWeapon = primary;
+        character.SecondaryWeapon = secondary;
+        character.IsFightingTwoHanded = true;
+        return character;
+    }
+
+    [Test]
+    public void AttacksPerRound_WhenFightingTwoHandedWithTwoMeleeWeapons_IsTwo()
+    {
+        var character = CreateTwoHandedCharacter(out _, out _);
+
+        Assert.That(character.AttacksPerRound, Is.EqualTo(2));
+    }
+
+    [Test]
+    public void AttacksPerRound_WhenNotFightingTwoHanded_IgnoresSecondaryWeapon()
+    {
+        var character = CreateTwoHandedCharacter(out var primary, out _);
+        character.IsFightingTwoHanded = false;
+
+        // Craftsman's Quickness/Dexterity are 2D6 (max 12), so the >16 double-attack rule can never
+        // fire here - this is purely ShortStaff's own AttacksPerRound.
+        Assert.That(character.AttacksPerRound, Is.EqualTo(primary.AttacksPerRound));
+    }
+
+    [Test]
+    public void AttacksPerRound_WithOnlyOneMeleeWeapon_IsNotDoubled()
+    {
+        var character = CreateCharacter();
+        var staff = new ShortStaff();
+        character.Equipment.Add(staff);
+        character.PrimaryWeapon = staff;
+        character.IsFightingTwoHanded = true;
+
+        Assert.That(character.AttacksPerRound, Is.EqualTo(staff.AttacksPerRound));
+    }
+
+    [Test]
+    public void CombatValues_TwoHandedWithoutQualification_PenalizesOffHandHarderThanMainHand()
+    {
+        var character = CreateTwoHandedCharacter(out _, out _);
+
+        character.SelectedCombatValueModifier = CombatValueModifier.PrimaryWeapon;
+        var mainHandAttack = character.AttackValue;
+
+        character.SelectedCombatValueModifier = CombatValueModifier.SecondaryWeapon;
+        var offHandAttack = character.AttackValue;
+
+        // Main hand: TwoHandedCombat's own -10 TÉ. Off hand: the full untrained-weapon penalty -25 TÉ,
+        // on top of GetWeaponUseModifier's own -25 TÉ for lacking WeaponUse on the dagger too.
+        Assert.That(offHandAttack, Is.LessThan(mainHandAttack));
+    }
+
+    [Test]
+    public void CombatValues_TwoHandedWithMasterQualification_RemovesPenaltyForThatHand()
+    {
+        var character = CreateTwoHandedCharacter(out var primary, out _);
+        character.SelectedCombatValueModifier = CombatValueModifier.PrimaryWeapon;
+        var beforeMaster = character.AttackValue;
+
+        character.Qualifications.Add(new TwoHandedCombat(QualificationLevel.Master) { Weapon = primary });
+
+        Assert.That(character.AttackValue, Is.EqualTo(beforeMaster + 10));
+    }
+
+    [Test]
+    public void CombatValues_TwoHandedBaseQualification_SoftensOffHandPenalty()
+    {
+        var character = CreateTwoHandedCharacter(out _, out var secondary);
+        character.SelectedCombatValueModifier = CombatValueModifier.SecondaryWeapon;
+        var untrainedOffHandAttack = character.AttackValue;
+
+        character.Qualifications.Add(new TwoHandedCombat(QualificationLevel.Base) { Weapon = secondary });
+
+        // Base level only removes TwoHandedCombat's own off-hand penalty (-25 -> -5), not
+        // GetWeaponUseModifier's separate -25 for lacking WeaponUse on the dagger.
+        Assert.That(character.AttackValue, Is.EqualTo(untrainedOffHandAttack + 20));
+    }
+
+    [Test]
+    public void CombatValues_NotFightingTwoHanded_AppliesNoTwoHandedModifier()
+    {
+        var character = CreateTwoHandedCharacter(out var primary, out _);
+        character.IsFightingTwoHanded = false;
+        character.SelectedCombatValueModifier = CombatValueModifier.PrimaryWeapon;
+        var withoutFlag = character.AttackValue;
+
+        character.IsFightingTwoHanded = true;
+        var withFlag = character.AttackValue;
+
+        Assert.That(withFlag, Is.EqualTo(withoutFlag - 10));
+    }
+
+    private static Character CreateAimingCharacter(out ElvenBow bow)
+    {
+        var character = CreateCharacter();
+        bow = new ElvenBow();
+        character.Equipment.Add(bow);
+        character.PrimaryWeapon = bow;
+        character.SelectedCombatValueModifier = CombatValueModifier.PrimaryWeapon;
+        return character;
+    }
+
+    [Test]
+    public void CombatValues_AimingWithoutQualification_AppliesNoAimingBonus()
+    {
+        var character = CreateAimingCharacter(out _);
+        var withoutAiming = character.AimValue;
+
+        character.IsAiming = true;
+
+        Assert.That(character.AimValue, Is.EqualTo(withoutAiming));
+    }
+
+    [Test]
+    public void CombatValues_AimingWithBaseQualification_Adds20AimValue()
+    {
+        // Harcosok, Barbárok, Gladiátorok, "Célzás": Alapfok grants +20 CÉ after 2 rounds of
+        // concentration - the concentration/interruption bookkeeping itself isn't automated here.
+        var character = CreateAimingCharacter(out _);
+        character.Qualifications.Add(new Aiming(QualificationLevel.Base));
+        var notAiming = character.AimValue;
+
+        character.IsAiming = true;
+
+        Assert.That(character.AimValue, Is.EqualTo(notAiming + 20));
+    }
+
+    [Test]
+    public void CombatValues_AimingWithMasterQualification_Adds35AimValue()
+    {
+        // Master grants +35 CÉ after only 1 round of concentration.
+        var character = CreateAimingCharacter(out _);
+        character.Qualifications.Add(new Aiming(QualificationLevel.Master));
+        var notAiming = character.AimValue;
+
+        character.IsAiming = true;
+
+        Assert.That(character.AimValue, Is.EqualTo(notAiming + 35));
+    }
+
+    [Test]
+    public void CombatValues_NotAiming_AppliesNoAimingBonusEvenWithQualification()
+    {
+        var character = CreateAimingCharacter(out _);
+        character.Qualifications.Add(new Aiming(QualificationLevel.Master));
+
+        Assert.That(character.IsAiming, Is.False);
+        var withoutFlag = character.AimValue;
+
+        character.IsAiming = true;
+
+        Assert.That(character.AimValue, Is.EqualTo(withoutFlag + 35));
+    }
+
+    [Test]
+    public void CombatValues_AimingWithMeleeWeaponSelected_AppliesNoAimingBonus()
+    {
+        var character = CreateCharacter();
+        var staff = new ShortStaff();
+        character.Equipment.Add(staff);
+        character.PrimaryWeapon = staff;
+        character.SelectedCombatValueModifier = CombatValueModifier.PrimaryWeapon;
+        character.Qualifications.Add(new Aiming(QualificationLevel.Master));
+        var withoutAiming = character.AttackValue;
+
+        character.IsAiming = true;
+
+        Assert.That(character.AttackValue, Is.EqualTo(withoutAiming));
+    }
 }

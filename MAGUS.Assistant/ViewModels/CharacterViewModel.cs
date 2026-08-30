@@ -4,6 +4,7 @@ using MAGUS.Assistant.Extensions;
 using MAGUS.Assistant.Interfaces;
 using MAGUS.Assistant.Services;
 using MAGUS.Assistant.Views;
+using MAGUS.Classes.Sorcerer;
 using MAGUS.Enums;
 using MAGUS.Extensions;
 using MAGUS.GameSystem;
@@ -23,6 +24,8 @@ using MAGUS.Services;
 using MAGUS.Things;
 using MAGUS.Things.Animals;
 using MAGUS.Things.Armors;
+using MAGUS.Things.Gemstones;
+using MAGUS.Things.MagicalObjects;
 using MAGUS.Things.Weapons;
 using Mtf.Extensions;
 using Mtf.Extensions.Services;
@@ -106,9 +109,14 @@ internal partial class CharacterViewModel(IPrintService printService, ISoundPlay
         get => primaryWeapon;
         set
         {
-            if (SetProperty(ref primaryWeapon, value))
+            if (SetProperty(ref primaryWeapon, value) && Character is { } character)
             {
-                Character?.PrimaryWeapon = value;
+                character.PrimaryWeapon = value;
+                // Saved immediately rather than waiting for CharacterDetailsPage.OnDisappearing - any
+                // page that reloads this character from the database before the details page actually
+                // closes (e.g. starting an Encounter, which reads a fresh copy via LoadCharactersAsync)
+                // would otherwise silently discard this still-unsaved selection.
+                _ = characterService.SaveAsync(character);
             }
         }
     }
@@ -118,9 +126,10 @@ internal partial class CharacterViewModel(IPrintService printService, ISoundPlay
         get => secondaryWeapon;
         set
         {
-            if (SetProperty(ref secondaryWeapon, value))
+            if (SetProperty(ref secondaryWeapon, value) && Character is { } character)
             {
-                Character?.SecondaryWeapon = value;
+                character.SecondaryWeapon = value;
+                _ = characterService.SaveAsync(character);
             }
         }
     }
@@ -130,9 +139,12 @@ internal partial class CharacterViewModel(IPrintService printService, ISoundPlay
         get => selectedArmor;
         set
         {
-            if (SetProperty(ref selectedArmor, value))
+            if (SetProperty(ref selectedArmor, value) && Character is { } character)
             {
-                Character?.Armor = value;
+                character.Armor = value;
+                // See PrimaryWeapon's remark - equipping armor and then, say, starting a fight before
+                // ever navigating away from the details page used to lose the selection the same way.
+                _ = characterService.SaveAsync(character);
             }
         }
     }
@@ -233,6 +245,8 @@ internal partial class CharacterViewModel(IPrintService printService, ISoundPlay
             OnPropertyChanged(nameof(Birthplace));
             OnPropertyChanged(nameof(CurrentLocation));
             OnPropertyChanged(nameof(TravelDestinations));
+            OnPropertyChanged(nameof(IsInGroup));
+            OnPropertyChanged(nameof(GroupMembersDescription));
             OnPropertyChanged(nameof(AvailableQuestsHere));
             OnPropertyChanged(nameof(AcceptedQuests));
             OnPropertyChanged(nameof(SearchableQuestsHere));
@@ -265,8 +279,11 @@ internal partial class CharacterViewModel(IPrintService printService, ISoundPlay
 
             OnPropertyChanged(nameof(MaxHealthPoints));
             OnPropertyChanged(nameof(MaxPainTolerancePoints));
+            OnPropertyChanged(nameof(ActualHealthPoints));
+            OnPropertyChanged(nameof(ActualPainTolerancePoints));
             OnPropertyChanged(nameof(PainToleranceModifierFormula));
             OnPropertyChanged(nameof(DeathCount));
+            OnPropertyChanged(nameof(IsDead));
 
             OnPropertyChanged(nameof(CanAllocateCombatModifier));
             OnPropertyChanged(nameof(MaxInitiateValue));
@@ -288,10 +305,14 @@ internal partial class CharacterViewModel(IPrintService printService, ISoundPlay
             OnPropertyChanged(nameof(HasSorcery));
             OnPropertyChanged(nameof(HasMagic));
             OnPropertyChanged(nameof(HasRunicMagic));
+            OnPropertyChanged(nameof(CanCraftGemstoneMagicItems));
+            OnPropertyChanged(nameof(CanCraftRuneMagicItems));
             OnPropertyChanged(nameof(MaxPsiPoints));
             OnPropertyChanged(nameof(PsiPoints));
             OnPropertyChanged(nameof(PsiPointsModifier));
             BuildPsiShieldCommand.NotifyCanExecuteChanged();
+            CraftGemstoneWeaponCommand.NotifyCanExecuteChanged();
+            CraftRuneWeaponCommand.NotifyCanExecuteChanged();
 
             OnPropertyChanged(nameof(MaxManaPoints));
             OnPropertyChanged(nameof(ManaPoints));
@@ -306,6 +327,8 @@ internal partial class CharacterViewModel(IPrintService printService, ISoundPlay
 
             OnPropertyChanged(nameof(QualificationPoints));
             OnPropertyChanged(nameof(CanAllocateQualificationPoints));
+            OnPropertyChanged(nameof(PercentQualificationPoints));
+            OnPropertyChanged(nameof(CanAllocatePercentQualificationPoints));
             OnPropertyChanged(nameof(Qualifications));
             OnPropertyChanged(nameof(PercentQualifications));
             OnPropertyChanged(nameof(SpecialQualifications));
@@ -331,10 +354,19 @@ internal partial class CharacterViewModel(IPrintService printService, ISoundPlay
             SleepCommand.NotifyCanExecuteChanged();
             StopSleepCommand.NotifyCanExecuteChanged();
             EatCommand.NotifyCanExecuteChanged();
+            UseHealingItemCommand.NotifyCanExecuteChanged();
             CastSpellCommand.NotifyCanExecuteChanged();
             CastPsiCommand.NotifyCanExecuteChanged();
+            BuildPsiShieldCommand.NotifyCanExecuteChanged();
+            CraftGemstoneWeaponCommand.NotifyCanExecuteChanged();
+            CraftRuneWeaponCommand.NotifyCanExecuteChanged();
             HealCommand.NotifyCanExecuteChanged();
             SearchForTrapsCommand.NotifyCanExecuteChanged();
+            AcceptQuestCommand.NotifyCanExecuteChanged();
+            CompleteQuestCommand.NotifyCanExecuteChanged();
+            SearchCommand.NotifyCanExecuteChanged();
+            NegotiateCommand.NotifyCanExecuteChanged();
+            StealCommand.NotifyCanExecuteChanged();
         }
     }
 
@@ -424,6 +456,11 @@ internal partial class CharacterViewModel(IPrintService printService, ISoundPlay
                 OnPropertyChanged(nameof(QualificationPoints));
                 break;
 
+            case nameof(Character.PercentQualificationPoints):
+                OnPropertyChanged(nameof(PercentQualificationPoints));
+                OnPropertyChanged(nameof(CanAllocatePercentQualificationPoints));
+                break;
+
             case nameof(Character.Money):
                 OnPropertyChanged(nameof(Mithril));
                 OnPropertyChanged(nameof(Gold));
@@ -458,9 +495,34 @@ internal partial class CharacterViewModel(IPrintService printService, ISoundPlay
                 break;
 
             case nameof(Character.ActualPainTolerancePoints):
-            case nameof(Character.ActualHealthPoints):
+                OnPropertyChanged(nameof(ActualPainTolerancePoints));
                 CastSpellCommand.NotifyCanExecuteChanged();
                 CastPsiCommand.NotifyCanExecuteChanged();
+                break;
+
+            case nameof(Character.ActualHealthPoints):
+                // ActualHealthPoints reaching 0 is the only thing that flips IsDead - everything
+                // that requires the character to be alive (see CanActWhileAlive and the other
+                // Can*-with-IsDead predicates) needs to re-evaluate here, not just Cast*.
+                OnPropertyChanged(nameof(ActualHealthPoints));
+                OnPropertyChanged(nameof(IsDead));
+                CastSpellCommand.NotifyCanExecuteChanged();
+                CastPsiCommand.NotifyCanExecuteChanged();
+                SleepCommand.NotifyCanExecuteChanged();
+                StopSleepCommand.NotifyCanExecuteChanged();
+                EatCommand.NotifyCanExecuteChanged();
+                UseHealingItemCommand.NotifyCanExecuteChanged();
+                TravelCommand.NotifyCanExecuteChanged();
+                BuildPsiShieldCommand.NotifyCanExecuteChanged();
+                CraftGemstoneWeaponCommand.NotifyCanExecuteChanged();
+                CraftRuneWeaponCommand.NotifyCanExecuteChanged();
+                HealCommand.NotifyCanExecuteChanged();
+                SearchForTrapsCommand.NotifyCanExecuteChanged();
+                AcceptQuestCommand.NotifyCanExecuteChanged();
+                CompleteQuestCommand.NotifyCanExecuteChanged();
+                SearchCommand.NotifyCanExecuteChanged();
+                NegotiateCommand.NotifyCanExecuteChanged();
+                StealCommand.NotifyCanExecuteChanged();
                 break;
 
             case nameof(Character.ManaPoints):
@@ -547,7 +609,8 @@ internal partial class CharacterViewModel(IPrintService printService, ISoundPlay
     // Materialized into a concrete array (like Cities itself) rather than left as a lazy .Where()
     // iterator - Picker.ItemsSource on Windows/WinUI doesn't reliably populate from a plain deferred
     // IEnumerable, which was showing as an empty dropdown despite this always having entries.
-    public IEnumerable<City> TravelDestinations => [.. Cities.Where(c => c != CurrentLocation)];
+    public IEnumerable<City> TravelDestinations =>
+        [.. Cities.Where(c => c != CurrentLocation).OrderBy(c => Lng.Elem(c.GetDescription()), StringComparer.InvariantCultureIgnoreCase)];
 
     private City? selectedTravelDestination;
     public City? SelectedTravelDestination
@@ -565,6 +628,42 @@ internal partial class CharacterViewModel(IPrintService printService, ISoundPlay
     public bool IsTraveling => Character?.IsTraveling ?? false;
 
     public double TravelProgress => Character?.TravelProgress ?? 0;
+
+    public bool IsInGroup => Character?.IsInGroup ?? false;
+
+    /// <summary>"Traveling with: A, B" - who Character.GroupMemberNames currently names, for display next to the Join/Leave group buttons in PlacesView.xaml.</summary>
+    public string GroupMembersDescription => Character is { IsInGroup: true } character
+        ? String.Format(Lng.Elem("Traveling with: {0}"), String.Join(", ", character.GroupMemberNames))
+        : String.Empty;
+
+    /// <summary>Lets this character join up with another saved character standing in the same city right now (Character.IsAtSameLocationAs) - see CharacterGroupActions.JoinGroupAsync. Grouped characters all move together once one of them changes TravelDestination - see TravelAsync.</summary>
+    [RelayCommand]
+    private async Task JoinGroupAsync()
+    {
+        if (Character is not { } character)
+        {
+            return;
+        }
+
+        await CharacterGroupActions.JoinGroupAsync(character, characterService).ConfigureAwait(true);
+
+        OnPropertyChanged(nameof(IsInGroup));
+        OnPropertyChanged(nameof(GroupMembersDescription));
+    }
+
+    [RelayCommand]
+    private async Task LeaveGroupAsync()
+    {
+        if (Character is not { } character)
+        {
+            return;
+        }
+
+        await CharacterGroupActions.LeaveGroupAsync(character, characterService).ConfigureAwait(true);
+
+        OnPropertyChanged(nameof(IsInGroup));
+        OnPropertyChanged(nameof(GroupMembersDescription));
+    }
 
     public string TravelDestinationDescription => Character?.TravelDestination is { } destination ? Lng.Elem(destination.GetDescription()) : String.Empty;
 
@@ -605,6 +704,8 @@ internal partial class CharacterViewModel(IPrintService printService, ISoundPlay
     public int Erudition => Character?.Erudition ?? 0;
     public int MaxHealthPoints => Character?.MaxHealthPoints ?? 0;
     public int MaxPainTolerancePoints => Character?.MaxPainTolerancePoints ?? 0;
+    public int ActualHealthPoints => Character?.ActualHealthPoints ?? 0;
+    public int ActualPainTolerancePoints => Character?.ActualPainTolerancePoints ?? 0;
     public int DeathCount => Character?.DeathCount ?? 0;
 
     public int ArmorClass => Character?.Armor?.ArmorClass ?? 0;
@@ -667,10 +768,14 @@ internal partial class CharacterViewModel(IPrintService printService, ISoundPlay
     public bool IsSleeping => Character?.IsSleeping ?? false;
     public double SleepProgress => Character?.SleepProgress ?? 0;
 
+    public bool IsDead => Character?.IsDead ?? false;
+
     public bool HasPsi => Character?.Psi != null;
     public bool HasSorcery => Character?.Sorcery != null;
     public bool HasMagic => Character?.Sorcery != null || Character?.Psi != null;
     public bool HasRunicMagic => Character?.HasRunicMagic() ?? false;
+    public bool CanCraftGemstoneMagicItems => Character?.CanCraftGemstoneMagicItems ?? false;
+    public bool CanCraftRuneMagicItems => Character?.CanCraftRuneMagicItems ?? false;
     public int MaxPsiPoints => Character?.MaxPsiPoints ?? 0;
     public int PsiPoints => Character?.PsiPoints ?? 0;
     public int PsiPointsModifier => Character?.PsiPointsModifier ?? 0;
@@ -768,6 +873,8 @@ internal partial class CharacterViewModel(IPrintService printService, ISoundPlay
 
     public int QualificationPoints => Character?.QualificationPoints ?? 0;
     public bool CanAllocateQualificationPoints => Character?.CanAllocateQualificationPoints ?? false;
+    public int PercentQualificationPoints => Character?.PercentQualificationPoints ?? 0;
+    public bool CanAllocatePercentQualificationPoints => Character != null && Character.PercentQualificationPoints >= MAGUS.GameSystem.Character.PercentQualificationPointCost;
     public QualificationList Qualifications => Character?.Qualifications ?? [];
     public PercentQualificationList PercentQualifications => Character?.PercentQualifications ?? [];
     public SpecialQualificationList SpecialQualifications => Character?.SpecialQualifications ?? [];
@@ -821,7 +928,7 @@ internal partial class CharacterViewModel(IPrintService printService, ISoundPlay
                     }
 
                     wq.Weapon = weapon;
-                    confirmation = $"{qualification.Name}: {weapon.Name}";
+                    confirmation = $"{Lng.Elem(qualification.Name)}: {Lng.Elem(weapon.Name)}";
                     break;
 
                 case AncientTongueLore atl:
@@ -832,7 +939,7 @@ internal partial class CharacterViewModel(IPrintService printService, ISoundPlay
                     }
 
                     atl.Language = ancientLanguage;
-                    confirmation = $"{qualification.Name}: {Lng.Elem(ancientLanguage.Value.GetDescription())}";
+                    confirmation = $"{Lng.Elem(qualification.Name)}: {Lng.Elem(ancientLanguage.Value.GetDescription())}";
                     break;
 
                 case LanguageLore ll:
@@ -843,7 +950,7 @@ internal partial class CharacterViewModel(IPrintService printService, ISoundPlay
                     }
 
                     ll.Language = language;
-                    confirmation = $"{qualification.Name}: {Lng.Elem(language.Value.GetDescription())}";
+                    confirmation = $"{Lng.Elem(qualification.Name)}: {Lng.Elem(language.Value.GetDescription())}";
                     break;
 
                 default:
@@ -884,8 +991,8 @@ internal partial class CharacterViewModel(IPrintService printService, ISoundPlay
     private static async Task<TEnum?> PickLanguageAsync<TEnum>(TEnum[] values) where TEnum : struct, Enum
     {
         var choice = await ShellNavigationService.DisplayActionSheetAsync(
-            "Choose language",
-            "Cancel",
+            Lng.Elem("Choose language"),
+            Lng.Elem("Cancel"),
             null,
             [.. values.Select(v => Lng.Elem(v.GetDescription()))]).ConfigureAwait(true);
 
@@ -898,6 +1005,37 @@ internal partial class CharacterViewModel(IPrintService printService, ISoundPlay
         return index < 0 ? null : values[index];
     }
 
+    /// <summary>
+    /// Spends PercentQualificationPointCost PercentQualificationPoints to raise percentQualification's
+    /// Percent by PercentPerQualificationPoint - see Character.IncreasePercentQualification. Only some
+    /// classes (Első Törvénykönyv), e.g. Thief/Bard/Warlock, earn PercentQualificationPoints per level.
+    /// </summary>
+    [RelayCommand]
+    private async Task IncreasePercentQualificationAsync(PercentQualification percentQualification)
+    {
+        if (Character is not { } character || percentQualification == null || !character.CanIncreasePercentQualification(percentQualification))
+        {
+            return;
+        }
+
+        character.IncreasePercentQualification(percentQualification);
+
+        // PercentQualification isn't INotifyPropertyChanged, so mutating Percent in place never updates
+        // the CollectionView row - force it to re-realize this item's DataTemplate, same trick used for
+        // Qualification's Weapon/Language selection in SelectQualificationAttributeAsync above.
+        var index = character.PercentQualifications.IndexOf(percentQualification);
+        if (index >= 0)
+        {
+            character.PercentQualifications.RemoveAt(index);
+            character.PercentQualifications.Insert(index, percentQualification);
+        }
+
+        OnPropertyChanged(nameof(PercentQualifications));
+        OnPropertyChanged(nameof(PercentQualificationPoints));
+        OnPropertyChanged(nameof(CanAllocatePercentQualificationPoints));
+
+        await characterService.SaveAsync(character).ConfigureAwait(true);
+    }
 
     public decimal Mithril => Character?.Money?.Mithril ?? 0;
     public decimal Gold => Character?.Money?.Gold ?? 0;
@@ -906,6 +1044,7 @@ internal partial class CharacterViewModel(IPrintService printService, ISoundPlay
     
     public ObservableCollection<Thing> Equipment => Character?.Equipment ?? [];
     public string TotalEquipmentWeight => Character?.TotalEquipmentWeight ?? String.Empty;
+    public ObservableCollection<TamedCreature> TamedCreatures => Character?.TamedCreatures ?? [];
     public string PortraitImage => Character?.RandomImage ?? String.Empty;
 
     public View? CurrentView
@@ -925,7 +1064,7 @@ internal partial class CharacterViewModel(IPrintService printService, ISoundPlay
     {
         get
         {
-            var formula = Character?.BaseClass?.GetPainToleranceModifierFormula();
+            var formula = Character is { } character ? character.BaseClass?.GetPainToleranceModifierFormula(character.Level) : null;
             return formula?.GetDisplayFormula() ?? String.Empty;
         }
     }
@@ -1044,11 +1183,11 @@ internal partial class CharacterViewModel(IPrintService printService, ISoundPlay
             int painIncrease;
             if (settings.AutoIncreasePainTolerance)
             {
-                painIncrease = Character.BaseClass.GetPainToleranceModifier();
+                painIncrease = Character.BaseClass.GetPainToleranceModifier(Character.Level + 1);
             }
             else
             {
-                var painToleranceModifierFormula = Character.BaseClass.GetPainToleranceModifierFormula();
+                var painToleranceModifierFormula = Character.BaseClass.GetPainToleranceModifierFormula(Character.Level + 1);
                 var page = new RollFormulaPage(soundPlayer, shakeService, painToleranceModifierFormula, $"{Lng.Elem("Level up")} - {Lng.Elem("PTP")} ({Character.Level + 1}. {Lng.Elem("Level")})");
                 await ShellNavigationService.ShowPageAsync(page).ConfigureAwait(true);
                 painIncrease = await page.ResultTask.ConfigureAwait(true);
@@ -1080,6 +1219,9 @@ internal partial class CharacterViewModel(IPrintService printService, ISoundPlay
             }
 
             Character.ApplyLevelUp(painIncrease, manaIncrease);
+
+            await CheckPendingFireMageSpecializationAsync().ConfigureAwait(true);
+
             OnPropertyChanged(String.Empty);
 
             OnPropertyChanged(nameof(Level));
@@ -1093,6 +1235,29 @@ internal partial class CharacterViewModel(IPrintService printService, ISoundPlay
             System.Diagnostics.Debug.WriteLine(ex);
             await ShellNavigationService.DisplayAlertAsync(ex.Message).ConfigureAwait(true);
         }
+    }
+
+    /// <summary>
+    /// Prompts for a level-5 Fire Mage specialization path (Második Törvénykönyv) the first time
+    /// it's relevant - called after every LevelUpAsync (covers leveling up live), and from
+    /// CharacterDetailsPage.OnAppearing (covers a character created directly at level 5+, or an
+    /// older save from before this feature existed). No-op otherwise.
+    /// </summary>
+    internal async Task CheckPendingFireMageSpecializationAsync()
+    {
+        if (Character is not { } character || character.BaseClass is not FireMage { Specialization: FireMageSpecialization.None } || character.Level < 5)
+        {
+            return;
+        }
+
+        var page = new FireMageSpecializationPage();
+        await ShellNavigationService.ShowPageAsync(page).ConfigureAwait(true);
+        var chosen = await page.ResultTask.ConfigureAwait(true);
+
+        character.ApplyFireMageSpecialization(chosen);
+        await characterService.SaveAsync(character).ConfigureAwait(true);
+
+        OnPropertyChanged(String.Empty);
     }
 
     private void ChangeCombatValueModifierButtonStates()
@@ -1112,7 +1277,7 @@ internal partial class CharacterViewModel(IPrintService printService, ISoundPlay
         DecrementAimCommand.NotifyCanExecuteChanged();
     }
 
-    private bool CanBuildPsiShield() => Character?.Psi != null;
+    private bool CanBuildPsiShield() => Character is { IsDead: false, Psi: not null };
 
     /// <summary>
     /// Building a psi shield (unlike dismantling one, see EncounterViewModel.DismantlePsiShieldAsync)
@@ -1216,6 +1381,198 @@ internal partial class CharacterViewModel(IPrintService printService, ISoundPlay
         }
     }
 
+    private bool CanCraftGemstoneWeapon => Character is { IsDead: false } && Character.CanCraftGemstoneMagicItems;
+
+    /// <summary>
+    /// Sets a drágakő into a weapon's hilt (Character.TryCraftGemstoneWeapon, Első Törvénykönyv
+    /// "Drágakőmágiával készített varázstárgyak - Felruházás") - picks the weapon and gemstone from
+    /// Equipment, prompts for how much Mana to invest (1 Mp = 1 E of effect strength), then replaces
+    /// both source items with the resulting GemstoneWeapon.
+    /// </summary>
+    [RelayCommand(CanExecute = nameof(CanCraftGemstoneWeapon))]
+    private async Task CraftGemstoneWeaponAsync()
+    {
+        if (Character is not { } character)
+        {
+            return;
+        }
+
+        // Includes already-crafted GemstoneWeapon/RuneSword items that wrap a weapon, not just plain
+        // Weapon instances - the book doesn't forbid combining Rúnamágia and Drágakőmágia on the same
+        // item (see Character.WrapsAWeapon), so either craft action can target the other's output too.
+        var weapons = character.Equipment.Where(Character.WrapsAWeapon).ToList();
+        if (weapons.Count == 0)
+        {
+            await ShellNavigationService.DisplayAlertAsync(
+                "Craft magic weapon",
+                String.Format(Lng.Elem("{0} has no weapon to set a gemstone into."), character.Name)).ConfigureAwait(true);
+            return;
+        }
+
+        var gemstones = character.Equipment.OfType<Gemstone>().ToList();
+        if (gemstones.Count == 0)
+        {
+            await ShellNavigationService.DisplayAlertAsync(
+                "Craft magic weapon",
+                String.Format(Lng.Elem("{0} has no gemstone to set."), character.Name)).ConfigureAwait(true);
+            return;
+        }
+
+        var weaponChoice = await ShellNavigationService.DisplayActionSheetAsync(
+            "Choose weapon",
+            "Cancel",
+            null,
+            [.. weapons.Select(w => w.Name)]).ConfigureAwait(true);
+
+        var weapon = weapons.FirstOrDefault(w => Lng.Elem(w.Name) == weaponChoice);
+        if (weapon == null)
+        {
+            return;
+        }
+
+        var gemstoneChoice = await ShellNavigationService.DisplayActionSheetAsync(
+            "Choose gemstone",
+            "Cancel",
+            null,
+            [.. gemstones.Select(g => g.Name)]).ConfigureAwait(true);
+
+        var gemstone = gemstones.FirstOrDefault(g => Lng.Elem(g.Name) == gemstoneChoice);
+        if (gemstone == null)
+        {
+            return;
+        }
+
+        // Első Törvénykönyv, "Drágakőmágia": transmutation (Átlényegítés, turning the mundane
+        // gemstone magic-capable) costs a fixed amount of Mana depending on which of the three
+        // effect kinds is chosen - Detekció 50, Védelem 80, Okozás 100 - paid on top of the per-E
+        // charging cost below (Character.TryCraftGemstoneWeapon).
+        var effectTypes = Enum.GetValues<MagicItemEffectType>();
+        var effectLabels = effectTypes.Select(t => $"{Lng.Elem(t.ToString())} ({t.TransmutationManaCost()} Mp)").ToArray();
+
+        var effectChoice = await ShellNavigationService.DisplayActionSheetAsync(
+            "Choose effect type",
+            "Cancel",
+            null,
+            effectLabels).ConfigureAwait(true);
+
+        var effectIndex = Array.IndexOf(effectLabels, effectChoice);
+        if (effectIndex < 0)
+        {
+            return;
+        }
+
+        var effectType = effectTypes[effectIndex];
+        var transmutationCost = effectType.TransmutationManaCost();
+        var remainingMana = character.ManaPoints - transmutationCost;
+
+        var manaText = await ShellNavigationService.DisplayPromptAsync(
+            "Craft magic weapon",
+            String.Format(
+                Lng.Elem("Transmutation costs {0} Mp up front. Spend how many more Mana points (max {1}) charging the {2}? 1 Mp = 1 E of effect strength."),
+                transmutationCost,
+                Math.Max(0, remainingMana),
+                Lng.Elem(gemstone.Name)),
+            "OK",
+            "Cancel",
+            Math.Max(0, remainingMana).ToString(CultureInfo.InvariantCulture)).ConfigureAwait(true);
+
+        if (String.IsNullOrWhiteSpace(manaText) || !int.TryParse(manaText, NumberStyles.Integer, CultureInfo.InvariantCulture, out var manaPoints))
+        {
+            return;
+        }
+
+        if (!character.TryCraftGemstoneWeapon(weapon, gemstone, effectType, manaPoints, out _))
+        {
+            await ShellNavigationService.DisplayAlertAsync(Lng.Elem("Not enough Mana points for the transmutation and the charge combined, or the character can't currently reach Trance (needs Kyr-method Psi).")).ConfigureAwait(true);
+            return;
+        }
+
+        await characterService.SaveAsync(character).ConfigureAwait(true);
+
+        OnPropertyChanged(nameof(ManaPoints));
+        OnPropertyChanged(nameof(PrimaryWeapon));
+        OnPropertyChanged(nameof(SecondaryWeapon));
+        RefillAvailableWeapons();
+        OnPropertyChanged(nameof(AvailableWeapons));
+
+        await ShellNavigationService.DisplayAlertAsync(
+            "Craft magic weapon",
+            String.Format(Lng.Elem("{0} sets the {1} into the {2}'s hilt."), character.Name, Lng.Elem(gemstone.Name), Lng.Elem(weapon.Name))).ConfigureAwait(true);
+    }
+
+    private bool CanCraftRuneWeapon => Character is { IsDead: false } && Character.CanCraftRuneMagicItems;
+
+    /// <summary>
+    /// Inscribes runes into a weapon's hilt (Character.TryCraftRuneWeapon, Első Törvénykönyv
+    /// "Rúnamágia") - picks the weapon from Equipment, then one of the fixed Mana-point tiers the
+    /// RuneSword catalog already comes in (Character.RuneWeaponManaTiers), producing the matching
+    /// RuneSword and consuming the source weapon.
+    /// </summary>
+    [RelayCommand(CanExecute = nameof(CanCraftRuneWeapon))]
+    private async Task CraftRuneWeaponAsync()
+    {
+        if (Character is not { } character)
+        {
+            return;
+        }
+
+        // Includes already-crafted GemstoneWeapon/RuneSword items that wrap a weapon, not just plain
+        // Weapon instances - the book doesn't forbid combining Rúnamágia and Drágakőmágia on the same
+        // item (see Character.WrapsAWeapon), so either craft action can target the other's output too.
+        var weapons = character.Equipment.Where(Character.WrapsAWeapon).ToList();
+        if (weapons.Count == 0)
+        {
+            await ShellNavigationService.DisplayAlertAsync(
+                "Craft rune weapon",
+                String.Format(Lng.Elem("{0} has no weapon to inscribe with runes."), character.Name)).ConfigureAwait(true);
+            return;
+        }
+
+        var weaponChoice = await ShellNavigationService.DisplayActionSheetAsync(
+            "Choose weapon",
+            "Cancel",
+            null,
+            [.. weapons.Select(w => w.Name)]).ConfigureAwait(true);
+
+        var weapon = weapons.FirstOrDefault(w => Lng.Elem(w.Name) == weaponChoice);
+        if (weapon == null)
+        {
+            return;
+        }
+
+        var tierLabels = Character.RuneWeaponManaTiers.Select(t => $"{t} Mp").ToArray();
+
+        var tierChoice = await ShellNavigationService.DisplayActionSheetAsync(
+            "Choose strength",
+            "Cancel",
+            null,
+            tierLabels).ConfigureAwait(true);
+
+        var tierIndex = Array.IndexOf(tierLabels, tierChoice);
+        if (tierIndex < 0)
+        {
+            return;
+        }
+
+        if (!character.TryCraftRuneWeapon(weapon, Character.RuneWeaponManaTiers[tierIndex], out _))
+        {
+            await ShellNavigationService.DisplayAlertAsync(Lng.Elem("Not enough Mana points to inscribe that many runes.")).ConfigureAwait(true);
+            return;
+        }
+
+        await characterService.SaveAsync(character).ConfigureAwait(true);
+
+        OnPropertyChanged(nameof(ManaPoints));
+        OnPropertyChanged(nameof(PrimaryWeapon));
+        OnPropertyChanged(nameof(SecondaryWeapon));
+        RefillAvailableWeapons();
+        OnPropertyChanged(nameof(AvailableWeapons));
+
+        await ShellNavigationService.DisplayAlertAsync(
+            "Craft rune weapon",
+            String.Format(Lng.Elem("{0} inscribes runes into the {1}'s hilt."), character.Name, Lng.Elem(weapon.Name))).ConfigureAwait(true);
+    }
+
     [RelayCommand]
     public async Task ChangePortraitAsync()
     {
@@ -1256,9 +1613,9 @@ internal partial class CharacterViewModel(IPrintService printService, ISoundPlay
         }
     }
 
-    private bool CanSleepOrEat => Character != null;
+    private bool CanSleepOrEat => Character is { IsDead: false };
 
-    private bool CanSleep => Character is { IsSleeping: false };
+    private bool CanSleep => Character is { IsDead: false, IsSleeping: false };
 
     [RelayCommand(CanExecute = nameof(CanSleep))]
     private async Task SleepAsync()
@@ -1412,7 +1769,10 @@ internal partial class CharacterViewModel(IPrintService printService, ISoundPlay
             null,
             [.. options.Select(o => o.Name)]).ConfigureAwait(true);
 
-        var chosen = options.FirstOrDefault(o => o.Name == choice);
+        // DisplayActionSheetAsync translates each button label via Lng.Elem() before returning the
+        // tapped choice, so comparing against the raw o.Name only matches by luck, whenever the
+        // current language happens to have no translation entry for it.
+        var chosen = options.FirstOrDefault(o => Lng.Elem(o.Name) == choice);
         if (chosen.Attack == null)
         {
             return;
@@ -1437,9 +1797,34 @@ internal partial class CharacterViewModel(IPrintService printService, ISoundPlay
             return;
         }
 
-        var target = targetChoice == selfLabel ? caster : others.FirstOrDefault(c => c.Name == targetChoice);
+        var target = targetChoice == selfLabel ? caster : others.FirstOrDefault(c => Lng.Elem(c.Name) == targetChoice);
         if (target == null)
         {
+            return;
+        }
+
+        // Magic needs the caster and target actually together - if they're not, offer to start the
+        // journey there instead of casting through solid geography. Declining or starting to travel
+        // both abort this cast; the player can try again once they've arrived.
+        if (target != caster && caster.CurrentLocation != target.CurrentLocation)
+        {
+            var startTraveling = await ShellNavigationService.DisplayAlertAsync(
+                title,
+                String.Format(
+                    Lng.Elem("{0} is in {1}, but {2} is in {3}. Start traveling to {1} first?"),
+                    target.Name,
+                    Lng.Elem(target.CurrentLocation.GetDescription()),
+                    caster.Name,
+                    Lng.Elem(caster.CurrentLocation.GetDescription())),
+                "Travel",
+                "Cancel").ConfigureAwait(true);
+
+            if (startTraveling)
+            {
+                SelectedTravelDestination = target.CurrentLocation;
+                await TravelAsync().ConfigureAwait(true);
+            }
+
             return;
         }
 
@@ -1462,7 +1847,7 @@ internal partial class CharacterViewModel(IPrintService printService, ISoundPlay
                 : String.Format(Lng.Elem("{0}'s {1} fails to affect {2}."), caster.Name, Lng.Elem(chosen.Name), target.Name)).ConfigureAwait(true);
     }
 
-    private bool CanTravel => Character is { IsTraveling: false } && SelectedTravelDestination.HasValue;
+    private bool CanTravel => Character is { IsDead: false, IsTraveling: false } && SelectedTravelDestination.HasValue;
 
     /// <summary>Progress already accounted for when the last waypoint-passing notification fired for the current journey - see RefreshLiveProgress. Reset to 0 whenever a new journey starts.</summary>
     private double lastNotifiedTravelProgress;
@@ -1507,6 +1892,7 @@ internal partial class CharacterViewModel(IPrintService printService, ISoundPlay
 
         var availableModes = Enum.GetValues<TransportMode>()
             .Where(m => m != TransportMode.Horseback || character.HasItem<Horse>())
+            .Where(m => m != TransportMode.Flying || character.HasItem<FlyingCarpet>())
             .ToList();
 
         // DisplayActionSheetAsync translates each button label before returning the tapped choice, so
@@ -1556,11 +1942,16 @@ internal partial class CharacterViewModel(IPrintService printService, ISoundPlay
                 Lng.Elem(mode.ToString()),
                 days);
 
+        if (character.IsInGroup)
+        {
+            message += " " + String.Format(Lng.Elem("The rest of the group ({0}) will travel along too."), String.Join(", ", character.GroupMemberNames));
+        }
+
         var confirm = await ShellNavigationService.DisplayAlertAsync(
             "Travel",
             message,
-            Lng.Elem("Travel"),
-            Lng.Elem("Cancel")).ConfigureAwait(true);
+            "Travel",
+            "Cancel").ConfigureAwait(true);
 
         if (!confirm)
         {
@@ -1572,10 +1963,16 @@ internal partial class CharacterViewModel(IPrintService printService, ISoundPlay
             character.Money -= fare;
         }
 
+        var departureUtc = DateTime.UtcNow;
         character.TravelDestination = destination;
-        character.TravelDepartureUtc = DateTime.UtcNow;
+        character.TravelDepartureUtc = departureUtc;
         character.TravelDurationDays = days;
         await characterService.SaveAsync(character).ConfigureAwait(true);
+
+        if (character.IsInGroup)
+        {
+            await CharacterGroupActions.SetGroupTravelAsync(character, destination, destinationPosition, mode, departureUtc, characterService).ConfigureAwait(true);
+        }
 
         lastNotifiedTravelProgress = 0;
         SelectedTravelDestination = null;
@@ -1594,12 +1991,108 @@ internal partial class CharacterViewModel(IPrintService printService, ISoundPlay
             if (dangerRoll <= escortQuest.EscortDangerChance)
             {
                 await ShellNavigationService.DisplayAlertAsync(
-                    Lng.Elem("Travel"),
+                    "Travel",
                     String.Format(Lng.Elem("Something moves along the road to {0}, {1}."), Lng.Elem(destination.GetDescription()), character.Name)).ConfigureAwait(true);
 
                 await gameEventService.TriggerRandomEncounterAsync(character).ConfigureAwait(true);
             }
         }
+    }
+
+    /// <summary>Flat app-level cost of OpenPortalAsync - not sourced from a rulebook formula, see that command's remarks.</summary>
+    private static readonly Money PortalCost = new(gold: 10);
+
+    private const string PayWithGoldLabel = "Pay 10 gold";
+    private const string CastTerkapuLabel = "Cast Térkapu (68 mana)";
+
+    /// <summary>
+    /// Instant alternative to Travel: skips TravelCalculator's days-long journey entirely and moves
+    /// the character straight to SelectedTravelDestination. Two unrelated payment paths share this
+    /// one command: a flat gold cost (pure app-level convenience, not a rulebook rule) always
+    /// available, and - only for a Wizard with enough mana - the actual Térkapu spell (Első
+    /// Törvénykönyv p.327, see Character.TryOpenWizardPortal/CanOpenWizardPortal for the mana cost
+    /// and what's simplified away from the book's Zone/line-of-sight restriction). A Wizard who can
+    /// afford both is asked which to use.
+    /// </summary>
+    [RelayCommand(CanExecute = nameof(CanTravel))]
+    private async Task OpenPortalAsync()
+    {
+        if (Character is not { IsDead: false, IsTraveling: false } character || SelectedTravelDestination is not { } destination)
+        {
+            return;
+        }
+
+        var canPayGold = character.Money >= PortalCost;
+        var canCastTerkapu = character.CanOpenWizardPortal;
+
+        if (!canPayGold && !canCastTerkapu)
+        {
+            await ShellNavigationService.DisplayAlertAsync(
+                Lng.Elem("Portal"),
+                String.Format(Lng.Elem("You cannot afford the {0} cost of opening a portal."), PortalCost.ToTranslatedString()),
+                Lng.Elem("OK")).ConfigureAwait(true);
+            return;
+        }
+
+        var useMana = canCastTerkapu;
+        if (canPayGold && canCastTerkapu)
+        {
+            var choice = await ShellNavigationService.DisplayActionSheetAsync(
+                "Portal",
+                "Cancel",
+                null,
+                PayWithGoldLabel,
+                CastTerkapuLabel).ConfigureAwait(true);
+
+            // DisplayActionSheetAsync translates each button label via Lng.Elem() before returning the
+            // tapped choice, so comparing against the raw labels only matches by luck, whenever the
+            // current language happens to have no translation entry for them.
+            if (choice != Lng.Elem(PayWithGoldLabel) && choice != Lng.Elem(CastTerkapuLabel))
+            {
+                return;
+            }
+            useMana = choice == Lng.Elem(CastTerkapuLabel);
+        }
+
+        var costDescription = useMana
+            ? String.Format(Lng.Elem("{0} mana"), Character.WizardPortalManaCost)
+            : PortalCost.ToTranslatedString();
+
+        var confirm = await ShellNavigationService.DisplayAlertAsync(
+            "Portal",
+            String.Format(
+                Lng.Elem("Open a portal to {0} for {1} and arrive instantly?"),
+                Lng.Elem(destination.GetDescription()),
+                costDescription),
+            "Open",
+            "Cancel").ConfigureAwait(true);
+
+        if (!confirm)
+        {
+            return;
+        }
+
+        if (useMana)
+        {
+            character.TryOpenWizardPortal(destination);
+        }
+        else
+        {
+            character.Money -= PortalCost;
+            character.CurrentLocation = destination;
+            character.Position = CityCoordinates.GetPosition(destination);
+        }
+
+        await characterService.SaveAsync(character).ConfigureAwait(true);
+
+        SelectedTravelDestination = null;
+        OnPropertyChanged(nameof(ManaPoints));
+        TravelCommand.NotifyCanExecuteChanged();
+        OpenPortalCommand.NotifyCanExecuteChanged();
+
+        await ShellNavigationService.DisplayAlertAsync(
+            "Portal",
+            String.Format(Lng.Elem("{0} steps through the portal and arrives instantly in {1}."), character.Name, Lng.Elem(destination.GetDescription()))).ConfigureAwait(true);
     }
 
     private bool CanStopTravel => Character is { IsTraveling: true };
@@ -1699,6 +2192,12 @@ internal partial class CharacterViewModel(IPrintService printService, ISoundPlay
         ExpireOverdueQuests(character);
     }
 
+    /// <summary>"5 copper" or "5 copper and 20 XP" - the money/XP reward clause shared by every quest-completion message below, so each only needs one placeholder for it instead of stitching two together.</summary>
+    private static string FormatQuestReward(Money money, ulong experienceReward)
+        => experienceReward > 0
+            ? String.Format(Lng.Elem("{0} and {1} XP"), money.ToTranslatedString(), experienceReward)
+            : money.ToTranslatedString();
+
     /// <summary>
     /// Completes any quest whose destination is the city the character just arrived in via Travel
     /// (see Character.CompleteTravelIfArrived and the Character setter above, which detects "just
@@ -1725,14 +2224,13 @@ internal partial class CharacterViewModel(IPrintService printService, ISoundPlay
             character.CompleteQuest(quest);
 
             WeakReferenceMessenger.Default.Send(new ShowInfoMessage(
-                Lng.Elem("Quest complete"),
+                "Quest complete",
                 String.Format(
-                    Lng.Elem("{0} arrives safely in {1}. \"{2}\" is complete - {3}{4}."),
+                    Lng.Elem("{0} arrives safely in {1}. \"{2}\" is complete - {3}."),
                     character.Name,
                     Lng.Elem(arrivedAt.GetDescription()),
                     Lng.Elem(quest.Name),
-                    quest.MoneyReward.ToTranslatedString(),
-                    quest.ExperienceReward > 0 ? String.Format(Lng.Elem(" and {0} XP"), quest.ExperienceReward) : String.Empty)));
+                    FormatQuestReward(quest.MoneyReward, quest.ExperienceReward))));
         }
 
         _ = characterService.SaveAsync(character);
@@ -1770,7 +2268,7 @@ internal partial class CharacterViewModel(IPrintService printService, ISoundPlay
         _ = characterService.SaveAsync(character);
 
         WeakReferenceMessenger.Default.Send(new ShowInfoMessage(
-            Lng.Elem("Sleep"),
+            "Sleep",
             String.Format(Lng.Elem("{0} wakes up feeling refreshed."), character.Name)));
     }
 
@@ -1809,7 +2307,7 @@ internal partial class CharacterViewModel(IPrintService printService, ISoundPlay
             }
 
             WeakReferenceMessenger.Default.Send(new ShowInfoMessage(
-                Lng.Elem("Quest failed"),
+                "Quest failed",
                 String.Format(Lng.Elem("Too much time has passed - \"{0}\" can no longer be completed."), Lng.Elem(quest.Name))));
         }
 
@@ -1869,7 +2367,10 @@ internal partial class CharacterViewModel(IPrintService printService, ISoundPlay
         ? []
         : PreloadService.Instance.Quests.Where(q => q.TrapLocation == character.CurrentLocation && character.GetQuestStatus(q) == QuestStatus.Accepted);
 
-    [RelayCommand]
+    /// <summary>Shared by every in-world quest action (Accept/Complete/Search/Negotiate/Steal) - a dead character can't act at all, on a quest or otherwise.</summary>
+    private bool CanActWhileAlive => Character is { IsDead: false };
+
+    [RelayCommand(CanExecute = nameof(CanActWhileAlive))]
     private void AcceptQuest(Quest quest)
     {
         if (Character is not { } character || quest == null)
@@ -1889,7 +2390,7 @@ internal partial class CharacterViewModel(IPrintService printService, ISoundPlay
         OnPropertyChanged(nameof(TrapSearchableQuestsHere));
     }
 
-    [RelayCommand]
+    [RelayCommand(CanExecute = nameof(CanActWhileAlive))]
     private async Task CompleteQuestAsync(Quest quest)
     {
         if (Character is not { } character || quest == null)
@@ -1909,13 +2410,12 @@ internal partial class CharacterViewModel(IPrintService printService, ISoundPlay
         OnPropertyChanged(nameof(TrapSearchableQuestsHere));
 
         await ShellNavigationService.DisplayAlertAsync(
-            Lng.Elem("Quest complete"),
+            "Quest complete",
             String.Format(
-                Lng.Elem("{0} completes \"{1}\" and earns {2}{3}."),
+                Lng.Elem("{0} completes \"{1}\" and earns {2}."),
                 character.Name,
                 Lng.Elem(quest.Name),
-                quest.MoneyReward.ToTranslatedString(),
-                quest.ExperienceReward > 0 ? String.Format(Lng.Elem(" and {0} XP"), quest.ExperienceReward) : String.Empty)).ConfigureAwait(true);
+                FormatQuestReward(quest.MoneyReward, quest.ExperienceReward))).ConfigureAwait(true);
     }
 
     /// <summary>
@@ -1929,7 +2429,7 @@ internal partial class CharacterViewModel(IPrintService printService, ISoundPlay
     /// (default 25%), a miss can instead drop the character into an unplanned fight via
     /// GameEventService.TriggerRandomEncounterAsync, same as the background Ambush event.
     /// </summary>
-    [RelayCommand]
+    [RelayCommand(CanExecute = nameof(CanActWhileAlive))]
     private async Task SearchAsync(Quest quest)
     {
         if (Character is not { } character || quest == null)
@@ -1944,7 +2444,7 @@ internal partial class CharacterViewModel(IPrintService printService, ISoundPlay
             if (dangerRoll <= quest.SearchDangerChance)
             {
                 await ShellNavigationService.DisplayAlertAsync(
-                    Lng.Elem("Search"),
+                    "Search",
                     String.Format(Lng.Elem("{0} finds no sign of it in {1} - but something else finds {0} instead."), character.Name, Lng.Elem(character.CurrentLocation.GetDescription()))).ConfigureAwait(true);
 
                 await gameEventService.TriggerRandomEncounterAsync(character).ConfigureAwait(true);
@@ -1952,7 +2452,7 @@ internal partial class CharacterViewModel(IPrintService printService, ISoundPlay
             }
 
             await ShellNavigationService.DisplayAlertAsync(
-                Lng.Elem("Search"),
+                "Search",
                 String.Format(Lng.Elem("{0} searches {1} but finds no sign of it yet. Worth trying again."), character.Name, Lng.Elem(character.CurrentLocation.GetDescription()))).ConfigureAwait(true);
             return;
         }
@@ -1971,7 +2471,7 @@ internal partial class CharacterViewModel(IPrintService printService, ISoundPlay
             OnPropertyChanged(nameof(TrapSearchableQuestsHere));
 
             await ShellNavigationService.DisplayAlertAsync(
-                Lng.Elem("Search"),
+                "Search",
                 String.Format(
                     Lng.Elem("{0} searches {1} and finds {2}! Now it needs to be carried to {3}."),
                     character.Name,
@@ -1993,14 +2493,13 @@ internal partial class CharacterViewModel(IPrintService printService, ISoundPlay
         OnPropertyChanged(nameof(TrapSearchableQuestsHere));
 
         await ShellNavigationService.DisplayAlertAsync(
-            Lng.Elem("Search"),
+            "Search",
             String.Format(
-                Lng.Elem("{0} searches {1} and finally finds what they were looking for! \"{2}\" is complete - {3}{4}."),
+                Lng.Elem("{0} searches {1} and finally finds what they were looking for! \"{2}\" is complete - {3}."),
                 character.Name,
                 Lng.Elem(character.CurrentLocation.GetDescription()),
                 Lng.Elem(quest.Name),
-                quest.MoneyReward.ToTranslatedString(),
-                quest.ExperienceReward > 0 ? String.Format(Lng.Elem(" and {0} XP"), quest.ExperienceReward) : String.Empty)).ConfigureAwait(true);
+                FormatQuestReward(quest.MoneyReward, quest.ExperienceReward))).ConfigureAwait(true);
     }
 
     /// <summary>
@@ -2010,7 +2509,7 @@ internal partial class CharacterViewModel(IPrintService printService, ISoundPlay
     /// character into an unplanned fight via GameEventService.TriggerRandomEncounterAsync - the wrong
     /// answer at the wrong moment.
     /// </summary>
-    [RelayCommand]
+    [RelayCommand(CanExecute = nameof(CanActWhileAlive))]
     private async Task NegotiateAsync(Quest quest)
     {
         if (Character is not { } character || quest?.DialogueRoot is not { } root)
@@ -2037,13 +2536,12 @@ internal partial class CharacterViewModel(IPrintService printService, ISoundPlay
                 OnPropertyChanged(nameof(TrapSearchableQuestsHere));
 
                 await ShellNavigationService.DisplayAlertAsync(
-                    Lng.Elem("Quest complete"),
+                    "Quest complete",
                     String.Format(
-                        Lng.Elem("{0} finds the right words. \"{1}\" is complete - {2}{3}."),
+                        Lng.Elem("{0} finds the right words. \"{1}\" is complete - {2}."),
                         character.Name,
                         Lng.Elem(quest.Name),
-                        quest.MoneyReward.ToTranslatedString(),
-                        quest.ExperienceReward > 0 ? String.Format(Lng.Elem(" and {0} XP"), quest.ExperienceReward) : String.Empty)).ConfigureAwait(true);
+                        FormatQuestReward(quest.MoneyReward, quest.ExperienceReward))).ConfigureAwait(true);
                 break;
 
             case DialogueOutcome.PartialSuccess:
@@ -2059,31 +2557,30 @@ internal partial class CharacterViewModel(IPrintService printService, ISoundPlay
                 OnPropertyChanged(nameof(TrapSearchableQuestsHere));
 
                 await ShellNavigationService.DisplayAlertAsync(
-                    Lng.Elem("Quest complete"),
+                    "Quest complete",
                     String.Format(
-                        Lng.Elem("{0} settles for a compromise. \"{1}\" is complete, but only for half the reward - {2}{3}."),
+                        Lng.Elem("{0} settles for a compromise. \"{1}\" is complete, but only for half the reward - {2}."),
                         character.Name,
                         Lng.Elem(quest.Name),
-                        (quest.MoneyReward * 0.5).ToTranslatedString(),
-                        quest.ExperienceReward > 0 ? String.Format(Lng.Elem(" and {0} XP"), (ulong)(quest.ExperienceReward * 0.5)) : String.Empty)).ConfigureAwait(true);
+                        FormatQuestReward(quest.MoneyReward * 0.5, (ulong)(quest.ExperienceReward * 0.5)))).ConfigureAwait(true);
                 break;
 
             case DialogueOutcome.Danger:
                 await ShellNavigationService.DisplayAlertAsync(
-                    Lng.Elem("Negotiation"),
+                    "Negotiation",
                     String.Format(Lng.Elem("The conversation turns hostile, {0}."), character.Name)).ConfigureAwait(true);
                 await gameEventService.TriggerRandomEncounterAsync(character).ConfigureAwait(true);
                 break;
 
             default:
                 await ShellNavigationService.DisplayAlertAsync(
-                    Lng.Elem("Negotiation"),
+                    "Negotiation",
                     String.Format(Lng.Elem("{0} doesn't manage to sway them this time. Worth trying again."), character.Name)).ConfigureAwait(true);
                 break;
         }
     }
 
-    private bool CanHeal => Character?.CanHeal() ?? false;
+    private bool CanHeal => Character is { IsDead: false } && Character.CanHeal();
 
     /// <summary>
     /// Treats a quest's injured NPC (Quest.RequiresHealing) - unlike Search, there's no roll: having
@@ -2111,13 +2608,12 @@ internal partial class CharacterViewModel(IPrintService printService, ISoundPlay
         OnPropertyChanged(nameof(TrapSearchableQuestsHere));
 
         await ShellNavigationService.DisplayAlertAsync(
-            Lng.Elem("Quest complete"),
+            "Quest complete",
             String.Format(
-                Lng.Elem("{0} treats the injury. \"{1}\" is complete - {2}{3}."),
+                Lng.Elem("{0} treats the injury. \"{1}\" is complete - {2}."),
                 character.Name,
                 Lng.Elem(quest.Name),
-                quest.MoneyReward.ToTranslatedString(),
-                quest.ExperienceReward > 0 ? String.Format(Lng.Elem(" and {0} XP"), quest.ExperienceReward) : String.Empty)).ConfigureAwait(true);
+                FormatQuestReward(quest.MoneyReward, quest.ExperienceReward))).ConfigureAwait(true);
     }
 
     /// <summary>
@@ -2128,7 +2624,7 @@ internal partial class CharacterViewModel(IPrintService printService, ISoundPlay
     /// into an unplanned fight via GameEventService.TriggerRandomEncounterAsync, same as Search/Escort
     /// danger.
     /// </summary>
-    [RelayCommand]
+    [RelayCommand(CanExecute = nameof(CanActWhileAlive))]
     private async Task StealAsync(Quest quest)
     {
         if (Character is not { } character || quest == null)
@@ -2143,7 +2639,7 @@ internal partial class CharacterViewModel(IPrintService printService, ISoundPlay
             if (dangerRoll <= quest.StealDangerChance)
             {
                 await ShellNavigationService.DisplayAlertAsync(
-                    Lng.Elem("Steal"),
+                    "Steal",
                     String.Format(Lng.Elem("{0} fumbles the attempt in {1} - and someone notices."), character.Name, Lng.Elem(character.CurrentLocation.GetDescription()))).ConfigureAwait(true);
 
                 await gameEventService.TriggerRandomEncounterAsync(character).ConfigureAwait(true);
@@ -2151,7 +2647,7 @@ internal partial class CharacterViewModel(IPrintService printService, ISoundPlay
             }
 
             await ShellNavigationService.DisplayAlertAsync(
-                Lng.Elem("Steal"),
+                "Steal",
                 String.Format(Lng.Elem("{0} doesn't find the right moment yet in {1}. Worth trying again."), character.Name, Lng.Elem(character.CurrentLocation.GetDescription()))).ConfigureAwait(true);
             return;
         }
@@ -2168,16 +2664,15 @@ internal partial class CharacterViewModel(IPrintService printService, ISoundPlay
         OnPropertyChanged(nameof(TrapSearchableQuestsHere));
 
         await ShellNavigationService.DisplayAlertAsync(
-            Lng.Elem("Steal"),
+            "Steal",
             String.Format(
-                Lng.Elem("{0} slips away clean! \"{1}\" is complete - {2}{3}."),
+                Lng.Elem("{0} slips away clean! \"{1}\" is complete - {2}."),
                 character.Name,
                 Lng.Elem(quest.Name),
-                quest.MoneyReward.ToTranslatedString(),
-                quest.ExperienceReward > 0 ? String.Format(Lng.Elem(" and {0} XP"), quest.ExperienceReward) : String.Empty)).ConfigureAwait(true);
+                FormatQuestReward(quest.MoneyReward, quest.ExperienceReward))).ConfigureAwait(true);
     }
 
-    private bool CanSearchForTraps => (Character?.TrapSearchSkillPercent() ?? 0) > 0;
+    private bool CanSearchForTraps => Character is { IsDead: false } && Character.TrapSearchSkillPercent() > 0;
 
     /// <summary>
     /// A single trap/secret-door search attempt for a quest whose Quest.TrapLocation matches where
@@ -2207,13 +2702,13 @@ internal partial class CharacterViewModel(IPrintService printService, ISoundPlay
                 await characterService.SaveAsync(character).ConfigureAwait(true);
 
                 await ShellNavigationService.DisplayAlertAsync(
-                    Lng.Elem("Search"),
+                    "Search",
                     String.Format(Lng.Elem("{0} misses it - and springs the trap, taking {1} damage."), character.Name, damage)).ConfigureAwait(true);
                 return;
             }
 
             await ShellNavigationService.DisplayAlertAsync(
-                Lng.Elem("Search"),
+                "Search",
                 String.Format(Lng.Elem("{0} finds nothing in {1} yet. Worth trying again."), character.Name, Lng.Elem(character.CurrentLocation.GetDescription()))).ConfigureAwait(true);
             return;
         }
@@ -2230,13 +2725,12 @@ internal partial class CharacterViewModel(IPrintService printService, ISoundPlay
         OnPropertyChanged(nameof(TrapSearchableQuestsHere));
 
         await ShellNavigationService.DisplayAlertAsync(
-            Lng.Elem("Search"),
+            "Search",
             String.Format(
-                Lng.Elem("{0} spots it! \"{1}\" is complete - {2}{3}."),
+                Lng.Elem("{0} spots it! \"{1}\" is complete - {2}."),
                 character.Name,
                 Lng.Elem(quest.Name),
-                quest.MoneyReward.ToTranslatedString(),
-                quest.ExperienceReward > 0 ? String.Format(Lng.Elem(" and {0} XP"), quest.ExperienceReward) : String.Empty)).ConfigureAwait(true);
+                FormatQuestReward(quest.MoneyReward, quest.ExperienceReward))).ConfigureAwait(true);
     }
 
     [RelayCommand]

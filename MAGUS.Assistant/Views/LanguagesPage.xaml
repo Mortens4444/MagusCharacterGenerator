@@ -27,7 +27,8 @@
                     ItemDisplayBinding="{Binding ., Converter={StaticResource TranslationConverter}}" />
         </HorizontalStackLayout>
 
-        <mc:EntryWithLabel Grid.Row="1" Label="Search" Text="{Binding SearchText}" />
+        <!-- SearchBar, not EntryWithLabel - see ImagesPage.xaml's comment on the same swap. -->
+        <SearchBar Grid.Row="1" Text="{Binding SearchText}" Placeholder="Search…" />
 
         <CollectionView Grid.Row="2"
                         ItemsSource="{Binding FilteredLanguages}"

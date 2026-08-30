@@ -213,7 +213,10 @@ internal sealed class PreloadService
         {
             try
             {
-                var magicalObjects = "MAGUS.Things.MagicalObjects".CreateInstancesFromNamespace<MagicalObject>()
+                // Excludes GemstoneWeapon (INotForSale) - unlike RuneSword's fixed, nameable
+                // catalog entries, a bare GemstoneWeapon has no TargetItem/Gemstone until crafted
+                // (Character.TryCraftGemstoneWeapon), so there's no fixed recipe to list here.
+                var magicalObjects = "MAGUS.Things.MagicalObjects".CreateInstancesFromNamespace<MagicalObject>(typeof(INotForSale))
                     .OrderBy(m => Lng.Elem(m.Name))
                     .ToArray();
 

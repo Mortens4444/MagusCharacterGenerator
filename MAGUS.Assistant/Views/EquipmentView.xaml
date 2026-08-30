@@ -7,6 +7,7 @@
              xmlns:conv="clr-namespace:Mtf.LanguageService.MAUI.Converters;assembly=Mtf.LanguageService.MAUI"
              xmlns:converters="clr-namespace:MAGUS.Assistant.Converters"
              xmlns:t="clr-namespace:MAGUS.Things;assembly=MAGUS"
+             xmlns:gs="clr-namespace:MAGUS.GameSystem;assembly=MAGUS"
              x:Class="MAGUS.Assistant.Views.EquipmentView"
              x:ClassModifier="internal"
              x:DataType="vm:CharacterViewModel">
@@ -14,7 +15,9 @@
     <ContentView.Resources>
         <ResourceDictionary>
             <conv:TranslationConverter x:Key="TranslationConverter" />
+            <conv:EnumDescriptionTranslationConverter x:Key="EnumDescriptionTranslationConverter" />
             <converters:EquipmentSorterConverter x:Key="EquipmentSorter" />
+            <converters:HasItemsConverter x:Key="HasItemsConverter" />
         </ResourceDictionary>
     </ContentView.Resources>
     
@@ -50,12 +53,13 @@
                     <CollectionView ItemsSource="{Binding Equipment, Converter={StaticResource EquipmentSorter}}" SelectionMode="None" HeightRequest="280">
                         <CollectionView.ItemTemplate>
                             <DataTemplate x:DataType="t:Thing">
-                                <Grid Padding="6" ColumnDefinitions="*, Auto, Auto, Auto" ColumnSpacing="10">
-                                    <Label Text="{Binding Name, Converter={StaticResource TranslationConverter}}" 
-                                       VerticalOptions="Center" 
+                                <Grid Padding="6" RowDefinitions="Auto, Auto" ColumnDefinitions="*, Auto, Auto, Auto" ColumnSpacing="10" RowSpacing="2">
+                                    <Label Grid.Row="0" Grid.Column="0"
+                                       Text="{Binding Name, Converter={StaticResource TranslationConverter}}"
+                                       VerticalOptions="Center"
                                        HorizontalOptions="Start" />
 
-                                    <Button Grid.Column="1"
+                                    <Button Grid.Row="0" Grid.Column="1"
                                         Text="💎"
                                         BackgroundColor="Transparent"
                                         FontSize="12"
@@ -63,11 +67,11 @@
                                         CommandParameter="{Binding .}"
                                         ToolTipProperties.Text="{Binding Source='Sell', Converter={StaticResource TranslationConverter}}" />
 
-                                    <Label Grid.Column="2" 
-                                       Text="{Binding Weight, Converter={StaticResource TranslationConverter}}" 
+                                    <Label Grid.Row="0" Grid.Column="2"
+                                       Text="{Binding Weight, Converter={StaticResource TranslationConverter}}"
                                        VerticalOptions="Center" />
 
-                                    <Button Grid.Column="3"
+                                    <Button Grid.Row="0" Grid.Column="3"
                                         Text="🔥"
                                         BackgroundColor="Transparent"
                                         FontSize="12"
@@ -75,6 +79,11 @@
                                         CommandParameter="{Binding .}"
                                         ToolTipProperties.Text="{Binding Source='Discard item', Converter={StaticResource TranslationConverter}}" />
 
+                                    <!-- Only magic items (GemstoneWeapon, RuneSword, ...) have a non-empty Description - shows the gemstone/rune enchantment details (see GemstoneWeapon.Description). -->
+                                    <Label Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="4"
+                                       Text="{Binding Description}"
+                                       FontSize="11" TextColor="Gray" LineBreakMode="WordWrap"
+                                       IsVisible="{Binding Description, Converter={StaticResource HasItemsConverter}}" />
                                 </Grid>
                             </DataTemplate>
                         </CollectionView.ItemTemplate>
@@ -83,6 +92,52 @@
                         <Label Text="Total weight (kg)" VerticalOptions="Center" TextColor="Gray" FontAttributes="Bold" />
                         <Label Text="{Binding TotalEquipmentWeight}" FontAttributes="Bold" HorizontalOptions="End" Margin="0,4,10,0" />
                     </Grid>
+                </VerticalStackLayout>
+            </Border>
+
+            <!-- Tamed creatures -->
+            <Border Style="{StaticResource BoxBorder}" IsVisible="{Binding TamedCreatures, Converter={StaticResource HasItemsConverter}}">
+                <VerticalStackLayout>
+                    <Label Text="Tamed creatures" Style="{StaticResource HeaderLabel}" />
+                    <Grid Padding="6" ColumnDefinitions="*, Auto" ColumnSpacing="10">
+                        <Label Text="Name" VerticalOptions="Center" TextColor="Gray" FontAttributes="Bold" />
+                        <Label Text="Location" VerticalOptions="Center" Grid.Column="1" TextColor="Gray" FontAttributes="Bold" />
+                    </Grid>
+
+                    <CollectionView ItemsSource="{Binding TamedCreatures}" SelectionMode="None">
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate x:DataType="gs:TamedCreature">
+                                <Grid Padding="6" ColumnDefinitions="*, Auto" ColumnSpacing="10">
+                                    <Label Grid.Column="0"
+                                       Text="{Binding Creature.Name, Converter={StaticResource TranslationConverter}}"
+                                       VerticalOptions="Center"
+                                       HorizontalOptions="Start" />
+
+                                    <Label Grid.Column="1"
+                                       Text="{Binding Location, Converter={StaticResource EnumDescriptionTranslationConverter}}"
+                                       VerticalOptions="Center" />
+                                </Grid>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                </VerticalStackLayout>
+            </Border>
+
+            <!-- Drágakőmágia -->
+            <Border Style="{StaticResource BoxBorder}" IsVisible="{Binding CanCraftGemstoneMagicItems}">
+                <VerticalStackLayout Spacing="6">
+                    <Label Text="Craft magic weapon" Style="{StaticResource HeaderLabel}"/>
+                    <Label Text="Set a gemstone into a weapon's hilt - the invested Mana points determine its effect strength." FontSize="12" FontAttributes="Italic" />
+                    <Button Text="Craft magic weapon" Command="{Binding CraftGemstoneWeaponCommand}" />
+                </VerticalStackLayout>
+            </Border>
+
+            <!-- Rúnamágia -->
+            <Border Style="{StaticResource BoxBorder}" IsVisible="{Binding CanCraftRuneMagicItems}">
+                <VerticalStackLayout Spacing="6">
+                    <Label Text="Craft rune weapon" Style="{StaticResource HeaderLabel}"/>
+                    <Label Text="Inscribe runes into a weapon's hilt - choose one of the fixed Mana-point strengths." FontSize="12" FontAttributes="Italic" />
+                    <Button Text="Craft rune weapon" Command="{Binding CraftRuneWeaponCommand}" />
                 </VerticalStackLayout>
             </Border>
 

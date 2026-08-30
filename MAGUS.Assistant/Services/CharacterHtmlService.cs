@@ -15,7 +15,7 @@ internal sealed class CharacterHtmlService
         ArgumentNullException.ThrowIfNull(character);
         var sb = new StringBuilder();
         var cultureInfo = CultureInfo.InvariantCulture;
-        var formula = character.BaseClass?.GetPainToleranceModifierFormula();
+        var formula = character.BaseClass?.GetPainToleranceModifierFormula(character.Level);
         var prpPerLevel = formula?.GetDisplayFormula() ?? String.Empty;
         var manaPerLevelFormula = character?.MaxManaPointsPerLevelFormula;
         var manaPerLevel = manaPerLevelFormula != null ? manaPerLevelFormula.GetDisplayFormula() : (character?.MaxManaPointsPerLevel ?? 0).ToString(CultureInfo.InvariantCulture);

@@ -16,6 +16,18 @@ internal sealed partial class CharacterDetailsPage : NotifierPage
         Title = characterDetailsViewModel.Name;
     }
 
+    protected override async void OnAppearing()
+    {
+        base.OnAppearing();
+
+        // Covers a character created directly at level 5+ (never went through LevelUpAsync's own
+        // check), or an older save from before Fire Mage specializations existed.
+        if (BindingContext is CharacterViewModel characterViewModel)
+        {
+            await characterViewModel.CheckPendingFireMageSpecializationAsync().ConfigureAwait(true);
+        }
+    }
+
     protected override void OnDisappearing()
     {
         if (BindingContext is CharacterViewModel characterViewModel && characterViewModel.Character != null)

@@ -62,8 +62,18 @@ public partial class Character
         MaxPainTolerancePoints += painToleranceIncrease;
         MaxManaPoints += manaIncrease;
         MaxPsiPoints += PsiPointsModifier;
-        QualificationPoints += BaseClass.QualificationPointsModifier;
-        TotalCombatValueModifier += CombatValueModifierPerLevel;
+        QualificationPoints += BaseClass.GetQualificationPointsModifierForLevel(Level);
+        TotalCombatValueModifier += BaseClass.GetCombatValueModifierForLevel(Level);
+
+        // FutureQualifications (e.g. Wizard's Herbalism at 4, or FireMage's specialization-path
+        // grants) are otherwise only ever evaluated once, in GetQualifications() at character
+        // creation - a character that reaches a gated level by leveling up live in the app would
+        // never receive it without this. Additive and idempotent (UpgradeOrAddQualification skips
+        // anything already owned at the same or higher level), so safe to run every level-up.
+        foreach (var qualification in BaseClass.FutureQualifications.Where(f => f.ActualLevel == BaseClass.Level))
+        {
+            Qualifications.UpgradeOrAddQualification(qualification);
+        }
 
         OnPropertyChanged(nameof(Level));
         OnPropertyChanged(nameof(QualificationPoints));
@@ -72,6 +82,7 @@ public partial class Character
         OnPropertyChanged(nameof(MaxPainTolerancePoints));
         OnPropertyChanged(nameof(MaxManaPoints));
         OnPropertyChanged(nameof(MaxPsiPoints));
+        OnPropertyChanged(nameof(Qualifications));
     }
 
     public void AddExperience(ulong amount)

@@ -126,7 +126,7 @@ internal sealed class GameEventService(CharacterService characterService, IServi
                 }
             }
 
-            var kind = character is null ? GameEventKind.Flavor : PickEventKind();
+            var kind = character is null ? GameEventKind.Flavor : PickEventKind(settingsService);
 
             return kind switch
             {
@@ -330,7 +330,34 @@ internal sealed class GameEventService(CharacterService characterService, IServi
         return await characterService.GetByNameAsync(name).ConfigureAwait(false);
     }
 
-    private static GameEventKind PickEventKind() => EnemyProvider.PickWeightedRandom(eventWeights, w => w.Weight).Kind;
+    // Ambush and Trap are real danger, not flavor - they stay rollable regardless of the two
+    // notification toggles below, so disabling flavor/world-event notifications only trims the
+    // benign/cosmetic content, never the actual challenge.
+    private static readonly HashSet<GameEventKind> worldEventKinds =
+    [
+        GameEventKind.MarketSale,
+        GameEventKind.MarketInflation,
+        GameEventKind.ItemStolen,
+        GameEventKind.FortuneGift,
+        GameEventKind.StrayDog,
+        GameEventKind.PersonInNeed
+    ];
+
+    /// <summary>
+    /// Weighted-random pick over eventWeights, minus whichever categories the player disabled via
+    /// Settings > Other (ShowFlavorOnlyNotifications / ShowRandomWorldEventNotifications) - the
+    /// excluded kinds' weight simply falls out of the pool rather than being redistributed by hand,
+    /// so whatever remains enabled naturally picks up their share.
+    /// </summary>
+    private static GameEventKind PickEventKind(SettingsService settingsService)
+    {
+        var pool = eventWeights.Where(w =>
+            (w.Kind != GameEventKind.Flavor || settingsService.ShowFlavorOnlyNotifications) &&
+            (!worldEventKinds.Contains(w.Kind) || settingsService.ShowRandomWorldEventNotifications))
+            .ToList();
+
+        return EnemyProvider.PickWeightedRandom(pool, w => w.Weight).Kind;
+    }
 
     private async Task<(string Title, string Message)> ApplyMarketEventAsync(SettingsService settingsService, double multiplier, string flavorText)
     {

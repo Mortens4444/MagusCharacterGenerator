@@ -6,6 +6,7 @@ using MAGUS.GameSystem.FightMode;
 using MAGUS.GameSystem.Languages;
 using MAGUS.GameSystem.Qualifications;
 using MAGUS.Interfaces;
+using MAGUS.Models;
 using MAGUS.Qualifications;
 using MAGUS.Qualifications.Combat;
 using MAGUS.Qualifications.Laical;
@@ -128,7 +129,56 @@ public class FireMage : Class, IClass, ILikeMagic
         new Sailing()
     ]);
 
-    public override QualificationList FutureQualifications => BuildQualifications([]);
+    /// <summary>
+    /// Level-5 specialization path (Második Törvénykönyv, "A tűzvarázslók három Útja", p.34-36) -
+    /// None until the player picks one via CharacterViewModel.CheckPendingFireMageSpecializationAsync/
+    /// Character.ApplyFireMageSpecialization. Drives GetCombatValueModifierForLevel/
+    /// GetPainToleranceModifier(level)/FutureQualifications below.
+    /// </summary>
+    public FireMageSpecialization Specialization { get; set; } = FireMageSpecialization.None;
+
+    /// <summary>Pusztító Tűz Útja (Destructive Fire) raises this from 8 to 9 from level 5 onward - not retroactive to levels 1-4, see the level-summing loop in Character.Combat.cs.</summary>
+    public override int GetCombatValueModifierForLevel(int level) =>
+        Specialization == FireMageSpecialization.DestructiveFire && level >= 5 ? 9 : CombatValueModifierPerLevel;
+
+    /// <summary>Pusztító Tűz Útja raises this from 1D6+1 to 1D6+3 from level 5 onward.</summary>
+    public override int GetPainToleranceModifier(int level) =>
+        Specialization == FireMageSpecialization.DestructiveFire && level >= 5 ? DiceThrow._1D6() + 3 : GetPainToleranceModifier();
+
+    /// <summary>Formula counterpart of GetPainToleranceModifier(level), for the manual-roll UI.</summary>
+    public override DiceThrowFormula? GetPainToleranceModifierFormula(int level) =>
+        Specialization == FireMageSpecialization.DestructiveFire && level >= 5
+            ? new DiceThrowFormula { Formula = "1D6", Modifier = 3, HasSpecialTraining = false }
+            : GetPainToleranceModifierFormula();
+
+    /// <summary>
+    /// Level-gated qualifications granted by whichever of the three Utak was chosen - empty for None
+    /// (not yet chosen) and for Sogron (that path converts the character to SogronPriest, whose own
+    /// FutureQualifications takes over from here - see Character.ApplyFireMageSpecialization).
+    /// Tűzvonás/Tűzgyűjtés (Fény Ösvénye's other flavor abilities) have no mechanical system in this
+    /// codebase and aren't modeled.
+    /// </summary>
+    public override QualificationList FutureQualifications => Specialization switch
+    {
+        FireMageSpecialization.DestructiveFire => BuildQualifications(
+        [
+            new WeaponUse(QualificationLevel.Master, 5),
+            new HistoryLore(level: 5),
+            new Leadership(level: 5),
+            new MilitaryFormation(level: 5),
+            new MilitaryFormation(QualificationLevel.Master, 7),
+            new Leadership(QualificationLevel.Master, 11)
+        ]),
+        FireMageSpecialization.Light => BuildQualifications(
+        [
+            new AncientTongueLore(AntientLanguage.OldGodonian, level: 5),
+            new HistoryLore(level: 5),
+            new LegendLore(level: 5),
+            new HistoryLore(QualificationLevel.Master, 8),
+            new AncientTongueLore(AntientLanguage.OldGodonian, QualificationLevel.Master, 11)
+        ]),
+        _ => BuildQualifications([])
+    };
 
     public override PercentQualificationList PercentQualifications => [];
 

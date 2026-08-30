@@ -3,6 +3,7 @@ using MAGUS.GameSystem;
 using MAGUS.GameSystem.Qualifications;
 using MAGUS.Races;
 using MAGUS.Qualifications.Laical;
+using MAGUS.Qualifications.Percentages;
 
 namespace MAGUS.Test;
 
@@ -75,5 +76,41 @@ public class CharacterQualificationsBehaviorTests
         var character = CreateCharacter();
         var speciality = character.GetSpeciality<MAGUS.Qualifications.Specialities.GoodInitiator>();
         Assert.That(speciality, Is.Null.Or.Not.Null);
+    }
+
+    [Test]
+    public void IncreasePercentQualification_WithEnoughPoints_IncreasesPercentAndSpendsPoint()
+    {
+        var character = CreateCharacter();
+        character.PercentQualificationPoints = 5;
+        var climbing = character.PercentQualifications.OfType<Climbing>().Single();
+        var initialPercent = climbing.Percent;
+
+        Assert.That(character.CanIncreasePercentQualification(climbing), Is.True);
+        character.IncreasePercentQualification(climbing);
+
+        Assert.That(climbing.Percent, Is.EqualTo(initialPercent + Character.PercentPerQualificationPoint));
+        Assert.That(character.PercentQualificationPoints, Is.EqualTo(5 - Character.PercentQualificationPointCost));
+    }
+
+    [Test]
+    public void IncreasePercentQualification_WithoutEnoughPoints_Throws()
+    {
+        var character = CreateCharacter();
+        character.PercentQualificationPoints = 0;
+        var climbing = character.PercentQualifications.OfType<Climbing>().Single();
+
+        Assert.That(character.CanIncreasePercentQualification(climbing), Is.False);
+        Assert.That(() => character.IncreasePercentQualification(climbing), Throws.InvalidOperationException);
+    }
+
+    [Test]
+    public void CanIncreasePercentQualification_ForQualificationNotOwned_ReturnsFalse()
+    {
+        var character = CreateCharacter();
+        character.PercentQualificationPoints = 5;
+        var foreignQualification = new Sneaking(0);
+
+        Assert.That(character.CanIncreasePercentQualification(foreignQualification), Is.False);
     }
 }

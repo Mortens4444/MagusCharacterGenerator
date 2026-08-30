@@ -11,7 +11,11 @@
                 Title="Images">
 
     <Grid Padding="10" RowDefinitions="Auto,*,Auto">
-        <mc:EntryWithLabel Grid.Row="0" Label="Search" Text="{Binding SearchText}" />
+        <!-- EntryWithLabel adds a double-tap GestureRecognizer (copy-to-clipboard) that competes with
+             Android's single-tap-to-focus on the underlying Entry, making search feel unresponsive to
+             a single tap - SearchBar carries no such gesture and is the same control SearchListView
+             already uses successfully for the same purpose. -->
+        <SearchBar Grid.Row="0" Text="{Binding SearchText}" Placeholder="Search…" />
 
         <CollectionView Grid.Row="1" SelectionMode="Single" ItemsLayout="VerticalList" ItemsSource="{Binding FilteredImages}" SelectedItem="{Binding SelectedImage}">
             <CollectionView.ItemTemplate>

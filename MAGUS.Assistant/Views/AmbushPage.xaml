@@ -25,7 +25,7 @@
                TextColor="{AppThemeBinding Light=Gray, Dark=LightGray}" />
 
         <Grid Grid.Row="4" ColumnDefinitions="*, *" ColumnSpacing="16" Margin="0,8,0,0">
-            <Button Grid.Column="0" Text="⚔ Fight" Command="{Binding FightCommand}" BackgroundColor="#FF3B30" TextColor="White" HeightRequest="52" FontAttributes="Bold" />
+            <Button Grid.Column="0" Text="⚔️ Fight" Command="{Binding FightCommand}" BackgroundColor="#FF3B30" TextColor="White" HeightRequest="52" FontAttributes="Bold" />
             <Button Grid.Column="1" Text="🏃 Flee" Command="{Binding FleeCommand}" BackgroundColor="{StaticResource Primary}" TextColor="Black" HeightRequest="52" FontAttributes="Bold" />
         </Grid>
 

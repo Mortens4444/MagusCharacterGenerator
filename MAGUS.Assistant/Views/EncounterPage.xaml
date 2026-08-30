@@ -19,8 +19,8 @@
     <v:NotifierPage.Resources>
         <ResourceDictionary>
             <c:BoolToTextConverter x:Key="BoolToTextConverter" />
-            <c:AttackModeNameConverter x:Key="AttackModeNameConverter" />
             <conv:TranslationConverter x:Key="TranslationConverter" />
+            <c:LiteralTranslationConverter x:Key="LiteralTranslationConverter" />
         </ResourceDictionary>
     </v:NotifierPage.Resources>
 
@@ -74,14 +74,30 @@
                             <StackLayout Spacing="6">
 
                                 <HorizontalStackLayout Spacing="8">
-                                    <Image Source="{Binding Character.RandomImage}" HeightRequest="48" WidthRequest="48" Aspect="AspectFill" />
+                                    <Image Source="{Binding Character.RandomImage}" HeightRequest="48" WidthRequest="48" Aspect="AspectFit" />
                                     <Label Text="{Binding Character.Name}" FontAttributes="Bold" VerticalOptions="Center" />
                                 </HorizontalStackLayout>
                                 <!--<Label Text="{Binding Character.Speed, StringFormat='Speed: {0} m/s'}" FontSize="12" />-->
 
-                                <Button Text="{Binding SelectedAttackMode, Converter={StaticResource AttackModeNameConverter}, StringFormat='Attack mode: {0}'}"
+                                <Button Text="{Binding SelectedAttackModeLabel, StringFormat='Attack mode: {0}'}"
                                         Command="{Binding Source={RelativeSource AncestorType={x:Type vm:EncounterViewModel}}, Path=SelectAttackModeCommand}"
                                         CommandParameter="{Binding .}" />
+
+                                <!-- Text= here is static English, but this row lives inside a CollectionView
+                                     DataTemplate - Translator.Translate's auto-translate pass walks bound data
+                                     items (AssignmentViewModel), not the realized per-row visual tree, so it can
+                                     never reach these - LiteralTranslationConverter translates them explicitly. -->
+                                <HorizontalStackLayout Spacing="6">
+                                    <CheckBox IsChecked="{Binding Character.IsFightingTwoHanded, Mode=TwoWay}" />
+                                    <Label Text="{Binding ., Converter={StaticResource LiteralTranslationConverter}, ConverterParameter='Two-handed combat'}" VerticalOptions="Center"
+                                           ToolTipProperties.Text="{Binding ., Converter={StaticResource LiteralTranslationConverter}, ConverterParameter='Fighting with a weapon in each hand - grants a second attack, but penalizes both hands without the Two-handed combat qualification (worse on the off-hand)'}" />
+                                </HorizontalStackLayout>
+
+                                <HorizontalStackLayout Spacing="6">
+                                    <CheckBox IsChecked="{Binding Character.IsAiming, Mode=TwoWay}" />
+                                    <Label Text="{Binding ., Converter={StaticResource LiteralTranslationConverter}, ConverterParameter='Aiming'}" VerticalOptions="Center"
+                                           ToolTipProperties.Text="{Binding ., Converter={StaticResource LiteralTranslationConverter}, ConverterParameter='Spending the round(s) in intense concentration on a ranged target for a large Aim Value bonus (with the Aiming qualification: +20 CÉ at Base after 2 rounds, +35 CÉ at Master after 1 round) - the character can't otherwise fight, move or use Psi while concentrating, and a successful interruption forces a GM-adjudicated Willpower check that this app doesn't automate'}" />
+                                </HorizontalStackLayout>
 
                                 <CollectionView ItemsSource="{Binding Enemies}" MaximumHeightRequest="140">
                                     <CollectionView.ItemTemplate>
@@ -91,7 +107,7 @@
                                              reflection against whichever concrete type each item actually is. -->
                                         <DataTemplate>
                                             <Grid ColumnDefinitions="Auto,*,Auto" Padding="0,4">
-                                                <Image Grid.Column="0" Source="{Binding RandomImage}" HeightRequest="36" WidthRequest="36" Aspect="AspectFill" />
+                                                <Image Grid.Column="0" Source="{Binding RandomImage}" HeightRequest="36" WidthRequest="36" Aspect="AspectFit" />
                                                 <Label Grid.Column="1" Text="{Binding Name, Converter={StaticResource TranslationConverter}}" Margin="8,0,0,0" VerticalOptions="Center" />
                                                 <!--<Button MaximumHeightRequest="10" MaximumWidthRequest="10" Text="X" />--> <!--Need Delete Enemy from assignment function with nicer delte buttons, nice text UTF-8 delete char-->
                                                 <!--<Label Grid.Column="1" Text="{Binding Distance, StringFormat='{0} m'}" />-->
@@ -138,7 +154,7 @@
                                     <CollectionView.ItemTemplate>
                                         <DataTemplate x:DataType="vm:TurnAttackViewModel">
                                             <Grid Padding="6" ColumnDefinitions="5*,5*,3*,7*">
-                                                <Image Grid.Column="0" Source="{Binding AttackerImage}" HeightRequest="32" WidthRequest="32" Aspect="AspectFill" HorizontalOptions="Start" />
+                                                <Image Grid.Column="0" Source="{Binding AttackerImage}" HeightRequest="32" WidthRequest="32" Aspect="AspectFit" HorizontalOptions="Start" />
                                                 <Label Grid.Column="1" Text="{Binding Result}" />
                                                 <Label Grid.Column="2" Text="{Binding Direction}" />
                                                 <Label Grid.Column="3" Text="{Binding HitLocation}" />
@@ -161,6 +177,7 @@
                 <Button Text="Psi surge" Command="{Binding UsePsiSurgeCommand}" IsVisible="{Binding SelectedCharacterHasPsi}" />
                 <Button Text="Dismantle shield" Command="{Binding DismantlePsiShieldCommand}" IsVisible="{Binding SelectedCharacterHasPsi}" />
                 <Button Text="Empower spell" Command="{Binding EmpowerSpellCommand}" IsVisible="{Binding SelectedCharacterHasSorcery}" />
+                <Button Text="Tame" Command="{Binding TryTameCommand}" IsVisible="{Binding SelectedCharacterCanTame}" />
                 <Button Text="Start New Round" Command="{Binding RunTurnCommand}" FontAttributes="Bold" />
             </HorizontalStackLayout>
         </ScrollView>

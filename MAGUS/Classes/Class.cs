@@ -197,9 +197,24 @@ public abstract class Class : ImageOwner, IClass
 
     public DiceThrowFormula? GetPainToleranceModifierFormula()
     {
-        var customAttributes = GetType().GetMethod(nameof(GetPainToleranceModifier))?.GetCustomAttributes(false);
+        // Type.EmptyTypes picks the parameterless overload specifically - GetMethod(name) alone
+        // throws AmbiguousMatchException once a level-aware GetPainToleranceModifier(int) overload
+        // also exists (see FireMage's override of the new virtual GetPainToleranceModifier(level)).
+        var customAttributes = GetType().GetMethod(nameof(GetPainToleranceModifier), Type.EmptyTypes)?.GetCustomAttributes(false);
         return customAttributes.GetDiceThrowFormula();
     }
+
+    // Defaults reproduce today's flat, level-independent behavior exactly for every class - only
+    // FireMage's Destructive Fire path (Második Törvénykönyv) overrides these, to raise its rate
+    // from level 5 onward without retroactively changing levels 1-4. See Character.Combat.cs/
+    // Character.Qualifications.cs/Character.Vitality.cs for the level-summing loops that call these.
+    public virtual int GetCombatValueModifierForLevel(int level) => CombatValueModifierPerLevel;
+
+    public virtual int GetQualificationPointsModifierForLevel(int level) => QualificationPointsModifier;
+
+    public virtual int GetPainToleranceModifier(int level) => GetPainToleranceModifier();
+
+    public virtual DiceThrowFormula? GetPainToleranceModifierFormula(int level) => GetPainToleranceModifierFormula();
 
     protected QualificationList BuildQualifications(IEnumerable<Qualification> qualifications)
     {

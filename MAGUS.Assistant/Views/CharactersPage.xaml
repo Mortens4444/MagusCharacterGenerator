@@ -63,7 +63,7 @@
                                                               CommandParameter="{Binding .}"/>
                                     </Border.GestureRecognizers>
 
-                                    <Grid ColumnDefinitions="*, Auto, Auto, Auto, Auto">
+                                    <Grid ColumnDefinitions="*, Auto, Auto">
                                         <VerticalStackLayout Grid.Column="0" Spacing="2">
                                             <Label Text="{Binding Name}"
                                                    FontAttributes="Bold"
@@ -94,25 +94,7 @@
                                             </Label.GestureRecognizers>
                                         </Label>
 
-                                        <Label Grid.Column="2" Text="😴" FontSize="22" VerticalOptions="Center" HorizontalOptions="Center"
-                                               WidthRequest="36" HorizontalTextAlignment="Center"
-                                               ToolTipProperties.Text="Send to sleep (restores HP/PTP/Mana/Psi)">
-                                            <Label.GestureRecognizers>
-                                                <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type vm:CharactersViewModel}}, Path=SleepCommand}"
-                                                                      CommandParameter="{Binding .}"/>
-                                            </Label.GestureRecognizers>
-                                        </Label>
-
-                                        <Label Grid.Column="3" Text="🍗" FontSize="22" VerticalOptions="Center" HorizontalOptions="Center"
-                                               WidthRequest="36" HorizontalTextAlignment="Center"
-                                               ToolTipProperties.Text="Eat (clears hunger, consumes one food item)">
-                                            <Label.GestureRecognizers>
-                                                <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type vm:CharactersViewModel}}, Path=EatCommand}"
-                                                                      CommandParameter="{Binding .}"/>
-                                            </Label.GestureRecognizers>
-                                        </Label>
-
-                                        <ImageButton Grid.Column="4" Source="delete.png" HeightRequest="24" WidthRequest="24" VerticalOptions="Center"
+                                        <ImageButton Grid.Column="2" Source="delete.png" HeightRequest="24" WidthRequest="24" VerticalOptions="Center"
                                                      Command="{Binding Source={RelativeSource AncestorType={x:Type vm:CharactersViewModel}}, Path=DeleteCharacterCommand}"
                                                      CommandParameter="{Binding .}">
                                         </ImageButton>

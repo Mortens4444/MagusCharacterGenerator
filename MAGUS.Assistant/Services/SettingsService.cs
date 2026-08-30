@@ -24,6 +24,8 @@ internal sealed class SettingsService : ISettings, ILanguageSettingsService
     public bool UseRaceClassRestrictions { get; private set; }
     public bool AssignmentTurnHistoryNewestOnTop { get; private set; }
     public bool ShowRandomBeastWhenBestiaryPageOpened { get; private set; }
+    public bool ShowFlavorOnlyNotifications { get; private set; }
+    public bool ShowRandomWorldEventNotifications { get; private set; }
     public CombatSimulatorMode CombatSimulatorMode { get; private set; }
     public string? DefaultCharacterName { get; private set; }
     public double ActiveMarketPriceMultiplier { get; private set; } = 1.0;
@@ -52,6 +54,8 @@ internal sealed class SettingsService : ISettings, ILanguageSettingsService
     
     private const string KeyAssignmentTurnHistoryNewestOnTop = "Setting_AssignmentTurnHistoryNewestOnTop";
     private const string KeyShowRandomBeastWhenBestiaryPageOpened = "Setting_ShowRandomBeastWhenBestiaryPageOpened";
+    private const string KeyShowFlavorOnlyNotifications = "Setting_ShowFlavorOnlyNotifications";
+    private const string KeyShowRandomWorldEventNotifications = "Setting_ShowRandomWorldEventNotifications";
     private const string KeyCombatSimulatorMode = "Setting_CombatSimulatorMode";
     private const string KeyDefaultCharacterName = "Setting_DefaultCharacterName";
     private const string KeyActiveMarketPriceMultiplier = "Setting_ActiveMarketPriceMultiplier";
@@ -86,6 +90,8 @@ internal sealed class SettingsService : ISettings, ILanguageSettingsService
 
         AssignmentTurnHistoryNewestOnTop = await settingsRepository.GetBoolSettingAsync(KeyAssignmentTurnHistoryNewestOnTop, Constants.AssignmentTurnHistoryNewestOnTop).ConfigureAwait(false);
         ShowRandomBeastWhenBestiaryPageOpened = await settingsRepository.GetBoolSettingAsync(KeyShowRandomBeastWhenBestiaryPageOpened, Constants.ShowRandomBeastWhenBestiaryPageOpened).ConfigureAwait(false);
+        ShowFlavorOnlyNotifications = await settingsRepository.GetBoolSettingAsync(KeyShowFlavorOnlyNotifications, Constants.ShowFlavorOnlyNotifications).ConfigureAwait(false);
+        ShowRandomWorldEventNotifications = await settingsRepository.GetBoolSettingAsync(KeyShowRandomWorldEventNotifications, Constants.ShowRandomWorldEventNotifications).ConfigureAwait(false);
         CombatSimulatorMode = await settingsRepository.GetEnumSettingAsync<CombatSimulatorMode>(KeyCombatSimulatorMode, Constants.CombatSimulatorMode).ConfigureAwait(false);
 
         var defaultCharacterName = await settingsRepository.GetSettingAsync(KeyDefaultCharacterName).ConfigureAwait(false);
@@ -187,6 +193,18 @@ internal sealed class SettingsService : ISettings, ILanguageSettingsService
     {
         ShowRandomBeastWhenBestiaryPageOpened = value;
         return settingsRepository.SaveBoolSettingAsync(KeyShowRandomBeastWhenBestiaryPageOpened, value);
+    }
+
+    public Task SaveShowFlavorOnlyNotifications(bool value)
+    {
+        ShowFlavorOnlyNotifications = value;
+        return settingsRepository.SaveBoolSettingAsync(KeyShowFlavorOnlyNotifications, value);
+    }
+
+    public Task SaveShowRandomWorldEventNotifications(bool value)
+    {
+        ShowRandomWorldEventNotifications = value;
+        return settingsRepository.SaveBoolSettingAsync(KeyShowRandomWorldEventNotifications, value);
     }
 
     public Task<CombatSimulatorMode> GetCombatSimulatorModeAsync()

@@ -95,7 +95,7 @@ public partial class Character
             {
                 for (var level = startLevel; level <= BaseClass.Level; level++)
                 {
-                    painTolerancePoints += BaseClass.GetPainToleranceModifier();
+                    painTolerancePoints += BaseClass.GetPainToleranceModifier(level);
                 }
             }
         }

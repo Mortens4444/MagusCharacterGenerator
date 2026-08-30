@@ -69,6 +69,36 @@
                     <Button Text="Travel"
                             Command="{Binding TravelCommand}"
                             IsVisible="{Binding IsTraveling, Converter={StaticResource InverseBooleanConverter}}" />
+
+                    <Button Text="Open portal (instant)"
+                            Command="{Binding OpenPortalCommand}"
+                            IsVisible="{Binding IsTraveling, Converter={StaticResource InverseBooleanConverter}}"
+                            ToolTipProperties.Text="Skip the journey entirely and arrive at the destination immediately - 10 gold, or free with Térkapu (Wizard, 68 mana)" />
+                </VerticalStackLayout>
+            </Border>
+
+            <!-- Group: any other saved character standing in the same city can join up (Character.IsAtSameLocationAs) - once
+                 grouped, changing this character's destination via Travel carries the whole group along too, each at their
+                 own race/mount speed - see CharacterGroupActions and CharacterViewModel.TravelAsync. -->
+            <Border Style="{StaticResource BoxBorder}">
+                <VerticalStackLayout Spacing="8">
+                    <Label Text="Group" Style="{StaticResource HeaderLabel}" />
+
+                    <Label Text="{Binding GroupMembersDescription}"
+                           IsVisible="{Binding IsInGroup}" />
+
+                    <Label Text="Not currently in a group."
+                           TextColor="Gray"
+                           IsVisible="{Binding IsInGroup, Converter={StaticResource InverseBooleanConverter}}" />
+
+                    <Button Text="Join group"
+                            Command="{Binding JoinGroupCommand}"
+                            IsVisible="{Binding IsTraveling, Converter={StaticResource InverseBooleanConverter}}"
+                            ToolTipProperties.Text="Group up with another saved character standing in the same city right now" />
+
+                    <Button Text="Leave group"
+                            Command="{Binding LeaveGroupCommand}"
+                            IsVisible="{Binding IsInGroup}" />
                 </VerticalStackLayout>
             </Border>
 

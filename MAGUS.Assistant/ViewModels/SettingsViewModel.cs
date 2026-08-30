@@ -32,6 +32,8 @@ internal sealed partial class SettingsViewModel : BaseViewModel
         OnPropertyChanged(nameof(AutoGenerateSkills));
         OnPropertyChanged(nameof(AutoIncreasePainTolerance));
         OnPropertyChanged(nameof(AutoIncreaseManaPoints));
+        OnPropertyChanged(nameof(AllAutomaticRulesEnabled));
+        OnPropertyChanged(nameof(AllFirstLevelBonusesEnabled));
         OnPropertyChanged(nameof(MaxDiesCount));
         OnPropertyChanged(nameof(UseRaceClassRestrictions));
         OnPropertyChanged(nameof(CombatSimulatorMode));
@@ -62,6 +64,7 @@ internal sealed partial class SettingsViewModel : BaseViewModel
             {
                 settingsService.SaveAddCombatValueAsync(value);
                 OnPropertyChanged();
+                OnPropertyChanged(nameof(AllFirstLevelBonusesEnabled));
             }
         }
     }
@@ -75,6 +78,7 @@ internal sealed partial class SettingsViewModel : BaseViewModel
             {
                 settingsService.SaveAddPainToleranceAsync(value);
                 OnPropertyChanged();
+                OnPropertyChanged(nameof(AllFirstLevelBonusesEnabled));
             }
         }
     }
@@ -88,6 +92,7 @@ internal sealed partial class SettingsViewModel : BaseViewModel
             {
                 settingsService.SaveAddQualificationAsync(value);
                 OnPropertyChanged();
+                OnPropertyChanged(nameof(AllFirstLevelBonusesEnabled));
             }
         }
     }
@@ -101,6 +106,7 @@ internal sealed partial class SettingsViewModel : BaseViewModel
             {
                 settingsService.SaveAddManaAsync(value);
                 OnPropertyChanged();
+                OnPropertyChanged(nameof(AllFirstLevelBonusesEnabled));
             }
         }
     }
@@ -114,6 +120,7 @@ internal sealed partial class SettingsViewModel : BaseViewModel
             {
                 settingsService.SaveAddPsiAsync(value);
                 OnPropertyChanged();
+                OnPropertyChanged(nameof(AllFirstLevelBonusesEnabled));
             }
         }
     }
@@ -127,6 +134,7 @@ internal sealed partial class SettingsViewModel : BaseViewModel
             {
                 settingsService.SaveAutoCombatValueDistributionAsync(value);
                 OnPropertyChanged();
+                OnPropertyChanged(nameof(AllAutomaticRulesEnabled));
             }
         }
     }
@@ -140,6 +148,7 @@ internal sealed partial class SettingsViewModel : BaseViewModel
             {
                 settingsService.SaveAutoQualificationPointsDistributionAsync(value);
                 OnPropertyChanged();
+                OnPropertyChanged(nameof(AllAutomaticRulesEnabled));
             }
         }
     }
@@ -153,6 +162,7 @@ internal sealed partial class SettingsViewModel : BaseViewModel
             {
                 settingsService.SaveAutoGenerateSkillsAsync(value);
                 OnPropertyChanged();
+                OnPropertyChanged(nameof(AllAutomaticRulesEnabled));
             }
         }
     }
@@ -166,6 +176,7 @@ internal sealed partial class SettingsViewModel : BaseViewModel
             {
                 settingsService.SaveAutoPainToleranceIncreaseAsync(value);
                 OnPropertyChanged();
+                OnPropertyChanged(nameof(AllAutomaticRulesEnabled));
             }
         }
     }
@@ -179,7 +190,57 @@ internal sealed partial class SettingsViewModel : BaseViewModel
             {
                 settingsService.SaveAutoManaIncreaseAsync(value);
                 OnPropertyChanged();
+                OnPropertyChanged(nameof(AllAutomaticRulesEnabled));
             }
+        }
+    }
+
+    /// <summary>
+    /// Master switch for the Automatic Rules group on the Settings page: true only while every rule
+    /// below is individually on, and setting it flips all five at once. Each rule can still be toggled
+    /// on its own afterward (see the OnPropertyChanged(nameof(AllAutomaticRulesEnabled)) call in each
+    /// one's setter, which keeps this reflecting their combined state either way).
+    /// </summary>
+    public bool AllAutomaticRulesEnabled
+    {
+        get => AutoDistributeCombatValues
+            && AutoDistributeQualificationPoints
+            && AutoGenerateSkills
+            && AutoIncreasePainTolerance
+            && AutoIncreaseManaPoints;
+        set
+        {
+            AutoDistributeCombatValues = value;
+            AutoDistributeQualificationPoints = value;
+            AutoGenerateSkills = value;
+            AutoIncreasePainTolerance = value;
+            AutoIncreaseManaPoints = value;
+            OnPropertyChanged();
+        }
+    }
+
+    /// <summary>
+    /// Master switch for the separate "Level 1 Point Bonuses" group: whether each stat's level-1
+    /// modifier is granted immediately at character creation rather than only from level 2 onward.
+    /// Kept apart from AllAutomaticRulesEnabled (a genuinely different concern - "what happens
+    /// automatically" vs. "what a level-1 character starts with") per the split requested in the
+    /// project's ToDo list.
+    /// </summary>
+    public bool AllFirstLevelBonusesEnabled
+    {
+        get => AddCombatValueModifierPointsOnFirstLevelForAllClass
+            && AddPainToleranceOnFirstLevelForAllClass
+            && AddQualificationPointsOnFirstLevelForAllClass
+            && AddManaPointsOnFirstLevelForAllClass
+            && AddPsiPointsOnFirstLevelForAllClass;
+        set
+        {
+            AddCombatValueModifierPointsOnFirstLevelForAllClass = value;
+            AddPainToleranceOnFirstLevelForAllClass = value;
+            AddQualificationPointsOnFirstLevelForAllClass = value;
+            AddManaPointsOnFirstLevelForAllClass = value;
+            AddPsiPointsOnFirstLevelForAllClass = value;
+            OnPropertyChanged();
         }
     }
 
@@ -230,6 +291,34 @@ internal sealed partial class SettingsViewModel : BaseViewModel
             if (settingsService.ShowRandomBeastWhenBestiaryPageOpened != value)
             {
                 settingsService.SaveShowRandomBeastWhenBestiaryPageOpened(value);
+                OnPropertyChanged();
+            }
+        }
+    }
+
+    /// <summary>Gates GameEventService's pure-flavor "Last words" jokes and similar no-effect notifications - see GameEventService.PickEventKind.</summary>
+    public bool ShowFlavorOnlyNotifications
+    {
+        get => settingsService.ShowFlavorOnlyNotifications;
+        set
+        {
+            if (settingsService.ShowFlavorOnlyNotifications != value)
+            {
+                settingsService.SaveShowFlavorOnlyNotifications(value);
+                OnPropertyChanged();
+            }
+        }
+    }
+
+    /// <summary>Gates GameEventService's narrative world events with side effects (market swings, a stray dog, a gift, a stranger in need, a stolen item) - not Ambush/Trap, which stay on regardless. See GameEventService.PickEventKind.</summary>
+    public bool ShowRandomWorldEventNotifications
+    {
+        get => settingsService.ShowRandomWorldEventNotifications;
+        set
+        {
+            if (settingsService.ShowRandomWorldEventNotifications != value)
+            {
+                settingsService.SaveShowRandomWorldEventNotifications(value);
                 OnPropertyChanged();
             }
         }
