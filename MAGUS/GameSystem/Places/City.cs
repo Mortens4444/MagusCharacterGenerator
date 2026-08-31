@@ -11,6 +11,10 @@ namespace MAGUS.GameSystem.Places;
 [Flags]
 public enum City : ulong
 {
+    // EnumDescriptionTranslationConverter only routes a value through Lng.Elem when it carries a
+    // [Description] attribute - without one it falls back to the raw ToString() untranslated, so
+    // "Unknown" showed up in English regardless of the active language until this was added.
+    [Description("Unknown")]
     Unknown = 0,
 
     [OfficialLanguage(Language.Pyarronian)]

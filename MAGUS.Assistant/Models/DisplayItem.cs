@@ -52,6 +52,20 @@ internal sealed partial class DisplayItem : INotifyPropertyChanged
 
     public string DefaultImage => Source is IHaveImage imageOwner ? imageOwner.DefaultImage : String.Empty;
 
+    public string Description
+    {
+        get
+        {
+            return Source switch
+            {
+                Rune rune => rune.Meaning ?? String.Empty,
+                Creature creature => creature.Description ?? String.Empty,
+                Thing thing => thing.Description ?? String.Empty,
+                _ => String.Empty
+            };
+        }
+    }
+
     public string Subtitle
     {
         get

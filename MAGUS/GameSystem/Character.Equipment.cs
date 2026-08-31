@@ -60,6 +60,7 @@ public partial class Character
     {
         if (Equipment.Remove(thing))
         {
+            ClearEquippedReferences(thing);
             OnPropertyChanged(nameof(TotalEquipmentWeight));
         }
     }
@@ -77,8 +78,35 @@ public partial class Character
         {
             Money += thing.MultipliedPrice;
             Equipment.Remove(thing);
+            ClearEquippedReferences(thing);
             OnPropertyChanged(nameof(Money));
             OnPropertyChanged(nameof(TotalEquipmentWeight));
+        }
+    }
+
+    /// <summary>
+    /// Un-equips <paramref name="thing"/> if it was the PrimaryWeapon/SecondaryWeapon/Armor - called
+    /// whenever an item leaves Equipment (RemoveEquipment/Sell) so those pointers never outlive the
+    /// item. Without this, PrimaryWeaponId (Character.Combat.cs) kept referencing a Weapon no longer
+    /// in Equipment: ResolveWeaponById only searches Equipment, so after a save/reload the weapon
+    /// silently vanished (PrimaryWeaponId stayed but PrimaryWeapon resolved to null) - see
+    /// Character.Crafting.cs, which already did this for the weapon-crafting consumption paths.
+    /// </summary>
+    private void ClearEquippedReferences(Thing thing)
+    {
+        if (PrimaryWeapon == thing)
+        {
+            PrimaryWeapon = null;
+        }
+
+        if (SecondaryWeapon == thing)
+        {
+            SecondaryWeapon = null;
+        }
+
+        if (Armor == thing)
+        {
+            Armor = null;
         }
     }
 

@@ -13,7 +13,6 @@ internal sealed partial class ClassesViewModel : BaseViewModel
 {
     private string searchText = String.Empty;
     private IClass? selectedClass;
-    private ObservableCollection<IClass> filteredClasses = [];
     private ObservableCollection<DiceStat> diceStats = [];
     private AsyncRelayCommand? previewImageCommand;
 
@@ -48,17 +47,16 @@ internal sealed partial class ClassesViewModel : BaseViewModel
         }
     }
 
-    public ObservableCollection<IClass> FilteredClasses
-    {
-        get => filteredClasses;
-        private set
-        {
-            if (SetProperty(ref filteredClasses, value ?? []))
-            {
-                OnPropertyChanged();
-            }
-        }
-    }
+    /// <summary>
+    /// Kept as one stable instance, mutated via Clear()/Add() - unlike an earlier version that
+    /// assigned a brand-new ObservableCollection here on every ApplyFilter() call. That pattern broke
+    /// the bound Picker's ItemsSource on some platforms after it had once observed an empty collection
+    /// (a search with no matches): the Picker never picked up the next replacement instance, so
+    /// results stayed stuck empty even once the search text matched something again. See
+    /// RacesViewModel/LanguagesViewModel/ImagesViewModel's FilteredX collections for the same
+    /// established, working pattern.
+    /// </summary>
+    public ObservableCollection<IClass> FilteredClasses { get; } = [];
 
     public string SearchText
     {
@@ -114,15 +112,14 @@ internal sealed partial class ClassesViewModel : BaseViewModel
     private void ApplyFilter()
     {
         var st = SearchText?.Trim();
-        if (!String.IsNullOrWhiteSpace(st))
+        var query = String.IsNullOrWhiteSpace(st)
+            ? Classes.AsEnumerable()
+            : Classes.Where(c => Lng.Elem(c.Name).Contains(st, StringComparison.InvariantCultureIgnoreCase)).OrderBy(c => Lng.Elem(c.Name));
+
+        FilteredClasses.Clear();
+        foreach (var it in query)
         {
-            FilteredClasses = new ObservableCollection<IClass>(Classes.Where(c =>
-                Lng.Elem(c.Name).Contains(st, StringComparison.InvariantCultureIgnoreCase))
-                .OrderBy(c => Lng.Elem(c.Name)));
-        }
-        else
-        {
-            FilteredClasses = new ObservableCollection<IClass>(Classes);
+            FilteredClasses.Add(it);
         }
     }
 

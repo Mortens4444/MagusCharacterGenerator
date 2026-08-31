@@ -252,6 +252,7 @@ internal partial class SearchListViewModel : BaseViewModel
                 q = q.Where(i =>
                     (Lng.Elem(i.Title)?.IndexOf(st, StringComparison.InvariantCultureIgnoreCase) >= 0) ||
                     (Lng.Elem(i.Subtitle)?.IndexOf(st, StringComparison.InvariantCultureIgnoreCase) >= 0) ||
+                    (Lng.Elem(i.Description)?.IndexOf(st, StringComparison.InvariantCultureIgnoreCase) >= 0) ||
                     (Lng.Elem(i.Key)?.IndexOf(st, StringComparison.InvariantCultureIgnoreCase) >= 0));
             }
 

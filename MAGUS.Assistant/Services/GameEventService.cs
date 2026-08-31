@@ -217,7 +217,7 @@ internal sealed class GameEventService(CharacterService characterService, IServi
     {
         await PreloadService.Instance.InitializeAsync().ConfigureAwait(true);
 
-        var creature = EnemyProvider.PickWeightedRandom(PreloadService.Instance.Creatures, c => c.Occurrence.GetWeight());
+        var creature = EnemyProvider.PickWeightedRandom(PreloadService.Instance.Creatures.Where(CanAmbushOnLand).ToList(), c => c.Occurrence.GetWeight());
         if (creature is null)
         {
             return;
@@ -225,6 +225,16 @@ internal sealed class GameEventService(CharacterService characterService, IServi
 
         await RunAmbushEncounterAsync(character, creature).ConfigureAwait(true);
     }
+
+    /// <summary>
+    /// Excludes exclusively-aquatic creatures (e.g. a Dolphin) from ambient random encounters (sleeping
+    /// in the open, a wandering-danger Ambush event) - the character isn't in the water for either of
+    /// those, so a creature with no non-InWater Speed has no plausible way to reach them. Same
+    /// exclusion Character.CanTame already uses for the same reason. Deliberately not applied to
+    /// EncounterViewModel.PickRandomEnemy, where the player is setting up a fight on purpose and might
+    /// genuinely want a sea creature.
+    /// </summary>
+    private static bool CanAmbushOnLand(Creature creature) => creature.Speeds.Any(s => s.TravelMode != TravelMode.InWater);
 
     /// <summary>Shared flee-or-fight flow behind both ResolveAmbushAsync (a pre-chosen, notification-scheduled creature) and TriggerRandomEncounterAsync (a freshly rolled one).</summary>
     private async Task RunAmbushEncounterAsync(Character character, Creature creature)
@@ -396,7 +406,7 @@ internal sealed class GameEventService(CharacterService characterService, IServi
     {
         await PreloadService.Instance.InitializeAsync().ConfigureAwait(false);
 
-        var creature = EnemyProvider.PickWeightedRandom(PreloadService.Instance.Creatures, c => c.Occurrence.GetWeight());
+        var creature = EnemyProvider.PickWeightedRandom(PreloadService.Instance.Creatures.Where(CanAmbushOnLand).ToList(), c => c.Occurrence.GetWeight());
         if (creature is null)
         {
             return ("MAGUS Assistant", Lng.Elem(PickFlavorOnlyMessage()));

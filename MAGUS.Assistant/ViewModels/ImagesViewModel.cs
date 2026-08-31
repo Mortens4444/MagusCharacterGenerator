@@ -6,6 +6,7 @@ using Mtf.LanguageService;
 using Mtf.Maui.Controls.Messages;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
+using System.Reflection;
 using System.Windows.Input;
 
 namespace MAGUS.Assistant.ViewModels;
@@ -78,13 +79,39 @@ internal sealed partial class ImagesViewModel : BaseViewModel
         }
     }
 
+    /// <summary>
+    /// One assembly among everything AppDomain.CurrentDomain.GetAssemblies() returns throwing out of
+    /// GetTypes() (ReflectionTypeLoadException is common on Android, where not every referenced
+    /// assembly's types are all loadable) used to abort the whole cache build partway through and
+    /// leave cachedImageItems stuck non-null-but-incomplete forever (see the guard in
+    /// LoadImagesFromTypes - a null check, so it never retries once set). Falling back to
+    /// ex.Types.Where(t => t != null) per assembly - the standard way to recover the types that did
+    /// load - keeps one bad assembly from starving every other type's images out of the search list.
+    /// </summary>
+    private static IEnumerable<Type> GetLoadableTypes(Assembly assembly)
+    {
+        try
+        {
+            return assembly.GetTypes();
+        }
+        catch (ReflectionTypeLoadException ex)
+        {
+            return ex.Types.Where(t => t != null)!;
+        }
+        catch (Exception ex)
+        {
+            Debug.WriteLine($"Skipping assembly {assembly.FullName}: {ex.Message}");
+            return [];
+        }
+    }
+
     private void BuildImageCache()
     {
         try
         {
             var interfaceType = typeof(IHaveImage);
             var types = AppDomain.CurrentDomain.GetAssemblies()
-                .SelectMany(s => s.GetTypes())
+                .SelectMany(GetLoadableTypes)
                 .Where(p => interfaceType.IsAssignableFrom(p) && !p.IsInterface && !p.IsAbstract);
 
             foreach (var type in types)
@@ -141,8 +168,9 @@ internal sealed partial class ImagesViewModel : BaseViewModel
 
     private void ApplyFilter()
     {
-        var filtered = (String.IsNullOrEmpty(SearchText) ? AllImages :
-            new ObservableCollection<ImageItem>(AllImages.Where(i => i.DisplayName.Contains(SearchText, StringComparison.OrdinalIgnoreCase))))
+        var st = SearchText?.Trim();
+        var filtered = (String.IsNullOrWhiteSpace(st) ? AllImages :
+            new ObservableCollection<ImageItem>(AllImages.Where(i => i.DisplayName.Contains(st, StringComparison.OrdinalIgnoreCase))))
             .OrderBy(comparer => comparer.DisplayName);
 
         FilteredImages.Clear();

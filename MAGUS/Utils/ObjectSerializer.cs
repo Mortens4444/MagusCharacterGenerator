@@ -19,7 +19,7 @@ public class ObjectSerializer
 
 	public static void SaveFile(string fullPath, object obj)
 	{
-        using var fileStream = new FileStream(fullPath, FileMode.OpenOrCreate, FileAccess.Write, FileShare.ReadWrite);
+        using var fileStream = new FileStream(fullPath, FileMode.Create, FileAccess.Write, FileShare.ReadWrite);
         using var streamWriter = new StreamWriter(fileStream);
         string result = GetSerializedString(obj);
         streamWriter.Write(result);
