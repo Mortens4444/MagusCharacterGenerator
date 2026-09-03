@@ -14,7 +14,6 @@ namespace MAGUS.Assistant.Views;
 internal sealed partial class RollFormulaPage : NotifierPage
 {
     private bool isClosing;
-    private bool firstRun = true;
     private DateTime lastShake = DateTime.MinValue;
     private const double ShakeThresholdG = 2.2;
     private const int ShakeDebounceMs = 800;
@@ -32,6 +31,12 @@ internal sealed partial class RollFormulaPage : NotifierPage
         BindingContext = new RollFormulaViewModel(soundPlayer, shakeService, rollFormula);
         ViewModel.RollRequested += OnRollRequested;
         ViewModel.CloseRequested += async (_, _) => await CloseAsync().ConfigureAwait(true);
+
+        // Unloaded (not OnDisappearing) fires only once the page is actually removed from the
+        // navigation stack - this page is itself shown modally, so Unloaded lines up with its
+        // final close (see EncounterPage.OnAppearing for why OnDisappearing generally can't be
+        // trusted for this kind of teardown).
+        Unloaded += (_, _) => ViewModel.Dispose();
     }
 
     public Task<int> ResultTask => tcs.Task;
@@ -57,18 +62,18 @@ internal sealed partial class RollFormulaPage : NotifierPage
     {
         base.OnDisappearing();
 
-        if (firstRun)
+        // Unconditional, matching OnAppearing's unconditional Start(): this used to run only on
+        // the first OnDisappearing (a "firstRun" guard), so backgrounding the app once while this
+        // dialog was open left the accelerometer subscribed on every subsequent disappear - which
+        // rooted this page (via the static Accelerometer.ReadingChanged event) for the rest of the
+        // process's life instead of letting it be garbage-collected once closed.
+        try
         {
-            firstRun = false;
-
-            try
-            {
-                ViewModel.ShakeService?.Stop();
-            }
-            catch (Exception ex)
-            {
-                WeakReferenceMessenger.Default.Send(new ShowErrorMessage(ex));
-            }
+            ViewModel.ShakeService?.Stop();
+        }
+        catch (Exception ex)
+        {
+            WeakReferenceMessenger.Default.Send(new ShowErrorMessage(ex));
         }
     }
 

@@ -17,6 +17,12 @@ internal sealed partial class EncounterPage : NotifierPage
     {
         InitializeComponent();
         BindingContext = viewModel;
+
+        // Unloaded (not OnDisappearing) fires only once the page is actually removed from the
+        // navigation stack, not when merely covered by a modal (see the OnAppearing comment
+        // below) - disposing on OnDisappearing would tear down the encounter the moment the
+        // enemy picker or a manual dice-roll dialog opens on top of it.
+        Unloaded += (_, _) => this.viewModel?.Dispose();
     }
 
     /// <summary>

@@ -14,6 +14,12 @@ internal sealed partial class CharacterDetailsPage : NotifierPage
         InitializeComponent();
         BindingContext = characterDetailsViewModel;
         Title = characterDetailsViewModel.Name;
+
+        // Unloaded (not OnDisappearing) fires only once the page is actually removed from the
+        // navigation stack, not when merely covered by a modal - see EncounterPage.OnAppearing
+        // for why OnDisappearing can't be trusted for this. Page/ViewModel are transient (a fresh
+        // instance per navigation), so it's safe to dispose here without affecting a reused instance.
+        Unloaded += (_, _) => (BindingContext as IDisposable)?.Dispose();
     }
 
     protected override async void OnAppearing()

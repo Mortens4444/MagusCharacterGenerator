@@ -33,6 +33,12 @@ internal sealed partial class BestiaryPage : NotifierPage
 
         randomToolbarItem.SetBinding(MenuItem.CommandProperty, nameof(BestiaryViewModel.PickRandomCommand));
         ToolbarItems.Add(randomToolbarItem);
+
+        // Unloaded (not OnDisappearing) fires only once the page is actually removed from the
+        // navigation stack, not when merely covered by a modal (e.g. a creature details page
+        // pushed on top) - see EncounterPage.OnAppearing for why OnDisappearing can't be trusted
+        // for this.
+        Unloaded += (_, _) => this.viewModel.Dispose();
     }
 
     protected override void OnAppearing()
