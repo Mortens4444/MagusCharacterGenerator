@@ -130,6 +130,7 @@ internal sealed partial class CharacterGeneratorViewModel : CharacterViewModel
             return;
         }
 
+        var totalSw = System.Diagnostics.Stopwatch.StartNew();
         try
         {
             var classType = SelectedClass.GetType();
@@ -157,9 +158,42 @@ internal sealed partial class CharacterGeneratorViewModel : CharacterViewModel
                     propertyInfo!.SetValue(instanceClass, result);
                 }
             }
-            Character = new Character(settings, NameGenerator.Get(selectedRace), selectedRace, instanceClass);
+            var constructSw = System.Diagnostics.Stopwatch.StartNew();
+            var newCharacter = new Character(settings, NameGenerator.Get(selectedRace), selectedRace, instanceClass);
+            constructSw.Stop();
+
+            // Learn qualifications on newCharacter BEFORE it's assigned to the Character property below,
+            // not after: Character.Learn() fires OnPropertyChanged(Qualifications) on every single call
+            // (see Character.Qualifications.cs), and once Character is assigned, that's relayed all the
+            // way to the QualificationsView CollectionView, which re-sorts/re-renders its full list on
+            // every one of the ~20-40 qualifications AutoDistributeQualificationPoints learns. Doing the
+            // learning first means those notifications fire while nothing is subscribed yet (newCharacter
+            // isn't "the" Character), so the CollectionView only ever renders the finished list once.
+            var qualifySw = System.Diagnostics.Stopwatch.StartNew();
+            if (settings.AutoDistributeQualificationPoints)
+            {
+                var qualifications = QualificationLearner.Get();
+                if (!newCharacter.HasPsi() && newCharacter.CanLearn(new PsiPyarron()))
+                {
+                    newCharacter.Learn(new PsiPyarron(), QualificationLevel.Base);
+                }
+                foreach (var qualification in qualifications)
+                {
+                    if (!newCharacter.HasQualification(qualification) && newCharacter.CanLearn(qualification, qualification.QualificationLevel))
+                    {
+                        newCharacter.Learn(qualification, qualification.QualificationLevel);
+                    }
+                }
+            }
+            qualifySw.Stop();
+
+            var assignSw = System.Diagnostics.Stopwatch.StartNew();
+            Character = newCharacter;
+            assignSw.Stop();
+
             IsCharacterGenerated = true;
             MarkDirty();
+            LogGenerationTiming($"construct={constructSw.ElapsedMilliseconds}ms qualify(pre-assign)={qualifySw.ElapsedMilliseconds}ms assign(incl. UI cascade)={assignSw.ElapsedMilliseconds}ms");
             if (!settings.AutoIncreasePainTolerance)
             {
                 for (var level = Level; level <= Level; level++)
@@ -190,27 +224,33 @@ internal sealed partial class CharacterGeneratorViewModel : CharacterViewModel
                     }
                 }
             }
-            if (settings.AutoDistributeQualificationPoints)
-            {
-                var qualifications = QualificationLearner.Get();
-                if (!Character.HasPsi() && Character.CanLearn(new PsiPyarron()))
-                {
-                    Character.Learn(new PsiPyarron(), QualificationLevel.Base);
-                }
-                foreach (var qualification in qualifications)
-                {
-                    if (!Character.HasQualification(qualification) && Character.CanLearn(qualification, qualification.QualificationLevel))
-                    {
-                        Character.Learn(qualification, qualification.QualificationLevel);
-                    }
-                }
-                OnPropertyChanged(nameof(QualificationPoints));
-                OnPropertyChanged(nameof(Qualifications));
-            }
+            totalSw.Stop();
+            LogGenerationTiming($"TOTAL GenerateCharacter={totalSw.ElapsedMilliseconds}ms (class={classType.Name}, level={BaseClassLevel})");
         }
         catch (Exception ex)
         {
             WeakReferenceMessenger.Default.Send(new ShowErrorMessage(ex));
+        }
+    }
+
+    /// <summary>
+    /// Temporary diagnostic for the "character generation is slow" report - writes to a plain text
+    /// file (not Debug.WriteLine, so it's readable without attaching a debugger) so the actual
+    /// wall-clock cost of Character construction vs. the Character property's UI-notification
+    /// cascade (see CharacterViewModel.Character's setter) can be measured on a real run, since the
+    /// model layer alone measured well under 1ms per property in isolation (MagusCharacterGenerator.Test).
+    /// Remove once the slow-generation report is resolved.
+    /// </summary>
+    private static void LogGenerationTiming(string message)
+    {
+        try
+        {
+            var path = System.IO.Path.Combine(System.IO.Path.GetTempPath(), "magus_generation_timing.log");
+            System.IO.File.AppendAllText(path, $"{DateTime.Now:HH:mm:ss.fff} {message}{Environment.NewLine}");
+        }
+        catch
+        {
+            // best-effort diagnostic only
         }
     }
 

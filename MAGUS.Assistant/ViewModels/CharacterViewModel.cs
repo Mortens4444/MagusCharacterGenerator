@@ -207,6 +207,7 @@ internal partial class CharacterViewModel(IPrintService printService, ISoundPlay
             if (character != null)
             {
                 character.PropertyChanged += Character_PropertyChanged;
+                MAGUS.GameSystem.Character.LogEquipmentDiagnostic($"CharacterViewModel.Character setter: subscribed to '{character.Name}' hash={System.Runtime.CompilerServices.RuntimeHelpers.GetHashCode(character)} (this VM hash={System.Runtime.CompilerServices.RuntimeHelpers.GetHashCode(this)})");
             }
 
             if (character?.Equipment is INotifyCollectionChanged nc)
@@ -469,8 +470,26 @@ internal partial class CharacterViewModel(IPrintService printService, ISoundPlay
                 break;
 
             case nameof(Character.Armor):
+                // Keeps the ArmorsPage Picker's SelectedItem in sync when Character.Armor changes
+                // through a path other than this ViewModel's own SelectedArmor setter - e.g.
+                // ClearEquippedReferences (Character.Equipment.cs) sets Armor = null when the
+                // currently-equipped armor is sold/discarded. Without this, SelectedArmor kept
+                // showing the now-removed armor as still selected.
+                SetProperty(ref selectedArmor, Character?.Armor, nameof(SelectedArmor));
                 OnPropertyChanged(nameof(ArmorClass));
                 OnPropertyChanged(nameof(ArmorCheckPenalty));
+                break;
+
+            case nameof(Character.PrimaryWeapon):
+                // Same class of bug as Armor above: ClearEquippedReferences nulls
+                // Character.PrimaryWeapon when the equipped weapon is sold/discarded, bypassing this
+                // ViewModel's own PrimaryWeapon setter - without this relay the Combat Values Picker
+                // kept showing the removed weapon as still selected ("elsődleges fegyvert elfelejti").
+                SetProperty(ref primaryWeapon, Character?.PrimaryWeapon, nameof(PrimaryWeapon));
+                break;
+
+            case nameof(Character.SecondaryWeapon):
+                SetProperty(ref secondaryWeapon, Character?.SecondaryWeapon, nameof(SecondaryWeapon));
                 break;
 
             case nameof(Character.CurrentLocation):
@@ -498,6 +517,24 @@ internal partial class CharacterViewModel(IPrintService printService, ISoundPlay
                 OnPropertyChanged(nameof(ActualPainTolerancePoints));
                 CastSpellCommand.NotifyCanExecuteChanged();
                 CastPsiCommand.NotifyCanExecuteChanged();
+                break;
+
+            // Max*Points only get their initial push from the big cascade in the Character setter -
+            // without these cases, a post-construction change (e.g. the manual Pain Tolerance/Mana
+            // roll in CharacterGeneratorViewModel.GenerateCharacter doing Character.MaxXxx += result)
+            // updates the model correctly but leaves the displayed Max stuck at its stale pre-roll
+            // value while Actual (which does have a case) jumps to the new total - showing Actual and
+            // Max out of sync right after generation even though the underlying data matches.
+            case nameof(Character.MaxHealthPoints):
+                OnPropertyChanged(nameof(MaxHealthPoints));
+                break;
+
+            case nameof(Character.MaxPainTolerancePoints):
+                OnPropertyChanged(nameof(MaxPainTolerancePoints));
+                break;
+
+            case nameof(Character.MaxManaPoints):
+                OnPropertyChanged(nameof(MaxManaPoints));
                 break;
 
             case nameof(Character.ActualHealthPoints):
@@ -536,6 +573,7 @@ internal partial class CharacterViewModel(IPrintService printService, ISoundPlay
                 break;
 
             case nameof(Character.Equipment):
+                MAGUS.GameSystem.Character.LogEquipmentDiagnostic($"Character_PropertyChanged(Equipment) fired: sender hash={System.Runtime.CompilerServices.RuntimeHelpers.GetHashCode(sender)}, this.Character hash={(Character == null ? "null" : System.Runtime.CompilerServices.RuntimeHelpers.GetHashCode(Character).ToString())}, Equipment.Count={Equipment.Count}");
                 OnPropertyChanged(nameof(Equipment));
                 break;
 
@@ -1086,6 +1124,7 @@ internal partial class CharacterViewModel(IPrintService printService, ISoundPlay
         if (answer)
         {
             Character.RemoveEquipment(thing);
+            await characterService.SaveAsync(Character).ConfigureAwait(true);
         }
     }
 
@@ -1111,6 +1150,7 @@ internal partial class CharacterViewModel(IPrintService printService, ISoundPlay
         if (answer)
         {
             Character.Sell(thing);
+            await characterService.SaveAsync(Character).ConfigureAwait(true);
         }
     }
 

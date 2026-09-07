@@ -303,7 +303,21 @@ internal partial class SearchListViewModel : BaseViewModel
     {
         try
         {
-            Character?.Buy(args.Thing);
+            if (Character == null)
+            {
+                return;
+            }
+
+            Character.LogEquipmentDiagnostic($"PurchaseHandler: Character='{Character.Name}' hash={System.Runtime.CompilerServices.RuntimeHelpers.GetHashCode(Character)} before Buy, Equipment.Count={Character.Equipment.Count}");
+            Character.Buy(args.Thing);
+            // Fire-and-forget mirrors PrimaryWeapon/SecondaryWeapon's own save-immediately pattern in
+            // CharacterViewModel - CharacterDetailsPage.OnDisappearing's save net only fires once that
+            // whole page is left, not for a Market page merely pushed on top of it, so without this a
+            // purchase survived only in memory until the character page was closed. Resolved from the
+            // DI container instead of a constructor param (like MarketPage.ApplyActiveMarketEvent
+            // already does) so every other SearchListViewModel subclass without a Character - Runes,
+            // Poisons, Gemstones, Bestiary, ... - doesn't need to plumb an unused CharacterService through.
+            _ = MauiProgram.Services.GetRequiredService<CharacterService>().SaveAsync(Character);
             ApplyFilter();
             ShellNavigationService.ClosePageAsync();
         }

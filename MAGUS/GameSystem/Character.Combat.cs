@@ -8,6 +8,8 @@ using MAGUS.GameSystem.Qualifications;
 using MAGUS.Interfaces;
 using MAGUS.Qualifications.Combat;
 using MAGUS.Qualifications.Specialities;
+using MAGUS.Races;
+using MAGUS.Things.Shields;
 using MAGUS.Things.Weapons;
 using MAGUS.Things.Weapons.OtherWeapons;
 using MAGUS.Utils;
@@ -179,6 +181,15 @@ public partial class Character : ICharacter
                 OnPropertyChanged();
                 OnPropertyChanged(nameof(PrimaryWeaponId));
                 InvalidateAttackModes();
+                OnCombatValuesChanged();
+
+                // Első Törvénykönyv, "Kétkezes fegyverek": a two-handed weapon occupies both hands
+                // at once, so equipping it into either slot mirrors it into the other one too -
+                // except for a Giant (HalfGiant and its subraces), big enough to wield it one-handed.
+                if (value is { IsTwoHanded: true } && Race is not HalfGiant)
+                {
+                    SecondaryWeapon = value;
+                }
             }
         }
     }
@@ -196,6 +207,12 @@ public partial class Character : ICharacter
                 OnPropertyChanged();
                 OnPropertyChanged(nameof(SecondaryWeaponId));
                 InvalidateAttackModes();
+                OnCombatValuesChanged();
+
+                if (value is { IsTwoHanded: true } && Race is not HalfGiant)
+                {
+                    PrimaryWeapon = value;
+                }
             }
         }
     }
@@ -219,11 +236,14 @@ public partial class Character : ICharacter
                     attackModes.Add(new RangedAttack(rangedWeapon, AimValue));
                 }
 
-                if (SecondaryWeapon is IMeleeWeapon meleeWeapon2)
+                // A two-handed weapon mirrored into both slots (see SecondaryWeapon's setter) is one
+                // weapon, not two - skip it here so it isn't listed as a second, separate attack mode.
+                var isSameAsPrimary = SecondaryWeapon != null && SecondaryWeapon == PrimaryWeapon;
+                if (!isSameAsPrimary && SecondaryWeapon is IMeleeWeapon meleeWeapon2)
                 {
                     attackModes.Add(new MeleeAttack(meleeWeapon2, AttackValue, strengthDamageBonus));
                 }
-                else if (SecondaryWeapon is IRangedWeapon rangedWeapon2)
+                else if (!isSameAsPrimary && SecondaryWeapon is IRangedWeapon rangedWeapon2)
                 {
                     attackModes.Add(new RangedAttack(rangedWeapon2, AimValue));
                 }
@@ -375,8 +395,8 @@ public partial class Character : ICharacter
             var initiatorRace = Race.SpecialQualifications.GetSpeciality<GoodInitiator>();
 
             var @base = initiatorRace != null ? initiatorRace.InitiateBase : BaseClass.InitiateBaseValue;
-            @base += MathHelper.GetAboveAverageValue(Quickness);
-            @base += MathHelper.GetAboveAverageValue(Dexterity);
+            @base += MathHelper.GetAboveAverageValue(EffectiveQuickness);
+            @base += MathHelper.GetAboveAverageValue(EffectiveDexterity);
             var headHunterInitiateValueIncreasing = BaseClass.SpecialQualifications.GetSpeciality<HeadHunterInitiateValueIncreasing>();
             if (headHunterInitiateValueIncreasing != null)
             {
@@ -406,8 +426,8 @@ public partial class Character : ICharacter
         {
             var @base = BaseClass.AttackBaseValue;
             @base += MathHelper.GetAboveAverageValue(Strength);
-            @base += MathHelper.GetAboveAverageValue(Quickness);
-            @base += MathHelper.GetAboveAverageValue(Dexterity);
+            @base += MathHelper.GetAboveAverageValue(EffectiveQuickness);
+            @base += MathHelper.GetAboveAverageValue(EffectiveDexterity);
             
             var weaponBonus = selectedCombatValueModifier switch
             {
@@ -426,8 +446,8 @@ public partial class Character : ICharacter
         get
         {
             var @base = BaseClass.DefenseBaseValue;
-            @base += MathHelper.GetAboveAverageValue(Quickness);
-            @base += MathHelper.GetAboveAverageValue(Dexterity);
+            @base += MathHelper.GetAboveAverageValue(EffectiveQuickness);
+            @base += MathHelper.GetAboveAverageValue(EffectiveDexterity);
 
             var weaponBonus = selectedCombatValueModifier switch
             {
@@ -436,7 +456,12 @@ public partial class Character : ICharacter
                 _ => fist.DefenseValue,
             };
 
-            return @base + AllocatedToDefense + weaponBonus + GetWeaponUseModifier().DefenseValue + GetTwoHandedCombatModifier().DefenseValue + TemporaryModifiers.Sum(m => m.DefenseValue);
+            // Első Törvénykönyv, "Pajzshasználat": a felszerelt pajzs saját VÉ-je mindig hozzáadódik,
+            // függetlenül attól melyik kéz van épp aktívan kiválasztva támadásra - a pajzs passzívan
+            // véd, nem "választható" harci mód, mint a jobb/bal kezes fegyverforgatás.
+            var shieldDefenseBonus = EquippedShield?.DefenseValue ?? 0;
+
+            return @base + AllocatedToDefense + weaponBonus + shieldDefenseBonus + GetWeaponUseModifier().DefenseValue + GetTwoHandedCombatModifier().DefenseValue + TemporaryModifiers.Sum(m => m.DefenseValue);
         }
     }
 
@@ -448,7 +473,7 @@ public partial class Character : ICharacter
             var archerClass = BaseClass.SpecialQualifications.FirstOrDefault(specialQualification => specialQualification is GoodArcher) as GoodArcher;
             var archerRace = Race.SpecialQualifications.GetSpeciality<GoodArcher>();
             var @base = Math.Max(Math.Max(archerClass?.AimBase ?? 0, archerRace?.AimBase ?? 0), BaseClass.AimBaseValue);
-            @base += MathHelper.GetAboveAverageValue(Dexterity);
+            @base += MathHelper.GetAboveAverageValue(EffectiveDexterity);
             
             var weaponBonus = selectedCombatValueModifier switch
             {
@@ -460,6 +485,46 @@ public partial class Character : ICharacter
             return @base + AllocatedToAim + weaponBonus + GetWeaponUseModifier().AimValue + GetAimingModifier() + TemporaryModifiers.Sum(m => m.AimValue);
         }
     }
+
+    /// <summary>
+    /// The Shield currently equipped as either weapon slot (a Shield is a Weapon subtype - Első
+    /// Törvénykönyv, "Pajzshasználat" - typically carried as SecondaryWeapon alongside a one-handed
+    /// PrimaryWeapon, but either slot is checked since nothing stops a shield-only fighter).
+    /// </summary>
+    [JsonIgnore, Newtonsoft.Json.JsonIgnore]
+    private Shield? EquippedShield => PrimaryWeapon as Shield ?? SecondaryWeapon as Shield;
+
+    /// <summary>
+    /// Első Törvénykönyv, "Pajzshasználat": egy felszerelt pajzs Mozgást Gátló Tényezője levonódik
+    /// Gyorsaságból és Ügyességből (l. EffectiveQuickness/EffectiveDexterity), amíg a karakter nincs
+    /// mesterfokú Pajzshasználó - mesterfokon a pajzs többé nem gátolja ezeket.
+    /// </summary>
+    private int GetShieldMovementObstructiveFactor()
+    {
+        var shield = EquippedShield;
+        if (shield == null)
+        {
+            return 0;
+        }
+
+        return HasQualification(new ShieldUse(), QualificationLevel.Master) ? 0 : shield.MovementObstructiveFactor;
+    }
+
+    private int GetArmorCheckPenalty()
+    {
+        if (Armor == null)
+        {
+            return 0;
+        }
+
+        return HasQualification(new HeavyArmorWearing(), QualificationLevel.Master) ? 0 : Armor.ArmorCheckPenalty;
+    }
+
+    [JsonIgnore, Newtonsoft.Json.JsonIgnore]
+    private int EffectiveQuickness => Math.Max(Quickness - GetArmorCheckPenalty() - GetShieldMovementObstructiveFactor(), 0);
+
+    [JsonIgnore, Newtonsoft.Json.JsonIgnore]
+    private int EffectiveDexterity => Math.Max(Dexterity - GetArmorCheckPenalty() - GetShieldMovementObstructiveFactor(), 0);
 
     public void SetWeapons()
     {

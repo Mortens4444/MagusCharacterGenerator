@@ -52,14 +52,14 @@ internal static class CharacterCareActions
         {
             await ShellNavigationService.DisplayAlertAsync(
                 Lng.Elem("Sleep"),
-                String.Format(Lng.Elem("{0} cannot afford a {1}."), character.Name, Lng.Elem(room.Name)),
+                SafeFormat("{0} cannot afford a {1}.", character.Name, Lng.Elem(room.Name)),
                 Lng.Elem("OK")).ConfigureAwait(true);
             return;
         }
 
         var hoursText = await ShellNavigationService.DisplayPromptAsync(
             "Sleep",
-            String.Format(Lng.Elem("How many hours should {0} sleep?"), character.Name),
+            SafeFormat("How many hours should {0} sleep?", character.Name),
             "OK",
             "Cancel",
             "8").ConfigureAwait(true);
@@ -84,7 +84,7 @@ internal static class CharacterCareActions
 
         await ShellNavigationService.DisplayAlertAsync(
             "Sleep",
-            String.Format(Lng.Elem("{0} settles in for about {1:F1} hours."), character.Name, hours)).ConfigureAwait(true);
+            SafeFormat("{0} settles in for about {1:F1} hours.", character.Name, hours)).ConfigureAwait(true);
 
         if (room == null)
         {
@@ -93,7 +93,7 @@ internal static class CharacterCareActions
             {
                 await ShellNavigationService.DisplayAlertAsync(
                     Lng.Elem("Sleep"),
-                    String.Format(Lng.Elem("Something finds {0} sleeping out in the open."), character.Name)).ConfigureAwait(true);
+                    SafeFormat("Something finds {0} sleeping out in the open.", character.Name)).ConfigureAwait(true);
 
                 await gameEventService.TriggerRandomEncounterAsync(character).ConfigureAwait(true);
             }
@@ -107,7 +107,7 @@ internal static class CharacterCareActions
         {
             await ShellNavigationService.DisplayAlertAsync(
                 "Eat",
-                String.Format(Lng.Elem("{0} has no food to eat."), character.Name)).ConfigureAwait(true);
+                SafeFormat("{0} has no food to eat.", character.Name)).ConfigureAwait(true);
             return;
         }
 
@@ -148,10 +148,29 @@ internal static class CharacterCareActions
         await characterService.SaveAsync(character).ConfigureAwait(false);
 
         var message = isFullyConsumed
-            ? String.Format(Lng.Elem("{0} eats the last of the {1} and feels much better."), character.Name, Lng.Elem(foodItem.Name))
-            : String.Format(Lng.Elem("{0} eats a portion of the {1} and feels a little better ({2} portion(s) left)."), character.Name, Lng.Elem(foodItem.Name), foodItem.RemainingPortions);
+            ? SafeFormat("{0} eats the last of the {1} and feels much better.", character.Name, Lng.Elem(foodItem.Name))
+            : SafeFormat("{0} eats a portion of the {1} and feels a little better ({2} portion(s) left).", character.Name, Lng.Elem(foodItem.Name), foodItem.RemainingPortions);
 
         await ShellNavigationService.DisplayAlertAsync("Eat", message).ConfigureAwait(true);
+    }
+
+    /// <summary>
+    /// String.Format against the Lng-translated template, falling back to the original English
+    /// template if the translation's placeholder count doesn't match the English one (a bad/stale
+    /// translation entry) - crashed here as "Index (zero based) must be greater than or equal to zero
+    /// and less than the size of the argument list" when a translation for the "eats the last of the"
+    /// message apparently carried a stray {2} the English source and its 2 arguments don't have.
+    /// </summary>
+    private static string SafeFormat(string englishTemplate, params object?[] args)
+    {
+        try
+        {
+            return String.Format(Lng.Elem(englishTemplate), args);
+        }
+        catch (FormatException)
+        {
+            return String.Format(englishTemplate, args);
+        }
     }
 
     /// <summary>
@@ -168,7 +187,7 @@ internal static class CharacterCareActions
         {
             await ShellNavigationService.DisplayAlertAsync(
                 "Use item",
-                String.Format(Lng.Elem("{0} has no healing item to use."), character.Name)).ConfigureAwait(true);
+                SafeFormat("{0} has no healing item to use.", character.Name)).ConfigureAwait(true);
             return;
         }
 
@@ -195,7 +214,7 @@ internal static class CharacterCareActions
             .Where(c => c.Id != character.Id)
             .ToList();
 
-        var selfLabel = String.Format(Lng.Elem("Self ({0})"), character.Name);
+        var selfLabel = SafeFormat("Self ({0})", character.Name);
         var targetNames = new List<string> { selfLabel };
         targetNames.AddRange(otherCharacters.Select(c => c.Name));
 
@@ -216,7 +235,7 @@ internal static class CharacterCareActions
         {
             await ShellNavigationService.DisplayAlertAsync(
                 "Use item",
-                String.Format(Lng.Elem("{0} is dead - the {1} can't bring them back."), target.Name, Lng.Elem(item.Name))).ConfigureAwait(true);
+                SafeFormat("{0} is dead - the {1} can't bring them back.", target.Name, Lng.Elem(item.Name))).ConfigureAwait(true);
             return;
         }
 
@@ -240,8 +259,8 @@ internal static class CharacterCareActions
         }
 
         var message = wasDead
-            ? String.Format(Lng.Elem("{0} uses the {1} on {2} - {2} draws breath again, every wound closed."), character.Name, Lng.Elem(item.Name), target.Name)
-            : String.Format(Lng.Elem("{0} uses the {1} on {2} - every wound closes."), character.Name, Lng.Elem(item.Name), target.Name);
+            ? SafeFormat("{0} uses the {1} on {2} - {2} draws breath again, every wound closed.", character.Name, Lng.Elem(item.Name), target.Name)
+            : SafeFormat("{0} uses the {1} on {2} - every wound closes.", character.Name, Lng.Elem(item.Name), target.Name);
 
         await ShellNavigationService.DisplayAlertAsync("Use item", message).ConfigureAwait(true);
     }

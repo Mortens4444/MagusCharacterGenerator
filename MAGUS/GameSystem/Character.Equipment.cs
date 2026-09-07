@@ -41,6 +41,21 @@ public partial class Character
         Money -= thing.MultipliedPrice;
         Equipment.Add(thing);
         OnPropertyChanged(nameof(Money));
+        LogEquipmentDiagnostic($"Character.Buy: added '{thing.Name}' to '{Name}' (hash={System.Runtime.CompilerServices.RuntimeHelpers.GetHashCode(this)}), Equipment.Count now {Equipment.Count}");
+    }
+
+    /// <summary>Temporary diagnostic for the "equipment list doesn't refresh on purchase" report - remove once resolved.</summary>
+    public static void LogEquipmentDiagnostic(string message)
+    {
+        try
+        {
+            var path = System.IO.Path.Combine(System.IO.Path.GetTempPath(), "magus_equipment_timing.log");
+            System.IO.File.AppendAllText(path, $"{DateTime.Now:HH:mm:ss.fff} {message}{Environment.NewLine}");
+        }
+        catch
+        {
+            // best-effort diagnostic only
+        }
     }
 
     public bool HasItem<T>()
